@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: finite mixture/exposure foundation complete locally. Source weights, global family/repeat caps, immutable schedule resume and source-specific preparation are implemented. Public review, tokenizer, curriculum transitions, language pilots and full-size trajectory acceptance remain open.
-- Next implementation milestone: explicit curriculum transition contracts and stage accounting. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
+- Current milestone: finite curriculum transitions complete locally. Pinned stage schedules, global AdamW state, cross-stage family exposure and version-3 resume receipts are implemented. Public review, tokenizer, language pilots, actual CUDA curriculum execution and full-size trajectory acceptance remain open.
+- Next implementation milestone: language/constraint evaluation and stage acceptance reporting. In parallel, complete the current source review, English/privacy/quality calibration and teacher quality/training-rights review. CLI-only teacher remains active; API fallback is prohibited.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -91,6 +91,13 @@ Updated: 19 October 2026
 - Native repeated-ID MLX GPU gradient variability diagnosed; explicit dense embedding control passes tested local determinism/resume and the original golden100. Both native and dense fail an additional repeated-token 100-update MLX/CPU trajectory stress. First retained rerun failure: updates 64/65 respectively. Negative evidence retained, original bounds unchanged; dense remains opt-in and actual dense CUDA is unvalidated.
 - Full 81M dense local own-resume probe: 92 logical / 136 actually executed processed positions, no language claims. Separate short timing probe: 10,240 timed positions in 7.381194s, allocator peak 4,674,112,660 bytes; not a sustained or controlled native/dense comparison.
 - No public/teacher training or teacher/cloud call. Real source approvals remain zero; curriculum transitions and production tokenizer selection remain pending. CUDA planning allowances unchanged at USD 5 out of USD 10; settled costs unknown.
+
+## Curriculum validation — 19 October 2026
+
+- Reference curriculum mechanics complete: 286 local tests passed / 9 unavailable-CUDA skips. Exact own-resume at stage boundaries, separate manual optimizer control, independent analytic LR clocks, explicit replay/family caps, interruption/corruption refusal and tiny local MLX/CPU/MLX continuation. See milestone-sixteen.md and its evidence.
+- Full 80,765,440-parameter local dense-mode probe preserves all 242,296,320 state values across exact own-resume and foundation → SFT continuation. Two logical updates / 100 processed / 80 supervised positions; three actually executed updates / 136 processed positions. Not language quality, actual NVIDIA evidence or a passed full-size cross-backend trajectory gate.
+- Standard v1/v2 checkpoints remain supported by the ordinary trainer; v3 requires the curriculum trainer. No implicit plan append, legacy checkpoint migration or optimizer reset. Quality exit-gate orchestration remains separate from data-stage transitions.
+- No public source approvals, teacher generation or cloud calls added. Existing numerical failures and dense production/CUDA gates remain open. CUDA planning allowances unchanged at USD 5 of USD 10; settled charges unknown.
 
 ## Open gates
 

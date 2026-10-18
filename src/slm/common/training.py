@@ -107,8 +107,12 @@ class Batches:
 
 
 class Trainer:
+    SUPPORTS_CURRICULUM = False
+
     def __init__(self, config, weights, batches, backend='torch', device='cpu',
                  recipe=None, tokenizer_hash='synthetic-token-ids-v1'):
+        if getattr(batches,'requires_stage_trainer',False) and not self.SUPPORTS_CURRICULUM:
+            raise ValueError('Curriculum data requires CurriculumTrainer')
         if getattr(batches,'vocab_size',config.vocab_size)!=config.vocab_size:
             raise ValueError('Dataset/model vocabulary mismatch')
         if getattr(batches,'max_length',0)>config.max_seq_len:
@@ -148,7 +152,8 @@ class Trainer:
     def _update(self):
         if self.cursor >= len(self.batches.items):
             raise StopIteration('Dataset exhausted; no implicit wraparound')
-        end = min(self.cursor+self.recipe.accumulation_steps, len(self.batches.items))
+        recipe, end = self._update_context()
+        start_cursor = self.cursor
         microbatches = end-self.cursor
         tokens = supervised = 0
         weighted_loss = 0.
@@ -158,8 +163,8 @@ class Trainer:
             count = int(mask.sum())
             value, grads = self.impl.value_and_grad(self.params, self.config,
                                                   *(self.array(a) for a in (x, y, mask)),
-                                                  loss_implementation=self.recipe.loss_implementation,
-                                                  embedding_implementation=self.recipe.embedding_implementation)
+                                                  loss_implementation=recipe.loss_implementation,
+                                                  embedding_implementation=recipe.embedding_implementation)
             scalar = float(value.detach()) if self.backend == 'torch' else float(value)
             if not np.isfinite(scalar):
                 raise FloatingPointError('Nonfinite loss')
@@ -182,8 +187,8 @@ class Trainer:
             if not all(np.isfinite(a).all() for a in self.impl.export(grads).values()):
                 raise FloatingPointError('Nonfinite accumulated gradients')
             scalar = weighted_loss/supervised
-        rate = self.recipe.rate(self.tokens+tokens)
-        settings = asdict(self.recipe)
+        rate = self._update_rate(recipe, end, tokens)
+        settings = asdict(recipe)
         for key in ('warmup_tokens', 'loss_implementation', 'accumulation_steps','embedding_implementation'):
             settings.pop(key)
         settings['lr'] = rate
@@ -196,18 +201,53 @@ class Trainer:
             params = {k: mx.contiguous(v) for k, v in params.items()}
             moments = {k: tuple(mx.contiguous(a) for a in v) for k, v in moments.items()}
             mx.eval(params, moments)
-        # Commit logical progress only after every microbatch and the optimizer succeed.
+        result = {'loss': scalar, 'lr': rate, 'step': self.step+1, 'tokens': self.tokens+tokens,
+                  'cursor': end, 'microbatches': microbatches,
+                  'supervised_tokens': self.supervised_tokens+supervised}
+        result = self._update_result(result, start_cursor)
+        # Commit logical progress only after all computations and receipt checks succeed.
         self.params, self.moments = params, moments
         self.cursor = end; self.step += 1
         self.tokens += tokens; self.supervised_tokens += supervised
-        return {'loss': scalar, 'lr': rate, 'step': self.step, 'tokens': self.tokens,
-                'cursor': self.cursor, 'microbatches': microbatches,
-                'supervised_tokens': self.supervised_tokens}
+        return result
+
+    def _update_context(self):
+        return self.recipe, min(self.cursor+self.recipe.accumulation_steps, len(self.batches.items))
+
+    def _update_rate(self, recipe, end, tokens):
+        return recipe.rate(self.tokens+tokens)
+
+    def _update_result(self, result, start_cursor):
+        return result
+
+    def _validate_progress(self):
+        validate_boundary(self.recipe, self.batches, self.step, self.cursor, self.tokens, self.supervised_tokens)
+
+    def _checkpoint_extra(self):
+        return {}
+
+    CHECKPOINT_SCHEDULE = 'linear-warmup-then-constant-tokens-after-update'
+
+    @staticmethod
+    def _validate_state(state, batches, recipe):
+        if state['version'] not in (1, 2):
+            raise ValueError('Unsupported training state; use the matching trainer')
+        if state['version'] == 1:
+            if recipe.accumulation_steps != 1 or recipe.embedding_implementation != 'native-gather-v1':
+                raise ValueError('Legacy training state cannot declare gradient accumulation')
+        else:
+            policy = state.get('accumulation')
+            if (not isinstance(policy, dict) or policy != accumulation_policy(recipe)
+                or type(policy.get('microbatches_per_update')) is not int
+                or type(policy.get('pending_microbatches')) is not int):
+                raise ValueError('Unsupported accumulation/checkpoint policy')
+        validate_boundary(recipe, batches, state['step'], state['cursor'], state['tokens'], state['supervised_tokens'])
+
 
     def save(self, destination):
         if self._in_update:
             raise RuntimeError('Checkpoint requires an optimizer-update boundary')
-        validate_boundary(self.recipe, self.batches, self.step, self.cursor, self.tokens, self.supervised_tokens)
+        self._validate_progress()
         destination = Path(destination)
         if destination.exists():
             raise FileExistsError(destination)
@@ -233,6 +273,7 @@ class Trainer:
                                       'implementation_sha256': hashlib.sha256(Path(self.impl.__file__).read_bytes()).hexdigest()},
                      'precision': 'fp32', 'rng_policy': 'precomputed-order-no-stochastic-ops',
                      'schedule': 'linear-warmup-then-constant-tokens-after-update'}
+            state.update(self._checkpoint_extra())
             (temp/'state.json').write_text(json.dumps(state, indent=2)+'\n')
             hashes = {str(p.relative_to(temp)): hashlib.sha256(p.read_bytes()).hexdigest()
                       for p in temp.rglob('*') if p.is_file()}
@@ -258,24 +299,15 @@ class Trainer:
             if hashlib.sha256((path/name).read_bytes()).hexdigest() != digest:
                 raise ValueError(f'Checksum mismatch: {name}')
         state = json.loads((path/'state.json').read_text())
-        if type(state['version']) is not int or state['version'] not in (1, 2) or state['precision'] != 'fp32':
+        if type(state['version']) is not int or state['precision'] != 'fp32':
             raise ValueError('Unsupported training state')
-        if state['schedule'] != 'linear-warmup-then-constant-tokens-after-update':
+        if state['schedule'] != cls.CHECKPOINT_SCHEDULE:
             raise ValueError('Unsupported schedule')
         if state['dataset_hash'] != batches.fingerprint or state['tokenizer_hash'] != tokenizer_hash:
             raise ValueError('Dataset/tokenizer mismatch')
         recipe = recipe_from_state(state)
-        if state['version'] == 1:
-            if recipe.accumulation_steps != 1 or recipe.embedding_implementation != 'native-gather-v1':
-                raise ValueError('Legacy training state cannot declare gradient accumulation')
-        else:
-            policy = state.get('accumulation')
-            if (not isinstance(policy, dict) or policy != accumulation_policy(recipe)
-                or type(policy.get('microbatches_per_update')) is not int
-                or type(policy.get('pending_microbatches')) is not int):
-                raise ValueError('Unsupported accumulation/checkpoint policy')
+        cls._validate_state(state, batches, recipe)
         cursor = state['cursor']
-        validate_boundary(recipe, batches, state['step'], cursor, state['tokens'], state['supervised_tokens'])
         config, weights = checkpoint.load(path/'model')
         trainer = cls(config, weights, batches, backend, device, recipe, tokenizer_hash)
         raw = load_file(str(path/'optimizer.safetensors'))
