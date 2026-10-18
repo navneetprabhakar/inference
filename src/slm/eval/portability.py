@@ -142,20 +142,21 @@ def create(destination, backend='mlx', device='cpu', config=None, recipe=None, s
     start_time = time.perf_counter()
     env = environment(backend, device)
     config = config or Config()
+    recipe = recipe or Recipe()
     if comparison_policy=='full_depth_fp32_v1':full_depth_budget(config)
     elif comparison_policy!='tiny_fp32_v1':raise ValueError('Unknown numerical policy')
     root = Path(destination)
     root.mkdir(parents=True, exist_ok=False)
     rng = np.random.default_rng(seed)
     arrays = {}
-    for i, length in enumerate((6, 8, 5, 9, 4, 7)):
+    for i, length in enumerate((6, 8, 5, 9, 4, 7)*recipe.accumulation_steps):
         if length > config.max_seq_len: raise ValueError('Fixture exceeds configured context')
         arrays[f'x{i}'] = rng.integers(0, config.vocab_size, (2, length), dtype=np.int64)
         arrays[f'y{i}'] = rng.integers(0, config.vocab_size, (2, length), dtype=np.int64)
         arrays[f'mask{i}'] = rng.integers(0, 2, (2, length)).astype(np.float32)
         arrays[f'mask{i}'][:, 0] = 1
     np.savez(root/'batches.npz', **arrays)
-    (root/'fixture.json').write_text(json.dumps({'vocab_size':config.vocab_size,'batch_count':6,
+    (root/'fixture.json').write_text(json.dumps({'vocab_size':config.vocab_size,'batch_count':6*recipe.accumulation_steps,
           'architecture':config.to_dict(),'probe_steps':[2,4,6], 'seed':seed,
           'initialization_seed':initialization_seed,'comparison_policy':comparison_policy},indent=2)+'\n')
     trainer = Trainer(config, initialize(config,initialization_seed), get_batches(root), backend, device,recipe=recipe)

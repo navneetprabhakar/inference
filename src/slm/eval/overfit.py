@@ -20,10 +20,11 @@ def run(config,output,backend='mlx',device='cpu',updates=100,recipe=None):
     x=rng.integers(0,config.vocab_size,(2,length),dtype=np.int64)
     y=np.roll(x,-1,axis=1);y[:,-1]=0
     mask=np.ones(x.shape,dtype=np.float32);mask[:,:3]=0
-    batches=Batches([(x,y,mask)]*updates,config.vocab_size)
-    np.savez(output/'batches.npz',**{f'{name}{i}':value for i in range(updates)
+    microbatches=updates*recipe.accumulation_steps
+    batches=Batches([(x,y,mask)]*microbatches,config.vocab_size)
+    np.savez(output/'batches.npz',**{f'{name}{i}':value for i in range(microbatches)
               for name,value in (('x',x),('y',y),('mask',mask))})
-    (output/'fixture.json').write_text(json.dumps({'vocab_size':config.vocab_size,'batch_count':updates,
+    (output/'fixture.json').write_text(json.dumps({'vocab_size':config.vocab_size,'batch_count':microbatches,'optimizer_updates':updates,
         'architecture':config.to_dict(),'seed':53,'initialization_seed':311,'repeated_batch':True},indent=2)+'\n')
     trainer=Trainer(config,initialize(config,311),batches,backend,device,recipe)
     def measure():
@@ -49,7 +50,7 @@ def run(config,output,backend='mlx',device='cpu',updates=100,recipe=None):
         final_loss,accuracy=measure()
         report.update(final_loss=final_loss,final_supervised_accuracy=accuracy,
             processed_tokens=trainer.tokens,supervised_tokens=trainer.supervised_tokens,
-            unique_batch_positions=x.size,repeated_exposures=updates)
+            unique_batch_positions=x.size,repeated_exposures=microbatches)
         trainer.save(output/'checkpoint')
         report['passed']=final_loss<initial_loss*.25 and accuracy>=.95
     except Exception as exc:

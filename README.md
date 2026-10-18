@@ -71,4 +71,6 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Token shards and a resumable reader](docs/milestone-eleven.md) now connect reviewed train data to the reference trainer with foundation EOS packing and plain-dialogue SFT masks. The public snapshot remains unapproved; scale measurements use temporary synthetic fixtures.
 
-Not implemented: approved production datasets, production bulk data intake/training, gradient accumulation, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
+[Gradient accumulation and update-boundary resume](docs/milestone-thirteen.md) now support unequal supervised-token counts, short tails and v1-to-v2 checkpoint loading. A bounded full-model MLX own-resume probe passes; actual accumulated CUDA validation remains open.
+
+Not implemented: approved production datasets, production bulk data intake/training, mixture/curriculum transitions, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
