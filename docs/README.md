@@ -39,3 +39,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Bounded MCP HTTP, static credentials and TLS](milestone-twenty.md)
 
 - [NVIDIA curriculum and typed-runtime validation](milestone-twenty-one.md)
+
+- [Numerical drift localization and sensitivity controls](milestone-twenty-two.md)

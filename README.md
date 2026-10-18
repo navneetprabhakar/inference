@@ -86,3 +86,5 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 [Bounded MCP Streamable HTTP](docs/milestone-twenty.md) now supports JSON/SSE, current/legacy SDK negotiation, static environment credentials and verified TLS. Redirect/replay/size/timeout controls and client closure are verified against local SDK servers. This does not establish production OAuth/authorization or learned model skill.
 
 Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, production MCP OAuth/authorization, and sustained cloud training.
+
+[Numerical drift localization](docs/milestone-twenty-two.md) now separates fixed-state accuracy from long-run sensitivity. A one-ULP PyTorch-only initialization change also fails the repeated-token trajectory bounds; fixed common-state updates and FP64 controls pass their tested checks. This supports sensitivity as a contributor and leaves all failed gates and the portability-policy decision open.

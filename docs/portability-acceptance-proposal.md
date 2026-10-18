@@ -16,6 +16,12 @@ Does seamless MLX/CUDA portability require tightly matching multi-update trainin
 - Full-size training trajectories fail the declared comparison gates. The scalar-loss accuracy candidate does not close them and also regresses the tiny first-moment criterion.
 - Short synthetic memorization is not a conversation-quality evaluation. No reviewed public-data release or language-trained checkpoint exists yet.
 
+## Additional evidence from numerical localization
+
+[Milestone twenty-two](milestone-twenty-two.md) reproduces the dense repeated-token failure at update 65. A deliberately one-ULP-perturbed embedding coordinate also causes a PyTorch-only trajectory to fail the original bounds at update 67. Across 18 fixed common-state anchors, isolated optimizer and complete one-update comparisons still pass the original bounds. A separate 81M common-state FP64 check shows small gradient errors on its one tested batch. These results support numerical sensitivity as a contributor; they do not establish general model correctness or comparable learned quality. No existing criterion has been waived.
+
+The choice below changes whether tight long-run trajectory agreement blocks subsequent functional portability work. It does not mark those failed comparisons as passing, authorize paid training, approve datasets or accept an unreviewed quality suite.
+
 ## Option A: state, inference and quality portability
 
 Use three separate release gates:
