@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: actual MCP stdio discovery/calls and bounded lifecycle complete within reference scope, using official SDK 2.3.0. Scripted controls produce real peer requests; actual random students still fail. No learned capability or production remote-service authorization is claimed.
-- Next implementation milestone: Streamable HTTP/authorization boundaries and batched actual NVIDIA validation of typed/curriculum paths. Source/suite review, English/privacy/quality calibration, teacher rights/quality review, tokenizer selection and real language pilots remain required. CLI-only teacher; no API fallback.
+- Current milestone: bounded MCP Streamable HTTP complete within local reference scope, using official SDK 2.3.0, static environment credentials and verified TLS. Scripted controls produce real peer requests; actual random students still fail. No learned capability or production remote-service authorization is claimed.
+- Next implementation milestone: batched actual NVIDIA validation of newer dense/curriculum/typed-runtime paths within the existing validation-only ceiling. Source/suite review, English/privacy/quality calibration, teacher rights/quality review, tokenizer selection and real language pilots remain required. CLI-only teacher; no API fallback.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -123,6 +123,14 @@ Updated: 19 October 2026
 - Exact holdout checks now ignore leading host/system context, preserving task isolation when schemas/style headers change. Semantic overlap and production audits remain open.
 - Renewed the app request for the current 40-example/four-source review packet; its file panel is queued and human attestation remains false. No review decision was inferred.
 - No real-service writes, teacher generation, model-training audit or new cloud jobs. Public approvals remain zero, prior numerical failures remain failed; CUDA planning allowances unchanged at USD 5 of USD 10, settled costs unknown. HTTP, authorization, Linux/CUDA typed-runtime validation and real language pilots remain open.
+
+## MCP HTTP and credential boundary — 19 October 2026
+
+- Local suite: **451 passed / 11 unavailable-CUDA skips**; focused HTTP/stdio suite 66 passed. Exact endpoint pinning, environment-only static credentials, verified TLS, current/legacy JSON/SSE, byte/request limits, strict wire checks, no redirect/replay and bounded client cleanup. See milestone-twenty.md and its source-hashed audit/test evidence.
+- Seven scripted tasks pass with **five independently logged peer tool calls**. Actual 34,976-parameter random MLX student fails all seven tasks and submits zero tools. No free-text/style or learned-tool acceptance; runtime audit performs zero training updates.
+- Nine additional audit probes verify protocol/lifecycle/error paths. Client closure is distinct from fixture ownership: client leaves the server alive; its test owner subsequently reaps it and verifies listener closure. TLS tests reject untrusted certificates and hostname mismatches before HTTP credentials reach the fixture. No token/private-key values enter committed reports.
+- Static preconfigured bearer/custom headers are supported; OAuth discovery/refresh, real-service action authorization and full protocol/provider conformance remain open. Failures preserve unknown remote outcomes; no automatic tool retry.
+- No teacher generation, API fallback, cloud job or real-service calls. Public approvals remain zero and app review remains pending; earlier numerical failures stay failed. CUDA planning allowances remain **USD 5 of USD 10**, settled cost unknown. Continue batched actual CUDA validation and pending data/tokenizer/teacher/suite reviews.
 
 ## Open gates
 

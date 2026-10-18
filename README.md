@@ -83,4 +83,6 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Application-managed MCP stdio](docs/milestone-nineteen.md) now adds actual SDK server discovery/calls, aliases, schema validation, bounded transport and verified process cleanup. Scripted controls issue five peer-observed calls; actual random students submit none. This is infrastructure evidence, not learned tool competence.
 
-Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, Streamable HTTP/production MCP authorization, and sustained cloud training.
+[Bounded MCP Streamable HTTP](docs/milestone-twenty.md) now supports JSON/SSE, current/legacy SDK negotiation, static environment credentials and verified TLS. Redirect/replay/size/timeout controls and client closure are verified against local SDK servers. This does not establish production OAuth/authorization or learned model skill.
+
+Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, production MCP OAuth/authorization, and sustained cloud training.

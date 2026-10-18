@@ -43,7 +43,7 @@ def schema_validator(schema):
 
 
 class MCPRegistry:
-    def __init__(self,command,*,namespace='tools',selected=None,cwd=None,env=None,timeout=5.,mode='auto',
+    def __init__(self,command=None,*,url=None,allow_loopback_http=False,bearer_token_env=None,headers_env=None,ca_file=None,namespace='tools',selected=None,cwd=None,env=None,timeout=5.,mode='auto',
                  max_tools=16,max_pages=16,max_discovery_bytes=65536,transport_limits=None):
         sdk_version=version('mcp')
         if sdk_version!='2.3.0':raise ValueError('This reference requires mcp==2.3.0')
@@ -53,13 +53,24 @@ class MCPRegistry:
         for v,limit in ((max_tools,64),(max_pages,32),(max_discovery_bytes,262144)):
             if type(v) is not int or not 1<=v<=limit:raise ValueError('Invalid discovery bound')
         if selected is not None and (not selected or len(set(selected))!=len(selected) or any(not isinstance(v,str) or not v for v in selected)):raise ValueError('Explicit selected remote names required')
-        self.transport=BoundedStdio(command,cwd=cwd,env=env,**(transport_limits or {}));self.namespace=namespace
+        if (command is None)==(url is None):raise ValueError('Configure exactly one stdio command or HTTP URL')
+        if url is not None:
+            if cwd is not None or env is not None:raise ValueError('HTTP does not accept subprocess settings')
+            from slm.mcp.http import BoundedHTTP
+            self.transport=BoundedHTTP(url,allow_loopback_http=allow_loopback_http,bearer_token_env=bearer_token_env,
+                headers_env=headers_env,ca_file=ca_file,timeout=timeout,**(transport_limits or {}))
+            endpoint_hash=self.transport.identity_hash
+        else:
+            if allow_loopback_http or bearer_token_env or headers_env or ca_file:raise ValueError('Stdio does not accept HTTP settings')
+            self.transport=BoundedStdio(command,cwd=cwd,env=env,**(transport_limits or {}))
+            endpoint_hash=digest({'command':list(command),'cwd':str(cwd),'env_keys':sorted(env or {})})
+        self.namespace=namespace
         self.selected=tuple(selected) if selected is not None else None;self.timeout=timeout;self.mode=mode
         self.max_tools=max_tools;self.max_pages=max_pages;self.max_discovery_bytes=max_discovery_bytes
         self.context_note='Tools come from a host-configured MCP connection; do not invent missing result fields.'
         self._lock=threading.RLock();self._closed=False;self._broken=False;self._portal=None;self._client=None;self._specs={}
         self.metrics={'tool_requests_submitted':0,'tool_results_received':0,'unknown_tool_outcomes':0,'list_requests':0,'connection_closed':False,
-            'protocol_version':None,'mcp_sdk':sdk_version,'endpoint_command_hash':digest({'command':list(command),'cwd':str(cwd),'env_keys':sorted(env or {})})}
+            'protocol_version':None,'mcp_sdk':sdk_version,'endpoint_hash':endpoint_hash,'transport_kind':'streamable_http' if url is not None else 'stdio'}
     def __enter__(self):
         if self._portal is not None or self._closed:raise ValueError('MCP registry cannot be reused')
         self._portal_cm=start_blocking_portal(name='slm-mcp-'+self.namespace);self._portal=self._portal_cm.__enter__()
@@ -79,7 +90,8 @@ class MCPRegistry:
                     startup.deadline=math.inf
                     task_status.started(catalogue)
                     await self._stop.wait()
-            if startup.cancelled_caught:raise MCPTimeout('MCP startup deadline exceeded')
+                    startup.deadline=anyio.current_time()+3
+            if startup.cancelled_caught:raise MCPTimeout('MCP lifecycle deadline exceeded')
         finally:self.metrics['connection_closed']=True;self._client=None
     async def _list_all(self):
         catalogue=[];cursor=None;seen_names=set();seen_cursors=set();size=0

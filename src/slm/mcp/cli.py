@@ -10,12 +10,16 @@ def configuration(path):
     path=Path(path);raw=path.read_bytes()
     if len(raw)>32768:raise ValueError('Bounded MCP configuration required')
     config=json.loads(raw)
-    if not isinstance(config,dict) or config.get('transport')!='stdio':raise ValueError('Explicit stdio configuration required')
-    config.pop('transport')
-    if not set(config)<={'command','namespace','selected','cwd','env','timeout','mode','max_tools','max_pages','max_discovery_bytes','transport_limits'}:
+    if not isinstance(config,dict) or config.get('transport') not in ('stdio','streamable_http'):raise ValueError('Explicit MCP transport configuration required')
+    kind=config.pop('transport')
+    if kind=='stdio' and 'command' not in config:raise ValueError('Stdio command required')
+    if kind=='streamable_http' and 'url' not in config:raise ValueError('HTTP URL required')
+    if not set(config)<={'command','namespace','selected','cwd','env','timeout','mode','max_tools','max_pages','max_discovery_bytes','transport_limits','url','allow_loopback_http','bearer_token_env','headers_env','ca_file'}:
         raise ValueError('Unknown MCP host configuration fields')
     if 'cwd' in config:
         root=Path(config['cwd']);config['cwd']=str(root if root.is_absolute() else path.resolve().parent/root)
+    if 'ca_file' in config:
+        root=Path(config['ca_file']);config['ca_file']=str(root if root.is_absolute() else path.resolve().parent/root)
     return config
 
 

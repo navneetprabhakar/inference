@@ -35,3 +35,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Local tools and typed SFT framing](milestone-eighteen.md)
 
 - [Application-managed MCP stdio integration](milestone-nineteen.md)
+
+- [Bounded MCP HTTP, static credentials and TLS](milestone-twenty.md)
