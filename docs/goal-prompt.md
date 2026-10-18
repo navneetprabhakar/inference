@@ -171,4 +171,4 @@ Use held-out scenarios, executable checks, and human review; teacher judging is 
 
 ## Next action
 
-Verify the ledger and most recent milestone evidence. Tiny FP32 optimizer resume and NVIDIA portability are complete. The bounded data audit foundation now covers four pinned sources and 901 sample-only examples. Continue with reviewed ingestion, English/privacy/quality gates and official split mapping before production tokenizer training; full-size parity and laptop pilots remain required.
+Verify the ledger and most recent milestone evidence. Tiny FP32 optimizer resume and NVIDIA portability are complete. The bounded data audit foundation now covers four pinned sources and 901 sample-only examples. Bootstrap reviewed ingestion and a checked train-only reader are implemented, with zero public approvals and a pending 40-example review packet. Continue English/privacy/quality gates and official split mapping before production tokenizer training. Full-size numerical/memory checks can proceed independently; laptop training pilots remain required.

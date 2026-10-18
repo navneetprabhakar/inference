@@ -23,3 +23,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Cross-host and CUDA verification](milestone-three.md)
 
 - [Bounded source audit and data curation](milestone-four.md)
+
+- [Bootstrap review and training release contract](milestone-five.md)

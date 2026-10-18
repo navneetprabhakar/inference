@@ -57,4 +57,6 @@ Tiny FP32 MLX → NVIDIA T4 CUDA → MLX training-state portability is validated
 
 A bounded four-source audit pipeline now produces sample-only deterministic JSONL shards with provenance and held-out protection; see [data audit results](docs/milestone-four.md).
 
+A manual bootstrap [review/release contract](docs/milestone-five.md) and checked train-only reader are implemented; public-source approvals remain pending.
+
 Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and sustained cloud training.
