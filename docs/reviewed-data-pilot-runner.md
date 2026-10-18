@@ -2,13 +2,13 @@
 
 Creator: Navneet Prabhakar
 
-Status: implementation specification from the production-readiness audit; no runner or real language pilot is claimed here.
+Status: reference runner implemented and locally validated in milestone thirty-one. Actual language pilots remain unrun; this contract does not claim production data admission or model acceptance.
 
 ## Purpose
 
 Provide a reproducible command for finite local language-training pilots using the existing reference trainer, token shards, mixtures and curriculum state. Remove the need to assemble diagnostic scripts manually. Do not change the model, optimizer, numeric acceptance policy, review authority or spending scope.
 
-This is the next independent implementation task. It can be built and validated using explicit synthetic fixtures while source/policy inputs remain pending. It must not silently enable unreviewed public data or run the actual 1M/10M pilots.
+The `slm.train` implementation is validated using explicit synthetic fixtures while source/policy inputs remain pending. It must not silently enable unreviewed public data or run the actual 1M/10M pilots.
 
 ## Inputs and preflight
 
@@ -52,3 +52,10 @@ This is the next independent implementation task. It can be built and validated 
 ## Real pilot gates remain separate
 
 After eligible data/admission review, tokenizer selection, portability-policy choice and evaluation preparation, use this runner for the actual target-model 1M-position smoke workload and required 10M pilot. Report actual processed positions and retained checkpoints rather than assigning those labels to a shorter run. Main GCP training still requires its own budget and fresh full-instance checks.
+
+
+## Implemented reference and known limits
+
+See [milestone thirty-one](milestone-thirty-one.md) for commands and evidence. Token-shard, mixture and curriculum bindings, re-encoded release provenance, managed checkpoint recovery and stage-screen revalidation are implemented. Preflight-only mode constructs no backend model; it can read canonical checkpoint tensors for integrity checks. CLI specification paths resolve relative to their specification file, and the saved specification uses absolute bindings.
+
+Bootstrap release review still loads its record inventory in memory. Re-encoding checks are bounded per document/tokenization buffer but do not turn that inventory into a scalable corpus-admission policy. Current actual source/policy approvals, production tokenizer selection and real-data language pilots are still missing. New NVIDIA wrapper validation and long-run throughput/memory measurement are separately open.

@@ -72,9 +72,11 @@ def audit(output):
     for path in paths:
         tree=ast.parse(path.read_text())
         if any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=='main' for n in tree.body):mains.append(str(path))
-    assert not (Path('src/slm/train.py').exists() or Path('src/slm/train').exists())
+    pilot_main_found=Path('src/slm/train.py').is_file() and 'src/slm/train.py' in mains
     assert not any('def main(' in Path(p).read_text() for p in ('src/slm/common/training.py','src/slm/common/curriculum.py'))
-    t=ET.parse('reports/milestone-twenty-nine-tests.xml').getroot().find('testsuite')
+    test_path=Path('reports/milestone-thirty-one-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-twenty-nine-tests.xml')
+    t=ET.parse(test_path).getroot().find('testsuite')
     tests={k:int(t.attrib[k]) for k in ('tests','failures','errors','skipped')};tests['passed']=tests['tests']-tests['skipped']-tests['failures']-tests['errors']
     refs={}
     items=[]
@@ -88,7 +90,7 @@ def audit(output):
       ('C01','Canonical random initialization and tied architecture',['src/slm/common/config.py','configs/target-81m.json'],'Fresh config count is 80,765,440; this is not a language-trained checkpoint.'),
       ('C02','Canonical unquantized model checkpoint and conventions',['src/slm/common/checkpoint.py','tests/test_portability.py'],'FP32 reference format; compressed exports remain separate.'),
       ('C03','FP32 optimizer moments, recipe, step and cursor state',['src/slm/common/training.py','tests/test_resume.py'],'Reference training state v1/v2 plus curriculum v3; not a main-run artifact.'),
-      ('C04','Atomic update-boundary save, corruption and interrupted-save checks',['src/slm/common/training.py','tests/test_resume.py'],'The checked API exists; general pilot process orchestration is missing.'),
+      ('C04','Atomic update-boundary save, corruption and interrupted-save checks',['src/slm/common/training.py','tests/test_resume.py'],'The checked API exists; see P02 for current pilot orchestration status.'),
       ('C05','Accumulation weighting, clip/decay/bias correction and tails',['src/slm/common/training.py','tests/test_accumulation.py'],'Reference optimizer behavior is tested; no new numerical acceptance is inferred.'),
       ('C06','Mixture order, family exposure and stage-local schedule resume',['src/slm/data/mixture.py','src/slm/data/curriculum.py','src/slm/common/curriculum.py'],'Finite reference manifests and receipts, not a sustained language curriculum.'),
     ]:item(id,'1',text,'implemented_reference',paths_,limit)
@@ -115,7 +117,9 @@ def audit(output):
     item('H05','5','Executable host normalization and reviewed continuation masks','partial',['src/slm/teacher/bridge.py','src/slm/common/supervision.py'],'Multiplication mapping only; partial historical tool exchanges unsupported. Historical assistant mistakes have zero direct loss.')
     item('H06','5','Source-bound offline review workflow','implemented_reference',['src/slm/data/review_console.py','src/slm/data/review_console.html','reports/milestone-twenty-nine-summary.json'],'Teacher gates work in synthetic DOM/Python controls; actual browser layout/download remains unverified and actual rights remain absent.')
     item('P01','6','Target architecture count and full-depth tiny-overfit checks','retained_reference_evidence',['configs/target-81m.json','reports/milestone-six-fullsize.json'],'Random initialization and synthetic checks only; full trajectory criterion still fails.')
-    item('P02','6','General bounded reviewed-data pilot execution command','missing',['src/slm/common/training.py','src/slm/common/curriculum.py','src/slm/eval/benchmark.py'],'Training APIs exist, but inspected entrypoints are diagnostics/audits. No general pilot command binds data/config/budgets/checkpoint cadence and report recovery.')
+    item('P02','6','General bounded reviewed-data pilot execution command','implemented_reference' if pilot_main_found else 'missing',
+        ['src/slm/train.py','tests/test_train.py','docs/reviewed-data-pilot-runner.md'] if pilot_main_found else ['src/slm/common/training.py','src/slm/common/curriculum.py','src/slm/eval/benchmark.py'],
+        'Reference runner now binds reviewed content, budgets, managed checkpoints and resume/stage receipts. Synthetic local tests are not the real language pilot; actual CUDA wrapper validation remains open.' if pilot_main_found else 'No general reviewed-data pilot command found.')
     item('P03','6','Actual 1M-token English smoke training','missing',['reports/milestone-eleven-reader-scale.json','docs/project-ledger.md'],'No eligible production tokenizer/data or 1M neural-update run; synthetic reader positions do not meet this requirement.')
     item('P04','6','Actual 10M-token laptop language pilot','missing',['docs/project-ledger.md','reports/milestone-seven-mlx-benchmark.json'],'No trained language checkpoint or sustained run. Short benchmark is not this pilot.')
     item('P05','6','Optional evidence-driven 50M extension','conditional_deferred',['docs/slm-training-plan.md'],'Optional after measured 1M/10M results, not an unconditional required paid run.')
@@ -157,8 +161,8 @@ def audit(output):
         'strict_trajectory_gate_passed':False,'production_tokenizer_selected_in_retained_report':False,
         'synthetic_reader_positions':scale['build']['processed_prediction_positions'],'synthetic_reader_neural_updates':0,
         'teacher_candidates':14,'teacher_approvals':0,'teacher_journals':journals,'combined_teacher_reserved_slots':17,
-        'latest_local_suite':tests,'general_pilot_main_found':False,'entrypoints_inspected':mains},
-      'next_independent_implementation':'Bounded reviewed-data pilot runner over existing Trainer/CurriculumTrainer, with immutable bindings, finite budgets, atomic checkpoints and restart-safe reports; validate on synthetic fixtures only until real input gates are resolved.',
+        'latest_local_suite':tests,'general_pilot_main_found':pilot_main_found,'entrypoints_inspected':mains},
+      'next_independent_implementation':('Production intake/admission policy and scalable grouping, while data/tokenizer/portability inputs gate real 1M/10M pilots.' if pilot_main_found else 'Bounded reviewed-data pilot runner over existing trainers with verified source bindings, budgets and recovery; synthetic validation only until real input gates are resolved.'),
       'external_inputs':['Source terms and explicit review decisions for current public packet','Scalable admission/quality-policy approval before bulk corpus release',
         'Portability acceptance option A/B','Actual account/source evidence and human teacher judgments','Evaluation suite/policy/rubric review',
         'Main GCP budget/hardware decision at its later paid-run gate'],
