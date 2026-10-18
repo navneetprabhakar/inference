@@ -43,3 +43,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Numerical drift localization and sensitivity controls](milestone-twenty-two.md)
 
 - [Offline human source-review console](milestone-twenty-three.md)
+
+- [Broader SFW CLI teacher pilot](milestone-twenty-four.md)
