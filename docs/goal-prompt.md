@@ -171,4 +171,4 @@ Use held-out scenarios, executable checks, and human review; teacher judging is 
 
 ## Next action
 
-Verify the ledger and most recent milestone evidence. Tiny FP32 optimizer resume and NVIDIA portability are complete; proceed with the audited data pipeline and production tokenizer, then full-size parity and laptop pilots.
+Verify the ledger and most recent milestone evidence. Tiny FP32 optimizer resume and NVIDIA portability are complete. The bounded data audit foundation now covers four pinned sources and 901 sample-only examples. Continue with reviewed ingestion, English/privacy/quality gates and official split mapping before production tokenizer training; full-size parity and laptop pilots remain required.

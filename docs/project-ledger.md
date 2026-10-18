@@ -7,8 +7,8 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: tiny FP32 cross-host verification complete; proceed with the data pipeline.
-- Next implementation milestone: audited data pipeline and production tokenizer, followed by full-size architecture parity.
+- Current milestone: bounded four-source audit and curation foundation complete; no training data released.
+- Next implementation milestone: reviewed data ingestion, calibrated English/privacy/quality gates and upstream split mapping; then tokenizer candidates and full-size parity.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: full 81M model, reduced precision and sustained training.
 - Spending: USD 10 authorized for a short CUDA validation job in `executespecv1`; one T4 validation VM used. No paid teacher calls or main pretraining. VM/disk/firewall deletion verified; conservative allowance below USD 1, settled billing pending.
@@ -24,6 +24,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Execution goal and repository setup | Complete | Private repository created and visibility verified; goal prompt, ledger, sole creator credit, and initial baseline prepared for milestone push |
 | 18 October 2026 | Local training-state checkpoint and resume | Complete locally | 33 passed, 1 CUDA skipped; exact same-backend continuation; MLX/CPU cross-backend resume; see milestone-two.md |
 | 18 October 2026 | Tiny cross-host and NVIDIA validation | Complete | 39 passed / 2 CUDA skips on Mac; 22 passed / 6 expected skips on T4; MLX/CUDA/MLX continuation and 100 CPU/CUDA updates; see milestone-three.md |
+| 18 October 2026 | Bounded source audit and curation foundation | Complete within audit scope | 57 passed / 2 CUDA skips; 800 input records → 901 retained sample-only examples; pinned revisions, protected held-outs and deterministic shards; see milestone-four.md |
 
 ## Decisions
 
@@ -36,6 +37,9 @@ Updated: 18 October 2026
 
 - GCP validation resources are deleted; Network Management was restored to disabled after deleting its temporary connectivity test. See the cleanup report.
 - Column-major serialization failure was corrected by explicit row-major export; scalar shapes and logical values are covered by regression tests.
+
+- Initial source probes: FineWeb-Edu, UltraChat, Dolly and complete OASST ready trees; sample bytes about 3.19 MB plus metadata. Raw data stays outside Git.
+- All retained content remains unreviewed; the audit is not a source clearance or production data release. No new cloud spending or teacher calls.
 
 ## Open gates
 

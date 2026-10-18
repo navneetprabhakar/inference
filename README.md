@@ -55,4 +55,6 @@ Training-state checkpoints and a deterministic fixture-batch cursor/warmup sched
 
 Tiny FP32 MLX → NVIDIA T4 CUDA → MLX training-state portability is validated; see [cross-host results](docs/milestone-three.md). CPU/CUDA also passed 100 updates and bidirectional checkpoint resume. This does not establish full-size or mixed-precision portability.
 
-Not implemented: production sharded-data training, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and sustained cloud training.
+A bounded four-source audit pipeline now produces sample-only deterministic JSONL shards with provenance and held-out protection; see [data audit results](docs/milestone-four.md).
+
+Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and sustained cloud training.

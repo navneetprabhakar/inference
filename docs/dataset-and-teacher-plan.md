@@ -181,3 +181,7 @@ Keep three axes independent:
 - [ ] All retained records have source, split, category, quality and lineage metadata.
 
 This checklist describes implementation gates. None is marked complete by writing this plan.
+
+## Implementation status
+
+A bounded four-source audit and deterministic curation foundation is implemented; see [milestone four](milestone-four.md). The full readiness checklist above remains open: small schema probes do not establish source approval, representative quality, human audit, production-scale processing or token inventory.
