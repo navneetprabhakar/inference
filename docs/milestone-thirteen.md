@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 Date: 19 October 2026
 
+The later [NVIDIA accumulation validation](milestone-fourteen.md) closes the actual-CUDA mechanics check described here. Historical local evidence and full-size trajectory limitations below remain unchanged.
+
 ## Outcome
 
 The FP32 reference trainer now supports **supervised-token-weighted gradient accumulation** on MLX and PyTorch. Local tests match a native full-batch reference and preserve optimizer/data/scheduler state across resume. The full **80,765,440-parameter** model passes a bounded MLX own-trajectory resume probe with accumulation. This does not satisfy the still-failed full-size cross-backend trajectory gate, establish a language pilot or validate accumulation on NVIDIA hardware.

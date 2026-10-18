@@ -7,11 +7,11 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: FP32 supervised-token-weighted gradient accumulation and v2 update-boundary resume implemented; full 81M MLX own-resume mechanics verified. Actual public-source review, tokenizer selection, accumulated CUDA validation and full-size cross-backend trajectory acceptance remain open.
-- Next implementation milestone: deterministic mixture/exposure accounting and explicit curriculum transitions; actual NVIDIA accumulated-state validation remains required. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
+- Current milestone: actual accumulated-state validation complete on T4, with tiny numerical MLX/CUDA/MLX return and full 81M exact state/finite continuation back to MLX. Public-source review, tokenizer selection, language pilots and full-size cross-backend trajectory acceptance remain open.
+- Next implementation milestone: deterministic mixture/exposure accounting and explicit curriculum transitions. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
-- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
+- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
 
@@ -34,6 +34,7 @@ Updated: 19 October 2026
 | 19 October 2026 | Token shards / resumable data consumption | Reference path complete; production runs open | 166 passed / 6 CUDA skips; exact tested same-backend resume, tiny MLX/CPU round trip, EOS/SFT masks and 2.60M-position synthetic reader probe; no public-data training; see milestone-eleven.md |
 | 19 October 2026 | CLI teacher pilot | Transport validated; training release open | 187 passed / 6 CUDA skips; one real GPT-5.6 Luna correction demonstration, three cache rechecks, two failed launch slots retained; no API calls or training approvals; see milestone-twelve.md |
 | 19 October 2026 | Gradient accumulation / v2 update boundaries | Local reference path complete; NVIDIA accumulation open | 221 passed / 7 CUDA skips; native full-batch checks, tiny MLX/CPU migration, real historical v1 resume, and full 81M own-resume over 3 logical updates; no public-data training; see milestone-thirteen.md |
+| 19 October 2026 | Actual NVIDIA accumulation / v2 state transport | Scoped validation complete; trajectory/quality gates unchanged | 222 passed / 7 skips locally; 187 passed / 29 expected skips on T4; tiny numerical round trip, full exact import/finite continuation/MLX return and CUDA own-resume; packaging failure retained/corrected; resources verified absent; see milestone-fourteen.md |
 
 ## Decisions
 
@@ -99,3 +100,12 @@ Updated: 19 October 2026
 ## Ledger practice
 
 Add dated entries when a milestone completes, a decision changes, or work is materially interrupted. Keep evidence and limitations together. Commit the ledger with the milestone; use Git history for commit identity. Verify push success against the remote before reporting synchronization.
+
+## Completed validation job — 19 October 2026
+
+- `slm-accum-20261019`, project `executespecv1`, zone `us-central1-a`; one T4/n1-standard-4, no external IP/service account, 100 GiB auto-delete standard disk and 45-minute server deletion limit. Dedicated IAP SSH rule `slm-accum-iap-ssh`, VM and boot disk are deleted and verified absent after checksum-verified result retrieval; see milestone-fourteen-cleanup.json.
+- USD 2 conservative job allowance, USD 5 cumulative out of USD 10 authorized; settled costs unknown. Source, dependency and fixture hashes are recorded in `reports/milestone-fourteen-input-manifest.json`. No public data or teacher outputs are included.
+
+- Final cloud checks pass after preserving/fixing an initial archive omission of `scripts/audit-data.py`; corrected suite 187 passed / 29 expected skips, original 1-failure suite retained. No tests, numerical code or thresholds changed to fix packaging.
+- Full v2 state import preserves 242,296,320 values on CUDA and again on MLX. The 7-microbatch chain ends on MLX at update 4/cursor 7, 122 processed/79 supervised positions. This finite mechanics chain is not an independent trajectory or language-quality evaluation.
+- Matching short accumulation-2 timing probes: 10,240 timed positions, MLX 7.900121s and T4 9.306863s. Unfused paths include host checks, library versions differ, and measurements are not sustained production rates. No new teacher generation/public-data training; full trajectory acceptance remains open.

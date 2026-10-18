@@ -1,0 +1,153 @@
+{
+  "tiny_roundtrip": {
+    "passed": true,
+    "bundle_hash": "5fb5dea1a62d3a0b2719d1a3940995c3086b1039049616acfaf4280a3c69be6b",
+    "origin": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "destination": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "comparison_policy": "tiny_fp32_v1",
+    "start_step": 4,
+    "parameters": 20640,
+    "attempted_probe_step": 6,
+    "final_step": 6,
+    "processed_tokens": 234,
+    "supervised_tokens": 129,
+    "seconds": 0.1556573329726234,
+    "memory": {
+      "process_peak_rss_bytes": 64520192,
+      "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+      "allocator_peak_bytes": 950288,
+      "allocator_active_bytes": 247728,
+      "allocator_cache_bytes": 1075896
+    },
+    "completed_update_step": 6,
+    "max_abs_error_by_group": {
+      "logits": 8.940696716308594e-08,
+      "loss": 4.76837158203125e-07,
+      "layer": 7.450580596923828e-09,
+      "gradient": 1.1920928955078125e-07,
+      "weight": 5.960464477539063e-08,
+      "moment_m": 3.725290298461914e-09,
+      "moment_v": 4.656612873077393e-10,
+      "cached_logits": 5.960464477539063e-08
+    }
+  },
+  "full_exact_import": {
+    "passed": true,
+    "scope": "Exact state import/export; no optimizer update or trajectory equivalence claim",
+    "parameters": 80765440,
+    "tensors_checked": 654,
+    "values_checked": 242296320,
+    "source_content_sha256": "0a505a42b5ba3cb490fe43fe58149f4a40833e08d5a9be6aa71a4d3d74540943",
+    "imported_content_sha256": "0a505a42b5ba3cb490fe43fe58149f4a40833e08d5a9be6aa71a4d3d74540943",
+    "updates_performed": 0,
+    "counters": {
+      "step": 3,
+      "cursor": 6,
+      "tokens": 112,
+      "supervised_tokens": 73
+    },
+    "recipe": {
+      "lr": 0.0003,
+      "warmup_tokens": 128,
+      "beta1": 0.9,
+      "beta2": 0.95,
+      "eps": 1e-08,
+      "decay": 0.1,
+      "clip": 1.0,
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "accumulation_steps": 2
+    },
+    "environment": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "seconds": 1.8233774590189569,
+    "memory": {
+      "process_peak_rss_bytes": 3359916032,
+      "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+      "allocator_peak_bytes": 969215552,
+      "allocator_active_bytes": 969215552,
+      "allocator_cache_bytes": 1033256
+    }
+  },
+  "full_mlx_tail": {
+    "passed": true,
+    "fixture_bundle_sha256": "60e5624e3b48f1fae329003f3789dfaccc173e04a149dcb5f4c131ba4da0a6f9",
+    "parameters": 80765440,
+    "environment": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "recipe": {
+      "lr": 0.0003,
+      "warmup_tokens": 128,
+      "beta1": 0.9,
+      "beta2": 0.95,
+      "eps": 1e-08,
+      "decay": 0.1,
+      "clip": 1.0,
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "accumulation_steps": 2
+    },
+    "source_counters": {
+      "step": 3,
+      "cursor": 6,
+      "tokens": 112,
+      "supervised_tokens": 73
+    },
+    "history": [
+      {
+        "loss": 9.79439640045166,
+        "lr": 0.00028593749999999995,
+        "step": 4,
+        "tokens": 122,
+        "cursor": 7,
+        "microbatches": 1,
+        "supervised_tokens": 79
+      }
+    ],
+    "final_counters": {
+      "step": 4,
+      "cursor": 7,
+      "tokens": 122,
+      "supervised_tokens": 79
+    },
+    "updates_performed": 1,
+    "all_final_values_finite": true,
+    "values_checked": 242296320,
+    "final_state_sha256": "9fb989e15cc266828c2a4751ac926d855068376b19771df226ab2bc688d1f578",
+    "seconds": 2.4563203749712557,
+    "memory": {
+      "process_peak_rss_bytes": 4343889920,
+      "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+      "allocator_peak_bytes": 2467048308,
+      "allocator_active_bytes": 969187968,
+      "allocator_cache_bytes": 1527279668
+    },
+    "scope": "Finite optimizer continuation and portable checkpoint; no independent/cross-backend trajectory acceptance or language-quality claim"
+  },
+  "all_checks_passed": true,
+  "scope": "Tiny strict numerical MLX/CUDA/MLX round trip plus full-size exact import and finite continuation; no full-size cross-backend trajectory acceptance"
+}

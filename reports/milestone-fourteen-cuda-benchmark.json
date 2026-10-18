@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "synthetic_only": true,
+  "parameters": 80765440,
+  "environment": {
+    "backend": "torch",
+    "platform": "Linux-7.0.0-1013-gcp-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "device": "cuda",
+    "version": "2.9.1+cu129",
+    "cuda_runtime": "12.9",
+    "hardware": "Tesla T4"
+  },
+  "recipe": {
+    "lr": 0.0003,
+    "warmup_tokens": 4096,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "eps": 1e-06,
+    "decay": 0.1,
+    "clip": 1.0,
+    "loss_implementation": "legacy-logsumexp-minus-target-v1",
+    "accumulation_steps": 2
+  },
+  "batch_size": 1,
+  "sequence_length": 1024,
+  "warmup_updates": 2,
+  "measured_updates": 5,
+  "measured_token_positions": 10240,
+  "microbatches_per_update": 2,
+  "effective_positions_per_update": 2048,
+  "measured_seconds": 9.306863454999984,
+  "token_positions_per_second": 1100.2632680184752,
+  "history": [
+    {
+      "loss": 9.824719905853271,
+      "lr": 0.0003,
+      "step": 3,
+      "tokens": 6144,
+      "cursor": 6,
+      "microbatches": 2,
+      "supervised_tokens": 6144
+    },
+    {
+      "loss": 9.8019380569458,
+      "lr": 0.0003,
+      "step": 4,
+      "tokens": 8192,
+      "cursor": 8,
+      "microbatches": 2,
+      "supervised_tokens": 8192
+    },
+    {
+      "loss": 9.808126449584961,
+      "lr": 0.0003,
+      "step": 5,
+      "tokens": 10240,
+      "cursor": 10,
+      "microbatches": 2,
+      "supervised_tokens": 10240
+    },
+    {
+      "loss": 9.808698177337646,
+      "lr": 0.0003,
+      "step": 6,
+      "tokens": 12288,
+      "cursor": 12,
+      "microbatches": 2,
+      "supervised_tokens": 12288
+    },
+    {
+      "loss": 9.8101224899292,
+      "lr": 0.0003,
+      "step": 7,
+      "tokens": 14336,
+      "cursor": 14,
+      "microbatches": 2,
+      "supervised_tokens": 14336
+    }
+  ],
+  "memory": {
+    "process_peak_rss_bytes": 1663418368,
+    "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+    "allocator_peak_bytes": 4100795904,
+    "allocator_reserved_bytes": 4292870144
+  },
+  "dataset_hash": "490acb0d9d38ca525cc966aa6da75736c003d578b4e6ebd6061e72e08dae109e",
+  "scope": "Unfused FP32 reference trainer with host gradient checks; synthetic data, no quality or production-cost guarantee."
+}
