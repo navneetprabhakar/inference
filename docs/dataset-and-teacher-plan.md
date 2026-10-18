@@ -191,3 +191,10 @@ The [offline teacher lifecycle](milestone-nine.md) now implements versioned requ
 The bounded current OASST sample now has [official partition evidence and repaired held-outs](milestone-ten.md). This covers the audited 200 complete trees, not every future source import. Actual source/content review, quality calibration and production release remain required.
 
 The active teacher transport is now **Codex CLI with saved ChatGPT sign-in**, per the 19 October instruction; the API path remains disabled. The [CLI pilot](milestone-twelve.md) generated one real GPT-5.6 Luna SFW correction demonstration and verified cache reuse. It grants no source/training approval. CLI launch counts and account token counters are reported separately from API estimates; account-specific training rights, a broader human-audited pilot and student-benefit measurement remain required.
+
+
+## Implemented teacher admission path — 19 October 2026
+
+The active transport remains saved-auth Codex CLI only. The [registered host bridge](milestone-twenty-six.md) reads completed cached responses without reserving requests, verifies request/response lineage, inserts runtime style/tool context and composes continuation-only transcripts. Only the explicit synthetic multiplication-to-arithmetic mapping is implemented; other teacher tools require their own schema/semantic adapters. Historical assistant messages are inputs, including mistakes.
+
+Previews are not a licensed source or a training release. Actual source/card/terms evidence is supplied separately for sample-only export. Derived examples require verified approved-train parent membership. The existing publisher additionally checks explicit teacher reply/style-content/history/host review; it rejects generic approval without those decisions. The public-source HTML console cannot process this extended teacher packet yet; JSON review is supported. Seven cached candidates have private composed previews, zero actual approvals and no verified free-text quality. Main language training and production tokenizer selection remain gated on the broader source/policy/review work.

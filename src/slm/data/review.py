@@ -68,6 +68,9 @@ def prepare(dataset, output, limit=40):
                      for e in selected}}
     for entry in packet['examples'].values():
         record=entry['record']
+        if 'teacher_bridge' in record['validation_results']:
+            from slm.teacher.bridge import review_requirements
+            entry['decision']['teacher_review']={k:None for k in review_requirements(record)}
         if record['source']=='OpenAssistant/oasst2' and 'upstream_mapping' in record['validation_results']:
             proof=oasst_mapping(record)
             entry['decision']['upstream_partition']=proof['split']
@@ -116,6 +119,13 @@ def check_packet(packet, sources, input_records=None):
         if approved is not None and type(approved) is not bool:
             raise ValueError('Example approval must be boolean or pending')
         if approved is not True: continue
+        if 'teacher_bridge' in record['validation_results']:
+            from slm.teacher.bridge import review_requirements
+            required=review_requirements(record);teacher_review=decision.get('teacher_review',{})
+            if decision['content_category']!=record['content_category']:
+                raise ValueError('Controlled teacher content setting cannot be relabeled at release')
+            if set(teacher_review)!=set(required) or any(teacher_review[k] is not True for k in required):
+                raise ValueError('Explicit teacher reply/style/history/host review required')
         if record['source']=='OpenAssistant/oasst2':
             proof=oasst_mapping(record)
             if upstream!=proof['split']:raise ValueError('Manual split override disagrees with verified OASST mapping')

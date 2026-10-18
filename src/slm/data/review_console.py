@@ -40,6 +40,7 @@ def decisions(sources,examples):
         if not isinstance(cats,list) or any(not isinstance(v,str) for v in cats) or len(set(cats))!=len(cats) or not set(cats)<=CATEGORIES:
             raise ValueError('Source categories differ')
     for entry in examples.values():
+        if 'teacher_review' in entry:raise ValueError('Teacher-specific review requires the extended JSON packet; this console cannot drop those gates')
         if set(entry)!=DECISION_FIELDS:raise ValueError('Example decision fields differ')
         for key in ('approved','english_verified','privacy_verified','quality_verified'):choice(entry[key])
         if entry['content_category'] is not None and entry['content_category'] not in CATEGORIES:raise ValueError('Unknown content category')
