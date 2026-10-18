@@ -7,8 +7,8 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: bounded BPE candidate and serialization foundation implemented; no production tokenizer selected/frozen. Training-trajectory acceptance still fails; public approvals remain zero.
-- Next implementation milestone: obtain the portability acceptance decision before changing its gates; continue data/tokenizer foundations within existing approvals and budgets. Source/sample human review remains pending.
+- Current milestone: offline teacher lifecycle and spending/cache controls implemented; no live teacher output or approved teacher dataset. Training-trajectory acceptance still fails; public-source approvals remain zero.
+- Next implementation milestone: obtain portability acceptance and source/sample review input; complete teacher key/account/terms/category/budget readiness before a live pilot. Continue useful offline work without changing failed gates or spending authorizations.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No paid teacher calls or main pretraining; settled billing pending.
@@ -29,6 +29,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Full-size local bring-up / drift diagnostics | Partial; training gate failed | 74 passed / 2 CUDA skips; 80,765,440 parameters; exact state import, 2,048-context checks and 100-update learning pass locally; trajectory comparisons fail; see milestone-six.md |
 | 18 October 2026 | Loss accuracy / full-size NVIDIA validation | Validation scope complete; trajectory gate still failed | 96 passed / 5 skipped locally; 71 passed / 17 expected skips on T4; exact learned state and 2,048-context inference pass; opt-in accurate loss candidate fails trajectory criteria; see milestone-seven.md |
 | 18 October 2026 | Tokenizer candidate / serialization foundation | Foundation complete; production selection open | 109 passed / 5 CUDA skips locally; train-only reviewed intake, disjoint IDs, assistant masks, integrity checks and comparison runner; both synthetic 16K/24K requests yield only 432 IDs; no public-data candidate trained; see milestone-eight.md |
+| 18 October 2026 | Offline conversation teacher lifecycle | Foundation complete; live pilot open | 139 passed / 5 CUDA skips; provider request contract, durable cache, bounded journal and structured/executable validators; 30 handcrafted replays plus 30 cache hits; no real teacher calls or training approvals; see milestone-nine.md |
 
 ## Decisions
 
@@ -58,6 +59,9 @@ Updated: 18 October 2026
 
 - Tokenizer mechanics now use an optional pinned `tokenizers==0.22.2` runtime and ten disjoint structural IDs; the fixture byte serializer remains unchanged. Production selection, streaming intake, representative sampling, packed training and structured tool serialization remain open.
 - The current sample-only public snapshot was refused by the tokenizer builder without output; zero public examples/sources are approved. No new cloud spending or paid teacher calls.
+
+- Initial teacher API IDs are documented as `gpt-6-luna` and `gpt-5.6-luna`; account access, output-training rights/category review and paid teacher budget remain unverified. No API key is configured in the workspace environment.
+- Live generation is disabled with zero budget. Current price/context registration requires revalidation after 25 October 2026. All teacher candidates remain ineligible for training until separate review/release; metadata checks do not verify prose truth/style/content.
 
 ## Open gates
 

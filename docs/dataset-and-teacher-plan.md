@@ -185,3 +185,5 @@ This checklist describes implementation gates. None is marked complete by writin
 ## Implementation status
 
 A bounded four-source audit and deterministic curation foundation is implemented; see [milestone four](milestone-four.md). The full readiness checklist above remains open: small schema probes do not establish source approval, representative quality, human audit, production-scale processing or token inventory.
+
+The [offline teacher lifecycle](milestone-nine.md) now implements versioned requests, a provider adapter, durable response caching, spending/request caps and structured/executable validation. Official API IDs for the initial labels are documented; account access, training-use terms/category review, paid authorization, live generation, human quality audit and student-benefit validation remain open. No readiness checkbox is completed merely by this foundation.
