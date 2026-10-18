@@ -7,7 +7,7 @@ from slm.common.config import validate_weights
 
 def load(config, weights, device='cpu'):
     validate_weights(config, weights)
-    return {k: torch.tensor(v, device=device, requires_grad=True) for k, v in weights.items()}
+    return {k: torch.tensor(weights[k], device=device, requires_grad=True) for k in config.shapes()}
 
 
 def export(params):

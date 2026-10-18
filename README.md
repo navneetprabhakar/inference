@@ -51,4 +51,6 @@ For MLX, import `mlx.core as mx` and `slm.backends.mlx_backend`, load the same w
 
 See [milestone report](docs/milestone-one.md), [training plan](docs/slm-training-plan.md), and [dataset/teacher plan](docs/dataset-and-teacher-plan.md).
 
-Not implemented in this milestone: training-state checkpoint migration, data cursor/scheduler, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and cloud jobs. An actual NVIDIA run is still required before claiming CUDA portability.
+Training-state checkpoints and a deterministic fixture-batch cursor/warmup scheduler are now implemented; see [resume results](docs/milestone-two.md).
+
+Not implemented: production sharded-data training, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and cloud jobs. An actual NVIDIA run is still required before claiming CUDA portability.

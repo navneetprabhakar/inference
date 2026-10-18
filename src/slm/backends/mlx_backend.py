@@ -7,7 +7,7 @@ from slm.common.config import validate_weights
 
 def load(config, weights):
     validate_weights(config, weights)
-    return {k: mx.array(v) for k, v in weights.items()}
+    return {k: mx.array(weights[k]) for k in config.shapes()}
 
 
 def export(params):

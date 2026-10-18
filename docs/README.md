@@ -17,3 +17,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Execution goal](goal-prompt.md)
 - [Active project ledger](project-ledger.md)
+
+- [Training checkpoint and resume results](milestone-two.md)
