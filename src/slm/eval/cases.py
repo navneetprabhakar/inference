@@ -58,4 +58,5 @@ def candidate_suite():
 @lru_cache(maxsize=1)
 def heldout_prompts():
     from slm.eval.tool_cases import tool_cases
-    return frozenset([*(digest(c['messages']) for c in candidate_suite()['cases']),*(digest(c['history']) for c in tool_cases())])
+    contexts=[*(c['messages'] for c in candidate_suite()['cases']),*(c['history'] for c in tool_cases())]
+    return frozenset(digest(v) for context in contexts for v in (context,context[1:] if context[0]['role']=='system' else context))

@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: five synthetic local tools, typed decision framing, bounded host execution and verified tool-SFT intake complete within reference scope. Scripted controls pass; actual random students fail. No learned tool capability or MCP transport is claimed.
-- Next implementation milestone: application-owned MCP transport/discovery mapping and executable timeout/error checks. In parallel, complete source/suite review, English/privacy/quality calibration, teacher rights/quality review and production tokenizer selection. CLI-only teacher; no API fallback.
+- Current milestone: actual MCP stdio discovery/calls and bounded lifecycle complete within reference scope, using official SDK 2.3.0. Scripted controls produce real peer requests; actual random students still fail. No learned capability or production remote-service authorization is claimed.
+- Next implementation milestone: Streamable HTTP/authorization boundaries and batched actual NVIDIA validation of typed/curriculum paths. Source/suite review, English/privacy/quality calibration, teacher rights/quality review, tokenizer selection and real language pilots remain required. CLI-only teacher; no API fallback.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -114,6 +114,15 @@ Updated: 19 October 2026
 - Initial full suite: 2 failed / 380 passed / 10 skipped, retained. New shard hashes changed batch order and exposed incidental tail-size assumptions. Updated fixtures guarantee short tails/different accumulation sizes and derive boundaries from declared counts; exact resume/independent rate checks and tolerances remain unchanged.
 - Evidence: milestone-eighteen.md, final/initial XML, source-hashed tool audit and ignored local-tools-audit-v4 raw traces. Seven synthetic scenario families remain unreviewed and protected from exact train/teacher reuse.
 - No actual NVIDIA typed-runtime validation, MCP calls, teacher generation or cloud jobs added. Public approvals remain zero, prior numerical failures remain failed and CUDA planning allowances remain USD 5 of USD 10; settled costs unknown.
+
+## MCP stdio integration — 19 October 2026
+
+- Local suite: 420 passed / 11 unavailable-CUDA skips. Application-managed registry, namespaced aliases, paginated/pinned discovery, schema checks, one-attempt low-level SDK calls, bounded POSIX transport and final cleanup reports. Actual SDK 2.3.0 negotiation records current 2026-07-28 and forced legacy 2025-11-25. Dependency closure: 28 local reference pins, including crypto extras.
+- Seven scripted tasks pass with five peer-observed tool requests. Actual 34,976-parameter random MLX student fails all seven tasks and submits zero tools. No free-text/style or learned-tool acceptance. See milestone-nineteen.md, source-hashed MCP audit and ignored mcp-audit-v1 raw traces.
+- Timeouts/disconnects/invalid results retain unknown outcomes and are never automatically retried. Tests verify catalog changes before further submission, malformed/oversized wire data, input-required refusal, credential inheritance boundary, parent reaping and termination of a same-group child that ignores SIGTERM. Not a process sandbox or full protocol/server conformance claim.
+- Exact holdout checks now ignore leading host/system context, preserving task isolation when schemas/style headers change. Semantic overlap and production audits remain open.
+- Renewed the app request for the current 40-example/four-source review packet; its file panel is queued and human attestation remains false. No review decision was inferred.
+- No real-service writes, teacher generation, model-training audit or new cloud jobs. Public approvals remain zero, prior numerical failures remain failed; CUDA planning allowances unchanged at USD 5 of USD 10, settled costs unknown. HTTP, authorization, Linux/CUDA typed-runtime validation and real language pilots remain open.
 
 ## Open gates
 

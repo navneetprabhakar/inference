@@ -26,6 +26,7 @@ class ExecutionRefused(ValueError):pass
 
 
 class LocalTools:
+    context_note='Catalog prices and documents here are synthetic fixtures, not live product information.'
     def __init__(self):
         ids={'type':'array','items':string(16),'minItems':2,'maxItems':3,'uniqueItems':True}
         self._specs={
@@ -74,7 +75,7 @@ class Session:
         if type(max_calls) is not int or not 1<=max_calls<=3:raise ValueError('One to three bounded call attempts required')
         if type(max_result_bytes) is not int or not 256<=max_result_bytes<=8192:raise ValueError('Explicit bounded result bytes required')
         self.registry=registry;self.registry_hash=registry.fingerprint;self.max_calls=max_calls;self.max_result_bytes=max_result_bytes
-        self.seen=set(seen_ids);self.attempts=0;self.executed=0
+        self.seen=set(seen_ids);self.attempts=0;self.executed=0;self.dispatched=0
     def call(self,call):
         decision(call)
         if call['kind']!='call':raise ValueError('Call required')
@@ -84,8 +85,12 @@ class Session:
         if call['id'] in self.seen:raise ExecutionRefused('Call ID already consumed')
         self.seen.add(call['id'])
         self.registry.validate(call)
-        self.executed+=1
-        result=self.registry.execute(call)
+        self.dispatched+=1
+        before=getattr(self.registry,'tool_submission_count',None)
+        if before is None:self.executed+=1
+        try:result=self.registry.execute(call)
+        finally:
+            if before is not None:self.executed+=self.registry.tool_submission_count-before
         try:canonical(result,self.max_result_bytes)
         except ValueError:
             result=tool_result({'id':call['id'],'name':call['name'],'ok':False,'data':None,

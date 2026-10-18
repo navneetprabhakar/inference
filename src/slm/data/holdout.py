@@ -8,5 +8,7 @@ def check_training_context(context,identifiers=()):
         raise ValueError('Reserved evaluation family cannot enter training')
     # Match complete user/tool-ended prefixes, including a demonstration's context.
     for i,message in enumerate(context):
-        if message.get('role') in ('user','tool') and digest(context[:i+1]) in heldout_prompts():
+        prefix=context[:i+1]
+        candidates=(prefix,prefix[1:]) if prefix[0].get('role')=='system' else (prefix,)
+        if message.get('role') in ('user','tool') and any(digest(v) in heldout_prompts() for v in candidates):
             raise ValueError('Exact held-out evaluation context cannot enter training')

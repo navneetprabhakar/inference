@@ -33,3 +33,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Raw conversation evaluation and stage screens](milestone-seventeen.md)
 
 - [Local tools and typed SFT framing](milestone-eighteen.md)
+
+- [Application-managed MCP stdio integration](milestone-nineteen.md)

@@ -79,6 +79,8 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Raw conversation evaluation](docs/milestone-seventeen.md) now provides cached greedy decoding, 500 unreviewed SFW candidate cases, separate exact/human/reference-loss metrics and stage screen reports. Actual tiny/full random-weight negative controls reject; no language capability or reviewed-suite acceptance is claimed.
 
-[Local tools and typed SFT](docs/milestone-eighteen.md) now connect five synthetic tools to typed call/answer/clarification decisions, bounded execution and correlated results. Verified token-shard v2 supports tool framing/masks; plain v1 remains readable. Scripted controls pass; actual random student controls fail. No learned tool competence or MCP transport is claimed.
+[Local tools and typed SFT](docs/milestone-eighteen.md) now connect five synthetic tools to typed call/answer/clarification decisions, bounded execution and correlated results. Verified token-shard v2 supports tool framing/masks; plain v1 remains readable. Scripted controls pass; actual random student controls fail. No learned tool competence is claimed; subsequent stdio MCP integration is recorded below.
 
-Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
+[Application-managed MCP stdio](docs/milestone-nineteen.md) now adds actual SDK server discovery/calls, aliases, schema validation, bounded transport and verified process cleanup. Scripted controls issue five peer-observed calls; actual random students submit none. This is infrastructure evidence, not learned tool competence.
+
+Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, Streamable HTTP/production MCP authorization, and sustained cloud training.
