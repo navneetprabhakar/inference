@@ -15,7 +15,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 ```sh
 uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer,teacher]'
+uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer,teacher,data]'
 .venv/bin/python -m pytest -q
 ```
 
@@ -23,7 +23,7 @@ uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer,teacher]'
 
 ## PyTorch on NVIDIA hardware
 
-Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev,tokenizer,teacher]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
+Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev,tokenizer,teacher,data]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
 
 ## Run the prototype
 
@@ -66,5 +66,7 @@ The learned full-size checkpoint also passes exact state import and 2,048-contex
 A bounded reviewed-train BPE builder, disjoint structural/content IDs, loss-mask serializer and 16K/24K comparison tooling are implemented; see [tokenizer foundation](docs/milestone-eight.md). Public-source approvals remain zero; no production tokenizer is selected or frozen.
 
 The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses adapter, durable cache, bounded spending/request journal and structured/executable validators. The shipped live configuration is disabled; no real teacher output has been produced.
+
+[Official OASST partition mapping](docs/milestone-ten.md) moved 23 previous train candidates to held-out status and preserved all prior held-outs. The current sample-only audit has 799 train / 70 validation / 32 test candidates; its new pending review packet remains unapproved.
 
 Not implemented: approved production datasets, production sharded-data training, production tokenizer, live teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

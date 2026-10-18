@@ -4,6 +4,7 @@ from copy import deepcopy
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -25,6 +26,17 @@ def records(path):
                     raise ValueError('Invalid dataset record identity or partition')
                 result[item['example_id']] = item
     return result
+
+
+def oasst_mapping(record):
+    proof=record['validation_results'].get('upstream_mapping',{})
+    root=record['parent_group_id'].removeprefix(record['source']+':')
+    if (proof.get('method')!='oasst-official-id-projection-v1'
+        or proof.get('source_revision')!=record['source_revision'] or proof.get('root_id')!=root
+        or proof.get('split') not in PRIORITY or proof.get('split')!=record['official_split']
+        or not re.fullmatch('[a-f0-9]{64}',proof.get('bundle_sha256',''))):
+        raise ValueError('Verified OASST official mapping required; manual split override refused')
+    return proof
 
 
 def prepare(dataset, output, limit=40):
@@ -54,6 +66,12 @@ def prepare(dataset, output, limit=40):
                                     'content_category': None, 'upstream_partition': None,
                                     'partition_evidence': '', 'note': ''}}
                      for e in selected}}
+    for entry in packet['examples'].values():
+        record=entry['record']
+        if record['source']=='OpenAssistant/oasst2' and 'upstream_mapping' in record['validation_results']:
+            proof=oasst_mapping(record)
+            entry['decision']['upstream_partition']=proof['split']
+            entry['decision']['partition_evidence']='Machine-verified official ID projection; bundle SHA-256 '+proof['bundle_sha256']
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open('x') as stream: stream.write(json.dumps(packet, sort_keys=True, ensure_ascii=False, indent=2)+'\n')
     return {'selected': len(selected), 'sources': len(packet['source_reviews']),
@@ -98,6 +116,9 @@ def check_packet(packet, sources, input_records=None):
         if approved is not None and type(approved) is not bool:
             raise ValueError('Example approval must be boolean or pending')
         if approved is not True: continue
+        if record['source']=='OpenAssistant/oasst2':
+            proof=oasst_mapping(record)
+            if upstream!=proof['split']:raise ValueError('Manual split override disagrees with verified OASST mapping')
         source_review = packet['source_reviews'][record['source']]
         if (source_review['approved'] is not True or upstream is None
             or any(decision[k] is not True for k in ('english_verified','privacy_verified','quality_verified'))

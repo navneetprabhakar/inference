@@ -2,13 +2,13 @@
 
 Creator: Navneet Prabhakar
 
-Updated: 18 October 2026
+Updated: 19 October 2026
 
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: offline teacher lifecycle and spending/cache controls implemented; no live teacher output or approved teacher dataset. Training-trajectory acceptance still fails; public-source approvals remain zero.
-- Next implementation milestone: obtain portability acceptance and source/sample review input; complete teacher key/account/terms/category/budget readiness before a live pilot. Continue useful offline work without changing failed gates or spending authorizations.
+- Current milestone: official OASST identity/partition join and held-out repair complete within audit scope; 23 previous train candidates quarantined, all 79 prior held-outs preserved. Public approvals remain zero; training trajectories still fail acceptance.
+- Next implementation milestone: review the current packet at `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and prepare production intake. Portability acceptance and separate teacher key/account/terms/category/budget readiness remain pending.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No paid teacher calls or main pretraining; settled billing pending.
@@ -30,6 +30,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Loss accuracy / full-size NVIDIA validation | Validation scope complete; trajectory gate still failed | 96 passed / 5 skipped locally; 71 passed / 17 expected skips on T4; exact learned state and 2,048-context inference pass; opt-in accurate loss candidate fails trajectory criteria; see milestone-seven.md |
 | 18 October 2026 | Tokenizer candidate / serialization foundation | Foundation complete; production selection open | 109 passed / 5 CUDA skips locally; train-only reviewed intake, disjoint IDs, assistant masks, integrity checks and comparison runner; both synthetic 16K/24K requests yield only 432 IDs; no public-data candidate trained; see milestone-eight.md |
 | 18 October 2026 | Offline conversation teacher lifecycle | Foundation complete; live pilot open | 139 passed / 5 CUDA skips; provider request contract, durable cache, bounded journal and structured/executable validators; 30 handcrafted replays plus 30 cache hits; no real teacher calls or training approvals; see milestone-nine.md |
+| 19 October 2026 | Official partitions / held-out repair | Audit scope complete; source review open | 148 passed / 5 CUDA skips; all 200 OASST sample trees joined to official identity projection; 23 prior train candidates now held out; 799/70/32 split; no public-data training; see milestone-ten.md |
 
 ## Decisions
 
@@ -62,6 +63,10 @@ Updated: 18 October 2026
 
 - Initial teacher API IDs are documented as `gpt-6-luna` and `gpt-5.6-luna`; account access, output-training rights/category review and paid teacher budget remain unverified. No API key is configured in the workspace environment.
 - Live generation is disabled with zero budget. Current price/context registration requires revalidation after 25 October 2026. All teacher candidates remain ineligible for training until separate review/release; metadata checks do not verify prose truth/style/content.
+
+- Current OASST mapping covers all 200 sampled roots against the pinned official identity projection; 191 upstream train and 9 validation trees. All 303 English paths retain mapping evidence. Full Parquet hashes/text equality and source approval are not claimed.
+- The authoritative pending source/sample review target is now `data/official-split-audit-v1/pending-review.json` (40 examples/four sources, no approvals/attestation). The original packet is retained; current release guards reject unmapped OASST approvals and manual split overrides.
+- Current mapped curation: 799 train / 70 validation / 32 test candidates. All 79 frozen hold-outs are preserved, and 23 OASST examples moved from local train to validation before any public-data training. No new cloud/teacher spending.
 
 ## Open gates
 

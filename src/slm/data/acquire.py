@@ -131,6 +131,36 @@ def sample_ready_trees(source, output, count=200):
     return report
 
 
+
+UPSTREAM_SPLITS={'train':'train','validation':'validation','test':'test',
+    'train_sft':'train','test_sft':'test','train_gen':'train','test_gen':'test'}
+
+
+def verified_cached_spec(item,folder):
+    """Bind cached bytes to the pinned source AND actual upstream config/split."""
+    from slm.data.build import read_source
+    from slm.data.schema import digest
+    folder=Path(folder);expected=item['source'];source=read_source(folder/'source/source.json')
+    acquisition=json.loads((folder/'sample/acquisition.json').read_text());path=folder/'sample/rows.jsonl'
+    if path.stat().st_size>32*1024*1024:raise ValueError('Cached sample exceeds bounded audit scope')
+    raw=path.read_bytes()
+    if (digest(asdict(source))!=digest(expected) or acquisition.get('source')!=source.source_id
+        or acquisition.get('revision')!=source.revision or acquisition.get('rows')!=item['sample_count']
+        or acquisition.get('rows_sha256')!=hashlib.sha256(raw).hexdigest()
+        or len(raw.splitlines())!=item['sample_count']):
+        raise ValueError('Cached acquisition identity or content differs')
+    if item['adapter']=='oasst':
+        expected_url=f'https://huggingface.co/datasets/{source.source_id}/resolve/{source.revision}/2023-11-05_oasst2_ready.trees.jsonl.gz'
+        if acquisition.get('url')!=expected_url:raise ValueError('Cached ready-tree export URL differs')
+        split=None
+    else:
+        if (acquisition.get('config')!=item['config'] or acquisition.get('split')!=item['upstream_split']
+            or item['upstream_split'] not in UPSTREAM_SPLITS):
+            raise ValueError('Cached upstream config/split differs')
+        split=UPSTREAM_SPLITS[item['upstream_split']]
+    return {'source_record':str(folder/'source/source.json'),'path':str(path),
+        'adapter':item['adapter'],'official_split':split}
+
 def main():
     from slm.data.build import read_source
     p=argparse.ArgumentParser(description=__doc__)

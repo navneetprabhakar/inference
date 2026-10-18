@@ -49,7 +49,13 @@ def build(input_specs, destination, frozen_groups=None, shard_size=100, training
         records = [json.loads(line) for line in raw.decode('utf8').splitlines() if line.strip()]
         if len(examples)+len(records) > 10_000:
             raise ValueError('Reference audit row limit exceeded')
-        adapted=rows(source,records,spec['adapter'],spec.get('official_split'))
+        partitions,partition_hash=None,None
+        if spec.get('partition_map') is not None:
+            from slm.data.partitions import load_mapping
+            partitions,partition_hash=load_mapping(spec['partition_map'],spec.get('partition_map_sha256'),source,checksum)
+            input_hashes['official-partition-map:'+source.source_id]=partition_hash
+        elif spec.get('partition_map_sha256') is not None:raise ValueError('Partition hash without mapping bundle')
+        adapted=rows(source,records,spec['adapter'],spec.get('official_split'),partitions,partition_hash)
         input_counts[source.source_id]+=len(records)
         adapted_counts[source.source_id]+=len(adapted)
         examples.extend(adapted)

@@ -5,7 +5,7 @@ from dataclasses import asdict
 import json
 import hashlib
 from pathlib import Path
-from slm.data.acquire import register, sample, sample_ready_trees
+from slm.data.acquire import register, sample, sample_ready_trees, verified_cached_spec
 from slm.data.build import build, verify, read_source
 from slm.data.schema import digest
 
@@ -42,9 +42,7 @@ def main():
             sample_ready_trees(actual,folder/'sample',item['sample_count'])
         else:
             sample(actual,item['config'],item['upstream_split'],folder/'sample',item['sample_count'])
-        specs.append(dict(source_record=str(folder/'source/source.json'),
-                          path=str(folder/'sample/rows.jsonl'),adapter=item['adapter'],
-                          official_split=None if item['adapter']=='oasst' else 'train'))
+        specs.append(verified_cached_spec(item,folder))
     # Freeze three-source evaluation before importing the complete-tree source.
     base=root/'base'
     build([s for s in specs if s['adapter']!='oasst'],base)

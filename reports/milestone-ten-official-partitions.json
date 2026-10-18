@@ -1,0 +1,108 @@
+{
+  "official_projection": {
+    "official_rows": 135174,
+    "official_trees": 13854,
+    "official_trees_by_split": {
+      "train": 13162,
+      "validation": 692
+    },
+    "selected_trees": 200,
+    "selected_trees_by_split": {
+      "train": 191,
+      "validation": 9
+    },
+    "range_payload_bytes_per_successful_acquisition": 8844478,
+    "files": [
+      {
+        "full_file_sha256_verified": false,
+        "lfs_sha256": "9638227b41b0a4fb69afa5d5c4b52e3fb6abfd56c9870d81bae32c9981e769b1",
+        "path": "data/train-00000-of-00001-88ba0162028a73fc.parquet",
+        "projected_rows_sha256": "ef39a2d6ee5fc4ce67cd0c246b9785e4ab50c68e540875da3c8ff339ac4d42c8",
+        "range_payload_bytes": 8404898,
+        "ranges": 390,
+        "row_groups": 129,
+        "rows": 128575,
+        "size": 63494018,
+        "split": "train"
+      },
+      {
+        "full_file_sha256_verified": false,
+        "lfs_sha256": "fd46c63babc0756909a957ee40975bcf5610d58c5d1ab5ff2c57c0f57be1f273",
+        "path": "data/validation-00000-of-00001-1deeef95c3248fe0.parquet",
+        "projected_rows_sha256": "8ae15432af28ee07f223647685ef9e0b740c4f495a1c1fc71e7930e89e20dada",
+        "range_payload_bytes": 439580,
+        "ranges": 24,
+        "row_groups": 7,
+        "rows": 6599,
+        "size": 3180111,
+        "split": "validation"
+      }
+    ],
+    "bundle_sha256": "aee61ce28678916ac2df98e7c7dade148bf67e0aa93d463083be55037044b1fd",
+    "ready_rows_sha256": "0e3429b62d3ee3c2b2560cdbe374b3e987477ca6ec2bcff5f5c4bcbec7fc7f3b",
+    "full_parquet_sha256_verified": false,
+    "source_approved": false
+  },
+  "offline_projection_replay": {
+    "identical_bundle": true,
+    "new_range_payload_bytes": 0
+  },
+  "initial_attempt": {
+    "published": false,
+    "failure_stage": "ready-tree identity join",
+    "reason": "Nested messages carry null message_tree_id; reader now inherits checked outer root ID and verifies exact official membership",
+    "sampled_messages_with_null_tree_id": 1873,
+    "range_bytes_retained_in_failure_report": null,
+    "note": "First attempt completed the same ID projections before failing. Per-successful-acquisition bytes are not total session bandwidth."
+  },
+  "curation": {
+    "dataset_manifest_sha256": "7501cc5f6251c483abd8349fae5f65c95e78a7776dd9ba57bf1434a730177f7a",
+    "deterministic_rebuild": true,
+    "frozen_dataset_manifest_sha256": "189187be24a8280ae4ce05dad89b29ec87bf6df1e8dcc1f81e260501491daf57",
+    "human_attestation": false,
+    "mapping_manifest_sha256": "aee61ce28678916ac2df98e7c7dade148bf67e0aa93d463083be55037044b1fd",
+    "moved_by_source": {
+      "OpenAssistant/oasst2": 23
+    },
+    "oasst_examples_with_mapping_evidence": 303,
+    "oasst_official_splits": {
+      "train": 280,
+      "validation": 23
+    },
+    "official_validation_examples": 23,
+    "official_validation_in_train": 0,
+    "original_heldouts_preserved": 79,
+    "pending_review": {
+      "approved": 0,
+      "dataset_manifest_sha256": "7501cc5f6251c483abd8349fae5f65c95e78a7776dd9ba57bf1434a730177f7a",
+      "selected": 40,
+      "sources": 4
+    },
+    "previous_train_candidates_moved_to_holdout": 23,
+    "public_source_approvals": 0,
+    "release": "sample_only",
+    "retained_examples": 901,
+    "scope": "Official partition identity and sample audit only; no data/content/source approval or model training",
+    "splits": {
+      "test": 32,
+      "train": 799,
+      "validation": 70
+    },
+    "old_holdout_partition_changes": 0
+  },
+  "review": {
+    "path": "data/official-split-audit-v1/pending-review.json",
+    "packet_sha256": "6ddab6b948bd53452e505de5f7e45224299a80045802d740dbde8af9c52c182d",
+    "selected": 40,
+    "source_reviews": 4,
+    "machine_partition_prefills": 7,
+    "approved_examples": 0,
+    "approved_sources": 0,
+    "human_attestation": false
+  },
+  "unreviewed_training_intake_refused": true,
+  "training_intake_error": "Reviewed training release required; sample-only data is refused",
+  "model_training_performed": false,
+  "paid_teacher_calls": 0,
+  "new_cloud_jobs": 0
+}

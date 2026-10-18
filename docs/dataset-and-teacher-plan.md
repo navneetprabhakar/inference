@@ -187,3 +187,5 @@ This checklist describes implementation gates. None is marked complete by writin
 A bounded four-source audit and deterministic curation foundation is implemented; see [milestone four](milestone-four.md). The full readiness checklist above remains open: small schema probes do not establish source approval, representative quality, human audit, production-scale processing or token inventory.
 
 The [offline teacher lifecycle](milestone-nine.md) now implements versioned requests, a provider adapter, durable response caching, spending/request caps and structured/executable validation. Official API IDs for the initial labels are documented; account access, training-use terms/category review, paid authorization, live generation, human quality audit and student-benefit validation remain open. No readiness checkbox is completed merely by this foundation.
+
+The bounded current OASST sample now has [official partition evidence and repaired held-outs](milestone-ten.md). This covers the audited 200 complete trees, not every future source import. Actual source/content review, quality calibration and production release remain required.
