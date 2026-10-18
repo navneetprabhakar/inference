@@ -4,6 +4,10 @@ Creator: Navneet Prabhakar
 
 Date: 18 October 2026
 
+## Current transport update — 19 October 2026
+
+This report preserves the historical API/offline milestone. The user subsequently authorized up to USD 1 for the proposed API pilot, then instructed “use codex cli, dont use API”. The API remains disabled. The active CLI-only workflow and first real demonstration are documented in [milestone twelve](milestone-twelve.md). Missing API keys are not a blocker for that path. CLI account usage is not an API-dollar budget; reviewed training use remains gated.
+
 ## Outcome
 
 The teacher lifecycle now has a provider adapter, durable cache, conservative budget journal, versioned recipes, scenario lineage, structured/executable validators and a disabled live entry point. **No real teacher output, paid API request or approved training example was produced.** The required live teacher pilot, quality audit and student-benefit experiment remain incomplete.

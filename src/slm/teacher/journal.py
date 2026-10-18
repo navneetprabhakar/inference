@@ -37,7 +37,7 @@ class Journal:
         with self.transaction() as db:
             row=db.execute('SELECT status,response,response_hash FROM requests WHERE key=?',(key,)).fetchone()
         if row is None:return None
-        if row[0]!='complete':raise RuntimeError('Request pending/uncertain; never replay automatically')
+        if row[0]!='complete':raise RuntimeError('Request has no completed cached response; never replay automatically')
         value=json.loads(row[1])
         if digest(value)!=row[2]:raise ValueError('Cached response checksum differs')
         return value
@@ -47,7 +47,7 @@ class Journal:
         with self.transaction() as db:
             cap,_,halted,max_requests=db.execute('SELECT cap,authorization,halted,max_requests FROM budget WHERE singleton=1').fetchone()
             if halted:raise RuntimeError('Journal halted; reconcile uncertainty before new requests')
-            if db.execute('SELECT 1 FROM requests WHERE status!=?',('complete',)).fetchone():
+            if db.execute('SELECT 1 FROM requests WHERE status NOT IN (?,?)',('complete','abandoned')).fetchone():
                 raise RuntimeError('Outstanding request exists; single-worker journal refuses duplicates/concurrency')
             if db.execute('SELECT COUNT(*) FROM requests').fetchone()[0]>=max_requests:raise ValueError('Teacher request-count cap reached')
             used=db.execute('SELECT COALESCE(SUM(COALESCE(accounted,reserved)),0) FROM requests').fetchone()[0]

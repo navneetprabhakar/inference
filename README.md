@@ -65,10 +65,10 @@ The learned full-size checkpoint also passes exact state import and 2,048-contex
 
 A bounded reviewed-train BPE builder, disjoint structural/content IDs, loss-mask serializer and 16K/24K comparison tooling are implemented; see [tokenizer foundation](docs/milestone-eight.md). Public-source approvals remain zero; no production tokenizer is selected or frozen.
 
-The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses adapter, durable cache, bounded spending/request journal and structured/executable validators. The shipped live configuration is disabled; no real teacher output has been produced.
+The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses adapter, durable cache, bounded spending/request journal and structured/executable validators. The historical API configuration stays disabled. The active teacher now uses saved ChatGPT sign-in through Codex CLI; see [CLI pilot](docs/milestone-twelve.md). One real SFW demonstration is cached and pending human review; no teacher example is approved for training.
 
 [Official OASST partition mapping](docs/milestone-ten.md) moved 23 previous train candidates to held-out status and preserved all prior held-outs. The current sample-only audit has 799 train / 70 validation / 32 test candidates; its new pending review packet remains unapproved.
 
 [Token shards and a resumable reader](docs/milestone-eleven.md) now connect reviewed train data to the reference trainer with foundation EOS packing and plain-dialogue SFT masks. The public snapshot remains unapproved; scale measurements use temporary synthetic fixtures.
 
-Not implemented: approved production datasets, production bulk data intake/training, gradient accumulation, production tokenizer, live teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
+Not implemented: approved production datasets, production bulk data intake/training, gradient accumulation, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

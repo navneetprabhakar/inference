@@ -287,3 +287,7 @@ Batch related code, documentation, and tests into the fewest practical commits/r
 - Before release: agreed latency/content requirements and whether the student’s measured competence is sufficient at this size.
 
 Tiny FP32 model and optimizer parity have passed on MLX GPU and PyTorch CPU. Training-state resume and the tiny MLX/CUDA round trip are now validated; see [resume results](milestone-two.md) and [CUDA results](milestone-three.md). Full-size validation and conversational capability gates remain open.
+
+## Teacher transport update — 19 October 2026
+
+Use Codex CLI with saved ChatGPT authentication for the active conversation teacher; do not use the Platform API. One real GPT-5.6 Luna SFW correction demonstration and cache reuse are verified in [milestone twelve](milestone-twelve.md). Human/content/rights review and student-benefit evaluation remain open. CLI account usage has no adapter-enforced dollar cap; the prior USD 1 API pilot approval does not enable API calls.

@@ -7,11 +7,11 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: reviewed-train token shards and resumable disk-backed consumption implemented; no public tokenization/training. Actual source review, tokenizer selection and full-size trajectory acceptance remain open.
-- Next implementation milestone: review the current packet at `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and prepare production intake. Portability acceptance and separate teacher key/account/terms/category/budget readiness remain pending.
+- Current milestone: CLI-only teacher transport with one real SFW correction demonstration and three cache rechecks; no teacher example approved or trained. Actual public-source review, tokenizer selection and full-size trajectory acceptance remain open.
+- Next implementation milestone: supervised-token-weighted gradient accumulation and update-boundary resume. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
-- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No paid teacher calls or main pretraining; settled billing pending.
+- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
 
@@ -32,13 +32,14 @@ Updated: 19 October 2026
 | 18 October 2026 | Offline conversation teacher lifecycle | Foundation complete; live pilot open | 139 passed / 5 CUDA skips; provider request contract, durable cache, bounded journal and structured/executable validators; 30 handcrafted replays plus 30 cache hits; no real teacher calls or training approvals; see milestone-nine.md |
 | 19 October 2026 | Official partitions / held-out repair | Audit scope complete; source review open | 148 passed / 5 CUDA skips; all 200 OASST sample trees joined to official identity projection; 23 prior train candidates now held out; 799/70/32 split; no public-data training; see milestone-ten.md |
 | 19 October 2026 | Token shards / resumable data consumption | Reference path complete; production runs open | 166 passed / 6 CUDA skips; exact tested same-backend resume, tiny MLX/CPU round trip, EOS/SFT masks and 2.60M-position synthetic reader probe; no public-data training; see milestone-eleven.md |
+| 19 October 2026 | CLI teacher pilot | Transport validated; training release open | 187 passed / 6 CUDA skips; one real GPT-5.6 Luna correction demonstration, three cache rechecks, two failed launch slots retained; no API calls or training approvals; see milestone-twelve.md |
 
 ## Decisions
 
 - Sole project creator credit: Navneet Prabhakar. Technical source references and required third-party notices remain accurate.
 - Every completed minor or major milestone receives a ledger update and cohesive commit/push to the private repository.
 - Preserve meaningful milestone boundaries; do not push every intermediate edit.
-- Teacher is required and configurable, initially GPT-6 Luna or GPT-5.6 Luna; offline data development only.
+- Teacher is required and configurable, initially GPT-6 Luna or GPT-5.6 Luna. Active transport is Codex CLI with saved ChatGPT auth; generation stays offline from deployed inference, with no Platform API fallback.
 - Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. Tiny NVIDIA training migration and full-size exact state import/inference are validated; accepted full-size resumed-training trajectories and reduced precision remain unverified.
 - CUDA evidence now includes full-size exact state import, learned-checkpoint context/inference and seven synthetic FP32 benchmark updates on T4. It does not establish accepted full-size continued-training trajectories, sustained throughput, reduced precision or optimized kernels.
 
@@ -62,8 +63,8 @@ Updated: 19 October 2026
 - Tokenizer mechanics now use an optional pinned `tokenizers==0.22.2` runtime and ten disjoint structural IDs; the fixture byte serializer remains unchanged. Production selection, streaming intake, representative sampling, packed training and structured tool serialization remain open.
 - The current sample-only public snapshot was refused by the tokenizer builder without output; zero public examples/sources are approved. No new cloud spending or paid teacher calls.
 
-- Initial teacher API IDs are documented as `gpt-6-luna` and `gpt-5.6-luna`; account access, output-training rights/category review and paid teacher budget remain unverified. No API key is configured in the workspace environment.
-- Live generation is disabled with zero budget. Current price/context registration requires revalidation after 25 October 2026. All teacher candidates remain ineligible for training until separate review/release; metadata checks do not verify prose truth/style/content.
+- Initial teacher API IDs are documented as `gpt-6-luna` and `gpt-5.6-luna`. Historical API readiness was unverified at milestone nine; API keys remain unused. The subsequent CLI sign-in and one real GPT-5.6 Luna generation are verified. Account-specific training rights and quality/category review remain open.
+- The historical API entry point remains disabled with zero configured budget. Current price/context registration requires revalidation after 25 October 2026. All teacher candidates remain ineligible for training until separate review/release; metadata checks do not verify prose truth/style/content.
 
 - Current OASST mapping covers all 200 sampled roots against the pinned official identity projection; 191 upstream train and 9 validation trees. All 303 English paths retain mapping evidence. Full Parquet hashes/text equality and source approval are not claimed.
 - The authoritative pending source/sample review target is now `data/official-split-audit-v1/pending-review.json` (40 examples/four sources, no approvals/attestation). The original packet is retained; current release guards reject unmapped OASST approvals and manual split overrides.
@@ -72,6 +73,11 @@ Updated: 19 October 2026
 - Token shards use one-pass deterministic B1 batches with tokenizer/data hash binding and lazy numeric-shard verification. The current bootstrap release verifier still materializes its records; bulk release/intake, gradient accumulation, curricula and actual target-model data runs remain open.
 - Tiny own-trajectory resume passes exactly in the tested updates. Independent MLX controls showed up to 3.7253e-9 differences even without disk reading; original FP32 bounds and failed full-size gates are unchanged.
 - The 2.60M-position temporary synthetic reader probe is data-only, with zero neural updates or real review approvals. It does not count as the planned 1M-token language pilot; no paid calls/cloud jobs were used.
+
+- On 19 October, up to USD 1 was authorized for the proposed teacher API pilot; the follow-up instruction “use codex cli, dont use API” changed the active transport. API calls remain disabled. No API-dollar estimate is applied to CLI usage; no credit purchase/reset is authorized automatically.
+- The active CLI pilot uses installed version 0.144.4 and selected GPT-5.6 Luna, present in the local model catalog. One real output passes structured checks but has no human/training approval. Reported usage: 11,088 input, 116 output and 35 reasoning-output tokens; counter overlap/settled cost are not inferred.
+- Two initial CLI launches failed without retained outputs. One old journal remains halted; the other failed key was explicitly abandoned using observed terminal-process evidence, retaining its launch slot and forbidding replay. The current journal allows 19 slots plus one frozen historical slot, for 20 combined; three are consumed. No underlying HTTP retry count is claimed.
+- Future CLI failures retain bounded private diagnostics. Metadata, usage and cached outputs are revalidated. One successful generation and three cache reads do not establish general conversation/style quality or teacher training rights. Gradient accumulation remains unimplemented.
 
 ## Open gates
 
@@ -83,7 +89,7 @@ Updated: 19 October 2026
 - [ ] Accepted full-size training trajectory portability; acceptance proposal pending review.
 - [ ] Data audit, production tokenizer, and teacher integration.
 - [x] Authorized GCP CUDA validation, limited to USD 10.
-- [ ] Main pretraining and teacher-generation budgets.
+- [ ] Main pretraining budget and sustained teacher-generation capacity/cost policy. Small CLI pilot authorized; account usage is not an enforceable dollar cap.
 
 ## Ledger practice
 
