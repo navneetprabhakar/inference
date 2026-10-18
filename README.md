@@ -1,0 +1,54 @@
+# Portable SLM prototype
+
+Creator: Navneet Prabhakar
+
+First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
+
+- Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
+- Shared NumPy initialization and canonical parameter names; adjacent-pair RoPE, GQA, SwiGLU, RMSNorm, tied input/output embedding.
+- Tiny default: 2 layers, width 32, FFN 64, vocabulary 64, context 64. Integer-token fixtures, no downloaded data or teacher calls.
+- Functional parameter dictionaries intentionally expose weights and gradients for parity testing. No dependency on framework module naming or optimizer state formats.
+- Reference bias-corrected AdamW, global gradient clipping, and explicit decay groups.
+- Model-only Safetensors serialization with checksums and versioned numerical conventions.
+
+## Setup on Apple Silicon
+
+```sh
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -e '.[dev,mlx]'
+.venv/bin/python -m pytest -q
+```
+
+`requirements-macos.lock` records the exact package versions used locally. To reproduce that environment, install it with `uv pip sync --python .venv/bin/python requirements-macos.lock`, then install this project with `uv pip install --python .venv/bin/python --no-deps -e .`.
+
+## PyTorch on NVIDIA hardware
+
+Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
+
+## Run the prototype
+
+```python
+import numpy as np
+import torch
+from slm.common.config import Config, initialize
+from slm.backends import torch_backend as backend
+
+config = Config()
+params = backend.load(config, initialize(config), device="cpu")  # or "cuda"
+tokens = torch.tensor([[1, 2, 3, 4]])  # move to the same device as params
+logits, cache, layer_states = backend.forward(params, config, tokens)
+```
+
+For MLX, import `mlx.core as mx` and `slm.backends.mlx_backend`, load the same weights, and supply `mx.array` inputs. Load/export functions use the same names and shapes. `forward` returns logits, rotated-key/value cache, and post-block states.
+
+- Loss receives explicitly aligned input/next-token target arrays and nonnegative token weights; at least one token must be supervised. Callers must keep token IDs within vocabulary.
+- Attention supports unpadded inputs and right padding with at least one valid token per row. Loss masks must exclude padded targets. Cached decoding currently supports **unpadded sequences only**.
+- RoPE positions start at zero and continue from cache length. Cache must belong to the same model and batch.
+- The fixture byte serializer has vocabulary 263 and is tested separately; use `Config(vocab_size=263)` with it. It is not the production BPE tokenizer. Raw content cannot inject reserved role IDs.
+- Checkpoints store one embedding tensor, reused for output logits. No separate head can drift out of sync.
+
+## Validation and remaining work
+
+See [milestone report](docs/milestone-one.md), [training plan](docs/slm-training-plan.md), and [dataset/teacher plan](docs/dataset-and-teacher-plan.md).
+
+Not implemented in this milestone: training-state checkpoint migration, data cursor/scheduler, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and cloud jobs. An actual NVIDIA run is still required before claiming CUDA portability.

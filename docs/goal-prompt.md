@@ -1,0 +1,167 @@
+# Project execution goal
+
+Creator: Navneet Prabhakar
+
+Build and validate an English small language model trained from random initialization. Execute the milestones below using the repository documents and verified results as the source of truth.
+
+## Read before execution
+
+- `README.md`
+- `docs/slm-training-plan.md`
+- `docs/dataset-and-teacher-plan.md`
+- `docs/milestone-one.md`
+- `docs/project-ledger.md`
+
+Workspace: `/Users/navneetprabhakar/Documents/git/image/inference`.
+GitHub destination: private repository `navneetprabhakar/inference`.
+
+## Ownership and documentation
+
+- The sole project creator/author credit is **Navneet Prabhakar**.
+- Do not add tool, agent, assistant, collaborator, or other-person creator credits, signatures, generated-by notices, or co-author trailers to project documentation or commits.
+- This authorship rule does not remove technical dependency/model names, accurate research citations, third-party copyright notices, dataset provenance, or required license attribution. Those identify dependencies and sources, not project creators.
+- Use the authenticated `navneetprabhakar` GitHub account. Never expose credentials or store tokens in project files.
+- Use the Git author name `Navneet Prabhakar` and the verified configured account email. Keep repository-specific identity configuration local to this repository.
+
+## GitHub and milestone synchronization
+
+Before further implementation, initialize this workspace as a Git repository and create the private GitHub repository if setup is not already complete. Verify the destination account, remote URL, and private visibility before the first push. Do not overwrite an existing unrelated repository.
+
+For every completed minor or major milestone:
+
+1. Complete the relevant implementation, tests, and documentation.
+2. Update the active project ledger with scope, evidence, limitations, decisions, and next steps.
+3. Inspect staged changes for credentials, unrelated files, datasets, model weights, temporary artifacts, and large generated outputs.
+4. Make a cohesive commit with code, tests, documentation, and ledger together.
+5. Push the milestone to the private repository and verify the local and remote commit match.
+6. Report the commit and validation result briefly.
+
+A milestone is a reviewable outcome, not every file edit. Batch related changes into the fewest practical commits and pushes. Do not trigger deployments or expensive CI jobs automatically. Never force-push or rewrite shared history without explicit authorization.
+
+If a push fails, retain the local commit and report the failure honestly. Update the ledger with the failure when it is persistent; do not mark remote synchronization complete without verification.
+
+## Active project ledger
+
+Maintain `docs/project-ledger.md` throughout execution. Include:
+
+- Current objective and active milestone.
+- Completed milestones and dated validation evidence.
+- Open tasks, blockers, assumptions, and decisions.
+- Hardware actually tested and capability gates still open.
+- Dataset, teacher, and cloud spending state where applicable.
+- Next concrete action.
+
+Update it at milestone completion, material decisions, and meaningful interruptions. Preserve historical entries; correct inaccuracies explicitly. Use Git history to associate ledger entries with their commits rather than trying to embed a commit's own hash into itself.
+
+## Objective and constraints
+
+Deliver a reproducible training and inference system for an approximately 81M-parameter conversational model that:
+
+- Understands English requests and multi-turn conversation.
+- Preserves references, corrections, negation, quantities, and user constraints.
+- Supports professional, casual, terse, humorous, and caveman styles without changing meaning.
+- Separates linguistic style from SFW/mature-content settings.
+- Chooses tools, supplies correct arguments, clarifies ambiguity, and interprets tool results.
+- Uses an application-managed MCP client for tool execution.
+- Later supports product relevance using Amazon ESCI.
+- Runs on MLX/Apple Silicon and PyTorch/NVIDIA CUDA.
+
+Train from random student weights. Memory, latency, and demonstrated capability matter more than a strict parameter ceiling. Document evidence before increasing model size. Do not treat fluent text, valid JSON, or teacher approval as proof of correctness.
+
+## Current verified baseline
+
+The tiny prototype exists:
+
+- Independent FP32 reference implementations with 20,640 parameters.
+- Canonical initialization, model-only Safetensors checkpoints, reference AdamW, and fixture conversation serialization.
+- Recorded local result: 27 tests passed and one CUDA test skipped.
+- MLX Apple GPU/PyTorch CPU parity through 100 training updates.
+
+Verify the current repository rather than assuming these historical results remain current. CUDA training portability, training-state resume, full-size validation, production data/tokenizer, teacher integration, and conversational capability remain open.
+
+## Execution sequence
+
+### 1. Portable training checkpoints and deterministic resume
+
+Implement versioned checkpoints containing weights, configuration, FP32 optimizer moments, master weights where needed, optimizer settings, completed updates, processed tokens, scheduler state, deterministic next-batch position, tokenizer/data hashes, and reproduction metadata.
+
+Save at optimizer-update boundaries. Match AdamW bias correction, epsilon placement, decay groups, clipping, and step numbering explicitly. Test same-backend continuation, interrupted writes, corruption detection, and backend state transfer. Never silently reset the optimizer during resume.
+
+### 2. Actual MLX and CUDA verification
+
+Create portable fixtures that can move between hosts. Compare parameters, layer outputs, logits, masked losses, gradients, optimizer updates, cached decoding, and post-transfer training continuation.
+
+Keep MLX/CPU, CPU/CUDA, and actual MLX/CUDA results separate. Establish justified tolerances; never weaken them merely to pass. A skipped CUDA test is not CUDA validation.
+
+### 3. Data pipeline
+
+Implement the documented source adapters, provenance/license records, sample audits, English/quality filtering, personal-information removal, exact/near deduplication, conversation-tree reconstruction, group-based splits, deterministic shards, and quality reports.
+
+Inspect before bulk downloads. Preserve useful informal English. Isolate tests before augmentation and tokenization. Track unique tokens and repeated exposure separately.
+
+### 4. Production tokenizer
+
+Compare 16K and 24K byte-level BPE candidates on training-only prose, dialogue, slang, JSON, numbers, and product terms. Measure sequence efficiency and parameter cost. Reserve message/tool boundaries and prevent raw content from injecting structural tokens. Freeze tokenizer files, IDs, normalization, and hashes before main pretraining.
+
+### 5. Required conversation teacher
+
+Implement a configurable offline conversation teacher. Initial choices are GPT-6 Luna or GPT-5.6 Luna; model selection can change, but the teacher workflow is required.
+
+Resolve actual provider identifiers, availability, terms, category support, and pricing before paid use. Separate provider integration from generation recipes.
+
+Generate controlled-scenario dialogue, clarifications, corrections, meaning-preserving style pairs, tool trajectories, and student-failure corrections. Validate facts, constraints, schemas, execution, and outcomes. Record lineage, prompt/model versions, settings, cost, and validation results. Include human-audited samples.
+
+Cache outputs and start small. The teacher is not a deployed inference dependency or an automatic fallback.
+
+### 6. Target architecture and laptop pilot
+
+Instantiate the documented approximately 81M model and verify counts and numerical conventions on both backends. Run full-depth checks, tiny overfit tests, a 1M-token smoke run, a 10M-token pilot, and an optional 50M extension based on measurements.
+
+Measure sustained throughput, memory, stability, restart behavior, and checkpoint overhead. Do not claim broad conversational competence from these pilots.
+
+### 7. Staged GCP pretraining
+
+Before paid runs, verify GPU availability, full-instance pricing, quotas, storage, spending ceilings, and resume behavior. Compare cost per million tokens using actual throughput.
+
+Use staged token budgets and controlled experiments. Record architecture, data, optimizer, precision, schedules, unique-token exposure, validation, and costs. Do not commit to a large run based on theoretical throughput.
+
+### 8. Conversation, styles, and tool training
+
+Use assistant-output loss masks. Prioritize instruction following, references, corrections, clarification, grounding, meaning preservation, and stopping behavior.
+
+Keep variants of a scenario in the same split. Styles must not change tool arguments, quantities, or constraints. Label and evaluate content settings separately, following the documented source/content rules. Retain general-conversation replay during specialization.
+
+Start with 5–10 tools and one call per step. Add dependent calls only after single-call correctness passes. Use preference optimization only for demonstrated remaining failures; defer RL until justified.
+
+### 9. Runtime and MCP
+
+The application owns tool discovery, schemas, MCP execution, validation, state, result limits, retries, and call-depth limits. The student predicts answers, clarifications, and calls.
+
+Validate local mock tools before MCP-backed tools. Treat results as untrusted data. Report semantic correctness independently of formatting and first-attempt success independently of repair success.
+
+### 10. ESCI and deployment optimization
+
+Introduce ESCI after core conversation/tool capability. Preserve official splits and query-family grouping. Compare student relevance scoring with a dedicated small ranker. Measure retrieval recall, ranking/classification quality, latency, and total memory. Do not invent live price or inventory fields.
+
+Reject domain checkpoints that materially damage required capabilities. Establish an unquantized reference before quantization and re-evaluate both deployment backends.
+
+## Evaluation and acceptance
+
+Use documented per-slice goals with adequate sample sizes. Track language/coherence, grounding, constraints, style and content-setting adherence, exact tool arguments, no-tool/clarification behavior, multi-turn completion, latency, and memory.
+
+Use held-out scenarios, executable checks, and human review; teacher judging is supplemental. Report uncertainty, denominators, and actual hardware. Diagnose implementation, data, optimization, and capacity before changing requirements.
+
+## Working rules
+
+- Follow applicable AGENTS.md instructions.
+- Communicate in concise executive bullets.
+- Finish the active milestone with meaningful checks, documentation, ledger updates, and GitHub synchronization.
+- Preserve existing work and avoid unrelated refactors.
+- Separate proposed settings from measured results.
+- Do not launch substantial paid teacher batches, cloud jobs, or large downloads without an established budget and authorization.
+- Git initialization, private repository creation, and milestone commits/pushes are explicitly authorized. Public releases, force pushes, deployments, and unrelated repositories are not.
+- When blocked, identify the exact dependency and continue useful independent work.
+
+## Next action
+
+First verify private-repository setup and ledger status. Then implement portable optimizer-state checkpoints and deterministic training resume. Complete local validation before preparing the actual NVIDIA validation run.
