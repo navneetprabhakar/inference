@@ -69,4 +69,6 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Official OASST partition mapping](docs/milestone-ten.md) moved 23 previous train candidates to held-out status and preserved all prior held-outs. The current sample-only audit has 799 train / 70 validation / 32 test candidates; its new pending review packet remains unapproved.
 
-Not implemented: approved production datasets, production sharded-data training, production tokenizer, live teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
+[Token shards and a resumable reader](docs/milestone-eleven.md) now connect reviewed train data to the reference trainer with foundation EOS packing and plain-dialogue SFT masks. The public snapshot remains unapproved; scale measurements use temporary synthetic fixtures.
+
+Not implemented: approved production datasets, production bulk data intake/training, gradient accumulation, production tokenizer, live teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

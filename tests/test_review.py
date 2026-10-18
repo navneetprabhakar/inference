@@ -9,12 +9,14 @@ from slm.data.review import prepare, release, training_examples, check_packet
 from slm.data.build import verify
 
 
-def fixture_snapshot(path):
+def fixture_snapshot(path,kind="dialogue",repeat_words=0):
     path.mkdir()
     src=Source('fixture','a'*40,'https://example.org','fixture','b'*64,'c'*64,('fixture',))
     examples=[make_example(src,str(i),'family:shared' if i<2 else str(i),
-               [{'role':'user','content':f'Question {i}'},{'role':'assistant','content':f'Answer {i}'}],
-               official_split='test' if i==1 else 'validation' if i==2 else 'train',language='en') for i in range(30)]
+               ([{'role':'text','content':(f'word{i} '*repeat_words if repeat_words else f'Paragraph {i}: a small synthetic prose record with its own number {i}.')}] if kind=='prose' else
+                [{'role':'user','content':f'Question {i}'},{'role':'assistant','content':f'Answer {i}'}]),
+               official_split='test' if i==1 else 'validation' if i==2 else 'train',language='en',
+               task='prose' if kind=='prose' else 'conversation') for i in range(30)]
     items,_=curate(examples,{'fixture':src})
     for split in ('train','validation','test'):
         selected=[e for e in items if e.split==split]

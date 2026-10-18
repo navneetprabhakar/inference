@@ -7,7 +7,7 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: official OASST identity/partition join and held-out repair complete within audit scope; 23 previous train candidates quarantined, all 79 prior held-outs preserved. Public approvals remain zero; training trajectories still fail acceptance.
+- Current milestone: reviewed-train token shards and resumable disk-backed consumption implemented; no public tokenization/training. Actual source review, tokenizer selection and full-size trajectory acceptance remain open.
 - Next implementation milestone: review the current packet at `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and prepare production intake. Portability acceptance and separate teacher key/account/terms/category/budget readiness remain pending.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
@@ -31,6 +31,7 @@ Updated: 19 October 2026
 | 18 October 2026 | Tokenizer candidate / serialization foundation | Foundation complete; production selection open | 109 passed / 5 CUDA skips locally; train-only reviewed intake, disjoint IDs, assistant masks, integrity checks and comparison runner; both synthetic 16K/24K requests yield only 432 IDs; no public-data candidate trained; see milestone-eight.md |
 | 18 October 2026 | Offline conversation teacher lifecycle | Foundation complete; live pilot open | 139 passed / 5 CUDA skips; provider request contract, durable cache, bounded journal and structured/executable validators; 30 handcrafted replays plus 30 cache hits; no real teacher calls or training approvals; see milestone-nine.md |
 | 19 October 2026 | Official partitions / held-out repair | Audit scope complete; source review open | 148 passed / 5 CUDA skips; all 200 OASST sample trees joined to official identity projection; 23 prior train candidates now held out; 799/70/32 split; no public-data training; see milestone-ten.md |
+| 19 October 2026 | Token shards / resumable data consumption | Reference path complete; production runs open | 166 passed / 6 CUDA skips; exact tested same-backend resume, tiny MLX/CPU round trip, EOS/SFT masks and 2.60M-position synthetic reader probe; no public-data training; see milestone-eleven.md |
 
 ## Decisions
 
@@ -67,6 +68,10 @@ Updated: 19 October 2026
 - Current OASST mapping covers all 200 sampled roots against the pinned official identity projection; 191 upstream train and 9 validation trees. All 303 English paths retain mapping evidence. Full Parquet hashes/text equality and source approval are not claimed.
 - The authoritative pending source/sample review target is now `data/official-split-audit-v1/pending-review.json` (40 examples/four sources, no approvals/attestation). The original packet is retained; current release guards reject unmapped OASST approvals and manual split overrides.
 - Current mapped curation: 799 train / 70 validation / 32 test candidates. All 79 frozen hold-outs are preserved, and 23 OASST examples moved from local train to validation before any public-data training. No new cloud/teacher spending.
+
+- Token shards use one-pass deterministic B1 batches with tokenizer/data hash binding and lazy numeric-shard verification. The current bootstrap release verifier still materializes its records; bulk release/intake, gradient accumulation, curricula and actual target-model data runs remain open.
+- Tiny own-trajectory resume passes exactly in the tested updates. Independent MLX controls showed up to 3.7253e-9 differences even without disk reading; original FP32 bounds and failed full-size gates are unchanged.
+- The 2.60M-position temporary synthetic reader probe is data-only, with zero neural updates or real review approvals. It does not count as the planned 1M-token language pilot; no paid calls/cloud jobs were used.
 
 ## Open gates
 

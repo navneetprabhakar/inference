@@ -54,6 +54,7 @@ class Batches:
     """Immutable ordered fixtures. Cursor counts consumed batches; no hidden RNG."""
     def __init__(self, batches, vocab_size):
         self.items = []
+        self.vocab_size = vocab_size
         digest = hashlib.sha256()
         for x, y, mask in batches:
             x, y, mask = np.asarray(x), np.asarray(y), np.asarray(mask)
@@ -83,6 +84,12 @@ class Batches:
 class Trainer:
     def __init__(self, config, weights, batches, backend='torch', device='cpu',
                  recipe=None, tokenizer_hash='synthetic-token-ids-v1'):
+        if getattr(batches,'vocab_size',config.vocab_size)!=config.vocab_size:
+            raise ValueError('Dataset/model vocabulary mismatch')
+        if getattr(batches,'max_length',0)>config.max_seq_len:
+            raise ValueError('Dataset context exceeds model window')
+        if getattr(batches,'tokenizer_hash',tokenizer_hash)!=tokenizer_hash:
+            raise ValueError('Dataset/tokenizer mismatch')
         self.config, self.batches = config, batches
         self.recipe = recipe or Recipe()
         self.tokenizer_hash = tokenizer_hash
