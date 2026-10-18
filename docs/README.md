@@ -41,3 +41,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [NVIDIA curriculum and typed-runtime validation](milestone-twenty-one.md)
 
 - [Numerical drift localization and sensitivity controls](milestone-twenty-two.md)
+
+- [Offline human source-review console](milestone-twenty-three.md)
