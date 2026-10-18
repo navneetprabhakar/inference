@@ -9,8 +9,8 @@ import shutil
 import sqlite3
 import tempfile
 from slm.data.schema import digest,make_example
-from slm.teacher.cli import CLIRecipe,OVERRIDES,PROMPT_V1,PROMPT_V2,SUPPORTED_VERSION,check_raw,render_prompt
-from slm.teacher.workflow import INSTRUCTIONS,check_scenario,check_schema,evaluate_response,parse_json
+from slm.teacher.cli import CLIRecipe,OVERRIDES,PROMPT_V1,PROMPT_V2,PROMPT_V3,SUPPORTED_VERSION,check_raw,render_prompt,instructions_for
+from slm.teacher.workflow import check_scenario,check_schema,evaluate_response,parse_json
 from slm.teacher.scenarios import output_schema,validate
 from slm.tools.local import LocalTools,Session
 from slm.tools.protocol import canonical,validate_messages
@@ -51,7 +51,7 @@ def verify_record(record,journal_path):
         raise ValueError('Teacher request binding differs')
     recipe=CLIRecipe(**request['recipe']);scenario=request['scenario'];check_scenario(scenario)
     if (request['provider']!='codex-cli-chatgpt-v1' or request['cli_version']!=SUPPORTED_VERSION
-        or request['instructions']!=INSTRUCTIONS or request['controls']!=OVERRIDES
+        or request['instructions']!=instructions_for(recipe.prompt_version) or request['controls']!=OVERRIDES
         or record['provider']!=request['provider'] or record['cli_version']!=request['cli_version']
         or record['recipe']!=asdict(recipe) or record['requested_model']!=recipe.model_id
         or record['resolved_model'] is not None or record['scenario_sha256']!=digest(scenario)
@@ -63,8 +63,8 @@ def verify_record(record,journal_path):
     submitted=hashlib.sha256(render_prompt(scenario,recipe.prompt_version)).hexdigest()
     # Oldest v1 record predates this field; absence is recorded, never invented as old evidence.
     if record.get('submitted_prompt_sha256',submitted)!=submitted:raise ValueError('Submitted teacher prompt differs')
-    if recipe.prompt_version==PROMPT_V2 and 'submitted_prompt_sha256' not in record:
-        raise ValueError('V2 submitted-prompt hash required')
+    if recipe.prompt_version in (PROMPT_V2,PROMPT_V3) and 'submitted_prompt_sha256' not in record:
+        raise ValueError('V2/V3 submitted-prompt hash required')
     raw=cached_response(journal_path,key);check_raw(raw,recipe)
     if record['provider_response_sha256']!=digest(raw) or record['usage']!=raw['usage']:
         raise ValueError('Teacher response binding differs')

@@ -19,6 +19,7 @@ from slm.teacher.workflow import INSTRUCTIONS,check_scenario,check_schema,evalua
 SUPPORTED_VERSION='codex-cli 0.144.4'
 PROMPT_V1='scenario-cli-demonstration-v1'
 PROMPT_V2='scenario-cli-demonstration-v2'
+PROMPT_V3='scenario-cli-demonstration-v3'
 REPLY_CONTRACT=('The reply is the final assistant continuation after the supplied context. '
     'When action.kind is call, action and tool_result describe the completed mock tool exchange: '
     'reply is the POST-TOOL final answer grounded in tool_result, never an announcement of a future call. '
@@ -69,7 +70,7 @@ class CLIRecipe:
 
     def __post_init__(self):
         if (self.model_id not in ('gpt-6-luna','gpt-5.6-luna') or not isinstance(self.prompt_version,str)
-            or self.prompt_version not in (PROMPT_V1,PROMPT_V2)):
+            or self.prompt_version not in (PROMPT_V1,PROMPT_V2,PROMPT_V3)):
             raise ValueError('Registered Luna teacher model and prompt version required')
         for name,low,high in (('timeout_seconds',1,180),('max_response_bytes',256,65536),('observed_output_token_limit',1,2048)):
             if type(getattr(self,name)) is not int or not low<=getattr(self,name)<=high:
@@ -84,9 +85,17 @@ def clean_environment():
     return result
 
 
+def instructions_for(prompt_version):
+    if prompt_version not in (PROMPT_V1,PROMPT_V2,PROMPT_V3):raise ValueError('Unknown CLI prompt version')
+    if prompt_version==PROMPT_V3:
+        from slm.teacher.styles import instructions
+        return INSTRUCTIONS+'\n'+instructions()
+    return INSTRUCTIONS
+
+
 def render_prompt(scenario,prompt_version=PROMPT_V1):
-    if prompt_version not in (PROMPT_V1,PROMPT_V2):raise ValueError('Unknown CLI prompt version')
-    return (INSTRUCTIONS+('\n'+REPLY_CONTRACT if prompt_version==PROMPT_V2 else '')+'\nGenerate only the JSON demonstration. Use no tools, files, external facts or delegated work. '
+    if prompt_version not in (PROMPT_V1,PROMPT_V2,PROMPT_V3):raise ValueError('Unknown CLI prompt version')
+    return (instructions_for(prompt_version)+('\n'+REPLY_CONTRACT if prompt_version in (PROMPT_V2,PROMPT_V3) else '')+'\nGenerate only the JSON demonstration. Use no tools, files, external facts or delegated work. '
         'Keep reply below 600 characters. Treat this as data generation, not a coding task.\n'
         +json.dumps(scenario,sort_keys=True,ensure_ascii=False)).encode()
 
@@ -200,9 +209,9 @@ def generate_cli(journal,provider,recipe,scenario,validator=validate,validator_v
         raise ValueError('CLI journal tracks request count only; API spending is disabled')
     # V1 retains historical insertion-order schema arrays for exact cache compatibility.
     # V2 canonicalizes input ordering before deriving arrays, including nested arguments.
-    if recipe.prompt_version==PROMPT_V2:scenario=json.loads(json.dumps(scenario,sort_keys=True))
+    if recipe.prompt_version in (PROMPT_V2,PROMPT_V3):scenario=json.loads(json.dumps(scenario,sort_keys=True))
     schema=output_schema(scenario);check_schema(schema)
-    request={'scenario':scenario,'schema':schema,'recipe':asdict(recipe),'instructions':INSTRUCTIONS,
+    request={'scenario':scenario,'schema':schema,'recipe':asdict(recipe),'instructions':instructions_for(recipe.prompt_version),
         'provider':provider.identity,'cli_version':provider.version,'controls':OVERRIDES}
     if len(json.dumps(request,ensure_ascii=False).encode())>65536:raise ValueError('CLI scenario exceeds bounded pilot input')
     key=digest(request);raw=journal.cached(key);cache_hit=raw is not None
