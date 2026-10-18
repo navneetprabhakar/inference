@@ -7,7 +7,7 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: full-size NVIDIA state/inference and loss-accuracy investigation recorded; training-trajectory acceptance still fails. Public approvals remain zero.
+- Current milestone: bounded BPE candidate and serialization foundation implemented; no production tokenizer selected/frozen. Training-trajectory acceptance still fails; public approvals remain zero.
 - Next implementation milestone: obtain the portability acceptance decision before changing its gates; continue data/tokenizer foundations within existing approvals and budgets. Source/sample human review remains pending.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
@@ -28,6 +28,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Bootstrap review/release contract | Complete within bootstrap scope | 63 passed / 2 CUDA skips; pending 40-example packet, source/content-bound review gates and checked train-only reader; no public approvals; see milestone-five.md |
 | 18 October 2026 | Full-size local bring-up / drift diagnostics | Partial; training gate failed | 74 passed / 2 CUDA skips; 80,765,440 parameters; exact state import, 2,048-context checks and 100-update learning pass locally; trajectory comparisons fail; see milestone-six.md |
 | 18 October 2026 | Loss accuracy / full-size NVIDIA validation | Validation scope complete; trajectory gate still failed | 96 passed / 5 skipped locally; 71 passed / 17 expected skips on T4; exact learned state and 2,048-context inference pass; opt-in accurate loss candidate fails trajectory criteria; see milestone-seven.md |
+| 18 October 2026 | Tokenizer candidate / serialization foundation | Foundation complete; production selection open | 109 passed / 5 CUDA skips locally; train-only reviewed intake, disjoint IDs, assistant masks, integrity checks and comparison runner; both synthetic 16K/24K requests yield only 432 IDs; no public-data candidate trained; see milestone-eight.md |
 
 ## Decisions
 
@@ -35,7 +36,7 @@ Updated: 18 October 2026
 - Every completed minor or major milestone receives a ledger update and cohesive commit/push to the private repository.
 - Preserve meaningful milestone boundaries; do not push every intermediate edit.
 - Teacher is required and configurable, initially GPT-6 Luna or GPT-5.6 Luna; offline data development only.
-- Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. Tiny NVIDIA migration is validated; full-size/reduced-precision migration remains unverified.
+- Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. Tiny NVIDIA training migration and full-size exact state import/inference are validated; accepted full-size resumed-training trajectories and reduced precision remain unverified.
 - CUDA evidence now includes full-size exact state import, learned-checkpoint context/inference and seven synthetic FP32 benchmark updates on T4. It does not establish accepted full-size continued-training trajectories, sustained throughput, reduced precision or optimized kernels.
 
 - The milestone-three tiny-validation resources were deleted; Network Management was restored to disabled after deleting its temporary connectivity test. See the milestone-three cleanup report. The new full-size job has its own lifecycle and cleanup evidence.
@@ -54,6 +55,9 @@ Updated: 18 October 2026
 - Experimental stable loss improves analytic confident-target accuracy but fails existing tiny/full-size trajectory criteria; the legacy loss remains default, and loss version is stored with training recipes/checkpoints.
 - Full-size cloud resources were deleted after checksum-verified result download; instance, auto-delete boot disk and temporary firewall were checked absent. See `reports/milestone-seven-cleanup.json`.
 - A concrete portability acceptance proposal is pending review through an app input request. No existing failed gate is waived, and no paid training is authorized by the proposal.
+
+- Tokenizer mechanics now use an optional pinned `tokenizers==0.22.2` runtime and ten disjoint structural IDs; the fixture byte serializer remains unchanged. Production selection, streaming intake, representative sampling, packed training and structured tool serialization remain open.
+- The current sample-only public snapshot was refused by the tokenizer builder without output; zero public examples/sources are approved. No new cloud spending or paid teacher calls.
 
 ## Open gates
 

@@ -15,7 +15,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 ```sh
 uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -e '.[dev,mlx]'
+uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer]'
 .venv/bin/python -m pytest -q
 ```
 
@@ -23,7 +23,7 @@ uv pip install --python .venv/bin/python -e '.[dev,mlx]'
 
 ## PyTorch on NVIDIA hardware
 
-Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
+Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev,tokenizer]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
 
 ## Run the prototype
 
@@ -62,5 +62,7 @@ A manual bootstrap [review/release contract](docs/milestone-five.md) and checked
 The full 80.8M candidate now passes local fixed-checkpoint context/state-import and synthetic learning checks. Full-size training-trajectory comparisons fail the declared numerical gates; see [bring-up and drift evidence](docs/milestone-six.md).
 
 The learned full-size checkpoint also passes exact state import and 2,048-context inference on an actual NVIDIA T4. A versioned loss-accuracy experiment and bounded laptop/T4 FP32 timings are recorded in [milestone seven](docs/milestone-seven.md); the experimental loss does not pass trajectory gates and remains opt-in. A [portability acceptance proposal](docs/portability-acceptance-proposal.md) is pending review.
+
+A bounded reviewed-train BPE builder, disjoint structural/content IDs, loss-mask serializer and 16K/24K comparison tooling are implemented; see [tokenizer foundation](docs/milestone-eight.md). Public-source approvals remain zero; no production tokenizer is selected or frozen.
 
 Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
