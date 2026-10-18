@@ -1,0 +1,142 @@
+{
+  "actual_sample": {
+    "new_source_or_row_approvals": 0,
+    "prior_holdouts_never_train": true,
+    "review_packet_unchanged": true,
+    "rows": 901,
+    "splits": {
+      "test": 32,
+      "train": 799,
+      "validation": 70
+    }
+  },
+  "api_calls": 0,
+  "cloud_jobs": 0,
+  "cuda_authorized_total_usd": 10,
+  "cuda_cumulative_conservative_allowance_usd": 7,
+  "goal_complete": false,
+  "incomplete_probes_retained": true,
+  "neural_updates": 0,
+  "remaining": "Representative data admission and approval, scalable checked review/tokenizer intake, production tokenizer, actual language pilots and numerical portability acceptance.",
+  "scope": "Sample-only disk-backed corpus staging; no corpus admission or learned student acceptance.",
+  "settled_cloud_cost": null,
+  "source_frozen_artifacts": {
+    "docs/disk-backed-corpus-staging.md": "5d584cbd428c681877106385ed3dc449fcf00610223abdfb1a96b63caa76efd3",
+    "docs/milestone-thirty-two.md": "f6f7fe2b079000254e45c5e4d5125280268ef44a2332d9c1b77d83204326f768",
+    "reports/milestone-thirty-two-readiness.json": "db761b50df9652cd25d2c6f9be62294e7649a7bb03b9b4925d639f5bf0688066",
+    "reports/milestone-thirty-two-real.json": "0487a2e5bb8ee0547fee70016ab6986038840585d44273d89dc020706165ffdf",
+    "reports/milestone-thirty-two-scale-incomplete.json": "64b74529728c17a876ca78d3ca94d6932c3a3401e218020a79300f860c095b37",
+    "reports/milestone-thirty-two-scale.json": "a96d5070653b8100030f23a67e136e12bf8c8f260b6e57f18e16478cf3e82296",
+    "reports/milestone-thirty-two-staging-tests.xml": "057e5a9d2e49522aad518a06074c2faccd6b561833c7a5cb21659489fd7cfe37",
+    "reports/milestone-thirty-two-tests.xml": "11665bb61c95052e9f9342b9378fb59eed826c88c0f20d5782b5f3866d4a96e5",
+    "scripts/audit-corpus-staging-real.py": "878f6f9871ef5f3628e6132e29014a3d29824c81cacf9e3b8f35df68cbb1d5bd",
+    "scripts/audit-corpus-staging.py": "eb3b4a482a3689a7a76dda2b81be162b64ab80d33611557bae23b65c3c7ad3cf",
+    "scripts/audit-production-readiness.py": "f39152252c002f3fead371fab686f0f36728b3485cac1efd1e280444c5210487",
+    "src/slm/data/staging.py": "51388d2643d8ece358c48ceca9c414f473d1bb9ebe47582ca409d0b76d9f8ee5",
+    "tests/test_staging.py": "f56f9f71a7683eb73f98d7bd521b7a0823b13bb23bfbbcefa47f186024acadc7"
+  },
+  "staged_manifests": {
+    "data/corpus-staging-real-v4/staged": "dbff9dc2e5341764dcd66643755e1a3a803ad87d08274333c4c42ba2f1bbdd22",
+    "data/corpus-staging-scale-v3/staged": "dbe86e6d8129cb705dedb8b7b65b120681d312a559115f45ab1afd69bd15b385"
+  },
+  "synthetic_scale": {
+    "code_sha256": "eb3b4a482a3689a7a76dda2b81be162b64ab80d33611557bae23b65c3c7ad3cf",
+    "input_sha256": "b81ca3be1538f26149dc2dbd062cbfb2508137b65afc0f6e1c115c60685eee02",
+    "neural_updates": 0,
+    "process_peak_rss_platform_units": 85327872,
+    "public_or_teacher_examples": 0,
+    "records": 11000,
+    "report": {
+      "candidate_comparisons": 0,
+      "candidate_lookup_plan": [
+        [
+          7,
+          0,
+          55,
+          "SEARCH mine USING COVERING INDEX prefix_record (sid=? AND kind=?)"
+        ],
+        [
+          15,
+          0,
+          55,
+          "SEARCH p USING PRIMARY KEY (kind=? AND feat=?)"
+        ],
+        [
+          21,
+          0,
+          45,
+          "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+        ],
+        [
+          29,
+          0,
+          45,
+          "SEARCH c USING PRIMARY KEY (sid=? AND kind=?)"
+        ],
+        [
+          54,
+          0,
+          0,
+          "USE TEMP B-TREE FOR DISTINCT"
+        ]
+      ],
+      "content_categories": {
+        "unreviewed": 11000
+      },
+      "exact_duplicates_removed": 0,
+      "frozen_dataset_manifest_sha256": null,
+      "input_bytes": 42624780,
+      "input_examples": 11000,
+      "language_labels": {
+        "unknown": 11000
+      },
+      "limits": {
+        "max_db_bytes": 1073741824,
+        "max_input_bytes": 67108864,
+        "max_pair_checks": 2000000,
+        "max_record_bytes": 65536,
+        "max_records": 12000,
+        "max_shingles": 4096
+      },
+      "max_shared_message_exposure": 0,
+      "near_pairs_grouped": 0,
+      "peak_database_allocated_bytes": 649936896,
+      "rejections": {},
+      "release": "sample_only",
+      "retained_examples": 11000,
+      "scope": "Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.",
+      "source_rights_approved": false,
+      "sources": {
+        "staging-scale-fixture": 11000
+      },
+      "split_seed": "slm-splits-v1",
+      "splits": {
+        "test": 516,
+        "train": 9944,
+        "validation": 540
+      },
+      "staging": "sqlite-exact-prefix-jaccard-v1",
+      "training_eligible": false,
+      "version": 1
+    },
+    "rss_unit": "bytes on macOS; KiB on Linux",
+    "scope": "Synthetic word-sequence JSONL mechanics; no natural-language quality or production scaling proof.",
+    "wall_seconds": 82.06699358398328
+  },
+  "teacher_new_launches": 0,
+  "teacher_reserved_slots": 17,
+  "test_counts": {
+    "staging-tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 20
+    },
+    "tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 15,
+      "tests": 643
+    }
+  }
+}

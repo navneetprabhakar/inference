@@ -74,7 +74,8 @@ def audit(output):
         if any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=='main' for n in tree.body):mains.append(str(path))
     pilot_main_found=Path('src/slm/train.py').is_file() and 'src/slm/train.py' in mains
     assert not any('def main(' in Path(p).read_text() for p in ('src/slm/common/training.py','src/slm/common/curriculum.py'))
-    test_path=Path('reports/milestone-thirty-one-tests.xml')
+    test_path=Path('reports/milestone-thirty-two-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-thirty-one-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-twenty-nine-tests.xml')
     t=ET.parse(test_path).getroot().find('testsuite')
     tests={k:int(t.attrib[k]) for k in ('tests','failures','errors','skipped')};tests['passed']=tests['tests']-tests['skipped']-tests['failures']-tests['errors']
@@ -104,7 +105,7 @@ def audit(output):
     item('D03','3','English/quality/privacy filtering suitable for real training','partial',['src/slm/data/curation.py','src/slm/data/review.py'],'Pattern redaction and declared language are incomplete; 901 current rows remain content-unreviewed.')
     item('D04','3','Exact/near deduplication, grouped splits and official holdouts','partial',['src/slm/data/curation.py','src/slm/data/partitions.py','src/slm/data/holdout.py'],'Bounded grouping and exact evaluation isolation; not scalable global semantic contamination proof or full OASST Parquet text verification.')
     item('D05','3','Approved public source and example release','pending_input',['data/official-split-audit-v1/pending-review.json','src/slm/data/review.py'],'Zero source/example approvals; sample-only reader refuses training.')
-    item('D06','3','Production bulk intake, global grouping and quality reporting','missing',['src/slm/data/build.py','src/slm/data/curation.py'],'Builder limits inputs to 32 MiB/10,000 rows; it materializes records and cannot be relabeled as bulk.')
+    item('D06','3','Production bulk intake, global grouping and quality reporting','partial',['src/slm/data/staging.py','tests/test_staging.py','docs/disk-backed-corpus-staging.md'],'Disk-backed sample-only JSONL staging preserves exact syntactic grouping with explicit limits; no representative corpus throughput, source admission, semantic decontamination, resumable intake or direct Parquet stream. Bootstrap builder/review/tokenizer readers still materialize records.')
     item('D07','3','Scalable admission backed by representative human audit','missing',['src/slm/data/review.py','docs/dataset-and-teacher-plan.md'],'Bootstrap release only admits explicitly reviewed rows. Forty decisions do not approve 861 other rows or a full corpus; a separately reviewed admission policy is needed.')
     item('D08','3','Verified token shards, source counts and repeat exposure','implemented_reference',['src/slm/data/tokenized.py','src/slm/data/mixture.py'],'Processed, supervised and unique prepared positions differ; prior 2.6M reader probe has zero neural updates.')
     item('T01','4','Train-only 16K/24K BPE comparison tooling and slice measurements','implemented_reference',['src/slm/common/tokenizer.py','src/slm/eval/tokenizer.py'],'Bounded candidate builder materializes training strings; synthetic run yielded 432 tokens for both requested sizes.')

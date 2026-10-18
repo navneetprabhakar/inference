@@ -1,0 +1,84 @@
+{
+  "code_sha256": "eb3b4a482a3689a7a76dda2b81be162b64ab80d33611557bae23b65c3c7ad3cf",
+  "input_sha256": "b81ca3be1538f26149dc2dbd062cbfb2508137b65afc0f6e1c115c60685eee02",
+  "neural_updates": 0,
+  "process_peak_rss_platform_units": 85327872,
+  "public_or_teacher_examples": 0,
+  "records": 11000,
+  "report": {
+    "candidate_comparisons": 0,
+    "candidate_lookup_plan": [
+      [
+        7,
+        0,
+        55,
+        "SEARCH mine USING COVERING INDEX prefix_record (sid=? AND kind=?)"
+      ],
+      [
+        15,
+        0,
+        55,
+        "SEARCH p USING PRIMARY KEY (kind=? AND feat=?)"
+      ],
+      [
+        21,
+        0,
+        45,
+        "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+      ],
+      [
+        29,
+        0,
+        45,
+        "SEARCH c USING PRIMARY KEY (sid=? AND kind=?)"
+      ],
+      [
+        54,
+        0,
+        0,
+        "USE TEMP B-TREE FOR DISTINCT"
+      ]
+    ],
+    "content_categories": {
+      "unreviewed": 11000
+    },
+    "exact_duplicates_removed": 0,
+    "frozen_dataset_manifest_sha256": null,
+    "input_bytes": 42624780,
+    "input_examples": 11000,
+    "language_labels": {
+      "unknown": 11000
+    },
+    "limits": {
+      "max_db_bytes": 1073741824,
+      "max_input_bytes": 67108864,
+      "max_pair_checks": 2000000,
+      "max_record_bytes": 65536,
+      "max_records": 12000,
+      "max_shingles": 4096
+    },
+    "max_shared_message_exposure": 0,
+    "near_pairs_grouped": 0,
+    "peak_database_allocated_bytes": 649936896,
+    "rejections": {},
+    "release": "sample_only",
+    "retained_examples": 11000,
+    "scope": "Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.",
+    "source_rights_approved": false,
+    "sources": {
+      "staging-scale-fixture": 11000
+    },
+    "split_seed": "slm-splits-v1",
+    "splits": {
+      "test": 516,
+      "train": 9944,
+      "validation": 540
+    },
+    "staging": "sqlite-exact-prefix-jaccard-v1",
+    "training_eligible": false,
+    "version": 1
+  },
+  "rss_unit": "bytes on macOS; KiB on Linux",
+  "scope": "Synthetic word-sequence JSONL mechanics; no natural-language quality or production scaling proof.",
+  "wall_seconds": 82.06699358398328
+}

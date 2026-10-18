@@ -1,0 +1,880 @@
+{
+  "version": 1,
+  "creator": "Navneet Prabhakar",
+  "scope": "Read-only requirement/evidence audit of the original full goal; no promotion or approval tool",
+  "goal_achieved": false,
+  "criteria": [
+    {
+      "id": "C01",
+      "goal_section": "1",
+      "requirement": "Canonical random initialization and tied architecture",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/config.py",
+        "configs/target-81m.json"
+      ],
+      "scope_or_missing_proof": "Fresh config count is 80,765,440; this is not a language-trained checkpoint."
+    },
+    {
+      "id": "C02",
+      "goal_section": "1",
+      "requirement": "Canonical unquantized model checkpoint and conventions",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/checkpoint.py",
+        "tests/test_portability.py"
+      ],
+      "scope_or_missing_proof": "FP32 reference format; compressed exports remain separate."
+    },
+    {
+      "id": "C03",
+      "goal_section": "1",
+      "requirement": "FP32 optimizer moments, recipe, step and cursor state",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/training.py",
+        "tests/test_resume.py"
+      ],
+      "scope_or_missing_proof": "Reference training state v1/v2 plus curriculum v3; not a main-run artifact."
+    },
+    {
+      "id": "C04",
+      "goal_section": "1",
+      "requirement": "Atomic update-boundary save, corruption and interrupted-save checks",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/training.py",
+        "tests/test_resume.py"
+      ],
+      "scope_or_missing_proof": "The checked API exists; see P02 for current pilot orchestration status."
+    },
+    {
+      "id": "C05",
+      "goal_section": "1",
+      "requirement": "Accumulation weighting, clip/decay/bias correction and tails",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/training.py",
+        "tests/test_accumulation.py"
+      ],
+      "scope_or_missing_proof": "Reference optimizer behavior is tested; no new numerical acceptance is inferred."
+    },
+    {
+      "id": "C06",
+      "goal_section": "1",
+      "requirement": "Mixture order, family exposure and stage-local schedule resume",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/data/mixture.py",
+        "src/slm/data/curriculum.py",
+        "src/slm/common/curriculum.py"
+      ],
+      "scope_or_missing_proof": "Finite reference manifests and receipts, not a sustained language curriculum."
+    },
+    {
+      "id": "N01",
+      "goal_section": "2",
+      "requirement": "Tiny MLX/CPU forward/gradient/100-update controls",
+      "status": "implemented_reference",
+      "evidence": [
+        "docs/milestone-one.md",
+        "docs/milestone-three.md",
+        "tests/test_portability.py"
+      ],
+      "scope_or_missing_proof": "Tiny tolerances do not establish full-depth training trajectories."
+    },
+    {
+      "id": "N02",
+      "goal_section": "2",
+      "requirement": "Actual NVIDIA checkpoint/continuation validation",
+      "status": "retained_hardware_evidence",
+      "evidence": [
+        "reports/milestone-twenty-one-summary.json",
+        "reports/milestone-twenty-one-cleanup.json"
+      ],
+      "scope_or_missing_proof": "Retained T4 validation, not a fresh hardware or cloud-resource query."
+    },
+    {
+      "id": "N03",
+      "goal_section": "2",
+      "requirement": "Full exact MLX/CUDA/MLX state transfer and context inference",
+      "status": "retained_hardware_evidence",
+      "evidence": [
+        "reports/milestone-twenty-one-summary.json",
+        "reports/milestone-seven-cuda-context.json"
+      ],
+      "scope_or_missing_proof": "242,296,320 weight/moment values checked; finite synthetic continuation is not learned quality."
+    },
+    {
+      "id": "N04",
+      "goal_section": "2",
+      "requirement": "Accepted full-size multi-update training portability",
+      "status": "failed_gate",
+      "evidence": [
+        "reports/milestone-twenty-two-summary.json",
+        "docs/portability-acceptance-proposal.md"
+      ],
+      "scope_or_missing_proof": "Trajectory failure remains recorded; state/inference/quality versus strict-trajectory policy needs user input."
+    },
+    {
+      "id": "N05",
+      "goal_section": "2",
+      "requirement": "Reduced-precision and optimized numerical validation",
+      "status": "missing",
+      "evidence": [
+        "src/slm/eval/precision.py",
+        "src/slm/backends/mlx_backend.py",
+        "src/slm/backends/torch_backend.py"
+      ],
+      "scope_or_missing_proof": "FP64 diagnostic is not BF16/FP16 production support. Reference acceptance precedes optimization."
+    },
+    {
+      "id": "D01",
+      "goal_section": "3",
+      "requirement": "Pinned source provenance/card/license sample acquisition",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/data/acquire.py",
+        "src/slm/data/schema.py"
+      ],
+      "scope_or_missing_proof": "Four sources, first-N schema/yield samples; no representative clearance or bulk download."
+    },
+    {
+      "id": "D02",
+      "goal_section": "3",
+      "requirement": "Prose/messages/Dolly/OASST adapters and complete tree reconstruction",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/data/adapters.py",
+        "configs/source-audit-v1.json"
+      ],
+      "scope_or_missing_proof": "Initial inspected source formats; the wider source shortlist is not fully audited."
+    },
+    {
+      "id": "D03",
+      "goal_section": "3",
+      "requirement": "English/quality/privacy filtering suitable for real training",
+      "status": "partial",
+      "evidence": [
+        "src/slm/data/curation.py",
+        "src/slm/data/review.py"
+      ],
+      "scope_or_missing_proof": "Pattern redaction and declared language are incomplete; 901 current rows remain content-unreviewed."
+    },
+    {
+      "id": "D04",
+      "goal_section": "3",
+      "requirement": "Exact/near deduplication, grouped splits and official holdouts",
+      "status": "partial",
+      "evidence": [
+        "src/slm/data/curation.py",
+        "src/slm/data/partitions.py",
+        "src/slm/data/holdout.py"
+      ],
+      "scope_or_missing_proof": "Bounded grouping and exact evaluation isolation; not scalable global semantic contamination proof or full OASST Parquet text verification."
+    },
+    {
+      "id": "D05",
+      "goal_section": "3",
+      "requirement": "Approved public source and example release",
+      "status": "pending_input",
+      "evidence": [
+        "data/official-split-audit-v1/pending-review.json",
+        "src/slm/data/review.py"
+      ],
+      "scope_or_missing_proof": "Zero source/example approvals; sample-only reader refuses training."
+    },
+    {
+      "id": "D06",
+      "goal_section": "3",
+      "requirement": "Production bulk intake, global grouping and quality reporting",
+      "status": "partial",
+      "evidence": [
+        "src/slm/data/staging.py",
+        "tests/test_staging.py",
+        "docs/disk-backed-corpus-staging.md"
+      ],
+      "scope_or_missing_proof": "Disk-backed sample-only JSONL staging preserves exact syntactic grouping with explicit limits; no representative corpus throughput, source admission, semantic decontamination, resumable intake or direct Parquet stream. Bootstrap builder/review/tokenizer readers still materialize records."
+    },
+    {
+      "id": "D07",
+      "goal_section": "3",
+      "requirement": "Scalable admission backed by representative human audit",
+      "status": "missing",
+      "evidence": [
+        "src/slm/data/review.py",
+        "docs/dataset-and-teacher-plan.md"
+      ],
+      "scope_or_missing_proof": "Bootstrap release only admits explicitly reviewed rows. Forty decisions do not approve 861 other rows or a full corpus; a separately reviewed admission policy is needed."
+    },
+    {
+      "id": "D08",
+      "goal_section": "3",
+      "requirement": "Verified token shards, source counts and repeat exposure",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/data/tokenized.py",
+        "src/slm/data/mixture.py"
+      ],
+      "scope_or_missing_proof": "Processed, supervised and unique prepared positions differ; prior 2.6M reader probe has zero neural updates."
+    },
+    {
+      "id": "T01",
+      "goal_section": "4",
+      "requirement": "Train-only 16K/24K BPE comparison tooling and slice measurements",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/tokenizer.py",
+        "src/slm/eval/tokenizer.py"
+      ],
+      "scope_or_missing_proof": "Bounded candidate builder materializes training strings; synthetic run yielded 432 tokens for both requested sizes."
+    },
+    {
+      "id": "T02",
+      "goal_section": "4",
+      "requirement": "Frozen production vocabulary selected from representative eligible data",
+      "status": "missing",
+      "evidence": [
+        "reports/milestone-eight-tokenizer-mechanics.json",
+        "reports/milestone-eight-data-gates.json"
+      ],
+      "scope_or_missing_proof": "No production candidate, selection or freeze. Vocabulary choice and target count must follow actual yield/efficiency."
+    },
+    {
+      "id": "T03",
+      "goal_section": "4",
+      "requirement": "Disjoint structural IDs, raw-content isolation and serialization",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/tokenizer.py",
+        "src/slm/common/tool_serialization.py",
+        "tests/test_tokenizer.py"
+      ],
+      "scope_or_missing_proof": "No raw content special-token interpretation; typed and continuation formats are versioned."
+    },
+    {
+      "id": "H01",
+      "goal_section": "5",
+      "requirement": "Configurable CLI-only teacher and disabled API fallback",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/teacher/cli.py",
+        "configs/teacher-cli-pilot.json",
+        "configs/teacher-disabled.json"
+      ],
+      "scope_or_missing_proof": "Requested Luna identity is pinned; CLI does not report resolved model identity."
+    },
+    {
+      "id": "H02",
+      "goal_section": "5",
+      "requirement": "Real small teacher pilot/cache/lineage/usage evidence",
+      "status": "retained_pilot_evidence",
+      "evidence": [
+        "reports/milestone-twenty-eight-summary.json",
+        "reports/milestone-twenty-eight-host-bridge.json"
+      ],
+      "scope_or_missing_proof": "14 successful candidates, two families; 17/20 reservations, no adapter-enforced settled-dollar cap."
+    },
+    {
+      "id": "H03",
+      "goal_section": "5",
+      "requirement": "Conversation/clarification/correction/style/tool/student-failure generation",
+      "status": "partial",
+      "evidence": [
+        "src/slm/teacher/scenarios.py",
+        "src/slm/teacher/bridge.py",
+        "reports/milestone-twenty-eight-summary.json"
+      ],
+      "scope_or_missing_proof": "All task shapes have fixture tests; real data is narrow arithmetic. Genuine trained-student failure mining is not demonstrated."
+    },
+    {
+      "id": "H04",
+      "goal_section": "5",
+      "requirement": "Human/rights/category-approved teacher data and broad validation",
+      "status": "pending_input",
+      "evidence": [
+        "docs/milestone-twenty-nine.md",
+        "src/slm/data/review.py"
+      ],
+      "scope_or_missing_proof": "No actual account/source evidence, human approval or mature-category pilot. Surface-distinct style outputs are not meaning/style acceptance."
+    },
+    {
+      "id": "H05",
+      "goal_section": "5",
+      "requirement": "Executable host normalization and reviewed continuation masks",
+      "status": "partial",
+      "evidence": [
+        "src/slm/teacher/bridge.py",
+        "src/slm/common/supervision.py"
+      ],
+      "scope_or_missing_proof": "Multiplication mapping only; partial historical tool exchanges unsupported. Historical assistant mistakes have zero direct loss."
+    },
+    {
+      "id": "H06",
+      "goal_section": "5",
+      "requirement": "Source-bound offline review workflow",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/data/review_console.py",
+        "src/slm/data/review_console.html",
+        "reports/milestone-twenty-nine-summary.json"
+      ],
+      "scope_or_missing_proof": "Teacher gates work in synthetic DOM/Python controls; actual browser layout/download remains unverified and actual rights remain absent."
+    },
+    {
+      "id": "P01",
+      "goal_section": "6",
+      "requirement": "Target architecture count and full-depth tiny-overfit checks",
+      "status": "retained_reference_evidence",
+      "evidence": [
+        "configs/target-81m.json",
+        "reports/milestone-six-fullsize.json"
+      ],
+      "scope_or_missing_proof": "Random initialization and synthetic checks only; full trajectory criterion still fails."
+    },
+    {
+      "id": "P02",
+      "goal_section": "6",
+      "requirement": "General bounded reviewed-data pilot execution command",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/train.py",
+        "tests/test_train.py",
+        "docs/reviewed-data-pilot-runner.md"
+      ],
+      "scope_or_missing_proof": "Reference runner now binds reviewed content, budgets, managed checkpoints and resume/stage receipts. Synthetic local tests are not the real language pilot; actual CUDA wrapper validation remains open."
+    },
+    {
+      "id": "P03",
+      "goal_section": "6",
+      "requirement": "Actual 1M-token English smoke training",
+      "status": "missing",
+      "evidence": [
+        "reports/milestone-eleven-reader-scale.json",
+        "docs/project-ledger.md"
+      ],
+      "scope_or_missing_proof": "No eligible production tokenizer/data or 1M neural-update run; synthetic reader positions do not meet this requirement."
+    },
+    {
+      "id": "P04",
+      "goal_section": "6",
+      "requirement": "Actual 10M-token laptop language pilot",
+      "status": "missing",
+      "evidence": [
+        "docs/project-ledger.md",
+        "reports/milestone-seven-mlx-benchmark.json"
+      ],
+      "scope_or_missing_proof": "No trained language checkpoint or sustained run. Short benchmark is not this pilot."
+    },
+    {
+      "id": "P05",
+      "goal_section": "6",
+      "requirement": "Optional evidence-driven 50M extension",
+      "status": "conditional_deferred",
+      "evidence": [
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "Optional after measured 1M/10M results, not an unconditional required paid run."
+    },
+    {
+      "id": "P06",
+      "goal_section": "6",
+      "requirement": "Sustained throughput/memory/restarts/checkpoint-overhead report",
+      "status": "partial",
+      "evidence": [
+        "reports/milestone-seven-mlx-benchmark.json",
+        "reports/milestone-fifteen-dense-benchmark.json"
+      ],
+      "scope_or_missing_proof": "Only short synthetic timing/resume evidence; no sustained real-data pilot or thermal profile."
+    },
+    {
+      "id": "G01",
+      "goal_section": "7",
+      "requirement": "Authorized CUDA validation and retained cleanup records",
+      "status": "retained_hardware_evidence",
+      "evidence": [
+        "reports/milestone-twenty-one-summary.json",
+        "reports/milestone-twenty-one-cleanup.json"
+      ],
+      "scope_or_missing_proof": "USD 7 conservative allowance of USD 10 validation-only ceiling; settled billing unknown."
+    },
+    {
+      "id": "G02",
+      "goal_section": "7",
+      "requirement": "Main training hardware/pricing/quota/storage/spending decision",
+      "status": "pending_input",
+      "evidence": [
+        "docs/goal-prompt.md",
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "No main-training budget. Fresh full-instance quotes/availability required only before an authorized paid run."
+    },
+    {
+      "id": "G03",
+      "goal_section": "7",
+      "requirement": "Actual staged 100M/1B/3B/10B evaluated checkpoints",
+      "status": "missing",
+      "evidence": [
+        "docs/slm-training-plan.md",
+        "docs/project-ledger.md"
+      ],
+      "scope_or_missing_proof": "No main pretraining performed; stages are planned experiments, not proof these token budgets suffice."
+    },
+    {
+      "id": "G04",
+      "goal_section": "7",
+      "requirement": "Measured complete cost per million useful training tokens",
+      "status": "missing",
+      "evidence": [
+        "reports/milestone-seven-cuda-benchmark.json"
+      ],
+      "scope_or_missing_proof": "Short synthetic T4 timing is not current complete instance pricing or sustained production economics."
+    },
+    {
+      "id": "S01",
+      "goal_section": "8",
+      "requirement": "Assistant-only/tool-call/termination masks and family grouping",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/common/tokenizer.py",
+        "src/slm/common/tool_serialization.py",
+        "src/slm/data/curation.py"
+      ],
+      "scope_or_missing_proof": "Mechanically tested masks; no actual conversation/style/tool SFT checkpoint."
+    },
+    {
+      "id": "S02",
+      "goal_section": "8",
+      "requirement": "Conversation SFT with general replay and measured regression",
+      "status": "missing",
+      "evidence": [
+        "src/slm/data/mixture.py",
+        "src/slm/data/curriculum.py",
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "Mixture support exists, but no 50K real approved conversation set or trained/reviewed baseline."
+    },
+    {
+      "id": "S03",
+      "goal_section": "8",
+      "requirement": "Meaning-preserving five styles and recovery across turns",
+      "status": "missing",
+      "evidence": [
+        "src/slm/teacher/styles.py",
+        "reports/milestone-twenty-eight-style-audit.json"
+      ],
+      "scope_or_missing_proof": "Teacher guidance/cues exist; no learned student capability or human accepted pair evaluation."
+    },
+    {
+      "id": "S04",
+      "goal_section": "8",
+      "requirement": "Independent SFW/mature content behavior and category approvals",
+      "status": "pending_input",
+      "evidence": [
+        "docs/dataset-and-teacher-plan.md",
+        "src/slm/data/review.py"
+      ],
+      "scope_or_missing_proof": "No mature source inventory/actual training/suite approval; style labels do not imply content categories."
+    },
+    {
+      "id": "S05",
+      "goal_section": "8",
+      "requirement": "Five to ten supported tools and learned no-call/clarify/arguments",
+      "status": "partial",
+      "evidence": [
+        "src/slm/tools/local.py",
+        "reports/milestone-twenty-one-summary.json"
+      ],
+      "scope_or_missing_proof": "Five local handlers exist; actual random students fail seven scripted-control tasks. Learned correctness remains unproved."
+    },
+    {
+      "id": "S06",
+      "goal_section": "8",
+      "requirement": "Dependent calls/preference tuning/RL only when justified",
+      "status": "conditional_deferred",
+      "evidence": [
+        "docs/goal-prompt.md",
+        "src/slm/inference/tools.py"
+      ],
+      "scope_or_missing_proof": "Do not promote optional later techniques before single-call correctness and useful SFT."
+    },
+    {
+      "id": "R01",
+      "goal_section": "9",
+      "requirement": "Application-owned discovery/schema/execution/results/call limits",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/tools/local.py",
+        "src/slm/tools/protocol.py",
+        "src/slm/inference/tools.py"
+      ],
+      "scope_or_missing_proof": "Reference local handlers and bounded host integration; not unrestricted action authorization."
+    },
+    {
+      "id": "R02",
+      "goal_section": "9",
+      "requirement": "Actual MCP stdio and bounded Streamable HTTP transport",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/mcp/transport.py",
+        "src/slm/mcp/registry.py",
+        "src/slm/mcp/http.py",
+        "reports/milestone-twenty-one-summary.json"
+      ],
+      "scope_or_missing_proof": "Local SDK process/HTTP and retained CUDA scripted controls; production OAuth/authorization is not implemented."
+    },
+    {
+      "id": "R03",
+      "goal_section": "9",
+      "requirement": "Untrusted tool-result handling and first-attempt error reporting",
+      "status": "implemented_reference",
+      "evidence": [
+        "src/slm/inference/tools.py",
+        "src/slm/mcp/transport.py",
+        "src/slm/mcp/http.py"
+      ],
+      "scope_or_missing_proof": "No automatic outcome replay; missing result remains unknown. Model resistance is not proven by schema controls."
+    },
+    {
+      "id": "R04",
+      "goal_section": "9",
+      "requirement": "Learned end-to-end task completion on both deployment backends",
+      "status": "missing",
+      "evidence": [
+        "reports/milestone-twenty-one-summary.json",
+        "reports/milestone-seventeen-summary.json"
+      ],
+      "scope_or_missing_proof": "Scripted success and random-student negative controls are not a useful learned model."
+    },
+    {
+      "id": "X01",
+      "goal_section": "10",
+      "requirement": "ESCI splits/query families and retrieval/ranker comparison",
+      "status": "conditional_deferred",
+      "evidence": [
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "Correctly gated after core conversation/tool capability; no ESCI adapter/data/ranker experiment yet."
+    },
+    {
+      "id": "X02",
+      "goal_section": "10",
+      "requirement": "Domain replay, relevance/regression and full latency/memory",
+      "status": "conditional_deferred",
+      "evidence": [
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "No core checkpoint exists to specialize or protect; do not substitute ESCI for language pretraining."
+    },
+    {
+      "id": "X03",
+      "goal_section": "10",
+      "requirement": "Quantized exports checked against unquantized learned reference",
+      "status": "conditional_deferred",
+      "evidence": [
+        "docs/slm-training-plan.md",
+        "src/slm/common/checkpoint.py"
+      ],
+      "scope_or_missing_proof": "No accepted learned baseline or deployment-quality comparison; reference FP32 storage is not quantization."
+    },
+    {
+      "id": "E01",
+      "goal_section": "Evaluation",
+      "requirement": "500 human-reviewed initial cases and accepted stage policy",
+      "status": "pending_input",
+      "evidence": [
+        "data/evaluation-candidates-v1/suite-review.json",
+        "configs/stage-screen-proposal-v1.json"
+      ],
+      "scope_or_missing_proof": "500 candidate cases exist, zero approved. Stage policy remains proposed."
+    },
+    {
+      "id": "E02",
+      "goal_section": "Evaluation",
+      "requirement": "Adequate held-out slice coverage, human rubrics and uncertainty",
+      "status": "partial",
+      "evidence": [
+        "src/slm/eval/conversation.py",
+        "src/slm/eval/stage.py",
+        "src/slm/eval/cases.py"
+      ],
+      "scope_or_missing_proof": "Scoring/screens exist; no accepted mature suite, blind human grades or useful student behavior."
+    },
+    {
+      "id": "E03",
+      "goal_section": "Evaluation",
+      "requirement": "Tool/clarification/turn/meaning/style/unsupported-claim targets",
+      "status": "missing",
+      "evidence": [
+        "docs/slm-training-plan.md",
+        "reports/milestone-seventeen-summary.json"
+      ],
+      "scope_or_missing_proof": "95%/95%/90%/90%/90% and <=1% unsupported-claim targets have no learned-model release evidence."
+    },
+    {
+      "id": "E04",
+      "goal_section": "Evaluation",
+      "requirement": "Constrained schema/raw-versus-constrained and repair comparisons",
+      "status": "partial",
+      "evidence": [
+        "src/slm/inference/tools.py",
+        "src/slm/eval/tools.py"
+      ],
+      "scope_or_missing_proof": "Strict raw parsing/rejection and no-repair controls exist; no general constrained decoder or 99.5% learned-schema result."
+    },
+    {
+      "id": "E05",
+      "goal_section": "Evaluation",
+      "requirement": "M4 p95 latency and 2K total incremental inference memory",
+      "status": "missing",
+      "evidence": [
+        "reports/milestone-seven-mlx-benchmark.json",
+        "docs/slm-training-plan.md"
+      ],
+      "scope_or_missing_proof": "Short training timing is neither p95 complete tool-generation latency nor full deployment memory."
+    },
+    {
+      "id": "O01",
+      "goal_section": "Ownership",
+      "requirement": "Private repository, sole creator and cohesive milestone history",
+      "status": "implemented_reference",
+      "evidence": [
+        "docs/project-ledger.md",
+        "docs/goal-prompt.md"
+      ],
+      "scope_or_missing_proof": "Git/private visibility are verified separately at publication; dependency provenance is retained."
+    },
+    {
+      "id": "O02",
+      "goal_section": "Working rules",
+      "requirement": "Ledger, explicit budgets and no unauthorized main runs",
+      "status": "implemented_reference",
+      "evidence": [
+        "docs/project-ledger.md",
+        "configs/teacher-cli-pilot.json",
+        "reports/milestone-twenty-nine-summary.json"
+      ],
+      "scope_or_missing_proof": "No inference that generation usage is free or that the validation budget covers pretraining."
+    }
+  ],
+  "status_counts": {
+    "implemented_reference": 21,
+    "retained_hardware_evidence": 3,
+    "failed_gate": 1,
+    "missing": 12,
+    "partial": 9,
+    "pending_input": 5,
+    "retained_pilot_evidence": 1,
+    "retained_reference_evidence": 1,
+    "conditional_deferred": 5
+  },
+  "observations": {
+    "target_parameters": 80765440,
+    "public_sample_rows": 901,
+    "public_sample_splits": {
+      "test": 32,
+      "train": 799,
+      "validation": 70
+    },
+    "public_language_labels": {
+      "en": 503,
+      "unknown": 398
+    },
+    "public_content_labels": {
+      "unreviewed": 901
+    },
+    "reviewed_packet_rows": 40,
+    "public_source_approvals": 0,
+    "public_row_approvals": 0,
+    "public_human_attestation": false,
+    "public_review_packet_sha256": "b72a2ee0001ae28fc81baeb8d70944d2125df740834628a9dfa4137b17c54ecc",
+    "public_sample_training_reader_refusal": "Reviewed training release required; sample-only data is refused",
+    "public_training_releases_found": [],
+    "data_manifest_files_inspected": 94,
+    "candidate_evaluation_cases": 500,
+    "approved_evaluation_cases": 0,
+    "evaluation_output_human_attestation": false,
+    "stage_policy_status": "proposed",
+    "strict_trajectory_gate_passed": false,
+    "production_tokenizer_selected_in_retained_report": false,
+    "synthetic_reader_positions": 2600025,
+    "synthetic_reader_neural_updates": 0,
+    "teacher_candidates": 14,
+    "teacher_approvals": 0,
+    "teacher_journals": [
+      {
+        "name": "cli-pilot-v1",
+        "halted": true,
+        "limit": 20,
+        "states": {
+          "uncertain": 1
+        },
+        "reserved_slots": 1,
+        "sha256": "da836ee65987b6a5d447f9f0baa01af6bfb0dce78da6e8eb551ded7e0f5937b4"
+      },
+      {
+        "name": "cli-pilot-v2",
+        "halted": false,
+        "limit": 19,
+        "states": {
+          "abandoned": 2,
+          "complete": 14
+        },
+        "reserved_slots": 16,
+        "sha256": "c167e715da7deef80ed6d5a3d1704cd0d6caaec660cb3f32c7c95f72677e1aae"
+      }
+    ],
+    "combined_teacher_reserved_slots": 17,
+    "latest_local_suite": {
+      "tests": 643,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 15,
+      "passed": 628
+    },
+    "general_pilot_main_found": true,
+    "entrypoints_inspected": [
+      "scripts/audit-corpus-staging-real.py",
+      "scripts/audit-corpus-staging.py",
+      "scripts/audit-curriculum.py",
+      "scripts/audit-data.py",
+      "scripts/audit-http-mcp.py",
+      "scripts/audit-language.py",
+      "scripts/audit-mcp.py",
+      "scripts/audit-tools.py",
+      "src/slm/common/tokenizer.py",
+      "src/slm/data/acquire.py",
+      "src/slm/data/build.py",
+      "src/slm/data/curriculum.py",
+      "src/slm/data/mixture.py",
+      "src/slm/data/partitions.py",
+      "src/slm/data/review.py",
+      "src/slm/data/review_console.py",
+      "src/slm/data/staging.py",
+      "src/slm/data/tokenized.py",
+      "src/slm/eval/accumulated_transfer.py",
+      "src/slm/eval/accumulation.py",
+      "src/slm/eval/benchmark.py",
+      "src/slm/eval/context.py",
+      "src/slm/eval/curriculum_transfer.py",
+      "src/slm/eval/dataio.py",
+      "src/slm/eval/drift.py",
+      "src/slm/eval/language.py",
+      "src/slm/eval/overfit.py",
+      "src/slm/eval/portability.py",
+      "src/slm/eval/precision.py",
+      "src/slm/eval/state_transfer.py",
+      "src/slm/eval/tokenizer.py",
+      "src/slm/inference/tools.py",
+      "src/slm/mcp/cli.py",
+      "src/slm/mcp/fixture_server.py",
+      "src/slm/mcp/http_fixture.py",
+      "src/slm/teacher/bridge.py",
+      "src/slm/teacher/cli.py",
+      "src/slm/teacher/run.py",
+      "src/slm/train.py"
+    ]
+  },
+  "next_independent_implementation": "Production intake/admission policy and scalable grouping, while data/tokenizer/portability inputs gate real 1M/10M pilots.",
+  "external_inputs": [
+    "Source terms and explicit review decisions for current public packet",
+    "Scalable admission/quality-policy approval before bulk corpus release",
+    "Portability acceptance option A/B",
+    "Actual account/source evidence and human teacher judgments",
+    "Evaluation suite/policy/rubric review",
+    "Main GCP budget/hardware decision at its later paid-run gate"
+  ],
+  "new_training_updates": 0,
+  "new_teacher_launches": 0,
+  "new_cloud_jobs": 0,
+  "source_or_policy_approvals_changed": false,
+  "historical_hardware_scope": "Retained reports only; no new CUDA run, cloud-resource query, availability/pricing check or billing verification.",
+  "evidence_sha256": {
+    "src/slm/common/config.py": "af3aaac19ab4fe8e0a4991b6304754c755bcb81df1d03a2af5a89b1a70c1d844",
+    "configs/target-81m.json": "c944c39c48a6fe4df7b24a58a44a4e5746d104860ed25989727aa8ec009f3da7",
+    "src/slm/common/checkpoint.py": "f7892ed9b7bb5e739c0a83d2e7109e241efcbe3d0a193cebc46accb2b3fdaf7c",
+    "tests/test_portability.py": "71c399b179a1fb3adeed30bd8e8b0d7f3af4559e32ab9d4811ab3dbe781217ab",
+    "src/slm/common/training.py": "2786bb88980e691db54f899c129783e33fe53b74160b3a99b6d4fd9e61de9556",
+    "tests/test_resume.py": "f42a437311b0d3c8bdb34294baeb21be7798d833fe75396bce870e2c47025baf",
+    "tests/test_accumulation.py": "46b546cdb5ef470a320099072353c30e66a60bcd476cd4c82cd7e7562a18c35c",
+    "src/slm/data/mixture.py": "c94ed8562bbc98e5b8d9a991ddc20eff631e0dc0e7ba30e29a5dab5a891fcb33",
+    "src/slm/data/curriculum.py": "45eaddc052cfa4f6aa25720821c89243d308b8ceddec707b1117a16893d7fe4a",
+    "src/slm/common/curriculum.py": "2807d193546e32bedcaf010782195d28f8e7693946e8463a0ea5453a03e8ae42",
+    "docs/milestone-one.md": "1cc7333963c410528368988481cf88eedba41334fd80ec5b895c22bd184c4903",
+    "docs/milestone-three.md": "edaf15d17764acb720f812c52ff4e83e18e4f7942119222aa2d02dd4414258f2",
+    "reports/milestone-twenty-one-summary.json": "1ccaa03496f24cdbc97f58604dcbee92521e28429c774485f857ec9ed6e5eda8",
+    "reports/milestone-twenty-one-cleanup.json": "7d98a0ce73465e447e03d0a518cbae38995d5eecbe897c4c9fcdb10ddd46754b",
+    "reports/milestone-seven-cuda-context.json": "ccd1735919d4371fd0d478929712faa5b2fd3c1291509c1c28d9716743cbf909",
+    "reports/milestone-twenty-two-summary.json": "b6c41208185364378f0b0f5c8c56da15bfb5b68dc61ac3dbcbef0736be03f947",
+    "docs/portability-acceptance-proposal.md": "bb82cbdb8eaf389f5fc25d96a5ae4e3a468f5ccbc809eb6c901de564a05d4f1c",
+    "src/slm/eval/precision.py": "6676ea965cf56a7f825e31a5e9704f6ac1d155a0353f8d5d4d44a074dc0038a3",
+    "src/slm/backends/mlx_backend.py": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+    "src/slm/backends/torch_backend.py": "e8a5fb383e939af17419a40be8870385a3ee593bc838d8e2024d166367570777",
+    "src/slm/data/acquire.py": "33eabebe111ff07598d9a174b56ef4a2a52d71ea2d60b13ba98388774b9b43be",
+    "src/slm/data/schema.py": "001626b56751a31ac3629a90e380c594e500dae9492a236ba914b4d5e06e416f",
+    "src/slm/data/adapters.py": "3a76a1cf14616b4eff5997f0e6a18c954d362f7ff6f9caaf4fbb6847caabd425",
+    "configs/source-audit-v1.json": "e9b1b4c70dad5bc0a05614a8f66893e4db1558c75a1fe8082d627a35007513dd",
+    "src/slm/data/curation.py": "31925be5e3e42675fd33dd71caced295a0238ae0734e41d937766a350a6fd997",
+    "src/slm/data/review.py": "5e81bf63c986652568c533abc65268d3b3a046b5993793a92efbe9cef3e5b416",
+    "src/slm/data/partitions.py": "42819d08584820a8f71667dd2cc1e13d78b0d6f2aaf1b1cd20fdb51206b4bcbf",
+    "src/slm/data/holdout.py": "1c6e263b3024bde11d94f55449d868085fba88599a02d5f2278bf04d4bdb0ca4",
+    "data/official-split-audit-v1/pending-review.json": "6ddab6b948bd53452e505de5f7e45224299a80045802d740dbde8af9c52c182d",
+    "src/slm/data/staging.py": "51388d2643d8ece358c48ceca9c414f473d1bb9ebe47582ca409d0b76d9f8ee5",
+    "tests/test_staging.py": "f56f9f71a7683eb73f98d7bd521b7a0823b13bb23bfbbcefa47f186024acadc7",
+    "docs/disk-backed-corpus-staging.md": "5d584cbd428c681877106385ed3dc449fcf00610223abdfb1a96b63caa76efd3",
+    "docs/dataset-and-teacher-plan.md": "55a327f4293ab0793fba27b198218556202c06e0a520a5931c0ad971f5e88dcd",
+    "src/slm/data/tokenized.py": "c071be32762ce1855d16c8f083b9d807820873da0781f4bc53a4576983286949",
+    "src/slm/common/tokenizer.py": "748efcfeaf68924ec6ff453af9d3443be63935acfd40be4045ecd0aeb30eb485",
+    "src/slm/eval/tokenizer.py": "f4051d1e40e7dba160154e2b5163a71115f75247210d2e62ad02f6b825a06ad2",
+    "reports/milestone-eight-tokenizer-mechanics.json": "249ed0dcdc13b38f6dba14ac53b349f4ff7830292ded8d0a95e7539cf98fc2d3",
+    "reports/milestone-eight-data-gates.json": "83e20ed26ccf1f0e605286ce2c937d49ffa2015a82c6f1d90eb599634e89e41b",
+    "src/slm/common/tool_serialization.py": "5cf83dcb6d5766dbf80de91d12f8ae2018d3518671778faa15cf94972ad99e9f",
+    "tests/test_tokenizer.py": "a498715a1ff823fb963c536eb3b9af04d6f584f18d79410ea56388b0fdf98a4b",
+    "src/slm/teacher/cli.py": "4867e1bab8ce332c5a8c48dc5194d75d783643abb43aee02ee7fe9d0fe7df4b4",
+    "configs/teacher-cli-pilot.json": "a496778512170a19ce82f559bd95b66613ab40afd4e47e93b2efeba64735ac67",
+    "configs/teacher-disabled.json": "6a1a9e7e59523e27a0e7205d8d052fde31398fb07218a67ad83c8b31d9ff526f",
+    "reports/milestone-twenty-eight-summary.json": "981c4881046ef0e8b5b0a411c5634bc10d321385845b34da62a4e10a7044d133",
+    "reports/milestone-twenty-eight-host-bridge.json": "7bf9ca334c9465ecf5dd4f2811cc9823837b64d1b12e2a4a391dc315dc3f18f0",
+    "src/slm/teacher/scenarios.py": "03d2111a671e941fecd4385cc40f7f3e244fcbca32122d0fdb86fdb41bd79a0e",
+    "src/slm/teacher/bridge.py": "001c311d8b9d07c4576b486de3b66d15dd95c8cb057f3d94bfe7f694f684cc49",
+    "docs/milestone-twenty-nine.md": "d1fbbf9259e9a915e951b7969ac51b83b3d836f89e4b4fa2d3d071aa7acfa9b7",
+    "src/slm/common/supervision.py": "45cac5d8b320ea8ff7dd167f3f15c79baa5b1b4a93a94b80be3f0a84ea12ab8c",
+    "src/slm/data/review_console.py": "98095e0518fa612ec31fa515e781efa737bc2b4e72ed338e9c08db7729619ae5",
+    "src/slm/data/review_console.html": "3fe6f6a49c4cc0614623df0361834973cc83c20780d922183de04ec2fab51b37",
+    "reports/milestone-twenty-nine-summary.json": "b11f8cb19a900c62d6a5e92542fec5a781b1e04a63c72517afd9171871b7f44e",
+    "reports/milestone-six-fullsize.json": "9188bee2957d5cc7c947014b561d7bc648098b87417598ee4318a96c65e73931",
+    "src/slm/train.py": "08df555068a6943515a32f5d8b958003faacce953724232f12bd164b22b0afb5",
+    "tests/test_train.py": "ef7d81a9c4e15a3a9bd742018f1cbde1814bb91aadefda08334a984d5e6e4092",
+    "docs/reviewed-data-pilot-runner.md": "82042690bb9e2bc670302fe664eba71c14551edc3fe5b3e381592b508056a01a",
+    "reports/milestone-eleven-reader-scale.json": "566b27dc43474c1ca3441431cdb4fffbcebef394770d5b1b58fd669dfa93f3ac",
+    "docs/project-ledger.md": "ecd5d604bd0b1ab5f9de10c48d231fdc525b8c6240718da6f53c16637dccbde0",
+    "reports/milestone-seven-mlx-benchmark.json": "a93408173b5244f96c3ec709b2d807354b098c4c0b0ce957309a57cad41a2a82",
+    "docs/slm-training-plan.md": "dc4ed8cc5835a2e1aee9948c49d70c104de753e74e6a84d38f71a25fa6fce842",
+    "reports/milestone-fifteen-dense-benchmark.json": "fa88e773bb9a0317a1b9e79390f128cd1eb2da6c213715bcebd17a51d61a3a78",
+    "docs/goal-prompt.md": "5ee7aac705b47ee3eac6dabd4104ad2895267df7c038abc13c73a16783ead0d3",
+    "reports/milestone-seven-cuda-benchmark.json": "01e4422d0e3cd7835c8a6caaa1f6a49006bc343fa39cfa6703e4812d1c8ce1f9",
+    "src/slm/teacher/styles.py": "64ff4044182fc9e218fd47326f249c969de34b949e777c6c77224d74ab9157a5",
+    "reports/milestone-twenty-eight-style-audit.json": "93b7ebc833976fdf6eba1a75f3db42f1d01d5d35dda5c08b158484f627870c0b",
+    "src/slm/tools/local.py": "6d177cc4fb4b2f41dbac1fd0cac5e4b1510d78ef2fd742d708a62d2445b52592",
+    "src/slm/inference/tools.py": "cc4240fd0b9773f403cb4e798292b25a739322848da87be8feee656a73debae6",
+    "src/slm/tools/protocol.py": "b900fe2c69f98aa73675081baedd70417b44b8733d81c7d8a92efa7b459019fd",
+    "src/slm/mcp/transport.py": "292c7bf23f556edd21082d20220464ffe8a7b4ac97929b5c3a9e77368719bc2f",
+    "src/slm/mcp/registry.py": "b6379f5db7f6f1014b597785bdebe7be2211b067b429309c505b96c01a48f321",
+    "src/slm/mcp/http.py": "bd1ba09b05f3ac8748baa6c3ad16b485583708e923545a9a42b9771b80db411a",
+    "reports/milestone-seventeen-summary.json": "dd61e53a5b0e32f266904cfca3401dcf03f4574f61bb743ca3c78380d81ebfb7",
+    "data/evaluation-candidates-v1/suite-review.json": "5f2a27dcb4c951a394ae64b6908557899aba9f919f05beade37da0dd18cbd5c9",
+    "configs/stage-screen-proposal-v1.json": "3b093e157d555b60f781b508fae84125cffcb8ae902a5b65cafdf24cde20cc3e",
+    "src/slm/eval/conversation.py": "1de1218041392fe285f177f243d2668fb9d24ad242b186ba4820f41e35fedd3f",
+    "src/slm/eval/stage.py": "af4b50466d0b3c43d4c838d24b7df9612b1f0c2b761a9be23507bec5237ea999",
+    "src/slm/eval/cases.py": "de37f6b7d8b59a68d55f8c07d93609985a6380c76a248c21f146c6de58718d74",
+    "src/slm/eval/tools.py": "3369bc83b078089f94ede54830a5909223d2474ae2784509f66eb092776e4a6a",
+    "pyproject.toml": "cd72d8eea85d9f5e980deb0564cf5b8bff0b4bbee97cf717168b6b785f70596f"
+  },
+  "code_inventory_sha256": "543b39920ad2ce3ae60c3364e7d031fdd3c65625c9dd75b8f5e087369f232c75",
+  "audit_script_sha256": "f39152252c002f3fead371fab686f0f36728b3485cac1efd1e280444c5210487",
+  "limitations": [
+    "Statuses distinguish implemented reference behavior from real-data/learned capability; no aggregate readiness percentage.",
+    "Inventory of Source-bearing training manifests is local only, not a claim about unseen external storage.",
+    "Human attestations are evidence records, not cryptographic proof of judgment. No unsupported approval is inferred."
+  ]
+}
