@@ -25,3 +25,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Bounded source audit and data curation](milestone-four.md)
 
 - [Bootstrap review and training release contract](milestone-five.md)
+
+- [Full-size local bring-up and trajectory diagnostics](milestone-six.md)

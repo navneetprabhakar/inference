@@ -7,10 +7,10 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: bootstrap review packets, reviewed canonical releases and checked train-only consumption implemented; public approvals remain zero.
-- Next implementation milestone: calibrated English/privacy/quality gates and upstream split mapping; full-size numerical/memory validation can proceed independently while human review is pending.
+- Current milestone: full-size local numeric bring-up and diagnostics recorded; exact state import/inference pass, training-trajectory acceptance fails. Public approvals remain zero.
+- Next implementation milestone: investigate full-size trajectory drift and full-size NVIDIA state/inference within the authorized validation budget; continue calibrated data gates while human review is pending.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
-- Hardware/precision gates still open: full 81M model, reduced precision and sustained training.
+- Hardware/precision gates still open: accepted full-size training trajectories, NVIDIA full-size checks, reduced precision and sustained training.
 - Spending: USD 10 authorized for a short CUDA validation job in `executespecv1`; one T4 validation VM used. No paid teacher calls or main pretraining. VM/disk/firewall deletion verified; conservative allowance below USD 1, settled billing pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
@@ -26,6 +26,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Tiny cross-host and NVIDIA validation | Complete | 39 passed / 2 CUDA skips on Mac; 22 passed / 6 expected skips on T4; MLX/CUDA/MLX continuation and 100 CPU/CUDA updates; see milestone-three.md |
 | 18 October 2026 | Bounded source audit and curation foundation | Complete within audit scope | 57 passed / 2 CUDA skips; 800 input records → 901 retained sample-only examples; pinned revisions, protected held-outs and deterministic shards; see milestone-four.md |
 | 18 October 2026 | Bootstrap review/release contract | Complete within bootstrap scope | 63 passed / 2 CUDA skips; pending 40-example packet, source/content-bound review gates and checked train-only reader; no public approvals; see milestone-five.md |
+| 18 October 2026 | Full-size local bring-up / drift diagnostics | Partial; training gate failed | 74 passed / 2 CUDA skips; 80,765,440 parameters; exact state import, 2,048-context checks and 100-update learning pass locally; trajectory comparisons fail; see milestone-six.md |
 
 ## Decisions
 
@@ -45,12 +46,17 @@ Updated: 18 October 2026
 - A human review request was presented in the app for `data/reviews/bootstrap-review.json`. It has 40 pending examples, four pending source reviews and no human attestation; selecting a response option does not approve records.
 - Manual bootstrap release integrity is implemented; production-scale automated quality evidence and stratified human-audit release remain open.
 
+- Full-size research numerical policy v1 failed independent validation and remains rejected; no tolerance changes followed those failures. The epsilon-1e-6 configuration is diagnostic, not a production choice.
+- Both backends learn the 100-repeat synthetic fixture; endpoint weight drift is substantial (max per-tensor relative L2 29.94%). Exact import/export preserves 242,296,320 values, but does not establish trajectory equality.
+- Recomputable duplicate probe arrays were retired after hash/evidence capture; checkpoints and provenance remain. No new cloud or teacher spending.
+
 ## Open gates
 
 - [x] Portable optimizer, token-warmup scheduler and deterministic fixture-batch cursor.
 - [x] Same-backend continuation and injected interrupted-save recovery tests.
 - [x] Actual tiny-FP32 MLX/CUDA training-state round trip.
-- [ ] Full-size architecture verification.
+- [x] Full-size local instantiation, fixed-checkpoint context, exact state imports and synthetic learning checks.
+- [ ] Accepted full-size training trajectory portability and actual NVIDIA full-size validation.
 - [ ] Data audit, production tokenizer, and teacher integration.
 - [x] Authorized GCP CUDA validation, limited to USD 10.
 - [ ] Main pretraining and teacher-generation budgets.

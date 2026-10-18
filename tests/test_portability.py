@@ -104,3 +104,46 @@ def test_cuda_100_updates_and_bidirectional_resume(tmp_path):
     if destination := os.environ.get('SLM_CUDA_STRESS_REPORT'):
         Path(destination).write_text(json.dumps({'passed': True, 'updates': 100,
             'destination': environment('torch', 'cuda'), 'checks': checks}, indent=2)+'\n')
+
+
+def test_custom_architecture_bundle_has_real_token_range(tmp_path):
+    from slm.common.config import Config
+    from slm.eval.portability import get_batches
+    config=Config(vocab_size=129,hidden_size=48,intermediate_size=96,num_layers=3,max_seq_len=64)
+    result=create(tmp_path/'bundle','torch',config=config)
+    assert result['measurement']['parameters']==config.parameter_count
+    batches=get_batches(tmp_path/'bundle')
+    assert max(x.max() for x,_,_ in batches.items)>63
+    report=verify(tmp_path/'bundle',tmp_path/'out','torch')
+    assert report['passed'] and report['parameters']==config.parameter_count
+    assert report['memory']['process_peak_rss_bytes']>0
+
+
+def test_explicit_recipe_and_seeds_are_preserved(tmp_path):
+    from slm.common.training import Recipe
+    create(tmp_path/'a','torch',recipe=Recipe(eps=1e-6),seed=137,initialization_seed=73)
+    create(tmp_path/'b','torch')
+    a=json.loads((tmp_path/'a/fixture.json').read_text())
+    assert (a['seed'],a['initialization_seed'])==(137,73)
+    state=json.loads((tmp_path/'a/initial/state.json').read_text())
+    assert state['recipe']['eps']==1e-6
+    assert verify(tmp_path/'a',tmp_path/'out','torch')['passed']
+    assert (tmp_path/'a/batches.npz').read_bytes()!=(tmp_path/'b/batches.npz').read_bytes()
+
+
+def test_full_depth_budget_is_fixed_restricted_and_not_blanket_relaxation():
+    from slm.common.config import Config
+    from slm.eval.portability import full_depth_budget
+    config=Config(vocab_size=16384,hidden_size=512,intermediate_size=1536,num_layers=24,num_heads=8,num_kv_heads=2)
+    assert full_depth_budget(config)==pytest.approx(24*np.sqrt(512)*2**-24)
+    with pytest.raises(ValueError):full_depth_budget(Config())
+    reference=np.ones(1000,dtype=np.float32);reference[0]=0
+    actual=reference.copy();actual[0]=3e-6
+    with pytest.raises(AssertionError):compare({'gradient:x':actual},{'gradient:x':reference})
+    result=compare({'gradient:x':actual},{'gradient:x':reference},'full_depth_fp32_v1',config)
+    assert result['gradient:x']['prototype_pointwise_violations']==1
+    # Small coherent distortion passes the prototype absolute floor, fails L2.
+    reference=np.full(1000,1e-4,dtype=np.float32);actual=reference+5e-7
+    compare({'gradient:x':actual},{'gradient:x':reference})
+    with pytest.raises(AssertionError):compare({'gradient:x':actual},{'gradient:x':reference},'full_depth_fp32_v1',config)
+    with pytest.raises(AssertionError):compare({'weight:x':np.array([3e-5])},{'weight:x':np.array([0.])},'full_depth_fp32_v1',config)

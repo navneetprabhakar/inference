@@ -59,4 +59,6 @@ A bounded four-source audit pipeline now produces sample-only deterministic JSON
 
 A manual bootstrap [review/release contract](docs/milestone-five.md) and checked train-only reader are implemented; public-source approvals remain pending.
 
-Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and sustained cloud training.
+The full 80.8M candidate now passes local fixed-checkpoint context/state-import and synthetic learning checks. Full-size training-trajectory comparisons fail the declared numerical gates; see [bring-up and drift evidence](docs/milestone-six.md).
+
+Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
