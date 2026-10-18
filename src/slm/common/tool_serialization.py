@@ -3,11 +3,13 @@ from slm.common.tokenizer import STRUCTURAL,OFFSET
 from slm.tools.protocol import validate_messages,canonical,parse,decision
 
 
-def serialize(tokenizer,messages,objective='assistant',max_length=None,complete=True):
+def serialize(tokenizer,messages,objective='assistant',max_length=None,complete=True,*,supervision='all-assistant-v1'):
     if objective not in ('assistant','all'):raise ValueError('Unknown tool loss objective')
+    from slm.common.supervision import boundary
+    start=boundary(messages,supervision,objective)
     bodies=validate_messages(messages,complete=complete);ids=[STRUCTURAL['bos']];mask=[0]
-    for m,body in zip(messages,bodies):
-        role=m['role'];supervised=int(role=='assistant');payload=[]
+    for index,(m,body) in enumerate(zip(messages,bodies)):
+        role=m['role'];supervised=int(role=='assistant' and index>start);payload=[]
         if role=='assistant' and body['kind']=='call':payload=[STRUCTURAL['tool_call_start'],*tokenizer.encode(canonical(body)),STRUCTURAL['tool_call_end']]
         else:payload=tokenizer.encode(canonical(body) if body is not None else m['content'])
         ids.extend([STRUCTURAL[role],*payload,STRUCTURAL['message_end']]);mask.extend([0,*([supervised]*len(payload)),supervised])
@@ -39,7 +41,7 @@ def parse_generation(tokenizer,result):
     return value
 
 
-def validate_batch(tokenizer,values):
+def validate_batch(tokenizer,values,*,supervision='all-assistant-v1'):
     import numpy as np
     x,y,mask=(np.asarray(a)[0] for a in values)
     if not np.array_equal(x[1:],y[:-1]):raise ValueError('Tool next-token shift differs')
@@ -58,6 +60,6 @@ def validate_batch(tokenizer,values):
         else:boundary=end
         if boundary>=len(ids) or ids[boundary]!=3:raise ValueError('Invalid tool message boundary')
         messages.append({'role':role,'content':tokenizer.decode(ids[start:end])});position=boundary+1
-    expected=serialize(tokenizer,messages)
+    expected=serialize(tokenizer,messages,supervision=supervision)
     for actual,wanted in zip((x,y,mask),expected):
         if not np.array_equal(actual,wanted):raise ValueError('Tool frame, canonical content or supervision differs')

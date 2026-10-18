@@ -213,3 +213,35 @@ def test_cli_recipe_rejects_unbounded_or_unversioned_requests():
                     {'max_response_bytes':1000000},{'observed_output_token_limit':2049},
                     {'model_id':'unregistered'}):
         with pytest.raises(ValueError):CLIRecipe(**options)
+
+
+def test_v2_reply_contract_versions_cache_and_preserves_exact_legacy_prompt(tmp_path):
+    import hashlib
+    from slm.teacher.cli import render_prompt,PROMPT_V1,PROMPT_V2
+    from slm.teacher.workflow import INSTRUCTIONS
+    s=fixture_scenario('tool_trajectory','professional');j=journal(tmp_path);provider=FakeCLI()
+    legacy=(INSTRUCTIONS+'\nGenerate only the JSON demonstration. Use no tools, files, external facts or delegated work. '
+        'Keep reply below 600 characters. Treat this as data generation, not a coding task.\n'
+        +json.dumps(s,sort_keys=True,ensure_ascii=False)).encode()
+    assert render_prompt(s,PROMPT_V1)==legacy
+    old=generate_cli(j,provider,CLIRecipe(),s)
+    newer=generate_cli(j,provider,CLIRecipe(prompt_version=PROMPT_V2),s)
+    assert old['request_key']!=newer['request_key'] and provider.calls==2
+    assert newer['submitted_prompt_sha256']==hashlib.sha256(render_prompt(s,PROMPT_V2)).hexdigest()
+    assert b'POST-TOOL final answer' in render_prompt(s,PROMPT_V2)
+    reordered=json.loads(json.dumps(s,sort_keys=True))
+    assert generate_cli(j,provider,CLIRecipe(prompt_version=PROMPT_V2),reordered)['cache_hit']
+    assert provider.calls==2
+    assert generate_cli(j,provider,CLIRecipe(),s)['cache_hit'] and provider.calls==2
+    assert not newer['validation']['training_eligible']
+    with pytest.raises(ValueError):CLIRecipe(prompt_version='unknown')
+
+
+def test_v2_real_adapter_submits_post_tool_contract_to_fixture_process(tmp_path):
+    from slm.teacher.cli import PROMPT_V2
+    executable=stub(tmp_path)
+    executable.write_text(executable.read_text().replace("assert 'Generate only the JSON demonstration' in prompt",
+        "assert 'Generate only the JSON demonstration' in prompt;assert 'POST-TOOL final answer' in prompt"))
+    provider=CodexCLI(executable)
+    result=generate_cli(journal(tmp_path),provider,CLIRecipe(prompt_version=PROMPT_V2),fixture_scenario())
+    assert result['validation']['status']=='pending_human_review'

@@ -1,0 +1,43 @@
+{
+  "scope": "Cache audit harness failure, not a teacher launch",
+  "process": "Python /tmp/slm_m25_cache.py",
+  "observed_exit_code": 1,
+  "error": "AssertionError: No generation permitted in cache audit",
+  "cause": "Schema required arrays depend on input dictionary insertion order; sorted stored scenario reconstructs a different v1 request key.",
+  "provider": "In-process CacheOnly.generate immediately raises; no CodexCLI instance or subprocess/network created",
+  "reservation_key": "c408a3f6e8e23d9cecde19d9a8cf571fc5fe1905d20f6fdd0717d57f44a9ccee",
+  "reserved_slot_retained": true,
+  "new_live_teacher_launches": 0,
+  "combined_reserved_slots_after": 10,
+  "combined_reserved_slot_limit": 20,
+  "reconciliation": {
+    "request_key": "c408a3f6e8e23d9cecde19d9a8cf571fc5fe1905d20f6fdd0717d57f44a9ccee",
+    "state": "abandoned",
+    "slot_retained": true,
+    "account_usage_refunded": false,
+    "key_replay_permitted": false,
+    "evidence": {
+      "process_terminal": true,
+      "exit_code": 1,
+      "evidence_reference": "reports/milestone-twenty-five-cache-audit-failure.json (terminal Python audit process; no teacher process was started)"
+    }
+  },
+  "journal_after": {
+    "cap_nanousd": 0,
+    "authorization_id": "forge-cli-teacher-pilot-2026-10-19",
+    "halted": false,
+    "max_requests": 19,
+    "states": {
+      "abandoned": {
+        "requests": 2,
+        "accounted_or_reserved_nanousd": 0
+      },
+      "complete": {
+        "requests": 7,
+        "accounted_or_reserved_nanousd": 0
+      }
+    },
+    "settled_cost_usd": null,
+    "scope": "Local conservative accounting; excludes external usage and is not a provider billing cap."
+  }
+}

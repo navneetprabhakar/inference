@@ -88,7 +88,8 @@ def test_rehashed_tool_shard_still_requires_typed_frames_and_role_masks(tmp_path
 
 
 @pytest.mark.parametrize('backend,device',[('torch','cpu'),('mlx','cpu'),('torch','cuda')])
-def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,backend,device):
+@pytest.mark.parametrize('continuation',[False,True])
+def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,backend,device,continuation):
     if backend=='mlx':pytest.importorskip('mlx.core')
     import torch
     if device=='cuda' and not torch.cuda.is_available():pytest.skip('NVIDIA CUDA device unavailable')
@@ -96,7 +97,8 @@ def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,
     from slm.common.training import Batches,Recipe,Trainer
     from slm.backends import torch_backend as tb
     from test_resume import compare
-    bpe=tokenizer();x,y,mask=serialize(bpe,transcript());arrays=tuple(np.array([v]) for v in (x,y,mask))
+    from test_continuation import conversation
+    bpe=tokenizer();x,y,mask=serialize(bpe,conversation(True) if continuation else transcript(),supervision='last-user-turn-v1' if continuation else 'all-assistant-v1');arrays=tuple(np.array([v]) for v in (x,y,mask))
     data=Batches([arrays]*4,bpe.vocab_size);c=Config(vocab_size=bpe.vocab_size,max_seq_len=1024)
     recipe=Recipe(embedding_implementation='dense-onehot-v1',accumulation_steps=2)
     weights=initialize(c);p=tb.load(c,weights);logits=tb.forward(p,c,torch.tensor(arrays[0]))[0]

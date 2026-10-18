@@ -17,6 +17,14 @@ from slm.teacher.scenarios import output_schema,validate
 from slm.teacher.workflow import INSTRUCTIONS,check_scenario,check_schema,evaluate_response,parse_json
 
 SUPPORTED_VERSION='codex-cli 0.144.4'
+PROMPT_V1='scenario-cli-demonstration-v1'
+PROMPT_V2='scenario-cli-demonstration-v2'
+REPLY_CONTRACT=('The reply is the final assistant continuation after the supplied context. '
+    'When action.kind is call, action and tool_result describe the completed mock tool exchange: '
+    'reply is the POST-TOOL final answer grounded in tool_result, never an announcement of a future call. '
+    'When clarification is required, ask for the missing information without inventing it. '
+    'Preserve corrected facts; do not repeat an earlier assistant mistake as truth. '
+    'History is context only. Produce no rewritten history or tool execution. ')
 
 
 class CLIExecutionError(RuntimeError):
@@ -61,7 +69,7 @@ class CLIRecipe:
 
     def __post_init__(self):
         if (self.model_id not in ('gpt-6-luna','gpt-5.6-luna') or not isinstance(self.prompt_version,str)
-            or not self.prompt_version.strip()):
+            or self.prompt_version not in (PROMPT_V1,PROMPT_V2)):
             raise ValueError('Registered Luna teacher model and prompt version required')
         for name,low,high in (('timeout_seconds',1,180),('max_response_bytes',256,65536),('observed_output_token_limit',1,2048)):
             if type(getattr(self,name)) is not int or not low<=getattr(self,name)<=high:
@@ -76,8 +84,9 @@ def clean_environment():
     return result
 
 
-def render_prompt(scenario):
-    return (INSTRUCTIONS+'\nGenerate only the JSON demonstration. Use no tools, files, external facts or delegated work. '
+def render_prompt(scenario,prompt_version=PROMPT_V1):
+    if prompt_version not in (PROMPT_V1,PROMPT_V2):raise ValueError('Unknown CLI prompt version')
+    return (INSTRUCTIONS+('\n'+REPLY_CONTRACT if prompt_version==PROMPT_V2 else '')+'\nGenerate only the JSON demonstration. Use no tools, files, external facts or delegated work. '
         'Keep reply below 600 characters. Treat this as data generation, not a coding task.\n'
         +json.dumps(scenario,sort_keys=True,ensure_ascii=False)).encode()
 
@@ -105,7 +114,7 @@ class CodexCLI:
                 # Empty TOML table differs from JSON object syntax only for nonempty dicts; none supplied here.
                 argv+=['-c',key+'='+json.dumps(value)]
             argv+=['-']
-            prompt=render_prompt(request['scenario'])
+            prompt=render_prompt(request['scenario'],recipe.prompt_version)
             (root/'prompt.txt').write_bytes(prompt)
             with (root/'events').open('w+b') as events,(root/'stderr').open('w+b') as errors,(root/'prompt.txt').open('rb') as incoming:
                 process=subprocess.Popen(argv,stdin=incoming,stdout=events,stderr=errors,
@@ -189,6 +198,9 @@ def generate_cli(journal,provider,recipe,scenario,validator=validate,validator_v
     summary=journal.summary()
     if summary['cap_nanousd']!=0 or summary['max_requests']>20:
         raise ValueError('CLI journal tracks request count only; API spending is disabled')
+    # V1 retains historical insertion-order schema arrays for exact cache compatibility.
+    # V2 canonicalizes input ordering before deriving arrays, including nested arguments.
+    if recipe.prompt_version==PROMPT_V2:scenario=json.loads(json.dumps(scenario,sort_keys=True))
     schema=output_schema(scenario);check_schema(schema)
     request={'scenario':scenario,'schema':schema,'recipe':asdict(recipe),'instructions':INSTRUCTIONS,
         'provider':provider.identity,'cli_version':provider.version,'controls':OVERRIDES}
@@ -213,7 +225,7 @@ def generate_cli(journal,provider,recipe,scenario,validator=validate,validator_v
     return {'request_key':key,'cache_hit':cache_hit,'provider':provider.identity,'cli_version':provider.version,
         'requested_model':recipe.model_id,'resolved_model':raw['resolved_model'],'recipe':asdict(recipe),
         'request':request,'scenario_sha256':digest(scenario),'family_id':scenario['family_id'],'split':scenario['split'],
-        'submitted_prompt_sha256':hashlib.sha256(render_prompt(scenario)).hexdigest(),
+        'submitted_prompt_sha256':hashlib.sha256(render_prompt(scenario,recipe.prompt_version)).hexdigest(),
         'prompt_provenance':'Reconstructed from the versioned submitted-prompt contract; CLI system context is not captured',
         'model_system_context_captured':False,
         'supervision_scope':'Generated continuation only; scenario history is input, never supervised',

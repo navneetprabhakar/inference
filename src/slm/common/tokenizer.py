@@ -65,16 +65,18 @@ class BPE:
             raise ValueError('Content decoding refuses structural or out-of-range IDs')
         return self._core.decode([i-OFFSET for i in ids],skip_special_tokens=False)
 
-    def serialize(self,messages,objective='assistant',max_length=None):
+    def serialize(self,messages,objective='assistant',max_length=None,*,supervision='all-assistant-v1'):
         if objective not in ('assistant','all'):raise ValueError('Unknown loss objective')
         if not messages:raise ValueError('Nonempty conversation required')
+        from slm.common.supervision import boundary
+        start=boundary(messages,supervision,objective)
         ids,mask=[STRUCTURAL['bos']],[0]
-        for message in messages:
+        for index,message in enumerate(messages):
             if not isinstance(message,dict) or set(message)!={'role','content'}:
                 raise ValueError('Only role/content messages supported; structured tool calls need a dedicated serializer')
             role=message.get('role');content=message.get('content')
             if role not in ROLES or not isinstance(content,str):raise ValueError('Invalid role/content')
-            payload=self.encode(content);supervised=int(role=='assistant')
+            payload=self.encode(content);supervised=int(role=='assistant' and index>start)
             ids.extend([STRUCTURAL[role],*payload,STRUCTURAL['message_end']])
             mask.extend([0,*([supervised]*len(payload)),supervised])
         ids.append(STRUCTURAL['eos']);mask.append(int(messages[-1]['role']=='assistant'))

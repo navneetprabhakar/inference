@@ -7,7 +7,7 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: broader SFW CLI teacher pilot complete within candidate-generation scope. Six new generations plus six cache hits; 51 teacher tests pass. Seven total real demonstrations remain unapproved. Professional/caveman tool replies expose pre-tool/post-tool ambiguity despite matching metadata. Latest full suite remains 468 passed / 12 CUDA skips; no runtime/model code changed.
+- Current milestone: explicit CLI v2 post-tool replies and version-3 continuation-only SFT shards. Local 477 passed / 13 CUDA skips, including local MLX/PyTorch masked loss/resume. Seven real v1 cache candidates remain unapproved. Reserved pilot slots 10/20 after one retained cache-audit reservation; actual historical CLI launches remain nine. No new teacher/cloud generation.
 - Next implementation: versioned explicit teacher reply semantics and a reviewed continuation-only supervision bridge, including host-tool normalization. Keep old cache identities intact and source/rights/held-out gates enforced. Actual source export, portability-policy choice and teacher/suite review remain pending; no approval is inferred. CLI-only teacher; no API fallback or new cloud run is justified.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
@@ -162,6 +162,14 @@ Updated: 19 October 2026
 - Professional tool text announces a calculation; caveman text gives the total. Both pass metadata checks. This reveals an underspecified reply role and prevents treating the pair as approved equivalent final answers. Seven total real teacher candidates remain unapproved; no style/English/general-quality acceptance or student training occurred.
 - Evidence: milestone-twenty-four.md, source/artifact-hashed CLI pilot report and focused XML. Private six-case review/context/output worksheet at `data/teacher/broader-pilot-v1/REVIEW.md` and `review.json`; file-panel opening is queued. Candidate worksheet is not a release authorization format. Requested model is known; resolved model identity is not supplied by this CLI contract.
 - Next independent integration work: preserve old cache contracts, define final/post-result teacher reply semantics, implement continuation-only masks and normalize mock actions into executable registered host transcripts. Source/policy/teacher/suite inputs remain pending; public approvals zero, original numerical failures unchanged. CUDA allowances remain USD 7/10, settled charges unknown.
+
+## Continuation supervision — 19 October 2026
+
+- Versioned CLI prompt v2 explicitly requests final post-tool replies; v1 bytes/request construction remain unchanged. V2 normalizes JSON object order before schema construction. Active config selects v2 on the same journal/limit, with no API fallback.
+- New plain/tool continuation SFT shards v3 derive supervision from the final user boundary. Historical assistant replies are inputs only; new assistant decisions/end/EOS are targets. Foundation mixing is refused; legacy v1/v2 readers remain supported. Verified synthetic releases, semantic rehashed-mask refusal and local MLX/PyTorch loss/resume tests pass.
+- Final local suite **477 passed / 13 CUDA skips**. Initial four fixture-test failures are explained in milestone-twenty-five.md; no partition or numerical policy was weakened. No fresh NVIDIA run or learned capability is claimed.
+- Seven real historical cache records rechecked with no provider/network invocation. A first cache-only audit hit legacy schema array ordering and immediately raised in the in-process stub before any CLI launch. The failed terminal audit was explicitly reconciled; its reserved slot is retained/abandoned and never replayed. Journals are not reset: combined reserved slots **10/20**, historical real CLI launches nine, seven successful candidates, active halt false. Six existing submitted-prompt hashes match; oldest record lacked that field.
+- Reports: milestone-twenty-five-tests.xml, milestone-twenty-five-cache.json and milestone-twenty-five-cache-audit-failure.json. No new live teacher/API call, cloud job, source approval or real-data training. CUDA allowances stay USD 7/10, settled cost unknown. Next: reviewed teacher-to-host transcript normalization and pending source/policy/style/suite decisions. Goal remains incomplete.
 
 ## Open gates
 
