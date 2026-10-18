@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import shutil
 import tempfile
+import numpy as np
 from safetensors.numpy import load_file, save_file
 from slm.common.config import Config, validate_weights
 
@@ -17,7 +18,8 @@ def save(path, config, weights):
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = Path(tempfile.mkdtemp(prefix='.checkpoint-', dir=path.parent))
     try:
-        save_file(weights, str(temp/'model.safetensors'))
+        save_file({k: np.array(v, order='C', copy=True) for k, v in weights.items()},
+                  str(temp/'model.safetensors'))
         metadata = {
             'schema_version': 1, 'architecture': config.to_dict(),
             'conventions': {'linear_layout': 'out_in', 'rope_pairing': 'adjacent',

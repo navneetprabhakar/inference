@@ -7,11 +7,11 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: local training checkpoint/resume implementation validated.
-- Next implementation milestone: portable cross-host verification fixtures and actual NVIDIA validation; data-pipeline work can proceed independently.
-- Hardware validated: Apple M4, MLX Apple GPU, PyTorch CPU.
-- Hardware not validated: NVIDIA CUDA.
-- Spending: no paid teacher calls or cloud training jobs executed for this project.
+- Current milestone: tiny FP32 cross-host verification complete; proceed with the data pipeline.
+- Next implementation milestone: audited data pipeline and production tokenizer, followed by full-size architecture parity.
+- Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
+- Hardware/precision gates still open: full 81M model, reduced precision and sustained training.
+- Spending: USD 10 authorized for a short CUDA validation job in `executespecv1`; one T4 validation VM used. No paid teacher calls or main pretraining. VM/disk/firewall deletion verified; conservative allowance below USD 1, settled billing pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
 
@@ -22,8 +22,8 @@ Updated: 18 October 2026
 | 18 October 2026 | Architecture and data planning | Complete | Training plan, dataset plan, configurable conversation teacher requirement |
 | 18 October 2026 | Tiny dual-backend prototype | Complete locally | 27 tests passed, 1 CUDA test skipped; 100-update numerical parity; see milestone-one.md |
 | 18 October 2026 | Execution goal and repository setup | Complete | Private repository created and visibility verified; goal prompt, ledger, sole creator credit, and initial baseline prepared for milestone push |
-
 | 18 October 2026 | Local training-state checkpoint and resume | Complete locally | 33 passed, 1 CUDA skipped; exact same-backend continuation; MLX/CPU cross-backend resume; see milestone-two.md |
+| 18 October 2026 | Tiny cross-host and NVIDIA validation | Complete | 39 passed / 2 CUDA skips on Mac; 22 passed / 6 expected skips on T4; MLX/CUDA/MLX continuation and 100 CPU/CUDA updates; see milestone-three.md |
 
 ## Decisions
 
@@ -31,17 +31,21 @@ Updated: 18 October 2026
 - Every completed minor or major milestone receives a ledger update and cohesive commit/push to the private repository.
 - Preserve meaningful milestone boundaries; do not push every intermediate edit.
 - Teacher is required and configurable, initially GPT-6 Luna or GPT-5.6 Luna; offline data development only.
-- Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. NVIDIA migration remains unverified.
-- No claim of CUDA compatibility until validated on NVIDIA hardware.
+- Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. Tiny NVIDIA migration is validated; full-size/reduced-precision migration remains unverified.
+- CUDA evidence is limited to the tiny FP32 implementation on the tested T4; do not generalize it to the full model or optimized kernels.
+
+- GCP validation resources are deleted; Network Management was restored to disabled after deleting its temporary connectivity test. See the cleanup report.
+- Column-major serialization failure was corrected by explicit row-major export; scalar shapes and logical values are covered by regression tests.
 
 ## Open gates
 
 - [x] Portable optimizer, token-warmup scheduler and deterministic fixture-batch cursor.
 - [x] Same-backend continuation and injected interrupted-save recovery tests.
-- [ ] Actual MLX/CUDA training-state round trip.
+- [x] Actual tiny-FP32 MLX/CUDA training-state round trip.
 - [ ] Full-size architecture verification.
 - [ ] Data audit, production tokenizer, and teacher integration.
-- [ ] Training budget and authorized GCP execution.
+- [x] Authorized GCP CUDA validation, limited to USD 10.
+- [ ] Main pretraining and teacher-generation budgets.
 
 ## Ledger practice
 

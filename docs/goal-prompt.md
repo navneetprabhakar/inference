@@ -74,10 +74,10 @@ The tiny prototype exists:
 
 - Independent FP32 reference implementations with 20,640 parameters.
 - Canonical initialization, model-only Safetensors checkpoints, reference AdamW, and fixture conversation serialization.
-- Recorded local result: 27 tests passed and one CUDA test skipped.
+- Initial local result: 27 tests passed and one CUDA test skipped. Subsequent validation: 39 passed / 2 CUDA skipped locally; 22 passed / 6 MLX-specific checks skipped on NVIDIA T4.
 - MLX Apple GPU/PyTorch CPU parity through 100 training updates.
 
-Verify the current repository rather than assuming these historical results remain current. CUDA training portability, training-state resume, full-size validation, production data/tokenizer, teacher integration, and conversational capability remain open.
+Verify the current repository rather than assuming these historical results remain current. Tiny FP32 training-state resume and an MLX → T4 CUDA → MLX round trip are validated, together with 100 CPU/CUDA updates. Full-size/reduced-precision validation, production data/tokenizer, teacher integration and conversational capability remain open.
 
 ## Execution sequence
 
@@ -162,6 +162,13 @@ Use held-out scenarios, executable checks, and human review; teacher judging is 
 - Git initialization, private repository creation, and milestone commits/pushes are explicitly authorized. Public releases, force pushes, deployments, and unrelated repositories are not.
 - When blocked, identify the exact dependency and continue useful independent work.
 
+## Authorized CUDA validation budget
+
+- Use GCP project `executespecv1` for a short NVIDIA parity/checkpoint validation job.
+- Maximum authorized total: **USD 10** for this validation work, including VM, GPU, disk and transfer.
+- Use finite runtime, automatic deletion, minimal credentials, and verify cleanup. Track estimates separately from settled charges.
+- This authorization does not cover main pretraining or paid teacher generation. Request required input through the app and continue independent work while waiting.
+
 ## Next action
 
-First verify private-repository setup and ledger status. Then implement portable optimizer-state checkpoints and deterministic training resume. Complete local validation before preparing the actual NVIDIA validation run.
+Verify the ledger and most recent milestone evidence. Tiny FP32 optimizer resume and NVIDIA portability are complete; proceed with the audited data pipeline and production tokenizer, then full-size parity and laptop pilots.

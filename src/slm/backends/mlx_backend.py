@@ -12,7 +12,8 @@ def load(config, weights):
 
 def export(params):
     mx.eval(params)
-    return {k: np.array(v) for k, v in params.items()}
+    # Canonical row-major buffers also preserve scalar shapes for serialization.
+    return {k: np.array(v, order='C', copy=True) for k, v in params.items()}
 
 
 def rope(x, positions, theta):

@@ -286,4 +286,4 @@ Batch related code, documentation, and tests into the fewest practical commits/r
 - Before main pretraining: compute ceiling, selected mixture, measured repeated-example exposure, and target hardware.
 - Before release: agreed latency/content requirements and whether the student’s measured competence is sufficient at this size.
 
-Tiny FP32 model and optimizer parity have passed on MLX GPU and PyTorch CPU. Training-state resume, actual CUDA portability, full-size validation, and conversational capability gates remain open; see [milestone results](milestone-one.md).
+Tiny FP32 model and optimizer parity have passed on MLX GPU and PyTorch CPU. Training-state resume and the tiny MLX/CUDA round trip are now validated; see [resume results](milestone-two.md) and [CUDA results](milestone-three.md). Full-size validation and conversational capability gates remain open.

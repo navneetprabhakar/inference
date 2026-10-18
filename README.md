@@ -53,4 +53,6 @@ See [milestone report](docs/milestone-one.md), [training plan](docs/slm-training
 
 Training-state checkpoints and a deterministic fixture-batch cursor/warmup scheduler are now implemented; see [resume results](docs/milestone-two.md).
 
-Not implemented: production sharded-data training, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and cloud jobs. An actual NVIDIA run is still required before claiming CUDA portability.
+Tiny FP32 MLX → NVIDIA T4 CUDA → MLX training-state portability is validated; see [cross-host results](docs/milestone-three.md). CPU/CUDA also passed 100 updates and bidirectional checkpoint resume. This does not establish full-size or mixed-precision portability.
+
+Not implemented: production sharded-data training, production tokenizer, datasets, teacher integration, mixed precision, fused kernels, full 81M validation, MCP, and sustained cloud training.
