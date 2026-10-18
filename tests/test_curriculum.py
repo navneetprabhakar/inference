@@ -18,12 +18,18 @@ from test_resume import compare
 
 
 def fixture(tmp_path):
-    stages=[];bindings={};tok=None
+    stages=[];bindings={};tok=None;used_accumulation=set()
     for name,objective,k,rate in [('foundation','foundation',3,.001),('conversation','sft',2,.0002)]:
         root=tmp_path/name;root.mkdir();cs,tok=components(root,objective)
         opts={} if objective=='foundation' else {'objective':'sft','budget':200,'minimum':100,'group_cap':20}
         r=build(cs,tok,root/'mixture',**opts)
-        schedule={'lr':rate,'warmup_tokens':64,'cooldown_tokens':64,'final_lr_fraction':.1,'accumulation_steps':k}
+        # Artifact hashes intentionally change order. Guarantee short tails instead of
+        # relying on one incidental schedule's number of batches.
+        k=next(v for v in range(k,17) if r['batches']%v and v not in used_accumulation)
+        used_accumulation.add(k)
+        with MixtureBatches(root/'mixture',paths(cs),tok) as data:
+            warmup=max(64,data.counts(k)[0]+1) if objective=='sft' else 64
+        schedule={'lr':rate,'warmup_tokens':warmup,'cooldown_tokens':64,'final_lr_fraction':.1,'accumulation_steps':k}
         stages.append({'id':name,'path':root/'mixture','components':paths(cs),'dataset_hash':r['dataset_hash'],'schedule':schedule})
         bindings[name]={'path':root/'mixture','components':paths(cs)}
     base=Recipe(embedding_implementation='dense-onehot-v1')
@@ -56,9 +62,12 @@ def test_exact_stage_boundary_resume_preserves_global_adam_and_short_tail(tmp_pa
             assert out['lr']==data.rate(start,a.cursor)
         assert a.step==r['optimizer_updates'] and a.tokens==r['processed_positions']
         assert data.progress(a.cursor)['next_stage'] is None
-        assert history[10]['stage_completed'] and history[10]['microbatches']==2
-        assert history[11]['stage']=='conversation' and history[11]['stage_updates']==1
-        assert history[-1]['microbatches']==1 and history[-1]['stage_completed']
+        boundary=next(i for i,row in enumerate(history) if row['stage']=='foundation' and row['stage_completed'])
+        first_k=data.inventory.recipes[0].accumulation_steps;second_k=data.inventory.recipes[1].accumulation_steps
+        assert first_k!=second_k
+        assert history[boundary]['microbatches']==len(data.inventory.data[0])%first_k<first_k
+        assert history[boundary+1]['stage']=='conversation' and history[boundary+1]['stage_updates']==1
+        assert history[-1]['microbatches']==len(data.inventory.data[1])%second_k<second_k and history[-1]['stage_completed']
         assert history[-1]['lr']==pytest.approx(.00002)
         with pytest.raises(StopIteration):a.update()
         with pytest.raises(ValueError,match='CurriculumTrainer'):Trainer(c,initialize(c),data)
@@ -290,13 +299,13 @@ def test_stage_local_warmup_and_cooldown_have_independent_analytic_clock(tmp_pat
             recipe,end,i,local=data.context(cursor);d=data.inventory.data[i]
             begin=0 if i==0 else data.inventory.ends[i-1]
             after=d.counts(end-begin)[0];total=d.counts(len(d))[0]
-            spec=stages[i]['schedule'];expected=spec['lr']*min(1,after/64)
+            spec=stages[i]['schedule'];expected=spec['lr']*min(1,after/spec['warmup_tokens'])
             if after>total-64:expected*=.1+.9*(total-after)/64
             assert data.rate(cursor,end)==pytest.approx(expected,abs=1e-18)
             if i==1 and not local:
-                assert after<64 and expected<spec['lr']
+                assert after<spec['warmup_tokens'] and expected<spec['lr']
                 # The global count already exceeds warmup; it must not be used.
-                assert data.counts(end)[0]>64
+                assert data.counts(end)[0]>spec['warmup_tokens']
             if end==data.inventory.ends[i]:assert expected==pytest.approx(spec['lr']*.1)
             seen.append((i,end));cursor=end
         assert {i for i,_ in seen}=={0,1}

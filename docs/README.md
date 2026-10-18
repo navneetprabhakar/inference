@@ -31,3 +31,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Finite mixture and embedding diagnostics](milestone-fifteen.md)
 - [Curriculum transitions and version-3 resume](milestone-sixteen.md)
 - [Raw conversation evaluation and stage screens](milestone-seventeen.md)
+
+- [Local tools and typed SFT framing](milestone-eighteen.md)

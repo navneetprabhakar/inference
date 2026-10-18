@@ -50,6 +50,10 @@ class GreedyModel:
     def generate(self,messages,max_new_tokens=64):
         if type(max_new_tokens) is not int or not 1<=max_new_tokens<=512:raise ValueError('Bounded generation budget required')
         ids=prompt_ids(self.tokenizer,messages)
+        return self._generate_ids(ids,max_new_tokens)
+
+    def _generate_ids(self,ids,max_new_tokens,allowed_controls=()):
+        if type(max_new_tokens) is not int or not 1<=max_new_tokens<=512:raise ValueError('Bounded generation budget required')
         if len(ids)+max_new_tokens>self.config.max_seq_len:raise ValueError('Prompt plus generation budget exceeds context; no truncation')
         started=time.perf_counter();first=None;raw=[];content=[];reason='length';cache=None
         current=self.array([ids])
@@ -61,8 +65,9 @@ class GreedyModel:
                 if first is None:first=time.perf_counter()-started
                 if token in (STRUCTURAL['message_end'],STRUCTURAL['eos']):
                     reason='message_end' if token==STRUCTURAL['message_end'] else 'eos';break
-                if token<OFFSET:reason='invalid_structural';break
-                content.append(token);current=self.array([[token]])
+                if token<OFFSET and token not in allowed_controls:reason='invalid_structural';break
+                if token>=OFFSET:content.append(token)
+                current=self.array([[token]])
         text=self.tokenizer.decode(content);elapsed=time.perf_counter()-started
         return {'text':text,'token_ids':raw,'stop_reason':reason,'prompt_tokens':len(ids),'generated_tokens':len(raw),
             'content_tokens':len(content),'ttft_seconds':first,'seconds':elapsed,'max_new_tokens':max_new_tokens}

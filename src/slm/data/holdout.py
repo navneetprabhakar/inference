@@ -4,7 +4,7 @@ from slm.data.schema import digest
 
 def check_training_context(context,identifiers=()):
     from slm.eval.cases import heldout_prompts
-    if any(isinstance(v,str) and (v.startswith('eval-v1/') or ':eval-v1/' in v) for v in identifiers):
+    if any(isinstance(v,str) and any(v.startswith(prefix) or ':'+prefix in v for prefix in ('eval-v1/','eval-tools-v1/')) for v in identifiers):
         raise ValueError('Reserved evaluation family cannot enter training')
     # Match complete user/tool-ended prefixes, including a demonstration's context.
     for i,message in enumerate(context):

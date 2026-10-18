@@ -27,7 +27,11 @@ def clean(example):
     roles = [m['role'] for m in item.messages]
     if not roles:
         raise ValueError('No messages')
-    if roles != ['text']:
+    tool_dialogue=item.task=='tool_dialogue'
+    if tool_dialogue:
+        from slm.tools.protocol import validate_messages
+        validate_messages(item.messages)
+    elif roles != ['text']:
         if roles and roles[0] == 'system':
             roles = roles[1:]
         if len(roles) < 2 or roles != ['user', 'assistant']*(len(roles)//2):
@@ -43,6 +47,9 @@ def clean(example):
         text, count = EMAIL.subn('[EMAIL]', text); redactions['email'] += count
         text, count = PHONE.subn(r'\1[PHONE]', text); redactions['phone'] += count
         m['content'] = text
+    if tool_dialogue:
+        if any(redactions.values()):raise ValueError('Structured tool dialogue needs manual privacy rewrite; no JSON field edits')
+        validate_messages(item.messages)
     item.validation_results.update(privacy_redactions=dict(redactions),
         privacy_scope='email/contextual-phone/credential-patterns; human review still required',
         content_review='required' if item.content_category == 'unreviewed' else 'supplied_label',

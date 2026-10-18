@@ -65,14 +65,18 @@ def document_tokens(bpe,example,objective,context_length):
         if objective=='sft':return None,'not_dialogue'
         tokens=bpe.encode(messages[0]['content'])+[STRUCTURAL['eos']]
         return (tokens,[1]*len(tokens)),None
-    x,y,mask=bpe.serialize(messages,objective='assistant' if objective=='sft' else 'all')
+    if example.get('task')=='tool_dialogue':
+        if objective!='sft':raise ValueError('Structured tool dialogue requires SFT objective')
+        from slm.common.tool_serialization import serialize
+        x,y,mask=serialize(bpe,messages)
+    else:x,y,mask=bpe.serialize(messages,objective='assistant' if objective=='sft' else 'all')
     if objective=='sft' and len(x)>context_length:return None,'over_context_no_truncation'
     if not any(mask):return None,'no_supervised_targets'
     return (x+[y[-1]],[0]+mask),None
 
 
 def build_shards(release,tokenizer,output,objective,context_length=1024,shard_positions=262144,
-                 max_positions=64000000,allowed_categories=('sfw',),allowed_sources=None):
+                 max_positions=64000000,allowed_categories=('sfw',),allowed_sources=None,message_format=None):
     release,tokenizer,output=Path(release),Path(tokenizer),Path(output)
     if output.exists():raise FileExistsError(output)
     if objective not in ('foundation','sft'):raise ValueError('Explicit foundation or SFT objective required')
@@ -82,6 +86,8 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         raise ValueError('Explicit supported content-category selection required')
     if allowed_sources is not None and (not allowed_sources or len(set(allowed_sources))!=len(allowed_sources) or not all(isinstance(v,str) and v for v in allowed_sources)):
         raise ValueError('Explicit nonempty source selection required')
+    if message_format not in (None,'plain-dialogue-v1','tool-decisions-v1'):raise ValueError('Unknown message format')
+    selected_format=message_format
     release_hash=sha(release/'manifest.json');tokenizer_hash=sha(tokenizer/'manifest.json')
     bpe=BPE.load(tokenizer)
     output.parent.mkdir(parents=True,exist_ok=True)
@@ -99,6 +105,11 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
                 # One document is encoded at a time; fail, never silently shorten a large document.
                 byte_count=sum(len(m['content'].encode('utf-8')) for m in example['messages'])
                 if byte_count>4*1024*1024:raise ValueError('Document exceeds bounded encoding size')
+                format_='tool-decisions-v1' if example.get('task')=='tool_dialogue' else 'plain-dialogue-v1'
+                if message_format is not None and format_!=message_format:
+                    rejected['message_format_excluded']+=1;continue
+                if selected_format is None:selected_format=format_
+                if selected_format!=format_:raise ValueError('Mixed message formats require separate filtered components')
                 result,reason=document_tokens(bpe,example,objective,context_length)
                 if reason is not None:rejected[reason]+=1;continue
                 tokens,mask=result
@@ -127,17 +138,18 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         verify(release);BPE.load(tokenizer)
         if sha(release/'manifest.json')!=release_hash or sha(tokenizer/'manifest.json')!=tokenizer_hash:
             raise ValueError('Source release/tokenizer changed during tokenization')
-        report={'objective':objective,'split':'train','retained_records':records,'retained_groups':len(groups),
+        report={'objective':objective,'split':'train','message_format':selected_format,'token_shard_version':2 if selected_format=='tool-decisions-v1' else 1,'retained_records':records,'retained_groups':len(groups),
             'excluded_records':dict(rejected),'categories':dict(categories),'sources':{k:dict(v) for k,v in sorted(sources.items())},
             'one_pass_encoded_positions':encoded,'processed_prediction_positions':writer.processed,
             'supervised_positions':writer.supervised,'batches':writer.batches,'shards':len(writer.shards),
             'explicit_passes':1,'implicit_wraparound':False,'cross_document_attention':objective=='foundation',
             'truncation':False,'scope':'Verified bootstrap release to disk-backed token shards; tokenizer selection and model training are separate gates'}
         (temp/'report.json').write_text(json.dumps(report,sort_keys=True,indent=2)+'\n')
-        manifest={'version':1,'kind':'portable-token-shards-v1','split':'train','objective':objective,
+        manifest={'version':2 if selected_format=='tool-decisions-v1' else 1,'message_format':selected_format,'kind':'portable-token-shards-v1','split':'train','objective':objective,
             'context_length':context_length,'vocab_size':bpe.vocab_size,'batch_size':1,
             'tokenizer_hash':tokenizer_hash,'release_manifest_sha256':release_hash,
             'lineage_schema':'record-content-spans-v2',
+            'structured_serializer_sha256':sha(Path(__file__).parents[1]/'common/tool_serialization.py'),
             'builder_sha256':sha(__file__),'serializer_sha256':sha(Path(__file__).parents[1]/'common/tokenizer.py'),
             'allowed_categories':list(allowed_categories),'allowed_sources':list(allowed_sources) if allowed_sources is not None else None,'batches':writer.batches,
             'processed_tokens':writer.processed,'supervised_tokens':writer.supervised,
@@ -153,7 +165,12 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
     return {'dataset_hash':sha(output/'manifest.json'),'tokenizer_hash':tokenizer_hash,**report}
 
 
-def validate_batch_objective(values,objective):
+def validate_batch_objective(values,objective,message_format='plain-dialogue-v1',tokenizer=None):
+    if message_format not in ('plain-dialogue-v1','tool-decisions-v1'):raise ValueError('Unsupported batch message format')
+    if message_format=='tool-decisions-v1':
+        if objective!='sft':raise ValueError('Tool format requires SFT objective')
+        from slm.common.tool_serialization import validate_batch
+        validate_batch(tokenizer,values);return
     x,y,mask=(a[0] for a in values)
     if not np.array_equal(x[1:],y[:-1]):raise ValueError('Next-token shift differs inside batch')
     if objective=='foundation':
@@ -183,11 +200,15 @@ class ShardBatches:
         manifest=json.loads((self.path/'manifest.json').read_text());self.fingerprint=sha(self.path/'manifest.json')
         if stamp(self.path/'manifest.json')!=manifest_stamp:raise ValueError('Dataset manifest changed during verification')
         if expected_fingerprint is not None and expected_fingerprint!=self.fingerprint:raise ValueError('Pinned token dataset differs')
-        if (manifest.get('version')!=1 or manifest.get('kind')!='portable-token-shards-v1' or manifest.get('split')!='train'
+        if (type(manifest.get('version')) is not int or manifest.get('version') not in (1,2) or manifest.get('kind')!='portable-token-shards-v1' or manifest.get('split')!='train'
             or manifest.get('batch_size')!=1 or manifest.get('objective') not in ('foundation','sft')
             or manifest.get('index_dtype')!=json.loads(json.dumps(INDEX.descr))):raise ValueError('Unsupported token-shard conventions')
+        self.message_format=manifest.get('message_format','plain-dialogue-v1')
+        if ((manifest['version']==1 and self.message_format!='plain-dialogue-v1') or (manifest['version']==2 and (self.message_format!='tool-decisions-v1' or manifest['objective']!='sft'))):raise ValueError('Unsupported message format/version')
         self.manifest=manifest;self.tokenizer_hash=manifest['tokenizer_hash'];self.vocab_size=manifest['vocab_size']
-        if sha(Path(tokenizer)/'manifest.json')!=self.tokenizer_hash or BPE.load(tokenizer).vocab_size!=self.vocab_size:
+        bpe=BPE.load(tokenizer)
+        self._bpe=bpe if self.message_format=='tool-decisions-v1' else None
+        if sha(Path(tokenizer)/'manifest.json')!=self.tokenizer_hash or bpe.vocab_size!=self.vocab_size:
             raise ValueError('Token-shard tokenizer differs')
         self._stamps={};files=manifest['files']
         expected={'index.bin','lineage.jsonl','report.json'}
@@ -245,7 +266,7 @@ class ShardBatches:
             arrays=self._cache[1]
             result=tuple(np.array(arrays[name][start:start+length],dtype=np.float32 if name=='loss' else np.int64,copy=True).reshape(1,length) for name in DTYPES)
             if int(result[2].sum())!=int(row['supervised']):raise ValueError('Batch supervision/index differs')
-            validate_batch_objective(result,self.manifest['objective'])
+            validate_batch_objective(result,self.manifest['objective'],self.message_format,self._bpe)
             self._guard()
             for a in result:a.flags.writeable=False
             return result
@@ -268,8 +289,8 @@ def main():
     p.add_argument('--release',required=True);p.add_argument('--tokenizer',required=True);p.add_argument('--output',required=True)
     p.add_argument('--objective',choices=['foundation','sft'],required=True);p.add_argument('--context-length',type=int,default=1024)
     p.add_argument('--shard-positions',type=int,default=262144);p.add_argument('--max-positions',type=int,default=64000000)
-    p.add_argument('--category',action='append',default=None);p.add_argument('--source',action='append',default=None)
-    a=p.parse_args();print(json.dumps(build_shards(a.release,a.tokenizer,a.output,a.objective,a.context_length,a.shard_positions,a.max_positions,tuple(a.category or ['sfw']),tuple(a.source) if a.source else None),indent=2))
+    p.add_argument('--category',action='append',default=None);p.add_argument('--source',action='append',default=None);p.add_argument('--message-format',choices=['plain-dialogue-v1','tool-decisions-v1'])
+    a=p.parse_args();print(json.dumps(build_shards(a.release,a.tokenizer,a.output,a.objective,a.context_length,a.shard_positions,a.max_positions,tuple(a.category or ['sfw']),tuple(a.source) if a.source else None,a.message_format),indent=2))
 
 
 if __name__=='__main__':main()

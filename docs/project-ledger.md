@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: raw-history decoding and candidate language/stage-screen foundation complete locally. The 500 SFW cases remain unreviewed; proposed stage policy and all human grades are pending. No student language acceptance is claimed.
-- Next implementation milestone: five local mock tools, structured tool serialization and executable semantic validation before MCP. In parallel, complete current source review, candidate-suite review, English/privacy/quality calibration, teacher rights/quality review and production tokenizer selection. CLI-only teacher; no API fallback.
+- Current milestone: five synthetic local tools, typed decision framing, bounded host execution and verified tool-SFT intake complete within reference scope. Scripted controls pass; actual random students fail. No learned tool capability or MCP transport is claimed.
+- Next implementation milestone: application-owned MCP transport/discovery mapping and executable timeout/error checks. In parallel, complete source/suite review, English/privacy/quality calibration, teacher rights/quality review and production tokenizer selection. CLI-only teacher; no API fallback.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -106,6 +106,14 @@ Updated: 19 October 2026
 - Actual random-weight controls reject: tiny 34,976 parameters, 0/400 exact tasks on 500 cases; full 80,765,440 parameters, 0/8 on a ten-case professional subset. All raw generations stop on invalid structural IDs. Reference scoring completes separately and is not task success. Zero training updates; no new teacher/cloud calls.
 - Reserved evaluation IDs/exact contexts are refused in teacher training generation, reviewed train publication and verified train reads. Semantic overlap and historical prepared-token auditing remain open; no retrospective contamination guarantee.
 - Previous source approvals remain zero and numerical failures remain failed. CUDA planning allowances remain USD 5 of USD 10, settled cost unknown. This milestone adds no actual NVIDIA validation or language-training pilot.
+
+## Local tools and SFT framing — 19 October 2026
+
+- Final local suite: 385 passed / 11 unavailable-CUDA skips. Five synthetic tool schemas/handlers, typed wire format, role-derived masks, portable token-shard v2 reader, explicit plain/tool filtering, bounded raw runtime and continued caller history. Plain token-shard v1 and existing training checkpoint versions remain readable.
+- Seven scripted controls pass independent structured action/result/final-metadata checks; valid wrong-quantity and wrong-result controls fail semantics. Free-text truth/style are not automatically verified. Actual random 34,976-parameter MLX model fails all seven scenarios and executes zero tools. No model training occurs in the runtime audit; separate two-logical-update synthetic masked-training/resume tests cover mechanics.
+- Initial full suite: 2 failed / 380 passed / 10 skipped, retained. New shard hashes changed batch order and exposed incidental tail-size assumptions. Updated fixtures guarantee short tails/different accumulation sizes and derive boundaries from declared counts; exact resume/independent rate checks and tolerances remain unchanged.
+- Evidence: milestone-eighteen.md, final/initial XML, source-hashed tool audit and ignored local-tools-audit-v4 raw traces. Seven synthetic scenario families remain unreviewed and protected from exact train/teacher reuse.
+- No actual NVIDIA typed-runtime validation, MCP calls, teacher generation or cloud jobs added. Public approvals remain zero, prior numerical failures remain failed and CUDA planning allowances remain USD 5 of USD 10; settled costs unknown.
 
 ## Open gates
 
