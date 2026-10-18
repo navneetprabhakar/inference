@@ -32,16 +32,33 @@ def note(value):
     if not isinstance(value,str) or len(value.encode())>8192:raise ValueError('Bounded review note required')
 
 
-def decisions(sources,examples):
+def teacher_contract(packet):
+    result={}
+    for key,entry in packet['examples'].items():
+        record=entry['record']
+        if 'teacher_bridge' in record['validation_results']:
+            from slm.teacher.bridge import review_requirements
+            result[key]={'fields':list(review_requirements(record)),'content_category':record['content_category']}
+    return result
+
+
+def decisions(sources,examples,contracts=None):
+    contracts=contracts or {}
     for entry in sources.values():
         if set(entry)!=SOURCE_FIELDS:raise ValueError('Source decision fields differ')
         choice(entry['approved']);choice(entry['terms_reviewed']);note(entry['evidence_note'])
         cats=entry['allowed_categories']
         if not isinstance(cats,list) or any(not isinstance(v,str) for v in cats) or len(set(cats))!=len(cats) or not set(cats)<=CATEGORIES:
             raise ValueError('Source categories differ')
-    for entry in examples.values():
-        if 'teacher_review' in entry:raise ValueError('Teacher-specific review requires the extended JSON packet; this console cannot drop those gates')
-        if set(entry)!=DECISION_FIELDS:raise ValueError('Example decision fields differ')
+    for key,entry in examples.items():
+        required=DECISION_FIELDS|({'teacher_review'} if key in contracts else set())
+        if set(entry)!=required:raise ValueError('Example decision fields differ')
+        if key in contracts:
+            extra=entry['teacher_review']
+            if not isinstance(extra,dict) or set(extra)!=set(contracts[key]['fields']):raise ValueError('Teacher decision fields differ')
+            for value in extra.values():choice(value)
+            if entry['content_category'] not in (None,contracts[key]['content_category']):
+                raise ValueError('Controlled teacher content setting cannot be relabeled')
         for key in ('approved','english_verified','privacy_verified','quality_verified'):choice(entry[key])
         if entry['content_category'] is not None and entry['content_category'] not in CATEGORIES:raise ValueError('Unknown content category')
         if entry['upstream_partition'] is not None and entry['upstream_partition'] not in PRIORITY:raise ValueError('Unknown upstream partition')
@@ -63,7 +80,7 @@ def bind(dataset,packet):
         if set(entry)!={'record','record_sha256','decision'} or key not in items or entry['record']!=items[key] or entry['record_sha256']!=digest(items[key]):raise ValueError('Record identity/content differs')
         if items[key]['source']=='OpenAssistant/oasst2' and 'upstream_mapping' in items[key]['validation_results']:
             if entry['decision']['upstream_partition']!=oasst_mapping(items[key])['split']:raise ValueError('Machine-mapped partition cannot change')
-    decisions({k:{f:v[f] for f in SOURCE_FIELDS} for k,v in packet['source_reviews'].items()},{k:v['decision'] for k,v in packet['examples'].items()})
+    decisions({k:{f:v[f] for f in SOURCE_FIELDS} for k,v in packet['source_reviews'].items()},{k:v['decision'] for k,v in packet['examples'].items()},teacher_contract(packet))
     return sources,items
 
 
@@ -88,11 +105,25 @@ def evidence(packet,root):
     return result
 
 
+def snapshot_evidence(dataset,packet):
+    if len(packet['source_reviews'])!=1:raise ValueError('Mixed teacher sources require an explicit pinned evidence root')
+    name,entry=next(iter(packet['source_reviews'].items()));texts={}
+    for key,filename,field in [('card','source-card.txt','card_sha256'),('license','source-license.txt','license_text_sha256')]:
+        path=Path(dataset)/filename
+        if not path.is_file():raise ValueError('Teacher source evidence missing; provide pinned evidence before rendering')
+        with path.open('rb') as f:data=f.read(2*1024*1024+1)
+        if len(data)>2*1024*1024 or hashlib.sha256(data).hexdigest()!=entry['source_record'][field]:
+            raise ValueError('Pinned teacher source evidence checksum differs')
+        texts[key]=data.decode('utf-8')
+    return {name:texts}
+
+
 def render(dataset,packet_file,output,evidence_root=None):
     output=Path(output)
     if output.exists():raise FileExistsError(output)
-    packet=read_json(packet_file);bind(dataset,packet);texts=evidence(packet,evidence_root)
-    payload={'packet':packet,'packet_sha256':digest(packet),'reviewer':REVIEWER,'evidence':texts}
+    packet=read_json(packet_file);bind(dataset,packet);contracts=teacher_contract(packet)
+    texts=evidence(packet,evidence_root) if evidence_root is not None or not contracts else snapshot_evidence(dataset,packet)
+    payload={'packet':packet,'packet_sha256':digest(packet),'reviewer':REVIEWER,'evidence':texts,'teacher_contract':contracts}
     template=Path(__file__).with_suffix('.html').read_text()
     data=base64.b64encode(json.dumps(payload,ensure_ascii=False,allow_nan=False).encode()).decode()
     html=template.replace('__PAYLOAD__',data)
@@ -114,7 +145,7 @@ def apply_patch(dataset,packet_file,patch_file,output):
     if patch['review_packet_sha256']!=digest(packet):raise ValueError('Stale/different review packet')
     if patch['reviewer']!=REVIEWER or type(patch['human_attestation']) is not bool:raise ValueError('Explicit review identity/attestation required')
     if set(patch['sources'])!=set(packet['source_reviews']) or set(patch['examples'])!=set(packet['examples']):raise ValueError('Decision inventory differs')
-    decisions(patch['sources'],patch['examples']);candidate=deepcopy(packet)
+    decisions(patch['sources'],patch['examples'],teacher_contract(packet));candidate=deepcopy(packet)
     for name,entry in patch['sources'].items():candidate['source_reviews'][name].update(entry)
     for key,entry in patch['examples'].items():
         record=packet['examples'][key]['record']

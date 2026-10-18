@@ -176,7 +176,7 @@ def test_source_review_release_shards_and_history_mask_are_connected(tmp_path,fo
     assert all(v is None for v in entry['decision']['teacher_review'].values())
     assert review_requirements(entry['record'])==REVIEW_FIELDS
     from slm.data.review_console import render
-    with pytest.raises(ValueError,match='extended JSON'):render(out,packet,tmp_path/'console.html')
+    assert render(out,packet,tmp_path/'console.html')['pinned_evidence_sources']==1
     approved_packet(packet)
     with pytest.raises(ValueError,match='Explicit teacher'):release(out,packet,tmp_path/'not-released')
     review=json.loads(packet.read_text())

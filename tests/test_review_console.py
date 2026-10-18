@@ -114,3 +114,12 @@ def test_dom_simulation_exports_synthetic_decisions_that_existing_python_checks_
     apply_patch(tmp_path/'raw',tmp_path/'base.json',tmp_path/'patch.json',tmp_path/'review.json')
     release(tmp_path/'raw',tmp_path/'review.json',tmp_path/'release')
     items=list(training_examples(tmp_path/'release'));assert len(items)==1 and items[0]['split']=='train'
+
+
+def test_public_decisions_cannot_inject_teacher_gates(tmp_path):
+    base=fixture(tmp_path);p=patch(base);entry=next(iter(p['examples'].values()))
+    entry['teacher_review']={'reply_meaning_verified':True}
+    write(tmp_path/'patch.json',p)
+    with pytest.raises(ValueError,match='decision fields'):
+        apply_patch(tmp_path/'raw',tmp_path/'base.json',tmp_path/'patch.json',tmp_path/'out.json')
+    assert not (tmp_path/'out.json').exists()
