@@ -1,0 +1,33 @@
+{
+  "backend_sha256": "c1050d5281c3e934c9278d07a53824c6fe252af8ddf2c9094f052d133f44f831",
+  "scope": "Repeated identical gradient computations; no weight updates or public/teacher data",
+  "repeats": 20,
+  "controls": {
+    "gpu-full-model": {
+      "nonidentical_computations": 19,
+      "max_abs_delta": 2.9802322387695312e-08,
+      "varying_parameters": [
+        "embedding"
+      ]
+    },
+    "gpu-lookup-only": {
+      "nonidentical_computations": 19,
+      "max_abs_delta": 9.5367431640625e-07
+    },
+    "cpu-full-model": {
+      "nonidentical_computations": 0,
+      "max_abs_delta": 0.0,
+      "varying_parameters": []
+    },
+    "cpu-lookup-only": {
+      "nonidentical_computations": 0,
+      "max_abs_delta": 0.0
+    }
+  },
+  "batch_shape": [
+    1,
+    64
+  ],
+  "distinct_token_ids": 27,
+  "positions": 64
+}

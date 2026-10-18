@@ -80,9 +80,9 @@ def capture(trainer):
     """Probe one fixed batch independently of the next training batch."""
     x, y, mask = trainer.batches.items[0]
     a = trainer.array
-    logits, _, layers = trainer.impl.forward(trainer.params, trainer.config, a(x))
+    logits, _, layers = trainer.impl.forward(trainer.params, trainer.config, a(x),embedding_implementation=trainer.recipe.embedding_implementation)
     loss, grads = trainer.impl.value_and_grad(trainer.params, trainer.config, a(x), a(y), a(mask),
-                    loss_implementation=trainer.recipe.loss_implementation)
+                    loss_implementation=trainer.recipe.loss_implementation,embedding_implementation=trainer.recipe.embedding_implementation)
     tensors = {'logits': logits, 'loss': loss}
     tensors.update({f'layer:{i}': v for i, v in enumerate(layers)})
     tensors.update({f'gradient:{k}': v for k, v in grads.items()})
@@ -90,8 +90,8 @@ def capture(trainer):
     for k, moments in trainer.moments.items():
         tensors[f'moment_m:{k}'], tensors[f'moment_v:{k}'] = moments
     # Probe chunked cached decoding against the full forward pass.
-    _, cache, _ = trainer.impl.forward(trainer.params, trainer.config, a(x[:, :2]))
-    cached, _, _ = trainer.impl.forward(trainer.params, trainer.config, a(x[:, 2:]), cache=cache)
+    _, cache, _ = trainer.impl.forward(trainer.params, trainer.config, a(x[:, :2]),embedding_implementation=trainer.recipe.embedding_implementation)
+    cached, _, _ = trainer.impl.forward(trainer.params, trainer.config, a(x[:, 2:]), cache=cache,embedding_implementation=trainer.recipe.embedding_implementation)
     tensors['cached_logits'] = cached
     raw = trainer.impl.export(tensors)
     np.testing.assert_allclose(raw['cached_logits'], raw['logits'][:, 2:], atol=1e-5, rtol=1e-4)

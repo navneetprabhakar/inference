@@ -29,9 +29,9 @@ def run(config,output,backend='mlx',device='cpu',updates=100,recipe=None):
     trainer=Trainer(config,initialize(config,311),batches,backend,device,recipe)
     def measure():
         value=trainer.impl.loss(trainer.params,config,trainer.array(x),trainer.array(y),trainer.array(mask),
-                                loss_implementation=recipe.loss_implementation)
+                                loss_implementation=recipe.loss_implementation,embedding_implementation=recipe.embedding_implementation)
         scalar=float(value.detach()) if backend=='torch' else float(value)
-        logits=trainer.impl.export({'logits':trainer.impl.forward(trainer.params,config,trainer.array(x))[0]})['logits']
+        logits=trainer.impl.export({'logits':trainer.impl.forward(trainer.params,config,trainer.array(x),embedding_implementation=recipe.embedding_implementation)[0]})['logits']
         if not np.isfinite(scalar) or not np.isfinite(logits).all():raise FloatingPointError('Nonfinite overfit probe')
         return scalar,float(((logits.argmax(-1)==y)*mask).sum()/mask.sum())
     initial_loss,initial_accuracy=measure()

@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "synthetic_only": true,
+  "architecture": {
+    "vocab_size": 16384,
+    "hidden_size": 512,
+    "intermediate_size": 1536,
+    "num_layers": 24,
+    "num_heads": 8,
+    "num_kv_heads": 2,
+    "max_seq_len": 2048,
+    "rope_theta": 10000.0,
+    "norm_eps": 1e-05
+  },
+  "parameters": 80765440,
+  "environment": {
+    "backend": "mlx",
+    "platform": "macOS-26.4.1-arm64-arm-64bit",
+    "python": "3.12.11",
+    "device": "Device(gpu, 0)",
+    "version": "0.32.4",
+    "hardware": "arm64"
+  },
+  "recipe": {
+    "lr": 0.0003,
+    "warmup_tokens": 128,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "eps": 1e-08,
+    "decay": 0.1,
+    "clip": 1.0,
+    "loss_implementation": "legacy-logsumexp-minus-target-v1",
+    "accumulation_steps": 2,
+    "embedding_implementation": "dense-onehot-v1"
+  },
+  "initialization_seed": 317,
+  "data_seed": 841,
+  "dataset_hash": "77dc932bc83cc3fc826e727328c859c4162ff330663e5eca526f073f111c1e11",
+  "microbatch_lengths": [
+    16,
+    32,
+    24,
+    8,
+    12
+  ],
+  "microbatch_supervised_counts": [
+    10,
+    21,
+    16,
+    5,
+    8
+  ],
+  "reference_optimizer_updates": 3,
+  "reference_consumed_microbatches": 5,
+  "reference_processed_positions": 92,
+  "reference_supervised_positions": 60,
+  "total_executed_updates": 5,
+  "total_executed_positions": 136,
+  "initialize_seconds": 0.3562872090260498,
+  "first_update_seconds": 0.44961233402136713,
+  "first_update": {
+    "loss": 9.86435499498921,
+    "lr": 0.0001125,
+    "step": 1,
+    "tokens": 48,
+    "cursor": 2,
+    "microbatches": 2,
+    "supervised_tokens": 31
+  },
+  "checkpoint_save_seconds": 1.8567336249980144,
+  "checkpoint_load_seconds": 0.70323829195695,
+  "checkpoint_bytes": 969244941,
+  "checkpoint_manifest_sha256": "455c3f4bf38237a0b3821f866537490d43be1f79f55257c16c78fe03d465d472",
+  "temporary_checkpoint_removed": true,
+  "history": [
+    {
+      "metrics": {
+        "loss": 9.874513126554943,
+        "lr": 0.00018749999999999998,
+        "step": 2,
+        "tokens": 80,
+        "cursor": 4,
+        "microbatches": 2,
+        "supervised_tokens": 52
+      },
+      "uninterrupted_seconds": 0.4355952080222778,
+      "resumed_seconds": 0.4006757080205716
+    },
+    {
+      "metrics": {
+        "loss": 10.075432777404785,
+        "lr": 0.00021562499999999997,
+        "step": 3,
+        "tokens": 92,
+        "cursor": 5,
+        "microbatches": 1,
+        "supervised_tokens": 60
+      },
+      "uninterrupted_seconds": 0.20806712500052527,
+      "resumed_seconds": 0.20555462501943111
+    }
+  ],
+  "own_trajectory_checks": [
+    {
+      "exact": true,
+      "values_checked": 242296320,
+      "canonical_state_sha256": "e9430b47240c7b2a8e913b8a508385d3a69e8c19d5e0e70b6598b7cc00cce1fc",
+      "step": 1,
+      "cursor": 2,
+      "processed_tokens": 48,
+      "supervised_tokens": 31
+    },
+    {
+      "exact": true,
+      "values_checked": 242296320,
+      "canonical_state_sha256": "4e35668af00072c2c63a3bf88b24ae73de4f3d44f620548d2c335e45e3adcdda",
+      "step": 2,
+      "cursor": 4,
+      "processed_tokens": 80,
+      "supervised_tokens": 52
+    },
+    {
+      "exact": true,
+      "values_checked": 242296320,
+      "canonical_state_sha256": "5166c143c0df515b95f6b6a2d890b3c577edf369f8051b91c64368fb92a6c36e",
+      "step": 3,
+      "cursor": 5,
+      "processed_tokens": 92,
+      "supervised_tokens": 60
+    }
+  ],
+  "memory": {
+    "process_peak_rss_bytes": 4985569280,
+    "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+    "allocator_peak_bytes": 3759262772,
+    "allocator_active_bytes": 1938370560,
+    "allocator_cache_bytes": 1963892716
+  },
+  "scope": "Three logical optimizer updates on opaque synthetic IDs; two simultaneous trainer states for exact own-resume checks. Short contexts only, not sustained throughput, language training, independent/cross-backend trajectory acceptance or production single-trainer memory."
+}

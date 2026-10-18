@@ -73,4 +73,6 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Gradient accumulation and update-boundary resume](docs/milestone-thirteen.md) now support unequal supervised-token counts, short tails and v1-to-v2 checkpoint loading. A bounded full-model MLX own-resume probe passes. [Actual NVIDIA accumulation validation](docs/milestone-fourteen.md) now covers the tiny numerical MLX/CUDA/MLX round trip and full-model exact state transfer with finite continuation; full-size cross-backend trajectory acceptance remains open.
 
-Not implemented: approved production datasets, production bulk data intake/training, mixture/curriculum transitions, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.
+[Finite mixture schedules](docs/milestone-fifteen.md) now provide source weights, family/repeat caps, per-record exposure and hash-bound accumulated resume. The explicit dense embedding control passes local determinism checks but both embedding modes fail the additional repeated-token trajectory stress; native stays default and dense CUDA validation remains open.
+
+Not implemented: approved production datasets, production bulk data intake/training, curriculum transitions, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

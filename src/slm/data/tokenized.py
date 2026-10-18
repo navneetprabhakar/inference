@@ -72,7 +72,7 @@ def document_tokens(bpe,example,objective,context_length):
 
 
 def build_shards(release,tokenizer,output,objective,context_length=1024,shard_positions=262144,
-                 max_positions=64000000,allowed_categories=('sfw',)):
+                 max_positions=64000000,allowed_categories=('sfw',),allowed_sources=None):
     release,tokenizer,output=Path(release),Path(tokenizer),Path(output)
     if output.exists():raise FileExistsError(output)
     if objective not in ('foundation','sft'):raise ValueError('Explicit foundation or SFT objective required')
@@ -80,6 +80,8 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         raise ValueError('Positive context/shard/budget limits required; shard must fit a full context')
     if not allowed_categories or len(set(allowed_categories))!=len(allowed_categories) or not set(allowed_categories)<=CATEGORIES:
         raise ValueError('Explicit supported content-category selection required')
+    if allowed_sources is not None and (not allowed_sources or len(set(allowed_sources))!=len(allowed_sources) or not all(isinstance(v,str) and v for v in allowed_sources)):
+        raise ValueError('Explicit nonempty source selection required')
     release_hash=sha(release/'manifest.json');tokenizer_hash=sha(tokenizer/'manifest.json')
     bpe=BPE.load(tokenizer)
     output.parent.mkdir(parents=True,exist_ok=True)
@@ -90,6 +92,8 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         writer=Writer(temp,shard_positions,max_positions)
         with (temp/'lineage.jsonl').open('w') as lineage:
             for example in training_examples(release):
+                if allowed_sources is not None and example['source'] not in allowed_sources:
+                    rejected['source_excluded']+=1;continue
                 if example['content_category'] not in allowed_categories:
                     rejected['content_category_excluded']+=1;continue
                 # One document is encoded at a time; fail, never silently shorten a large document.
@@ -100,7 +104,7 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
                 tokens,mask=result
                 contribution=len(tokens)-int(objective=='sft' or encoded==0)
                 supervised=contribution if objective=='foundation' else sum(mask[1:])
-                record={'example_id':example['example_id'],'record_sha256':digest(example),'source':example['source'],
+                record={'example_id':example['example_id'],'record_sha256':digest(example),'content_sha256':digest(example['messages']),'source':example['source'],
                     'source_revision':example['source_revision'],'parent_group_id':example['parent_group_id'],
                     'split_group':example['validation_results']['split_group'],'split':'train',
                     'encoded_positions':len(tokens),'prediction_positions':contribution,'supervised_positions':supervised}
@@ -133,8 +137,9 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         manifest={'version':1,'kind':'portable-token-shards-v1','split':'train','objective':objective,
             'context_length':context_length,'vocab_size':bpe.vocab_size,'batch_size':1,
             'tokenizer_hash':tokenizer_hash,'release_manifest_sha256':release_hash,
+            'lineage_schema':'record-content-spans-v2',
             'builder_sha256':sha(__file__),'serializer_sha256':sha(Path(__file__).parents[1]/'common/tokenizer.py'),
-            'allowed_categories':list(allowed_categories),'batches':writer.batches,
+            'allowed_categories':list(allowed_categories),'allowed_sources':list(allowed_sources) if allowed_sources is not None else None,'batches':writer.batches,
             'processed_tokens':writer.processed,'supervised_tokens':writer.supervised,
             'index_dtype':INDEX.descr,'shards':writer.shards,
             'files':{str(p.relative_to(temp)):sha(p) for p in sorted(temp.rglob('*')) if p.is_file()}}
@@ -263,8 +268,8 @@ def main():
     p.add_argument('--release',required=True);p.add_argument('--tokenizer',required=True);p.add_argument('--output',required=True)
     p.add_argument('--objective',choices=['foundation','sft'],required=True);p.add_argument('--context-length',type=int,default=1024)
     p.add_argument('--shard-positions',type=int,default=262144);p.add_argument('--max-positions',type=int,default=64000000)
-    p.add_argument('--category',action='append',default=None)
-    a=p.parse_args();print(json.dumps(build_shards(a.release,a.tokenizer,a.output,a.objective,a.context_length,a.shard_positions,a.max_positions,tuple(a.category or ['sfw'])),indent=2))
+    p.add_argument('--category',action='append',default=None);p.add_argument('--source',action='append',default=None)
+    a=p.parse_args();print(json.dumps(build_shards(a.release,a.tokenizer,a.output,a.objective,a.context_length,a.shard_positions,a.max_positions,tuple(a.category or ['sfw']),tuple(a.source) if a.source else None),indent=2))
 
 
 if __name__=='__main__':main()

@@ -26,7 +26,7 @@ def rope(x, positions, theta):
     return torch.stack((even*c-odd*s, even*s+odd*c), dim=-1).flatten(-2)
 
 
-def forward(p, c, tokens, padding_mask=None, cache=None):
+def forward(p, c, tokens, padding_mask=None, cache=None, embedding_implementation='native-gather-v1'):
     """Right-padding only. Cache is a list of (rotated K, V); no padded caching."""
     b, t = tokens.shape
     offset = 0 if cache is None else cache[0][0].shape[2]
@@ -47,7 +47,12 @@ def forward(p, c, tokens, padding_mask=None, cache=None):
     allowed = allowed[None, None]
     if padding_mask is not None:
         allowed = allowed & padding_mask[:, None, None, :]
-    x = p['embedding'][tokens]
+    if embedding_implementation == 'native-gather-v1':
+        x = p['embedding'][tokens]
+    elif embedding_implementation == 'dense-onehot-v1':
+        x = (tokens[..., None] == torch.arange(c.vocab_size,device=tokens.device)).to(p['embedding'].dtype) @ p['embedding']
+    else:
+        raise ValueError('Unknown embedding implementation')
     new_cache, traces = [], []
     def norm(z, w):
         return z * torch.rsqrt(z.square().mean(-1, keepdim=True)+c.norm_eps)*w
@@ -90,10 +95,10 @@ def cross_entropy_logits(logits, targets):
     return torch.logaddexp(margin,torch.zeros_like(margin))
 
 
-def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
+def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
     if mask.shape != targets.shape or not bool((mask >= 0).all()) or float(mask.sum()) <= 0:
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
-    logits, _, _ = forward(p, c, tokens, padding_mask)
+    logits, _, _ = forward(p, c, tokens, padding_mask, embedding_implementation=embedding_implementation)
     if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
         per_token = torch.logsumexp(logits,-1)-logits.gather(-1,targets[...,None]).squeeze(-1)
     elif loss_implementation == STABLE_LOSS_IMPLEMENTATION:
@@ -103,8 +108,8 @@ def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEF
     return (per_token*mask).sum()/mask.sum()
 
 
-def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
-    value = loss(p, c, tokens, targets, mask, padding_mask,loss_implementation)
+def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
+    value = loss(p, c, tokens, targets, mask, padding_mask,loss_implementation,embedding_implementation)
     grads = torch.autograd.grad(value, tuple(p.values()))
     return value, dict(zip(p, grads))
 

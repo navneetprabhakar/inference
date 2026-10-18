@@ -25,7 +25,7 @@ def exact_state(a,b):
         'step':a.step,'cursor':a.cursor,'processed_tokens':a.tokens,'supervised_tokens':a.supervised_tokens}
 
 
-def run(config,output,backend='mlx',device='cpu'):
+def run(config,output,backend='mlx',device='cpu',embedding_implementation='native-gather-v1'):
     output=Path(output)
     if output.exists():raise FileExistsError(output)
     if config.max_seq_len<32:raise ValueError('Mechanics fixture requires context at least 32')
@@ -36,7 +36,7 @@ def run(config,output,backend='mlx',device='cpu'):
         mask=np.ones(x.shape,np.float32);mask[:,::3]=0
         items.append((x,y,mask))
     data=Batches(items,config.vocab_size)
-    recipe=Recipe(lr=3e-4,warmup_tokens=128,accumulation_steps=2)
+    recipe=Recipe(lr=3e-4,warmup_tokens=128,accumulation_steps=2,embedding_implementation=embedding_implementation)
     def sync():
         if backend=='mlx':
             import mlx.core as mx
@@ -83,7 +83,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config',required=True);p.add_argument('--output',required=True)
     p.add_argument('--backend',choices=['torch','mlx'],default='mlx');p.add_argument('--device',default='cpu')
-    a=p.parse_args();r=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device)
+    p.add_argument('--embedding-implementation',choices=['native-gather-v1','dense-onehot-v1'],default='native-gather-v1')
+    a=p.parse_args();r=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device,a.embedding_implementation)
     print(json.dumps({k:r[k] for k in ('passed','parameters','reference_optimizer_updates','reference_processed_positions','memory')},indent=2))
 
 

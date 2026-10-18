@@ -24,13 +24,16 @@ class Recipe:
     clip: float = 1.
     loss_implementation: str = 'legacy-logsumexp-minus-target-v1'
     accumulation_steps: int = 1
+    embedding_implementation: str = 'native-gather-v1'
 
     def __post_init__(self):
         if type(self.accumulation_steps) is not int or not 1 <= self.accumulation_steps <= 1024:
             raise ValueError('Accumulation steps must be an integer from 1 to 1024')
+        if self.embedding_implementation not in ('native-gather-v1','dense-onehot-v1'):
+            raise ValueError('Unknown embedding implementation')
         if self.loss_implementation not in ('legacy-logsumexp-minus-target-v1','max-centered-target-tail-softplus-v1'):
             raise ValueError('Unknown loss implementation')
-        if not all(np.isfinite(v) for k,v in asdict(self).items() if k != 'loss_implementation'):
+        if not all(np.isfinite(v) for k,v in asdict(self).items() if k not in ('loss_implementation','embedding_implementation')):
             raise ValueError('Nonfinite optimizer setting')
         if self.lr <= 0 or self.eps <= 0 or self.clip <= 0 or self.decay < 0:
             raise ValueError('Invalid optimizer settings')
@@ -50,6 +53,9 @@ def recipe_from_state(state):
         raise ValueError('Loss implementation metadata mismatch')
     if 'loss_implementation' not in values:
         values['loss_implementation'] = recorded or 'legacy-logsumexp-minus-target-v1'
+    embedding = state.get('reproduction',{}).get('embedding_implementation')
+    if embedding is not None and values.get('embedding_implementation','native-gather-v1') != embedding:
+        raise ValueError('Embedding implementation metadata mismatch')
     return Recipe(**values)
 
 
@@ -152,7 +158,8 @@ class Trainer:
             count = int(mask.sum())
             value, grads = self.impl.value_and_grad(self.params, self.config,
                                                   *(self.array(a) for a in (x, y, mask)),
-                                                  loss_implementation=self.recipe.loss_implementation)
+                                                  loss_implementation=self.recipe.loss_implementation,
+                                                  embedding_implementation=self.recipe.embedding_implementation)
             scalar = float(value.detach()) if self.backend == 'torch' else float(value)
             if not np.isfinite(scalar):
                 raise FloatingPointError('Nonfinite loss')
@@ -177,7 +184,7 @@ class Trainer:
             scalar = weighted_loss/supervised
         rate = self.recipe.rate(self.tokens+tokens)
         settings = asdict(self.recipe)
-        for key in ('warmup_tokens', 'loss_implementation', 'accumulation_steps'):
+        for key in ('warmup_tokens', 'loss_implementation', 'accumulation_steps','embedding_implementation'):
             settings.pop(key)
         settings['lr'] = rate
         # AdamW owns clipping; invoke it exactly once after normalization.
@@ -222,6 +229,7 @@ class Trainer:
                                       'numpy_version': np.__version__,
                                       'trainer_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                                       'loss_implementation': self.recipe.loss_implementation,
+                                      'embedding_implementation': self.recipe.embedding_implementation,
                                       'implementation_sha256': hashlib.sha256(Path(self.impl.__file__).read_bytes()).hexdigest()},
                      'precision': 'fp32', 'rng_policy': 'precomputed-order-no-stochastic-ops',
                      'schedule': 'linear-warmup-then-constant-tokens-after-update'}
@@ -258,7 +266,7 @@ class Trainer:
             raise ValueError('Dataset/tokenizer mismatch')
         recipe = recipe_from_state(state)
         if state['version'] == 1:
-            if recipe.accumulation_steps != 1:
+            if recipe.accumulation_steps != 1 or recipe.embedding_implementation != 'native-gather-v1':
                 raise ValueError('Legacy training state cannot declare gradient accumulation')
         else:
             policy = state.get('accumulation')

@@ -28,7 +28,7 @@ def rope(x, positions, theta):
     return mx.stack((even*c-odd*s, even*s+odd*c), axis=-1).reshape(x.shape)
 
 
-def forward(p, c, tokens, padding_mask=None, cache=None):
+def forward(p, c, tokens, padding_mask=None, cache=None, embedding_implementation='native-gather-v1'):
     b, t = tokens.shape
     offset = 0 if cache is None else cache[0][0].shape[2]
     if t == 0 or offset+t > c.max_seq_len:
@@ -47,7 +47,12 @@ def forward(p, c, tokens, padding_mask=None, cache=None):
     allowed = allowed[None, None]
     if padding_mask is not None:
         allowed = allowed & padding_mask[:, None, None, :]
-    x = p['embedding'][tokens]
+    if embedding_implementation == 'native-gather-v1':
+        x = p['embedding'][tokens]
+    elif embedding_implementation == 'dense-onehot-v1':
+        x = (tokens[..., None] == mx.arange(c.vocab_size)).astype(p['embedding'].dtype) @ p['embedding']
+    else:
+        raise ValueError('Unknown embedding implementation')
     new_cache, traces = [], []
     def norm(z, w):
         return z*mx.rsqrt(mx.mean(mx.square(z), axis=-1, keepdims=True)+c.norm_eps)*w
@@ -92,10 +97,10 @@ def cross_entropy_logits(logits, targets):
     return mx.logaddexp(margin,mx.zeros_like(margin))
 
 
-def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
+def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
     if mask.shape != targets.shape or not bool(mx.all(mask >= 0)) or float(mx.sum(mask)) <= 0:
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
-    logits, _, _ = forward(p, c, tokens, padding_mask)
+    logits, _, _ = forward(p, c, tokens, padding_mask, embedding_implementation=embedding_implementation)
     if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
         selected = mx.take_along_axis(logits,targets[...,None],axis=-1).squeeze(-1)
         per_token = mx.logsumexp(logits,axis=-1)-selected
@@ -106,8 +111,8 @@ def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEF
     return mx.sum(per_token*mask)/mx.sum(mask)
 
 
-def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
-    value, grads = mx.value_and_grad(lambda w: loss(w, c, tokens, targets, mask, padding_mask,loss_implementation))(p)
+def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
+    value, grads = mx.value_and_grad(lambda w: loss(w, c, tokens, targets, mask, padding_mask,loss_implementation,embedding_implementation))(p)
     mx.eval(value, grads)
     return value, grads
 

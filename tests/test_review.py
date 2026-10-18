@@ -9,19 +9,19 @@ from slm.data.review import prepare, release, training_examples, check_packet
 from slm.data.build import verify
 
 
-def fixture_snapshot(path,kind="dialogue",repeat_words=0):
+def fixture_snapshot(path,kind="dialogue",repeat_words=0,source_name="fixture",content_prefix=""):
     path.mkdir()
-    src=Source('fixture','a'*40,'https://example.org','fixture','b'*64,'c'*64,('fixture',))
+    src=Source(source_name,'a'*40,'https://example.org','fixture','b'*64,'c'*64,('fixture',))
     examples=[make_example(src,str(i),'family:shared' if i<2 else str(i),
-               ([{'role':'text','content':(f'word{i} '*repeat_words if repeat_words else f'Paragraph {i}: a small synthetic prose record with its own number {i}.')}] if kind=='prose' else
-                [{'role':'user','content':f'Question {i}'},{'role':'assistant','content':f'Answer {i}'}]),
+               ([{'role':'text','content':(f'word{i} '*repeat_words if repeat_words else f'{content_prefix}Paragraph {i}: a small synthetic prose record with its own number {i}.')}] if kind=='prose' else
+                [{'role':'user','content':f'{content_prefix}Question {i}'},{'role':'assistant','content':f'Answer {i}'}]),
                official_split='test' if i==1 else 'validation' if i==2 else 'train',language='en',
                task='prose' if kind=='prose' else 'conversation') for i in range(30)]
-    items,_=curate(examples,{'fixture':src})
+    items,_=curate(examples,{source_name:src})
     for split in ('train','validation','test'):
         selected=[e for e in items if e.split==split]
         if selected:(path/f'{split}-00000.jsonl').write_text(''.join(json.dumps(e.to_dict())+'\n' for e in selected))
-    (path/'sources.json').write_text(json.dumps({'fixture':asdict(src)}))
+    (path/'sources.json').write_text(json.dumps({source_name:asdict(src)}))
     manifest={'version':1,'release':'sample_only','files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in path.iterdir()}}
     (path/'manifest.json').write_text(json.dumps(manifest))
     return items

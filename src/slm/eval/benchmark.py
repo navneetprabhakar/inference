@@ -10,12 +10,12 @@ from slm.common.training import Batches,Recipe,Trainer
 from slm.eval.portability import environment,memory_snapshot
 
 
-def run(config,output,backend='torch',device='cuda',length=1024,warmup=2,steps=5,accumulation_steps=1):
+def run(config,output,backend='torch',device='cuda',length=1024,warmup=2,steps=5,accumulation_steps=1,embedding_implementation='native-gather-v1'):
     output=Path(output)
     if output.exists():raise FileExistsError(output)
     if not 1<=length<=config.max_seq_len or warmup<0 or steps<1:
         raise ValueError('Invalid reference benchmark workload')
-    recipe=Recipe(lr=3e-4,warmup_tokens=max(1,warmup*length*accumulation_steps),eps=1e-6,accumulation_steps=accumulation_steps)
+    recipe=Recipe(lr=3e-4,warmup_tokens=max(1,warmup*length*accumulation_steps),eps=1e-6,accumulation_steps=accumulation_steps,embedding_implementation=embedding_implementation)
     env=environment(backend,device)
     rng=np.random.default_rng(617);items=[]
     for _ in range((warmup+steps)*recipe.accumulation_steps):
@@ -57,7 +57,8 @@ def main():
     p.add_argument('--backend',choices=['torch','mlx'],default='torch');p.add_argument('--device',default='cuda')
     p.add_argument('--length',type=int,default=1024);p.add_argument('--warmup',type=int,default=2);p.add_argument('--steps',type=int,default=5)
     p.add_argument('--accumulation-steps',type=int,default=1)
-    a=p.parse_args();r=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device,a.length,a.warmup,a.steps,a.accumulation_steps)
+    p.add_argument('--embedding-implementation',choices=['native-gather-v1','dense-onehot-v1'],default='native-gather-v1')
+    a=p.parse_args();r=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device,a.length,a.warmup,a.steps,a.accumulation_steps,a.embedding_implementation)
     print(json.dumps(r,indent=2))
 
 

@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: actual accumulated-state validation complete on T4, with tiny numerical MLX/CUDA/MLX return and full 81M exact state/finite continuation back to MLX. Public-source review, tokenizer selection, language pilots and full-size cross-backend trajectory acceptance remain open.
-- Next implementation milestone: deterministic mixture/exposure accounting and explicit curriculum transitions. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
+- Current milestone: finite mixture/exposure foundation complete locally. Source weights, global family/repeat caps, immutable schedule resume and source-specific preparation are implemented. Public review, tokenizer, curriculum transitions, language pilots and full-size trajectory acceptance remain open.
+- Next implementation milestone: explicit curriculum transition contracts and stage accounting. In parallel, review `data/official-split-audit-v1/pending-review.json`, calibrate English/privacy/quality gates and review teacher quality/training rights. Portability acceptance remains pending. CLI sign-in works; API keys are not needed and API fallback is prohibited.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -84,6 +84,13 @@ Updated: 19 October 2026
 - Accumulation defaults to 1; configured groups sum gradients weighted by supervised targets and normalize before one global clipping/AdamW update. Learning-rate warmup counts all processed positions after each group. Short tails are consumed without drop/replay.
 - New checkpoints use state v2 and explicitly bind accumulation, zero pending microbatches and independent optimizer-step/data-cursor counters. Historical v1 loads with accumulation 1; old readers require upgrading before reading v2. Dataset/curriculum changes on resume are not supported yet.
 - Full-size MLX mechanics: 3 logical updates, 92 processed / 60 supervised positions; actual probe work is 5 updates / 136 processed positions with two continuations. Exact own-resume values pass; this is not independent or cross-backend acceptance, sustained timing or a language pilot. Peak RSS 4,985,421,824 bytes holds two trainer states; no new cloud/teacher calls or data approvals.
+
+## Mixture validation — 19 October 2026
+
+- Reference mixture foundation complete: 250 local tests passed / 8 CUDA skips; source-filtered reviewed preparation, finite weighted schedules, family/pass caps, per-record prepared-position exposure, path-independent hashes and accumulated resume. See milestone-fifteen.md and its test XML/mixture audit.
+- Native repeated-ID MLX GPU gradient variability diagnosed; explicit dense embedding control passes tested local determinism/resume and the original golden100. Both native and dense fail an additional repeated-token 100-update MLX/CPU trajectory stress. First retained rerun failure: updates 64/65 respectively. Negative evidence retained, original bounds unchanged; dense remains opt-in and actual dense CUDA is unvalidated.
+- Full 81M dense local own-resume probe: 92 logical / 136 actually executed processed positions, no language claims. Separate short timing probe: 10,240 timed positions in 7.381194s, allocator peak 4,674,112,660 bytes; not a sustained or controlled native/dense comparison.
+- No public/teacher training or teacher/cloud call. Real source approvals remain zero; curriculum transitions and production tokenizer selection remain pending. CUDA planning allowances unchanged at USD 5 out of USD 10; settled costs unknown.
 
 ## Open gates
 
