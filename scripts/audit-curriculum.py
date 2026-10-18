@@ -64,7 +64,7 @@ def run(config,output,backend='mlx',device='cpu',embedding='dense-onehot-v1'):
                 'logical_updates':a.step,'logical_processed_positions':a.tokens,'logical_supervised_positions':a.supervised_tokens,
                 'executed_updates':a.step+b.step-first['step'],'executed_processed_positions':a.tokens+b.tokens-first['tokens'],
                 'memory':memory_snapshot(backend,device),'temporary_fixtures_and_checkpoint_removed':True,
-                'scope':'Short synthetic two-stage own-resume mechanics, not language quality, sustained throughput, actual CUDA or independent cross-backend trajectory acceptance',
+                'scope':'Short synthetic two-stage own-resume mechanics, not language quality, sustained throughput or independent cross-backend trajectory acceptance',
                 'source_sha256':{str(p):sha(p) for p in map(Path,['src/slm/common/training.py','src/slm/common/curriculum.py','src/slm/data/curriculum.py','scripts/audit-curriculum.py'])}}
     output.parent.mkdir(parents=True,exist_ok=True)
     with output.open('x') as f:f.write(json.dumps(report,indent=2)+'\n')

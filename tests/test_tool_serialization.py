@@ -87,10 +87,11 @@ def test_rehashed_tool_shard_still_requires_typed_frames_and_role_masks(tmp_path
     with pytest.raises(ValueError,match='boundary'):validate_batch_objective(values,'sft')
 
 
-@pytest.mark.parametrize('backend',['torch','mlx'])
-def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,backend):
+@pytest.mark.parametrize('backend,device',[('torch','cpu'),('mlx','cpu'),('torch','cuda')])
+def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,backend,device):
     if backend=='mlx':pytest.importorskip('mlx.core')
     import torch
+    if device=='cuda' and not torch.cuda.is_available():pytest.skip('NVIDIA CUDA device unavailable')
     from slm.common.config import Config,initialize
     from slm.common.training import Batches,Recipe,Trainer
     from slm.backends import torch_backend as tb
@@ -100,9 +101,9 @@ def test_typed_sft_loss_and_checkpoint_resume_preserve_masked_training(tmp_path,
     recipe=Recipe(embedding_implementation='dense-onehot-v1',accumulation_steps=2)
     weights=initialize(c);p=tb.load(c,weights);logits=tb.forward(p,c,torch.tensor(arrays[0]))[0]
     losses=torch.nn.functional.cross_entropy(logits[0],torch.tensor(y),reduction='none');expected=float((losses*torch.tensor(mask)).sum().detach()/sum(mask))
-    a=Trainer(c,weights,data,backend,recipe=recipe);r=a.update()
+    a=Trainer(c,weights,data,backend,device,recipe=recipe);r=a.update()
     assert r['loss']==pytest.approx(expected,abs=1e-5,rel=1e-4)
-    a.save(tmp_path/'state');b=Trainer.resume(tmp_path/'state',data,backend);compare(a,b,True)
+    a.save(tmp_path/'state');b=Trainer.resume(tmp_path/'state',data,backend,device);compare(a,b,True)
     assert a.update()==b.update();compare(a,b,True)
     assert a.supervised_tokens==4*sum(mask)<a.tokens
 

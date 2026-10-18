@@ -37,3 +37,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Application-managed MCP stdio integration](milestone-nineteen.md)
 
 - [Bounded MCP HTTP, static credentials and TLS](milestone-twenty.md)
+
+- [NVIDIA curriculum and typed-runtime validation](milestone-twenty-one.md)

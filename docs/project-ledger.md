@@ -7,11 +7,11 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: bounded MCP Streamable HTTP complete within local reference scope, using official SDK 2.3.0, static environment credentials and verified TLS. Scripted controls produce real peer requests; actual random students still fail. No learned capability or production remote-service authorization is claimed.
-- Next implementation milestone: batched actual NVIDIA validation of newer dense/curriculum/typed-runtime paths within the existing validation-only ceiling. Source/suite review, English/privacy/quality calibration, teacher rights/quality review, tokenizer selection and real language pilots remain required. CLI-only teacher; no API fallback.
+- Current milestone: scoped NVIDIA curriculum/typed-runtime validation complete. Local 453 passed / 12 CUDA skips; corrected NVIDIA 412 passed / 40 expected skips. Full v3 MLX → T4 → MLX state imports/replay continuation pass; initial packaging failures remain retained. VM, disk and temporary firewall are verified absent. No learned conversation/tool capability or full-size trajectory gate is accepted.
+- Next implementation milestone: diagnose existing repeated-token/full-size numerical drift and resolve pending source/tokenizer/teacher/suite decisions before real language pilots. English/privacy/quality calibration remains required. CLI-only teacher; no API fallback. No repeat cloud run is required for this milestone.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
-- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
+- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all four T4 validation VMs/disks/temporary firewalls are verified absent. Conservative allowances now total USD 7 (prior USD 5 + current USD 2); these are not settled costs. No Platform teacher API calls or main pretraining; one historical real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing remains pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
 
@@ -131,6 +131,14 @@ Updated: 19 October 2026
 - Nine additional audit probes verify protocol/lifecycle/error paths. Client closure is distinct from fixture ownership: client leaves the server alive; its test owner subsequently reaps it and verifies listener closure. TLS tests reject untrusted certificates and hostname mismatches before HTTP credentials reach the fixture. No token/private-key values enter committed reports.
 - Static preconfigured bearer/custom headers are supported; OAuth discovery/refresh, real-service action authorization and full protocol/provider conformance remain open. Failures preserve unknown remote outcomes; no automatic tool retry.
 - No teacher generation, API fallback, cloud job or real-service calls. Public approvals remain zero and app review remains pending; earlier numerical failures stay failed. CUDA planning allowances remain **USD 5 of USD 10**, settled cost unknown. Continue batched actual CUDA validation and pending data/tokenizer/teacher/suite reviews.
+
+## NVIDIA curriculum and typed-runtime validation — 19 October 2026
+
+- Local suite **453 passed / 12 CUDA skips**; corrected NVIDIA suite **412 passed / 40 expected skips**. Original NVIDIA suite **44 failed / 367 passed / 40 skipped** remains retained. Restricted fixture children lacked source/dependency registration; corrected isolated interpreter passes without relaxing the environment boundary. An initial `ensurepip` setup failure is also retained. Added explicit CUDA typed-SFT mask/loss/resume coverage; no backend or tolerance changes.
+- Full **80,765,440-parameter** v3 MLX → T4 → MLX chain imports all **242,296,320 state values** exactly in each direction and completes foundation → conversation → replay at update 3 / cursor 6 / 164 processed / 144 supervised positions. Finite mechanics, not independent trajectory equality or language training. See milestone-twenty-one.md and source/result/cleanup manifests.
+- Separate dense/native full CUDA own-resume each passes: two logical updates / 81 processed / 61 supervised positions; three actual updates / 117 positions including the additional branch. These fixtures differ from the portable chain/prior local audits. Native remains default; neither prior full-size nor repeated-token drift gate is waived.
+- CUDA-backed random tiny students fail all seven tasks in each local/stdio/HTTP audit and submit zero tools. Scripted controls pass seven each; stdio/HTTP each record five peer calls. Actual transport and device plumbing, not learned tool skill, English truth or style acceptance.
+- One private T4 job, 45-minute deletion policy, no public IP/service account; no reset/extension. Both result archives checksum verified; VM, boot disk and temporary IAP firewall independently verified absent. Linux snapshot records 144 pins. CUDA allowances now **USD 7 of USD 10**, settled cost unknown; no teacher calls, API fallback, new public approvals or main training. Pending source attestation remains false.
 
 ## Open gates
 

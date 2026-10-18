@@ -34,7 +34,7 @@ def absent(pid):
     except ProcessLookupError:return True
 
 
-def run(output,artifacts,backend='mlx'):
+def run(output,artifacts,backend='mlx',device='cpu'):
     output,artifacts=Path(output),Path(artifacts)
     if output.exists() or artifacts.exists():raise FileExistsError('Fresh audit destinations required')
     artifacts.mkdir(parents=True);positives=[];negatives=[];probes=[]
@@ -82,7 +82,7 @@ def run(output,artifacts,backend='mlx'):
         rng=np.random.default_rng(1901);words=[''.join(rng.choice(list('abcdefghijklmnopqrstuvwxyz'),12)) for _ in range(1000)]
         bpe=train_core([' '.join(words)]*2,512,min_frequency=1);bpe.save(root/'tokenizer',{'scope':'Independent random mechanics tokenizer'})
         config=Config(vocab_size=bpe.vocab_size,max_seq_len=4096);save(root/'model',config,initialize(config,1703))
-        model=ToolModel(root/'model',root/'tokenizer',backend,expected_tokenizer_hash=sha(root/'tokenizer/manifest.json'))
+        model=ToolModel(root/'model',root/'tokenizer',backend,device,expected_tokenizer_hash=sha(root/'tokenizer/manifest.json'))
         negative=connection('negative')
         with negative:
             for original in tool_cases():
@@ -108,8 +108,8 @@ def run(output,artifacts,backend='mlx'):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True);p.add_argument('--artifacts',required=True);p.add_argument('--backend',choices=['mlx','torch'],default='mlx')
-    a=p.parse_args();r=run(a.output,a.artifacts,a.backend)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True);p.add_argument('--artifacts',required=True);p.add_argument('--backend',choices=['mlx','torch'],default='mlx');p.add_argument('--device',default='cpu')
+    a=p.parse_args();r=run(a.output,a.artifacts,a.backend,a.device)
     print(json.dumps({'sdk':r['mcp_sdk'],'scripted_passes':r['scripted_controls']['structured_passes'],'actual_peer_calls':r['scripted_controls']['actual_peer_tool_calls'],
         'random_passes':r['random_student']['structured_passes'],'production_accepted':False},indent=2))
 

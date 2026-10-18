@@ -24,7 +24,7 @@ class ScriptedControl:
     def generate_decision(self,history,max_new_tokens):return {'source':'scripted_control_not_student'},self.actions.pop(0)
 
 
-def run(output,artifacts,backend='mlx'):
+def run(output,artifacts,backend='mlx',device='cpu'):
     output,artifacts=Path(output),Path(artifacts)
     if output.exists() or artifacts.exists():raise FileExistsError('Fresh audit destinations required')
     artifacts.mkdir(parents=True);registry=LocalTools();cases=tool_cases();positive=[];negative=[]
@@ -42,7 +42,7 @@ def run(output,artifacts,backend='mlx'):
     with tempfile.TemporaryDirectory(prefix='slm-tool-negative-') as temp:
         root=Path(temp);bpe=train_core([' '.join(words)]*2,512,min_frequency=1);bpe.save(root/'tokenizer',{'scope':'Independent random-word mechanics tokenizer'})
         c=Config(vocab_size=bpe.vocab_size,max_seq_len=4096);save(root/'model',c,initialize(c,1703))
-        model=ToolModel(root/'model',root/'tokenizer',backend,expected_tokenizer_hash=sha(root/'tokenizer/manifest.json'))
+        model=ToolModel(root/'model',root/'tokenizer',backend,device,expected_tokenizer_hash=sha(root/'tokenizer/manifest.json'))
         for case in cases:
             report=run_turn(model,case['history'],registry,max_new_tokens=8);scored=score_task(case,report)
             if scored['structured_task_passed'] or report['executed_calls']:raise AssertionError('Random negative unexpectedly passed or executed; inspect before acceptance')
@@ -61,8 +61,8 @@ def run(output,artifacts,backend='mlx'):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True);p.add_argument('--artifacts',required=True);p.add_argument('--backend',choices=['mlx','torch'],default='mlx')
-    a=p.parse_args();r=run(a.output,a.artifacts,a.backend);print(json.dumps({k:r[k] for k in ('tool_names','scripted_positive_controls','new_training_updates','production_accepted')},indent=2))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True);p.add_argument('--artifacts',required=True);p.add_argument('--backend',choices=['mlx','torch'],default='mlx');p.add_argument('--device',default='cpu')
+    a=p.parse_args();r=run(a.output,a.artifacts,a.backend,a.device);print(json.dumps({k:r[k] for k in ('tool_names','scripted_positive_controls','new_training_updates','production_accepted')},indent=2))
 
 
 if __name__=='__main__':main()

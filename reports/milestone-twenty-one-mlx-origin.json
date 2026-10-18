@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "bundle_sha256": "88bd307a9db9e2c37f3d11aed6b87d4d83acc050d84666c412ed70faa54b74ff",
+  "parameters": 80765440,
+  "first_update": {
+    "loss": 9.764214515686035,
+    "lr": 0.0003,
+    "step": 1,
+    "tokens": 64,
+    "cursor": 2,
+    "microbatches": 2,
+    "supervised_tokens": 64,
+    "stage": "foundation",
+    "stage_cursor": 2,
+    "stage_updates": 1,
+    "stage_processed_positions": 64,
+    "stage_supervised_positions": 64,
+    "stage_completed": true
+  },
+  "plan": {
+    "dataset_hash": "8116bc84d90226b611c867c101e39b9226ddb5ec10290dc69eedbfcc4ba2a251",
+    "stage_order": [
+      "foundation",
+      "conversation",
+      "replay"
+    ],
+    "processed_positions": 164,
+    "supervised_positions": 144,
+    "microbatches": 6,
+    "optimizer_updates": 3,
+    "max_family_processed_positions": 29,
+    "family_processed_cap": 100000,
+    "distinct_content_fingerprints": 9,
+    "content_fingerprints_in_multiple_stages": 1,
+    "scope": "Processed-position exposure across stages; no cross-objective unique-token or semantic-uniqueness claim",
+    "stages": [
+      {
+        "id": "foundation",
+        "objective": "foundation",
+        "dataset_hash": "5fe2524859cafee155bb2a14454634827aa3f2693732df2f87d0e6158652a2c2",
+        "microbatches": 2,
+        "processed_positions": 64,
+        "supervised_positions": 64,
+        "optimizer_updates": 1,
+        "schedule": {
+          "lr": 0.0003,
+          "warmup_tokens": 0,
+          "cooldown_tokens": 0,
+          "final_lr_fraction": 1,
+          "accumulation_steps": 3
+        }
+      },
+      {
+        "id": "conversation",
+        "objective": "sft",
+        "dataset_hash": "ff8e79570df38d4dd8c760ff0139a874f3cf2a6ff0d2300568d291a2c3bf75b5",
+        "microbatches": 2,
+        "processed_positions": 36,
+        "supervised_positions": 16,
+        "optimizer_updates": 1,
+        "schedule": {
+          "lr": 0.0001,
+          "warmup_tokens": 0,
+          "cooldown_tokens": 0,
+          "final_lr_fraction": 1,
+          "accumulation_steps": 2
+        }
+      },
+      {
+        "id": "replay",
+        "objective": "foundation",
+        "dataset_hash": "14526a5f16a4a7ef336a7326c12a104b8dd4dda917cb089a1b1a9aa7972ed124",
+        "microbatches": 2,
+        "processed_positions": 64,
+        "supervised_positions": 64,
+        "optimizer_updates": 1,
+        "schedule": {
+          "lr": 0.0003,
+          "warmup_tokens": 0,
+          "cooldown_tokens": 0,
+          "final_lr_fraction": 1,
+          "accumulation_steps": 2
+        }
+      }
+    ]
+  },
+  "environment": {
+    "backend": "mlx",
+    "platform": "macOS-26.4.1-arm64-arm-64bit",
+    "python": "3.12.11",
+    "device": "Device(gpu, 0)",
+    "version": "0.32.4",
+    "hardware": "arm64"
+  },
+  "synthetic_only": true
+}

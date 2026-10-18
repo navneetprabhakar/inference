@@ -1,0 +1,647 @@
+{
+  "artifact_sha256": {
+    "corrected-v2-results/stdio-artifacts/lifecycle-probes.json": "73d3bc44f4e99621d483f471bad37288551a536bcb9e31d9ce9ea0668d2b5c81",
+    "corrected-v2-results/stdio-artifacts/negative-traces.json": "c9bd8020226098cc6b4793a5c33ea25952383235283371746cdcda69600b0571",
+    "corrected-v2-results/stdio-artifacts/peer-calls.json": "8b2371c91a9fa85810090c92f27bf72f43909bae969c0e1f161386e01292de4e",
+    "corrected-v2-results/stdio-artifacts/positive-traces.json": "6fd88144f80048edb0f9a59408bb44907c9f1ef4f878fa9e98c63b96b5595e00"
+  },
+  "catalogue_hash": "3430bca055847ad24e9848e6c2d085dfca5e1075709eab1905bcbf9861db0210",
+  "creator": "Navneet Prabhakar",
+  "lifecycle_probes": [
+    {
+      "audit": {
+        "connection": {
+          "connection_closed": true,
+          "endpoint_hash": "fa60f6c9a0865805cd249da4f71470cadcf532c33ef2bd0e8721c95bd24999e4",
+          "last_result_hash": "5fad2c2f43e968ba587733958ef2220863a11222817143fcf153be51794d49ab",
+          "list_requests": 6,
+          "mcp_sdk": "2.3.0",
+          "protocol_version": "2025-11-25",
+          "tool_requests_submitted": 1,
+          "tool_results_received": 1,
+          "transport_kind": "stdio",
+          "unknown_tool_outcomes": 0
+        },
+        "transport": {
+          "limit_error": null,
+          "parent_reaped": true,
+          "pid": 3068,
+          "received_bytes": 9498,
+          "received_messages": 8,
+          "returncode": 0,
+          "signals": [],
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdin_closed": true
+        }
+      },
+      "expected_failure_observed": false,
+      "parent_absent_verified": true,
+      "probe": "legacy"
+    },
+    {
+      "audit": {
+        "connection": {
+          "connection_closed": true,
+          "endpoint_hash": "077bea21102793c4b7349c1aab905854fd36b55e663a04d4e2cabab781624c73",
+          "list_requests": 6,
+          "mcp_sdk": "2.3.0",
+          "protocol_version": "2026-07-28",
+          "tool_requests_submitted": 1,
+          "tool_results_received": 0,
+          "transport_kind": "stdio",
+          "unknown_tool_outcomes": 1
+        },
+        "transport": {
+          "limit_error": null,
+          "parent_reaped": true,
+          "pid": 3072,
+          "received_bytes": 10369,
+          "received_messages": 7,
+          "returncode": 0,
+          "signals": [],
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdin_closed": true
+        }
+      },
+      "expected_failure_observed": true,
+      "failure_type": "MCPTimeout",
+      "parent_absent_verified": true,
+      "probe": "call_hang"
+    },
+    {
+      "audit": {
+        "connection": {
+          "connection_closed": true,
+          "endpoint_hash": "32762a6a3efb47ed4ed3511d3b27038cdf5e5f0ccec635d6eff5687827f114bd",
+          "last_result_hash": "85d215e23285349e10fa48d7c9bf7b1729d9cf2aab18f193b94a85d0cec95ffb",
+          "list_requests": 9,
+          "mcp_sdk": "2.3.0",
+          "protocol_version": "2026-07-28",
+          "tool_requests_submitted": 1,
+          "tool_results_received": 1,
+          "transport_kind": "stdio",
+          "unknown_tool_outcomes": 0
+        },
+        "transport": {
+          "limit_error": null,
+          "parent_reaped": true,
+          "pid": 3076,
+          "received_bytes": 15622,
+          "received_messages": 11,
+          "returncode": 0,
+          "signals": [],
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdin_closed": true
+        }
+      },
+      "expected_failure_observed": true,
+      "failure_type": "ExecutionRefused",
+      "parent_absent_verified": true,
+      "probe": "changed"
+    },
+    {
+      "audit": {
+        "connection": {
+          "connection_closed": true,
+          "endpoint_hash": "c744b0f9ad3b9aa63005b475c683fdcf8384be0694cece228bfb75a7bc4fce7b",
+          "list_requests": 0,
+          "mcp_sdk": "2.3.0",
+          "protocol_version": null,
+          "tool_requests_submitted": 0,
+          "tool_results_received": 0,
+          "transport_kind": "stdio",
+          "unknown_tool_outcomes": 0
+        },
+        "transport": {
+          "limit_error": "TransportLimit",
+          "parent_reaped": true,
+          "pid": 3080,
+          "received_bytes": 147456,
+          "received_messages": 0,
+          "returncode": 0,
+          "signals": [],
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdin_closed": true
+        }
+      },
+      "expected_failure_observed": true,
+      "failure_type": "ExceptionGroup",
+      "parent_absent_verified": true,
+      "probe": "stdout_oversize"
+    },
+    {
+      "audit": {
+        "connection": {
+          "connection_closed": true,
+          "endpoint_hash": "a506fbe927ee03137cc59cc2943fafd107d474095e83d9aded13ffb0f21c2675",
+          "last_result_hash": "85d215e23285349e10fa48d7c9bf7b1729d9cf2aab18f193b94a85d0cec95ffb",
+          "list_requests": 6,
+          "mcp_sdk": "2.3.0",
+          "protocol_version": "2026-07-28",
+          "tool_requests_submitted": 1,
+          "tool_results_received": 1,
+          "transport_kind": "stdio",
+          "unknown_tool_outcomes": 0
+        },
+        "transport": {
+          "limit_error": null,
+          "parent_reaped": true,
+          "pid": 3082,
+          "received_bytes": 10631,
+          "received_messages": 8,
+          "returncode": 0,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ],
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdin_closed": true
+        }
+      },
+      "child_not_running_verified": true,
+      "child_ps_state": "",
+      "expected_failure_observed": false,
+      "parent_absent_verified": true,
+      "probe": "stubborn_child"
+    }
+  ],
+  "mcp_sdk": "2.3.0",
+  "new_cloud_jobs": 0,
+  "new_teacher_calls": 0,
+  "production_accepted": false,
+  "random_student": {
+    "audit": {
+      "connection": {
+        "connection_closed": true,
+        "endpoint_hash": "26019ba5aa6fcb2e6d4fa7ec802e92ba3ce38aec7d982f37643ae8ff5726a413",
+        "list_requests": 3,
+        "mcp_sdk": "2.3.0",
+        "protocol_version": "2026-07-28",
+        "tool_requests_submitted": 0,
+        "tool_results_received": 0,
+        "transport_kind": "stdio",
+        "unknown_tool_outcomes": 0
+      },
+      "parent_absent_verified": true,
+      "transport": {
+        "limit_error": null,
+        "parent_reaped": true,
+        "pid": 3098,
+        "received_bytes": 5320,
+        "received_messages": 4,
+        "returncode": 0,
+        "signals": [],
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdin_closed": true
+      }
+    },
+    "cases": 7,
+    "identity": {
+      "architecture": {
+        "hidden_size": 32,
+        "intermediate_size": 64,
+        "max_seq_len": 4096,
+        "norm_eps": 1e-05,
+        "num_heads": 4,
+        "num_kv_heads": 2,
+        "num_layers": 2,
+        "rope_theta": 10000.0,
+        "vocab_size": 512
+      },
+      "backend_sha256": "e8a5fb383e939af17419a40be8870385a3ee593bc838d8e2024d166367570777",
+      "binding_scope": "Explicit model-only/tokenizer pairing; vocabulary and supplied tokenizer hash checked, no inferred training provenance",
+      "decoding": "raw-cached-tool-decisions-v1",
+      "embedding_implementation": "native-gather-v1",
+      "environment": {
+        "backend": "torch",
+        "cuda_runtime": "12.9",
+        "device": "cuda",
+        "hardware": "Tesla T4",
+        "platform": "Linux-7.0.0-1013-gcp-x86_64-with-glibc2.39",
+        "python": "3.12.3",
+        "version": "2.9.1+cu129"
+      },
+      "inference_sha256": "f6da14241b5fe940e61a034b0ca0009d92f614d1dc3d79ccf9fefe179c36b4f5",
+      "model_manifest_sha256": "b7eaf0c265e67f8981f810938e331210a835558cc2dc586d4837cf8cff7d75d8",
+      "tokenizer_manifest_sha256": "4f3e161bc4157f20d4c5a226bcb946226a43f901e4342aee76c9d6fb722a732f",
+      "tool_protocol_sha256": "b900fe2c69f98aa73675081baedd70417b44b8733d81c7d8a92efa7b459019fd",
+      "tool_runtime_sha256": "cc4240fd0b9773f403cb4e798292b25a739322848da87be8feee656a73debae6",
+      "tool_serializer_sha256": "96e62578d54c78c1b55cece43093f0a8dccd781f927006e3c16ccf92ec4cdbef"
+    },
+    "parameters": 34976,
+    "statuses": [
+      "invalid_decision",
+      "invalid_decision",
+      "invalid_decision",
+      "invalid_decision",
+      "invalid_decision",
+      "invalid_decision",
+      "invalid_decision"
+    ],
+    "structured_passes": 0,
+    "tool_submissions": 0
+  },
+  "runtime_audit_training_updates": 0,
+  "scope": "Actual local stdio SDK interoperability and bounded lifecycle controls on this host, not real-service authorization, HTTP, learned capability or actual CUDA MCP validation",
+  "scripted_controls": {
+    "actual_peer_tool_calls": 5,
+    "audit": {
+      "connection": {
+        "connection_closed": true,
+        "endpoint_hash": "ef807bd2ce3259dd84801d2d0621401aaf36031105f0820975826bc21c1d12fd",
+        "last_result_hash": "6ee67fd4e4064b7b9f2487254cf7ee7a4050abc06e7b77a758afe2384c99ecc4",
+        "list_requests": 18,
+        "mcp_sdk": "2.3.0",
+        "protocol_version": "2026-07-28",
+        "tool_requests_submitted": 5,
+        "tool_results_received": 5,
+        "transport_kind": "stdio",
+        "unknown_tool_outcomes": 0
+      },
+      "parent_absent_verified": true,
+      "transport": {
+        "limit_error": null,
+        "parent_reaped": true,
+        "pid": 3064,
+        "received_bytes": 33665,
+        "received_messages": 24,
+        "returncode": 0,
+        "signals": [],
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdin_closed": true
+      }
+    },
+    "cases": 7,
+    "free_text_verified": false,
+    "structured_passes": 7,
+    "student": false
+  },
+  "source_sha256": {
+    "requirements-mcp-reference.lock": "fbb73c636cf3c727e360adcc6bf8c87b69efe9fc89343f8bcdd520adf9b9d5a3",
+    "scripts/audit-mcp.py": "a98070b621fba77c32d6462ea27df0763300a846b583521350a0afe65599c36b",
+    "src/slm/inference/tools.py": "cc4240fd0b9773f403cb4e798292b25a739322848da87be8feee656a73debae6",
+    "src/slm/mcp/__init__.py": "3c1c81f3ba248a12fbca13df216e5594488981827642a72544a6c01d9bd7fc3e",
+    "src/slm/mcp/cli.py": "2d4a923ca75eb7c4eb292f8d2d29d4346af3ed4f179a2e1d1ef0dc9a7de7af51",
+    "src/slm/mcp/fixture_server.py": "56262e1731243b51dd747d2bac04c0afb74b1398a9164352c24984efd72c7c8a",
+    "src/slm/mcp/http.py": "bd1ba09b05f3ac8748baa6c3ad16b485583708e923545a9a42b9771b80db411a",
+    "src/slm/mcp/http_fixture.py": "b9b20b8a0c37357f290a93d027ef157ca52c92737c1d4a2fa08210d1f2b3d28f",
+    "src/slm/mcp/registry.py": "b6379f5db7f6f1014b597785bdebe7be2211b067b429309c505b96c01a48f321",
+    "src/slm/mcp/transport.py": "292c7bf23f556edd21082d20220464ffe8a7b4ac97929b5c3a9e77368719bc2f",
+    "src/slm/tools/local.py": "6d177cc4fb4b2f41dbac1fd0cac5e4b1510d78ef2fd742d708a62d2445b52592"
+  },
+  "tools": [
+    {
+      "description": "fixture.product_lookup: Look up one synthetic product by exact product ID.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "product_id": {
+            "maxLength": 16,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "product_id"
+        ],
+        "type": "object"
+      },
+      "name": "mcp_fixture_165ce29fca073e2b",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "product": {
+            "additionalProperties": false,
+            "properties": {
+              "brand": {
+                "maxLength": 32,
+                "minLength": 1,
+                "type": "string"
+              },
+              "category": {
+                "maxLength": 32,
+                "minLength": 1,
+                "type": "string"
+              },
+              "currency": {
+                "const": "fixture_minor_units"
+              },
+              "fixture_price_minor": {
+                "maximum": 1000000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "product_id": {
+                "maxLength": 16,
+                "minLength": 1,
+                "type": "string"
+              },
+              "source": {
+                "const": "synthetic_catalog_v1"
+              },
+              "title": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "product_id",
+              "title",
+              "brand",
+              "category",
+              "fixture_price_minor",
+              "currency",
+              "source"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "fixture.product_compare: Return two or three synthetic products for comparison by distinct IDs.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "product_ids": {
+            "items": {
+              "maxLength": 16,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 3,
+            "minItems": 2,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "product_ids"
+        ],
+        "type": "object"
+      },
+      "name": "mcp_fixture_5fa1a4aa44ef5f39",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "products": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "brand": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "category": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "currency": {
+                  "const": "fixture_minor_units"
+                },
+                "fixture_price_minor": {
+                  "maximum": 1000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "product_id": {
+                  "maxLength": 16,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "source": {
+                  "const": "synthetic_catalog_v1"
+                },
+                "title": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "product_id",
+                "title",
+                "brand",
+                "category",
+                "fixture_price_minor",
+                "currency",
+                "source"
+              ],
+              "type": "object"
+            },
+            "maxItems": 3,
+            "minItems": 2,
+            "type": "array"
+          }
+        },
+        "required": [
+          "products"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "fixture.document_lookup: Return the body of a local synthetic document by exact document ID.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "document_id": {
+            "maxLength": 16,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_id"
+        ],
+        "type": "object"
+      },
+      "name": "mcp_fixture_72027fe23545ca3c",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "body": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "type": "string"
+          },
+          "document_id": {
+            "maxLength": 16,
+            "minLength": 1,
+            "type": "string"
+          },
+          "source": {
+            "const": "synthetic_documents_v1"
+          }
+        },
+        "required": [
+          "document_id",
+          "body",
+          "source"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "fixture.arithmetic: Compute an exact bounded integer operation. Amounts use caller-supplied minor units.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "left": {
+            "maximum": 1000000,
+            "minimum": -1000000,
+            "type": "integer"
+          },
+          "operation": {
+            "enum": [
+              "add",
+              "subtract",
+              "multiply"
+            ]
+          },
+          "right": {
+            "maximum": 1000000,
+            "minimum": -1000000,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "operation",
+          "left",
+          "right"
+        ],
+        "type": "object"
+      },
+      "name": "mcp_fixture_9537bd02ba6e9f49",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "maximum": 1000000000000,
+            "minimum": -1000000000000,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "fixture.catalog_search: Find synthetic catalog products by all query words, price cap and excluded brands.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "excluded_brands": {
+            "items": {
+              "maxLength": 32,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 10,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "limit": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "max_price_minor": {
+            "maximum": 1000000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "query": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "max_price_minor",
+          "excluded_brands",
+          "limit"
+        ],
+        "type": "object"
+      },
+      "name": "mcp_fixture_c05caf643dd8e3c9",
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "products": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "brand": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "category": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "currency": {
+                  "const": "fixture_minor_units"
+                },
+                "fixture_price_minor": {
+                  "maximum": 1000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "product_id": {
+                  "maxLength": 16,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "source": {
+                  "const": "synthetic_catalog_v1"
+                },
+                "title": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "product_id",
+                "title",
+                "brand",
+                "category",
+                "fixture_price_minor",
+                "currency",
+                "source"
+              ],
+              "type": "object"
+            },
+            "maxItems": 5,
+            "type": "array"
+          }
+        },
+        "required": [
+          "products"
+        ],
+        "type": "object"
+      }
+    }
+  ]
+}

@@ -15,15 +15,15 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 ```sh
 uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer,teacher,data]'
+uv pip install --python .venv/bin/python -e '.[dev,mlx,tokenizer,teacher,data,mcp]'
 .venv/bin/python -m pytest -q
 ```
 
-`requirements-macos.lock` records the exact package versions used locally. To reproduce that environment, install it with `uv pip sync --python .venv/bin/python requirements-macos.lock`, then install this project with `uv pip install --python .venv/bin/python --no-deps -e .`.
+`requirements-macos.lock` records the original model-runtime package versions used locally. To reproduce that baseline, install it with `uv pip sync --python .venv/bin/python requirements-macos.lock`, then install this project with `uv pip install --python .venv/bin/python --no-deps -e .`. MCP transport checks additionally require the separate `requirements-mcp-reference.lock` dependency closure.
 
 ## PyTorch on NVIDIA hardware
 
-Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev,tokenizer,teacher,data]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip.
+Install the PyTorch build appropriate for the host CUDA driver, then install `.[dev,tokenizer,teacher,data,mcp]` without the MLX extra and run pytest. The CPU/CUDA check runs only if `torch.cuda.is_available()` is true. Local MLX cross-framework tests skip where MLX is not installed. A green Linux test run with those skips does **not** prove an MLX/CUDA round trip. MCP fixture children require the project/SDK registered in their interpreter; inheriting a parent `PYTHONPATH` alone is insufficient.
 
 ## Run the prototype
 
@@ -73,9 +73,9 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Gradient accumulation and update-boundary resume](docs/milestone-thirteen.md) now support unequal supervised-token counts, short tails and v1-to-v2 checkpoint loading. A bounded full-model MLX own-resume probe passes. [Actual NVIDIA accumulation validation](docs/milestone-fourteen.md) now covers the tiny numerical MLX/CUDA/MLX round trip and full-model exact state transfer with finite continuation; full-size cross-backend trajectory acceptance remains open.
 
-[Finite mixture schedules](docs/milestone-fifteen.md) now provide source weights, family/repeat caps, per-record exposure and hash-bound accumulated resume. The explicit dense embedding control passes local determinism checks but both embedding modes fail the additional repeated-token trajectory stress; native stays default and dense CUDA validation remains open.
+[Finite mixture schedules](docs/milestone-fifteen.md) now provide source weights, family/repeat caps, per-record exposure and hash-bound accumulated resume. Both embedding modes fail the additional repeated-token trajectory stress; native stays default. Subsequent dense CUDA mechanics and numerical controls are recorded in [milestone twenty-one](docs/milestone-twenty-one.md); they do not waive the failed trajectory gate.
 
-[Curriculum transitions](docs/milestone-sixteen.md) now preserve global AdamW state across finite foundation/SFT stages with stage-local schedules and version-3 resume receipts. Tiny local transition controls and a bounded full-model MLX own-resume probe pass; capability exit gates and actual CUDA curriculum execution remain open.
+[Curriculum transitions](docs/milestone-sixteen.md) now preserve global AdamW state across finite foundation/SFT stages with stage-local schedules and version-3 resume receipts. Actual NVIDIA curriculum and typed-runtime validation is recorded in [milestone twenty-one](docs/milestone-twenty-one.md). Capability acceptance and real language pilots remain open.
 
 [Raw conversation evaluation](docs/milestone-seventeen.md) now provides cached greedy decoding, 500 unreviewed SFW candidate cases, separate exact/human/reference-loss metrics and stage screen reports. Actual tiny/full random-weight negative controls reject; no language capability or reviewed-suite acceptance is claimed.
 
