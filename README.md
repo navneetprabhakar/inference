@@ -61,4 +61,6 @@ A manual bootstrap [review/release contract](docs/milestone-five.md) and checked
 
 The full 80.8M candidate now passes local fixed-checkpoint context/state-import and synthetic learning checks. Full-size training-trajectory comparisons fail the declared numerical gates; see [bring-up and drift evidence](docs/milestone-six.md).
 
+The learned full-size checkpoint also passes exact state import and 2,048-context inference on an actual NVIDIA T4. A versioned loss-accuracy experiment and bounded laptop/T4 FP32 timings are recorded in [milestone seven](docs/milestone-seven.md); the experimental loss does not pass trajectory gates and remains opt-in. A [portability acceptance proposal](docs/portability-acceptance-proposal.md) is pending review.
+
 Not implemented: approved production datasets, production sharded-data training, production tokenizer, teacher integration, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

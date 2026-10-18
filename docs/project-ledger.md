@@ -7,11 +7,11 @@ Updated: 18 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: full-size local numeric bring-up and diagnostics recorded; exact state import/inference pass, training-trajectory acceptance fails. Public approvals remain zero.
-- Next implementation milestone: investigate full-size trajectory drift and full-size NVIDIA state/inference within the authorized validation budget; continue calibrated data gates while human review is pending.
+- Current milestone: full-size NVIDIA state/inference and loss-accuracy investigation recorded; training-trajectory acceptance still fails. Public approvals remain zero.
+- Next implementation milestone: obtain the portability acceptance decision before changing its gates; continue data/tokenizer foundations within existing approvals and budgets. Source/sample human review remains pending.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
-- Hardware/precision gates still open: accepted full-size training trajectories, NVIDIA full-size checks, reduced precision and sustained training.
-- Spending: USD 10 authorized for a short CUDA validation job in `executespecv1`; one T4 validation VM used. No paid teacher calls or main pretraining. VM/disk/firewall deletion verified; conservative allowance below USD 1, settled billing pending.
+- Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
+- Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; both tiny and full-size T4 jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 prior + USD 2 full-size = USD 3 total; these are not settled costs. No paid teacher calls or main pretraining; settled billing pending.
 - Repository: [navneetprabhakar/inference](https://github.com/navneetprabhakar/inference), verified private.
 - Baseline branch: `main`. This ledger is committed with the initial project baseline; remote synchronization is verified after pushing.
 
@@ -27,6 +27,7 @@ Updated: 18 October 2026
 | 18 October 2026 | Bounded source audit and curation foundation | Complete within audit scope | 57 passed / 2 CUDA skips; 800 input records → 901 retained sample-only examples; pinned revisions, protected held-outs and deterministic shards; see milestone-four.md |
 | 18 October 2026 | Bootstrap review/release contract | Complete within bootstrap scope | 63 passed / 2 CUDA skips; pending 40-example packet, source/content-bound review gates and checked train-only reader; no public approvals; see milestone-five.md |
 | 18 October 2026 | Full-size local bring-up / drift diagnostics | Partial; training gate failed | 74 passed / 2 CUDA skips; 80,765,440 parameters; exact state import, 2,048-context checks and 100-update learning pass locally; trajectory comparisons fail; see milestone-six.md |
+| 18 October 2026 | Loss accuracy / full-size NVIDIA validation | Validation scope complete; trajectory gate still failed | 96 passed / 5 skipped locally; 71 passed / 17 expected skips on T4; exact learned state and 2,048-context inference pass; opt-in accurate loss candidate fails trajectory criteria; see milestone-seven.md |
 
 ## Decisions
 
@@ -35,9 +36,9 @@ Updated: 18 October 2026
 - Preserve meaningful milestone boundaries; do not push every intermediate edit.
 - Teacher is required and configurable, initially GPT-6 Luna or GPT-5.6 Luna; offline data development only.
 - Model-only checkpoints remain supported; training checkpoints now preserve optimizer/cursor/scheduler state. Tiny NVIDIA migration is validated; full-size/reduced-precision migration remains unverified.
-- CUDA evidence is limited to the tiny FP32 implementation on the tested T4; do not generalize it to the full model or optimized kernels.
+- CUDA evidence now includes full-size exact state import, learned-checkpoint context/inference and seven synthetic FP32 benchmark updates on T4. It does not establish accepted full-size continued-training trajectories, sustained throughput, reduced precision or optimized kernels.
 
-- GCP validation resources are deleted; Network Management was restored to disabled after deleting its temporary connectivity test. See the cleanup report.
+- The milestone-three tiny-validation resources were deleted; Network Management was restored to disabled after deleting its temporary connectivity test. See the milestone-three cleanup report. The new full-size job has its own lifecycle and cleanup evidence.
 - Column-major serialization failure was corrected by explicit row-major export; scalar shapes and logical values are covered by regression tests.
 
 - Initial source probes: FineWeb-Edu, UltraChat, Dolly and complete OASST ready trees; sample bytes about 3.19 MB plus metadata. Raw data stays outside Git.
@@ -50,13 +51,18 @@ Updated: 18 October 2026
 - Both backends learn the 100-repeat synthetic fixture; endpoint weight drift is substantial (max per-tensor relative L2 29.94%). Exact import/export preserves 242,296,320 values, but does not establish trajectory equality.
 - Recomputable duplicate probe arrays were retired after hash/evidence capture; checkpoints and provenance remain. No new cloud or teacher spending.
 
+- Experimental stable loss improves analytic confident-target accuracy but fails existing tiny/full-size trajectory criteria; the legacy loss remains default, and loss version is stored with training recipes/checkpoints.
+- Full-size cloud resources were deleted after checksum-verified result download; instance, auto-delete boot disk and temporary firewall were checked absent. See `reports/milestone-seven-cleanup.json`.
+- A concrete portability acceptance proposal is pending review through an app input request. No existing failed gate is waived, and no paid training is authorized by the proposal.
+
 ## Open gates
 
 - [x] Portable optimizer, token-warmup scheduler and deterministic fixture-batch cursor.
 - [x] Same-backend continuation and injected interrupted-save recovery tests.
 - [x] Actual tiny-FP32 MLX/CUDA training-state round trip.
 - [x] Full-size local instantiation, fixed-checkpoint context, exact state imports and synthetic learning checks.
-- [ ] Accepted full-size training trajectory portability and actual NVIDIA full-size validation.
+- [x] Actual NVIDIA full-size exact-state import, learned-checkpoint 2,048-context inference and bounded reference training.
+- [ ] Accepted full-size training trajectory portability; acceptance proposal pending review.
 - [ ] Data audit, production tokenizer, and teacher integration.
 - [x] Authorized GCP CUDA validation, limited to USD 10.
 - [ ] Main pretraining and teacher-generation budgets.

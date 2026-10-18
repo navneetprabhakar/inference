@@ -7,7 +7,7 @@ from pathlib import Path
 import time
 from safetensors.numpy import load_file
 from slm.common.checkpoint import load
-from slm.common.training import Trainer
+from slm.common.training import Trainer,recipe_from_state
 from slm.eval.portability import environment,memory_snapshot,get_batches
 
 
@@ -35,7 +35,7 @@ def audit(checkpoint,fixture,output,backend='mlx',device='cpu'):
     if original.hexdigest()!=imported.hexdigest():raise AssertionError('State values differ after import/export')
     state=json.loads((checkpoint/'state.json').read_text())
     counters={'step':trainer.step,'cursor':trainer.cursor,'tokens':trainer.tokens,'supervised_tokens':trainer.supervised_tokens}
-    if any(counters[k]!=state[k] for k in counters) or asdict(trainer.recipe)!=state['recipe']:
+    if any(counters[k]!=state[k] for k in counters) or asdict(trainer.recipe)!=asdict(recipe_from_state(state)):
         raise ValueError('Training counters or recipe changed')
     report={'passed':True,'scope':'Exact state import/export; no optimizer update or trajectory equivalence claim',
             'parameters':config.parameter_count,'tensors_checked':len(expected),'values_checked':sum(v.size for v in expected.values()),

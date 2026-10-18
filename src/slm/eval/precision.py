@@ -7,7 +7,7 @@ import numpy as np
 import torch
 from safetensors.numpy import load_file
 from slm.common.checkpoint import load
-from slm.common.training import Recipe
+from slm.common.training import recipe_from_state
 from slm.eval.portability import get_batches
 
 
@@ -84,7 +84,7 @@ def diagnose(bundle,cpu_probe,output):
     if output.exists():raise FileExistsError(output)
     config,weights=load(bundle/'initial/model')
     state=json.loads((bundle/'initial/state.json').read_text())
-    recipe=Recipe(**state['recipe'])
+    recipe=recipe_from_state(state)
     params={k:torch.tensor(v,dtype=torch.float64,requires_grad=True) for k,v in weights.items()}
     del weights
     groups=[{'params':[p for k,p in params.items() if p.ndim==2 and k!='embedding'],'weight_decay':recipe.decay},

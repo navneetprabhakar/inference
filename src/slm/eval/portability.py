@@ -81,7 +81,8 @@ def capture(trainer):
     x, y, mask = trainer.batches.items[0]
     a = trainer.array
     logits, _, layers = trainer.impl.forward(trainer.params, trainer.config, a(x))
-    loss, grads = trainer.impl.value_and_grad(trainer.params, trainer.config, a(x), a(y), a(mask))
+    loss, grads = trainer.impl.value_and_grad(trainer.params, trainer.config, a(x), a(y), a(mask),
+                    loss_implementation=trainer.recipe.loss_implementation)
     tensors = {'logits': logits, 'loss': loss}
     tensors.update({f'layer:{i}': v for i, v in enumerate(layers)})
     tensors.update({f'gradient:{k}': v for k, v in grads.items()})

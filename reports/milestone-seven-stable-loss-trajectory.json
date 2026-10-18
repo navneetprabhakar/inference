@@ -1,0 +1,96 @@
+{
+  "stablece-versioned-seed211-origin": {
+    "report_sha256": "c50aa8a740f80630a0cdff2f6ad0b51bd7b6a00562f0553126581ede0050769d",
+    "vocab_size": 16384,
+    "batch_count": 6,
+    "architecture": {
+      "vocab_size": 16384,
+      "hidden_size": 512,
+      "intermediate_size": 1536,
+      "num_layers": 24,
+      "num_heads": 8,
+      "num_kv_heads": 2,
+      "max_seq_len": 2048,
+      "rope_theta": 10000.0,
+      "norm_eps": 1e-05
+    },
+    "probe_steps": [
+      2,
+      4,
+      6
+    ],
+    "seed": 211,
+    "initialization_seed": 109,
+    "comparison_policy": "full_depth_fp32_v1"
+  },
+  "stablece-versioned-seed211-cpu": {
+    "report_sha256": "abcf35fb1a220ee08c59a54e2437628d53be3c076c2eb251bc912f87c6811ba9",
+    "passed": true,
+    "bundle_hash": "53598473348772febc583aeaf77a279a95830d75bb5a7dbddef828184885ca53",
+    "origin": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "destination": {
+      "backend": "torch",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "cpu",
+      "version": "2.14.1",
+      "cuda_runtime": null,
+      "hardware": "arm64"
+    },
+    "comparison_policy": "full_depth_fp32_v1",
+    "start_step": 2,
+    "parameters": 80765440,
+    "attempted_probe_step": 4,
+    "final_step": 4,
+    "processed_tokens": 56,
+    "supervised_tokens": 37,
+    "seconds": 7.745539875002578,
+    "memory": {
+      "process_peak_rss_bytes": 5153619968,
+      "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+    },
+    "completed_update_step": 4
+  },
+  "stablece-versioned-seed211-return": {
+    "report_sha256": "dd7d8a48da82f05b348f3acb2661ba94cb56ad39c6e78bda515ee538e1bf1472",
+    "passed": false,
+    "bundle_hash": "53598473348772febc583aeaf77a279a95830d75bb5a7dbddef828184885ca53",
+    "origin": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "destination": {
+      "backend": "mlx",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "device": "Device(gpu, 0)",
+      "version": "0.32.4",
+      "hardware": "arm64"
+    },
+    "comparison_policy": "full_depth_fp32_v1",
+    "start_step": 4,
+    "parameters": 80765440,
+    "attempted_probe_step": 6,
+    "error": "AssertionError: \nNot equal to tolerance rtol=0.0001, atol=1e-05\nlayer:10\nMismatched elements: 1 / 6144 (0.0163%)\nMismatch at index:\n [1, 3, 1]: 0.00013445038348436356 (ACTUAL), 0.00012422539293766022 (DESIRED)\nMax absolute difference among violations: 1.0224991e-05\nMax relative difference among violations: 0.08230999\n ACTUAL: array([[[ 1.008587e+00, -3.333816e-02, -6.576709e-01, ...,\n          2.049409e+00,  2.167586e+00, -4.883758e-01],\n        [ 1.053699e+00, -1.986468e-01, -6.751271e-01, ...,...\n DESIRED: array([[[ 1.008584e+00, -3.334785e-02, -6.576754e-01, ...,\n          2.049410e+00,  2.167584e+00, -4.883752e-01],\n        [ 1.053697e+00, -1.986559e-01, -6.751312e-01, ...,...",
+    "seconds": 8.024089791986626,
+    "memory": {
+      "process_peak_rss_bytes": 5274877952,
+      "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+      "allocator_peak_bytes": 2467096116,
+      "allocator_active_bytes": 969186560,
+      "allocator_cache_bytes": 1568535724
+    },
+    "completed_update_step": 6
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "synthetic_only": true,
+  "parameters": 80765440,
+  "environment": {
+    "backend": "torch",
+    "platform": "Linux-7.0.0-1013-gcp-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "device": "cuda",
+    "version": "2.9.1+cu129",
+    "cuda_runtime": "12.9",
+    "hardware": "Tesla T4"
+  },
+  "recipe": {
+    "lr": 0.0003,
+    "warmup_tokens": 2048,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "eps": 1e-06,
+    "decay": 0.1,
+    "clip": 1.0,
+    "loss_implementation": "legacy-logsumexp-minus-target-v1"
+  },
+  "batch_size": 1,
+  "sequence_length": 1024,
+  "warmup_updates": 2,
+  "measured_updates": 5,
+  "measured_token_positions": 5120,
+  "measured_seconds": 3.786581073999969,
+  "token_positions_per_second": 1352.1432394926828,
+  "history": [
+    {
+      "loss": 9.769387245178223,
+      "lr": 0.0003,
+      "step": 3,
+      "tokens": 3072
+    },
+    {
+      "loss": 9.803216934204102,
+      "lr": 0.0003,
+      "step": 4,
+      "tokens": 4096
+    },
+    {
+      "loss": 9.815009117126465,
+      "lr": 0.0003,
+      "step": 5,
+      "tokens": 5120
+    },
+    {
+      "loss": 9.824037551879883,
+      "lr": 0.0003,
+      "step": 6,
+      "tokens": 6144
+    },
+    {
+      "loss": 9.812155723571777,
+      "lr": 0.0003,
+      "step": 7,
+      "tokens": 7168
+    }
+  ],
+  "memory": {
+    "process_peak_rss_bytes": 1660325888,
+    "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory.",
+    "allocator_peak_bytes": 3442220032,
+    "allocator_reserved_bytes": 3766484992
+  },
+  "dataset_hash": "731731ad62f871f92addc8d8d2066a2882c6e718940cf4b5f7ee1fa5f78495ec",
+  "scope": "Unfused FP32 reference trainer with host gradient checks; synthetic data, no quality or production-cost guarantee."
+}

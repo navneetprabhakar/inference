@@ -27,7 +27,8 @@ def run(config,output,backend='mlx',device='cpu',updates=100,recipe=None):
         'architecture':config.to_dict(),'seed':53,'initialization_seed':311,'repeated_batch':True},indent=2)+'\n')
     trainer=Trainer(config,initialize(config,311),batches,backend,device,recipe)
     def measure():
-        value=trainer.impl.loss(trainer.params,config,trainer.array(x),trainer.array(y),trainer.array(mask))
+        value=trainer.impl.loss(trainer.params,config,trainer.array(x),trainer.array(y),trainer.array(mask),
+                                loss_implementation=recipe.loss_implementation)
         scalar=float(value.detach()) if backend=='torch' else float(value)
         logits=trainer.impl.export({'logits':trainer.impl.forward(trainer.params,config,trainer.array(x))[0]})['logits']
         if not np.isfinite(scalar) or not np.isfinite(logits).all():raise FloatingPointError('Nonfinite overfit probe')
@@ -65,7 +66,9 @@ def main():
     p.add_argument('--config',required=True);p.add_argument('--output',required=True)
     p.add_argument('--backend',choices=['mlx','torch'],default='mlx');p.add_argument('--device',default='cpu')
     p.add_argument('--updates',type=int,default=100)
-    a=p.parse_args();report=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device,a.updates)
+    p.add_argument('--recipe',help='Explicit training recipe, including loss version')
+    a=p.parse_args();recipe=Recipe(**json.loads(Path(a.recipe).read_text())) if a.recipe else None
+    report=run(Config(**json.loads(Path(a.config).read_text())),a.output,a.backend,a.device,a.updates,recipe)
     print(json.dumps({k:v for k,v in report.items() if k!='history'},indent=2))
     if not report['passed']:raise SystemExit(1)
 

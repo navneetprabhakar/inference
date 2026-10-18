@@ -4,6 +4,9 @@ import numpy as np
 import torch
 from slm.common.config import validate_weights
 
+DEFAULT_LOSS_IMPLEMENTATION = 'legacy-logsumexp-minus-target-v1'
+STABLE_LOSS_IMPLEMENTATION = 'max-centered-target-tail-softplus-v1'
+
 
 def load(config, weights, device='cpu'):
     validate_weights(config, weights)
@@ -74,16 +77,34 @@ def forward(p, c, tokens, padding_mask=None, cache=None):
     return x @ p['embedding'].T, new_cache, traces
 
 
-def loss(p, c, tokens, targets, mask, padding_mask=None):
+def cross_entropy_logits(logits, targets):
+    """One-hot CE through the non-target tail; avoids subtracting confident logits."""
+    selected = logits.gather(-1, targets[..., None]).squeeze(-1)
+    if logits.shape[-1] == 1:
+        return selected*0
+    center = logits.max(-1).values.detach()
+    shifted = logits-center[..., None]
+    is_target = torch.arange(logits.shape[-1],device=logits.device) == targets[..., None]
+    others = shifted.masked_fill(is_target,-float('inf'))
+    margin = torch.logsumexp(others,-1)-(selected-center)
+    return torch.logaddexp(margin,torch.zeros_like(margin))
+
+
+def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
     if mask.shape != targets.shape or not bool((mask >= 0).all()) or float(mask.sum()) <= 0:
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
     logits, _, _ = forward(p, c, tokens, padding_mask)
-    per_token = torch.logsumexp(logits, -1)-logits.gather(-1, targets[..., None]).squeeze(-1)
+    if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
+        per_token = torch.logsumexp(logits,-1)-logits.gather(-1,targets[...,None]).squeeze(-1)
+    elif loss_implementation == STABLE_LOSS_IMPLEMENTATION:
+        per_token = cross_entropy_logits(logits,targets)
+    else:
+        raise ValueError('Unknown loss implementation')
     return (per_token*mask).sum()/mask.sum()
 
 
-def value_and_grad(p, c, tokens, targets, mask, padding_mask=None):
-    value = loss(p, c, tokens, targets, mask, padding_mask)
+def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
+    value = loss(p, c, tokens, targets, mask, padding_mask,loss_implementation)
     grads = torch.autograd.grad(value, tuple(p.values()))
     return value, dict(zip(p, grads))
 

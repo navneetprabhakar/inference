@@ -1,0 +1,35 @@
+# Portability acceptance decision
+
+Creator: Navneet Prabhakar
+
+Status: proposed; no existing gate changed or waived.
+
+## Decision needed
+
+Does seamless MLX/CUDA portability require tightly matching multi-update training trajectories, or portable state plus verified inference and measured quality after resumed training?
+
+## Evidence already available
+
+- Tiny FP32 MLX/CUDA round-trip continuation and 100 CPU/CUDA updates passed.
+- Full-size MLX/CPU training-state imports preserve all 242,296,320 weight/moment values and counters exactly.
+- Full-size fixed-checkpoint inference and 2,048-token context checks pass locally, including the checkpoint after 100 synthetic updates.
+- Full-size training trajectories fail the declared comparison gates. The scalar-loss accuracy candidate does not close them and also regresses the tiny first-moment criterion.
+- Short synthetic memorization is not a conversation-quality evaluation. No reviewed public-data release or language-trained checkpoint exists yet.
+
+## Option A: state, inference and quality portability
+
+Use three separate release gates:
+
+1. Exact checkpoint schema/content transfer, optimizer moments, counters, tokenizer/data identity and versioned numerical recipe. Test same-backend resume exactly and verify imported values on each destination.
+2. Same-checkpoint logits, layers, causal/cache behavior and deterministic generation under declared, independently validated precision-specific tolerances. Validate on actual MLX and CUDA hardware. Preserve existing fixed-checkpoint bounds; do not loosen them through this proposal.
+3. Finite, useful resumed training and comparable held-out quality across separately continued runs. Before new runs, specify held-out tasks, confidence intervals/effect-size thresholds, seeds, token exposure, loss and regressions. Require conversation/tool evaluations when those capabilities exist. Until then, only a synthetic smoke result can be claimed.
+
+Retain trajectory diagnostics as recorded failures. This option does not rename them as passing or claim bitwise-equivalent training. It permits data/tokenizer and language-pilot work to progress while long-run reproducibility is evaluated through predeclared quality gates. It does not authorize paid training or teacher generation.
+
+## Option B: strict training trajectory portability
+
+Keep the existing full-size trajectory comparisons as a prerequisite. Continue reference-kernel/reduction/optimizer investigation before any claim of full-size training portability. Costs include additional numerical engineering, reduced optimization freedom and separate validation for every precision/kernel change. No completion date or assurance of a practical tolerance can currently be justified.
+
+## Recommendation for review
+
+Option A matches the practical requirement to move the same model between Apple Silicon and NVIDIA. Option B is appropriate only if tightly matched optimization paths are themselves a product/research requirement. The decision requires explicit review; all failed gates and current documentation remain in force until that decision is recorded.

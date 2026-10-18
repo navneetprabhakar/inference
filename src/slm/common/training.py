@@ -22,9 +22,12 @@ class Recipe:
     eps: float = 1e-8
     decay: float = .1
     clip: float = 1.
+    loss_implementation: str = 'legacy-logsumexp-minus-target-v1'
 
     def __post_init__(self):
-        if not all(np.isfinite(v) for v in asdict(self).values()):
+        if self.loss_implementation not in ('legacy-logsumexp-minus-target-v1','max-centered-target-tail-softplus-v1'):
+            raise ValueError('Unknown loss implementation')
+        if not all(np.isfinite(v) for k,v in asdict(self).items() if k != 'loss_implementation'):
             raise ValueError('Nonfinite optimizer setting')
         if self.lr <= 0 or self.eps <= 0 or self.clip <= 0 or self.decay < 0:
             raise ValueError('Invalid optimizer settings')
@@ -35,6 +38,16 @@ class Recipe:
 
     def rate(self, tokens_after_update):
         return self.lr * min(1., tokens_after_update/max(1, self.warmup_tokens))
+
+
+def recipe_from_state(state):
+    values = dict(state['recipe'])
+    recorded = state.get('reproduction',{}).get('loss_implementation')
+    if 'loss_implementation' in values and recorded is not None and values['loss_implementation'] != recorded:
+        raise ValueError('Loss implementation metadata mismatch')
+    if 'loss_implementation' not in values:
+        values['loss_implementation'] = recorded or 'legacy-logsumexp-minus-target-v1'
+    return Recipe(**values)
 
 
 class Batches:
@@ -95,7 +108,8 @@ class Trainer:
             raise StopIteration('Dataset exhausted; no implicit wraparound')
         x, y, mask = self.batches.items[self.cursor]
         value, grads = self.impl.value_and_grad(self.params, self.config,
-                                              *(self.array(a) for a in (x, y, mask)))
+                                              *(self.array(a) for a in (x, y, mask)),
+                                              loss_implementation=self.recipe.loss_implementation)
         scalar = float(value.detach()) if self.backend == 'torch' else float(value)
         if not np.isfinite(scalar):
             raise FloatingPointError('Nonfinite loss')
@@ -103,7 +117,7 @@ class Trainer:
             raise FloatingPointError('Nonfinite gradients')
         rate = self.recipe.rate(self.tokens+x.size)
         settings = asdict(self.recipe)
-        settings.pop('warmup_tokens'); settings['lr'] = rate
+        settings.pop('warmup_tokens'); settings.pop('loss_implementation'); settings['lr'] = rate
         params, moments = self.impl.adamw(self.params, grads, self.moments, self.step+1, **settings)
         if self.backend == 'mlx':
             import mlx.core as mx
@@ -137,6 +151,7 @@ class Trainer:
                                       'platform': platform.platform(),
                                       'backend_version': version('torch' if self.backend == 'torch' else 'mlx'),
                                       'numpy_version': np.__version__,
+                                      'loss_implementation': self.recipe.loss_implementation,
                                       'implementation_sha256': hashlib.sha256(Path(self.impl.__file__).read_bytes()).hexdigest()},
                      'precision': 'fp32', 'rng_policy': 'precomputed-order-no-stochastic-ops',
                      'schedule': 'linear-warmup-then-constant-tokens-after-update'}
@@ -178,7 +193,7 @@ class Trainer:
         if cursor != state['step'] or cursor > len(batches.items) or batches.counts(cursor) != (state['tokens'], state['supervised_tokens']):
             raise ValueError('Inconsistent data cursor/counters')
         config, weights = checkpoint.load(path/'model')
-        trainer = cls(config, weights, batches, backend, device, Recipe(**state['recipe']), tokenizer_hash)
+        trainer = cls(config, weights, batches, backend, device, recipe_from_state(state), tokenizer_hash)
         raw = load_file(str(path/'optimizer.safetensors'))
         keys = {f'{s}:{k}' for k in weights for s in ('m', 'v')} if state['step'] else set()
         if raw.keys() != keys:

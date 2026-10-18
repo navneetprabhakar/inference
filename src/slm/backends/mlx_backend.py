@@ -4,6 +4,9 @@ import numpy as np
 import mlx.core as mx
 from slm.common.config import validate_weights
 
+DEFAULT_LOSS_IMPLEMENTATION = 'legacy-logsumexp-minus-target-v1'
+STABLE_LOSS_IMPLEMENTATION = 'max-centered-target-tail-softplus-v1'
+
 
 def load(config, weights):
     validate_weights(config, weights)
@@ -74,16 +77,37 @@ def forward(p, c, tokens, padding_mask=None, cache=None):
     return x @ p['embedding'].T, new_cache, traces
 
 
-def loss(p, c, tokens, targets, mask, padding_mask=None):
+def cross_entropy_logits(logits, targets):
+    """Equivalent centered softplus CE with an explicit target derivative."""
+    selected = mx.take_along_axis(logits,targets[..., None],axis=-1).squeeze(-1)
+    if logits.shape[-1] == 1:
+        return selected*0
+    center = mx.stop_gradient(mx.max(logits,axis=-1))
+    shifted = logits-center[..., None]
+    is_target = mx.arange(logits.shape[-1]) == targets[..., None]
+    others = mx.where(is_target,-float('inf'),shifted)
+    margin = mx.logsumexp(others,axis=-1)-(selected-center)
+    # Margin first preserves its small gradient on the validated MLX runtime;
+    # the symmetric argument order loses that gradient at high confidence.
+    return mx.logaddexp(margin,mx.zeros_like(margin))
+
+
+def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
     if mask.shape != targets.shape or not bool(mx.all(mask >= 0)) or float(mx.sum(mask)) <= 0:
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
     logits, _, _ = forward(p, c, tokens, padding_mask)
-    selected = mx.take_along_axis(logits, targets[..., None], axis=-1).squeeze(-1)
-    return mx.sum((mx.logsumexp(logits, axis=-1)-selected)*mask)/mx.sum(mask)
+    if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
+        selected = mx.take_along_axis(logits,targets[...,None],axis=-1).squeeze(-1)
+        per_token = mx.logsumexp(logits,axis=-1)-selected
+    elif loss_implementation == STABLE_LOSS_IMPLEMENTATION:
+        per_token = cross_entropy_logits(logits,targets)
+    else:
+        raise ValueError('Unknown loss implementation')
+    return mx.sum(per_token*mask)/mx.sum(mask)
 
 
-def value_and_grad(p, c, tokens, targets, mask, padding_mask=None):
-    value, grads = mx.value_and_grad(lambda w: loss(w, c, tokens, targets, mask, padding_mask))(p)
+def value_and_grad(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION):
+    value, grads = mx.value_and_grad(lambda w: loss(w, c, tokens, targets, mask, padding_mask,loss_implementation))(p)
     mx.eval(value, grads)
     return value, grads
 
