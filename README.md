@@ -77,4 +77,6 @@ The [offline teacher lifecycle](docs/milestone-nine.md) now provides a Responses
 
 [Curriculum transitions](docs/milestone-sixteen.md) now preserve global AdamW state across finite foundation/SFT stages with stage-local schedules and version-3 resume receipts. Tiny local transition controls and a bounded full-model MLX own-resume probe pass; capability exit gates and actual CUDA curriculum execution remain open.
 
+[Raw conversation evaluation](docs/milestone-seventeen.md) now provides cached greedy decoding, 500 unreviewed SFW candidate cases, separate exact/human/reference-loss metrics and stage screen reports. Actual tiny/full random-weight negative controls reject; no language capability or reviewed-suite acceptance is claimed.
+
 Not implemented: approved production datasets, production bulk data intake/training, production tokenizer, broader teacher validation/reviewed release, mixed precision, fused kernels, accepted full-size training portability, MCP, and sustained cloud training.

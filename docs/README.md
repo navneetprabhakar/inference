@@ -5,7 +5,7 @@ Creator: Navneet Prabhakar
 - **Objective:** train an English conversational model from random initialization, targeting roughly 81M parameters, with controlled styles, tool use, and portable MLX/CUDA training and inference.
 - **Development:** Apple M4 MacBook Air with 24GB unified memory first; GCP for sustained training.
 - **Teacher:** initially GPT-6 Luna or GPT-5.6 Luna; configurable and required in the conversation-data workflow, absent from deployed student inference.
-- **Status:** tiny dual-backend reference prototype implemented and tested on MLX GPU/PyTorch CPU. Tiny FP32 checkpoint portability is validated on an NVIDIA T4, including return to MLX. A bounded, sample-only data audit pipeline is validated locally. Approved production datasets, real pretraining and full-size portability remain open.
+- **Status:** dual-backend reference training, actual NVIDIA state portability, finite mixtures/curricula and candidate language evaluation are implemented. Full-size numerical trajectories still fail acceptance; production data/tokenizer, language pilots and model capability remain open. The [ledger](project-ledger.md) holds current evidence.
 
 | Document | Purpose |
 | --- | --- |
@@ -27,3 +27,7 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Bootstrap review and training release contract](milestone-five.md)
 
 - [Full-size local bring-up and trajectory diagnostics](milestone-six.md)
+
+- [Finite mixture and embedding diagnostics](milestone-fifteen.md)
+- [Curriculum transitions and version-3 resume](milestone-sixteen.md)
+- [Raw conversation evaluation and stage screens](milestone-seventeen.md)

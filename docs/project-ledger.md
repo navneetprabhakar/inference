@@ -7,8 +7,8 @@ Updated: 19 October 2026
 ## Current state
 
 - Objective: train a portable conversational SLM from random initialization.
-- Current milestone: finite curriculum transitions complete locally. Pinned stage schedules, global AdamW state, cross-stage family exposure and version-3 resume receipts are implemented. Public review, tokenizer, language pilots, actual CUDA curriculum execution and full-size trajectory acceptance remain open.
-- Next implementation milestone: language/constraint evaluation and stage acceptance reporting. In parallel, complete the current source review, English/privacy/quality calibration and teacher quality/training-rights review. CLI-only teacher remains active; API fallback is prohibited.
+- Current milestone: raw-history decoding and candidate language/stage-screen foundation complete locally. The 500 SFW cases remain unreviewed; proposed stage policy and all human grades are pending. No student language acceptance is claimed.
+- Next implementation milestone: five local mock tools, structured tool serialization and executable semantic validation before MCP. In parallel, complete current source review, candidate-suite review, English/privacy/quality calibration, teacher rights/quality review and production tokenizer selection. CLI-only teacher; no API fallback.
 - Hardware validated: Apple M4 MLX GPU; Apple/Linux PyTorch CPU; NVIDIA T4 CUDA.
 - Hardware/precision gates still open: accepted full-size training trajectories, reduced precision and sustained training.
 - Spending: USD 10 cumulative authorized for CUDA validation in `executespecv1`; all three T4 validation jobs are finished and their VMs/disks/temporary firewalls are verified absent. Conservative planning allowances: USD 1 tiny + USD 2 full-size + USD 2 current accumulated-state job = USD 5 total; these are not settled costs. No Platform teacher API calls or main pretraining; one real CLI teacher generation consumes account usage of unknown settled cost. Settled cloud billing pending.
@@ -98,6 +98,14 @@ Updated: 19 October 2026
 - Full 80,765,440-parameter local dense-mode probe preserves all 242,296,320 state values across exact own-resume and foundation → SFT continuation. Two logical updates / 100 processed / 80 supervised positions; three actually executed updates / 136 processed positions. Not language quality, actual NVIDIA evidence or a passed full-size cross-backend trajectory gate.
 - Standard v1/v2 checkpoints remain supported by the ordinary trainer; v3 requires the curriculum trainer. No implicit plan append, legacy checkpoint migration or optimizer reset. Quality exit-gate orchestration remains separate from data-stage transitions.
 - No public source approvals, teacher generation or cloud calls added. Existing numerical failures and dense production/CUDA gates remain open. CUDA planning allowances unchanged at USD 5 of USD 10; settled charges unknown.
+
+## Language evaluation — 19 October 2026
+
+- 316 local tests passed / 10 unavailable-CUDA skips. Raw cached greedy decoder, final-answer content-only reference NLL, exact-task scoring, bound human reviews, family/scenario denominators and baseline-aware stage screens. See milestone-seventeen.md and its evidence.
+- 500 synthetic candidate cases cover 100 scenarios/ten template families and five style controls: 400 exact-format tasks, 100 human-reviewed open responses. Zero approvals/grades; the stage policy remains proposed. Case intervals are descriptive, not independent-sample reliability evidence.
+- Actual random-weight controls reject: tiny 34,976 parameters, 0/400 exact tasks on 500 cases; full 80,765,440 parameters, 0/8 on a ten-case professional subset. All raw generations stop on invalid structural IDs. Reference scoring completes separately and is not task success. Zero training updates; no new teacher/cloud calls.
+- Reserved evaluation IDs/exact contexts are refused in teacher training generation, reviewed train publication and verified train reads. Semantic overlap and historical prepared-token auditing remain open; no retrospective contamination guarantee.
+- Previous source approvals remain zero and numerical failures remain failed. CUDA planning allowances remain USD 5 of USD 10, settled cost unknown. This milestone adds no actual NVIDIA validation or language-training pilot.
 
 ## Open gates
 

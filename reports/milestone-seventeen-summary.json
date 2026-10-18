@@ -1,0 +1,66 @@
+{
+  "creator": "Navneet Prabhakar",
+  "scope": "Reference decoder, unreviewed candidate evaluations and proposed stage screens; not model language acceptance",
+  "local_tests": {
+    "passed": 316,
+    "skipped": 10,
+    "reason": "NVIDIA CUDA unavailable"
+  },
+  "suite_cases": 500,
+  "parameterized_scenarios": 100,
+  "template_families": 10,
+  "exact_cases": 400,
+  "human_cases": 100,
+  "suite_approved_cases": 0,
+  "human_output_grades": 0,
+  "stage_policy_status": "proposed",
+  "raw_negative_controls": {
+    "tiny": {
+      "parameters": 34976,
+      "cases": 500,
+      "exact_passes": 0,
+      "exact_cases": 400,
+      "invalid_structural_stops": 500
+    },
+    "full": {
+      "parameters": 80765440,
+      "cases": 10,
+      "exact_passes": 0,
+      "exact_cases": 8,
+      "invalid_structural_stops": 10
+    }
+  },
+  "recomputed_score_and_stage_reports_match_retained_raw_results": true,
+  "retained_raw_artifact_hashes_verified": true,
+  "identity_inference_and_backend_hashes_match_current_code": true,
+  "neural_training_updates": 0,
+  "new_teacher_calls": 0,
+  "new_cloud_jobs": 0,
+  "actual_cuda_generation_validated": false,
+  "production_accepted": false,
+  "numerical_tolerances_changed": false,
+  "cuda_planning_allowances_usd_cumulative": 5,
+  "cuda_authorized_usd": 10,
+  "settled_cost_known": false,
+  "sha256": {
+    "src/slm/inference/greedy.py": "d415c75a59052fd9d5de91808d896ba599b9d9174da43e531c570098641e4a1b",
+    "src/slm/eval/cases.py": "a74565bdb37572845f1947a6bd7d4fae89203f10d1643b68e386ab12d64f1ff9",
+    "src/slm/eval/conversation.py": "1de1218041392fe285f177f243d2668fb9d24ad242b186ba4820f41e35fedd3f",
+    "src/slm/eval/stage.py": "af4b50466d0b3c43d4c838d24b7df9612b1f0c2b761a9be23507bec5237ea999",
+    "src/slm/eval/language.py": "94b1b3e9a437493eb0bf3b1a8f747913d8ff67ed27fc4ee7d81f7cd97282c7b5",
+    "src/slm/data/holdout.py": "c2be50b70581e0dc1f6683553d2d807343a599b746b91e0124ea760a2ca85a88",
+    "src/slm/data/review.py": "1d6b04c97c2a321aa73c4a5611bc58d2ae61c27fd69efd2716d29118d7792b05",
+    "src/slm/teacher/workflow.py": "053b5f9cec0403839a47536cc96090459ae96fbde39a8490d0eb550243d6f9dc",
+    "configs/stage-screen-proposal-v1.json": "3b093e157d555b60f781b508fae84125cffcb8ae902a5b65cafdf24cde20cc3e",
+    "scripts/audit-language.py": "2924f27301c740ce8ecdb687b4264fe01bcf020eab88d4cfd6a95df3b40d4c05",
+    "tests/test_generation.py": "1b77f469e759b46f9483366f2cf85b2df717ad32fd395bd4d1068da2967bc9cd",
+    "tests/test_language.py": "7325d2aab1116af2bfd6ef9841a2f5e91b274d75f2e83ef2039076e3cc716f6f",
+    "reports/milestone-seventeen-tests.xml": "49963f0a3f6b39876ddd4749ca4d03074adf5831f4fab6320a647322d3f659c9",
+    "reports/milestone-seventeen-tiny-negative.json": "272b34655df5fbcd6516987ec51851e3432986b93f7ec86c4133a0baa95ad717",
+    "reports/milestone-seventeen-full-negative.json": "eaceeb00d9d430bcc074fcd9cf22756b46e2cae45aee537dfc10599c8fe1a866"
+  },
+  "optional_dependency_guard_followup_tests": {
+    "passed": 20,
+    "skipped": 0
+  }
+}

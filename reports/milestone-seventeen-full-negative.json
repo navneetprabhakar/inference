@@ -1,0 +1,445 @@
+{
+  "artifact_sha256": {
+    "data/evaluation-full-negative-v1/output-review.json": "cba84b58997843b8007bc2c3d8e8c9bd096dc31b43fbb273ced016ab0e01c496",
+    "data/evaluation-full-negative-v1/results.json": "ef11c1c5d88fe101a98d225953336e46a0296efe84f61a77e22ad4eb132eec9c",
+    "data/evaluation-full-negative-v1/score.json": "91c8b116d0dd2ec4ad501d0cd820275dc675e76b0836858f2eaa5bc252f8a71a",
+    "data/evaluation-full-negative-v1/stage.json": "9b20a2e43abf63145a5e1a4d31cf88751469dd9acaf867ed165a3e710c828b50",
+    "data/evaluation-full-negative-v1/suite-review.json": "14f80f28bc7af757ea1394825d4147f1a6a84a11cae7c9d452868753098a9f2a",
+    "data/evaluation-full-negative-v1/suite.json": "b72fdab1fb354f2cc6c26cbc08eaac964390ee2335a75137561b751d3cdfe073"
+  },
+  "decision": "reject",
+  "failed_checks": [
+    "exact_below_target:slices:reference",
+    "exact_below_target:slices:correction",
+    "exact_below_target:slices:negation",
+    "exact_below_target:slices:quantity",
+    "exact_below_target:slices:grounding",
+    "exact_below_target:slices:constraints",
+    "exact_below_target:slices:clarification",
+    "exact_below_target:slices:stopping",
+    "exact_below_target:styles:professional"
+  ],
+  "human_output_grades": 0,
+  "identity": {
+    "architecture": {
+      "hidden_size": 512,
+      "intermediate_size": 1536,
+      "max_seq_len": 2048,
+      "norm_eps": 1e-05,
+      "num_heads": 8,
+      "num_kv_heads": 2,
+      "num_layers": 24,
+      "rope_theta": 10000.0,
+      "vocab_size": 16384
+    },
+    "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+    "binding_scope": "Explicit model-only/tokenizer pairing; vocabulary and supplied tokenizer hash checked, no inferred training provenance",
+    "decoding": "raw-cached-greedy-v1",
+    "embedding_implementation": "native-gather-v1",
+    "environment": {
+      "backend": "mlx",
+      "device": "Device(gpu, 0)",
+      "hardware": "arm64",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "version": "0.32.4"
+    },
+    "inference_sha256": "d415c75a59052fd9d5de91808d896ba599b9d9174da43e531c570098641e4a1b",
+    "model_manifest_sha256": "15ad071c9911275cd1fd7f4af6cd5c71ff6340f1339d48b3f6f2686b3d2039b0",
+    "tokenizer_manifest_sha256": "bb8e463e06ac94bddcfcf6f1536ff323f724efe4a694d4604be0149f8e7d172f"
+  },
+  "latency": {
+    "completed_generations": 10,
+    "mean_seconds": 0.024998116795904933,
+    "scope": "All returned generations including length/structural failures; not a production latency acceptance sample"
+  },
+  "max_new_tokens": 8,
+  "memory": {
+    "allocator_active_bytes": 323061760,
+    "allocator_cache_bytes": 754759921,
+    "allocator_peak_bytes": 437730544,
+    "process_peak_rss_bytes": 1393197056,
+    "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+  },
+  "missing_evidence": [
+    "stage_policy_not_accepted",
+    "insufficient_cases",
+    "insufficient_scenarios",
+    "suite_cases_not_all_human_approved",
+    "human_output_grades_pending",
+    "insufficient_slices:reference",
+    "insufficient_slices:correction",
+    "insufficient_slices:negation",
+    "insufficient_slices:quantity",
+    "insufficient_slices:grounding",
+    "insufficient_slices:constraints",
+    "insufficient_slices:clarification",
+    "insufficient_slices:stopping",
+    "insufficient_slices:conversation",
+    "insufficient_slices:style_switch",
+    "insufficient_styles:professional",
+    "missing_styles:casual",
+    "missing_styles:terse",
+    "missing_styles:humorous",
+    "missing_styles:caveman",
+    "pre_stage_baseline_required"
+  ],
+  "model_and_tokenizer_temporary_removed": true,
+  "neural_training_updates": 0,
+  "overall": {
+    "approved_cases": 0,
+    "cases": 10,
+    "exact_case_wilson95_descriptive": [
+      0,
+      0.32440756488388023
+    ],
+    "exact_cases": 8,
+    "exact_family_macro_rate": 0.0,
+    "exact_passes": 0,
+    "exact_rate": 0.0,
+    "exact_scenario_all_variants_pass_rate": 0.0,
+    "generation_errors": 0,
+    "human_all_rubrics_passes": 0,
+    "human_cases": 2,
+    "human_graded": 0,
+    "human_pending": 2,
+    "human_rubric_rates": {
+      "instruction": null,
+      "meaning": null,
+      "sfw": null,
+      "stopping": null,
+      "style": null
+    },
+    "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+    "scenarios": 10,
+    "template_families": 10
+  },
+  "parameters": 80765440,
+  "production_accepted": false,
+  "random_student": true,
+  "raw_stop_reasons": {
+    "invalid_structural": 10
+  },
+  "reference_loss": {
+    "bits_per_reference_byte": 8.503771999618248,
+    "content_targets": 89,
+    "failed_cases": 0,
+    "mean_content_nll": 9.669408713554601,
+    "nll_sum": 860.5773755063595,
+    "scope": "One teacher-forced reference per case, excluding structural targets; not evidence of free-generation correctness",
+    "scored_cases": 10,
+    "utf8_bytes": 146
+  },
+  "scope": "Evaluator negative-control mechanics, not student capability or a trained-checkpoint baseline. Candidate reviews and stage policy remain pending.",
+  "slices": {
+    "clarification": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "constraints": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "conversation": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": null,
+      "exact_cases": 0,
+      "exact_family_macro_rate": null,
+      "exact_passes": 0,
+      "exact_rate": null,
+      "exact_scenario_all_variants_pass_rate": null,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 1,
+      "human_graded": 0,
+      "human_pending": 1,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "correction": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "grounding": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "negation": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "quantity": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "reference": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "stopping": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.7934506856227626
+      ],
+      "exact_cases": 1,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 0,
+      "human_graded": 0,
+      "human_pending": 0,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    },
+    "style_switch": {
+      "approved_cases": 0,
+      "cases": 1,
+      "exact_case_wilson95_descriptive": null,
+      "exact_cases": 0,
+      "exact_family_macro_rate": null,
+      "exact_passes": 0,
+      "exact_rate": null,
+      "exact_scenario_all_variants_pass_rate": null,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 1,
+      "human_graded": 0,
+      "human_pending": 1,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 1,
+      "template_families": 1
+    }
+  },
+  "styles": {
+    "professional": {
+      "approved_cases": 0,
+      "cases": 10,
+      "exact_case_wilson95_descriptive": [
+        0,
+        0.32440756488388023
+      ],
+      "exact_cases": 8,
+      "exact_family_macro_rate": 0.0,
+      "exact_passes": 0,
+      "exact_rate": 0.0,
+      "exact_scenario_all_variants_pass_rate": 0.0,
+      "generation_errors": 0,
+      "human_all_rubrics_passes": 0,
+      "human_cases": 2,
+      "human_graded": 0,
+      "human_pending": 2,
+      "human_rubric_rates": {
+        "instruction": null,
+        "meaning": null,
+        "sfw": null,
+        "stopping": null,
+        "style": null
+      },
+      "interval_scope": "Descriptive case-level interval; correlated scenario/style/template variants are not independent samples",
+      "scenarios": 10,
+      "template_families": 10
+    }
+  },
+  "suite_cases": 10,
+  "suite_hash": "eba5797d1b85aa80da3ddeafd33e5f7a3b1e7b4d6cfa1c0ecd951aa6dfc821b4",
+  "suite_reviews_approved": 0,
+  "synthetic_only": true,
+  "teacher_calls": 0
+}

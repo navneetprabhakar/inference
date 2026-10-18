@@ -147,6 +147,10 @@ def release(dataset, review_file, destination):
         raise ValueError('Reviewed dataset manifest differs')
     sources = json.loads((dataset/'sources.json').read_text())
     approved = check_packet(packet, sources, records(dataset))
+    from slm.data.holdout import check_training_context
+    for record in approved.values():
+        if record['split']=='train':
+            check_training_context(record['messages'],(record['example_id'],record['parent_group_id'],record['validation_results']['split_group']))
     destination.parent.mkdir(parents=True, exist_ok=True)
     temp = Path(tempfile.mkdtemp(prefix='.review-release-', dir=destination.parent))
     try:
@@ -188,7 +192,11 @@ def training_examples(path):
     actual = records(path)
     if actual != expected: raise ValueError('Released records differ from approved review')
     for key in sorted(actual):
-        if actual[key]['split'] == 'train': yield deepcopy(actual[key])
+        if actual[key]['split'] == 'train':
+            from slm.data.holdout import check_training_context
+            record=actual[key]
+            check_training_context(record['messages'],(record['example_id'],record['parent_group_id'],record['validation_results']['split_group']))
+            yield deepcopy(record)
 
 
 def main():

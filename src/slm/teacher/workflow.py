@@ -81,6 +81,8 @@ def check_scenario(scenario):
         if (not isinstance(message,dict) or set(message)!={'role','content'}
             or message['role'] not in ('system','user','assistant','tool') or not isinstance(message['content'],str)):
             raise ValueError('Invalid scenario context')
+    from slm.data.holdout import check_training_context
+    check_training_context(scenario['context'],(scenario['scenario_id'],scenario['family_id']))
     if not isinstance(scenario['facts'],dict) or not isinstance(scenario['expected_action'],dict):raise ValueError('Structured oracle required')
     if len(json.dumps(scenario,allow_nan=False).encode())>65536:raise ValueError('Scenario exceeds bounded prompt size')
 
