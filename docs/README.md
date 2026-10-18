@@ -48,3 +48,7 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Disk-backed corpus staging contract](disk-backed-corpus-staging.md)
 - [Disk-backed staging validation](milestone-thirty-two.md)
+
+- [Disk-backed explicit-row review contract](streamed-row-review.md)
+- [Corpus-admission proposal](corpus-admission-proposal.md)
+- [Reviewed-release intake results](milestone-thirty-three.md)

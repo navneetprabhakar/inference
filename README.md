@@ -96,3 +96,5 @@ The [production-readiness audit](docs/milestone-thirty.md) maps the full goal to
 
 
 Use `.venv/bin/python -m slm.train --spec /absolute/spec.json --preflight-only` to verify a pilot binding without backend model construction. Execution requires a fresh `--output` attempt and explicit backend/device settings; see the [runner contract](docs/reviewed-data-pilot-runner.md). Local synthetic controls pass, but no real 1M/10M language pilot or new NVIDIA wrapper validation is claimed.
+
+[Disk-backed explicit-row review](docs/milestone-thirty-three.md) now preserves row-specific approval gates while verifying releases and pilot lookups through SQLite. BPE intake uses a checked text spool. Corpus-wide admission remains a [proposal](docs/corpus-admission-proposal.md); all actual public/teacher approvals and real language pilots remain open.

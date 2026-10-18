@@ -109,11 +109,13 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
     output.parent.mkdir(parents=True,exist_ok=True)
     temp=Path(tempfile.mkdtemp(prefix='.token-shards-',dir=output.parent))
     writer=None
-    rejected=Counter();sources=defaultdict(Counter);categories=Counter();groups=set();records=0;encoded=0;buffer=[]
+    rejected=Counter();sources=defaultdict(Counter);categories=Counter();group_count=0;records=0;encoded=0;buffer=[]
     try:
         writer=Writer(temp,shard_positions,max_positions)
-        with (temp/'lineage.jsonl').open('w') as lineage:
-            for example in training_examples(release):
+        from slm.data.review_stream import open_checked
+        with open_checked(release) as reviewed, (temp/'lineage.jsonl').open('w') as lineage:
+            reviewed.db.execute('CREATE TABLE retained_groups(gid TEXT PRIMARY KEY) WITHOUT ROWID')
+            for example in reviewed.values():
                 if allowed_sources is not None and example['source'] not in allowed_sources:
                     rejected['source_excluded']+=1;continue
                 if example['content_category'] not in allowed_categories:
@@ -136,7 +138,7 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
                     'split_group':example['validation_results']['split_group'],'split':'train',
                     'encoded_positions':len(tokens),'prediction_positions':contribution,'supervised_positions':supervised}
                 lineage.write(json.dumps(record,sort_keys=True)+'\n')
-                groups.add(record['split_group']);records+=1;encoded+=len(tokens);categories[example['content_category']]+=1
+                reviewed.db.execute('INSERT OR IGNORE INTO retained_groups VALUES(?)',(record['split_group'],));reviewed.tick();records+=1;encoded+=len(tokens);categories[example['content_category']]+=1
                 sources[example['source']].update(records=1,utf8_bytes=byte_count,encoded_positions=len(tokens),
                     prediction_positions=contribution,supervised_positions=supervised)
                 if objective=='sft':writer.add(tokens[:-1],tokens[1:],mask[1:])
@@ -146,6 +148,7 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
                         chunk=buffer[start:start+context_length+1]
                         writer.add(chunk[:-1],chunk[1:],[1]*context_length);start+=context_length
                     buffer=buffer[start:]
+            group_count=reviewed.db.execute('SELECT count(*) FROM retained_groups').fetchone()[0]
         if objective=='foundation' and len(buffer)>1:writer.add(buffer[:-1],buffer[1:],[1]*(len(buffer)-1))
         writer.flush();writer.close()
         if not writer.batches:raise ValueError('No eligible supervised training batches: '+json.dumps(dict(rejected)))
@@ -154,7 +157,7 @@ def build_shards(release,tokenizer,output,objective,context_length=1024,shard_po
         verify(release);BPE.load(tokenizer)
         if sha(release/'manifest.json')!=release_hash or sha(tokenizer/'manifest.json')!=tokenizer_hash:
             raise ValueError('Source release/tokenizer changed during tokenization')
-        report={'objective':objective,'split':'train','message_format':selected_format,'token_shard_version':FORMATS[selected_format],'retained_records':records,'retained_groups':len(groups),
+        report={'objective':objective,'split':'train','message_format':selected_format,'token_shard_version':FORMATS[selected_format],'retained_records':records,'retained_groups':group_count,
             'excluded_records':dict(rejected),'categories':dict(categories),'sources':{k:dict(v) for k,v in sorted(sources.items())},
             'one_pass_encoded_positions':encoded,'processed_prediction_positions':writer.processed,
             'supervised_positions':writer.supervised,'batches':writer.batches,'shards':len(writer.shards),

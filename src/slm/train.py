@@ -16,7 +16,7 @@ from slm.common.tokenizer import BPE
 from slm.data.tokenized import ShardBatches,sha,stamp,document_tokens,example_format
 from slm.data.mixture import MixtureBatches
 from slm.data.curriculum import CurriculumBatches
-from slm.data.review import training_examples
+from slm.data.review_stream import open_checked
 from slm.data.schema import digest
 
 
@@ -79,7 +79,8 @@ def open_data(spec,tokenizer):
 
 def verify_leaf(leaf,approved,bpe):
     """Re-encode approved content: rehashed masks/arrays alone cannot invent training data."""
-    index=0;buffer=[];seen=set();encoded=0
+    index=0;buffer=[];encoded=0
+    approved.clear_seen()
     def check(tokens,mask):
         nonlocal index
         if index>=len(leaf):raise ValueError('Reviewed stream exceeds token batches')
@@ -90,8 +91,7 @@ def verify_leaf(leaf,approved,bpe):
     with (leaf.path/'lineage.jsonl').open() as f:
         for line in f:
             r=json.loads(line);id=r['example_id'];e=approved.get(id)
-            if id in seen or e is None:raise ValueError('Unapproved or repeated leaf record identity')
-            seen.add(id)
+            if not approved.claim(id) or e is None:raise ValueError('Unapproved or repeated leaf record identity')
             expected={'record_sha256':digest(e),'content_sha256':digest(e['messages']),'source':e['source'],
                 'source_revision':e['source_revision'],'parent_group_id':e['parent_group_id'],
                 'split_group':e['validation_results']['split_group'],'split':'train'}
@@ -113,7 +113,7 @@ def verify_leaf(leaf,approved,bpe):
                     chunk=buffer[start:start+context+1];check(chunk,[0]+[1]*context);start+=context
                 buffer=buffer[start:]
     if leaf.manifest['objective']=='foundation' and len(buffer)>1:check(buffer,[0]+[1]*(len(buffer)-1))
-    if not seen or index!=len(leaf):raise ValueError('Unreviewed extra token batches')
+    if not encoded or index!=len(leaf):raise ValueError('Unreviewed extra token batches')
 
 
 class Inputs:
@@ -141,7 +141,7 @@ class Inputs:
             for fingerprint,path in spec['releases'].items():
                 root=Path(path)
                 if sha(root/'manifest.json')!=fingerprint:raise ValueError('Reviewed release fingerprint differs')
-                approved[fingerprint]={e['example_id']:e for e in training_examples(root)}
+                approved[fingerprint]=self.stack.enter_context(open_checked(root))
                 self.pin_tree(root)
             for part in parts:verify_leaf(part,approved[part.manifest['release_manifest_sha256']],bpe)
             self.pin_tree(Path(spec['tokenizer']))
@@ -152,7 +152,7 @@ class Inputs:
                 'reference_sources':{str(p.relative_to(Path(__file__).parent)):sha(p) for p in
                     [Path(__file__),*[Path(__file__).parent/name for name in ('common/training.py','common/curriculum.py','common/config.py',
                         'common/checkpoint.py','common/tokenizer.py','common/tool_serialization.py','common/supervision.py',
-                        'data/tokenized.py','data/mixture.py','data/curriculum.py','data/review.py',
+                        'data/tokenized.py','data/mixture.py','data/curriculum.py','data/review.py','data/review_stream.py','data/build.py','data/staging.py',
                         'backends/torch_backend.py','backends/mlx_backend.py','eval/stage.py','eval/conversation.py')]]}}
             for name in self.plan['reference_sources']:
                 path=Path(__file__).parent/name;self.guards[path.resolve()]=stamp(path)

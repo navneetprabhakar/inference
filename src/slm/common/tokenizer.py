@@ -122,19 +122,32 @@ def train_release(release,output,vocab_size,min_frequency=2,max_bytes=64*1024*10
     release,output=Path(release),Path(output)
     if output.exists():raise FileExistsError(output)
     if type(max_bytes) is not int or max_bytes<1:raise ValueError('Positive corpus byte limit required')
-    parent=sha(release/'manifest.json');texts=[];identity=[];total=0
-    for example in training_examples(release):
-        identity.append((example['example_id'],digest(example)))
-        for message in example['messages']:
-            text=message['content'];total+=len(text.encode('utf-8'))
-            if total>max_bytes:raise ValueError('Corpus exceeds bounded candidate budget; no silent truncation')
-            texts.append(text)
-    if not texts or not total:raise ValueError('Nonempty reviewed training stream required')
+    from slm.data.review_stream import open_checked
+    parent=sha(release/'manifest.json');identity=hashlib.sha256();identity.update(b'[')
+    total=examples=messages=0
+    with tempfile.TemporaryDirectory(prefix='slm-bpe-text-') as spool_dir:
+        spool=Path(spool_dir)/'texts.jsonl'
+        with open_checked(release) as reviewed, spool.open('w') as out:
+            for example in reviewed.values():
+                if examples:identity.update(b',')
+                identity.update(json.dumps([example['example_id'],digest(example)],sort_keys=True,ensure_ascii=False,separators=(',',':')).encode())
+                examples+=1
+                for message in example['messages']:
+                    text=message['content'];total+=len(text.encode('utf-8'));messages+=1
+                    if total>max_bytes:raise ValueError('Corpus exceeds bounded candidate budget; no silent truncation')
+                    out.write(json.dumps(text,ensure_ascii=False)+'\n')
+        identity.update(b']')
+        if not examples or not total:raise ValueError('Nonempty reviewed training stream required')
+        # The tokenizer may consume Python iteration on its own thread. Open the
+        # immutable text spool there, rather than sharing a SQLite connection.
+        def texts():
+            with spool.open() as f:
+                for line in f:yield json.loads(line)
+        bpe=train_core(texts(),vocab_size,min_frequency)
     if sha(release/'manifest.json')!=parent:raise ValueError('Release changed during intake')
-    bpe=train_core(texts,vocab_size,min_frequency)
     provenance={'scope':'reviewed-release candidate; not production selection/freeze',
-        'release_manifest_sha256':parent,'train_record_identity_sha256':digest(identity),
-        'train_examples':len(identity),'train_messages':len(texts),'utf8_bytes':total,
+        'release_manifest_sha256':parent,'train_record_identity_sha256':identity.hexdigest(),
+        'train_examples':examples,'train_messages':messages,'utf8_bytes':total,
         'requested_vocab_size':vocab_size,'target_vocab_reached':bpe.vocab_size==vocab_size,
         'min_frequency':min_frequency,'max_bytes':max_bytes}
     fingerprint=bpe.save(output,provenance)

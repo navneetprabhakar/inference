@@ -81,7 +81,7 @@ def prepare(dataset, output, limit=40):
             'approved': 0, 'dataset_manifest_sha256': packet['dataset_manifest_sha256']}
 
 
-def check_packet(packet, sources, input_records=None):
+def check_source_reviews(packet, sources):
     if packet.get('version') != 1 or packet.get('reviewer') != REVIEWER or packet.get('human_attestation') is not True:
         raise ValueError('Explicit human review attestation required')
     if set(packet['source_reviews']) != set(sources): raise ValueError('Source review set differs')
@@ -94,54 +94,64 @@ def check_packet(packet, sources, input_records=None):
             if (entry['terms_reviewed'] is not True or not entry['evidence_note'].strip()
                 or not entry['allowed_categories'] or not set(entry['allowed_categories']) <= CATEGORIES):
                 raise ValueError('Source terms/category review incomplete')
-    accepted, group_splits = {}, defaultdict(list)
-    packet_hash = digest(packet)
-    for key, entry in packet['examples'].items():
-        record, decision = entry['record'], entry['decision']
-        if key != record['example_id'] or digest(record) != entry['record_sha256']:
-            raise ValueError('Reviewed record identity/content differs')
-        if input_records is not None and (key not in input_records or record != input_records[key]):
+
+
+def check_entry(key, entry, sources, source_reviews, packet_hash):
+    record, decision = entry['record'], entry['decision']
+    if key != record['example_id'] or digest(record) != entry['record_sha256']:
+        raise ValueError('Reviewed record identity/content differs')
+    if record['source'] not in sources or record['source_revision'] != sources[record['source']]['revision']:
+        raise ValueError('Reviewed source revision differs')
+    if record['license_record'] != digest(sources[record['source']]):
+        raise ValueError('Reviewed license provenance differs')
+    if record['split'] not in PRIORITY: raise ValueError('Invalid input partition')
+    group = record['validation_results']['split_group']
+    partitions=[record['split']]
+    upstream = decision['upstream_partition']
+    if upstream is not None:
+        if upstream not in PRIORITY or not decision['partition_evidence'].strip():
+            raise ValueError('Upstream partition evidence required')
+        # Known held-out identity protects the group even if this item is rejected.
+        partitions.append(upstream)
+    approved = decision['approved']
+    if approved is not None and type(approved) is not bool:
+        raise ValueError('Example approval must be boolean or pending')
+    if approved is not True:return None,group,partitions
+    if 'teacher_bridge' in record['validation_results']:
+        from slm.teacher.bridge import review_requirements
+        required=review_requirements(record);teacher_review=decision.get('teacher_review',{})
+        if decision['content_category']!=record['content_category']:
+            raise ValueError('Controlled teacher content setting cannot be relabeled at release')
+        if set(teacher_review)!=set(required) or any(teacher_review[k] is not True for k in required):
+            raise ValueError('Explicit teacher reply/style/history/host review required')
+    if record['source']=='OpenAssistant/oasst2':
+        proof=oasst_mapping(record)
+        if upstream!=proof['split']:raise ValueError('Manual split override disagrees with verified OASST mapping')
+    source_review = source_reviews[record['source']]
+    if (source_review['approved'] is not True or upstream is None
+        or any(decision[k] is not True for k in ('english_verified','privacy_verified','quality_verified'))
+        or decision['content_category'] not in source_review['allowed_categories']):
+        raise ValueError('Example review gates incomplete')
+    item = deepcopy(record)
+    item['language'] = 'en'
+    item['content_category'] = decision['content_category']
+    for gate in ('language_review','content_review','privacy_review','quality_review'):
+        item['validation_results'][gate] = 'human_attested'
+    item['validation_results']['human_review'] = {
+        'packet_sha256': packet_hash, 'reviewed_record_sha256': entry['record_sha256']}
+    return item,group,partitions
+
+
+def check_packet(packet, sources, input_records=None):
+    check_source_reviews(packet,sources)
+    accepted,group_splits={},defaultdict(list)
+    packet_hash=digest(packet)
+    for key,entry in packet['examples'].items():
+        if input_records is not None and (key not in input_records or entry['record']!=input_records[key]):
             raise ValueError('Review does not match frozen input record')
-        if record['source'] not in sources or record['source_revision'] != sources[record['source']]['revision']:
-            raise ValueError('Reviewed source revision differs')
-        if record['license_record'] != digest(sources[record['source']]):
-            raise ValueError('Reviewed license provenance differs')
-        if record['split'] not in PRIORITY: raise ValueError('Invalid input partition')
-        group = record['validation_results']['split_group']
-        group_splits[group].append(record['split'])
-        upstream = decision['upstream_partition']
-        if upstream is not None:
-            if upstream not in PRIORITY or not decision['partition_evidence'].strip():
-                raise ValueError('Upstream partition evidence required')
-            # Known held-out identity protects the group even if this item is rejected.
-            group_splits[group].append(upstream)
-        approved = decision['approved']
-        if approved is not None and type(approved) is not bool:
-            raise ValueError('Example approval must be boolean or pending')
-        if approved is not True: continue
-        if 'teacher_bridge' in record['validation_results']:
-            from slm.teacher.bridge import review_requirements
-            required=review_requirements(record);teacher_review=decision.get('teacher_review',{})
-            if decision['content_category']!=record['content_category']:
-                raise ValueError('Controlled teacher content setting cannot be relabeled at release')
-            if set(teacher_review)!=set(required) or any(teacher_review[k] is not True for k in required):
-                raise ValueError('Explicit teacher reply/style/history/host review required')
-        if record['source']=='OpenAssistant/oasst2':
-            proof=oasst_mapping(record)
-            if upstream!=proof['split']:raise ValueError('Manual split override disagrees with verified OASST mapping')
-        source_review = packet['source_reviews'][record['source']]
-        if (source_review['approved'] is not True or upstream is None
-            or any(decision[k] is not True for k in ('english_verified','privacy_verified','quality_verified'))
-            or decision['content_category'] not in source_review['allowed_categories']):
-            raise ValueError('Example review gates incomplete')
-        item = deepcopy(record)
-        item['language'] = 'en'
-        item['content_category'] = decision['content_category']
-        for gate in ('language_review','content_review','privacy_review','quality_review'):
-            item['validation_results'][gate] = 'human_attested'
-        item['validation_results']['human_review'] = {
-            'packet_sha256': packet_hash, 'reviewed_record_sha256': entry['record_sha256']}
-        accepted[key] = item
+        item,group,partitions=check_entry(key,entry,sources,packet['source_reviews'],packet_hash)
+        group_splits[group].extend(partitions)
+        if item is not None:accepted[key]=item
     for item in accepted.values():
         item['split'] = max(group_splits[item['validation_results']['split_group']], key=PRIORITY.get)
     if not accepted: raise ValueError('No approved records; no training release')
@@ -192,9 +202,13 @@ def training_examples(path):
     """Only approved train shards; review packets and evaluation text are never yielded."""
     path = Path(path)
     manifest = verify(path)
+    if manifest.get('release')=='training' and manifest.get('review_schema_version')==2:
+        from slm.data.review_stream import training_examples as streamed
+        yield from streamed(path);return
     if manifest.get('release') != 'training' or manifest.get('review_schema_version') != 1:
         raise ValueError('Reviewed training release required; sample-only data is refused')
-    packet = json.loads((path/'review.json').read_text())
+    from slm.data.staging import metadata
+    packet = metadata(path/'review.json')
     if (digest(packet) != manifest['review_packet_sha256']
         or packet['dataset_manifest_sha256'] != manifest['parent_dataset_manifest_sha256']):
         raise ValueError('Review lineage differs')

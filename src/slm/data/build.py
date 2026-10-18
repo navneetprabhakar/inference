@@ -125,7 +125,8 @@ def verify(path):
     actual={p.name for p in path.iterdir() if p.name != 'manifest.json'}
     if actual != set(manifest['files']): raise ValueError('Dataset file set differs')
     for name,checksum in manifest['files'].items():
-        if hashlib.sha256((path/name).read_bytes()).hexdigest() != checksum:
+        with (path/name).open('rb') as stream: actual_hash=hashlib.file_digest(stream,'sha256').hexdigest()
+        if actual_hash != checksum:
             raise ValueError(f'Dataset checksum mismatch: {name}')
     return manifest
 
