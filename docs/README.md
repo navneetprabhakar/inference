@@ -52,3 +52,6 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Disk-backed explicit-row review contract](streamed-row-review.md)
 - [Corpus-admission proposal](corpus-admission-proposal.md)
 - [Reviewed-release intake results](milestone-thirty-three.md)
+
+- [Non-admitting quality audit contract](quality-audit-contract.md)
+- [Offline language/privacy/group-audit results](milestone-thirty-four.md)
