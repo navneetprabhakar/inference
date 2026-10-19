@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "creator": "Navneet Prabhakar",
+  "scope": "Three handcrafted development probes, not a reviewed acceptance suite or a population estimate.",
+  "decoding": "raw-cached-greedy-v1",
+  "max_new_tokens": 32,
+  "cases": [
+    {
+      "id": "literal-word",
+      "messages": [{"role": "user", "content": "Reply with exactly the word blue."}],
+      "expected_exact": "blue"
+    },
+    {
+      "id": "name-reference",
+      "messages": [
+        {"role": "user", "content": "My name is Mira. Please remember it."},
+        {"role": "assistant", "content": "Understood."},
+        {"role": "user", "content": "What is my name? Reply with only the name."}
+      ],
+      "expected_exact": "Mira"
+    },
+    {
+      "id": "simple-addition",
+      "messages": [{"role": "user", "content": "What is 2 plus 3? Reply with only the number."}],
+      "expected_exact": "5"
+    }
+  ],
+  "limitations": "The model has prose-only foundation training, not conversation SFT. The supplied prior assistant turn is a handcrafted fixture, not a generated teacher response. Results can seed actual student-failure investigation; they do not establish broad capability or authorize training on generated outputs."
+}
