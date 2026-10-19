@@ -102,3 +102,5 @@ Use `.venv/bin/python -m slm.train --spec /absolute/spec.json --preflight-only` 
 The [non-admitting quality audit](docs/milestone-thirty-four.md) now measures full-message language windows, privacy candidates and quality features, then selects whole split groups for review. Actual source judgments and corpus admission remain pending; short/code and random-word controls demonstrate why detector scores cannot authorize training.
 
 [Complete small-source preparation](docs/milestone-thirty-five.md) now includes all pinned Dolly records within a 24 MiB acquisition cap, preserving previous heldouts and producing a new 287-row whole-group review bundle. The 15,692-row combined population remains sample-only; actual source review, corpus admission and real training are still open.
+
+[Exact-shingle storage compaction](docs/milestone-thirty-six.md) cuts measured main DB allocation by 52% and wall time by 26% on the complete-source workload, preserving every non-report payload byte. This is one local comparison; existing source reviews and model acceptance gates remain open.

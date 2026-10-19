@@ -58,3 +58,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Small complete-source acquisition](small-source-snapshot.md)
 - [Complete Dolly preparation and review bundle](milestone-thirty-five.md)
+
+- [Compact exact-shingle storage and comparison](milestone-thirty-six.md)

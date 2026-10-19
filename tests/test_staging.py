@@ -63,11 +63,17 @@ def test_prefix_matches_bruteforce_random_and_boundary(tmp_path):
         sets.extend([common,common|{rng.randrange(60)}])
     src=setup(tmp_path);store=Store(tmp_path/'test.sqlite',LIMITS['max_db_bytes'])
     try:
+        from collections import Counter
+        for i in range(len(sets)):store.insert(item(src,i),0,False,4096)
+        store.db.execute('DELETE FROM features');store.db.execute('DELETE FROM counts');store.db.execute('DELETE FROM dictionary')
+        frequency=Counter(v for values in sets for v in values)
+        for v,n in frequency.items():
+            store.db.execute('INSERT INTO dictionary(feat,n_full,n_prompt) VALUES(?,?,0)',(hashlib.sha256(str(v).encode()).digest(),n))
+        ids={feat:fid for fid,feat in store.db.execute('SELECT fid,feat FROM dictionary')}
         for i,values in enumerate(sets):
-            sid=store.insert(item(src,i),0,False,4096)
-            store.db.execute('DELETE FROM features WHERE sid=?',(sid,));store.db.execute('DELETE FROM counts WHERE sid=?',(sid,))
-            store.db.execute('INSERT INTO counts VALUES(?,?,?)',(sid,'full',len(values)))
-            store.db.executemany('INSERT INTO features VALUES(?,?,?)',(('full',hashlib.sha256(str(v).encode()).digest(),sid) for v in values))
+            sid=i+1
+            store.db.execute('INSERT INTO counts VALUES(?,?,?)',(sid,0,len(values)))
+            store.db.executemany('INSERT INTO features VALUES(?,?,?)',((0,ids[hashlib.sha256(str(v).encode()).digest()],sid) for v in values))
         store.db.commit();store.group(100000)
         expected={(i+1,j+1) for i,a in enumerate(sets) for j,b in enumerate(sets) if j>i and len(a&b)/len(a|b)>=.85}
         actual=set(store.db.execute('SELECT a,b FROM near_pairs'))
@@ -185,3 +191,33 @@ def test_streaming_adapters_preserve_reference_identity(tmp_path,adapter,raw):
     expected,_=curate(rows(src,raw,adapter),{src.source_id:src})
     out=tmp_path/'out';stage([s],out,limits=LIMITS)
     assert read(out)==[e.to_dict() for e in expected]
+
+
+def test_interning_preserves_hashes_memberships_and_separate_frequencies(tmp_path):
+    from collections import Counter
+    from slm.data.curation import clean,key_text,shingles
+    from slm.data.schema import digest
+    src=setup(tmp_path)
+    records=[item(src,'a','one two three four five six seven','eight nine ten eleven twelve'),
+             item(src,'b','eight nine ten eleven twelve','one two three four five six seven'),
+             item(src,'c','one two three four five six seven','An entirely different response.')]
+    expected=Counter();memberships={};store=Store(tmp_path/'interning.sqlite',LIMITS['max_db_bytes'])
+    try:
+        for record in records:
+            record=clean(record);sid=store.insert(record,0,False,4096)
+            for kind,text in ((0,key_text(record)),(1,record.messages[0]['content'])):
+                values={bytes.fromhex(digest(v)) for v in shingles(text)}
+                memberships[sid,kind]=values;expected.update((kind,v) for v in values)
+        actual={}
+        for fid,feat,full,prompt in store.db.execute('SELECT fid,feat,n_full,n_prompt FROM dictionary'):
+            assert len(feat)==32
+            if full:actual[0,feat]=full
+            if prompt:actual[1,feat]=prompt
+        assert actual==dict(expected)
+        assert store.db.execute('SELECT count(*) FROM dictionary').fetchone()[0]==len({v for _,v in expected})
+        assert any(actual.get((0,v),0)!=n for (kind,v),n in actual.items() if kind==1)
+        for (sid,kind),wanted in memberships.items():
+            found={r[0] for r in store.db.execute('SELECT d.feat FROM features f JOIN dictionary d ON d.fid=f.fid WHERE f.sid=? AND f.kind=?',(sid,kind))}
+            assert found==wanted
+        store.usage();assert store.scratch_peak>0
+    finally:store.db.close()

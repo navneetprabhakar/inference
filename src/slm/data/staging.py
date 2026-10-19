@@ -18,7 +18,7 @@ from slm.data.tokenized import sha,stamp
 
 PRIORITY={None:0,'train':0,'validation':1,'test':2}
 CANDIDATES='''INSERT INTO candidates SELECT DISTINCT p.sid FROM prefixes mine
- CROSS JOIN prefixes p ON p.kind=mine.kind AND p.feat=mine.feat
+ CROSS JOIN prefixes p ON p.kind=mine.kind AND p.fid=mine.fid
  CROSS JOIN records r ON r.sid=p.sid CROSS JOIN counts c ON c.sid=p.sid AND c.kind=p.kind
  WHERE mine.sid=? AND mine.kind=? AND r.eid<? AND 20*c.n>=17*? AND 17*c.n<=20*?'''
 LIMITS={'max_input_bytes','max_records','max_record_bytes','max_shingles','max_pair_checks','max_db_bytes'}
@@ -46,7 +46,7 @@ def canonical(value):return json.dumps(value,sort_keys=True,ensure_ascii=False,s
 
 class Store:
     def __init__(self,path,max_bytes):
-        self.db=sqlite3.connect(path);self.peak=0;self.pairs=0
+        self.db=sqlite3.connect(path);self.peak=0;self.scratch_peak=0;self.pairs=0
         self.db.executescript('''PRAGMA page_size=4096; PRAGMA journal_mode=DELETE; PRAGMA synchronous=FULL;
  PRAGMA cache_size=-8192; PRAGMA temp_store=FILE;
  CREATE TABLE records(sid INTEGER PRIMARY KEY,eid TEXT UNIQUE NOT NULL,data TEXT NOT NULL,family TEXT NOT NULL,
@@ -54,9 +54,11 @@ class Store:
  root INTEGER,group_id TEXT,split TEXT);
  CREATE INDEX families ON records(family); CREATE INDEX exacts ON records(exact); CREATE INDEX prompts ON records(prompt);
  CREATE TABLE seen(eid TEXT PRIMARY KEY); CREATE TABLE incoming(eid TEXT PRIMARY KEY);
- CREATE TABLE features(kind TEXT,feat BLOB,sid INTEGER,PRIMARY KEY(kind,feat,sid)) WITHOUT ROWID;
- CREATE INDEX by_record ON features(sid,kind);
- CREATE TABLE counts(sid INTEGER,kind TEXT,n INTEGER,PRIMARY KEY(sid,kind)) WITHOUT ROWID;
+ CREATE TABLE dictionary(fid INTEGER PRIMARY KEY,feat BLOB NOT NULL UNIQUE,n_full INTEGER NOT NULL,n_prompt INTEGER NOT NULL);
+ CREATE TABLE features(kind INTEGER,fid INTEGER,sid INTEGER,PRIMARY KEY(kind,fid,sid)) WITHOUT ROWID;
+ CREATE INDEX by_record ON features(sid,kind,fid);
+ CREATE TABLE counts(sid INTEGER,kind INTEGER,n INTEGER,PRIMARY KEY(sid,kind)) WITHOUT ROWID;
+ CREATE TEMP TABLE incoming_features(feat BLOB PRIMARY KEY) WITHOUT ROWID; PRAGMA temp.cache_size=-2048;
  CREATE TABLE candidates(sid INTEGER PRIMARY KEY);
  CREATE TABLE near_pairs(a INTEGER,b INTEGER,PRIMARY KEY(a,b)) WITHOUT ROWID;
  CREATE TABLE groups(root INTEGER PRIMARY KEY,group_id TEXT,split TEXT);
@@ -65,7 +67,9 @@ class Store:
  ''')
         self.db.execute('PRAGMA max_page_count='+str(max_bytes//4096))
     def usage(self):
-        value=self.db.execute('PRAGMA page_count').fetchone()[0]*4096;self.peak=max(self.peak,value);return value
+        value=self.db.execute('PRAGMA page_count').fetchone()[0]*4096;self.peak=max(self.peak,value)
+        scratch=self.db.execute('PRAGMA temp.page_count').fetchone()[0]*self.db.execute('PRAGMA temp.page_size').fetchone()[0]
+        self.scratch_peak=max(self.scratch_peak,scratch);return value
     def find(self,sid):
         path=[]
         while True:
@@ -87,25 +91,28 @@ class Store:
         cur=self.db.execute('INSERT INTO records(eid,data,family,exact,prompt,fixed,frozen,official) VALUES(?,?,?,?,?,?,?,?)',
             (item.example_id,canonical(item.to_dict()),item.parent_group_id,fingerprint,pkey,fixed,int(frozen),{None:-1,'train':0,'validation':1,'test':2}[item.official_split]))
         sid=cur.lastrowid;self.db.execute('UPDATE records SET parent=? WHERE sid=?',(sid,sid))
-        for kind,content in [('full',text),('prompt',prompt)]:
+        for kind,content in [(0,text),(1,prompt)]:
             if content is None:continue
             values=shingles(content)
             if len(values)>max_shingles:raise ValueError('Per-record feature budget exceeded; no truncation')
             self.db.execute('INSERT INTO counts VALUES(?,?,?)',(sid,kind,len(values)))
-            self.db.executemany('INSERT INTO features VALUES(?,?,?)',((kind,bytes.fromhex(digest(v)),sid) for v in sorted(values)))
+            self.db.execute('DELETE FROM incoming_features')
+            self.db.executemany('INSERT INTO incoming_features VALUES(?)',((bytes.fromhex(digest(v)),) for v in sorted(values)))
+            self.db.execute('''INSERT INTO dictionary(feat,n_full,n_prompt) SELECT feat,?,? FROM incoming_features WHERE true
+ ON CONFLICT(feat) DO UPDATE SET n_full=n_full+excluded.n_full,n_prompt=n_prompt+excluded.n_prompt''',(int(kind==0),int(kind==1)))
+            self.db.execute('''INSERT INTO features SELECT ?,d.fid,? FROM incoming_features i
+ CROSS JOIN dictionary d ON d.feat=i.feat''',(kind,sid))
         if sid%256==0:self.db.commit()
         self.usage();return sid
     def group(self,max_checks):
         # Stable global frequency order; prefix length n-ceil(.85*n)+1.
         # Every candidate is still verified against its full shingle sets.
-        self.db.executescript('''CREATE TABLE frequency AS SELECT kind,feat,count(*) AS n FROM features GROUP BY kind,feat;
- CREATE UNIQUE INDEX frequency_key ON frequency(kind,feat);
- CREATE TABLE prefixes(kind TEXT,feat BLOB,sid INTEGER,PRIMARY KEY(kind,feat,sid)) WITHOUT ROWID;
- INSERT INTO prefixes SELECT kind,feat,sid FROM (
- SELECT f.kind,f.feat,f.sid,c.n,row_number() OVER(PARTITION BY f.sid,f.kind ORDER BY q.n,f.feat) AS position
- FROM features f JOIN frequency q ON q.kind=f.kind AND q.feat=f.feat JOIN counts c ON c.sid=f.sid AND c.kind=f.kind)
+        self.db.executescript('''CREATE TABLE prefixes(kind INTEGER,fid INTEGER,sid INTEGER,PRIMARY KEY(kind,fid,sid)) WITHOUT ROWID;
+ INSERT INTO prefixes SELECT kind,fid,sid FROM (
+ SELECT f.kind,f.fid,f.sid,c.n,row_number() OVER(PARTITION BY c.sid,c.kind ORDER BY CASE c.kind WHEN 0 THEN q.n_full ELSE q.n_prompt END,q.feat) AS position
+ FROM counts c CROSS JOIN features f ON f.sid=c.sid AND f.kind=c.kind CROSS JOIN dictionary q ON q.fid=f.fid)
  WHERE position<=n-(17*n+19)/20+1;
- CREATE INDEX prefix_record ON prefixes(sid,kind);''')
+ CREATE INDEX prefix_record ON prefixes(sid,kind,fid);''')
         for sid,eid,family,exact,prompt in self.db.execute('SELECT sid,eid,family,exact,prompt FROM records ORDER BY eid'):
             for field,value in [('family',family),('exact',exact),('prompt',prompt)]:
                 if value is None:continue
@@ -117,7 +124,7 @@ class Store:
                 for other,m in self.db.execute('SELECT c.sid,n.n FROM candidates c JOIN counts n ON n.sid=c.sid AND n.kind=? ORDER BY c.sid',(kind,)):
                     self.pairs+=1
                     if self.pairs>max_checks:raise ValueError('Exact candidate comparison budget exceeded; no partial grouping')
-                    overlap=self.db.execute('SELECT count(*) FROM features a JOIN features b ON a.kind=b.kind AND a.feat=b.feat WHERE a.sid=? AND b.sid=? AND a.kind=?',(sid,other,kind)).fetchone()[0]
+                    overlap=self.db.execute('SELECT count(*) FROM features a CROSS JOIN features b ON a.kind=b.kind AND a.fid=b.fid WHERE a.sid=? AND b.sid=? AND a.kind=?',(sid,other,kind)).fetchone()[0]
                     if 20*overlap>=17*(n+m-overlap):
                         self.union(sid,other);self.db.execute('INSERT OR IGNORE INTO near_pairs VALUES(?,?)',(min(sid,other),max(sid,other)))
             if sid%256==0:self.db.commit()
@@ -284,12 +291,15 @@ def stage(specs,output,*,limits,seed='slm-splits-v1',shard_size=1000,frozen_data
             for family,split in db.execute('SELECT family,split FROM heldout ORDER BY family'):
                 f.write(('' if first else ',')+canonical(family)+':'+canonical(split));first=False
             f.write('}\n')
-        report={'version':1,'release':'sample_only','staging':'sqlite-exact-prefix-jaccard-v1','input_examples':ingested,
+        report={'version':1,'release':'sample_only','staging':'sqlite-exact-prefix-jaccard-v1','feature_storage':'interned-sha256-postings-v1','input_examples':ingested,
             'retained_examples':sum(counts.values()),'splits':dict(counts),'sources':dict(source_counts),'language_labels':dict(language),
             'content_categories':dict(categories),'rejections':dict(rejected),'limits':limits,'input_bytes':total,
             'exact_duplicates_removed':db.execute('SELECT count(*) FROM records').fetchone()[0]-sum(counts.values()),
-            'candidate_lookup_plan':db.execute('EXPLAIN QUERY PLAN '+CANDIDATES,(-1,'full','',0,0)).fetchall(),
+            'candidate_lookup_plan':db.execute('EXPLAIN QUERY PLAN '+CANDIDATES,(-1,0,'',0,0)).fetchall(),
             'near_pairs_grouped':db.execute('SELECT count(*) FROM near_pairs').fetchone()[0],'candidate_comparisons':store.pairs,
+            'peak_record_scratch_database_bytes':store.scratch_peak,
+            'unique_shingle_hashes':db.execute('SELECT count(*) FROM dictionary').fetchone()[0],
+            'signature_memberships':db.execute('SELECT count(*) FROM features').fetchone()[0],
             'peak_database_allocated_bytes':store.peak,'max_shared_message_exposure':exposure_max,'split_seed':seed,
             'source_rights_approved':False,'training_eligible':False,'frozen_dataset_manifest_sha256':frozen_manifest,
             'scope':'Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.'}
