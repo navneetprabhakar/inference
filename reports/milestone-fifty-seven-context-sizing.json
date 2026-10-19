@@ -1,0 +1,345 @@
+{
+  "controls": {
+    "actual_trial_reaggregation_passed": true,
+    "focused_checks_passed": 6,
+    "original_26_runtime_references_unchanged": true,
+    "script_sha256": "953009b420313cbebd4f53fdb2ab736de2f9efee65fa9c881ed507cf9a6376cc",
+    "source_model_transitive_load_valid": true,
+    "test_source_sha256": "5e1065d27b0a4202cc88f3423ae54e458639ca9a61e15cb9aa7bb6d8ecc0716c",
+    "total_gradient_positions": 24576,
+    "total_supervised_gradient_positions": 12288
+  },
+  "creator": "Navneet Prabhakar",
+  "hardware_observed_after_probes": {
+    "cpu_brand": "Apple M4",
+    "numpy_version": "2.5.4",
+    "observed_at_utc": "2026-10-19T07:04:40.374629+00:00",
+    "physical_memory_bytes": 25769803776,
+    "scope": "Observed after probes, not temperature/background-load control."
+  },
+  "language_capability_proved": false,
+  "optimizer_updates": 0,
+  "protocol": {
+    "creator": "Navneet Prabhakar",
+    "fresh_process_each_trial": true,
+    "implementation_sha256": "8c35612a9545da5218b8e568d15561c8734744f3380204c7031f2e53f0cf1c7c",
+    "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+    "optimizer_updates": 0,
+    "order": [
+      1024,
+      2048,
+      2048,
+      1024
+    ],
+    "scope": "Synthetic forward/backward sizing, resident dummy moment-shaped buffers; not a full optimizer step or language training.",
+    "script_sha256": "8efb85aa73bdfa99d78d8cd531e784d728d86adfe5bfc7e80244a61408d8987b",
+    "seed": 20261019,
+    "source_receipt_sha256": "161ee10c32b7fe5583f4fe72a4a8d3f5921c0ef690fedfbf612c7b91add58f9f",
+    "timed_gradient_calls_per_trial": 3,
+    "version": 1,
+    "warmup_gradient_calls_per_trial": 1
+  },
+  "protocol_sha256": "ad00d4949771aca528bbc15dbbf0483953b14b8524c0b01145422b907046b181",
+  "scope": "Two fresh processes per context, six timed calls each. ABBA ordering reduces order confounding but is not sustained/thermal causal evidence. Finite checks/export/optimizer/data/checkpoint overhead excluded from timing. Allocator/RSS overlap. Memory includes dummy moment buffers but omits optimizer-update scratch. No full-step memory acceptance, real SFT throughput or actual CUDA result.",
+  "summary": {
+    "1024": {
+      "forward_backward_positions_per_second": 1840.1703431747333,
+      "fresh_process_trials": 2,
+      "max_seconds": 0.5617358750314452,
+      "maximum_allocator_peak_bytes": 4027980944,
+      "maximum_process_peak_rss_bytes": 1344864256,
+      "median_seconds": 0.5577139999950305,
+      "min_seconds": 0.5492663339828141,
+      "resident_moment_shaped_bytes": 646123520,
+      "seconds": [
+        0.5512711249757558,
+        0.5492663339828141,
+        0.5568954169866629,
+        0.5617358750314452,
+        0.5611200000275858,
+        0.558532583003398
+      ],
+      "timed_calls": 6
+    },
+    "2048": {
+      "forward_backward_positions_per_second": 1312.8015722846076,
+      "fresh_process_trials": 2,
+      "max_seconds": 1.568419791990891,
+      "maximum_allocator_peak_bytes": 7974681744,
+      "maximum_process_peak_rss_bytes": 1343619072,
+      "median_seconds": 1.5603615835134406,
+      "min_seconds": 1.5526822499814443,
+      "resident_moment_shaped_bytes": 646123520,
+      "seconds": [
+        1.5615589580265805,
+        1.5626017080503516,
+        1.568419791990891,
+        1.5591642090003006,
+        1.5526822499814443,
+        1.5557081250008196
+      ],
+      "timed_calls": 6
+    }
+  },
+  "total_synthetic_gradient_positions": 24576,
+  "total_synthetic_supervised_gradient_positions": 12288,
+  "trials": [
+    {
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "batch_size": 1,
+      "config": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "creator": "Navneet Prabhakar",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "finite_losses": [
+        10.930596351623535,
+        10.930596351623535,
+        10.930596351623535
+      ],
+      "forward_backward_seconds": [
+        0.5512711249757558,
+        0.5492663339828141,
+        0.5568954169866629
+      ],
+      "implementation_sha256": "8c35612a9545da5218b8e568d15561c8734744f3380204c7031f2e53f0cf1c7c",
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "memory": {
+        "allocator_active_bytes": 969197568,
+        "allocator_cache_bytes": 3520771734,
+        "allocator_peak_bytes": 4027980944,
+        "allocator_peak_scope": "Reset after warmup; timed forward/backward and untimed finite checks, with moment-shaped buffers resident.",
+        "process_peak_rss_bytes": 1344864256,
+        "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+      },
+      "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+      "new_training_positions": 0,
+      "observed_reservation_delta_bytes": 646123520,
+      "optimizer_updates": 0,
+      "parameters": 80765440,
+      "parameters_bitwise_unchanged": true,
+      "reservation_kind": "Synthetic FP32 buffers; not source optimizer values and not used by an optimizer.",
+      "resident_moment_shaped_bytes": 646123520,
+      "scope": "Synthetic fixed-length forward/backward only. Timings exclude validation/export, optimizer/clipping and data/checkpoint work. RSS is process lifetime; allocator peak has the declared reset scope and overlaps unified-memory RSS. No sustained throughput, complete training-step feasibility, learned quality or actual CUDA claim.",
+      "seed": 20261019,
+      "sequence_length": 1024,
+      "timed_forward_backward_positions_per_second": 1853.4687253913921,
+      "timed_gradient_calls": 3,
+      "timed_positions": 3072,
+      "total_gradient_probe_positions": 4096,
+      "total_supervised_probe_positions": 2048,
+      "version": 1,
+      "warmup_gradient_calls": 1,
+      "warmup_seconds": 0.5908949170261621
+    },
+    {
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "batch_size": 1,
+      "config": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "creator": "Navneet Prabhakar",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "finite_losses": [
+        11.073238372802734,
+        11.073238372802734,
+        11.073238372802734
+      ],
+      "forward_backward_seconds": [
+        1.5615589580265805,
+        1.5626017080503516,
+        1.568419791990891
+      ],
+      "implementation_sha256": "8c35612a9545da5218b8e568d15561c8734744f3380204c7031f2e53f0cf1c7c",
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "memory": {
+        "allocator_active_bytes": 969209856,
+        "allocator_cache_bytes": 7521849926,
+        "allocator_peak_bytes": 7974681744,
+        "allocator_peak_scope": "Reset after warmup; timed forward/backward and untimed finite checks, with moment-shaped buffers resident.",
+        "process_peak_rss_bytes": 1343619072,
+        "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+      },
+      "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+      "new_training_positions": 0,
+      "observed_reservation_delta_bytes": 646123520,
+      "optimizer_updates": 0,
+      "parameters": 80765440,
+      "parameters_bitwise_unchanged": true,
+      "reservation_kind": "Synthetic FP32 buffers; not source optimizer values and not used by an optimizer.",
+      "resident_moment_shaped_bytes": 646123520,
+      "scope": "Synthetic fixed-length forward/backward only. Timings exclude validation/export, optimizer/clipping and data/checkpoint work. RSS is process lifetime; allocator peak has the declared reset scope and overlaps unified-memory RSS. No sustained throughput, complete training-step feasibility, learned quality or actual CUDA claim.",
+      "seed": 20261019,
+      "sequence_length": 2048,
+      "timed_forward_backward_positions_per_second": 1309.3009389826852,
+      "timed_gradient_calls": 3,
+      "timed_positions": 6144,
+      "total_gradient_probe_positions": 8192,
+      "total_supervised_probe_positions": 4096,
+      "version": 1,
+      "warmup_gradient_calls": 1,
+      "warmup_seconds": 1.6145095000392757
+    },
+    {
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "batch_size": 1,
+      "config": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "creator": "Navneet Prabhakar",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "finite_losses": [
+        11.073238372802734,
+        11.073238372802734,
+        11.073238372802734
+      ],
+      "forward_backward_seconds": [
+        1.5591642090003006,
+        1.5526822499814443,
+        1.5557081250008196
+      ],
+      "implementation_sha256": "8c35612a9545da5218b8e568d15561c8734744f3380204c7031f2e53f0cf1c7c",
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "memory": {
+        "allocator_active_bytes": 969209856,
+        "allocator_cache_bytes": 7521850006,
+        "allocator_peak_bytes": 7974681744,
+        "allocator_peak_scope": "Reset after warmup; timed forward/backward and untimed finite checks, with moment-shaped buffers resident.",
+        "process_peak_rss_bytes": 1343389696,
+        "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+      },
+      "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+      "new_training_positions": 0,
+      "observed_reservation_delta_bytes": 646123520,
+      "optimizer_updates": 0,
+      "parameters": 80765440,
+      "parameters_bitwise_unchanged": true,
+      "reservation_kind": "Synthetic FP32 buffers; not source optimizer values and not used by an optimizer.",
+      "resident_moment_shaped_bytes": 646123520,
+      "scope": "Synthetic fixed-length forward/backward only. Timings exclude validation/export, optimizer/clipping and data/checkpoint work. RSS is process lifetime; allocator peak has the declared reset scope and overlaps unified-memory RSS. No sustained throughput, complete training-step feasibility, learned quality or actual CUDA claim.",
+      "seed": 20261019,
+      "sequence_length": 2048,
+      "timed_forward_backward_positions_per_second": 1316.32097481711,
+      "timed_gradient_calls": 3,
+      "timed_positions": 6144,
+      "total_gradient_probe_positions": 8192,
+      "total_supervised_probe_positions": 4096,
+      "version": 1,
+      "warmup_gradient_calls": 1,
+      "warmup_seconds": 1.612123792001512
+    },
+    {
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "batch_size": 1,
+      "config": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "creator": "Navneet Prabhakar",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "finite_losses": [
+        10.930596351623535,
+        10.930596351623535,
+        10.930596351623535
+      ],
+      "forward_backward_seconds": [
+        0.5617358750314452,
+        0.5611200000275858,
+        0.558532583003398
+      ],
+      "implementation_sha256": "8c35612a9545da5218b8e568d15561c8734744f3380204c7031f2e53f0cf1c7c",
+      "loss_implementation": "legacy-logsumexp-minus-target-v1",
+      "memory": {
+        "allocator_active_bytes": 969197568,
+        "allocator_cache_bytes": 3520771654,
+        "allocator_peak_bytes": 4027980944,
+        "allocator_peak_scope": "Reset after warmup; timed forward/backward and untimed finite checks, with moment-shaped buffers resident.",
+        "process_peak_rss_bytes": 1344274432,
+        "scope": "Process lifetime high-water mark; allocator memory overlaps RSS on unified memory."
+      },
+      "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+      "new_training_positions": 0,
+      "observed_reservation_delta_bytes": 646123520,
+      "optimizer_updates": 0,
+      "parameters": 80765440,
+      "parameters_bitwise_unchanged": true,
+      "reservation_kind": "Synthetic FP32 buffers; not source optimizer values and not used by an optimizer.",
+      "resident_moment_shaped_bytes": 646123520,
+      "scope": "Synthetic fixed-length forward/backward only. Timings exclude validation/export, optimizer/clipping and data/checkpoint work. RSS is process lifetime; allocator peak has the declared reset scope and overlaps unified-memory RSS. No sustained throughput, complete training-step feasibility, learned quality or actual CUDA claim.",
+      "seed": 20261019,
+      "sequence_length": 1024,
+      "timed_forward_backward_positions_per_second": 1827.0614296591884,
+      "timed_gradient_calls": 3,
+      "timed_positions": 3072,
+      "total_gradient_probe_positions": 4096,
+      "total_supervised_probe_positions": 2048,
+      "version": 1,
+      "warmup_gradient_calls": 1,
+      "warmup_seconds": 0.5832792079891078
+    }
+  ],
+  "version": 1
+}
