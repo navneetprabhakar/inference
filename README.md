@@ -6,6 +6,8 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
+**Data-intake implementation:** [Expanded isolation and accounting](docs/data-intake-isolation.md) now protects364requests/119generated replies and scans1,176retained source records. Forty-one focused checks pass. A real four-request Cosmopedia metadata probe confirms377bounded groups in one pinned file; no data rows or new gradients yet.
+
 **Latest assessment:** [100 actual three-turn conversations](docs/current-model-100-assessment.md) on the unchanged latest fitting-control checkpoint: **0/100 conversations, 0/300 requested turns; 7.6/100** direct development score. Only29 distinct replies recur across300 turns. [Full transcripts](docs/current-model-100-transcripts.md) are retained; no further training or cloud launch occurred.
 
 Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md) completed **475 updates /800,130 positions** on the 81M foundation checkpoint. Assistant validation NLL improves **4.649 →4.463**, but its actual eight-turn conversation still completes **0/8 tasks**, scoring **5/100** with dominant repetition and ignored requests. The model remains unsuitable as a conversational assistant. The [next-iteration plan](docs/iteration-four-plan.md) starts with fresh-session diagnostics and a small reviewed learning control before another broad run.
