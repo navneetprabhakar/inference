@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "creator": "Navneet Prabhakar",
+  "kind": "main-english-learning-budget-proposal-v1",
+  "status": "proposed_not_authorized",
+  "project": "executespecv1",
+  "separate_from_cuda_validation_usd": 10,
+  "existing_cuda_validation_conservative_allowances_usd": 7,
+  "existing_cuda_validation_settled_cost": null,
+  "preferred_machine": "g2-standard-4",
+  "region": "us-central1",
+  "gpu": "NVIDIA L4",
+  "gpu_count": 1,
+  "on_demand_only": true,
+  "maximum_concurrent_instances": 1,
+  "architecture_parameters": 80765440,
+  "student_initialization": "Own random-origin foundation checkpoint; explicit new-corpus phase and optimizer policy must be frozen before launch. No external pretrained student weights.",
+  "tokenizer": "existing frozen 16K byte BPE",
+  "training_context": 1024,
+  "model_maximum_context": 2048,
+  "precision": "FP32 reference; no unvalidated precision/kernel change",
+  "options": {
+    "usd50": {
+      "maximum_new_total_spend_usd": 50,
+      "maximum_new_prediction_positions": 100000000,
+      "maximum_total_vm_hours": 45,
+      "maximum_vm_list_rate_usd_per_hour": 0.8,
+      "compute_allowance_usd": 36,
+      "storage_network_allowance_usd": 4,
+      "other_contingency_usd": 10
+    },
+    "usd25": {
+      "maximum_new_total_spend_usd": 25,
+      "maximum_new_prediction_positions": 50000000,
+      "maximum_total_vm_hours": 20,
+      "maximum_vm_list_rate_usd_per_hour": 0.8,
+      "compute_allowance_usd": 16,
+      "storage_network_allowance_usd": 4,
+      "other_contingency_usd": 5
+    },
+    "laptop_only": {
+      "maximum_new_cloud_spend_usd": 0,
+      "cloud_launch_authorized": false,
+      "scope": "Local source preparation and separately frozen bounded MLX training only. No automatic long training launch inferred from the budget preference."
+    }
+  },
+  "launch_prerequisites": [
+    "Explicit main-training budget authorization; no reuse of validation-only or teacher budgets",
+    "Checked finite corpus/source-rights/research admission and original heldout preservation; sample review alone is not corpus admission",
+    "Frozen model/tokenizer/data/optimizer-transition/exposure/evaluation/conversation contracts",
+    "Exact state/import and unchanged same-checkpoint inference parity checks; useful paired learning comparison specified before comparative runs",
+    "Current price, image/runtime, regional and global quota/capacity, all-in budget bound and cleanup/deletion behavior verified",
+    "Built-in finite VM deletion duration, auto-delete boot disk, job wall/time/token stops and retrieval/cleanup implemented and verified before paid launch"
+  ],
+  "stop_conditions": [
+    "Prepared data exhaustion or frozen token/update limit",
+    "Insufficient remaining time/spend allowance for next atomic work unit and cleanup",
+    "State/inference/resource/source-integrity failure or nonfinite training",
+    "Predeclared learning/retention regression guard failure",
+    "VM maximum total lifetime; no silent deadline extension or automatic budget reset"
+  ],
+  "not_authorized": [
+    "resource creation before required authorization and gates",
+    "teacher API or CLI usage changes",
+    "credits or usage resets",
+    "paid services, clusters, public deployment or unrelated project-resource changes",
+    "parallel VMs, committed-use contracts, automatic region/hardware sweeps"
+  ]
+}

@@ -10,6 +10,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [The actual 12-example fitting control](docs/milestone-sixty-six.md) completes 96 updates: train NLL 4.158 to 0.174, but only 5/12 exact references, so its frozen fitting criterion fails. Validation NLL worsens 4.881 to 5.853. The separate branch scores 10/100 for grammatical sentences only and still 0/8 conversation tasks; it is not promoted as the conversational model. All seven first canonical errors reproduce without KV caching.
 
+[Broader English preparation](docs/milestone-sixty-seven.md) audits 64 FineWeb-Edu documents across four crawl periods and directly reviews 16: six considerations, six deferrals, four exclusions; none admitted for training. Bounded Parquet footer access succeeds without downloading the 2.15 GB shard. A separate [main-learning budget proposal](docs/main-learning-budget-proposal.md) awaits a decision; no VM or new training is launched. Useful MLX/CUDA resumed-learning acceptance remains open.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
