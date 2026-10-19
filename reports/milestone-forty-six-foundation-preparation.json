@@ -1,0 +1,975 @@
+{
+  "candidate_rows_by_source_split": {
+    "OpenAssistant/oasst2|test": 1051,
+    "OpenAssistant/oasst2|train": 12803,
+    "OpenAssistant/oasst2|validation": 2093,
+    "databricks/databricks-dolly-15k|test": 166,
+    "databricks/databricks-dolly-15k|train": 13108,
+    "databricks/databricks-dolly-15k|validation": 145
+  },
+  "creator": "Navneet Prabhakar",
+  "dialogue_screen_manifest_sha256": "3c1d404195029e3a9f94bccb68557e2c79a576b729f1fabc356eb20c4b6cc49a",
+  "frozen_heldout_rows_verified": 5363,
+  "frozen_parent_manifest_sha256": "3cb24ceb950c97817bb0c89a42c7c5f0d90144c401344c40e341a24d497bbc89",
+  "new_cloud_jobs": 0,
+  "new_neural_updates": 0,
+  "new_teacher_calls": 0,
+  "original_dolly_rows": 14991,
+  "original_manifest_sha256": "1c50b116a72202c6ed8c10eb41a1a4b3ce411f4d308c713f0a3d1c804558e730",
+  "prior_dolly_judgment_counts": {
+    "False": 51,
+    "True": 42
+  },
+  "quality": {
+    "attention_records": {
+      "incomplete_top_k": 38,
+      "non_english_top_window": 715,
+      "privacy_candidate": 7,
+      "unscored_window": 146
+    },
+    "groups": 18669,
+    "groups_per_stratum": 2,
+    "human_approvals": 0,
+    "kind": "non-admitting-quality-audit-v1",
+    "limits": {
+      "detector_seconds": 60,
+      "max_db_bytes": 1073741824,
+      "max_detector_output_bytes": 16777216,
+      "max_input_bytes": 268435456,
+      "max_record_bytes": 1048576,
+      "max_records": 50000,
+      "max_sample_records": 2000,
+      "max_strata": 1024,
+      "max_windows": 250000
+    },
+    "peak_database_allocated_bytes": 218832896,
+    "privacy_candidate_occurrences": {
+      "identity_or_address_context": 4,
+      "ipv4_literal_candidate": 5
+    },
+    "records": 31603,
+    "release": "sample_only",
+    "sampled_groups": 67,
+    "sampled_records": 239,
+    "sampling": "Seeded bottom-k split groups per group-level stratum; full selected groups, clustered rows, conditional on this frozen input only.",
+    "scope": "Signals and sampling only. No calibrated language/PII/content/quality acceptance; no corpus admission or upstream representativeness claim.",
+    "seed": "iteration-two-foundation-audit-20261019-v1",
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": {
+        "attention_records": {},
+        "groups": 18,
+        "records": 18,
+        "sampled_records": 8
+      },
+      "HuggingFaceH4/ultrachat_200k": {
+        "attention_records": {
+          "non_english_top_window": 1
+        },
+        "groups": 22,
+        "records": 22,
+        "sampled_records": 4
+      },
+      "OpenAssistant/oasst2": {
+        "attention_records": {
+          "incomplete_top_k": 19,
+          "non_english_top_window": 337,
+          "privacy_candidate": 5,
+          "unscored_window": 48
+        },
+        "groups": 4141,
+        "records": 15986,
+        "sampled_records": 171
+      },
+      "databricks/databricks-dolly-15k": {
+        "attention_records": {
+          "incomplete_top_k": 19,
+          "non_english_top_window": 377,
+          "privacy_candidate": 2,
+          "unscored_window": 98
+        },
+        "groups": 14501,
+        "records": 15577,
+        "sampled_records": 56
+      }
+    },
+    "strata": [
+      {
+        "groups": 1,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 1,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 2,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 2,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 1,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 1,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 1,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 1,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 2,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.4,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.4,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 12,
+        "inclusion_probability": 0.16666666666666666,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 10,
+        "inclusion_probability": 0.2,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 157,
+        "inclusion_probability": 0.012738853503184714,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 103,
+        "inclusion_probability": 0.019417475728155338,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 1898,
+        "inclusion_probability": 0.001053740779768177,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 1406,
+        "inclusion_probability": 0.001422475106685633,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 23,
+        "inclusion_probability": 0.08695652173913043,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 307,
+        "inclusion_probability": 0.006514657980456026,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 226,
+        "inclusion_probability": 0.008849557522123894,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 63,
+        "inclusion_probability": 0.031746031746031744,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 237,
+        "inclusion_probability": 0.008438818565400843,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 62,
+        "inclusion_probability": 0.03225806451612903,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 218,
+        "inclusion_probability": 0.009174311926605505,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 19,
+        "inclusion_probability": 0.10526315789473684,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 358,
+        "inclusion_probability": 0.00558659217877095,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 251,
+        "inclusion_probability": 0.00796812749003984,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 808,
+        "inclusion_probability": 0.0024752475247524753,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 7725,
+        "inclusion_probability": 0.0002588996763754045,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4178,
+        "inclusion_probability": 0.0004786979415988511,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 16,
+        "inclusion_probability": 0.125,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 335,
+        "inclusion_probability": 0.005970149253731343,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 218,
+        "inclusion_probability": 0.009174311926605505,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "short_0_255"
+        ]
+      }
+    ],
+    "top_language_window_counts": {
+      "af": 1,
+      "ar": 1,
+      "az": 1,
+      "bn": 3,
+      "br": 1,
+      "ca": 16,
+      "ceb": 3,
+      "cs": 6,
+      "da": 2,
+      "de": 155,
+      "en": 90338,
+      "eo": 54,
+      "es": 91,
+      "et": 2,
+      "eu": 5,
+      "fa": 3,
+      "fi": 6,
+      "fr": 80,
+      "fy": 1,
+      "ga": 9,
+      "he": 20,
+      "hr": 5,
+      "hu": 25,
+      "ia": 1,
+      "id": 3,
+      "io": 4,
+      "it": 80,
+      "ja": 9,
+      "jbo": 1,
+      "jv": 2,
+      "kn": 2,
+      "ko": 7,
+      "la": 31,
+      "lt": 3,
+      "lv": 2,
+      "mk": 2,
+      "ml": 4,
+      "ms": 7,
+      "nds": 2,
+      "nl": 26,
+      "nn": 1,
+      "no": 11,
+      "pl": 15,
+      "pt": 12,
+      "ro": 7,
+      "ru": 8,
+      "sl": 5,
+      "sq": 1,
+      "sr": 1,
+      "sv": 11,
+      "ta": 1,
+      "tr": 3,
+      "uk": 2,
+      "uz": 2,
+      "vi": 4,
+      "war": 4,
+      "yi": 3,
+      "zh": 16
+    },
+    "training_eligible": false,
+    "window_characters": 2048,
+    "windows": 91273
+  },
+  "quality_manifest_sha256": "3dcf27603756538db6fbe940e6e7dcca64fa8c6dcfa7353adb3a147e775d2de7",
+  "release": "sample_only",
+  "scope": "Broader local full-source foundation candidates only. Prior approvals/rejections are evidence, not inherited whole-corpus approval. No source/content/privacy/factual certification, tokenization fit or training admission.",
+  "script_sha256": "995a70fc7274005a512dbf75f2fb7680d029e6372f10ce0c2b06ed214280e1b4",
+  "stage_seconds": 495.81491516699316,
+  "staged_manifest_sha256": "7973beddc1e6e6da4d4f02047e9833736c23e16c463247fd69b40dc4634e08b9",
+  "staging": {
+    "candidate_comparisons": 28514,
+    "candidate_lookup_plan": [
+      [
+        7,
+        0,
+        55,
+        "SEARCH mine USING COVERING INDEX prefix_record (sid=? AND kind=?)"
+      ],
+      [
+        15,
+        0,
+        55,
+        "SEARCH p USING PRIMARY KEY (kind=? AND fid=?)"
+      ],
+      [
+        22,
+        0,
+        45,
+        "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+      ],
+      [
+        30,
+        0,
+        45,
+        "SEARCH c USING PRIMARY KEY (sid=? AND kind=?)"
+      ],
+      [
+        56,
+        0,
+        0,
+        "USE TEMP B-TREE FOR DISTINCT"
+      ]
+    ],
+    "content_categories": {
+      "unreviewed": 31603
+    },
+    "exact_duplicates_removed": 0,
+    "feature_storage": "interned-sha256-postings-v1",
+    "frozen_dataset_manifest_sha256": "3cb24ceb950c97817bb0c89a42c7c5f0d90144c401344c40e341a24d497bbc89",
+    "input_bytes": 99743302,
+    "input_examples": 35353,
+    "language_labels": {
+      "en": 16004,
+      "unknown": 15599
+    },
+    "limits": {
+      "max_db_bytes": 3221225472,
+      "max_input_bytes": 268435456,
+      "max_pair_checks": 8000000,
+      "max_record_bytes": 1048576,
+      "max_records": 50000,
+      "max_shingles": 100000
+    },
+    "max_shared_message_exposure": 8,
+    "near_pairs_grouped": 25798,
+    "peak_database_allocated_bytes": 1015209984,
+    "peak_record_scratch_database_bytes": 221184,
+    "rejections": {},
+    "release": "sample_only",
+    "retained_examples": 31603,
+    "scope": "Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.",
+    "signature_memberships": 9688885,
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": 18,
+      "HuggingFaceH4/ultrachat_200k": 22,
+      "OpenAssistant/oasst2": 15986,
+      "databricks/databricks-dolly-15k": 15577
+    },
+    "split_seed": "slm-splits-v1",
+    "splits": {
+      "test": 2362,
+      "train": 25911,
+      "validation": 3330
+    },
+    "staging": "sqlite-exact-prefix-jaccard-v1",
+    "training_eligible": false,
+    "unique_shingle_hashes": 5620706,
+    "version": 1
+  },
+  "training_eligible": false,
+  "training_reader_refusal": "Reviewed training release required; sample-only data is refused"
+}

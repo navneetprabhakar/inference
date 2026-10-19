@@ -75,3 +75,4 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Bounded dialogue candidate contract](dialogue-candidates.md)
 - [Second-iteration grouped candidates, sizing and delegated review](milestone-forty-four.md)
 - [Complete OASST sample review and rejected screening experiment](milestone-forty-five.md)
+- [Conversation language diagnostics and larger foundation candidates](milestone-forty-six.md)

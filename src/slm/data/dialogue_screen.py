@@ -71,7 +71,12 @@ def reasons(record,audit,minimum_score):
 def screen(dataset,audit,review,policy_path,output):
     dataset,audit,review,policy_path,output=map(Path,(dataset,audit,review,policy_path,output))
     if output.exists():raise FileExistsError(output)
-    policy=metadata(policy_path);checked(policy);verify(dataset);verify(audit)
+    policy=metadata(policy_path);language=None;reason_fn=reasons
+    if policy.get('version')==2:
+        from slm.data import dialogue_language as language
+        language.checked_policy(policy);reason_fn=language.reasons
+    else:checked(policy)
+    verify(dataset);verify(audit)
     review_data=metadata(review)
     if (sha(dataset/'manifest.json')!=policy['population_manifest_sha256'] or sha(audit/'manifest.json')!=policy['audit_manifest_sha256']
         or sha(review)!=policy['review_sha256'] or review_data['audit_manifest_sha256']!=policy['audit_manifest_sha256']
@@ -79,6 +84,7 @@ def screen(dataset,audit,review,policy_path,output):
         or review_data['human_attestation'] is not False or review_data['training_eligible'] is not False):
         raise ValueError('Screen population/audit/review binding differs')
     paths=[*dataset.iterdir(),*audit.iterdir(),review,policy_path,Path(__file__)]
+    if language is not None:paths.append(Path(language.__file__))
     guards={p.resolve():stamp(p) for p in paths if p.is_file()}
     if sum(p.stat().st_size for p in guards)>256*1024**2:raise ValueError('Screen input byte limit exceeded')
     output.parent.mkdir(parents=True,exist_ok=True);temp=Path(tempfile.mkdtemp(prefix='.dialogue-screen-',dir=output.parent));db=None
@@ -102,7 +108,7 @@ def screen(dataset,audit,review,policy_path,output):
                 raise ValueError('Unsupported or unread judgment')
             db.execute('INSERT INTO reviewed VALUES(?,?,?,?)',(row['example_id'],row['record_sha256'],row['split_group'],row['decision']))
             if row['decision']!='suitable_for_bounded_sfw_research_consideration':db.execute('INSERT OR IGNORE INTO blocked VALUES(?)',(row['split_group'],))
-        n=0;raw_reasons=Counter()
+        n=0;raw_reasons=Counter();language_counts=Counter()
         for split in ('train','validation','test'):
             for path in sorted(dataset.glob(split+'-*.jsonl')):
                 for row in lines(path):
@@ -111,7 +117,8 @@ def screen(dataset,audit,review,policy_path,output):
                     eid=row['example_id'];gid=row['validation_results']['split_group']
                     item=db.execute('SELECT data FROM audits WHERE eid=?',(eid,)).fetchone()
                     if item is None:raise ValueError('Missing audit row')
-                    result=reasons(row,json.loads(item[0]),policy['minimum_english_top_score']);candidate='not_current_dialogue_candidate' not in result
+                    signal=json.loads(item[0]);result=reason_fn(row,signal,policy['minimum_english_top_score']);candidate='not_current_dialogue_candidate' not in result
+                    if language is not None and candidate:language_counts[language.assess(row['messages'],signal['signals']['language_windows'])['status']]+=1
                     decision=db.execute('SELECT hash,gid,decision FROM reviewed WHERE eid=?',(eid,)).fetchone()
                     if decision:
                         if decision[:2]!=(digest(row),gid):raise ValueError('Reviewed record differs')
@@ -139,6 +146,7 @@ def screen(dataset,audit,review,policy_path,output):
             population_manifest_sha256=policy['population_manifest_sha256'],audit_manifest_sha256=policy['audit_manifest_sha256'],
             review_sha256=sha(review),implementation_sha256=sha(__file__),candidates_sha256=sha(temp/'candidates.jsonl'),
             scope='Measured proposed research screen only. Whole-group quarantine preserves existing partitions and original labels. No source rights, quality certification, corpus admission or training eligibility.')
+        if language is not None:report.update(language_observation_counts=dict(language_counts),language_implementation_sha256=sha(language.__file__))
         (temp/'report.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n');shutil.copyfile(policy_path,temp/'policy.json')
         shutil.copyfile(dataset/'sources.json',temp/'sources.json')
         manifest=dict(version=1,release='sample_only',files={p.name:sha(p) for p in temp.iterdir() if p.is_file()})

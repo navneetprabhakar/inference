@@ -12,6 +12,8 @@ Latest: an actual [eight-turn conversation scores 0/100](docs/milestone-forty-th
 
 Latest [sample review and screening diagnosis](docs/milestone-forty-five.md): all 74 sampled OASST paths plus three mixed-group references have been read. The proposed screen is not admitted: its per-window language cutoff rejects observed valid short/informal English and leaves only 2.69M raw-node content tokens in train. Calibrate language handling and expand foundation data before the next training freeze.
 
+[Versioned language diagnostics and a larger local pool](docs/milestone-forty-six.md) now provide 25,911 train candidates with 6.67M content tokens counted once per exact message text. The revised rule resolves the selected short-English counterexamples but retains known limitations. All 5,363 frozen heldout rows are protected; 39 train candidates carry prior graded nonapprovals requiring resolution. A bounded admission decision and checked release come next; second-iteration training has not started.
+
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
 - Shared NumPy initialization and canonical parameter names; adjacent-pair RoPE, GQA, SwiGLU, RMSNorm, tied input/output embedding.
