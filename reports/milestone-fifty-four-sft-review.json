@@ -1,0 +1,138 @@
+{
+  "actual_controls": {
+    "all_12_train_batches_match_whole_dialogue_assistant_masks": true,
+    "approved_ids_equal": true,
+    "first_review_note_corrected_no_decision_changes": true,
+    "original_messages_and_splits_preserved": true,
+    "raw_dolly_pinned_hash_matches": true
+  },
+  "checked_split_counts": {
+    "test": 5,
+    "train": 12,
+    "validation": 4
+  },
+  "checked_train_rows": 12,
+  "controls_script_sha256": "a846b6f850caca92f50a159b2f8279cdb998c33dd3b7c0d521bf043617a99649",
+  "creator": "Navneet Prabhakar",
+  "decision_sha256": "1c6c05fb8f240667577c8d33610545c7b1c8f354ff3290505b2fc52ddd61c56e",
+  "full_dialogues_read": 64,
+  "human_attestation": false,
+  "judgments": {
+    "A|OpenAssistant/oasst2|test": 3,
+    "A|OpenAssistant/oasst2|train": 4,
+    "A|OpenAssistant/oasst2|validation": 2,
+    "A|databricks/databricks-dolly-15k|test": 2,
+    "A|databricks/databricks-dolly-15k|train": 8,
+    "A|databricks/databricks-dolly-15k|validation": 2,
+    "D|OpenAssistant/oasst2|train": 6,
+    "D|OpenAssistant/oasst2|validation": 2,
+    "D|databricks/databricks-dolly-15k|train": 12,
+    "R|OpenAssistant/oasst2|test": 1,
+    "R|OpenAssistant/oasst2|train": 14,
+    "R|databricks/databricks-dolly-15k|test": 2,
+    "R|databricks/databricks-dolly-15k|train": 4,
+    "R|databricks/databricks-dolly-15k|validation": 2
+  },
+  "limitations": "Purposive short-text review, not population quality-rate sampling or broad SFT data. No neural updates, new teacher/API calls, cloud actions or paid training. Existing separate explicit release not merged. Source-relative factual extraction does not certify upstream facts.",
+  "preparation": {
+    "approved_rows": 0,
+    "creator": "Navneet Prabhakar",
+    "distinct_groups": 64,
+    "full_text_read": 0,
+    "human_attestation": false,
+    "parent_manifest_sha256": "6fb4576f36065a21b960337f36485175613a0ec8b2d32685eaf1bb417e6251bb",
+    "pending_sha256": "57352cbb6b5bbb4fb4b02c57ef42b8bd400e3795d035f1873df6ae0e0faa9241",
+    "raw_dolly_sha256": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+    "raw_oasst_sha256": "93092c0f05695da0306d7ea78bfc10a25b00396a7b4625a2d18a1377fb0aae04",
+    "raw_receipts_sha256": "8da40da09639767d1828f38e4cf253d36db41353501d38e1ea2744121ccdfbb6",
+    "readable_sha256": "c5e424e7c6bd42edbce16fd81f77bc84e44a906286e002589102714ae5c7503b",
+    "rows": 64,
+    "scope": "Purposive short whole-dialogue packet, 32 per source, distinct checked groups and original splits. Raw path/text matching and reused exact source-review evidence only; no quality approval, neural update or new teacher/cloud call.",
+    "script_sha256": "dd61df0325685057a6d99076914df0ca96ade0371479f5af4410bc35578e8d7e",
+    "seed": "iteration-three-explicit-short-sft-review-20261019-v1",
+    "selected_counts": {
+      "OpenAssistant/oasst2|test": 4,
+      "OpenAssistant/oasst2|train": 24,
+      "OpenAssistant/oasst2|validation": 4,
+      "databricks/databricks-dolly-15k|test": 4,
+      "databricks/databricks-dolly-15k|train": 24,
+      "databricks/databricks-dolly-15k|validation": 4
+    },
+    "source_review_file_sha256": "1fe8a4e2cac1d0876c2773124a3d2eb3b8a3871309e1d6e4303317a64be0f581",
+    "version": 1
+  },
+  "primary_reference_checks": {
+    "25": [
+      "https://www.merriam-webster.com/grammar/the-many-plurals-of-octopus-octopi-octopuses-octopodes"
+    ],
+    "29": [
+      "https://www.presidentiallibrary.go.ke/presidents/he-daniel-toroitich-arap-moi"
+    ],
+    "36": [
+      "https://movies.disney.com/the-lion-king",
+      "https://movies.disney.com/frozen",
+      "https://movies.disney.com/finding-nemo"
+    ]
+  },
+  "read_receipts_sha256": "cdf7d1b9c8146bb54bebc390799461d7fdb5c542972033f3fa168879f4318f15",
+  "readable_sha256": "c5e424e7c6bd42edbce16fd81f77bc84e44a906286e002589102714ae5c7503b",
+  "release": {
+    "approved_examples": 21,
+    "limitation": "Validates explicit attestations and integrity, not human judgment, legal clearance or unreviewed corpus rows.",
+    "peak_database_allocated_bytes": 157347840,
+    "release": "training",
+    "review_schema_version": 2,
+    "reviewed_entries": 64,
+    "scope": "explicit_rows_only",
+    "snapshot_records": 27772,
+    "splits": {
+      "test": 5,
+      "train": 12,
+      "validation": 4
+    }
+  },
+  "release_manifest_sha256": "03f0792e14c63fb5000b86a8662946bb1e9ea32075c6a927487f712e8fcec14b",
+  "review_mode": "delegated_expert",
+  "scope": "Explicit row-only SFW research judgments. D is scope/verification deferral, R an observed defect; non-admission is not a population factual-error count. No neural update or corpus-wide SFT admission. Prior separate 49-row release is not implicitly merged.",
+  "script_sha256": "1e0f94271d2449654ef907ac952c0df9ab360112d3954465972dc3bf923ae100",
+  "token_manifest_sha256": "2784eb4e4d992a8c3b4407622896e1a8207652c1f292d6e7218f36b91ae432ab",
+  "token_preparation": {
+    "batches": 12,
+    "categories": {
+      "sfw": 12
+    },
+    "cross_document_attention": false,
+    "excluded_records": {},
+    "explicit_passes": 1,
+    "implicit_wraparound": false,
+    "message_format": "plain-dialogue-v1",
+    "objective": "sft",
+    "one_pass_encoded_positions": 1429,
+    "processed_prediction_positions": 1417,
+    "retained_groups": 12,
+    "retained_records": 12,
+    "scope": "Verified bootstrap release to disk-backed token shards; tokenizer selection and model training are separate gates",
+    "shards": 1,
+    "sources": {
+      "OpenAssistant/oasst2": {
+        "encoded_positions": 551,
+        "prediction_positions": 547,
+        "records": 4,
+        "supervised_positions": 403,
+        "utf8_bytes": 1561
+      },
+      "databricks/databricks-dolly-15k": {
+        "encoded_positions": 878,
+        "prediction_positions": 870,
+        "records": 8,
+        "supervised_positions": 448,
+        "utf8_bytes": 2901
+      }
+    },
+    "split": "train",
+    "supervised_positions": 851,
+    "token_shard_version": 1,
+    "truncation": false
+  },
+  "version": 1
+}
