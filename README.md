@@ -6,7 +6,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Latest corpus progress:** [Verified seed containment](docs/global-seed-containment.md) scans all 333,398 consolidated text fields against 36,554 captured normalized seeds. One new Cosmopedia/FineWeb link is verified and consumed, yielding 229,605 components. Four tests, all-pattern/link checks, sampled brute-force recall and the full root/component audit pass. Near-duplicate grouping, splits and finite admission remain next. No new training or cloud spend.
+**Latest corpus progress:** [Full near-duplicate grouping is running locally](docs/global-near-grouping-launch.md) at the declared 0.85 Jaccard threshold. The recorded snapshot indexes 16,384 source records /10.75M full shingle occurrences. Explicit continuation reuses 7.52M committed features and fixes large-file hashing without resetting the original deadline. Twenty-eight focused tests pass. Terminal near audit, component propagation, splits and admission remain open; no new training or cloud spend.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 
