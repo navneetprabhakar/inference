@@ -22,6 +22,8 @@ The [explicit SFT stage transition](docs/milestone-fifty-five.md) now imports ve
 
 [The complete 64-dialogue review](docs/milestone-sixty.md) records 25 considerations / 12 defect exclusions / 27 deferrals. A separate bounded private research policy selects 950 train dialogues / 358,144 hypothetical assistant targets after excluding all known nonapproval groups; 925 retained train dialogues remain unread. The policy is not training-ready: a checked SFT research publisher/reader and finite experiment preflight remain next. The student has no new updates.
 
+[Checked research release and actual SFT preparation](docs/milestone-sixty-one.md) are now complete: 950 whole-dialogue train batches / 400,065 prediction positions / 358,144 assistant targets, maximum length 1,583. All actual rows and batches match their admitted source; 60 checks pass / one CUDA skip. Earlier exact-import weights and original runtime hashes remain intact. New bounded training integration, finite experiment freeze and full-step preflight remain next; no new student updates occurred.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
