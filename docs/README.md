@@ -68,3 +68,4 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Bounded research admission](research-admission.md)
 - [Actual tokenizer and local-pilot preparation](milestone-thirty-nine.md)
+- [Actual pilot launch and frozen validation scorer](milestone-forty.md)

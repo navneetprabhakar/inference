@@ -4,7 +4,7 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
-Current decisions: **Option A is accepted** for exact state transfer, inference parity and measured resumed-training quality. Strict trajectory failures remain diagnostics. The first [delegated expert review](docs/milestone-thirty-seven.md) approves 42 explicit Dolly rows with human attestation false; broader data admission and real language pilots remain open. Later status below is chronological milestone history.
+Current decisions: **Option A is accepted** for exact state transfer, inference parity and measured resumed-training quality. Strict trajectory failures remain diagnostics. The first [delegated expert review](docs/milestone-thirty-seven.md) approves 42 explicit Dolly rows with human attestation false. Bounded research admission now permits the first actual [local foundation pilot](docs/milestone-forty.md), currently running from random weights; its completion and heldout comparison remain pending. Broader data and conversational capability remain open. Later status below is chronological milestone history.
 
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
