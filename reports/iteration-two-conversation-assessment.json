@@ -1,0 +1,507 @@
+{
+  "assessment_code_sha256": "0ac5b8a2035cff2de6835583f861302b2df8d8ac38be577941169c3f516d67ba",
+  "completion_sha256": "248e232548ca099e949bd7ac5a04810198a13c1545f7f5cd9e8b36e7f9af42ca",
+  "creator": "Navneet Prabhakar",
+  "grades": {
+    "creator": "Navneet Prabhakar",
+    "dimensions": {
+      "coherence": {
+        "evidence_turns": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reason": "Limited local grammatical success: You are welcome and I am glad you have a great idea are readable sentences. Dominant failures include popular and popular repetition, The best language is a is a, broken syntax in turn four, incomplete clauses, and repeated contradictory generic filler. No sustained connected non-repetitive response.",
+        "score": 1
+      },
+      "context_and_corrections": {
+        "evidence_turns": [
+          3,
+          5,
+          8
+        ],
+        "reason": "Does not recall Mira, incorporate the Tara/two-apples correction, or use the explicitly restated corrected facts in the final recap.",
+        "score": 0
+      },
+      "instruction_following": {
+        "evidence_turns": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reason": "Ignores one-sentence greeting, exact two words, number-only answer, corrected quantities, professional meeting time, caveman word limit/meaning, and valid JSON.",
+        "score": 0
+      },
+      "relevance": {
+        "evidence_turns": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "reason": "Every reply is unrelated to its requested content. Language and generic welcome/glad continuations replace answers throughout.",
+        "score": 0
+      },
+      "understanding": {
+        "evidence_turns": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "reason": "No requested task is completed: greeting becomes a claim about language, exact Hello Mira is ignored, apples are unanswered, and explicit JSON fields produce unrelated prose.",
+        "score": 0
+      }
+    },
+    "full_transcript_read": true,
+    "human_attestation": false,
+    "limitations": "One adaptive eight-turn development conversation on a single terminal checkpoint with raw greedy decoding and retained failing history. The five-dimension score is a direct delegated judgment, not blinded benchmark accuracy, readiness, or evidence of tool/MCP capability. Same initial prompt/rubric as iteration one; subsequent prompts overlap task families but are adaptive. No teacher repair. No training admission for this transcript.",
+    "review_mode": "delegated_expert",
+    "turn_judgments": [
+      {
+        "reason": "No greeting or Mira; emits repetitive unrelated language claims across two sentences.",
+        "task_succeeded": false,
+        "turn": 1
+      },
+      {
+        "reason": "Does not output Hello Mira; repeats malformed language filler.",
+        "task_succeeded": false,
+        "turn": 2
+      },
+      {
+        "reason": "Does not return the name Mira; repeats the previous irrelevant reply.",
+        "task_succeeded": false,
+        "turn": 3
+      },
+      {
+        "reason": "Does not compute three or obey number-only format.",
+        "task_succeeded": false,
+        "turn": 4
+      },
+      {
+        "reason": "Neither Tara nor two apples appears; unrelated welcome/ideas sentences ignore correction.",
+        "task_succeeded": false,
+        "turn": 5
+      },
+      {
+        "reason": "No meeting or 4 PM; generic welcome sentences fail the professional time-change request.",
+        "task_succeeded": false,
+        "turn": 6
+      },
+      {
+        "reason": "No meeting or 4 PM, no caveman style, and exceeds twelve words.",
+        "task_succeeded": false,
+        "turn": 7
+      },
+      {
+        "reason": "Not JSON and contains none of the requested corrected facts.",
+        "task_succeeded": false,
+        "turn": 8
+      }
+    ]
+  },
+  "grades_sha256": "aeb84f633765c0f8444e25a1bec62def13d76da21609600ec71009e79e913270",
+  "human_attestation": false,
+  "normalized_score_out_of_100": 5,
+  "protocol_sha256": "9ecf03f1b298d33e3cd61dcfecce7e015a275a5e83f2fbd9f51714fcfca37367",
+  "scope": "Direct expert judgments on one adaptive development conversation. Structural/token checks do not certify the judgments; the score is not population accuracy, readiness or tool capability.",
+  "score_out_of_20": 1,
+  "session_sha256": "f225f3a64f2c9dd60115675529b3812fd13c7c95c32e0524bfa0dc8d24da206f",
+  "student": {
+    "architecture": {
+      "hidden_size": 512,
+      "intermediate_size": 1536,
+      "max_seq_len": 2048,
+      "norm_eps": 1e-05,
+      "num_heads": 8,
+      "num_kv_heads": 2,
+      "num_layers": 24,
+      "rope_theta": 10000.0,
+      "vocab_size": 16384
+    },
+    "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+    "binding_scope": "Explicit model-only/tokenizer pairing; vocabulary and supplied tokenizer hash checked, no inferred training provenance",
+    "decoding": "raw-cached-greedy-v1",
+    "embedding_implementation": "dense-onehot-v1",
+    "environment": {
+      "backend": "mlx",
+      "device": "Device(gpu, 0)",
+      "hardware": "arm64",
+      "platform": "macOS-26.4.1-arm64-arm-64bit",
+      "python": "3.12.11",
+      "version": "0.32.4"
+    },
+    "inference_sha256": "f6da14241b5fe940e61a034b0ca0009d92f614d1dc3d79ccf9fefe179c36b4f5",
+    "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+    "tokenizer_manifest_sha256": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126"
+  },
+  "successful_tasks": 0,
+  "terminal": {
+    "checkpoint_manifest_sha256": "4ff572d2ced0ead0c532befae1a758430ef0557eb3a7d732feaf30ee0ae9a76f",
+    "embedding_implementation": "dense-onehot-v1",
+    "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+    "model_path": "/Users/navneetprabhakar/Documents/git/image/inference/data/iteration-two-experiment-v1/runs/selected-continuation/checkpoints/000000009984-44136fa355b3/state/model",
+    "plan_hash": "3ee45f9cb9b5c7d346c561e359417ce332e13697cd7f98804eb8e65df5c08528",
+    "terminal_report_sha256": "4faf243aafe36c5c7bac5e47a2dbef0cb860a643579a6eaf8871809780d7351e",
+    "terminal_score_sha256": "450ebe3ad05552b7d63edf04a9d946a0403b9705b4ac811a4f7133838af0213d",
+    "tokenizer_manifest_sha256": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126",
+    "tokenizer_path": "/Users/navneetprabhakar/Documents/git/image/inference/data/iteration-two-foundation-tokenizers-v1/vocab-16384",
+    "training_final": {
+      "cursor": 9984,
+      "step": 9984,
+      "supervised_tokens": 10223491,
+      "tokens": 10223491
+    }
+  },
+  "training_approved": false,
+  "transcript": [
+    {
+      "context_sha256": "d4e3ad800cc7453deef61e3695373448f37d68587818e4f0c0e49d5d664e4567",
+      "response": {
+        "content_tokens": 42,
+        "generated_tokens": 43,
+        "max_new_tokens": 64,
+        "prompt_tokens": 23,
+        "seconds": 0.3313876249594614,
+        "stop_reason": "message_end",
+        "text": "The word \"a\" is a very popular and popular language, and it is a very popular and popular language. It is a popular language, and it is a popular language in the field of computer science.",
+        "token_ids": [
+          484,
+          2181,
+          486,
+          74,
+          11,
+          313,
+          267,
+          1164,
+          1090,
+          292,
+          1090,
+          979,
+          21,
+          292,
+          354,
+          313,
+          267,
+          1164,
+          1090,
+          292,
+          1090,
+          979,
+          23,
+          545,
+          313,
+          267,
+          1090,
+          979,
+          21,
+          292,
+          354,
+          313,
+          267,
+          1090,
+          979,
+          297,
+          272,
+          1709,
+          298,
+          1431,
+          1948,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.02805595798417926
+      },
+      "turn": 1,
+      "user": "Hi! My name is Mira. Please say hello to me in one short sentence."
+    },
+    {
+      "context_sha256": "0465579c8aa5dcb95043ec4c2b8d7bf40d9135755f26c90a0f36e531380dbd05",
+      "response": {
+        "content_tokens": 11,
+        "generated_tokens": 12,
+        "max_new_tokens": 64,
+        "prompt_tokens": 88,
+        "seconds": 0.14938458299729973,
+        "stop_reason": "message_end",
+        "text": "The best language is \"a\" is \"a\"",
+        "token_ids": [
+          484,
+          926,
+          979,
+          313,
+          486,
+          74,
+          11,
+          313,
+          486,
+          74,
+          11,
+          3
+        ],
+        "ttft_seconds": 0.046594583021942526
+      },
+      "turn": 2,
+      "user": "That did not greet me. Reply with exactly these two words: Hello Mira"
+    },
+    {
+      "context_sha256": "c5a7b4bc8969963644802041363b250a56cbf0704cea92f3928940ff996fb46e",
+      "response": {
+        "content_tokens": 11,
+        "generated_tokens": 12,
+        "max_new_tokens": 64,
+        "prompt_tokens": 115,
+        "seconds": 0.12178729102015495,
+        "stop_reason": "message_end",
+        "text": "The best language is \"a\" is \"a\"",
+        "token_ids": [
+          484,
+          926,
+          979,
+          313,
+          486,
+          74,
+          11,
+          313,
+          486,
+          74,
+          11,
+          3
+        ],
+        "ttft_seconds": 0.040372833027504385
+      },
+      "turn": 3,
+      "user": "What is my name? Answer with my name only."
+    },
+    {
+      "context_sha256": "911961798e117b8ae03a6288ebfab2769f0b4863bb6e3ebf3011ba4e7aa4f2c2",
+      "response": {
+        "content_tokens": 16,
+        "generated_tokens": 17,
+        "max_new_tokens": 64,
+        "prompt_tokens": 156,
+        "seconds": 0.16745983302826062,
+        "stop_reason": "message_end",
+        "text": "The best language is to take is to get a few days in a week.",
+        "token_ids": [
+          484,
+          926,
+          979,
+          313,
+          294,
+          1046,
+          313,
+          294,
+          841,
+          267,
+          1181,
+          2150,
+          297,
+          267,
+          3441,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.04303499998059124
+      },
+      "turn": 4,
+      "user": "New task: I have two apples and add one apple. How many apples do I have? Reply with only the number."
+    },
+    {
+      "context_sha256": "23c97f293c37b7a2ebcf39af80ceb5078b4a0507e41f010da3df8b3682483894",
+      "response": {
+        "content_tokens": 27,
+        "generated_tokens": 28,
+        "max_new_tokens": 64,
+        "prompt_tokens": 212,
+        "seconds": 0.26191870804177597,
+        "stop_reason": "message_end",
+        "text": "You are welcome. I'm glad you have a few ideas. I'm so glad to hear that you are not a good idea.",
+        "token_ids": [
+          1533,
+          353,
+          4130,
+          23,
+          334,
+          1233,
+          5275,
+          320,
+          450,
+          267,
+          1181,
+          2056,
+          23,
+          334,
+          1233,
+          573,
+          5275,
+          294,
+          4859,
+          341,
+          320,
+          353,
+          470,
+          267,
+          894,
+          1842,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.05383375001838431
+      },
+      "turn": 5,
+      "user": "Correction: my name is Tara, not Mira. I now have two apples, not three. State my corrected name and apple count in one short sentence."
+    },
+    {
+      "context_sha256": "edd587141e4030fbd3dcab2b430c28d7a70e6d00e6eb1beb3d1d9f88acd1309b",
+      "response": {
+        "content_tokens": 24,
+        "generated_tokens": 25,
+        "max_new_tokens": 64,
+        "prompt_tokens": 268,
+        "seconds": 0.24736325000412762,
+        "stop_reason": "message_end",
+        "text": "You are welcome! I'm glad you have a great idea. I'm glad you have a few ideas for you.",
+        "token_ids": [
+          1533,
+          353,
+          4130,
+          10,
+          334,
+          1233,
+          5275,
+          320,
+          450,
+          267,
+          1148,
+          1842,
+          23,
+          334,
+          1233,
+          5275,
+          320,
+          450,
+          267,
+          1181,
+          2056,
+          332,
+          320,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.06225504196481779
+      },
+      "turn": 6,
+      "user": "Write one professional sentence to a colleague: our meeting has moved from 3 PM to 4 PM. Preserve the new time."
+    },
+    {
+      "context_sha256": "e222ebea35d11ce104a77be4a219b69332566265c16fd57b7dc2e84f91859d57",
+      "response": {
+        "content_tokens": 24,
+        "generated_tokens": 25,
+        "max_new_tokens": 64,
+        "prompt_tokens": 316,
+        "seconds": 0.25199575000442564,
+        "stop_reason": "message_end",
+        "text": "You are welcome. I'm glad you have a good idea. I'm glad to hear that you are looking for.",
+        "token_ids": [
+          1533,
+          353,
+          4130,
+          23,
+          334,
+          1233,
+          5275,
+          320,
+          450,
+          267,
+          894,
+          1842,
+          23,
+          334,
+          1233,
+          5275,
+          294,
+          4859,
+          341,
+          320,
+          353,
+          2193,
+          332,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.05687220802064985
+      },
+      "turn": 7,
+      "user": "Try caveman style in at most 12 words: tell me the meeting is now at 4 PM."
+    },
+    {
+      "context_sha256": "946b2ce0fbb4ef745dcabd95b4ee615c98a08de63bfd3b6b073c9700cc78a6db",
+      "response": {
+        "content_tokens": 35,
+        "generated_tokens": 36,
+        "max_new_tokens": 64,
+        "prompt_tokens": 381,
+        "seconds": 0.34426087501924485,
+        "stop_reason": "message_end",
+        "text": "I'm glad you have a good idea. I'm glad to hear that you are not a good idea. I'm glad to hear that you are not a good idea.",
+        "token_ids": [
+          50,
+          1233,
+          5275,
+          320,
+          450,
+          267,
+          894,
+          1842,
+          23,
+          334,
+          1233,
+          5275,
+          294,
+          4859,
+          341,
+          320,
+          353,
+          470,
+          267,
+          894,
+          1842,
+          23,
+          334,
+          1233,
+          5275,
+          294,
+          4859,
+          341,
+          320,
+          353,
+          470,
+          267,
+          894,
+          1842,
+          23,
+          3
+        ],
+        "ttft_seconds": 0.06708374997833744
+      },
+      "turn": 8,
+      "user": "Return only valid JSON with keys name, apples, and meeting_time. Use my corrected name Tara, apple count 2, and new meeting time 4 PM."
+    }
+  ],
+  "transcript_sha256": "5d76a0116a8dcdb31497e92b1da4d221a154603fc6c62823cda4a3bdc0c8a652",
+  "turns": 8
+}
