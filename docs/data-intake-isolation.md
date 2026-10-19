@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 Date: 19 October 2026
 
+Subsequent implementation: [the completed bounded candidate intake](cosmopedia-candidate-intake.md) publishes49,000 actual rows. The metadata-only results and next-step statements below describe this prerequisite milestone.
+
 ## Completed
 
 - **Expanded exclusions:**364 distinct normalized requests and119 actual generated replies,483 distinct texts from1,851 source records. Sources include the original500-case/seven-tool fixtures, four earlier actual interviews, the100-conversation protocol/transcript,48 fresh-session diagnostic responses, and30 same-prompt branch-comparison generations.

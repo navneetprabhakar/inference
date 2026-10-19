@@ -6,7 +6,9 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Data-intake implementation:** [Expanded isolation and accounting](docs/data-intake-isolation.md) now protects364requests/119generated replies and scans1,176retained source records. Forty-one focused checks pass. A real four-request Cosmopedia metadata probe confirms377bounded groups in one pinned file; no data rows or new gradients yet.
+**Latest corpus progress:** [Bounded Cosmopedia intake](docs/cosmopedia-candidate-intake.md) publishes49,000rows /39.33Mstudent tokens;31,920rows /24.63Mtokens provisionally pass. All outputs pass the retained-evidence audit;52focused checks pass. An observed detector-control bug is fixed in a versioned continuation, with the failed1,000-row charge preserved. Global grouping/admission and the other language sources remain next; no new training or cloud spend.
+
+**Intake prerequisites:** [Expanded isolation and accounting](docs/data-intake-isolation.md) protect364requests/119generated replies. The earlier metadata-only probe and41-check milestone are preserved as historical evidence.
 
 **Latest assessment:** [100 actual three-turn conversations](docs/current-model-100-assessment.md) on the unchanged latest fitting-control checkpoint: **0/100 conversations, 0/300 requested turns; 7.6/100** direct development score. Only29 distinct replies recur across300 turns. [Full transcripts](docs/current-model-100-transcripts.md) are retained; no further training or cloud launch occurred.
 
