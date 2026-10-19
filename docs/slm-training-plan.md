@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+**Current correction (19 October 2026):** [Failure diagnosis](conversation-failure-diagnosis.md) and [revised next-iteration plan](next-iteration-training-plan.md) govern the next run. The existing10M-position dialogue pilot is not a completed English foundation; the latest12-example control is not an accepted conversational candidate. Continue language learning from the own foundation checkpoint, then admit balanced conversation SFT only after its separate language gate. USD50 /oneL4 /45VMhours /100Mphysical positions is a pilot ceiling, not a broad-chat delivery promise. No next training has started. Older schedules below are research context; the corrected plan and explicit resource authorization take precedence.
+
 Current portability decision (19 October 2026): [Option A is accepted](portability-acceptance-proposal.md): exact training-state transfer, same-checkpoint inference parity and measured resumed-training quality. Strict long-run trajectory failures remain diagnostics; no inference tolerance is relaxed. Useful resumed-training quality is still unproved.
 
 Updated: 18 October 2026. Status: implementation plan with the tiny local prototype completed; see [milestone results](milestone-one.md). Numerical targets below remain acceptance goals or experiment settings, not measured results.

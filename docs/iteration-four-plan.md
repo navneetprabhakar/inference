@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+**Historical diagnostic/control plan.** Its experiments are completed and failed their conversational goals. The [new diagnosis](conversation-failure-diagnosis.md) and [revised next-iteration plan](next-iteration-training-plan.md) supersede its next-run recommendations. Main-training budget is now separately authorized; historical pending-budget statements below describe their original milestone. No additional tiny-control training is scheduled.
+
 Date: 19 October 2026
 
 ## Starting decision
