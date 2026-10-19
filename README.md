@@ -18,6 +18,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [Balanced direct prose review](docs/milestone-seventy.md) reads 32 complete fresh train documents: 13 considered, 12 excluded, seven deferred. A finite local research policy retains 777 train /43 validation /44 test records, including 758 unread train documents with explicit residual-risk acceptance. It remains training-unready and does not launch another small standalone run. The actual policy check and 11 negative controls pass.
 
+[Checked prose release and tokens](docs/milestone-seventy-one.md) now preserve all 864 admitted canonical records and prepare 777 train documents into 796,718 prediction positions /779 batches /four portable shards. Forty-four focused checks and full actual token/metadata reconstruction pass. All 29 observed nonapprovals stay absent; 758 train documents remain unread. This is an ingredient, with zero model updates and no standalone training launch.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
