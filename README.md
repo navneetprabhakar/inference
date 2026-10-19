@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
+**Latest assessment:** [100 actual three-turn conversations](docs/current-model-100-assessment.md) on the unchanged latest fitting-control checkpoint: **0/100 conversations, 0/300 requested turns; 7.6/100** direct development score. Only29 distinct replies recur across300 turns. [Full transcripts](docs/current-model-100-transcripts.md) are retained; no further training or cloud launch occurred.
+
 Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md) completed **475 updates /800,130 positions** on the 81M foundation checkpoint. Assistant validation NLL improves **4.649 →4.463**, but its actual eight-turn conversation still completes **0/8 tasks**, scoring **5/100** with dominant repetition and ignored requests. The model remains unsuitable as a conversational assistant. The [next-iteration plan](docs/iteration-four-plan.md) starts with fresh-session diagnostics and a small reviewed learning control before another broad run.
 
 [Fresh-session diagnostics](docs/milestone-sixty-five.md) also fail **0/16 tasks** at 64 tokens, 256 tokens and after system-message removal. All 48 raw replies are retained. Conditional EOS-after-end is strong, but correct content/early termination remain weak. Next is a bounded fitting control using the existing 12 individually reviewed train rows, rather than another broad run or new research reader.
@@ -21,6 +23,10 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 [Checked prose release and tokens](docs/milestone-seventy-one.md) now preserve all 864 admitted canonical records and prepare 777 train documents into 796,718 prediction positions /779 batches /four portable shards. Forty-four focused checks and full actual token/metadata reconstruction pass. All 29 observed nonapprovals stay absent; 758 train documents remain unread. This is an ingredient, with zero model updates and no standalone training launch.
 
 [Independent Wikipedia audit](docs/milestone-seventy-two.md) acquires 64 cleaned records and directly reviews 16: seven considered, seven excluded, two deferred. Missing values/tables and sparse captures remain material defects; the source stays sample-only pending extraction and licensing reconciliation. The actual binding/selection/BPE audit passes. Existing model and admitted FineWeb artifacts remain unchanged.
+
+[Cosmopedia audit and seed provenance](docs/milestone-seventy-three.md) reads 16 complete prompt/text pairs: nine considerations, two exclusions, five deferrals, plus two separately reviewed story nonapprovals. Fifty exact FineWeb seed excerpts reconstruct; eight parser checks pass. A bounded 50K-row candidate-intake plan is frozen but unexecuted, with no training admission or model update.
+
+The main-learning budget is now explicitly authorized: **USD 50 all-in /100M physical prediction positions /one L4 VM /45 total VM-hours**. The [authorization](configs/main-learning-budget-authorization-v1.json) preserves the data, runtime, portability and cleanup prerequisites. No main-training VM has launched.
 
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
