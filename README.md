@@ -12,6 +12,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [Broader English preparation](docs/milestone-sixty-seven.md) audits 64 FineWeb-Edu documents across four crawl periods and directly reviews 16: six considerations, six deferrals, four exclusions; none admitted for training. Bounded Parquet footer access succeeds without downloading the 2.15 GB shard. A separate [main-learning budget proposal](docs/main-learning-budget-proposal.md) awaits a decision; no VM or new training is launched. Useful MLX/CUDA resumed-learning acceptance remains open.
 
+[Bounded row-group intake](docs/milestone-sixty-eight.md) now extracts 1,000 actual source documents using 6.06 MB of range-response bodies, with exact agreement against all 200 prior viewer records and preservation of all 18 ancestral heldouts. Thirteen focused checks pass. This is acquisition only: content screening, deduplication, evaluation isolation and finite admission remain next; no new training or cloud resource.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
