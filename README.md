@@ -18,6 +18,8 @@ The [explicit SFT stage transition](docs/milestone-fifty-five.md) now imports ve
 
 [Direct short-conversation review](docs/milestone-fifty-eight.md) reads 64 complete train dialogues: 32 for quality consideration, 24 defect exclusions and eight verification/scope deferrals. Prior 5,692 heldout rows remain protected. Considered rows have only 14,065 hypothetical assistant targets and no training approval; sufficient conversation data remains the next constraint.
 
+[Human-rated OASST2 screening](docs/milestone-fifty-nine.md) now yields 989 train candidates / 372,746 hypothetical assistant targets, including 314 multi-turn conversations. Complete raw paths, ratings, existing splits and one-path-per-group controls pass; 57 focused checks pass. A frozen 64-dialogue train packet awaits direct review and separate SFT admission. No new training has started.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
