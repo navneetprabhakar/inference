@@ -24,6 +24,8 @@ The [explicit SFT stage transition](docs/milestone-fifty-five.md) now imports ve
 
 [Checked research release and actual SFT preparation](docs/milestone-sixty-one.md) are now complete: 950 whole-dialogue train batches / 400,065 prediction positions / 358,144 assistant targets, maximum length 1,583. All actual rows and batches match their admitted source; 60 checks pass / one CUDA skip. Earlier exact-import weights and original runtime hashes remain intact. New bounded training integration, finite experiment freeze and full-step preflight remain next; no new student updates occurred.
 
+[Bounded SFT execution and actual full-step probes](docs/milestone-sixty-two.md) now pass: exact 81M initialization, checked stage resume, shared conservative exposure accounting and 64 focused checks. Two disposable full-size MLX first steps take about 4.9s each / peak Metal 5.54 GiB; main weights remain unchanged. Final execution plans fit 915,325 prospective physical positions including a discarded screen. Frozen selection/evaluation and launch contract remain next; no real SFT learning yet.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
