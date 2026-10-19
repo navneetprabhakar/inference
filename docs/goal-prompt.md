@@ -42,6 +42,8 @@ If a push fails, retain the local commit and report the failure honestly. Update
 
 ## Active project ledger
 
+After each completed training iteration, verify its terminal checkpoint, conduct an actual multi-turn conversation with that student, and assess it directly using a declared rubric. Preserve exact model answers and conversation history, including failures; record delegated expert judgments with human attestation false. Publish the score, transcript, limitations and failure-driven next-iteration plan before advancing. No teacher repair or ideal-answer substitution. Evaluation task families must remain protected from training contamination. The owner explicitly authorized this train → converse → score → next-iteration workflow.
+
 Maintain `docs/project-ledger.md` throughout execution. Include:
 
 - Current objective and active milestone.

@@ -71,3 +71,4 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Actual pilot launch and frozen validation scorer](milestone-forty.md)
 - [Explicit dialogue review and local resume contract](milestone-forty-one.md)
 - [Actual 1M foundation results and learned-state restart](milestone-forty-two.md)
+- [First-iteration conversation and second-iteration preparation](milestone-forty-three.md)

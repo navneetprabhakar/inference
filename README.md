@@ -6,6 +6,8 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 Current decisions: **Option A is accepted** for exact state transfer, inference parity and measured resumed-training quality. Strict trajectory failures remain diagnostics. The actual [1M-position local foundation pilot](docs/milestone-forty-two.md) has completed from random weights: frozen prose-loss and exact local resume checks pass, but all three simple development conversation probes fail. The [explicit reviewed subset](docs/milestone-forty-one.md) contains 49 examples with human attestation false. Broader data, production tokenizer, 10M pilot and useful conversation/tool capability remain open. Later status below is chronological milestone history.
 
+Latest: an actual [eight-turn conversation scores 0/100](docs/milestone-forty-three.md). Second-iteration preparation has acquired the complete pinned OASST2 export (13,854 trees / 135,174 messages) and verified all official partitions. It remains raw, unadmitted data; second-iteration neural training has not started.
+
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
 - Shared NumPy initialization and canonical parameter names; adjacent-pair RoPE, GQA, SwiGLU, RMSNorm, tied input/output embedding.
