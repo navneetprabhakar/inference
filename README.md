@@ -14,6 +14,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [Bounded row-group intake](docs/milestone-sixty-eight.md) now extracts 1,000 actual source documents using 6.06 MB of range-response bodies, with exact agreement against all 200 prior viewer records and preservation of all 18 ancestral heldouts. Thirteen focused checks pass. This is acquisition only: content screening, deduplication, evaluation isolation and finite admission remain next; no new training or cloud resource.
 
+[Prose screening and duplicate staging](docs/milestone-sixty-nine.md) now produce 796 train /34 validation /35 test candidates while preserving all 5,728 ancestral heldouts. Twenty-three focused checks and the actual lineage audit pass. All ten prior nonapprovals would pass the automatic signals alone; they remain explicitly quarantined. The artifact stays sample-only, pending content review and finite research admission.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
