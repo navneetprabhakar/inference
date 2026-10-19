@@ -1,6 +1,7 @@
 """Verify actual optimizer-screen checkpoints before frozen diagnostic scoring."""
 # Creator: Navneet Prabhakar
 import argparse
+import fcntl
 import json
 from pathlib import Path
 import numpy as np
@@ -74,8 +75,10 @@ def main():
     p.add_argument('--freeze',required=True);p.add_argument('--output',required=True);a=p.parse_args()
     output=Path(a.output)
     if output.exists():raise FileExistsError(output)
-    result=evaluate_screen(a.root,a.trial,a.freeze)
-    with output.open('x') as out:out.write(json.dumps(result,indent=2,sort_keys=True)+'\n')
+    with (Path(a.root)/'execution.lock').open('a') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        result=evaluate_screen(a.root,a.trial,a.freeze)
+        with output.open('x') as out:out.write(json.dumps(result,indent=2,sort_keys=True)+'\n')
     print(json.dumps(dict(trial=a.trial,metrics={k:v for k,v in result['metrics'].items() if not k.endswith('group_nll')}),indent=2))
 
 

@@ -12,7 +12,7 @@ Latest: an actual [eight-turn conversation scores 0/100](docs/milestone-forty-th
 
 Latest [sample review and screening diagnosis](docs/milestone-forty-five.md): all 74 sampled OASST paths plus three mixed-group references have been read. The proposed screen is not admitted: its per-window language cutoff rejects observed valid short/informal English and leaves only 2.69M raw-node content tokens in train. Calibrate language handling and expand foundation data before the next training freeze.
 
-[The second-iteration optimizer experiment is frozen](docs/milestone-forty-eight.md): a new train-only 16K BPE, 25,339 research-admitted foundation records and a 10,223,491-position selected-chain schedule. Two equal-exposure learning-rate screens use 64 source-balanced validation groups; total planned physical work stays below 10,485,760 positions. Execute the first screen next, then compare and continue the selected chain. Freeze/preparation evidence is not completed neural training or conversation capability.
+[Both optimizer trials are measured; 3e-4 is selected](docs/milestone-forty-nine.md). Each completed 256 MLX updates on identical data; frozen source-balanced validation NLL is 6.8845 versus 7.0269 for 1e-3. Continue the selected checkpoint under its unchanged plan, with 9.96M positions remaining and total physical work capped at 10.49M including the discarded trial. Terminal training, actual conversation scoring and separate SFT admission remain open; short-run loss is not conversation capability.
 
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
