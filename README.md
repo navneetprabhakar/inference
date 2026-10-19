@@ -16,6 +16,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [Prose screening and duplicate staging](docs/milestone-sixty-nine.md) now produce 796 train /34 validation /35 test candidates while preserving all 5,728 ancestral heldouts. Twenty-three focused checks and the actual lineage audit pass. All ten prior nonapprovals would pass the automatic signals alone; they remain explicitly quarantined. The artifact stays sample-only, pending content review and finite research admission.
 
+[Balanced direct prose review](docs/milestone-seventy.md) reads 32 complete fresh train documents: 13 considered, 12 excluded, seven deferred. A finite local research policy retains 777 train /43 validation /44 test records, including 758 unread train documents with explicit residual-risk acceptance. It remains training-unready and does not launch another small standalone run. The actual policy check and 11 negative controls pass.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
