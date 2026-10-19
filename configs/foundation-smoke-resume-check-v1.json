@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "creator": "Navneet Prabhakar",
+  "scope": "actual_local_foundation_checkpoint_resume_diagnostic",
+  "plan_hash": "2ba1fe964d06202f8b9bf8e016af3fc68917ac1d7b21203eb7b83abd8fbb06a7",
+  "backend": "mlx",
+  "device": "default",
+  "original_run": "data/context-research-run-v1",
+  "resume_run": "data/context-research-run-resume-v1",
+  "resume_checkpoint_step": 1024,
+  "expected_final_step": 1025,
+  "max_new_updates": 1,
+  "expected_final_processed_positions": 1048230,
+  "comparison": "Exact bitwise equality of all model and optimizer tensors, identical final counters, recipe, dataset/tokenizer/config and logical plan. No relaxed tolerance or optimizer reset.",
+  "compute_accounting": "One diagnostic replay update is additional physical work, counted separately. It does not add unique tokens or increase the final model's logical exposure; each chain stays inside the same cumulative plan limits.",
+  "failure_rule": "Retain any mismatch as a failed actual local resume diagnostic; investigate without changing the declared equality criterion.",
+  "limitations": "One local learned-checkpoint resume boundary only; not a crash test, arbitrary interruption coverage, cross-backend quality gate or broad language capability proof. If no valid step-1024 checkpoint remains, report unavailable rather than restarting the original run."
+}
