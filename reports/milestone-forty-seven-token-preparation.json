@@ -1,0 +1,73 @@
+{
+  "creator": "Navneet Prabhakar",
+  "elapsed_seconds": 45.0436103749671,
+  "freeze": {
+    "comparison_file_sha256": "a58a0b8e9e85e6b6e967b2ec929e46c5c48ad8647e0414fc52f2b34df841c6e3",
+    "config": {
+      "hidden_size": 512,
+      "intermediate_size": 1536,
+      "max_seq_len": 2048,
+      "norm_eps": 1e-05,
+      "num_heads": 8,
+      "num_kv_heads": 2,
+      "num_layers": 24,
+      "rope_theta": 10000.0,
+      "vocab_size": 16384
+    },
+    "creator": "Navneet Prabhakar",
+    "initialization": "New canonical random chain required: IDs differ from iteration one. No reused embeddings or optimizer state.",
+    "limitations": "Train-only fitting, with validation and test token-sizing metrics reported separately. Exact-message token counts do not establish substring or semantic uniqueness. This is a pilot-specific freeze; broader language/styles/content/tools and production selection remain open.",
+    "parameters": 80765440,
+    "production_frozen": false,
+    "release_manifest_sha256": "6fb4576f36065a21b960337f36485175613a0ec8b2d32685eaf1bb417e6251bb",
+    "scope": "local_iteration_two_foundation_pilot",
+    "selected_vocab_size": 16384,
+    "selection": "Select 16K for the laptop experiment: 24K saves 3.53 percent of serialized validation positions but adds 4194304 parameters and a 50 percent larger vocabulary dimension. No measured latency or memory-speed tradeoff is claimed. Heldout token counts and development byte round-trips are sizing evidence, not language-quality selection.",
+    "tokenizer_manifest_sha256": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126",
+    "version": 1
+  },
+  "new_neural_updates": 0,
+  "scope": "All admitted train rows prepared once, without truncation. Preparation ceiling is not a training allowance. Optimizer comparison, cumulative physical budget, main schedule and validation protocol still must be frozen before launch.",
+  "script_sha256": "42139e84d5a0c09f295af9f8eb650ff534f6b089985676b3f9f94877832a8448",
+  "token_preparation": {
+    "batches": 7614,
+    "categories": {
+      "sfw": 25339
+    },
+    "cross_document_attention": true,
+    "dataset_hash": "50202f753f637fe81e0cd7f0a128a1a4138aeab3638951f5d44826e8afffb4e2",
+    "excluded_records": {},
+    "explicit_passes": 1,
+    "implicit_wraparound": false,
+    "message_format": "plain-dialogue-v1",
+    "objective": "foundation",
+    "one_pass_encoded_positions": 7796612,
+    "processed_prediction_positions": 7796611,
+    "retained_groups": 15741,
+    "retained_records": 25339,
+    "scope": "Verified bootstrap release to disk-backed token shards; tokenizer selection and model training are separate gates",
+    "shards": 30,
+    "sources": {
+      "OpenAssistant/oasst2": {
+        "encoded_positions": 5404062,
+        "prediction_positions": 5404061,
+        "records": 12460,
+        "supervised_positions": 5404061,
+        "utf8_bytes": 23353713
+      },
+      "databricks/databricks-dolly-15k": {
+        "encoded_positions": 2392550,
+        "prediction_positions": 2392550,
+        "records": 12879,
+        "supervised_positions": 2392550,
+        "utf8_bytes": 9595241
+      }
+    },
+    "split": "train",
+    "supervised_positions": 7796611,
+    "token_shard_version": 1,
+    "tokenizer_hash": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126",
+    "truncation": false
+  },
+  "tokenizer_freeze_sha256": "dd19dcb7d0d35f9575309ac09276b6fd86ae1c461b919183f4395ddd0029b95e"
+}

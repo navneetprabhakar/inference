@@ -47,7 +47,7 @@ def guarded(roots,limits):
             if not path.is_file() or path.is_symlink():raise ValueError('Flat regular review artifacts required')
             paths[path.resolve()]=stamp(path)
     if sum(v[0] for v in paths.values())>limits['max_input_bytes']:raise ValueError('Review input byte limit exceeded')
-    for name in ('review_stream.py','review.py','research_admission.py','context.py','quality_audit.py','build.py','staging.py','holdout.py'):
+    for name in ('review_stream.py','review.py','research_admission.py','foundation_research.py','dialogue_language.py','dialogue_screen.py','context.py','quality_audit.py','build.py','staging.py','holdout.py'):
         path=Path(__file__).with_name(name);paths[path.resolve()]=stamp(path)
     def check():
         for path,before in paths.items():
@@ -208,6 +208,10 @@ def release(dataset,review,output,*,limits,shard_size=1000):
 def open_checked(root,limits=None):
     """Fully verify before exposing train-only records or random lookups."""
     root=Path(root);manifest=metadata(root/'manifest.json')
+    if manifest.get('release')=='research_training' and manifest.get('review_schema_version')==4:
+        from slm.data.foundation_research import open_research
+        with open_research(root,limits) as index:yield index
+        return
     if manifest.get('release')=='research_training' and manifest.get('review_schema_version')==3:
         from slm.data.research_admission import open_research
         with open_research(root,limits) as index:yield index
