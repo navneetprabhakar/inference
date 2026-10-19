@@ -55,3 +55,6 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Non-admitting quality audit contract](quality-audit-contract.md)
 - [Offline language/privacy/group-audit results](milestone-thirty-four.md)
+
+- [Small complete-source acquisition](small-source-snapshot.md)
+- [Complete Dolly preparation and review bundle](milestone-thirty-five.md)

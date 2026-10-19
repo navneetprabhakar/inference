@@ -100,3 +100,5 @@ Use `.venv/bin/python -m slm.train --spec /absolute/spec.json --preflight-only` 
 [Disk-backed explicit-row review](docs/milestone-thirty-three.md) now preserves row-specific approval gates while verifying releases and pilot lookups through SQLite. BPE intake uses a checked text spool. Corpus-wide admission remains a [proposal](docs/corpus-admission-proposal.md); all actual public/teacher approvals and real language pilots remain open.
 
 The [non-admitting quality audit](docs/milestone-thirty-four.md) now measures full-message language windows, privacy candidates and quality features, then selects whole split groups for review. Actual source judgments and corpus admission remain pending; short/code and random-word controls demonstrate why detector scores cannot authorize training.
+
+[Complete small-source preparation](docs/milestone-thirty-five.md) now includes all pinned Dolly records within a 24 MiB acquisition cap, preserving previous heldouts and producing a new 287-row whole-group review bundle. The 15,692-row combined population remains sample-only; actual source review, corpus admission and real training are still open.
