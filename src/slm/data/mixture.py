@@ -29,7 +29,7 @@ def stats(data,index):
 
 
 class Inventory:
-    def __init__(self,components,paths,tokenizer,objective,categories,max_batches):
+    def __init__(self,components,paths,tokenizer,objective,categories,max_batches,allow_mixed_sources=False):
         self.data=[];self.records=[];self.ends=[];self.batch_stats=[]
         seen_datasets=set();seen_content=set();seen_ids=set();seen_examples=set();parent_groups={};lineage_bytes=0;record_count=0
         try:
@@ -66,7 +66,7 @@ class Inventory:
                     if parent in parent_groups and parent_groups[parent]!=r['split_group']:raise ValueError('Inconsistent parent-family mapping across inventory')
                     parent_groups[parent]=r['split_group']
                     sources.add(r['source'])
-                if (not rows or len(sources)!=1 or cursor!=d.manifest['processed_tokens'] or supervised!=d.manifest['supervised_tokens']):
+                if (not rows or (len(sources)!=1 and not allow_mixed_sources) or cursor!=d.manifest['processed_tokens'] or supervised!=d.manifest['supervised_tokens']):
                     raise ValueError('Lineage totals or single-source identity differs')
                 self.records.append(rows);self.ends.append(ends)
                 sizes=[stats(d,i) for i in range(len(d))];self.batch_stats.append(sizes)
@@ -109,16 +109,23 @@ def account(inventory,components,rows,objective,group_cap):
     return source,record_counts,groups,tokens,supervised
 
 
-def build_mixture(components,tokenizer,output,*,objective,budget,minimum,group_cap,seed='0',max_batches=1000000,allowed_categories=('sfw',)):
+def source_account(inventory,records):
+    totals=defaultdict(Counter)
+    for (ci,ri),counts in records.items():totals[inventory.records[ci][ri]['source']].update(counts)
+    return {source:dict(counts) for source,counts in sorted(totals.items())}
+
+
+def build_mixture(components,tokenizer,output,*,objective,budget,minimum,group_cap,seed='0',max_batches=1000000,allowed_categories=('sfw',),allow_mixed_sources=False):
     output=Path(output)
     if output.exists():raise FileExistsError(output)
     integer(budget);integer(minimum,maximum=budget);integer(group_cap);integer(max_batches,maximum=1000000)
     if objective not in ('foundation','sft') or not isinstance(seed,str) or not seed or len(seed)>128:raise ValueError('Explicit objective/seed required')
+    if type(allow_mixed_sources) is not bool or (allow_mixed_sources and objective!='foundation'):raise ValueError('Mixed-source components require explicit foundation v2')
     if not allowed_categories or len(set(allowed_categories))!=len(allowed_categories) or not set(allowed_categories)<=CATEGORIES:raise ValueError('Explicit categories required')
     paths={c['id']:c['path'] for c in components}
     specs=sorted([{k:v for k,v in c.items() if k!='path'} for c in components],key=lambda c:c['id'])
     if len(paths)!=len(specs):raise ValueError('Duplicate component identity')
-    inv=Inventory(specs,paths,tokenizer,objective,allowed_categories,max_batches)
+    inv=Inventory(specs,paths,tokenizer,objective,allowed_categories,max_batches,allow_mixed_sources)
     temp=None
     try:
         # SHA sorting fixes order independently of NumPy RNG/library versions.
@@ -160,6 +167,9 @@ def build_mixture(components,tokenizer,output,*,objective,budget,minimum,group_c
             'reallocation':'Weighted virtual finish time among remaining eligible sources; explicit component/family/pass caps always apply',
             'implicit_wraparound':False,'partial_batch_truncation':False}
         report['repeated_processed_positions']=tokens-report['unique_prepared_processed_positions']
+        if allow_mixed_sources:
+            report['sources']=source_account(inv,records)
+            report['component_weight_scope']='Weights apply to components, not sources within a packed component. Source exposure is measured from exact record spans.'
         output.parent.mkdir(parents=True,exist_ok=True);temp=Path(tempfile.mkdtemp(prefix='.mixture-',dir=output.parent))
         array.tofile(temp/'schedule.bin')
         with (temp/'exposure.jsonl').open('w') as f:
@@ -173,6 +183,7 @@ def build_mixture(components,tokenizer,output,*,objective,budget,minimum,group_c
             'tokenizer_hash':inv.data[0].tokenizer_hash,'vocab_size':inv.data[0].vocab_size,'batches':len(rows),
             'processed_tokens':tokens,'supervised_tokens':supervised,'max_length':int(array['length'].max()),'index_dtype':SCHEDULE.descr,
             'builder_sha256':sha(__file__),'files':{p.name:sha(p) for p in sorted(temp.iterdir())}}
+        if allow_mixed_sources:manifest.update(version=2,kind='finite-token-mixture-v2',mixed_source_components=True)
         # Recheck inputs before atomic publication; numeric payloads remain lazily checked by readers.
         for d in inv.data:d.counts(0)
         (temp/'manifest.json').write_text(json.dumps(manifest,sort_keys=True,indent=2)+'\n');os.rename(temp,output);temp=None
@@ -188,8 +199,10 @@ class MixtureBatches:
         self.stamps={};before=stamp(self.path/'manifest.json');self.fingerprint=sha(self.path/'manifest.json')
         m=json.loads((self.path/'manifest.json').read_text())
         if stamp(self.path/'manifest.json')!=before or (expected_fingerprint is not None and expected_fingerprint!=self.fingerprint):raise ValueError('Mixture fingerprint differs')
-        if (type(m.get('version')) is not int or m.get('version')!=1 or m.get('kind')!='finite-token-mixture-v1' or m.get('objective') not in ('foundation','sft')
+        mixed=m.get('version')==2
+        if (type(m.get('version')) is not int or m.get('version') not in (1,2) or m.get('kind')!=('finite-token-mixture-v2' if mixed else 'finite-token-mixture-v1') or m.get('objective') not in ('foundation','sft')
             or m.get('index_dtype')!=json.loads(json.dumps(SCHEDULE.descr))):raise ValueError('Unsupported mixture contract')
+        if (mixed and (m.get('mixed_source_components') is not True or m['objective']!='foundation')) or (not mixed and 'mixed_source_components' in m):raise ValueError('Mixture mixed-source scope differs')
         for k in ('budget','minimum','group_cap','max_batches','batches'):integer(m[k])
         if m['minimum']>m['budget'] or m['max_batches']>1000000 or m['batches']>m['max_batches']:raise ValueError('Invalid mixture bounds')
         if not m['allowed_categories'] or not set(m['allowed_categories'])<=CATEGORIES:raise ValueError('Invalid mixture categories')
@@ -202,9 +215,10 @@ class MixtureBatches:
         if (self.path/'schedule.bin').stat().st_size!=m['batches']*SCHEDULE.itemsize:raise ValueError('Mixture index size differs')
         try:
             if set(components)!={c['id'] for c in m['components']}:raise ValueError('Mixture component mapping differs')
-            self.inventory=Inventory(m['components'],components,tokenizer,m['objective'],m['allowed_categories'],m['max_batches'])
+            self.inventory=Inventory(m['components'],components,tokenizer,m['objective'],m['allowed_categories'],m['max_batches'],mixed)
             self.index=np.memmap(self.path/'schedule.bin',dtype=SCHEDULE,mode='r',shape=(m['batches'],))
-            _,_,_,t,s=account(self.inventory,m['components'],self.index,m['objective'],m['group_cap'])
+            _,records,_,t,s=account(self.inventory,m['components'],self.index,m['objective'],m['group_cap'])
+            if mixed and json.loads((self.path/'report.json').read_text()).get('sources')!=source_account(self.inventory,records):raise ValueError('Mixture source exposure differs')
             metric=t if m['objective']=='foundation' else s
             if (t,s)!=(m['processed_tokens'],m['supervised_tokens']) or not m['minimum']<=metric<=m['budget'] or int(self.index['length'].max())!=m['max_length']:
                 raise ValueError('Mixture accounting differs')

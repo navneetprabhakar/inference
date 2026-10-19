@@ -164,7 +164,7 @@ class Inputs:
                         'common/checkpoint.py','common/tokenizer.py','common/tool_serialization.py','common/supervision.py',
                         'data/tokenized.py','data/mixture.py','data/curriculum.py','data/review.py','data/review_stream.py','data/research_admission.py',
                         'data/context.py','data/foundation_research.py','data/dialogue_language.py','data/dialogue_screen.py','data/quality_audit.py','data/build.py','data/staging.py',
-                        'backends/torch_backend.py','backends/mlx_backend.py','eval/stage.py','eval/conversation.py')]]}}
+                        'backends/torch_backend.py','backends/mlx_backend.py','eval/stage.py','eval/conversation.py','eval/iteration_two.py')]]}}
             for name in self.plan['reference_sources']:
                 path=Path(__file__).parent/name;self.guards[path.resolve()]=stamp(path)
             self.identity=digest(self.plan);self.check()

@@ -12,7 +12,7 @@ Latest: an actual [eight-turn conversation scores 0/100](docs/milestone-forty-th
 
 Latest [sample review and screening diagnosis](docs/milestone-forty-five.md): all 74 sampled OASST paths plus three mixed-group references have been read. The proposed screen is not admitted: its per-window language cutoff rejects observed valid short/informal English and leaves only 2.69M raw-node content tokens in train. Calibrate language handling and expand foundation data before the next training freeze.
 
-[Checked second-iteration research release and tokenizer comparison](docs/milestone-forty-seven.md) now provide 25,339 train records, with known review exclusions quarantined and frozen partitions protected. A new train-only 16K BPE is selected for the local 81M foundation pilot: 6.09M content tokens once per exact message text and 7.80M one-pass prepared positions without truncation. Foundation admission does not certify SFT answers or production quality. Next freeze cumulative optimizer/main exposure and validation, then execute the neural experiment; second-iteration training has not started.
+[The second-iteration optimizer experiment is frozen](docs/milestone-forty-eight.md): a new train-only 16K BPE, 25,339 research-admitted foundation records and a 10,223,491-position selected-chain schedule. Two equal-exposure learning-rate screens use 64 source-balanced validation groups; total planned physical work stays below 10,485,760 positions. Execute the first screen next, then compare and continue the selected chain. Freeze/preparation evidence is not completed neural training or conversation capability.
 
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
