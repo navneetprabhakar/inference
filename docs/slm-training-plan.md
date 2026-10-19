@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+**Latest execution priority:** [Conversation recovery plan](course-correction.md) and [fresh100-session transcripts](course-correction-100-transcripts.md). Current score remains0/100successful conversations; no accepted candidate. Teacher selection is nowGPT-6.1 Sol via isolated CLI0.163.0; one actual reviewed demonstration succeeds, historical20-request pilot exhausted. Owned near-index job is stopped/reaped. No new training has started; prior frozen budgets, source/admission and numerical checks remain binding.
+
 **Current correction (19 October 2026):** [Failure diagnosis](conversation-failure-diagnosis.md) and [revised next-iteration plan](next-iteration-training-plan.md) govern the next run. The existing10M-position dialogue pilot is not a completed English foundation; the latest12-example control is not an accepted conversational candidate. Continue language learning from the own foundation checkpoint, then admit balanced conversation SFT only after its separate language gate. USD50 /oneL4 /45VMhours /100Mphysical positions is a pilot ceiling, not a broad-chat delivery promise. No next training has started. Older schedules below are research context; the corrected plan and explicit resource authorization take precedence.
 
 Current portability decision (19 October 2026): [Option A is accepted](portability-acceptance-proposal.md): exact training-state transfer, same-checkpoint inference parity and measured resumed-training quality. Strict long-run trajectory failures remain diagnostics; no inference tolerance is relaxed. Useful resumed-training quality is still unproved.

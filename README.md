@@ -4,11 +4,13 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
-**Current model capability: unchanged and failing.** [Fresh reassessment](docs/current-model-conversation-rerun.md): 0/100 conversations, 0/300 requested tasks, 7.6/100; all 300 fresh replies match the previous tokens exactly. Recent milestones are data engineering; no new student weights or capability improvement were produced.
+**Current decision: course correction.** [Detailed recovery plan](docs/course-correction.md). A new actual run again yields **0/100 conversations, 0/300 tasks, 7.6/100**; [all 300 fresh message/response pairs](docs/course-correction-100-transcripts.md) are visible. No accepted conversational candidate exists. Recent data engineering produced no new student weights.
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Latest corpus progress:** [Near grouping continues locally](docs/global-near-terminal-audit.md) in explicit v3cache continuation, reusing 20.19M committed feature occurrences under the original deadline. Snapshot:27,648source records /20.99Mfeatures. Nine targeted terminal-audit/component tests pass; actual full-corpus verification remains pending. Model weights and failed conversation results remain unchanged.
+**Teacher now works:** isolated CLI0.163.0 successfully requests GPT-6.1 Sol; one actual correction demonstration passes strict offline event/schema/fact checks and direct review. The global CLI and historical contracts stay unchanged.31focused tests pass. The historical pilot is exhausted at20/20reservations; [a separate bounded English batch](docs/teacher-english-batch-proposal.md) awaits authorization. No teacher-training release or new student update is claimed.
+
+**Current corpus state:** the owned [near-grouping job](docs/global-near-terminal-audit.md) was explicitly stopped and reaped for course correction. Partial index/database/journal remain retained; full grouping and new corpus admission are incomplete. Thirteen audit/component fixture tests pass across the prepared tools; this is not a completed corpus audit. No new training or GCP resources were started.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 

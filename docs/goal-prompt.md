@@ -2,6 +2,14 @@
 
 Creator: Navneet Prabhakar
 
+## Current course correction — 19 October 2026
+
+The latest user request requires fresh100-conversation assessment, complete message/response display, in-depth diagnosis, **GPT-6.1 Sol through saved-auth Codex CLI** as the English teacher, followed by measurable training/assessment/correction cycles until core English meets the good-score gate within authorized resources. [The current recovery plan](course-correction.md) governs execution priority and teacher selection; older Luna choices/live-job statements below are historical. Preserve all failed results and immutable runtime/data contracts.
+
+Fresh actual300turns again yield0/100conversations,0/300tasks,7.6/100; [all pairs](course-correction-100-transcripts.md) are published. Own foundation remains the next language source; accepted conversational candidate is null. Owned near-index job is now explicitly stopped/reaped, not training-ready. The old CLI0.144.4rejected the requested model; isolated CLI0.163.0resolves access and yields one correct reviewed GPT-6.1 Sol demonstration after strict offline separation of known client notices.31focused tests pass. All three new attempts remain charged,20/20historical pilot slots consumed; app input for a separate bounded English-teacher allowance is pending. No model substitution/API fallback or fake teacher training. Checked Sol continuation/release integration, applicable training-use terms/scope and finite corpus/experiment readiness remain unresolved. No new student gradients or GCP resources have been started by this correction.
+
+Use task success first. Development SFT gates remain80%single-turn/60%complete three-turn; proposed final good-score gate is80/100fully successful fresh three-turn sessions,240/300successful turns,rubric80/100,95%appropriate termination,allrequired core slices>=60%,unrelated templates<=5%. Freeze a family-disjoint final suite before use; never train on graded transcripts or repeat final tests until one passes. Core English is only one project stage; styles/content/tools/MCP/portability/ESCI remain separate measured requirements. USD50/100Mphysicalpositions/oneL4/45VMhours and CLI-only usage constraints remain binding; stop at resource/data/regression boundaries and request necessary input rather than promise unbounded repetition.
+
 Build and validate an English small language model trained from random initialization. Execute the milestones below using the repository documents and verified results as the source of truth.
 
 ## Read before execution

@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+**Course-correction update:** v3/session30445 is now stopped, not live. Owned parent17890 was interrupted; supervisor reaped child17909 with-9 and tool session exited130. Partial database/journal remain retained at29,696source records/22,824,817feature occurrences. No complete near corpus audit or component propagation occurred. The independently implemented BFS component checker has four fixture tests passing; actual full-corpus execution remains deferred. [Current recovery plan](course-correction.md) governs next work; older live-job instructions below are historical.
+
 Date: 19 October 2026
 
 - **Current job: v3, tool session30445, parent17890/worker17909.** V2session39730 is terminal after an explicit interruption; do not restart it. The recorded v3snapshot covers27,648source records /20,994,407full shingle occurrences. Full near grouping remains incomplete.
