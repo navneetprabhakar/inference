@@ -1,0 +1,891 @@
+{
+  "assessment_sha256": "60e80b65fed7a7828266c44026769380d40de8fb9e25a542f015b5430e6fa9fb",
+  "candidate_report_sha256": "10960a319d0e105582cc68606e2eb6eb602caa9b2e259a1088fb81bd24795cb2",
+  "creator": "Navneet Prabhakar",
+  "distinct_train_candidate_node_characters": 23787729,
+  "distinct_train_candidate_nodes": 35249,
+  "frozen_heldout_rows_verified": 2237,
+  "new_candidate_characters": {
+    "test": 1857005,
+    "train": 33355408,
+    "validation": 3917367
+  },
+  "new_candidate_rows_retained": 20589,
+  "new_candidate_splits": {
+    "test": 1033,
+    "train": 17463,
+    "validation": 2093
+  },
+  "new_cloud_jobs": 0,
+  "new_neural_updates": 0,
+  "new_teacher_calls": 0,
+  "parent_manifest_sha256": "5a7b0f75378dad39c1747e400ad91f6c3405feda2a4acf2147c3e8ccda275c73",
+  "quality": {
+    "attention_records": {
+      "incomplete_top_k": 24,
+      "non_english_top_window": 596,
+      "privacy_candidate": 50,
+      "unscored_window": 71
+    },
+    "groups": 7140,
+    "groups_per_stratum": 2,
+    "human_approvals": 0,
+    "kind": "non-admitting-quality-audit-v1",
+    "limits": {
+      "detector_seconds": 60,
+      "max_db_bytes": 1073741824,
+      "max_detector_output_bytes": 16777216,
+      "max_input_bytes": 268435456,
+      "max_record_bytes": 1048576,
+      "max_records": 30000,
+      "max_sample_records": 2000,
+      "max_strata": 1024,
+      "max_windows": 200000
+    },
+    "peak_database_allocated_bytes": 175009792,
+    "privacy_candidate_occurrences": {
+      "identity_or_address_context": 5,
+      "international_phone_candidate": 17,
+      "ipv4_literal_candidate": 81
+    },
+    "records": 22826,
+    "release": "sample_only",
+    "sampled_groups": 60,
+    "sampled_records": 129,
+    "sampling": "Seeded bottom-k split groups per group-level stratum; full selected groups, clustered rows, conditional on this frozen input only.",
+    "scope": "Signals and sampling only. No calibrated language/PII/content/quality acceptance; no corpus admission or upstream representativeness claim.",
+    "seed": "iteration-two-dialogue-audit-20261019-v1",
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": {
+        "attention_records": {},
+        "groups": 18,
+        "records": 18,
+        "sampled_records": 8
+      },
+      "HuggingFaceH4/ultrachat_200k": {
+        "attention_records": {
+          "non_english_top_window": 1
+        },
+        "groups": 22,
+        "records": 22,
+        "sampled_records": 4
+      },
+      "OpenAssistant/oasst2": {
+        "attention_records": {
+          "incomplete_top_k": 22,
+          "non_english_top_window": 550,
+          "privacy_candidate": 50,
+          "unscored_window": 63
+        },
+        "groups": 5331,
+        "records": 20628,
+        "sampled_records": 74
+      },
+      "databricks/databricks-dolly-15k": {
+        "attention_records": {
+          "incomplete_top_k": 2,
+          "non_english_top_window": 45,
+          "unscored_window": 8
+        },
+        "groups": 1771,
+        "records": 2158,
+        "sampled_records": 43
+      }
+    },
+    "strata": [
+      {
+        "groups": 1,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 1,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 1,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 1,
+        "stratum": [
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.4,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.4,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 12,
+        "inclusion_probability": 0.16666666666666666,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 10,
+        "inclusion_probability": 0.2,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 157,
+        "inclusion_probability": 0.012738853503184714,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 104,
+        "inclusion_probability": 0.019230769230769232,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 2624,
+        "inclusion_probability": 0.0007621951219512195,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 1868,
+        "inclusion_probability": 0.0010706638115631692,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 33,
+        "inclusion_probability": 0.06060606060606061,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 308,
+        "inclusion_probability": 0.006493506493506494,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 227,
+        "inclusion_probability": 0.00881057268722467,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.5,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 33,
+        "inclusion_probability": 0.06060606060606061,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 126,
+        "inclusion_probability": 0.015873015873015872,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 35,
+        "inclusion_probability": 0.05714285714285714,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 118,
+        "inclusion_probability": 0.01694915254237288,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 19,
+        "inclusion_probability": 0.10526315789473684,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 354,
+        "inclusion_probability": 0.005649717514124294,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 251,
+        "inclusion_probability": 0.00796812749003984,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 16,
+        "inclusion_probability": 0.125,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 331,
+        "inclusion_probability": 0.006042296072507553,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 218,
+        "inclusion_probability": 0.009174311926605505,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 19,
+        "inclusion_probability": 0.10526315789473684,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 122,
+        "inclusion_probability": 0.01639344262295082,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 15,
+        "inclusion_probability": 0.13333333333333333,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 112,
+        "inclusion_probability": 0.017857142857142856,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      }
+    ],
+    "top_language_window_counts": {
+      "bn": 3,
+      "br": 1,
+      "ca": 7,
+      "ceb": 2,
+      "cs": 5,
+      "de": 137,
+      "el": 4,
+      "en": 80192,
+      "eo": 63,
+      "es": 99,
+      "et": 2,
+      "eu": 4,
+      "fa": 9,
+      "fi": 1,
+      "fr": 48,
+      "ga": 8,
+      "he": 40,
+      "hu": 14,
+      "ia": 5,
+      "io": 4,
+      "is": 11,
+      "it": 58,
+      "ja": 12,
+      "jv": 2,
+      "km": 1,
+      "kn": 3,
+      "ko": 7,
+      "la": 29,
+      "mk": 2,
+      "ml": 3,
+      "ms": 4,
+      "nds": 2,
+      "nl": 12,
+      "no": 6,
+      "pl": 9,
+      "pt": 5,
+      "ro": 10,
+      "ru": 22,
+      "sh": 6,
+      "sl": 5,
+      "sr": 3,
+      "sv": 4,
+      "ta": 1,
+      "tr": 2,
+      "uk": 3,
+      "vi": 3,
+      "war": 4,
+      "yi": 3,
+      "zh": 17
+    },
+    "training_eligible": false,
+    "window_characters": 2048,
+    "windows": 80973
+  },
+  "quality_manifest_sha256": "a6aec64e53534975637c92d00bb779a6b1464da255135c13e2b771598e6a2649",
+  "reserved_exact_prompt_hits": 0,
+  "scope": "Sample-only metadata candidates with exact/near grouping and non-admitting audit. No English/content/privacy quality certification, source approval or corpus admission. Exact development prompt checks do not establish semantic isolation.",
+  "script_sha256": "2793d6c3d3f512647ce5e9d5cb94ddfa50ccbdda0dfbf7711df4248847daf1c9",
+  "stage_seconds": 256.69133112498093,
+  "staged_manifest_sha256": "3cb24ceb950c97817bb0c89a42c7c5f0d90144c401344c40e341a24d497bbc89",
+  "staging": {
+    "candidate_comparisons": 34750,
+    "candidate_lookup_plan": [
+      [
+        7,
+        0,
+        55,
+        "SEARCH mine USING COVERING INDEX prefix_record (sid=? AND kind=?)"
+      ],
+      [
+        15,
+        0,
+        55,
+        "SEARCH p USING PRIMARY KEY (kind=? AND fid=?)"
+      ],
+      [
+        22,
+        0,
+        45,
+        "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+      ],
+      [
+        30,
+        0,
+        45,
+        "SEARCH c USING PRIMARY KEY (sid=? AND kind=?)"
+      ],
+      [
+        56,
+        0,
+        0,
+        "USE TEMP B-TREE FOR DISTINCT"
+      ]
+    ],
+    "content_categories": {
+      "unreviewed": 22826
+    },
+    "exact_duplicates_removed": 12,
+    "feature_storage": "interned-sha256-postings-v1",
+    "frozen_dataset_manifest_sha256": "5a7b0f75378dad39c1747e400ad91f6c3405feda2a4acf2147c3e8ccda275c73",
+    "input_bytes": 87524223,
+    "input_examples": 22950,
+    "language_labels": {
+      "en": 20646,
+      "unknown": 2180
+    },
+    "limits": {
+      "max_db_bytes": 2147483648,
+      "max_input_bytes": 268435456,
+      "max_pair_checks": 4000000,
+      "max_record_bytes": 1048576,
+      "max_records": 30000,
+      "max_shingles": 100000
+    },
+    "max_shared_message_exposure": 8,
+    "near_pairs_grouped": 32895,
+    "peak_database_allocated_bytes": 887005184,
+    "peak_record_scratch_database_bytes": 131072,
+    "rejections": {
+      "Control characters": 5,
+      "Credential-like content": 73,
+      "Repeated-line boilerplate": 9
+    },
+    "release": "sample_only",
+    "retained_examples": 22826,
+    "scope": "Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.",
+    "signature_memberships": 8595134,
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": 18,
+      "HuggingFaceH4/ultrachat_200k": 22,
+      "OpenAssistant/oasst2": 20628,
+      "databricks/databricks-dolly-15k": 2158
+    },
+    "split_seed": "slm-splits-v1",
+    "splits": {
+      "test": 2178,
+      "train": 17463,
+      "validation": 3185
+    },
+    "staging": "sqlite-exact-prefix-jaccard-v1",
+    "training_eligible": false,
+    "unique_shingle_hashes": 5017693,
+    "version": 1
+  },
+  "training_eligible": false,
+  "training_reader_refusal": "Reviewed training release required; sample-only data is refused"
+}

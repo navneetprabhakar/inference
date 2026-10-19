@@ -72,3 +72,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Explicit dialogue review and local resume contract](milestone-forty-one.md)
 - [Actual 1M foundation results and learned-state restart](milestone-forty-two.md)
 - [First-iteration conversation and second-iteration preparation](milestone-forty-three.md)
+- [Bounded dialogue candidate contract](dialogue-candidates.md)
+- [Second-iteration grouped candidates, sizing and delegated review](milestone-forty-four.md)
