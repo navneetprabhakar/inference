@@ -6,7 +6,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Latest corpus progress:** [Distributed general-English intake](docs/general-and-narrative-corpus-progress.md) publishes48,000new FineWeb rows;41,721rows /40.57Mtokens provisionally pass. Together with Cosmopedia, the new provisional pool is65.20Mtoken occurrences before grouping. TinyStories source evidence is pinned; narrative rows, cross-source grouping and admission remain next. Fifty-five focused checks and full retained-output audits pass. No new training or cloud spend.
+**Latest corpus progress:** [Narrative intake](docs/narrative-range-intake.md) acquires 81,703 complete stories /17.30M raw BPE token occurrences and both official validation files. Exact checks identify 318 train/validation overlaps for exclusion. The preceding FineWeb/Cosmopedia pool remains 65.20M provisionally screened token occurrences before grouping. Narrative quality screening, global grouping and finite admission remain next; no new training or cloud spend.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 
