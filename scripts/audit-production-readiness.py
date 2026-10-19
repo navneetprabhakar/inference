@@ -49,13 +49,22 @@ def audit(output):
         sources=set(read(path.parent/'sources.json'))
         if sources&source_ids:
             real_releases.append({'path':str(path.parent),'source_ids':sorted(sources),'checked_train_records':sum(1 for _ in training_examples(path.parent))})
-    if real_releases:raise ValueError('A public training release now exists; re-audit tokenizer/pilot readiness rather than preserving old blockers')
+    delegated=read('reports/milestone-thirty-seven-source-review.json')
+    assert delegated['human_attestation'] is False and delegated['review_mode']=='delegated_expert'
+    assert delegated['explicitly_approved']==42 and delegated['checked_train_rows']==17 and delegated['unsampled_rows_approved']==0
+    delegated_root=Path('data/delegated-source-review-v1/release')
+    assert sha(delegated_root/'manifest.json')==delegated['release_manifest_sha256']
+    delegated_packet=read('data/delegated-source-review-v1/decisions.json')
+    assert digest(delegated_packet)==delegated['packet_sha256']
+    if {r['path']:r['checked_train_records'] for r in real_releases}!={str(delegated_root):17}:
+        raise ValueError('Training release inventory changed; re-audit real-data pilot readiness')
     suite=read('data/evaluation-candidates-v1/suite-review.json');output_review=read('data/evaluation-candidates-v1/output-review.json')
     approved_cases=sum(v['approved'] is True for v in suite['cases'].values())
     if suite['human_attestation'] or approved_cases:raise ValueError('Evaluation review changed; update classifications')
     stage_policy=read('configs/stage-screen-proposal-v1.json');assert stage_policy['status']=='proposed'
     numeric=read('reports/milestone-twenty-two-summary.json');assert numeric['strict_state_trajectory_gate_passed'] is False
-    proposal=Path('docs/portability-acceptance-proposal.md').read_text();assert 'Status: proposed; no existing gate changed or waived.' in proposal
+    portability=read('configs/portability-acceptance-v1.json')
+    assert portability['status']=='accepted' and portability['option']=='A' and portability['strict_trajectory_failures_retained'] is True
     tokenizer=read('reports/milestone-eight-tokenizer-mechanics.json');assert not tokenizer['production_frozen'] and tokenizer['selected_vocab_size'] is None
     scale=read('reports/milestone-eleven-reader-scale.json');assert scale['neural_updates']==0 and scale['public_training_examples_used']==0
     teacher=read('reports/milestone-twenty-eight-summary.json');assert teacher['actual_training_approvals']==0
@@ -74,7 +83,9 @@ def audit(output):
         if any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=='main' for n in tree.body):mains.append(str(path))
     pilot_main_found=Path('src/slm/train.py').is_file() and 'src/slm/train.py' in mains
     assert not any('def main(' in Path(p).read_text() for p in ('src/slm/common/training.py','src/slm/common/curriculum.py'))
-    test_path=Path('reports/milestone-thirty-five-tests.xml')
+    test_path=Path('reports/milestone-thirty-seven-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-thirty-six-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-thirty-five-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-four-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-three-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-two-tests.xml')
@@ -101,15 +112,15 @@ def audit(output):
     item('N01','2','Tiny MLX/CPU forward/gradient/100-update controls','implemented_reference',['docs/milestone-one.md','docs/milestone-three.md','tests/test_portability.py'],'Tiny tolerances do not establish full-depth training trajectories.')
     item('N02','2','Actual NVIDIA checkpoint/continuation validation','retained_hardware_evidence',['reports/milestone-twenty-one-summary.json','reports/milestone-twenty-one-cleanup.json'],'Retained T4 validation, not a fresh hardware or cloud-resource query.')
     item('N03','2','Full exact MLX/CUDA/MLX state transfer and context inference','retained_hardware_evidence',['reports/milestone-twenty-one-summary.json','reports/milestone-seven-cuda-context.json'],'242,296,320 weight/moment values checked; finite synthetic continuation is not learned quality.')
-    item('N04','2','Accepted full-size multi-update training portability','failed_gate',['reports/milestone-twenty-two-summary.json','docs/portability-acceptance-proposal.md'],'Trajectory failure remains recorded; state/inference/quality versus strict-trajectory policy needs user input.')
+    item('N04','2','Accepted state/inference/resumed-quality portability','partial',['configs/portability-acceptance-v1.json','reports/milestone-twenty-two-summary.json','docs/portability-acceptance-proposal.md'],'Option A accepted by the user. Exact-state/inference hardware evidence retained; useful resumed-training quality is unproved. Strict trajectory failures remain failed diagnostics, not a waived passing test.')
     item('N05','2','Reduced-precision and optimized numerical validation','missing',['src/slm/eval/precision.py','src/slm/backends/mlx_backend.py','src/slm/backends/torch_backend.py'],'FP64 diagnostic is not BF16/FP16 production support. Reference acceptance precedes optimization.')
     item('D01','3','Pinned source provenance/card/license sample acquisition','implemented_reference',['src/slm/data/acquire.py','src/slm/data/snapshot.py','reports/milestone-thirty-five-acquisition.json'],'Four pinned sources; complete 12.48 MiB Dolly JSONL acquired within the 24 MiB audit cap, other sources first-N. No source clearance or unbounded bulk acquisition.')
     item('D02','3','Prose/messages/Dolly/OASST adapters and complete tree reconstruction','implemented_reference',['src/slm/data/adapters.py','configs/source-audit-v1.json'],'Initial inspected source formats; the wider source shortlist is not fully audited.')
     item('D03','3','English/quality/privacy filtering suitable for real training','partial',['src/slm/data/quality_audit.py','docs/quality-audit-contract.md','reports/milestone-thirty-four-sample.json'],'Pinned offline language scores and privacy/quality features exist, but short/code errors, incomplete privacy coverage and unverified judgments prevent production eligibility. All 15,692 complete-small-source population rows remain content-unreviewed; the original 901-row snapshot stays historical.')
     item('D04','3','Exact/near deduplication, grouped splits and official holdouts','partial',['src/slm/data/curation.py','src/slm/data/partitions.py','src/slm/data/holdout.py','reports/milestone-thirty-five-invariants.json'],'Complete small-source syntactic grouping preserves all prior heldouts; not global semantic contamination proof or full OASST Parquet text verification.')
-    item('D05','3','Approved public source and example release','pending_input',['data/official-split-audit-v1/pending-review.json','src/slm/data/review.py'],'Zero source/example approvals; sample-only reader refuses training.')
-    item('D06','3','Production bulk intake, global grouping and quality reporting','partial',['src/slm/data/staging.py','tests/test_staging.py','docs/disk-backed-corpus-staging.md'],'Disk-backed sample-only JSONL staging preserves exact syntactic grouping with explicit limits; complete Dolly measurement has 52.5x main-DB amplification and is not production-scale economics. Source admission, semantic decontamination, resumable intake and direct Parquet streaming remain missing. Legacy builder/packets remain bounded; v2 explicit-row verification and downstream approved-row/text intake are disk-backed. Other mixture/lineage/BPE state is not globally bounded.')
-    item('D07','3','Scalable admission backed by representative human audit','missing',['src/slm/data/review_stream.py','docs/corpus-admission-proposal.md'],'Disk-backed v2 still admits explicit rows only. Whole-group audit now covers a complete post-filter Dolly population plus three first-N sources. The 287-row sample and observed eight-category coverage have no accepted error thresholds or actual judgments; corpus admission remains missing.')
+    item('D05','3','Approved public source and example release','partial',['reports/milestone-thirty-seven-source-review.json','src/slm/data/review.py','data/delegated-source-review-v1/release/manifest.json'],'User-delegated expert review approves 42 explicit SFW Dolly rows, only 17 train. Human attestation remains false. Three other source reviews and all unsampled rows remain unapproved; broader admission is implementation/review work, not a manual-export request.')
+    item('D06','3','Production bulk intake, global grouping and quality reporting','partial',['src/slm/data/staging.py','tests/test_staging.py','docs/disk-backed-corpus-staging.md'],'Disk-backed sample-only JSONL staging preserves exact syntactic grouping with explicit limits; complete Dolly interned measurement has 25.32x main-DB amplification and is not production-scale economics. Source admission, semantic decontamination, resumable intake and direct Parquet streaming remain missing. Legacy builder/packets remain bounded; v2 explicit-row verification and downstream approved-row/text intake are disk-backed. Other mixture/lineage/BPE state is not globally bounded.')
+    item('D07','3','Scalable admission backed by representative human audit','missing',['src/slm/data/review_stream.py','docs/corpus-admission-proposal.md'],'Disk-backed v2 still admits explicit rows only. Whole-group audit now covers a complete post-filter Dolly population plus three first-N sources. The 287-row sample now has 93 Dolly dispositions under delegated expert authority (42 accepted), with other sources deferred. No unbiased corpus error-rate estimate or accepted bulk admission protocol yet exists; corpus admission remains missing.')
     item('D08','3','Verified token shards, source counts and repeat exposure','implemented_reference',['src/slm/data/tokenized.py','src/slm/data/mixture.py'],'Processed, supervised and unique prepared positions differ; prior 2.6M reader probe has zero neural updates.')
     item('T01','4','Train-only 16K/24K BPE comparison tooling and slice measurements','implemented_reference',['src/slm/common/tokenizer.py','src/slm/eval/tokenizer.py'],'Candidate builder uses a checked text spool/generator and streaming record digest; BPE internal vocabulary state still grows. Retained synthetic comparison yielded 432 tokens for both requested sizes; no production selection.')
     item('T02','4','Frozen production vocabulary selected from representative eligible data','missing',['reports/milestone-eight-tokenizer-mechanics.json','reports/milestone-eight-data-gates.json'],'No production candidate, selection or freeze. Vocabulary choice and target count must follow actual yield/efficiency.')
@@ -160,25 +171,25 @@ def audit(output):
     complete_observation={'rows':complete_report['retained_examples'],'splits':complete_report['splits'],'sources':complete_report['sources'],
         'language_labels':complete_report['language_labels'],'content_labels':complete_report['content_categories'],
         'dataset_manifest_sha256':sha(complete_root/'manifest.json'),'pending_review_rows':len(complete_review['examples']),
-        'human_attestation':complete_review['human_attestation'],'reviewer':complete_review['reviewer'],'scope':'Complete retained Dolly plus three existing first-N sources; no actual training approval.'}
+        'human_attestation':complete_review['human_attestation'],'reviewer':complete_review['reviewer'],'scope':'Complete retained Dolly plus three existing first-N sources. Parent stays sample-only; the explicitly approved subset is reported separately.'}
     files={str(p):sha(p) for p in paths};refs['pyproject.toml']=sha('pyproject.toml')
     report={'version':1,'creator':'Navneet Prabhakar','scope':'Read-only requirement/evidence audit of the original full goal; no promotion or approval tool',
       'goal_achieved':False,'criteria':items,'status_counts':dict(Counter(i['status'] for i in items)),
       'observations':{'target_parameters':config.parameter_count,'public_sample_rows':sample_report['retained_examples'],
         'public_sample_splits':sample_report['splits'],'public_language_labels':sample_report['language_labels'],'public_content_labels':sample_report['content_categories'],
-        'reviewed_packet_rows':len(packet['examples']),'public_source_approvals':source_approvals,'public_row_approvals':row_approvals,
+        'historical_bootstrap_packet_rows':len(packet['examples']),'historical_bootstrap_source_approvals':source_approvals,'historical_bootstrap_row_approvals':row_approvals,
+        'public_source_approvals':sum(v['approved'] is True for v in delegated_packet['source_reviews'].values()),'public_row_approvals':delegated['explicitly_approved'],
         'public_human_attestation':packet['human_attestation'],'public_review_packet_sha256':digest(packet),'public_sample_training_reader_refusal':reader_refusal,
         'complete_small_source_population':complete_observation,'original_bootstrap_packet_scope':'Historical 901-row population only; cannot bind the new complete-source population',
         'public_training_releases_found':real_releases,'data_manifest_files_inspected':manifest_count,
         'candidate_evaluation_cases':len(suite['cases']),'approved_evaluation_cases':approved_cases,
         'evaluation_output_human_attestation':output_review['human_attestation'],'stage_policy_status':stage_policy['status'],
-        'strict_trajectory_gate_passed':False,'production_tokenizer_selected_in_retained_report':False,
+        'strict_trajectory_gate_passed':False,'portability_acceptance':portability,'delegated_source_review':delegated,'production_tokenizer_selected_in_retained_report':False,
         'synthetic_reader_positions':scale['build']['processed_prediction_positions'],'synthetic_reader_neural_updates':0,
         'teacher_candidates':14,'teacher_approvals':0,'teacher_journals':journals,'combined_teacher_reserved_slots':17,
         'latest_local_suite':tests,'general_pilot_main_found':pilot_main_found,'entrypoints_inspected':mains},
-      'next_independent_implementation':('Production intake/admission policy and scalable grouping, while data/tokenizer/portability inputs gate real 1M/10M pilots.' if pilot_main_found else 'Bounded reviewed-data pilot runner over existing trainers with verified source bindings, budgets and recovery; synthetic validation only until real input gates are resolved.'),
-      'external_inputs':['Source terms and explicit review decisions for current public packet','Scalable admission/quality-policy approval before bulk corpus release',
-        'Portability acceptance option A/B','Actual account/source evidence and human teacher judgments','Evaluation suite/policy/rubric review',
+      'next_independent_implementation':('Develop bounded research corpus-admission policy under delegated source review, then freeze representative train-only tokenizer and run the actual local 1M pilot; no further manual source-review export is requested.' if pilot_main_found else 'Bounded reviewed-data pilot runner over existing trainers with verified source bindings, budgets and recovery; synthetic validation only until real input gates are resolved.'),
+      'external_inputs':['Actual account/source evidence for teacher-output training use', 'Evaluation suite/policy/rubric review outside the delegated source/sample scope',
         'Main GCP budget/hardware decision at its later paid-run gate'],
       'new_training_updates':0,'new_teacher_launches':0,'new_cloud_jobs':0,'source_or_policy_approvals_changed':False,
       'historical_hardware_scope':'Retained reports only; no new CUDA run, cloud-resource query, availability/pricing check or billing verification.',
@@ -189,7 +200,7 @@ def audit(output):
     assert sha(packet_path)==packet_before
     output.parent.mkdir(parents=True,exist_ok=True)
     with output.open('x') as f:f.write(json.dumps(report,indent=2)+'\n')
-    return {'criteria':len(items),'goal_achieved':False,'status_counts':report['status_counts'],'public_approvals':row_approvals,'new_training_updates':0}
+    return {'criteria':len(items),'goal_achieved':False,'status_counts':report['status_counts'],'public_approvals':delegated['explicitly_approved'],'new_training_updates':0}
 
 
 if __name__=='__main__':

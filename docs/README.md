@@ -5,7 +5,7 @@ Creator: Navneet Prabhakar
 - **Objective:** train an English conversational model from random initialization, targeting roughly 81M parameters, with controlled styles, tool use, and portable MLX/CUDA training and inference.
 - **Development:** Apple M4 MacBook Air with 24GB unified memory first; GCP for sustained training.
 - **Teacher:** initially GPT-6 Luna or GPT-5.6 Luna; configurable and required in the conversation-data workflow, absent from deployed student inference.
-- **Status:** dual-backend reference training, actual NVIDIA state portability, finite mixtures/curricula and candidate language evaluation are implemented. Full-size numerical trajectories still fail acceptance; production data/tokenizer, language pilots and model capability remain open. The [ledger](project-ledger.md) holds current evidence.
+- **Status:** dual-backend reference training, actual NVIDIA state portability, finite mixtures/curricula and candidate language evaluation are implemented. Option A now governs portability; trajectory failures remain diagnostics and useful resumed-training quality is unproved. A delegated expert release contains 42 Dolly rows; broad data/tokenizer, language pilots and model capability remain open. The [ledger](project-ledger.md) holds current evidence.
 
 | Document | Purpose |
 | --- | --- |
@@ -60,3 +60,5 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Complete Dolly preparation and review bundle](milestone-thirty-five.md)
 
 - [Compact exact-shingle storage and comparison](milestone-thirty-six.md)
+
+- [Accepted portability and delegated source review](milestone-thirty-seven.md)

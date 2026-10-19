@@ -2,9 +2,11 @@
 
 Creator: Navneet Prabhakar
 
-Status: proposed; no existing gate changed or waived.
+Status: **Option A accepted by Navneet Prabhakar on 19 October 2026.** Versioned decision: `configs/portability-acceptance-v1.json`.
 
-## Decision needed
+The recorded user response is “A: Exact state transfer, inference parity and measured resumed-training quality (Recommended)”. This supersedes the previous request for an A/B decision. Exact state transfer, same-checkpoint inference and measured resumed-training quality now govern portability acceptance. Existing trajectory failures remain failed diagnostics; existing inference tolerances are unchanged. The resumed-training quality gate has not yet been demonstrated. This decision authorizes neither new spending nor blanket dataset admission.
+
+## Question resolved
 
 Does seamless MLX/CUDA portability require tightly matching multi-update training trajectories, or portable state plus verified inference and measured quality after resumed training?
 
@@ -18,9 +20,9 @@ Does seamless MLX/CUDA portability require tightly matching multi-update trainin
 
 ## Additional evidence from numerical localization
 
-[Milestone twenty-two](milestone-twenty-two.md) reproduces the dense repeated-token failure at update 65. A deliberately one-ULP-perturbed embedding coordinate also causes a PyTorch-only trajectory to fail the original bounds at update 67. Across 18 fixed common-state anchors, isolated optimizer and complete one-update comparisons still pass the original bounds. A separate 81M common-state FP64 check shows small gradient errors on its one tested batch. These results support numerical sensitivity as a contributor; they do not establish general model correctness or comparable learned quality. No existing criterion has been waived.
+[Milestone twenty-two](milestone-twenty-two.md) reproduces the dense repeated-token failure at update 65. A deliberately one-ULP-perturbed embedding coordinate also causes a PyTorch-only trajectory to fail the original bounds at update 67. Across 18 fixed common-state anchors, isolated optimizer and complete one-update comparisons still pass the original bounds. A separate 81M common-state FP64 check shows small gradient errors on its one tested batch. These results support numerical sensitivity as a contributor; they do not establish general model correctness or comparable learned quality. At the time of those experiments, no criterion had been waived. The subsequent Option A decision changes the role of trajectory comparisons to diagnostics while retaining every failure.
 
-The choice below changes whether tight long-run trajectory agreement blocks subsequent functional portability work. It does not mark those failed comparisons as passing, authorize paid training, approve datasets or accept an unreviewed quality suite.
+The accepted choice below changes whether tight long-run trajectory agreement blocks subsequent functional portability work. It does not mark those failed comparisons as passing, authorize paid training, approve datasets or accept an unreviewed quality suite.
 
 ## Option A: state, inference and quality portability
 
@@ -38,4 +40,4 @@ Keep the existing full-size trajectory comparisons as a prerequisite. Continue r
 
 ## Recommendation for review
 
-Option A matches the practical requirement to move the same model between Apple Silicon and NVIDIA. Option B is appropriate only if tightly matched optimization paths are themselves a product/research requirement. The decision requires explicit review; all failed gates and current documentation remain in force until that decision is recorded.
+Option A is accepted. Option B is retained as the alternative considered, not an outstanding decision. All historical failed comparisons remain recorded. Actual useful resumed-training quality, reduced precision and sustained performance still require measured evidence.

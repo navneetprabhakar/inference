@@ -56,7 +56,8 @@ def guarded(roots,limits):
 
 
 def header_checked(header,sources,ledger):
-    if set(header)!=HEADER or type(header['version']) is not int or header['version']!=2 or header['scope']!='explicit_rows_only':
+    expected=HEADER|({'review_mode','review_authorization'} if header.get('review_mode')=='delegated_expert' else set())
+    if set(header)!=expected or type(header['version']) is not int or header['version']!=2 or header['scope']!='explicit_rows_only':
         raise ValueError('Explicit-row review v2 required; corpus inference refused')
     if sha(ledger)!=header['decisions_sha256']:raise ValueError('Review ledger checksum differs')
     check_source_reviews({**header,'version':1},sources)
@@ -76,6 +77,10 @@ def export_packet(packet_file,output):
                 if key!=entry['record']['example_id'] or digest(entry['record'])!=entry['record_sha256']:raise ValueError('Legacy review record differs')
                 f.write(canonical(entry)+'\n')
         header={k:deepcopy(packet[k]) for k in ('dataset_manifest_sha256','reviewer','human_attestation','source_reviews')}
+        if packet.get('review_mode')=='delegated_expert':
+            header.update(review_mode=packet['review_mode'],review_authorization=deepcopy(packet['review_authorization']))
+        elif packet.get('review_mode','human')!='human' or 'review_authorization' in packet:
+            raise ValueError('Unknown or inconsistent review authority')
         header.update(version=2,scope='explicit_rows_only',decisions_sha256=sha(temp/'decisions.jsonl'),legacy_packet_sha256=sha(packet_file))
         (temp/'header.json').write_text(canonical(header)+'\n')
         if stamp(packet_file)!=before:raise ValueError('Legacy packet changed during export')
@@ -121,10 +126,12 @@ class Index(Mapping):
             if snapshot:
                 prior=self.db.execute('SELECT data FROM snapshot WHERE eid=?',(key,)).fetchone()
                 if prior is None or prior[0]!=canonical(entry['record']):raise ValueError('Review does not match frozen input record')
-            item,group,partitions=check_entry(key,entry,sources,header['source_reviews'],binding)
+            mode=header.get('review_mode','human')
+            item,group,partitions=check_entry(key,entry,sources,header['source_reviews'],binding,mode)
             self.db.execute('INSERT INTO groups VALUES(?,?) ON CONFLICT(gid) DO UPDATE SET priority=max(priority,excluded.priority)',(group,max(PRIORITY[p] for p in partitions)))
             if item is not None:
-                item['validation_results']['human_review']={'review_schema_version':2,'review_binding_sha256':binding,'reviewed_record_sha256':entry['record_sha256']}
+                receipt_key='human_review' if mode=='human' else 'delegated_expert_review'
+                item['validation_results'][receipt_key]={'review_schema_version':2,'review_binding_sha256':binding,'reviewed_record_sha256':entry['record_sha256']}
                 self.db.execute('INSERT INTO approved(eid,data,gid,split) VALUES(?,?,?,?)',(key,canonical(item),group,item['split']))
             self.tick()
         if not self.db.execute('SELECT 1 FROM approved LIMIT 1').fetchone():raise ValueError('No approved records; no training release')

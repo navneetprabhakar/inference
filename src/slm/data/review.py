@@ -1,4 +1,4 @@
-"""Human review packets and checked training releases. Decisions are never inferred."""
+"""Explicit review packets and checked releases; preserve review authority and mode."""
 from collections import defaultdict, Counter
 from copy import deepcopy
 import hashlib
@@ -81,9 +81,30 @@ def prepare(dataset, output, limit=40):
             'approved': 0, 'dataset_manifest_sha256': packet['dataset_manifest_sha256']}
 
 
+def check_review_authority(packet):
+    mode=packet.get('review_mode','human')
+    if mode=='human':
+        if (packet.get('reviewer')!=REVIEWER or packet.get('human_attestation') is not True
+            or 'review_authorization' in packet):
+            raise ValueError('Explicit human review attestation required')
+    elif mode=='delegated_expert':
+        authorization=packet.get('review_authorization',{})
+        required={'version','authorized_by','instruction','scope','dataset_manifest_sha256','recorded_on'}
+        if (packet.get('human_attestation') is not False or packet.get('reviewer')!='delegated_expert'
+            or set(authorization)!=required or type(authorization.get('version')) is not int
+            or authorization['version']!=1 or authorization['authorized_by']!=REVIEWER
+            or authorization['scope']!='explicit_rows_only'
+            or authorization['dataset_manifest_sha256']!=packet.get('dataset_manifest_sha256')
+            or not re.fullmatch('[a-f0-9]{64}',authorization['dataset_manifest_sha256'])
+            or not authorization['instruction'].strip() or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',authorization['recorded_on'])):
+            raise ValueError('Explicit dataset-bound delegated review authorization required')
+    else:raise ValueError('Unknown review mode')
+    return mode
+
+
 def check_source_reviews(packet, sources):
-    if packet.get('version') != 1 or packet.get('reviewer') != REVIEWER or packet.get('human_attestation') is not True:
-        raise ValueError('Explicit human review attestation required')
+    if packet.get('version') != 1:raise ValueError('Review packet v1 required')
+    check_review_authority(packet)
     if set(packet['source_reviews']) != set(sources): raise ValueError('Source review set differs')
     for name, entry in packet['source_reviews'].items():
         if entry['source_sha256'] != digest(sources[name]) or entry['source_record'] != sources[name]:
@@ -96,7 +117,8 @@ def check_source_reviews(packet, sources):
                 raise ValueError('Source terms/category review incomplete')
 
 
-def check_entry(key, entry, sources, source_reviews, packet_hash):
+def check_entry(key, entry, sources, source_reviews, packet_hash, review_mode='human'):
+    if review_mode not in ('human','delegated_expert'):raise ValueError('Unknown review mode')
     record, decision = entry['record'], entry['decision']
     if key != record['example_id'] or digest(record) != entry['record_sha256']:
         raise ValueError('Reviewed record identity/content differs')
@@ -136,8 +158,9 @@ def check_entry(key, entry, sources, source_reviews, packet_hash):
     item['language'] = 'en'
     item['content_category'] = decision['content_category']
     for gate in ('language_review','content_review','privacy_review','quality_review'):
-        item['validation_results'][gate] = 'human_attested'
-    item['validation_results']['human_review'] = {
+        item['validation_results'][gate] = 'human_attested' if review_mode=='human' else 'delegated_expert_reviewed'
+    receipt_key='human_review' if review_mode=='human' else 'delegated_expert_review'
+    item['validation_results'][receipt_key] = {
         'packet_sha256': packet_hash, 'reviewed_record_sha256': entry['record_sha256']}
     return item,group,partitions
 
@@ -149,7 +172,7 @@ def check_packet(packet, sources, input_records=None):
     for key,entry in packet['examples'].items():
         if input_records is not None and (key not in input_records or entry['record']!=input_records[key]):
             raise ValueError('Review does not match frozen input record')
-        item,group,partitions=check_entry(key,entry,sources,packet['source_reviews'],packet_hash)
+        item,group,partitions=check_entry(key,entry,sources,packet['source_reviews'],packet_hash,packet.get('review_mode','human'))
         group_splits[group].extend(partitions)
         if item is not None:accepted[key]=item
     for item in accepted.values():
@@ -185,7 +208,8 @@ def release(dataset, review_file, destination):
                   'categories':dict(Counter(e['content_category'] for e in approved.values())),
                   'parent_dataset_manifest_sha256':packet['dataset_manifest_sha256'],
                   'review_packet_sha256':digest(packet),
-                  'limitation':'Checks attestations and record integrity; cannot prove human judgment or legal clearance.'}
+                  'review_mode':packet.get('review_mode','human'),
+                  'limitation':'Explicit rows only. Integrity checks do not prove independent judgment, factual truth or legal clearance.'}
         (temp/'report.json').write_text(json.dumps(report, sort_keys=True, indent=2)+'\n')
         manifest = {'version':1, 'release':'training', 'review_schema_version':1,
                     'parent_dataset_manifest_sha256':packet['dataset_manifest_sha256'],

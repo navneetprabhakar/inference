@@ -6,6 +6,12 @@ Creator: Navneet Prabhakar
 
 Review schema v2 stores individual decisions in JSONL and small source/attestation metadata in `header.json`. It approves only the rows carrying explicit successful decisions. It does not infer corpus approval from reviewed samples or introduce a sampled-admission policy.
 
+## Delegated expert review
+
+On 19 October 2026, Navneet Prabhakar explicitly delegated the source/sample review. Both bounded v1 packets and disk-backed v2 headers now support `review_mode: delegated_expert`, `reviewer: delegated_expert`, `human_attestation: false`, and a `review_authorization` record containing the actual instruction, authorizing owner, date, scope and exact parent-manifest SHA256. These fields are checked together; missing/misbound authorization, mixed human/expert flags, unknown modes and whole-corpus scope are refused. Released validation markers are `delegated_expert_reviewed`, with a `delegated_expert_review` receipt. Existing human packets retain their original behavior.
+
+This is a recorded authority/method, not a cryptographic proof of judgment. The human-review HTML console remains a human-attestation interface; delegated decisions are written explicitly and checked through the publisher. No fabricated human export or claim of browser verification is involved. The first actual expert decisions and limitations are in [milestone thirty-seven](milestone-thirty-seven.md).
+
 ```sh
 .venv/bin/python -m slm.data.review_stream export \
   --packet /absolute/existing-review.json --output /absolute/new-review-bundle
@@ -31,7 +37,7 @@ The limits file has exactly these positive integers:
 
 ## Integrity and approval contract
 
-- `header.json` contains exactly: `version: 2`, `scope: explicit_rows_only`, frozen dataset manifest SHA256, reviewer, human-attestation flag, source reviews, decision-file SHA256 and optional legacy-packet SHA256. The only recognized reviewer name remains Navneet Prabhakar. Source terms, allowed categories and evidence requirements remain unchanged.
+- `header.json` contains exactly: `version: 2`, `scope: explicit_rows_only`, frozen dataset manifest SHA256, reviewer, human-attestation flag, source reviews, decision-file SHA256 and optional legacy-packet SHA256. Human mode names Navneet Prabhakar. Delegated mode uses reviewer `delegated_expert` and additionally requires `review_mode` and `review_authorization` as specified above. Source terms, allowed categories and evidence requirements remain unchanged.
 - Each JSONL entry contains the original canonical `record`, its `record_sha256`, and the existing `decision` object. The record includes its example identity; duplicate ledger identities fail even when a decision rejects the row. Every reviewed record must exactly match the frozen snapshot at release time.
 - Existing strict English/privacy/quality, category, teacher-specific history/style/host semantics and OASST official mapping checks are reused through the same entry validator as schema v1. Pending/rejected decisions remain absent from training. Stronger upstream held-out evidence on rejected rows still constrains approved peers sharing their split group.
 - The release binds the header, ledger, source metadata and derived approved rows. Its review receipt explicitly identifies schema v2; v1 receipts are not silently rewritten in an existing release. Changing a receipt changes record identity and requires rebuilding dependent token shards.

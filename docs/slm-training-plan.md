@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+Current portability decision (19 October 2026): [Option A is accepted](portability-acceptance-proposal.md): exact training-state transfer, same-checkpoint inference parity and measured resumed-training quality. Strict long-run trajectory failures remain diagnostics; no inference tolerance is relaxed. Useful resumed-training quality is still unproved.
+
 Updated: 18 October 2026. Status: implementation plan with the tiny local prototype completed; see [milestone results](milestone-one.md). Numerical targets below remain acceptance goals or experiment settings, not measured results.
 
 ## Executive decisions

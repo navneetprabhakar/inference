@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+Current source-review authority (19 October 2026): Navneet Prabhakar delegated expert review. [The first explicit release](milestone-thirty-seven.md) contains 42 SFW Dolly rows with human attestation false. Broader corpus admission remains separate; manual source-review exports are no longer a user-input prerequisite.
+
 Updated: 18 October 2026. This is a source shortlist and executable curation design, not a claim that datasets have been downloaded, audited, or cleared for every use.
 
 ## 1. Data strategy

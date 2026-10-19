@@ -4,6 +4,9 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
+Current decisions: **Option A is accepted** for exact state transfer, inference parity and measured resumed-training quality. Strict trajectory failures remain diagnostics. The first [delegated expert review](docs/milestone-thirty-seven.md) approves 42 explicit Dolly rows with human attestation false; broader data admission and real language pilots remain open. Later status below is chronological milestone history.
+
+
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
 - Shared NumPy initialization and canonical parameter names; adjacent-pair RoPE, GQA, SwiGLU, RMSNorm, tied input/output embedding.
 - Tiny default: 2 layers, width 32, FFN 64, vocabulary 64, context 64. Integer-token fixtures, no downloaded data or teacher calls.
