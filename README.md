@@ -16,6 +16,8 @@ The [explicit SFT stage transition](docs/milestone-fifty-five.md) now imports ve
 
 [Actual MLX context probes](docs/milestone-fifty-seven.md) keep 2K as a candidate whole-dialogue limit: median forward/backward 1.560s / peak Metal 7.43 GiB, versus 0.558s / 3.75 GiB at 1K. Dummy optimizer-shaped buffers are included, but complete optimizer-step and sustained training costs are unmeasured. Zero weight updates occurred; source/content admission remains next.
 
+[Direct short-conversation review](docs/milestone-fifty-eight.md) reads 64 complete train dialogues: 32 for quality consideration, 24 defect exclusions and eight verification/scope deferrals. Prior 5,692 heldout rows remain protected. Considered rows have only 14,065 hypothetical assistant targets and no training approval; sufficient conversation data remains the next constraint.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
