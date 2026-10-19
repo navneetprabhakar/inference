@@ -10,6 +10,8 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Teacher20-call milestone complete:** [Actual English pilot](docs/english-teacher-pilot.md) uses GPT-6.1 Sol via CLI and produces182continuations/20template families. Direct review:180quality considerations/two exclusions;43focused tests and full raw-capture/context/mask reconstruction pass. Only2,890supervised targets remain among considerations—this is a small candidate packet, not another training iteration. Additional allowance20/20consumed; historical-plus-new40/40reserved. No student gradients or teacher-training admission.
 
+**Exact-index prototype:** [Bounded replacement and limits](docs/prefix-near-prototype.md) verifies all 4,096 selected source records / 5,820 facets and 7,368 candidate comparisons, with nine focused tests passing. The source sample has zero qualifying near pairs; positive coverage is synthetic. Full-corpus grouping and source admission remain incomplete.
+
 **Current corpus state:** the owned [near-grouping job](docs/global-near-terminal-audit.md) was explicitly stopped and reaped for course correction. Partial index/database/journal remain retained; full grouping and new corpus admission are incomplete. Thirteen audit/component fixture tests pass across the prepared tools; this is not a completed corpus audit. No new training or GCP resources were started.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.

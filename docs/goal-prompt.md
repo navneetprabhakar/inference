@@ -2,6 +2,10 @@
 
 Creator: Navneet Prabhakar
 
+## Current data-index prototype — 20 October 2026
+
+[Exact prefix-index prototype](prefix-near-prototype.md) passes nine focused tests and a separate complete read-only audit of 4,096 selected source records / 5,820 raw facets / 7,368 candidate comparisons. Actual sample has no qualifying near pairs; positive-match coverage is synthetic. Original inefficient-audit benchmark remains interrupted and retained. No exact build-throughput or full-corpus claim. Next freeze a larger measured bounded preflight before a complete full-source join, component/flag audit, split and finite admission. No student update, additional teacher request or cloud resource; all prior budgets and immutable artifacts remain binding.
+
 ## Current teacher milestone — 20 October2026
 
 The user authorizes **only20additional CLI calls**, not the proposed200, and permits another good teacher if required. All20now complete with GPT-6.1 Sol; no substitution/API fallback/purchase/reset. Historical20plusnew20=40reserved, zero calls remain in the new allowance. [Actual pilot](english-teacher-pilot.md):182continuations/20semantic template families; all182automated checks/50exact oracles pass; full direct expert review gives180considerations/two pronoun-assumption exclusions.43focused tests and full20-capture/182-transcript reconstruction pass. A separate versioned host adapter exposes style in student input and masks every earlier assistant turn; teacher text is unchanged. Only2,890supervised targets exist among considerations; this is not broad English/SFT data, training admission or model improvement. Latest planning snapshot is configs/course-correction-v3.json; prior hashed planning/config/code artifacts remain intact.
