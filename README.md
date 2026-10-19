@@ -10,6 +10,8 @@ Latest: an actual [eight-turn conversation scores 0/100](docs/milestone-forty-th
 
 [Second-iteration candidate preparation](docs/milestone-forty-four.md) now retains 17,463 train dialogue paths after grouping and holdout protection. Existing-tokenizer sizing counts 6.28M content tokens once per raw train node; these are still unadmitted candidates. Actual review of 20 sampled train paths yields six suitable for research consideration, nine excluded and five unresolved. Corpus admission and representative tokenizer selection come next.
 
+Latest [sample review and screening diagnosis](docs/milestone-forty-five.md): all 74 sampled OASST paths plus three mixed-group references have been read. The proposed screen is not admitted: its per-window language cutoff rejects observed valid short/informal English and leaves only 2.69M raw-node content tokens in train. Calibrate language handling and expand foundation data before the next training freeze.
+
 
 - Independent FP32 MLX and PyTorch implementations of a pre-norm decoder Transformer.
 - Shared NumPy initialization and canonical parameter names; adjacent-pair RoPE, GQA, SwiGLU, RMSNorm, tied input/output embedding.
