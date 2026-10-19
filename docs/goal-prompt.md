@@ -2,6 +2,12 @@
 
 Creator: Navneet Prabhakar
 
+## Current teacher milestone — 20 October2026
+
+The user authorizes **only20additional CLI calls**, not the proposed200, and permits another good teacher if required. All20now complete with GPT-6.1 Sol; no substitution/API fallback/purchase/reset. Historical20plusnew20=40reserved, zero calls remain in the new allowance. [Actual pilot](english-teacher-pilot.md):182continuations/20semantic template families; all182automated checks/50exact oracles pass; full direct expert review gives180considerations/two pronoun-assumption exclusions.43focused tests and full20-capture/182-transcript reconstruction pass. A separate versioned host adapter exposes style in student input and masks every earlier assistant turn; teacher text is unchanged. Only2,890supervised targets exist among considerations; this is not broad English/SFT data, training admission or model improvement. Latest planning snapshot is configs/course-correction-v3.json; prior hashed planning/config/code artifacts remain intact.
+
+Next prioritize scalable protected-family grouping, finite prose admission and the frozen learning/resource/useful-portability contract for substantial language continuation. Do not launch another tiny memorization run or collect more teacher templates. Applicable teacher source/account evidence and finite release admission remain open. USD50/100Mphysicalpositions/oneL4/45VMhours and2Mpreliminary+78Mlanguage+20MconditionalSFT reservations remain unchanged. Student still0/100on the last actual evaluation; no new gradient, CUDA claim or GCP resource. Full English/styles/content/tools/MCP/portability/ESCI objective remains unfinished. Historical pending teacher-allowance/access statements below are superseded by this section.
+
 ## Current course correction — 19 October 2026
 
 The latest user request requires fresh100-conversation assessment, complete message/response display, in-depth diagnosis, **GPT-6.1 Sol through saved-auth Codex CLI** as the English teacher, followed by measurable training/assessment/correction cycles until core English meets the good-score gate within authorized resources. [The current recovery plan](course-correction.md) governs execution priority and teacher selection; older Luna choices/live-job statements below are historical. Preserve all failed results and immutable runtime/data contracts.

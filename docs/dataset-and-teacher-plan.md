@@ -2,6 +2,8 @@
 
 Creator: Navneet Prabhakar
 
+**20 October2026update:** [The authorized20-call English teacher pilot](english-teacher-pilot.md) is complete:182candidate continuations,180direct quality considerations/two exclusions, only2,890supervised targets. GPT-6.1 Sol worked; an alternative good teacher is permitted if required but none was used. No further calls, training release or student improvement are authorized/implied by this result. Return to substantial language-learning readiness; configs/course-correction-v3.json records the latest planning state.
+
 **Current teacher decision (19 October 2026): GPT-6.1 Sol via saved-auth Codex CLI.** This supersedes historical Luna choices below. The old client rejected the model; isolated CLI0.163.0now yields one actual reviewed demonstration. No substitute model/API fallback or training approval; original20-request pilot exhausted. See [the current recovery curriculum and access evidence](course-correction.md). Larger teacher generation remains subject to a finite usage envelope and actual source/terms/category admission.
 
 Current source-review authority (19 October 2026): Navneet Prabhakar delegated expert review. [The first explicit release](milestone-thirty-seven.md) contains 42 SFW Dolly rows with human attestation false. Broader corpus admission remains separate; manual source-review exports are no longer a user-input prerequisite.
