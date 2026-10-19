@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 Date: 19 October 2026
 
+**Current override:** v2session39730 is terminal after an explicit cache repair; [v3/session30445](global-near-terminal-audit.md) is the active continuation. The launch snapshots below remain historical.
+
 - **The actual local job is running; near grouping is not complete.** The recorded launch snapshot covers 16,384 source records, 21,381 unique indexed facets and 10,750,063 full shingle occurrences. These are progress counters, not final corpus or capability results.
 - Preserve and poll tool session39730 and its specific parent/worker, recorded in `reports/global-near-launch.json`. Current state is under `data/global-near-facets-v2`. A transient observation timeout does not authorize restarting the job.
 - Original source/witness database and exact-plus-containment input roots remain immutable. The next terminal audit and component overlay must consume those inherited roots and all accepted near links before new splits or admission.
