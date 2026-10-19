@@ -6,7 +6,9 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Latest corpus progress:** [Bounded Cosmopedia intake](docs/cosmopedia-candidate-intake.md) publishes49,000rows /39.33Mstudent tokens;31,920rows /24.63Mtokens provisionally pass. All outputs pass the retained-evidence audit;52focused checks pass. An observed detector-control bug is fixed in a versioned continuation, with the failed1,000-row charge preserved. Global grouping/admission and the other language sources remain next; no new training or cloud spend.
+**Latest corpus progress:** [Distributed general-English intake](docs/general-and-narrative-corpus-progress.md) publishes48,000new FineWeb rows;41,721rows /40.57Mtokens provisionally pass. Together with Cosmopedia, the new provisional pool is65.20Mtoken occurrences before grouping. TinyStories source evidence is pinned; narrative rows, cross-source grouping and admission remain next. Fifty-five focused checks and full retained-output audits pass. No new training or cloud spend.
+
+[The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 
 **Intake prerequisites:** [Expanded isolation and accounting](docs/data-intake-isolation.md) protect364requests/119generated replies. The earlier metadata-only probe and41-check milestone are preserved as historical evidence.
 
