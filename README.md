@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
+**Current model capability: unchanged and failing.** [Fresh reassessment](docs/current-model-conversation-rerun.md): 0/100 conversations, 0/300 requested tasks, 7.6/100; all 300 fresh replies match the previous tokens exactly. Recent milestones are data engineering; no new student weights or capability improvement were produced.
+
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
 **Latest corpus progress:** [Full near-duplicate grouping is running locally](docs/global-near-grouping-launch.md) at the declared 0.85 Jaccard threshold. The recorded snapshot indexes 16,384 source records /10.75M full shingle occurrences. Explicit continuation reuses 7.52M committed features and fixes large-file hashing without resetting the original deadline. Twenty-eight focused tests pass. Terminal near audit, component propagation, splits and admission remain open; no new training or cloud spend.
