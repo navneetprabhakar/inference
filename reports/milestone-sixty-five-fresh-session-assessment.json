@@ -1,0 +1,249 @@
+{
+  "ablation_protocol_sha256": "93e542c56723a5d5b2ba8d25861dd18a0cbfc9c8667a0720e4ac3bba31d58668",
+  "ablation_summary": {
+    "actual_generated_tokens": 1007,
+    "creator": "Navneet Prabhakar",
+    "exact_cases": 12,
+    "exact_successes": 0,
+    "generations": 16,
+    "human_semantic_assessment_pending": true,
+    "prior_score_changed": false,
+    "protocol_sha256": "93e542c56723a5d5b2ba8d25861dd18a0cbfc9c8667a0720e4ac3bba31d58668",
+    "reservations_sha256": "61eab558868726db589b92236ba1d0b2a01d89631e22e5f6f34f287f2caa4858",
+    "responses_sha256": "03210edfc67de659c4d748fac8b9c8c4f062c82f18df7664bc626aa1feacdffb",
+    "scope": "New separately frozen post-hoc diagnostic. Remove only the initial system message, retaining all other fixture context. Semantic/exact task comparisons only; style instructions can change when removed. Original32-generationcap/results/5-score are unchanged; no gradients or training admission.",
+    "status": "complete",
+    "student": {
+      "architecture": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "binding_scope": "Explicit model-only/tokenizer pairing; vocabulary and supplied tokenizer hash checked, no inferred training provenance",
+      "decoding": "raw-cached-greedy-v1",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "inference_sha256": "f6da14241b5fe940e61a034b0ca0009d92f614d1dc3d79ccf9fefe179c36b4f5",
+      "model_manifest_sha256": "74959eed7e4de0e8e302117854e904ade65a91f68fe9c4f3d3d9b278af592ed1",
+      "tokenizer_manifest_sha256": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126"
+    }
+  },
+  "actual_generated_tokens": 5809,
+  "actual_generations": 48,
+  "checker_sha256": "f4eb2fbaf5759776bdcc9f097514745290e819e25abc831a50e5e1d0f3827dc0",
+  "conditional_reference_summary": {
+    "eos_after_end_probability_range": [
+      0.9952719489751279,
+      0.9999227623479519
+    ],
+    "first_content_greedy_matches": 3,
+    "first_content_rank_median": 79.0,
+    "message_end_greedy_matches": 1
+  },
+  "conditions": {
+    "with_system_256": {
+      "cases": 16,
+      "stop_reasons": {
+        "length": 13,
+        "message_end": 3
+      },
+      "task_successes": 0
+    },
+    "with_system_64": {
+      "cases": 16,
+      "stop_reasons": {
+        "length": 15,
+        "message_end": 1
+      },
+      "task_successes": 0
+    },
+    "without_system_64": {
+      "cases": 16,
+      "stop_reasons": {
+        "length": 15,
+        "message_end": 1
+      },
+      "task_successes": 0
+    }
+  },
+  "creator": "Navneet Prabhakar",
+  "direct_human_oracle_judgments": {
+    "all_48_complete_responses_read": true,
+    "creator": "Navneet Prabhakar",
+    "human_attestation": false,
+    "judgments": [
+      {
+        "budget": 64,
+        "case_id": "eval-v1/conversation/8/professional",
+        "condition": "with_system",
+        "reason": "Does not state Friday/date18,9:30 orQ25. Substitutes repetitive running/park/day advice for the requested corrected meeting confirmation.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 256,
+        "case_id": "eval-v1/conversation/8/professional",
+        "condition": "with_system",
+        "reason": "Does not state Friday/date18,9:30 orQ25. Substitutes repetitive running/park/day advice for the requested corrected meeting confirmation.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/conversation/9/casual",
+        "condition": "with_system",
+        "reason": "Does not state Friday/date19,10:30 orQ26. Repeats generic time/planning/language advice instead of preserving the corrected meeting facts.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 256,
+        "case_id": "eval-v1/conversation/9/casual",
+        "condition": "with_system",
+        "reason": "Does not state Friday/date19,10:30 orQ26. Repeats generic time/planning/language advice instead of preserving the corrected meeting facts.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/style_switch/8/professional",
+        "condition": "with_system",
+        "reason": "Does not preserve Friday/date18,9:30 orQ25 or produce the requested professional confirmation; unrelated day/walk advice dominates.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 256,
+        "case_id": "eval-v1/style_switch/8/professional",
+        "condition": "with_system",
+        "reason": "Does not preserve Friday/date18,9:30 orQ25 or produce the requested professional confirmation; unrelated day/walk advice dominates.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/style_switch/9/caveman",
+        "condition": "with_system",
+        "reason": "Does not preserve Friday/date19,10:30 orQ26. Short but semantically unrelated text about days/walks does not satisfy the caveman-style rewrite task.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 256,
+        "case_id": "eval-v1/style_switch/9/caveman",
+        "condition": "with_system",
+        "reason": "Does not preserve Friday/date19,10:30 orQ26. Short but semantically unrelated text about days/walks does not satisfy the caveman-style rewrite task.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/conversation/8/professional",
+        "condition": "without_system",
+        "reason": "Uses time-traveler/number-loop/walk/learning prose and omits the requested corrected date, time and room. Removing the system message does not recover the semantic task; no style-isolation claim.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/conversation/9/casual",
+        "condition": "without_system",
+        "reason": "Uses time-traveler/number-loop/walk/learning prose and omits the requested corrected date, time and room. Removing the system message does not recover the semantic task; no style-isolation claim.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/style_switch/8/professional",
+        "condition": "without_system",
+        "reason": "Uses time-traveler/number-loop/walk/learning prose and omits the requested corrected date, time and room. Removing the system message does not recover the semantic task; no style-isolation claim.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      },
+      {
+        "budget": 64,
+        "case_id": "eval-v1/style_switch/9/caveman",
+        "condition": "without_system",
+        "reason": "Uses time-traveler/number-loop/walk/learning prose and omits the requested corrected date, time and room. Removing the system message does not recover the semantic task; no style-isolation claim.",
+        "required_facts_preserved": false,
+        "task_succeeded": false
+      }
+    ],
+    "limitations": "Four human-oracle scenario templates per condition, not an independent broad benchmark. Other12cases use reviewed exact strip-only oracles. Synthetic fixture assistant turns are supplied context, not generated history. Bare-context ablation changes/removes style instruction; only semantic/exact task recovery is compared. This does not identify a training root cause, prove arbitrary family-level decontamination, or alter prior5/100.",
+    "review_mode": "delegated_expert",
+    "training_approved": false
+  },
+  "interpretation": "All16tasksfailatbothbudgets;removingsystemmessagealso0of16. Fresh-request failures persist outside the erroneous interview history; longer budget/removing system alone does not recover tasks on these cases. Conditional EOS-after-end is learned strongly, but content choice and message-end probabilities remain weak. No training root cause or population rate established; exact contexts/IDs protected, arbitrary paraphrase contamination not certified.",
+  "judgment_sha256": "1729d86a698cfec12b051ddc8c5c72c53e70ea2d7d8199f38708b3b275b1b467",
+  "kind": "actual-fresh-session-diagnostic-assessment-v1",
+  "new_training_updates": 0,
+  "prior_conversation_score": 5,
+  "prior_score_changed": false,
+  "protocol_sha256": "72fc96b22967531bfc0f2688b9b100bcf34358a31a4c7ac86c11dcf7cbf49886",
+  "source_summary": {
+    "actual_generated_tokens": 4802,
+    "cases": 16,
+    "creator": "Navneet Prabhakar",
+    "exact_oracle_cases": 12,
+    "exact_success_by_budget": {
+      "256": 0,
+      "64": 0
+    },
+    "files_sha256": {
+      "references.jsonl": "1e4756f50e3b48bf50cbcfba3e4a3f233ce53f9da6caf11d3209815889beb0ef",
+      "reservations.jsonl": "7dc3bcd2b3b8ae4e51adb388fa060d4625b934391f61d389ec214cad305dbf16",
+      "responses.jsonl": "cadb61af981e96eb61f024e8f50abb24edac40dfafcdf5af83b0847bbaacce1a",
+      "session.json": "662cd8ed2732b57cf3706984e5535bd881b345bc47bedf9e62c49450e349585e"
+    },
+    "generations": 32,
+    "human_oracle_assessment_pending": true,
+    "prior_conversation_score": 5,
+    "prior_score_changed": false,
+    "protocol_sha256": "72fc96b22967531bfc0f2688b9b100bcf34358a31a4c7ac86c11dcf7cbf49886",
+    "reserved_max_tokens": 5120,
+    "scope": "Fresh-session diagnostics only. Protected16scenarios/eightparameterizedfamilies, not population accuracy or evidence that training caused differences. Forced reference likelihood is separate from generation success.",
+    "status": "complete",
+    "student": {
+      "architecture": {
+        "hidden_size": 512,
+        "intermediate_size": 1536,
+        "max_seq_len": 2048,
+        "norm_eps": 1e-05,
+        "num_heads": 8,
+        "num_kv_heads": 2,
+        "num_layers": 24,
+        "rope_theta": 10000.0,
+        "vocab_size": 16384
+      },
+      "backend_sha256": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+      "binding_scope": "Explicit model-only/tokenizer pairing; vocabulary and supplied tokenizer hash checked, no inferred training provenance",
+      "decoding": "raw-cached-greedy-v1",
+      "embedding_implementation": "dense-onehot-v1",
+      "environment": {
+        "backend": "mlx",
+        "device": "Device(gpu, 0)",
+        "hardware": "arm64",
+        "platform": "macOS-26.4.1-arm64-arm-64bit",
+        "python": "3.12.11",
+        "version": "0.32.4"
+      },
+      "inference_sha256": "f6da14241b5fe940e61a034b0ca0009d92f614d1dc3d79ccf9fefe179c36b4f5",
+      "model_manifest_sha256": "74959eed7e4de0e8e302117854e904ade65a91f68fe9c4f3d3d9b278af592ed1",
+      "tokenizer_manifest_sha256": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126"
+    }
+  }
+}

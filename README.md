@@ -6,6 +6,8 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md) completed **475 updates /800,130 positions** on the 81M foundation checkpoint. Assistant validation NLL improves **4.649 →4.463**, but its actual eight-turn conversation still completes **0/8 tasks**, scoring **5/100** with dominant repetition and ignored requests. The model remains unsuitable as a conversational assistant. The [next-iteration plan](docs/iteration-four-plan.md) starts with fresh-session diagnostics and a small reviewed learning control before another broad run.
 
+[Fresh-session diagnostics](docs/milestone-sixty-five.md) also fail **0/16 tasks** at 64 tokens, 256 tokens and after system-message removal. All 48 raw replies are retained. Conditional EOS-after-end is strong, but correct content/early termination remain weak. Next is a bounded fitting control using the existing 12 individually reviewed train rows, rather than another broad run or new research reader.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.

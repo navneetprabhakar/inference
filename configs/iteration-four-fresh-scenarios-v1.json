@@ -1,0 +1,574 @@
+{
+  "budgets": [
+    64,
+    256
+  ],
+  "cases": [
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/stopping",
+      "id": "eval-v1/stopping/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Return exactly Q25, without explanation, punctuation or additional lines.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "Q25"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "Q25",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/stopping/8",
+      "slice": "stopping",
+      "source_case_sha256": "3f4fceb900a775c8be9a9f789e66c85007ff3c6e4b7113ffc6b6db471b0825e1",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/stopping",
+      "id": "eval-v1/stopping/9/terse",
+      "messages": [
+        {
+          "content": "Use terse style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Return exactly Q26, without explanation, punctuation or additional lines.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "Q26"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "Q26",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/stopping/9",
+      "slice": "stopping",
+      "source_case_sha256": "bed6e10f8bb4ee6f67c4cce2d2d8a6b9b15fc895c3971633649087ff050f578e",
+      "style": "terse"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/reference",
+      "id": "eval-v1/reference/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Options in order: A8, B8, C8.",
+          "role": "user"
+        },
+        {
+          "content": "I have the three options.",
+          "role": "assistant"
+        },
+        {
+          "content": "Choose the second option. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "B8"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "B8",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/reference/8",
+      "slice": "reference",
+      "source_case_sha256": "5184a168b619b859139008caa57857623930c8bf0fa9569db8ac696a9c2c9784",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/reference",
+      "id": "eval-v1/reference/9/casual",
+      "messages": [
+        {
+          "content": "Use casual style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Options in order: A9, B9, C9.",
+          "role": "user"
+        },
+        {
+          "content": "I have the three options.",
+          "role": "assistant"
+        },
+        {
+          "content": "Choose the second option. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "B9"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "B9",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/reference/9",
+      "slice": "reference",
+      "source_case_sha256": "3e5e5f12b88713f0f7bec4f8dc38b142b8da0d392d7eae72fc35583879171749",
+      "style": "casual"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/correction",
+      "id": "eval-v1/correction/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "I need 7 units at 289 minor currency units each.",
+          "role": "user"
+        },
+        {
+          "content": "The total is 2023 minor currency units.",
+          "role": "assistant"
+        },
+        {
+          "content": "Actually, make it 2 units; keep the unit price. Return only the numeric total.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "578"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "578",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/correction/8",
+      "slice": "correction",
+      "source_case_sha256": "4b359d41999fe5c9933bd6a5ed19b3b80f5bd4960e23b8c3843e041316f839c9",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/correction",
+      "id": "eval-v1/correction/9/terse",
+      "messages": [
+        {
+          "content": "Use terse style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "I need 7 units at 308 minor currency units each.",
+          "role": "user"
+        },
+        {
+          "content": "The total is 2156 minor currency units.",
+          "role": "assistant"
+        },
+        {
+          "content": "Actually, make it 3 units; keep the unit price. Return only the numeric total.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "924"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "924",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/correction/9",
+      "slice": "correction",
+      "source_case_sha256": "554914b748b359f1526a5eab38d2a58576393cb5f597768279f02e65966ac21e",
+      "style": "terse"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/quantity",
+      "id": "eval-v1/quantity/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "There are 2 boxes, each with 11 bottles. Return only the total number of bottles.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "22"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "22",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/quantity/8",
+      "slice": "quantity",
+      "source_case_sha256": "b46ac1f27edfc947e7e9c73e9ab8698708f9f03ef4c0d8f91eb143b65d4d74ec",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/quantity",
+      "id": "eval-v1/quantity/9/terse",
+      "messages": [
+        {
+          "content": "Use terse style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "There are 3 boxes, each with 12 bottles. Return only the total number of bottles.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "36"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "36",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/quantity/9",
+      "slice": "quantity",
+      "source_case_sha256": "454f320d32be1438050c5c0b613469993f792236e4900e8462a88b953417cbb9",
+      "style": "terse"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/negation",
+      "id": "eval-v1/negation/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Item R8 is red. Item G8 is green. Select the item that is not red. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "G8"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "G8",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/negation/8",
+      "slice": "negation",
+      "source_case_sha256": "575419ab3111c8f02388b1f0b85148c16fcb2ab8bd2b78d797cc27b6a34512ef",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/negation",
+      "id": "eval-v1/negation/9/casual",
+      "messages": [
+        {
+          "content": "Use casual style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Item R9 is red. Item G9 is green. Select the item that is not red. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "G9"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "G9",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/negation/9",
+      "slice": "negation",
+      "source_case_sha256": "cafaa5ef61aa22a3b5daa2fa331ab238f686102d8d19a398f112184843402ca6",
+      "style": "casual"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/constraints",
+      "id": "eval-v1/constraints/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Candidates: X8, black, price 289; Y8, white, price 288; Z8, black, price 389. Select black and price at most 289. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "X8"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "X8",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/constraints/8",
+      "slice": "constraints",
+      "source_case_sha256": "ce773ea7d446aea4787940c1df28fbb7a783443294c48cf8bca850e793d26d56",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/constraints",
+      "id": "eval-v1/constraints/9/terse",
+      "messages": [
+        {
+          "content": "Use terse style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Candidates: X9, black, price 308; Y9, white, price 307; Z9, black, price 408. Select black and price at most 308. Return only its ID.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "accepted": [
+          "X9"
+        ],
+        "kind": "exact",
+        "normalization": "strip-only"
+      },
+      "reference": "X9",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/constraints/9",
+      "slice": "constraints",
+      "source_case_sha256": "2245755637633bfaab786f3923a90a6d6870809b457c257ce173a6b9def878c2",
+      "style": "terse"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/conversation",
+      "id": "eval-v1/conversation/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Meeting is Tuesday at 9:30, room Q25.",
+          "role": "user"
+        },
+        {
+          "content": "The meeting is scheduled for Tuesday.",
+          "role": "assistant"
+        },
+        {
+          "content": "Change it to Friday, date 18. Keep the time and room. Confirm all final details.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "kind": "human",
+        "required_facts": {
+          "day": "Friday, date 18",
+          "room": "Q25",
+          "time": "9:30"
+        },
+        "rubric": [
+          "instruction",
+          "meaning",
+          "style",
+          "sfw",
+          "stopping"
+        ]
+      },
+      "reference": "The meeting is now Friday, date 18 at 9:30 in room Q25.",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/conversation/8",
+      "slice": "conversation",
+      "source_case_sha256": "8e7cec8289edad0bcc2568264ace8a04a849d9218e7b6d1e1bdc889be04d037d",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/conversation",
+      "id": "eval-v1/conversation/9/casual",
+      "messages": [
+        {
+          "content": "Use casual style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Meeting is Tuesday at 10:30, room Q26.",
+          "role": "user"
+        },
+        {
+          "content": "The meeting is scheduled for Tuesday.",
+          "role": "assistant"
+        },
+        {
+          "content": "Change it to Friday, date 19. Keep the time and room. Confirm all final details.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "kind": "human",
+        "required_facts": {
+          "day": "Friday, date 19",
+          "room": "Q26",
+          "time": "10:30"
+        },
+        "rubric": [
+          "instruction",
+          "meaning",
+          "style",
+          "sfw",
+          "stopping"
+        ]
+      },
+      "reference": "The meeting is now Friday, date 19 at 10:30 in room Q26.",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/conversation/9",
+      "slice": "conversation",
+      "source_case_sha256": "7a143fd5b4aebb4d1171d83e46c67fd55a66b1882dd1fb8e9a9340331beb7d74",
+      "style": "casual"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/style_switch",
+      "id": "eval-v1/style_switch/8/professional",
+      "messages": [
+        {
+          "content": "Use professional style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Meeting is Tuesday at 9:30, room Q25.",
+          "role": "user"
+        },
+        {
+          "content": "Me remember meeting. Tuesday. Same room.",
+          "role": "assistant"
+        },
+        {
+          "content": "Change it to Friday, date 18. Keep the time and room. Confirm all final details. Switch to professional style now.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "kind": "human",
+        "required_facts": {
+          "day": "Friday, date 18",
+          "room": "Q25",
+          "time": "9:30"
+        },
+        "rubric": [
+          "instruction",
+          "meaning",
+          "style",
+          "sfw",
+          "stopping"
+        ]
+      },
+      "reference": "The meeting is now Friday, date 18 at 9:30 in room Q25.",
+      "reference_note": "Original supplied reference retained; not the only possible successful wording for human-oracle cases.",
+      "scenario_id": "eval-v1/style_switch/8",
+      "slice": "style_switch",
+      "source_case_sha256": "e3b38137541cd4e6374f0c8f8de115a2a36523f2c26f6c34adc042292111b8d9",
+      "style": "professional"
+    },
+    {
+      "content_category": "sfw",
+      "family_id": "eval-v1/style_switch",
+      "id": "eval-v1/style_switch/9/caveman",
+      "messages": [
+        {
+          "content": "Use caveman style and SFW language. Follow any exact output format requested by the user.",
+          "role": "system"
+        },
+        {
+          "content": "Meeting is Tuesday at 10:30, room Q26.",
+          "role": "user"
+        },
+        {
+          "content": "Me remember meeting. Tuesday. Same room.",
+          "role": "assistant"
+        },
+        {
+          "content": "Change it to Friday, date 19. Keep the time and room. Confirm all final details. Switch to caveman style now.",
+          "role": "user"
+        }
+      ],
+      "oracle": {
+        "kind": "human",
+        "required_facts": {
+          "day": "Friday, date 19",
+          "room": "Q26",
+          "time": "10:30"
+        },
+        "rubric": [
+          "instruction",
+          "meaning",
+          "style",
+          "sfw",
+          "stopping"
+        ]
+      },
+      "reference": "Me remember. Meeting Friday, date 19. 10:30. Room Q26.",
+      "reference_note": "A manually specified terse caveman-style reference preserving every required fact. Original protected context and source case hash remain unchanged; likelihood is only for this one reference.",
+      "scenario_id": "eval-v1/style_switch/9",
+      "slice": "style_switch",
+      "source_case_sha256": "9f00a1e89b254079d7b0f79b7132736746e7d6b869b70f4971da10e1c94540d2",
+      "style": "caveman"
+    }
+  ],
+  "creator": "Navneet Prabhakar",
+  "kind": "iteration-four-fresh-session-candidates-v1",
+  "max_generated_tokens": 5120,
+  "max_generations": 32,
+  "review": {
+    "creator": "Navneet Prabhakar",
+    "full_contexts_and_references_read": true,
+    "human_attestation": false,
+    "limitations": "Sixteen parameterized synthetic scenarios, eight families; system-style instructions and supplied assistant turns are synthetic fixture context, not actual generated history or repairs. No broad benchmark validation or factual gold beyond these simple explicit constraints. No training approval.",
+    "reference_checks": [
+      "Q25/Q26 and second-option B8/B9 match explicit requests.",
+      "Corrected totals independently checked:2*289=578 and3*308=924; supplied prior totals7*289=2023 and7*308=2156 also match.",
+      "Bottle counts2*11=22 and3*12=36; non-red options G8/G9; price/color conjunction selects X8/X9.",
+      "All four meeting references preserve the changed Friday/date plus original time and room; fictional supplied dates do not assert real calendar weekdays.",
+      "Caveman-style reference is one manually specified terse wording, not a unique style oracle."
+    ],
+    "review_mode": "delegated_expert"
+  },
+  "review_status": "direct_references_reviewed_for_diagnostic_only",
+  "scope": "Fresh sessions on the completed SFT endpoint, using previously reserved contexts. No claim that all historical models have never seen these diagnostic cases; no training admission or replacement of the eight-turn score.",
+  "source_suite": "english-candidates-v1",
+  "version": 1
+}
