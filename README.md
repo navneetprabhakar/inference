@@ -6,6 +6,8 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 Current: the [second local foundation iteration](docs/milestone-fifty-two.md) completed **9,984 updates / 10.22M positions** from random initialization. Frozen held-out foundation NLL improves **9.7671 → 5.0423**, but its actual eight-turn conversation completes **0/8 tasks**, scoring **5/100** for limited grammatical coherence only. The previous iteration scored 0/100. This model is not a useful conversational assistant yet.
 
+The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
