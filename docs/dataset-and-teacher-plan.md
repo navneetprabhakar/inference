@@ -206,3 +206,8 @@ The [v3 style contract and diagnostics](milestone-twenty-eight.md) now define al
 
 
 The [teacher-capable review console](milestone-twenty-nine.md) is verified through synthetic DOM/Blob/Python-publisher controls. It displays continuation boundaries and legacy reply warnings, binds teacher-specific field sets to frozen receipts, and refuses missing gates or controlled-content relabeling. Actual teacher rendering still needs actual source/account evidence; none was invented for the fourteen cached candidates. The actual forty-example public packet remains unchanged and unapproved. Real browser layout/download verification and real language pilots remain open.
+
+
+### Independent source-expansion audit — 19 October 2026
+
+[Milestone seventy-two](milestone-seventy-two.md) audits pinned `wikimedia/wikipedia` /`20231101.en` as an additional candidate outside the proposed foundation quotas above. It is not admitted: 16 complete length-conditioned records yield seven considerations, seven extraction/selection exclusions and two deferrals. Missing numeric/template/table content and sparse stubs need source-specific controls; title/URL/article ID/snapshot/attribution context must survive any future adapter. The card's 3.0/GFDL declarations and current official 4.0/GFDL guide are both retained for reconciliation. No source share, student state or teacher rule changes. Compare additional explanatory/narrative sources before freezing the larger learning population.
