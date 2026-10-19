@@ -6,7 +6,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.
 
-**Latest corpus progress:** [Narrative screening and measured supply](docs/narrative-quality-and-supply.md): 80,051 stories /17.00M tokens provisionally pass; all 318 validation overlaps and three reviewed nonapprovals are blocked. General prose, textbook-format explanatory text and narratives supply 80.06M token occurrences before global grouping. All 81,703 story decisions are checked; ten focused tests pass. Global grouping, finite admission and the realized mixture remain next. No new training or cloud spend.
+**Latest corpus progress:** [Global exact-family consolidation](docs/global-exact-family-grouping.md) groups 235,779 source/witness records into 229,606 components. Two missing ancestral Dolly witnesses are recovered from original local data; all 2,862 protected families are represented. One additional provisional candidate joins a rejected component. Four tests and the full exact-component audit pass. Near-duplicate/seed-containment checks, new splits and finite admission remain next. No new training or cloud spend.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 
