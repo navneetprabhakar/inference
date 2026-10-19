@@ -62,3 +62,6 @@ Start with the portability prototype and data audit. Do not start a large pretra
 - [Compact exact-shingle storage and comparison](milestone-thirty-six.md)
 
 - [Accepted portability and delegated source review](milestone-thirty-seven.md)
+
+- [Reference-passage foundation candidates](milestone-thirty-eight.md)
+- [Context extraction and grouping contract](context-prose-candidates.md)

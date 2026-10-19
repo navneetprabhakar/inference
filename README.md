@@ -107,3 +107,5 @@ The [non-admitting quality audit](docs/milestone-thirty-four.md) now measures fu
 [Complete small-source preparation](docs/milestone-thirty-five.md) now includes all pinned Dolly records within a 24 MiB acquisition cap, preserving previous heldouts and producing a new 287-row whole-group review bundle. The 15,692-row combined population remains sample-only; actual source review, corpus admission and real training are still open.
 
 [Exact-shingle storage compaction](docs/milestone-thirty-six.md) cuts measured main DB allocation by 52% and wall time by 26% on the complete-source workload, preserving every non-report payload byte. This is one local comparison; existing source reviews and model acceptance gates remain open.
+
+[Reference-only foundation candidates](docs/milestone-thirty-eight.md) now retain 2,314 train passages after fresh grouping and heldout protection, with no Dolly answer targets. The derivative is still sample-only; bounded research admission and real token/model runs are next.

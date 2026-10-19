@@ -1,0 +1,739 @@
+{
+  "actual_source_or_row_approvals": 0,
+  "candidate_extraction": {
+    "answer_targets_retained": 0,
+    "candidate_identity_sha256": "09970e8bda55da1630c4a70c7707edec0d5dcb0f0d1eba46dcd5ce3430340bcd",
+    "candidate_records": 3165,
+    "candidates_sha256": "f79650ba014bcfac26b7cee161f414546e2f3eafa243530ce4cde51c4f009dc9",
+    "characters": {
+      "test": 274496,
+      "train": 3691712,
+      "validation": 213905
+    },
+    "exclusions": {
+      "boilerplate_attention": 85,
+      "function_word_proxy": 10,
+      "missing_or_ambiguous_context": 10534,
+      "other_source": 701,
+      "repeated_lines": 2,
+      "scope_attention": 186,
+      "script_proxy": 8,
+      "url_attention": 1,
+      "word_count": 1000
+    },
+    "implementation_sha256": "cd825a4dba3747b4bf6f9a75e98ce2f2cc2d127afce29ccde2c84641516c2fde",
+    "input_records": 15692,
+    "parent_manifest_sha256": "1c50b116a72202c6ed8c10eb41a1a4b3ce411f4d308c713f0a3d1c804558e730",
+    "policy_sha256": "cd11c30efb6ec86f0fbbf40433a25cceae413dabb6d73ae8171521b20eee6bea",
+    "scope": "sample_only",
+    "source_or_row_approvals": 0,
+    "splits": {
+      "test": 180,
+      "train": 2817,
+      "validation": 168
+    },
+    "training_eligible": false,
+    "version": 1
+  },
+  "cloud_jobs": 0,
+  "creator": "Navneet Prabhakar",
+  "derived_characters": {
+    "test": 378929,
+    "train": 2891329,
+    "validation": 364767
+  },
+  "derived_retained": 2900,
+  "derived_splits": {
+    "test": 303,
+    "train": 2314,
+    "validation": 283
+  },
+  "frozen_original_heldout_rows": 1651,
+  "implementation_sha256": "cd825a4dba3747b4bf6f9a75e98ce2f2cc2d127afce29ccde2c84641516c2fde",
+  "limitation": "Derived passages still sample-only; new grouping, detector observations and lexical screening do not establish training admission or corpus quality.",
+  "neural_updates": 0,
+  "new_teacher_launches": 0,
+  "parent_manifest_sha256": "1c50b116a72202c6ed8c10eb41a1a4b3ce411f4d308c713f0a3d1c804558e730",
+  "policy_sha256": "eb373616315c8c310a9f4d3b6ffb05ee52ab577d6756065e072c9943d0a01ece",
+  "quality": {
+    "attention_records": {
+      "incomplete_top_k": 2,
+      "non_english_top_window": 49,
+      "privacy_candidate": 1,
+      "unscored_window": 8
+    },
+    "groups": 4103,
+    "groups_per_stratum": 3,
+    "human_approvals": 0,
+    "kind": "non-admitting-quality-audit-v1",
+    "limits": {
+      "detector_seconds": 30,
+      "max_db_bytes": 536870912,
+      "max_detector_output_bytes": 16777216,
+      "max_input_bytes": 67108864,
+      "max_record_bytes": 1048576,
+      "max_records": 20000,
+      "max_sample_records": 2000,
+      "max_strata": 1024,
+      "max_windows": 50000
+    },
+    "peak_database_allocated_bytes": 27209728,
+    "privacy_candidate_occurrences": {
+      "ipv4_literal_candidate": 1
+    },
+    "records": 4551,
+    "release": "sample_only",
+    "sampled_groups": 71,
+    "sampled_records": 107,
+    "sampling": "Seeded bottom-k split groups per group-level stratum; full selected groups, clustered rows, conditional on this frozen input only.",
+    "scope": "Signals and sampling only. No calibrated language/PII/content/quality acceptance; no corpus admission or upstream representativeness claim.",
+    "seed": "context-prose-audit-20261019-v1",
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": {
+        "attention_records": {},
+        "groups": 18,
+        "records": 18,
+        "sampled_records": 12
+      },
+      "HuggingFaceH4/ultrachat_200k": {
+        "attention_records": {
+          "non_english_top_window": 1
+        },
+        "groups": 22,
+        "records": 22,
+        "sampled_records": 6
+      },
+      "OpenAssistant/oasst2": {
+        "attention_records": {
+          "non_english_top_window": 1
+        },
+        "groups": 9,
+        "records": 39,
+        "sampled_records": 20
+      },
+      "databricks/databricks-dolly-15k": {
+        "attention_records": {
+          "incomplete_top_k": 2,
+          "non_english_top_window": 47,
+          "privacy_candidate": 1,
+          "unscored_window": 8
+        },
+        "groups": 4054,
+        "records": 4472,
+        "sampled_records": 69
+      }
+    },
+    "strata": [
+      {
+        "groups": 4,
+        "inclusion_probability": 0.75,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.6,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 5,
+        "inclusion_probability": 0.6,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 4,
+        "inclusion_probability": 0.75,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceFW/fineweb-edu"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 12,
+        "inclusion_probability": 0.25,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 10,
+        "inclusion_probability": 0.3,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "HuggingFaceH4/ultrachat_200k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 7,
+        "inclusion_probability": 0.42857142857142855,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 2,
+        "inclusion_probability": 1.0,
+        "sampled_groups": 2,
+        "stratum": [
+          [
+            "single",
+            "OpenAssistant/oasst2"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 33,
+        "inclusion_probability": 0.09090909090909091,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 126,
+        "inclusion_probability": 0.023809523809523808,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 35,
+        "inclusion_probability": 0.08571428571428572,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 118,
+        "inclusion_probability": 0.025423728813559324,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "mixed"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 19,
+        "inclusion_probability": 0.15789473684210525,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 354,
+        "inclusion_probability": 0.00847457627118644,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 251,
+        "inclusion_probability": 0.01195219123505976,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 16,
+        "inclusion_probability": 0.1875,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 331,
+        "inclusion_probability": 0.00906344410876133,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 219,
+        "inclusion_probability": 0.0136986301369863,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "conversation"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "short_0_255"
+        ]
+      },
+      {
+        "groups": 19,
+        "inclusion_probability": 0.15789473684210525,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 122,
+        "inclusion_probability": 0.02459016393442623,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "test",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 270,
+        "inclusion_probability": 0.011111111111111112,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 2014,
+        "inclusion_probability": 0.0014895729890764648,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "train",
+          "medium_256_2047"
+        ]
+      },
+      {
+        "groups": 15,
+        "inclusion_probability": 0.2,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "long_2048_plus"
+        ]
+      },
+      {
+        "groups": 112,
+        "inclusion_probability": 0.026785714285714284,
+        "sampled_groups": 3,
+        "stratum": [
+          [
+            "single",
+            "databricks/databricks-dolly-15k"
+          ],
+          [
+            "single",
+            "prose"
+          ],
+          [
+            "single",
+            "unreviewed"
+          ],
+          "validation",
+          "medium_256_2047"
+        ]
+      }
+    ],
+    "top_language_window_counts": {
+      "ca": 3,
+      "cs": 1,
+      "de": 6,
+      "en": 6932,
+      "eo": 3,
+      "es": 7,
+      "eu": 1,
+      "fr": 8,
+      "hu": 2,
+      "it": 8,
+      "la": 2,
+      "nl": 3,
+      "no": 1,
+      "pl": 1,
+      "pt": 2,
+      "ru": 1,
+      "war": 1,
+      "zh": 1
+    },
+    "training_eligible": false,
+    "window_characters": 2048,
+    "windows": 6991
+  },
+  "retained_derived_heldouts_protected": 314,
+  "script_sha256": "7af73b099649a39b9d4b4c3ea9c633649adb49eb77119136914b8f43edfa3d7d",
+  "stage_wall_seconds": 124.52809549996164,
+  "staged_manifest_sha256": "5a7b0f75378dad39c1747e400ad91f6c3405feda2a4acf2147c3e8ccda275c73",
+  "staging": {
+    "candidate_comparisons": 1332,
+    "candidate_lookup_plan": [
+      [
+        7,
+        0,
+        55,
+        "SEARCH mine USING COVERING INDEX prefix_record (sid=? AND kind=?)"
+      ],
+      [
+        15,
+        0,
+        55,
+        "SEARCH p USING PRIMARY KEY (kind=? AND fid=?)"
+      ],
+      [
+        22,
+        0,
+        45,
+        "SEARCH r USING INTEGER PRIMARY KEY (rowid=?)"
+      ],
+      [
+        30,
+        0,
+        45,
+        "SEARCH c USING PRIMARY KEY (sid=? AND kind=?)"
+      ],
+      [
+        56,
+        0,
+        0,
+        "USE TEMP B-TREE FOR DISTINCT"
+      ]
+    ],
+    "content_categories": {
+      "unreviewed": 4551
+    },
+    "exact_duplicates_removed": 265,
+    "feature_storage": "interned-sha256-postings-v1",
+    "frozen_dataset_manifest_sha256": "1c50b116a72202c6ed8c10eb41a1a4b3ce411f4d308c713f0a3d1c804558e730",
+    "input_bytes": 8875594,
+    "input_examples": 4816,
+    "language_labels": {
+      "en": 57,
+      "unknown": 4494
+    },
+    "limits": {
+      "max_db_bytes": 1073741824,
+      "max_input_bytes": 67108864,
+      "max_pair_checks": 2000000,
+      "max_record_bytes": 1048576,
+      "max_records": 20000,
+      "max_shingles": 100000
+    },
+    "max_shared_message_exposure": 8,
+    "near_pairs_grouped": 1177,
+    "peak_database_allocated_bytes": 141586432,
+    "peak_record_scratch_database_bytes": 118784,
+    "rejections": {},
+    "release": "sample_only",
+    "retained_examples": 4551,
+    "scope": "Local JSONL staging only; exact hash-shingle Jaccard groups, bounded metadata, no semantic/English/rights clearance or corpus admission.",
+    "signature_memberships": 1228930,
+    "source_rights_approved": false,
+    "sources": {
+      "HuggingFaceFW/fineweb-edu": 18,
+      "HuggingFaceH4/ultrachat_200k": 22,
+      "OpenAssistant/oasst2": 39,
+      "databricks/databricks-dolly-15k": 4472
+    },
+    "split_seed": "slm-splits-v1",
+    "splits": {
+      "test": 1145,
+      "train": 2314,
+      "validation": 1092
+    },
+    "staging": "sqlite-exact-prefix-jaccard-v1",
+    "training_eligible": false,
+    "unique_shingle_hashes": 840308,
+    "version": 1
+  },
+  "training_reader_refusal": "Reviewed training release required; sample-only data is refused"
+}

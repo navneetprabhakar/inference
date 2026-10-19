@@ -83,7 +83,18 @@ def audit(output):
         if any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=='main' for n in tree.body):mains.append(str(path))
     pilot_main_found=Path('src/slm/train.py').is_file() and 'src/slm/train.py' in mains
     assert not any('def main(' in Path(p).read_text() for p in ('src/slm/common/training.py','src/slm/common/curriculum.py'))
-    test_path=Path('reports/milestone-thirty-seven-tests.xml')
+    context_candidates=read('reports/milestone-thirty-eight-context-candidates.json')
+    context_review=read('reports/milestone-thirty-eight-context-review.json')
+    assert context_review['human_attestation'] is False and context_review['complete_passages_inspected']==10 and context_review['new_training_approvals']==0
+    assert context_review['quality_manifest_sha256']==sha('data/context-prose-candidates-v1/quality/manifest.json')
+    context_root=Path('data/context-prose-candidates-v1/staged');verify(context_root)
+    assert sha(context_root/'manifest.json')==context_candidates['staged_manifest_sha256']
+    assert context_candidates['actual_source_or_row_approvals']==0 and context_candidates['neural_updates']==0
+    try:list(training_examples(context_root))
+    except ValueError:pass
+    else:raise ValueError('Context candidates unexpectedly admitted; reassess pilot readiness')
+    test_path=Path('reports/milestone-thirty-eight-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-thirty-seven-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-six-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-five-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-four-tests.xml')
@@ -93,7 +104,7 @@ def audit(output):
     if not test_path.exists():test_path=Path('reports/milestone-twenty-nine-tests.xml')
     t=ET.parse(test_path).getroot().find('testsuite')
     tests={k:int(t.attrib[k]) for k in ('tests','failures','errors','skipped')};tests['passed']=tests['tests']-tests['skipped']-tests['failures']-tests['errors']
-    refs={}
+    refs={p:sha(p) for p in ('reports/milestone-thirty-eight-context-candidates.json','reports/milestone-thirty-eight-context-review.json','configs/context-prose-candidate-v1.json','src/slm/data/context.py','scripts/prepare-context-prose.py','tests/test_context_prose.py')}
     items=[]
     def item(id,section,requirement,status,evidence,limit):
         for path in evidence:
@@ -180,7 +191,8 @@ def audit(output):
         'historical_bootstrap_packet_rows':len(packet['examples']),'historical_bootstrap_source_approvals':source_approvals,'historical_bootstrap_row_approvals':row_approvals,
         'public_source_approvals':sum(v['approved'] is True for v in delegated_packet['source_reviews'].values()),'public_row_approvals':delegated['explicitly_approved'],
         'public_human_attestation':packet['human_attestation'],'public_review_packet_sha256':digest(packet),'public_sample_training_reader_refusal':reader_refusal,
-        'complete_small_source_population':complete_observation,'original_bootstrap_packet_scope':'Historical 901-row population only; cannot bind the new complete-source population',
+        'complete_small_source_population':complete_observation,'context_prose_candidates':context_candidates,'context_development_review':context_review,
+        'original_bootstrap_packet_scope':'Historical 901-row population only; cannot bind the new complete-source population',
         'public_training_releases_found':real_releases,'data_manifest_files_inspected':manifest_count,
         'candidate_evaluation_cases':len(suite['cases']),'approved_evaluation_cases':approved_cases,
         'evaluation_output_human_attestation':output_review['human_attestation'],'stage_policy_status':stage_policy['status'],
