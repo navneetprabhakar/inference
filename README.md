@@ -8,6 +8,8 @@ Current: the [actual whole-dialogue SFT iteration](docs/milestone-sixty-four.md)
 
 [Fresh-session diagnostics](docs/milestone-sixty-five.md) also fail **0/16 tasks** at 64 tokens, 256 tokens and after system-message removal. All 48 raw replies are retained. Conditional EOS-after-end is strong, but correct content/early termination remain weak. Next is a bounded fitting control using the existing 12 individually reviewed train rows, rather than another broad run or new research reader.
 
+[The actual 12-example fitting control](docs/milestone-sixty-six.md) completes 96 updates: train NLL 4.158 to 0.174, but only 5/12 exact references, so its frozen fitting criterion fails. Validation NLL worsens 4.881 to 5.853. The separate branch scores 10/100 for grammatical sentences only and still 0/8 conversation tasks; it is not promoted as the conversational model. All seven first canonical errors reproduce without KV caching.
+
 The following stage summaries are historical evidence; pending statements describe their state at that milestone.
 
 The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching training/inference framing across all 34,603 assistant prefixes and 7,614 prepared batches. Assistant content is 73.4% of training targets; 21.7% lacks its complete preceding user in the packed window. This is a measured limitation, not a proven cause. Separate whole-dialogue SFT review and an explicit checkpoint transition are next.
