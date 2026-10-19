@@ -12,6 +12,8 @@ The [actual conditioning audit](docs/milestone-fifty-three.md) finds matching tr
 
 The [explicit SFT stage transition](docs/milestone-fifty-five.md) now imports verified foundation weights with a declared fresh-AdamW policy and retained source lineage; same-stage resume preserves its new optimizer. An actual 81M MLX initialization-only probe preserves every weight bit and runs zero updates. This does not add conversation skill or prove CUDA training quality.
 
+[SFT expansion measurements](docs/milestone-fifty-six.md) show that strict literal extraction remains too small (174 train candidates, unadmitted). A pinned 200-row Smol-SmolTalk train-prefix audit supplies broader schema/provenance evidence: 113 whole dialogues fit 1,024 positions, 198 fit 2,048. Content review, constituent admission and actual context-memory measurements remain next; this is not a trained capability or quality estimate.
+
 **Option A is accepted** for exact state transfer, fixed-checkpoint inference parity and measured resumed-training quality. Strict trajectory failures remain recorded; useful MLX/CUDA resumed-training quality remains open. Next: conditioning diagnosis, separate assistant-target SFT review/admission and a frozen finite next-iteration experiment. Teacher rights/category review, broader styles/content, learned tools/MCP and later ESCI remain open. [Project ledger](docs/project-ledger.md) is current; entries below describe chronological milestones and may state historical pending status.
 
 
