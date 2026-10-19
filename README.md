@@ -109,3 +109,5 @@ The [non-admitting quality audit](docs/milestone-thirty-four.md) now measures fu
 [Exact-shingle storage compaction](docs/milestone-thirty-six.md) cuts measured main DB allocation by 52% and wall time by 26% on the complete-source workload, preserving every non-report payload byte. This is one local comparison; existing source reviews and model acceptance gates remain open.
 
 [Reference-only foundation candidates](docs/milestone-thirty-eight.md) now retain 2,314 train passages after fresh grouping and heldout protection, with no Dolly answer targets. The derivative is still sample-only; bounded research admission and real token/model runs are next.
+
+[Bounded research admission and pilot preparation](docs/milestone-thirty-nine.md) now provide 2,113 policy-admitted train passages, complete 16K/24K BPE candidates and a finite 1,048,230-position local schedule. This is experimental reference-prose training scope; production vocabulary and conversation/tool capability remain open.

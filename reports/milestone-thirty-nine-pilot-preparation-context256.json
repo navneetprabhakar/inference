@@ -1,0 +1,98 @@
+{
+  "cloud_jobs": 0,
+  "creator": "Navneet Prabhakar",
+  "mixture": {
+    "batches": 4097,
+    "budget": 1048576,
+    "components": {
+      "context_prose": {
+        "batches": 4097,
+        "max_passes": 2,
+        "max_positions": 1048576,
+        "metric": 1048486,
+        "processed": 1048486,
+        "realized_metric_fraction": 1.0,
+        "requested_weight": 1,
+        "supervised": 1048486
+      }
+    },
+    "dataset_hash": "d7d5e33f248db9b6e91f0caf533436532bd8b4e9eafc63cb8ef7d5893bd0bc7d",
+    "excluded_candidates": {
+      "total_budget": 587
+    },
+    "families_touched": 2093,
+    "implicit_wraparound": false,
+    "max_family_metric_positions": 4882,
+    "minimum": 1000000,
+    "objective": "foundation",
+    "partial_batch_truncation": false,
+    "planned_metric_positions": 1048486,
+    "planned_processed_positions": 1048486,
+    "planned_supervised_positions": 1048486,
+    "reallocation": "Weighted virtual finish time among remaining eligible sources; explicit component/family/pass caps always apply",
+    "record_identities_touched": 2113,
+    "repeated_processed_positions": 449107,
+    "scope": "Finite prepared-position exposure, not lexical/semantic unique tokens or shared-prefix deduplication",
+    "unfilled_budget": 90,
+    "unique_prepared_processed_positions": 599379,
+    "unique_prepared_supervised_positions": 599379,
+    "weight_basis": "processed_positions"
+  },
+  "new_teacher_launches": 0,
+  "pilot_spec_sha256": "711abb7dac328a3317d4d3848b1ae00b9584a6b109037057f79d8b0cbb956ae8",
+  "preflight_plan_hash": "73f14ba65e36240d72b337cd8f9ae09c60d2a2d1ee3350dc9987aafa56f0cf1c",
+  "public_data_model_updates": 0,
+  "research_limits": {
+    "max_parameters": 100000000,
+    "max_passes": 2,
+    "processed_positions": 1048576,
+    "updates": 2048
+  },
+  "scope": "Actual-data preparation and checked pilot preflight; no trained checkpoint or capability claim.",
+  "script_sha256": "d13cb7cc276f34b76559b5327311115795dee5f7a8e0e58d08c118da415aa7c4",
+  "token_preparation": {
+    "batches": 2342,
+    "categories": {
+      "sfw": 2113
+    },
+    "cross_document_attention": true,
+    "dataset_hash": "863257d26b297239f2e01cb0a3d1197da8d63af24e243d980ec23aba68514980",
+    "excluded_records": {},
+    "explicit_passes": 1,
+    "implicit_wraparound": false,
+    "message_format": "plain-dialogue-v1",
+    "objective": "foundation",
+    "one_pass_encoded_positions": 599380,
+    "processed_prediction_positions": 599379,
+    "retained_groups": 2093,
+    "retained_records": 2113,
+    "scope": "Verified bootstrap release to disk-backed token shards; tokenizer selection and model training are separate gates",
+    "shards": 3,
+    "sources": {
+      "databricks/databricks-dolly-15k": {
+        "encoded_positions": 599380,
+        "prediction_positions": 599379,
+        "records": 2113,
+        "supervised_positions": 599379,
+        "utf8_bytes": 2630768
+      }
+    },
+    "split": "train",
+    "supervised_positions": 599379,
+    "token_shard_version": 1,
+    "tokenizer_hash": "08d4b0a641eb2834443cbfd5e76cbb9ae403bcc1454e342e358cd070ef0eb44f",
+    "truncation": false
+  },
+  "tokenizer_freeze": {
+    "comparison_sha256": "dc0a8f34ad350d6693507e99fc840ec3ba6fae15108256dd735181dea290edcf",
+    "limitations": "Tokenizer training contains reference prose only; dialogue/slang/tool/product breadth remains open. No validation/test text entered BPE training.",
+    "parameters": 80765440,
+    "production_frozen": false,
+    "release_manifest_sha256": "bc047b578bf6a2a165522e827d78a02e08a067dca798dbee657f8bbfa140d99e",
+    "scope": "local_foundation_smoke_only",
+    "selected_vocab_size": 16384,
+    "selection": "Keep the planned 81M architecture and smaller vocabulary head for this bounded pilot. Both candidates reach requested size; small handcrafted development slices cannot select a production tokenizer.",
+    "tokenizer_manifest_sha256": "08d4b0a641eb2834443cbfd5e76cbb9ae403bcc1454e342e358cd070ef0eb44f",
+    "version": 1
+  }
+}

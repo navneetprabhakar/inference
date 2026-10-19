@@ -65,3 +65,6 @@ Start with the portability prototype and data audit. Do not start a large pretra
 
 - [Reference-passage foundation candidates](milestone-thirty-eight.md)
 - [Context extraction and grouping contract](context-prose-candidates.md)
+
+- [Bounded research admission](research-admission.md)
+- [Actual tokenizer and local-pilot preparation](milestone-thirty-nine.md)

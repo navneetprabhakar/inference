@@ -226,7 +226,8 @@ def training_examples(path):
     """Only approved train shards; review packets and evaluation text are never yielded."""
     path = Path(path)
     manifest = verify(path)
-    if manifest.get('release')=='training' and manifest.get('review_schema_version')==2:
+    if ((manifest.get('release')=='training' and manifest.get('review_schema_version')==2)
+        or (manifest.get('release')=='research_training' and manifest.get('review_schema_version')==3)):
         from slm.data.review_stream import training_examples as streamed
         yield from streamed(path);return
     if manifest.get('release') != 'training' or manifest.get('review_schema_version') != 1:

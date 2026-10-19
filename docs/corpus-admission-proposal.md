@@ -2,7 +2,7 @@
 
 Creator: Navneet Prabhakar
 
-Status: proposed. No corpus-wide approval, accepted threshold or implementation is created by this document. The implemented release scopes remain explicit rows only.
+Status: production admission remains proposed. A separate [bounded private research policy](research-admission.md) is now accepted under delegated expert review, with a checked v3 reader and enforced experiment limits. It admits reference prose under disclosed uncalibrated screening risk; it does not establish production error bounds, individual human verification or broad source clearance. The production requirements below remain unmet where stronger evidence is required.
 
 User delegation recorded on 19 October 2026 now authorizes expert source/sample review; it does not silently admit an unsampled corpus. Routine review decisions no longer require manual exports from the owner. The explicit 42-row Dolly release is documented in [milestone thirty-seven](milestone-thirty-seven.md). A bounded research admission policy should be distinguished from production release assurance.
 

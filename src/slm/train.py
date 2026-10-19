@@ -137,12 +137,22 @@ class Inputs:
             bpe=BPE.load(spec['tokenizer']);parts=leaves(self.data)
             if not isinstance(spec['releases'],dict) or set(spec['releases'])!={d.manifest['release_manifest_sha256'] for d in parts}:
                 raise ValueError('Every leaf needs its exact reviewed release')
-            approved={}
+            approved={};self.research_limits=None
             for fingerprint,path in spec['releases'].items():
                 root=Path(path)
                 if sha(root/'manifest.json')!=fingerprint:raise ValueError('Reviewed release fingerprint differs')
                 approved[fingerprint]=self.stack.enter_context(open_checked(root))
+                if getattr(approved[fingerprint],'research_limits',None):self.research_limits=approved[fingerprint].research_limits
                 self.pin_tree(root)
+            if self.research_limits:
+                caps=self.research_limits
+                if (len(approved)!=1 or len(parts)!=1 or isinstance(self.data,CurriculumBatches)
+                    or spec['scope']!='language_pilot' or parts[0].manifest['objective']!='foundation'
+                    or self.config.parameter_count>caps['max_parameters']
+                    or any(spec['limits'][k]>caps[k] for k in ('updates','processed_positions'))):
+                    raise ValueError('Bounded research scope/objective/model/training limit exceeded')
+                if isinstance(self.data,MixtureBatches) and any(c['max_passes']>caps['max_passes'] for c in self.data.manifest['components']):
+                    raise ValueError('Research repeat-exposure limit exceeded')
             for part in parts:verify_leaf(part,approved[part.manifest['release_manifest_sha256']],bpe)
             self.pin_tree(Path(spec['tokenizer']))
             self.plan={'version':1,'config':self.config.to_dict(),'recipe':asdict(self.recipe),'seed':spec['seed'],
@@ -152,7 +162,8 @@ class Inputs:
                 'reference_sources':{str(p.relative_to(Path(__file__).parent)):sha(p) for p in
                     [Path(__file__),*[Path(__file__).parent/name for name in ('common/training.py','common/curriculum.py','common/config.py',
                         'common/checkpoint.py','common/tokenizer.py','common/tool_serialization.py','common/supervision.py',
-                        'data/tokenized.py','data/mixture.py','data/curriculum.py','data/review.py','data/review_stream.py','data/build.py','data/staging.py',
+                        'data/tokenized.py','data/mixture.py','data/curriculum.py','data/review.py','data/review_stream.py','data/research_admission.py',
+                        'data/context.py','data/quality_audit.py','data/build.py','data/staging.py',
                         'backends/torch_backend.py','backends/mlx_backend.py','eval/stage.py','eval/conversation.py')]]}}
             for name in self.plan['reference_sources']:
                 path=Path(__file__).parent/name;self.guards[path.resolve()]=stamp(path)
@@ -270,6 +281,7 @@ def run(spec,output,*,backend='torch',device='cpu',resume=None,max_new_updates=1
     started=time.perf_counter();inputs=Inputs(spec);trainer=None;latest=None;passed={};events=None;created=False
     timing={'preflight':time.perf_counter()-started,'initialization_restore':0.,'updates':0.,'checkpoints':0.,'evaluation':0.}
     try:
+        if inputs.research_limits and device.startswith('cuda'):raise ValueError('This research admission permits local MLX/CPU only; no CUDA training authorization')
         roots=[Path(spec['tokenizer']),*[Path(p) for p in spec['releases'].values()],*[p.path for p in leaves(inputs.data)],inputs.data.path]
         if resume:roots.append(Path(resume))
         target=output.resolve()

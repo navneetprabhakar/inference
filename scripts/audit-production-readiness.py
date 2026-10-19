@@ -40,11 +40,14 @@ def audit(output):
     # Never silently retain pending-input classifications after the audited baseline changes.
     if source_approvals or row_approvals or packet['human_attestation']:
         raise ValueError('Review input changed; update requirement classifications before publishing this audit')
-    real_releases=[];manifest_count=0
+    real_releases=[];research_releases=[];manifest_count=0
     for path in sorted(Path('data').rglob('manifest.json')):
         manifest_count+=1
         if not (path.parent/'sources.json').is_file():continue
         m=read(path)
+        if m.get('release')=='research_training':
+            research_releases.append({'path':str(path.parent),'checked_train_records':sum(1 for _ in training_examples(path.parent))})
+            continue
         if m.get('release')!='training':continue
         sources=set(read(path.parent/'sources.json'))
         if sources&source_ids:
@@ -58,6 +61,11 @@ def audit(output):
     assert digest(delegated_packet)==delegated['packet_sha256']
     if {r['path']:r['checked_train_records'] for r in real_releases}!={str(delegated_root):17}:
         raise ValueError('Training release inventory changed; re-audit real-data pilot readiness')
+    if {r['path']:r['checked_train_records'] for r in research_releases}!={'data/context-research-release-v1':2113}:
+        raise ValueError('Bounded research release inventory changed; reassess admission')
+    research_preparation=read('reports/milestone-thirty-nine-pilot-preparation.json')
+    evaluation_freeze=read('reports/milestone-thirty-nine-evaluation-freeze.json')
+    assert research_preparation['public_data_model_updates']==0 and evaluation_freeze['model_scores_observed']==0
     suite=read('data/evaluation-candidates-v1/suite-review.json');output_review=read('data/evaluation-candidates-v1/output-review.json')
     approved_cases=sum(v['approved'] is True for v in suite['cases'].values())
     if suite['human_attestation'] or approved_cases:raise ValueError('Evaluation review changed; update classifications')
@@ -93,7 +101,8 @@ def audit(output):
     try:list(training_examples(context_root))
     except ValueError:pass
     else:raise ValueError('Context candidates unexpectedly admitted; reassess pilot readiness')
-    test_path=Path('reports/milestone-thirty-eight-tests.xml')
+    test_path=Path('reports/milestone-thirty-nine-tests.xml')
+    if not test_path.exists():test_path=Path('reports/milestone-thirty-eight-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-seven-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-six-tests.xml')
     if not test_path.exists():test_path=Path('reports/milestone-thirty-five-tests.xml')
@@ -129,12 +138,12 @@ def audit(output):
     item('D02','3','Prose/messages/Dolly/OASST adapters and complete tree reconstruction','implemented_reference',['src/slm/data/adapters.py','configs/source-audit-v1.json'],'Initial inspected source formats; the wider source shortlist is not fully audited.')
     item('D03','3','English/quality/privacy filtering suitable for real training','partial',['src/slm/data/quality_audit.py','docs/quality-audit-contract.md','reports/milestone-thirty-four-sample.json'],'Pinned offline language scores and privacy/quality features exist, but short/code errors, incomplete privacy coverage and unverified judgments prevent production eligibility. All 15,692 complete-small-source population rows remain content-unreviewed; the original 901-row snapshot stays historical.')
     item('D04','3','Exact/near deduplication, grouped splits and official holdouts','partial',['src/slm/data/curation.py','src/slm/data/partitions.py','src/slm/data/holdout.py','reports/milestone-thirty-five-invariants.json'],'Complete small-source syntactic grouping preserves all prior heldouts; not global semantic contamination proof or full OASST Parquet text verification.')
-    item('D05','3','Approved public source and example release','partial',['reports/milestone-thirty-seven-source-review.json','src/slm/data/review.py','data/delegated-source-review-v1/release/manifest.json'],'User-delegated expert review approves 42 explicit SFW Dolly rows, only 17 train. Human attestation remains false. Three other source reviews and all unsampled rows remain unapproved; broader admission is implementation/review work, not a manual-export request.')
+    item('D05','3','Approved public source and example release','partial',['reports/milestone-thirty-seven-source-review.json','reports/milestone-thirty-nine-admission.json','src/slm/data/review.py'],'Forty-two individually reviewed Dolly rows remain separate from 2,657 policy-admitted research passages (2,113 train). Human attestation stays false. Experimental admission is neither production clearance nor individual verification. Three other sources remain deferred.')
     item('D06','3','Production bulk intake, global grouping and quality reporting','partial',['src/slm/data/staging.py','tests/test_staging.py','docs/disk-backed-corpus-staging.md'],'Disk-backed sample-only JSONL staging preserves exact syntactic grouping with explicit limits; complete Dolly interned measurement has 25.32x main-DB amplification and is not production-scale economics. Source admission, semantic decontamination, resumable intake and direct Parquet streaming remain missing. Legacy builder/packets remain bounded; v2 explicit-row verification and downstream approved-row/text intake are disk-backed. Other mixture/lineage/BPE state is not globally bounded.')
-    item('D07','3','Scalable admission backed by representative human audit','missing',['src/slm/data/review_stream.py','docs/corpus-admission-proposal.md'],'Disk-backed v2 still admits explicit rows only. Whole-group audit now covers a complete post-filter Dolly population plus three first-N sources. The 287-row sample now has 93 Dolly dispositions under delegated expert authority (42 accepted), with other sources deferred. No unbiased corpus error-rate estimate or accepted bulk admission protocol yet exists; corpus admission remains missing.')
+    item('D07','3','Scalable admission backed by representative audit','partial',['src/slm/data/research_admission.py','configs/context-research-admission-v1.json','docs/corpus-admission-proposal.md'],'Self-contained v3 implements bounded research admission, exact derivative reconstruction, complete signal/output coverage, group quarantine and run caps. Development judgments are not representative production error bounds; broad production admission and scale remain open.')
     item('D08','3','Verified token shards, source counts and repeat exposure','implemented_reference',['src/slm/data/tokenized.py','src/slm/data/mixture.py'],'Processed, supervised and unique prepared positions differ; prior 2.6M reader probe has zero neural updates.')
-    item('T01','4','Train-only 16K/24K BPE comparison tooling and slice measurements','implemented_reference',['src/slm/common/tokenizer.py','src/slm/eval/tokenizer.py'],'Candidate builder uses a checked text spool/generator and streaming record digest; BPE internal vocabulary state still grows. Retained synthetic comparison yielded 432 tokens for both requested sizes; no production selection.')
-    item('T02','4','Frozen production vocabulary selected from representative eligible data','missing',['reports/milestone-eight-tokenizer-mechanics.json','reports/milestone-eight-data-gates.json'],'No production candidate, selection or freeze. Vocabulary choice and target count must follow actual yield/efficiency.')
+    item('T01','4','Train-only 16K/24K BPE comparison tooling and slice measurements','implemented_reference',['src/slm/common/tokenizer.py','reports/milestone-thirty-nine-tokenizer-comparison.json'],'Actual admitted train-only candidates reach 16,384/24,576 IDs on 2,113 reference passages. Checked text spool avoids a corpus text list; BPE vocabulary state still grows. Handcrafted development slices are not representative production evidence.')
+    item('T02','4','Frozen production vocabulary selected from representative eligible data','partial',['reports/milestone-thirty-nine-pilot-preparation.json'],'16K is frozen only for the bounded 81M pilot. Reference-only training and small development slices do not freeze a production vocabulary or cover dialogue/slang/tool/product breadth.')
     item('T03','4','Disjoint structural IDs, raw-content isolation and serialization','implemented_reference',['src/slm/common/tokenizer.py','src/slm/common/tool_serialization.py','tests/test_tokenizer.py'],'No raw content special-token interpretation; typed and continuation formats are versioned.')
     item('H01','5','Configurable CLI-only teacher and disabled API fallback','implemented_reference',['src/slm/teacher/cli.py','configs/teacher-cli-pilot.json','configs/teacher-disabled.json'],'Requested Luna identity is pinned; CLI does not report resolved model identity.')
     item('H02','5','Real small teacher pilot/cache/lineage/usage evidence','retained_pilot_evidence',['reports/milestone-twenty-eight-summary.json','reports/milestone-twenty-eight-host-bridge.json'],'14 successful candidates, two families; 17/20 reservations, no adapter-enforced settled-dollar cap.')
@@ -146,7 +155,7 @@ def audit(output):
     item('P02','6','General bounded reviewed-data pilot execution command','implemented_reference' if pilot_main_found else 'missing',
         ['src/slm/train.py','tests/test_train.py','docs/reviewed-data-pilot-runner.md'] if pilot_main_found else ['src/slm/common/training.py','src/slm/common/curriculum.py','src/slm/eval/benchmark.py'],
         'Reference runner now binds reviewed content, budgets, managed checkpoints and resume/stage receipts. Synthetic local tests are not the real language pilot; actual CUDA wrapper validation remains open.' if pilot_main_found else 'No general reviewed-data pilot command found.')
-    item('P03','6','Actual 1M-token English smoke training','missing',['reports/milestone-eleven-reader-scale.json','docs/project-ledger.md'],'No eligible production tokenizer/data or 1M neural-update run; synthetic reader positions do not meet this requirement.')
+    item('P03','6','Actual 1M-token English smoke training','missing',['reports/milestone-eleven-reader-scale.json','docs/project-ledger.md'],'Actual admitted research data, pilot tokenizer and 1,048,230-position schedule are prepared; no completed 1M-position student run is yet recorded. Reader positions alone do not meet this requirement.')
     item('P04','6','Actual 10M-token laptop language pilot','missing',['docs/project-ledger.md','reports/milestone-seven-mlx-benchmark.json'],'No trained language checkpoint or sustained run. Short benchmark is not this pilot.')
     item('P05','6','Optional evidence-driven 50M extension','conditional_deferred',['docs/slm-training-plan.md'],'Optional after measured 1M/10M results, not an unconditional required paid run.')
     item('P06','6','Sustained throughput/memory/restarts/checkpoint-overhead report','partial',['reports/milestone-seven-mlx-benchmark.json','reports/milestone-fifteen-dense-benchmark.json'],'Only short synthetic timing/resume evidence; no sustained real-data pilot or thermal profile.')
@@ -193,14 +202,15 @@ def audit(output):
         'public_human_attestation':packet['human_attestation'],'public_review_packet_sha256':digest(packet),'public_sample_training_reader_refusal':reader_refusal,
         'complete_small_source_population':complete_observation,'context_prose_candidates':context_candidates,'context_development_review':context_review,
         'original_bootstrap_packet_scope':'Historical 901-row population only; cannot bind the new complete-source population',
-        'public_training_releases_found':real_releases,'data_manifest_files_inspected':manifest_count,
+        'public_training_releases_found':real_releases,'bounded_research_releases_found':research_releases,
+        'research_pilot_preparation':research_preparation,'research_evaluation_freeze':evaluation_freeze,'data_manifest_files_inspected':manifest_count,
         'candidate_evaluation_cases':len(suite['cases']),'approved_evaluation_cases':approved_cases,
         'evaluation_output_human_attestation':output_review['human_attestation'],'stage_policy_status':stage_policy['status'],
         'strict_trajectory_gate_passed':False,'portability_acceptance':portability,'delegated_source_review':delegated,'production_tokenizer_selected_in_retained_report':False,
         'synthetic_reader_positions':scale['build']['processed_prediction_positions'],'synthetic_reader_neural_updates':0,
         'teacher_candidates':14,'teacher_approvals':0,'teacher_journals':journals,'combined_teacher_reserved_slots':17,
         'latest_local_suite':tests,'general_pilot_main_found':pilot_main_found,'entrypoints_inspected':mains},
-      'next_independent_implementation':('Develop bounded research corpus-admission policy under delegated source review, then freeze representative train-only tokenizer and run the actual local 1M pilot; no further manual source-review export is requested.' if pilot_main_found else 'Bounded reviewed-data pilot runner over existing trainers with verified source bindings, budgets and recovery; synthetic validation only until real input gates are resolved.'),
+      'next_independent_implementation':('Run the committed bounded local 81M pilot on the admitted finite schedule, retain checkpoints, and score the frozen validation prefixes; broader production data/tokenizer and conversation/tool quality remain open.' if pilot_main_found else 'Bounded reviewed-data pilot runner over existing trainers with verified source bindings, budgets and recovery; synthetic validation only until real input gates are resolved.'),
       'external_inputs':['Actual account/source evidence for teacher-output training use', 'Evaluation suite/policy/rubric review outside the delegated source/sample scope',
         'Main GCP budget/hardware decision at its later paid-run gate'],
       'new_training_updates':0,'new_teacher_launches':0,'new_cloud_jobs':0,'source_or_policy_approvals_changed':False,
