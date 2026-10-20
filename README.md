@@ -4,6 +4,8 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
+**Active execution:** [Source-driven English recovery](docs/english-recovery-execution.md). Main-training ceiling is nowUSD100;100Mphysicalpositions/oneL4/45hours remain.80additional CLI teacher calls authorized. Full235,779-record exact-prefix join is running after successful16Kpreflight; general/explanatory first admission fails, refined general/story sample passes, Cosmopedia/long-prose expansion rejected. Revised two-source data-limited pilot preserves learning/inference/conversation gates. No new student score or cloud resource yet.
+
 **Current decision: course correction.** [Detailed recovery plan](docs/course-correction.md). A new actual run again yields **0/100 conversations, 0/300 tasks, 7.6/100**; [all 300 fresh message/response pairs](docs/course-correction-100-transcripts.md) are visible. No accepted conversational candidate exists. Recent data engineering produced no new student weights.
 
 **Current next-run decision:** [Diagnosed failure](docs/conversation-failure-diagnosis.md) and [corrected training plan](docs/next-iteration-training-plan.md): severe narrow-control overfitting on an undertrained dialogue-only foundation. No next training starts until the new corpus, recipe and learning gates are executable.

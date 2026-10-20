@@ -2,6 +2,10 @@
 
 Creator: Navneet Prabhakar
 
+## Active source-driven execution — 20 October 2026
+
+The owner requests corpus grouping/admission, actual corrected English training and another100-conversation comparison. [Current execution](english-recovery-execution.md) and configs/english-recovery-execution-v1.json supersede prior source mixture/coverage proposals: rejected Cosmopedia and long prose are withheld; proceed as an explicitly data-limited general/story pilot without claiming the original40Mcoverage target passed. Inference, heldout learning and generated-conversation quality thresholds remain unchanged. USD100main-training ceiling;100Mnewphysicalpositions/oneL4/45hours unchanged. Separate80more CLI teacher calls are authorized, not yet consumed. Preserve every failed review/job and immutable runtime/source artifact. Full235,779-record join is running after measured16Kpreflight; no new gradient/cloud resource/conversation score yet. Continue through terminal grouping, exact finite cloud research admission/preparation, fixed baseline and paired learning, substantial language phase, actual100session capture/direct scores, then conditional broad admitted SFT within remaining budget. Do not stop at preparation or claim improvement from tests.
+
 ## Current data-index prototype — 20 October 2026
 
 [Exact prefix-index prototype](prefix-near-prototype.md) passes nine focused tests and a separate complete read-only audit of 4,096 selected source records / 5,820 raw facets / 7,368 candidate comparisons. Actual sample has no qualifying near pairs; positive-match coverage is synthetic. Original inefficient-audit benchmark remains interrupted and retained. No exact build-throughput or full-corpus claim. Next freeze a larger measured bounded preflight before a complete full-source join, component/flag audit, split and finite admission. No student update, additional teacher request or cloud resource; all prior budgets and immutable artifacts remain binding.

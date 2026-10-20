@@ -1,0 +1,69 @@
+{
+  "creator": "Navneet Prabhakar",
+  "kind": "revised-source-driven-english-recovery-v1",
+  "date": "2026-10-20",
+  "status": "awaiting_full_components_and_exact_admission",
+  "training_allowed": false,
+  "budget": "configs/main-learning-budget-authorization-v2.json",
+  "teacher_allowance": "configs/teacher-extra-80-authorization-v1.json",
+  "source_policy": {
+    "sources": [
+      "general",
+      "narrative"
+    ],
+    "explanatory": "Excluded: failed both frozen review rounds",
+    "long_prose_expansion": "Excluded: additional stratum failed",
+    "eligibility": "src/slm/data/english_eligibility.py",
+    "maximum_passes": 2,
+    "observed_nonapproval_family_withholding": true,
+    "research_scope": "Private laptop and one approved GCP VM only; no publication, production certification or human attestation"
+  },
+  "plan_revision": {
+    "prior": "configs/course-correction-v3.json",
+    "unchanged": [
+      "Own random-origin foundation,81M,16KBPE,FP32,1024context",
+      "Maximum100Mnewphysicalgradientpositions including discarded work",
+      "2Mpreliminary/78Mlanguage/20MconditionalSFT reservations",
+      "Same numeric inference tolerances and useful portability checks",
+      "Held-out language improvement and generated conversation promotion thresholds"
+    ],
+    "changed": [
+      "Replace rejected three-source60/20/20mixture with measured general/narrative supply, provisional weights60/40 and explicit exhaustion reallocation",
+      "Original40Mdistinct-content coverage target cannot be certified after source rejection; report actual unique occurrences, never claim original coverage gate passed",
+      "Proceed as a clearly named data-limited two-source learning pilot within same maximum reservations; no extra passes or proxy claim of broad conversational competence"
+    ],
+    "reason": "Concrete source defects justify removing unreliable training material. A count target does not justify admitting rejected synthetic claims or contaminated long documents. Compare actual held-out learning and conversation results under unchanged quality criteria; insufficient learning stops SFT."
+  },
+  "language_quality": {
+    "dev_documents": 500,
+    "generation_prefixes": 100,
+    "minimum_nll_improvement": 0.1,
+    "bootstrap_lower_bound_positive": true,
+    "maximum_slice_regression": 0.1,
+    "minimum_readable_topic_preserving_generations": 70,
+    "stop_after_two_scheduled_slice_regressions": true
+  },
+  "portability": {
+    "common_mlx_prefix_updates": 32,
+    "paired_continuation_updates_per_backend": 64,
+    "accumulation_steps": 8,
+    "context": 1024,
+    "paired_full_size_positions": 1310720,
+    "heldout_documents": 500,
+    "each_backend_minimum_improvement_nats": 0.02,
+    "maximum_backend_mean_improvement_gap_nats": 0.05,
+    "paired_bootstrap_improvement_gap_interval_max_abs": 0.1,
+    "inference_tolerances": "Unchanged prior frozen contract",
+    "failure": "Retain failure and stop full-size extension; no trajectory relabeling"
+  },
+  "model_promoted": false,
+  "inputs": {
+    "configs/main-learning-budget-authorization-v2.json": "1bc5d4f21919cf5210ffd83626222de557cff563efce0d88bb20d2a926e15185",
+    "configs/teacher-extra-80-authorization-v1.json": "e0913da233bb8e71af00dcbb7f85b87c57679b51dfac651a552e42b51bf62327",
+    "configs/course-correction-v3.json": "0b0edcbd954b33d0c8fe7b284aa7cd20108ee84d83d796ec5a4cdfc4c4b3bf8e",
+    "data/english-corpus-admission-review-v1/decision.json": "10bc8335923aac8798aabf9c31d3d70cee4963cdc972429b38e2e0e0ee3b7ebc",
+    "data/english-corpus-admission-review-v2/decision.json": "97919aa1155f5ee67068bcd24216c5f188ba8a3c33b213433c9e8d530b8b3ff5",
+    "data/english-long-prose-review-v1/decision.json": "2bf116a16713c08cdd366af390835e05e43b0f4a475d59ebe7b574211f5bc279",
+    "src/slm/data/english_eligibility.py": "84c707c51236b2ce3de4a02d4136f27485abda71aae6e058ce11aab723d10143"
+  }
+}
