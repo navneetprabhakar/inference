@@ -4,7 +4,7 @@ Creator: Navneet Prabhakar
 
 First implementation milestone for an English SLM trained from scratch. This is a numerical reference prototype, not a conversational model.
 
-**Active execution:** [Source-driven English recovery](docs/english-recovery-execution.md). Complete grouping/release audits pass; main inventory34.3Mone-pass/68.6Mtwo-pass positions. The first MLX continuation improves overall NLL but fails the unchanged general-retention gate; no GPU launch. A separately frozen balanced control is running, carrying786,432discarded positions into a1,964,493cumulative preliminary plan below2M. No conversation-score improvement claimed. USD100main ceiling/100Mpositions/oneL4/45hours unchanged;80new CLI teacher calls remain unused.
+**Active execution:** [English recovery](docs/english-recovery-execution.md). Full corpus audits pass. Corrected local resumed learning passes: heldout NLL4.318→3.906, both sources improve;1,506,080actual cumulative preliminary positions. Uniform main v3/package are prepared for68.6Mpositions. First L4 request failed zone capacity; cleanup confirms zero VMs/disks/temporary rules. Capacity-only b→c retry awaits explicit app approval, retainingUSD100/oneL4/original absolute deletion. CUDA/main/required100-conversation comparison remain pending; no new conversation score.80new CLI teacher calls remain unused.
 
 **Current decision: course correction.** [Detailed recovery plan](docs/course-correction.md). A new actual run again yields **0/100 conversations, 0/300 tasks, 7.6/100**; [all 300 fresh message/response pairs](docs/course-correction-100-transcripts.md) are visible. No accepted conversational candidate exists. The failed conversation branch remains rejected; the new language branch is measured separately.
 
@@ -14,7 +14,7 @@ First implementation milestone for an English SLM trained from scratch. This is 
 
 **Exact-index prototype:** [Bounded replacement and limits](docs/prefix-near-prototype.md) verifies all 4,096 selected source records / 5,820 facets and 7,368 candidate comparisons, with nine focused tests passing. The source sample has zero qualifying near pairs; positive coverage is synthetic. That prototype is historical; the full v2join and finite admission now pass as reported above.
 
-**Current corpus state:** the owned [near-grouping job](docs/global-near-terminal-audit.md) was explicitly stopped and reaped for course correction. Partial index/database/journal remain retained; full grouping and new corpus admission are incomplete. Thirteen audit/component fixture tests pass across the prepared tools; this is not a completed corpus audit. No new training or GCP resources were started.
+**Current corpus state:** Full replacement grouping and independent release audits pass:106,554families,104,483train/1,038validation/1,033test. General/story private research only; category unreviewed and original40Mcoverage gate unmet. Earlier stopped grouping attempts remain retained.
 
 [The preceding Cosmopedia intake](docs/cosmopedia-candidate-intake.md) preserves49,000rows /39.33Mstudent tokens, including31,920provisional rows /24.63Mtokens. Its detector-control correction and failed1,000-row charge remain recorded.
 

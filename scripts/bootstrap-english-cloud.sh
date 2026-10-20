@@ -7,13 +7,19 @@ task_archive_sha="${2:?archive hash}"
 task_launch="${3:?verified cloud launch JSON}"
 task_output="${4:?new extraction directory}"
 task_verifier="${5:?pinned archive verification script}"
+task_proof="${6:?pinned worker script}"
+task_proof="$(cd "$(dirname "$task_proof")" && pwd)/$(basename "$task_proof")"
+task_mode="${7:?proof or conditional-main}"
+task_proof_stage="${8:?pinned proof-stage script}"
+task_proof_stage="$(cd "$(dirname "$task_proof_stage")" && pwd)/$(basename "$task_proof_stage")"
+case "$task_mode" in proof|conditional-main) ;; *) exit 2 ;; esac
 python3 "$task_verifier" "$task_archive" "$task_archive_sha" "$task_output"
 task_output="$(cd "$task_output" && pwd)"
 mkdir "$task_output/dependencies"
 python3 -m pip install --no-index --find-links "$task_output/wheels" --target "$task_output/dependencies" \
   safetensors==0.8.0 tokenizers==0.22.2 jsonschema==4.26.0 > "$task_output/offline-install.log" 2>&1
 python3 -m venv --without-pip --system-site-packages "$task_output/venv"
-python3 - "$task_output" "$task_launch" <<'PY'
+python3 - "$task_output" "$task_launch" "$task_mode" <<'PY'
 import json,hashlib,shutil,sys
 from pathlib import Path
 from datetime import datetime,timezone
@@ -34,7 +40,7 @@ if not 3600<=remaining<=45*3600-1800:raise ValueError('Independent VM lifetime/c
 destination=project/experiment/'cloud-launch.json'
 if destination.exists():raise FileExistsError('Retain previous cloud launch record')
 shutil.copyfile(launch,destination)
-(root/'job-seconds.txt').write_text(str(remaining))
+(root/'job-seconds.txt').write_text(str(min(7200,remaining) if sys.argv[3]=='proof' else remaining))
 site=list((root/'venv/lib').glob('python*/site-packages'))
 if len(site)!=1:raise ValueError('One isolated image interpreter required')
 (site[0]/'english-project.pth').write_text(str(project/'src')+'\n'+str(root/'dependencies')+'\n')
@@ -51,11 +57,11 @@ PY
 task_username="$(id -un)"
 task_groupname="$(id -gn)"
 task_job_seconds="$(cat "$task_output/job-seconds.txt")"
-sudo systemd-run --unit=slm-english-recovery --uid="$task_username" --gid="$task_groupname" \
+sudo -n systemd-run --unit=slm-english-recovery --uid="$task_username" --gid="$task_groupname" \
   --property=RuntimeMaxSec="${task_job_seconds}s" --property=KillMode=control-group \
   --property=TimeoutStopSec=15 --property=Restart=no \
   --property=WorkingDirectory="$task_output/project" \
   --property=StandardOutput="append:$task_output/project/data/english-balanced-experiment-v2/cloud-service.log" \
   --property=StandardError="append:$task_output/project/data/english-balanced-experiment-v2/cloud-service.log" \
   --setenv=PATH="$task_output/venv/bin:/usr/local/bin:/usr/bin:/bin" \
-  /bin/bash "$task_output/project/scripts/english-cloud-worker-v2.sh" "$task_output/project"
+  /bin/bash "$task_proof" "$task_output/project" "$task_proof_stage"
