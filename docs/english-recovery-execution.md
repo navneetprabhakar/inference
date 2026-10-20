@@ -4,6 +4,12 @@ Creator: Navneet Prabhakar
 
 Date: 20 October 2026
 
+## Owner cloud hold — 20 October 2026
+
+- Owner approved b→c capacity attempts, but the first read-only inventory in `data/english-gcp-session-v4` failed expired GCP reauthentication. No VM create request was reached; no new CUDA/main gradients. Preserve that attempt and the authorization; do not rerun its existing output directory.
+- Owner now explicitly requires no GCP authentication until the failure explanation and plan are convincing. `configs/english-owner-cloud-hold-v1.json` supersedes cloud execution. No login, launch or authentication workaround; the heartbeat is not renewed consent. Existing absolute deadline/budget stay unchanged.
+- Delivery remains unproven: latest100-conversation test is the older collapsed fitting-control branch, not corrected90-step foundation. Current local NLL improves both source slices but no new conversation score exists. Do not present stale0/100as a measurement of the corrected checkpoint, or NLL as chatbot ability. Strongest direct cause is narrow-control memorization; inadequate broad language exposure is the leading foundation diagnosis, not exclusive causal proof. Proposed68.6Mprose positions remain a language pilot, not evidence of broad conversation readiness.
+
 ## Current terminal results and cloud boundary — 20 October 2026
 
 - Corrected local controller `data/english-balanced-local-v2` is terminal-successful. Do not restart either local controller. Common 33 + resumed MLX 57 updates finish at checkpoint step 90. Heldout NLL **4.317756→3.905882**, improvement **0.411874 nats**, 95% family bootstrap **[0.391798, 0.432125]**. General improves **0.164148**, narrative **0.577025**; unchanged local retention gate passes. This is not a CUDA or conversational result.
