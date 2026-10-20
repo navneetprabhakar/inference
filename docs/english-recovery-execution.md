@@ -1,3 +1,7 @@
+## Latest local conversation execution — 20 October2026
+
+Owner requires>=75%correct turns on unseen conversations, full-session results separately. GCP hold persists. First local SFT parent41920/session39443 is terminal0; ownedcaffeinate reaped. It stops at154updates/270359positions on unchanged retention failure: generalregression.188328/narrative.271506>.1. Source-model exact import and all174input/state/ledger checks pass; raw cumulative1776439, no refund. Both old100-session regression and new100-session harder natural diagnostic remain0/300tasks/0of100sessions; all600rawreplies/directjudgments published. The harder maths/noisy-followup suite is not the primary75%English acceptance benchmark; reserved100unexecuted. No checkpoint promotion or NLL-to-capability claim. Next separately admitted grounded short-answer/language-replay correction is under preparation; SQuAD full pinned source/offset/group audits pass, direct review/exclusions/admission/frozen schedule still required before gradients. Original source/runtime/plans and failed attempts immutable; no GCP clock/budget reset. See [full evidence and next boundaries](local-conversation-recovery.md). Older snapshots below remain historical.
+
 # Source-driven English recovery execution
 
 Creator: Navneet Prabhakar
