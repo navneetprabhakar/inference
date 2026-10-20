@@ -42,7 +42,9 @@ def build_tokens(rows,bpe,output,release_hash,tokenizer_hash,policy_hash,context
   with (output/'lineage.jsonl').open('x') as lineage:
    for r in rows:
     if r['split']!='train' or digest(r['text'])!=r['content_sha256']:raise ValueError('Intact admitted train row required')
-    tokens=bpe.encode(r['text'])+[STRUCTURAL['eos']]
+    encoded=bpe.encode(r['text'])
+    if 'original_content_tokens' in r and len(encoded)!=r['original_content_tokens']:raise ValueError('Pinned intake tokenizer count differs')
+    tokens=encoded+[STRUCTURAL['eos']]
     contribution=len(tokens)-(0 if count else 1)
     row={k:r[k] for k in ('example_id','parent_group_id','split_group','source','split','content_sha256')}
     row.update(prediction_positions=contribution,supervised_positions=contribution,encoded_positions=len(tokens),prediction_offset_start=positions,prediction_offset_end=positions+contribution,source_sid=r['sid'])
@@ -56,7 +58,7 @@ def build_tokens(rows,bpe,output,release_hash,tokenizer_hash,policy_hash,context
  if writer.processed!=positions or not count:raise ValueError('Exact complete source accounting required')
  report=dict(creator='Navneet Prabhakar',objective='foundation',records=count,processed_positions=positions,supervised_positions=positions,one_pass=True,source_text_truncation=False,cross_document_attention=True,admission_sha256=policy_hash)
  save(output/'report.json',report)
- manifest=dict(version=1,kind='portable-token-shards-v1',message_format='plain-dialogue-v1',split='train',objective='foundation',batch_size=1,context_length=context,vocab_size=bpe.vocab_size,tokenizer_hash=tokenizer_hash,release_manifest_sha256=release_hash,research_policy_file_sha256=policy_hash,lineage_schema='record-content-spans-v2',allowed_categories=['sfw'],allowed_sources=sorted({r['source'] for r in rows}),batches=writer.batches,processed_tokens=writer.processed,supervised_tokens=writer.supervised,index_dtype=INDEX.descr,shards=writer.shards,builder_sha256=sha(__file__),files={str(p.relative_to(output)):sha(p) for p in output.rglob('*') if p.is_file()})
+ manifest=dict(version=1,kind='portable-token-shards-v1',message_format='plain-dialogue-v1',split='train',objective='foundation',batch_size=1,context_length=context,vocab_size=bpe.vocab_size,tokenizer_hash=tokenizer_hash,release_manifest_sha256=release_hash,research_policy_file_sha256=policy_hash,lineage_schema='record-content-spans-v2',allowed_categories=['unreviewed'],allowed_sources=sorted({r['source'] for r in rows}),batches=writer.batches,processed_tokens=writer.processed,supervised_tokens=writer.supervised,index_dtype=INDEX.descr,shards=writer.shards,builder_sha256=sha(__file__),files={str(p.relative_to(output)):sha(p) for p in output.rglob('*') if p.is_file()})
  save(output/'manifest.json',manifest);return report
 
 def verify_tokens(rows,bpe,path,tokenizer):

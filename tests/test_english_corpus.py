@@ -29,3 +29,7 @@ def test_exact_token_stream_reconstruction_and_corruption(tmp_path):
 def test_no_validation_or_repaired_content_admission(tmp_path):
  r=record(0,text('train'));r['split']='validation';bpe=train_core([r['text']],300)
  with pytest.raises(ValueError,match='train'):build_tokens([r],bpe,tmp_path/'x','a'*64,'b'*64,'c'*64,context=32)
+
+def test_pinned_intake_token_count_cannot_be_reused_with_different_text_or_tokenizer(tmp_path):
+ r=record(0,text('content'));r['original_content_tokens']=1;bpe=train_core([r['text']],300)
+ with pytest.raises(ValueError,match='tokenizer count'):build_tokens([r],bpe,tmp_path/'counts','a'*64,'b'*64,'c'*64,context=32)

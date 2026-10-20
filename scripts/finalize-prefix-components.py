@@ -5,7 +5,7 @@ from pathlib import Path
 from slm.data.near_components import Components
 from slm.data.near_component_audit import reconstruct,verify
 from slm.data.stream_hash import sha
-out=Path('data/english-global-components-v1');root=Path('data/global-prefix-grouping-v1')
+out=Path('data/english-global-components-v1');root=Path('data/global-prefix-grouping-v2')
 def read(p):return json.loads(Path(p).read_text())
 def rows(p):
  with Path(p).open() as f:
@@ -14,7 +14,7 @@ def main():
  if out.exists():raise FileExistsError(out)
  r=read(root/'report.json');terminal=read(root/'supervisor-terminal.json');plan=read(root/'plan.json')
  if not (r['complete'] and r['full_population'] and r['source_records']==235779 and terminal==dict(complete=True,returncode=0)):raise ValueError('Complete terminal full source join required')
- if sha('configs/global-prefix-grouping-v1.json')!=r['plan_sha256']:raise ValueError('Frozen full plan differs')
+ if sha('configs/global-prefix-grouping-v2.json')!=r['plan_sha256']:raise ValueError('Frozen full plan differs')
  for f,h in plan['inputs'].items():
   if sha(f)!=h:raise ValueError('Source input differs')
  for f,h in r['files'].items():

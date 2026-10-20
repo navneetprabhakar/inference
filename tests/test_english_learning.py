@@ -45,3 +45,17 @@ def test_regression_capture_keeps_actual_student_history_and_resets_sessions(tmp
  assert len(calls[3])==1
  assert all(r['context_sha256']==digest(c) for r,c in zip(rows,calls))
  assert 'actual-reply-300' in (output/'transcripts-part-2.md').read_text()
+
+def test_exact_import_checks_fp32_bits_including_signed_zero(tmp_path):
+ import importlib.util,json
+ import numpy as np
+ from types import SimpleNamespace
+ from safetensors.numpy import save_file
+ from slm.common.config import Config,initialize
+ from slm.common.checkpoint import save as save_model
+ spec=importlib.util.spec_from_file_location('test_english_runner','scripts/run-english-learning.py');runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner)
+ c=Config();w=initialize(c);w['embedding'][0,0]=np.float32(0);origin=tmp_path/'origin';origin.mkdir();save_model(origin/'model',c,w);save_file({},str(origin/'optimizer.safetensors'));(origin/'manifest.json').write_text('{}')
+ t=SimpleNamespace(params={k:v.copy() for k,v in w.items()},moments={},impl=SimpleNamespace(export=lambda x:x))
+ assert runner.exact_import(t,origin)['exact']
+ t.params['embedding'][0,0]=np.float32(-0.0)
+ with pytest.raises(ValueError,match='Exact imported model state'):runner.exact_import(t,origin)

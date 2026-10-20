@@ -4,6 +4,20 @@ Creator: Navneet Prabhakar
 
 Date: 20 October 2026
 
+## Active indexed-query continuation
+
+The original full-run process is stopped and reaped (parent130/child-9); its database, journal and binary are retained. Profiling and a read-only EXPLAIN probe establish that its candidate-fetch query uses SCAN records instead of primary-key lookups. A separate fast engine forces candidate-first CROSS JOIN and the identical candidate-ID order. Original implementation/attempt remain unchanged.
+
+The active root is now `data/global-prefix-grouping-v2`, config `configs/global-prefix-grouping-v2.json`, entry `scripts/resume-prefix-grouping-v3.py`. It recovers only a cloned copy, reuses all committed facets and source mappings, reconstructs committed candidate counts, reserves a conservative upper bound for at most256uncommitted/in-progress facets, and retains the original absolute two-hour deadline with a10-second conservative margin. Combined original/copy work remains within24GiB; worker RSS stop is8GiB and cache2GiB. No fresh full-run time or comparison allowance is inferred. Source/raw-prefix/full-Jaccard/completeness checks remain unchanged.
+
+The first copy setup expected the older benchmark's terminal schema and refused before allocation; that failed entry/version is preserved. The corrected entry reads the actual full-run schema. Two focused fast-engine tests pass against original positive results, resumed-copy equivalence and query-plan lookup. Final full audit/component proof is still required.
+
+Before live token preparation, the foundation source category is explicitly `unreviewed`, not a whole-corpus SFW certification; pinned intake token counts are rechecked. A disjoint roughly1M-position eligible train pool is reserved for later conditional SFT retention, so main-language two-pass exhaustion does not force extra replay of exhausted families. Twenty-six focused preparation tests pass, including bit-for-bit signed-zero state import and the separately scoped foundation-data adapter. These are preparation controls, not student scores.
+
+## Foundation category compatibility correction
+
+Static execution review found that the unchanged mixture registry accepts only conversation content categories; a truthful `unreviewed` foundation label would therefore fail during build/read. The new `src/slm/data/english_foundation_adapter.py` loads isolated namespaces of the same frozen mixture/curriculum engines. It permits only explicit foundation/unreviewed input, binds its own hash in both manifests, and leaves the original category set/readers unchanged. Its curriculum reader subclasses the original class to preserve trainer/resume checks. No numerical trainer, schedule, source text or original module bytes change. Actual tiny CPU fixture training/resume succeeds; original readers still reject the unreviewed label, SFT/SFW misuse and adapter tampering are refused. This is data-contract compatibility, not an MLX/CUDA student-quality result.
+
 ## Current mandate and budgets
 
 Finish corpus grouping and finite admission, execute the corrected English learning plan, then publish all messages/replies and direct scores for another 100 three-turn conversations. Model improvement remains unproved until new student weights and actual assessments exist.
@@ -59,4 +73,4 @@ Configs: `main-learning-budget-authorization-v2.json`, `teacher-extra-80-authori
 
 The full join, exact release, actual learning and new conversation score must each have terminal evidence before being marked complete. Pipeline tests and corpus size are not model improvement. The broader conversation/styles/content/tools/MCP/ESCI objective remains unfinished.
 
-A quiet ten-minute thread continuation is active for this authorized recovery. It checks existing workers before acting and reports only meaningful progress/results/failures/input needs. Eighteen focused preparation tests pass, including aggregate preliminary precharge, family-bootstrap guards, source/token reconstruction and a scripted actual-history capture control. The scripted control is not a new student assessment.
+A quiet ten-minute thread continuation is active for this authorized recovery. It checks existing workers before acting and reports only meaningful progress/results/failures/input needs. Twenty-six focused preparation tests pass (reports/english-recovery-preparation-tests-v5.xml), including aggregate preliminary precharge, family-bootstrap guards, source/token reconstruction, the foundation-category adapter and a scripted actual-history capture control. The scripted control is not a new student assessment.

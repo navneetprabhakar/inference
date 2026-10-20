@@ -7,7 +7,7 @@ import numpy as np
 from slm.common import checkpoint
 from slm.common.curriculum import CurriculumTrainer
 from slm.common.tokenizer import BPE
-from slm.data.curriculum import CurriculumBatches
+from slm.data.english_foundation_adapter import CurriculumBatches
 from slm.data.english_corpus import lines
 from slm.data.stream_hash import sha
 from slm.data.schema import digest

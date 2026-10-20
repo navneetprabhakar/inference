@@ -11,7 +11,7 @@ from slm.common.training import Trainer,Recipe
 from slm.common.curriculum import CurriculumTrainer
 from slm.common.tokenizer import BPE
 from slm.data.tokenized import ShardBatches
-from slm.data.curriculum import CurriculumBatches
+from slm.data.english_foundation_adapter import CurriculumBatches
 from slm.data.stream_hash import sha
 from slm.data.english_corpus import lines
 from slm.english_learning import Meter,nll,compare_learning,run_updates,save
@@ -41,10 +41,11 @@ def snapshot(trainer,bpe,documents,path):
  np.savez(path,**value)
 
 def exact_import(trainer,origin):
+ def same_bits(a,b):return a.dtype==b.dtype and a.shape==b.shape and a.tobytes()==b.tobytes()
  _,weights=checkpoint.load(origin/'model');actual=trainer.impl.export(trainer.params)
- if actual.keys()!=weights.keys() or any(not np.array_equal(actual[k],weights[k]) for k in weights):raise ValueError('Exact imported model state differs')
+ if actual.keys()!=weights.keys() or any(not same_bits(actual[k],weights[k]) for k in weights):raise ValueError('Exact imported model state differs')
  raw=load_file(str(origin/'optimizer.safetensors'));moments=trainer.impl.export({f'{slot}:{k}':v[j] for k,v in trainer.moments.items() for j,slot in enumerate(['m','v'])})
- if raw.keys()!=moments.keys() or any(not np.array_equal(raw[k],moments[k]) for k in raw):raise ValueError('Exact imported optimizer state differs')
+ if raw.keys()!=moments.keys() or any(not same_bits(raw[k],moments[k]) for k in raw):raise ValueError('Exact imported optimizer state differs')
  return dict(model_tensors=len(weights),optimizer_tensors=len(raw),exact=True,origin_manifest_sha256=sha(origin/'manifest.json'))
 
 def prose(model_path,backend,device,path,p):
