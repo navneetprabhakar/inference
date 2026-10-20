@@ -2,6 +2,10 @@
 
 Creator: Navneet Prabhakar
 
+## Owner stop and sequence redesign — 21 October 2026
+
+STOP new training. Owner approved the local-only route, then explicitly stopped to redesign: English foundation → conversation → tool calling; starting from scratch is acceptable, not a launch instruction. No local-main run or new gradient occurred after approval; no owned learner/capture is running. GCP/auth remains forbidden. See configs/owner-learning-redesign-hold-v1.json. Preserve all evidence/budgets/clocks; stage plan and readiness gates precede any new run. Earlier execution snapshots below are historical.
+
 ## Active local conversation recovery — 20 October 2026
 
 Owner requires >=75% correct requested turns (225/300) on unseen100 three-turn conversations, session success separate; original full-project gates unchanged. NO GCP/auth. Original paired foundation/corrected both0/300; first SFT rejected at154updates/270359positions,0/300 on regression and harder diagnostic. Grounded/replay run is now terminal:520updates/2595406positions, retention passes, actual groundedQA3/300, originalregression0/300. New everydayEnglish paired source0/300→trained1/300;0/100complete sessions. All1500new raw replies/direct judgments published in docs/grounded-conversation-recovery.md and linked transcripts; no promotion or75%claim. All local learners/captures exited. Cumulative new recovery4371845positions across four raw ledgers; remaining conditionalSFT17134235, language0/78M. Latest exclusionsv5 required. Exhausted QA cannot replay. Local-language route proposalv1 is unapproved; prior actualCUDA-before-main prerequisite requires explicit owner exception for isolated local-only branch. No auth/main launch/clock reset. Old pending snapshots below historical. Full objective unfinished.
