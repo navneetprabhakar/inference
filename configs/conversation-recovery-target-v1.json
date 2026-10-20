@@ -1,0 +1,27 @@
+{
+  "authorization_source": "Direct user instruction: keep going training in conversation till at least70\u201375% correctness",
+  "automatic_training_allowed_by_this_target_file": false,
+  "budget": "configs/main-learning-budget-authorization-v2.json",
+  "cloud_execution_allowed": false,
+  "cloud_hold": "configs/english-owner-cloud-hold-v1.json",
+  "creator": "Navneet Prabhakar",
+  "existing_teacher_extra_calls": 80,
+  "kind": "conversation-recovery-target-v1",
+  "next_requirement": "Broad independently admitted conversation corpus and a new checked local training recipe; no reuse of collapsed branches or tiny teacher templates as another full iteration.",
+  "phase_caps_unchanged": {
+    "conditional_sft": 20000000,
+    "language": 78000000,
+    "preliminary": 2000000,
+    "total_new_physical_positions": 100000000
+  },
+  "platform_api_allowed": false,
+  "training_policy": "Iterative local conversation-focused preparation, admission, frozen training and actual generation assessment; stop at approved resource, source or safety boundaries, never promise convergence or silently extend caps. No training on evaluation prompts/replies or parameter variants of them.",
+  "working_acceptance": {
+    "complete_conversation_success_reported_separately": true,
+    "evaluation_conversations": 100,
+    "minimum_correct_requested_turn_fraction": 0.75,
+    "old_full_project_acceptance_thresholds_unchanged": true,
+    "turns_per_conversation": 3,
+    "unseen_prompt_families_required": true
+  }
+}

@@ -4,6 +4,12 @@ Creator: Navneet Prabhakar
 
 Date: 20 October 2026
 
+## Actual paired conversation result and new training target — 20 October 2026
+
+- Both local endpoints complete100three-turn conversations: foundation0/300tasks/4.95rubric, corrected0/300/5.00; neither passes any full session. Corrected repetitive8-gram replies130→258/300, token-ceiling167→256/300. No demonstrated task improvement. All600rawreplies/directjudgments/identity-history-publication audits are complete;20/20targeteduncached16-token prefixes match.
+- User now requires continued conversation training toward70–75%correctness. Working target>=75%correct requested turns on unseen conversations, with session pass rate separately; old full-project gates remain. Owner cloud hold remains active. Proceed with broad independent conversation corpus/admission, frozen local recipe and fresh acceptance families, then bounded iterative local training. No automatic68.6Mprose/GCP launch, tiny template memorization or evaluation-answer training.
+- See docs/paired-local-conversation-diagnosis.md, docs/balanced-versus-foundation-transcripts.md and configs/conversation-recovery-target-v1.json. This assessment uses zero gradients/teacher/cloud;100Mglobal/20MconditionalSFT/other phase caps unchanged. Original full objective remains unfinished.
+
 ## Owner cloud hold — 20 October 2026
 
 - Owner approved b→c capacity attempts, but the first read-only inventory in `data/english-gcp-session-v4` failed expired GCP reauthentication. No VM create request was reached; no new CUDA/main gradients. Preserve that attempt and the authorization; do not rerun its existing output directory.

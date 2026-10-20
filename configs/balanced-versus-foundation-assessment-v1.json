@@ -1,0 +1,47 @@
+{
+  "actual_student_history": true,
+  "backend": "mlx",
+  "cloud_execution_authorized": false,
+  "creator": "Navneet Prabhakar",
+  "decoding": "raw-cached-greedy-v1",
+  "execution_order": [
+    "corrected",
+    "foundation"
+  ],
+  "inputs": {
+    "configs/current-model-100-conversations-v1.json": "bb006f260c30d5ae30e4128f79a7fa163de9e5e3407d91486f3e3eb5e32521df",
+    "data/english-balanced-experiment-v2/mlx/checkpoint/model/config.json": "3e3c91950089dbe7e8ab85fadba8152a5d4bf4f7a26f069b075f770345f5f397",
+    "data/english-balanced-experiment-v2/mlx/checkpoint/model/manifest.json": "882e2891c1ed815765ddd562322b0bc6a4b6da5ab90bcf3388b1dbce64a5a912",
+    "data/english-balanced-experiment-v2/mlx/checkpoint/model/model.safetensors": "5623ef5a6c4eb1144091a808064540464e3e71fc6ac0bd4b2fe30d8c9929187a",
+    "data/english-balanced-local-v2/supervisor-terminal.json": "46ab71aa1c4bccfbb84fedced31b753fa153d1109b458df0b2967370fa401c70",
+    "data/iteration-two-experiment-v1/runs/selected-continuation/checkpoints/000000009984-44136fa355b3/state/model/config.json": "3e3c91950089dbe7e8ab85fadba8152a5d4bf4f7a26f069b075f770345f5f397",
+    "data/iteration-two-experiment-v1/runs/selected-continuation/checkpoints/000000009984-44136fa355b3/state/model/manifest.json": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+    "data/iteration-two-experiment-v1/runs/selected-continuation/checkpoints/000000009984-44136fa355b3/state/model/model.safetensors": "fa5de72e1a03adedbbd631effedd1ecaf385822bc2916879545d155f557d999b",
+    "data/iteration-two-foundation-tokenizers-v1/vocab-16384/core.json": "0044125dd66d4414a4f7dabf9cdfe356dfdcbd7b91a09393fa28fe6bfac30a64",
+    "data/iteration-two-foundation-tokenizers-v1/vocab-16384/manifest.json": "651b5b56d11caa890a2f51b8f5b896600885f676095b07ae51c6d4436712a126",
+    "reports/english-balanced-local-learning-v2.json": "e028010ab9adb80d09a98340dbd2d62413772b3d2bbc8ad68a6c3c5e7f4adf1e",
+    "scripts/assess-balanced-versus-foundation-v1.py": "b26c8552637e10b169ccaba196f9a9b036407a33aaf2f56317979edf6d358cdc",
+    "src/slm/backends/mlx_backend.py": "eb5973a583ce73cb2272acdb1f32ff49beadaff963941ee9462db0d3cc9d0928",
+    "src/slm/english_language_stage.py": "9050818f35c7e9c3dea2c36fb4608bd0b7d6e3e34bb3de4167eed97e3b2c7af8",
+    "src/slm/inference/greedy.py": "f6da14241b5fe940e61a034b0ca0009d92f614d1dc3d79ccf9fefe179c36b4f5"
+  },
+  "kind": "paired-local-100-conversation-assessment-v1",
+  "max_new_tokens_per_reply": 128,
+  "maximum_seconds_per_model": 7200,
+  "model_updates_authorized": 0,
+  "models": {
+    "corrected": {
+      "model_manifest_sha256": "882e2891c1ed815765ddd562322b0bc6a4b6da5ab90bcf3388b1dbce64a5a912",
+      "path": "data/english-balanced-experiment-v2/mlx/checkpoint/model"
+    },
+    "foundation": {
+      "model_manifest_sha256": "a55daf69c568081f68606848bd27a8be6de5c2a3642d2a01c648e7ac99d96792",
+      "path": "data/iteration-two-experiment-v1/runs/selected-continuation/checkpoints/000000009984-44136fa355b3/state/model"
+    }
+  },
+  "protocol": "configs/current-model-100-conversations-v1.json",
+  "scope": "Same visible development prompts, not a new held-out benchmark; each endpoint uses its own actual replies as history; direct quality grading remains separate.",
+  "system_prompt": null,
+  "teacher_calls_authorized": 0,
+  "tokenizer": "data/iteration-two-foundation-tokenizers-v1/vocab-16384"
+}

@@ -2,6 +2,10 @@
 
 Creator: Navneet Prabhakar
 
+## Active local conversation recovery — 20 October 2026
+
+Owner requires continued conversation training toward70–75%correctness; use>=75%correct requested turns on unseen100three-turn conversations, report whole-session success separately, preserve original full-project gates. configs/conversation-recovery-target-v1.json records target, not a launch contract. NO GCP authentication/execution under owner hold. Actual paired local assessment now completes: foundation0/100sessions,0/300turns,4.95/100rubric; corrected0/100,0/300,5.00. Corrected repetition worsens130→258replies/300 by repeated8-gram rule. All600rawreplies/directjudgments published;20/20targeteduncachedprefixes match. See docs/paired-local-conversation-diagnosis.md and docs/balanced-versus-foundation-transcripts.md. No new gradients/teacher/cloud. Next broad independently admitted conversation data, frozen local recipe and unseen acceptance cases before actual iterative training; retain all budget/exposure/source limits. Older unmeasured/pending assessment snapshots below are historical. Full recovery/training objective unfinished; no promise of75%within current limits.
+
 ## Current execution boundary — 20 October 2026
 
 - Full grouping, component and finite-release audits pass. The original MLX control fails general retention (-0.118 nats); preserve its 786,432 discarded positions and artifacts. Corrected balanced local control is terminal-successful: common 33 + resumed 57 updates, NLL 4.317756→3.905882; both general and narrative improve. This is a language signal, not conversation acceptance.
@@ -11,10 +15,6 @@ Creator: Navneet Prabhakar
 - OWNER HOLD supersedes cloud execution: user approved b→c, but initial read-only inventory failed GCP reauthentication before any create request. User now forbids GCP authentication/execution pending a convincing diagnosis. See configs/english-owner-cloud-hold-v1.json. Do not authenticate, relaunch or infer consent from heartbeats. Preserve original absolute deletion 2026-10-22T01:30:02Z and all budgets. No VM created.
 - See docs/english-recovery-execution.md and latest ledger. Old live-process descriptions below are historical; no controller remains live. Category remains unreviewed, original 40M coverage gate unmet, rejected populations excluded. Foundation adapter preserves original numerical runtime. Eighty additional saved-login CLI teacher calls remain unused; admission/account/category evidence still required.
 - Continue after actual approval through CUDA proof, conditional uniform main training, verified checkpoint retrieval and resource cleanup, isolated MLX exact-state/inference checks, then all 300 raw message/reply pairs from 100 three-turn student-history conversations and direct scores against 0/100, 0/300, 7.6/100. Development reuse is not a fresh final test. Never substitute preprocessing, teacher quality or NLL for actual conversation improvement. Full English/styles/content/tools/MCP/portability/ESCI objective remains unfinished.
-
-## Current data-index prototype — 20 October 2026
-
-[Exact prefix-index prototype](prefix-near-prototype.md) passes nine focused tests and a separate complete read-only audit of 4,096 selected source records / 5,820 raw facets / 7,368 candidate comparisons. Actual sample has no qualifying near pairs; positive-match coverage is synthetic. Original inefficient-audit benchmark remains interrupted and retained. No exact build-throughput or full-corpus claim. Next freeze a larger measured bounded preflight before a complete full-source join, component/flag audit, split and finite admission. No student update, additional teacher request or cloud resource; all prior budgets and immutable artifacts remain binding.
 
 ## Current teacher milestone — 20 October2026
 
