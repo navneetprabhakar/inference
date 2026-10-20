@@ -2,9 +2,9 @@
 
 Creator: Navneet Prabhakar
 
-## Actual admitted release and learning — 20 October 2026
+## Active balanced correction — 20 October 2026
 
-Full v2group/component/release/pool audits pass. Language inventory:34,304,928one-pass/68,609,856two-pass positions;40Mcoverage remains unmet.32commonMLXupdates/262144physicalpositions improve500docNLL5.106870→4.952450; lastconversation score remains0/100.64MLXresume runs under controller29552: inspect state first, preserve169pinned inputs and avoid duplicate phases. CUDA/mainlanguage/new100conversations remain pending; no VM/teacher call. Current execution/actual reports supersede old running-group/no-gradient snapshots below.
+Full grouping/release audits pass. Original MLX arm fails unchanged general-retention gate(-0.118nat); controllerv1 is stopped,786432positions retained. New balanced experiment/control: data/english-balanced-experiment-v2 and data/english-balanced-local-v2(parent31770).33common+57per-arm updates predeclare1964493cumulative positions below2M; carry old ledger, retain thresholds and all failed artifacts. Inspect corrected process/progress/terminal first, avoid duplicates/pinned-input edits. CUDA/main/100conversation comparison pending; no VM/newteacher calls. See current execution; older live/no-gradient snapshots are historical.
 
 ## Current full-join correction — 20 October 2026
 
