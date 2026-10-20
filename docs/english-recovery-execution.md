@@ -4,6 +4,18 @@ Creator: Navneet Prabhakar
 
 Date: 20 October 2026
 
+## Actual grouping, release and first learning signal — 20 October 2026
+
+The full join is now terminal-successful, not merely indexed:235,779records/332,849facet references/325,988unique facets/124,276,305fullfeatures/18,812,560prefix postings/23,396,238candidate pairs/3,124qualifying raw-verified near pairs. Full streaming audit433.30seconds; original elapsed4,258.52seconds stays within its unchanged7,200-second ceiling. Peak RSS2,495,627,264bytes. Original stopped attempt/rollback reservation remain retained. The independent graph audit checks every235,779source roots and229,415finalcomponents, including original heldout/nonapproval flags.
+
+Exact private research release:106,554intact rows/families,104,483train/1,038validation/1,033test. A new read-only full membership audit reconstructs all eligible canonical component representatives from the entire original database and verifies original text/provenance/splits, every pool lineage/position span and dev/prefix identity. It passes. It reuses the fixed eligibility predicate and adds no new content judgments or independent numeric-token replay; the frozen preparer already reconstructed every numeric next-token/mask from source. Most admitted text remains unread and category unreviewed.
+
+Main language pools:25,019general records/18,787,248one-pass prediction positions plus72,856narrative records/15,517,680positions. Total34,304,928prepared positions,68,609,856across exactly two passes and8,376optimizer updates. Realized general/story fractions54.765%/45.235%reflect finite exhaustion, not a claimed60/40final mixture. Separate3,619preliminary families/1,205,304positions and2,989retention families/1,003,443positions are disjoint from main and all evaluation families. Original40Mcoverage gate remains unmet. Main language has not started.
+
+Actual baseline scores500fixed heldout documents and captures100raw prose continuations. The32common MLX updates complete in284.22seconds and reserve262,144physical positions. Equal-document heldout NLL improves5.106870→4.952450:0.154420nats, family-bootstrap95%interval[0.146006,0.162337]. General improves0.241002/narrative0.096698. This is a measured early language signal; it is not the64-update resumed-arm comparison, CUDA portability, generation gate or new conversation score. The64-update resumed MLX arm is now running under the existing local controller; exact state import passes. No new teacher calls or paid cloud resources.
+
+Evidence: reports/global-prefix-grouping-final.json, english-global-components.json, english-corpus-preparation.json, english-release-audit.json, english-experiment-freeze.json and english-recovery-common-learning.json. Experiment plan SHA e4f7e46d941fbaafb4446fa107e852f46be84dd112de3cad9c1da15bac66443e. Preserve all executed sources, release/curriculum bytes and169controller inputs. After serial local completion inspect the real MLX useful-learning/package receipts, then prepare/verify the separate bounded actual CUDA launch. Latest actual conversation result stays0/100sessions/0of300turns/7.6of100until the planned new raw-history assessment exists. Older live/pending paragraphs below describe earlier states.
+
 ## Active indexed-query continuation
 
 The original full-run process is stopped and reaped (parent130/child-9); its database, journal and binary are retained. Profiling and a read-only EXPLAIN probe establish that its candidate-fetch query uses SCAN records instead of primary-key lookups. A separate fast engine forces candidate-first CROSS JOIN and the identical candidate-ID order. Original implementation/attempt remain unchanged.

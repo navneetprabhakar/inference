@@ -2,6 +2,10 @@
 
 Creator: Navneet Prabhakar
 
+## Actual admitted release and learning — 20 October 2026
+
+Full v2group/component/release/pool audits pass. Language inventory:34,304,928one-pass/68,609,856two-pass positions;40Mcoverage remains unmet.32commonMLXupdates/262144physicalpositions improve500docNLL5.106870→4.952450; lastconversation score remains0/100.64MLXresume runs under controller29552: inspect state first, preserve169pinned inputs and avoid duplicate phases. CUDA/mainlanguage/new100conversations remain pending; no VM/teacher call. Current execution/actual reports supersede old running-group/no-gradient snapshots below.
+
 ## Current full-join correction — 20 October 2026
 
 The active join is data/global-prefix-grouping-v2 with configs/global-prefix-grouping-v2.json and scripts/resume-prefix-grouping-v3.py. Original v1is stopped/reaped and retained: EXPLAIN proves an unintended full-record scan per candidate-fetch query. New forced candidate-first lookup is equivalent, runs on a recovered copy of committed work, conservatively reserves possible rollback comparisons and keeps the original absolute2-hourdeadline (10s conservative margin), combined24GiBwork/40GiBfree and new8GiBRSSstop. No restart of v1or deadline/counter reset. First copy setup refused the wrong terminal schema before allocation and remains recorded. Finalize-prefix-components.py now targets v2; full corpus proof/admission still pending. No new gradients/teacher calls/VMs. Read docs/english-recovery-execution.md before following older job-state paragraphs.
