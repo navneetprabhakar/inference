@@ -1,0 +1,34 @@
+{
+  "status": "UPDATE_TRANSACTION_COMPONENT_PASS",
+  "new_transaction_tests": 10,
+  "related_regression_tests": 30,
+  "backends": [
+    "MLX",
+    "PyTorch CPU"
+  ],
+  "scope": "Fixed arithmetic gradient callbacks, real AdamW, real persistent reservation ledger and real stop monitor. No neural forward or model initialization.",
+  "verified": [
+    "reservation before reader and gradient calls",
+    "target-weighted microbatch accumulation",
+    "input parameters remain unchanged",
+    "success returns proposed state and cloned monitor after completion",
+    "gradient failure and nonfinite state leave charged incomplete reservation",
+    "quality-stop rejection leaves charged incomplete reservation",
+    "terminal monitor blocks retry",
+    "budget rejection before data/computation"
+  ],
+  "files_sha256": {
+    "src/slm/restart/update_step.py": "0578debfc183dcf9dc23c3fdc4bb9d0b162e9975128b64b3188708fd0cd18c56",
+    "tests/test_restart_update_step.py": "63ab528d98c506ed8d181047dcae186863252523e72b09904d675e156fd79c38",
+    "src/slm/restart/accumulation.py": "0660dc43795fe142b5c98968d38d0daeb457c081abd5300c2bcd347b9afee833",
+    "src/slm/restart/ledger.py": "242a9c61bb9fca9e7c53074472647c17743b50d8d679b1bed7306944e723d8dc"
+  },
+  "required_40_case_neural_suite_passed": false,
+  "remaining": [
+    "Scoped launcher authorization and custody integration",
+    "Neural forward/gradient 40-case suite",
+    "Checkpoint publication and resumed-next-update equivalence",
+    "Live supervisor and evaluation-event integration"
+  ],
+  "training_started": false
+}

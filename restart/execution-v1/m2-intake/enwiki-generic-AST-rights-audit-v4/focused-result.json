@@ -1,0 +1,183 @@
+{
+  "status": "PASS21_INDEPENDENT_CROSS_CONTEXT_SYNTHETIC_CHECKS_NO_RETAINED_SOURCE_PARSE",
+  "count": 21,
+  "cases": [
+    {
+      "source": "Lead [[{{PAGENAME}}]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [https://{{site}}/page Label].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_external_URL_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[Foo|{{unknown}}]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unresolved_template_or_Lua_dependency"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A&amp;B]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A&amp]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A&amp|Label]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [https://example.org/a&amp Label].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_external_URL_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[{{{target}}}|Readable]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A<!--comment-->B|Readable]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [https://{{{host}}}/path Label].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_external_URL_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A|<b>{{unknown}}</b>]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unresolved_template_or_Lua_dependency"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [https://example.org <i>{{unknown}}</i>].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unresolved_template_or_Lua_dependency"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "== [[{{unknown}}|Heading]] ==\nComplete paragraph.",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Complete opening.\n\nLate [[A|{{unknown}}]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unresolved_template_or_Lua_dependency"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[A&#xD800;|Readable]].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_internal_link_destination_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [https://example.org/&#999999999999999999999; Readable].",
+      "held": true,
+      "preview": null,
+      "holds": [
+        "unsupported_or_nested_external_URL_AST"
+      ],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "Lead [[AT&T]].",
+      "held": false,
+      "preview": "Lead AT&T.",
+      "holds": [],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "[https://example.org/?a=1&b=2 Label]",
+      "held": false,
+      "preview": "Label (https://example.org/?a=1&b=2)",
+      "holds": [],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "in[[line|line]] text.",
+      "held": false,
+      "preview": "inline text.",
+      "holds": [],
+      "source_inverse_verified": true
+    },
+    {
+      "source": "A &amp; B &#65; &#x1F600;",
+      "held": false,
+      "preview": "A & B A \ud83d\ude00",
+      "holds": [],
+      "source_inverse_verified": true
+    },
+    {
+      "separate_H2_section_preserved_while_complete_lead_held": true
+    }
+  ],
+  "policy_core_SHA256": "984dbb8635beba95a4eb5b78ddd2ee13076e5c5537415e734a70707801fc411c",
+  "source_records_ASTparsed": 0
+}

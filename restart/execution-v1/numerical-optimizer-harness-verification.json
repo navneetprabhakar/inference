@@ -1,0 +1,28 @@
+{
+  "status": "OPTIMIZER_CASE_LOGIC_IMPLEMENTED_NEURAL_TRAJECTORY_PENDING",
+  "new_required_case_implementations": 6,
+  "total_required_case_implementations": 28,
+  "required_suite_cases": 40,
+  "new_harness_tests_passed": 4,
+  "combined_numerical_harness_tests_passed": 30,
+  "scope": "Real accumulators supplied arithmetic gradient callbacks; NumPy oracle supplied independent closed-form constant-gradient records, not actual neural optimizer histories.",
+  "checks": [
+    "Unequal supervision weighting against full-batch gradient",
+    "Partial batch normalization by actual targets",
+    "Clipping active in both future backend trajectories",
+    "First/second moments and trajectory continuity",
+    "Every matrix decayed including embedding; vectors excluded",
+    "Global target-count warmup/cosine and endpoint validation"
+  ],
+  "files_sha256": {
+    "src/slm/restart/numerical_optimizer.py": "f4bd6f79003a55d6cb0f927ca7c9dfd60c629a2641488c2ce44aa31977462288",
+    "tests/test_restart_numerical_optimizer.py": "015b34510183ff1eeabfdd552b83333be7ee590b1b2c62a459a219e62d64966f"
+  },
+  "remaining": [
+    "Six checkpoint/resume case IDs",
+    "Six fit/budget/integrity case IDs",
+    "Actual budgeted adapters and captured backend trajectories",
+    "Freeze and execute full suite only after scoped preflight"
+  ],
+  "training_started": false
+}

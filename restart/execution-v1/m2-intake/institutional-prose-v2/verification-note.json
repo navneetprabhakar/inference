@@ -1,0 +1,11 @@
+{
+  "status": "VERIFIER_CORRECTION_RECORDED",
+  "issue": "Initial verifier removed www. before applying the suffix test, incorrectly rejecting two www.gov.uk candidates. Builder applies suffix selection to the original hostname.",
+  "correction": "Verifier now checks original parsed hostname while separately verifying normalized storage host. No candidate, filter, sample or tokenizer changed.",
+  "affected_rows": [
+    39549,
+    42703
+  ],
+  "subsequent_verification": "verification.json",
+  "recorded_utc": "2026-10-21T07:52:27.896244+00:00"
+}

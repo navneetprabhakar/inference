@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "utc": "2026-10-21T05:05:57.041670+00:00",
+  "scope": "Standalone optimizer arithmetic fixtures; not the complete frozen 40-case M1 correctness gate.",
+  "tests_passed": 4,
+  "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_restart_optimizer_policy.py",
+  "regression": "Both backends previously exempted embedding from matrix decay; zero-gradient regression failed before change and passed after.",
+  "recipe": "All rank-2 matrices decay at 0.1; vectors do not decay.",
+  "validation": [
+    "Zero-gradient fixture isolates weight decay in both backends.",
+    "Nonzero globally clipped update and both moments match native torch.optim.AdamW within absolute 1e-6."
+  ],
+  "no_neural_model_constructed": true,
+  "training_data_used": false,
+  "legacy_boundary": "initialize/load/trainer/resume/train remain denied; verified after code change.",
+  "files_sha256": {
+    "src/slm/backends/mlx_backend.py": "64555ba1ab828ecf3265925ee74cf9b2356a7cd1a201265e0cab1c39fcc0fc51",
+    "src/slm/backends/torch_backend.py": "56556bd2fd36cb356289be438c16855e3ad8ccf1bf7beb83d35cf291a31b26ac",
+    "tests/test_restart_optimizer_policy.py": "5434921a2c4fab121b5b6d4c451aca389e47abab137352ea34842a3c4e45497f"
+  },
+  "remaining": [
+    "Full frozen 40-case suite",
+    "Accumulation and optimizer integration into scoped training launcher",
+    "Complete deterministic model/optimizer/RNG/cursor resume proof"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-10-21T05:57:27.256160+00:00",
+  "status": "ARITHMETIC_HARNESS_VERIFIED_NEURAL_SUITE_PENDING",
+  "tests": {
+    "command": "PYTHONPATH=src .venv/bin/pytest -q tests/test_restart_numerical_*.py tests/test_restart_checkpoint_binding.py",
+    "passed": 82
+  },
+  "fix": "Deep-copy restored monitor state so continuation cannot mutate checkpoint metadata evidence.",
+  "worker_case_count": 34,
+  "pending": "Supervisor-backed final six integrity cases, frozen launch binding and actual numerical execution.",
+  "model_initialized": false,
+  "training_started": false,
+  "sha256": {
+    "src/slm/restart/numerical_trajectory.py": "83157cfc9b65840e983cbc7d166f1310f9723e60fe2273f3c827e1742eb7753e",
+    "src/slm/restart/numerical_runner.py": "2e4171baaeab7bc0a766ce643a412b978f206b46727d4f7cbddbe028b4d9604a",
+    "src/slm/restart/checkpoint_binding.py": "71ff7f62cea784d832e290bd322898378b3dfb1db9d28fc045cd1fa2a8e3a7da",
+    "tests/test_restart_numerical_trajectory.py": "9c5a520d26b3b9639e779a4729ce6af2ce67353e50bfd0d05d3e1c44869d8e0c",
+    "tests/test_restart_numerical_runner.py": "e7a66b1fef606e0e5e200beecb5f5188bae11ca2fc216d4f8a703acdbe348a70"
+  }
+}

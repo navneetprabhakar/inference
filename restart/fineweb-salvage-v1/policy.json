@@ -1,0 +1,34 @@
+{
+  "scope": "Conservative short standalone prose salvage from prior mechanically accepted FineWeb only. No text rewriting. Does not attempt to salvage all good long/list/medical/commercial documents.",
+  "rules": {
+    "medical_advice_or_claims": "\\b(?:patient\\w*|diagnos\\w*|treatments?|symptoms?|supplements?|diseases?|cancer|insulin|therap\\w*|medications?|health benefits|mental health|weight loss|brain health|brain function)\\b",
+    "commercial_or_signup": "\\b(?:buy|purchase|shop|sale|discount|customers?|clients?|book now|booking|registration|register|subscribe|contact us|sign up|refund|shipping|our services|our products|our team|free trial|get in touch|order now|click|download|donate|pricing|price|costs?|fees?|tickets?)\\b|[$\u20ac\u20b9\u00a3]",
+    "link_markup_or_encoding": "https?://|www\\.|\\[/?\\w+[^\\]]*\\]|<[^>]+>|\u00e2\u20ac|\u00c3.|\u00c2.|\ufffd|\\|",
+    "exercise_or_missing_media": "\\b(?:antonyms?|synonyms?|fill in the blank|multiple choice|answer key|worksheet|watch (?:the|this)|video|pictured|image above|image below|photo above|photo below|read more|learn more|see below|see above|figure \\d|table \\d)\\b",
+    "boilerplate": "\\b(?:all rights reserved|privacy|cookies|terms and conditions|copyright|leave a reply|posted by|related articles|share this|follow us|newsletter|posted on)\\b"
+  },
+  "length_tokens": [
+    120,
+    480
+  ],
+  "paragraphs": [
+    2,
+    12
+  ],
+  "minimum_words_each_paragraph": 8,
+  "require_terminal_sentence_punctuation_each_paragraph": true,
+  "source_input_sha256": "0f368e5a98a74f2f40e2f986e48b3021935b4995bc323546ac466c283f90c51e",
+  "filter_code_sha256": "505f755f57a223a8960b9519c89ddfbdaa6194a9de0ef27fb41b80e3606d4729",
+  "previous_sample_families_reserved": 200,
+  "sampling": "Fresh deterministic pseudorandom document sample of 200 train records after freezing filters; exclude every prior FineWeb sample family from salvage pool. Equal selection opportunity per eligible train document; not token-weighted.",
+  "seed": "fineweb-salvage-v1-fresh-20261021:",
+  "gate": {
+    "usable_minimum": 190,
+    "major_maximum": 4,
+    "denominator": 200
+  },
+  "early_rejection": "Reject once >10 total failures or >4 major failures. Never early accept. No tuning on validation sample without new holdout.",
+  "failure_action": "Reject source slice, retain only individually reviewed passing records as explicitly limited salvage; report separately.",
+  "pass_action": "Admit slice excluding observed failed families. Report sample uncertainty and exact manifest counts, not certified population quality.",
+  "training_approved": false
+}

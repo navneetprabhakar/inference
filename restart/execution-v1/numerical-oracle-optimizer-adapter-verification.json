@@ -1,0 +1,26 @@
+{
+  "status": "ORACLE_AND_OPTIMIZER_ADAPTERS_IMPLEMENTED",
+  "combined_adapter_budget_tests_passed": 25,
+  "scope": "Fixed small array expressions and fixed-gradient optimizer calls only. No Config initialization, decoder forward or neural training.",
+  "verified": [
+    "Tied full/input/output gradients computed by real autodiff with appropriate detach paths",
+    "All three paths charged before evaluation",
+    "FP64 oracle clones supplied arrays and uses native Torch CE",
+    "Finite-difference result agrees on fixed expression without mutating FP32 originals",
+    "Optimizer reserves first and captures before/after params and moments",
+    "Invalid/nonfinite optimizer results never install proposed state",
+    "Position counts reject non-integers instead of truncating"
+  ],
+  "files_sha256": {
+    "src/slm/restart/numerical_backend.py": "29bf911389bd455b44bf2f50f31b8685c07cde2dee710696a806187ed4f0b728",
+    "tests/test_restart_numerical_backend.py": "69b3de4d1dca4dfc7a6a852303798be00089db05beb3775ab526b4ceb0e98caf",
+    "tests/test_restart_numerical_oracle_adapters.py": "fd0f0ed300d897ccf4d7acb767762fa1400ddcd496caf110b461d633ce661b3c"
+  },
+  "remaining": [
+    "Orchestrate full suite and real checkpoint captures",
+    "Freeze exact complete runner and initialization scope",
+    "Toy-only supervised/custodied launch",
+    "Run all 40 cases within original update/work/time limits"
+  ],
+  "training_started": false
+}

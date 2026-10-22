@@ -1,0 +1,5 @@
+Fixed PressBooks development capture, no acceptance inference.
+
+Metadata-only frozen population79874distincttextSHA minus13explicit heldhashes(allcopies)=79861. Twenty seeded SHA-priority uniform draws withoutreplacement and10 unbiased SHA-rejection/inverseCDF UTF8-BYTE draws withreplacement, keeping all overlaps/multiplicity. Earliest(source_id,ordinal) solely chooses capture occurrence; no corpus preferred edition. Seven selected FAMILY_UNRESOLVED flags retained.
+
+Actual worker streams BOTH immutablegzip files once, verifies fullCRC/EOF+compressedSHA, everyoriginalmetadataframe row and orderedlinelocators, captures exact fullrawJSONline plus original decodedtext without truncation. Original metadata remains complete in source.json. 421754480compressedB;2GBdecoded/file;4MBline/2.196MBtext;285worker/295supervisor normal deadline/300external cleanup/1GBRSS/100MBoutput. Output expected about4.32MBincluding2MBslots. No source read by preparation. Actual once-only command gated by parent+independentreview.

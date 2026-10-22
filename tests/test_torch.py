@@ -29,8 +29,8 @@ def test_reference_adamw_against_native():
     c = Config()
     p = tb.load(c, initialize(c))
     native = tb.load(c, initialize(c))
-    groups = [dict(params=[w for k, w in native.items() if w.ndim == 2 and k != 'embedding'], weight_decay=.1),
-              dict(params=[w for k, w in native.items() if w.ndim != 2 or k == 'embedding'], weight_decay=0.)]
+    groups = [dict(params=[w for k, w in native.items() if w.ndim == 2], weight_decay=.1),
+              dict(params=[w for k, w in native.items() if w.ndim != 2], weight_decay=0.)]
     opt = torch.optim.AdamW(groups, lr=.001, betas=(.9, .95), eps=1e-8, foreach=False, fused=False)
     state = {}
     rng = np.random.default_rng(7)

@@ -1,0 +1,79 @@
+"""Select source-grounded narrative/copy probes without generating training text."""
+import collections,csv,hashlib,json,re,sqlite3
+from pathlib import Path
+from slm.common.tokenizer import BPE
+O=Path(__file__).resolve().parent;R=O.parents[2];EXEC=O.parent
+MAN=R/'restart/fineweb-salvage-reviewed-v1/accepted-manifest.csv'
+EXPECTED='2ad53dc0fc670a7185763f1cfe151e1148933038b8855e55d54a29f84256716d'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def rank(label,row):return hashlib.sha256((label+':'+row['family_id']+':'+row['audit_id']).encode()).digest()
+
+def main():
+    dest=O/'narrative-probes-v1'
+    if dest.exists():raise FileExistsError('Preserve existing candidate set')
+    assert sha(MAN)==EXPECTED
+    tok=BPE.load(EXEC/'tokenizer-8192');rows=list(csv.DictReader(MAN.open()))
+    db=sqlite3.connect(f'file:{R}/restart/corpus-audit-v1/audit.sqlite?mode=ro',uri=True)
+    cache={};used=set();selected={};pairs={};train_bins=collections.defaultdict(list)
+    def load(row):
+        key=row['audit_id']
+        if key not in cache:
+            text=db.execute('SELECT text FROM docs WHERE id=?',(int(key),)).fetchone()[0]
+            assert hashlib.sha256(text.encode()).hexdigest()==row['original_text_sha256']
+            ids=tok.encode(text);cache[key]=(text,ids)
+        return cache[key]
+    def base(row):return {k:row[k] for k in ['audit_id','source','split','family_id','original_text_sha256','normalized_sha256']}
+    def copy_candidate(row):
+        text,ids=load(row)
+        if len(ids)<96:return None
+        prefix=tok.decode(ids[:32])
+        if '\ufffd' in prefix or tok.encode(prefix)!=ids[:32] or not text.startswith(prefix):return None
+        tail=text[len(prefix):]
+        if prefix[-1].isalnum() and tail and tail[0].isalnum():return None
+        return base(row)|{'prefix':prefix,'prefix_token_ids':ids[:32],'expected_next_64_token_ids':ids[32:96],
+              'document_content_tokens':len(ids),'prefix_words':len(prefix.split()),'role':'copy_probe_not_added_training'}
+    for row in sorted((r for r in rows if r['split']=='train' and r['source']=='TinyStories'),key=lambda r:rank('copy-train-v1',r)):
+        candidate=copy_candidate(row)
+        if candidate:train_bins[candidate['document_content_tokens']].append(candidate)
+    for split,source_split in [('development','development'),('final','test')]:
+        eligible=[r for r in rows if r['split']==source_split and r['source']=='TinyStories']
+        narrative=[]
+        for row in sorted(eligible,key=lambda r:rank('narrative-v1',r)):
+            if row['family_id'] in used:continue
+            text,ids=load(row)
+            for match in re.finditer(r'[.!?]["”\']?(?=\s|$)',text):
+                prefix=text[:match.end()]
+                if not 30<=len(prefix.split())<=60:continue
+                if len(text[match.end():].split())<80:continue
+                prefix_ids=tok.encode(prefix)
+                if len(prefix_ids)>100:continue
+                if ids[:len(prefix_ids)]!=prefix_ids:continue
+                narrative.append(base(row)|{'id':f'{split}:narrative:{len(narrative):03d}','prefix':prefix,'prefix_token_ids':prefix_ids,
+                  'generation_seed':int.from_bytes(rank('generation-seed-v1',row)[:4],'big'),'temperature':.7,'top_p':.9,
+                  'minimum_words':80,'maximum_words':120,'early_eos_failure_below_words':40,'role':'heldout_narrative_generation'})
+                used.add(row['family_id']);break
+            if len(narrative)==100:break
+        assert len(narrative)==100
+        selected[split]=narrative;matched=[]
+        for row in sorted(eligible,key=lambda r:rank('copy-heldout-v1',r)):
+            if row['family_id'] in used:continue
+            held=copy_candidate(row)
+            if held is None:continue
+            candidates=train_bins[held['document_content_tokens']]
+            partner=next((x for x in candidates if x['family_id'] not in used and abs(x['prefix_words']-held['prefix_words'])<=2),None)
+            if partner is None:continue
+            used.update([row['family_id'],partner['family_id']]);pairid=f'{split}:copy:{len(matched):03d}'
+            matched.append({'pair_id':pairid,'evaluation_split':split,'training':partner,'heldout':held,'matching':{'source':'TinyStories','prefix_tokens':32,'document_tokens':'exact','maximum_prefix_word_difference':2}})
+            if len(matched)==100:break
+        assert len(matched)==100
+        pairs[split]=matched
+    dest.mkdir();files={}
+    for split in selected:
+        for kind,values in [('narrative',selected[split]),('copy-pairs',pairs[split])]:
+            p=dest/(split+'-'+kind+'.jsonl');p.write_text(''.join(json.dumps(x,ensure_ascii=False)+'\n' for x in values));files[p.name]=sha(p)
+    receipt={'status':'DRAFT_NOT_FROZEN','source_manifest_sha256':sha(MAN),'tokenizer_manifest_sha256':sha(EXEC/'tokenizer-8192/manifest.json'),
+      'narrative_per_split':100,'copy_pairs_per_split':100,'distinct_selected_families':len(used),'files_sha256':files,
+      'copy_matching':'32 input content tokens, exact document token length and same source; prefix word count differs by at most two. All 64 reference targets exist.',
+      'limitations':['Copying training prefixes intentionally overlap admitted training documents; diagnostic-only exception, never re-added or oversampled.','Narrative and heldout copying families are distinct from each other and from training probe families.','Existing split/family audit preserved; fresh prefix containment/near checks and semantic review still required.','Full source text and future continuation are not included in generation prompts.','These are research drafts, not independent human certification or scored model results.']}
+    (dest/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt,indent=2))
+if __name__=='__main__':main()

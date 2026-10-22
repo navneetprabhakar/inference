@@ -1,0 +1,81 @@
+{
+  "status": "FINITE_FIRST_SHARD_STREAMING_INVENTORY_PROPOSAL_NOT_EXECUTED",
+  "source": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m2-intake/common-pile-pressbooks-raw-v1/00000_pressbooks.json.gz",
+    "bytes": 247301311,
+    "SHA256": "67d1135ad65d3c1f2f4d88d44ad35d37a4e381cb518c1bd878e4d2c350c9ff21",
+    "independent_integrity_receipt": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/pressbooks-first-shard-parent-integrity-v1/verification.json"
+  },
+  "actual_schema": {
+    "top_level": [
+      "id",
+      "text",
+      "source",
+      "added",
+      "created",
+      "metadata"
+    ],
+    "metadata": [
+      "license",
+      "url",
+      "book_url",
+      "title",
+      "author",
+      "institution",
+      "subject"
+    ],
+    "field_types": "First observed record all scalar strings, text string, metadata dictionary; not universal schema proof."
+  },
+  "limits_proposed": {
+    "compressed_bytes": 247301311,
+    "decoded_bytes": 2000000000,
+    "encountered_records": 100000,
+    "parsed_record_bytes": 4000000,
+    "line_consume_chunk_bytes": 65536,
+    "worker_seconds": 570,
+    "external_seconds": 600,
+    "RSS_bytes": 1000000000,
+    "output_bytes": 128000000,
+    "SQLite_bytes": 112000000,
+    "exceptions_and_terminal_bytes": 16000000,
+    "per_metadata_scalar_UTF8_bytes": 4096,
+    "network_requests": 0
+  },
+  "boundedness_basis": "First shard247.3MB compressed is observed. CommonPile card estimates ~1.5GB UTF8 across2 shards/106881rows, not a measured expansion bound. 2GBdecoded/100krecords/600sec are finite engineering ceilings; stop partial if any bound, no silent continuation/cap raise. Measure actual wall/RSS/SQLite footprint rather than extrapolate usable yield.",
+  "reader_and_source": [
+    "O_RDONLY|NOFOLLOW regular exact-path before/FD/during/after stat matching independent full-file receipt; no source mutation/new request/global ledger.",
+    "Stream entire gzip with bounded zlib output and all member CRC/EOF/trailing-data checks. Hash every compressed input byte once, require exact publisher byte/SHA256 at full completion; do not materialize whole expanded source.",
+    "Physical JSONL line offsets/length/ordinal/SHA256 retained. Decode strictUTF8 and one dictionary per physical line. Oversized lines consumed/hash-held in fixed chunks within total decoded limit without parsing/reconstructing; terminal partial if budget hits mid-line.",
+    "Unknown schema/types/missing or unexpected keys, malformed timestamps and URL/family anomalies recorded as explicit holds with bounded exceptions/counts/ordered digests and original raw-line locator; no skipped records or assumption all records share first schema."
+  ],
+  "compact_storage": [
+    "SQLite unique source ordinal; raw decompressed line offset/bytes/SHA256, textSHA256/UTF8bytes/chars if parsed, id/source/added/created, all observed rawmetadata fields or explicit overflow hold/hash/locator. No duplicate fulltext or original HTML (not present here).",
+    "Store exact source URL/id and book_url separately. Candidate book root derives only explicit host+leading bookslug from observed native PressBooks URL pattern, flagged derivation with source URL retained; book_url may be a frontmatter path, not canonical book homepage. Missing/conflicting or unknown URL patterns remain family-unresolved.",
+    "Metadata license rawstring and explicit observed licenseURL/version are evidence tags, not rights approval. Do not infer underlying source content rights from CommonPile package license. Distinguish BY/SA/NC/ND/public-domain/unknown exactly; no relabeling.",
+    "Book-title/author/institution/subject are captured metadata, not original-English or authorship verification. Identify repeated IDs/URLs/text hashes and shared book roots; retain all source occurrences, no canonical selection/admission during inventory.",
+    "All text lengths are bytes/chars; no tokens, language quality or usable counts."
+  ],
+  "family_and_review": [
+    "Whole book/root/version page ancestry is the sampling/leakage unit; cross-source ancestry includes underlying OpenStax/Wikimedia/PG/LibreTexts/book adaptations, not automatically a new independent provenance group.",
+    "The first biased record is a nursing OER catalog with pipe/table-like text and __unknown__ URL path; this requires actual layout/coherence/source-component review, not a whole-source rejection or nursing-fact clearance.",
+    "Freeze full complete frame before uniform whole-unit and token-weighted later sampling; no firstrecord acceptance or extrapolation. Missing media/table/headings/quotation context and original HTML absence remain explicit extraction-fidelity risks.",
+    "Any later body selection must preserve complete native chapter/wholeunit context and wholebook family reservation; inventory alone cannot establish complete books."
+  ],
+  "bias_example": {
+    "id": "https://ecampusontario.pressbooks.pub/oerbysubjectpeerguide/chapter/__unknown__/",
+    "metadata": {
+      "license": "Creative Commons - Attribution - https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://ecampusontario.pressbooks.pub/oerbysubjectpeerguide/chapter/__unknown__/",
+      "book_url": "https://ecampusontario.pressbooks.pub/oerbysubjectpeerguide/front-matter/introduction/",
+      "title": "2023 Compendium of North American Nursing OER",
+      "author": "Kyle Montgomery, Marnie Seal, Shannon Dowdall-Smith, Remar Mangaoil, Phyllis Montgomery, Sharolyn Mossey",
+      "institution": "Cambrian College, Laurentian University",
+      "subject": "Nursing, Nursing fundamentals and skills, Nursing specialties, Nursing management and leadership"
+    },
+    "text_UTF8_bytes": 28156,
+    "first_record_SHA256": "5b7f13efa35d448c0c4a353e5240d9ded6ca01dff0372418ce124146861743f6",
+    "quality_assessment": "Not semantically reviewed as a whole; first256characters show a pipe/table-like representation. No sourcewide quality inference."
+  },
+  "new_admissions": 0,
+  "execution_requires": "Parent review + pinned implementation and meaningful stream/CRC/overflow/identity/output/lifecycle controls; no execution by this proposal."
+}

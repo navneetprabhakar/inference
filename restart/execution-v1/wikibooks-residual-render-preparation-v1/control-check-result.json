@@ -1,0 +1,60 @@
+{
+  "status": "PASS_REAL_ISOLATED_CONTROL_TESTS_NO_RENDER_SHARD_LAUNCH",
+  "check_count": 11,
+  "checks": [
+    "global930s_contains5s_cleanup_reserve",
+    "owned_process_tree4GB_RSS_stop",
+    "eight_output_combined_cap",
+    "weights_and_free_floor",
+    "combined_processed64GB_ceiling",
+    "PID_reuse_birth_identity_prevents_unrelated_descendant_claim",
+    "file_fsync_then_replace_then_directory_fsync_real_filesystem",
+    "real_separate_session_worker_owned_unrelated_sentinel_excluded",
+    "real_worker_group_terminated_parent_reaps_child_launcher_reaps_parent",
+    "durable_registration_recovers_reparented_separate_session_worker",
+    "registered_orphan_group_terminated_without_unrelated_kill"
+  ],
+  "process_observations": [
+    {
+      "test": "separate_session_cleanup",
+      "parent_pid": 8865,
+      "worker_pid": 8866,
+      "sentinel_pid": 8864,
+      "cleanup": {
+        "signals": [
+          {
+            "pgid": 8866,
+            "signal": 15
+          }
+        ],
+        "direct_children_reaped": true,
+        "remaining_observed_owned_processes": [],
+        "observation_errors": [],
+        "reaping_scope": "Direct supervisors waited here; supervisors given grace to wait their workers. Any orphaned grandchildren are reaped by the OS, never falsely claimed waitpid children."
+      }
+    },
+    {
+      "test": "registered_orphan_cleanup",
+      "registration": {
+        "supervisor_pid": 8873,
+        "worker_pid": 8874,
+        "worker_script": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/wikibooks-residual-render-preparation-v1/tmpr6_czdgd/fixture-render-worker.py",
+        "output": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/wikibooks-residual-render-preparation-v1/tmpr6_czdgd/orphan-root/shard-1"
+      },
+      "cleanup": {
+        "signals": [
+          {
+            "pgid": 8874,
+            "signal": 15
+          }
+        ],
+        "direct_children_reaped": true,
+        "remaining_observed_owned_processes": [],
+        "observation_errors": [],
+        "reaping_scope": "Direct supervisors waited here; supervisors given grace to wait their workers. Any orphaned grandchildren are reaped by the OS, never falsely claimed waitpid children."
+      }
+    }
+  ],
+  "new_admitted_documents": 0,
+  "new_admitted_tokens": 0
+}

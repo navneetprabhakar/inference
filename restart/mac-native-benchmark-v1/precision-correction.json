@@ -1,0 +1,21 @@
+{
+  "reason": "Compute norms retained FP32 weights; MLX RMSNorm promoted outputs and following matrix multiplications to FP32.",
+  "fixed_intent": "Cast all compute-view parameters, including normalization weights, to selected16bit dtype. Keep FP32 masters, moments, gradients, loss and native RMSNorm reductions.",
+  "invalidated_results": [
+    "original BF16/FP16 numerical eligibility for16bit compute",
+    "initial BF16 speed screening"
+  ],
+  "retained_valid_results": [
+    "MPS reference and optimized-control screening",
+    "MLX FP32 numerical and screening"
+  ],
+  "existing_screening_elapsed_seconds": 651.4212191104889,
+  "bf16_screening_seconds_already_consumed": 114.59528231620789,
+  "original_resource_baseline_bytes": 592906813.44,
+  "resource_breach": false,
+  "original_clock_unchanged": true,
+  "original_work_meter_unchanged": true,
+  "thresholds_unchanged": true,
+  "recorded_epoch": 1792688188.043241,
+  "full_training_authorized": false
+}

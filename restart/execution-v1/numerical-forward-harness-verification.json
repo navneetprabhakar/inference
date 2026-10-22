@@ -1,0 +1,31 @@
+{
+  "status": "FORWARD_HARNESS_IMPLEMENTED_NOT_NEURALLY_EXECUTED",
+  "required_case_implementations": 8,
+  "full_suite_required_cases": 40,
+  "harness_tests_passed": 8,
+  "scope": "Arithmetic stub and injected faults only. Checks supplied backend outputs; neither allocates weights nor invokes a neural backend in tests.",
+  "checks": [
+    "single-token logits",
+    "unpadded batch logits",
+    "padded valid logits versus other backend and independent trimmed rows",
+    "all layer traces",
+    "causal future perturbation",
+    "other-document perturbation",
+    "token-by-token cache equivalence",
+    "multi-token cached offset equivalence"
+  ],
+  "tolerance": {
+    "absolute": 1e-05,
+    "relative": 0
+  },
+  "files_sha256": {
+    "src/slm/restart/numerical_forward.py": "c8f95eb60cf2c9764172b1cc79662b234b70e94790a5104f75b1bd8a1c696c57",
+    "tests/test_restart_numerical_forward_harness.py": "28b25e28bc426acf99916b58737fa744c6f0949e7c85ae7481d629816656f42b"
+  },
+  "remaining": [
+    "Gradient, optimizer, state, fixture-fit and integrity case implementations",
+    "Budgeted backend invocation wrapper",
+    "Complete runner freeze and scoped execution"
+  ],
+  "training_started": false
+}

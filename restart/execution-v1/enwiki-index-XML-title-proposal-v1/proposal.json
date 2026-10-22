@@ -1,0 +1,27 @@
+{
+  "status": "PREPARED_STRICT_REPRESENTATION_ADAPTER_NOT_INTEGRATED_OR_DISPATCHED",
+  "problem": "Index native lexeme is XML-encoded; native SAX callback title is decoded XML character data. Comparing different representations can reject an otherwise exact page identity.",
+  "scope": "Raw index DB, row/page IDs, UTF8 title lexemes, ordinal/group offsets, raw lines and hashes remain immutable. Derive a separate semantic expected-title value once for comparison/transcript, retain both exact representations with helper/source pins.",
+  "decoder": "Only5 XML predefined entities plus XML1.0 decimal/#x hexadecimal character references; strict UTF8/XML scalar validity. No HTML5 unknown names/repair, case-fold, NFC, underscore replacement, trimming/collapse or recursive unescape. LiteralCR/LF explicitly held as unsupported line-index representation rather than silently normalized; references to XML-valid whitespace preserve their scalar. Max64KiB UTF8 is a resource cap, never a quality threshold.",
+  "downstream_integration_proposed": [
+    "Keep sink ordered page-ID and exact semantic-title equality. No fuzzy/threshold relaxation.",
+    "Use semantic expected-title in both sink expected tuples and frozen-index identity transcript; keep raw lexeme/rawline SHA256 sidecar and decoder pin.",
+    "Do not mutate the verified complete index DB or raw selection packet.",
+    "Require exact actual targetgroup diagnostic proof and new isolated calibration profile/pins independently reviewed before any actual calibration rerun.",
+    "Any invalid/unsupported lexeme is a terminal hold, no skip/replacement."
+  ],
+  "known_observation": {
+    "row": 2240,
+    "page_ID": 3914,
+    "group": 23,
+    "raw_title": "British &amp; Irish Lions",
+    "proposed_semantic_title": "British & Irish Lions",
+    "actual_native_title_proof": "PENDING_SEPARATE_TARGET_DIAGNOSTIC"
+  },
+  "producer_failure_preserved": true,
+  "no_source_body_read": true,
+  "no_calibration_rerun": true,
+  "no_production_mutation": true,
+  "admissions": 0,
+  "training": false
+}

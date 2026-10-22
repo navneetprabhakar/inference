@@ -9,3 +9,48 @@ checkpoints/
 .DS_Store
 /data/
 *.safetensors
+
+# Reproducible local corpus-audit outputs; receipts and audit source remain versionable.
+/restart/corpus-audit-v1/*.sqlite*
+/restart/corpus-audit-v1/near_join
+/restart/corpus-audit-v1/containment
+/restart/corpus-audit-v1/*input.txt
+/restart/corpus-audit-v1/language-projected.txt
+/restart/corpus-audit-v1/language-map.bin
+/restart/corpus-audit-v1/language-predictions*.txt
+/restart/corpus-audit-v1/near-pairs.tsv
+/restart/corpus-audit-v1/containment-hits.tsv
+/restart/corpus-audit-v1/accepted-manifest.csv
+/restart/corpus-audit-v1/dispositions.jsonl
+
+# Regenerable semantic-admission manifests (review judgments remain versionable).
+/restart/semantic-review-v1/accepted-manifest.csv
+/restart/semantic-review-v1/excluded-manifest.csv
+
+# Regenerable FineWeb salvage manifests.
+/restart/fineweb-salvage-v1/*manifest.csv
+/restart/fineweb-salvage-v1/filter-exclusions.csv
+/restart/fineweb-salvage-reviewed-v1/*manifest.csv
+
+# Local restart execution payloads; preserve scripts, policies and receipts.
+/restart/execution-v1/data-*/tokens.u16
+/restart/execution-v1/data-*/index.jsonl
+/restart/execution-v1/data-*/unigram-counts.npy
+/restart/execution-v1/retokenized-manifest*.csv
+/restart/execution-v1/m2-intake/raw/
+/restart/execution-v1/m2-intake/charges/
+/restart/execution-v1/m2-intake/metadata/*-api
+
+# Regenerable baseline arrays and bounded intake payloads.
+/restart/execution-v1/kn-preparation/model/*.npy
+/restart/execution-v1/kn-preparation/*.sqlite*
+/restart/execution-v1/kn-preparation/heartbeat.json
+/restart/execution-v1/m2-intake/prose-cohort-v1/candidates.sqlite*
+/restart/execution-v1/m2-intake/prose-cohort-v1/exclusions.jsonl
+/restart/execution-v1/m2-intake/prose-cohort-v1/*sample.jsonl
+
+/restart/execution-v1/m2-intake/wikipedia-prose-v1/candidates.sqlite*
+/restart/execution-v1/m2-intake/wikipedia-prose-v1/exclusions.jsonl
+/restart/execution-v1/m2-intake/wikipedia-prose-v1/*sample.jsonl
+
+/restart/execution-v1/m2-intake/wikipedia-gap-audit-v1/findings.jsonl

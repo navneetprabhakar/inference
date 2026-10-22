@@ -1,0 +1,4 @@
+- Exact metadata frozen for PressBooks2files and UKHansard11files; no corpus GET or ledger mutation.
+- Profiles specify finite future transfers and complete source/component review; they are designs awaiting parent review and separately pinned executor controls.
+- Published pointers bind compressed file SHA256 and bytes, not the rights/quality/completeness of individual content. Whole book/session ancestry remains required.
+- Prefix-only acquisition or first-shard quality extrapolation is not proposed.

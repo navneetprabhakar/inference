@@ -1,0 +1,77 @@
+{
+  "status": "SYNTHETIC_ONLY_READY_FOR_PARENT_CORE_REVIEW_NOT_SOURCE_DISPATCH",
+  "API": {
+    "constructor": "Metadata(page_callback, revision_callback, limits=None, require_enwiki_base=True, **PageSpans_limits)",
+    "feed": "nonempty bytes <= configured feed cap; helper guards UTF8/DTD/namespaces/raw lexical limits; semantic layer finite stack/scalars/attrs/schema controls.",
+    "revision_callback": "At closing each direct page/revision; fields revision_ID,page_ordinal,revision_ordinal,page_ID,span,attributes,fields,contributor,contributor_attributes,contents,sibling_SHA1,holds,unknown_count,unknown_examples,unknown_descriptor_SHA256. No accumulated page revisions list.",
+    "revision_key": [
+      "revision_ID",
+      "page_ordinal",
+      "revision_ordinal"
+    ],
+    "page_callback": "At original raw page span/hash emission after closing direct page. Fields page_ordinal,page_ID,title,namespace,redirect,revision_count,main_text,model,format,holds,unknown_count,unknown_examples,unknown_descriptor_SHA256,raw_XML,no_admission_or_English_claim.",
+    "finish": "Actual XML root close/Expat finalization required. Returns counts/bounded root/siteinfo diagnostics and resource maxima, no global identity/English/article/usable claim.",
+    "finish_prefix": "Pinned v3 helper terminal-flushes Expat deferred token first, then semantic checks root-only stack/no active page/revision/pending emission. Root remains open, no bytes invented; caller must separately prove exact BZ2/indexgroup boundary.",
+    "flush_boundary": "Call ONLY after actual complete BZ2 group decode/CRC. Uses pinned helperv4 finite nonterminal empty-parse flush restoring deferral; asserts rootopen/noactive/semantic root-only stack. Caller must reconcile complete expected index rows before atomic SQL group commit."
+  },
+  "identities": {
+    "integers": "Direct page/revision IDs positive signed SQLite int64; namespace signed int64 incl0; ASCII decimal only, canonical integer interpretation, leading zeros permitted. Missing/duplicate direct identity fields, child-markup identity/title, overflow or invalid direct IDs are explicit terminal failures; never NULL/0 coercion.",
+    "duplicate_revision_IDs": "All valid occurrence callbacks preserved even same page/crosspage/repeated canonical numeric ID. No global revision/page ID set or uniqueness assertion; caller reconciles every page ordinal/ID/exacttitle to complete frozen index.",
+    "parent_contributor": "Contributor ID never used as page/revision ID; username/id/ip raw scalar descriptors and container deletion attrs retained. No author-history completeness or rights clearance inferred."
+  },
+  "content": {
+    "scope": "Metadata only: no rendered wikitext/prose extraction or tokenizer. Huge ordinary text streamed decoded-UTF8 SHA256/SHA1/byte count; no whole page raw/text string.",
+    "main_text": "Unique one-revision and structurally single legacy/main slot descriptor only; otherwise null. A populated descriptor does NOT mean all holds passed.",
+    "slots": "All slots within cap retained per revision until its prompt callback. Auxiliary/missing/mixed/multiplemain/legacy+slot ambiguity explicit holds. Model and format preserved separately; wikitext/applicationjson not supported wiki content.",
+    "hashes": "Text@bytes and base36 text@sha1 separately MATCH/MISMATCH/INVALID/MISSING; optional content/slot sha1 and revision sibling sha1 compared only against unambiguous supported nondeleted text, otherwise explicit unverified/missing/deleted. Hash comparison is XML-decoded UTF8, whereas raw_XML.SHA256 binds original source including entity/CDATA spelling.",
+    "raw_spans": "Absolute original decoded XML byte offsets end-exclusive, original page rawSHA from root helper. Revision/field/slot spans use exact opening/closing token shape incl selfclosing. Revision rawSHA not separately computed; parent raw page hash + revisionordinal/span permits later source recovery."
+  },
+  "bounds": {
+    "semantic": {
+      "depth": 64,
+      "scalar_bytes": 65536,
+      "attribute_bytes": 16384,
+      "attributes": 32,
+      "children_per_element": 4096,
+      "revisions_per_page": 10000,
+      "slots_per_revision": 16,
+      "unknown_examples": 16,
+      "namespace_definitions": 512
+    },
+    "raw_helper": "Default feed65536/token1048576/decoded256GB/page25792234; explicit caller finite overrides for eventual calibration/full profile. Not acquisition/run authority.",
+    "memory": "No tree, page list, ID sets or accumulated revision list. Stack<=depth; scalar text retained<=65536 per ordinary metadata leaf, cleared with oversize hold; original text never retained. Namespace map<=512, bounded contents<=16 per revision, unknown descriptors<=16 with exact totalcount+ordered digest+original source span backing. Caller must consume/release callbacks; downstream retaining all rows is outside this core guarantee.",
+    "oversized_scalar": "Unknown nonidentity scalar streamed hash/count and explicit OVERSIZED_SCALAR_METADATA with valueNULL (no silent truncation). Direct identity/title unrepresentable stops. Ordinary text not subject to metadata scalar cap.",
+    "per_page_revisions": "At revision10001 default explicit terminal failure, no silent ignored excess. Overall30M revision and SQL/output caps belong external producer/sink.",
+    "unknown_schema": "Unknown children/attributes, scalar childmarkup and nonwhitespace container characterdata explicit holds, exact bounded descriptors/count/hash where applicable. Header/root holds discovered late apply entire producer frame, including prior emitted provisional pages; caller must not infer per-page eligibility before global completion."
+  },
+  "sink_handoff": {
+    "callbacks_provisional": "Emit revision before page; deferred foreign keys permitted in parent-owned group transaction. All callbacks and page rawhash/identity/index correspondence must reconcile before whole group atomic commit; callback/parser failure means unfinished group not committed.",
+    "no_extra_DB_schema": "Root owns measured compact SQL page/group/revision tables and enum/flag codec; this module adds no SQL/indices/producer. Rich callback diagnostics are NOT instructions to persist full JSON/title/author strings per page. Use bounded exception budget and raw page locator; retain holds/protected priority.",
+    "exact_title": "Ephemeral unnormalized Unicode title supplied for external expected-index title equality; no separate title storage/index proposed.",
+    "format_nulls": "Model/format content absent/ambiguous staysNone. Missing hash/nativebytes comparison is explicit status, never numeric0/falsematch.",
+    "group_spans": "raw_XML.start/end absolute decoded positions; external producer converts start to containinggroup-relative offset only after group identity/bounds proof.",
+    "namespace_range": "Core namespace signedint64 deliberately exceeds measured sink signedint32. Sink must refuse values outside signedint32 before insert/atomic group commit; no modulo/truncation/zero coercion. This does not add a new SQL schema field."
+  },
+  "scope": {
+    "retained_native_body_reads": 0,
+    "network": 0,
+    "ledger": 0,
+    "supervisor": false,
+    "source_reader": false,
+    "SQLite_sink": false,
+    "model_tokenizer_training_admissions": 0
+  },
+  "dependencies": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/enwiki-incremental-XML-span-preparation-v4/spans.py",
+      "sha256": "12fdb8fbe179623cc33ab42f6f1212ec1661ffd030af4254e40da48b07f4ea51",
+      "review": "enwiki-incremental-span-independent-audit-v4 review9b35c395f9d040dc92a37d972ebb0854b5e1c5ad68c2a790254b8ffdd4197c54"
+    }
+  ],
+  "header": {
+    "root": "Both full and prefix summaries retain exact root expanded name, original xmlns prefix/URI declarations, raw opening-token span and ordinary attributes incl expanded xsi:schemaLocation. Original XML not rewritten.",
+    "siteinfo": "Exact base scalar descriptor retained alongside bounded namespace metadata. Default require_enwiki_base=True validates nonempty no Unicode whitespace or categoryCc/Cf control/format characters https://en.wikipedia.org exactnetloc and nofragment; invalid/missing yields explicit SITEINFO_BASE_UNSUPPORTED_OR_MISSING frame/page hold. Fixture optout explicitly reports NOT_REQUIRED_BY_FIXTURE_CONFIGURATION and cannot authorize enwiki producer COMPLETE.",
+    "producer_completion_requirement": "Caller must require VERIFIED_HTTPS_ENWIKI_BASE plus no unresolved source/header schema holds before COMPLETE/eligible-frame claim; finish()/finish_prefix() receipts are parsing results, not producer publication authority."
+  },
+  "version_note": "v3 preserves frozen v2; narrow Unicode base-control guard plus helperv4 finite group-boundary flush integration. No retained source reads."
+}

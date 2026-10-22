@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "properties": {
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "language_ok": {
+            "type": "boolean"
+          },
+          "coherent": {
+            "type": "boolean"
+          },
+          "answers_request": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "language_ok",
+          "coherent",
+          "answers_request",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "assistant": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "assistant"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "ready_for_conversation_sft": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "next_step": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ready_for_conversation_sft",
+        "reason",
+        "next_step"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "reviews",
+    "corrections",
+    "assessment"
+  ],
+  "additionalProperties": false
+}

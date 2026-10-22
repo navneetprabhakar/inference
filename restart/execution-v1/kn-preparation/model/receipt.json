@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "scope": "modified Kneser-Ney five-gram baseline; no neural model training",
+  "training_targets": 14469949,
+  "development_targets": 200000,
+  "trials": [
+    {
+      "scale": 0.8,
+      "development_nll": 2.670183759628854,
+      "development_bits_per_byte": 0.9530946556037639
+    },
+    {
+      "scale": 1.0,
+      "development_nll": 2.6306174826593387,
+      "development_bits_per_byte": 0.9389718796016268
+    },
+    {
+      "scale": 1.2,
+      "development_nll": 2.6520756216817243,
+      "development_bits_per_byte": 0.9466311418331823
+    }
+  ],
+  "selected": {
+    "scale": 1.0,
+    "development_nll": 2.6306174826593387,
+    "development_bits_per_byte": 0.9389718796016268
+  },
+  "boundary": "four BOS=0 per document, EOS=1 already in targets",
+  "discounts": {
+    "5": {
+      "base": [
+        0.8308348408544792,
+        1.1385549853081522,
+        1.3389068602136402
+      ],
+      "count_of_counts_1_to_4": [
+        6225433,
+        633776,
+        219042,
+        109483
+      ],
+      "sparse_fallback_used": false
+    },
+    "4": {
+      "base": [
+        0.8130558283892626,
+        1.1973348470773368,
+        1.5081954831151916
+      ],
+      "count_of_counts_1_to_4": [
+        4016434,
+        461745,
+        151948,
+        69699
+      ],
+      "sparse_fallback_used": false
+    },
+    "3": {
+      "base": [
+        0.7368975653041983,
+        1.1316963721602058,
+        1.4874885222696683
+      ],
+      "count_of_counts_1_to_4": [
+        1567866,
+        279896,
+        109936,
+        56412
+      ],
+      "sparse_fallback_used": false
+    },
+    "2": {
+      "base": [
+        0.6383394712050212,
+        1.0851841021199342,
+        1.5100952051042738
+      ],
+      "count_of_counts_1_to_4": [
+        260867,
+        73899,
+        35302,
+        20599
+      ],
+      "sparse_fallback_used": false
+    }
+  },
+  "files": {
+    "grams-2.npy": "c31fa6320e2f008d6300bf62a7cc3285c6584a8233285b0311a0567ab5d345fb",
+    "grams-3.npy": "e4c2d66a89478c00712ef4832ae76ba0bad4e79d0e42007dedeb50d1ce79661b",
+    "grams-1.npy": "c157b4081306d8ed45f886d2865d08a8e9dc9385b7c32286d1a41d30446f67a8",
+    "grams-4.npy": "85b2e517475395b88c0a2ea99d85b88aa84f12d40a6018e972deca76c4ada1ca",
+    "grams-5.npy": "8fa1173648cad44c84bf56a46751f2edf15070eaba4ca8d7b81a68be91a98a29",
+    "manifest.json": "7bbcedfd45f4d6099e5e6e6074af754dd767dc2d013b74ea78cabd28ee8f5bf7",
+    "counts-1.npy": "e3a56ba7961b9d88b5ca94c9ee191c4419eab0fe42bfa0da5b2d158e8e83a5d5",
+    "counts-3.npy": "cc3332e31ce5913ac7001b91d4838875dbfabefb5f402343eab7d88c21db6a94",
+    "counts-2.npy": "76d77ef138455e8ffc485aca94e478f5eed033b86075a4cf4892abc60ee2587e",
+    "counts-5.npy": "c8f903f73b080d2395376541629d7326ee454d8c626a20047c2766610b9f603f",
+    "counts-4.npy": "1e3c82114bf94c28d474a89fb57db7eb8b8c1bc86bda7e6edb12823b152b9836"
+  },
+  "source_tokenizer_sha256": "577c0f59ffc594931650de802c4630f3171ebde139cc32c742f5f264e7f98812",
+  "final_set_read_or_scored": false,
+  "elapsed_seconds": 22.286866541020572
+}

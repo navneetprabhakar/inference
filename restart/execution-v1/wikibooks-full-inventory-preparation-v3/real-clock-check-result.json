@@ -1,0 +1,78 @@
+{
+  "status": "PASS_REAL_CLOCK_CHILDREN_ONLY_NO_INVENTORY_LAUNCH",
+  "checks": [
+    "fresh_child_1_inside_parent_CLOCK_MONOTONIC_interval_and_live_parent_binding",
+    "fresh_child_2_inside_parent_CLOCK_MONOTONIC_interval_and_live_parent_binding",
+    "fresh_child_3_inside_parent_CLOCK_MONOTONIC_interval_and_live_parent_binding",
+    "inherited_deadline_ages_during_process_startup",
+    "expired900second_origin_rejected",
+    "future_clock_origin_rejected",
+    "wrong_direct_supervisor_PID_rejected"
+  ],
+  "check_count": 7,
+  "observations": [
+    {
+      "parent_before": 2864972.443882,
+      "child": {
+        "accepted": true,
+        "clock": 2864972.522306,
+        "elapsed": 0.07842399971559644,
+        "ppid": 92939
+      },
+      "parent_after": 2864972.531536
+    },
+    {
+      "parent_before": 2864972.531541,
+      "child": {
+        "accepted": true,
+        "clock": 2864972.606055,
+        "elapsed": 0.07451399974524975,
+        "ppid": 92939
+      },
+      "parent_after": 2864972.612022
+    },
+    {
+      "parent_before": 2864972.612027,
+      "child": {
+        "accepted": true,
+        "clock": 2864972.683785,
+        "elapsed": 0.07175799971446395,
+        "ppid": 92939
+      },
+      "parent_after": 2864972.689353
+    }
+  ],
+  "aged": {
+    "accepted": true,
+    "clock": 2864972.759149,
+    "elapsed": 1.0697920001111925,
+    "ppid": 92939
+  },
+  "expired": {
+    "accepted": false,
+    "clock": 2864972.834977,
+    "elapsed": 901.0700269998051,
+    "reason": "Invalid supervisor shared CLOCK_MONOTONIC",
+    "ppid": 92939
+  },
+  "future": {
+    "accepted": false,
+    "clock": 2864972.911288,
+    "elapsed": -9.928992999717593,
+    "reason": "Invalid supervisor shared CLOCK_MONOTONIC",
+    "ppid": 92939
+  },
+  "wrong_parent": {
+    "accepted": false,
+    "clock": 2864972.98791,
+    "elapsed": 0.07097800029441714,
+    "reason": "Requires live direct supervisor parent",
+    "ppid": 92939
+  },
+  "clock_implementation": "time.clock_gettime(time.CLOCK_MONOTONIC)",
+  "interpreter": "/Library/Developer/CommandLineTools/usr/bin/python3",
+  "python": "3.9.6",
+  "real_source_records_processed": 0,
+  "new_admitted_documents": 0,
+  "new_admitted_tokens": 0
+}

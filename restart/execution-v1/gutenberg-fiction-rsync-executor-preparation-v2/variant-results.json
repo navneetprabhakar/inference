@@ -1,0 +1,59 @@
+{
+  "scope": "LOCAL_ONLY_NO_REMOTE",
+  "results": [
+    {
+      "kind": "missing",
+      "error": null,
+      "receipt": {
+        "exit_code": 23,
+        "received_bytes": 179,
+        "received_SHA256": "effc449514b84c4f9ab6d8b2e2a46f2432e86fcac2d9c1f6b9ee701c75f12d9c",
+        "sent_protocol_bytes": 100,
+        "stdout": "rsync(9532): warning: sender has empty file list: exiting\n",
+        "stderr": "rsync(9532): error: '123/pg123.txt': (l)stat: No such file or directory\nrsync(9529): warning: receiver has empty file list: exiting\n",
+        "remote_started": false,
+        "remote_address": null,
+        "child_PID": 9529,
+        "child_reaped": true,
+        "transport": "official native unencrypted rsync; application-byte cap, not physical TCP/IP wire cap"
+      },
+      "files": []
+    },
+    {
+      "kind": "oversize",
+      "error": null,
+      "receipt": {
+        "exit_code": 0,
+        "received_bytes": 155,
+        "received_SHA256": "09bfe86c24b1ea04e1833bf25b3dedf0fc409021e766b333c791e353b070c65a",
+        "sent_protocol_bytes": 116,
+        "stdout": "\nsent 112 bytes  received 83 bytes  1950000 bytes/sec\ntotal size is 2400001  speedup is 12307.63\nNumber of files: 1\nNumber of files transferred: 0\nTotal file size: 2400001 B\nTotal transferred file size: 0 B\nUnmatched data: 0 B\nMatched data: 0 B\nFile list size: 27 B\nTotal sent: 112 B\nTotal received: 91 B\n",
+        "stderr": "",
+        "remote_started": false,
+        "remote_address": null,
+        "child_PID": 9533,
+        "child_reaped": true,
+        "transport": "official native unencrypted rsync; application-byte cap, not physical TCP/IP wire cap"
+      },
+      "files": []
+    },
+    {
+      "kind": "symlink",
+      "error": null,
+      "receipt": {
+        "exit_code": 0,
+        "received_bytes": 155,
+        "received_SHA256": "3eaee2688da39084fbae916f566c15adfa922ee3e3bd2999d278b14135659bac",
+        "sent_protocol_bytes": 116,
+        "stdout": "skipping non-regular file \"pg123.txt\"\n\nsent 112 bytes  received 83 bytes  1950000 bytes/sec\ntotal size is 82  speedup is 0.42\nNumber of files: 1\nNumber of files transferred: 0\nTotal file size: 82 B\nTotal transferred file size: 0 B\nUnmatched data: 0 B\nMatched data: 0 B\nFile list size: 27 B\nTotal sent: 112 B\nTotal received: 91 B\n",
+        "stderr": "",
+        "remote_started": false,
+        "remote_address": null,
+        "child_PID": 9537,
+        "child_reaped": true,
+        "transport": "official native unencrypted rsync; application-byte cap, not physical TCP/IP wire cap"
+      },
+      "files": []
+    }
+  ]
+}

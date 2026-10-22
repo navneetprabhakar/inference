@@ -1,0 +1,27 @@
+{
+  "status": "SEGMENTATION_CASE_LOGIC_AND_COMPONENT_RUN_PASS",
+  "new_required_case_implementations": 6,
+  "total_required_case_implementations": 22,
+  "required_suite_cases": 40,
+  "new_component_harness_tests_passed": 7,
+  "combined_numerical_harness_tests_passed": 26,
+  "scope": "Actual segmentation/collation/train-only token reader on authored integer fixtures plus injected mutations. No weights, neural forward, optimizer or corpus training. This does not constitute a frozen full-suite run.",
+  "files_sha256": {
+    "src/slm/restart/numerical_segments.py": "3221558753924e4bf452358348b08b8f91e050de9adca7b1410c06371071e3c6",
+    "tests/test_restart_numerical_segments.py": "6b3782b97b56167909561e6b074a1c6af73065e529683ec17e77651417e2a0ef"
+  },
+  "checks": [
+    "Exact BOS shift and EOS once per source",
+    "Long-document target offsets cover every position once",
+    "Correct predecessor at every segment start",
+    "Document and bound family/split identity retained; heldout index rejected",
+    "Padding IDs and supervision counts correct"
+  ],
+  "remaining": [
+    "Six accumulation/optimizer cases",
+    "Six checkpoint/resume cases",
+    "Six fit/budget/integrity cases",
+    "Budgeted neural adapters and full runner freeze"
+  ],
+  "training_started": false
+}

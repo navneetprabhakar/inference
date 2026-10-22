@@ -1,0 +1,26 @@
+{
+  "status": "PASS_COMPONENT_VALIDATION_ONLY",
+  "utc": "2026-10-21T05:09:36.719954+00:00",
+  "checkpoint_and_storage_tests_passed": 20,
+  "ledger_and_snapshot_tests_passed": 14,
+  "evidence": [
+    "Exact tensor names/shapes, finite FP32 state and nonnegative second moments required.",
+    "Frozen target totals and update boundaries bind optimizer step to data cursor.",
+    "Complete monitor histories and exact PCG64 state required; terminal monitor cannot resume.",
+    "Both publication and read validate semantics; intact hashes do not excuse missing buffers.",
+    "Ledger logical-prefix snapshot includes contract, reservations and exposure spans, including WAL-visible data.",
+    "Later reservations remain charged; replay consumes new reservations and exposure."
+  ],
+  "limits": [
+    "No neural model constructed or updated.",
+    "No end-to-end next-training-update equivalence established.",
+    "Scoped worker must bind trusted schedules, lineage hashes and ledger snapshots to the same checkpoint.",
+    "Backend RNG capture remains required if a future forward pass uses randomness; current validation specifies PCG64 data RNG only."
+  ],
+  "files_sha256": {
+    "src/slm/restart/training_state.py": "1526eb51e691650df70724723fc7a22b058c37a13dc988ec2c6c15c968a49915",
+    "src/slm/restart/ledger.py": "228516e887e57cead7cbccef2c31ec04846fa873e12443ad0dc55a7cead47ffc",
+    "tests/test_restart_training_state.py": "4153653fa2545a7c25473a87843ee16ebf2cc8002d252de39e17d230956518c8",
+    "tests/test_restart_ledger_snapshot.py": "5f78fd0b4e67bbb89dd021003e09d2c1c807d3d65c17d9eab6656800cc579b60"
+  }
+}

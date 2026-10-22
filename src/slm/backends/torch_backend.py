@@ -84,6 +84,15 @@ def forward(p, c, tokens, padding_mask=None, cache=None, embedding_implementatio
 
 def cross_entropy_logits(logits, targets):
     """One-hot CE through the non-target tail; avoids subtracting confident logits."""
+    if (logits.ndim < 1 or logits.shape[-1] < 1 or logits.numel() == 0
+            or targets.shape != logits.shape[:-1]
+            or not torch.is_floating_point(logits)
+            or targets.dtype not in (torch.int32, torch.int64)):
+        raise ValueError('Invalid cross-entropy shapes or dtypes')
+    if (not bool(torch.isfinite(logits).all())
+            or bool((targets < 0).any()) or bool((targets >= logits.shape[-1]).any())):
+        raise ValueError('Cross-entropy requires finite logits and in-range targets')
+    targets = targets.to(torch.int64)
     selected = logits.gather(-1, targets[..., None]).squeeze(-1)
     if logits.shape[-1] == 1:
         return selected*0
@@ -96,7 +105,10 @@ def cross_entropy_logits(logits, targets):
 
 
 def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
-    if mask.shape != targets.shape or not bool((mask >= 0).all()) or float(mask.sum()) <= 0:
+    if (mask.shape != targets.shape or tokens.shape != targets.shape
+            or not bool(torch.isfinite(mask).all())
+            or not bool((mask >= 0).all()) or not bool(torch.isfinite(mask.sum()))
+            or float(mask.sum()) <= 0):
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
     logits, _, _ = forward(p, c, tokens, padding_mask, embedding_implementation=embedding_implementation)
     if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
@@ -127,7 +139,8 @@ def adamw(p, grads, state, step, lr, beta1=.9, beta2=.95, eps=1e-8, decay=.1, cl
             m, v = state.get(name, (torch.zeros_like(w), torch.zeros_like(w)))
             m = beta1*m+(1-beta1)*g
             v = beta2*v+(1-beta2)*g.square()
-            wd = decay if w.ndim == 2 and name != 'embedding' else 0.
+            # The restart recipe decays every matrix, including the tied embedding.
+            wd = decay if w.ndim == 2 else 0.
             updated = w*(1-lr*wd)-lr*(m/(1-beta1**step))/(torch.sqrt(v/(1-beta2**step))+eps)
             out[name] = updated.detach().requires_grad_(True)
             moments[name] = (m, v)

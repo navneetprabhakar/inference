@@ -1,0 +1,24 @@
+{
+  "status": "BUDGETED_FORWARD_GRADIENT_CE_ADAPTERS_IMPLEMENTED",
+  "adapter_tests_passed": 10,
+  "combined_adapter_budget_tests_passed": 17,
+  "scope": "Patched arithmetic forward/gradient callbacks plus real uniform-logit CE differentiation on each backend. No neural parameter initialization or neural forward.",
+  "verified": [
+    "Durable charge before backend invocation",
+    "Result export/MLX evaluation occurs before completion",
+    "Nonfinite exports rejected before completion",
+    "Exceptions persist charged terminal failure",
+    "No parameter initialization/load API in adapter"
+  ],
+  "files_sha256": {
+    "src/slm/restart/numerical_backend.py": "3527ad43c9f0d8001856e788289403d12b1ce4d6806bfa6a438ce918c75987c1",
+    "tests/test_restart_numerical_backend.py": "96affee1595258dd8cd0eef0e1d6b84fac1af0b32323ec8d8ea519a7126dc5df"
+  },
+  "remaining": [
+    "Budgeted tied-embedding and FP64 finite-difference adapters",
+    "Budgeted optimizer trajectory and checkpoint capture",
+    "Runner/code/input freeze and toy-only launcher",
+    "Execute full neural numerical suite within original limits"
+  ],
+  "training_started": false
+}

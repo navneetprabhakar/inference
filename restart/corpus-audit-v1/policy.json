@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "purpose": "Full local foundation-corpus audit; no training or model-size approval",
+  "candidate_sources": ["TinyStories", "FineWeb", "Cosmopedia"],
+  "tokenizer": "preserved byte-level BPE total vocabulary 16384; exact encoding of original text; no retraining",
+  "minimum_words": 50,
+  "maximum_words": 6000,
+  "minimum_alpha_fraction": 0.50,
+  "language": "whole document and every 1024-character window with >=40 alphabetic characters must be fastText English probability >=0.8",
+  "quality": "Reject encoding/control corruption, excessive literal escapes, HTML/code boilerplate, contact/secret signals, repeated lines (>30% when >=8 lines), repeated five-word shingles (>20%), dominant word (>15%). No factual-truth certification.",
+  "deduplication": "NFKC/casefold/punctuation-normalized exact match, then complete prefix-filtered all-pairs five-word shingle Jaccard >=0.8; no sampling, no truncation",
+  "protection": "All official and historical heldout documents, retained evaluation requests/responses and full contexts; exact/near/contained-span matches propagate to the full connected family",
+  "family": "Original source ID, normalized URL/host family, duplicate connected components; Cosmopedia unresolved underlying source identities quarantined",
+  "split": "After quarantine and dedup: stable family-hash train/dev/test thresholds 90/5/5; no item-level split",
+  "training_approved": false
+}

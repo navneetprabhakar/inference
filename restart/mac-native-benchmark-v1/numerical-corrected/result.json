@@ -1,0 +1,46 @@
+{
+  "status": "NUMERICAL_COMPLETE",
+  "reference": {
+    "loss": 5.011080741882324,
+    "gradient_norm": 4.257678480210315,
+    "initial_validation_nll": 5.065414905548096,
+    "after_10_updates_validation_nll": 4.863205909729004
+  },
+  "arms": {
+    "fp32": {
+      "loss": 5.011080741882324,
+      "absolute_loss_difference": 0.0,
+      "gradient_relative_L2_error": 1.4265527532737086e-06,
+      "gradient_cosine": 0.9999999999989825,
+      "all_gradient_tensors_finite": true,
+      "loss_scale": 1.0,
+      "one_update_delta_relative_L2_error": 3.2388145428370674e-06,
+      "after_10_updates_validation_nll": 4.863205909729004,
+      "after_10_updates_validation_difference": 0.0,
+      "status": "PASS"
+    },
+    "bf16": {
+      "loss": 5.002544403076172,
+      "absolute_loss_difference": 0.008536338806152344,
+      "gradient_relative_L2_error": 0.020950934653698898,
+      "gradient_cosine": 0.9997814875370179,
+      "all_gradient_tensors_finite": true,
+      "loss_scale": 1.0,
+      "after_10_updates_validation_nll": 4.856940746307373,
+      "after_10_updates_validation_difference": 0.006265163421630859,
+      "status": "PASS"
+    },
+    "fp16": {
+      "loss": 5.0107951164245605,
+      "absolute_loss_difference": 0.0002856254577636719,
+      "gradient_relative_L2_error": 0.0022365257166446564,
+      "gradient_cosine": 0.9999975231102733,
+      "all_gradient_tensors_finite": true,
+      "loss_scale": 128.0,
+      "after_10_updates_validation_nll": 4.861983299255371,
+      "after_10_updates_validation_difference": 0.0012226104736328125,
+      "status": "PASS"
+    }
+  },
+  "charged_positions": 16306176
+}

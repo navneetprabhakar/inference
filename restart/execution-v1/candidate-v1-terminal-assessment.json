@@ -1,0 +1,59 @@
+{
+  "status": "M1_FAILED_SUPERVISOR_CORRECTNESS",
+  "recorded_at": "2026-10-21T07:33:03.867233+00:00",
+  "candidate_initialized_from_scratch": true,
+  "parameters": 5114112,
+  "seed": 42,
+  "optimizer_updates_reserved": 0,
+  "training_targets_reserved": 0,
+  "optimizer_updates_completed": 0,
+  "charged_active_seconds": 10.016610249993391,
+  "original_active_cap_seconds": 129600,
+  "remaining_active_seconds": 129589.98338975,
+  "original_deadline": "2026-10-24T04:35:21.314878+00:00",
+  "failure": "Supervisor compared a fresh heartbeat to an older resource sampling timestamp; 4.327ms race.",
+  "resource_sample": {
+    "rss_gib": 1.67645263671875,
+    "swap_growth_mib": 0,
+    "free_disk_gib": 232.72940826416016,
+    "thermal": "nominal"
+  },
+  "retained_checkpoint": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/candidate-run-v1/checkpoints/state-000001-step-000000",
+    "step": 0,
+    "manifest_sha256": "4870047ace2c18113baa2cefbc38a772efc4ba08b53df56ab8f59f1272a966b7",
+    "scope": "Initial random state only; not trained or selected as best"
+  },
+  "training_data": {
+    "split": "train",
+    "documents": 72116,
+    "families": 72116,
+    "targets": 14469949,
+    "scored_utf8_bytes": 58468732,
+    "files": {
+      "index.jsonl": "5dabc29550639909fc38e63d22895ee475d51b2cb8ef008ad369f543f3b58053",
+      "unigram-counts.npy": "bbbf2b788b687f5cab2a7d2c28d07c2cb87873db97a465fcb76c6cb5038d05ac",
+      "tokens.u16": "16fdd61161998ecccf4bd36b8e4cb9465eea83e6f432ce6264952b64aa1ef745"
+    },
+    "source_manifest_sha256": "2ad53dc0fc670a7185763f1cfe151e1148933038b8855e55d54a29f84256716d",
+    "tokenizer_manifest_sha256": "577c0f59ffc594931650de802c4630f3171ebde139cc32c742f5f264e7f98812",
+    "order": "sha256 m1-loss-v1:family:id",
+    "selection": "all documents"
+  },
+  "development": "Initial evaluation was interrupted; no accepted score",
+  "final_holdout": "Not opened by final evaluator; no final scoring or generated final outputs",
+  "final_research_pass": false,
+  "full_english_gate_met": false,
+  "automatic_resume_permitted": false,
+  "evidence_sha256": {
+    "snapshot.json": "4484143a5e46470ae196063a60dfcf141f584a1ea4ddc19684aeba37caea6141",
+    "controls.json": "eb8055711570da746eb77d75bb878155d232664124e395380ef83c679916bcd0",
+    "initialization-complete.json": "dc18e84929629c860506429e36ebac5179585a6c1b08c9663ed07183c9901a4b",
+    "pilot-supervisor.json": "04927d6f508c44f25d5b9c3e99098b305a22df8b5216836026cccc00d0cbf764",
+    "pilot-supervisor.json.resources.jsonl": "b320346d584b1bfdfee79e1744e494d2af61168f41662762e2f03d10ffffb8db",
+    "parent-stop.json": "e298c757929d2c8363c17250dbbbd13f63a613cf99e68e9521fc7b3df247c973"
+  },
+  "proposed_fix": "resource-clock-revision-proposal-v1/proposal.json",
+  "proposed_fix_regression": "5/5 expected outcomes, real subprocesses without model operations",
+  "broader_goal": "M0-M3 remains active; M1 retry requires owner approval, independent data/contract work remains possible"
+}

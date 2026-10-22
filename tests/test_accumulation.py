@@ -38,8 +38,8 @@ def test_accumulation_matches_native_full_batch_loss_gradients_clipping_and_adam
     c=Config();data=fixtures();recipe=Recipe(accumulation_steps=3,clip=.01,warmup_tokens=40)
     trainer=Trainer(c,initialize(c),data,backend,recipe=recipe)
     p=tb.load(c,initialize(c))
-    groups=[{'params':[w for k,w in p.items() if w.ndim==2 and k!='embedding'],'weight_decay':recipe.decay},
-            {'params':[w for k,w in p.items() if w.ndim!=2 or k=='embedding'],'weight_decay':0.}]
+    groups=[{'params':[w for k,w in p.items() if w.ndim==2],'weight_decay':recipe.decay},
+            {'params':[w for k,w in p.items() if w.ndim!=2],'weight_decay':0.}]
     optimizer=torch.optim.AdamW(groups,lr=recipe.lr,betas=(recipe.beta1,recipe.beta2),eps=recipe.eps,foreach=False,fused=False)
     captured=[];adamw=trainer.impl.adamw
     def capture(params,grads,state,step,**settings):

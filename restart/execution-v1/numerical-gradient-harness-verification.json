@@ -1,0 +1,27 @@
+{
+  "status": "GRADIENT_HARNESS_PARTIALLY_IMPLEMENTED_NOT_NEURALLY_EXECUTED",
+  "new_required_case_implementations": 4,
+  "total_required_case_implementations_so_far": 12,
+  "full_suite_required_cases": 40,
+  "new_harness_tests_passed": 6,
+  "combined_forward_gradient_harness_tests_passed": 14,
+  "checks": [
+    "Every parameter gradient and stable mean loss compared across backends",
+    "Target-weighted trimmed-row aggregate matches padded loss/gradient",
+    "Masked target mutation leaves loss/gradient unchanged",
+    "EOS-only supervision has nonzero gradients and backend agreement",
+    "Native-gather and dense-onehot embedding gradients agree"
+  ],
+  "scope": "Four suite case IDs; padding case includes two subchecks. All harness runs use arithmetic callbacks, not neural models.",
+  "files_sha256": {
+    "src/slm/restart/numerical_gradients.py": "14f098f33806f59853aa13518f52eb1008a637e251a216c716ff3503040ab6d7",
+    "tests/test_restart_numerical_gradient_harness.py": "5d96b86043c5f0d1582b9ebe072c0e4ed66d9f58ce915355799841b6b41cceaf"
+  },
+  "remaining_gradient_cases": [
+    "tied embedding input/output gradient decomposition",
+    "stable CE confident tail",
+    "stable CE common offset",
+    "finite-difference selected parameters"
+  ],
+  "training_started": false
+}

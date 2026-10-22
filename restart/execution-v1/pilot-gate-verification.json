@@ -1,0 +1,25 @@
+{
+  "status": "PILOT_METRIC_GATE_COMPONENT_PASS",
+  "tests_passed": 19,
+  "scope": "Pure rule evaluation with synthetic evidence; no pilot was executed. Gate does not grant training authority and cannot replace bound correctness/resource/identity evidence.",
+  "requirements": [
+    "Exactly 2M targets within two active hours",
+    "Complete fixed 200k-target development records at 0/500k/1M/1.5M/2M",
+    "At least 5% NLL improvement and no two consecutive >5% regressions",
+    "Complete development suite item counts and no evaluation errors",
+    "Fewer than five degenerate outputs among 20 smoke cases",
+    "At least 600 active seconds throughput after 250k warmup",
+    "Projected remaining targets plus 25% overhead fit both remaining active and elapsed caps"
+  ],
+  "files_sha256": {
+    "src/slm/restart/pilot_gate.py": "7dab3b179f024cadd31eb78a821eb5364ea2441798b38db0ab5f2f058362082a",
+    "tests/test_restart_pilot_gate.py": "572a6c8af7fbe02396599037fc12e5aa200a104226aa3213204c69a1fd67b482"
+  },
+  "remaining": [
+    "Bind actual evaluation outputs to metrics",
+    "Persist stage barrier so checkpoint/resume cannot skip pilot",
+    "Scoped launcher/supervisor integration",
+    "Required neural correctness suite"
+  ],
+  "training_started": false
+}

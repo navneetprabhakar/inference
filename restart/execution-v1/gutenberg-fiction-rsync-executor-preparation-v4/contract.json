@@ -1,0 +1,53 @@
+{
+  "status": "RAW_SOURCE_DISCOVERY_ONLY_NO_ADMISSION_TRAINING_OR_MODEL_OPERATIONS",
+  "scope": "Exactly frozen 300 literal rsync files; no remote execution by preparation or static preflight.",
+  "transport": {
+    "fixed_public_host": "rsync.ibiblio.org",
+    "port": 873,
+    "module": "gutenberg-epub",
+    "route": "One literal <decimalID>/pg<decimalID>.txt per fresh stage. No recursive/files-from/archive/delete/resume/compression/auth/proxy/config/runtime fallback.",
+    "trust": "Unencrypted native rsync public mirror; no TLS/publisher checksum or catalog-version-equivalence claim.",
+    "bytes": "Received rsync application stream includes greeting/file-list/checksum/data, bounded before forwarding: 2.5MB each and 750MB aggregate. Not physical packet/TCP retransmission wire bytes. Plaintext file maximum 2.4MB. Ledger actual body hashes/lengths describe this received application stream; file SHA/size recorded separately."
+  },
+  "limits": {
+    "books": 300,
+    "file_bytes": 2400000,
+    "received_bytes_each": 2500000,
+    "received_total": 750000000,
+    "output_bytes": 800000000,
+    "connections": 300,
+    "pace_seconds": 2,
+    "per_file_external_seconds": 60,
+    "per_file_active_seconds": 55,
+    "profile_external_seconds": 21600,
+    "RSS_bytes": 1000000000
+  },
+  "disk": {
+    "combined_intake_bytes": 64000000000,
+    "free_weights_scratch_floor_bytes": 53474836480,
+    "preflight_additional_output_reservation": 800000000
+  },
+  "charge": "Exclusive existing IntakeLedger lock held throughout profile and reconciliation. 800MB output before any owned file; 2.5MB and one request before each attempt/listener/source IO. Attempt keys must all be absent; no charge refunds/replay. Failed partial charges retained. Generated metadata is not downloaded body bytes.",
+  "continue": "Only exact recognized missing, independently bounded oversize skip or independent network timeout may advance next frozen record; success resets consecutive failures, third consecutive independent failure terminates. All protocol/path/policy/custody/resource/budget/ledger errors stop immediately. No replacement or retry.",
+  "ownership": "Single controller monitors whole descendant RSS; sandbox native child only writes fresh rawstage and connects exact owned loopback relay. Main thread performs ledger/resource checks; DNS subprocess ownership registration is thread-safe without SQLite work. Native/resolver killed and reaped on ordinary failures. DNS <=5sec; native active55/external60; global active21595/external21600. Entire attempt setup/precharge/pacing/transport/validation/ledger/receipt is protected by main-thread active55-second SIGALRM independently of cooperative transport. Active expiry is fatal, never a continue timeout. During cleanup hard60-second alarm exits124 preserving pending charges/active PID ownership evidence for parent reconciliation. Both timers clamp original global active/hard deadlines; global timer restored only after attempt context unwinds.",
+  "crash_limit": "SIGKILL of controller cannot run finally: parent must use active ownership PID+ps identity and reap owned groups before any reconciliation or further writer. No universal automatic crash-recovery guarantee.",
+  "output_inventory": {
+    "root": [
+      "planned-files.json",
+      "ownership.json",
+      "result.json",
+      "inventory.json",
+      "controller.json"
+    ],
+    "attempt-NNN": [
+      "file.declaration",
+      "native.sb",
+      "receipt.json",
+      "raw/pg<exactID>.txt or retained native partials"
+    ],
+    "success": "SHA256 and size inventory of surviving regular artifacts; terminal result/inventory/controller preallocated slots declared separately.",
+    "partial": "All failed partials preserved; bounded stat inventory explicitly makes no all-artifact SHA claim.",
+    "semantics": "COMPLETE means finite profile terminal, not 300 successful books. Per-record states/complete/independent failure/unattempted counts remain explicit."
+  },
+  "source_quality": "Catalog extents and death/component metadata are discovery priorities only. Current body original-English, edition/components, rights, language, semantic quality, family/leakage and token counts remain pending."
+}

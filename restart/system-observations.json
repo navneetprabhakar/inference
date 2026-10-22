@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-21",
+  "hardware": {
+    "machine": "MacBook Air",
+    "chip": "M4",
+    "cpu_cores": 10,
+    "gpu_cores": 10,
+    "memory_GiB": 24
+  },
+  "trainer_processes_found_at_start": [],
+  "project_processes_retained": [
+    "ChatGPT CUA node session and trusted-worker; not trainers"
+  ],
+  "actions_stopped": [],
+  "automations": [
+    {
+      "id": "catalog-gcs-after-project-cleanup",
+      "name": "Catalog and organize GCS after cleanup",
+      "status": "PAUSED"
+    },
+    {
+      "id": "ganesh-mini-public-benchmark-closure",
+      "name": "Ganesh Mini public benchmark closure",
+      "status": "PAUSED"
+    }
+  ],
+  "launch_agents": [
+    {
+      "label": null,
+      "arguments": [],
+      "referenced_scripts": []
+    },
+    {
+      "label": null,
+      "arguments": [],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.failmon",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/es-failonly-monitor.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.pro",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/es-pro-run.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.comp1pass1stop",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/comp1-pass1-stop.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.failonly",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/es-failonly-run.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "homebrew.mxcl.redis",
+      "arguments": [
+        "/opt/homebrew/opt/redis/bin/redis-server",
+        "/opt/homebrew/etc/redis.conf"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.comp1",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/comp1-launchd.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.estb.promon",
+      "arguments": [
+        "/bin/bash",
+        "/tmp/es-pro-monitor.sh"
+      ],
+      "referenced_scripts": []
+    },
+    {
+      "label": "com.google.GoogleUpdater.wake",
+      "arguments": [
+        "/Users/navneetprabhakar/Library/Application Support/Google/GoogleUpdater/Current/GoogleUpdater.app/Contents/MacOS/GoogleUpdater",
+        "--wake-all",
+        "--enable-logging",
+        "--vmodule=*/components/update_client/*=2,*/chrome/enterprise_companion/*=2,*/chrome/updater/*=2"
+      ],
+      "referenced_scripts": []
+    }
+  ],
+  "cron": "Unrelated straw-hat-crew morning-digest only; unchanged",
+  "cloud_access": false,
+  "caveat": "Local process/scheduler inspection only; no remote/cloud state inspected."
+}

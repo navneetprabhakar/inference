@@ -1,0 +1,36 @@
+{
+  "status": "SYNTHETIC_ONLY_COMPONENT_REVIEW_DETECTOR_NOT_SOURCE_EXECUTOR",
+  "interface": "detect_components(text, identity) -> deterministic scoped flags; identity source_id/ordinal/text_SHA256/source_JSON_SHA256. Core verifies exact UTF8 text hash; caller independently verifies raw JSON/source-frame ancestry.",
+  "output": "Each notice and bounded context retains exact character/UTF8 offsets, literal bytes and SHA256. Notice extent is never inferred component-body extent. All matching occurrences retained.",
+  "classes": [
+    "NC/FDL license tokens with local grant-vs-mention cue",
+    "explicit generation attribution vs AI-topic, negated/example/conditional language",
+    "AI assistance distinct from full authorship",
+    "translation attribution",
+    "republication/adaptation ancestry",
+    "literal Source URL lead"
+  ],
+  "disposition": "SCOPED_REVIEW_FLAG_ONLY. No automatic exclusions, admission, grant compatibility, work equivalence, source quota reassignment, or human authorship certification.",
+  "bounds": {
+    "input_UTF8_bytes": 2196000,
+    "flags": 256,
+    "notice_characters": 1024,
+    "context_each_side_characters": 192,
+    "result_UTF8_bytes": 512000
+  },
+  "failure": "Strict UTF8/hash/identity refusal. Any bound exceeded raises without returning partial-success receipt. Future caller must record diagnostic incomplete/resource hold and never silently skip.",
+  "limits": [
+    "Finite literal rules, not exhaustive semantic or licensing analysis. Bare NC/FDL mention is not proof of applicable grant.",
+    "Context tags use bounded local heuristics, not legal or linguistic certification; quotations, example and negation may be ambiguous. All flags require scoped source review.",
+    "No result flags means UNASSESSED_NOT_CLEARED. No inference that unmarked prose is human or unrestricted.",
+    "Exact sourceURL is an ancestry lead, not confirmed same-work family. Wrapper license never overrides captured component terms.",
+    "Explicit generation attribution does not prove the attributed component is retained, nor define its extent; proofreading assistance is separate.",
+    "No alteration, component stripping, sentence cropping, Unicode/entity normalization or source pass."
+  ],
+  "integration": {
+    "structural_API": "assess(text) stays separate; preserve prior_v1, delta_representation_review_holds and delta_review_only_signals unchanged.",
+    "component_API": "Attach this result under component_ancestry_review; do not coerce review flags into structural/quality verdicts. Union exact known holds separately; preserve all raw source and current failed400 judgments.",
+    "future_run": "New complete bounded executor/profile with frozen input/runtime/code pins, aggregate output and RSS/deadline guards and exact source joins requires parent review before retained-source application."
+  },
+  "preservation": "All existing failed400/133+8 verdicts and our70 verdicts plus extra71 seen scope unchanged. No new selection, corpus pass, counts, or admissions."
+}

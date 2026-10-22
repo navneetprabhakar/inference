@@ -1,0 +1,4 @@
+- Synthetic-only native metadata SAX core; no archive reader, supervisor, SQL writer or source operation.
+- Run controls with project .venv/bin/python checks.py. All67 controls pass, including10MiBstreamed text and5000page fixedstate fixture.
+- Contract specifies prompt revision occurrence callbacks followed by page rawhash/exacttitle callback. Root-owned source/index/group/SQL integration remains separate.
+- Pinned independently reviewed spanhelperv3 handles original page bytes and prefix terminal flush. No helper changes.

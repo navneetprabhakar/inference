@@ -1,0 +1,23 @@
+{
+  "design": "Deterministic hash-ranked simple random sample of 200 training records per source; equal inclusion probability within source. Development and test texts are not inspected. Seed fixed before reading.",
+  "seed": "semantic-review-v1-20261021:",
+  "criteria": {
+    "readable_complete_english_min": 0.95,
+    "major_corruption_or_offtopic_boilerplate_max": 0.02
+  },
+  "labels": [
+    "pass",
+    "minor",
+    "fail",
+    "major"
+  ],
+  "interpretation": "minor remains readable and usable with imperfections; fail is excluded. Sample compliance is not a population guarantee or factual verification. Only observed failures and defensibly linked families are excluded; no extrapolated counts.",
+  "early_rejection_rule": "For FineWeb, before opening any sample text: stop once >10 failures (including major) or >4 major corruption/boilerplate failures occur within the fixed 200-record sample. Even if every unread record passed, the source would fail the predeclared gate. No early acceptance. Unread records have no judgments; report reviewed denominator, no pass-rate extrapolation.",
+  "source_failure_action": "Quarantine the entire source from the admitted pool when gate failure is mathematically established. Preserve mechanically eligible counts separately; this is not a claim every quarantined document is bad.",
+  "label_meaning": {
+    "pass": "Readable complete useful prose; no material issue noted, not factual certification",
+    "minor": "Usable for narrow language experiment despite recorded imperfections or concerns",
+    "fail": "Substantive coherence, completeness, extraction or epistemic-quality defect",
+    "major": "Major semantic/grammatical corruption or dominant off-topic/template/link boilerplate; also a failure"
+  }
+}

@@ -53,6 +53,8 @@ class Config:
 
 
 def initialize(config: Config, seed=42):
+    from slm.common.restart_guard import require_training_approval
+    require_training_approval()
     rng = np.random.default_rng(seed)
     weights = {}
     for name, shape in config.shapes().items():

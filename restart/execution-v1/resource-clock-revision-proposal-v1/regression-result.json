@@ -1,0 +1,42 @@
+{
+  "status": "PROPOSED_FIX_REGRESSION_PASS",
+  "cases": [
+    {
+      "case": "original-race",
+      "status": "STOP",
+      "expected": "STOP",
+      "reason": "StopRun: invalid resource telemetry",
+      "receipt_sha256": "7897ad6845b652f3cac9719063b9380e9a203c380393d697dbf378fe292e9b91"
+    },
+    {
+      "case": "proposed-race",
+      "status": "PASS",
+      "expected": "PASS",
+      "reason": "worker_completed",
+      "receipt_sha256": "f192478b03034b287637948a826eccbce0acb8b8a25ad06e1102ce0e69699603"
+    },
+    {
+      "case": "proposed-future-heartbeat",
+      "status": "STOP",
+      "expected": "STOP",
+      "reason": "StopRun: Invalid heartbeat clock",
+      "receipt_sha256": "2c56fe9fbc4a63cc3e00f1cb76ca51942f46f27716304bf97370344c9f06d3ce"
+    },
+    {
+      "case": "proposed-rss",
+      "status": "STOP",
+      "expected": "STOP",
+      "reason": "StopRun: instant RSS limit",
+      "receipt_sha256": "537f144ad0adf211481ffd1904d2390b8f13e8ba08923831d2164d224fe232bc"
+    },
+    {
+      "case": "proposed-future-sample",
+      "status": "STOP",
+      "expected": "STOP",
+      "reason": "StopRun: Invalid resource sample clock",
+      "receipt_sha256": "9887529e89ff99ec452b17e5ac8856223766962852e7580634d6d7711f4db4a5"
+    }
+  ],
+  "model_operations": false,
+  "current_source_modified": false
+}

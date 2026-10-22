@@ -1,0 +1,142 @@
+{
+  "status": "EXACT_EXISTING_M1_TRAIN_SOURCE_SPLIT_AND_PROJECTED_DISTINCT_TOKEN_RECIPE_LIMITS_NOT_TRAINING_APPROVAL",
+  "input_SHA256": {
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/data-train/index.jsonl": "5dabc29550639909fc38e63d22895ee475d51b2cb8ef008ad369f543f3b58053",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/data-train/manifest.json": "05bbbe88fa29b9a18f0ad1d5b275cc92a1a08d4acb183b6cba921ff7ee88d803",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/tokenizer-receipt.json": "a0b67529e2a0310556d0cc2c0dbc09fc6f7dd8611f7b367f22c77e47503917c2",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m0-registry-v1/artifacts/admitted-documents.jsonl": "31b6fce26aac16695510b077d53796e7c8495423abf6f8cd5362a82c18f304b9",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/fineweb-salvage-reviewed-v1/accepted-manifest.csv": "2ad53dc0fc670a7185763f1cfe151e1148933038b8855e55d54a29f84256716d",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/MILESTONE_PLAN.md": "b9b14dd2038fd3fb136d7deeaede507fe2c44e5078c19bed384dc478c617e205",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m2-intake/gutenberg-individual-admissions-v1/counts.json": "9ba447625c0b5ca1fd002098096f4aa4397ddb11f5f12faf72074b47bf72b22d",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m2-intake/gutenberg-individual-admissions-v1/documents.jsonl": "06f36e640ed56cc7d991f50f34f7a6868bb98d2783ba065937dc7dbc3cbdebc2",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m2-intake/wikibooks-individual-admissions-v1/counts.json": "cdb9ff8641cd6c8fbb9604c0526c757f18c38954b75911c1ae7341a9e8e183f1",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/gutenberg-fourteen-individual-admission-preparation-v3/proposal.json": "69027541530c07e7b70d9107f51897b76c60f800d19661bb52e8036f64820fa2",
+    "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/gutenberg-fourteen-individual-admission-preparation-v3/documents.proposed.json": "1d6b1b901a7c9f6209152eceb3a66c9506b33a51147fa8a55c04e14cc407e136"
+  },
+  "existing_M1_train_exact_source_counts": {
+    "TinyStories": {
+      "documents": 72065,
+      "M1_content_tokens": 14368835,
+      "M1_targets_with_EOS": 14440900,
+      "scored_UTF8_bytes": 58370962
+    },
+    "FineWeb": {
+      "documents": 51,
+      "M1_content_tokens": 28998,
+      "M1_targets_with_EOS": 29049,
+      "scored_UTF8_bytes": 97770
+    }
+  },
+  "M1_content_tokens_exclude_EOS": true,
+  "metadata_identity_join": "Every72116 M1 train index row joined by exact auditID/source/train/family/normalizedSHA/originalSHA to frozen M0 admitted registry and accepted-manifest; historical CSV token counts intentionally not used",
+  "existing_release_only": {
+    "documents": 72116,
+    "content_tokens": 14397833,
+    "synthetic_fraction": 0.9979859469129834,
+    "human_FineWeb_fraction": 0.0020140530870166365
+  },
+  "observed_current_separate_individual_admitted_pools": {
+    "PG_documents": 4,
+    "PG_content_tokens": 23090,
+    "Wikimedia_documents": 1,
+    "Wikimedia_content_tokens": 216,
+    "all_available_train_documents": 72121,
+    "all_available_train_content_tokens": 14421139
+  },
+  "conditional_projection_after14PG_plus_existing1WB": {
+    "new_PG_documents_not_claimed_published_by_this_assessment": 14,
+    "new_PG_content_tokens": 144780,
+    "source_groups": {
+      "TinyStories_simplified_synthetic": {
+        "documents": 72065,
+        "content_tokens": 14368835
+      },
+      "FineWeb_human_web_including_any_FineWebEdu": {
+        "documents": 51,
+        "content_tokens": 28998
+      },
+      "Project_Gutenberg_human_all_editions_cores": {
+        "documents": 18,
+        "content_tokens": 167870
+      },
+      "Wikimedia_human_all_projects_combined": {
+        "documents": 1,
+        "content_tokens": 216
+      }
+    },
+    "all_available_train_documents": 72135,
+    "all_available_train_content_tokens": 14565919,
+    "human_authored_nonsynthetic_available_tokens": 197084,
+    "human_fraction": 0.013530488532855359,
+    "synthetic_fraction": 0.9864695114671447,
+    "not_final_recipe_usable_tokens": true
+  },
+  "quota_arithmetic": {
+    "policy": {
+      "human_minimum": 0.5,
+      "simplified_synthetic_stories_maximum": 0.2,
+      "any_source_group_maximum": 0.3,
+      "everyday_narrative_minimum": 0.1,
+      "exposition_reference_minimum": 0.1,
+      "instructional_explanatory_minimum": 0.1,
+      "genre_labels_disjoint": true
+    },
+    "human50pct_only_distinct_cap": 394168,
+    "synthetic20pct_only_distinct_cap": 246355,
+    "all_source_caps_optimistic_fractional_distinct_upper_bound": 1080,
+    "source_bound_derivation": "TinyStories<=.2T, FineWeb<=.3T, PG<=.3T leave Wikimedia>=.2T. Only216 distinct Wikimedia tokens available, soT<=216/.2=1080. This ignores whole-document sizes and genre/factual/quality gates.",
+    "hypothetical_fractional_boundary_allocation_not_a_recipe": {
+      "TinyStories": 216,
+      "FineWeb": 324,
+      "Project_Gutenberg": 324,
+      "Wikimedia": 216
+    },
+    "whole_document_distinct_recipe_maximum": 0,
+    "whole_document_infeasibility_proof": "Any nonzero recipe needs allfour source groups: omitting any group leaves summed maxima<=.9. AtT<=1080, PG<=324. Smallest exact available/proposed PG unit790 exceeds324. Therefore no nonzero whole-document recipe meets sourcecaps, even before genre/quality checks.",
+    "smallest_projected_PG_whole_unit_tokens": 790,
+    "does_not_authorize_arbitrary_clipping_or_repetition": true,
+    "no_source_caps_relabeling": "AllWikimedia together; allPG together; FineWeb/Edu together. Shared source labels cannot manufacture diversity."
+  },
+  "genre_evidence": {
+    "existing_four_PG_frozen_primary_genres": {
+      "everyday_narrative": {
+        "documents": 3,
+        "content_tokens": 16585
+      },
+      "exposition_reference": {
+        "documents": 1,
+        "content_tokens": 6505
+      }
+    },
+    "existing_one_WB_frozen_primary_genres": {
+      "exposition_reference": {
+        "documents": 1,
+        "content_tokens": 216
+      }
+    },
+    "explicit_frozen_instructional_explanatory_tokens_in_individual_pools": 0,
+    "existing51FineWeb_M2_disjoint_genre_tokens": "UNMEASURED_NOT_ZERO",
+    "old_release_TinyStories_narrative_scope": "simplified synthetic stories, cannot supply genuine human exposition/instruction",
+    "new14PG_M2_primary_genre_ledger": "No disjoint final M2 labels frozen in current proposal; historical fiction/memoir/criticism do not become procedure instruction solely by containing factual dialogue.",
+    "certified_complete_M2_recipe_tokens": 0,
+    "zero_reason": "No frozen nonzero quota-compliant recipe; whole-document source ceiling already proves infeasibility. Zero certified instructional label supply is not a claim everyFineWebbody lacks instruction."
+  },
+  "500M_planning_floor_gap": {
+    "available_pool_arithmetic_gap_only": 485434081,
+    "at_least_human_tokens_still_missing_for50percent": 249802916,
+    "instructional10percent_required_tokens": 50000000,
+    "current_instructional_supply_not_certified": true,
+    "if_only_current_four_groups_Wikimedia_minimum_distinct_tokens": 100000000,
+    "current_Wikimedia_tokens": 216,
+    "four_group_Wikimedia_gap": 99999784,
+    "not_the_same_as_final_recipe_usable_gap": true
+  },
+  "limits": [
+    "No fitting, encoding, neuralmodel imports, training or source-body rereading",
+    "Existing M1 tokenizer units only; final M3 tokenizer recount required",
+    "Source human attribution follows existing dataset/source decisions, not independent authorship certification of every web passage",
+    "Individual source admission does not pass M2 global quality/genre/mixture/evaluation gates",
+    "All-pool totals cannot be presented as final-mixture usable; repeated exposure cannot create distinct supply",
+    "Projection is conditional14PG; this assessment neither publishes admissions nor changes counts/live status"
+  ]
+}

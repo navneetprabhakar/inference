@@ -1,0 +1,164 @@
+{
+  "status": "complete_under_frozen_operational_policy",
+  "training_approved": false,
+  "model_size_approved": false,
+  "raw": {
+    "TinyStories": {
+      "raw_documents": 131323,
+      "raw_content_tokens": 28077733,
+      "official_or_historical_heldout": 49620
+    },
+    "FineWeb": {
+      "raw_documents": 49000,
+      "raw_content_tokens": 55821298,
+      "official_or_historical_heldout": 18
+    },
+    "Cosmopedia": {
+      "raw_documents": 49064,
+      "raw_content_tokens": 39380839,
+      "official_or_historical_heldout": 0
+    },
+    "HistoricalProtection": {
+      "raw_documents": 66298,
+      "raw_content_tokens": 13028893,
+      "official_or_historical_heldout": 66298
+    },
+    "SQuADProtection": {
+      "raw_documents": 20963,
+      "raw_content_tokens": 3627903,
+      "official_or_historical_heldout": 20963
+    },
+    "ConversationProtection": {
+      "raw_documents": 111930,
+      "raw_content_tokens": 22290413,
+      "official_or_historical_heldout": 111930
+    },
+    "EvaluationProtection": {
+      "raw_documents": 3921,
+      "raw_content_tokens": 442393,
+      "official_or_historical_heldout": 3921
+    }
+  },
+  "waterfall": {
+    "TinyStories": {
+      "official_heldout_documents": 49620,
+      "official_heldout_tokens": 10775619,
+      "quality_pass_documents": 80362,
+      "quality_pass_tokens": 17079733,
+      "quality_and_protection_pass_documents": 79997,
+      "quality_and_protection_pass_tokens": 16977347,
+      "quality_rejected_documents": 1341,
+      "quality_rejected_tokens": 222381,
+      "evaluation_family_excluded_documents": 365,
+      "evaluation_family_excluded_tokens": 102386,
+      "usable_documents": 79997,
+      "usable_content_tokens": 16977347
+    },
+    "FineWeb": {
+      "quality_pass_documents": 41941,
+      "quality_pass_tokens": 38258993,
+      "quality_and_protection_pass_documents": 37631,
+      "quality_and_protection_pass_tokens": 34632114,
+      "evaluation_family_excluded_documents": 4310,
+      "evaluation_family_excluded_tokens": 3626879,
+      "quality_rejected_documents": 7041,
+      "quality_rejected_tokens": 17546640,
+      "official_heldout_documents": 18,
+      "official_heldout_tokens": 15665,
+      "duplicate_removed_documents": 8,
+      "duplicate_removed_tokens": 5164,
+      "usable_documents": 37623,
+      "usable_content_tokens": 34626950
+    },
+    "Cosmopedia": {
+      "ancestry_quarantine_documents": 49064,
+      "ancestry_quarantine_tokens": 39380839
+    }
+  },
+  "overlapping_quality_reasons": {
+    "TinyStories": {
+      "short": 6,
+      "repeated_fivegrams": 12,
+      "dominant_word": 1899,
+      "full_document_or_window_language": 28,
+      "repeated_lines": 1
+    },
+    "FineWeb": {
+      "source_english_score": 853,
+      "full_document_or_window_language": 4988,
+      "contact_or_secret_signal": 1038,
+      "table_caption_heavy": 797,
+      "dominant_word": 81,
+      "long": 470,
+      "markup_or_boilerplate": 119,
+      "promotional_call_to_action": 76,
+      "corrupt_encoding_or_controls": 25,
+      "short": 13,
+      "repeated_lines": 47,
+      "direct_content_review_exclusion": 1,
+      "repeated_fivegrams": 3
+    },
+    "Cosmopedia": {
+      "unresolved_seed_document_ancestry": 49064,
+      "full_document_or_window_language": 6091,
+      "short": 45,
+      "dominant_word": 8,
+      "markup_or_boilerplate": 111,
+      "repeated_lines": 200,
+      "promotional_call_to_action": 38,
+      "repeated_fivegrams": 34,
+      "model_control_marker_in_source": 21,
+      "table_caption_heavy": 90,
+      "contact_or_secret_signal": 15,
+      "corrupt_encoding_or_controls": 14
+    }
+  },
+  "splits": {
+    "train": {
+      "documents": 105789,
+      "content_tokens": 46451603,
+      "content_plus_one_eos_per_doc": 46557392,
+      "families": 94644
+    },
+    "test": {
+      "documents": 6051,
+      "content_tokens": 2656748,
+      "content_plus_one_eos_per_doc": 2662799,
+      "families": 5133
+    },
+    "development": {
+      "documents": 5780,
+      "content_tokens": 2495946,
+      "content_plus_one_eos_per_doc": 2501726,
+      "families": 5279
+    }
+  },
+  "language_windows": {
+    "TinyStories": 279698,
+    "FineWeb": 297755,
+    "Cosmopedia": 250874
+  },
+  "exact_near_edges": {
+    "exact": 59893,
+    "near": 3276
+  },
+  "rejected_hash_false_positive_edges": 0,
+  "contained_protected_text_documents": 69147,
+  "usable_documents": 117620,
+  "usable_content_tokens": 51604297,
+  "validation": {
+    "zero_known_cross_split_family_overlap": true,
+    "zero_normalized_exact_duplicates": true,
+    "one_representative_per_verified_near_component": true,
+    "zero_known_protected_family_members": true,
+    "all_candidate_documents_and_tokens_reconciled": true
+  },
+  "limits": [
+    "Operational screening is not factual-truth or human semantic-quality certification.",
+    "Near join is complete at Jaccard .8 over 64-bit full-document shingle hashes; every positive edge verified with exact string shingles. Hash-collision false-negative risk is extremely small but not formally zero.",
+    "Containment checks full evaluation strings >=12 words and all fixed 32-word protected blocks at stride16; any shared contiguous 47-word span contains a checked block. Short strings only exclude whole-document equality.",
+    "Semantic paraphrases and unknown upstream ancestry cannot be exhaustively certified. Cosmopedia entirely quarantined because underlying source-document identity is unresolved.",
+    "Host grouping uses last two DNS labels conservatively; public suffixes such as co.uk can overgroup, never split a known host family.",
+    "Numbers use existing 16k BPE; a future newly fitted tokenizer changes exact token counts."
+  ]
+}

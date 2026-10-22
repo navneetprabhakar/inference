@@ -1,0 +1,262 @@
+{
+  "status": "NUMERICAL_CASE_RESULTS_PASS",
+  "required_cases": 40,
+  "reported_cases": 40,
+  "passed_cases": 40,
+  "missing": [],
+  "failed": [],
+  "cases": {
+    "forward:single_token_logits": {
+      "passed": true,
+      "maximum_absolute_error": 5.960464477539063e-08,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:un-padded_batch_logits": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:right_padded_valid_logits": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:layer_residual_traces": {
+      "passed": true,
+      "maximum_absolute_error": 3.725290298461914e-09,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:causal_future_perturbation": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:separate_document_perturbation": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:cached_vs_full_decode": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "forward:rope_offset_decode": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:all_parameter_gradients": {
+      "passed": true,
+      "maximum_absolute_error": 2.384185791015625e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:padding_zero_contribution": {
+      "passed": true,
+      "maximum_absolute_error": 1.002441753078509e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:eos_nonzero_contribution": {
+      "passed": true,
+      "maximum_absolute_error": 1.4901161193847656e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:native_vs_onehot_embedding": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:stable_ce_confident_tail": {
+      "passed": true,
+      "maximum_absolute_error": 1.4503455645353824e-06,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:stable_ce_common_offset": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:tied_embedding_both_paths": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "gradients:finite_difference_selected_parameters": {
+      "passed": true,
+      "maximum_absolute_error": 6.582300926538664e-08,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "segmentation:bos_target_shift": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "segmentation:single_document_eos": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "segmentation:long_document_unique_targets": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "segmentation:one_predecessor_context": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "segmentation:family_split_identity_retained": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "segmentation:padding_not_counted": {
+      "passed": true,
+      "comparison": "exact discrete identity/counts"
+    },
+    "accumulation_optimizer:unequal_target_weighting": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "accumulation_optimizer:partial_tail_batch": {
+      "passed": true,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "accumulation_optimizer:target_count_lr_schedule": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "accumulation_optimizer:clip_after_accumulation": {
+      "passed": true,
+      "maximum_absolute_error": 6.191206636252389e-08,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "accumulation_optimizer:adam_first_second_moments": {
+      "passed": true,
+      "maximum_absolute_error": 6.891787057705656e-09,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "accumulation_optimizer:matrix_only_decay_including_embedding": {
+      "passed": true,
+      "maximum_absolute_error": 6.191206647354619e-08,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:parameter_roundtrip": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:moment_roundtrip": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:data_rng_roundtrip": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:monitor_schedule_roundtrip": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:ledger_prefix_no_refund": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "checkpoint_resume:resumed_next_update_equivalence": {
+      "passed": true,
+      "maximum_absolute_error": 0.0,
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 0
+    },
+    "fit_and_integrity:toy_fit_loss_drop_50_percent": {
+      "passed": true,
+      "details": {
+        "final_to_initial_ratios": {
+          "mlx": 0.16277529902189097,
+          "torch": 0.16277527380223533
+        }
+      }
+    },
+    "fit_and_integrity:aggregate_toy_update_cap": {
+      "passed": true,
+      "details": {
+        "charged_updates": 18,
+        "backend_updates": {
+          "mlx": 9,
+          "torch": 9
+        },
+        "cap": 18
+      }
+    },
+    "fit_and_integrity:aggregate_toy_target_cap": {
+      "passed": true,
+      "details": {
+        "charged_work_positions": 2086,
+        "cap": 100000
+      }
+    },
+    "fit_and_integrity:aggregate_toy_walltime_cap": {
+      "passed": true,
+      "details": {
+        "observed_seconds": 3.7772761250380427,
+        "charged_seconds": 10.0,
+        "supervisor_status": "PASS",
+        "cap": 1800
+      }
+    },
+    "fit_and_integrity:nonfinite_input_terminal_rejection": {
+      "passed": true,
+      "details": {
+        "initial_rejection": true,
+        "retry_rejection": true,
+        "terminal": "missing/nonfinite update metric"
+      }
+    },
+    "fit_and_integrity:incomplete_checkpoint_rejection": {
+      "passed": true,
+      "details": {
+        "rejected_forms": [
+          "missing-tensor",
+          ".partial-checkpoint"
+        ]
+      }
+    }
+  },
+  "training_authorized_by_this_check": false,
+  "evidence_sha256": {
+    "progress": "88e560bafec853751bfbcb4e05d421d0368af5eaaaf2620d8bb0b523dca6e2d0",
+    "inputs": "445aa4957e30cc6f3f6278de13029b4c2b9fcae2e34c84ee3bd8d038d6e4b470",
+    "supervisor": "817bc2127fca436573a8c5a0054679ecc0632b4217ec72fbd7328841dc84f557",
+    "trajectory": "e5b69cdaf4b85eef52e25da00f1b2301530fc8fe3c71cf9073214c781253b4fc"
+  }
+}

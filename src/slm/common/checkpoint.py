@@ -36,6 +36,8 @@ def save(path, config, weights):
 
 
 def load(path):
+    from slm.common.restart_guard import require_training_approval
+    require_training_approval()
     path = Path(path)
     hashes = json.loads((path/'manifest.json').read_text())
     if set(hashes) != {'config.json', 'model.safetensors'}:

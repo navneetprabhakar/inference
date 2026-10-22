@@ -271,6 +271,8 @@ def save_checkpoint(output,trainer,inputs,passed_gates):
 
 
 def run(spec,output,*,backend='torch',device='cpu',resume=None,max_new_updates=1000000,wall_seconds=3600.,gates=None):
+    from slm.common.restart_guard import require_training_approval
+    require_training_approval()
     output=Path(output).resolve();gates={} if gates is None else {key:{k:str(Path(v).resolve()) if v is not None else None for k,v in bundle.items()} for key,bundle in gates.items()}
     integer(max_new_updates)
     if type(wall_seconds) not in (int,float) or not np.isfinite(wall_seconds) or wall_seconds<=0:raise ValueError('Positive finite soft wall limit required')

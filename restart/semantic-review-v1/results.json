@@ -1,0 +1,78 @@
+{
+  "status": "semantic_admission_review_complete_with_fineweb_rejected",
+  "training_approved": false,
+  "model_size_approved": false,
+  "review": {
+    "TinyStories": {
+      "selected": 200,
+      "fully_read": 200,
+      "unread": 0,
+      "labels": {
+        "pass": 137,
+        "minor": 53,
+        "fail": 10
+      },
+      "usable_reviewed": 190,
+      "source_gate": "pass_at_boundary",
+      "reviewed_content_tokens": 42021,
+      "major_failure_minimum_in_full_200": 0.0
+    },
+    "FineWeb": {
+      "selected": 200,
+      "fully_read": 31,
+      "unread": 169,
+      "labels": {
+        "fail": 4,
+        "minor": 11,
+        "pass": 11,
+        "major": 5
+      },
+      "usable_reviewed": 22,
+      "source_gate": "reject",
+      "reviewed_content_tokens": 27571,
+      "major_failure_minimum_in_full_200": 0.025
+    }
+  },
+  "admitted_sources": [
+    "TinyStories"
+  ],
+  "total_documents": 79987,
+  "total_content_tokens": 16975190,
+  "splits": {
+    "train": {
+      "documents": 72065,
+      "content_tokens": 15295273,
+      "tokens_with_one_eos_per_document": 15367338
+    },
+    "test": {
+      "documents": 3923,
+      "content_tokens": 831587,
+      "tokens_with_one_eos_per_document": 835510
+    },
+    "development": {
+      "documents": 3999,
+      "content_tokens": 848330,
+      "tokens_with_one_eos_per_document": 852329
+    }
+  },
+  "exclusions_from_mechanical_pool": {
+    "review_failed_family": {
+      "documents": 10,
+      "content_tokens": 2157
+    },
+    "source_semantic_gate_failed": {
+      "documents": 37623,
+      "content_tokens": 34626950
+    }
+  },
+  "tiny_sample_usable_95pct_wilson_interval": [
+    0.9104218518612239,
+    0.972617354399236
+  ],
+  "semantically_certified_population_counts": null,
+  "interpretation": "Exact counts of records admitted under sample-based policy, not a claim each remaining record has been semantically reviewed. FineWeb all quarantined as source; Cosmopedia remains ancestry-quarantined.",
+  "tokenizer_sha256": "0044125dd66d4414a4f7dabf9cdfe356dfdcbd7b91a09393fa28fe6bfac30a64",
+  "tokenizer_total_vocabulary": 16384,
+  "original_manifest_sha256": "0f368e5a98a74f2f40e2f986e48b3021935b4995bc323546ac466c283f90c51e",
+  "accepted_manifest_sha256": "71444df43882202845088c1845f7980b227b39755bc289c92c28727f56c22445"
+}

@@ -1,0 +1,8 @@
+from pathlib import Path
+import json,hashlib,sys,datetime
+B=Path(__file__).resolve().parents[1];O=Path(__file__).resolve().parent;p=B/'m2-intake/hansard-fixed30-draw-development-capture-v1/source-2-row-002848.text.utf8';raw=p.read_bytes();s=raw.decode();assert hashlib.sha256(raw).hexdigest()=='8a1ca30a6ba7c31f10360db786f9f5d8f1d3c37350707255b0c31a26f37e718f';end=int(sys.argv[1]);assert 0<end<=len(s);chunks=[]
+for a in range(0,end,10000):
+ z=min(a+10000,end);cb=s[a:z].encode();chunks.append({'char_start':a,'char_end':z,'UTF8_start':len(s[:a].encode()),'UTF8_end':len(s[:z].encode()),'SHA256':hashlib.sha256(cb).hexdigest(),'visible_untruncated_read':True})
+old=json.loads((O/'progress.json').read_text()) if (O/'progress.json').exists() else {};notes=old.get('notes',[])
+if len(sys.argv)>2:notes.append(sys.argv[2])
+j={'status':'WHOLE_REVIEW_COMPLETE' if end==len(s) else 'PARTIAL_VISIBLE_REVIEW_NO_WHOLE_UNIT_VERDICT','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'uniform_draw':6,'source_id':2,'ordinal':2848,'ID':'daylord2013-07-02a','source':'uk-hansard-lords-debates','source_SHA256':hashlib.sha256(raw).hexdigest(),'source_UTF8_bytes':len(raw),'source_characters':len(s),'read_character_end':end,'read_UTF8_bytes':len(s[:end].encode()),'whole_captured_record_read':end==len(s),'whole_day_or_debate_claim':False,'chunks':chunks,'notes':notes,'no_sourcewide_acceptance_or_admission':True,'rights_language_family_leakage_clearance':False};(O/'progress.json').write_text(json.dumps(j,indent=2)+'\n');print(json.dumps({'status':j['status'],'readchars':end,'readbytes':j['read_UTF8_bytes'],'chunks':len(chunks)}))

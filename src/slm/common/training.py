@@ -111,6 +111,8 @@ class Trainer:
 
     def __init__(self, config, weights, batches, backend='torch', device='cpu',
                  recipe=None, tokenizer_hash='synthetic-token-ids-v1'):
+        from slm.common.restart_guard import require_training_approval
+        require_training_approval()
         if getattr(batches,'requires_stage_trainer',False) and not self.SUPPORTS_CURRICULUM:
             raise ValueError('Curriculum data requires CurriculumTrainer')
         if getattr(batches,'vocab_size',config.vocab_size)!=config.vocab_size:
@@ -289,6 +291,8 @@ class Trainer:
 
     @classmethod
     def resume(cls, path, batches, backend='torch', device='cpu', tokenizer_hash='synthetic-token-ids-v1'):
+        from slm.common.restart_guard import require_training_approval
+        require_training_approval()
         path = Path(path)
         hashes = json.loads((path/'manifest.json').read_text())
         expected = {'model/config.json', 'model/model.safetensors', 'model/manifest.json',

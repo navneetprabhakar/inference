@@ -1,0 +1,64 @@
+{
+  "schema": "gutenberg.complete-catalog-acquisition-proposal.v1",
+  "status": "PROPOSAL_ONLY_REQUIRES_PARENT_REVIEW_AND_PINNED_WORKER_BEFORE_EXECUTION",
+  "purpose": "AcquireonecompleteofficialnativeRDFcatalogsnapshotforreproducibleEnglishworkdiscovery;notebookbodyharvest.",
+  "exact_request": {
+    "method": "GET",
+    "URL": "https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.bz2",
+    "Accept-Encoding": "identity",
+    "response_body_cap_bytes": 160000000,
+    "requests": 1,
+    "attempts": 1,
+    "redirects": false,
+    "automatic_retries": 0
+  },
+  "why_RDF": "Onecompletepublishercatalogavoidsperbookmetadatacrawlingandpreservescontributorroles,stableagentsandallformatidentities. CSV/OPDSnotfetched; requiredfieldcoveragewillbevalidatedagainstnativeRDF,notassumedfromCSVheaders.",
+  "frozen_endpoint_not_immutable_remote_object": true,
+  "remote_publisher_checksum_or_exact_bytes_observed": false,
+  "snapshot_binding": "Saveexactresponsebytes,UTC,headers,ContentLengthifpresent,LastModified,ETagandlocalSHA256. Freezeonlythecapturedbyteidentity;recorddivergencefromlistingdatewithoutinventingversionidentity. No bookformatlinks followed.",
+  "proposed_hard_bounds": {
+    "HTTP_response_bytes": 160000000,
+    "local_total_output_bytes": 1000000000,
+    "aggregate_decoded_tar_bytes": 4000000000,
+    "tar_member_count": 150000,
+    "per_member_parsed_XML_bytes": 1000000,
+    "per_member_XML_nodes": 50000,
+    "per_member_XML_depth": 96,
+    "process_tree_observed_RSS_bytes": 1000000000,
+    "external_seconds": 600,
+    "worker_seconds": 570,
+    "requests": 1,
+    "automatic_retries": 0,
+    "redirects": false
+  },
+  "preIO_guards": [
+    "Parent-reviewedexternallysuppliedmanifestSHA256andexactrequiredcode/dependencyinventoryinmainandworker.",
+    "ExactfrozenURL/caps;strictTLSCERT_REQUIRED+hostname;pinreviewedtrustbundle/environmentwithnofallback.",
+    "SharedIntakeLedgerownseriallease,reserve160MBresponse/1GBoutputbeforeI/O;80GBcumulativeglobalcapincludesmetadataandpriorattempts.",
+    "Localonly:combinedprocessed64GBceiling;preserve16GBweights,16GBscratchand20GiBfreefloor.",
+    "External600secprocesssupervisorplussharedworker570secclock;nomodels,bodyharvestorbackgroundcontinuation."
+  ],
+  "download_acceptance": [
+    "HTTP200fromexactURL,noredirect;declaredlengthifpresentmustfitcapandmatchreceived;hittingcapfailsterminalwithoutunreservedEOFprobe.",
+    "Preservepartialbytes/headers/hashandfailedreservationonfailure;noretryorfallback.",
+    "Successfulcompletewiretransferdoesnotassertcatalogparsecompleteness."
+  ],
+  "offline_catalog_acceptance": [
+    "Streamingbzip2fullCRC/EOFandtarendblocks,allpadding/trailingbyteschecked;neverpathextract.",
+    "Everymembercountedwithoriginalmemberpath/headerhash/memberhash/length;safeordinaryRDFmembersparsedwithoutDTD/entities/network.",
+    "Preserveoversize/invalid/deleted/unknownmembersasexplicithelddiagnostics,nosilentskipping. AcompletearchiveidentityinventorydoesnotestablishcompleteEnglishselectionframeifunparsedpotentialrecordsremain.",
+    "ExactlyresolveebookID/root/xmlbase/agentauthorityURLsagainstnativeRDF;savestablesourceidentity,requiredfieldsandunknownfieldinventory.",
+    "Reconciletar/member/parsed/heldcounts,uniqueebookIDs,SQLiteintegrityandframeSHA256. Multipleeditions/aliasesremainseparatebutfamilyconnected.",
+    "Alllanguage/creator/formatfieldcoverageandmissingnessreportedbeforeselection. Noquality/tokenyieldorEnglishoriginalworkclaimfromcatalogalone."
+  ],
+  "output_plan": [
+    "Originalcompressedarchiveonly;donotpersist4GBexpandedtar.",
+    "CompactSQLitecatalogandallmemberhashmanifest;minimumfieldsinselection-contract.json.",
+    "Excludedsummaryfieldhashes+rawarchiveauthority;noneofcatalogdescriptionssummariesbecomesprose.",
+    "Completetransfer/parse/ledger/resource/integrityreceipts,orhonestterminalpartial."
+  ],
+  "follow_on_authority": "Separateparentreviewrequiredforanybookbodytransfers. ProposedcatalogacquisitionhaszerobodyURLrequests.",
+  "direct_HTTP_requests_executed": 0,
+  "new_admitted_documents": 0,
+  "new_admitted_tokens": 0
+}

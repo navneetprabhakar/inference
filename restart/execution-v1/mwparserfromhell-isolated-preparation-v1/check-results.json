@@ -1,0 +1,47 @@
+{
+  "status": "PASS_STDLIB_PATH_HASH_CRC_RECORD_CONTROLS",
+  "checks": [
+    {
+      "check": "reject_../evil",
+      "PASS": true
+    },
+    {
+      "check": "reject_/absolute",
+      "PASS": true
+    },
+    {
+      "check": "reject_mwparserfromhell/../evil",
+      "PASS": true
+    },
+    {
+      "check": "reject_mwparserfromhell/./a",
+      "PASS": true
+    },
+    {
+      "check": "reject_mwparserfromhell//a",
+      "PASS": true
+    },
+    {
+      "check": "reject_mwparserfromhell/a.pth",
+      "PASS": true
+    },
+    {
+      "check": "reject_pkg.data/scripts/a",
+      "PASS": true
+    },
+    {
+      "check": "reject_mwparserfromhell\\evil",
+      "PASS": true
+    },
+    {
+      "check": "all_exact_wheel_paths_CRC_RECORD_LICENSE_verified",
+      "PASS": true
+    },
+    {
+      "check": "changed_wheel_hash_refused",
+      "PASS": true
+    }
+  ],
+  "count": 10,
+  "package_not_yet_installed_or_imported": true
+}

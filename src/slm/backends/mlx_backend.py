@@ -84,6 +84,14 @@ def forward(p, c, tokens, padding_mask=None, cache=None, embedding_implementatio
 
 def cross_entropy_logits(logits, targets):
     """Equivalent centered softplus CE with an explicit target derivative."""
+    if (logits.ndim < 1 or logits.shape[-1] < 1 or logits.size == 0
+            or targets.shape != logits.shape[:-1]
+            or logits.dtype not in (mx.float16, mx.bfloat16, mx.float32)
+            or targets.dtype not in (mx.int32, mx.int64)):
+        raise ValueError('Invalid cross-entropy shapes or dtypes')
+    if (not bool(mx.all(mx.isfinite(logits)))
+            or bool(mx.any(targets < 0)) or bool(mx.any(targets >= logits.shape[-1]))):
+        raise ValueError('Cross-entropy requires finite logits and in-range targets')
     selected = mx.take_along_axis(logits,targets[..., None],axis=-1).squeeze(-1)
     if logits.shape[-1] == 1:
         return selected*0
@@ -98,7 +106,10 @@ def cross_entropy_logits(logits, targets):
 
 
 def loss(p, c, tokens, targets, mask, padding_mask=None, loss_implementation=DEFAULT_LOSS_IMPLEMENTATION, embedding_implementation='native-gather-v1'):
-    if mask.shape != targets.shape or not bool(mx.all(mask >= 0)) or float(mx.sum(mask)) <= 0:
+    if (mask.shape != targets.shape or tokens.shape != targets.shape
+            or not bool(mx.all(mx.isfinite(mask)))
+            or not bool(mx.all(mask >= 0)) or not bool(mx.isfinite(mx.sum(mask)))
+            or float(mx.sum(mask)) <= 0):
         raise ValueError('Loss requires nonnegative weights and supervised tokens')
     logits, _, _ = forward(p, c, tokens, padding_mask, embedding_implementation=embedding_implementation)
     if loss_implementation == DEFAULT_LOSS_IMPLEMENTATION:
@@ -128,7 +139,8 @@ def adamw(p, grads, state, step, lr, beta1=.9, beta2=.95, eps=1e-8, decay=.1, cl
         m, v = state.get(name, (mx.zeros_like(w), mx.zeros_like(w)))
         m = beta1*m+(1-beta1)*g
         v = beta2*v+(1-beta2)*mx.square(g)
-        wd = decay if w.ndim == 2 and name != 'embedding' else 0.
+        # The restart recipe decays every matrix, including the tied embedding.
+        wd = decay if w.ndim == 2 else 0.
         out[name] = w*(1-lr*wd)-lr*(m/(1-beta1**step))/(mx.sqrt(v/(1-beta2**step))+eps)
         moments[name] = (m, v)
     mx.eval(out, moments)

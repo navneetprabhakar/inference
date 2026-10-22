@@ -1,0 +1,133 @@
+{
+  "status": "SQLITE_CAPACITY_FEASIBLE_CANDIDATE_NO_PRODUCER_APPROVAL_OR_BODY_READ",
+  "key_result": "Measured title-free SQLite page+all-revision occurrence schema fits projected4GB aggregate for realistic and ID-onlyint64 scenarios. SQLite is not ruled out; custom packing is not required by measured capacity alone.",
+  "measured": {
+    "scenarios": 6,
+    "maximum_fixture_pages": 500000,
+    "total_fixture_pages": 1000000,
+    "elapsed_seconds": 11.926110000349581,
+    "peak_RSS_bytes": 67469312,
+    "settings": {
+      "page_size": 4096,
+      "cache_KiB": 32768,
+      "commit_rows": 500,
+      "journal": "MEMORY",
+      "temp_store": "MEMORY",
+      "synchronous": "FULL",
+      "DB_cap": 3800000000
+    }
+  },
+  "projection_basis": {
+    "pages": 25792234,
+    "groups": 257960,
+    "revision_occurrences_cap": 30000000,
+    "sidecar_exception_reserve": 128000000,
+    "receipt_log_control_reserve": 64000000,
+    "DB_hard_cap": 3800000000,
+    "aggregate_hard_cap": 4000000000,
+    "extra_ns0_vector_or_page_ID_map": false,
+    "each_component": "SQLite dbstat per-table and group-offset-index bytes scaled independently to exact25,792,234pages/257,960groups/30Mrevisioncap; not whole-DB/page ratio ignoringrevisioncap."
+  },
+  "scenarios": [
+    {
+      "scenario": "ordered_realistic",
+      "pages": 100000,
+      "revisions": 100000,
+      "measured_DB_bytes": 8560640,
+      "projected_DB_at30Mrevisions": 2279490730.55744,
+      "projected_aggregate_with_reserves": 2471490730.55744,
+      "projected_plus10pct_DB_with_reserves": 2699439803.613184,
+      "insert_seconds": 0.427352000027895,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 10,
+      "all_page_fields_roundtrip": 8
+    },
+    {
+      "scenario": "permuted_realistic",
+      "pages": 100000,
+      "revisions": 100000,
+      "measured_DB_bytes": 8474624,
+      "projected_DB_at30Mrevisions": 2253685930.55744,
+      "projected_aggregate_with_reserves": 2445685930.55744,
+      "projected_plus10pct_DB_with_reserves": 2671054523.613184,
+      "insert_seconds": 0.6628550002351403,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 10,
+      "all_page_fields_roundtrip": 8
+    },
+    {
+      "scenario": "permuted_near_revision_cap",
+      "pages": 100000,
+      "revisions": 116000,
+      "measured_DB_bytes": 8847360,
+      "projected_DB_at30Mrevisions": 2282287309.8677845,
+      "projected_aggregate_with_reserves": 2474287309.8677845,
+      "projected_plus10pct_DB_with_reserves": 2702516040.854563,
+      "insert_seconds": 0.7124530002474785,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 10,
+      "all_page_fields_roundtrip": 8
+    },
+    {
+      "scenario": "permuted_larger_than_32MiB_cache",
+      "pages": 500000,
+      "revisions": 580000,
+      "measured_DB_bytes": 43884544,
+      "projected_DB_at30Mrevisions": 2264924640.1376395,
+      "projected_aggregate_with_reserves": 2456924640.1376395,
+      "projected_plus10pct_DB_with_reserves": 2683417104.151404,
+      "insert_seconds": 7.848650999832898,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 50,
+      "all_page_fields_roundtrip": 8
+    },
+    {
+      "scenario": "int64_IDs_only_separate_stress",
+      "pages": 100000,
+      "revisions": 116000,
+      "measured_DB_bytes": 12124160,
+      "projected_DB_at30Mrevisions": 3129140614.170836,
+      "projected_aggregate_with_reserves": 3321140614.170836,
+      "projected_plus10pct_DB_with_reserves": 3634054675.5879197,
+      "insert_seconds": 0.5781410001218319,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 9,
+      "all_page_fields_roundtrip": 8
+    },
+    {
+      "scenario": "extreme_int64_separate_stress",
+      "pages": 100000,
+      "revisions": 116000,
+      "measured_DB_bytes": 14905344,
+      "projected_DB_at30Mrevisions": 3846470253.676756,
+      "projected_aggregate_with_reserves": 4038470253.676756,
+      "projected_plus10pct_DB_with_reserves": 4423117279.044432,
+      "insert_seconds": 0.5484770000912249,
+      "preserved_duplicate_revision_occurrences_for_one_ID": 9,
+      "all_page_fields_roundtrip": 8
+    }
+  ],
+  "why_no_duplicate_page_ID_map": "Existing immutable globally-unique index remains the source pageID\u2192ordinal/title/group map. A future native producer must match EVERY native occurrence to the same indexed page ordinal/ID/title/group and exact25,792,234coverage. Only that full ordered reconciliation transfers uniqueness to native pages. Current measurements do not claim that native reconciliation happened.",
+  "revision_custody": "WITHOUT ROWID primary key(revision_id,page_ordinal,revision_ordinal) indexes nonunique revision-ID lookup and retains cross-page and same-page repeated IDs as separate occurrences; no canonical selection/dedup/overwrite. Page rawgroup-local span+SHA references original complete native XML; revisionordinal allows later recovery without copying all native text.",
+  "special_cases": "Redirect/deleted-text flags, nonzero namespaces, unknown model enum needing future exception context, three100MB metadata-only oversize records perfixture,1.16rev/page mixed case, IDs-only8byte stress, and separately extreme all-fields int64 stress. No large text bodies allocated.",
+  "extreme_case_scope": "All-fields int64 stress projects3.846GBDB and4.038GBincludingreserves and therefore fails both caps. It is not a plausible population model under256GBtotaldecodedXML: all25Mpagescannot each have2**48textbytes/2**51rawbytes. It demonstrates a finite schema/cap limit, not proof of actual infeasibility. IDs-only int64 stress still fits with10%DBmargin. Actual unknown scalar distributions and fragmentation can still exhaust the cap and must stopPARTIAL.",
+  "packed_comparison": {
+    "original_proposed_peak": 3643987656,
+    "original_page_ID_map": 309506808,
+    "packed_peak_if_only_redundant_page_ID_map_removed": 3334480848,
+    "packed_measured_producer": false,
+    "differences": "Packed proposal includes namespace ordinal vector and external sort temporary runs plus extra revision-span sidecar. SQLite instead uses SQL filters/scans fornamespace/flags, reuses existing index forpageIDlookup, and composite revision Btree with page span+revisionordinal forsource recovery. No on-disk sort/journal overlap in MEMORY mode; power/forced-kill partialDB not promisedrecoverable."
+  },
+  "performance_limits": [
+    "500kcase wholeDB exceeds32MiBcache, but its revisionBtree is only~9.8MB and fitscache; full30M random-indexI/O is not benchmarked.",
+    "Synthetic insert throughput excludes native XML tokenization/hash/semanticidentity checks and full-size DB integrity/publication costs. No forecast or total nativeproducer runtime certified.",
+    "Small ordered/permuted results differ in Btreefill; no globalSQLite size guarantee from linear extrapolation.",
+    "Existing packed time estimates derive from a biased1600pageprefix, not a measured fullproducer. This assessment does not validate them."
+  ],
+  "existing_index_metadata_only_evidence": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/restart/execution-v1/m2-intake/enwiki-complete-index-identity-frame-v1/result.json",
+    "SHA256": "40999754c63ce9d2d6b888ab84a91043c46f40ce8420e608a7bc2320c4648c94",
+    "DB_bytes_reported": 2579058688,
+    "DB_SHA256_reported": "b3da13e0080303b5500cb98501e2396ce38fe634369f9f9937c36e3243a6936e",
+    "DB_opened_or_hashed_by_this_task": false
+  },
+  "source_body_reads": 0,
+  "producer_implemented": false,
+  "network_ledger_models_training_admission": 0,
+  "next_design": "Keep compactSQLite as a viable nativeframe choice. Before any producerbuild/dispatch parent must freeze exact schema, scalar/unknown exceptions, all-index reconciliation, source publication pins, limits, partial recovery semantics and complete-frame verification. No gate authorized here."
+}

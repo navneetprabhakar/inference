@@ -1,0 +1,15 @@
+{
+  "status": "COMPONENT_PASS_INTEGRATION_PENDING",
+  "tests_passed": 16,
+  "backends": [
+    "FP32 MLX",
+    "FP32 PyTorch CPU"
+  ],
+  "scope": "Target-weighted accumulation, unequal supervision, one-shot consumption, invalid/overflow microbatch atomic rejection. Fixed arithmetic arrays only; no model initialized or optimizer called.",
+  "files_sha256": {
+    "src/slm/restart/accumulation.py": "0660dc43795fe142b5c98968d38d0daeb457c081abd5300c2bcd347b9afee833",
+    "tests/test_restart_accumulation.py": "18cb409ea5e76560528c349c5944fdf90408a908ccb7368e17a93d2232c86a4e"
+  },
+  "initial_test_failures": "Exact FP32 mean equality and MLX conversion of NumPy scalar lists corrected in the test harness; final tolerance 1e-6, stricter than plan 1e-5.",
+  "full_40_case_suite_passed": false
+}
