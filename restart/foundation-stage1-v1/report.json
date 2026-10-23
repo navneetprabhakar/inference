@@ -1,0 +1,118 @@
+{
+  "status": "FIRST_75M_STAGE_COMPLETE_WAITING_FOR_OWNER_APPROVAL",
+  "complete_local": "2026-10-23T08:06:41.717188+05:30",
+  "checkpoint": {
+    "path": "restart/foundation-stage1-v1/stage1-checkpoint.pt",
+    "sha256": "d0cd9a769de016cad73b358e5fe82a630c72ccc966d1045911bc187f54fe8c9c",
+    "optimizer_step": 1173,
+    "completed_targets": 153747456,
+    "additional_updates": 572,
+    "verified_exact_CPU_reload": true,
+    "epoch": 1792722566.964121
+  },
+  "source_checkpoint_unchanged": true,
+  "additional_updates": 572,
+  "additional_training_targets": 74973184,
+  "total_retained_training_targets": 153747456,
+  "total_optimizer_step": 1173,
+  "learned_parameters": 15191712,
+  "validation": {
+    "baseline_nll": 2.367339350283146,
+    "checkpoint_nll": 1.710346207022667,
+    "improvement_nats": 0.656993143260479,
+    "fixed_targets": 131072,
+    "relative_improvement_percent": 27.752385528585044
+  },
+  "grammar": {
+    "baseline_correct": 55,
+    "correct": 71,
+    "cases": 100,
+    "unique_pairs": 45,
+    "unique_pairs_correct": 33
+  },
+  "grounded": {
+    "baseline_correct": 28,
+    "correct": 27,
+    "cases": 100,
+    "choices": 4
+  },
+  "narrative": {
+    "baseline_coherent": 0,
+    "primary_coherent": 9,
+    "teacher_coherent": 1,
+    "conservative_coherent": 1,
+    "cases": 100,
+    "families": 20,
+    "degeneration_threshold_failures": 1,
+    "generated_tokens": 9600,
+    "eos_outputs": 0
+  },
+  "document_boundary_audit": {
+    "decoded_matches": 100,
+    "cases_with_BOS": 9,
+    "frozen_full_window_scores_unchanged": true,
+    "limitation": "Nine generated document boundaries are hidden by string decoding. Full-window scores can penalize beginning another document. No shortened-response replacement or adjusted acceptance score was used."
+  },
+  "independent_serialized_reference": {
+    "status": "PASS",
+    "checkpoint_sha256": "d0cd9a769de016cad73b358e5fe82a630c72ccc966d1045911bc187f54fe8c9c",
+    "FP32_reference_nll": 1.7102457992732525,
+    "BF16_native_nll": 1.710346207022667,
+    "absolute_difference": 0.00010040774941444397,
+    "tolerance": 0.02,
+    "targets": 131072,
+    "seconds": 5.696128499926999,
+    "training_updates": 0,
+    "checkpoint_unchanged": true
+  },
+  "disagreement_ids": [
+    "story-02-0",
+    "story-05-4",
+    "story-10-3",
+    "story-12-0",
+    "story-12-1",
+    "story-12-3",
+    "story-13-1",
+    "story-14-3"
+  ],
+  "teacher_receipt": {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": null,
+    "usage": {
+      "input_tokens": 30924,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5584,
+      "reasoning_output_tokens": 371
+    },
+    "tool_events": 0,
+    "requests": 1,
+    "seconds": 49.461656749947,
+    "client": "codex-cli 0.163.0-alpha.11.2"
+  },
+  "first_25_update_mean_loss": 2.3331785583496094,
+  "last_25_update_mean_loss": 1.7152611923217773,
+  "training_updates_elapsed_seconds": 6623.55165895808,
+  "training_tokens_per_second": 11319.181590227634,
+  "final_30_minute_tokens_per_second": 10809.353374435805,
+  "elapsed_since_this_approval_seconds": 7115.7173709869385,
+  "processed_positions_charged": 76702570,
+  "prior_preflight_positions_charged": 1003285,
+  "cumulative_continuation_experiment_positions": 77705855,
+  "peak_process_tree_RSS_GiB": 1.4839630126953125,
+  "additional_global_swap_bytes": 0,
+  "all_workers_reaped": true,
+  "training_authorized": false,
+  "next_stage_authorized": false,
+  "full_training_authorized": false,
+  "conversation_training_authorized": false,
+  "formal_English_gate": "NOT_RUN_AND_NOT_PASSED",
+  "development_only": true,
+  "limitations": [
+    "Development packet, not the formal English acceptance gate.",
+    "Grammar lexical templates recur: 100 rendered trials cover only 45 distinct pairs ignoring option order.",
+    "Twenty story template families with five names each; counts are not 100 independent families.",
+    "Native TinyStories train/validation split is not newly deduplicated; family/near-duplicate leakage is unresolved.",
+    "No sealed acceptance set or prior conversation holdout used."
+  ]
+}

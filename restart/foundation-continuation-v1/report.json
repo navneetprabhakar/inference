@@ -1,0 +1,38 @@
+{
+  "status": "STOPPED_BEFORE_TRAINING_WAITING_FOR_OWNER",
+  "training_updates": 0,
+  "additional_retained_training_targets": 0,
+  "processed_evaluation_positions_charged": 132107,
+  "elapsed_approval_to_worker_terminal_seconds": 294.1271049976349,
+  "checkpoint_sha256": "194f0d3d0574ce86cddeff9a88e38993bf00837b583c1dea2f6c0f506d8255b2",
+  "checkpoint_unchanged": true,
+  "worker_reaped": true,
+  "resume_verification": {
+    "status": "PASS",
+    "origin_step": 601,
+    "own_checkpoint_sha256": "194f0d3d0574ce86cddeff9a88e38993bf00837b583c1dea2f6c0f506d8255b2",
+    "BF16_loss": 2.486246109008789,
+    "FP32_reference_loss": 2.486572504043579,
+    "absolute_difference": 0.00032639503479003906,
+    "exact_master_and_moment_roundtrip": true,
+    "next_sequence_cursor": 307712,
+    "RNG_restored": true,
+    "weights_updated": false
+  },
+  "baseline_validation": {
+    "validation_nll": 2.367339350283146,
+    "targets": 131072
+  },
+  "story_and_grammar_evaluation_complete": false,
+  "teacher_requests": 0,
+  "peak_process_RSS_GiB": 1.376068115234375,
+  "additional_swap_bytes": 0,
+  "cause": "Compiled validation updates module parameter references with tracing arrays. Direct grammar inference reused those references outside compilation.",
+  "fix": "Rebind actual BF16 compute arrays from unchanged FP32 master parameters after compiled validation and before direct inference.",
+  "fix_validation": "CPU-only fixed 2x2-array regression reproduced the original failure and passed after rebinding, including latest-parameter refresh; no student checkpoint loaded or updated by this regression.",
+  "fix_validated_on_student": false,
+  "preflight_replay_authorized": false,
+  "first_75M_stage_started": false,
+  "next_stage_authorized": false,
+  "full_training_authorized": false
+}

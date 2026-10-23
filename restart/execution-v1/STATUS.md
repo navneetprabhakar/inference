@@ -483,3 +483,18 @@ Corrected FP32/BF16/FP16 numerical checks passed. An initial precision-promotion
 ## Latest conversation diagnostic: not ready
 
 Read-only evaluation of the retained 15.19M step-601 checkpoint: eight story continuations all show coherence/context drift; 24 chat-format outputs across 12 scenarios all fail the request. Chat templates are untrained, so their failures alone do not establish base-language weakness. GPT-6 Luna independently reviewed the actual outputs and recommended more foundation learning before conversation SFT. Sixteen manually reviewed correction examples are prepared:217 assistant targets including EOS,520 total tokens. No student updates; full training remains paused. The formal English gate was not run or passed. See restart/conversation-readiness-v1/REPORT.md.
+
+
+## Foundation stage-one preflight stopped before training
+
+Owner approved first +75M checkpoint with review required before advancing. Checkpoint/optimizer exact roundtrip, own data cursor, BF16 dtype proof and FP32-reference loss parity passed; fixed131,072-target baseline NLL2.36733935 measured. Subsequent grammar scoring failed because the compiled loss left tracing arrays in the model module used by direct inference. Zero student updates. Worker reaped; no swap growth. The approved preflight-failure hard stop remains in effect. Source fix prepared and verified on a CPU-only2x2-array reproduction; no student-model replay or restart. See restart/foundation-continuation-v1/report.json and correction-proposal.json.
+
+
+## Corrected inference-only preflight passed; training paused
+
+Explicit15-minute correction approved. Frozen baseline evaluation completed:131,072-target NLL2.36733935; grammar55/100 (22/45 distinct pairs ignoring option order), grounded completion28/100, narrative coherence0/100 in both primary-agent and GPT-6 Luna reviews across20 template families. No outputs crossed the frozen narrow repetition threshold, despite pervasive incoherence. BF16/FP32 fixed loss difference0.0003264 within existing0.02 tolerance; original checkpoint and optimizer unchanged, zero training updates, workers reaped, zero additional swap. Previous failed attempt and charges preserved. This verifies the evaluator repair, not English capability. First+75M foundation stage and conversation training remain paused pending owner approval. See restart/foundation-inference-preflight-v2/REPORT.md.
+
+
+## First +75M foundation stage completed; next stage awaits owner approval
+
+Completed572 updates/74,973,184 additional targets, ending at own15.19M step1173 checkpoint with153,747,456 retained training targets. Validation NLL2.36733935→1.71034621 (27.75% improvement); grammar55→71/100 (distinct pairs22→33/45); grounded28→27/100. Primary coherence9/100, independent GPT-6 Luna1/100; conservative1/100 versus baseline0. Hidden generated BOS boundaries occur in9/100 outputs; identical-seed token audit reproducesall100 decoded outputs, with frozen scores retained. No formal English/conversation gate passed. FP32 saved-checkpoint reference NLL differs by0.0001004, within unchanged0.02 tolerance. Training110.4minutes, total reporting118.6minutes; final30-minute rate10,809targets/sec. RSS1.48GiB, swapgrowth0; all workers reaped. Finalcheckpoint d0cd9a769de016cad73b358e5fe82a630c72ccc966d1045911bc187f54fe8c9c. Explicit review hold; no automatic continuation or SFT. See restart/foundation-stage1-v1/REPORT.md.

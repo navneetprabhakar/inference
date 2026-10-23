@@ -1,0 +1,84 @@
+{
+  "status": "CORRECTED_INFERENCE_PREFLIGHT_PASS_TRAINING_PAUSED",
+  "complete_local": "2026-10-23T06:02:52.377804+05:30",
+  "elapsed_seconds_since_authorization": 259.3779048919678,
+  "deadline_seconds": 900,
+  "checkpoint_sha256": "194f0d3d0574ce86cddeff9a88e38993bf00837b583c1dea2f6c0f506d8255b2",
+  "optimizer_step": 601,
+  "retained_training_targets": 78774272,
+  "learned_parameters": 15191712,
+  "student_updates": 0,
+  "training_authorized": false,
+  "next_stage_authorized": false,
+  "conversation_training_authorized": false,
+  "full_training_authorized": false,
+  "integrity": {
+    "source_checkpoint_unchanged": true,
+    "optimizer_step": 601,
+    "completed_training_targets": 78774272,
+    "training_updates": 0,
+    "training_entrypoint_absent": true,
+    "frozen_packet_unchanged": true,
+    "frozen_validation_unchanged": true,
+    "additional_evaluation_positions": 871178,
+    "prior_failed_attempt_evaluation_positions": 132107,
+    "cumulative_evaluation_positions": 1003285,
+    "original_stop_and_clocks_preserved": true,
+    "inference_worker_reaped": true
+  },
+  "numerical_loss_absolute_difference": 0.00032639503479003906,
+  "numerical_loss_absolute_tolerance": 0.02,
+  "baseline_validation_nll": 2.367339350283146,
+  "baseline_validation_targets": 131072,
+  "grammar": {
+    "correct": 55,
+    "cases": 100,
+    "chance_reference": 0.5,
+    "unique_pairs_ignoring_option_order": 45,
+    "unique_pairs_correct": 22
+  },
+  "grounded": {
+    "correct": 28,
+    "cases": 100,
+    "chance_reference": 0.25
+  },
+  "story": {
+    "primary_coherent": 0,
+    "teacher_coherent": 0,
+    "conservative_coherent": 0,
+    "cases": 100,
+    "template_families": 20,
+    "degeneration_threshold_failures": 0,
+    "generated_tokens": 9600,
+    "eos_outputs": 0,
+    "grades_not_two_human_final_acceptance": true
+  },
+  "frozen_packet_and_validation_unchanged": true,
+  "teacher_receipt": {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": null,
+    "usage": {
+      "input_tokens": 30918,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5100,
+      "reasoning_output_tokens": 168
+    },
+    "tool_events": 0,
+    "requests": 1,
+    "seconds": 38.60711120907217,
+    "client": "codex-cli 0.163.0-alpha.11.2"
+  },
+  "peak_process_tree_RSS_GiB": 1.3805999755859375,
+  "maximum_additional_swap_bytes": 0,
+  "all_workers_reaped": true,
+  "client_startup_note": "Installed CLI patch was 0.163.0-alpha.11.2 rather than .11. Initial local version guard stopped before any model request. Exact installed version/flags were reviewed; then the single authorized teacher request completed. No inference rerun or deadline reset.",
+  "limitations": [
+    "Development packet, not the formal English acceptance gate.",
+    "Grammar lexical templates recur: 100 rendered trials cover only 45 distinct pairs ignoring option order.",
+    "Twenty story template families with five names each; counts are not 100 independent families.",
+    "Native TinyStories train/validation split is not newly deduplicated; family/near-duplicate leakage is unresolved.",
+    "No sealed acceptance set or prior conversation holdout used."
+  ],
+  "decision": "Evaluator repair verified on the actual student. Base coherence/comprehension remain inadequate for conversation SFT. No foundation continuation is started; first +75M stage awaits explicit owner approval."
+}

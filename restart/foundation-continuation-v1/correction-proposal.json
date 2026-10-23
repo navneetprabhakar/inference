@@ -1,0 +1,25 @@
+{
+  "status": "PROPOSED_NOT_APPROVED",
+  "approval_required_reason": "The approved PLAN.md states that preflight failure ends the attempt; no automatic retry.",
+  "objective": "One corrected inference-only preflight, followed by a report and owner review before any training.",
+  "preflight_replay_authorized": false,
+  "training_authorized": false,
+  "corrected_preflight_seconds_max": 900,
+  "student_updates_max": 0,
+  "additional_evaluation_positions_max": 8000000,
+  "teacher_review_requests_max": 1,
+  "teacher_model": "gpt-6-luna",
+  "teacher_request_seconds_max": 240,
+  "preserve_original_clock_and_work": true,
+  "original_run_deadlines_unchanged": true,
+  "success": [
+    "FP32-master and optimizer integrity remain exact",
+    "Native BF16 versus FP32 fixed loss remains within existing .02 tolerance",
+    "Complete frozen baseline loss, 100 grammar pairs, 100 grounded cases and 100 story generations without nonfinite results or tracer errors",
+    "Primary-agent and GPT-6 Luna reviews recorded before reporting"
+  ],
+  "after_success": "Stop for owner review. The first +75M-target training stage still requires explicit go-ahead after this corrected preflight.",
+  "original_failure_and_charges_retained": true,
+  "corrected_preflight_clock": "A separately authorized inference-only attempt, at most 900 seconds from its start after approval. Original failed-attempt clocks are preserved as historical records, not reset or reused as training authority.",
+  "training_deadline_extension_authorized": false
+}
