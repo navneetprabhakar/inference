@@ -1,37 +1,26 @@
 # English SLM from scratch
 
-Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below100M learned parameters. No public pretrained model weights are used; the reference experiment reuses a tokenizer.
+Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — training paused
+## Current measured state — stopped at data admission
 
-- **Post-run audit found an evaluator defect:** all600grammar/grounding candidates contain an extra whitespace token. The historical option-score changes below are not clean normal-text capability measurements. Sol's continuous rubric mean improved4.45→5.06/10despite flat binary passes; primary/Sol kappa0.222shows weak agreement. See [cause audit](restart/foundation-cause-audit-v1/REPORT.md). No corrected inference or training has run.
-- Latest own checkpoint: **15,191,712 parameters**, step **2889**, **378,667,008 retained training target exposures**. The owner-approved successor completed1144updates/149,946,368additional targets and stopped. Parameters did not increase.
-- **Development gate failed.** Validation NLL1.527115→1.400689; grammar75→78/100, but distinct grammar pairs37→36/45. Grounding regressed42→30/100. Conservative primary∩Sol coherence4/100, below20; the same paired regrade scored the previous checkpoint4/100. Published previous3/100 remains preserved. Primary alone23, Sol5; agent grades are unstable and do not establish conversation readiness.
-- Final exact CPU checkpoint/optimizer reload passed. **Independent saved-checkpoint FP32 parity is unverified:** the verifier failed before inference with a missing clock-key error. One attempt consumed; no automatic patch/replay or tolerance change. This remains a failed correctness criterion.
-- Training took231.2minutes including initialization. Sustained final30-minute throughput10,499targets/sec; peak supervised RSS1.473GiB; no additional swap/resource breach. All owned workers are reaped. Original cumulative306,104,851/320Mprocessed positions and4/4teacher requests remain charged.
-- **No further foundation training, conversation SFT, tool training, new initialization or full reference run is authorized.** The current approval is consumed. The formal English gate is unpassed.
+- **Corrected foundation recovery:** R0 evaluator calibration passed; D0 data admission failed. R1 and R2 never started. Blanket execution approval and all failed attempts remain recorded. No further overnight approval request is pending.
+- Model size remains **15,191,712parameters**. The selected research reference is our own cooldown checkpoint at step3145, with412,221,440retained target exposures. It is not an accepted English/conversation release. All original checkpoint hashes remain unchanged.
+- **Zero new training updates.** Native BF16 versus independent FP32 NLL difference was at most0.000233; teacher repeat agreement95%, primary/teacher kappa0.649/0.792. Selected-reference conservative coherence was only1/20and new premise-grounded accuracy37/100. Calibration passing does not establish capability.
+- D0 produced **15,764provisional documents /13,657,292native content tokens** after filtering/deduplication/protected exclusions. Only1,460,204tokens were everyday explanations, below the required1.5M in training alone. These counts are not admitted/usable supply.
+- The once-frozen50uniform+50weighted semantic sample failed during the first six full uniform reviews: out-of-scope poetry, a media-only stub and duplicated classroom text were present. **Zero new broad documents/tokens were admitted.**94draws and the cross-split100-nearest audit remain unreviewed/unrun; no accepted train/dev/sealed split exists.
+- All workers are reaped. No downloads, new student initialization, conversation SFT or tools training occurred. The immediate blocker is data admission; formal English and conversation gates remain unpassed.
 
-These are development diagnostics:100stories span20template families;100grammar trials contain45distinct pairs. Native-shard deduplication/leakage limitations remain unresolved. Three current continuations generated document-boundary BOS tokens; full response windows remain in the evidence. Lower loss alone has not delivered reliable semantic behavior.
+## Evidence and lineage
 
-## Path to the actual goal
+- [Latest corrected recovery report](restart/foundation-recovery-v2-corrected/REPORT.md), [metrics](restart/foundation-recovery-v2-corrected/report.json), [terminal stop](restart/foundation-recovery-v2-corrected/STOP.json)
+- [Approved recovery design](restart/foundation-recovery-v2/PLAN.md), [blanket approval receipt](restart/foundation-recovery-v2-corrected/approval-receipt.json)
+- [Preserved preparation-defect stop and correction proposal](restart/foundation-recovery-v2/REPORT.md)
+- [Earlier resolution experiment](restart/foundation-resolution-v1/REPORT.md), [previous foundation stage](restart/foundation-stage3-v1/REPORT.md)
+- [Formal English gate](restart/ENGLISH_GATE.md), [milestone plan](restart/MILESTONE_PLAN.md), [goal path](restart/foundation-stage3-v1/GOAL_PATH.md)
+- [Native Mac benchmark](restart/mac-native-benchmark-v1/report.json), [original reference/data receipt](restart/mac15m-feasibility-v1/data-receipt.json)
+- [Historical work log](restart/execution-v1/STATUS.md), [cleanup and license/provenance context](restart/CLEANUP_AND_DATA.md)
 
-The [resolution proposal](restart/foundation-resolution-v1/PLAN.md) specifies corrected measurement, two equal-work33.55M-target training branches, and one separately approved74.97M-target continuation. It preserves the15.19Mparameter count and requires owner review after each phase. It is not approved or running.
+Teacher review requested exactly`gpt-6-sol`through the pinned Codex CLI, high reasoning, tools disabled and120seconds/request. Backend-resolved identity is unavailable. Ten requests used39,376observed output-plus-reasoning tokens. Teacher reviews never became student training data.
 
-The15.19M TinyStories model is a prototype, not the selected final broad-English architecture. The previous exposure experiment exhausted its approval; the resolution proposal requests a distinct controlled scheduling test after measurement repair. The final delivery path still requires broad-English data admission, a justified fixed architecture below100M, measured compute and a foundation acceptance decision before conversation/tool stages. See [goal path](restart/foundation-stage3-v1/GOAL_PATH.md). No next experiment is approved.
-
-## Evidence
-
-- [Latest completed experiment, failed gate and verifier failure](restart/foundation-stage3-v1/REPORT.md), [metrics](restart/foundation-stage3-v1/report.json), [terminal stop](restart/foundation-stage3-v1/global-stop.json)
-- [Approved successor proposal](restart/foundation-stage3-v1/PLAN.md) and [approval receipt](restart/foundation-stage3-v1/approval.json)
-- [Read-only diagnosis](restart/foundation-diagnosis-v1/REPORT.md)
-- [Previous completed stage](restart/foundation-stage2-v1/REPORT.md) and [first stage](restart/foundation-stage1-v1/REPORT.md)
-- [Corrected inference preflight](restart/foundation-inference-preflight-v2/REPORT.md), [earlier conversation diagnostic](restart/conversation-readiness-v1/REPORT.md)
-- [Native benchmark](restart/mac-native-benchmark-v1/report.json), [verification](restart/mac-native-benchmark-v1/verification.json), [reference experiment](restart/mac15m-feasibility-v1/report.json), [data receipt](restart/mac15m-feasibility-v1/data-receipt.json)
-- [Current work and prior decisions](restart/execution-v1/STATUS.md), [English gate](restart/ENGLISH_GATE.md), [milestone plan](restart/MILESTONE_PLAN.md)
-- [Cleanup](restart/CLEANUP_AND_DATA.md), [cleanup manifest](restart/cleanup-manifest.json), [FineWeb salvage](restart/fineweb-salvage-reviewed-v1/REPORT.md)
-
-Checkpoint review requested exactly GPT-6 Sol (`gpt-6-sol`) through Codex CLI, one blinded paired request with tools disabled and a240-second cap. No backend-resolved identity is returned; receipts distinguish requested identity from observed metadata. Historical Luna/Sol receipts are preserved. Teacher outputs did not enter this training run.
-
-Native dependencies are recorded in `restart/mac-native-benchmark-v1/runtime-versions.json`. Latest local weights: `restart/foundation-stage3-v1/stage3-checkpoint.pt`. Weights, optimizer states, token shards, source corpora, upstream downloads, virtual environments, SQLite ledgers and raw CLI events are excluded from Git. Selected code, hashes, generated evaluation outputs and audit receipts are versioned; a clone does not contain a runnable trained model or the full local audit history. Historical experiment scripts are terminal execution artifacts, not approval to rerun them.
-
-The pre-restart experiment was archived locally at `/Users/navneetprabhakar/Documents/git/image/inference-history-20261021/`; its Git history remains available. Archived approvals do not authorize current work. Latest execution records supersede historical status prose without changing acceptance thresholds.
+Weights, optimizer states, source corpora, token shards, private sealed plaintext, virtual environments, SQLite and raw CLI events remain local and outside Git. Source code, evaluation outputs, hashes and audit receipts are versioned. A clone does not contain trained weights or the full local corpus/runtime. Historical scripts/approvals are not permission to rerun terminal experiments. Latest receipts supersede older status prose without rewriting older results or relaxing gates.

@@ -1,0 +1,244 @@
+{
+  "status": "FAIL_STOP",
+  "completed_phases": {
+    "R0": "PASS",
+    "D0": "FAIL_STOP",
+    "R1": "NOT_STARTED",
+    "R2": "NOT_STARTED"
+  },
+  "model_parameters": 15191712,
+  "new_training_updates": 0,
+  "new_training_targets": 0,
+  "reference_source_selected": "cooldown3145",
+  "selected_reference_retained_targets": 412221440,
+  "source_hashes_unchanged": true,
+  "all_previous_stops_preserved": true,
+  "blanket_approval_recorded": true,
+  "new_student_positions_reserved": 1768824,
+  "previous_aborted_v2_positions": 1021037,
+  "combined_v2_positions": 2789861,
+  "combined_prior_continuation_resolution_positions": 378874312,
+  "teacher_requests": 10,
+  "teacher_usage": {
+    "input_tokens": 157038,
+    "cached_input_tokens": 33792,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 23173,
+    "reasoning_output_tokens": 16203
+  },
+  "teacher_output_plus_reasoning": 39376,
+  "teacher_requested_model": "gpt-6-sol",
+  "teacher_resolved_model": null,
+  "R0_result": {
+    "status": "PASS",
+    "phase": "R0",
+    "selected_source": "cooldown3145",
+    "reliability": {
+      "pass_all": true,
+      "binary_repeat_agreement": 0.95,
+      "total_score_MAD": 0.65,
+      "checkpoint_mean_shifts": {
+        "step1745": 0.35,
+        "step2889": 0.15,
+        "cooldown3145": 0.15
+      },
+      "primary_teacher_pairs": [
+        {
+          "kappa": 0.6491228070175442,
+          "constant_label_fallback": false,
+          "exact_binary_agreement": 0.9666666666666667,
+          "score_MAD": 1.1333333333333333,
+          "pass_all": true
+        },
+        {
+          "kappa": 0.791666666666666,
+          "constant_label_fallback": false,
+          "exact_binary_agreement": 0.9833333333333333,
+          "score_MAD": 1.1833333333333333,
+          "pass_all": true
+        }
+      ]
+    },
+    "anchors": [
+      {
+        "packet": "round1-packet1",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round1-packet2",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round1-packet3",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round1-packet4",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round1-packet5",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round2-packet1",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round2-packet2",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round2-packet3",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round2-packet4",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      },
+      {
+        "packet": "round2-packet5",
+        "correct": 4,
+        "total": 4,
+        "pass_all": true
+      }
+    ],
+    "anchors_pass": true,
+    "candidates": [
+      {
+        "id": "step1745",
+        "global_step": 1745,
+        "conservative_coherent": 0,
+        "total": 20,
+        "fact_correct": 30,
+        "native_NLL": 1.5271154046058655,
+        "primary_coherent": 0,
+        "teacher_coherent": [
+          0,
+          0
+        ],
+        "teacher_mean_scores": [
+          3.2,
+          3.55
+        ]
+      },
+      {
+        "id": "step2889",
+        "global_step": 2889,
+        "conservative_coherent": 0,
+        "total": 20,
+        "fact_correct": 34,
+        "native_NLL": 1.4006886184215546,
+        "primary_coherent": 1,
+        "teacher_coherent": [
+          1,
+          1
+        ],
+        "teacher_mean_scores": [
+          4.4,
+          4.25
+        ]
+      },
+      {
+        "id": "cooldown3145",
+        "global_step": 3145,
+        "conservative_coherent": 1,
+        "total": 20,
+        "fact_correct": 37,
+        "native_NLL": 1.3430354408919811,
+        "primary_coherent": 2,
+        "teacher_coherent": [
+          2,
+          1
+        ],
+        "teacher_mean_scores": [
+          4.45,
+          4.6
+        ]
+      }
+    ],
+    "positions": 1768824,
+    "training_updates": 0,
+    "epoch": 1792789978.873704,
+    "small_sample_uncertainty": "20 cases/checkpoint; descriptive source choice, not proof of superiority",
+    "formal_English_pass": false
+  },
+  "D0_result": {
+    "status": "FAIL_STOP",
+    "phase": "D0",
+    "reasons": [
+      "INSUFFICIENT_EVERYDAY_TOKENS_FOR_FIXED_DOMAIN_SHARE",
+      "FRESH_SEMANTIC_SAMPLE_GATE_FAILED"
+    ],
+    "candidate_documents": 15764,
+    "candidate_native_content_tokens": {
+      "procedural": 3793445,
+      "educational": 8403643,
+      "everyday": 1460204
+    },
+    "candidate_native_content_total": 13657292,
+    "candidate_BOS_boundary_positions": 15764,
+    "optimistic_train_content_upper_bound": 9734693,
+    "needed_everyday_train_tokens": 1500000,
+    "available_everyday_all_splits": 1460204,
+    "minimum_everyday_deficit_before_holdouts": 39796,
+    "admitted_documents": 0,
+    "admitted_native_content_tokens": 0,
+    "train_development_sealed_manifests_released": false,
+    "cross_split_nearest100_audit": "Not run: no admissible split was released after supply/semantic failure",
+    "semantic_draws_reviewed": 6,
+    "semantic_draws_frozen": 100,
+    "new_downloads": 0,
+    "training_updates": 0,
+    "student_positions": 0,
+    "teacher_calls": 0,
+    "epoch": 1792791043.6181839,
+    "phase_elapsed_seconds": 1058.049293756485
+  },
+  "all_workers_reaped": true,
+  "peak_phase_process_tree_RSS_bytes": 1272676352,
+  "storage_written_current_run_bytes": 630337839,
+  "resources_at_finalization": {
+    "epoch": 1792791084.6863601,
+    "rss_bytes": 35962880,
+    "global_swap_bytes": 376176640,
+    "free_disk_bytes": 137061441536,
+    "AC": true,
+    "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "cross_split_audit_complete": false,
+  "fresh_sample_complete": false,
+  "fresh_sample_draws_whole_reviewed": 6,
+  "fresh_sample_draws_not_reviewed": 94,
+  "new_broad_admitted_documents": 0,
+  "new_broad_admitted_native_tokens": 0,
+  "new_download_bytes": 0,
+  "model_readiness": "Formal English/conversation/tool gates remain unpassed",
+  "automatic_continuation": false,
+  "no_further_approval_requested": true,
+  "finalized_epoch": 1792791084.6877382,
+  "validation": {
+    "prelaunch_CPU_tests_passed": 6,
+    "terminal_data_audit_tests_passed": 6,
+    "model_updates_in_tests": 0,
+    "source_and_prior_evidence_hashes_rechecked": true
+  }
+}
