@@ -1,0 +1,136 @@
+{
+  "status": "SECOND_75M_STAGE_COMPLETE_NARRATIVE_PROGRESS_GATE_FAILED",
+  "checkpoint": {
+    "path": "restart/foundation-stage2-v1/stage2-checkpoint.pt",
+    "sha256": "8dc0f786499d08c670adfe53d55ddcf213ff6dcd07db5dca70835fd723fe3f69",
+    "optimizer_step": 1745,
+    "completed_targets": 228720640,
+    "additional_updates": 572,
+    "verified_exact_CPU_reload": true,
+    "epoch": 1792732475.8454459
+  },
+  "additional_updates": 572,
+  "additional_training_targets": 74973184,
+  "total_retained_training_targets": 228720640,
+  "total_optimizer_step": 1745,
+  "cumulative_targets_since_step601": 149946368,
+  "learned_parameters": 15191712,
+  "validation": {
+    "original_nll": 2.367339350283146,
+    "previous_nll": 1.710346207022667,
+    "current_nll": 1.5271154046058655,
+    "gain_from_original_nats": 0.8402239456772804,
+    "gain_this_stage_nats": 0.18323080241680145
+  },
+  "grammar": {
+    "previous_correct": 71,
+    "correct": 75,
+    "cases": 100,
+    "unique_pairs": 45,
+    "unique_pairs_correct": 37
+  },
+  "grounded": {
+    "previous_correct": 27,
+    "correct": 42,
+    "cases": 100,
+    "choices": 4
+  },
+  "narrative": {
+    "original_conservative_coherent": 0,
+    "previous_original_luna_conservative": 1,
+    "previous_sol_conservative": 3,
+    "current_primary_coherent": 8,
+    "current_sol_coherent": 14,
+    "current_conservative_coherent": 3,
+    "cases": 100,
+    "families": 20,
+    "degenerate": 1,
+    "cases_with_generated_BOS": 0,
+    "full_window_metric_unchanged": true,
+    "first_document_text_saved_as_separate_diagnostic": true,
+    "previous_sol_teacher_coherent": 5
+  },
+  "mandatory_150M_progress_gate": {
+    "checks": {
+      "loss_improvement_at_least_point1": true,
+      "coherent_at_least_20": false,
+      "coherence_gain_at_least_10pp": false
+    },
+    "passed": false,
+    "original_baseline_teacher": "gpt-6-luna",
+    "current_teacher": "gpt-6-sol",
+    "reviewer_change_limits_original_baseline_comparability": true,
+    "paired_previous_current_sol_grading": true
+  },
+  "teacher_receipt": {
+    "paired_prior_and_current_review": true,
+    "cases": 200,
+    "requested_model": "gpt-6-sol",
+    "resolved_model": null,
+    "usage": {
+      "input_tokens": 40168,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8596,
+      "reasoning_output_tokens": 161
+    },
+    "tool_events": 0,
+    "requests": 1,
+    "seconds": 102.25614275003318,
+    "client": "codex-cli 0.163.0-alpha.11.2"
+  },
+  "independent_serialized_reference": {
+    "status": "PASS",
+    "checkpoint_sha256": "8dc0f786499d08c670adfe53d55ddcf213ff6dcd07db5dca70835fd723fe3f69",
+    "FP32_reference_nll": 1.5269848965108395,
+    "BF16_native_nll": 1.5271154046058655,
+    "absolute_difference": 0.00013050809502601624,
+    "tolerance": 0.02,
+    "targets": 131072,
+    "seconds": 4.150526041048579,
+    "training_updates": 0,
+    "checkpoint_unchanged": true
+  },
+  "training_updates_elapsed_seconds": 6814.465853958041,
+  "training_tokens_per_second": 11002.063200075085,
+  "final_30_minute_tokens_per_second": 10682.20856284658,
+  "elapsed_since_approval_seconds": 7246.470456123352,
+  "processed_positions_charged": 75974410,
+  "prior_positions_charged": 77705855,
+  "cumulative_continuation_experiment_positions": 153680265,
+  "peak_process_tree_RSS_GiB": 1.4793548583984375,
+  "additional_global_swap_bytes": 0,
+  "all_workers_reaped": true,
+  "training_sources_unchanged": true,
+  "teacher_review_amendment_recorded": true,
+  "training_authorized": false,
+  "next_stage_authorized": false,
+  "conversation_training_authorized": false,
+  "full_training_authorized": false,
+  "formal_English_gate": "NOT_RUN_AND_NOT_PASSED",
+  "development_only": true,
+  "primary_rubric_zero_counts": {
+    "grammar": 5,
+    "topical_continuity": 15,
+    "entity_consistency": 30,
+    "causal_temporal_consistency": 64,
+    "local_coherence": 36
+  },
+  "first_25_update_mean_loss": 1.695510983467102,
+  "last_25_update_mean_loss": 1.523135175704956,
+  "teacher_original_budget_accounting": {
+    "requests_used": 3,
+    "requests_cap": 4,
+    "observed_output_and_reasoning_tokens": 19980,
+    "observed_token_cap": 48000
+  },
+  "interpretation": "Numerical and resource checks passed; the mandatory narrative progress gate failed. More foundation training, SFT and tool training remain paused.",
+  "limitations": [
+    "Development diagnostics, not the formal English acceptance gate or conversation evaluation.",
+    "100 narrative cases use 20 template families and five names; grammar has 45 distinct pairs among 100 rendered trials.",
+    "Native TinyStories shard split remains unresolved for near-duplicate/family leakage; token positions are not unique usable text counts.",
+    "Primary and teacher judgments are not calibrated human grades; disagreements conservatively fail.",
+    "Luna-to-Sol score changes cannot alone establish learning. Prior/current Sol grading was paired and checkpoint identities blinded.",
+    "TinyStories does not establish broad expository English, general factual knowledge, conversation or tool competence."
+  ]
+}
