@@ -15,7 +15,9 @@ These are development diagnostics:100stories span20template families;100grammar 
 
 ## Path to the actual goal
 
-The15.19M TinyStories model is a prototype, not the selected final broad-English architecture. This was the last proposed bounded exposure test of that narrative lineage. The next decision must address broad-English data admission and a fixed architecture below100M, with measured compute and a justified foundation acceptance gate before conversation/tool stages. See [goal path](restart/foundation-stage3-v1/GOAL_PATH.md). No next experiment is approved.
+The [resolution proposal](restart/foundation-resolution-v1/PLAN.md) specifies corrected measurement, two equal-work33.55M-target training branches, and one separately approved74.97M-target continuation. It preserves the15.19Mparameter count and requires owner review after each phase. It is not approved or running.
+
+The15.19M TinyStories model is a prototype, not the selected final broad-English architecture. The previous exposure experiment exhausted its approval; the resolution proposal requests a distinct controlled scheduling test after measurement repair. The final delivery path still requires broad-English data admission, a justified fixed architecture below100M, measured compute and a foundation acceptance decision before conversation/tool stages. See [goal path](restart/foundation-stage3-v1/GOAL_PATH.md). No next experiment is approved.
 
 ## Evidence
 

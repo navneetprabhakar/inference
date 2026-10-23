@@ -1,0 +1,226 @@
+{
+  "status": "PROPOSED_NOT_APPROVED_NO_EXECUTION",
+  "owner": "Navneet Prabhakar",
+  "purpose": "Continue own-weight training through measurement repair, one equal-work learning-rate comparison, then one separately approved continuation.",
+  "reference_checkpoint": {
+    "path": "restart/foundation-stage3-v1/stage3-checkpoint.pt",
+    "sha256": "1fc366363a74bf514aa22ea334a938253bf31e437d588e3e0a0c712557e47335",
+    "optimizer_step": 2889,
+    "completed_targets": 378667008,
+    "additional_updates": 1144,
+    "verified_exact_CPU_reload": true,
+    "epoch": 1792753454.270015
+  },
+  "model_parameters": 15191712,
+  "parameter_ceiling": 100000000,
+  "new_model_initialization": false,
+  "pretrained_weights_import": false,
+  "tokenizer_or_architecture_changes": false,
+  "new_downloads": false,
+  "training_authorized": false,
+  "conversation_training_authorized": false,
+  "tool_training_authorized": false,
+  "full_reference_run_authorized": false,
+  "recipe": {
+    "backend": "native MLX",
+    "compute": "BF16",
+    "master_weights_and_moments": "FP32",
+    "microbatch": 16,
+    "accumulation": 32,
+    "context": 256,
+    "targets_per_update": 131072,
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "eps": 1e-08,
+    "matrix_weight_decay": 0.1,
+    "norm_weight_decay": 0.0,
+    "gradient_clip": 1.0,
+    "new_warmup": false,
+    "exact_first_sequence_offset": 1479168,
+    "training_data": "Same native TinyStories stream and tokenizer; no new admissions"
+  },
+  "phases": [
+    {
+      "id": "R0",
+      "name": "Repair and validate measurement",
+      "requires_separate_owner_approval": true,
+      "wall_seconds_cap": 2700,
+      "processed_positions_cap": 2000000,
+      "training_updates": 0,
+      "teacher_requests_cap": 2,
+      "scope": [
+        "New version of joint-tokenized option scorer; exact continuation spans",
+        "One consistent deadline schema and mocked contract test for every phase",
+        "Read-only BF16 and independent FP32 fixed loss/option scores for steps1745 and2889",
+        "Freeze40new development prefixes in20families,20balanced grading anchors, rubric and decision rules before new model outputs",
+        "Generate40baseline continuations; two blinded grading orders containing40baseline+20anchors each",
+        "Corrected empty/shuffled-passage controls for both saved checkpoints; report diagnostic accuracy without requiring current capability",
+        "Independent CPU scorer fixtures for target shift, continuation-only loss, causal masks and source/clock contracts before model execution"
+      ],
+      "pass_all": [
+        "All600candidate token sequences match intended full-text encoding; prefix spans and equal lengths verified",
+        "Independent FP32/native NLL absolute difference <=0.02 on131072targets for both saved checkpoints",
+        "Zero checkpoint mutation, optimizer updates or changed training inputs",
+        "Each grader request passes>=9of10positive and>=9of10negative anchors; anchor inter-review kappa>=0.6",
+        "Across40actual baseline continuations, binary repeat agreement>=85percent and mean absolute total-score difference<=1.0of10",
+        "New probe prefixes<=96native tokens;96token output windows fit current256context; all probes/anchors are development material, not independent acceptance"
+      ],
+      "stop_and_report": true
+    },
+    {
+      "id": "R1",
+      "name": "Equal-work training comparison",
+      "requires_separate_owner_approval": true,
+      "prerequisite": "R0 passed and owner reviewed results",
+      "wall_seconds_cap": 10800,
+      "processed_positions_cap": 72000000,
+      "teacher_requests_cap": 2,
+      "arms": [
+        {
+          "id": "A",
+          "updates": 256,
+          "training_targets": 33554432,
+          "start": "Same step2889 full state",
+          "learning_rate": "Unchanged original rate(global_step)",
+          "data": "Next256updates from exact sequence offset1479168"
+        },
+        {
+          "id": "B",
+          "updates": 256,
+          "training_targets": 33554432,
+          "start": "Same step2889 full state including moments and RNG",
+          "learning_rate": {
+            "type": "linear_cooldown",
+            "first_update_lr": 0.0004995509721941322,
+            "last_update_lr": 5e-05,
+            "formula": "start_lr+(0.00005-start_lr)*j/255 for j=0..255"
+          },
+          "data": "Exactly the same next256updates as A"
+        }
+      ],
+      "GPU_jobs": "Serialized; one at a time",
+      "physical_training_targets": 67108864,
+      "retained_new_targets_after_selection": 33554432,
+      "selected_endpoint_step": 3145,
+      "selected_endpoint_targets": 412221440,
+      "checkpoint_every_additional_updates": 64,
+      "teacher_cases_per_request": 140,
+      "teacher_case_composition": "40baseline+40A+40B+20anchors; two independently permuted requests",
+      "eligibility_all": [
+        "Native fixed NLL improves>=0.01nats from R0step2889baseline",
+        "Corrected grounded accuracy loses<=5of100 from R0baseline",
+        "Distinct grammar accuracy loses<=2of45 from R0baseline",
+        "Within each paired teacher request, story mean loses<=0.25of10 vs baseline and incoherent-sentence rate rises<=10percentagepoints",
+        "Exact CPU save/reload, independent saved-checkpoint FP32 parity and all resource checks pass",
+        "Same R0grading-anchor requirements pass",
+        "At least one behavioral gain vs baseline: corrected grounding improves>=5of100, OR paired story mean improves>=0.25of10 in each of the two teacher reviews; lower loss alone never releases R2"
+      ],
+      "selection_rule": "If exactly one arm eligible, select it. If both eligible, select B only if NLL_B<=NLL_A-0.01 and B loses<=5grounded cases and<=2distinct grammar pairs vs A; otherwise select A and label cooldown advantage unproven. Neither eligible:stop, noR2.",
+      "stop_and_report": true
+    },
+    {
+      "id": "R2",
+      "name": "Bounded continuation of selected own checkpoint",
+      "requires_separate_owner_approval": true,
+      "prerequisite": "R1eligible winner reviewed and explicitly approved",
+      "wall_seconds_cap": 10800,
+      "processed_positions_cap": 82000000,
+      "teacher_requests_cap": 2,
+      "updates": 572,
+      "training_targets": 74973184,
+      "source": "Chosen R1step3145 checkpoint; preserve optimizer, RNG and data cursor",
+      "learning_rate_if_A": "Continue original global-step schedule",
+      "learning_rate_if_B": "Hold0.00005; no reheating or warmup reset",
+      "checkpoint_every_additional_updates": 64,
+      "endpoint_step": 3717,
+      "endpoint_retained_targets": 487194624,
+      "teacher_cases_per_request": 200,
+      "teacher_case_composition": "100current original-packet stories+40current new probes+40selected-R1probe outputs+20anchors; two independently permuted requests",
+      "development_success_all": [
+        "Validation NLL improves>=0.03nats from selected-R1checkpoint",
+        "Corrected original grammar>=75of100 and distinct correct>=max(36, selected-R1distinct correct)",
+        "Corrected original grounded>=max(50,min(100,R0step2889correct+10))of100",
+        "Original100story conservative primary-and-both-teacher pass count>=20; no replacement of historical failed scores",
+        "On40paired new probes, mean two-review total improves>=0.5of10 from selectedR1;20-family10000-resample bootstrap95percent lower bound>0",
+        "Primary/both-teacher binary kappa>=0.6 on original100cases and teacher repeat agreement>=85percent; undefined disagreement statistics are inconclusive, not a pass",
+        "Degeneration<=5of100 under unchanged narrow rule; grading-anchor checks and all correctness/resource checks pass",
+        "Corrected intact-passage accuracy beats both empty and shuffled controls by>=15percentagepoints"
+      ],
+      "stop_even_if_pass": true,
+      "no_automatic_extension": true
+    }
+  ],
+  "totals": {
+    "phase_wall_seconds_cap_sum": 24300,
+    "new_processed_positions_cap": 156000000,
+    "new_physical_training_targets": 142082048,
+    "max_retained_new_targets": 108527616,
+    "max_retained_total_targets": 487194624,
+    "old_continuation_positions_preserved": 306104851,
+    "old_continuation_position_cap_preserved": 320000000,
+    "combined_continuation_resolution_position_ceiling": 462104851,
+    "earlier_feasibility_and_benchmark_ledgers": "Preserved separately; combined number is not lifetime-project total",
+    "old_teacher_requests_consumed": 4,
+    "old_teacher_observed_output_reasoning_tokens": 28828,
+    "new_teacher_requests_cap": 6,
+    "new_teacher_observed_output_reasoning_tokens_cap": 72000,
+    "combined_teacher_requests_cap": 10,
+    "combined_teacher_observed_output_reasoning_tokens_cap": 100828
+  },
+  "teacher": {
+    "requested_model": "gpt-6-sol",
+    "interface": "Codex CLI with existing ChatGPT login",
+    "max_observed_output_plus_reasoning_tokens_per_request": 12000,
+    "max_prompt_UTF8_bytes_per_request": 524288,
+    "max_seconds_per_request": 240,
+    "tools_enabled": false,
+    "automatic_retries": false,
+    "model_substitution": false,
+    "teacher_text_enters_training": false,
+    "primary_review_sealed_before_teacher": true,
+    "identity_disclosure": "Record requested identity; do not claim backend-resolved identity unless returned",
+    "usage_enforcement": "Use provider-side output controls when exposed; audit observed usage after every response and halt dispatch on any cap breach. Never claim that post-response observed-token checks can prevent already incurred usage."
+  },
+  "guards": {
+    "max_GPU_GiB": 12,
+    "max_process_tree_RSS_GiB": 12,
+    "max_added_global_swap_MiB": 512,
+    "swap_baseline_bytes_preserved": 401342464,
+    "min_free_disk_GiB": 60,
+    "AC_required": true,
+    "sustained_critical_thermal_seconds": 60,
+    "all_losses_gradients_masters_moments_finite": true,
+    "exact_CPU_state_reload_required": true,
+    "FP32_native_fixed_NLL_tolerance": 0.02,
+    "periodic_fixed_NLL_abort_gain_over_phase_source": 0.1,
+    "consecutive_training_loss_spike_stop": "3updates each>1.5times first16update mean; first16updates abort if loss>2times phase-source fixed NLL",
+    "checkpoint_shutdown_reserve_seconds": 300,
+    "automatic_recovery_or_tolerance_changes": false,
+    "phase_budget_borrowing": false,
+    "any_technical_arm_failure": "Terminal for the entire phase; do not rescue it by selecting the completed other arm"
+  },
+  "authority": {
+    "old_stops_and_clocks_preserved": true,
+    "old_attempt_or_request_slots_reused": false,
+    "new_approval_is_explicit_exception_after_terminal_stop": true,
+    "approval_barrier_after_each_phase": true,
+    "phase_clock": "Starts at that phase explicit approval; never resets; report wall time including setup/evaluation. Inter-phase owner wait has no workers and is recorded separately.",
+    "source_freeze": "Freeze phase source manifest, evaluation cases and activation receipt before model execution; one shared clock schema for every reader."
+  },
+  "after_R2": {
+    "if_pass": "Report development progress, not formal English acceptance. Prepare separate foundation-to-conversation readiness proposal; current English gate or an explicitly approved replacement/exception must be resolved before any SFT.",
+    "if_fail": "Stop this15Mdelivery path under this resolution budget; preserve all artifacts. No automatic TinyStories extension, new architecture or data switch. A separately justified under100Mdata/architecture/compute proposal may follow; no claim of mathematical infeasibility.",
+    "conversation": "New separate bounded SFT proposal using retokenized and re-reviewed curriculum with fresh family-heldout cases; GPT-6Sol teacher only under a new allowance.",
+    "tools": "Only after conversation acceptance; separate internal/MCP schema, argument, permission and result-grounding evaluations. Runtime tool execution is separate from learned student competence."
+  },
+  "implementation_preparation": {
+    "shared_runtime": "One shared runner/scorer/clock schema for this new version; parameterized phases, not copied per-stage programs",
+    "CPU_preparation": "Routine CPU-only edits/tests allowed before source freeze, inside the phase preparation allowance; no new student lineage",
+    "model_attempt": "One model-executing attempt per phase after source/receipt/evaluation freeze; any post-launch correctness/resource/deadline stop is terminal",
+    "source_is_not_prepared_yet": true,
+    "plan_is_not_a_ready_or_approved_launcher": true
+  }
+}
