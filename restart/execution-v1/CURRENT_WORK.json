@@ -1,5 +1,5 @@
 {
-  "observed_utc": "2026-10-22T03:00:40.425353+00:00",
+  "observed_utc": "2026-10-23T11:14:55.293124+00:00",
   "goal": "M0-M3 PAUSED at explicit owner request; incomplete",
   "verified_previous_turn_classification": "PROGRESS_AND_EXPLICIT_OWNER_REQUESTED_PAUSE",
   "residual_render": {
@@ -65,7 +65,7 @@
   "new_M2_admitted_documents": 19,
   "new_M2_admitted_tokens": 168086,
   "corpus_training_or_candidate_retry_this_turn": true,
-  "latest_free_disk_GiB_observed": 137.6084861755371,
+  "latest_free_disk_GiB_observed": 125.48236846923828,
   "download_body_reservations_bytes": 46277900016,
   "verified_successful_body_bytes": 2543600762,
   "parallel_tracks": [
@@ -94,7 +94,7 @@
     "fresh_current_candidate_whole_documents_reviewed": 20,
     "known_hold_overlay": "m2-intake/wikibooks-current20-parent-integration-v1/integration.json"
   },
-  "current_turn_progress": "Completed diverse500 Luna pilot;482 accepted (382train/50dev/50test),97/100 semantic sample. One fresh5.114M model initialized; originalswap stop preserved andonecache-limited recovery keptaggregate2Mbase/32634SFTtarget/636reserved-update/360.023s counters.616 updates applied toretainedcheckpoint. Development0/20 andfinal0/50 conversations pass; updates stopped ondegeneration, optionalthirdpassskipped. DecoderparityPASS6.2e-6. Allownedworkersreaped; no furthertraining, teacher scaling or corpus intake running.",
+  "current_turn_progress": "Approved149.95M-target successor completed at15.19Mparameters/step2889/378667008total targets. Loss1.400689; grammar78/100 but distinct36/45; grounding30/100; conservativecoherence4/100 andpaired4to4. Gatefailed; FP32saved-checkpointverifierfailedbeforeinferencewithmissingclockkey, no retry. Allworkersreaped, alltrainingauthorityconsumed; reportrestart/foundation-stage3-v1/REPORT.md.",
   "Gutenberg_novel": {
     "derivative": "m2-intake/gutenberg-novel-prose-nine-markers-v4",
     "chapters": 61,
@@ -1653,22 +1653,27 @@
     "assistant_target_tokens_including_eos": 217
   },
   "foundation_continuation": {
-    "status": "SECOND_75M_STAGE_COMPLETE_NARRATIVE_PROGRESS_GATE_FAILED",
+    "status": "SUCCESSOR_COMPLETE_DEVELOPMENT_PROGRESS_GATE_FAILED",
     "training_authorized": false,
     "next_stage_authorized": false,
     "conversation_training_authorized": false,
-    "additional_updates": 572,
-    "additional_training_targets": 74973184,
-    "total_retained_training_targets": 228720640,
-    "checkpoint": "restart/foundation-stage2-v1/stage2-checkpoint.pt",
-    "checkpoint_sha256": "8dc0f786499d08c670adfe53d55ddcf213ff6dcd07db5dca70835fd723fe3f69",
-    "report": "restart/foundation-stage2-v1/REPORT.md",
+    "additional_updates": 1144,
+    "additional_training_targets": 149946368,
+    "total_retained_training_targets": 378667008,
+    "checkpoint": "restart/foundation-stage3-v1/stage3-checkpoint.pt",
+    "checkpoint_sha256": "1fc366363a74bf514aa22ea334a938253bf31e437d588e3e0a0c712557e47335",
+    "report": "restart/foundation-stage3-v1/REPORT.md",
     "all_workers_reaped": true,
-    "review_hold": "restart/foundation-stage2-v1/global-stop.json",
-    "current_stage": "restart/foundation-stage2-v1",
+    "review_hold": "restart/foundation-stage3-v1/global-stop.json",
+    "current_stage": "restart/foundation-stage3-v1",
     "teacher_model": "gpt-6-sol",
-    "prior_review_hold_preserved": "restart/foundation-stage1-v1/global-stop.json",
-    "mandatory_progress_gate_passed": false
+    "prior_review_hold_preserved": "restart/foundation-stage2-v1/global-stop.json",
+    "mandatory_progress_gate_passed": false,
+    "independent_checkpoint_parity_verified": false,
+    "verifier_failure": "KeyError: 'stage3_deadline_epoch'",
+    "all_resource_guards_passed": true,
+    "teacher_original_request_allowance_consumed": true,
+    "final_verification": "restart/foundation-stage3-v1/final-verification.json"
   },
   "foundation_diagnosis": {
     "status": "COMPLETE_READ_ONLY",
@@ -1678,7 +1683,7 @@
     "all_workers_reaped": true
   },
   "foundation_successor_preparation": {
-    "status": "PREPARED_EXPLICIT_SUCCESSOR_APPROVAL_REQUIRED",
+    "status": "SUCCESSOR_COMPLETE_DEVELOPMENT_PROGRESS_GATE_FAILED",
     "plan": "restart/foundation-stage3-v1/PLAN.md",
     "proposal": "restart/foundation-stage3-v1/proposal.json",
     "training_authorized": false,
@@ -1686,6 +1691,7 @@
     "planned_additional_targets": 149946368,
     "parameters": 15191712,
     "wall_seconds_cap": 18000,
-    "terminal_quality_stop_preserved": true
+    "terminal_quality_stop_preserved": true,
+    "approval": "restart/foundation-stage3-v1/approval.json"
   }
 }
