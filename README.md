@@ -12,6 +12,12 @@ Owner: Navneet Prabhakar (Forge). This project builds its own English model from
 - Final30-minute training throughput was **10,682 targets/sec**. Further ETAs must use sustained rates and retain their wall-clock stops.
 - **GPT-6 Sol (`gpt-6-sol`)** is the selected reviewer through Codex CLI. It graded prior/current outputs in one blinded paired request. The16 earlier Luna correction seeds (217 assistant targets) remain unused for student training.
 
+## Prepared next decision
+
+Read-only diagnosis found42/100grounding accuracy with passages versus25/100without; only9/100paired changed-fact cases were both correct. Greedy continuations still fail frequently. No student updates occurred. A separately authorized successor is prepared for149.95Madditional targets, approximately4hours of training and a5-hour hard cap, with the20/100coherence floor retained. **It has not been approved or launched.** The prior terminal failure remains preserved.
+
+See [diagnosis](restart/foundation-diagnosis-v1/REPORT.md), [prepared experiment](restart/foundation-stage3-v1/PLAN.md), and [path to the actual under-100M goal](restart/foundation-stage3-v1/GOAL_PATH.md).
+
 ## Evidence and reproduction
 
 - [Latest completed stage, failed gate and raw evidence](restart/foundation-stage2-v1/REPORT.md)
