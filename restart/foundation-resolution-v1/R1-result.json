@@ -1,0 +1,130 @@
+{
+  "status": "FAIL_STOP",
+  "phase": "R1",
+  "selected_arm": null,
+  "cooldown_advantage": "UNPROVEN",
+  "arms": {
+    "A": {
+      "eligible": false,
+      "gates": {
+        "NLL_gain": true,
+        "grounding_nonregression": true,
+        "distinct_grammar_nonregression": true,
+        "paired_mean_nonregression": false,
+        "incoherent_nonregression": false,
+        "behavior_gain": false,
+        "calibration": true
+      },
+      "NLL_gain": 0.013521432876586914,
+      "grounding_delta": 0,
+      "distinct_grammar_delta": 0,
+      "paired_reviews": [
+        {
+          "mean": 4.375,
+          "baseline_mean": 5.05,
+          "mean_delta": -0.6749999999999998,
+          "incoherent_fraction": 0.4,
+          "incoherent_delta": 0.07500000000000001
+        },
+        {
+          "mean": 4.075,
+          "baseline_mean": 4.725,
+          "mean_delta": -0.6499999999999995,
+          "incoherent_fraction": 0.4,
+          "incoherent_delta": 0.2
+        }
+      ],
+      "summary": {
+        "validation_nll": 1.3871671855449677,
+        "grammar_correct": 100,
+        "grammar_unique_correct": 45,
+        "grammar_unique_total": 45,
+        "grounded_intact_correct": 43,
+        "grounded_empty_correct": 25,
+        "grounded_shuffled_correct": 18,
+        "dtype_proof": {
+          "compute": "mlx.core.bfloat16",
+          "embedding": "mlx.core.bfloat16",
+          "norm_output": "mlx.core.bfloat16",
+          "matrix_weight": "mlx.core.bfloat16",
+          "matrix_output": "mlx.core.bfloat16",
+          "logits": "mlx.core.bfloat16",
+          "master_weights": "mlx.core.float32",
+          "optimizer_moment": "mlx.core.float32",
+          "audit_forward_evaluated": false,
+          "normalization_reduction": "Native MLX RMSNorm FP32 accumulation"
+        }
+      }
+    },
+    "B": {
+      "eligible": false,
+      "gates": {
+        "NLL_gain": true,
+        "grounding_nonregression": true,
+        "distinct_grammar_nonregression": true,
+        "paired_mean_nonregression": false,
+        "incoherent_nonregression": true,
+        "behavior_gain": true,
+        "calibration": true
+      },
+      "NLL_gain": 0.05765317752957344,
+      "grounding_delta": 5,
+      "distinct_grammar_delta": 0,
+      "paired_reviews": [
+        {
+          "mean": 4.825,
+          "baseline_mean": 5.05,
+          "mean_delta": -0.22499999999999964,
+          "incoherent_fraction": 0.275,
+          "incoherent_delta": -0.04999999999999999
+        },
+        {
+          "mean": 3.975,
+          "baseline_mean": 4.725,
+          "mean_delta": -0.7499999999999996,
+          "incoherent_fraction": 0.275,
+          "incoherent_delta": 0.07500000000000001
+        }
+      ],
+      "summary": {
+        "validation_nll": 1.3430354408919811,
+        "grammar_correct": 100,
+        "grammar_unique_correct": 45,
+        "grammar_unique_total": 45,
+        "grounded_intact_correct": 48,
+        "grounded_empty_correct": 25,
+        "grounded_shuffled_correct": 17,
+        "dtype_proof": {
+          "compute": "mlx.core.bfloat16",
+          "embedding": "mlx.core.bfloat16",
+          "norm_output": "mlx.core.bfloat16",
+          "matrix_weight": "mlx.core.bfloat16",
+          "matrix_output": "mlx.core.bfloat16",
+          "logits": "mlx.core.bfloat16",
+          "master_weights": "mlx.core.float32",
+          "optimizer_moment": "mlx.core.float32",
+          "audit_forward_evaluated": false,
+          "normalization_reduction": "Native MLX RMSNorm FP32 accumulation"
+        }
+      }
+    }
+  },
+  "calibration": {
+    "anchor_classification_counts": [
+      {
+        "True": 10,
+        "False": 10
+      },
+      {
+        "True": 10,
+        "False": 10
+      }
+    ],
+    "anchor_inter_review_kappa": 1.0,
+    "pass_all": true
+  },
+  "physical_training_targets": 67108864,
+  "selected_retained_new_targets": 0,
+  "positions": 69088744,
+  "epoch": 1792783698.491176
+}

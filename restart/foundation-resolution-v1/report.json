@@ -1,0 +1,187 @@
+{
+  "status": "RESOLUTION_STOPPED_AT_R1_QUALITY_GATE",
+  "epoch": 1792783786.137877,
+  "model_parameters": 15191712,
+  "from_scratch_own_lineage": true,
+  "new_pretrained_weights": false,
+  "R0_status": "PASS",
+  "R1_status": "FAIL_STOP",
+  "R2_started": false,
+  "conversation_training_started": false,
+  "tool_training_started": false,
+  "all_workers_reaped": true,
+  "source_manifest_checks": {
+    "R0-freeze.json": "PASS",
+    "R0-review-freeze.json": "PASS",
+    "R1-freeze.json": "PASS",
+    "R1-review-freeze.json": "PASS"
+  },
+  "old_stop_and_checkpoint_unchanged": true,
+  "physical_training_targets": 67108864,
+  "targets_per_arm": 33554432,
+  "selected_retained_new_targets": 0,
+  "each_experimental_endpoint_targets": 412221440,
+  "each_experimental_endpoint_step": 3145,
+  "new_processed_positions": 69979600,
+  "work_charges": [
+    {
+      "phase": "R0",
+      "kind": "fixed-validation",
+      "positions": 262144
+    },
+    {
+      "phase": "R0",
+      "kind": "generation-full-input",
+      "positions": 302592
+    },
+    {
+      "phase": "R0",
+      "kind": "independent-fp32-options",
+      "positions": 20644
+    },
+    {
+      "phase": "R0",
+      "kind": "independent-fp32-validation",
+      "positions": 262144
+    },
+    {
+      "phase": "R0",
+      "kind": "options-grammar-intact",
+      "positions": 4452
+    },
+    {
+      "phase": "R0",
+      "kind": "options-grounded-empty",
+      "positions": 6496
+    },
+    {
+      "phase": "R0",
+      "kind": "options-grounded-intact",
+      "positions": 16192
+    },
+    {
+      "phase": "R0",
+      "kind": "options-grounded-shuffled",
+      "positions": 16192
+    },
+    {
+      "phase": "R1",
+      "kind": "fixed-validation",
+      "positions": 1048576
+    },
+    {
+      "phase": "R1",
+      "kind": "generation-full-input",
+      "positions": 605184
+    },
+    {
+      "phase": "R1",
+      "kind": "independent-fp32-options",
+      "positions": 20644
+    },
+    {
+      "phase": "R1",
+      "kind": "independent-fp32-validation",
+      "positions": 262144
+    },
+    {
+      "phase": "R1",
+      "kind": "options-grammar-intact",
+      "positions": 4452
+    },
+    {
+      "phase": "R1",
+      "kind": "options-grounded-empty",
+      "positions": 6496
+    },
+    {
+      "phase": "R1",
+      "kind": "options-grounded-intact",
+      "positions": 16192
+    },
+    {
+      "phase": "R1",
+      "kind": "options-grounded-shuffled",
+      "positions": 16192
+    },
+    {
+      "phase": "R1",
+      "kind": "training-A",
+      "positions": 33554432
+    },
+    {
+      "phase": "R1",
+      "kind": "training-B",
+      "positions": 33554432
+    }
+  ],
+  "old_continuation_positions": 306104851,
+  "combined_continuation_resolution_positions": 376084451,
+  "teacher_requests": 4,
+  "new_teacher_output_plus_reasoning_tokens": 30160,
+  "new_teacher_input_tokens": 102280,
+  "unused_R2_teacher_requests": 2,
+  "unused_R2_allowances_not_reassigned": true,
+  "phase_elapsed_seconds": {
+    "R0_preparation_and_transition": 509.1918992996216,
+    "R1_through_decision": 5632.520827770233,
+    "total_through_decision": 6141.712727069855
+  },
+  "training_throughput": {
+    "A": {
+      "all_training_targets_per_second": 13436.245105457643,
+      "last_32_update_targets_per_second": 12247.485646200399,
+      "training_seconds": 2497.3072265830124
+    },
+    "B": {
+      "all_training_targets_per_second": 12045.497476029346,
+      "last_32_update_targets_per_second": 12070.731817723003,
+      "training_seconds": 2785.641030333005
+    }
+  },
+  "peak_process_tree_RSS_bytes": 1405714432,
+  "peak_GPU_bytes": 2504828924,
+  "calibrated_anchor_result": {
+    "anchor_classification_counts": [
+      {
+        "True": 10,
+        "False": 10
+      },
+      {
+        "True": 10,
+        "False": 10
+      }
+    ],
+    "anchor_inter_review_kappa": 1.0,
+    "pass_all": true
+  },
+  "larger_packet_review_variation": {
+    "baseline": {
+      "binary_pass_counts": [
+        9,
+        3
+      ],
+      "binary_repeat_agreement": 0.85,
+      "total_score_MAD": 1.125
+    },
+    "A": {
+      "binary_pass_counts": [
+        4,
+        2
+      ],
+      "binary_repeat_agreement": 0.95,
+      "total_score_MAD": 0.8
+    },
+    "B": {
+      "binary_pass_counts": [
+        6,
+        0
+      ],
+      "binary_repeat_agreement": 0.85,
+      "total_score_MAD": 1.15
+    }
+  },
+  "stop_reason": "No eligible branch: A fails story nonregression/incoherence and behavior gain; B improves grounding but fails paired mean story nonregression in review2 (-0.75 vs allowed -0.25).",
+  "interpretation": "Cooldown improves fixed NLL and this development grounding packet; robust generative quality improvement was not demonstrated. Larger-packet story ratings also varied despite perfect easy-anchor classification. Do not treat this stop as a calibrated English-capability estimate, proof of capacity failure, or permission to extend training.",
+  "next_training_authorized": false
+}

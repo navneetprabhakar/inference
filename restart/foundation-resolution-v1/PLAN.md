@@ -1,3 +1,14 @@
+# Resolution plan: approved execution status
+
+- The owner approved execution with: “once plan is created , you have my approval for execution, make sure time updates are visible in executive bullets”.
+- This authorizes R0, then R1 and R2 **only when their preceding gates pass**, without another owner approval between successful phases. All technical, quality, attempt, resource and budget stops remain terminal.
+- The approval is bound to the unchanged machine-readable proposal in [approval-receipt.json](approval-receipt.json). Conversation, tool training and further foundation extensions remain unauthorized.
+- **Execution stopped at the R1 quality gate.** R0 passed; both R1 arms completed, neither qualified, and R2 did not start. All workers are reaped. See [execution report](REPORT.md) and [exact decision](R1-result.json). Owner requested written progress every10minutes or on critical changes.
+
+---
+
+## Original proposal (preserved)
+
 # Resolution plan: repair measurement, then continue our own training
 
 **Proposed, not approved. No training or model inference has restarted.** This is a bounded route to a better-evidenced checkpoint, not a promise of a working conversational model within a few hours. The plan deliberately includes further training and a final decision; it does not authorize an indefinite audit or TinyStories loop.
