@@ -1,0 +1,256 @@
+{
+  "status": "READ_ONLY_CPU_AUDIT_COMPLETE_TRAINING_PAUSED",
+  "epoch": 1792773926.330003,
+  "training_updates": 0,
+  "model_forward_passes": 0,
+  "new_weights_initialized": false,
+  "teacher_requests": 0,
+  "frozen_sources_modified": false,
+  "checkpoint_unchanged": true,
+  "tokenization": {
+    "grammar": {
+      "counts": {
+        "candidates": 200,
+        "separate_vs_joint_mismatch": 200,
+        "joint_prefix_unchanged": 200,
+        "exactly_one_extra_token": 200,
+        "double_space_in_actual_decoding": 200,
+        "joint_equal_length_case": 100
+      },
+      "example": {
+        "id": "grammar-000",
+        "prefix": "Near the old tree, the dogs",
+        "option": " are waiting.",
+        "actual_decoded": "Near the old tree, the dogs  are waiting.",
+        "intended_decoded": "Near the old tree, the dogs are waiting.",
+        "actual_suffix_ids": [
+          29871,
+          526,
+          10534,
+          29889
+        ],
+        "intended_suffix_ids": [
+          526,
+          10534,
+          29889
+        ]
+      }
+    },
+    "grounded": {
+      "counts": {
+        "candidates": 400,
+        "separate_vs_joint_mismatch": 400,
+        "joint_prefix_unchanged": 400,
+        "exactly_one_extra_token": 400,
+        "double_space_in_actual_decoding": 400,
+        "joint_equal_length_case": 100
+      },
+      "example": {
+        "id": "ground-000",
+        "prefix": "Mia put a red cup on a small table. The color of the cup was",
+        "option": " red.",
+        "actual_decoded": "Mia put a red cup on a small table. The color of the cup was  red.",
+        "intended_decoded": "Mia put a red cup on a small table. The color of the cup was red.",
+        "actual_suffix_ids": [
+          29871,
+          2654,
+          29889
+        ],
+        "intended_suffix_ids": [
+          2654,
+          29889
+        ]
+      }
+    }
+  },
+  "tokenization_interpretation": "All candidate strings contain an extra whitespace token. Its direct logprob term is common to options, but it changes their conditioning. Corrected inference is needed to quantify accuracy effects; no corrected scores are claimed.",
+  "teacher": {
+    "current": {
+      "dimension_means": {
+        "grammar": 1.7,
+        "topic": 0.95,
+        "entity_reference": 1.28,
+        "causal_temporal": 0.49,
+        "local_coherence": 0.64
+      },
+      "mean_total": 5.06,
+      "incoherent_sentences": 41,
+      "contradictions": 6,
+      "binary_pass": 5
+    },
+    "prior": {
+      "dimension_means": {
+        "grammar": 1.52,
+        "topic": 0.86,
+        "entity_reference": 1.16,
+        "causal_temporal": 0.43,
+        "local_coherence": 0.48
+      },
+      "mean_total": 4.45,
+      "incoherent_sentences": 54,
+      "contradictions": 8,
+      "binary_pass": 4
+    }
+  },
+  "primary_vs_teacher": {
+    "agreement": 0.8,
+    "kappa": 0.221789883268483,
+    "a_positive": 23,
+    "b_positive": 5,
+    "intersection": 4
+  },
+  "grammar": {
+    "prior": {
+      "rendered_cases": 100,
+      "rendered_correct": 75,
+      "unique_pairs": 45,
+      "unique_correct": 37
+    },
+    "current": {
+      "rendered_cases": 100,
+      "rendered_correct": 78,
+      "unique_pairs": 45,
+      "unique_correct": 36
+    }
+  },
+  "grounded_historical_malformed_input_scores": {
+    "prior": {
+      "provided-color": {
+        "cases": 20,
+        "correct": 6,
+        "predicted_answer_counts": {
+          "1": 19,
+          "0": 1
+        }
+      },
+      "location": {
+        "cases": 20,
+        "correct": 8,
+        "predicted_answer_counts": {
+          "0": 3,
+          "2": 16,
+          "3": 1
+        }
+      },
+      "ownership": {
+        "cases": 20,
+        "correct": 10,
+        "predicted_answer_counts": {
+          "0": 15,
+          "2": 5
+        }
+      },
+      "correction": {
+        "cases": 20,
+        "correct": 5,
+        "predicted_answer_counts": {
+          "1": 20
+        }
+      },
+      "negation": {
+        "cases": 20,
+        "correct": 13,
+        "predicted_answer_counts": {
+          "0": 10,
+          "2": 7,
+          "3": 3
+        }
+      }
+    },
+    "current": {
+      "provided-color": {
+        "cases": 20,
+        "correct": 5,
+        "predicted_answer_counts": {
+          "1": 20
+        }
+      },
+      "location": {
+        "cases": 20,
+        "correct": 5,
+        "predicted_answer_counts": {
+          "0": 20
+        }
+      },
+      "ownership": {
+        "cases": 20,
+        "correct": 10,
+        "predicted_answer_counts": {
+          "0": 6,
+          "2": 14
+        }
+      },
+      "correction": {
+        "cases": 20,
+        "correct": 5,
+        "predicted_answer_counts": {
+          "1": 20
+        }
+      },
+      "negation": {
+        "cases": 20,
+        "correct": 5,
+        "predicted_answer_counts": {
+          "0": 20
+        }
+      }
+    }
+  },
+  "schedule": {
+    "total_updates": 2889,
+    "configured_updates": 100000,
+    "configured_schedule_fraction": 0.02889,
+    "total_targets": 378667008,
+    "configured_targets": 13107200000,
+    "native_corpus_positions": 1004262627,
+    "approximate_corpus_passes": 0.3770597429590497,
+    "warmup_updates": 1000,
+    "warmup_targets": 131072000,
+    "warmup_fraction_of_completed_updates": 0.3461405330564209,
+    "final_lr": 0.0004995514473393571,
+    "peak_lr": 0.0005,
+    "final_lr_fraction_of_peak": 0.999102894678714,
+    "configured_horizon_is_not_a_proven_minimum": true
+  },
+  "learning": {
+    "first100_stage3_mean_loss": 1.5098867332935333,
+    "last100_stage3_mean_loss": 1.3956699299812316,
+    "all_stage3_losses_and_norms_finite": true,
+    "stage3_updates_with_gradient_norm_above1": 0
+  },
+  "architecture": {
+    "total_parameters": 15191712,
+    "embedding_parameters": 9216000,
+    "transformer_and_norm_parameters": 5975712,
+    "embedding_fraction": 0.6066465714989857,
+    "layers": 6,
+    "width": 288,
+    "vocabulary": 32000,
+    "context": 256,
+    "same_size_published_reference_exists": true,
+    "capacity_failure_not_proven": true
+  },
+  "throughput": {
+    "final30_targets_per_second": 10498.897562400542,
+    "billion_target_training_hours": 26.4578043672487,
+    "remaining_configured_training_days": 14.032043157683615,
+    "overhead_included": false,
+    "projection_not_a_run_proposal": true
+  },
+  "independent_checkpoint_parity": "NOT_VERIFIED_VERIFIER_CLOCK_KEY_FAILURE",
+  "limitations": [
+    "No causal optimization or data ablation executed.",
+    "No corrected model scoring or new generation executed.",
+    "Native validation leakage remains unresolved.",
+    "TinyStories does not establish broad conversation or tool capability."
+  ],
+  "source_sha256": {
+    "restart/foundation-stage3-v1/worker.py": "c1983b12f58e41384ef0f5208296dd9da5146b80f48f27eae5ff5d7c78d39156",
+    "restart/foundation-stage3-v1/engine.py": "803b9d97ee6f89d751ff96fc65849e0333c31f1ac89466442d83c62c72aa1552",
+    "restart/foundation-stage3-v1/engine_support.py": "1042d33746f89575c3711dcc6832bcfdb1e02a229bd1590db03c3ddfea56eff5",
+    "restart/foundation-stage3-v1/packet.json": "c4c56e024a55267ea1a29870c0f76d56be3c92cd76b7896bf308023d267802f8",
+    "restart/foundation-stage3-v1/teacher-review.json": "89f73092a93e0673eb28a785a6048db8764f40a552774b921be1b393ed1f460b",
+    "restart/foundation-stage3-v1/primary-review.json": "4f89f77c56946658831d42a7f4411cedacdbbc92770b18323d3382d952517ecb",
+    "restart/foundation-stage3-v1/stage3-checkpoint.pt": "1fc366363a74bf514aa22ea334a938253bf31e437d588e3e0a0c712557e47335"
+  }
+}

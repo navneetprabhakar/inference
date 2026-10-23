@@ -4,6 +4,7 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Current measured state — training paused
 
+- **Post-run audit found an evaluator defect:** all600grammar/grounding candidates contain an extra whitespace token. The historical option-score changes below are not clean normal-text capability measurements. Sol's continuous rubric mean improved4.45→5.06/10despite flat binary passes; primary/Sol kappa0.222shows weak agreement. See [cause audit](restart/foundation-cause-audit-v1/REPORT.md). No corrected inference or training has run.
 - Latest own checkpoint: **15,191,712 parameters**, step **2889**, **378,667,008 retained training target exposures**. The owner-approved successor completed1144updates/149,946,368additional targets and stopped. Parameters did not increase.
 - **Development gate failed.** Validation NLL1.527115→1.400689; grammar75→78/100, but distinct grammar pairs37→36/45. Grounding regressed42→30/100. Conservative primary∩Sol coherence4/100, below20; the same paired regrade scored the previous checkpoint4/100. Published previous3/100 remains preserved. Primary alone23, Sol5; agent grades are unstable and do not establish conversation readiness.
 - Final exact CPU checkpoint/optimizer reload passed. **Independent saved-checkpoint FP32 parity is unverified:** the verifier failed before inference with a missing clock-key error. One attempt consumed; no automatic patch/replay or tolerance change. This remains a failed correctness criterion.

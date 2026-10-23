@@ -1,5 +1,5 @@
 {
-  "observed_utc": "2026-10-23T11:14:55.293124+00:00",
+  "observed_utc": "2026-10-23T16:54:56.996073+00:00",
   "goal": "M0-M3 PAUSED at explicit owner request; incomplete",
   "verified_previous_turn_classification": "PROGRESS_AND_EXPLICIT_OWNER_REQUESTED_PAUSE",
   "residual_render": {
@@ -94,7 +94,7 @@
     "fresh_current_candidate_whole_documents_reviewed": 20,
     "known_hold_overlay": "m2-intake/wikibooks-current20-parent-integration-v1/integration.json"
   },
-  "current_turn_progress": "Approved149.95M-target successor completed at15.19Mparameters/step2889/378667008total targets. Loss1.400689; grammar78/100 but distinct36/45; grounding30/100; conservativecoherence4/100 andpaired4to4. Gatefailed; FP32saved-checkpointverifierfailedbeforeinferencewithmissingclockkey, no retry. Allworkersreaped, alltrainingauthorityconsumed; reportrestart/foundation-stage3-v1/REPORT.md.",
+  "current_turn_progress": "Read-only CPU cause audit found600/600option-text tokenization mismatches, uncalibratedgrading(kappa0.222), modestpairedmeanprogress4.45to5.06/10,andonly2.889percentofconfiguredschedulecompleted. Earlierclaimofclean42to30groundingregressionqualified; no correctedinference ortraining. Sourcesandcheckpointunchanged; alltrainingpaused.",
   "Gutenberg_novel": {
     "derivative": "m2-intake/gutenberg-novel-prose-nine-markers-v4",
     "chapters": 61,
@@ -1693,5 +1693,21 @@
     "wall_seconds_cap": 18000,
     "terminal_quality_stop_preserved": true,
     "approval": "restart/foundation-stage3-v1/approval.json"
+  },
+  "foundation_cause_audit": {
+    "status": "READ_ONLY_CPU_AUDIT_COMPLETE_TRAINING_PAUSED",
+    "report": "restart/foundation-cause-audit-v1/REPORT.md",
+    "receipt": "restart/foundation-cause-audit-v1/audit.json",
+    "training_updates": 0,
+    "model_forward_passes": 0,
+    "new_teacher_requests": 0,
+    "new_weights_initialized": false,
+    "grammar_and_grounding_historical_scores_qualified": "All600candidate strings have unintended whitespace token; corrected capability/regression unmeasured",
+    "paired_teacher_mean_prior": 4.45,
+    "paired_teacher_mean_current": 5.06,
+    "primary_teacher_kappa": 0.221789883268483,
+    "configured_schedule_fraction_completed": 0.02889,
+    "frozen_training_sources_unchanged": true,
+    "further_execution_authorized": false
   }
 }

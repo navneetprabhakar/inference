@@ -1,5 +1,7 @@
 # Approved successor completed — failed gate, training paused
 
+**Post-run CPU audit qualification:** the grammar/grounding scorer inserts an unintended whitespace token in all600candidate strings. The75→78and42→30figures below remain historical outputs, but do not establish normal-text capability or a clean grounding regression. No corrected inference has run. The paired Sol mean rubric total improves4.45→5.06/10while the binary intersection stays4→4; primary/Sol kappa is0.222. The earlier wording about no semantic progress was too categorical. Training remains paused and readiness is unproven. See [cause audit](../foundation-cause-audit-v1/REPORT.md); no historical score or failed gate has been overwritten.
+
 The owner approved one 1,144-update continuation. It completed and stopped. **The model remains 15,191,712 parameters.** It added 149,946,368 training targets, ending at step 2,889 with 378,667,008 retained training targets. These are repeated target exposures, not newly admitted or unique corpus tokens. No conversation SFT, tool training, new model initialization, download or full reference run occurred.
 
 ## Results
