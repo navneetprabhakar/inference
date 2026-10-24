@@ -1,0 +1,104 @@
+{
+  "status": "COMPLETE_QUALITY_SCREENED_CANDIDATES",
+  "requested_model": "gpt-6-sol",
+  "resolved_model": null,
+  "generated": 100,
+  "splits": {
+    "train": {
+      "documents": 80,
+      "content_tokens": 10998,
+      "assistant_content_tokens": 5464,
+      "messages": 350,
+      "plain_role_serialization_tokens": 12303,
+      "quality_clear_documents": 75,
+      "quality_clear_content_tokens": 10335,
+      "quality_clear_assistant_content_tokens": 5143,
+      "quality_clear_context256_documents": 73
+    },
+    "development": {
+      "documents": 10,
+      "content_tokens": 1402,
+      "assistant_content_tokens": 588,
+      "messages": 40,
+      "plain_role_serialization_tokens": 1552,
+      "quality_clear_documents": 10,
+      "quality_clear_content_tokens": 1402,
+      "quality_clear_assistant_content_tokens": 588,
+      "quality_clear_context256_documents": 10
+    },
+    "test": {
+      "documents": 10,
+      "content_tokens": 1339,
+      "assistant_content_tokens": 733,
+      "messages": 40,
+      "plain_role_serialization_tokens": 1489,
+      "quality_clear_documents": 10,
+      "quality_clear_content_tokens": 1339,
+      "quality_clear_assistant_content_tokens": 733,
+      "quality_clear_context256_documents": 9
+    }
+  },
+  "cross_split_near_duplicates": [],
+  "teacher_rejections": [
+    "sol-05-3",
+    "sol-10-4",
+    "sol-12-2",
+    "sol-14-4",
+    "sol-17-1"
+  ],
+  "usage": {
+    "input_tokens": 304950,
+    "cached_input_tokens": 33792,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 28765,
+    "reasoning_output_tokens": 5456
+  },
+  "elapsed_seconds": 492.41083002090454,
+  "student_updates": 0,
+  "training_admitted": 0,
+  "token_counts": "Native SentencePiece content only; assistant content excludes end-turn/format markers. Final supervised targets require a frozen serialization. Plain role serialization is a diagnostic, not an approved chat format.",
+  "leakage_scope": "Exhaustive exact and 5-word-shingle cross-split pair comparison within this batch. Historical sealed evaluation not accessed; global source-history overlap not certified.",
+  "primary_reviewed": 25,
+  "primary_fixed_sample_pass": 20,
+  "primary_fixed_sample_total": 20,
+  "quality_screened_documents": 95,
+  "packaged_candidate_counts": {
+    "train": {
+      "documents": 75,
+      "content_tokens": 10335,
+      "assistant_content_tokens": 5143,
+      "messages": 328,
+      "plain_role_serialization_tokens": 11558,
+      "context256_diagnostic_documents": 73,
+      "context256_content_tokens": 9828,
+      "context256_assistant_content_tokens": 4864
+    },
+    "development": {
+      "documents": 10,
+      "content_tokens": 1402,
+      "assistant_content_tokens": 588,
+      "messages": 40,
+      "plain_role_serialization_tokens": 1552,
+      "context256_diagnostic_documents": 10,
+      "context256_content_tokens": 1402,
+      "context256_assistant_content_tokens": 588
+    },
+    "test": {
+      "documents": 10,
+      "content_tokens": 1339,
+      "assistant_content_tokens": 733,
+      "messages": 40,
+      "plain_role_serialization_tokens": 1489,
+      "context256_diagnostic_documents": 9,
+      "context256_content_tokens": 1063,
+      "context256_assistant_content_tokens": 532
+    }
+  },
+  "training_paused": true,
+  "admission_remaining": [
+    "Freeze chat serialization and assistant/end-turn loss masking before counting actual supervised targets.",
+    "Current foundation data gate remains failed; this batch does not override it."
+  ],
+  "historical_training_overlap_matches": 0,
+  "historical_training_records_checked": 382
+}
