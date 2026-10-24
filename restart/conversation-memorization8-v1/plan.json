@@ -1,0 +1,39 @@
+{
+  "owner_instruction": "ok go ahead",
+  "scope": "One eight-conversation memorization test proposed immediately before approval",
+  "source_checkpoint": "restart/foundation-resolution-v1/B/checkpoint.pt",
+  "source_sha256": "bf45241501cee600bd618677dc1a3ae666e6f50d9c628e29e7326ee9c87d338d",
+  "parameters": 15191712,
+  "architecture_and_tokenizer_unchanged": true,
+  "maximum_updates": 200,
+  "wall_seconds": 900,
+  "checkpoint_every": 25,
+  "maximum_positions": 2000000,
+  "maximum_supervised_targets": 40000,
+  "batch": 8,
+  "context": 256,
+  "learning_rate": 5e-05,
+  "warmup_updates": 5,
+  "fresh_optimizer": true,
+  "optimizer": "Same verified AdamW BF16 compute/FP32 masters and moments; betas0.9/0.95 eps1e-8 decay0.1 matrices/0 norms; clip1",
+  "success": "All eight full conversations exactly reproduce all ten assistant target sequences and emit EOS after each; narrative validation NLL remains within 5% of baseline.",
+  "checkpoints": "Evaluate at baseline and updates25,50,...200; stop immediately on success or numerical/resource/regression failure.",
+  "stops": {
+    "foundation_nll_increase_fraction": 0.05,
+    "nonfinite": true,
+    "gradient_norm_above": 100,
+    "zero_first_parameter_update": true
+  },
+  "interpretation": "Memorization pass tests trainability/format mechanics only. A foundation-regression stop before memorization leaves unconstrained trainability unresolved. No unseen generalization is tested.",
+  "new_teacher_calls": 0,
+  "new_downloads": 0,
+  "automatic_retry": false,
+  "checkpoint_promotion": false,
+  "sources": {
+    "restart/conversation-memorization8-v1/run.py": "de552643176333460320ce0ca84a54c8fca7a5e8720f2a4a8e708cc48830b951",
+    "restart/sol-conversation-sft-diagnostic-v1/runner.py": "eb7a1509c690b6ee41db837c68f7465f0fbd17121731bb6678c78553332bb9a4",
+    "restart/foundation-stage3-v1/engine.py": "803b9d97ee6f89d751ff96fc65849e0333c31f1ac89466442d83c62c72aa1552",
+    "restart/foundation-stage3-v1/engine_support.py": "1042d33746f89575c3711dcc6832bcfdb1e02a229bd1590db03c3ddfea56eff5",
+    "restart/foundation-recovery-v2-corrected/common.py": "9e8d4db9952e59809cb26a471eb63ada5dab14532885e34640ca17cf2542ecf0"
+  }
+}
