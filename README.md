@@ -2,9 +2,12 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — broader curriculum stopped; earlier research checkpoint retained
+## Current measured state — fresh factual conversation checks failed
 
-- **Latest broader curriculum stopped at update 100:** earlier factual retention fell from 77/80 to 64/80, below the frozen 69/80 floor. No new checkpoint qualified; no retry or promotion occurred. Original foundation loss stayed within the 5% guard (+2.30%), and source/parent weights are unchanged.
+- **Fresh conversation reassessment failed on both checkpoints:** twenty new three-turn supplied-fact conversations scored **3/60 factual answers** on the retained model and **6/60** on the rejected child (5/60 without a repeated-word fluency defect). Both completed **0/20 conversations** correctly. Full names, times and quantities scored zero; corrected-fact recall after distraction was 0/20 and 1/20. All answers ended with EOS; context was not truncated.
+- A separate 15-question elementary knowledge check scored **1/15 retained, 0/15 rejected**; the one accepted answer had a capitalization defect. These small checks are primary-authored/judged evidence, not independent benchmark accuracy. The earlier controlled 77/80 must not be treated as general factual accuracy; formatting alone does not explain this failure to generalize.
+- This reassessment used **zero training updates**, 33,054 aggregate inference positions, and left both checkpoints, original weights and previous terminal stop unchanged. No promotion occurred. A format-only repair is insufficient as an overall conversation plan; evaluation must separate novel vocabulary, wording and delayed recall.
+- **Preceding broader curriculum stopped at update 100:** earlier factual retention fell from 77/80 to 64/80, below the frozen 69/80 floor. No new checkpoint qualified; no retry or promotion occurred. Original foundation loss stayed within the 5% guard (+2.30%), and source/parent weights are unchanged.
 - Read-only diagnosis of the rejected child scored 37/80 on fresh synthetic broader prompts: location phrases and complete sentences improved, but full names/times failed and delayed final-state queries scored 1/8. Earlier exposed broader probes scored 24/48 automatically, **23/48 after semantic review** (one keyword-rubric false positive). These gains are not retained in an accepted checkpoint.
 - Consumed 100 new updates, 4,699 SFT targets and 204,800 narrative replay targets in 37.52 seconds; all remain charged, zero new updates retained. Prepared 2,976 conversations contain 103,113 native content tokens and 15,333 assistant tokens. Old rehearsal was 25% of examples but only 12.36% of consumed assistant/EOS targets. Output-format interference is the main observed regression; it does not establish insufficient model capacity. A separately normalized retention-loss and paired-format repair is proposed, not executed.
 - **Earlier controlled factual-binding test passed:** 77/80 fresh synthetic answers correct+EOS, including 40/40 held-out combinations under familiar wording and 37/40 under novel wording; 30/32 paired checks passed. All 80 turns ended with EOS. Repeated color prefixes leave 61/64 unique prefixes correct. Original narrative NLL rose 1.49%, within the unchanged 5% guardrail.
@@ -24,7 +27,9 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest broader curriculum stop report](restart/broader-curriculum-v1/README.md), [decision](restart/broader-curriculum-v1/decision.json), [rejected-child diagnosis](restart/broader-curriculum-v1/rejected-assessment.json), [proposed repair](restart/broader-curriculum-v1/NEXT_RUN_PROPOSAL.md)
+- [Latest fresh factual conversation reassessment](restart/fresh-factual-conversations-v1/README.md), [semantic review](restart/fresh-factual-conversations-v1/review.json), [basic-fact check](restart/fresh-factual-conversations-v1/knowledge-review.json), [audit](restart/fresh-factual-conversations-v1/audit.json)
+
+- [Preceding broader curriculum stop report](restart/broader-curriculum-v1/README.md), [decision](restart/broader-curriculum-v1/decision.json), [rejected-child diagnosis](restart/broader-curriculum-v1/rejected-assessment.json), [proposed repair](restart/broader-curriculum-v1/NEXT_RUN_PROPOSAL.md)
 
 - [Earlier controlled binding report](restart/factual-binding-v1/README.md), [decision](restart/factual-binding-v1/decision.json), [audit](restart/factual-binding-v1/audit.json)
 
