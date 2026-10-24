@@ -2,9 +2,12 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — controlled factual binding passed; conversation remains limited
+## Current measured state — broader curriculum stopped; earlier research checkpoint retained
 
-- **Latest controlled factual-binding test passed:** 77/80 fresh synthetic answers correct+EOS, including 40/40 held-out combinations under familiar wording and 37/40 under novel wording; 30/32 paired checks passed. All 80 turns ended with EOS. Repeated color prefixes leave 61/64 unique prefixes correct. Original narrative NLL rose 1.49%, within the unchanged 5% guardrail.
+- **Latest broader curriculum stopped at update 100:** earlier factual retention fell from 77/80 to 64/80, below the frozen 69/80 floor. No new checkpoint qualified; no retry or promotion occurred. Original foundation loss stayed within the 5% guard (+2.30%), and source/parent weights are unchanged.
+- Read-only diagnosis of the rejected child scored 37/80 on fresh synthetic broader prompts: location phrases and complete sentences improved, but full names/times failed and delayed final-state queries scored 1/8. Earlier exposed broader probes scored 24/48 automatically, **23/48 after semantic review** (one keyword-rubric false positive). These gains are not retained in an accepted checkpoint.
+- Consumed 100 new updates, 4,699 SFT targets and 204,800 narrative replay targets in 37.52 seconds; all remain charged, zero new updates retained. Prepared 2,976 conversations contain 103,113 native content tokens and 15,333 assistant tokens. Old rehearsal was 25% of examples but only 12.36% of consumed assistant/EOS targets. Output-format interference is the main observed regression; it does not establish insufficient model capacity. A separately normalized retention-loss and paired-format repair is proposed, not executed.
+- **Earlier controlled factual-binding test passed:** 77/80 fresh synthetic answers correct+EOS, including 40/40 held-out combinations under familiar wording and 37/40 under novel wording; 30/32 paired checks passed. All 80 turns ended with EOS. Repeated color prefixes leave 61/64 unique prefixes correct. Original narrative NLL rose 1.49%, within the unchanged 5% guardrail.
 - Used 384 deterministic, oracle-labelled conversations (8,496 native content tokens; 672 assistant content tokens). Completed 400 updates with 9,600 SFT target exposures and 819,200 explicitly charged narrative replay exposures in 140.41 seconds. No new teacher calls, downloads or parameter changes. Original foundation source is unchanged; selected research child is not promoted and the bounded run is closed.
 - **Broader conversation still fails:** a post-selection inference-only check on the previously exposed 48-turn bank scored 13/48 correct+EOS, 48/48 EOS and 3/16 paired checks. Multi-word answers, times, some names, clarification and unknown responses remain weak. The controlled result establishes narrow fact copying and explicit correction handling; persistent state, general English and tool use remain unpassed.
 - **Preceding matched transfer test failed:** short-answer-first scored 1/48 correct+EOS on fresh probes; shuffled control scored 2/48. Both scored 0/16 on paired fact-change checks. EOS endings improved to 40/48 and 43/48; reliable factual grounding did not pass.
@@ -21,7 +24,9 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest controlled binding report](restart/factual-binding-v1/README.md), [decision](restart/factual-binding-v1/decision.json), [audit](restart/factual-binding-v1/audit.json)
+- [Latest broader curriculum stop report](restart/broader-curriculum-v1/README.md), [decision](restart/broader-curriculum-v1/decision.json), [rejected-child diagnosis](restart/broader-curriculum-v1/rejected-assessment.json), [proposed repair](restart/broader-curriculum-v1/NEXT_RUN_PROPOSAL.md)
+
+- [Earlier controlled binding report](restart/factual-binding-v1/README.md), [decision](restart/factual-binding-v1/decision.json), [audit](restart/factual-binding-v1/audit.json)
 
 - [Preceding matched transfer report](restart/short-answer-transfer-v1/README.md), [decision](restart/short-answer-transfer-v1/decision.json), [correctness](restart/short-answer-transfer-v1/correctness.json)
 - [Earlier eight-conversation memorization report](restart/conversation-memorization8-v1/README.md), [decision](restart/conversation-memorization8-v1/decision.json), [correctness](restart/conversation-memorization8-v1/correctness.json)
