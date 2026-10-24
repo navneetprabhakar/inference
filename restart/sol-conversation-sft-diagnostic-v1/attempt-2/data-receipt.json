@@ -1,0 +1,43 @@
+{
+  "counts": {
+    "train": {
+      "documents": 62,
+      "content_tokens": 8690,
+      "assistant_content_tokens": 3704,
+      "supervised_targets": 3830,
+      "sequence_positions": 9572
+    },
+    "development": {
+      "documents": 10,
+      "content_tokens": 1308,
+      "assistant_content_tokens": 527,
+      "supervised_targets": 547,
+      "sequence_positions": 1448
+    },
+    "test": {
+      "documents": 10,
+      "content_tokens": 1245,
+      "assistant_content_tokens": 522,
+      "supervised_targets": 542,
+      "sequence_positions": 1385
+    }
+  },
+  "excluded": [
+    {
+      "id": "sol1000-15-09-1",
+      "reason": "PRIMARY_HOLD"
+    },
+    {
+      "id": "sol1000-10-06-0",
+      "reason": "PRIMARY_HOLD"
+    }
+  ],
+  "all_selected_directly_reviewed": true,
+  "format": "BOS; per user turn encode(User: text\\nAssistant:); assistant content; EOS. Segments encoded independently, identically at inference.",
+  "mask": "Assistant content and EOS only; next-token shift once; user/role labels and padding have zero loss.",
+  "dataset_sha256": "bbbc59f6d899124aabe34c2f61c523676418d2d20e782de040eb806451d06200",
+  "probe_sha256": "d5ad0f69c1069f4f788b4cc7cee9495085b9b4d88d9d84ab3da3b53980566400",
+  "tokenizer_sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+  "probe_turns": 24,
+  "heldout_policy": "Previously inspected synthetic holdouts and newly authored frozen probes; not sealed independent benchmarks."
+}

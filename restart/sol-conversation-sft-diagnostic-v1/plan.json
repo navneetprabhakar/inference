@@ -1,0 +1,46 @@
+{
+  "owner_instruction": "go ahead",
+  "authority": "One separately bounded SFT diagnostic following readiness response; does not resume failed foundation-recovery D0/R1/R2.",
+  "source_checkpoint": "restart/foundation-resolution-v1/B/checkpoint.pt",
+  "source_sha256": "bf45241501cee600bd618677dc1a3ae666e6f50d9c628e29e7326ee9c87d338d",
+  "parameters": 15191712,
+  "optimizer": "Fresh AdamW states; FP32 master parameters and moments, BF16 compute; betas 0.9/0.95; eps1e-8; matrix decay0.1; norms0; clip1.",
+  "maximum_epochs": 3,
+  "maximum_updates": 24,
+  "batch": 8,
+  "context": 256,
+  "learning_rate": 5e-05,
+  "warmup_updates": 2,
+  "maximum_supervised_targets": 60000,
+  "maximum_total_positions": 2000000,
+  "wall_seconds": 2700,
+  "correctness": {
+    "masked_loss_vs_independent_fp32_abs_max": 0.02,
+    "gradient_relative_L2_max": 0.08,
+    "gradient_cosine_min": 0.995,
+    "masked_label_change_loss_abs_max": 1e-06,
+    "padding_change_loss_abs_max": 1e-06
+  },
+  "stops": {
+    "nonfinite": true,
+    "gradient_norm_above": 100,
+    "foundation_nll_increase_fraction": 0.05,
+    "development_nll_increase_fraction": 0.1
+  },
+  "selection": "Lowest development assistant NLL among non-regressing epoch checkpoints; test never selects checkpoint.",
+  "success": {
+    "dev_assistant_nll_reduction_fraction_min": 0.05,
+    "manual_probe_correct_min": 6,
+    "manual_probe_improvement_min": 4,
+    "foundation_nll_increase_fraction_max": 0.05
+  },
+  "after_stop": "No more updates; read-only response assessment allowed. No checkpoint auto-promotion, further training or automatic retries.",
+  "source_sha256s": {
+    "restart/sol-conversation-sft-diagnostic-v1/experiment.py": "eba6ba10fd27efb2dea70c1e51c689b2a335978b605ae6bccfe7b85edf1b41eb",
+    "restart/foundation-stage3-v1/engine.py": "803b9d97ee6f89d751ff96fc65849e0333c31f1ac89466442d83c62c72aa1552",
+    "restart/foundation-stage3-v1/engine_support.py": "1042d33746f89575c3711dcc6832bcfdb1e02a229bd1590db03c3ddfea56eff5",
+    "restart/foundation-recovery-v2-corrected/common.py": "9e8d4db9952e59809cb26a471eb63ada5dab14532885e34640ca17cf2542ecf0"
+  },
+  "new_teacher_calls": 0,
+  "new_downloads": 0
+}
