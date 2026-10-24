@@ -1,0 +1,43 @@
+{
+  "authority": "User requests reassessment before making a decision; preserve prior measured improvement and compare gains/regressions fairly.",
+  "scope": "Inference-only matched diagnostic across original foundation, short-answer child and broader candidate. No new checkpoint acceptance/rejection decision or training.",
+  "parameters": 15191712,
+  "models": {
+    "foundation": {
+      "path": "restart/foundation-resolution-v1/B/checkpoint.pt",
+      "sha256": "bf45241501cee600bd618677dc1a3ae666e6f50d9c628e29e7326ee9c87d338d"
+    },
+    "short_answer": {
+      "path": "restart/factual-binding-v1/binding/epoch-400.pt",
+      "sha256": "62b83c558ac5d9b844494f7080c4a99e2a852c8a7dcbb90fcfec2eea997b2a3c"
+    },
+    "broader_candidate": {
+      "path": "restart/broader-curriculum-v1/broad/epoch-100.pt",
+      "sha256": "78c5213150ef5599dd0734db924b077c09c756ab43a6084b21f7ec8ada4d0cb3"
+    }
+  },
+  "conversations_per_model": 120,
+  "answers_per_model": 152,
+  "sections": {
+    "copy_factorial": 64,
+    "complete_sentence": 16,
+    "clarification": 8,
+    "conditional_answerability": 16,
+    "history_answers": 48
+  },
+  "copy_factors": "Four families x four fixed shared entities x known/novel values x familiar/novel wording; one turn. Same entities/facts cross wording. Known/novel values verified against actually consumed broader SFT stream.",
+  "history": "Separate 16 three-turn actual conversations using known color/location values; initial answer, update, delayed recall scored separately. This is not a causal isolation of dialogue length from added distractors/corrections.",
+  "metrics": "Complete normalized exact answer and EOS reported mechanically, primary semantic factual correctness judged separately with natural wording allowed; partial/full-format errors recorded. Clarification judged as a relevant grammatical question, not keyword presence alone. Paired model gains/losses and every stratum reported, no composite pass/fail threshold.",
+  "decoding": "Full vocabulary greedy, max32 new tokens, stop BOS/EOS, native segmented chat format, actual generated previous answers retained.",
+  "wall_seconds": 900,
+  "maximum_positions": 2000000,
+  "rss_gpu_limit_gib": 12,
+  "artifact_limit_gib": 1,
+  "disk_floor_gib": 60,
+  "training_updates": 0,
+  "new_teacher_calls": 0,
+  "automatic_retry": false,
+  "promotion": false,
+  "decision_deferred": true,
+  "limitations": "Primary-authored/primary-judged, small correlated probes; novel wording one template per family. Known/novel values deliberately differ in training exposure and may differ in tokenization. Known labels reference the broader consumed stream, not equal original model exposure. No world-knowledge or new untrained quantity tasks included. No significance or causal model-ranking claim."
+}

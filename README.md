@@ -2,9 +2,12 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — fresh factual conversation checks failed
+## Current measured state — matched gains and regressions; decision deferred
 
-- **Fresh conversation reassessment failed on both checkpoints:** twenty new three-turn supplied-fact conversations scored **3/60 factual answers** on the retained model and **6/60** on the rejected child (5/60 without a repeated-word fluency defect). Both completed **0/20 conversations** correctly. Full names, times and quantities scored zero; corrected-fact recall after distraction was 0/20 and 1/20. All answers ended with EOS; context was not truncated.
+- **Matched reassessment confirms measurable improvement:** on 152 identical new diagnostic answers per checkpoint, exact responses rose **0/152 original foundation -> 25/152 short-answer child -> 56/152 broader candidate**. Content/task correctness with formatting separate was 0/152 -> 33/152 -> 66/152. All 456 responses were directly reviewed; these are small primary-authored diagnostic-bank results, not population factual accuracy.
+- Broader versus short-answer gains: full location exact replies 0/16 -> 9/16; exact sentences 0/16 -> 8/16; missing-owner abstention 0/8 -> 8/8; fully factually correct three-turn conversations 1/16 -> 6/16. Exact paired gains/losses were 43/12. Color-only copying regressed 8/16 -> 5/16; full names/times remain 0/16 each; novel-value transfer and novel-wording recall remain limited.
+- **Decision deferred, as requested.** This inference-only reassessment preserves both the earlier positive report and harder negative checks as evidence for different scopes. The previous retention guard/stop remains unchanged; no new model acceptance/rejection decision, promotion or training occurred. Measurable learning progress and generalization limits must be assessed separately.
+- **Earlier harder fresh-conversation reassessment:** twenty new three-turn supplied-fact conversations scored **3/60 factual answers** on the retained model and **6/60** on the rejected child (5/60 without a repeated-word fluency defect). Both completed **0/20 conversations** correctly. Full names, times and quantities scored zero; corrected-fact recall after distraction was 0/20 and 1/20. All answers ended with EOS; context was not truncated.
 - A separate 15-question elementary knowledge check scored **1/15 retained, 0/15 rejected**; the one accepted answer had a capitalization defect. These small checks are primary-authored/judged evidence, not independent benchmark accuracy. The earlier controlled 77/80 must not be treated as general factual accuracy; formatting alone does not explain this failure to generalize.
 - This reassessment used **zero training updates**, 33,054 aggregate inference positions, and left both checkpoints, original weights and previous terminal stop unchanged. No promotion occurred. A format-only repair is insufficient as an overall conversation plan; evaluation must separate novel vocabulary, wording and delayed recall.
 - **Preceding broader curriculum stopped at update 100:** earlier factual retention fell from 77/80 to 64/80, below the frozen 69/80 floor. No new checkpoint qualified; no retry or promotion occurred. Original foundation loss stayed within the 5% guard (+2.30%), and source/parent weights are unchanged.
@@ -27,7 +30,9 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest fresh factual conversation reassessment](restart/fresh-factual-conversations-v1/README.md), [semantic review](restart/fresh-factual-conversations-v1/review.json), [basic-fact check](restart/fresh-factual-conversations-v1/knowledge-review.json), [audit](restart/fresh-factual-conversations-v1/audit.json)
+- [Latest matched improvement reassessment](restart/matched-improvement-reassessment-v1/README.md), [paired/semantic review](restart/matched-improvement-reassessment-v1/review.json), [audit](restart/matched-improvement-reassessment-v1/audit.json)
+
+- [Earlier harder fresh factual conversation reassessment](restart/fresh-factual-conversations-v1/README.md), [semantic review](restart/fresh-factual-conversations-v1/review.json), [basic-fact check](restart/fresh-factual-conversations-v1/knowledge-review.json), [audit](restart/fresh-factual-conversations-v1/audit.json)
 
 - [Preceding broader curriculum stop report](restart/broader-curriculum-v1/README.md), [decision](restart/broader-curriculum-v1/decision.json), [rejected-child diagnosis](restart/broader-curriculum-v1/rejected-assessment.json), [proposed repair](restart/broader-curriculum-v1/NEXT_RUN_PROPOSAL.md)
 
