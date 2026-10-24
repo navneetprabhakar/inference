@@ -2,8 +2,12 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — matched gains and regressions; decision deferred
+## Current measured state — deep audit identifies lineage, data and optimization gaps
 
+- **Deep audit found the active lineage gap:** the current broader candidate inherits the deterministic drill branch, not the earlier general Sol SFT branch or the generated 1,000-conversation teacher bank. Its post-training lineage is 500 updates / 14,299 assistant+EOS target exposures. The screened teacher training bank has 757 records fitting the current exact format (44,241 assistant content tokens / 45,792 targets), but they are not newly admitted or trained by this audit.
+- **New skills remain underfit:** on 32 exact previously consumed training prompts, the broader checkpoint reproduced 1/16 names and 0/16 times. It had seen 67 time examples and 77 name examples before the stop, covering only 20.8% of the new bank overall. Conditional token accuracy improved substantially; timestamp separators reached 90.6% but digits only 21.9%. Old training reference paths stayed perfect (480/480) while paraphrase/format retention regressed.
+- Old rehearsal averaged **6.3% of total loss coefficient**, despite 25% of examples. Four fixed-batch gradient probes found strong new-task dominance; equal group normalization alone did not remove initial old-loss directional conflict in three samples. The generator also ties missingness to colors, updates to fixed transitions and target order to value indices. These are measured design weaknesses, not proof that all gains are artifacts or that Adam's exact historical cause is isolated.
+- **No training updates in the audit.** Candidate/parent weights and prior stops are unchanged. A bounded proposal now connects admitted Sol dialogue, repaired grounded data, a multi-token fit gate and two matched consolidation branches. Training remains paused; no new model acceptance/rejection or parameter-capacity verdict has been made.
 - **Matched reassessment confirms measurable improvement:** on 152 identical new diagnostic answers per checkpoint, exact responses rose **0/152 original foundation -> 25/152 short-answer child -> 56/152 broader candidate**. Content/task correctness with formatting separate was 0/152 -> 33/152 -> 66/152. All 456 responses were directly reviewed; these are small primary-authored diagnostic-bank results, not population factual accuracy.
 - Broader versus short-answer gains: full location exact replies 0/16 -> 9/16; exact sentences 0/16 -> 8/16; missing-owner abstention 0/8 -> 8/8; fully factually correct three-turn conversations 1/16 -> 6/16. Exact paired gains/losses were 43/12. Color-only copying regressed 8/16 -> 5/16; full names/times remain 0/16 each; novel-value transfer and novel-wording recall remain limited.
 - **Decision deferred, as requested.** This inference-only reassessment preserves both the earlier positive report and harder negative checks as evidence for different scopes. The previous retention guard/stop remains unchanged; no new model acceptance/rejection decision, promotion or training occurred. Measurable learning progress and generalization limits must be assessed separately.
@@ -30,7 +34,9 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest matched improvement reassessment](restart/matched-improvement-reassessment-v1/README.md), [paired/semantic review](restart/matched-improvement-reassessment-v1/review.json), [audit](restart/matched-improvement-reassessment-v1/audit.json)
+- [Latest deep training audit](restart/deep-training-audit-v1/README.md), [conditional/gradient summary](restart/deep-training-audit-v1/summary.json), [lineage](restart/deep-training-audit-v1/lineage.json), [proposed teacher-data bridge study](restart/deep-training-audit-v1/PROPOSED_STUDY.md), [integrity audit](restart/deep-training-audit-v1/audit.json)
+
+- [Earlier matched improvement reassessment](restart/matched-improvement-reassessment-v1/README.md), [paired/semantic review](restart/matched-improvement-reassessment-v1/review.json), [audit](restart/matched-improvement-reassessment-v1/audit.json)
 
 - [Earlier harder fresh factual conversation reassessment](restart/fresh-factual-conversations-v1/README.md), [semantic review](restart/fresh-factual-conversations-v1/review.json), [basic-fact check](restart/fresh-factual-conversations-v1/knowledge-review.json), [audit](restart/fresh-factual-conversations-v1/audit.json)
 

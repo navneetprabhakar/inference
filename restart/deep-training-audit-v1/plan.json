@@ -1,0 +1,26 @@
+{
+  "scope": "Deep read-only diagnosis requested by user before suggesting next training; forward/teacher-forced and sampled gradient diagnostics only, no optimizer updates or weight changes.",
+  "models": {
+    "short_answer": {
+      "path": "restart/factual-binding-v1/binding/epoch-400.pt",
+      "sha256": "62b83c558ac5d9b844494f7080c4a99e2a852c8a7dcbb90fcfec2eea997b2a3c"
+    },
+    "broader_candidate": {
+      "path": "restart/broader-curriculum-v1/broad/epoch-100.pt",
+      "sha256": "78c5213150ef5599dd0734db924b077c09c756ab43a6084b21f7ec8ada4d0cb3"
+    }
+  },
+  "wall_seconds": 900,
+  "maximum_positions": 2000000,
+  "rss_gpu_gib": 12,
+  "artifact_gib": 1,
+  "disk_floor_gib": 60,
+  "gradients": "Four frozen historical batches at steps1,34,67,100; independently normalized old/new and narrative gradients, at both checkpoint weights. Global/layer cosine is diagnostic, not proof of Adam update interference.",
+  "teacher_forcing": "Gold current answer continuations with actual generated previous replies, plus gold-history controls on later turns. These are conditional diagnostics, not fresh conversational successes.",
+  "new_teacher_calls": 0,
+  "training_updates": 0,
+  "promotion": false,
+  "automatic_retry": false,
+  "audit_start_epoch": 1792823819.6966445,
+  "setup_failure": "Relative/absolute preparation-path mismatch prevented freeze creation, followed by a missing-freeze error. Zero model work/updates. Preserved setup-failure.json/log. Corrected within original 15-minute audit clock; no scientific stop or model-work budget reset."
+}
