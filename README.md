@@ -2,6 +2,8 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
+Start a new thread with the [current handoff](HANDOFF.md): checkpoint lineage, evidence, pending approval and exact continuation boundaries.
+
 ## Current measured state — deep audit identifies lineage, data and optimization gaps
 
 - **Deep audit found the active lineage gap:** the current broader candidate inherits the deterministic drill branch, not the earlier general Sol SFT branch or the generated 1,000-conversation teacher bank. Its post-training lineage is 500 updates / 14,299 assistant+EOS target exposures. The screened teacher training bank has 757 records fitting the current exact format (44,241 assistant content tokens / 45,792 targets), but they are not newly admitted or trained by this audit.
