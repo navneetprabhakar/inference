@@ -2,9 +2,11 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — memorization passed; unseen conversation remains unproven
+## Current measured state — transfer trial failed; stopping improved
 
-- **Latest memorization diagnostic passed:** eight directly reviewed training conversations, all 10 assistant answers reproduced exactly, including two correction sequences; EOS emitted on all 10 turns. Stopped early at update 25 after 1,100 supervised target exposures and 12.48 seconds of execution. Foundation narrative NLL rose 3.24%, within the unchanged 5% guardrail. This tests training-set memorization, not unseen generalization. No checkpoint was promoted.
+- **Latest matched transfer test failed:** short-answer-first scored 1/48 correct+EOS on fresh probes; shuffled control scored 2/48. Both scored 0/16 on paired fact-change checks. EOS endings improved to 40/48 and 43/48; reliable factual grounding did not pass.
+- Both arms consumed 200 updates each, with identical full SFT exposure multisets and narrative replay order: 152,642 SFT target exposures plus 819,200 replay exposures across separate models. Execution took 173.71 seconds. Selected update 175 research checkpoints remained within the original 5% narrative-regression guardrail (+4.94%/+4.45%). No checkpoint was promoted; training is paused.
+- **Earlier memorization diagnostic passed:** eight directly reviewed training conversations, all 10 assistant answers reproduced exactly, including two correction sequences; EOS emitted on all 10 turns. Stopped early at update 25 after 1,100 supervised target exposures and 12.48 seconds of execution. Foundation narrative NLL rose 3.24%, within the unchanged 5% guardrail. This tests training-set memorization, not unseen generalization. No checkpoint was promoted.
 - **Earlier broader conversation diagnostic:** 62 directly reviewed training conversations, 10 development and 10 test conversations. Three passes consumed 24 updates and 11,490 assistant/EOS target exposures. All 84 selected records were inspected; two training records were excluded without replacement.
 - **Earlier held-out response quality: 0/24 before and 0/24 after.** Repetitive story continuations persisted, and no output emitted an EOS end-of-turn token. Lower token loss did not establish conversational capability. No checkpoint was promoted; further training is paused.
 - Epoch 2 was selected using development loss alone: 16 retained SFT updates and 7,660 retained SFT target exposures. Held-out test assistant NLL fell from 5.897426 to 5.323741 (9.7%); narrative foundation NLL rose from 1.343035 to 1.380192 (2.8%, within the 5% guardrail). Epoch 3's 8 updates/3,830 exposures remain charged but were not selected.
@@ -16,7 +18,8 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest eight-conversation memorization report](restart/conversation-memorization8-v1/README.md), [decision](restart/conversation-memorization8-v1/decision.json), [correctness](restart/conversation-memorization8-v1/correctness.json)
+- [Latest matched transfer report](restart/short-answer-transfer-v1/README.md), [decision](restart/short-answer-transfer-v1/decision.json), [correctness](restart/short-answer-transfer-v1/correctness.json)
+- [Earlier eight-conversation memorization report](restart/conversation-memorization8-v1/README.md), [decision](restart/conversation-memorization8-v1/decision.json), [correctness](restart/conversation-memorization8-v1/correctness.json)
 - [Earlier bounded SFT report](restart/sol-conversation-sft-diagnostic-v1/README.md), [decision](restart/sol-conversation-sft-diagnostic-v1/decision.json), [correctness](restart/sol-conversation-sft-diagnostic-v1/attempt-3/correctness.json)
 - [1,000-conversation batch](restart/sol-conversation-data-1000-v1/README.md), [earlier 100-conversation batch](restart/sol-conversation-data-v1/README.md)
 - [Corrected foundation recovery report](restart/foundation-recovery-v2-corrected/REPORT.md), [metrics](restart/foundation-recovery-v2-corrected/report.json), [terminal stop](restart/foundation-recovery-v2-corrected/STOP.json)
