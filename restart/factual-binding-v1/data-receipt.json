@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "training": {
+      "conversations": 384,
+      "assistant_turns": 480,
+      "content_tokens": 8496,
+      "assistant_content_tokens": 672,
+      "supervised_targets": 1152
+    },
+    "development": {
+      "conversations": 16,
+      "assistant_turns": 20,
+      "content_tokens": 416,
+      "assistant_content_tokens": 28,
+      "supervised_targets": 48
+    },
+    "test": {
+      "conversations": 64,
+      "assistant_turns": 80,
+      "content_tokens": 1704,
+      "assistant_content_tokens": 112,
+      "supervised_targets": 192
+    }
+  },
+  "oracle": "Deterministic literal facts, all four task templates and values authored and inspected by the primary agent. Generated records pass exact oracle, role, prefix, context and overlap assertions. No teacher calls.",
+  "split": "All combinations with (entity index + value index) modulo 4 equal to zero excluded from training. Development uses entities 0/1; test entities 2/3/4/5. Values and entities individually seen in training. Test includes familiar and unseen template strata. No claim of an independent sealed benchmark.",
+  "counterfactual_pairs": 32,
+  "new_downloads": 0,
+  "new_teacher_calls": 0,
+  "replay": "Existing TinyStories training-only replay bank repeated twice; 819200 replay exposures maximum.",
+  "tokenizer_sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347"
+}

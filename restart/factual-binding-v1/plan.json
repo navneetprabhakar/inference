@@ -1,0 +1,33 @@
+{
+  "scope": "Single controlled factual-copying and correction diagnostic, own original foundation, fresh optimizer; not a broad foundation or general conversation run.",
+  "authority": "User: ok keep going, following proposed factual-copying and correction test.",
+  "parameters": 15191712,
+  "source_sha256": "bf45241501cee600bd618677dc1a3ae666e6f50d9c628e29e7326ee9c87d338d",
+  "wall_seconds": 1800,
+  "maximum_updates": 400,
+  "checkpoint_every": 50,
+  "maximum_positions": 8000000,
+  "maximum_sft_targets": 100000,
+  "maximum_replay_targets": 819200,
+  "maximum_storage_gib": 5,
+  "rss_and_gpu_limit_gib": 12,
+  "disk_floor_gib": 60,
+  "learning_rate": 2e-05,
+  "warmup": 5,
+  "batch": 8,
+  "objective": "0.5 assistant/EOS CE + 0.5 narrative CE; each separately normalized.",
+  "foundation_baseline_nll": 1.3430354408919811,
+  "foundation_regression_limit": 0.05,
+  "selection": "Highest development correct+EOS, then EOS, then lowest dev NLL among checkpoints under original 5% foundation-loss guard.",
+  "success": "At least 60/80 test turns correct+EOS, at least 72/80 EOS, at least 24/32 counterfactual conversation pairs fully correct, at least 24/40 correct+EOS turns in each template stratum; original foundation NLL increase <=5%.",
+  "hard_stops": [
+    "Any nonfinite loss, gradients, weights, moments or logits",
+    "Gradient norm >100",
+    "Original foundation NLL regression >5%",
+    "Wall, work, memory, storage or disk caps",
+    "Frozen input hash mismatch"
+  ],
+  "retry": false,
+  "promotion": false,
+  "after": "Stop after bounded run and inspect actual responses. No automatic continuation or promotion."
+}

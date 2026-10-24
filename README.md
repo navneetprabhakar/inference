@@ -2,9 +2,12 @@
 
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-## Current measured state — transfer trial failed; stopping improved
+## Current measured state — controlled factual binding passed; conversation remains limited
 
-- **Latest matched transfer test failed:** short-answer-first scored 1/48 correct+EOS on fresh probes; shuffled control scored 2/48. Both scored 0/16 on paired fact-change checks. EOS endings improved to 40/48 and 43/48; reliable factual grounding did not pass.
+- **Latest controlled factual-binding test passed:** 77/80 fresh synthetic answers correct+EOS, including 40/40 held-out combinations under familiar wording and 37/40 under novel wording; 30/32 paired checks passed. All 80 turns ended with EOS. Repeated color prefixes leave 61/64 unique prefixes correct. Original narrative NLL rose 1.49%, within the unchanged 5% guardrail.
+- Used 384 deterministic, oracle-labelled conversations (8,496 native content tokens; 672 assistant content tokens). Completed 400 updates with 9,600 SFT target exposures and 819,200 explicitly charged narrative replay exposures in 140.41 seconds. No new teacher calls, downloads or parameter changes. Original foundation source is unchanged; selected research child is not promoted and the bounded run is closed.
+- **Broader conversation still fails:** a post-selection inference-only check on the previously exposed 48-turn bank scored 13/48 correct+EOS, 48/48 EOS and 3/16 paired checks. Multi-word answers, times, some names, clarification and unknown responses remain weak. The controlled result establishes narrow fact copying and explicit correction handling; persistent state, general English and tool use remain unpassed.
+- **Preceding matched transfer test failed:** short-answer-first scored 1/48 correct+EOS on fresh probes; shuffled control scored 2/48. Both scored 0/16 on paired fact-change checks. EOS endings improved to 40/48 and 43/48; reliable factual grounding did not pass.
 - Both arms consumed 200 updates each, with identical full SFT exposure multisets and narrative replay order: 152,642 SFT target exposures plus 819,200 replay exposures across separate models. Execution took 173.71 seconds. Selected update 175 research checkpoints remained within the original 5% narrative-regression guardrail (+4.94%/+4.45%). No checkpoint was promoted; training is paused.
 - **Earlier memorization diagnostic passed:** eight directly reviewed training conversations, all 10 assistant answers reproduced exactly, including two correction sequences; EOS emitted on all 10 turns. Stopped early at update 25 after 1,100 supervised target exposures and 12.48 seconds of execution. Foundation narrative NLL rose 3.24%, within the unchanged 5% guardrail. This tests training-set memorization, not unseen generalization. No checkpoint was promoted.
 - **Earlier broader conversation diagnostic:** 62 directly reviewed training conversations, 10 development and 10 test conversations. Three passes consumed 24 updates and 11,490 assistant/EOS target exposures. All 84 selected records were inspected; two training records were excluded without replacement.
@@ -18,7 +21,9 @@ Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with co
 
 ## Evidence and lineage
 
-- [Latest matched transfer report](restart/short-answer-transfer-v1/README.md), [decision](restart/short-answer-transfer-v1/decision.json), [correctness](restart/short-answer-transfer-v1/correctness.json)
+- [Latest controlled binding report](restart/factual-binding-v1/README.md), [decision](restart/factual-binding-v1/decision.json), [audit](restart/factual-binding-v1/audit.json)
+
+- [Preceding matched transfer report](restart/short-answer-transfer-v1/README.md), [decision](restart/short-answer-transfer-v1/decision.json), [correctness](restart/short-answer-transfer-v1/correctness.json)
 - [Earlier eight-conversation memorization report](restart/conversation-memorization8-v1/README.md), [decision](restart/conversation-memorization8-v1/decision.json), [correctness](restart/conversation-memorization8-v1/correctness.json)
 - [Earlier bounded SFT report](restart/sol-conversation-sft-diagnostic-v1/README.md), [decision](restart/sol-conversation-sft-diagnostic-v1/decision.json), [correctness](restart/sol-conversation-sft-diagnostic-v1/attempt-3/correctness.json)
 - [1,000-conversation batch](restart/sol-conversation-data-1000-v1/README.md), [earlier 100-conversation batch](restart/sol-conversation-data-v1/README.md)
