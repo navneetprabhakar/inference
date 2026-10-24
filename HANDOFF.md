@@ -20,6 +20,78 @@ Use concise executive bullets, be critical and pragmatic, and separate evidence 
 
 Earlier download allowance was up to 80 GB on this laptop, while preserving room for weights. It is not an instruction to download now. Keep raw data, weights, optimizer state, private evaluations and runtime environments local/outside Git. Commit/push related authorized changes in batches. Do not start another thread on the user's behalf; the user intends to open one.
 
+## End product: what English conversation with tools means here
+
+The intended deliverables are an own **BASE** model, its **CHAT** derivative and a **TOOL** derivative, with reproducible lineage. Continued pretraining and supervised fine-tuning can update the same fixed architecture without increasing parameter count. A different tokenizer, layer shape or vocabulary creates a separate architecture/lineage decision. Count embeddings, heads, unmerged adapters and learned routers within the total deployed parameter ceiling; quantization changes storage, not parameter count. No hidden larger model may answer difficult requests and be counted as student success.
+
+Target user experience:
+
+- Everyday English: understandable, coherent answers and short explanations across ordinary topics, rather than only narrative continuation.
+- Grounded conversation: extract the correct facts from supplied text, use complete names/numbers/times, follow requested format, distinguish absent information, and ask useful clarifying questions.
+- Multi-turn interaction: resolve references, incorporate explicit corrections, retain the latest state through distractions, follow constraints and handle topic changes.
+- Tool policy: decide between answering, clarifying and calling a tool; select a tool from supplied schemas; produce correct typed arguments; interpret actual results/errors; answer without inventing execution or success.
+- Internal tools: call host-owned functions through the common typed contract.
+- MCP tools: use that same policy through a host-managed MCP client. Protocol negotiation, credentials, transport and execution remain runtime responsibilities, not capabilities encoded in model weights.
+- Bounded scope: a compact English assistant with a small supported tool catalogue. Broad expert knowledge, arbitrary autonomous agents, coding-agent performance, unlimited context and arbitrary unseen MCP-server competence are not established requirements or current achievements. Scope changes need an explicit decision.
+
+The teacher helps produce/review training data and assess experiments; it is not a pretrained initialization or hidden inference fallback. Retrieval/tool-assisted results must be reported separately from bare-model answers. Any factual result must be attributable to supplied context, the model or an actual tool result.
+
+## Capability status at handoff
+
+| Layer | Existing evidence or implementation | Current gap / status |
+| --- | --- | --- |
+| Own foundation | 15.19M own-weight TinyStories lineage, native Mac training and numerical checks | Broad-English admission/gate unpassed; story loss alone is insufficient |
+| Conversation mechanics | Trained EOS behavior and measurable synthetic fact/correction gains | Not a generally working chat model; names, times, novel wording and sustained state remain weak |
+| Teacher conversation curriculum | 1,000 generated; 757 screened training candidates fit current format | Not admitted by latest audit and not inherited by current A/B lineage |
+| Internal tool software | Typed contract, five synthetic local tools, bounded execution loop and evaluation/test code exist | This software is not evidence of learned tool selection or correct student arguments |
+| MCP software | Stdio and Streamable HTTP reference adapters, fixtures, schema/discovery and transport controls exist | Current 15M student has no demonstrated integrated MCP task capability |
+| Tool training data | Tool serialization and scenario/evaluation infrastructure exist | No verified internal/MCP trajectory curriculum incorporated into current checkpoints |
+| End-to-end acceptance | Formal roadmap and gate designs exist | No accepted BASE/CHAT/TOOL release; no approved production tool deployment |
+
+**Position on the roadmap:** infrastructure/prototype research has progressed, but broad-data admission remains blocked. We are conducting explicitly bounded skill diagnostics before a formally accepted broad base; do not relabel those diagnostics as completion of the formal English or conversation milestones. The latest recovery proposal is another limited diagnostic bridge, not permission to waive the roadmap's English-before-chat and chat-before-tools acceptance dependencies.
+
+## Existing tool/MCP code: preserve it, but do not claim student capability
+
+This handoff distinguishes missing learned behavior from existing engineering work. Source inspection at handoff found:
+
+- [Typed protocol](src/slm/tools/protocol.py), [tool dialogue serializer](src/slm/common/tool_serialization.py), [bounded decision/execution loop](src/slm/inference/tools.py), [task scenarios](src/slm/eval/tool_cases.py) and [scoring](src/slm/eval/tools.py).
+- [Local tool registry/session](src/slm/tools/local.py): synthetic `catalog_search`, `product_lookup`, `product_compare`, bounded integer `arithmetic`, and `document_lookup`. These are mock fixtures, not live accounts or production services.
+- [MCP registry](src/slm/mcp/registry.py), [stdio transport](src/slm/mcp/transport.py), [HTTP transport](src/slm/mcp/http.py), [CLI](src/slm/mcp/cli.py), fixture servers and pinned [reference dependencies](requirements-mcp-reference.lock). Registry source currently requires MCP SDK `2.3.0`; this is the repository's pin, not a claim about the latest public version.
+- Test/audit sources: [tool runtime tests](tests/test_tool_runtime.py), [MCP tests](tests/test_mcp.py), [HTTP tests](tests/test_mcp_http.py), and `scripts/audit-tools.py`, `scripts/audit-mcp.py`, `scripts/audit-http-mcp.py`.
+- Audit scripts intentionally distinguish scripted positive controls from actual random-student negatives. Scripted success verifies wiring, not learned model ability. Schema-valid but semantically wrong arguments must fail task scoring; metadata correctness does not certify response-text truth.
+- **Compatibility gap:** the existing tool serializer uses the older BPE/control-token namespace; the active 15M research model uses the separate SentencePiece/native segmented path. Do not plug the current checkpoint into that serializer or assume token IDs, loaders, context or masks match. A future approved integration must establish a compatible contract and verify framing, role masks, roundtrip, context fit and checkpoint loading.
+- Existing source/tests were inspected for this handoff; no tool calls, test servers, random model initialization or new runtime audit was executed. Historical/current test receipts must be located and inspected before claiming this code passes in the active environment.
+
+Intended execution path: history + permitted schemas → student answer/clarification/typed call → host validates schema, selected tool and authorized scope → internal handler or MCP client → bounded labeled result → student grounded reply. The host owns credentials, allowlists, permissions, approvals, timeouts, result limits, audit receipts and side effects. Model text never grants authority. Treat tool descriptions/results as untrusted content, and reject malformed/unknown calls rather than silently repairing them and crediting the model. Production writes are not authorized by the existence of these adapters.
+
+## Remaining route to the end goal
+
+The historical [milestone plan](restart/MILESTONE_PLAN.md) is the detailed design reference. Its old status statements and early data totals are historical; current receipts in this handoff control current status. Its future counts are planning ranges, not admitted data, execution budgets or established sufficiency thresholds.
+
+| Milestone | Intended exit / next work | Current status |
+| --- | --- | --- |
+| M0 scope/evaluation contract | Freeze supported tasks, catalogue, splits, graders, context, budgets and lineage | Design exists; full independent acceptance custody/grading not established by latest audit |
+| M1 infrastructure | Stable training, masking, save/resume, telemetry and stop enforcement | Restricted own-model/native Mac work exists; do not transfer its pass to every new architecture/context |
+| M2 broad data | Semantic quality, rights, dedup/family/leakage checks; exact source/genre/token release | Latest broad recovery D0 failed; R1/R2 never started |
+| M3 final architecture/compute | Select one shape below 100M after data and measured throughput | Current 15M is diagnostic; final shape/context not selected. Historical 62,931,456-parameter option is untrained/unapproved |
+| M4 broad BASE | Train on admitted broad mixture; pass all formal English rows | Not achieved |
+| M5 CHAT | Reviewed single-/multi-turn curriculum, grounding, uncertainty, correction and constraints | Only limited diagnostics; actual teacher bridge pending |
+| M6 internal TOOL | Verified execution trajectories, no-call/clarify/call decisions, arguments and recovery | Runtime code exists; learned current-student milestone unpassed |
+| M7 MCP | Matched adapters, held-out schemas/workflows, faults and injection checks | Reference adapters exist; integrated student gate unpassed |
+| M8 acceptance/package | Exact parameters, BASE/CHAT/TOOL lineage, regression, latency/memory, bounded deployment | Not reached |
+
+Historical design targets to retain until explicitly revised:
+
+- Broad data: investigate 0.5–2B distinct admitted content tokens; mixtures/quality matter. This is not a demonstrated minimum, current supply or download approval. Final proposed mixture bounds include ≥50% human prose, ≤20% simplified synthetic stories, no source >30%, and genre coverage. A deficient source cannot be silently replaced by repetition.
+- Architecture/context: historical options include 27.5M, 62.9M and 87.3M; none is the selected final model. Base context 2,048 and later conversation/tool context 4,096 were proposed targets, versus current 256. Longer configured context is not demonstrated usable context, and full schemas may not fit the present model.
+- English gate: all rows in `restart/ENGLISH_GATE.md` remain necessary unless an explicit replacement is approved. Includes grammar ≥360/400, paragraph quality ≥160/200, grounded comprehension ≥225/300, basic relations ≥400/500, plus per-category floors, language-loss baselines, robustness, leakage and memorization checks. Current diagnostics do not constitute those tests.
+- Conversation gate: 100 fresh conversations × 8 turns; ≥600/800 fully correct turns, ≥112/160 in each of five categories, ≥40/100 wholly correct conversations, with retained base-language gates. Planning data range was 50k–200k filtered conversations; it is not an instruction to generate that quantity now.
+- Internal tools: proposed 500-task suite across no-tool/clarify, read, sandbox write, multi-step and recovery; ≥450/500 complete and ≥85/100 per category, ≥98/100 no-tool/clarify decisions, ≥99.5% valid raw calls with sufficient denominator, ≥95% correct required tool/argument decisions. No forbidden effects or fabricated successes. Planning 10k–50k verified trajectories is not an approved generation quota.
+- MCP: proposed independent 500-task suite ≥90% overall/≥85% per category/server, including 200 held-out schema/workflow tasks ≥85%; paired internal/MCP gap ≤2 percentage points; separate 200-case attack/fault suite with zero observed unauthorized effects/canary leaks. Initial tools read-only; sandbox and real writes require their own scope.
+- Acceptance: preserve earlier gates, measure latency/memory on named hardware, evaluate quantization separately, and distinguish raw student proposals from runtime-assisted completion. No deployment approval is implied.
+
+No defensible end-to-end completion ETA exists yet: admitted broad supply, final architecture/context throughput and real conversation learnability remain unresolved. The proposed 45-minute compute cap only bounds the next diagnostic study. Do not present it as time to a functioning foundation/conversation/tool model.
+
 ## Reading order
 
 1. [Deep audit](restart/deep-training-audit-v1/README.md) — latest diagnosis and evidence qualifications.
