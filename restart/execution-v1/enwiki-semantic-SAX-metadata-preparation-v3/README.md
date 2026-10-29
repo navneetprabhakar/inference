@@ -1,3 +1,0 @@
-- Synthetic-only semantic corev3:78controlsPASS. No retained body/network/SQLite/model operations.
-- Narrow v2delta rejects Unicodewhitespace/Cc/Cf base controls and imports audited rawhelperv4 with finite nonterminalflush_boundary for future groupatomic integration.
-- All callbacks provisional until external source/index/CRC/group/SQL proof.

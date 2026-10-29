@@ -1,4 +1,0 @@
-- Synthetic-only native SAX metadata core;73 controls pass. No source reader, supervisor, SQLite writer, retained body reads or model operations.
-- v2 preserves v1 and adds exact root namespace/attributes/header span summaries plus explicit enwiki HTTPS base disposition.
-- Revision occurrence callbacks arrive before page rawhash/title callbacks and remain provisional until parent-owned atomic group/index reconciliation.
-- Header/global holds and signedint32 sink namespace bound must be respected by the future producer. See contract.json.

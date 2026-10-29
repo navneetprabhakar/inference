@@ -1,4 +1,0 @@
-- Exact index-only coverage: **158,433 complete groups / 15,840,694 index rows**, ending at compressed byte **17,988,779,480 exclusive**.
-- 61.417% of full verified index rows; this is source-order coverage, not articles, English text, tokens or usable data.
-- Exclude 65,292 retained trailing bytes inside the next incomplete group.
-- No native source/compressed-index read or DB rehash. Proposed separate fragment inventory remains blocked on128calibration budget evidence, parentreview and dispatch.

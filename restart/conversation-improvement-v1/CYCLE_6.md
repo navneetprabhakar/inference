@@ -1,7 +1,0 @@
-# Cycle 6 — bounded recovery through full curriculum coverage
-
-Cycle5 stopped at control50 with65/80 retention despite starting79/80. All mixed curricula stopped before full coverage (200). This leaves transient forgetting versus eventual recovery unresolved.
-
-Prospective protocol amendment under the user's autonomous-improvement authorization: this exploratory cycle allows temporary retention dips while training fixed400 updates per arm from the cycle4 consolidated checkpoint, using exactly cycle5's fresh-optimizer/data/loss/stream recipe. Record retention every50; only numerical/resource or original narrative+5% violations stop early. No intermediate model is eligible. At the400 endpoint, original content≥72 and strict≥73 are mandatory for eligibility, along with secondary preservation and campaign conversation criteria. Failure to restore retention means no selection/promotion; do not extend this run. The final conversation thresholds are unchanged. This explicitly changes an exploratory stopping rule, not the meaning of any prior failure or candidate acceptance score.
-
-This amendment supersedes the campaign's every-check content stop for this cycle only. Prior stopped checkpoints remain closed; first50 updates are independently reproduced from the parent, not resumed from failed children. The scientific comparison at400 is available only if both arms finish. Fresh final tests remain sealed until eligible development selection. The same cumulative campaign caps/reservation remain in force.

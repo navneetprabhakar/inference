@@ -1,9 +1,0 @@
-SCHEMA='''CREATE TABLE known_roles(text_SHA256 BLOB NOT NULL,role TEXT NOT NULL,role_kind TEXT NOT NULL,evidence_JSON TEXT NOT NULL,PRIMARY KEY(text_SHA256,role,role_kind)) WITHOUT ROWID;
-CREATE TABLE sources(source_id INTEGER PRIMARY KEY,path TEXT NOT NULL,source_SHA256 BLOB NOT NULL,source_stat TEXT NOT NULL,rows INTEGER NOT NULL);
-CREATE TABLE texts(text_SHA256 BLOB PRIMARY KEY,normalized_SHA256 BLOB NOT NULL,normalized_words INTEGER NOT NULL,UTF8_bytes INTEGER NOT NULL,M1_content_tokens INTEGER NOT NULL,language_pass INTEGER NOT NULL,explicit_known_hold INTEGER NOT NULL,generic_mask INTEGER NOT NULL,queue_mask INTEGER NOT NULL,candidate INTEGER NOT NULL,fresh_population INTEGER NOT NULL,prior_reviewed_or_held INTEGER NOT NULL,first_source INTEGER NOT NULL,first_ordinal INTEGER NOT NULL,occurrences INTEGER NOT NULL,source_flags INTEGER NOT NULL,family_uncertainty INTEGER NOT NULL,events INTEGER NOT NULL,event_upper_bound INTEGER,receipt_JSON_bytes INTEGER NOT NULL) WITHOUT ROWID;
-CREATE TABLE receipts(text_SHA256 BLOB PRIMARY KEY,receipt_JSON_SHA256 BLOB NOT NULL,receipt_zlib BLOB NOT NULL,receipt_zlib_SHA256 BLOB NOT NULL,codec TEXT NOT NULL,FOREIGN KEY(text_SHA256)REFERENCES texts(text_SHA256)) WITHOUT ROWID;
-CREATE TABLE occurrences(source_id INTEGER NOT NULL,ordinal INTEGER NOT NULL,line_offset INTEGER NOT NULL,line_bytes INTEGER NOT NULL,line_SHA256 BLOB NOT NULL,text_SHA256 BLOB NOT NULL,source_flags INTEGER NOT NULL,identity_holds INTEGER NOT NULL,lead_status INTEGER NOT NULL,lead_root_id INTEGER,PRIMARY KEY(source_id,ordinal),FOREIGN KEY(source_id)REFERENCES sources(source_id),FOREIGN KEY(text_SHA256)REFERENCES texts(text_SHA256)) WITHOUT ROWID;
-CREATE INDEX occurrence_text ON occurrences(text_SHA256,source_id,ordinal);
-CREATE INDEX candidate_SHA ON texts(candidate,text_SHA256);
-CREATE INDEX fresh_SHA ON texts(fresh_population,text_SHA256);
-CREATE INDEX normalized_candidates ON texts(candidate,normalized_SHA256);'''

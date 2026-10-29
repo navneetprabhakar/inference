@@ -1,0 +1,16 @@
+{
+  "status": "proposed_not_a_long_training_launch",
+  "initialization": "random",
+  "target_parameters": "80M-150M, select after throughput and quality pilot",
+  "language": "English",
+  "tokenizer": "train new byte-level BPE, 16384 or 32768 vocabulary; compare compression",
+  "pilot_tokens": 100000000,
+  "next_stage_tokens": 1000000000,
+  "candidate_pretraining_tokens": "10B-30B only if held-out conversation readiness improves",
+  "context": 512,
+  "later_context": 2048,
+  "tools": "initially 5-10 executable tools with deterministic fixtures",
+  "evaluation": "held-out dialogue and tool families; whole-trajectory success",
+  "cloud_budget_authorized_usd": 0,
+  "teacher_api_budget_authorized_usd": 0
+}
