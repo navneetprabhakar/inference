@@ -8,7 +8,7 @@ The old project is preserved in Git branch `codex/archive-before-scratch-2026102
 
 Fresh branch: `codex/english-tools-from-scratch`.
 
-This branch contains a read-only local data inventory, bounded random-weight MLX benchmark, cost calculator, and a proposed pilot. No long training job, cloud resource, or paid teacher API is running. Short synthetic benchmarks are throughput measurements, not language-quality results.
+This branch contains a read-only local data inventory, bounded random-weight MLX benchmark, cost calculator, and a proposed pilot. A sustained local benchmark followed by a conditional 100M-token pilot is authorized; see [LOCAL_RUN.md](LOCAL_RUN.md) and the live files under runs/local-campaign-v1. No cloud resource or paid teacher API is used. Short synthetic benchmarks are throughput measurements, not language-quality results.
 
 ## Reproduce
 

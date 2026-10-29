@@ -1,0 +1,65 @@
+{
+  "sources": {
+    "fineweb-train": {
+      "tokens": 99999912,
+      "documents": 93638,
+      "sha256": "2f801c8e2163b13a532103937917b8789c84ca07724badb7a2a36aac9856cabc",
+      "path": "fineweb-train.bin"
+    },
+    "fineweb-validation": {
+      "tokens": 999925,
+      "documents": 917,
+      "sha256": "7e4f4cdc545183da234548112b97556278c6ecd0399299646f2fd602689c28b6",
+      "path": "fineweb-validation.bin"
+    },
+    "tinystories-train": {
+      "tokens": 29999898,
+      "documents": 157831,
+      "sha256": "8dc1d57afe9f2795dc87616ff4111b95459e694cca8f864a6d494330c27339ed",
+      "path": "tinystories-train.bin"
+    },
+    "tinystories-validation": {
+      "tokens": 367602,
+      "documents": 1941,
+      "sha256": "b8114d5091d4ce00dadfd689291c06b8901a2af1721ae5fd6f25e6bb59ca09bb",
+      "path": "tinystories-validation.bin"
+    }
+  },
+  "vocab_size": 16384,
+  "eos": 1,
+  "train_mix": {
+    "fineweb": 0.8,
+    "tinystories": 0.2
+  },
+  "split": "1% deterministic group-hash; FineWeb canonical URL; TinyStories normalized text; global exact-text dedup before tokenization",
+  "limits": "No semantic near-dedup or universal benchmark decontamination; validation is diagnostic only. ASCII language heuristic is not comprehensive English quality assessment. Tokenizer fitted only on training documents.",
+  "raw_sources": [
+    "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/execution-v1/m2-intake/raw/b393f51fefab26cd6f4c8f65707c1924f6666c4961a0ebebe04bb57f7ec832de.parquet",
+    "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data00.json",
+    "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data01.json"
+  ],
+  "document_counts": [
+    {
+      "source": "fineweb",
+      "split": "train",
+      "documents": 179565
+    },
+    {
+      "source": "fineweb",
+      "split": "validation",
+      "documents": 1734
+    },
+    {
+      "source": "tinystories",
+      "split": "train",
+      "documents": 198042
+    },
+    {
+      "source": "tinystories",
+      "split": "validation",
+      "documents": 1941
+    }
+  ],
+  "tokenizer_sha256": "d14236a82744a26a30b251222629345c2e49343a26798825df50055b5005bf61",
+  "seconds": 94.77439212799072
+}
