@@ -1,0 +1,7 @@
+# Cycle 7 — conversation-focused allocation
+
+Cycle6 completed: control retention71/80 and teacher61/80; neither eligible. Manual development dialogue control1/48, teacher2/48 at400; natural probe teacher0/24 seen turns and0/24 unused turns. OriginalB also0/24 on each probe. This exposes a fitting gap, not just held-out transfer.
+
+Change one major policy: replace deterministic shared/extra grounding with additional admitted teacher conversations. Per update: six teacher conversations (jointly normalized coefficient0.25), two original training rehearsal records (0.25), eight narrative sequences (0.5). Same source as cycle6 (cycle4 consolidated checkpoint), fresh Adam, LR2e-5, deterministic engine and ordinary decoding. This allocation policy changes teacher exposure and removes competing short-grounding drills; it is not a pure loss-weight experiment.
+
+Seeded teacher order is balanced across six families per update, cycling the24 records per family; original rehearsal order unchanged, repeated. No new records or evaluation answers added. At most1600 updates; narrative/numerical/resource guards remain hard. Record retention each100; intermediate dips allowed under cycle6's exploratory policy; candidate eligibility still requires≥72 content/73 strict plus all other preservation and conversation thresholds. Development/secondary and sampled seen-dialogue fit at200,400,800,1200,1600; no final test until qualifying semantic review. No automatic extension beyond1600. All charges share campaign caps.

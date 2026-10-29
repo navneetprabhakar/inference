@@ -1,0 +1,7 @@
+# Cycle11: grounding-first transfer to mixed dialogue
+
+Cycle10 completed1600, retention73/80,narrative1.406430; development names4/16,time0/16,state18/24, semantic dialogue0/48. Seen grounding76/80 including8/8time and24/24state shows substantial fitting but poor transfer. No acceptance and no final-test use.
+
+Test staged curriculum: initialize fromCycle10step600, the earliest recorded checkpoint meeting retention eligibility (76/80) and with narrative margin (1.372179). Preserve adapter optimizer/RNG exactly; parent hashbc24cf23178897044ff4b33050d8b1ed1dba523a5e2e1c5985d1e1348a0c4f87. This is a new stage from an un-stopped checkpoint, not continuation of any failed arm. Same original frozen base/rank8 engine; total15,454,368 parameters. Fresh stage schedule cursor0; cumulative adapter counters continue from600.
+
+Two original rehearsal records .25; three existing grounding records .10; three admitted natural teacher records .15; eight narrative windows .50. Existing frozen schedules, alternating first/last3 of the6 records perstep. No new data. LR2e-4 and optimizer unchanged. Maximum1000 additional updates, narrative/retention checks each100; development each200. All shared campaign resource limits and original eligibility thresholds remain binding. This final staged-transfer test is truncated if the cumulative45-minute active-model cap binds; never reset clock. No final evaluation unless all development gates pass. Record exact initial restoration before updates.

@@ -1,0 +1,7 @@
+# Cycle 9: frozen foundation with rank-8 adapters
+
+Prospectively frozen before model work. Cycle8 stopped at800: narrative1.4145812988 exceeds1.4101872129; retention70/80. No promotion. Hypothesis: restricting updates to low-rank projections may learn dialogue with less interference. This is not evidence of a capacity ceiling.
+
+Original own foundation checkpoint, same immutable data and1600-step schedule asCycle8; rank8, scale2 adapters on42 attention/MLP matrices. A normal/sqrt(input), B zero; frozen embedding/head/norm/base. Fresh AdamW2e-4, betas.9/.95,eps1e-8,decay0,clip1. Same .5 narrative,.25 original rehearsal,.25 teacher. Maximum1200 updates; check narrative/retention each200 and development/seen each400 (plus terminal eligible endpoint). Stop on unchanged narrative/numerical/resource guards. All evaluation uses merged adapter weights. Temporary retention dips allowed; original candidate/development/final gates unchanged. Final test untouched until eligible.
+
+Preflight: zero-delta equality; independent Torch FP32 masked loss/adapter gradients within previous .02 loss/.08 relativeL2/.995cosine bounds; exact2updates versus1+save/reload+1 including optimizer/RNG, four charged disposable updates. Adapter checkpoint stores frozen-parent hash, adapter arrays, optimizer state, RNG, counters; no inherited full-model optimizer claim. No new calls/downloads. All phases use shared cumulative campaign ledger/caps.

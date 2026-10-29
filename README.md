@@ -1,10 +1,50 @@
 # English SLM from scratch
 
+Current G0 result (29 October): [additional-review reassessment](restart/coherence-g0-v3-2026-10-29/REPORT.md). STOP_DATA_ADMISSION. Fresh audit found6major defects in10whole texts; single repair quarantined legacy everyday stratum. Remaining everyday candidate training tokens403,905 versus1M floor; zero admitted. Nine benchmark repairs independently pass; replay deduplication and bounded custody-overlap audit complete. Final unsealed; curriculum review unfinished. No new student inference/training. Previous review-budget stop below was superseded by explicit4M additional approval; this stop is data admission.
+
+Latest preparation v2 (29 October): [review-budget stop and acquisition results](restart/coherence-g0-v2-2026-10-29/REPORT.md). Local session counters reveal at least14.90M G0 agent input/output tokens, over inherited6M; prior estimates superseded. No further model review without explicit additional budget. New primary-source candidates214,929tokens are NOT admitted; benchmark independent review found2 ambiguous choices and7 defective references. No student inference/training. Earlier entries below are historical.
+
+Latest G0 result (29 October): [preparation stopped before training](restart/coherence-g0-2026-10-29/REPORT.md). One repair left787,316 everyday-prose candidate tokens against the fixed1M floor; zero broad tokens admitted. Both blind reviewers passed24/24 clear anchors. Benchmark/training drafts and separately custodied final candidate exist, but reviews/overlap remain incomplete and final is unsealed. **STOP_DATA_ADMISSION; no new inference/training. Further acquisition requires a new preparation decision.**
+
+Latest decision (29 October): [foundation audit and consolidated coherence campaign](restart/coherence-campaign-2026-10-29/CAMPAIGN.md). Foundation readiness remains unestablished. One readiness gate, at most one recovery comparison, fixed conversation screen, one confirmation and one final test replace serial tweaks. Proposed hard maximum3268 new updates/285 active minutes/100M positions. **Planning only; admission and fresh benchmarks remain incomplete. No new inference/training.**
+
+Latest terminal result (29 October): [tiny copying reassessment](restart/tiny-copy-execution-2026-10-29/REPORT.md).All four arms fit32/32 training examples, but selected endpoints fail every transfer cell (names16/64, times9/64).512 updates completed within caps;2.33 new active minutes,28.87 cumulative. Proposed next step is inference-only comparison of saved lower-LR endpoints before further training. **No promotion; update allowance exhausted.**
+
+Latest preparation (29 October): [tiny isolated name/time copying proposal](restart/tiny-copy-preparation-2026-10-29/PROPOSAL.md).64 fit presentations and128 transfer presentations; strict fit and transfer gates. Proposed four128-update arms,15 new active minutes and6M new positions, carrying previous usage forward. CPU checks passed. **Awaiting budget approval; no new training.**
+
+Latest terminal result (29 October): [paired-versus-shuffled fit reassessment](restart/paired-fit-execution-2026-10-29/REPORT.md). Both arms fail every task/view fit gate. Complete pairs: paired191/512, shuffled208/512; no clear benefit from adjacency. Names/times remain weak even on training examples.512 new updates completed within caps;6.82 new active minutes,26.54 cumulative. **No promotion; update allowance exhausted.**
+
+Latest preparation (29 October): [separate semantic review and controlled-fit proposal](restart/paired-fit-preparation-2026-10-29/PROPOSAL.md). Repaired fit inputs passed independent review and512 CPU batch checks. Proposed paired-versus-shuffled experiment:256 updates per arm,60 new active minutes,20M new positions; historical usage carried forward. **Awaiting budget approval; no training executed.**
+
+Latest (29 October): [inference diagnosis and reassessment](restart/binding-diagnosis-2026-10-29/REPORT.md) completed with 1,024 probes and zero updates. Simpler prompts and copy instructions do not broadly repair supplied-fact errors. [Revised curriculum](restart/contrastive-curriculum-2026-10-29/DATACARD.md): 4,096 paired conversations, two views, 512 unscored development candidates; 70,162 checks pass. Prepared, not trained. Next gate is semantic review and a controlled small-fit proposal with fresh budget approval. No acceptable model. Entries below are historical.
+
+Latest terminal result (29 October): [four-arm screen reassessment](restart/retained-screen-2026-10-29/REASSESSMENT.md). All four arms completed; none qualified. Diverse wording plus replay was best at52.0% unseen-fact/unseen-wording accuracy, with native narrative NLL+61.6%. Exactly4,612 cumulative updates and19.43 active-model minutes; no promotion. Next proposal is targeted fact-binding/copying diagnosis before more training.
+
+Latest execution (29 October): [bounded LR/feasibility calibration](restart/lr-feasibility-2026-10-29/README.md) complete. Common LR5e-4 selected from training-only evidence;600 new disposable updates,612 cumulative. Retained training remains unstarted. Conservative full-screen projection is121.2 active minutes; proposed150-minute ceiling awaits approval. Preservation is a documented research tradeoff, not a conversation-quality pass.
+
+Latest execution (29 October): [12-update disposable calibration](restart/disposable-calibration-2026-10-29/README.md) passed. Actual optimizer arithmetic and post-update process restart match; all child checkpoints remain disposable. Retained training has not started. Common-LR/feasibility calibration and preservation-policy resolution remain.
+
+Latest implementation (29 October): [runner readiness](restart/runner-readiness-2026-10-29/README.md). Runner, replay and evaluation components implemented; zero optimizer updates. Finite deterministic backward checks pass. The source scores 0/80 on the proposed behavior-preservation packet, so that gate is inconclusive; native held-out NLL reproduces its baseline. Numerical/resume calibration requires approval before retained training.
+
+Latest follow-through (29 October): [preparation packet](restart/phase-a-completion-2026-10-29/README.md) and [scoped experiment](restart/phase-a-completion-2026-10-29/EXPERIMENT.md). Added 24 natural development frames, explicit short-response context bounds, semantic grading checks and a four-arm specification. No training; broader acceptance and launch implementation remain unresolved.
+
+Latest preparation (28 October): [Phase A reassessment](restart/phase-a-2026-10-28/REASSESSMENT.md). Acceptance examples, matched balanced curricula and evaluation matrix are prepared; inference-only checks isolate prompt wording/order sensitivity. **Zero training updates.** [Blinded agent review](restart/phase-a-2026-10-28/REVIEW_ADJUDICATION.md) completed on 29 October: 20/24 agreement, four borderline labels revised. Natural-case diversity, earlier-state recall coverage and context headroom remain unresolved; not training-ready.
+
+Latest assessment (28 October): [whole-process audit](restart/process-audit-2026-10-28/REPORT.md) and [revised plan](restart/process-audit-2026-10-28/PLAN.md). No new training. Prior conclusions about a single root cause are provisional; the next proposed study separates task diversity from preservation pressure.
+
+Latest: [conversation improvement report](restart/conversation-improvement-v1/REPORT.md). Twelve cycles produced no acceptable candidate; campaign closed at its45-minute model-time cap after5,165 new optimizer invocations. No active worker, promotion or final-test use. Earlier status bullets below are historical.
+
 Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
 
-Start a new thread with the [current handoff](HANDOFF.md): checkpoint lineage, evidence, pending approval and exact continuation boundaries.
+Start a new thread with the [current handoff](HANDOFF.md): checkpoint lineage, evidence, latest terminal stop and exact continuation boundaries.
 
-## Current measured state — deep audit identifies lineage, data and optimization gaps
+## Latest execution — EOS weighting does not resolve the fit failure
+
+A matched 200-update-per-arm experiment scored **8/16 complete names with ordinary loss versus 9/16 with EOS loss ×0.25**: three gains and two regressions. Both achieved 16/16 exact times and preserved narrative loss, but neither passed the 15/16 name gate. Control weights and optimizer moments exactly reproduced the previous fit run.
+
+No checkpoint was promoted; the main teacher study remains unstarted. Read the [ablation report](restart/eos-loss-ablation-v2/REPORT.md), [comparison](restart/eos-loss-ablation-v2/comparison.json), [audit](restart/eos-loss-ablation-v2/audit.json) and [broad-data packet](restart/teacher-bridge-execution-v1/BROAD_DATA_READINESS.md). The next proposed training diagnostic tests duration under unchanged gates, rather than adding more EOS-weight variants.
+
+## Earlier measured state — deep audit identifies lineage, data and optimization gaps
 
 - **Deep audit found the active lineage gap:** the current broader candidate inherits the deterministic drill branch, not the earlier general Sol SFT branch or the generated 1,000-conversation teacher bank. Its post-training lineage is 500 updates / 14,299 assistant+EOS target exposures. The screened teacher training bank has 757 records fitting the current exact format (44,241 assistant content tokens / 45,792 targets), but they are not newly admitted or trained by this audit.
 - **New skills remain underfit:** on 32 exact previously consumed training prompts, the broader checkpoint reproduced 1/16 names and 0/16 times. It had seen 67 time examples and 77 name examples before the stop, covering only 20.8% of the new bank overall. Conditional token accuracy improved substantially; timestamp separators reached 90.6% but digits only 21.9%. Old training reference paths stayed perfect (480/480) while paraphrase/format retention regressed.

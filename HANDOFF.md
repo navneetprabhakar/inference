@@ -1,16 +1,140 @@
 # English SLM — current handoff
 
-Updated: 2026-10-24 (Asia/Kolkata). Owner: Navneet Prabhakar / Forge.
+Current G0 result (29 October): [additional-review reassessment](restart/coherence-g0-v3-2026-10-29/REPORT.md). STOP_DATA_ADMISSION. Fresh audit found6major defects in10whole texts; single repair quarantined legacy everyday stratum. Remaining everyday candidate training tokens403,905 versus1M floor; zero admitted. Nine benchmark repairs independently pass; replay deduplication and bounded custody-overlap audit complete. Final unsealed; curriculum review unfinished. No new student inference/training. Previous review-budget stop below was superseded by explicit4M additional approval; this stop is data admission.
+
+Current stop — G0 preparation v2: [review-budget stop and acquisition results](restart/coherence-g0-v2-2026-10-29/REPORT.md). Local session counters reveal at least14.90M G0 agent input/output tokens, over inherited6M; prior estimates superseded. No further model review without explicit additional budget. New primary-source candidates214,929tokens are NOT admitted; benchmark independent review found2 ambiguous choices and7 defective references. No student inference/training. Earlier entries below are historical.
+
+Updated: 2026-10-29 (Asia/Kolkata). Owner: Navneet Prabhakar / Forge.
 Workspace: `/Users/navneetprabhakar/Documents/git/image/inference`.
-Latest substantive audit commit: `c895b71` (pushed to `origin/main`). This handoff is committed after it.
+Historical audit commit: `c895b71` (pushed to `origin/main`). Latest execution artifacts are local; this update does not claim a new commit or push.
 
-## Read this first: state and authorization
+Execution update (2026-10-24): read the [latest conversation campaign report](restart/conversation-improvement-v1/REPORT.md), [terminal result](restart/conversation-improvement-v1/RESULT.json) and [audit](restart/conversation-improvement-v1/audit.json) first. Earlier evidence: [EOS ablation report](restart/eos-loss-ablation-v2/REPORT.md), [comparison](restart/eos-loss-ablation-v2/comparison.json), [audit](restart/eos-loss-ablation-v2/audit.json), [numerical repair report](restart/resume-repair-v1/REPORT.md) and [broad-data packet](restart/teacher-bridge-execution-v1/BROAD_DATA_READINESS.md) first.
 
-- **Training is paused. No active experiment is authorized by this handoff.** The latest request was to create this document for a new thread, not to execute the proposed study.
-- Preserve the current checkpoints and measured improvements. The user requested reassessment before a decision; no new model promotion or blanket rejection was made.
-- Prior broad-curriculum training stopped at update 100 on its frozen retention guard. That terminal stop remains intact. Historical blanket approvals do not authorize reopening stopped runs or executing the latest proposal.
-- The next proposed recovery study changes future retention-stop handling. Obtain explicit approval of its concrete scope and revised guard semantics before student updates or new teacher calls.
-- Read-only review and preparation of a revised decision packet can proceed. Do not quietly turn preparation into training, downloads, teacher generation, checkpoint promotion or deployment.
+## Current terminal result — G0 data admission failed
+
+Read [G0 reassessment](restart/coherence-g0-2026-10-29/REPORT.md) first. The single repair batch is spent; everyday candidate supply787,316<1M, admitted broad tokens0. STOP_DATA_ADMISSION under the frozen campaign. Both blinded reviewers passed24/24 clear anchors. Training6400 candidates not admitted: first semantic review80/6400; second review unfinished. Final240 candidate remains separately custodied and unsealed pending overlap/admission; do not inspect private payload from selection work. No student calls/updates, prior ledger and campaign unchanged. Do not continue training, another repair, or source acquisition automatically. A new owner decision is needed to change preparation scope. Earlier entries below are historical.
+
+## Latest decision — foundation readiness audit and one consolidated campaign
+
+Read the [foundation audit](restart/coherence-campaign-2026-10-29/FOUNDATION_AUDIT.md), [stage-gated campaign](restart/coherence-campaign-2026-10-29/CAMPAIGN.md), [acceptance registry](restart/coherence-campaign-2026-10-29/ACCEPTANCE_REGISTRY.md), and [machine policy](restart/coherence-campaign-2026-10-29/campaign.json) first. User requested a fixed route to coherent conversation instead of serial adjustments. The previous low-LR copying follow-up is deferred; do not start another isolated tweak.
+
+Readiness is NOT ESTABLISHED: own B checkpoint never passed stable generative-quality gate; corrected option scores100/100 grammar reflect45 distinct pairs, grounding48/100. Sampled saved continuations show identity/premise/logic failures. Broad corpus admission remains0. CPU audit also finds1,600 unique replay rows among3,200 and zero exact overlap with512 validation rows, without document-level independence. No new model inference, optimization or teacher calls.
+
+Consolidated pilot:2–4turn supplied-context English conversation,32-token replies/256context; not broad unrestricted chat. Fresh readiness benchmark first; one conditional matched foundation-recovery comparison if needed; two fixed conversation arms; one independent-seed confirmation; one sealed final test. Existing anchors/development/diagnostics retain historical roles; none become fresh final by relabelling. Final thresholds and stop branches are fixed in campaign.json and tested on boundary fixtures.
+
+Proposed maximum3268 new updates/285 active student minutes/100M positions; conditional unused budgets cannot be reassigned. Carry newest successor once:5,636 updates/24,847,840 positions/28.87minutes; proposed cumulative max8,904updates/124,847,840positions/313.87minutes. Separate authoring/review ceiling80requests/6M total tokens. NOT approved for execution. G0 incomplete: new benchmark/custodied final, independent review, admitted training/recovery data, manifests and measured feasibility are still missing. Audit and campaign design are complete, not launch readiness. One campaign approval can later cover all eligible transitions; terminal failure stops, not another micro-adjustment.
+
+## Latest terminal result — tiny copying fits, unseen-value transfer fails
+
+Read the [tiny-copy report/reassessment](restart/tiny-copy-execution-2026-10-29/REPORT.md), [assessment](restart/tiny-copy-execution-2026-10-29/assessment.json), [audit](restart/tiny-copy-execution-2026-10-29/audit.json) and [result](restart/tiny-copy-execution-2026-10-29/result.json) first. All four128-update arms (name/time ×LR1e-4/5e-4) fit32/32 examples at128, meeting8/8 complete pairs in both contexts. Frozen training-loss rule selected common5e-4. Selected transfer fails all8 cells: name16/64, time9/64, all terminate normally. Complete training-value substitutions dominate name errors. This supports limited generalization/memorization, not a capacity impossibility claim.
+
+Low-LR arms fit perfectly with native NLL about+6.2–6.3%; high-LR selected arms about+40–41%. Unselected low-LR transfer was intentionally not evaluated; do not claim its generalization. Next recommendation is a separately scoped inference-only comparison of saved low-LR endpoints on the now-exposed transfer packet before more training. No such extra work started. No matched joint-task experiment, no causal interference conclusion, no acceptable conversation model or promotion.
+
+Exactly512 new updates,2,254,325 new positions,2.33 new active minutes. Final successor totals5,636 updates,24,847,840 positions,28.87 active minutes. Carry-forward imported once; old ledgers unchanged; caps/counts/initialization/hashes pass audit. Update allowance exhausted; unused time does not authorize extensions. Current status supersedes older proposals below.
+
+## Latest preparation — tiny isolated name/time copying proposal
+
+Read the [tiny-copy proposal](restart/tiny-copy-preparation-2026-10-29/PROPOSAL.md), [budget](restart/tiny-copy-preparation-2026-10-29/budget.json), [coverage](restart/tiny-copy-preparation-2026-10-29/coverage.json) and [CPU verification](restart/tiny-copy-preparation-2026-10-29/cpu-verification.json) first. Prepared64 fit presentations (16 values/task in simple and distractor contexts), plus128 transfer presentations separating familiar-field recombinations from new fields. Paired examples change both name or time fields; other facts stay fixed. CPU data/serialization checks1,508 plus527 adapter/scorer assertions pass. No model loaded or trained; primary-author semantic checking only, no separate-review claim.
+
+Proposed four fresh arms: name-only/time-only ×LR1e-4/5e-4,128 updates each, replay0.5 fixed. Fit gate8/8 complete pairs in each context. Common LR selected strictly by worst normalized endpoint teacher-forced fit loss, then selected endpoints get transfer evaluation; transfer gate7/8 pairs per task/novelty/context plus all responses terminating. Narrow copying diagnostic, not conversation acceptance. No joint-task arm or causal interference claim.
+
+Budget proposal—not approved:512 new updates,15 active minutes,6M positions,1GiB artifacts. Conservative estimate11.9 minutes/2.83M positions. Carry prior paired-fit successor once:5,124 updates/22,593,515 positions/26.54 minutes; proposed cumulative ceilings5,636 updates/28,593,515 positions/41.54 minutes. Existing ledgers remain closed. After explicit approval, implement bounded launcher against frozen inputs and verify all identities before executing; no training launcher exists yet.
+
+## Latest terminal result — paired/shuffled fit completed; both fail
+
+Read the [fit report and reassessment](restart/paired-fit-execution-2026-10-29/REPORT.md), [assessment](restart/paired-fit-execution-2026-10-29/assessment.json), [audit](restart/paired-fit-execution-2026-10-29/audit.json) and [accounting](restart/paired-fit-execution-2026-10-29/result.json) first. User approved512 new updates/60 new active minutes/20M new positions with prior usage carried forward. Both256-update arms completed from bitwise-identical fresh parameters/optimizer/RNG. Zero of16 task/view cells met the29/32 complete-pair gate in either arm. Paired191/512 complete pair presentations versus shuffled208/512; development89/176 versus85/176. No clear paired-order advantage; no promotion.
+
+Names and exact times fail even on fit examples: names15/128 versus30/128; time0/128 versus1/128. Both arms development names/time0/16 each. Native NLL1.9625/1.9648 versus source1.3430 satisfies permissive research guard but is approximately46% worse. Shuffled has39 termination failures; paired0. Thus failures are not all EOS problems. See full loss/error breakdown before attributing causes.
+
+Charged512 new updates,7,557,173 new positions and6.82 new active minutes. Final successor totals5,124 updates,22,593,515 positions and26.54 active minutes, importing prior calibration/screen/diagnosis once. Historical ledgers unchanged; full caps audit passes. Update allowance exhausted; unused time is not permission for more updates. Proposed next investigation isolates tiny arbitrary name/time copying and task interference with a separately scoped budget. None started. Older entries below are historical and do not override this terminal status.
+
+## Latest preparation — independent semantic review and bounded paired/shuffled proposal
+
+Read the [controlled fit proposal](restart/paired-fit-preparation-2026-10-29/PROPOSAL.md), [separate-agent semantic review](restart/paired-fit-preparation-2026-10-29/SEMANTIC_REVIEW.md), [budget](restart/paired-fit-preparation-2026-10-29/budget.json) and [CPU verification](restart/paired-fit-preparation-2026-10-29/cpu-verification.json) first. Separate reviewer found no wrong references;72 parent exposures falsely referred to multiple objects in single-fact prompts. All8 selected affected presentations were repaired in successor inputs and independently rechecked. Parent remains immutable; do not train full parent without repairing remaining defects.
+
+Prepared512 semantic fit conversations/1,024 presentation records and128 development cases. Two matched arms propose256 updates each; whole-batch shuffle preserves batch contents, target counts, replay by update and epoch/view blocks. All512 actual batches verified on CPU; no model loaded or optimizer update. Pair adjacency and before/after orientation are jointly manipulated, not individually isolated.
+
+Proposed—not approved—caps:512 new updates,60 new active minutes,20M new positions,2GiB new artifacts. Conservative estimate55.7 minutes/15.51M positions. Carry-forward independently reconciled read-only:4,612 updates,15,036,342 positions,19.7235 minutes. Aggregate proposed ceilings5,124 updates/35,036,342 positions/79.7235 minutes. Preflight caught an incorrect4-versus8 replay-block assumption; corrected before final freeze, checks pass. No training launcher or training approval exists. After explicit budget approval, wire adapter into bounded runner/ledger and verify launch identities; no implicit extension or promotion.
+
+## Latest result — inference diagnosis complete; revised curriculum prepared
+
+Read the [diagnosis and reassessment](restart/binding-diagnosis-2026-10-29/REPORT.md), [curriculum data card](restart/contrastive-curriculum-2026-10-29/DATACARD.md), [checks](restart/contrastive-curriculum-2026-10-29/checks.json), and [integrity audit](restart/binding-diagnosis-2026-10-29/audit.json) first. Ran 1,024 fixed-checkpoint inference probes, zero optimizer updates: 282,800 input positions and 17.462956 active seconds, separately accounted. Parameters unchanged; original 128 responses reproduced exactly. Simplification/copy instructions do not broadly rescue names, locations or colors; best cells remain 10/32, 7/32 and 4/32. Time reaches 32/32 in one reused-scenario condition. This is posthoc diagnosis, not fresh acceptance evidence.
+
+Prepared 4,096 paired supervised training conversations (2,048 pairs), two presentation views, 1,024 proposed batches/8,192 exposures, and 512 unscored development candidates. All 70,162 checks pass; generated-history bounds fit 256 tokens. Zero exact prompt-sequence overlap with old evaluation packets; two old training sequences reused. Frozen candidate has not been trained. Independent semantic review, a matched pairing-order control, prospective paired generalization cases and a separately approved small-fit budget remain before further training. Existing 4,612-update allowance stays exhausted. No candidate is acceptable and no promotion/final-test use occurred.
+
+Older entries below describe historical state at their respective stage; they do not override this boundary.
+
+## Latest terminal result — four-arm retained screen completed, no candidate
+
+Read the [end-of-screen reassessment](restart/retained-screen-2026-10-29/REASSESSMENT.md), [endpoint report](restart/retained-screen-2026-10-29/REPORT.md), [assessment](restart/retained-screen-2026-10-29/assessment.json) and [audit](restart/retained-screen-2026-10-29/audit.json) first. User approved the150-minute total ceiling carrying calibration usage. All four1,000-update arms completed, with612 calibration updates imported once. Exactly4,612 cumulative updates,14,753,542 positions and19.43 active-model minutes. The update allowance is exhausted; no automatic extensions, confirmation seeds or promotions.
+
+No arm passed any acquisition-gate category. D accuracy: canonical/replay29.5%, diverse/replay52.0%, canonical/no-replay32.1%, diverse/no-replay36.6%. Native NLL:2.1938,2.1706,12.1864,16.8541 versus source1.3430. Diverse/replay dominates other endpoints but is not acceptable. It scores4/32 initial state answers and32/32 on each of the two follow-ups; names with new components0/16, unseen supplied location reminders0/16. Posthoc errors strongly align with training-associated values. This narrows the bottleneck to supplied-fact binding and unfamiliar-value copying, without proving an internal mechanism or capacity ceiling.
+
+Proposed next work is matched inference-only diagnosis of dense versus simple fact representation and copying, then contrastive curriculum preparation with fresh heldouts. No new training is authorized. Four endpoint checkpoints remain private research artifacts. All source hashes, evaluation counts, checkpoints and cumulative accounting verify; extra-update reservation rejected. Old source/ledgers unchanged; no final test or natural-conversation acceptance run.
+
+## Latest execution — LR calibration complete; retained screen awaits decision
+
+Read the [LR/feasibility reassessment](restart/lr-feasibility-2026-10-29/README.md), [assessment](restart/lr-feasibility-2026-10-29/assessment.json), and [preservation decision](restart/lr-feasibility-2026-10-29/PRESERVATION_DECISION.md). All six disposable 100-update calibrations completed. The predeclared training-only rule selected common LR5e-4 (not a claim of unseen transfer); no development/final scores were used for selection. Exactly600 new updates, cumulative612 including the audited earlier12; total1,391,872 positions and139.26 active seconds. No retained training or promotion.
+
+The full four-arm screen projects40.91M positions and121.2 active minutes under conservative timing plus25% reserve. The90-minute envelope is not supported by this projection. Proposed ceiling:150 total active minutes, all other caps unchanged; NOT authorized. Preservation is explicitly acquisition-versus-native-retention research: behavior baseline0/80 remains inconclusive, native NLL measures a limited retention proxy, and no automatic promotion or historical+5% stop applies. Before retained launch, obtain approval, freeze a successor launcher/policy, reconcile all612 updates and charges into its ledger without mutating old limits, and scope resource checks across the successor artifacts. Exactly4,000 main updates remain in the proposed4,612 envelope.
+
+## Latest execution — approved 12-update calibration passed
+
+Read the [calibration reassessment](restart/disposable-calibration-2026-10-29/README.md), [result](restart/disposable-calibration-2026-10-29/result.json) and [audit](restart/disposable-calibration-2026-10-29/audit.json). Exactly 12 disposable updates completed: three continuous versus one-plus-two after a real process restart, for replay 0 and 0.5. Parameters, optimizer, RNG and next logits match bitwise; all optimizer applications agree with independent NumPy Adam within the frozen tolerance. No retained training or promotion.
+
+Charged 29,792 positions, 628 assistant/EOS targets, 12,288 narrative targets and 14.33 active seconds. Update13 reservation was rejected without work. The 12-update ledger stays closed; a later aggregate study ledger must explicitly carry these charges/time forward rather than alter its policy. Remaining proposed study allowance is 4,600 updates if approved unchanged. Learning-rate/feasibility calibration and an explicit acquisition/preservation decision remain before retained training. Fixed LR2e-5 here is an engineering probe, not a selected training LR.
+
+## Latest implementation — runner readiness, 29 October
+
+Read the [runner readiness report](restart/runner-readiness-2026-10-29/README.md) and [receipt](restart/runner-readiness-2026-10-29/receipt.json). Implemented full-parameter grouped loss, immutable replay order, durable pre-work accounting, checkpoint/RNG state, generated-history evaluation, preservation metrics and gated four-arm orchestration. All training CLI/launch gates remain closed.
+
+Verified 70,333 CPU assertions plus lifecycle guards, actual forward and cold-state reload, native held-out NLL, and two finite bitwise-identical backward evaluations. **Zero optimizer applications; parameters unchanged.** Verification consumed 255,560 input positions and 16.01 active-model seconds. Backward evaluations exposed 106 assistant target positions; they are not optimizer steps.
+
+Critical reassessment: original foundation scored 0/80 under the behavior packet's scorer, making the five-point preservation gate vacuous. It now returns INCONCLUSIVE_SOURCE_FLOOR. Held-out native narrative NLL reproduces 1.3430354334; this is a measurable preservation proxy, not conversation acceptance. Replay/validation have zero exact257-token block overlap, without claiming document-level independence. Actual post-update numerical/resume equivalence, common-LR/full-budget calibration and an explicit preservation policy remain before retained training. Proposed next execution is 12 disposable optimizer applications under explicit approval; none occurred. Do not reset historical or verification ledgers.
+
+## Latest preparation — Phase A follow-through, 29 October
+
+Read the [completion packet](restart/phase-a-completion-2026-10-29/README.md) and [proposed experiment](restart/phase-a-completion-2026-10-29/EXPERIMENT.md). Added 24 authored natural development frames / 88 turns with two-to-four-turn layouts, earlier-state retrieval and revised semantic grading. Old frozen data are unchanged. The new 32-token short-response diagnostic fits 256 context (maximum 224); the broader 48-token allowance still fails conservative headroom on 18 turns (maximum 288). This is an explicit scoped diagnostic, not a claimed solution to broader conversation context.
+
+The four-arm diversity/replay screen has a proposed 4,612-update / 90-active-minute ceiling including calibration/checks, fixed thresholds and 128 sentinel IDs selected without model scores. Twenty instruction strings are surface variants, not independently validated linguistic families. All natural cases remain development; no representative final benchmark is released. Training remains unauthorized and launch-disabled. The grouped runner, replay/regression manifests, numerical/resume checks and measured backward feasibility remain before retained training. No student inference or optimizer steps occurred in this follow-through.
+
+## Latest execution — Phase A preparation, no training
+
+User authorized building acceptance examples, the evaluation matrix and balanced curriculum, followed by reassessment before training. Read the [Phase A reassessment](restart/phase-a-2026-10-28/REASSESSMENT.md), [data card](restart/phase-a-2026-10-28/DATA_CARD.md) and [receipt](restart/phase-a-2026-10-28/receipt.json) first.
+
+Prepared 24 acceptance anchors, two matched 3,200-conversation curricula, a 1,024-case matrix and 256 counterfactual cases. Revised candidate data pass 76,424 mechanical assertions. Inference-only checks generated 832 responses across the four historical models and a focused adapter follow-up: 332,898 positions, 53.35 active seconds, zero optimizer updates. Source checkpoints and frozen packets verified unchanged; no final-test inference.
+
+The same 16 time values score 16/16 with the original prompt, 15/16 when only the fact sentence changes, and 1/16 when the original instruction moves before the fact. This supports a narrow instruction/order sensitivity diagnosis, not a general capability or capacity conclusion.
+
+**Not training-ready:** separate blinded model-agent acceptance review completed on 29 October (20/24 agreement; adjudicated 13 Accept, 2 Borderline, 9 Fail; no human validation). Read the [adjudication](restart/phase-a-2026-10-28/REVIEW_ADJUDICATION.md). The reminder-writing rubric is stricter than the original frozen contract; no old student scores changed. Remaining gaps: 20 wording strings per task are not 20 validated linguistic families; 240 prospective natural cases cover only six main flows; 78 of 714 natural turns can exceed context under worst-case generated histories. Prerequisite v2 contexts fit. The user authorized the separate reviewer, who saw only the blind packet. Four-turn anchors also lack a real return-to-earlier-state question. No new training may start from this packet. Historical ledgers remain closed.
+
+## Prior instruction — audit and plan before new training
+
+On 28 October the user requested a fresh whole-process audit challenging prior assumptions. Read the [audit](restart/process-audit-2026-10-28/REPORT.md), [revised plan](restart/process-audit-2026-10-28/PLAN.md), [fresh evidence](restart/process-audit-2026-10-28/evidence.json) and [receipt](restart/process-audit-2026-10-28/receipt.json) first. No new student inference/training, teacher calls or corpus downloads occurred.
+
+The audit independently reconstructs 2,192 serialized records, verifies 123 historical frozen inputs and eight journals. Confirmed failures include weak task conditioning, narrow supervision and confounded transfer evaluation; no single dominant causal mechanism or model-size ceiling is established. The previous “prompt diversity is the fix” framing is too strong. All development names/times change both labels and wording, add numeric distractors, and the final branch changed task allocation as well as prompt variety. Native foundation inventory is separate from the older semantically filtered corpus.
+
+Next proposal: prepare representative acceptance examples, a fact×wording evaluation matrix, balanced diverse training data and scorer controls; then seek approval for a bounded factorial study of diversity and narrative-replay pressure. Broader pretraining and capacity are conditional hypotheses. Current user request authorizes auditing/planning, not another training run. Historical stops/ledgers remain closed.
+
+## Latest campaign — closed at resource cap
+
+User authorization: “i need you to keep going and testing to improve till we have acceptable conversation”. Executed the [bounded autonomous campaign](restart/conversation-improvement-v1/PLAN.md): twelve cycles plus a duration diagnostic. **No acceptable conversation candidate.** The cumulative45-minute active-model cap stopped Cycle12 after511 charged updates. No worker is active; no final test or promotion. Do not reset the existing ledger.
+
+[Report](restart/conversation-improvement-v1/REPORT.md), [terminal result](restart/conversation-improvement-v1/RESULT.json), [audit](restart/conversation-improvement-v1/audit.json):5,165 campaign updates plus614 historical =5,779 tracked. All123 frozen inputs and eight reservation journals verified. Original foundation/A/B weights remain unchanged.
+
+Simple-grounding adapter training fits76/80 sampled training turns but fails transfer (development names4/16,times0/16,dialogue0/48). Natural-dialogue branches repeatedly hit the unchanged narrative guard. Final prompt-variation diagnostic achieves development names4/16,times4/16,dialogue4/48 and0/24 complete conversations. Latest saved Cycle12stage500 retention71/80 is ineligible. Adapters add262,656 parameters to15,191,712 frozen own foundation parameters; total15,454,368. No imported pretrained weights, new teacher calls or downloads.
+
+Next work should address diverse training instructions and independent fact/prompt splits, with balanced multi-task rehearsal, under a new bounded phase. These failures do not prove a capacity ceiling. Broad-English data admission remains blocked; do not use raw files as an admitted corpus. All earlier stops stay closed.
+
+## Historical EOS-ablation state (superseded by active campaign above)
+
+- Latest user authorization: “ok lets continue next steps of training”. The bounded EOS-loss ablation completed 200 updates per arm. Control names 8/16; EOS-0.25 names 9/16 (three gains, two losses). Both times 16/16; both name-fit gates failed. No training remains running or promoted.
+- Narrative NLL remained within its guard: 1.378773 control and 1.378842 treatment, about +2.66% versus original foundation. All endpoint generations terminated normally; no overflow.
+- Lower EOS weighting did not resolve premature stopping. Teacher-forced name-content correctness was 55/63 control versus 56/63 treatment; all respective eight/seven errors predicted EOS. Original B scored 1/16 names and 0/16 times on this exact seen-example bank.
+- Control weights and optimizer moments reproduced the prior 200-update fit checkpoint bitwise. Numerical repair remains validated. The EOS reference-harness shape error occurred before training, was preserved and corrected in a new revision with all charges carried forward.
+- Latest study consumed 400 new updates, 2,757,293 positions and 142.76 active model seconds. Previous tracked studies remain 214 updates; combined total 614. No budget reset, new teacher calls or downloads.
+- Main teacher/control comparison and fresh development/final tests remain unstarted. Next training decision is a prospectively bounded longer-duration reference fit under unchanged thresholds, not a silent extension, decoder EOS suppression or model-size increase.
+- Original/A/B checkpoints and earlier stops are unchanged. Teacher data entered disposable preflight checks only, not the fit/ablation curriculum or any retained candidate. Broad corpus admission remains blocked.
 
 ## Goal and working preferences
 
@@ -42,7 +166,7 @@ The teacher helps produce/review training data and assess experiments; it is not
 | --- | --- | --- |
 | Own foundation | 15.19M own-weight TinyStories lineage, native Mac training and numerical checks | Broad-English admission/gate unpassed; story loss alone is insufficient |
 | Conversation mechanics | Trained EOS behavior and measurable synthetic fact/correction gains | Not a generally working chat model; names, times, novel wording and sustained state remain weak |
-| Teacher conversation curriculum | 1,000 generated; 757 screened training candidates fit current format | Not admitted by latest audit and not inherited by current A/B lineage |
+| Teacher conversation curriculum | 1,000 generated; 757 screened training candidates fit current format | 144 admitted for disposable preflight only; no teacher data inherited by retained A/B lineage |
 | Internal tool software | Typed contract, five synthetic local tools, bounded execution loop and evaluation/test code exist | This software is not evidence of learned tool selection or correct student arguments |
 | MCP software | Stdio and Streamable HTTP reference adapters, fixtures, schema/discovery and transport controls exist | Current 15M student has no demonstrated integrated MCP task capability |
 | Tool training data | Tool serialization and scenario/evaluation infrastructure exist | No verified internal/MCP trajectory curriculum incorporated into current checkpoints |
@@ -75,7 +199,7 @@ The historical [milestone plan](restart/MILESTONE_PLAN.md) is the detailed desig
 | M2 broad data | Semantic quality, rights, dedup/family/leakage checks; exact source/genre/token release | Latest broad recovery D0 failed; R1/R2 never started |
 | M3 final architecture/compute | Select one shape below 100M after data and measured throughput | Current 15M is diagnostic; final shape/context not selected. Historical 62,931,456-parameter option is untrained/unapproved |
 | M4 broad BASE | Train on admitted broad mixture; pass all formal English rows | Not achieved |
-| M5 CHAT | Reviewed single-/multi-turn curriculum, grounding, uncertainty, correction and constraints | Only limited diagnostics; actual teacher bridge pending |
+| M5 CHAT | Reviewed single-/multi-turn curriculum, grounding, uncertainty, correction and constraints | Limited diagnostics; repaired bridge stopped at name/time fit gate |
 | M6 internal TOOL | Verified execution trajectories, no-call/clarify/call decisions, arguments and recovery | Runtime code exists; learned current-student milestone unpassed |
 | M7 MCP | Matched adapters, held-out schemas/workflows, faults and injection checks | Reference adapters exist; integrated student gate unpassed |
 | M8 acceptance/package | Exact parameters, BASE/CHAT/TOOL lineage, regression, latency/memory, bounded deployment | Not reached |
