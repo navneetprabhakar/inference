@@ -3,7 +3,7 @@ import argparse,fcntl,hashlib,json,os,signal,subprocess,sys,time
 from pathlib import Path
 from train_local import atomic_json
 from sft_common import ROOT
-OUT=ROOT/'runs/sft-v1';REPORT=ROOT/'reports/sft-v1';ARMS=[('100m',1e-5),('100m',3e-5),('200m',1e-5),('200m',3e-5)]
+OUT=ROOT/'runs/sft-v2';REPORT=ROOT/'reports/sft-v2';ARMS=[('100m',1e-5),('100m',3e-5),('200m',1e-5),('200m',3e-5)]
 CHILD=None
 STOP=False
 def stop(*_):
@@ -18,7 +18,7 @@ def main(resume=False):
  cp=OUT/'campaign.json';old=json.loads(cp.read_text()) if cp.exists() else None
  if old and not resume:raise RuntimeError('Existing experiment; inspect and use --resume')
  names=['run_sft_experiment.py','train_sft.py','evaluate_sft.py','sft_common.py','benchmark_mlx.py','train_local.py','evaluate_pilot.py']
- pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in names};data_hash=hashlib.sha256((ROOT/'data/sft-v1/manifest.json').read_bytes()).hexdigest()
+ pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in names};data_hash=hashlib.sha256((ROOT/'data/sft-v2/manifest.json').read_bytes()).hexdigest()
  if old:assert old['code_pins']==pins and old['data_sha256']==data_hash,'Do not change pinned experiment on resume'
  bases={'100m':latest(ROOT/'runs/local-campaign-v1/pilot'),'200m':latest(ROOT/'runs/continuation-v1/200m')};base_hashes={k:hashlib.sha256((v/'model.safetensors').read_bytes()).hexdigest() for k,v in bases.items()}
  for k,v in bases.items():assert json.loads((v/'state.json').read_text())['tokens']==int(k[:-1])*1000000
@@ -53,7 +53,7 @@ def main(resume=False):
   for tokens in [1000000,3000000]:evaluate(stage/'milestones'/str(tokens),name+f'-{tokens//1000000}m','milestone',REPORT/name/f'{tokens//1000000}m')
   model=stage/'milestones/5000000';evaluate(model,name,'sweep',REPORT/name/'decoding');evaluate(model,name,'final',REPORT/name/'final',REPORT/name/'decoding/selected.json');state['completed_arms'].append(name);write()
  assert all(hashlib.sha256((v/'model.safetensors').read_bytes()).hexdigest()==base_hashes[k] for k,v in bases.items()),'Frozen base changed'
- summary={};lines=['# Bounded four-arm SFT comparison','','All training has stopped. Each arm consumed exactly 5M processed input slots, including padding; no model was extended beyond its SFT budget. No cloud or paid APIs.','','Raw local fixture metrics are not broad tool capability scores. Chat quality needs human review. Each decoder was selected only on development data; settings and all outputs are retained.','']
+ summary={};lines=['# Bounded four-arm SFT comparison','','All training has stopped. Each arm consumed exactly 5M processed input slots, including padding; no model was extended beyond its SFT budget. No cloud or paid APIs.','','Raw local fixture metrics are not broad tool capability scores. Chat quality needs human review. Primary comparisons use common greedy decoding with penalty 1.2. Development sweeps are exploratory only.','']
  for name in ['base-100m','base-200m']+state['completed_arms']:
   report=json.loads((REPORT/name/'final/metrics.json').read_text());summary[name]=report;lines += [f'## {name}','','```json',json.dumps({'config':report['config'],'metrics':report['metrics']},indent=2),'```','',f'[All actual outputs]({name}/final/REPORT.md)','']
   rows=json.loads((REPORT/name/'final/generations.json').read_text());chosen=[]

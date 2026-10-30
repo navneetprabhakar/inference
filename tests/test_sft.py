@@ -6,9 +6,11 @@ import mlx.core as mx
 import mlx.nn as nn
 from tokenizers import Tokenizer
 from sft_common import *
-from train_sft import batch,lr_at
+from train_sft import batch,batch_slots,lr_at
 from benchmark_mlx import Model
-from evaluate_sft import faithful
+from evaluate_sft import faithful,strict_answer,evaluate_record
+from unittest.mock import patch
+from prepare_sft import tool_record
 class SFTTest(unittest.TestCase):
  def test_assistant_mask_and_roundtrip(self):
   tok=Tokenizer.from_file(str(ROOT/'data/pilot-v1/tokenizer.json'))
@@ -28,10 +30,34 @@ class SFTTest(unittest.TestCase):
   with self.assertRaises(ValueError):execute({'name':'get_weather','arguments':{'city':'Pune','extra':1}})
  def test_partial_input_budget(self):
   a={'train_ids':np.ones((2,513),np.int32),'train_mask':np.ones((2,512),np.float32),'train_length':np.array([100,200])}
-  t,m,n,p=batch(a,np.array([0,1]),0,600);self.assertEqual(n,600);self.assertEqual(p,99+88);self.assertEqual(float(m.sum()),600)
+  t,m,n,p=batch(a,np.array([0,1]),0,250);self.assertEqual(t.shape,(2,200));self.assertEqual(n,250);self.assertEqual(p,99+51);self.assertEqual(float(m.sum()),250)
  def test_lr_endpoints(self):
   self.assertAlmostEqual(lr_at(250000,3e-5),3e-5);self.assertAlmostEqual(lr_at(5000000,3e-5),1e-6)
  def test_result_scoring_handles_sentence_punctuation(self):
   c={'name':'calculate','arguments':{'op':'add','a':2,'b':3}};r=execute(c)
   self.assertTrue(faithful(c,r,result_answer(c,r)));self.assertFalse(faithful(c,r,'The result is 15.'))
+ def test_strict_rejects_contradictions_and_wrong_numeric_sign(self):
+  c={'name':'calculate','arguments':{'op':'add','a':2,'b':3}};r=execute(c)
+  for text in ['The result is 5. Actually it is 7.','The result is -5.','The result is 5.5.','Not 5.']:
+   self.assertFalse(faithful(c,r,text))
+  self.assertFalse(strict_answer('-5','5'));self.assertFalse(strict_answer('1.5','15'))
+ def test_no_tool_gibberish_not_success(self):
+  rec={'id':'x','kind':'none','messages':[],'expected_answer':'Hello.'}
+  with patch('evaluate_sft.generate',return_value={'output':'asdf blarg'}):
+   row=evaluate_record(None,None,rec,{})
+  self.assertIsNone(row['success']);self.assertTrue(row['human_review_required'])
+ def test_independent_tool_arguments_and_chain_routes(self):
+  cities={};topics={}
+  for split in ['train','dev','test']:
+   records=[tool_record(split,i) for i in range(500)]
+   cities[split]={r['calls'][0]['arguments']['city'] for r in records if r['calls'][0]['name']=='get_weather'}
+   topics[split]={r['calls'][0]['arguments']['query'] for r in records if r['calls'][0]['name']=='search_notes'}
+   self.assertGreaterEqual(len(cities[split]),6);self.assertGreaterEqual(len(topics[split]),6)
+   chains=[tool_record(split,i,'chain') for i in range(100)]
+   self.assertEqual(len({tuple(c['name'] for c in r['calls']) for r in chains}),3)
+  for x,y in [('train','dev'),('train','test'),('dev','test')]:
+   self.assertFalse(cities[x]&cities[y]);self.assertFalse(topics[x]&topics[y])
+ def test_trimmed_loss_matches_padded_loss(self):
+  model=Model(64,2,128);t=mx.random.randint(0,128,(2,513));mask=mx.zeros((2,512));mask=mask.at[:,:30].add(1)
+  self.assertTrue(bool(mx.allclose(masked_loss(model,t,mask),masked_loss(model,t[:,:31],mask[:,:30]),atol=1e-5)))
 if __name__=='__main__':unittest.main()

@@ -1,3 +1,5 @@
+> Current SFT status: v2 data and evaluation corrections are validated and stopped for review before any arm starts. See [readiness report](reports/sft-v2/READINESS.html). Earlier v1 baseline artifacts are retained; its evaluator stopped on a now-fixed retention-scoring error.
+
 # English conversation and tool calling from scratch
 
 Random initialization. English text. Total model parameters below 1B. Laptop-first development on an Apple M4 MacBook Air, 24GB unified memory. No old model, tokenizer, trainer, or evaluation policy is inherited.

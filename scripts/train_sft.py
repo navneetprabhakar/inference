@@ -20,11 +20,17 @@ def lr_at(tokens,peak):
  if tokens<250000:return peak*max(tokens,8192)/250000
  return 1e-6+(peak-1e-6)*.5*(1+math.cos(math.pi*min(1,(tokens-250000)/4750000)))
 
-def batch(arrays,order,cursor,valid):
+def batch_slots(arrays,order,cursor):
  indices=order[cursor:cursor+2]
  assert len(indices)==2,'Exposure order exhausted'
- ids=arrays['train_ids'][indices];mask=arrays['train_mask'][indices].copy();mask.reshape(-1)[valid:]=0
- nonpad=sum(min(max(int(arrays['train_length'][idx])-1,0),max(0,valid-j*512)) for j,idx in enumerate(indices))
+ return 2*int(max(arrays['train_length'][indices])-1)
+
+def batch(arrays,order,cursor,valid):
+ indices=order[cursor:cursor+2]
+ slots=batch_slots(arrays,order,cursor);width=slots//2
+ valid=min(valid,slots)
+ ids=arrays['train_ids'][indices,:width+1];mask=arrays['train_mask'][indices,:width].copy();mask.reshape(-1)[valid:]=0
+ nonpad=sum(min(max(int(arrays['train_length'][idx])-1,0),max(0,valid-j*width)) for j,idx in enumerate(indices))
  return mx.array(ids),mx.array(mask),int(mask.sum()),int(nonpad)
 
 def dev_loss(model,arrays):
@@ -40,7 +46,7 @@ def dev_loss(model,arrays):
 
 def main(a):
  signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGINT,stop)
- data=ROOT/'data/sft-v1';out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);lock=(out/'.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+ data=ROOT/'data/sft-v2';out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);lock=(out/'.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  assert a.lr in [1e-5,3e-5]
  manifest=json.loads((data/'manifest.json').read_text())
  for n,h in manifest['files'].items():assert hashlib.sha256((data/n).read_bytes()).hexdigest()==h,n
@@ -69,7 +75,7 @@ def main(a):
    if h['free_disk_bytes']<15*2**30 or h['mlx_peak_bytes']>12*2**30 or h['swap_used_mb']-state['initial_health']['swap_used_mb']>1024:checkpoint('stopped_resource_limit');return 3
   endpoint=next(x for x in MILESTONES if x>state['tokens']);count=min(8192,endpoint-state['tokens']);batches=[];used=0;total_targets=0;nonpad=0
   while used<count:
-   valid=min(1024,count-used);t,m,n,p=batch(arrays,order,state['cursor'],valid);state['cursor']+=2;batches.append((t,m,n));total_targets+=n;nonpad+=p;used+=valid
+   valid=min(batch_slots(arrays,order,state['cursor']),count-used);t,m,n,p=batch(arrays,order,state['cursor'],valid);state['cursor']+=2;batches.append((t,m,n));total_targets+=n;nonpad+=p;used+=valid
   acc=None;weighted=0.
   for t,m,n in batches:
    if n==0:continue

@@ -6,7 +6,7 @@ import pyarrow.parquet as pq
 from tokenizers import Tokenizer
 from sft_common import *
 from prepare_continuation import Near,fingerprint
-DATA=ROOT/'data/sft-v1';REPORT=ROOT/'reports/sft-v1'
+DATA=ROOT/'data/sft-v2';REPORT=ROOT/'reports/sft-v2'
 def digest(x):return hashlib.sha256(x.encode()).hexdigest()
 def msg(role,content):return {'role':role,'content':content}
 # Templates 0..7 train; 8..9 dev; 10..11 test. Entities/numbers also separated.
@@ -20,7 +20,12 @@ PREFIX={'train':'A','dev':'D','test':'T'}
 def tool_record(split,i,kind='single'):
  rng=np.random.default_rng(871+i+{'train':0,'dev':100000,'test':200000}[split]);names=list(SCHEMAS);name=names[i%5];offset={'train':0,'dev':100,'test':200}[split];t=(i//5)%8 if split=='train' else (8 if split=='dev' else 10)+(i//5)%2
  a=int(rng.integers(1+offset,90+offset));b=int(rng.integers(1+offset,90+offset));entity=PREFIX[split]+str(int(rng.integers(1,10000)))
- args={'calculate':{'op':['add','subtract','multiply','divide'][i%4],'a':a,'b':b},'convert':{'value':a,'from_unit':['m','km','cm'][i%3],'to_unit':['cm','m','km'][i%3]},'get_weather':{'city':['Pune','Delhi','Patna','Jaipur','Kochi'][i%5]+' '+entity},'lookup_item':{'item_id':'SKU-'+entity},'search_notes':{'query':['budget','travel','launch','design','review'][i%5]+' '+entity}}[name]
+ cities={'train':['Pune','Delhi','Patna','Jaipur','Kochi','Mumbai','Chennai','Bengaluru','Agra','Lucknow','Bhopal','Surat'], 'dev':['Ranchi','Mysuru','Panaji','Nagpur','Indore','Amritsar'], 'test':['Madurai','Guwahati','Kolkata','Shimla','Cuttack','Nashik']}[split]
+ topics={'train':['budget planning','travel itinerary','launch checklist','design review','hiring meeting','garden supplies','school schedule','invoice payment','book club','repair appointment','delivery status','team lunch'], 'dev':['museum visit','annual renewal','project handover','kitchen repairs','exam timetable','customer survey'], 'test':['conference agenda','holiday booking','training workshop','library membership','birthday party','equipment order']}[split]
+ units=rng.choice(['m','km','cm'],size=2,replace=False).tolist()
+ a=round(float(rng.uniform(-89-offset,89+offset)),2) if i%3==0 else a
+ args={'calculate':{'op':str(rng.choice(['add','subtract','multiply','divide'])),'a':a,'b':b},'convert':{'value':a,'from_unit':units[0],'to_unit':units[1]},'get_weather':{'city':str(rng.choice(cities))},'lookup_item':{'item_id':'SKU-'+entity},'search_notes':{'query':str(rng.choice(topics))}}[name]
+
  call={'name':name,'arguments':args};q=TEMPLATES[name][t].format(**args);messages=[msg('system',system()),msg('user',q)]
  record={'id':f'{split}-tool-{kind}-{i}','source':'tool','kind':kind,'split':split,'family':f'{name}-template-{t}','messages':messages}
  if kind=='clarify':
@@ -36,8 +41,21 @@ def tool_record(split,i,kind='single'):
   call={'name':'calculate','arguments':{'op':'divide','a':a,'b':0}};result=execute(call)
   messages=[msg('system',system(['calculate'])),msg('user',f'Divide {a} by zero.'),msg('assistant',call_text(call)),msg('tool',json.dumps(result))];record['messages']=messages;answer=result_answer(call,result);record.update(expected_words=['zero','nonzero'],expected_answer=answer)
  elif kind=='chain':
-  c1={'name':'convert','arguments':{'value':a,'from_unit':'km','to_unit':'m'}};r1=execute(c1);c2={'name':'calculate','arguments':{'op':'add','a':r1['result'],'b':b}};r2=execute(c2)
-  q=(f'Convert {a} km to m, then add {b}.' if split=='train' else f'First express {a} kilometres in metres. Increase that result by {b}.' if split=='dev' else f'I have {a} km plus {b} metres. Convert the kilometres using the tool, then calculate their sum in metres.')
+  op=str(rng.choice(['add','subtract','multiply','divide']));route=(i//5)%3
+  if route==0:
+   c1={'name':'convert','arguments':{'value':a,'from_unit':units[0],'to_unit':units[1]}};r1=execute(c1)
+   c2={'name':'calculate','arguments':{'op':op,'a':r1['result'],'b':b}}
+   steps=f"convert {a} {units[0]} to {units[1]}, then {op} the result and {b}"
+  elif route==1:
+   c1={'name':'calculate','arguments':{'op':op,'a':a,'b':b}};r1=execute(c1)
+   c2={'name':'convert','arguments':{'value':r1['result'],'from_unit':units[0],'to_unit':units[1]}}
+   steps=f"{op} {a} and {b}, then convert that result from {units[0]} to {units[1]}"
+  else:
+   c1={'name':'calculate','arguments':{'op':op,'a':a,'b':b}};r1=execute(c1)
+   c2={'name':'calculate','arguments':{'op':str(rng.choice(['add','subtract','multiply'])),'a':r1['result'],'b':int(rng.integers(2,20))}}
+   steps=f"{op} {a} and {b}, then {c2['arguments']['op']} that result and {c2['arguments']['b']}"
+  r2=execute(c2)
+  q={'train':'Use tools to ', 'dev':'Carry out these steps in order: ', 'test':'Complete this two-stage request using tools: '}[split]+steps+'.'
   messages=[msg('system',system(['convert','calculate'])),msg('user',q)];answer=result_answer(c2,r2);record.update(messages=messages,calls=[c1,c2],expected_answer=answer)
  else:
   result=execute(call);answer=result_answer(call,result);record.update(calls=[call],expected_answer=answer)
@@ -111,7 +129,7 @@ def main():
   categories=({'single':5000,'chain':1000,'clarify':1000,'none':0,'error':1000} if split=='train' else {'single':100,'chain':50,'clarify':50,'none':0,'error':25} if split=='dev' else {'single':200,'chain':100,'clarify':100,'none':0,'error':50})
   for kind,n in categories.items():
    for i in range(n):records[split].append(tool_record(split,i,kind))
- arrays={};manifest={'counts':{},'source_receipt':json.loads((DATA/'raw/receipt.json').read_text()),'format':'existing role tokens; assistant-only targets including tool-call marker and EOS; one padded episode per 512-input row','limits':['Short diagnostic conversations, not all three-turn; no broad conversational accuracy claim.','Synthetic tool families use held-out wording and disjoint argument ranges/entities; clarify/no-tool linguistic diversity is small.','Tool outputs are local deterministic fixtures, never real weather or catalog data.','No human blind ratings yet; report proxy metrics separately.'],'seed':3901,'input_token_cap_per_arm':5000000,'mix_by_padded_input_tokens':{'chat':.4,'tool':.4,'grounded':.2}}
+ arrays={};manifest={'counts':{},'source_receipt':json.loads((DATA/'raw/receipt.json').read_text()),'format':'existing role tokens; assistant-only targets including tool-call marker and EOS; one independent episode per row; batches trimmed to longest member, no cross-episode attention','limits':['Short diagnostic conversations, not all three-turn; no broad conversational accuracy claim.','Synthetic tools use held-out wording and disjoint city/topic sets; numeric values can overlap. Clarification diversity remains small.','Tool outputs are local deterministic fixtures, never real weather or catalog data.','No human blind ratings yet; report proxy metrics separately.'],'seed':3901,'input_token_cap_per_arm':5000000,'mix_by_scheduled_examples':{'chat':.4,'tool':.4,'grounded':.2}}
  hashes={};groupsplit={}
  for split,rr in records.items():
   kept=[];local=set()
@@ -129,10 +147,11 @@ def main():
  np.savez(DATA/'episodes.npz',**arrays)
  # Exact reproducible source-balanced stream, shared by all four runs.
  rng=np.random.default_rng(3901);pools={s:rng.permutation(np.flatnonzero(arrays['train_source']==s)).tolist() for s in range(3)};cursor={s:0 for s in pools};order=[]
- for i in range(10000):
+ for i in range(50000):
   s=[0,1,0,1,2][i%5]
   if cursor[s]==len(pools[s]):pools[s]=rng.permutation(np.flatnonzero(arrays['train_source']==s)).tolist();cursor[s]=0
   order.append(pools[s][cursor[s]]);cursor[s]+=1
+ order=[j for k in range(0,len(order),100) for j in sorted(order[k:k+100],key=lambda j:int(arrays['train_length'][j]))]
  np.save(DATA/'order.npy',np.array(order,np.int32))
  manifest.update(filter_counts=dict(stats),files={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in DATA.iterdir() if p.is_file()},unique_scheduled_examples=len(set(order)),scheduled_rows=len(order),scheduled_source_counts=dict(collections.Counter(int(arrays['train_source'][i]) for i in order)))
  (DATA/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');shutil.copyfile(DATA/'manifest.json',REPORT/'data-manifest.json')
