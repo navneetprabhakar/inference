@@ -25,4 +25,4 @@ See [PLAN.md](PLAN.md) for the revised budget and sequence. Existing corpus coun
 
 ## 100M pilot outcome
 
-The pilot completed exactly 100M tokens in 11h22m. Local evaluation is complete: see [the full report and actual generations](reports/evaluation-v1/REPORT.md). Loss improved on held-out text, but conversation, grounding, and tool probes fail. A bounded extension to 300M total is recommended as an experiment; no additional training has started. Cloud/API spend is zero.
+The pilot completed exactly 100M tokens in 11h22m. Local evaluation is complete: see [the full report and actual generations](reports/evaluation-v1/REPORT.md). Loss improved on held-out text, but conversation, grounding, and tool probes fail. A bounded extension of another 200M tokens is authorized. See [the continuation protocol](CONTINUATION_RUN.md) for the fresh corpus, power guard, and evaluations at 200M and 300M total. Live status is in `runs/continuation-v1/campaign.json`. Cloud/API spend is zero.
