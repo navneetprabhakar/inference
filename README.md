@@ -22,3 +22,7 @@ python scripts/estimate_cost.py --parameters 150e6 --tokens 20e9 --runs 2
 ```
 
 See [PLAN.md](PLAN.md) for the revised budget and sequence. Existing corpus counts are not approved training splits: identify duplicates and source lineage before reuse. Do not sum archived versions and derived datasets as independent data.
+
+## 100M pilot outcome
+
+The pilot completed exactly 100M tokens in 11h22m. Local evaluation is complete: see [the full report and actual generations](reports/evaluation-v1/REPORT.md). Loss improved on held-out text, but conversation, grounding, and tool probes fail. A bounded extension to 300M total is recommended as an experiment; no additional training has started. Cloud/API spend is zero.
