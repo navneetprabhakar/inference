@@ -1,0 +1,62 @@
+{
+  "counts": {
+    "train": {
+      "chat": 10000,
+      "grounded": 5000,
+      "tool": 7800
+    },
+    "dev": {
+      "chat": 89,
+      "grounded": 50,
+      "tool": 256
+    },
+    "test": {
+      "chat": 200,
+      "grounded": 100,
+      "tool": 504
+    }
+  },
+  "source_receipt": {
+    "dataset": "HuggingFaceTB/smol-smoltalk",
+    "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc",
+    "url": "https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk/resolve/f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc/data/train-00000-of-00004.parquet",
+    "bytes": 229710350,
+    "sha256": "498cd4580014f42c40cfde066573564ed28e3e1548a5566715b615f5ea932856",
+    "license": "Apache-2.0 upstream card",
+    "paid_services": false
+  },
+  "format": "existing role tokens; assistant-only targets including tool-call marker and EOS; one padded episode per 512-input row",
+  "limits": [
+    "Short diagnostic conversations, not all three-turn; no broad conversational accuracy claim.",
+    "Synthetic tool families use held-out wording and disjoint argument ranges/entities; clarify/no-tool linguistic diversity is small.",
+    "Tool outputs are local deterministic fixtures, never real weather or catalog data.",
+    "No human blind ratings yet; report proxy metrics separately."
+  ],
+  "seed": 3901,
+  "input_token_cap_per_arm": 5000000,
+  "mix_by_padded_input_tokens": {
+    "chat": 0.4,
+    "tool": 0.4,
+    "grounded": 0.2
+  },
+  "filter_counts": {
+    "train_duplicates": 1200,
+    "dev_duplicates": 4,
+    "test_duplicates": 14
+  },
+  "files": {
+    "train.jsonl": "b5e887cb77bbb50033d0489176dfaa0fc4cd296cc676c16d0f575f3106020847",
+    "test.jsonl": "159b71bf5332fab02811f611b0ee2efcc9600057f1e900c2a98eace2e5b2678f",
+    "episodes.npz": "cd01d7025a3c9a04ca2d8e9116c2f0f55443e58ab18754b06f1fecfb7276d414",
+    "tokenizer.json": "d14236a82744a26a30b251222629345c2e49343a26798825df50055b5005bf61",
+    "dev.jsonl": "a25e5ec626668ce25416ea6df9dbacfb9398fc99c79b081afeee48480bf98a98",
+    "order.npy": "904c601e2d8d7d6961a42f35342411bc4f3f11f2980dbccc887eb7105990128c"
+  },
+  "unique_scheduled_examples": 10000,
+  "scheduled_rows": 10000,
+  "scheduled_source_counts": {
+    "0": 4000,
+    "1": 4000,
+    "2": 2000
+  }
+}
