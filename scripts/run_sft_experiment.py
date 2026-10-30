@@ -17,7 +17,7 @@ def main(resume=False):
  lock=(OUT/'.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  cp=OUT/'campaign.json';old=json.loads(cp.read_text()) if cp.exists() else None
  if old and not resume:raise RuntimeError('Existing experiment; inspect and use --resume')
- names=['run_sft_experiment.py','train_sft.py','evaluate_sft.py','sft_common.py','benchmark_mlx.py','train_local.py','evaluate_pilot.py']
+ names=['run_sft_experiment.py','train_sft.py','evaluate_sft.py','sft_common.py','benchmark_mlx.py','train_local.py','evaluate_pilot.py','blind_sft_review.py']
  pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in names};data_hash=hashlib.sha256((ROOT/'data/sft-v2/manifest.json').read_bytes()).hexdigest()
  if old:assert old['code_pins']==pins and old['data_sha256']==data_hash,'Do not change pinned experiment on resume'
  bases={'100m':latest(ROOT/'runs/local-campaign-v1/pilot'),'200m':latest(ROOT/'runs/continuation-v1/200m')};base_hashes={k:hashlib.sha256((v/'model.safetensors').read_bytes()).hexdigest() for k,v in bases.items()}
@@ -61,6 +61,7 @@ def main(resume=False):
   for row in chosen:
    lines += [f"### {row['id']}",'','```text',row['prompt'],'```']
    for g in row['generations']:lines+=['```text',g['output'],'```']
+ invoke([ROOT/'scripts/blind_sft_review.py',*[REPORT/name/'final/generations.json' for name in summary],'--output',REPORT/'blind-review'],OUT/'blind-review.log')
  atomic_json(REPORT/'comparison.json',summary);(REPORT/'REPORT.md').write_text('\n'.join(lines)+'\n');state.update(status='awaiting_user_review',finished_at=time.time(),trained_sft_input_tokens=20000000,final_report=str(REPORT/'REPORT.md'),base_checkpoints_unchanged=True);write()
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--resume',action='store_true');args=p.parse_args()

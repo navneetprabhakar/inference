@@ -1,4 +1,4 @@
-> Current SFT status: v2 data and evaluation corrections are validated and stopped for review before any arm starts. See [readiness report](reports/sft-v2/READINESS.html). Earlier v1 baseline artifacts are retained; its evaluator stopped on a now-fixed retention-scoring error.
+> Current SFT status: v2 data and evaluation corrections are validated; the four-arm local campaign is authorized and launching. See [readiness report](reports/sft-v2/READINESS.html). Earlier v1 baseline artifacts are retained; its evaluator stopped on a now-fixed retention-scoring error.
 
 # English conversation and tool calling from scratch
 
