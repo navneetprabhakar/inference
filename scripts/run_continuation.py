@@ -1,4 +1,4 @@
-"""Local 100M -> 200M -> 300M campaign, evaluation at both milestones."""
+"""Local continuation through the configured, user-authorized milestone."""
 import argparse,fcntl,hashlib,json,os,subprocess,sys,time
 from pathlib import Path
 from train_local import atomic_json
@@ -14,7 +14,9 @@ def main(resume=False):
     names=['benchmark_mlx.py','train_local.py','train_continuation.py','evaluate_pilot.py','evaluate_continuation.py','run_continuation.py'];pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in names}
     if previous:
         assert all(pins[n]==h or (n=='train_continuation.py' and h==AC_ONLY_PREDECESSOR) for n,h in previous['source_pins'].items() if n!='run_continuation.py'),'Training/evaluation sources changed'
-    state={'status':'baseline_evaluation','pid':os.getpid(),'started_at':time.time(),'source_pins':pins,'additional_tokens_authorized':200000000,'total_token_ceiling':300000000,'cloud_spend_usd':0,'paid_api_spend_usd':0}
+    ceiling=json.loads((ROOT/'configs/continuation.json').read_text())['total_token_ceiling']
+    assert ceiling in [200000000,300000000]
+    state={'status':'baseline_evaluation','pid':os.getpid(),'started_at':time.time(),'source_pins':pins,'additional_tokens_authorized':ceiling-100000000,'total_token_ceiling':ceiling,'cloud_spend_usd':0,'paid_api_spend_usd':0}
     if previous:state.update(resumed_at=time.time(),consent_required=False,previous_pid=previous['pid'])
     def write():state['updated_at']=time.time();atomic_json(OUT/'campaign.json',state)
     def invoke(args,logpath):
@@ -31,6 +33,7 @@ def main(resume=False):
         assert json.loads((REPORT/'100m/loss-results.json').read_text())['model_sha256']==hashlib.sha256((source/'model.safetensors').read_bytes()).hexdigest()
     else:invoke([ROOT/'scripts/evaluate_continuation.py','--checkpoint',source,'--total-tokens',100000000,'--output',REPORT/'100m'],OUT/'baseline-evaluation.log')
     for target in [200000000,300000000]:
+        if target>ceiling:break
         stage=OUT/f'{target//1000000}m';stage.mkdir(exist_ok=True);state.update(status='training',target_total_tokens=target);write()
         args=[ROOT/'scripts/train_continuation.py','--from-checkpoint',source,'--output',stage,'--target-total',target]
         if resume and (stage/'latest.json').exists():args.append('--resume')
@@ -39,7 +42,7 @@ def main(resume=False):
         state.update(status='evaluating',completed_total_tokens=target);write()
         invoke([ROOT/'scripts/evaluate_continuation.py','--checkpoint',source,'--total-tokens',target,'--output',REPORT/f'{target//1000000}m'],stage/'evaluation.log')
         state['last_completed_evaluation']=str(REPORT/f'{target//1000000}m/REPORT.md');write()
-    state.update(status='completed',finished_at=time.time());write()
+    state.update(status='awaiting_user_review' if ceiling==200000000 else 'completed',consent_required=ceiling==200000000,finished_at=time.time());write()
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--resume',action='store_true');args=p.parse_args()
     try:main(args.resume)

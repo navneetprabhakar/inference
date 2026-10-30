@@ -1,6 +1,6 @@
-# Local continuation: 100M → 200M → 300M tokens
+# Local continuation: stop and review at 200M tokens
 
-Authorized scope: another 200M training tokens on the laptop; no cloud resources or paid APIs. This is a bounded pretraining experiment, not a promise of conversational or tool-use competence. The original 100M checkpoint remains intact.
+Updated authorized scope: train to 200M total and finish its evaluation, then stop for user review. Training from 200M to 300M is no longer authorized; no cloud resources or paid APIs. This is a bounded pretraining experiment, not a promise of conversational or tool-use competence. The original 100M checkpoint remains intact.
 
 ## Data
 
@@ -18,11 +18,11 @@ Continue the 97,536,768-parameter model with both FP32 master weights and AdamW 
 
 Learning rate rises from 3e-5 at 100M to 1e-4 at 102M, then decays smoothly to 1e-5 at 300M. The schedule and data cursor do not reset at 200M. This deliberate restart schedule is an experiment, not an exact extension of the original cosine schedule.
 
-Checkpoint every five minutes; continue on battery per user instruction; pause only on critical thermal state. Stop on less than 15 GiB free disk, more than 12 GiB MLX peak memory, more than 1 GiB additional swap, nonfinite loss/gradient, or 36 hours of active continuation. An existing STOP file in the active stage directory stops safely. A failed stage or evaluation prevents the next stage. Hard ceiling: 300M total training tokens. Estimated additional training time is around 23 hours based on the pilot; system sleep or thermal pauses add wall-clock time.
+Checkpoint every five minutes; continue on battery per user instruction; pause only on critical thermal state. Stop on less than 15 GiB free disk, more than 12 GiB MLX peak memory, more than 1 GiB additional swap, nonfinite loss/gradient, or 36 hours of active continuation. An existing STOP file in the active stage directory stops safely. A failed stage or evaluation prevents the next stage. Current supervisor ceiling: 200M total training tokens. The trainer retains its absolute 300M safety limit, but the 300M stage is blocked by a STOP file and excluded by the supervisor configuration. Estimated additional training time is around 23 hours based on the pilot; system sleep or thermal pauses add wall-clock time.
 
 ## Evaluation and actual outputs
 
-The supervisor first evaluates the existing 100M model on the expanded frozen evaluation suite. It trains to exactly 200M, evaluates, then trains to exactly 300M and evaluates. Nine loss sets include the six prior sets (two are exposed-training diagnostics) and three new held-out source sets. New evaluation blocks exclude the validation prefix used for routine monitoring. Original arrays and prompts remain unchanged.
+The supervisor first evaluates the existing 100M model on the expanded frozen evaluation suite. It trains to exactly 200M, evaluates, saves all outputs, and exits with awaiting_user_review. A further 100M requires explicit user authorization. Nine loss sets include the six prior sets (two are exposed-training diagnostics) and three new held-out source sets. New evaluation blocks exclude the validation prefix used for routine monitoring. Original arrays and prompts remain unchanged.
 
 At each milestone, all 12 prompts produce BF16 greedy and sampled outputs plus FP32 greedy outputs: 36 actual outputs, capped at 96 tokens, with no best-of selection. Sampled decoding uses temperature 0.8/top-k 40. Reports include all outputs, not just selected examples. Legacy Wikipedia is now held-out text from a trained source, rather than an unseen source. These probes are too small to establish broad capabilities.
 
