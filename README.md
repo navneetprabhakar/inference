@@ -26,3 +26,7 @@ See [PLAN.md](PLAN.md) for the revised budget and sequence. Existing corpus coun
 ## 100M pilot outcome
 
 The pilot completed exactly 100M tokens in 11h22m. Local evaluation is complete: see [the full report and actual generations](reports/evaluation-v1/REPORT.md). Loss improved on held-out text, but conversation, grounding, and tool probes fail. A bounded extension of another 200M tokens is authorized. See [the continuation protocol](CONTINUATION_RUN.md) for the fresh corpus, power guard, and evaluations at 200M and 300M total. Live status is in `runs/continuation-v1/campaign.json`. Cloud/API spend is zero.
+
+## 200M review checkpoint
+
+Training and evaluation completed at exactly 200M total tokens. The campaign has stopped for user review; no training beyond 200M is authorized. See [all 36 actual outputs and nine loss sets](reports/continuation-v1/200m/REPORT.md). Compared with 100M, fresh held-out web/Wikipedia/Pressbooks perplexity improved from 45.10/50.03/44.55 to 38.73/24.84/33.56, while unseen TinyStories worsened from 5.99 to 13.19. Mean greedy repeated-four-gram fraction increased from 0.636 to 0.846 on the same 12 prompts. Outputs remain unsuitable for conversation or tool calling. The evidence does not justify automatically continuing the same recipe to 300M.
