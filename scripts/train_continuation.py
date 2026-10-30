@@ -9,6 +9,11 @@ from mlx.utils import tree_map,tree_unflatten
 from benchmark_mlx import Model
 from train_local import atomic_json,health,loss,save_checkpoint
 STOP=False
+# Compatible predecessor: only the AC-power pause policy changed. Preserve all
+# model, optimizer, sampler, loss, and learning-rate state when resuming it.
+AC_ONLY_PREDECESSOR='3e5e05d386955ec78f11a89427c2daf1452ff437ae998054472c230aad149ca7'
+def compatible_code(previous,current):
+    return previous.keys()==current.keys() and all(h==current[n] or (n=='train_continuation.py' and h==AC_ONLY_PREDECESSOR) for n,h in previous.items())
 def stop(*_):
     global STOP
     STOP=True
@@ -56,7 +61,7 @@ def run(a):
     previous=json.loads((origin/'state.json').read_text());assert previous['tokens']<=a.target_total<=300_000_000
     assert previous['tokens']>=100_000_000
     if 'continuation_data_sha256' in previous:
-        assert previous['continuation_data_sha256']==data_hash and previous['continuation_code_hashes']==code_hashes
+        assert previous['continuation_data_sha256']==data_hash and compatible_code(previous['continuation_code_hashes'],code_hashes)
     else:assert previous['tokens']==100_000_000
     master=Model(768,12,16384);master.load_weights(str(origin/'model.safetensors'))
     compute=Model(768,12,16384);compute.update(tree_map(lambda x:x.astype(mx.bfloat16),master.parameters()))
@@ -64,7 +69,7 @@ def run(a):
     assert int(opt.step)==previous['steps'],'Optimizer and checkpoint step counters disagree'
     corpus=FreshCorpus(data,previous.get('fresh_corpus'))
     state={'tokens':previous['tokens'],'steps':previous['steps'],'continuation_active_seconds':previous.get('continuation_active_seconds',0.),'continuation_data_sha256':data_hash,'continuation_code_hashes':code_hashes,'origin_checkpoint':str(origin),'target_total_tokens':a.target_total,'absolute_token_ceiling':300_000_000,'initial_health':previous.get('continuation_initial_health',health()),'initial_validation':validation(compute,data)}
-    state['continuation_initial_health']=state['initial_health'];start_tokens=state['tokens'];start_active=state['continuation_active_seconds'];value=norm_value=0.
+    state['power_policy']='continue_on_battery';state['resumed_code_hashes']=previous.get('continuation_code_hashes');state['continuation_initial_health']=state['initial_health'];start_tokens=state['tokens'];start_active=state['continuation_active_seconds'];value=norm_value=0.
     def snapshot(status):
         obj={**state,'status':status,'health':health(),'last_loss':value,'gradient_norm':norm_value,'fresh_corpus':corpus.state(),'updated_at':time.time(),'pid':os.getpid()};atomic_json(out/'status.json',obj);return obj
     def checkpoint(status):return save_checkpoint(out,master,opt,snapshot(status))
@@ -74,11 +79,11 @@ def run(a):
         if STOP or (out/'STOP').exists():checkpoint('stopped');return 2
         if time.monotonic()-last_health>=15:
             h=health();last_health=time.monotonic()
-            if not h['ac_power'] or h['thermal_state']>=3:
-                checkpoint('paused_power_or_critical_thermal')
+            if h['thermal_state']>=3:
+                checkpoint('paused_critical_thermal')
                 while not STOP and not (out/'STOP').exists():
                     time.sleep(10);h=health()
-                    if h['ac_power'] and h['thermal_state']<3:break
+                    if h['thermal_state']<3:break
                 last=time.monotonic();last_progress=last;last_checkpoint=last
                 if STOP or (out/'STOP').exists():checkpoint('stopped');return 2
             if h['free_disk_bytes']<15*2**30 or h['mlx_peak_bytes']>12*2**30 or h['swap_used_mb']-state['initial_health']['swap_used_mb']>1024:checkpoint('stopped_resource_limit');return 3

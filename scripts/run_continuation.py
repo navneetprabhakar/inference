@@ -2,6 +2,7 @@
 import argparse,fcntl,hashlib,json,os,subprocess,sys,time
 from pathlib import Path
 from train_local import atomic_json
+from train_continuation import AC_ONLY_PREDECESSOR
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'runs/continuation-v1';REPORT=ROOT/'reports/continuation-v1'
 def main(resume=False):
     OUT.mkdir(parents=True,exist_ok=True);REPORT.mkdir(parents=True,exist_ok=True)
@@ -12,7 +13,7 @@ def main(resume=False):
     assert (ROOT/'data/continuation-v1/manifest.json').exists()
     names=['benchmark_mlx.py','train_local.py','train_continuation.py','evaluate_pilot.py','evaluate_continuation.py','run_continuation.py'];pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in names}
     if previous:
-        assert all(pins[n]==h for n,h in previous['source_pins'].items() if n!='run_continuation.py'),'Training/evaluation sources changed'
+        assert all(pins[n]==h or (n=='train_continuation.py' and h==AC_ONLY_PREDECESSOR) for n,h in previous['source_pins'].items() if n!='run_continuation.py'),'Training/evaluation sources changed'
     state={'status':'baseline_evaluation','pid':os.getpid(),'started_at':time.time(),'source_pins':pins,'additional_tokens_authorized':200000000,'total_token_ceiling':300000000,'cloud_spend_usd':0,'paid_api_spend_usd':0}
     if previous:state.update(resumed_at=time.time(),consent_required=False,previous_pid=previous['pid'])
     def write():state['updated_at']=time.time();atomic_json(OUT/'campaign.json',state)

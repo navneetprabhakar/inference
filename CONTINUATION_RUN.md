@@ -18,7 +18,7 @@ Continue the 97,536,768-parameter model with both FP32 master weights and AdamW 
 
 Learning rate rises from 3e-5 at 100M to 1e-4 at 102M, then decays smoothly to 1e-5 at 300M. The schedule and data cursor do not reset at 200M. This deliberate restart schedule is an experiment, not an exact extension of the original cosine schedule.
 
-Checkpoint every five minutes; pause on battery or critical thermal state. Stop on less than 15 GiB free disk, more than 12 GiB MLX peak memory, more than 1 GiB additional swap, nonfinite loss/gradient, or 36 hours of active continuation. An existing STOP file in the active stage directory stops safely. A failed stage or evaluation prevents the next stage. Hard ceiling: 300M total training tokens. Estimated additional training time is around 23 hours based on the pilot; power pauses add wall-clock time.
+Checkpoint every five minutes; continue on battery per user instruction; pause only on critical thermal state. Stop on less than 15 GiB free disk, more than 12 GiB MLX peak memory, more than 1 GiB additional swap, nonfinite loss/gradient, or 36 hours of active continuation. An existing STOP file in the active stage directory stops safely. A failed stage or evaluation prevents the next stage. Hard ceiling: 300M total training tokens. Estimated additional training time is around 23 hours based on the pilot; system sleep or thermal pauses add wall-clock time.
 
 ## Evaluation and actual outputs
 

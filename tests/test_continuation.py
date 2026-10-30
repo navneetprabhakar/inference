@@ -3,9 +3,15 @@ from pathlib import Path
 import numpy as np
 import mlx.core as mx
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from train_continuation import FreshCorpus,learning_rate
+from train_continuation import FreshCorpus,learning_rate,compatible_code,AC_ONLY_PREDECESSOR
 from prepare_continuation import Near,fingerprint,english
 class ContinuationTest(unittest.TestCase):
+    def test_power_policy_migration_only_accepts_known_predecessor(self):
+        current={'train_continuation.py':'new','benchmark_mlx.py':'same','train_local.py':'same'}
+        old={**current,'train_continuation.py':AC_ONLY_PREDECESSOR}
+        self.assertTrue(compatible_code(old,current))
+        self.assertFalse(compatible_code({**old,'benchmark_mlx.py':'changed'},current))
+        self.assertFalse(compatible_code({**old,'train_continuation.py':'unknown'},current))
     def test_resume_no_replay_and_source_counts(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d);np.arange(512*20+1,dtype=np.uint16).tofile(p/'train.bin');(p/'manifest.json').write_text(json.dumps({'source_ranges':{'fineweb':[0,512*10],'wikipedia':[512*10,512*15],'pressbooks':[512*15,512*20]}}))
