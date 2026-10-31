@@ -1,0 +1,81 @@
+<meta charset="utf-8"><title>Bounded repair experiment</title><style>body{font:16px/1.6 system-ui;max-width:1000px;margin:40px auto}pre{white-space:pre-wrap}</style><h1>Two-arm local repair experiment</h1><p>Two independent 2M-input-slot continuations from the frozen 100M + 5M SFT LR 3e-5 checkpoint. Fresh AdamW optimizer per arm; identical frozen data order. 256MiB cache ceiling, sequential execution, existing resource guards, continue on battery. Startup validation tokens count inside the first arm budget.</p><p>Source weights multiply only supervised labels. Fractional target mass is preserved and used to normalize accumulated gradients. The desired 50/25/10/15 source share is aggregate weighted target mass, not a claim that gradients or learning gains follow that proportion.</p><p>Four development evaluations at 1M/2M snapshots plus both existing references precede selection. One fresh-test release scores the selected candidate and both frozen references. There is no automatic checkpoint promotion, test-driven reselection or extension; stop for review. Chat quality remains pending blind review.</p><pre>{
+  &quot;status&quot;: &quot;authorized_bounded_two_arm_repair&quot;,
+  &quot;data_dir&quot;: &quot;data/sft-v3&quot;,
+  &quot;manifest_sha256&quot;: &quot;7f05e6cfe9bc5b24b8380c10303fe52e02afd2ef5bd2f568914b400eef1b0c0e&quot;,
+  &quot;training_authorized_tokens&quot;: 4000000,
+  &quot;fresh_test_model_evaluations&quot;: 0,
+  &quot;existing_runner_repointed&quot;: false,
+  &quot;input_mix&quot;: {
+    &quot;chat&quot;: 0.25,
+    &quot;tool&quot;: 0.5,
+    &quot;grounded&quot;: 0.1,
+    &quot;replay&quot;: 0.15
+  },
+  &quot;simulated_2m_budget&quot;: {
+    &quot;processed_slots&quot;: 2000000,
+    &quot;nonpadding_tokens&quot;: 1980007,
+    &quot;padding_fraction&quot;: 0.009996499999999964,
+    &quot;supervised_tokens&quot;: 770234,
+    &quot;nonpadding_by_source&quot;: {
+      &quot;grounded&quot;: 204359,
+      &quot;chat&quot;: 499969,
+      &quot;tool&quot;: 986875,
+      &quot;replay&quot;: 288804
+    },
+    &quot;supervised_by_source&quot;: {
+      &quot;grounded&quot;: 32248,
+      &quot;chat&quot;: 316413,
+      &quot;tool&quot;: 132769,
+      &quot;replay&quot;: 288804
+    },
+    &quot;real_token_mix&quot;: {
+      &quot;grounded&quot;: 0.10321125127335408,
+      &quot;chat&quot;: 0.2525087032520592,
+      &quot;tool&quot;: 0.49841995508096687,
+      &quot;replay&quot;: 0.14586009039361983
+    },
+    &quot;example_exposures&quot;: 9500,
+    &quot;unique_examples&quot;: 8286
+  },
+  &quot;raw_target_share&quot;: {
+    &quot;grounded&quot;: 0.041867796020430156,
+    &quot;chat&quot;: 0.41080113316212996,
+    &quot;tool&quot;: 0.17237488867019632,
+    &quot;replay&quot;: 0.3749561821472436
+  },
+  &quot;source_loss_weights&quot;: {
+    &quot;chat&quot;: 0.6085669678553031,
+    &quot;tool&quot;: 2.900654520256988,
+    &quot;grounded&quot;: 2.3884706028280824,
+    &quot;replay&quot;: 0.4000467445049237
+  },
+  &quot;next_training_prerequisite&quot;: null,
+  &quot;cache_limit_bytes&quot;: 268435456,
+  &quot;cloud_spend_usd&quot;: 0,
+  &quot;paid_api_spend_usd&quot;: 0,
+  &quot;per_arm_processed_input_limit&quot;: 2000000,
+  &quot;learning_rates&quot;: [
+    1e-05,
+    3e-05
+  ],
+  &quot;desired_weighted_target_mass&quot;: {
+    &quot;chat&quot;: 0.25,
+    &quot;tool&quot;: 0.5,
+    &quot;grounded&quot;: 0.1,
+    &quot;replay&quot;: 0.15
+  },
+  &quot;base_checkpoint&quot;: &quot;runs/sft-v2/100m-lr3e-5/milestones/5000000&quot;,
+  &quot;milestones&quot;: [
+    1000000,
+    2000000
+  ],
+  &quot;stop_after&quot;: &quot;two arms, development selection, one frozen test release, review&quot;,
+  &quot;selection_policy&quot;: {
+    &quot;primary&quot;: &quot;0.4 single + 0.25 chain + 0.2 result + 0.15 accepted clarification&quot;,
+    &quot;guards&quot;: &quot;grounding, no-tool abstention and error no more than 5 percentage points below starting checkpoint; each retention PPL &lt;=105% of starting checkpoint&quot;,
+    &quot;tie_break&quot;: &quot;lower chat repetition, then earlier milestone, then lower LR&quot;,
+    &quot;fresh_test&quot;: &quot;One frozen release: selected candidate and both existing references; no subsequent selection/tuning on test.&quot;
+  },
+  &quot;runner&quot;: &quot;scripts/run_sft_v3.py&quot;,
+  &quot;fresh_test_release_models&quot;: &quot;dev-selected candidate plus both frozen existing reference checkpoints; no test-driven reselection&quot;
+}</pre>

@@ -1,63 +1,75 @@
-# English SLM from scratch
+# English conversation and tool calling from scratch
 
-Owner: Navneet Prabhakar (Forge). Goal: our own English foundation model with conversation and internal/MCP tool capabilities, below 100M learned parameters. Public pretrained model weights are not used; the reference experiment reuses a tokenizer.
+Updated 31 October 2026. This repository contains the restarted, laptop-first project: a 97,536,768-parameter English language model initialized with random weights, a fresh tokenizer, native MLX training, and offline tool-call evaluation. It is an experimental model, not a production assistant.
 
-Start a new thread with the [current handoff](HANDOFF.md): checkpoint lineage, evidence, pending approval and exact continuation boundaries.
+## Current state
 
-## Current measured state — deep audit identifies lineage, data and optimization gaps
+**All training and the repetition-penalty evaluation are complete and stopped for review. No further training is authorized. Cloud and paid API spending: USD0.** Electricity and developer time have not been costed.
 
-- **Deep audit found the active lineage gap:** the current broader candidate inherits the deterministic drill branch, not the earlier general Sol SFT branch or the generated 1,000-conversation teacher bank. Its post-training lineage is 500 updates / 14,299 assistant+EOS target exposures. The screened teacher training bank has 757 records fitting the current exact format (44,241 assistant content tokens / 45,792 targets), but they are not newly admitted or trained by this audit.
-- **New skills remain underfit:** on 32 exact previously consumed training prompts, the broader checkpoint reproduced 1/16 names and 0/16 times. It had seen 67 time examples and 77 name examples before the stop, covering only 20.8% of the new bank overall. Conditional token accuracy improved substantially; timestamp separators reached 90.6% but digits only 21.9%. Old training reference paths stayed perfect (480/480) while paraphrase/format retention regressed.
-- Old rehearsal averaged **6.3% of total loss coefficient**, despite 25% of examples. Four fixed-batch gradient probes found strong new-task dominance; equal group normalization alone did not remove initial old-loss directional conflict in three samples. The generator also ties missingness to colors, updates to fixed transitions and target order to value indices. These are measured design weaknesses, not proof that all gains are artifacts or that Adam's exact historical cause is isolated.
-- **No training updates in the audit.** Candidate/parent weights and prior stops are unchanged. A bounded proposal now connects admitted Sol dialogue, repaired grounded data, a multi-token fit gate and two matched consolidation branches. Training remains paused; no new model acceptance/rejection or parameter-capacity verdict has been made.
-- **Matched reassessment confirms measurable improvement:** on 152 identical new diagnostic answers per checkpoint, exact responses rose **0/152 original foundation -> 25/152 short-answer child -> 56/152 broader candidate**. Content/task correctness with formatting separate was 0/152 -> 33/152 -> 66/152. All 456 responses were directly reviewed; these are small primary-authored diagnostic-bank results, not population factual accuracy.
-- Broader versus short-answer gains: full location exact replies 0/16 -> 9/16; exact sentences 0/16 -> 8/16; missing-owner abstention 0/8 -> 8/8; fully factually correct three-turn conversations 1/16 -> 6/16. Exact paired gains/losses were 43/12. Color-only copying regressed 8/16 -> 5/16; full names/times remain 0/16 each; novel-value transfer and novel-wording recall remain limited.
-- **Decision deferred, as requested.** This inference-only reassessment preserves both the earlier positive report and harder negative checks as evidence for different scopes. The previous retention guard/stop remains unchanged; no new model acceptance/rejection decision, promotion or training occurred. Measurable learning progress and generalization limits must be assessed separately.
-- **Earlier harder fresh-conversation reassessment:** twenty new three-turn supplied-fact conversations scored **3/60 factual answers** on the retained model and **6/60** on the rejected child (5/60 without a repeated-word fluency defect). Both completed **0/20 conversations** correctly. Full names, times and quantities scored zero; corrected-fact recall after distraction was 0/20 and 1/20. All answers ended with EOS; context was not truncated.
-- A separate 15-question elementary knowledge check scored **1/15 retained, 0/15 rejected**; the one accepted answer had a capitalization defect. These small checks are primary-authored/judged evidence, not independent benchmark accuracy. The earlier controlled 77/80 must not be treated as general factual accuracy; formatting alone does not explain this failure to generalize.
-- This reassessment used **zero training updates**, 33,054 aggregate inference positions, and left both checkpoints, original weights and previous terminal stop unchanged. No promotion occurred. A format-only repair is insufficient as an overall conversation plan; evaluation must separate novel vocabulary, wording and delayed recall.
-- **Preceding broader curriculum stopped at update 100:** earlier factual retention fell from 77/80 to 64/80, below the frozen 69/80 floor. No new checkpoint qualified; no retry or promotion occurred. Original foundation loss stayed within the 5% guard (+2.30%), and source/parent weights are unchanged.
-- Read-only diagnosis of the rejected child scored 37/80 on fresh synthetic broader prompts: location phrases and complete sentences improved, but full names/times failed and delayed final-state queries scored 1/8. Earlier exposed broader probes scored 24/48 automatically, **23/48 after semantic review** (one keyword-rubric false positive). These gains are not retained in an accepted checkpoint.
-- Consumed 100 new updates, 4,699 SFT targets and 204,800 narrative replay targets in 37.52 seconds; all remain charged, zero new updates retained. Prepared 2,976 conversations contain 103,113 native content tokens and 15,333 assistant tokens. Old rehearsal was 25% of examples but only 12.36% of consumed assistant/EOS targets. Output-format interference is the main observed regression; it does not establish insufficient model capacity. A separately normalized retention-loss and paired-format repair is proposed, not executed.
-- **Earlier controlled factual-binding test passed:** 77/80 fresh synthetic answers correct+EOS, including 40/40 held-out combinations under familiar wording and 37/40 under novel wording; 30/32 paired checks passed. All 80 turns ended with EOS. Repeated color prefixes leave 61/64 unique prefixes correct. Original narrative NLL rose 1.49%, within the unchanged 5% guardrail.
-- Used 384 deterministic, oracle-labelled conversations (8,496 native content tokens; 672 assistant content tokens). Completed 400 updates with 9,600 SFT target exposures and 819,200 explicitly charged narrative replay exposures in 140.41 seconds. No new teacher calls, downloads or parameter changes. Original foundation source is unchanged; selected research child is not promoted and the bounded run is closed.
-- **Broader conversation still fails:** a post-selection inference-only check on the previously exposed 48-turn bank scored 13/48 correct+EOS, 48/48 EOS and 3/16 paired checks. Multi-word answers, times, some names, clarification and unknown responses remain weak. The controlled result establishes narrow fact copying and explicit correction handling; persistent state, general English and tool use remain unpassed.
-- **Preceding matched transfer test failed:** short-answer-first scored 1/48 correct+EOS on fresh probes; shuffled control scored 2/48. Both scored 0/16 on paired fact-change checks. EOS endings improved to 40/48 and 43/48; reliable factual grounding did not pass.
-- Both arms consumed 200 updates each, with identical full SFT exposure multisets and narrative replay order: 152,642 SFT target exposures plus 819,200 replay exposures across separate models. Execution took 173.71 seconds. Selected update 175 research checkpoints remained within the original 5% narrative-regression guardrail (+4.94%/+4.45%). No checkpoint was promoted; training is paused.
-- **Earlier memorization diagnostic passed:** eight directly reviewed training conversations, all 10 assistant answers reproduced exactly, including two correction sequences; EOS emitted on all 10 turns. Stopped early at update 25 after 1,100 supervised target exposures and 12.48 seconds of execution. Foundation narrative NLL rose 3.24%, within the unchanged 5% guardrail. This tests training-set memorization, not unseen generalization. No checkpoint was promoted.
-- **Earlier broader conversation diagnostic:** 62 directly reviewed training conversations, 10 development and 10 test conversations. Three passes consumed 24 updates and 11,490 assistant/EOS target exposures. All 84 selected records were inspected; two training records were excluded without replacement.
-- **Earlier held-out response quality: 0/24 before and 0/24 after.** Repetitive story continuations persisted, and no output emitted an EOS end-of-turn token. Lower token loss did not establish conversational capability. No checkpoint was promoted; further training is paused.
-- Epoch 2 was selected using development loss alone: 16 retained SFT updates and 7,660 retained SFT target exposures. Held-out test assistant NLL fell from 5.897426 to 5.323741 (9.7%); narrative foundation NLL rose from 1.343035 to 1.380192 (2.8%, within the 5% guardrail). Epoch 3's 8 updates/3,830 exposures remain charged but were not selected.
-- Model size remains **15,191,712 parameters**. The original reference remains our own cooldown checkpoint at foundation step 3145, with 412,221,440 retained foundation target exposures; its hash is unchanged. Research SFT child checkpoints retain separate optimizer/exposure provenance and are not an English/conversation release.
-- Masked native BF16 versus independent Torch FP32 preflight passed: NLL difference 0.002218, gradient relative L2 error 0.01919, cosine 0.9998165. Changing masked target labels or right-padding inputs changed loss by zero. Two setup-only failures occurred before model work; all stops are preserved, with the same aggregate clock and caps.
-- The new 1,000-conversation Sol batch retained **957 screened candidates**: 759 training, 100 development, 98 test. These are not fully certified training data. The diagnostic used only its separately reviewed subset. No actual internal/MCP tool-call traces were generated.
-- **Foundation recovery remains stopped:** R0 calibration passed, D0 data admission failed, and R1/R2 never started. Its 15,764 documents / 13,657,292 native content tokens remain provisional; semantic and mixture admission failed, and cross-split audits remain incomplete. No new broad foundation data was admitted. The heuristic domain counts are not a certified measure of coverage.
-- All workers have exited. No automatic continuation, new downloads, new model architecture, or tool training occurred. Formal English and conversation gates remain unpassed.
+- Hardware: Apple M4 MacBook Air, 24GB unified memory.
+- Model: 12 layers, width 768, 16,384-token byte-level BPE vocabulary, 512-token context; FP32 master weights and BF16 compute.
+- Pretraining: 100M-token pilot completed; separate continuation reached 200M total and stopped. No 300M run.
+- Revised V2 SFT: two 5M-input-slot arms on the 100M base completed (LR 1e-5 and 3e-5). The two planned 200M-base arms did not run.
+- V3 repair: two 2M-input-slot arms completed from the 100M + 5M SFT LR 3e-5 checkpoint. Development selection chose **repair-lr3-2m**.
+- Penalty sweep: 1.2, 1.3, 1.4 and 1.5 evaluated on the same 550 development cases. Keep 1.2 under the predefined regression gates; stronger global penalties damage tool chains.
 
-## Evidence and lineage
+## Measured results
 
-- [Latest deep training audit](restart/deep-training-audit-v1/README.md), [conditional/gradient summary](restart/deep-training-audit-v1/summary.json), [lineage](restart/deep-training-audit-v1/lineage.json), [proposed teacher-data bridge study](restart/deep-training-audit-v1/PROPOSED_STUDY.md), [integrity audit](restart/deep-training-audit-v1/audit.json)
+V3 test release: 1,000 cases, selected model and two references on the same cases. Selection used development data only. This test set has now been inspected and must not be described as fresh for future tuning.
 
-- [Earlier matched improvement reassessment](restart/matched-improvement-reassessment-v1/README.md), [paired/semantic review](restart/matched-improvement-reassessment-v1/review.json), [audit](restart/matched-improvement-reassessment-v1/audit.json)
+| Metric | Starting LR 3e-5 reference | Selected V3 repair |
+|---|---:|---:|
+| Single-tool full success | 14/200 | 122/200 |
+| Tool-chain full success | 0/150 | 103/150 |
+| Result-only exact answer | 99/150 | 135/150 |
+| Grounded exact answer | 9/100 | 70/100 |
+| Clarification accepted reference | 0/150 | 150/150 |
+| Clarification canonical exact | 0/150 | 71/150 |
+| Error canonical answer | 0/100 | 100/100 |
+| No-tool canonical answer | 0/50 | 50/50 |
+| Chat mean repeated four-gram fraction | 9.81% | 9.82% |
+| Chat EOS termination | 83% | 79% |
+| FineWeb perplexity | 59.71 | 57.38 |
+| TinyStories perplexity | 6.92 | 6.39 |
 
-- [Earlier harder fresh factual conversation reassessment](restart/fresh-factual-conversations-v1/README.md), [semantic review](restart/fresh-factual-conversations-v1/review.json), [basic-fact check](restart/fresh-factual-conversations-v1/knowledge-review.json), [audit](restart/fresh-factual-conversations-v1/audit.json)
+Tool cases use synthetic, template-correlated offline fixtures. These numbers do not establish production tool reliability or broad English competence. Chat quality is not human-certified. Canonical and accepted-reference clarification scores measure different things.
 
-- [Preceding broader curriculum stop report](restart/broader-curriculum-v1/README.md), [decision](restart/broader-curriculum-v1/decision.json), [rejected-child diagnosis](restart/broader-curriculum-v1/rejected-assessment.json), [proposed repair](restart/broader-curriculum-v1/NEXT_RUN_PROPOSAL.md)
+| Development penalty | Chat repetition | Single-tool success | Chain success |
+|---|---:|---:|---:|
+| 1.2 | 9.45% | 56% | 74.67% |
+| 1.3 | 2.06% | 55% | 72% |
+| 1.4 | 0.39% | 55% | 69.33% |
+| 1.5 | 0.01% | 54% | 48% |
 
-- [Earlier controlled binding report](restart/factual-binding-v1/README.md), [decision](restart/factual-binding-v1/decision.json), [audit](restart/factual-binding-v1/audit.json)
+Reducing repetition alone does not establish coherence. Some prompts request repetition; future scoring must distinguish legitimate repetition from loops.
 
-- [Preceding matched transfer report](restart/short-answer-transfer-v1/README.md), [decision](restart/short-answer-transfer-v1/decision.json), [correctness](restart/short-answer-transfer-v1/correctness.json)
-- [Earlier eight-conversation memorization report](restart/conversation-memorization8-v1/README.md), [decision](restart/conversation-memorization8-v1/decision.json), [correctness](restart/conversation-memorization8-v1/correctness.json)
-- [Earlier bounded SFT report](restart/sol-conversation-sft-diagnostic-v1/README.md), [decision](restart/sol-conversation-sft-diagnostic-v1/decision.json), [correctness](restart/sol-conversation-sft-diagnostic-v1/attempt-3/correctness.json)
-- [1,000-conversation batch](restart/sol-conversation-data-1000-v1/README.md), [earlier 100-conversation batch](restart/sol-conversation-data-v1/README.md)
-- [Corrected foundation recovery report](restart/foundation-recovery-v2-corrected/REPORT.md), [metrics](restart/foundation-recovery-v2-corrected/report.json), [terminal stop](restart/foundation-recovery-v2-corrected/STOP.json)
-- [Approved recovery design](restart/foundation-recovery-v2/PLAN.md), [blanket approval receipt](restart/foundation-recovery-v2-corrected/approval-receipt.json)
-- [Preserved preparation-defect stop and correction proposal](restart/foundation-recovery-v2/REPORT.md)
-- [Earlier resolution experiment](restart/foundation-resolution-v1/REPORT.md), [previous foundation stage](restart/foundation-stage3-v1/REPORT.md)
-- [Formal English gate](restart/ENGLISH_GATE.md), [milestone plan](restart/MILESTONE_PLAN.md), [goal path](restart/foundation-stage3-v1/GOAL_PATH.md)
-- [Native Mac benchmark](restart/mac-native-benchmark-v1/report.json), [original reference/data receipt](restart/mac15m-feasibility-v1/data-receipt.json)
-- [Historical work log](restart/execution-v1/STATUS.md), [cleanup and license/provenance context](restart/CLEANUP_AND_DATA.md)
+## Documentation and evidence
 
-Conversation generation requested exactly `gpt-6-sol` through the pinned Codex CLI with tools disabled. Backend-resolved identity was unavailable. Usage and data-token counts are recorded separately per experiment. No new teacher call was used by the bounded SFT diagnostic.
+- [Current plan and constraints](PLAN.md)
+- [Local operation, setup and recovery](LOCAL_RUN.md)
+- [Completed pretraining continuation](CONTINUATION_RUN.md)
+- [Architecture, data and evaluation](docs/ARCHITECTURE.md)
+- [Experiment history and artifact map](docs/EXPERIMENTS.md)
+- [V3 comparison and actual outputs](reports/sft-v3/experiment/REPORT.html)
+- [Completed penalty comparison and actual outputs](reports/sft-v3/penalty-sweep-v1/REPORT.html)
+- [V3 dataset readiness](reports/sft-v3/READINESS.html)
 
-Weights, optimizer states, source corpora, token shards, private evaluation plaintext, virtual environments, SQLite and raw CLI events remain local and outside Git. Reusable code, aggregate evaluation results, hashes and audit receipts are versioned. Exact executed SFT source snapshots containing private probes remain local with versioned hashes. A clone does not contain trained weights or the full local corpus/runtime. Historical scripts and approvals are not permission to rerun terminal experiments. Latest receipts supersede older status prose without rewriting older results or relaxing gates.
+Top-level documents and docs/ describe the current project. Dated reports and configs are immutable experiment evidence, including failed or superseded approaches; their launch-time status fields are not live authorization.
+
+## Setup and verification
+
+Use Python 3.14 on Apple Silicon with Metal support:
+
+```sh
+python3.14 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+Tests exercise small models and fixtures; they do not launch a training campaign. Existing measurements used `../inference-archive-20261029/.venv/bin/python` as a dependency environment only. Archived trainer code and model weights were not inherited.
+
+Git contains code, configs and reports. Raw data, token arrays, checkpoints and runtime state are ignored and remain local. A clone alone cannot reproduce the reported generations without the matching local assets and hashes. See [the runbook](LOCAL_RUN.md) before invoking any preparation or training script.
+
+## Restart boundary
+
+The previous project is preserved on `codex/archive-before-scratch-20261029` at `309c9accdaf2bad074e16fe702e313049abc86f7`. Its ignored files remain in the sibling `inference-archive-20261029`; relocation evidence is in `reports/archive.json`. Historical reports are retained for provenance, not carried forward as current capabilities. No archive deletion or Git history rewrite is required.

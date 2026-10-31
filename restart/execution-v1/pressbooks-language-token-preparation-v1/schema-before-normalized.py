@@ -1,7 +1,0 @@
-"""Metadata-only fixed schema. No original/projected text is stored."""
-SCHEMA='''CREATE TABLE docs(doc INTEGER PRIMARY KEY,source INTEGER NOT NULL,source_ordinal INTEGER NOT NULL,id_SHA256 BLOB NOT NULL,text_SHA256 BLOB NOT NULL,line_SHA256 BLOB NOT NULL,characters INTEGER NOT NULL,UTF8_bytes INTEGER NOT NULL,content_tokens INTEGER NOT NULL,EOS_count INTEGER NOT NULL,scored INTEGER NOT NULL,skipped INTEGER NOT NULL,language_pass INTEGER NOT NULL,min_english REAL NOT NULL,source_flags INTEGER NOT NULL,explicit_hold_flags INTEGER NOT NULL,UNIQUE(source,source_ordinal));
-CREATE TABLE windows(doc INTEGER NOT NULL,ordinal INTEGER NOT NULL,kind INTEGER NOT NULL,start INTEGER NOT NULL,end INTEGER NOT NULL,alphabetics INTEGER NOT NULL,raw_SHA256 BLOB NOT NULL,projection_SHA256 BLOB NOT NULL,scored INTEGER NOT NULL,skip_reason INTEGER,label TEXT,raw_probability TEXT,top_probability REAL,english_probability REAL,policy_pass INTEGER,PRIMARY KEY(doc,ordinal),FOREIGN KEY(doc) REFERENCES docs(doc)) WITHOUT ROWID;
-CREATE TABLE texts(text_SHA256 BLOB PRIMARY KEY,characters INTEGER NOT NULL,UTF8_bytes INTEGER NOT NULL,content_tokens INTEGER NOT NULL,language_pass INTEGER NOT NULL,min_english REAL NOT NULL,scored INTEGER NOT NULL,skipped INTEGER NOT NULL,occurrences INTEGER NOT NULL,explicit_hold_flags INTEGER NOT NULL,source_flags INTEGER NOT NULL) WITHOUT ROWID;'''
-DOC_INSERT='INSERT INTO docs VALUES('+','.join(['?']*16)+')'
-WINDOW_INSERT='INSERT INTO windows VALUES('+','.join(['?']*15)+')'
-TEXT_INSERT='INSERT INTO texts VALUES('+','.join(['?']*11)+')'

@@ -1,0 +1,62 @@
+{
+  "counts": {
+    "train": {
+      "chat": 10000,
+      "grounded": 5000,
+      "tool": 6548
+    },
+    "dev": {
+      "chat": 89,
+      "grounded": 50,
+      "tool": 237
+    },
+    "test": {
+      "chat": 200,
+      "grounded": 100,
+      "tool": 456
+    }
+  },
+  "source_receipt": {
+    "dataset": "HuggingFaceTB/smol-smoltalk",
+    "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc",
+    "url": "https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk/resolve/f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc/data/train-00000-of-00004.parquet",
+    "bytes": 229710350,
+    "sha256": "498cd4580014f42c40cfde066573564ed28e3e1548a5566715b615f5ea932856",
+    "license": "Apache-2.0 upstream card",
+    "paid_services": false
+  },
+  "format": "existing role tokens; assistant-only targets including tool-call marker and EOS; one independent episode per row; batches trimmed to longest member, no cross-episode attention",
+  "limits": [
+    "Short diagnostic conversations, not all three-turn; no broad conversational accuracy claim.",
+    "Synthetic tools use held-out wording and disjoint city/topic sets; numeric values can overlap. Clarification diversity remains small.",
+    "Tool outputs are local deterministic fixtures, never real weather or catalog data.",
+    "No human blind ratings yet; report proxy metrics separately."
+  ],
+  "seed": 3901,
+  "input_token_cap_per_arm": 5000000,
+  "mix_by_scheduled_examples": {
+    "chat": 0.4,
+    "tool": 0.4,
+    "grounded": 0.2
+  },
+  "filter_counts": {
+    "train_duplicates": 2452,
+    "dev_duplicates": 23,
+    "test_duplicates": 62
+  },
+  "files": {
+    "train.jsonl": "51e102297e13f4a59e8a211592bf5bac3d03bc4ba75f1daf2ac790c268bdb890",
+    "test.jsonl": "9700a12bf35c208d15a7312dad0112baf511dfacc011c6a458354b3d75d57b86",
+    "episodes.npz": "8daef924234a096091f81fd5d67d26816c8c6d7338e441326f25ac847ca1ed00",
+    "tokenizer.json": "d14236a82744a26a30b251222629345c2e49343a26798825df50055b5005bf61",
+    "dev.jsonl": "3de8790f8a6b0d6f6cea407515f43d4bbea6a7b1ba986880db6bb9d9a526a382",
+    "order.npy": "40906a57cf378a1bf5d078b9c5c2300d5918824e575a5e5ee636a993227c59db"
+  },
+  "unique_scheduled_examples": 21548,
+  "scheduled_rows": 50000,
+  "scheduled_source_counts": {
+    "2": 10000,
+    "0": 20000,
+    "1": 20000
+  }
+}

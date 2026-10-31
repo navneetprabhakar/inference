@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>MLX cache fix validation</title><style>body{font:17px/1.6 system-ui;max-width:950px;margin:40px auto;padding:20px}pre{white-space:pre-wrap;background:#eee;padding:16px}</style><h1>Cache fix implemented; sequential campaign resumed</h1><ul><li>Trainer and evaluator set a 256 MiB MLX free-buffer cache ceiling before model allocation.</li><li>Telemetry includes active, cached, total allocator and peak active memory. Trainer guard checks allocator total as well as active peak.</li><li>Swap growth is measured from each process start; the 1 GiB growth limit, thermal guard, disk reserve and 12 GiB memory limit remain.</li><li>19 regression tests passed, including cached-memory guard and resume-baseline checks.</li><li>Actual trainer completed 128 validation updates in approximately 8 minutes, reaching 1,098,304 tokens. Maximum sampled allocator memory was 2.25 GiB; no sampled swap growth. The 1M milestone and final validation checkpoint were saved.</li><li>Updates remain inside the first arm's 5M-token allowance. Data order, optimizer state, learning-rate schedule and evaluation scoring were preserved.</li><li>Original checkpoint files are preserved. A recorded hash migration covers only runner infrastructure changes.</li><li>Sequential supervisor resumed after validation and reuses the two completed baseline evaluations. Four arms remain capped at 20M total input slots, followed by strict evaluation and a review stop. No cloud or paid API use.</li></ul><p>Eight-minute validation supports the fix; resource guards remain necessary for a longer run. Cached buffers may transiently exceed the configured ceiling until the next allocation. Snapshot maxima are not continuous allocator peak measurements.</p><pre>{
+  &quot;passed&quot;: true,
+  &quot;training_updates&quot;: 128,
+  &quot;start_tokens&quot;: 57344,
+  &quot;end_tokens&quot;: 1098304,
+  &quot;active_seconds&quot;: 481.5846137080807,
+  &quot;tokens_per_second&quot;: 2185.810513607491,
+  &quot;max_sampled_allocator_bytes&quot;: 2414250608,
+  &quot;max_sampled_swap_growth_mb&quot;: 0.0,
+  &quot;cache_limit_bytes&quot;: 268435456,
+  &quot;checkpoint&quot;: &quot;/Users/navneetprabhakar/Documents/git/image/inference/runs/sft-v2/100m-lr1e-5/checkpoint-000001098304-1793410505568864000&quot;,
+  &quot;note&quot;: &quot;Validation updates retained inside first arm budget. Same optimizer, cursor, LR schedule and frozen data.&quot;
+}</pre><p><a href="../memory-investigation/REPORT.html">Root-cause investigation</a></p>

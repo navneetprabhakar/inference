@@ -1,1 +1,0 @@
-V4 preparation only: adds inspection of only surrounding whitespaceText around exactlyone simple Wikilink author for partial yearshadow. Full original authorvalue raw/hash/offset unchanged; semantictext/comments/tags/multiplelinks remain global. Allv3 ref/unknownyear/collision/globalfallback/componentguards retained.53syntheticcontrols; no retainedsourceapplication.

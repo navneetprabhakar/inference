@@ -1,0 +1,108 @@
+{
+  "checkpoint": "/Users/navneetprabhakar/Documents/git/image/inference/runs/continuation-v1/200m/checkpoint-000200000000-1793375728148476000",
+  "model_sha256": "81bacc82d0b43cff2ac6ca80880cd548f0cbd395c2dae657f2b7523182150e34",
+  "stage": "base-200m",
+  "paid_api_spend_usd": 0,
+  "cloud_spend_usd": 0,
+  "limitations": [
+    "Synthetic template-generated fixture tasks; not BFCL and not independent human release tests.",
+    "Chat coherence is not automatically scored. No human blind review has occurred.",
+    "Strict canonical matching rejects valid paraphrases; no-tool abstention is not answer quality. Chat/no-tool quality requires blind review.",
+    "Role-boundary stopping is an inference intervention, reported separately from learned EOS."
+  ],
+  "config": {
+    "penalty": 1.2,
+    "mode": "greedy",
+    "seed": 100
+  },
+  "metrics": {
+    "chat": {
+      "cases": 200,
+      "mean_repeated_4gram_fraction": 0.27421900251299425,
+      "eos_fraction": 0.07,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0
+    },
+    "grounded": {
+      "cases": 100,
+      "mean_repeated_4gram_fraction": 0.5917204301075268,
+      "eos_fraction": 0.0,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "strict_success_fraction": 0.0,
+      "successes": 0
+    },
+    "none": {
+      "cases": 68,
+      "mean_repeated_4gram_fraction": 0.23226779545565124,
+      "eos_fraction": 0.014705882352941176,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "tool_abstention_fraction": 1.0,
+      "answer_quality": "pending blind human review"
+    },
+    "single": {
+      "cases": 143,
+      "mean_repeated_4gram_fraction": 0.3419290844136417,
+      "eos_fraction": 0.055944055944055944,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "strict_success_fraction": 0.0,
+      "successes": 0,
+      "raw_schema_valid_fraction": 0.0,
+      "exact_call_sequence_fraction": 0.0,
+      "canonical_result_exact_match": 0.0
+    },
+    "chain": {
+      "cases": 100,
+      "mean_repeated_4gram_fraction": 0.1071871535421982,
+      "eos_fraction": 0.44,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "strict_success_fraction": 0.0,
+      "successes": 0,
+      "raw_schema_valid_fraction": 0.0,
+      "exact_call_sequence_fraction": 0.0,
+      "canonical_result_exact_match": 0.0
+    },
+    "clarify": {
+      "cases": 100,
+      "mean_repeated_4gram_fraction": 0.17733524366848832,
+      "eos_fraction": 0.05,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "strict_success_fraction": 0.0,
+      "successes": 0
+    },
+    "error": {
+      "cases": 45,
+      "mean_repeated_4gram_fraction": 0.3579450418160096,
+      "eos_fraction": 0.0,
+      "role_boundary_stop_fraction": 0.0,
+      "context_overflows": 0,
+      "strict_success_fraction": 0.0,
+      "successes": 0
+    }
+  },
+  "assistant_dev_nll": {
+    "chat": 3.2823833240006497,
+    "tool": 3.3436481831453255,
+    "grounded": 5.864687804664884
+  },
+  "language_retention": {
+    "fineweb_validation": {
+      "nll_nats_per_token": 3.7556500658392906,
+      "perplexity": 42.76200889840973,
+      "block_mean_standard_error": 0.033154076882593864,
+      "blocks": 128,
+      "tokens": 65536
+    },
+    "tinystories_unseen_shard": {
+      "nll_nats_per_token": 2.5797384176403284,
+      "perplexity": 13.19368647258755,
+      "block_mean_standard_error": 0.014326091047216575,
+      "blocks": 128,
+      "tokens": 65536
+    }
+  }
+}

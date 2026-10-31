@@ -1,0 +1,112 @@
+{
+  "sources": {
+    "wikipedia-train": {
+      "path": "wikipedia-train.bin",
+      "tokens": 58656475,
+      "sha256": "45e387f5212e6bee17112ef639a9764d19caf27b4b264b70afa1220c91b47e8f"
+    },
+    "wikipedia-validation": {
+      "path": "wikipedia-validation.bin",
+      "tokens": 1950074,
+      "sha256": "b3a18ff18f418c44ec3101d93c0470b53fef06c5b92690f9f654fec6f4c3c6d5"
+    },
+    "pressbooks-train": {
+      "path": "pressbooks-train.bin",
+      "tokens": 56453143,
+      "sha256": "9e41612fa94f21e3f38ae12b385323716aa79a7b06ba3eb639647cffc5f5200f"
+    },
+    "pressbooks-validation": {
+      "path": "pressbooks-validation.bin",
+      "tokens": 1971056,
+      "sha256": "1b01160a93a1f56afbbfc0c9bf1e174c387db2efe8c60e4df0a5413772b57135"
+    },
+    "fineweb-train": {
+      "path": "fineweb-train.bin",
+      "tokens": 116990724,
+      "sha256": "b1ffecfd44aa9a371d1c0e26b3284a0e1e09e51e0fae5a9b72e435931e3a6332"
+    },
+    "fineweb-validation": {
+      "path": "fineweb-validation.bin",
+      "tokens": 1932314,
+      "sha256": "aaac01057e4a6e9f3e0786195cc78e31161584b27aea155fb425572862f24fd2"
+    }
+  },
+  "vocab_size": 16384,
+  "eos": 1,
+  "source_token_counts": {
+    "wikipedia": {
+      "train": 58656475,
+      "validation": 1950074
+    },
+    "pressbooks": {
+      "train": 56453143,
+      "validation": 1971056
+    },
+    "fineweb": {
+      "train": 116990724,
+      "validation": 1932314
+    }
+  },
+  "old_documents_protected": 381538,
+  "old_long_paragraphs_protected": 3039254,
+  "duplicate_screen": "normalized exact document exclusion; repeated paragraphs >=80 characters removed; bottom-64 5-word-shingle SimHash, first 4096 words, Hamming <=3 via four bands; applies to old documents and new retained records. Approximate, not semantic uniqueness proof.",
+  "split": "5% deterministic group hash; Pressbooks grouped by book, Wikipedia/FineWeb by canonical URL; legacy evaluation hashes explicitly protected",
+  "language_screen": "source metadata plus >=95% ASCII letters and English function-word checks; heuristic, not comprehensive language verification",
+  "tokenizer_sha256": "d14236a82744a26a30b251222629345c2e49343a26798825df50055b5005bf61",
+  "sources_url": {
+    "fineweb": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu",
+    "pressbooks": "https://huggingface.co/datasets/common-pile/pressbooks",
+    "wikipedia": "https://huggingface.co/datasets/wikimedia/wikipedia"
+  },
+  "train_tokens": 232099840,
+  "train_sha256": "5752bd8c3c14a7d66282a662d1b3d53d14a73fb48199476bc7928e0691509ebb",
+  "source_ranges": {
+    "fineweb": [
+      0,
+      116990464
+    ],
+    "wikipedia": [
+      116990464,
+      175646720
+    ],
+    "pressbooks": [
+      175646720,
+      232099840
+    ]
+  },
+  "screen_counts": {
+    "wikipedia_read": 107209,
+    "wikipedia_quality_reject": 30012,
+    "wikipedia_paragraphs_removed": 6031,
+    "wikipedia_overlap_or_clean_quality_reject": 426,
+    "wikipedia_exact_reject": 96,
+    "wikipedia_near_reject": 3,
+    "wikipedia_token_cap_skip": 1366,
+    "pressbooks_read": 61041,
+    "pressbooks_paragraphs_removed": 172768,
+    "pressbooks_quality_reject": 3608,
+    "pressbooks_exact_reject": 14362,
+    "pressbooks_overlap_or_clean_quality_reject": 6443,
+    "pressbooks_near_reject": 3284,
+    "pressbooks_token_cap_skip": 543,
+    "fineweb_read": 119528,
+    "fineweb_paragraphs_removed": 13831,
+    "fineweb_quality_reject": 808,
+    "fineweb_exact_reject": 235,
+    "fineweb_overlap_or_clean_quality_reject": 430,
+    "fineweb_near_reject": 39,
+    "fineweb_token_cap_skip": 3998
+  },
+  "seconds": 548.6970419883728,
+  "final_verification": {
+    "same_url_documents_removed": 1769,
+    "table_heavy_documents_removed": 3830,
+    "verified_retained_documents": 216526,
+    "verified_distinct_long_paragraphs": 2580880,
+    "exact_overlap_with_prior_documents_or_prior_evaluation": 0,
+    "new_long_paragraph_duplicates": 0,
+    "cross_split_group_overlap": 0,
+    "train_tokens": 232099840,
+    "limits": "Approximate near-duplicate screening is inherited from preparation. Semantic paraphrases and unrepresented legacy passage overlap may remain."
+  }
+}

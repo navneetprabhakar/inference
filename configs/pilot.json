@@ -1,0 +1,23 @@
+{
+  "status": "authorized_local_benchmark_then_conditional_100m_pilot",
+  "initialization": "random",
+  "target_parameters": 97536768,
+  "language": "English",
+  "tokenizer": "fresh byte-level BPE, 16384 tokens",
+  "pilot_tokens": 100000000,
+  "next_stage_tokens": 1000000000,
+  "candidate_pretraining_tokens": "10B-30B only if held-out conversation readiness improves",
+  "context": 512,
+  "later_context": 2048,
+  "tools": "initially 5-10 executable tools with deterministic fixtures",
+  "evaluation": "held-out dialogue and tool families; whole-trajectory success",
+  "cloud_budget_authorized_usd": 0,
+  "teacher_api_budget_authorized_usd": 0,
+  "pretraining_mix": {
+    "FineWeb-Edu": 0.8,
+    "TinyStories": 0.2
+  },
+  "benchmark_seconds": 1800,
+  "automatic_pilot_gate": "all checks in train_local.py must pass",
+  "power_policy": "pause/checkpoint on battery or critical thermal state; resume on AC and cooler state"
+}
