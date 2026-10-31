@@ -1,0 +1,317 @@
+{
+  "status": "both 100M arms fully evaluated; both 200M arms unstarted and blocked",
+  "table": [
+    [
+      "Grounded exact /100",
+      93,
+      89
+    ],
+    [
+      "Single schema-valid /143",
+      59,
+      69
+    ],
+    [
+      "Single exact calls /143",
+      25,
+      32
+    ],
+    [
+      "Single full success /143",
+      5,
+      25
+    ],
+    [
+      "Full chains /100",
+      0,
+      0
+    ],
+    [
+      "Clarification exact /100",
+      20,
+      7
+    ],
+    [
+      "No-tool abstention /68",
+      66,
+      67
+    ],
+    [
+      "Error response exact /45",
+      45,
+      45
+    ],
+    [
+      "Chat repetition %",
+      13.07,
+      8.77
+    ],
+    [
+      "Chat EOS %",
+      84.5,
+      77.0
+    ],
+    [
+      "FineWeb perplexity",
+      54.34,
+      59.71
+    ],
+    [
+      "TinyStories perplexity",
+      6.47,
+      6.92
+    ]
+  ],
+  "paired_outcomes": {
+    "grounded": {
+      "both_correct": 89,
+      "both_wrong": 7,
+      "lr1_only": 4
+    },
+    "single": {
+      "both_wrong": 117,
+      "lr3_only": 21,
+      "both_correct": 4,
+      "lr1_only": 1
+    },
+    "chain": {
+      "both_wrong": 100
+    },
+    "clarify": {
+      "both_wrong": 80,
+      "both_correct": 7,
+      "lr1_only": 13
+    },
+    "error": {
+      "both_correct": 45
+    }
+  },
+  "diagnostics": {
+    "100m-lr1e-5": {
+      "observed_counts": {
+        "step_1_reached": 243,
+        "step_1_exact": 37,
+        "single_exact_calls": 25,
+        "single_correct_answers_after_exact_calls": 5,
+        "step_2_reached": 12,
+        "step_2_exact": 0
+      },
+      "argument_accuracy_on_parseable_reached_calls": {
+        "city": {
+          "cases": 6,
+          "correct": 0
+        },
+        "item_id": {
+          "cases": 20,
+          "correct": 20
+        },
+        "op": {
+          "cases": 94,
+          "correct": 80
+        },
+        "a": {
+          "cases": 94,
+          "correct": 35
+        },
+        "b": {
+          "cases": 94,
+          "correct": 0
+        },
+        "value": {
+          "cases": 45,
+          "correct": 20
+        },
+        "from_unit": {
+          "cases": 45,
+          "correct": 40
+        },
+        "to_unit": {
+          "cases": 45,
+          "correct": 42
+        },
+        "query": {
+          "cases": 1,
+          "correct": 0
+        }
+      },
+      "limitation": "V2 stopped after wrong calls; later steps are unobserved, not newly evaluated."
+    },
+    "100m-lr3e-5": {
+      "observed_counts": {
+        "step_1_reached": 243,
+        "step_1_exact": 67,
+        "single_exact_calls": 32,
+        "single_correct_answers_after_exact_calls": 25,
+        "step_2_reached": 35
+      },
+      "argument_accuracy_on_parseable_reached_calls": {
+        "city": {
+          "cases": 5,
+          "correct": 0
+        },
+        "query": {
+          "cases": 10,
+          "correct": 0
+        },
+        "value": {
+          "cases": 47,
+          "correct": 42
+        },
+        "from_unit": {
+          "cases": 47,
+          "correct": 42
+        },
+        "to_unit": {
+          "cases": 47,
+          "correct": 44
+        },
+        "item_id": {
+          "cases": 20,
+          "correct": 20
+        },
+        "op": {
+          "cases": 63,
+          "correct": 63
+        },
+        "a": {
+          "cases": 63,
+          "correct": 47
+        },
+        "b": {
+          "cases": 63,
+          "correct": 12
+        }
+      },
+      "limitation": "V2 stopped after wrong calls; later steps are unobserved, not newly evaluated."
+    }
+  },
+  "examples": [
+    {
+      "id": "test-tool-single-0",
+      "kind": "single",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>For two values, -8.67 then 270, perform add.\n<|assistant|>",
+      "reference": "The result is 261.33.",
+      "100m-lr1e-5": [
+        "To find the correct value, -8.67 = 370."
+      ],
+      "100m-lr3e-5": [
+        "To find the correct answer, we need to add up all the values and divide by 2.67. \n\nThe first value is -8.67."
+      ]
+    },
+    {
+      "id": "test-tool-single-1",
+      "kind": "single",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>The original unit is km, quantity 224; give the equivalent in m.\n<|assistant|>",
+      "reference": "224000.0 m.",
+      "100m-lr1e-5": [
+        "Which unit is m?"
+      ],
+      "100m-lr3e-5": [
+        "Which unit should I use?"
+      ]
+    },
+    {
+      "id": "test-tool-chain-0",
+      "kind": "chain",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>Complete this two-stage request using tools: convert -8.67 km to m, then multiply the result and 270.\n<|assistant|>",
+      "reference": "The result is -2340900.0.",
+      "100m-lr1e-5": [
+        "<|tool_call|>{\"name\":\"convert\",\"arguments\":{\"value\":-8.67,\"from_unit\":\"km\",\"to_unit\":\"m\"}}",
+        "<|tool_call|>{\"name\":\"calculate\",\"arguments\":{\"op\":\"multiply\",\"a\":-8670.0,\"b\":2}}"
+      ],
+      "100m-lr3e-5": [
+        "<|tool_call|>{\"name\":\"convert\",\"arguments\":{\"value\":-8.67,\"from_unit\":\"km\",\"to_unit\":\"m\"}}",
+        "-8670.0 m."
+      ]
+    },
+    {
+      "id": "test-tool-chain-1",
+      "kind": "chain",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>Complete this two-stage request using tools: convert 224 km to m, then divide the result and 250.\n<|assistant|>",
+      "reference": "The result is 896.0.",
+      "100m-lr1e-5": [
+        "<|tool_call|>{\"name\":\"convert\",\"arguments\":{\"value\":324,\"from_unit\":\"km\",\"to_unit\":\"m\"}}"
+      ],
+      "100m-lr3e-5": [
+        "Here's a revised version of the sentence:\n\n\"The result is 224 km. Please use a nonzero m, and let me know if you need any further assistance.\"\n\nI made several changes to improve clarity and grammar. I removed \"would not\" as it would be, but instead changed \"multiply\" to \"delivery\" to make the sentence more concise. I also added \"practice\" to make the"
+      ]
+    },
+    {
+      "id": "test-tool-clarify-0",
+      "kind": "clarify",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>The tracking reference is T3209. Can you assist? Please add -8.67 to another number.\n<|assistant|>",
+      "reference": "What is the second number?",
+      "100m-lr1e-5": [
+        "What is the tracking reference?"
+      ],
+      "100m-lr3e-5": [
+        "I can help with that. Please use a nonzero number. I'll provide you with the correct answer, and I'll do my best to assist you in your tracking."
+      ]
+    },
+    {
+      "id": "test-tool-clarify-1",
+      "kind": "clarify",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>The tracking reference is T7960. Can you assist? Convert 224 m.\n<|assistant|>",
+      "reference": "Which target unit should I use?",
+      "100m-lr1e-5": [
+        "Which target unit should I use?"
+      ],
+      "100m-lr3e-5": [
+        "Which target unit should I use?"
+      ]
+    },
+    {
+      "id": "test-grounded-0",
+      "kind": "grounded",
+      "prompt": "<|system|>Answer using only the given context. If the answer is missing, say that the context does not say.\n<|user|>Context: Jaipur is home to Asha 20000, whose occupation is baker.\nQuestion: What is Asha 20000's age?\n<|assistant|>",
+      "reference": "The context does not say.",
+      "100m-lr1e-5": [
+        "The context does not say."
+      ],
+      "100m-lr3e-5": [
+        "The context does not say."
+      ]
+    },
+    {
+      "id": "test-grounded-1",
+      "kind": "grounded",
+      "prompt": "<|system|>Answer using only the given context. If the answer is missing, say that the context does not say.\n<|user|>Context: Jaipur is home to Ravi 20001, whose occupation is artist.\nQuestion: Where does Ravi 20001 live?\n<|assistant|>",
+      "reference": "Jaipur",
+      "100m-lr1e-5": [
+        "Jaipur"
+      ],
+      "100m-lr3e-5": [
+        "Jaipur"
+      ]
+    },
+    {
+      "id": "chat-9ff95716c5f5aad859e476faa57158922e52e45df5d28f2721713d484063d026",
+      "kind": "chat",
+      "prompt": "<|user|>I'm going to give you a character now. You will be a 1990s action movie star, 45 years of age. You have been given the role of the villain in a new action movie, with the working title of \"Doomsday Storm.\" You've read the script, and have decided to meet with the director to discuss your character. \n\nYou are dressed in casual Hollywood attire.\n<|assistant|>(sitting down in the director's office, wearing a sleek black leather jacket and a confident smile) Ah, thanks for seeing me, Marty. I gotta say, I love the script for Doomsday Storm. The action scenes are gonna be insane, and I think I can bring a lot of depth to the role of... (checking the script) ...Victor Vex. But I do have some questions about where you see this character going. What's the real motivation behind Victor's desire to unleash this catastrophic weather control device? Is it just about world domination, or is there something more personal at play here?<|endoftext|><|user|>I've been doing some thinking about Victor's character and I wish for him to not be one dimensional. He has to have more meat to him. That's why I've written in his daughter's death at the hands of a freak hurricane that he had got separated from. Now he has extreme anger with science not saving her.\n<|assistant|>",
+      "reference": "(nodding, intrigued) Ah, I like that. It adds a layer of complexity to Victor's character. The whole \"vengeful villain\" thing is overdone, but this... this is different. It's personal. It's emotional. I can work with that. (pausing, thinking) So, Victor's anger towards science is really a misplaced anger towards himself for not being able to save his daughter. He's projecting his guilt onto the world, and that's what's driving him to create this weather control device. (leaning forward) But what about his relationship with the hero of the story? Is there a personal connection between them, or is it just a straightforward good vs. evil showdown?",
+      "100m-lr1e-5": [
+        "(sitting down in the office, and I'm not sure if you're interested in this. I've been working on a few things since I was a young boy, but I'm still trying to get my attention back.) What's the point?"
+      ],
+      "100m-lr3e-5": [
+        "(sitting down in the office, and I've got a few questions about him) What's the story behind you? Are there any other people who have been trying to get me into this situation?"
+      ]
+    },
+    {
+      "id": "chat-bf2e9bd1a2336d2e5fadfa86547b9014be19bbd9ee1d5242d935369933173de9",
+      "kind": "chat",
+      "prompt": "<|user|>A researcher is analyzing the relationship between the dose of a certain medication and the resulting effect on a patient's blood pressure. She has collected data on the dose (in milligrams) and the corresponding blood pressure reading (in mmHg) for several patients.\n\nHere is a sample of the data:\n\nDose (mg)  2  4  6  8  10  12  14  16\nBP (mmHg) 90  85  80  75  70  65  60  55\n\nWhat type of relationship appears to exist between dose and blood pressure based on this data?\n<|assistant|>The data suggests a negative linear relationship between the dose of the medication and the resulting blood pressure reading. As the dose increases, the blood pressure decreases in a consistent and predictable manner. This is evident from the fact that each increase in dose is accompanied by a corresponding decrease in blood pressure, with the decreases in blood pressure being roughly proportional to the increases in dose. This type of relationship is often described as an inverse or negative correlation, indicating that as one variable (dose) increases, the other variable (blood pressure) decreases.<|endoftext|><|user|>The same researcher is analyzing data on the relationship between the dose of the same medication and the resulting effect on a patient's heart rate.\n\nHere is a sample of the data:\n\nDose (mg)  2  4  6  8  10  12  14  16\nHR (bpm)  60  70  75  80  80  80  80  80\n\nWhat type of relationship appears to exist between dose and heart rate based on this data?\n<|assistant|>",
+      "reference": "The data suggests a non-linear relationship between the dose of the medication and the resulting heart rate. Initially, as the dose increases from 2 to 8 milligrams, the heart rate also increases. However, beyond a dose of 8 milligrams, the heart rate appears to plateau at 80 beats per minute (bpm), with no further increases in heart rate observed despite continued increases in dose. This type of relationship is often described as a threshold or saturation effect, where the response (heart rate) increases initially with the stimulus (dose), but eventually reaches a maximum or plateau level beyond which further increases in the stimulus have no additional effect.",
+      "100m-lr1e-5": [
+        "The data is presented as a series of data sets, which are then compared to the results obtained in this study. The results are shown in Figure 1:\n\nThe results are presented as a series of data sets that are presented as a series of data sets, with the same result being the same as the two-dimensional data set. This is also referred to as the standard deviation of the data set, which is used for the analysis of the patient's heart rate and blood"
+      ],
+      "100m-lr3e-5": [
+        "The data suggests that the patient's heart rate is significantly lower than the average of the two groups, indicating a positive correlation between the dose and blood pressure reading. This indicates that the patient's heart rate is higher than the average of the two groups, suggesting a negative relationship between the dose and blood pressure reading."
+      ]
+    }
+  ],
+  "source_reports": {
+    "100m-lr1e-5": "/Users/navneetprabhakar/Documents/git/image/inference/reports/sft-v2/100m-lr1e-5/final/metrics.json",
+    "100m-lr3e-5": "/Users/navneetprabhakar/Documents/git/image/inference/reports/sft-v2/100m-lr3e-5/final/metrics.json"
+  },
+  "recommendation": "Keep LR3 as tool-repair candidate, LR1 as conservative retention/grounding fallback. Neither dominates; no production-ready or four-way-winner claim."
+}

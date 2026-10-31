@@ -1,4 +1,4 @@
-> Current SFT status: v2 data and evaluation corrections are validated; the four-arm local campaign runs sequentially with a 256MiB MLX cache cap. Cache-fix validation updates count toward the first arm, with automatic continuation after validation. See [readiness report](reports/sft-v2/READINESS.html). Earlier v1 baseline artifacts are retained; its evaluator stopped on a now-fixed retention-scoring error.
+> Current status: both 100M SFT arms are fully evaluated; all training is blocked. Revised v3 data/evaluation are prepared for review. See [v3 readiness](reports/sft-v3/READINESS.html) and [completed comparison](reports/sft-v3/COMPARISON.html). The fresh v3 test set has not been scored by a model.
 
 # English conversation and tool calling from scratch
 
