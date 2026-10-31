@@ -1,46 +1,41 @@
-# Authorized local campaign — 29 October 2026
+# Local operation — 31 October 2026
 
-User authorized a sustained real-data laptop benchmark followed by a 100M-token pilot if feasible. Cloud and paid API spending remain zero.
+## Current state
 
-## What runs
+Training is stopped. V3 repair and the penalty sweep both finished awaiting review. No automatic resume, further pretraining or paid compute is authorized. Keep existing STOP files. Continue on battery if a future run is authorized; charger removal is not a pause condition. Critical thermal and memory/disk limits remain applicable.
 
-1. `scripts/run_local_campaign.py` starts a 30-minute benchmark using fresh random seed 42.
-2. It checks every feasibility condition and verifies source files have not changed.
-3. If all checks pass, it starts a separate fresh-random-weight pilot with seed 43 and exactly 100,000,000 target tokens. Benchmark weights are not reused.
-4. If any check fails, it records the reason and does not launch the pilot. No automatic expansion or retraining is allowed.
+See README.md for environment setup. The measured environment is `../inference-archive-20261029/.venv/bin/python`; use that executable path directly rather than resolving its symlink. Requirements are pinned in requirements.txt. Metal-backed tests require compatible Apple hardware.
 
-Model: 97,536,768 parameters, 12 layers, width 768, 16K newly trained byte-level BPE vocabulary, 512-token context, 2 sequences per microbatch, 8 microbatches/update (8192 target tokens). FP32 master parameters and AdamW state, BF16 forward/backward, global gradient clipping at 1, 2M-token LR warmup, cosine decay. The last batch masks unused targets to stop at exactly 100M.
+## Inspect without starting work
 
-Data: 99,999,912 FineWeb training tokens and 29,999,898 TinyStories training tokens; sampling mix 80/20. Independent validation files contain 999,925 and 367,602 tokens respectively. Original raw data remains unchanged in the archive. The tokenizer uses only training documents. Exact text duplicates are removed, and documents are split by canonical URL or normalized text hash. Near-duplicate and benchmark contamination are not comprehensively resolved; losses are diagnostic, not benchmark capability claims.
+- `runs/sft-v3/campaign.json`: completed repair campaign; old child PID fields may remain after exit.
+- `runs/sft-v3/penalty-sweep-v1/status.json`: completed sweep, model unchanged, recommendation 1.2.
+- `reports/sft-v3/experiment/selection.json`: development-only checkpoint selection.
+- `reports/sft-v3/penalty-sweep-v1/comparison.json`: completed penalty metrics and guards.
+- `runs/continuation-v1/campaign.json`: stopped at 200M total.
 
-## Gates and controls
+Check process existence as well as status files; a recorded PID alone is not evidence of a running job. Final completed_penalties and report files take precedence over the last periodically written cases_completed counter.
 
-- At least 30 active minutes and 25 logged intervals, continuously on AC with no power/critical-thermal pause.
-- Last five intervals average at least 1400 tokens/sec and at least 60% of the first five intervals' average.
-- MLX peak under 12GiB; peak process RSS under 18GiB; swap growth under 1GiB; free disk at least 15GiB.
-- All losses/gradient norms finite; final validation loss improves from random initialization.
-- Checkpoint every approximately five minutes; preserve the two most recent complete checkpoints. Weight and optimizer files are written to a temporary directory before atomic publication.
-- On battery or critical macOS thermal state, checkpoint and pause; resume after AC/cooling. An interrupted benchmark does not authorize the pilot.
-- Pilot stops after 100M target tokens or 24 active hours, whichever occurs first. A STOP file or SIGTERM requests a checkpoint and graceful exit.
-- Local `caffeinate -i` prevents idle sleep while the campaign lives; it does not override lid closure, shutdown, or a disconnected power cable.
+## Assets and checkpoint
 
-## Status and control
+Selected local checkpoint: `runs/sft-v3/repair-lr3/milestones/2000000`.
 
-Live files (intentionally ignored by Git):
+Model SHA-256: `93bb235b29c8bdff5efe4e14bac223b92b5bc70fecc3023a22d8ed2d9b6fd781`.
 
-- `runs/local-campaign-v1/campaign.json`: overall campaign state and child PID.
-- `runs/local-campaign-v1/benchmark/status.json`, `metrics.jsonl`, `result.json`.
-- `runs/local-campaign-v1/pilot/status.json`, `metrics.jsonl`, `result.json` when launched.
-- Each phase's `latest.json` points to its latest complete checkpoint.
+Frozen V3 manifest SHA-256: `7f05e6cfe9bc5b24b8380c10303fe52e02afd2ef5bd2f568914b400eef1b0c0e`.
 
-To stop the active phase gracefully, create `STOP` inside that phase's run directory. An interrupted run is not automatically relaunched. Resume explicitly with the same data and script hashes:
+Data, runtime state and checkpoints are ignored by Git. Preserve them locally; Git push is not a model/data backup. The manifests, receipts, config and code hashes document the dependencies needed to recreate a run. Checkpoints and datasets are not bundled as a downloadable release.
 
-```sh
-../inference-archive-20261029/.venv/bin/python scripts/train_local.py --mode pilot --seed 43 --output runs/local-campaign-v1/pilot --resume
-```
+## Resource controls
 
-Remove a STOP file before resuming. Do not run a second campaign: both supervisor and trainer hold exclusive filesystem locks.
+Run GPU workloads sequentially. The initial overlap attempt and uncapped MLX buffer cache caused swap growth. The fix caps MLX cache at 256MiB and observes active plus cache allocations. V3 inference ended around 0.43GiB allocator usage; training ended around 2.25GiB. Neither is total system memory.
 
-The preserved environment is used as a library interpreter only; all trainer code and tokenization are new. Reproducible dependency versions are in requirements.txt. Tests cover causality, finite gradients, sampler resume across an epoch, exact optimizer/checkpoint state continuation for fixed gradients, and the partially masked final batch. BF16 embedding-gradient accumulation is not bitwise deterministic across GPU executions.
+Retain 12GiB MLX allocation/peak limits, 1GiB additional swap per session, at least 15GiB free disk and critical-thermal protection. System sleep and lid closure can suspend execution; caffeinate does not guarantee execution through lid closure.
 
-This is a base-language training pilot. It does not yet implement conversation/tool SFT and is not a usable conversational model release.
+## Recovery only after renewed authorization
+
+Inspect the failed stage, checkpoint, logs, code/data pins and resource state before resuming. Never delete a STOP file merely because a script suggests resumption. Do not bypass hash mismatches. Preparation scripts can overwrite generated datasets; isolate a new version before any rebuild.
+
+Current implementations are `run_sft_v3.py`, `train_sft_v3.py`, `evaluate_sft_v3.py` and `evaluate_repetition_v3.py` under scripts/. Older campaign and overlap scripts are retained as experiment history and must not be used as the default entry point. A launch-time authorized flag in a config does not grant continuing permission.
+
+Run `python -m unittest discover -s tests -v` in the prepared environment for regression checks. Tiny test-model gradient updates are verification, not additional checkpoint training. Do not launch campaign drivers as a smoke test.

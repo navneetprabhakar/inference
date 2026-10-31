@@ -1,45 +1,26 @@
-# Local continuation: stop and review at 200M tokens
+# Completed pretraining continuation — 31 October 2026
 
-Updated authorized scope: train to 200M total and finish its evaluation, then stop for user review. Training from 200M to 300M is no longer authorized; no cloud resources or paid APIs. This is a bounded pretraining experiment, not a promise of conversational or tool-use competence. The original 100M checkpoint remains intact.
+## Outcome
 
-## Data
+The random-weight 100M-token pilot completed in about 11h22m. A separate continuation reached exactly 200M total tokens and completed evaluation. The user stopped the campaign there. The 300M stage did not run and remains blocked; no more pretraining is authorized.
 
-The unchanged 16,384-token tokenizer encodes fresh FineWeb-Edu, English Wikipedia, and Common Pile Pressbooks. Preparation targets approximately 50% web, 25% Wikipedia, and 25% textbooks by token count. Final counts and hashes are recorded in `reports/continuation-v1/data-manifest.json` and `data-verification.json`. Actual consumption is recorded per source in each training checkpoint.
+The selected V3 SFT checkpoint descends from the **100M base**, not the 200M continuation. There were no completed 200M-base SFT arms.
 
-Sources: [FineWeb-Edu](https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu), [Wikipedia](https://huggingface.co/datasets/wikimedia/wikipedia), [Pressbooks](https://huggingface.co/datasets/common-pile/pressbooks). FineWeb uses ODC-By; Wikipedia has CC-BY-SA/GFDL terms; Pressbooks records carry individual license metadata, retained in the local document database. These source terms must be reviewed before distribution. Wikipedia and Pressbooks use existing local raw files; one additional public FineWeb shard was downloaded with a pinned revision and SHA-256 receipt.
+## Data and recipe used
 
-All prior pilot document hashes and prior held-out document hashes are excluded. Preparation removes repeated paragraphs of at least 80 characters and screens approximate near-duplicates using 5-word-shingle SimHash. Source groups remain in one split, with Pressbooks grouped by book. The final verifier additionally removes URLs already present in the original web shard, checks exact overlap and repeated paragraphs, and rebuilds the token files. Table/list-heavy extracts are rejected when over 40% of their characters are on lines of at most three words, or pipe characters exceed 1%. Spot checks are not factual verification of web content. This reduces duplication; it cannot prove absence of semantic paraphrases or all cross-source leakage. English screening is heuristic.
+The pilot used approximately 80% FineWeb-Edu and 20% TinyStories. Continuation used approximately 50% FineWeb-Edu, 25% English Wikipedia and 25% Common Pile Pressbooks with the same 16,384-token tokenizer, 512-token context and 97.5M model. FP32 master parameters and AdamW moments were restored; BF16 compute continued. The continuation schedule was originally designed through 300M; stopping at 200M did not retroactively alter that schedule.
 
-The runner visits randomly permuted 512-target-token blocks without replay. A checkpoint preserves the permutation cursor. 232.1M verified candidate tokens provide headroom for the authorized 200M; unused tokens are not automatically trained.
+Preparation excluded prior document hashes and held-out hashes, removed repeated paragraphs, screened approximate duplicates, and kept source groups together (including Pressbooks books). These checks reduce leakage; they do not prove semantic independence. Manifests and source receipts preserve counts and provenance. No source-license approval for model/data distribution is implied.
 
-## Training and limits
+## Evidence and limits
 
-Continue the 97,536,768-parameter model with both FP32 master weights and AdamW moments restored from the 100M checkpoint. BF16 forward/backward, 512-token context, batch 2, eight-way accumulation, 8,192 targets per full update, gradient clipping at 1. Final partial updates use masked targets. The original optimizer step counter is preserved.
+On the expanded held-out suite, web/Wikipedia/Pressbooks perplexity improved from 45.10/50.03/44.55 at 100M to 38.73/24.84/33.56 at 200M. Unseen TinyStories worsened from 5.99 to 13.19. On the same 12 greedy prompts, mean repeated four-gram fraction increased from 0.636 to 0.846. These base-model probes were not the later V3 chat/tool suite.
 
-Learning rate rises from 3e-5 at 100M to 1e-4 at 102M, then decays smoothly to 1e-5 at 300M. The schedule and data cursor do not reset at 200M. This deliberate restart schedule is an experiment, not an exact extension of the original cosine schedule.
+The evidence did not support automatically continuing the same recipe. Lower language-model loss did not produce usable conversation or tool calling.
 
-Checkpoint every five minutes; continue on battery per user instruction; pause only on critical thermal state. Stop on less than 15 GiB free disk, more than 12 GiB MLX peak memory, more than 1 GiB additional swap, nonfinite loss/gradient, or 36 hours of active continuation. An existing STOP file in the active stage directory stops safely. A failed stage or evaluation prevents the next stage. Current supervisor ceiling: 200M total training tokens. The trainer retains its absolute 300M safety limit, but the 300M stage is blocked by a STOP file and excluded by the supervisor configuration. Estimated additional training time is around 23 hours based on the pilot; system sleep or thermal pauses add wall-clock time.
+- [100M actual outputs on the expanded suite](reports/continuation-v1/100m/REPORT.md)
+- [200M actual outputs and losses](reports/continuation-v1/200m/REPORT.md)
+- [Data manifest](reports/continuation-v1/data-manifest.json)
+- [Data verification](reports/continuation-v1/data-verification.json)
 
-## Evaluation and actual outputs
-
-The supervisor first evaluates the existing 100M model on the expanded frozen evaluation suite. It trains to exactly 200M, evaluates, saves all outputs, and exits with awaiting_user_review. A further 100M requires explicit user authorization. Nine loss sets include the six prior sets (two are exposed-training diagnostics) and three new held-out source sets. New evaluation blocks exclude the validation prefix used for routine monitoring. Original arrays and prompts remain unchanged.
-
-At each milestone, all 12 prompts produce BF16 greedy and sampled outputs plus FP32 greedy outputs: 36 actual outputs, capped at 96 tokens, with no best-of selection. Sampled decoding uses temperature 0.8/top-k 40. Reports include all outputs, not just selected examples. Legacy Wikipedia is now held-out text from a trained source, rather than an unseen source. These probes are too small to establish broad capabilities.
-
-Compare held-out loss and failure patterns at 100M/200M/300M. Lower loss alone does not establish useful conversation, grounded answers, or valid tool calls. No additional pretraining beyond 300M is authorized by this run.
-
-Live status: `runs/continuation-v1/campaign.json` and stage `status.json`/`metrics.jsonl`. Reports: `reports/continuation-v1/100m/REPORT.md`, `200m/REPORT.md`, and `300m/REPORT.md`. Checkpoints stay local under stage directories.
-
-## Reproduce and recover
-
-Use the dependencies in requirements.txt; this laptop uses `../inference-archive-20261029/.venv/bin/python`. No archived project code is imported.
-
-```sh
-python scripts/prepare_continuation.py
-python scripts/verify_continuation_data.py
-python scripts/smoke_continuation.py
-python -m unittest discover -s tests -v
-python scripts/run_continuation.py
-```
-
-Preparation is destructive to its own generated data files: do not rerun it during or after training without isolating a new dataset version. A running campaign pins script and data hashes. The supervisor refuses to overwrite an existing campaign unless `--resume` is supplied after inspecting its state. With renewed user consent, remove stage STOP files and run `python scripts/run_continuation.py --resume`; it reuses the verified baseline and resumes stage checkpoints. For manual recovery, inspect the error and checkpoint, then resume the affected stage with `train_continuation.py --resume --output <stage> --from-checkpoint <origin> --target-total <200000000 or 300000000>`. Complete its evaluation before starting the next stage from that stage's latest checkpoint. Do not bypass hash mismatches or the token ceiling.
+Local checkpoint pointers remain under `runs/local-campaign-v1/pilot/latest.json` and `runs/continuation-v1/200m/latest.json`. Runtime assets are not in Git. See LOCAL_RUN.md for current operating policy; this document is an outcome record, not a launch procedure.
