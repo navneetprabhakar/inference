@@ -1,0 +1,431 @@
+{
+  "created_at_ist": "2026-10-31T11:36:14.301567+05:30",
+  "status": "two training arms complete; LR3 final evaluation pending; 200M arms blocked by user no-training instruction",
+  "provisional_candidate": "/Users/navneetprabhakar/Documents/git/image/inference/runs/sft-v2/100m-lr3e-5/milestones/5000000",
+  "same_dev_metrics": {
+    "100m-lr1e-5": {
+      "chat": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.1659929856118591,
+        "eos_fraction": 0.7,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0
+      },
+      "grounded": {
+        "cases": 30,
+        "mean_repeated_4gram_fraction": 0.0,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.7333333333333333,
+        "successes": 22
+      },
+      "single": {
+        "cases": 50,
+        "mean_repeated_4gram_fraction": 0.03427862288722897,
+        "eos_fraction": 0.9846153846153847,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.1,
+        "successes": 5,
+        "raw_schema_valid_fraction": 0.58,
+        "exact_call_sequence_fraction": 0.3,
+        "canonical_result_exact_match": 0.1
+      },
+      "chain": {
+        "cases": 30,
+        "mean_repeated_4gram_fraction": 0.01967299866440973,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.0,
+        "successes": 0,
+        "raw_schema_valid_fraction": 0.9,
+        "exact_call_sequence_fraction": 0.0,
+        "canonical_result_exact_match": 0.0
+      },
+      "clarify": {
+        "cases": 25,
+        "mean_repeated_4gram_fraction": 0.005399393326592517,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.52,
+        "successes": 13
+      },
+      "none": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.1307714415015194,
+        "eos_fraction": 0.8,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "tool_abstention_fraction": 0.95,
+        "answer_quality": "pending blind human review"
+      },
+      "error": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.0,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 1.0,
+        "successes": 20
+      }
+    },
+    "100m-lr3e-5": {
+      "chat": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.11693524255962615,
+        "eos_fraction": 0.7,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0
+      },
+      "grounded": {
+        "cases": 30,
+        "mean_repeated_4gram_fraction": 0.0,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.8,
+        "successes": 24
+      },
+      "single": {
+        "cases": 50,
+        "mean_repeated_4gram_fraction": 0.04600060651739605,
+        "eos_fraction": 0.9104477611940298,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.3,
+        "successes": 15,
+        "raw_schema_valid_fraction": 0.58,
+        "exact_call_sequence_fraction": 0.34,
+        "canonical_result_exact_match": 0.3
+      },
+      "chain": {
+        "cases": 30,
+        "mean_repeated_4gram_fraction": 0.01979159052329784,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.0,
+        "successes": 0,
+        "raw_schema_valid_fraction": 0.7,
+        "exact_call_sequence_fraction": 0.0,
+        "canonical_result_exact_match": 0.0
+      },
+      "clarify": {
+        "cases": 25,
+        "mean_repeated_4gram_fraction": 0.03727536231884057,
+        "eos_fraction": 0.96,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 0.48,
+        "successes": 12
+      },
+      "none": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.05095471589781049,
+        "eos_fraction": 0.9,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "tool_abstention_fraction": 0.95,
+        "answer_quality": "pending blind human review"
+      },
+      "error": {
+        "cases": 20,
+        "mean_repeated_4gram_fraction": 0.0,
+        "eos_fraction": 1.0,
+        "role_boundary_stop_fraction": 0.0,
+        "context_overflows": 0,
+        "strict_success_fraction": 1.0,
+        "successes": 20
+      }
+    }
+  },
+  "completed_final_metrics": {
+    "100m-lr1e-5": {
+      "checkpoint": "/Users/navneetprabhakar/Documents/git/image/inference/runs/sft-v2/100m-lr1e-5/milestones/5000000",
+      "model_sha256": "e4a395b580124f99ec3430e798db19356de4003c9cefa9b38112dac4c4582399",
+      "stage": "100m-lr1e-5",
+      "memory_policy": {
+        "cache_limit_bytes": 268435456,
+        "previous_cache_limit_bytes": 24481313587
+      },
+      "paid_api_spend_usd": 0,
+      "cloud_spend_usd": 0,
+      "limitations": [
+        "Synthetic template-generated fixture tasks; not BFCL and not independent human release tests.",
+        "Chat coherence is not automatically scored. No human blind review has occurred.",
+        "Strict canonical matching rejects valid paraphrases; no-tool abstention is not answer quality. Chat/no-tool quality requires blind review.",
+        "Role-boundary stopping is an inference intervention, reported separately from learned EOS."
+      ],
+      "config": {
+        "penalty": 1.2,
+        "mode": "greedy",
+        "seed": 100
+      },
+      "metrics": {
+        "chat": {
+          "cases": 200,
+          "mean_repeated_4gram_fraction": 0.130730561194685,
+          "eos_fraction": 0.845,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0
+        },
+        "grounded": {
+          "cases": 100,
+          "mean_repeated_4gram_fraction": 0.0,
+          "eos_fraction": 1.0,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "strict_success_fraction": 0.93,
+          "successes": 93
+        },
+        "none": {
+          "cases": 68,
+          "mean_repeated_4gram_fraction": 0.10165316068215408,
+          "eos_fraction": 0.8676470588235294,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "tool_abstention_fraction": 0.9705882352941176,
+          "answer_quality": "pending blind human review"
+        },
+        "single": {
+          "cases": 143,
+          "mean_repeated_4gram_fraction": 0.047706376477010926,
+          "eos_fraction": 0.9464285714285714,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "strict_success_fraction": 0.03496503496503497,
+          "successes": 5,
+          "raw_schema_valid_fraction": 0.4125874125874126,
+          "exact_call_sequence_fraction": 0.17482517482517482,
+          "canonical_result_exact_match": 0.03496503496503497
+        },
+        "chain": {
+          "cases": 100,
+          "mean_repeated_4gram_fraction": 0.02209418997235017,
+          "eos_fraction": 1.0,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "strict_success_fraction": 0.0,
+          "successes": 0,
+          "raw_schema_valid_fraction": 0.87,
+          "exact_call_sequence_fraction": 0.0,
+          "canonical_result_exact_match": 0.0
+        },
+        "clarify": {
+          "cases": 100,
+          "mean_repeated_4gram_fraction": 0.0,
+          "eos_fraction": 1.0,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "strict_success_fraction": 0.2,
+          "successes": 20
+        },
+        "error": {
+          "cases": 45,
+          "mean_repeated_4gram_fraction": 0.0,
+          "eos_fraction": 1.0,
+          "role_boundary_stop_fraction": 0.0,
+          "context_overflows": 0,
+          "strict_success_fraction": 1.0,
+          "successes": 45
+        }
+      },
+      "assistant_dev_nll": {
+        "chat": 2.8174525322314508,
+        "tool": 2.9252820075560604,
+        "grounded": 0.4098905658881579
+      },
+      "language_retention": {
+        "fineweb_validation": {
+          "nll_nats_per_token": 3.9951915331184864,
+          "perplexity": 54.33624681801555,
+          "block_mean_standard_error": 0.03315098957959611,
+          "blocks": 128,
+          "tokens": 65536
+        },
+        "tinystories_unseen_shard": {
+          "nll_nats_per_token": 1.8666605846956372,
+          "perplexity": 6.466665420504324,
+          "block_mean_standard_error": 0.01615861400677946,
+          "blocks": 128,
+          "tokens": 65536
+        }
+      }
+    }
+  },
+  "actual_examples": [
+    {
+      "kind": "single",
+      "id": "dev-tool-single-0",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>Work out subtract with operands -102.1, 124.\n<|assistant|>",
+      "reference": "The result is -226.1.",
+      "lr1e5": [
+        "<|tool_call|>{\"name\":\"calculate\",\"arguments\":{\"op\":\"add\",\"a\":-102.1,\"b\":114.1}}"
+      ],
+      "lr3e5": [
+        "<|tool_call|>{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":-102.1,\"b\":11}}"
+      ]
+    },
+    {
+      "kind": "chain",
+      "id": "dev-tool-chain-0",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>Carry out these steps in order: convert -102.1 m to km, then divide the result and 124.\n<|assistant|>",
+      "reference": "The result is -0.000823.",
+      "lr1e5": [
+        "<|tool_call|>{\"name\":\"convert\",\"arguments\":{\"value\":-102.1 m,\"from_unit\":\"m\",\"to_unit\":\"km\"}}"
+      ],
+      "lr3e5": [
+        "<|tool_call|>{\"name\":\"convert\",\"arguments\":{\"value\":-102.1,\"from_unit\":\"m\",\"to_unit\":\"km\"}}",
+        "<|tool_call|>{\"name\":\"calculate\",\"arguments\":{\"op\":\"divide\",\"a\":-0.1021,\"b\":12}}"
+      ]
+    },
+    {
+      "kind": "clarify",
+      "id": "dev-tool-clarify-0",
+      "prompt": "<|system|>Answer briefly in English. Use tools only when needed. Ask for missing arguments. Never invent tool results. Tools: {\"calculate\":{\"op\":\"add|subtract|multiply|divide\",\"a\":\"number\",\"b\":\"number\"},\"convert\":{\"value\":\"number\",\"from_unit\":\"m|km|cm\",\"to_unit\":\"m|km|cm\"},\"get_weather\":{\"city\":\"string\"},\"lookup_item\":{\"item_id\":\"string\"},\"search_notes\":{\"query\":\"string\"}}. To call a tool output <|tool_call|> followed by JSON with name and arguments.\n<|user|>For request D9336, I need help. Please add -102.1 to another number.\n<|assistant|>",
+      "reference": "What is the second number?",
+      "lr1e5": [
+        "What is the second number?"
+      ],
+      "lr3e5": [
+        "To find the correct answer, I need to add -102.1 to the next number.\n\nI'll use the following formula: \n\nD9336 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346 - D9346"
+      ]
+    },
+    {
+      "kind": "grounded",
+      "id": "dev-grounded-0",
+      "prompt": "<|system|>Answer using only the given context. If the answer is missing, say that the context does not say.\n<|user|>Context: The resident named Asha 10000 works as a artist. Their home is in Delhi.\nQuestion: What is Asha 10000's age?\n<|assistant|>",
+      "reference": "The context does not say.",
+      "lr1e5": [
+        "The resident named Asha 10000 is a painter."
+      ],
+      "lr3e5": [
+        "The resident named Asha 10000 is a masterpiece of the art."
+      ]
+    },
+    {
+      "kind": "chat",
+      "id": "chat-1ec9bef41955c7700b0c7f314aacb03925d82d6d5d03c478b271d26b481a7c9b",
+      "prompt": "<|user|>What is the median of a dataset with the following numbers: 1, 7, 9, 15, 30, 40, 50, 55, 72, 92, 105, and 120?\n<|assistant|>To find the median, the numbers need to be sorted in ascending order, which they already are in this case. Since there are 12 numbers in the dataset, an even number, the median will be the average of the two middle numbers.\n\nThe two middle numbers are the 6th and 7th numbers, which are 40 and 50. \n\nThe median is (40 + 50) / 2 = 90 / 2 = 45. \n\nTherefore, the median of the dataset is 45.<|endoftext|><|user|>What is the mode of a dataset with the following numbers: 1, 7, 7, 9, 15, 30, 40, 50, 55, 72, 92, 105, and 120?\n<|assistant|>The mode is the number that appears most frequently in the dataset. Looking at the given numbers, it can be seen that the number 7 appears twice, while all other numbers appear only once.\n\nTherefore, the mode of the dataset is 7, since it is the only number with more than one occurrence.<|endoftext|><|user|>What is range of a dataset with the following numbers: 1, 7, 7, 9, 15, 30, 40, 50, 55, 72, 92, 105, and 120?\n<|assistant|>",
+      "reference": "The range of a dataset is the difference between the largest and smallest values in the dataset. \n\nIn this case, the largest value is 120, and the smallest value is 1. \n\nThe range is calculated as 120 - 1 = 119.\n\nTherefore, the range of the dataset is 119.",
+      "lr1e5": [
+        "To find the range of a dataset with the following numbers, we need to calculate the number of data points.\n\nThe total number of data points is approximately 1, 2, 3, 4, 5, 6, 7, 8, and 92. \n\nSo, the number of data points is approximately 1, 2, 3, 4, 5, 6, 10, 11, 15, 30, 50, 75, 95, 90, 80, 70,"
+      ],
+      "lr3e5": [
+        "To find the range of a dataset with the given numbers, we need to calculate the number of values in each dataset. \n\nThe total number of values is approximately 1,000 + 2,000 = 63.5."
+      ]
+    }
+  ],
+  "metric_plan": [
+    [
+      "Grounded exact answers",
+      "93/100 test",
+      ">=95%; preserve unknown-answer handling",
+      "Vary context order, distractors, unknowns and multi-turn corrections; split underlying facts/templates, not just IDs."
+    ],
+    [
+      "Single-tool schema validity",
+      "59/143 = 41.3% test",
+      ">=90% raw; >=99% separately constrained",
+      "Train complete short calls, balance tools and types; grammar decoding as a separately labelled system intervention."
+    ],
+    [
+      "Single-tool exact arguments",
+      "25/143 = 17.5% test",
+      ">=70%",
+      "Contrastive near-identical prompts differing in one operand/operator; decimal, negative, multi-digit and entity-copy examples; score each argument."
+    ],
+    [
+      "Single-tool full success",
+      "5/143 = 3.5% test",
+      ">=60%; conditional answer accuracy >=90%",
+      "Supervise result-to-answer copying with independently varied tool results. Preserve canonical metric and add separate fact/contradiction checks with reviewed paraphrase labels."
+    ],
+    [
+      "Full chains",
+      "0/100 test; both arms 0/30 dev",
+      ">=40% on unseen two-step chains",
+      "Train stepwise dependencies with changing operands, units and tool sequences; execute model rollouts, not teacher-forced-only history. Report first-step, conditional second-step and full success."
+    ],
+    [
+      "Clarification",
+      "20/100 test",
+      ">=80% correct missing-slot questions",
+      "Remove split-specific tracking-reference prefixes. Cross missing fields with paraphrases/distractors across splits. Avoid overtraining one canonical question."
+    ],
+    [
+      "No-tool abstention",
+      "66/68 = 97.1% test; quality unrated",
+      ">=98% abstention; >=70% relevant/correct answers",
+      "Balance tool-related explanation requests against true tool requests; blind-review answer correctness, not abstention alone."
+    ],
+    [
+      "Error handling",
+      "45/45 test, division by zero only",
+      "Maintain >=98% on broader error suite",
+      "Add not-found, invalid unit, empty results and timeout fixtures; score appropriate explanation and recovery. Cannot improve beyond 100% on the existing fixture."
+    ],
+    [
+      "Chat usefulness",
+      "Unrated; sampled outputs often irrelevant/incorrect",
+      "Establish blind baseline, target >=70% rubric pass",
+      "Short high-quality English tasks, instruction constraints and 3-turn state updates; score relevance, correctness, coherence and unsupported claims separately."
+    ],
+    [
+      "Repetition / stopping",
+      "13.1% repeat-4grams; 84.5% EOS on chat test",
+      "<=5% repetition; >=95% appropriate termination",
+      "Teach concise complete answers and EOS. Keep common-decoder comparison; tune penalty on dev only and separately measure truncation and omissions."
+    ],
+    [
+      "Language retention",
+      "FineWeb PPL 54.34 vs base 49.43; TinyStories 6.47 vs 5.99",
+      "First restore <=49.43 and <=5.99 on those same blocks",
+      "Include 15% clean English/story replay by real input tokens; compare all-token replay loss separately from assistant-only SFT loss. No guarantee both retention and task scores improve together."
+    ],
+    [
+      "Assistant dev NLL",
+      "LR3: chat 2.624; tool 2.739; grounded 0.280",
+      "Track downward alongside generation; never select on NLL alone",
+      "Use identical dev sets, source weighting and token accounting."
+    ],
+    [
+      "Already-good mechanics",
+      "0 context overflow and role-boundary intervention in completed final set",
+      "Preserve; not metrics that need increasing",
+      "Track generation length and role protocol on longer contexts; distinguish learned EOS from forced truncation."
+    ]
+  ],
+  "phases": [
+    {
+      "phase": "1. Finish evidence and freeze selection",
+      "eta": "1\u20133 hours; current evaluation may take another 15\u201330 active minutes",
+      "work": "Let the current LR3 final evaluation finish; keep both 200M arms blocked. Blind-review fixed samples from both 100M arms and preserve canonical raw metrics. LR3 at 5M is provisional candidate; keep LR1 as rollback. No four-way winner claim."
+    },
+    {
+      "phase": "2. Fix dataset and evaluator weaknesses",
+      "eta": "6\u201310 engineering hours",
+      "work": "Create training-only remediation examples and development suite; independently author 800\u20131,000 fresh final cases stratified by tools, operations, lengths, novel entities/aliases and trajectories. Split underlying scenario families, remove prefix cues, and keep the existing 756-case set as a known regression set. Add per-argument, conditional-result and chain-step diagnostics. Add blinded chat rubric; no paid judge."
+    },
+    {
+      "phase": "3. Evaluate inference-only options",
+      "eta": "2\u20134 engineering/evaluation hours",
+      "work": "Compare common decoder to schema-constrained calls and deterministic tool-result rendering using actual returned values. Keep raw model and assisted-system scores separate. Grammar fixes JSON shape, not wrong copied operands. Tune on dev only; do not repeatedly search the fresh test set."
+    },
+    {
+      "phase": "4. Proposed bounded repair experiment \u2014 NOT AUTHORIZED OR STARTED",
+      "eta": "About 45\u201375 minutes training plus 3\u20136 hours evaluation",
+      "work": "After review, two independent 2M processed-input-slot continuations from the selected SFT checkpoint, at LR 1e-5 and 3e-5. Same revised data/order, fresh optimizer, 50% tools/25% chat/10% grounded/15% English replay by nonpadding input tokens. Track actual assistant targets and full-LM replay targets separately. Compare 1M/2M dev milestones; choose by semantic task success and retention gates. Maximum 4M additional slots at this stage."
+    },
+    {
+      "phase": "5. Decision gate",
+      "eta": "1\u20132 hours review; initial iteration approximately 2\u20133 working days total",
+      "work": "Unlock fresh test once for selected candidate. Report paired case changes and uncertainty by scenario family, not inflated independent-template counts. Require meaningful tool and chat gains with grounding/abstention/error non-regression and retention within stated gates. If numeric copying and chains remain weak, stop scaling this recipe and reconsider pretraining/tokenizer capacity. Completing the two unstarted 200M arms would require separate approval; it is not silently included."
+    }
+  ],
+  "targets_are_engineering_goals_not_predictions": true,
+  "training_authorized_now": false
+}
