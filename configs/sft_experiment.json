@@ -47,5 +47,17 @@
     "seed": 100
   },
   "decoder_sweeps": "exploratory only; do not choose primary decoder",
-  "batching": "length-neighbour pairs, dynamic trimming, separate attention per episode"
+  "batching": "length-neighbour pairs, dynamic trimming, separate attention per episode",
+  "memory_policy": {
+    "mlx_cache_limit_bytes": 268435456,
+    "execution": "sequential",
+    "guard": "12GiB active peak or active-plus-cache; 1GiB session swap growth; 15GiB disk reserve",
+    "telemetry": [
+      "active",
+      "cache",
+      "allocator_total",
+      "peak_active",
+      "system_swap"
+    ]
+  }
 }

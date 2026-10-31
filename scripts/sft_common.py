@@ -5,6 +5,14 @@ import numpy as np
 import mlx.core as mx
 import mlx.nn as nn
 ROOT=Path(__file__).resolve().parents[1]
+CACHE_LIMIT_BYTES=256*2**20
+def configure_memory():
+    previous=mx.set_cache_limit(CACHE_LIMIT_BYTES)
+    return {'cache_limit_bytes':CACHE_LIMIT_BYTES,'previous_cache_limit_bytes':previous}
+def memory_stats():
+    active=mx.get_active_memory();cache=mx.get_cache_memory()
+    return {'mlx_active_bytes':active,'mlx_cache_bytes':cache,'mlx_allocator_bytes':active+cache,'mlx_peak_bytes':mx.get_peak_memory(),'mlx_cache_limit_bytes':CACHE_LIMIT_BYTES}
+
 ROLES={'system':'<|system|>','user':'<|user|>','assistant':'<|assistant|>','tool':'<|tool_result|>'}
 EOS='<|endoftext|>';CALL='<|tool_call|>'
 SCHEMAS={'calculate':{'op':'add|subtract|multiply|divide','a':'number','b':'number'},'convert':{'value':'number','from_unit':'m|km|cm','to_unit':'m|km|cm'},'get_weather':{'city':'string'},'lookup_item':{'item_id':'string'},'search_notes':{'query':'string'}}

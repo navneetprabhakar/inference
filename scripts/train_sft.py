@@ -7,8 +7,10 @@ import mlx.nn as nn
 import mlx.optimizers as optim
 from mlx.utils import tree_map,tree_unflatten
 from benchmark_mlx import Model
-from train_local import atomic_json,health,save_checkpoint
-from sft_common import ROOT,masked_loss
+from train_local import atomic_json,health as system_health,save_checkpoint
+from sft_common import ROOT,masked_loss,configure_memory,memory_stats
+def health():
+ return {**system_health(),**memory_stats()}
 STOP=False
 LIMIT=5_000_000
 MILESTONES=[1_000_000,3_000_000,5_000_000]
@@ -44,10 +46,15 @@ def dev_loss(model,arrays):
   totals[['chat','tool','grounded'][src]]=num/max(1,den)
  return totals
 
+def resource_limit(h,baseline):
+ return h['free_disk_bytes']<15*2**30 or h['mlx_peak_bytes']>12*2**30 or h.get('mlx_allocator_bytes',0)>12*2**30 or h['swap_used_mb']-baseline['swap_used_mb']>1024
+
 def main(a):
+ memory_policy=configure_memory()
  signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGINT,stop)
  data=ROOT/'data/sft-v2';out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);lock=(out/'.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  assert a.lr in [1e-5,3e-5]
+ session_health=health()
  manifest=json.loads((data/'manifest.json').read_text())
  for n,h in manifest['files'].items():assert hashlib.sha256((data/n).read_bytes()).hexdigest()==h,n
  arrays=dict(np.load(data/'episodes.npz'));order=np.load(data/'order.npy');pins={n:hashlib.sha256((ROOT/'scripts'/n).read_bytes()).hexdigest() for n in ['train_sft.py','sft_common.py','benchmark_mlx.py','train_local.py']};data_hash=hashlib.sha256((data/'manifest.json').read_bytes()).hexdigest()
@@ -57,6 +64,7 @@ def main(a):
  if a.resume:
   origin=out/json.loads((out/'latest.json').read_text())['directory'];state=json.loads((origin/'state.json').read_text());assert state['code_pins']==pins and state['data_sha256']==data_hash and state['peak_lr']==a.lr
   opt.state=tree_unflatten(list(mx.load(str(origin/'optimizer.npz')).items()))
+ state['session_initial_health']=session_health;state['memory_policy']=memory_policy;session_start_steps=state['steps']
  master.load_weights(str(origin/'model.safetensors'));compute=Model(768,12,16384);compute.update(tree_map(lambda x:x.astype(mx.bfloat16),master.parameters()));mx.eval(master.parameters(),compute.parameters(),opt.state)
  grad=nn.value_and_grad(compute,masked_loss)
  def snapshot(status):
@@ -72,7 +80,7 @@ def main(a):
     checkpoint('paused_critical_thermal')
     while h['thermal_state']>=3 and not STOP and not (out/'STOP').exists() and not (out.parent/'STOP').exists():time.sleep(10);h=health()
     last=time.monotonic();continue
-   if h['free_disk_bytes']<15*2**30 or h['mlx_peak_bytes']>12*2**30 or h['swap_used_mb']-state['initial_health']['swap_used_mb']>1024:checkpoint('stopped_resource_limit');return 3
+   if resource_limit(h,session_health):checkpoint('stopped_resource_limit');return 3
   endpoint=next(x for x in MILESTONES if x>state['tokens']);count=min(8192,endpoint-state['tokens']);batches=[];used=0;total_targets=0;nonpad=0
   while used<count:
    valid=min(batch_slots(arrays,order,state['cursor']),count-used);t,m,n,p=batch(arrays,order,state['cursor'],valid);state['cursor']+=2;batches.append((t,m,n));total_targets+=n;nonpad+=p;used+=valid
@@ -94,7 +102,9 @@ def main(a):
    state['dev_loss']=dev_loss(compute,arrays);dest=out/'milestones'/str(state['tokens']);dest.parent.mkdir(parents=True,exist_ok=True)
    tmp=dest.with_name(dest.name+'.partial');tmp.mkdir(exist_ok=True);master.save_weights(str(tmp/'model.safetensors'));atomic_json(tmp/'state.json',snapshot('milestone'));os.replace(tmp,dest)
    checkpoint('running');print('milestone',state['tokens'],state['dev_loss'],flush=True)
+  if a.validation_updates and state['steps']-session_start_steps>=a.validation_updates:
+   checkpoint('validation_completed');return 0
   if state['active_seconds']>8*3600:checkpoint('stopped_8h_limit');return 5
  checkpoint('completed');atomic_json(out/'result.json',{**state,'status':'completed','cloud_spend_usd':0,'paid_api_spend_usd':0});return 0
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--lr',type=float,required=True);p.add_argument('--resume',action='store_true');raise SystemExit(main(p.parse_args()))
+ p=argparse.ArgumentParser();p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--lr',type=float,required=True);p.add_argument('--resume',action='store_true');p.add_argument('--validation-updates',type=int,default=0);raise SystemExit(main(p.parse_args()))

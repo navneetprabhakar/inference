@@ -61,14 +61,15 @@ def subset(records,counts):
  return result
 
 def run(a):
+ memory_policy=configure_memory()
  out=a.output;out.mkdir(parents=True,exist_ok=True);data=ROOT/'data/sft-v2';tok=Tokenizer.from_file(str(data/'tokenizer.json'));model=Model(768,12,16384);model.load_weights(str(a.checkpoint/'model.safetensors'));model.set_dtype(mx.bfloat16);mx.eval(model.parameters());dev=[json.loads(l) for l in (data/'dev.jsonl').read_text().splitlines()]
- start=time.time();base={'checkpoint':str(a.checkpoint),'model_sha256':hashlib.sha256((a.checkpoint/'model.safetensors').read_bytes()).hexdigest(),'stage':a.stage,'paid_api_spend_usd':0,'cloud_spend_usd':0,'limitations':['Synthetic template-generated fixture tasks; not BFCL and not independent human release tests.','Chat coherence is not automatically scored. No human blind review has occurred.','Strict canonical matching rejects valid paraphrases; no-tool abstention is not answer quality. Chat/no-tool quality requires blind review.','Role-boundary stopping is an inference intervention, reported separately from learned EOS.']}
+ start=time.time();base={'checkpoint':str(a.checkpoint),'model_sha256':hashlib.sha256((a.checkpoint/'model.safetensors').read_bytes()).hexdigest(),'stage':a.stage,'memory_policy':memory_policy,'paid_api_spend_usd':0,'cloud_spend_usd':0,'limitations':['Synthetic template-generated fixture tasks; not BFCL and not independent human release tests.','Chat coherence is not automatically scored. No human blind review has occurred.','Strict canonical matching rejects valid paraphrases; no-tool abstention is not answer quality. Chat/no-tool quality requires blind review.','Role-boundary stopping is an inference intervention, reported separately from learned EOS.']}
  if a.mode=='sweep':
   small=subset(dev,{'chat':20,'grounded':30,'single':50,'chain':30,'clarify':25,'none':20,'error':20});runs=[]
   for penalty in [1.,1.1,1.2,1.3]:
    for mode in ['greedy','sampled']:
     for seed in ([100] if mode=='greedy' else [100,101,102]):
-     config={'penalty':penalty,'mode':mode,'seed':seed};rows=[evaluate_record(model,tok,x,config) for x in small];metrics=summarize(rows);runs.append({'config':config,'metrics':metrics,'rows':rows});atomic_json(out/'sweep.json',{'runs':runs,**base});print('sweep',config,flush=True)
+     config={'penalty':penalty,'mode':mode,'seed':seed};rows=[evaluate_record(model,tok,x,config) for x in small];metrics=summarize(rows);runs.append({'config':config,'metrics':metrics,'rows':rows});atomic_json(out/'sweep.json',{'runs':runs,**base});atomic_json(out/'memory.json',memory_stats());print('sweep',config,flush=True)
   # Choose by mean across sampling seeds, never best-of-seed selection.
   ranked=[]
   for penalty in [1.,1.1,1.2,1.3]:
@@ -91,7 +92,7 @@ def run(a):
   rows=[]
   for i,rec in enumerate(records):
    rows.append(evaluate_record(model,tok,rec,config))
-   if i%25==0:atomic_json(out/'generations.json',rows);print('evaluation cases',i,flush=True)
+   if i%25==0:atomic_json(out/'generations.json',rows);atomic_json(out/'memory.json',memory_stats());print('evaluation cases',i,flush=True)
   retention={}
   if a.mode=='final':
    frozen=np.load(ROOT/'runs/evaluation-v1/loss_sets.npz')
@@ -102,6 +103,6 @@ def run(a):
    lines += [f"## {r['id']} ({r['kind']})",'','Prompt:','```text',r['prompt'],'```','Reference:','```text',r['reference'],'```']
    for i,g in enumerate(r['generations']):lines += [f'Output {i+1}:','```text',g['output'],'```',f"Stop: {g['stop']}",'']
   (out/'REPORT.md').write_text('\n'.join(lines)+'\n')
- atomic_json(out/'completed.json',{**base,'complete':True,'seconds':time.time()-start});return 0
+ atomic_json(out/'completed.json',{**base,'memory':memory_stats(),'complete':True,'seconds':time.time()-start});return 0
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--stage',required=True);p.add_argument('--mode',choices=['sweep','milestone','final'],required=True);p.add_argument('--config',type=Path);run(p.parse_args())

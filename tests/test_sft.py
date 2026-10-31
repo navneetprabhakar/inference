@@ -6,7 +6,7 @@ import mlx.core as mx
 import mlx.nn as nn
 from tokenizers import Tokenizer
 from sft_common import *
-from train_sft import batch,batch_slots,lr_at
+from train_sft import batch,batch_slots,lr_at,resource_limit
 from benchmark_mlx import Model
 from evaluate_sft import faithful,strict_answer,evaluate_record
 from unittest.mock import patch
@@ -60,4 +60,10 @@ class SFTTest(unittest.TestCase):
  def test_trimmed_loss_matches_padded_loss(self):
   model=Model(64,2,128);t=mx.random.randint(0,128,(2,513));mask=mx.zeros((2,512));mask=mask.at[:,:30].add(1)
   self.assertTrue(bool(mx.allclose(masked_loss(model,t,mask),masked_loss(model,t[:,:31],mask[:,:30]),atol=1e-5)))
+ def test_resume_resource_guard_uses_session_growth(self):
+  h={'free_disk_bytes':80*2**30,'mlx_peak_bytes':3*2**30,'swap_used_mb':1600}
+  self.assertFalse(resource_limit(h,{'swap_used_mb':1600}))
+  self.assertTrue(resource_limit(dict(h,mlx_allocator_bytes=13*2**30),{'swap_used_mb':1600}))
+  self.assertTrue(resource_limit(dict(h,swap_used_mb=2625),{'swap_used_mb':1600}))
+  self.assertTrue(resource_limit(dict(h,free_disk_bytes=10*2**30),h))
 if __name__=='__main__':unittest.main()
