@@ -1,8 +1,8 @@
 {
-  "status": "prepared_for_review_training_not_authorized",
+  "status": "authorized_bounded_two_arm_repair",
   "data_dir": "data/sft-v3",
   "manifest_sha256": "7f05e6cfe9bc5b24b8380c10303fe52e02afd2ef5bd2f568914b400eef1b0c0e",
-  "training_authorized_tokens": 0,
+  "training_authorized_tokens": 4000000,
   "fresh_test_model_evaluations": 0,
   "existing_runner_repointed": false,
   "input_mix": {
@@ -43,9 +43,39 @@
     "tool": 0.17237488867019632,
     "replay": 0.3749561821472436
   },
-  "source_loss_weights": null,
-  "next_training_prerequisite": "Explicit authorization and a v3 runner configuration that reports source loss weighting and supports full-LM replay masks. Input mix is not loss mix.",
+  "source_loss_weights": {
+    "chat": 0.6085669678553031,
+    "tool": 2.900654520256988,
+    "grounded": 2.3884706028280824,
+    "replay": 0.4000467445049237
+  },
+  "next_training_prerequisite": null,
   "cache_limit_bytes": 268435456,
   "cloud_spend_usd": 0,
-  "paid_api_spend_usd": 0
+  "paid_api_spend_usd": 0,
+  "per_arm_processed_input_limit": 2000000,
+  "learning_rates": [
+    1e-05,
+    3e-05
+  ],
+  "desired_weighted_target_mass": {
+    "chat": 0.25,
+    "tool": 0.5,
+    "grounded": 0.1,
+    "replay": 0.15
+  },
+  "base_checkpoint": "runs/sft-v2/100m-lr3e-5/milestones/5000000",
+  "milestones": [
+    1000000,
+    2000000
+  ],
+  "stop_after": "two arms, development selection, one frozen test release, review",
+  "selection_policy": {
+    "primary": "0.4 single + 0.25 chain + 0.2 result + 0.15 accepted clarification",
+    "guards": "grounding, no-tool abstention and error no more than 5 percentage points below starting checkpoint; each retention PPL <=105% of starting checkpoint",
+    "tie_break": "lower chat repetition, then earlier milestone, then lower LR",
+    "fresh_test": "One frozen release: selected candidate and both existing references; no subsequent selection/tuning on test."
+  },
+  "runner": "scripts/run_sft_v3.py",
+  "fresh_test_release_models": "dev-selected candidate plus both frozen existing reference checkpoints; no test-driven reselection"
 }

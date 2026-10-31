@@ -1,4 +1,4 @@
-> Current status: both 100M SFT arms are fully evaluated; all training is blocked. Revised v3 data/evaluation are prepared for review. See [v3 readiness](reports/sft-v3/READINESS.html) and [completed comparison](reports/sft-v3/COMPARISON.html). The fresh v3 test set has not been scored by a model.
+> Current status: authorized v3 repair experiment, two 2M-token arms from the 100M + 5M SFT LR 3e-5 checkpoint. Sequential local execution, 256MiB cache cap, weighted source loss, development-only selection, one fresh-test release, then stop for review. The old v2 campaign remains blocked.
 
 # English conversation and tool calling from scratch
 
