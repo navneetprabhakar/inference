@@ -15,10 +15,8 @@ python gpt2.py --device mps
 
 Use `--device cpu` for the CPU path. The command builds random weights, checks the parameter count, varies the suffix of a sequence to test causal attention, and computes next-token loss on synthetic token IDs. It performs zero optimizer updates and saves no weights. On this laptop the MPS check passed with loss 11.2031. This measures wiring only.
 
-## Next milestone
+## Current execution
 
-1. Add the GPT-2 tokenizer. Verify known text/ID pairs and document boundaries before preparing any shards.
-2. Overfit one small batch and inspect targets, gradients and loss. Then use a document-disjoint validation shard to measure generalization.
-3. Benchmark sustained tokens per second and memory on real text. Use those measurements to choose a feasible local pretraining budget before launching a long run.
+The tokenizer and decoder parity checks passed on CPU and MPS. The 124M student memorized an eight-target batch in seven updates. A separate 999,424-target diagnostic pilot improved held-out loss on both text sources. The run artifacts include generated samples and the checkpoint inventory. See the [feasibility report](reports/astra-feasibility/README.md) for the measured results and reproduction commands.
 
 The previous project is preserved at [main commit c5b911b](https://github.com/navneetprabhakar/inference/commit/c5b911b5a4abe096f17848e1d119549e253a0092).

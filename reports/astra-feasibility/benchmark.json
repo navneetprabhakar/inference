@@ -1,0 +1,72 @@
+{
+  "status": {
+    "stage": "benchmark",
+    "state": "passed",
+    "step": 453,
+    "target_tokens": 1855488,
+    "measured_target_tokens": 1835008,
+    "measured_seconds": 1802.4378489160445,
+    "warmup_updates": 5,
+    "timestamp": 1793896495.738944,
+    "input_tokens": 1855488,
+    "measured_training_seconds": 1796.6886840059888,
+    "restored": true,
+    "training_tokens_per_second": 1021.3277438295946,
+    "end_to_end_tokens_per_second": 1018.0700550110744,
+    "last_ten_minutes_tokens_per_second": 1024.0,
+    "last_window_seconds": 600,
+    "source_wraps": {
+      "wiki": 1,
+      "stories": 0
+    },
+    "remaining_measured_seconds": 0,
+    "remaining_elapsed_seconds": 878.7450139522552,
+    "validation_loss": 6.834225654602051,
+    "elapsed_seconds": 1821.3978581428528
+  },
+  "config": {
+    "seed": 81,
+    "dtype": "fp32",
+    "parameters": 124439808,
+    "length": 256,
+    "microbatch": 1,
+    "accumulation": 16,
+    "targets_per_update": 4096,
+    "corpus": "2b85ffcfb75bc35bd03e5edc1618f10f9258bf0cdaee3f2f062516d27bbfdcf9",
+    "torch": "2.14.1",
+    "source_sha": {
+      "benchmark.py": "116e5a46729e698932d4fcec34ddac9e457195d420617f9183bd23ae2078234f",
+      "gpt2.py": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+      "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+      "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+      "pilot.py": "61637531f256ee62e2e44938d2161f36781e20a275915d8ec2bc185a39dd00ea"
+    },
+    "elapsed_cap": 2700,
+    "measured_seconds": 1800,
+    "validation_every": 30,
+    "save_restore_at_measured_step": 10,
+    "warmup_updates": 5,
+    "data_policy": "cycle finite training shards only for throughput measurement"
+  },
+  "guards": {
+    "peak_thermal": 1,
+    "peak_rss_mib": 958.515625,
+    "sampled_peak_mps_bytes": 2012588544,
+    "maximum_swap_growth_mib": 0.0,
+    "minimum_disk_gib": 90.9515266418457
+  },
+  "decision": {
+    "run": "astra-candidate-01",
+    "authorization": "Owner delegated local zero-paid-cost run and budget decisions",
+    "target_tokens": 2457600,
+    "steps": 600,
+    "active_cap_seconds": 3900,
+    "elapsed_cap_seconds": 5400,
+    "projected_training_hours": 0.671,
+    "projected_calendar_hours_at_100pct_duty": 0.671,
+    "projected_calendar_hours_at_50pct_duty": 1.341,
+    "disk_allowance_gib": 15,
+    "basis": "4,889,910 unique training positions available. At the 9:7 mixture, 640 updates fit, selecting 600. 32 fixed validation blocks per source. Pilot paired block loss difference SE 0.0221; using 0.025 required primary improvement and 0.05 material regression. Two missed windows or material regression stop. A 100M target trial is unsupported by the reviewed data."
+  }
+}

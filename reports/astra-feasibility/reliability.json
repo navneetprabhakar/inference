@@ -1,0 +1,30 @@
+{
+  "resume_and_retention": {
+    "state": "passed",
+    "device": "cpu",
+    "steps": 2,
+    "targets": 24,
+    "bit_identical": true,
+    "protected_retention": true,
+    "interrupted_same_step_safe": true,
+    "corrupt_checkpoint_rejected": true,
+    "guard_resume_deadline": true
+  },
+  "candidate_recovery": {
+    "state": "passed",
+    "device": "cpu",
+    "bit_identical_candidate": true,
+    "hard_token_cap": 192,
+    "reserved_lost_work": 16,
+    "failed_gate_preserved": true
+  },
+  "code_sha256": {
+    "verify_resume.py": "332f125aa65222dc4789a49e4b5e42513119cee1d2a1dda71e87357623c6d02c",
+    "verify_pretrain.py": "6fe85564012a297fd9225bbf2633d85840c10abfd5d5fbae3ffcbe885b94d8e1",
+    "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+    "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+    "pretrain.py": "6ca87d2fffebe573d0330dbb5c8a19dbf3895f3b39e99f623fc8f296cbf6426e",
+    "benchmark.py": "116e5a46729e698932d4fcec34ddac9e457195d420617f9183bd23ae2078234f"
+  },
+  "scope": "Single-thread CPU model and optimizer fixtures with mocked MPS telemetry. The live benchmark separately tests full-size MPS checkpoint/save and restore."
+}

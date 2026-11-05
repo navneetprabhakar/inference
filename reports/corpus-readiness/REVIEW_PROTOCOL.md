@@ -1,0 +1,7 @@
+# Extended trial review
+
+This corpus is for a bounded, local learning trial. A frozen salt selects 12 independent Wikipedia documents from each split and six TinyStories documents from each split. The reviewing assistant reads each complete extracted document. A document passes if it supplies understandable English prose, contains a complete idea and has no distracting extraction damage, contact information or evident imported attribution requirement. A minor issue preserves readability. A major issue breaks comprehension, exposes sensitive text or shows an unresolved rights notice. Stop or revise if fewer than 23 of 24 Wikipedia leads or 11 of 12 story records are readable, or any sampled record exposes sensitive data or an unresolved rights notice.
+
+This small sample checks the extraction pipeline. It cannot establish source-wide factual accuracy, attribution completeness or a population-wide readability rate. Mathematical and legal accuracy are outside this review. Reviewers distinguish fictional narrative from factual source material.
+
+The v1 sample exposed a health/addiction biography and missing quantities. V1 fails the gate. The v2 derivative drops Wikipedia leads with biography or sensitive-salience markers and obvious missing template quantities. Its new salt draws 24 Wikipedia leads again. The 12 TinyStories source documents reviewed in v1 are unaffected by the derivative, with identical shard bytes.

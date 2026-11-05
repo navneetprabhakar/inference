@@ -1,0 +1,170 @@
+{
+  "status": {
+    "stage": "distinct-document pilot",
+    "state": "passed",
+    "step": 244,
+    "target_tokens": 999424,
+    "unigram": {
+      "wiki": 8.0588418296001,
+      "stories": 6.183311351252294
+    },
+    "elapsed": 835.1152212079614,
+    "shard_offsets": {
+      "wiki": 562176,
+      "stories": 437248
+    },
+    "timestamp": 1793894668.720841,
+    "train_loss": 6.026752382516861,
+    "gradient_norm": 1.1194814443588257,
+    "lr": 3.001216648934266e-05
+  },
+  "evaluation": [
+    {
+      "step": 0,
+      "validation": {
+        "wiki": 11.014553785324097,
+        "stories": 10.947660684585571
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to Nieto Nieto Nieto Nieto Nieto Nieto Nieto765617656176561765617656176561765617656176561",
+        "The child went to the garden because": "The child went to the garden because459459459459459459459459whewhewhewhewhewhewhewhe"
+      }
+    },
+    {
+      "step": 1,
+      "validation": {
+        "wiki": 10.303334355354309,
+        "stories": 10.008249282836914
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to................",
+        "The child went to the garden because": "The child went to the garden because................"
+      }
+    },
+    {
+      "step": 10,
+      "validation": {
+        "wiki": 8.826401472091675,
+        "stories": 8.046316742897034
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to.\n,,,,,,,,,,,,,,",
+        "The child went to the garden because": "The child went to the garden because, the,,,,,,,,,,,,,,"
+      }
+    },
+    {
+      "step": 30,
+      "validation": {
+        "wiki": 7.878312349319458,
+        "stories": 5.731661260128021
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to a big, \"\nThe\nThe Tim, \" Tim, \"\nThe",
+        "The child went to the garden because": "The child went to the garden because, \" \" Tim, \"\nThe \" \" \" Tim, \"\nThe"
+      }
+    },
+    {
+      "step": 60,
+      "validation": {
+        "wiki": 7.624446511268616,
+        "stories": 5.055145502090454
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to the end, and the end.\n- \"The little girl, \"I",
+        "The child went to the garden because": "The child went to the garden because and said, \"I, \"I, \"I, \"I, \""
+      }
+    },
+    {
+      "step": 120,
+      "validation": {
+        "wiki": 7.308697998523712,
+        "stories": 4.474223375320435
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to the other of the other of the first of the other of the other of the",
+        "The child went to the garden because": "The child went to the garden because the first of the other of the first of the first of the other of the"
+      }
+    },
+    {
+      "step": 180,
+      "validation": {
+        "wiki": 7.192887008190155,
+        "stories": 4.25362366437912
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to the first of the first of the first of the first of the first of the",
+        "The child went to the garden because": "The child went to the garden because the park.\nThe bird was very happy and the park.\nThe bird"
+      }
+    },
+    {
+      "step": 244,
+      "validation": {
+        "wiki": 7.118679881095886,
+        "stories": 4.16185188293457
+      },
+      "completions": {
+        "A bridge is built to": "A bridge is built to the other of the other of the other of the other of the other of the",
+        "The child went to the garden because": "The child went to the garden because the park.\nThe bird was very happy and the park. He was very"
+      }
+    }
+  ],
+  "latest": [
+    {
+      "file": "step-000244.pt",
+      "sha256": "80f4b765adf6f0481fc16bb42a19dc3b420bb02dd8cf8642bd71a930f55040fe",
+      "bytes": 1493453659
+    },
+    {
+      "file": "step-000120.pt",
+      "sha256": "9e7584e16eb6c6d746777387a66d582c3141e2b1bdc8964d4d2f013acfc8293e",
+      "bytes": 1493453659
+    }
+  ],
+  "config": {
+    "seed": 61,
+    "torch": "2.14.1",
+    "config": {
+      "vocabulary": 50257,
+      "context": 1024,
+      "width": 768,
+      "heads": 12,
+      "depth": 12
+    },
+    "dtype": "float32",
+    "length": 256,
+    "accumulation": 16,
+    "training_tokens_cap": 999424,
+    "seconds_cap": 3600,
+    "lr": 0.0003,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "warmup": 10,
+    "weight_decay": 0.1,
+    "gradient_clip": 1.0,
+    "mix": "nine wiki then seven story microbatches per update",
+    "prompts": [
+      "A bridge is built to",
+      "The child went to the garden because"
+    ],
+    "corpus_sha": "2b85ffcfb75bc35bd03e5edc1618f10f9258bf0cdaee3f2f062516d27bbfdcf9",
+    "source_sha": {
+      "gpt2.py": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+      "pilot.py": "61637531f256ee62e2e44938d2161f36781e20a275915d8ec2bc185a39dd00ea",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+      "tokenizer.py": "02209604b4e779046405c8f17cb4452936821e9f041513734aaefd56f7b40443",
+      "guards.py": "dd8003b1f300b0f2521cd0844a0b5c1e0e7a5e6ebd915e6f17caeb746725cf90",
+      "checkpoint.py": "7864d93b596f7f7af7e5f71fa1a9c918e33e37b55c98a72437d868d14ed9304a"
+    }
+  },
+  "resource_summary": {
+    "samples": 30,
+    "peak_thermal": 1,
+    "peak_process_rss_mib": 980.3125,
+    "max_sampled_mps_bytes": 2011904512,
+    "swap_growth_mib": 0.0,
+    "minimum_free_gib": 92.42400741577148
+  },
+  "candidate_selection": "excluded; diagnostic random initialization"
+}

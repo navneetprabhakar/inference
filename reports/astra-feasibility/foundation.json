@@ -1,0 +1,79 @@
+{
+  "cpu": {
+    "device": "cpu",
+    "max_gradient_error": 1.1920928955078125e-07,
+    "loss_error": 0.0,
+    "max_logit_error": 5.960464477539063e-08
+  },
+  "mps": {
+    "device": "mps",
+    "max_gradient_error": 8.940696716308594e-08,
+    "loss_error": 0.0,
+    "max_logit_error": 4.470348358154297e-08
+  },
+  "resume": {
+    "state": "passed",
+    "device": "cpu",
+    "steps": 2,
+    "targets": 24,
+    "bit_identical": true
+  },
+  "overlap": {
+    "hash": "cases.jsonl",
+    "sha256": "1c998f22158e85e078860460dceaeb5cc7b92f614571c981d923bebeef3a001e",
+    "cases": 100,
+    "dev_cases": 12,
+    "dev_confirmation_shared_8grams": 0,
+    "corpus_matches": [],
+    "records": 5770,
+    "limitation": "8-word overlaps catch copied passages; semantic overlap requires review. Single operator authored the set. Pilot is disposable, not eligible for promotion."
+  },
+  "foundation": {
+    "starting_sha": "9b50163221f3a5263dd9288480bab33e2d208cf9",
+    "system": "macOS-26.4.1-arm64-arm-64bit",
+    "python": "3.12.11",
+    "fixtures_sha256": "ab190b119cebe8d7b8f25072dd6e1935bb000948e837c9149cee611c7bd0c3c1",
+    "independent_tokenizer": "tiktoken 0.12.0 gpt2 encode_ordinary; ten fixtures plus first 1,000 raw FineWeb documents compared",
+    "tokenizer_asset_base": "https://openaipublic.blob.core.windows.net/gpt-2/encodings/main/",
+    "source_manifest_sha256": "2b85ffcfb75bc35bd03e5edc1618f10f9258bf0cdaee3f2f062516d27bbfdcf9",
+    "tokenizer_source_license": "https://github.com/openai/gpt-2/blob/master/LICENSE",
+    "test_source_sha256": {
+      "verify_foundation.py": "9b3f8a5753c0545a5b8c57c599fb12723521407c6e20b22be605a4caaa46481a",
+      "verify_resume.py": "2b8da90a609d1e623942d0b1f955995ab10d86951291b1e2d007e6761f8d88e0",
+      "gpt2.py": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c"
+    }
+  },
+  "memorization": {
+    "stage": "memorization",
+    "seed": 57,
+    "device": "mps",
+    "dtype": "fp32",
+    "input": [
+      "A",
+      " quiet",
+      " fox",
+      " crossed",
+      " the",
+      " bridge",
+      " before",
+      " sunrise"
+    ],
+    "targets": [
+      " quiet",
+      " fox",
+      " crossed",
+      " the",
+      " bridge",
+      " before",
+      " sunrise",
+      "."
+    ],
+    "state": "passed",
+    "step": 7,
+    "post_update_ce": 0.08474113047122955,
+    "accuracy": 1.0,
+    "gradient_norm": 3.2077291011810303,
+    "train_ce": 0.24968914687633514,
+    "parameter_delta": 0.0019744504243135452
+  }
+}
