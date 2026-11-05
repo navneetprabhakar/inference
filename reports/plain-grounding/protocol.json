@@ -1,0 +1,190 @@
+{
+  "seed": 713,
+  "learning_rate": 0.00015,
+  "clip_norm": 1.0,
+  "batch": 8,
+  "memorize_max_steps": 120,
+  "memorize_check_every": 5,
+  "memorize_required": 4,
+  "teaching_steps": 450,
+  "training_rows": 1800,
+  "memorization_rows": [
+    [
+      "A stockroom count was requested. The count tool returned 13.",
+      13
+    ],
+    [
+      "A stockroom count was requested. The count tool returned 42.",
+      42
+    ],
+    [
+      "A stockroom count was requested. The count tool returned 67.",
+      67
+    ],
+    [
+      "A stockroom count was requested. The count tool returned 95.",
+      95
+    ]
+  ],
+  "teaching_templates": [
+    "A stockroom count was requested. The count tool returned {v}.",
+    "The pace sensor displayed {v} during the practice run.",
+    "A greenhouse moisture probe returned {v} on the last reading.",
+    "A carton scanner produced the following count: {v}.",
+    "For the milling test the gauge read {v}.",
+    "On the tally sheet, the scoring tool printed {v}.",
+    "An archive lookup found {v} matching items.",
+    "The coffee dispenser's volume readout shows {v}.",
+    "From the seed tray counter we received {v}.",
+    "The fabric cutter reports a measured width of {v}."
+  ],
+  "holdout": [
+    {
+      "template": "Previous reading: 46. The cave surveyor asked for depth. The sonar reply was {v}.",
+      "values": [
+        59,
+        91
+      ]
+    },
+    {
+      "template": "The kiln controller gave a temperature reading of {v}. Previous reading: 97.",
+      "values": [
+        56,
+        71
+      ]
+    },
+    {
+      "template": "Previous reading: 18. A festival gate checked wristbands. Its output was {v}.",
+      "values": [
+        61,
+        94
+      ]
+    },
+    {
+      "template": "From the ferry terminal's berth lookup: {v}. Previous reading: 66.",
+      "values": [
+        43,
+        87
+      ]
+    },
+    {
+      "template": "Previous reading: 21. The telescope exposure meter settled on {v}.",
+      "values": [
+        56,
+        96
+      ]
+    },
+    {
+      "template": "At the bookbinding bench, the thickness indicator shows {v}. Previous reading: 38.",
+      "values": [
+        97,
+        76
+      ]
+    },
+    {
+      "template": "Previous reading: 96. The apiary scale transmitted {v} after calibration.",
+      "values": [
+        15,
+        38
+      ]
+    },
+    {
+      "template": "A pipe inspector's pressure sensor logged {v}. Previous reading: 13.",
+      "values": [
+        33,
+        92
+      ]
+    },
+    {
+      "template": "Previous reading: 19. On the weaving loom the tension instrument indicated {v}.",
+      "values": [
+        96,
+        34
+      ]
+    },
+    {
+      "template": "In the rehearsal booth, the pitch detector displayed {v}. Previous reading: 79.",
+      "values": [
+        77,
+        24
+      ]
+    },
+    {
+      "template": "Previous reading: 97. The soil assay lists the specimen's reading as {v}.",
+      "values": [
+        67,
+        14
+      ]
+    },
+    {
+      "template": "A mountain hut's visibility instrument recorded {v}. Previous reading: 61.",
+      "values": [
+        52,
+        97
+      ]
+    },
+    {
+      "template": "Previous reading: 20. In the pottery workshop the turntable sensor returned {v}.",
+      "values": [
+        85,
+        22
+      ]
+    },
+    {
+      "template": "The rink technician queried the ice gauge and received {v}. Previous reading: 17.",
+      "values": [
+        77,
+        95
+      ]
+    },
+    {
+      "template": "Previous reading: 54. The baggage carousel reported a load of {v}.",
+      "values": [
+        67,
+        19
+      ]
+    },
+    {
+      "template": "A plank passed the sawmill laser and the display flashed {v}. Previous reading: 69.",
+      "values": [
+        36,
+        55
+      ]
+    },
+    {
+      "template": "Previous reading: 26. The drying cabinet issued a humidity reading of {v}.",
+      "values": [
+        57,
+        81
+      ]
+    },
+    {
+      "template": "The orchestra librarian ran a parts lookup. It found {v}. Previous reading: 15.",
+      "values": [
+        93,
+        17
+      ]
+    },
+    {
+      "template": "Previous reading: 84. The reservoir monitor delivered a level of {v}.",
+      "values": [
+        20,
+        29
+      ]
+    },
+    {
+      "template": "In the signal lab, the pulse reader registered {v}. Previous reading: 16.",
+      "values": [
+        62,
+        84
+      ]
+    }
+  ],
+  "threshold_pairs": 16,
+  "time_limit_seconds": 3600,
+  "plain_suffix": "\nReply with the reported number only.\nAnswer:",
+  "json_suffix": "\nReply with the reported number as JSON, using a string field named \"text\".\nAnswer:",
+  "decoding": "greedy, eight tokens plain or 16 JSON; EOT required, trim whitespace, exact decimal value; JSON must be exactly one string text field",
+  "conditional": "If plain passes, same weights and cases with JSON instruction, zero further updates",
+  "base_sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4"
+}
