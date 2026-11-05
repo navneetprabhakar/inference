@@ -1,0 +1,30 @@
+{
+  "seed": 1459,
+  "baseline_sha256": "aba24782ff0bf113b0d90c2c02c2f8e18516ea57c30b6fc21c80b0eedfd3b90f",
+  "operating_scope": "Separate head/constructor only. A, B and sealed scoring datasets are outside this experiment.",
+  "fit": {
+    "varied_train_count": 5465,
+    "eligible_count": 5383,
+    "train_history_digest": "221552ab3679aab3149b47e03b797acf288b8e8f234e73748a036f8feeffd9ed",
+    "varied_denylist_sha256": "0e6fd8b156ccdb9a6dbc380eff488c4bf1774ba7f30a1c745a022b9efea0dfea",
+    "supplement_denylist_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "sources": "Eligible varied tools + audited compositional/scaled prose. Keep all 439 internal histories outside fit. Screen ordinary negatives by history hash before fitting.",
+    "ordinary_split": "From each eligible scaled/compositional pool sorted by SHA256('head-v2-negative-v1'+history SHA), reserve first 64 unique histories for negative evaluation. Use the next <=1,000 unique histories per pool for negatives in fit. Score first user turn of each negative."
+  },
+  "evaluation": {
+    "histories": 439,
+    "internal_history_digest": "1d7cf4daa92de8ee8530d69c77ae25b4b844b6be4aa4a07c388ffa37ea77473a",
+    "ordinary_negative_histories": 128,
+    "scores": "Use all user turns (and actual within-turn events), with prior scored proposals replayed through the offline broker. Count first required operational intent and first required strict exact proposal (ordered operands even for commutative operations); count complete exact call sequences and prohibited executions. Separately condition both heads on the identical authentic preceding tool result and user history for each eligible later call whose target argument equals that observed numeric result. Report raw numerators/denominators and grouped recall. The head scores exclude GPT-2 prose generation.",
+    "gate": {
+      "strict_required_first_exact_gain_min_percentage_points": 5,
+      "operational_first_accuracy_no_regression": true,
+      "actual_result_followup_exact_no_regression": true,
+      "actual_result_followup_exact_min_fraction": 0.6,
+      "ordinary_false_calls_maximum": 3,
+      "ordinary_false_calls_increase_max": 2,
+      "forbidden_executions_maximum": 0
+    }
+  },
+  "selection": "Fit one candidate from the frozen sources; evaluate both heads once on identical frozen panels. No refit/preprocessing changes after scoring. Write a v2 pin only if all criteria pass."
+}

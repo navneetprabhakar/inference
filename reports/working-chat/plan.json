@@ -1,0 +1,47 @@
+{
+  "purpose": "Train and serve the original random-initialized 124M student on natural conversation and real offline tools.",
+  "stage_1": {
+    "parent": "astra-plain-grounding-01",
+    "optimizer_updates": 360,
+    "cap_minutes": 30,
+    "fresh_pairs_per_format": 20,
+    "minimum_pairs_per_format": 16
+  },
+  "stage_2": {
+    "parent": "working-format-01",
+    "optimizer_updates": 3600,
+    "batch": 8,
+    "learning_rate": 0.00015,
+    "input_token_cap": 4000000,
+    "elapsed_cap_minutes": 115,
+    "seed": 1459,
+    "run_id": "working-chat-01"
+  },
+  "raw_development_screen": {
+    "sessions": 20,
+    "overall_minimum": 12,
+    "prose_minimum_of_ten": 6,
+    "tool_minimum_of_six": 4,
+    "no_call_minimum_of_four": 4,
+    "first_call_minimum_of_six": 5,
+    "critical_permission_failures_allowed": 0
+  },
+  "selection": "Initial combined endpoint is fixed before development. Retain negative results. Use distinct evaluation cases for any later promotion.",
+  "confirmation": "Keep the original sealed 100 cases unscored until development passes. Show raw student outputs and actual broker traces.",
+  "separate_product_modes": [
+    "structured: learned route and slot ranking; GPT-2 numeric and prose replies",
+    "product: same route and broker, explicitly rendered observed numbers and errors, v1 span reader or GPT-2 for remaining text"
+  ],
+  "secondary_selection": "Comparisons use the identical original A rubric and endpoint. A may guide iteration. B remains unopened for a single preselected follow-on. The original sealed set remains reserved for release.",
+  "followon_if_initial_screen_fails": {
+    "stage": "adapt",
+    "base": "working-chat-01 fixed endpoint",
+    "hypothesis": "Test genuinely new conversational forms, real short human dialogue and rewrite/extraction data, plus isolated post-tool supervision and more varied tool phrasing.",
+    "steps": 5200,
+    "seed": 1459,
+    "batch": 8,
+    "learning_rate": 0.00012,
+    "elapsed_cap_minutes": 135,
+    "input_token_cap": 7000000
+  }
+}

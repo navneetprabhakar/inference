@@ -1,0 +1,321 @@
+{
+  "scope": "Independent assistant semantic adjudication of 28 saved native reference replies. Accept correct paraphrases; honor explicit yes/no, copying, ordering and single-letter formats. Reject fabricated specifics that change the answer.",
+  "cases": [
+    {
+      "id": "p01",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "The full sentence explicitly identifies Neri as the bust buyer."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It attributes the inkwell purchase to Ivo instead of Bela."
+        }
+      ]
+    },
+    {
+      "id": "p02",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "It identifies the florist as the second stop. The waiting-customer detail embellishes the answer."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "The response does not identify the tannery."
+        }
+      ]
+    },
+    {
+      "id": "p03",
+      "stratum": "prose",
+      "semantic": true,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "The response identifies cracked as the latest inspection finding."
+        },
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "It explicitly says neither record identifies who caused the crack."
+        }
+      ]
+    },
+    {
+      "id": "p04",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "Belmoor is present, but the response invents a museum, a historic building and an English location; these materially change the claimed discovery place."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It endorses the unsupported maker inference."
+        }
+      ]
+    },
+    {
+      "id": "p05",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It gives full names in the wrong order, not the requested surname-only list."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It omits the two earlier names and does not return the three sorted surnames."
+        }
+      ]
+    },
+    {
+      "id": "p06",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It asks for the date and time rather than the missing venue."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It repeats the date/time request instead of giving the boathouse."
+        }
+      ]
+    },
+    {
+      "id": "p07",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It repeats opens in present tense."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It retains the singular subject and present tense."
+        }
+      ]
+    },
+    {
+      "id": "p08",
+      "stratum": "prose",
+      "semantic": true,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "It explicitly names Tavi as the judge actor."
+        },
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "It names Tavi as the witness after the switch."
+        }
+      ]
+    },
+    {
+      "id": "p09",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "Yes contradicts the odd-date rule on the 16th."
+        },
+        {
+          "semantic": true,
+          "strict": true,
+          "reason": "Yes correctly applies the odd-date rule to the 17th in the requested format."
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "stratum": "prose",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It denies that the later item is specified even though the order implies linen."
+        },
+        {
+          "semantic": true,
+          "strict": false,
+          "reason": "It correctly says the memo gives no packing times and supplies no invented interval. The speculative cotton aside is irrelevant."
+        }
+      ]
+    },
+    {
+      "id": "n01",
+      "stratum": "no_call",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It repeats both durations but does not return the single requested winning letter."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It ignores the update to 43 and violates the letter-only format."
+        }
+      ]
+    },
+    {
+      "id": "n02",
+      "stratum": "no_call",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "Its opening No has the correct polarity, but it violates the explicit yes-or-no output constraint and reaches the generation cap."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It claims to have dispatched something despite there being no action or tool interface."
+        }
+      ]
+    },
+    {
+      "id": "n03",
+      "stratum": "no_call",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It invents feet instead of identifying the missing source and target units."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "It repeats the unsupported target feet instead of asking for a target unit."
+        }
+      ]
+    },
+    {
+      "id": "n04",
+      "stratum": "no_call",
+      "semantic": false,
+      "strict": false,
+      "turns": [
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "Yes incorrectly grants the arithmetic tools reservation-cancellation capability."
+        },
+        {
+          "semantic": false,
+          "strict": false,
+          "reason": "Yes claims a personal tool cancellation that never occurred."
+        }
+      ]
+    }
+  ],
+  "strict": {
+    "conversations": {
+      "passed": 0,
+      "total": 14
+    },
+    "turns": {
+      "passed": 1,
+      "total": 28
+    },
+    "by_stratum": {
+      "prose": {
+        "conversations": {
+          "passed": 0,
+          "total": 10
+        },
+        "turns": {
+          "passed": 1,
+          "total": 20
+        }
+      },
+      "no_call": {
+        "conversations": {
+          "passed": 0,
+          "total": 4
+        },
+        "turns": {
+          "passed": 0,
+          "total": 8
+        }
+      }
+    }
+  },
+  "semantic": {
+    "conversations": {
+      "passed": 2,
+      "total": 14
+    },
+    "turns": {
+      "passed": 8,
+      "total": 28
+    },
+    "by_stratum": {
+      "prose": {
+        "conversations": {
+          "passed": 2,
+          "total": 10
+        },
+        "turns": {
+          "passed": 8,
+          "total": 20
+        }
+      },
+      "no_call": {
+        "conversations": {
+          "passed": 0,
+          "total": 4
+        },
+        "turns": {
+          "passed": 0,
+          "total": 8
+        }
+      }
+    }
+  }
+}

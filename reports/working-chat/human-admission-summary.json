@@ -1,0 +1,66 @@
+{
+  "scope": "Train-only human QA/dialogue custody; all protected raw text remains excluded from this report.",
+  "pools": {
+    "squad": {
+      "rows": 702,
+      "eligible": 702,
+      "denied": 0,
+      "input_tokens": 137221,
+      "assistant_targets": 15738,
+      "pretraining_only_tokens": null,
+      "file_sha256": "ade7233021dd7beff1b6d54ee941e4735a56bb7060c1948a2b1149ea06329761",
+      "source_pool_sha256": "10a859362b1c7ff43d4f0caa8031c2cc85df26c3e4199fa8cd0bf3578fb2012b"
+    },
+    "quac": {
+      "rows": 83,
+      "eligible": 83,
+      "denied": 0,
+      "input_tokens": 17721,
+      "assistant_targets": 2795,
+      "pretraining_only_tokens": null,
+      "file_sha256": "0ce76fb60191a538e551e8c3c8a1dce4c30cb51a68da8799708c73ee24659957",
+      "source_pool_sha256": "72ad58169cafe4bd05629a1641ac06074899478ab049b716e2d00e681cfa912b"
+    },
+    "taskmaster_sft": {
+      "rows": 1295,
+      "eligible": 915,
+      "denied": 380,
+      "input_tokens": 45888,
+      "assistant_targets": 20338,
+      "pretraining_only_tokens": null,
+      "file_sha256": "0cc45ce7a55fb2e732867ec94212d3bbd194b94e2ba5915c40deafc3f6faec91",
+      "source_pool_sha256": "4f7af74c2f74cd06fee49cb8452a9c899493c5cf5adc8b3614e20665fc170ffe"
+    },
+    "taskmaster_pretrain": {
+      "rows": 4378,
+      "eligible": 3993,
+      "denied": 385,
+      "input_tokens": null,
+      "assistant_targets": null,
+      "pretraining_only_tokens": 114049,
+      "file_sha256": "0466f10cad43ef5c2094778fb90e8a05d10233f1bb66b3e2d4d764d16d38515c",
+      "source_pool_sha256": null
+    }
+  },
+  "denylist_sha256": {
+    "human-sft": {
+      "count": 380,
+      "sha256": "e33873b6314c5abba9d9a1dec2e12c2f055faace8e9329b619acb1a47dd40bf6"
+    },
+    "human-pretrain": {
+      "count": 385,
+      "sha256": "fcddb16c3dc125737c5209a9394642ea4f98e87f6591d3730ae304b8afa89fb2"
+    }
+  },
+  "sft_totals": {
+    "histories": 1700,
+    "input_tokens": 200830,
+    "assistant_targets": 38871
+  },
+  "pretraining_only_totals": {
+    "histories": 3993,
+    "tokens_with_document_markers": 114049
+  },
+  "interpretation": "These two independent objectives offer 314,879 one-pass input positions combined, 3.15% of 10M. Position counts include serialization and repeated text; neither guarantees broadly useful English or scores after fitting.",
+  "source_checks": "Raw official train span hashes and original role-preserving dialogue offsets verified. Custody excluded matching source/paragraph/group identifiers and copied protected windows; official publisher test/validation files were not read. Local held-out material contributed exclusion keys only."
+}

@@ -15,6 +15,7 @@ from evaluate_sft import DEVELOPMENT, DEV_SHA, evaluate
 from gpt2 import Config, GPT2
 from guards import Guard, ResourceStop
 from prepare_sft import DEST, REPORT
+from pretrained_base import load_base
 from pretrain import atomic_status
 from tokenizer import ASSETS, load
 from train import backward_rows, optimizer_for
@@ -79,24 +80,6 @@ def update(model, opt, rows, indices, step, steps, spec, check):
     return dict(train_ce=loss,gradient_norm=norm.item(),lr=lr)
 
 
-def load_base(base, sha):
-    parent=base.parent
-    if base.is_symlink() or checkpoint.checksum(base)!=sha:
-        raise ValueError("base hash mismatch")
-    protected=json.loads((parent/"protected.json").read_text())
-    status=json.loads((parent/"status.json").read_text())
-    if base.name not in protected or status.get("stage")!="extended pretraining" or status["state"]!="passed":
-        raise ValueError("base must be a protected checkpoint from a passing extended run")
-    saved=torch.load(base,map_location="cpu",mmap=True,weights_only=True)
-    if saved["identity"] != json.loads((parent/"config.json").read_text()):
-        raise ValueError("base lineage differs from its run configuration")
-    if saved["identity"]["model"] != asdict(Config()) or saved["step"]==0:
-        raise ValueError("base is untrained or differs from the 124M architecture")
-    if saved["identity"].get("tokenizer")!=ASSETS:
-        raise ValueError("base tokenizer mismatch")
-    return saved["model"]
-
-
 def candidate(guard, base, base_sha, resume):
     path=guard.path
     spec=frozen_budget()
@@ -106,7 +89,7 @@ def candidate(guard, base, base_sha, resume):
                   model=asdict(Config()),torch=str(torch.__version__),tokenizer=ASSETS,
                   code={file:checkpoint.checksum(Path(__file__).parent/file) for file in (
                       "sft.py","evaluate_sft.py","evaluate.py","verify_dialogue.py","dialogue.py","train.py","gpt2.py",
-                      "tokenizer.py","guards.py","checkpoint.py","prepare_sft.py","pretrain.py","tools/__init__.py")})
+                      "tokenizer.py","guards.py","checkpoint.py","prepare_sft.py","pretrain.py","pretrained_base.py","tools/__init__.py")})
     if resume:
         old=json.loads((path/"status.json").read_text())
         if old["state"]!="running" or json.loads((path/"config.json").read_text())!=identity:

@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "reference_sha256": "b687b7b484d61fa38d2d49d44131da9191fcdfc09551845ded956ccdfdbc182d",
+  "reference_threshold": 0.85,
+  "internal": {
+    "counts": {
+      "rows": 864,
+      "positives": 504,
+      "attempts": 17,
+      "correct": 10,
+      "negative_false_extractions": 0
+    },
+    "precision": 0.5882352941176471,
+    "correct_positive_coverage": 0.01984126984126984,
+    "family": {
+      "introduce_recall": {
+        "rows": 96,
+        "positives": 48,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "greeting_context": {
+        "rows": 96,
+        "positives": 0,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "binding": {
+        "rows": 96,
+        "positives": 96,
+        "attempts": 3,
+        "correct": 2,
+        "negative_false_extractions": 0
+      },
+      "correction": {
+        "rows": 96,
+        "positives": 96,
+        "attempts": 13,
+        "correct": 8,
+        "negative_false_extractions": 0
+      },
+      "ordered_choice": {
+        "rows": 96,
+        "positives": 96,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "missing_evidence": {
+        "rows": 96,
+        "positives": 48,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "clarification": {
+        "rows": 96,
+        "positives": 24,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "constrained_rewrite": {
+        "rows": 96,
+        "positives": 0,
+        "attempts": 0,
+        "correct": 0,
+        "negative_false_extractions": 0
+      },
+      "conditional": {
+        "rows": 96,
+        "positives": 96,
+        "attempts": 1,
+        "correct": 0,
+        "negative_false_extractions": 0
+      }
+    },
+    "representative_errors": [
+      {
+        "family": "binding",
+        "text": [
+          "Cevuvaven has tag Cevidorin. Cevorusil has tag Jevororil. What tag belongs to Cevuvaven?"
+        ],
+        "gold": "Cevidorin",
+        "predicted": "Jevororil"
+      },
+      {
+        "family": "correction",
+        "text": [
+          "Zelaviril went to Torevutal. Lunaniven went to Zeleriven. Tell me who has Lunaniven."
+        ],
+        "gold": "Zeleriven",
+        "predicted": "Torevutal"
+      },
+      {
+        "family": "correction",
+        "text": [
+          "Zelaviril went to Wyritoril. Lunaniven went to Zeleriven. Tell me who has Lunaniven."
+        ],
+        "gold": "Zeleriven",
+        "predicted": "Wyritoril"
+      },
+      {
+        "family": "correction",
+        "text": [
+          "Torobarin went to Flinesudyn. Kelmevuril went to Maveyaril. Tell me who has Torobarin."
+        ],
+        "gold": "Flinesudyn",
+        "predicted": "Maveyaril"
+      },
+      {
+        "family": "correction",
+        "text": [
+          "Ulverital went to Jevelimor. Dravemivin went to Quilerilin. Tell me who has Dravemivin."
+        ],
+        "gold": "Quilerilin",
+        "predicted": "Jevelimor"
+      },
+      {
+        "family": "correction",
+        "text": [
+          "Ulverital went to Esuvador. Dravemivin went to Quilerilin. Tell me who has Dravemivin."
+        ],
+        "gold": "Quilerilin",
+        "predicted": "Esuvador"
+      },
+      {
+        "family": "conditional",
+        "text": [
+          "When the switch is up the screen shows Vesidodak; when down it shows Rovelisil. The screen shows Vesidodak. Where is the switch?"
+        ],
+        "gold": "up",
+        "predicted": "Rovelisil"
+      }
+    ]
+  },
+  "paraphrases": {
+    "counts": {
+      "rows": 30,
+      "positives": 20,
+      "attempts": 2,
+      "correct": 0,
+      "negative_false_extractions": 0
+    },
+    "precision": 0.0,
+    "correct_positive_coverage": 0.0,
+    "family": {
+      "fresh paraphrase": {
+        "rows": 30,
+        "positives": 20,
+        "attempts": 2,
+        "correct": 0,
+        "negative_false_extractions": 0
+      }
+    },
+    "representative_errors": [
+      {
+        "family": "fresh paraphrase",
+        "text": [
+          "The silver badge belongs to Orive; the brass one belongs to Navas. Who wears brass?"
+        ],
+        "gold": "Navas",
+        "predicted": "Orive"
+      },
+      {
+        "family": "fresh paraphrase",
+        "text": [
+          "The word before the slash is Vesaro; the second word is Tiluna. Which comes after the slash?"
+        ],
+        "gold": "Tiluna",
+        "predicted": "Vesaro"
+      }
+    ]
+  },
+  "scope": "same diagnostic forms and prompts; no checkpoint or selection change"
+}

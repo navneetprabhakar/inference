@@ -58,7 +58,8 @@ class GPT2(nn.Module):
             for projection in (block.mlp[-1], block.attention_out):
                 nn.init.normal_(projection.weight, std=0.02 / (2 * config.depth) ** 0.5)
 
-    def forward(self, token_ids):
+    def forward(self, token_ids, prediction_mask=None):
+        """Optionally project only supervised positions during masked SFT."""
         length = token_ids.size(1)
         if not 0 < length <= self.positions.num_embeddings:
             raise ValueError("sequence length is outside the model context")
@@ -66,7 +67,10 @@ class GPT2(nn.Module):
         hidden = self.tokens(token_ids) + self.positions(positions)
         for block in self.blocks:
             hidden = block(hidden)
-        return F.linear(self.final_norm(hidden), self.tokens.weight)
+        hidden = self.final_norm(hidden)
+        if prediction_mask is not None:
+            hidden = hidden[prediction_mask]
+        return F.linear(hidden, self.tokens.weight)
 
 
 def next_token_loss(model, sequence):

@@ -1,0 +1,125 @@
+{
+  "salt": "tm2-quality-v3",
+  "passes_out_of_six": {
+    "sft": {
+      "flights": 4,
+      "hotels": 5,
+      "movies": 5,
+      "music": 6,
+      "restaurant-search": 3
+    },
+    "pretrain-only": {
+      "flights": 4,
+      "food-ordering": 5,
+      "hotels": 5,
+      "movies": 6,
+      "restaurant-search": 5,
+      "sports": 5
+    }
+  },
+  "admit": {
+    "sft": [
+      "hotels",
+      "movies",
+      "music"
+    ],
+    "pretrain-only": [
+      "food-ordering",
+      "hotels",
+      "movies",
+      "restaurant-search",
+      "sports"
+    ]
+  },
+  "hold_ids": [
+    "dlg-c4211f63-4d26-41bd-9289-838c354da959",
+    "dlg-26402b97-da6c-4475-98dd-beb911a50df0",
+    "dlg-afe71b2b-7e77-45d7-838d-8cbae0ce0de3",
+    "dlg-35b74f7c-4ffe-43d3-aedb-30971810a214",
+    "dlg-0a600455-67c1-4b35-a3e0-af75519dd63b",
+    "dlg-2843b55d-dc28-4d5e-9034-a9fe56731850"
+  ],
+  "major_failures": {
+    "sft/flights": "Redundant return trip question despite the round-trip dates, and one unresolved contradictory departure airport.",
+    "sft/hotels": "Contradictory week/two-night request accepted without clarifying the discrepancy.",
+    "sft/movies": "Same sentence asked twice in one response.",
+    "sft/restaurant-search": "Invented Austin location, cuisine re-asked after Cajun was supplied, current-location collection.",
+    "pretrain-only/flights": "Two garbled utterances, one with a stray reference to squash.",
+    "pretrain-only/food-ordering": "Garbled food references.",
+    "pretrain-only/hotels": "Malformed price expression.",
+    "pretrain-only/restaurant-search": "Full request repeated twice.",
+    "pretrain-only/sports": "Acknowledgement of an unobserved answer, no self-contained preference."
+  },
+  "inspected_training_ids": {
+    "sft": [
+      "dlg-c54ed816-a5f7-44c5-866f-793d6939a21a",
+      "dlg-1c29fbeb-52b3-4f28-962d-8abd1d50e17a",
+      "dlg-6f2a81a3-030b-4df5-8f3a-ba301af8d7f7",
+      "dlg-fbe155dc-b55e-4c83-81ec-24a73a4bfe32",
+      "dlg-455759e7-7ac2-4c0e-9256-24d48bcf7814",
+      "dlg-d2622bd7-872f-42e8-884d-8ddfda323da5",
+      "dlg-c4211f63-4d26-41bd-9289-838c354da959",
+      "dlg-60aeff6a-8abd-4f7e-96a3-8d37a28944d0",
+      "dlg-0416ae4a-0504-4f7b-b205-581871c58804",
+      "dlg-67934822-393c-4eb4-8848-1c6b80429c26",
+      "dlg-c7024cd0-70ff-496c-9c74-f6ef9b154248",
+      "dlg-397af343-0ea9-463c-8042-9b61654c2582",
+      "dlg-a3de09d6-ae67-40c6-9ae7-7c38db4c0da5",
+      "dlg-96871818-6c86-4c09-a344-6de8f89ea8dc",
+      "dlg-26402b97-da6c-4475-98dd-beb911a50df0",
+      "dlg-0639eaac-2185-47d5-98a1-db3cb58db83e",
+      "dlg-25e7a06a-ce13-4d72-b908-4ea2b6853cf9",
+      "dlg-1524ad8a-d67a-4605-ae4f-9152c2b6ae20",
+      "dlg-1e77ad95-d401-4f56-93a0-5fada1876901",
+      "dlg-f301cf8d-7fba-4ffa-a64d-eeb92d827ee9",
+      "dlg-554635ad-9093-4c87-8c38-a0c63b60e3cf",
+      "dlg-2a516aca-06db-4e5e-9ffb-1baeb2d55701",
+      "dlg-ecb196e8-673f-4e8f-9dae-0a12e9e899ca",
+      "dlg-9d5e07bb-b17c-4f06-87e6-08e0b57f6be2",
+      "dlg-185d8d14-5e9b-47a6-8cfe-1ce38b468c45",
+      "dlg-42223b67-c040-400c-97ea-61401f640706",
+      "dlg-7887fa5f-a46d-4547-a6ba-a812b8e280ec",
+      "dlg-dd66affe-70eb-4cc5-8bed-4a0bc8f64801",
+      "dlg-7f8e2e6e-eeb7-4795-9b5e-ec6d84f3d501",
+      "dlg-a3907c3b-4af0-4a5c-966a-5c26e81b17e2"
+    ],
+    "pretrain-only": [
+      "dlg-efaf1720-8ab5-4651-abac-ff4d55e2dc6c",
+      "dlg-80c6a187-8356-43ff-82af-c7f2042085f3",
+      "dlg-93713f7b-16e3-4987-b243-3237bb7c3c3a",
+      "dlg-86b20281-956d-487d-aaa6-14a4f76bfda6",
+      "dlg-885c20c5-3911-4628-b57c-0eb28f549f9e",
+      "dlg-c985ca7c-8be2-4a13-891c-6a65a76db426",
+      "dlg-c8e29c6d-eaf1-4129-8898-1759d2ca1af1",
+      "dlg-0a5f5ba3-9431-4509-a9f5-d29656b8daeb",
+      "dlg-2acd0ff9-e44d-4ff6-92dd-9aaeb7e85f60",
+      "dlg-2f79b0e1-48ff-4df2-b71c-18afdbaf7d26",
+      "dlg-afe71b2b-7e77-45d7-838d-8cbae0ce0de3",
+      "dlg-0432d350-ff4f-4fd8-82c3-4a50c88b0888",
+      "dlg-3010f423-2398-4b0a-85f0-76c6bc9ece3f",
+      "dlg-81b9be17-4995-469f-a5c0-aa2cffb68fed",
+      "dlg-a7491c53-2b9c-4f7b-8e8c-f829fbc38028",
+      "dlg-b8244f14-eabc-4455-a1f8-2bf9c7015709",
+      "dlg-35b74f7c-4ffe-43d3-aedb-30971810a214",
+      "dlg-d7c6328e-e9bc-428c-ae78-14365f8bc33d",
+      "dlg-007fd36a-ad44-4454-969a-141feaaef982",
+      "dlg-e85eb433-8593-462d-b973-7a1cd13d4f3e",
+      "dlg-144dcf20-c186-4e4a-b8c0-51b168103678",
+      "dlg-4cc007af-07cb-4e69-a706-396c8a5e1663",
+      "dlg-2b9cd5e2-61af-4dda-b6f5-8e62786e8850",
+      "dlg-e708a664-179a-48a4-9348-31f93ce37052",
+      "dlg-c5f0bc46-2870-407d-aad8-eb9f3b1ddde1",
+      "dlg-0a600455-67c1-4b35-a3e0-af75519dd63b",
+      "dlg-c409398a-5122-418e-981f-24252350da00",
+      "dlg-37e74b65-9bc6-4a96-b041-7a41547b85e9",
+      "dlg-0169d0e2-b337-473f-954c-eb0c65ce4e36",
+      "dlg-d68dd3cb-29d7-4122-9b52-165cb79a8634",
+      "dlg-21c2c479-5823-4410-bac2-83304861e918",
+      "dlg-2843b55d-dc28-4d5e-9034-a9fe56731850",
+      "dlg-f2a37913-13ce-4152-ac1d-83c69ef4dc50",
+      "dlg-4f82f7ab-3b9e-4c79-93ed-ce640697de07",
+      "dlg-ba99e2ed-2b4f-47a2-8adf-9354dd0c8da8",
+      "dlg-5a74cef1-5190-4931-83e2-5b2c4abd385a"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "status": "Pre-scoring split repair",
+  "original_protocol_sha256": "f356abcecd5ee4c479ca01a322e25fd75797608015b6e98a36370fc2fcc85c7b",
+  "finding": "18/128 first ordinary prompts appeared in other eligible training histories although full-history hashes were disjoint. No baseline or candidate internal scores were opened.",
+  "repair": "Select first 64 unique normalized first prompts per each of the two ordinary pools in the preregistered hash order. Exclude any prompt present among eligible varied training user messages. Fit up to the next 1000 histories per pool, skipping histories with ANY user message equal to a reserved first prompt after Unicode casefold, punctuation removal and whitespace normalization. Identical 439 internal and gate criteria are unchanged.",
+  "superseded_fit_sha256": "3884277b022880c111a5e3cae170f831748f1543f0500b5b551824ab34469bc0"
+}

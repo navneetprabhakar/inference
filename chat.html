@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local chat · GPT-2 small</title>
+<style>
+:root{color-scheme:light;--ink:#192620;--sub:#53635b;--sage:#daf0d6;--line:#dbe2da;--paper:#fbfcf8;--dark:#182d25}
+*{box-sizing:border-box} body{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)} button,textarea,input{font:inherit} button{cursor:pointer} button:disabled{cursor:wait;opacity:.62} :focus-visible{outline:3px solid #50a177;outline-offset:4px}
+.layout{display:grid;grid-template-columns:244px minmax(0,1fr);height:100vh;height:100dvh}.side{background:var(--dark);color:#eef5ef;padding:32px 26px;display:flex;flex-direction:column;min-width:0}.brand{font-size:23px;font-weight:650;letter-spacing:-.8px;margin:0}.model{margin-top:66px}.side .label{font-size:12px;color:#bbcbc0;display:block;font-weight:550}.model strong{display:block;margin:5px 0 2px;font-size:22px;letter-spacing:-.55px}.muted{color:#d2dfd3;font-size:14px}.details{margin-top:auto;padding-top:32px}.details dt{font-size:12px;color:#bbcbc0;margin-top:19px}.details dd{margin:3px 0 0}.details code{font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.mobile-meta{display:none}
+main{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;min-height:0}.top{display:flex;justify-content:space-between;align-items:center;padding:17px clamp(18px,4vw,60px);border-bottom:1px solid var(--line)}.top h1{font-size:18px;letter-spacing:-.45px;margin:0}.outline{background:transparent;color:var(--ink);border:1px solid #cdd7ce;border-radius:8px;padding:6px 12px;font-weight:560;font-size:14px}.outline:hover{background:#eaf0e8}
+#thread{overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;align-items:center;padding:26px clamp(16px,4vw,60px);scrollbar-gutter:stable}.inner{width:min(100%,760px)}#empty{margin:auto 0;width:min(100%,760px);padding:18px 0}#empty h2{margin:0 0 15px;font-size:clamp(25px,3.4vw,39px);font-weight:590;letter-spacing:-1.3px}#examples{display:flex;flex-wrap:wrap;gap:9px}.example{text-align:left;background:white;border:1px solid var(--line);padding:11px 15px;border-radius:10px;color:var(--ink)}.example:hover{border-color:#77947e}.turn{border-bottom:1px solid var(--line);padding:12px 0 25px;margin:0 0 16px}.speaker{font-size:12px;color:var(--sub);font-weight:650;margin:14px 0 4px}.message{white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.user-msg{background:#eaf0e7;display:inline-block;border-radius:9px;padding:9px 13px}.error{color:#933c28;font-weight:550}.trace{border:1px solid #cbdaca;background:#f0f6ed;border-radius:8px;padding:8px 12px;margin:13px 0 6px;font-size:14px}.frames{font-size:14px;margin:8px 0}summary{cursor:pointer;font-weight:550}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
+.bottom{border-top:1px solid var(--line);padding:17px clamp(16px,4vw,60px) max(16px,env(safe-area-inset-bottom));display:grid;justify-items:center}.composer{border:1px solid #a6b6a8;border-radius:13px;background:white;padding:10px 13px}.composer:focus-within{border-color:#506f58;box-shadow:0 0 0 1px #506f58}textarea{resize:vertical;background:transparent;border:0;color:var(--ink);outline:none!important;display:block;width:100%;min-height:47px;max-height:150px}.controls{display:flex;align-items:center;justify-content:space-between;gap:14px}.controls label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--sub)}input[type=checkbox]{width:16px;height:16px;accent-color:#385f43}.send{display:inline-flex;align-items:center;gap:6px;background:#264f36;border:0;color:white;padding:6px 13px;border-radius:7px;font-weight:600;font-size:14px}.send:hover{background:#1c3d29}.send svg{width:16px;height:16px}.notice{font-size:14px;color:var(--sub);margin:0 0 8px}.notice:empty{display:none}[hidden]{display:none!important}
+@media(max-width:700px){.layout{display:flex;flex-direction:column}.side{padding:12px 17px;display:flex;flex-direction:row;align-items:center;gap:12px}.brand{font-size:18px}.model,.details{display:none}.mobile-meta{display:block;margin-left:auto;font-size:12px;color:#d9e5da}.mobile-meta summary{font-weight:500}.mobile-meta code{display:block;max-width:170px;overflow-wrap:anywhere}.top{padding:12px 16px}.top h1{font-size:16px}main{flex:1}#thread{padding:14px 16px}.bottom{padding-top:12px}#empty h2{font-size:24px}#examples{gap:6px}.example{padding:9px 12px;font-size:14px}.controls label{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side" aria-label="Model details">
+  <div class="brand">Local chat</div>
+  <section class="model"><span class="label">Model</span><strong id="model">GPT-2 small</strong><span class="muted">124M parameters</span></section>
+  <dl class="details"><dt>Device</dt><dd id="device">—</dd><dt>Checkpoint</dt><dd><code id="checkpoint">—</code></dd><dt>SHA-256</dt><dd><code id="digest">—</code></dd></dl>
+  <details class="mobile-meta"><summary id="mobile-model">GPT-2 small</summary><code id="mobile-digest">—</code></details>
+</aside>
+<main>
+  <header class="top"><h1>Conversation</h1><button class="outline" type="button" id="new">+ New chat</button></header>
+  <div id="thread" aria-label="Conversation history">
+    <div id="empty"><h2>Start a conversation</h2><div id="examples">
+      <button type="button" class="example" data-prompt="Introduce yourself in one sentence.">Introduce yourself</button>
+      <button type="button" class="example" data-tools="true" data-prompt="Use the calculator to add 14 and 37.">Try the calculator</button>
+    </div></div>
+    <div class="inner" id="messages" role="log" aria-live="polite"></div>
+  </div>
+  <footer class="bottom"><div class="inner">
+    <p class="notice" id="notice" role="status"></p>
+    <form class="composer" id="composer">
+      <textarea id="message" rows="2" maxlength="8192" aria-label="Message" placeholder="Message GPT-2 small"></textarea>
+      <div class="controls"><label><input id="tools" type="checkbox">Allow offline tools this turn</label>
+      <button class="send" id="send" type="submit">Send <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></div>
+    </form>
+  </div></footer>
+</main>
+</div>
+<script>
+'use strict';
+const byId=id=>document.getElementById(id);
+const field=byId('message'), tools=byId('tools'), notice=byId('notice');
+let token=null, busy=false, pending=null;
+function node(tag,text,cls){const e=document.createElement(tag);if(text!==null)e.textContent=text;if(cls)e.className=cls;return e;}
+function setNotice(text,error=false){notice.textContent=text;notice.classList.toggle('error',error);}
+function setBusy(value){
+  busy=value;byId('send').disabled=value||!token;byId('new').disabled=value;field.disabled=value;tools.disabled=value;
+  document.querySelectorAll('.example').forEach(b=>b.disabled=value||!token);
+}
+async function post(path,payload){
+  const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error||'The local server could not complete the request.');
+  return data;
+}
+function details(parent,title,data,cls){
+  const item=node('details',null,cls);item.append(node('summary',title),node('pre',JSON.stringify(data,null,2)));parent.append(item);
+}
+function render(turn){
+  byId('empty').hidden=true;
+  const item=node('article',null,'turn');
+  item.append(node('div','You','speaker'),node('p',turn.message,'message user-msg'));
+  for(const event of turn.trace){
+    const name=event.name||'Proposal';
+    const observed=event.ok?JSON.stringify(event.data?.result):String(event.error||'Execution failed');
+    details(item,'Offline tool · '+name+' → '+observed,event,'trace');
+  }
+  if(turn.answer!==null){
+    const path=turn.selected_path||'gpt2/dialogue';
+    const source=path.startsWith('host/')?'Observed tool response':path.startsWith('learned-reader/')?'Model · context span':'Model answer';
+    item.append(node('div',source,'speaker'),node('p',turn.answer,'message'));
+  }
+  if(turn.failure)item.append(node('div','Turn failed','speaker error'),node('p',String(turn.failure),'message error'));
+  if(turn.frames.length)details(item,'Response frames',turn.frames.map((raw,i)=>({source:turn.frame_origins?.[i]||'gpt2/dialogue',raw})),'frames');
+  byId('messages').append(item);
+}
+function scrollEnd(){const thread=byId('thread');thread.scrollTop=thread.scrollHeight;}
+async function openSession(resume){
+  setBusy(true);setNotice('Opening local chat…');
+  try{
+    const current=resume?sessionStorage.getItem('local-chat-session'):null;
+    const data=await post('/api/session',current?{session:current}:{});
+    token=data.session;pending=null;sessionStorage.setItem('local-chat-session',token);
+    byId('model').textContent=data.model.name;byId('device').textContent=data.model.device.toUpperCase();
+    byId('digest').textContent=data.model.sha256;byId('checkpoint').textContent=data.model.checkpoint;
+    byId('mobile-model').textContent=data.model.name+' · '+data.model.device.toUpperCase();
+    byId('mobile-digest').textContent=data.model.checkpoint+' · '+data.model.sha256;
+    byId('messages').replaceChildren();byId('empty').hidden=data.turns.length>0;
+    data.turns.forEach(render);tools.checked=false;field.value='';setNotice('');scrollEnd();
+  }catch(err){setNotice(err.message,true);}
+  finally{setBusy(false);}
+}
+byId('new').addEventListener('click',()=>openSession(false));
+document.querySelectorAll('.example').forEach(button=>button.addEventListener('click',()=>{
+  field.value=button.dataset.prompt;tools.checked=button.dataset.tools==='true';field.focus();
+}));
+byId('composer').addEventListener('submit',async event=>{
+  event.preventDefault();const message=field.value;
+  if(busy||!token||!message.trim())return;
+  if(!pending||pending.message!==message||pending.permit_calls!==tools.checked)
+    pending={session:token,id:crypto.randomUUID(),message,permit_calls:tools.checked};
+  setBusy(true);setNotice('Generating…');
+  try{
+    const turn=await post('/api/turn',pending);
+    render(turn);pending=null;field.value='';tools.checked=false;setNotice('');scrollEnd();
+  }catch(err){setNotice(err.message,true);}
+  finally{setBusy(false);field.focus();}
+});
+field.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();byId('composer').requestSubmit();}});
+openSession(true);
+</script>
+</body>
+</html>

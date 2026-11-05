@@ -1,0 +1,277 @@
+{
+  "status": {
+    "stage": "chat",
+    "state": "trained",
+    "step": 3600,
+    "input_tokens": 1938869,
+    "target_tokens": 854061,
+    "charged_inputs": 1938869,
+    "loss": 0.06781793385744095,
+    "gradient_norm": 1.0744671821594238,
+    "elapsed": 2405.857985973358,
+    "weights_sha256": "c2d673376af27ea1b7c00603304d6bc612c7f42966b1cac7a4609baccebe670f"
+  },
+  "config": {
+    "seed": 1459,
+    "stage": "chat",
+    "base": "runs/working-format-01/weights.pt",
+    "sha256": "5502b636ba8581c0e10a964b49162e156ec1d02f5ddb874bb8c832648f765922",
+    "steps": 3600,
+    "lr": 0.00015,
+    "batch": 8,
+    "minutes": 115,
+    "weights": {
+      "copy": 0.05,
+      "chat": 0.35,
+      "natural": 0.17,
+      "tool": 0.43
+    },
+    "corpus_counts": {
+      "copy": 3600,
+      "chat": 3394,
+      "natural": 241,
+      "tool": 8197
+    },
+    "token_cap": 4000000,
+    "dataset_sha256": {
+      "copy": "3a2e6defb3efd140b360c4001b1a9ca348af3e679fcf1169a49b66e0153df5f2",
+      "chat": "d7297f888eddb7bb0d9fad464a43ed5f480d92e7f5a4d3d95e242d9337eeffee",
+      "natural": "66297863f5b388dc325503ba034481e233384ec5cc666882a1c8727b0248a072",
+      "tool": "ed7fedd24b4b57222e46bfe0f374cb06b31b2b4cb281335c322d3fd1f4107a4e"
+    },
+    "code_sha256": {
+      "fit_working.py": "d7736984ee7dc0b09e1090f9d8e74910402edf64a0bae081266e891c19b744c4",
+      "local_chat.py": "325e0dd896bb5de0e66055c3dc7e6a011efb390e92faadd4852afb8307dc0382",
+      "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+    }
+  },
+  "development_A": {
+    "raw": {
+      "conversations": {
+        "passed": 0,
+        "total": 20
+      },
+      "turns": {
+        "passed": 1,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 0,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 0,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 0,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 0,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 26,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 3,
+        "total": 8
+      },
+      "readbacks_with_observation": {
+        "passed": 8,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 3,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": false,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 6
+    },
+    "structured": {
+      "conversations": {
+        "passed": 2,
+        "total": 20
+      },
+      "turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 2,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 5,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 5,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 25,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 5,
+        "total": 8
+      },
+      "readbacks_with_observation": {
+        "passed": 8,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 5,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": true,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 11
+    },
+    "product": {
+      "conversations": {
+        "passed": 2,
+        "total": 20
+      },
+      "turns": {
+        "passed": 6,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 2,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 5,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 5,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 26,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 8,
+        "total": 8
+      },
+      "readbacks_with_observation": {
+        "passed": 8,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 8,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": true,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 8
+    },
+    "product-v2": {
+      "conversations": {
+        "passed": 2,
+        "total": 20
+      },
+      "turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 2,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 4,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 4,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 27,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 9,
+        "total": 10
+      },
+      "readbacks_with_observation": {
+        "passed": 10,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 9,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": true,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 6
+    }
+  },
+  "limits": "Only the 20 development A cases were scored. Confirmation remains unused; no production release.",
+  "manual_review": "See initial-a-adjudication.json for full 80-turn review. Adjudicated raw score 0/40, product 7/40; whole conversation counts unchanged."
+}

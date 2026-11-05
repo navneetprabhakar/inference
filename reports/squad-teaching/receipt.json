@@ -1,0 +1,74 @@
+{
+  "splits": {
+    "train": {
+      "histories": 702,
+      "questions": 1676,
+      "max_input_tokens": 306,
+      "input_tokens": 137221,
+      "articles": 82,
+      "groups": 81,
+      "wh_types": {
+        "what": 1040,
+        "when": 131,
+        "who": 112,
+        "where": 41,
+        "how-quantity": 144,
+        "which": 128,
+        "how": 68,
+        "why": 12
+      },
+      "multi_turn": 582,
+      "sha256": "ade7233021dd7beff1b6d54ee941e4735a56bb7060c1948a2b1149ea06329761"
+    },
+    "validation": {
+      "histories": 150,
+      "questions": 381,
+      "max_input_tokens": 304,
+      "input_tokens": 30404,
+      "articles": 12,
+      "groups": 12,
+      "wh_types": {
+        "what": 247,
+        "how-quantity": 39,
+        "who": 26,
+        "which": 22,
+        "when": 30,
+        "where": 3,
+        "why": 4,
+        "how": 10
+      },
+      "multi_turn": 134,
+      "sha256": "6f66655f8abebc1cb5311490f3171ff92dae355a240075b8792cc57e2c3ab7e6"
+    }
+  },
+  "script_sha256": "070794a2222a660623c24236014b160cf0a3b5fcc2e151e7ce5035b1bf7c1d5d",
+  "candidate_sha256": "ba03071e01e4b41078e854e072a1cbc361881548e23bd3cf0b13d34908d55062",
+  "review_sha256": "ff6873dfa6f3ad1f80e03a63462947c7413158602955261271b69eaf0933e21d",
+  "intake": {
+    "source_pins": {
+      "grounded-qa-intake-v1/train-v1.1.json": "3527663986b8295af4f7fcdff1ba1ff3f72d07d61a20f487cb238a6ef92fd955",
+      "grounded-qa-intake-v1/index.pug": "f576095c38cb63a7d110442bdd17bc6877f46a51a96af6d8f06ec09d20ccd886",
+      "grounded-qa-groups-v2/eligible.jsonl": "9f4c2135dcf6185c296295677008666cb67ddf470514f25516e44b08b587bf35",
+      "grounded-conversations-v1/candidates.jsonl": "5cdd0e46ff0a54be3dd09eb9e884018b7a40e8ee47f793dbf92c3ee1d8650e1d",
+      "grounded-conversations-v1/sample.jsonl": "676b170cd4041ee7ca0e96135094a16190669d6d3ddfd21b1a90444f6694f133",
+      "grounded-replay-sft-v1/train.jsonl": "3654cf8a29bef4fd10b4817f5f2686730c55aedd6ca37928faee6177bc855771"
+    },
+    "quac_source_sha": "067c94373d1a622339a73f16032d8060bb5dd989cd8ce2b3647363a8bc1d5b5f",
+    "old_train_article_components": 204,
+    "excluded_prior_paragraphs": 4122,
+    "cross_source_word_overlap_groups": 7,
+    "excluded_title_count": 14797,
+    "counts": {
+      "previous_replay_or_review_paragraph": 3870,
+      "paragraph_length": 220,
+      "paragraph_content_or_notice": 1149,
+      "no_suitable_QA": 132,
+      "cross_source_or_sensitive_article": 429,
+      "prior_partition_or_other_training_overlap": 9693
+    },
+    "source": "SQuAD v1.1 by Rajpurkar, Zhang, Lopyrev and Liang; crowdworker questions about Wikipedia paragraphs",
+    "license": "CC BY-SA 4.0",
+    "transformation": "Original paragraphs and answer offsets, at most three distinct answers/questions per paragraph; new framing and group split."
+  },
+  "status": "Training-only selection, pending separate protected-case custody; evaluation cases never read here."
+}

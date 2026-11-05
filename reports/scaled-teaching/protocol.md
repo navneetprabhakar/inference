@@ -1,0 +1,3 @@
+# Source audit
+
+A fixed SHA-256 order using salt `astra-scaled-source-audit-1` draws 12 complete histories per stratum before cohort admission. Source training split, canonical role order, safe topic, answer relevance on every turn, absence of fabricated personal experience or service capability, and sufficient support for assertions are required. Minor style issues can pass. Hold every sampled major failure. Reject the stratum when two or more histories have material errors, or when any history fabricates personal experience, a service action or private information. A repaired filter requires a new deterministic draw and an explicit repair note. The review is sampled assistant adjudication, with no human attestation or error-rate certification.

@@ -20,3 +20,14 @@ Use `--device cpu` for the CPU path. The command builds random weights, checks t
 The 124M student passed foundation and pretraining gates on the M4 Air. After 2,457,600 pretraining targets and 74 supervised updates, it passed 0/12 development conversations and 0/20 pairs in each required transfer skill. The run closed at that gate. See the [result and artifacts](reports/astra-feasibility/RESULT.md) and [foundation reproduction commands](reports/astra-feasibility/README.md).
 
 The previous project is preserved at [main commit c5b911b](https://github.com/navneetprabhakar/inference/commit/c5b911b5a4abe096f17848e1d119549e253a0092).
+
+## Experimental local conversation and tools
+
+The current preview uses the original from-scratch GPT-2 weights, a learned tool router, a session-scoped offline calculator and unit converter, and a grounded span reader. The loopback interface shows whether a reply came from the decoder, a selected context span, or the broker's observed result.
+
+```sh
+.venv/bin/python serve_chat.py --pin reports/working-chat/preview.json
+.venv/bin/python serve_chat.py --pin reports/working-chat/preview.json --cli
+```
+
+Open [the local chat](http://127.0.0.1:8765/) on the training machine. Enable offline tools for a turn when appropriate. To inspect the original decoder without the product heads, add `--runtime raw`. The initial combined student scored 0/20 complete development conversations. The preview product scored 2/20. The 100-case confirmation set remains reserved for a candidate that clears development.

@@ -1,4 +1,4 @@
-"""One random-initialized candidate with an immutable budget and milestone policy."""
+"""Train from random weights or the protected pre-SFT base under a fresh immutable budget."""
 import argparse
 from dataclasses import asdict
 import json
@@ -13,6 +13,7 @@ import torch
 import checkpoint
 from gpt2 import Config, GPT2, next_token_loss
 from guards import Guard, ResourceStop
+from pretrained_base import continuation_parent, load_base
 from tokenizer import ASSETS, load
 from train import backward_rows, optimizer_for
 
@@ -144,6 +145,10 @@ def candidate(guard, spec, model_config, device, previous):
                     torch=str(torch.__version__), tokens_per_step=TOKENS_PER_STEP,
                     code={name: checkpoint.checksum(Path(__file__).with_name(name)) for name in
                           ("pretrain.py", "train.py", "gpt2.py", "checkpoint.py", "guards.py", "tokenizer.py")})
+    parent = continuation_parent(spec, model_config)
+    if parent is not None:
+        identity["initialization"] = dict(mode="local_pre_sft_weights", parent=parent, optimizer="fresh_adamw")
+        identity["code"]["pretrained_base.py"] = checkpoint.checksum(Path(__file__).with_name("pretrained_base.py"))
     if previous is None:
         atomic_status(path / "config.json", identity)
     elif json.loads((path / "config.json").read_text()) != identity:
@@ -215,6 +220,12 @@ def candidate(guard, spec, model_config, device, previous):
         check(force=True)
         torch.manual_seed(spec["seed"])
         model = GPT2(model_config).to(device)
+        if previous is None and parent is not None:
+            parent_file = Path(parent["path"])
+            if parent_file.stat().st_size != parent["bytes"]:
+                raise ValueError("pre-SFT base size differs from its acceptance report")
+            model.load_state_dict(load_base(parent_file, parent["sha256"], terminal=parent), strict=True)
+            check(force=True)
         opt = optimizer_for(model)
         if previous is not None:
             saved = checkpoint.load(path, identity)
