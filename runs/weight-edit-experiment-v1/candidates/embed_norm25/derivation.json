@@ -1,0 +1,683 @@
+{
+  "id": "embed_norm25",
+  "method": "embedding_norm_rollback",
+  "scale": 0.25,
+  "formula": "V11 + 0.25*(P100-V11) only tied embedding and all RMSNorm weights",
+  "hypothesis": "Test whether dominant tied input/output embedding and normalization drift contributes to degeneration; no semantic neuron claim.",
+  "parameters": 97536768,
+  "sha256": "0539001bd518c6cbc4fd3d3a62b4a9de0ebf1918c99396f074619cc40ebb8064",
+  "relative_l2_vs_v11": 0.026178289600564703,
+  "bf16_changed_fraction": 0.12390896528373792,
+  "tensors": [
+    {
+      "name": "embed.weight",
+      "relative_l2": 0.05329138851955451,
+      "bf16_changed": 12082558,
+      "entries": 12582912
+    },
+    {
+      "name": "layers.0.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.0.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.0.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.0.n1.weight",
+      "relative_l2": 0.0010556628472453654,
+      "bf16_changed": 127,
+      "entries": 768
+    },
+    {
+      "name": "layers.0.n2.weight",
+      "relative_l2": 0.0014027286068117742,
+      "bf16_changed": 232,
+      "entries": 768
+    },
+    {
+      "name": "layers.0.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.0.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.0.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.0.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.1.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.1.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.1.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.1.n1.weight",
+      "relative_l2": 0.0013295923521649906,
+      "bf16_changed": 162,
+      "entries": 768
+    },
+    {
+      "name": "layers.1.n2.weight",
+      "relative_l2": 0.001112658318732972,
+      "bf16_changed": 169,
+      "entries": 768
+    },
+    {
+      "name": "layers.1.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.1.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.1.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.1.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.10.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.10.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.10.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.10.n1.weight",
+      "relative_l2": 0.0006064005878911172,
+      "bf16_changed": 77,
+      "entries": 768
+    },
+    {
+      "name": "layers.10.n2.weight",
+      "relative_l2": 0.0005778973478471514,
+      "bf16_changed": 92,
+      "entries": 768
+    },
+    {
+      "name": "layers.10.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.10.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.10.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.10.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.11.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.11.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.11.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.11.n1.weight",
+      "relative_l2": 0.0007246536816290706,
+      "bf16_changed": 95,
+      "entries": 768
+    },
+    {
+      "name": "layers.11.n2.weight",
+      "relative_l2": 0.0006842667783910976,
+      "bf16_changed": 90,
+      "entries": 768
+    },
+    {
+      "name": "layers.11.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.11.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.11.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.11.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.2.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.2.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.2.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.2.n1.weight",
+      "relative_l2": 0.0013486324550469086,
+      "bf16_changed": 184,
+      "entries": 768
+    },
+    {
+      "name": "layers.2.n2.weight",
+      "relative_l2": 0.001044835076363733,
+      "bf16_changed": 150,
+      "entries": 768
+    },
+    {
+      "name": "layers.2.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.2.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.2.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.2.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.3.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.3.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.3.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.3.n1.weight",
+      "relative_l2": 0.001030648613419578,
+      "bf16_changed": 171,
+      "entries": 768
+    },
+    {
+      "name": "layers.3.n2.weight",
+      "relative_l2": 0.0010818316263951344,
+      "bf16_changed": 180,
+      "entries": 768
+    },
+    {
+      "name": "layers.3.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.3.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.3.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.3.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.4.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.4.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.4.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.4.n1.weight",
+      "relative_l2": 0.0005676448396770398,
+      "bf16_changed": 79,
+      "entries": 768
+    },
+    {
+      "name": "layers.4.n2.weight",
+      "relative_l2": 0.000976503970955924,
+      "bf16_changed": 153,
+      "entries": 768
+    },
+    {
+      "name": "layers.4.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.4.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.4.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.4.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.5.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.5.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.5.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.5.n1.weight",
+      "relative_l2": 0.0005492294423187111,
+      "bf16_changed": 68,
+      "entries": 768
+    },
+    {
+      "name": "layers.5.n2.weight",
+      "relative_l2": 0.0008278676526019815,
+      "bf16_changed": 151,
+      "entries": 768
+    },
+    {
+      "name": "layers.5.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.5.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.5.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.5.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.6.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.6.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.6.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.6.n1.weight",
+      "relative_l2": 0.00047694660857766386,
+      "bf16_changed": 64,
+      "entries": 768
+    },
+    {
+      "name": "layers.6.n2.weight",
+      "relative_l2": 0.0007385319912061723,
+      "bf16_changed": 127,
+      "entries": 768
+    },
+    {
+      "name": "layers.6.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.6.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.6.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.6.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.7.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.7.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.7.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.7.n1.weight",
+      "relative_l2": 0.0007341534417666053,
+      "bf16_changed": 95,
+      "entries": 768
+    },
+    {
+      "name": "layers.7.n2.weight",
+      "relative_l2": 0.0006465142004389052,
+      "bf16_changed": 107,
+      "entries": 768
+    },
+    {
+      "name": "layers.7.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.7.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.7.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.7.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.8.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.8.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.8.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.8.n1.weight",
+      "relative_l2": 0.0005656211681125807,
+      "bf16_changed": 75,
+      "entries": 768
+    },
+    {
+      "name": "layers.8.n2.weight",
+      "relative_l2": 0.0005504986016747158,
+      "bf16_changed": 74,
+      "entries": 768
+    },
+    {
+      "name": "layers.8.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.8.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.8.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.8.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.9.down.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.9.gate.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.9.k.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.9.n1.weight",
+      "relative_l2": 0.0005361277984424962,
+      "bf16_changed": 80,
+      "entries": 768
+    },
+    {
+      "name": "layers.9.n2.weight",
+      "relative_l2": 0.0005062196367727212,
+      "bf16_changed": 79,
+      "entries": 768
+    },
+    {
+      "name": "layers.9.o.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.9.q.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "layers.9.up.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 1572864
+    },
+    {
+      "name": "layers.9.v.weight",
+      "relative_l2": 0.0,
+      "bf16_changed": 0,
+      "entries": 589824
+    },
+    {
+      "name": "norm.weight",
+      "relative_l2": 0.0015148047046639455,
+      "bf16_changed": 241,
+      "entries": 768
+    }
+  ],
+  "source_hashes": {
+    "v11": "d9b4eba2cb446078acff4029198b76caa63d0fdc40b92ca1aeda0346f335069b",
+    "v15": "72b2b0e8a61264af2d57a5578ec14453bab282796d7e431f38ba77f6ba12113e",
+    "p100": "bf054a64200f8f5230dc699c7bf821db52b7cc45dc124d695aaf280fe453b166",
+    "v18": "25ced9f981553aeed1d333d9421affb2572812b204d1aefcd56628ada812db68",
+    "p200": "81bacc82d0b43cff2ac6ca80880cd548f0cbd395c2dae657f2b7523182150e34"
+  },
+  "no_training": true,
+  "saved_arrays_verified": true,
+  "created_unix": 1793683817.869201
+}

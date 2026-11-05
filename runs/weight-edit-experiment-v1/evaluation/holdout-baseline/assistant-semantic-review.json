@@ -1,0 +1,423 @@
+{
+  "kind": "assistant_semantic_review",
+  "reviewer": "weight_diagnostics assistant; not independent human review",
+  "review_method": "Read every frozen holdout criterion and all 80 full actual replies plus every call, fixture and post-tool reply. Explicit case judgments enforce full-answer correctness and requested form, with actual-history recall assessed against actual outputs even when an earlier call failed. No inference, selection edits or tuning. Borderline actual-history judgments aligned with selected-candidate reviewer.",
+  "checkpoint_sha256": "d9b4eba2cb446078acff4029198b76caa63d0fdc40b92ca1aeda0346f335069b",
+  "evaluation_sha256": "9d76052ed232c23418672d5e03dde3bca242e1782ef2dfb58c2c3f82bf633586",
+  "decoding": {
+    "greedy": true,
+    "seed": 20261102,
+    "cap": 96,
+    "penalty": 1.2
+  },
+  "raw_outputs_sha256": "af26722233ff7d35db6263c60706de0ff5dd627bd66ab2b5e2aeb8233efecb6e",
+  "conversations": 40,
+  "fully_correct_conversations": 0,
+  "student_turns": 80,
+  "fully_correct_turns": 6,
+  "tool_conversations": 10,
+  "tool_full_successes": 0,
+  "review_completed_unix": 1793684354.594729,
+  "cases": [
+    {
+      "id": "weight-holdout-p-001",
+      "family": "preference_followup",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 suggests a spot for the screen despite the screen-free requirement and names no hobby. Turn 2 proposes a book with invented titles, not a paper-and-pencil activity."
+    },
+    {
+      "id": "weight-holdout-p-002",
+      "family": "constraint_revision",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 does not choose apple slices and invents cheese. Turn 2 tells the user to put unavailable apples in a bag instead of checking available ingredients."
+    },
+    {
+      "id": "weight-holdout-p-003",
+      "family": "referent_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Both turns refuse to infer explicitly stated facts and refer to an invented office; neither Tara nor Ishan is identified."
+    },
+    {
+      "id": "weight-holdout-p-004",
+      "family": "contrast_summary",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 mentions lighter weight but omits the fewer-pockets trade-off. Turn 2 incorrectly says Yes to more pockets and adds irrelevant wording."
+    },
+    {
+      "id": "weight-holdout-p-005",
+      "family": "repair_acknowledgment",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Neither turn states the supplied bicycle colour; both substitute unneeded verification disclaimers for green and then yellow."
+    },
+    {
+      "id": "weight-holdout-p-006",
+      "family": "conditional_logic",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 incorrectly says the notebook condition holds. Turn 2 mentions notebook but adds an unsupported claim about a small note and says the available item is unspecified; this is not a wholly correct answer."
+    },
+    {
+      "id": "weight-holdout-p-007",
+      "family": "constraint_priority",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 suggests white tea and a coffee bag instead of plain water. Turn 2 repeats coffee bags instead of identifying the caffeine constraint."
+    },
+    {
+      "id": "weight-holdout-p-008",
+      "family": "sequence_repair",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Neither turn identifies tightening the screws in the supplied order. The first requests moving the stool; the second invents weight, time and notes."
+    },
+    {
+      "id": "weight-holdout-p-009",
+      "family": "explicit_uncertainty",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 begins No but its rationale, that the message says it is a time or a fact, does not explain the possibility and is not coherent. Turn 2 replaces the arrival possibility with a dead end."
+    },
+    {
+      "id": "weight-holdout-p-010",
+      "family": "summary_scope",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 omits the working scanner from the summary. Turn 2 repeats printer offline instead of identifying the scanner."
+    },
+    {
+      "id": "weight-holdout-p-011",
+      "family": "preference_exclusion",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 offers an incoherent dry-up book with invented wording rather than a clear activity. Turn 2 apologizes rather than recalling cooking and watching a film."
+    },
+    {
+      "id": "weight-holdout-p-012",
+      "family": "consent_boundary",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 writes an unsolicited poem rather than offering wording feedback. Turn 2 repeats the poem instead of denying permission to publish."
+    },
+    {
+      "id": "weight-holdout-p-013",
+      "family": "set_intersection",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Both answers say Harbor instead of chess and painting."
+    },
+    {
+      "id": "weight-holdout-p-014",
+      "family": "time_interval",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 is the unfinished phrase No. It says instead of 08:30. Turn 2 gives 67 minutes instead of 30."
+    },
+    {
+      "id": "weight-holdout-p-015",
+      "family": "change_amount",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 repeats the notebook price instead of computing 65. Turn 2 invents a statement about 135 being 10 instead of computing 15."
+    },
+    {
+      "id": "weight-holdout-p-016",
+      "family": "ordered_comparison",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 omits 4 m and does not sort the lengths. Turn 2 invents four ropes at 8 m instead of 7 m."
+    },
+    {
+      "id": "weight-holdout-p-017",
+      "family": "negation_grounding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 incorrectly assigns the stand requirement to dry umbrellas. Turn 2 says the stand is not allowed inside instead of putting a wet umbrella in it."
+    },
+    {
+      "id": "weight-holdout-p-018",
+      "family": "causal_explanation",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 refuses to read the supplied account instead of identifying the leaking bottle. Turn 2 starts No but adds the unsupported contradictory claim that the bag was wet and dry."
+    },
+    {
+      "id": "weight-holdout-p-019",
+      "family": "count_and_filter",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Both replies are the tautology Pens are the pens, without five total or three blue pens."
+    },
+    {
+      "id": "weight-holdout-p-020",
+      "family": "short_message",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 requests future box-carrying help rather than thanking the friend. Turn 2 correctly says Thanks for helping carry boxes. I really appreciate your help, without a promise of repayment."
+    },
+    {
+      "id": "weight-holdout-p-021",
+      "family": "contradiction_detection",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 rewrites the contradiction into a new statement about closing at noon instead of identifying conflicting Monday hours. Turn 2 is an incoherent statement about a changed new one, not a grounded acknowledgment of the conflict."
+    },
+    {
+      "id": "weight-holdout-p-022",
+      "family": "state_tracking",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 says Drawer-mounted, but the drawer was not there, adding a contradiction to the required drawer location. Turn 2 says No. It is in the cup, directly contradicting itself and the final location."
+    },
+    {
+      "id": "weight-holdout-p-023",
+      "family": "format_boolean",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 states A square has four sides rather than the required single word true. Turn 2 correctly identifies a square."
+    },
+    {
+      "id": "weight-holdout-p-024",
+      "family": "text_edit",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 copies the original sentence with cat instead of replacing it with dog. Turn 2 repeats that sentence instead of identifying cat or acknowledging that no replacement was made."
+    },
+    {
+      "id": "weight-holdout-p-025",
+      "family": "fact_vs_preference",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 starts No but follows with the malformed Ritu pref statement; the complete answer does not coherently distinguish preference from booking. Turn 2 is unintelligible and does not identify the window-seat preference."
+    },
+    {
+      "id": "weight-holdout-p-026",
+      "family": "joint_constraint",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 names no two-person activity. Turn 2 discusses unreliable equipment rather than explaining equipment-free participation or acknowledging the missing suggestion."
+    },
+    {
+      "id": "weight-holdout-p-027",
+      "family": "meaning_preservation",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 repeats the source sentence verbatim: it preserves the condition but does not perform the requested simplification. Turn 2 incorrectly permits using the room while cleaning is unfinished and adds incoherent conditions."
+    },
+    {
+      "id": "weight-holdout-p-028",
+      "family": "bounded_choice",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Both turns substitute a generic inability-to-verify disclaimer for the explicit time comparison; neither chooses 11:00 nor explains that 09:00 precedes 10:00."
+    },
+    {
+      "id": "weight-holdout-p-029",
+      "family": "literal_extraction",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 does not extract cotton. Turn 2 invents 101 g instead of small."
+    },
+    {
+      "id": "weight-holdout-p-030",
+      "family": "no_evidence",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 adds irrelevant official-address advice to its uncertainty instead of a coherent theft-evidence assessment. Turn 2 invents an official-address search rather than a grounded first step for missing keys."
+    },
+    {
+      "id": "weight-holdout-t-031",
+      "family": "tool_subtraction_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 emits invalid JSON with 83 credits as a numeric value and the wrong divide operation; the fixture rejects it. Turn 2 asks for appointments instead of reporting actual arguments or acknowledging the failed call."
+    },
+    {
+      "id": "weight-holdout-t-032",
+      "family": "tool_multiplication_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 asks for the total instead of making the required 6 times 9 call. Turn 2 claims the calculator reports the total although no call or result exists, without an actual value."
+    },
+    {
+      "id": "weight-holdout-t-033",
+      "family": "tool_division_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 calls subtract 7 minus 7, obtains zero and reports zero rather than dividing 147 by 7. Turn 2 starts No but refers to unrequested changes instead of the original 21-versus-25 comparison."
+    },
+    {
+      "id": "weight-holdout-t-034",
+      "family": "tool_conversion_binding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 asks for a measurement already supplied and makes no conversion. Turn 2 says no input units were used: despite referring to input rather than output units, this accurately acknowledges the actual absence of any conversion and does not fabricate an output unit."
+    },
+    {
+      "id": "weight-holdout-t-035",
+      "family": "weather_fixture_grounding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 correctly calls the described weather a fixture but never fetches Indore weather or supplies its temperature and condition. Turn 2 accurately denies verified live observations; no weather observation was retrieved in the actual history."
+    },
+    {
+      "id": "weight-holdout-t-036",
+      "family": "item_fixture_grounding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 looks up IT-502 rather than PN-502, so the requested binding fails even though it faithfully reports the actual fixture price 35 and stock 15. Turn 2 faithfully repeats the actual returned stock, 15 units, and passes the actual-history question."
+    },
+    {
+      "id": "weight-holdout-t-037",
+      "family": "notes_query_binding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 asks what the note is instead of searching handover checklist. Turn 2 truthfully says no notes were provided, matching the actual absence of a retrieval rather than fabricating a note or scheduling claim."
+    },
+    {
+      "id": "weight-holdout-t-038",
+      "family": "missing_required_argument",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 invents the unknown operand as 8 and calls 8 times 8, then misreports the actual fixture 64 as 466. Turn 2 says 64 rather than asking for the unknown multiplier."
+    },
+    {
+      "id": "weight-holdout-t-039",
+      "family": "explicit_tool_prohibition",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 abstains but asks for contact details unrelated to determining current temperature. Turn 2 repeats a generic information disclaimer without identifying missing location and current weather evidence."
+    },
+    {
+      "id": "weight-holdout-t-040",
+      "family": "unsupported_action",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Turn 1 says it cannot determine deletion instead of truthfully stating it has not erased the file and lacks the capability. Turn 2 begins No but fabricates a weather lookup and produces incoherent found/data claims rather than explaining that weather cannot prove deletion."
+    }
+  ]
+}

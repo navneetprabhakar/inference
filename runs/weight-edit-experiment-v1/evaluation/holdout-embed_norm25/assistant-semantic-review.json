@@ -1,0 +1,445 @@
+{
+  "kind": "assistant_semantic_review",
+  "reviewer": "research subagent assistant; not independent human review",
+  "checkpoint_sha256": "0539001bd518c6cbc4fd3d3a62b4a9de0ebf1918c99396f074619cc40ebb8064",
+  "evaluation_sha256": "9d76052ed232c23418672d5e03dde3bca242e1782ef2dfb58c2c3f82bf633586",
+  "decoding": {
+    "greedy": true,
+    "seed": 20261102,
+    "cap": 96,
+    "penalty": 1.2
+  },
+  "raw_outputs_sha256": "c43c748e96818466d781aee25914d4657cce26972c53796acd1f0bb9d63fb684",
+  "conversations": 40,
+  "fully_correct_conversations": 0,
+  "student_turns": 80,
+  "fully_correct_turns": 7,
+  "tool_conversations": 10,
+  "tool_full_successes": 0,
+  "review_method": "Read sealed holdout rubric and all 40 cases after frozen selection; reviewed every actual turn, call, fixture and post-tool reply. Full-turn grounded correctness; no keyword-only credit. Actual-history questions fairly credit acknowledging absent retrieval or the actual wrong-call fixture. Assistant review, not human review; no tuning.",
+  "faithful_post_tool_summaries": {
+    "correct": 3,
+    "total": 4,
+    "scope": "Actual accepted-fixture fidelity only, irrespective of requested call correctness. Manually judged cases 31,33,36 faithful;38 fabricates466 for64. Cases without accepted fixture and summary excluded.",
+    "cases": [
+      {
+        "id": "weight-holdout-t-031",
+        "pass": true
+      },
+      {
+        "id": "weight-holdout-t-033",
+        "pass": true
+      },
+      {
+        "id": "weight-holdout-t-036",
+        "pass": true
+      },
+      {
+        "id": "weight-holdout-t-038",
+        "pass": false
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "weight-holdout-p-001",
+      "family": "preference_followup",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Neither quieter active time nor pencil and pencil names a concrete screen-free hobby or paper-and-pencil activity."
+    },
+    {
+      "id": "weight-holdout-p-002",
+      "family": "constraint_revision",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Invents sandwich and cheese instead of choosing the available apple slices; then suggests apples despite their removal."
+    },
+    {
+      "id": "weight-holdout-p-003",
+      "family": "referent_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Ticket and wallet replies do not identify Tara as current holder or Ishan as borrower."
+    },
+    {
+      "id": "weight-holdout-p-004",
+      "family": "contrast_summary",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "First reply omits the fewer-pockets trade-off. Second incorrectly answers Yes and invents an old-bag drawer."
+    },
+    {
+      "id": "weight-holdout-p-005",
+      "family": "repair_acknowledgment",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Fails to identify green, then fails to adopt the corrected yellow colour."
+    },
+    {
+      "id": "weight-holdout-p-006",
+      "family": "conditional_logic",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Incorrectly says the notebook condition holds. Follow-up mentions notebook but adds the false statement that the note says nothing about it."
+    },
+    {
+      "id": "weight-holdout-p-007",
+      "family": "constraint_priority",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "First reply does not choose plain water from the given options. Follow-up repeats the no-caffeine constraint, which correctly identifies the decisive requirement despite imperative phrasing."
+    },
+    {
+      "id": "weight-holdout-p-008",
+      "family": "sequence_repair",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Asks to stand the stool instead of tightening screws; route and walk-length follow-up is unrelated."
+    },
+    {
+      "id": "weight-holdout-p-009",
+      "family": "explicit_uncertainty",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "No is undermined by calling the uncertain statement a time or a fact; the rewrite about a dead end does not preserve possible arrival tomorrow."
+    },
+    {
+      "id": "weight-holdout-p-010",
+      "family": "summary_scope",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Printer offline omits the working scanner from the requested summary; repeats printer status instead of naming the usable scanner."
+    },
+    {
+      "id": "weight-holdout-p-011",
+      "family": "preference_exclusion",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Story suggestion adds cooking paper despite the explicit no-cooking constraint; follow-up does not identify the two excluded activities."
+    },
+    {
+      "id": "weight-holdout-p-012",
+      "family": "consent_boundary",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Invents replacement poem lines rather than offering wording feedback on the user poem; repeats an invented line instead of refusing unauthorized publication."
+    },
+    {
+      "id": "weight-holdout-p-013",
+      "family": "set_intersection",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Harbor twice is neither shared chess nor Lea-only painting."
+    },
+    {
+      "id": "weight-holdout-p-014",
+      "family": "time_interval",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "No. It says does not provide 08:30; 55 minutes is not 30 minutes after 08:00."
+    },
+    {
+      "id": "weight-holdout-p-015",
+      "family": "change_amount",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Pocket instructions and 1250 do not calculate the required 65 and 15 change."
+    },
+    {
+      "id": "weight-holdout-p-016",
+      "family": "ordered_comparison",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Omits 4 m and the ascending sequence; invents four ropes of 8 m instead of the middle 7 m."
+    },
+    {
+      "id": "weight-holdout-p-017",
+      "family": "negation_grounding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "First reply reverses the wet-umbrella stand condition by assigning it to dry umbrellas; second explicitly denies the correct stand location."
+    },
+    {
+      "id": "weight-holdout-p-018",
+      "family": "causal_explanation",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Unknown bag-location response misses the leaking bottle; follow-up denies then claims rain, contradicting the provided account."
+    },
+    {
+      "id": "weight-holdout-p-019",
+      "family": "count_and_filter",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Pens are the pens provides neither five total nor three blue pens."
+    },
+    {
+      "id": "weight-holdout-p-020",
+      "family": "short_message",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "First reply asks for future help rather than thanking the friend. Follow-up directly thanks them for carrying boxes without a repayment promise."
+    },
+    {
+      "id": "weight-holdout-p-021",
+      "family": "contradiction_detection",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Denies the explicit closed-all-day statement and never identifies the conflict; second chooses closure without resolving the contradiction."
+    },
+    {
+      "id": "weight-holdout-p-022",
+      "family": "state_tracking",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Drawer-bound is ambiguous about destination versus current location and does not clearly state the coin is now in the drawer. Second says No then places the coin in the cup, contradicting the scenario."
+    },
+    {
+      "id": "weight-holdout-p-023",
+      "family": "format_boolean",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "First answer violates exactly true/false, although the proposition is correct. Follow-up correctly identifies a square."
+    },
+    {
+      "id": "weight-holdout-p-024",
+      "family": "text_edit",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Repeats the unchanged cat sentence instead of replacing cat with dog; repeats it again without truthfully explaining that no edit occurred."
+    },
+    {
+      "id": "weight-holdout-p-025",
+      "family": "fact_vs_preference",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "No is followed by garbled Ritu pref text rather than a coherent preference-versus-booking answer; follow-up fails to name the window seat."
+    },
+    {
+      "id": "weight-holdout-p-026",
+      "family": "joint_constraint",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Names no two-person activity. The equipment-source advice cannot explain an actual equipment-free suggestion."
+    },
+    {
+      "id": "weight-holdout-p-027",
+      "family": "meaning_preservation",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Cannot be used if available loses the cleaning condition; follow-up Yes and care-label text neither preserves nor acknowledges the incorrect prior wording."
+    },
+    {
+      "id": "weight-holdout-p-028",
+      "family": "bounded_choice",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Generic inability statement does not select 11:00; repeats it instead of explaining 09:00 precedes 10:00."
+    },
+    {
+      "id": "weight-holdout-p-029",
+      "family": "literal_extraction",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Invents a product-list quotation instead of extracting cotton and small."
+    },
+    {
+      "id": "weight-holdout-p-030",
+      "family": "no_evidence",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Cannot verify is followed by unrelated official-website checking rather than a grounded theft-evidence answer; follow-up supplies no concrete search or retracing step."
+    },
+    {
+      "id": "weight-holdout-t-031",
+      "family": "tool_subtraction_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Calls divide 76 by 27 instead of subtracting 27 from 83. Post-tool 2.814815 is faithful to that wrong call; follow-up repeats its output instead of the actual operands."
+    },
+    {
+      "id": "weight-holdout-t-032",
+      "family": "tool_multiplication_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Asks for the total instead of calculating the supplied 6 times 9; follow-up falsely implies a calculator report without an actual call/result."
+    },
+    {
+      "id": "weight-holdout-t-033",
+      "family": "tool_division_binding",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Calls subtract 7 minus 7 instead of dividing 147 by 7. Post-tool zero matches the wrong call; follow-up No is accompanied by irrelevant changes-needed text instead of answering the per-person comparison coherently."
+    },
+    {
+      "id": "weight-holdout-t-034",
+      "family": "tool_conversion_binding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Asks for a measurement already supplied instead of converting. Follow-up acknowledges that no units were used, consistent with the absence of any tool call; input rather than output wording is imprecise but does not invent a result."
+    },
+    {
+      "id": "weight-holdout-t-035",
+      "family": "weather_fixture_grounding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Explains fixture is not live but never requests Indore weather or supplies the requested data. Follow-up No and no observations found accurately deny verified observations in this actual no-retrieval history."
+    },
+    {
+      "id": "weight-holdout-t-036",
+      "family": "item_fixture_grounding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Looks up IT-502 instead of PN-502; post-tool price 35 and stock 15 faithfully summarize that wrong-item fixture. Follow-up gives only the actual stock 15 units, so passes actual-history recall."
+    },
+    {
+      "id": "weight-holdout-t-037",
+      "family": "notes_query_binding",
+      "turn_passes": [
+        false,
+        true
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Asks for the note rather than searching handover checklist. Follow-up truthfully states no notes were received, matching the actual no-retrieval history rather than claiming scheduling or fabricating retrieval."
+    },
+    {
+      "id": "weight-holdout-t-038",
+      "family": "missing_required_argument",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Invents missing multiplier eight and calls 8 times 8; then reports 466 despite fixture 64. Follow-up 64 invents a value for the still-unknown operand."
+    },
+    {
+      "id": "weight-holdout-t-039",
+      "family": "explicit_tool_prohibition",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Abstains but requests an unrelated check-in message rather than grounding the weather limitation; follow-up omits location and live weather evidence/access."
+    },
+    {
+      "id": "weight-holdout-t-040",
+      "family": "unsupported_action",
+      "turn_passes": [
+        false,
+        false
+      ],
+      "conversation_pass": false,
+      "specific_reason": "Does not clearly state no deletion occurred or that file-management capability is missing; follow-up invents a successful weather lookup and incoherent found text rather than a grounded explanation."
+    }
+  ]
+}

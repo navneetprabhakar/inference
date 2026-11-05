@@ -1,0 +1,42 @@
+{
+  "kind": "assistant_authored_sealed_holdout_rubric",
+  "purpose": "One-time paired evaluation of unchanged V11 and the single development-selected direct weight edit; not old 100-case confirmation and not a 60%-goal replacement.",
+  "primary": "Every substantive turn must be relevant, correct, grounded and satisfy explicit constraints. Whole conversation passes iff both turns pass.",
+  "tools": "Score semantic operation/arguments, faithful fixture reporting and follow-up separately from parser/exact-call checks. Equivalent commutative order can pass semantics while exact-call diagnostic differs.",
+  "actual_history": "Questions about actual prior tool results/calls use the saved observed trace, including wrong calls. Original-scenario questions retain original facts. A correct follow-up never rescues a failed first turn.",
+  "format": "Enforce explicit only/exactly constraints as written; allow semantic paraphrase elsewhere. Do not demand unasked exact phrasing.",
+  "judge": "Assistant per-case review with concrete reasons, not independent human review; parent must not inspect contents before selecting final candidate.",
+  "selection": "Freeze one winning candidate plus unchanged baseline before revealing prompts. No tuning on holdout, no multiple edited variants. Same output identity may resume whole-case prefix only.",
+  "counts": {
+    "conversations": 40,
+    "turns": 80,
+    "prose": 30,
+    "tool": 10,
+    "required_call": 7,
+    "required_abstention": 3
+  },
+  "limitations": [
+    "Authored by assistant in shared workspace; procedurally sealed, not access-isolated.",
+    "Independent from old confirmation by non-reading, but no claim of semantic disjointness from every historical source.",
+    "Small diagnostic holdout, not definitive broad language competence."
+  ],
+  "oracle_fixture_checks": {
+    "weight-holdout-t-035": {
+      "city": "Indore",
+      "temperature_c": 34,
+      "condition": "sunny",
+      "fixture": true
+    },
+    "weight-holdout-t-036": {
+      "item_id": "PN-502",
+      "price": 18,
+      "stock": 18,
+      "fixture": true
+    },
+    "weight-holdout-t-037": {
+      "query": "handover checklist",
+      "note": "The handover checklist meeting is on Wednesday.",
+      "fixture": true
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "version": "chat-rating-100-v1",
+  "scope": "One continuous fictional book-swap chat, rated per assistant exchange against the actually supplied prompt, external support, and retained rolling context.",
+  "reviewer": "current-auth CodexCLI gpt-5.6-terra",
+  "frozen_before_review": true,
+  "dimensions": [
+    {
+      "key": "relevance_direct_answer",
+      "label": "Relevance/direct answer",
+      "0": "Does not address the user's request, is incoherent, or is materially off-topic.",
+      "1": "Touches part of the request but misses its main deliverable or is substantially indirect.",
+      "2": "Directly provides the requested deliverable or answer."
+    },
+    {
+      "key": "correctness_grounding",
+      "label": "Correctness/grounding in supplied user facts",
+      "0": "Contradicts, fabricates, or makes materially incorrect claims relative to supplied facts; unsupported factual claims are marked accordingly.",
+      "1": "Mostly safe but materially incomplete, vague, or includes a minor unsupported/error-prone assertion.",
+      "2": "Correctly uses supplied facts and makes no material unsupported or incorrect claim."
+    },
+    {
+      "key": "follows_instructions_constraints",
+      "label": "Follows explicit instructions/constraints",
+      "0": "Violates a salient explicit instruction or fails to attempt the requested form/constraint.",
+      "1": "Attempts the instruction but misses a meaningful stated constraint or format element.",
+      "2": "Follows all material explicit instructions and constraints available in this exchange."
+    },
+    {
+      "key": "continuity_available_context",
+      "label": "Continuity with actual available context",
+      "0": "Contradicts or ignores material context that was actually supplied in this generation.",
+      "1": "Does not use relevant supplied context well, but does not materially contradict it, or it relies on unavailable older context.",
+      "2": "Consistent with and appropriately uses relevant actually supplied external support and retained pairs."
+    },
+    {
+      "key": "clarity_completeness_nonrepetition",
+      "label": "Clarity/completeness/nonrepetition",
+      "0": "Unclear, substantially incomplete, or materially repetitive such that it is not usable.",
+      "1": "Understandable but notably incomplete, awkward, or somewhat repetitive.",
+      "2": "Clear, complete enough for the requested task, and nonrepetitive."
+    }
+  ],
+  "total": {"minimum": 0, "maximum": 10, "calculation": "sum of five integer dimension scores"},
+  "rules": [
+    "Scores are explicit reviewer judgments; no score is derived from regex, length, stop flags, repetition metrics, or threshold classifiers.",
+    "A length or EOS stop may be noted as a cutoff but is not an automatic penalty.",
+    "Do not penalize failure to recall context that the recorded model input did not contain; distinguish it from ignoring actually supplied context.",
+    "Do not treat fluent but wrong answers as correct, and do not rate user-prompt authoring quality.",
+    "Creative wording may receive full credit without exact wording matches.",
+    "Unknown factual assertions are scored for grounding rather than assumed true."
+  ]
+}

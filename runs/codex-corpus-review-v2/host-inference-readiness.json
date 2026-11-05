@@ -1,0 +1,67 @@
+{
+  "kind": "host_local_inference_readiness",
+  "prepared_at": "2026-11-01",
+  "gates_passed": true,
+  "purpose": "authorized local development-only inference preparation; no training, redistribution, cloud operation, or paid API use",
+  "command_argv": [
+    "../inference-archive-20261029/.venv/bin/python",
+    "scripts/run_author_dev_decode.py"
+  ],
+  "working_directory": "/Users/navneetprabhakar/Documents/git/image/inference",
+  "checkpoint": {
+    "path": "runs/sft-v3/repair-lr3/milestones/2000000/model.safetensors",
+    "sha256_verified": "93bb235b29c8bdff5efe4e14bac223b92b5bc70fecc3023a22d8ed2d9b6fd781"
+  },
+  "development": {
+    "path": "data/author-review-v3/development-cases.jsonl",
+    "sha256_verified": "7d2c21fad1ce57af423ea4f69af5162ba3933028daef30fa43d5a2fad85c28fa",
+    "cases": 120
+  },
+  "confirmation": {
+    "path": "data/author-review-v3/confirmation-cases.jsonl",
+    "sha256_verified": "5d5ca685e8e40f410052873bfa8e2226f76e656c9fdac346eefb09bc14e8f0ac",
+    "frozen": true,
+    "opened_by_decoder": false,
+    "decoder_selection_allowed": false
+  },
+  "candidate_audit": {
+    "report": "reports/author-review-v2/derived-candidate-validation.json",
+    "candidate_sha256": "8d14ed64e22e572ce85ee533616cd3aac97753a683672af113eaee585fff5316",
+    "records": 2345,
+    "max_tokens": 473,
+    "tokenization_failures": 0,
+    "eos_failures": 0,
+    "role_mask_failures": 0,
+    "source_identity_failures": 0,
+    "user_turn_preservation_failures": 0,
+    "heldout_exact_user_turn_overlap": 0,
+    "heldout_near_user_turn_overlap": 0
+  },
+  "safety_guards": {
+    "mlx_cache_limit_bytes": 268435456,
+    "output_token_cap": 96,
+    "tool_turn_limit": 6,
+    "stop_files_checked": ["runs/codex-corpus-review-v2/STOP"],
+    "critical_thermal_action": "stop before or between cases",
+    "mlx_peak_or_allocator_limit_bytes": 12884901888,
+    "session_swap_growth_limit_mb": 1024,
+    "minimum_free_disk_bytes": 16106127360,
+    "guard_unit_tests": "4 passed; see reports/author-review-v2/evaluation-preparation-review.json"
+  },
+  "inference_blockers": [],
+  "future_training_or_distribution_restrictions": [
+    "Training remains unauthorized.",
+    "Redistribution remains unauthorized.",
+    "Per-row dataset/license labels are unknown/not asserted; this is retained as a provenance/legal-admission issue, not a technical blocker for this authorized local inference.",
+    "The teacher model card locally declares Apache-2.0 for the artifact, but that is not asserted as a corpus-output or redistribution license; see reports/author-review-v2/manifest.json."
+  ],
+  "actual_host_inference": {
+    "ran": true,
+    "results_claimed": true,
+    "development_decode_report_exists": true,
+    "report": "reports/author-review-v1/development-decoding-v2/report.json",
+    "output_review": "reports/author-review-v1/development-decoding-v2/OUTPUT_REVIEW.md",
+    "scope": "development only; confirmation remained unopened"
+  },
+  "next_action": "Output review completed. Do not execute confirmation, training, tuning, commit, or push without new authorization."
+}

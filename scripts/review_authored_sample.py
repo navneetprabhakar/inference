@@ -1,0 +1,58 @@
+from pathlib import Path
+import json,random,hashlib,html,sys
+sys.path.insert(0,'scripts')
+from tokenizers import Tokenizer
+from sft_common import encode_episode
+src=Path('data/author-only-v2/conversations-2500.jsonl');rows=[json.loads(x) for x in src.read_text().splitlines()];sample=random.Random(104729).sample(range(200,2500),24)
+repairs={
+1083:('Unsupported sock identification and ambiguous counts',{1:"I'm not sure how many individual unmatched socks you have from that description. Lay the socks out and group them by size, color and pattern before deciding which ones form pairs.",3:"Set that sock aside to check whether you want to repair it. Then match the remaining blue socks by size and pattern rather than assuming they're all interchangeable."}),
+1410:('Changed address and falsely implied delivery already happened',{1:'To: 421 Willow Lane, Oakridge. Contents: a few fresh blooms. Please handle with care.',3:'To: 421 Willow Lane, Oakridge. Contents: a few fresh blooms from a local garden. Please handle with care.'}),
+1027:('Invented building layout, neighbor schedule and postal timing',{1:"Ask your neighbor whether they'd like the plant first, and agree on where to leave it. Keep doorways, stairs and shared access routes clear.",3:"I don't know when Lena will be available. Ask which day works for her rather than choosing a time based on an assumed schedule."}),
+1134:('Suggested speculative personal narrative about an absent member',{5:"If you're sharing that person's story, check that they agreed to its inclusion. You can discuss the piece itself without speculating about why they left the group or promising another contribution."}),
+803:('Invented meeting logistics and represented assistant as attending',{1:"A 3 PM meeting could work if your 2:30 meeting ends in time and you can reach the venue. Otherwise, 6 PM may give you more room. How long is the earlier meeting?",3:"You could plan coffee followed by a short walk, provided that fits both people's availability. Choose the café and walking route with the person you're meeting.",5:"Your proposed plan is 3 PM at Brew & Bloom, followed by a 20-minute walk around the east loop. Confirm those details with the person you're meeting; I can't confirm their attendance."}),
+1076:('Invented book contents and page number',{1:"I can't identify the subject from the spine colors alone. Check the titles, contents pages, or your borrowing record to see which book covers medieval trade routes.",3:"Understood: you mean the blue book where you left your notes. Your notes or its contents page may help you confirm the subject, but I can't inspect the book myself."}),
+311:('Invented edition availability and precise shelf locations',{1:"I can't verify that title, author and edition combination or where a copy is shelved. Check the library catalog using those details, or ask a librarian to help identify the book.",3:"You asked for the 1984 edition, not a 1987 reprint. Verify the publication details in the catalog or on the book's copyright page before choosing a copy."}),
+264:('Irrelevant editing condition and unnecessary specificity',{1:"'Can't wait to hike with you this weekend!' is a natural, casual version. Use it if that tone suits the person you're inviting."}),
+1415:('Claimed an unseen notice and ability to contact venue',{1:"You described it as the 7:30 PM screening, so that's the time given in your message. I can't independently confirm the venue's schedule here.",3:"That timing conflicts with your availability. You could ask the venue whether late entry is allowed or choose another screening. I can't contact the venue or change its start time from this chat."}),
+1361:('Suggested more project work as a restorative break',{3:"Let your teammates know you're stepping away briefly, then take the five-minute break. You can check progress when you return rather than spending the whole break on project messages."}),
+2460:('Unsupported solar-system suitability claims',{1:"500 watts equals 0.5 kilowatts. 500 kilowatts would be 500,000 watts, a very different quantity. Check which unit is written on your equipment specification.",3:"Five panels rated at 300 watts total 1,500 watts, or 1.5 kilowatts, of rated capacity. Actual output depends on operating conditions; that arithmetic alone doesn't establish whether the system meets your needs."}),
+658:('Failed follow-up request for a different adverb',{3:"Another option is: 'The students were expectantly waiting for the science fair to begin.' This changes only the adverb."}),
+549:('Incorrectly excluded wood from reflecting sound',{1:"An echo happens when reflected sound returns late enough to be heard separately. A cave wall can reflect your voice back toward you; the distance and shape affect what you hear.",3:"Not only stone. Smooth wood can reflect sound too. Soft, porous surfaces generally absorb more sound, while a clear echo also depends on the distance and arrangement of the surfaces."}),
+1532:('Invented ten-minute timing and conflated booking deadline with use time',{3:"Do you mean the reservation must be made by 4 PM Saturday, or that you need to use the table at 4 PM? Those are different requirements.",5:"If you need to use the table at 4 PM, write: 'Please confirm that the outdoor table is available for us at 4:00 PM on Saturday.' If 4 PM is only the booking deadline, include the actual time you need the table separately."}),
+1175:('Edited an email that was never supplied',{1:"Please paste the email you want reworded. I'll make it less harsh while keeping a professional tone.",3:"For a colleague, a direct and respectful tone usually works. Share the original text so I can adjust it without guessing what it says."}),
+1864:('Arbitrary exact hiking buffer',{1:"Spare time allows for delays, breaks, route conditions and slower progress. How much buffer you need depends on the route, daylight and conditions; I can't justify one exact number from the start and finish times alone."}),
+319:('Incorrect spreadsheet sorting guidance',{3:"Keep each name and ID in the same row and sort the entire table together, not just the ID column. Save a backup first. Freezing the header helps navigation but doesn't prevent columns from becoming misaligned."}),
+1967:('Unfounded generalizations about binders and albums',{1:"A different storage format may help, but binder designs vary. Look for a way to support the postcards flat without forcing or creasing them.",3:"An album could work if it opens flat and its sleeves fit the cards. Check the materials and avoid adhesive contact with vintage postcards; put notes beside the cards rather than writing on them."})}
+excluded={2246:'Incoherent magnet/pocket premise and invented observations throughout; exclude rather than rewrite into a different scenario.',1436:'Unsupported, internally confused ergonomic equipment dimensions; exclude rather than retain as advice.'}
+passes={2108:'No blocker in basic question/statement distinction.',1323:'Inclusive page arithmetic checked.',986:'No material blocker in supplied-text rewrite.',315:'Rectangle arithmetic and outer-boundary distinction checked; minor pizza metaphor limitations remain.'}
+assert set(sample)==set(repairs)|set(excluded)|set(passes)
+review=[];repaired=[];changes=[];t=Tokenizer.from_file('data/sft-v3/tokenizer.json')
+for i,r in enumerate(rows):
+ if i in excluded:continue
+ if i in repairs:
+  reason,edits=repairs[i];r=json.loads(json.dumps(r));before=json.loads(json.dumps(r['messages']))
+  for turn,text in edits.items():assert r['messages'][turn]['role']=='assistant';r['messages'][turn]['content']=text
+  e=encode_episode(t,r['messages']);assert e is not None,(i,r['id'])
+  r['repair']={'method':'assistant_authored_correction_in_chat','original_corpus_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'reason':reason,'changed_assistant_turns':list(edits),'independent_review':False}
+  r['student_tokens']=e[2];r['content_sha256_after_repair']=hashlib.sha256(json.dumps(r['messages'],sort_keys=True).encode()).hexdigest();r['review_status']='sample_repaired_pending_independent_review';r['training_approved']=False
+  changes.append({'id':r['id'],'original_index':i,'reason':reason,'before':before,'after':r['messages']})
+ repaired.append(r)
+for i in sample:
+ status='repair_required' if i in repairs else 'exclude' if i in excluded else 'provisional_no_blocker'
+ reason=repairs[i][0] if i in repairs else excluded.get(i,passes.get(i))
+ review.append({'id':rows[i]['id'],'original_index':i,'status':status,'reason':reason,'reviewer':'assistant_in_this_chat','independent_human_review':False})
+root=Path('reports/author-review-v1');out=Path('data/author-review-v1');root.mkdir(exist_ok=True);out.mkdir(exist_ok=True)
+for name,obj in [('sample-review.json',review),('sample-repairs.json',changes)]: (root/name).write_text(json.dumps(obj,indent=2)+'\n')
+output=out/'repaired-candidates-not-approved.jsonl';output.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in repaired))
+summary={'status':'quality_gate_failed_do_not_train','original_conversations':2500,'original_hash_verified':True,'sample_policy':'24 local-teacher records chosen using random.Random(104729).sample(range(200,2500),24), before reading outputs','local_sample_reviewed':24,'repair_required':len(repairs),'excluded':len(excluded),'provisional_no_blocker':len(passes),'independent_human_review':False,'repairs_written':len(changes),'remaining_candidate_records':len(repaired),'records_outside_sample_not_content_reviewed':2476,'raw_corpus_preserved':True,'derived_corpus_sha256':hashlib.sha256(output.read_bytes()).hexdigest(),'training_approved':False,'training_started':False,'paid_api_calls':0,'next_stage':'Systematic content review/repair and separate evaluation-set preparation required before training readiness; do not treat low lexical repetition or mechanical integrity as quality.','evaluation_gate':'Full student baseline/decoder comparison not launched in this follow-up because corpus readiness gate failed. Existing student checkpoint remains unchanged.','cautions':['Small sample; do not present it as an exact population error rate.','Original 200 chat-authored records are not independently human-certified.','Only the sampled 18 records were repaired; 2 excluded. Remaining unreviewed records are not approved.']}
+(root/'quality-gate.json').write_text(json.dumps(summary,indent=2)+'\n')
+(out/'admission.json').write_text(json.dumps({'training_allowed':False,'quality_gate':summary['status'],'reviewed_sample':24,'independent_human_review':False},indent=2)+'\n')
+body='<h1>Generation complete; content gate failed</h1><p>2,500 conversations generated. Original corpus is preserved. No training or paid APIs. Assistant review is not independent human review.</p><h2>Integrity and overlap</h2><pre>'+html.escape((root/'integrity-and-overlap.json').read_text())+'</pre><h2>Sample review and repairs</h2><pre>'+html.escape(json.dumps(summary,indent=2))+'</pre>'
+for c in changes:
+ body+='<h3>'+html.escape(c['id']+': '+c['reason'])+'</h3><details><summary>Original dialogue</summary>'
+ for m in c['before']:body+='<p><b>'+m['role']+':</b> '+html.escape(m['content'])+'</p>'
+ body+='</details><details><summary>Repaired candidate</summary>'
+ for m in c['after']:body+='<p><b>'+m['role']+':</b> '+html.escape(m['content'])+'</p>'
+ body+='</details>'
+(root/'REPORT.html').write_text('<!doctype html><meta charset="utf-8"><title>Author corpus review</title><style>body{font:16px/1.6 system-ui;max-width:1000px;margin:40px auto;padding:0 20px}pre{white-space:pre-wrap;background:#eee;padding:14px}h3{margin-top:32px}</style>'+body)
+print(json.dumps(summary,indent=2))
