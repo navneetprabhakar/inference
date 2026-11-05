@@ -1,0 +1,461 @@
+{
+  "weights_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "cases": [
+    {
+      "id": "p01",
+      "pool": "natural",
+      "index": 9,
+      "prior_uses": 5,
+      "optimizer_steps": [
+        851,
+        1671,
+        3094,
+        3418,
+        3507
+      ],
+      "exact": [
+        "I'm trying to distinguish a question from a request.",
+        "What is 'Please close the gate'?"
+      ],
+      "paraphrase": [
+        "How is asking a question different from making a request?",
+        "Which kind is 'Please close the gate'?"
+      ],
+      "reference": [
+        "A question asks for information. A request asks someone to do something.",
+        "It is a request."
+      ],
+      "rubrics": [
+        "Explain that a question seeks information and a request asks for an action.",
+        "Classify the quoted gate instruction as a request."
+      ]
+    },
+    {
+      "id": "p02",
+      "pool": "natural",
+      "index": 46,
+      "prior_uses": 10,
+      "optimizer_steps": [
+        124,
+        683,
+        683,
+        1671,
+        2512,
+        3418,
+        3418,
+        3613,
+        3846,
+        4432
+      ],
+      "exact": [
+        "I want to explain a rule to my club. Can you draft it?",
+        "Return the shared brushes clean."
+      ],
+      "paraphrase": [
+        "Please help me phrase a club rule, but I haven't told you the rule yet.",
+        "Our members ought to return shared brushes clean."
+      ],
+      "reference": [
+        "What rule do you want members to follow?",
+        "Please clean the shared brushes before returning them."
+      ],
+      "rubrics": [
+        "Ask what club rule or instruction is needed; do not invent it.",
+        "Produce a usable rule requesting clean shared brushes when returned."
+      ]
+    },
+    {
+      "id": "p03",
+      "pool": "natural",
+      "index": 55,
+      "prior_uses": 13,
+      "optimizer_steps": [
+        499,
+        1543,
+        1714,
+        2007,
+        2011,
+        2148,
+        2438,
+        2645,
+        2797,
+        3591,
+        3591,
+        4189,
+        4512
+      ],
+      "exact": [
+        "I want to explain patience to a child.",
+        "Can you use planting as an example?"
+      ],
+      "paraphrase": [
+        "Could you describe patience in words a child would understand?",
+        "Show me what patience looks like when planting something."
+      ],
+      "reference": [
+        "Patience means being able to wait without losing your temper.",
+        "You water a seed and wait while it grows, even when you can't see a sprout yet."
+      ],
+      "rubrics": [
+        "Explain waiting calmly in child-accessible language.",
+        "Describe waiting or tending a seed/plant as it takes time to grow."
+      ]
+    },
+    {
+      "id": "p04",
+      "pool": "natural",
+      "index": 110,
+      "prior_uses": 11,
+      "optimizer_steps": [
+        508,
+        1335,
+        2021,
+        2032,
+        2076,
+        2160,
+        2698,
+        3668,
+        4165,
+        4487,
+        4655
+      ],
+      "exact": [
+        "Find the note I left on my kitchen table.",
+        "It says the lesson moved to Thursday."
+      ],
+      "paraphrase": [
+        "Could you locate the note sitting on my kitchen table?",
+        "Its message says that the lesson has been rescheduled for Thursday."
+      ],
+      "reference": [
+        "I can't see your kitchen table. Can you share the note's text?",
+        "The note says the lesson moved to Thursday."
+      ],
+      "rubrics": [
+        "Explain lack of access to the physical note or request its text; no claimed external action.",
+        "Accurately restate the lesson's move to Thursday or acknowledge it explicitly."
+      ]
+    },
+    {
+      "id": "p05",
+      "pool": "natural",
+      "index": 134,
+      "prior_uses": 11,
+      "optimizer_steps": [
+        285,
+        760,
+        1522,
+        1693,
+        1693,
+        2336,
+        2393,
+        2513,
+        3192,
+        3642,
+        5194
+      ],
+      "exact": [
+        "I need a polite way to decline an invitation.",
+        "Can you make it warmer?"
+      ],
+      "paraphrase": [
+        "I'd like to turn down an invitation politely. What could I say?",
+        "Could the same refusal sound a little warmer?"
+      ],
+      "reference": [
+        "Thanks for inviting me. I won't be able to come this time.",
+        "Thank you for thinking of me. I wish I could join you, and I hope you have a lovely time."
+      ],
+      "rubrics": [
+        "Provide a polite first-person decline without fabrication.",
+        "Produce a warmer polite decline, still declining."
+      ]
+    },
+    {
+      "id": "p06",
+      "pool": "compositional",
+      "index": 1339,
+      "prior_uses": 1,
+      "optimizer_steps": [
+        26
+      ],
+      "exact": [
+        "Hi, I'm Zelorudak.",
+        "What did I say my name was?"
+      ],
+      "paraphrase": [
+        "Hello there. The name I use is Zelorudak.",
+        "How did I introduce myself earlier?"
+      ],
+      "reference": [
+        "Hello! How can I help?",
+        "Zelorudak"
+      ],
+      "rubrics": [
+        "Give an appropriate greeting or positive acknowledgment without misnaming the user.",
+        "State Zelorudak as the user's name; no competing name."
+      ]
+    },
+    {
+      "id": "p07",
+      "pool": "compositional",
+      "index": 9352,
+      "prior_uses": 1,
+      "optimizer_steps": [
+        26
+      ],
+      "exact": [
+        "Nice to meet you.",
+        "My name is Lunavodyn. Could you say it back?"
+      ],
+      "paraphrase": [
+        "It's a pleasure to meet you.",
+        "I go by Lunavodyn. Please repeat my name."
+      ],
+      "reference": [
+        "Nice to meet you too!",
+        "Lunavodyn"
+      ],
+      "rubrics": [
+        "Return the introduction courteously and relevantly.",
+        "Restate Lunavodyn; no competing name."
+      ]
+    },
+    {
+      "id": "p08",
+      "pool": "compositional",
+      "index": 10372,
+      "prior_uses": 2,
+      "optimizer_steps": [
+        9,
+        2350
+      ],
+      "exact": [
+        "Rovorusil has tag Toranidak. Azulidak has tag Bellevusil. What tag belongs to Rovorusil?",
+        "And what about Azulidak?"
+      ],
+      "paraphrase": [
+        "Two tags are assigned: Toranidak to Rovorusil and Bellevusil to Azulidak. Read off Rovorusil's tag.",
+        "Which one is Azulidak's?"
+      ],
+      "reference": [
+        "Toranidak",
+        "Bellevusil"
+      ],
+      "rubrics": [
+        "Answer Toranidak; no competing tag.",
+        "Answer Bellevusil; no competing tag."
+      ]
+    },
+    {
+      "id": "p09",
+      "pool": "compositional",
+      "index": 5834,
+      "prior_uses": 1,
+      "optimizer_steps": [
+        9
+      ],
+      "exact": [
+        "I put down Gavenavin as the destination. Which destination did I write?",
+        "Cross that out and use Pavemireth. Which destination belongs on the new card?"
+      ],
+      "paraphrase": [
+        "The destination written on my card is Gavenavin. Read it back.",
+        "Please replace the destination with Pavemireth. Read the revised card."
+      ],
+      "reference": [
+        "Gavenavin",
+        "Pavemireth"
+      ],
+      "rubrics": [
+        "Report Gavenavin; no competing destination.",
+        "Report Pavemireth; no competing destination."
+      ]
+    },
+    {
+      "id": "p10",
+      "pool": "compositional",
+      "index": 7242,
+      "prior_uses": 1,
+      "optimizer_steps": [
+        9
+      ],
+      "exact": [
+        "Gavilumar waits behind Paveyarin, and Ivranidor is directly ahead of Paveyarin. Who is last in line?",
+        "Who was immediately ahead of that person?"
+      ],
+      "paraphrase": [
+        "Ivranidor stands directly in front of Paveyarin, and Gavilumar stands behind Paveyarin. Who is at the very back?",
+        "Name the person just in front of that last person."
+      ],
+      "reference": [
+        "Gavilumar",
+        "Paveyarin"
+      ],
+      "rubrics": [
+        "Answer Gavilumar.",
+        "Answer Paveyarin."
+      ]
+    },
+    {
+      "id": "p11",
+      "pool": "compositional",
+      "index": 9286,
+      "prior_uses": 2,
+      "optimizer_steps": [
+        15,
+        2221
+      ],
+      "exact": [
+        "Someone carried a medallion into Jevevudyn. Can you name the person from that alone?",
+        "A witness says Yorelireth carried it. Who was it?"
+      ],
+      "paraphrase": [
+        "A medallion was taken into Jevevudyn. Does that tell you the carrier's name?",
+        "The witness identifies Yorelireth as the one who carried it. Name the carrier now."
+      ],
+      "reference": [
+        "No. The person isn't identified.",
+        "Yorelireth"
+      ],
+      "rubrics": [
+        "Explain the carrier has not been identified; do not invent a name.",
+        "Answer Yorelireth."
+      ]
+    },
+    {
+      "id": "p12",
+      "pool": "compositional",
+      "index": 14959,
+      "prior_uses": 2,
+      "optimizer_steps": [
+        9,
+        2067
+      ],
+      "exact": [
+        "Which one did I ask for?",
+        "There were two labels, Ulvarodyn and Flinesuril. I asked for Ulvarodyn. Which one?"
+      ],
+      "paraphrase": [
+        "Can you identify the one I requested?",
+        "The alternatives were Ulvarodyn and Flinesuril; my request was for Ulvarodyn. Which did I request?"
+      ],
+      "reference": [
+        "Which choices are you referring to?",
+        "Ulvarodyn"
+      ],
+      "rubrics": [
+        "Ask for the choices/details or explain the information is missing.",
+        "Answer Ulvarodyn; no competing label."
+      ]
+    },
+    {
+      "id": "p13",
+      "pool": "compositional",
+      "index": 15524,
+      "prior_uses": 3,
+      "optimizer_steps": [
+        15,
+        1432,
+        2843
+      ],
+      "exact": [
+        "The rule says use Azalavin when the flag is open and Gavemital when it is closed. It is open. Which label?",
+        "The flag closes. Which label now?"
+      ],
+      "paraphrase": [
+        "An open flag points to Azalavin and a closed one points to Gavemital. Right now it's open. Read off the label.",
+        "Now shut the flag. Which label applies?"
+      ],
+      "reference": [
+        "Azalavin",
+        "Gavemital"
+      ],
+      "rubrics": [
+        "Answer Azalavin.",
+        "Answer Gavemital."
+      ]
+    },
+    {
+      "id": "p14",
+      "pool": "compositional",
+      "index": 14653,
+      "prior_uses": 1,
+      "optimizer_steps": [
+        9
+      ],
+      "exact": [
+        "Thank Ivritomor for the slate in one sentence.",
+        "Keep the sentence but address it to Azevumor."
+      ],
+      "paraphrase": [
+        "Write a single sentence thanking Ivritomor for the slate.",
+        "Use the same thank-you, but make Azevumor the recipient."
+      ],
+      "reference": [
+        "Thank you, Ivritomor, for the slate.",
+        "Thank you, Azevumor, for the slate."
+      ],
+      "rubrics": [
+        "One sentence directly thanking Ivritomor for the slate.",
+        "Thank Azevumor for the slate, retaining the request and replacing the old addressee."
+      ]
+    },
+    {
+      "id": "p15",
+      "pool": "chat",
+      "index": 2774,
+      "prior_uses": 4,
+      "optimizer_steps": [
+        4,
+        841,
+        2810,
+        4075
+      ],
+      "exact": [
+        "Read this label: 'Bo / hammer / the workshop'. Return only the item.",
+        "Now give only the name."
+      ],
+      "paraphrase": [
+        "The printed label says 'Bo / hammer / the workshop'. Respond with only the item shown.",
+        "Just the person's name this time."
+      ],
+      "reference": [
+        "hammer",
+        "Bo"
+      ],
+      "rubrics": [
+        "Only hammer, allowing surrounding whitespace and capitalization.",
+        "Only Bo, allowing surrounding whitespace."
+      ]
+    },
+    {
+      "id": "p16",
+      "pool": "chat",
+      "index": 450,
+      "prior_uses": 2,
+      "optimizer_steps": [
+        4,
+        767
+      ],
+      "exact": [
+        "The practice is on Tuesday. Which day should I write down?",
+        "It moved to Monday. Update the note."
+      ],
+      "paraphrase": [
+        "I see the practice listed for Tuesday. What day do I enter?",
+        "The practice has been rescheduled to Monday. Give me the revised note."
+      ],
+      "reference": [
+        "Tuesday.",
+        "The practice is on Monday."
+      ],
+      "rubrics": [
+        "Identify Tuesday.",
+        "Update the practice's day to Monday without retaining Tuesday as current."
+      ]
+    }
+  ],
+  "design": "Purposefully selected actually sampled histories from the natural, initial chat and compositional teaching sets. All 16 have two user turns. Pair members ask the same things with the same concepts/names/numbers. Each starts from a fresh raw Chat; turn two sees the actual first answer. Inputs are word-level fresh against visited histories in these three pools. Greedy CPU one thread, reply cap 96, no tools permitted, no host renderer/fallback. Any attempted call, malformed frame or no answer fails a turn. Score each valid answer for semantic satisfaction of its fixed rubric and every complete session only if both turns pass. No candidate changes or repeated generations.",
+  "proof": "Replayed original random sampling, stable per-batch length sort and group offset across all 5,200 updates. Verified hashes of the three reconstructed target pools plus saved sampler RNG at step 4800. Optimizer steps expose complete training rows; prior_uses includes duplicates when sampled within a batch."
+}

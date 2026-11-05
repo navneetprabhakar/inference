@@ -57,7 +57,8 @@ class Chat:
                     self.guard.check()
                     device=next(self.model.parameters()).device
                     ids=torch.tensor([working],device=device)
-                    token=self.model(ids)[0,-1].argmax().item()
+                    scores=self.model.next_logits(ids)[0] if hasattr(self.model,"next_logits") else self.model(ids)[0,-1]
+                    token=scores.argmax().item()
                     suffix.append(token)
                     working.append(token)
                     if token==EOT:

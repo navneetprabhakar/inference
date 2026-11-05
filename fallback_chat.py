@@ -47,7 +47,8 @@ class Chat:
         for _ in range(cap):
             self.guard.check()
             row = torch.tensor([ids+generated], device=device)
-            token = self.model(row)[0,-1].argmax().item()
+            scores = self.model.next_logits(row)[0] if hasattr(self.model,"next_logits") else self.model(row)[0,-1]
+            token = scores.argmax().item()
             generated.append(token)
             if token == EOT:
                 break

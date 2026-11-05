@@ -3,6 +3,7 @@ import argparse
 from collections import OrderedDict
 from dataclasses import dataclass, field
 import hashlib
+from importlib import import_module
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
@@ -19,7 +20,9 @@ from guards import Guard, ResourceStop
 from tokenizer import load
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_PIN = ROOT / "reports/working-chat/selected.json"
+RELEASE_PIN = ROOT / "reports/working-chat/selected.json"
+PREVIEW_PIN = ROOT / "reports/working-chat/live.json"
+DEFAULT_PIN = RELEASE_PIN if RELEASE_PIN.is_file() else PREVIEW_PIN
 MAX_SESSIONS = 16
 MAX_TURNS = 64
 MAX_BODY = 32 * 1024
@@ -32,10 +35,11 @@ class RequestError(Exception):
         self.status = status
 
 
-def resolve_weights(weights, sha, pin):
+def resolve_weights(weights, sha, pin, spec=None):
     if weights is None:
         pin = (pin or DEFAULT_PIN).resolve()
-        spec = json.loads(pin.read_text())
+        if spec is None:
+            spec = json.loads(pin.read_text())
         weights, sha = Path(spec["weights"]).expanduser(), spec["sha256"]
         if not weights.is_absolute():
             local = pin.parent / weights
@@ -55,7 +59,11 @@ def load_student(weights, sha, device):
         stream.seek(0)
         state = torch.load(stream, weights_only=True, map_location="cpu")
     with torch.device("meta"):
-        model = GPT2()
+        if "copy_query.weight" in state:
+            from copy_gpt import CopyGPT2
+            model = CopyGPT2(copy_width=state["copy_query.weight"].shape[0])
+        else:
+            model = GPT2()
     model.load_state_dict(state, strict=True, assign=True)
     return model.to(device).eval()
 
@@ -69,12 +77,37 @@ class CPUGuard:
 @dataclass
 class Session:
     chat: object
+    model_info: dict = field(default_factory=dict)
     turns: dict = field(default_factory=dict)
     host_failed: bool = False
 
 
+class WatchedPin:
+    """Read one pin snapshot per new conversation; publish only a successful load."""
+
+    def __init__(self, pin, loader):
+        self.pin, self.loader = pin, loader
+        self.snapshot = self.factory = self.info = None
+
+    def open(self):
+        try:
+            snapshot = self.pin.read_bytes()
+            if snapshot == self.snapshot:
+                return Session(self.factory(), self.info)
+            spec = json.loads(snapshot)
+            if not isinstance(spec, dict):
+                raise ValueError("Expected a checkpoint pin object")
+            factory, info = self.loader(spec)
+            session = Session(factory(), info)
+            self.snapshot, self.factory, self.info = snapshot, factory, info
+            return session
+        except (OSError, ValueError, RuntimeError, KeyError, ImportError, TypeError) as error:
+            raise RequestError(503, f"Unable to load the selected local checkpoint: {error}") from error
+
+
 class Sessions:
-    def __init__(self, factory, model_info):
+    def __init__(self, factory, model_info, *, watch=None):
+        self.watch = watch
         self.factory = factory
         self.model_info = model_info
         self.sessions = OrderedDict()
@@ -91,11 +124,11 @@ class Sessions:
         with self.lock:
             if token is None:
                 token = secrets.token_urlsafe(32)
-                self.sessions[token] = Session(self.factory())
+                self.sessions[token] = self.watch.open() if self.watch else Session(self.factory(), self.model_info)
                 if len(self.sessions) > MAX_SESSIONS:
                     self.sessions.popitem(last=False)
             session = self.lookup(token)
-            return dict(session=token, model=self.model_info, turns=list(session.turns.values()))
+            return dict(session=token, model=session.model_info, turns=list(session.turns.values()))
 
     def turn(self, token, turn_id, message, permit_calls):
         if not isinstance(message, str) or not message.strip() or len(message.encode("utf-8")) > MAX_MESSAGE:
@@ -214,7 +247,20 @@ def print_turn(record, as_json):
     for event in record["trace"]:
         print("Offline tool:", json.dumps(event, ensure_ascii=True))
     if record["answer"] is not None:
-        print("Model:", record["answer"])
+        origin = record.get("selected_path", "gpt2/dialogue")
+        if origin == "host/session-memory":
+            label = "Session memory"
+        elif origin == "learned-readback/host-trace-render" or origin.startswith("host/observed-"):
+            label = "Observed tool response"
+        elif origin.startswith("host/"):
+            label = "Host response"
+        elif origin.startswith("learned-dialogue-act/"):
+            label = "Learned intent · host response"
+        elif origin == "learned-reader/copied-span":
+            label = "Selected context span"
+        else:
+            label = "Model"
+        print(label, record["answer"], sep=" · ")
     if record["failure"]:
         print("Failure:", record["failure"])
         print("Generated frames:", json.dumps(record["frames"], ensure_ascii=True))
@@ -248,14 +294,69 @@ def terminal(sessions, prompt, permit_calls, as_json):
                 print(error, file=sys.stderr)
 
 
+RUNTIMES = {
+    "raw": "local_chat", "structured": "fallback_chat", "product": "product_chat",
+    "product-v2": "followon_product_chat", "memory-preview": "memory_chat",
+    "assistant-preview": "assistant_preview",
+}
+TRACE_RUNTIMES = {"assistant-preview"}
+FOLLOWON_RUNTIMES = TRACE_RUNTIMES | {"product-v2", "memory-preview"}
+PRODUCT_RUNTIMES = FOLLOWON_RUNTIMES | {"product"}
+
+
+def refresh_runtime_dependencies(runtime):
+    # Existing chats own their model and heads. Clear discovery caches only for
+    # constructing the next generation, under the session manager's lock.
+    if runtime in ("structured", "product"):
+        from fallback_head import load_head
+        load_head.cache_clear()
+    if runtime in PRODUCT_RUNTIMES:
+        from product_chat import selected_reader
+        selected_reader.cache_clear()
+    if runtime in FOLLOWON_RUNTIMES:
+        from followon_head_v2 import load_accepted_head
+        load_accepted_head.cache_clear()
+    if runtime in TRACE_RUNTIMES:
+        from trace_readback_chat import selected_readback
+        from reference_ops_chat import accepted_patterns
+        selected_readback.cache_clear()
+        accepted_patterns.cache_clear()
+
+
+def build_runtime(args, guard, tokenizer, weights, sha, pin_info):
+    runtime = args.runtime or pin_info.get("runtime","raw")
+    if args.watch_pin:
+        refresh_runtime_dependencies(runtime)
+    if runtime not in RUNTIMES:
+        raise ValueError("unknown chat runtime")
+    Chat = import_module(RUNTIMES[runtime]).Chat
+    model = load_student(weights, sha, args.device)
+    parameters = sum(p.numel() for p in model.parameters())
+    if runtime in FOLLOWON_RUNTIMES:
+        head = json.loads((ROOT / "reports/working-chat/head-v2.json").read_text())
+        parameters += head["parameters"]
+    elif runtime in {"structured", "product"}:
+        parameters += 56566
+    if runtime in PRODUCT_RUNTIMES:
+        from product_chat import reader_identity
+        parameters += reader_identity()["parameters"]
+    if runtime in TRACE_RUNTIMES:
+        features = json.loads((ROOT / "reports/trace-readback/weights.json").read_text())
+        parameters += len(features["idf"])
+    info = dict(name=f"GPT-2 small · {runtime} · {pin_info.get('status','local')}", runtime=runtime, parameters=parameters, checkpoint=weights.name, sha256=sha, device=args.device)
+    return lambda: Chat(model, tokenizer, guard), info
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     select = parser.add_mutually_exclusive_group()
-    select.add_argument("--pin", type=Path, help="JSON with weights path and SHA-256 (defaults to reports/working-chat/selected.json)")
+    select.add_argument("--pin", type=Path, help="JSON with weights path and SHA-256 (defaults to the release pin, or the experimental live pin)")
     select.add_argument("--weights", type=Path, help="Bare GPT-2 state dict, requires --sha256")
+    parser.add_argument("--watch-pin", action="store_true",
+                        help="CPU only: refresh the local pin for new chats and preserve open chats")
     parser.add_argument("--sha256", help="Expected digest for --weights")
     parser.add_argument("--device", choices=("cpu", "mps"), default="cpu")
-    parser.add_argument("--runtime",choices=("raw","structured","product","product-v2"),help="Override the runtime named in the pin")
+    parser.add_argument("--runtime",choices=tuple(RUNTIMES),help="Override the runtime named in the pin")
     parser.add_argument("--port", type=int, default=8765, help="Loopback web port (default 8765)")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--cli", action="store_true", help="Interactive terminal")
@@ -265,40 +366,35 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if bool(args.weights) != bool(args.sha256):
         parser.error("--weights and --sha256 must be supplied together")
+    if args.watch_pin and (args.weights or args.device != "cpu"):
+        parser.error("--watch-pin requires a local pin and CPU serving")
     if not 0 <= args.port <= 65535:
         parser.error("--port must be between 0 and 65535")
     if (args.tools or args.json) and not (args.cli or args.prompt is not None):
         parser.error("--tools and --json apply to --cli or --prompt")
     guard = None
     try:
-        weights, sha = resolve_weights(args.weights, args.sha256, args.pin)
         guard = Guard(ROOT / "runs" / ("serve-" + uuid.uuid4().hex), 12 * 3600) if args.device == "mps" else CPUGuard()
         guard.check()
-        pin_info = json.loads((args.pin or DEFAULT_PIN).read_text()) if args.weights is None else {}
-        runtime = args.runtime or pin_info.get("runtime","raw")
-        if runtime in ("product","product-v2"):
-            from product_chat import reader_identity
-            if runtime == "product-v2":
-                from followon_product_chat import Chat
-                route_params = json.loads((ROOT/"reports/working-chat/head-v2.json").read_text())["parameters"]
-            else:
-                from product_chat import Chat
-                route_params = 56566
-            parameters = 124439808 + route_params + reader_identity()["parameters"]
-        elif runtime == "structured":
-            from fallback_chat import Chat
-            parameters = 124439808 + 56566
-        elif runtime == "raw":
-            from local_chat import Chat
-            parameters = 124439808
-        else:
-            raise ValueError("unknown chat runtime")
         if args.device == "cpu":
             torch.set_num_threads(1)
         tokenizer = load()
-        model = load_student(weights, sha, args.device)
-        info = dict(name=f"GPT-2 small · {runtime} · {pin_info.get('status','local')}", runtime=runtime, parameters=parameters, checkpoint=weights.name, sha256=sha, device=args.device)
-        sessions = Sessions(lambda: Chat(model, tokenizer, guard), info)
+        pin = args.pin or DEFAULT_PIN
+
+        def load_pin(spec):
+            weights, sha = resolve_weights(args.weights, args.sha256, pin, spec)
+            return build_runtime(args, guard, tokenizer, weights, sha, spec)
+
+        if args.watch_pin:
+            watch = WatchedPin(pin, load_pin)
+            watch.open()  # Verify the selected runtime before serving.
+            sessions = Sessions(None, None, watch=watch)
+            sha = watch.info["sha256"]
+        else:
+            spec = json.loads(pin.read_bytes()) if args.weights is None else {}
+            factory, info = load_pin(spec)
+            sessions = Sessions(factory, info)
+            sha = info["sha256"]
         if args.cli or args.prompt is not None:
             print(f"GPT-2 small · {args.device.upper()} · SHA-256 {sha}", file=sys.stderr)
             return terminal(sessions, args.prompt, args.tools, args.json)

@@ -123,6 +123,9 @@ def validate_spec(spec):
             raise ValueError(f"{key} must be nonnegative and finite")
     if spec["target_tokens"] % TOKENS_PER_STEP:
         raise ValueError("budget must be a multiple of tokens per update")
+    peak_lr = spec.get("peak_lr", 3e-4)
+    if not math.isfinite(peak_lr) or not 0 < peak_lr <= 3e-4:
+        raise ValueError("invalid peak learning rate")
     steps = spec["target_tokens"] // TOKENS_PER_STEP
     mix = spec["mix"]
     if (any(type(n) is not int or n <= 0 for n in mix.values()) or
@@ -278,7 +281,7 @@ def candidate(guard, spec, model_config, device, previous):
             reserved += TOKENS_PER_STEP
             update()
             opt.zero_grad(set_to_none=True)
-            lr = 3e-4 * min((step+1)/spec["warmup_steps"], 1.) * (
+            lr = spec.get("peak_lr", 3e-4) * min((step+1)/spec["warmup_steps"], 1.) * (
                 .1+.9*(1+math.cos(math.pi*max(0, step-spec["warmup_steps"])/max(1, steps-spec["warmup_steps"])))/2)
             for group in opt.param_groups:
                 group["lr"] = lr

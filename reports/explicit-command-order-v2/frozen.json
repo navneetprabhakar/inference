@@ -1,0 +1,556 @@
+{
+  "stage": "frozen",
+  "suite_sha256": "5bdbbe2f9a7cfe70b284b9b96414bf6bb5fb3f7c0e17f9e5cbb63f23bf1df90c",
+  "source_sha256": "f7369250fb3b1216e8e6c7ccc5162524116e77e67d26d7da427d78f8d4c93116",
+  "checkpoint_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "device": "cpu",
+  "passed": 24,
+  "total": 24,
+  "rows": [
+    {
+      "id": "preamble-forward",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "43",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.0003252,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 57,
+            "b": 14
+          },
+          "ok": true,
+          "data": {
+            "result": 43
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":57,\"b\":14}}}",
+        "{\"text\": \"43\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "preamble-reverse",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-43",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.000981,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 14,
+            "b": 57
+          },
+          "ok": true,
+          "data": {
+            "result": -43
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":14,\"b\":57}}}",
+        "{\"text\": \"-43\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "context-forward",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "62",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.001792,
+          "name": "calculate",
+          "arguments": {
+            "a": 74,
+            "b": 12,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": 62
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":74,\"b\":12,\"op\":\"subtract\"}}}",
+        "{\"text\": \"62\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "context-reverse",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-62",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.002292,
+          "name": "calculate",
+          "arguments": {
+            "a": 12,
+            "b": 74,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": -62
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":12,\"b\":74,\"op\":\"subtract\"}}}",
+        "{\"text\": \"-62\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "words-forward",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "17",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.002818,
+          "name": "calculate",
+          "arguments": {
+            "a": 23,
+            "b": 6,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": 17
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":23,\"b\":6,\"op\":\"subtract\"}}}",
+        "{\"text\": \"17\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "words-reverse",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-17",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.003293,
+          "name": "calculate",
+          "arguments": {
+            "a": 6,
+            "b": 23,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": -17
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":6,\"b\":23,\"op\":\"subtract\"}}}",
+        "{\"text\": \"-17\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "signed-forward",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "13.75",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.0037608,
+          "name": "calculate",
+          "arguments": {
+            "a": 11.25,
+            "b": -2.5,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": 13.75
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":11.25,\"b\":-2.5,\"op\":\"subtract\"}}}",
+        "{\"text\": \"13.75\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "signed-reverse",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-13.75",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.004174,
+          "name": "calculate",
+          "arguments": {
+            "a": -2.5,
+            "b": 11.25,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": -13.75
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":-2.5,\"b\":11.25,\"op\":\"subtract\"}}}",
+        "{\"text\": \"-13.75\"}"
+      ],
+      "frame_origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "anaphor-a",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "58",
+      "trace": [
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.004799,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 63,
+            "b": 5
+          },
+          "ok": true,
+          "data": {
+            "result": 58
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":63,\"b\":5}}}",
+        "{\"text\": \"58\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "anaphor-b",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-19",
+      "trace": [
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.005357,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": -14,
+            "b": 5
+          },
+          "ok": true,
+          "data": {
+            "result": -19
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":-14,\"b\":5}}}",
+        "{\"text\": \"-19\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "anaphor-reverse",
+      "outcome": "subtract",
+      "passed": true,
+      "answer": "-58",
+      "trace": [
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919634.005882,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 5,
+            "b": 63
+          },
+          "ok": true,
+          "data": {
+            "result": -58
+          }
+        }
+      ],
+      "frames": [
+        "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"subtract\",\"a\":5,\"b\":63}}}",
+        "{\"text\": \"-58\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ],
+      "failure": null
+    },
+    {
+      "id": "failed-prior",
+      "outcome": "missing_prior",
+      "passed": true,
+      "answer": "There is no successful result from the latest call to use.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"There is no successful result from the latest call to use.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "unordered",
+      "outcome": "clarify",
+      "passed": true,
+      "answer": "Please specify the starting amount and the amount to subtract from it.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"Please specify the starting amount and the amount to subtract from it.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "alternative",
+      "outcome": "clarify",
+      "passed": true,
+      "answer": "Please specify the starting amount and the amount to subtract from it.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"Please specify the starting amount and the amount to subtract from it.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "missing-amount",
+      "outcome": "clarify",
+      "passed": true,
+      "answer": "Please specify the starting amount and the amount to subtract from it.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"Please specify the starting amount and the amount to subtract from it.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "ambiguous-context",
+      "outcome": "clarify",
+      "passed": true,
+      "answer": "Please specify the starting amount and the amount to subtract from it.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"Please specify the starting amount and the amount to subtract from it.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "disabled",
+      "outcome": "denied",
+      "passed": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"This turn does not permit a new tool call.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "authority",
+      "outcome": "denied",
+      "passed": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"This turn does not permit a new tool call.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "explicit-prohibition",
+      "outcome": "denied",
+      "passed": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"This turn does not permit a new tool call.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "unevaluated",
+      "outcome": "expression",
+      "passed": true,
+      "answer": "44 − 17",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"44 \\u2212 17\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "unavailable",
+      "outcome": "unavailable",
+      "passed": true,
+      "answer": "Only the offline calculator and unit converter are available. No live lookup was performed.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"Only the offline calculator and unit converter are available. No live lookup was performed.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "hypothetical",
+      "outcome": "no_call",
+      "passed": true,
+      "answer": "No tool was run. To request a calculation, give a direct command.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"No tool was run. To request a calculation, give a direct command.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "quotation",
+      "outcome": "no_call",
+      "passed": true,
+      "answer": "No tool was run. To request a calculation, give a direct command.",
+      "trace": [],
+      "frames": [
+        "{\"text\": \"No tool was run. To request a calculation, give a direct command.\"}"
+      ],
+      "frame_origins": [
+        "host/explicit-command-notice"
+      ],
+      "failure": null
+    },
+    {
+      "id": "nonarithmetic",
+      "outcome": "no_call",
+      "passed": true,
+      "answer": "What number should the reader a number should I convert to follow?",
+      "trace": [],
+      "frames": [
+        "{\"text\":\"What number should the reader a number should I convert to follow?\"}"
+      ],
+      "frame_origins": [
+        "gpt2/dialogue"
+      ],
+      "failure": null
+    }
+  ]
+}

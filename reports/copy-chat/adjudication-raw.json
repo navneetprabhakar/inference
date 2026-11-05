@@ -1,0 +1,667 @@
+{
+  "scope": "Raw copy-model A and B; assessor inspected both only after both runs completed 20/20 cases. No reruns, tuning, or model edits. One assistant semantic assessor.",
+  "criteria": "Credit correct identifiable intended meaning despite grammar or a recoverable typo. A required tool call must actually be proposed with the right arguments; action claims follow the actual trace. Malformed/unavailable answers fail. An explicitly requested exact spelling, format, or number-only response is substantive. Both turns must pass for a case pass. Frozen strict scoring is separately preserved.",
+  "suites": {
+    "a": {
+      "meta": {
+        "weights_sha256": "87f1cd7315839c56ca578ed6dca0b87f9b90f7cee462bc76a27087696bd7e4c4",
+        "head_pin": null,
+        "reader": null,
+        "holdout": "A",
+        "runtime": "local_chat.Chat",
+        "device": "cpu"
+      },
+      "strict": {
+        "conversations": {
+          "passed": 0,
+          "total": 20
+        },
+        "turns": {
+          "passed": 2,
+          "total": 40
+        },
+        "by_stratum": {
+          "prose": {
+            "passed": 0,
+            "total": 10
+          },
+          "tool": {
+            "passed": 0,
+            "total": 6
+          },
+          "no_call": {
+            "passed": 0,
+            "total": 4
+          }
+        },
+        "first_call_per_tool_session": {
+          "passed": 1,
+          "total": 6
+        },
+        "counterfactual_whole_session_pair_pass": false,
+        "successful_calls_when_prohibited": 0,
+        "protocol_failures": 5
+      },
+      "semantic": {
+        "cases": 20,
+        "passed_cases": 1,
+        "turns": 40,
+        "passed_turns": 5
+      },
+      "by_stratum": {
+        "prose": {
+          "cases": 10,
+          "passed_cases": 1,
+          "turns": 20,
+          "passed_turns": 3
+        },
+        "tool": {
+          "cases": 6,
+          "passed_cases": 0,
+          "turns": 12,
+          "passed_turns": 1
+        },
+        "no_call": {
+          "cases": 4,
+          "passed_cases": 0,
+          "turns": 8,
+          "passed_turns": 1
+        }
+      },
+      "cases": [
+        {
+          "id": "p01",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Names Bela and a fragment of Neri without identifying the bust buyer. Bellei does not identify Bela in the follow-up."
+        },
+        {
+          "id": "p02",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First answer malformed; second invents a stop instead of naming the tannery."
+        },
+        {
+          "id": "p03",
+          "stratum": "prose",
+          "semantic_turns": [
+            true,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "The garbled first answer nevertheless calls cracked the latest condition. The follow-up never acknowledges the cause is unknown."
+        },
+        {
+          "id": "p04",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Greeting omits Belmoor; returning Belmoor as the maker fails to reject the unsupported inference."
+        },
+        {
+          "id": "p05",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Neither output is a parseable ordered surname list."
+        },
+        {
+          "id": "p06",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Mentions date/meeting without requesting a location; never supplies boathouse."
+        },
+        {
+          "id": "p07",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Neither output supplies the requested edited sentence."
+        },
+        {
+          "id": "p08",
+          "stratum": "prose",
+          "semantic_turns": [
+            true,
+            true
+          ],
+          "strict_turns": [
+            false,
+            true
+          ],
+          "reason": "First output repeatedly identifies only Tavi, despite severe disfluency. Second correctly gives Tavi as the reassigned witness."
+        },
+        {
+          "id": "p09",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First answer malformed; second repeats May and fails to answer the eligibility question."
+        },
+        {
+          "id": "p10",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Freight does not identify linen; packed does not acknowledge missing duration."
+        },
+        {
+          "id": "t01",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Divides 24 by 24 instead of multiplying 24 by seven. No add call on turn two."
+        },
+        {
+          "id": "t02",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Requests add rather than subtract; reports actual 107. Follow-up remembers 107 but appends call despite explicit number-only request."
+        },
+        {
+          "id": "t03",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Same wrong add and actual 107 as paired case. Follow-up again violates number-only request by appending call."
+        },
+        {
+          "id": "t04",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Subtracts zeroes instead of converting kilograms. Original unit question is answered with a quantity."
+        },
+        {
+          "id": "t05",
+          "stratum": "tool",
+          "semantic_turns": [
+            true,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Correct division proposal; reports the actual timeout without claiming success, despite malformed phrasing. Does not answer no to verified-result follow-up."
+        },
+        {
+          "id": "t06",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            true
+          ],
+          "reason": "Adds wrong quantities, makes no conversion. The digits on turn two reproduce its calculator output, but no converter reported those minutes."
+        },
+        {
+          "id": "n01",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Neither answer is the single requested letter; turn two supplies the updated duration instead."
+        },
+        {
+          "id": "n02",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            true
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Turn one does not reject the inference of real dispatch. The explicit No on turn two is consistent with the empty trace despite disfluent trailing text."
+        },
+        {
+          "id": "n03",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Dispatches an unrequested addition rather than identifying both missing units. Does not ask for the missing target unit after centimetres are given."
+        },
+        {
+          "id": "n04",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First answer malformed; repeats cancelled without distinguishing written claim from personally performed action."
+        }
+      ],
+      "transcripts_sha256": "225d60efdc964c06dfa5b5b26964c079bd9fdc05aa6fce2d6a29e7626973c535"
+    },
+    "b": {
+      "meta": {
+        "weights_sha256": "87f1cd7315839c56ca578ed6dca0b87f9b90f7cee462bc76a27087696bd7e4c4",
+        "head_pin": null,
+        "reader": null,
+        "holdout": "B",
+        "runtime": "local_chat.Chat",
+        "device": "cpu"
+      },
+      "strict": {
+        "conversations": {
+          "passed": 0,
+          "total": 20
+        },
+        "turns": {
+          "passed": 2,
+          "total": 40
+        },
+        "by_stratum": {
+          "prose": {
+            "passed": 0,
+            "total": 10
+          },
+          "tool": {
+            "passed": 0,
+            "total": 6
+          },
+          "no_call": {
+            "passed": 0,
+            "total": 4
+          }
+        },
+        "first_call_per_tool_session": {
+          "passed": 0,
+          "total": 6
+        },
+        "counterfactual_whole_session_pair_pass": false,
+        "successful_calls_when_prohibited": 0,
+        "protocol_failures": 7
+      },
+      "semantic": {
+        "cases": 20,
+        "passed_cases": 2,
+        "turns": 40,
+        "passed_turns": 8
+      },
+      "by_stratum": {
+        "prose": {
+          "cases": 10,
+          "passed_cases": 1,
+          "turns": 20,
+          "passed_turns": 5
+        },
+        "tool": {
+          "cases": 6,
+          "passed_cases": 0,
+          "turns": 12,
+          "passed_turns": 1
+        },
+        "no_call": {
+          "cases": 4,
+          "passed_cases": 1,
+          "turns": 8,
+          "passed_turns": 2
+        }
+      },
+      "cases": [
+        {
+          "id": "bp01",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            true
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First repeatedly says yes, inconsistent with one confirmed reference. Second repeats yes after both confirm; no clear opposing answer, despite severe disfluency."
+        },
+        {
+          "id": "bp02",
+          "stratum": "prose",
+          "semantic_turns": [
+            true,
+            true
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "The repaire and fiddlerriddler are corrupted, but each identifies the only matching holder in context. Credited on meaning, not spelling."
+        },
+        {
+          "id": "bp03",
+          "stratum": "prose",
+          "semantic_turns": [
+            true,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Explicitly says medieval for the later evidence despite wording errors. Follow-up about proof offers neither no nor a coherent explanation of conjecture."
+        },
+        {
+          "id": "bp04",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Both fail to produce a complete edited sentence."
+        },
+        {
+          "id": "bp05",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Neither answer is the required caption alone."
+        },
+        {
+          "id": "bp06",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Purchase date irrelevant to bird identification; second frame malformed."
+        },
+        {
+          "id": "bp07",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            true
+          ],
+          "strict_turns": [
+            false,
+            true
+          ],
+          "reason": "Carrier answer malformed. Emon is the original preparer."
+        },
+        {
+          "id": "bp08",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Mentions flowers without giving west; does not deny that the wind revises the earlier dance direction."
+        },
+        {
+          "id": "bp09",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Both responses omit the requested full material; offersmeric is not a sufficiently clear identification of turmeric."
+        },
+        {
+          "id": "bp10",
+          "stratum": "prose",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First frame malformed; second omits the hyphenated words."
+        },
+        {
+          "id": "bt01",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Divides 8 by 8 instead of 8,281 by 91. Follow-up multiplication frame malformed."
+        },
+        {
+          "id": "bt02",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "No completed division or archive observation. Follow-up says archived rather than a number or that none arrived."
+        },
+        {
+          "id": "bt03",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Same missing division and missing actual recorded answer as paired case."
+        },
+        {
+          "id": "bt04",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Converts zero litres instead of 0.375. Original unit recalled as a malformed number."
+        },
+        {
+          "id": "bt05",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Multiplies 9 by 9 instead of requesting 940 minus 215. Answers 81 instead of original 940 in follow-up."
+        },
+        {
+          "id": "bt06",
+          "stratum": "tool",
+          "semantic_turns": [
+            false,
+            true
+          ],
+          "strict_turns": [
+            false,
+            true
+          ],
+          "reason": "Adds 38 to itself and omits conversion. Its actual first calculation produced 76; it correctly recalls exactly 76 on explicit follow-up."
+        },
+        {
+          "id": "bn01",
+          "stratum": "no_call",
+          "semantic_turns": [
+            true,
+            true
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "No toll voucher applies conveys ineligibility at ten. The ride applies (repeated) conveys eligibility after eleven; both avoid tools. Borderline disfluent, especially turn two."
+        },
+        {
+          "id": "bn02",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Restates the poster instead of acknowledging that a written instruction changed nothing."
+        },
+        {
+          "id": "bn03",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "First frame malformed. Missing does not identify the second factor."
+        },
+        {
+          "id": "bn04",
+          "stratum": "no_call",
+          "semantic_turns": [
+            false,
+            false
+          ],
+          "strict_turns": [
+            false,
+            false
+          ],
+          "reason": "Claims arithmetic adapters renew or repeats renew without denying actual renewal; neither requested negative answer is given."
+        }
+      ],
+      "transcripts_sha256": "fde19aac37cfc06ee6383460813789bc0609bd07a71ef1c4d166e8c639e9b50a"
+    }
+  },
+  "sensitivity": "Permissive borderline judgments: A p08 turn one and B bp01 turn two, bp02 both, bn01 turn two are credited despite severe disfluency. Removing just those credits yields A 0/20 cases and 4/40 turns; B 0/20 cases and 4/40 turns. Additional trace-only readback credit for A t06 turn two would ignore that no converter was called, so remains separately identified rather than upgraded."
+}

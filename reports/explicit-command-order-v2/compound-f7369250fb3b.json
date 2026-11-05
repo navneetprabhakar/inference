@@ -1,0 +1,217 @@
+{
+  "scope": "Separate compound integration checks, not a before/after quality estimate",
+  "checkpoint_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "passed": 7,
+  "total": 7,
+  "rows": [
+    {
+      "user": "First add 29 and 8. Next subtract seven from the observed sum.",
+      "fixture": 41,
+      "passed": true,
+      "answer": "34",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "synthetic recorded fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.260731,
+          "name": "calculate",
+          "arguments": {
+            "a": 29,
+            "b": 8,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": 41
+          }
+        },
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.26108,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 41,
+            "b": 7
+          },
+          "ok": true,
+          "data": {
+            "result": 34
+          }
+        }
+      ],
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "user": "First add 29 and 8. Next subtract the observed sum from seven.",
+      "fixture": 41,
+      "passed": true,
+      "answer": "-34",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "synthetic recorded fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.262006,
+          "name": "calculate",
+          "arguments": {
+            "a": 29,
+            "b": 8,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": 41
+          }
+        },
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.262239,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 7,
+            "b": 41
+          },
+          "ok": true,
+          "data": {
+            "result": -34
+          }
+        }
+      ],
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "user": "First add 29 and 8. Next subtract seven from the observed sum.",
+      "fixture": -10,
+      "passed": true,
+      "answer": "-17",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "synthetic recorded fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.262892,
+          "name": "calculate",
+          "arguments": {
+            "a": 29,
+            "b": 8,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": -10
+          }
+        },
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.2630882,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": -10,
+            "b": 7
+          },
+          "ok": true,
+          "data": {
+            "result": -17
+          }
+        }
+      ],
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "user": "First add 29 and 8. Next subtract the observed sum from seven.",
+      "fixture": -10,
+      "passed": true,
+      "answer": "17",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "synthetic recorded fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.2636611,
+          "name": "calculate",
+          "arguments": {
+            "a": 29,
+            "b": 8,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": -10
+          }
+        },
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.263933,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 7,
+            "b": -10
+          },
+          "ok": true,
+          "data": {
+            "result": 17
+          }
+        }
+      ],
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "user": "First add 29 and 8. Next calculate the difference between the earlier amount and seven.",
+      "passed": true,
+      "trace": [],
+      "answer": "Please specify the starting amount and the amount to subtract from it."
+    },
+    {
+      "user": "Please deduct 13 centimetres from a wooden strip of 7 metres.",
+      "passed": true,
+      "trace": [],
+      "answer": "Please specify the starting amount and the amount to subtract from it."
+    },
+    {
+      "user": "same two-step request with first-call outage",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "synthetic recorded fixture",
+          "schema_version": 1,
+          "timestamp": 1793919636.26547,
+          "name": "calculate",
+          "ok": false,
+          "error": "test outage"
+        }
+      ],
+      "answer": "The tool returned an error: test outage",
+      "passed": true
+    }
+  ],
+  "source_sha256": "f7369250fb3b1216e8e6c7ccc5162524116e77e67d26d7da427d78f8d4c93116"
+}

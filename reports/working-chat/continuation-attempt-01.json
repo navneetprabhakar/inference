@@ -1,0 +1,131 @@
+{
+  "status": {
+    "stage": "extended pretraining",
+    "state": "failed",
+    "step": 115,
+    "target_tokens": 471040,
+    "attempt": 1,
+    "input_tokens": 471040,
+    "elapsed": 604.3995578289032,
+    "active_elapsed": 604.3911181660369,
+    "charged_resume_gap_seconds": 0.0,
+    "reserved_target_tokens": 471040,
+    "remaining_target_tokens": 4239360,
+    "remaining_active_seconds": 6595.608881833963,
+    "remaining_elapsed_seconds": 10195.600442171097,
+    "observed_tokens_per_second": 779.3519930624182,
+    "active_tokens_per_second": 779.3628758631046,
+    "eta_active_seconds": 5439.520063494332,
+    "next_source_offsets": {
+      "wiki": 117760,
+      "textbook": 117760,
+      "stories": 235520
+    },
+    "timestamp": 1793908852.6354282,
+    "train_ce": 5.034202605485916,
+    "gradient_norm": 1.0229547023773193,
+    "lr": 0.0002983682215529839,
+    "reason": "development improvement gate"
+  },
+  "development": [
+    {
+      "validation": {
+        "wiki": 6.542326748371124,
+        "textbook": 6.684024810791016,
+        "stories": 3.3888638988137245
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the National Register of the National Register of Historic Places in the National Register of Historic Places in the National Register of the National",
+        "The child went to the garden because": "The child went to the garden because it was very happy.\nThe little girl was very happy and said, \"I'm sorry, I can't know"
+      },
+      "contrast_logit_margins": [
+        -0.15354245901107788,
+        0.3164074718952179,
+        1.3547348976135254,
+        -1.3401246070861816
+      ],
+      "step": 0
+    },
+    {
+      "validation": {
+        "wiki": 6.627908885478973,
+        "textbook": 6.364197760820389,
+        "stories": 3.3940457478165627
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the United States.",
+        "The child went to the garden because": "The child went to the garden because the sky was very very happy."
+      },
+      "contrast_logit_margins": [
+        -0.7573348879814148,
+        0.8495721220970154,
+        2.758864641189575,
+        -2.528562545776367
+      ],
+      "step": 115,
+      "primary_ce_improvement": -0.08558213710784912
+    }
+  ],
+  "config": {
+    "spec": {
+      "corpus": "data/balanced-continuation-v1",
+      "manifest_sha256": "97ceba8dddcb6f8c289506f54c50dd06e223988b0efa6e85eaf542b6e5f7c48f",
+      "target_tokens": 4710400,
+      "active_seconds": 7200,
+      "elapsed_seconds": 10800,
+      "seed": 1201,
+      "mix": {
+        "wiki": 4,
+        "textbook": 4,
+        "stories": 8
+      },
+      "primary": "wiki",
+      "minimum_ce_improvement": 0.025,
+      "material_ce_regression": 0.05,
+      "warmup_steps": 60,
+      "validation_rows_per_source": 32,
+      "budget_name": "balanced-language-continuation-01",
+      "parent_checkpoint": {
+        "path": "runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+        "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4"
+      }
+    },
+    "model": {
+      "vocabulary": 50257,
+      "context": 1024,
+      "width": 768,
+      "heads": 12,
+      "depth": 12
+    },
+    "device": "mps",
+    "tokenizer": {
+      "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+      "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+    },
+    "dtype": "fp32",
+    "torch": "2.14.1",
+    "tokens_per_step": 4096,
+    "code": {
+      "pretrain.py": "f273b3fd465c37336f7e297c46c7a3fb9ab1d2af6183a63ac65006ac60f87e62",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+      "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+      "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+      "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+      "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+      "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27"
+    },
+    "initialization": {
+      "mode": "local_pre_sft_weights",
+      "parent": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+        "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4",
+        "bytes": 1493456923,
+        "step": 600,
+        "target_tokens": 2457600,
+        "acceptance_report_sha256": "120cc3af4b7ffb566bd7fdc5104783a9886ef2c7414b0611303acb4b653e74b8"
+      },
+      "optimizer": "fresh_adamw"
+    }
+  },
+  "decision": "Rejected at first milestone. Fresh run 02 starts from identical passing pre-SFT parent and changes only the peak LR from 0.0003 to 0.00006; same corpus, seed, review thresholds, caps. The first 471,040 target positions will repeat across experiments only."
+}

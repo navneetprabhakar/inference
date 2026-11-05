@@ -1,0 +1,431 @@
+{
+  "state": "complete",
+  "reviewer": "Assistant reviewer who preregistered the synthetic cases, using their frozen rubrics and actual HTTP records. No human or blinded adjudication.",
+  "protocol_sha256": "fc147de1e82cd9f9449b5aed7c67a15ed19fbb8e16402c4a7231b1d70c4ae623",
+  "suite_sha256": "383045aa3a986908c74d44f266a577898edd11878f32a642dee7b83cd8ea920d",
+  "transcripts_sha256": "e5e634f8cc246212a9fa8cbb002a155baf28c6d364910522bb2f51e2f7cc5e8e",
+  "model": {
+    "name": "GPT-2 small · assistant-preview · experimental",
+    "runtime": "assistant-preview",
+    "parameters": 125931704,
+    "checkpoint": "weights.pt",
+    "sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+    "device": "cpu"
+  },
+  "overall": {
+    "turns": 34,
+    "passed_turns": 17,
+    "sessions": 15,
+    "passed_sessions": 6
+  },
+  "by_scope": {
+    "session memory": {
+      "turns": 9,
+      "passed_turns": 9,
+      "sessions": 3,
+      "passed_sessions": 3
+    },
+    "everyday prose": {
+      "turns": 10,
+      "passed_turns": 0,
+      "sessions": 5,
+      "passed_sessions": 0
+    },
+    "single tool": {
+      "turns": 6,
+      "passed_turns": 4,
+      "sessions": 3,
+      "passed_sessions": 2
+    },
+    "dependent calls": {
+      "turns": 5,
+      "passed_turns": 4,
+      "sessions": 2,
+      "passed_sessions": 1
+    },
+    "tool boundaries": {
+      "turns": 4,
+      "passed_turns": 0,
+      "sessions": 2,
+      "passed_sessions": 0
+    }
+  },
+  "by_final_origin": {
+    "host/session-memory": {
+      "turns": 9,
+      "passed_turns": 9
+    },
+    "gpt2/dialogue": {
+      "turns": 15,
+      "passed_turns": 2
+    },
+    "host/observed-number": {
+      "turns": 7,
+      "passed_turns": 5
+    },
+    "host/reference-abstention": {
+      "turns": 2,
+      "passed_turns": 0
+    },
+    "learned-readback/host-trace-render": {
+      "turns": 1,
+      "passed_turns": 1
+    }
+  },
+  "tool_events": {
+    "observed": 8,
+    "successful": 8,
+    "disabled_events": 0,
+    "unregistered_events": 0
+  },
+  "protocol_failures": 5,
+  "required_actions_correct": 6,
+  "required_actions": 8,
+  "required_first_calls_correct": 5,
+  "required_first_calls": 7,
+  "cases": [
+    {
+      "id": "M1",
+      "scope": "session memory",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Greeted Levia by the supplied name.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Returned Levia.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "scope": "session memory",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Acknowledged Orla.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Replaced Orla with Elio.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 3,
+          "passed": true,
+          "reason": "Returned Elio.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "scope": "session memory",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Reported an empty name slot in a new session.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Acknowledged Runa.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 3,
+          "passed": true,
+          "reason": "Confirmed clearing the name.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        },
+        {
+          "turn": 4,
+          "passed": true,
+          "reason": "Reported an empty name slot after forgetting.",
+          "origin": "host/session-memory",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "P1",
+      "scope": "everyday prose",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "JSON parsing failed; no note was served.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "The generated string was unterminated; no rewrite was served.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "scope": "everyday prose",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "The model did not complete a valid frame.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "The model did not complete a valid frame.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "scope": "everyday prose",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "The model did not complete a valid frame.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Repeated unrelated text about the United States and did not identify the blue tub.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "scope": "everyday prose",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "Answered Flinen instead of dusk.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Repeated Flinen in mixed case instead of DUSK.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "P5",
+      "scope": "everyday prose",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "The fragment “The requ.” neither acknowledged missing information nor requested the count.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Answered Selelirin instead of four.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "T1",
+      "scope": "single tool",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "Ran 9 minus 46 and reported its actual result, -37. The task required 46 minus 9.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Requested clarification instead of repeating the observed -37.",
+          "origin": "host/reference-abstention",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "scope": "single tool",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Multiplied 13 by 8 and reported the observed 104.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Returned only 104 without another call.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "scope": "single tool",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Converted 1.75 metres to centimetres and reported the observed 175.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Returned only m without another call.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "D1",
+      "scope": "dependent calls",
+      "complete_session": true,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Added 16 and 23 and reported 39.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        },
+        {
+          "turn": 2,
+          "passed": true,
+          "reason": "Used the observed 39 as the first operand for multiplication by four and reported 156.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        },
+        {
+          "turn": 3,
+          "passed": true,
+          "reason": "Repeated the observed 156 without another call.",
+          "origin": "learned-readback/host-trace-render",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "scope": "dependent calls",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": true,
+          "reason": "Added 26 and 10, divided the observed 36 by six, and reported 6.",
+          "origin": "host/observed-number",
+          "tool_events": 2
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Requested clarification instead of repeating the observed second result, 6.",
+          "origin": "host/reference-abstention",
+          "tool_events": 0
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "scope": "tool boundaries",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "Made no call but returned unrelated prose instead of an unevaluated subtraction expression.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Executed 4 minus 4 and reported its actual result, 0; required 19 minus 4.",
+          "origin": "host/observed-number",
+          "tool_events": 1
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "scope": "tool boundaries",
+      "complete_session": false,
+      "turns": [
+        {
+          "turn": 1,
+          "passed": false,
+          "reason": "Made no call but answered Zelen instead of explaining the missing tide capability.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        },
+        {
+          "turn": 2,
+          "passed": false,
+          "reason": "Answered Zelen instead of saying that no live reading was received.",
+          "origin": "gpt2/dialogue",
+          "tool_events": 0
+        }
+      ]
+    }
+  ]
+}

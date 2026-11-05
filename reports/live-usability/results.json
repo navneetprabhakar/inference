@@ -1,0 +1,749 @@
+[
+  {
+    "session": "01 introduction",
+    "turn": 1,
+    "prompt": "Hi, I'm Nila. Nice to meet you.",
+    "permit_calls": true,
+    "criterion": "Acknowledges introduction conversationally.",
+    "answer": "Hello! How can I help?",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Hello! How can I help?\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": true,
+    "reason": "Generic greeting accepted as a conversational response."
+  },
+  {
+    "session": "01 introduction",
+    "turn": 2,
+    "prompt": "What name did I give you?",
+    "permit_calls": true,
+    "criterion": "Nila.",
+    "answer": "I don’t have a saved name for you in this chat.",
+    "selected_path": "host/session-memory",
+    "frame_origins": [
+      "host/session-memory"
+    ],
+    "frames": [
+      "{\"text\":\"I don’t have a saved name for you in this chat.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Could not recall Nila."
+  },
+  {
+    "session": "02 correction",
+    "turn": 1,
+    "prompt": "My name is Arun.",
+    "permit_calls": true,
+    "criterion": "Acknowledges introduction.",
+    "answer": "Hello, Arun.",
+    "selected_path": "host/session-memory",
+    "frame_origins": [
+      "host/session-memory"
+    ],
+    "frames": [
+      "{\"text\":\"Hello, Arun.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": true,
+    "reason": "Greeted Arun by name."
+  },
+  {
+    "session": "02 correction",
+    "turn": 2,
+    "prompt": "Actually, call me Dev instead.",
+    "permit_calls": true,
+    "criterion": "Accepts Dev.",
+    "answer": "Xavel!",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Xavel!\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Introduced an unrelated name."
+  },
+  {
+    "session": "02 correction",
+    "turn": 3,
+    "prompt": "What should you call me now?",
+    "permit_calls": true,
+    "criterion": "Dev.",
+    "answer": "Oskevuven",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Oskevuven\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Did not supply Dev."
+  },
+  {
+    "session": "03 social continuity",
+    "turn": 1,
+    "prompt": "Hello there!",
+    "permit_calls": true,
+    "criterion": "Relevant greeting.",
+    "answer": "Hello! What would you like help with today?",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Hello! What would you like help with today?\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": true,
+    "reason": "Relevant greeting."
+  },
+  {
+    "session": "03 social continuity",
+    "turn": 2,
+    "prompt": "I go by Mina.",
+    "permit_calls": true,
+    "criterion": "Acknowledges preferred name.",
+    "answer": "Hello, Mavey!",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Hello, Mavey!\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Used the wrong name."
+  },
+  {
+    "session": "03 social continuity",
+    "turn": 3,
+    "prompt": "Goodnight, I'll talk to you tomorrow.",
+    "permit_calls": true,
+    "criterion": "Returns farewell.",
+    "answer": "Hello, Maveyamar!",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Hello, Maveyamar!\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Greeted instead of saying goodnight."
+  },
+  {
+    "session": "04 addition",
+    "turn": 1,
+    "prompt": "Please use the calculator to add 48 and 17.",
+    "permit_calls": true,
+    "criterion": "65.",
+    "answer": "65",
+    "selected_path": "host/observed-number",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-number"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":48,\"b\":17,\"op\":\"add\"}}}",
+      "{\"text\": \"65\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "calculate",
+        "arguments": {
+          "a": 48,
+          "b": 17,
+          "op": "add"
+        },
+        "ok": true,
+        "data": {
+          "result": 65
+        }
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Correct sum and matching call."
+  },
+  {
+    "session": "04 addition",
+    "turn": 2,
+    "prompt": "Now subtract 9 from that result using the calculator.",
+    "permit_calls": true,
+    "criterion": "56.",
+    "answer": "Please clarify the calculation or comparison you want.",
+    "selected_path": "host/reference-abstention",
+    "frame_origins": [
+      "host/reference-abstention"
+    ],
+    "frames": [
+      "{\"text\": \"Please clarify the calculation or comparison you want.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Asked for clarification instead of subtracting."
+  },
+  {
+    "session": "05 division error",
+    "turn": 1,
+    "prompt": "Use the calculator to divide 27 by 0.",
+    "permit_calls": true,
+    "criterion": "Real failed call and clear division by zero error.",
+    "answer": "The tool returned an error: division by zero",
+    "selected_path": "host/observed-error",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-error"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":27,\"b\":0,\"op\":\"divide\"}}}",
+      "{\"text\": \"The tool returned an error: division by zero\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "calculate",
+        "ok": false,
+        "error": "division by zero"
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Executed the division and accurately reported its error."
+  },
+  {
+    "session": "05 division error",
+    "turn": 2,
+    "prompt": "Try that with a divisor of 3 instead.",
+    "permit_calls": true,
+    "criterion": "9.",
+    "answer": "Please clarify the calculation or comparison you want.",
+    "selected_path": "host/reference-abstention",
+    "frame_origins": [
+      "host/reference-abstention"
+    ],
+    "frames": [
+      "{\"text\": \"Please clarify the calculation or comparison you want.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Did not carry over the dividend."
+  },
+  {
+    "session": "06 permission",
+    "turn": 1,
+    "prompt": "Tools are off. Don't call anything. What is 12 plus 5?",
+    "permit_calls": false,
+    "criterion": "17 or a clear limitation, no call.",
+    "answer": null,
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"add\",\"a\":12,\"b\":5}}}"
+    ],
+    "trace": [],
+    "failure": "student proposed a call outside the learned route",
+    "passed": false,
+    "reason": "No executed call, but returned a route failure rather than an answer or clear capability limit."
+  },
+  {
+    "session": "06 permission",
+    "turn": 2,
+    "prompt": "Tools are on now. Calculate that sum using the calculator.",
+    "permit_calls": true,
+    "criterion": "17.",
+    "answer": null,
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"add\",\"a\":5,\"b\":5}}}"
+    ],
+    "trace": [],
+    "failure": "student proposed a call outside the learned route",
+    "passed": false,
+    "reason": "No answer or executed call."
+  },
+  {
+    "session": "07 multiplication",
+    "turn": 1,
+    "prompt": "Use the calculator: 14 times 6.",
+    "permit_calls": true,
+    "criterion": "84.",
+    "answer": "84",
+    "selected_path": "host/observed-number",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-number"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":14,\"b\":6,\"op\":\"multiply\"}}}",
+      "{\"text\": \"84\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "calculate",
+        "arguments": {
+          "a": 14,
+          "b": 6,
+          "op": "multiply"
+        },
+        "ok": true,
+        "data": {
+          "result": 84
+        }
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Correct product and matching call."
+  },
+  {
+    "session": "07 multiplication",
+    "turn": 2,
+    "prompt": "Double that with the calculator.",
+    "permit_calls": true,
+    "criterion": "168.",
+    "answer": "168",
+    "selected_path": "host/observed-number",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-number"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"a\":84,\"b\":2,\"op\":\"multiply\"}}}",
+      "{\"text\": \"168\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c2",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "calculate",
+        "arguments": {
+          "a": 84,
+          "b": 2,
+          "op": "multiply"
+        },
+        "ok": true,
+        "data": {
+          "result": 168
+        }
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Used prior 84 and doubled it."
+  },
+  {
+    "session": "08 length",
+    "turn": 1,
+    "prompt": "Use the converter to convert 3 kilometers to meters.",
+    "permit_calls": true,
+    "criterion": "3000 meters.",
+    "answer": "3000",
+    "selected_path": "host/observed-number",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-number"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"convert\",\"arguments\":{\"value\":3,\"from\":\"km\",\"to\":\"m\"}}}",
+      "{\"text\": \"3000\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "convert",
+        "arguments": {
+          "value": 3,
+          "from": "km",
+          "to": "m"
+        },
+        "ok": true,
+        "data": {
+          "result": 3000.0
+        }
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Correct result, target unit established by prompt and successful trace."
+  },
+  {
+    "session": "08 length",
+    "turn": 2,
+    "prompt": "Now convert that distance to centimeters.",
+    "permit_calls": true,
+    "criterion": "300000 centimeters.",
+    "answer": null,
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"multiply\",\"a\":156.0,\"b\":3}}}"
+    ],
+    "trace": [],
+    "failure": "student proposed a call outside the learned route",
+    "passed": false,
+    "reason": "No answer or conversion."
+  },
+  {
+    "session": "09 temperature",
+    "turn": 1,
+    "prompt": "Use the converter to convert 68 Fahrenheit to Celsius.",
+    "permit_calls": true,
+    "criterion": "20 Celsius.",
+    "answer": "What number should I divide by?",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"What number should I divide by?\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Asked for a divisor."
+  },
+  {
+    "session": "09 temperature",
+    "turn": 2,
+    "prompt": "Convert that temperature back to Fahrenheit.",
+    "permit_calls": true,
+    "criterion": "68 Fahrenheit.",
+    "answer": null,
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"calculate\",\"arguments\":{\"op\":\"divide\",\"a\":68,\"b\":9}}}"
+    ],
+    "trace": [],
+    "failure": "student proposed a call outside the learned route",
+    "passed": false,
+    "reason": "No answer or conversion."
+  },
+  {
+    "session": "10 incompatible units",
+    "turn": 1,
+    "prompt": "Use the converter to convert 4 kilograms to meters.",
+    "permit_calls": true,
+    "criterion": "Real failed call and clear incompatibility.",
+    "answer": null,
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"convert\",\"arguments\":{\"value\":4,\"from\":\"m\",\"to\":\"mm\"}}}"
+    ],
+    "trace": [],
+    "failure": "student proposed a call outside the learned route",
+    "passed": false,
+    "reason": "No conversion executed, so no incompatibility error observed."
+  },
+  {
+    "session": "10 incompatible units",
+    "turn": 2,
+    "prompt": "I meant grams. Can you convert the original amount?",
+    "permit_calls": true,
+    "criterion": "4000 grams.",
+    "answer": "meters as the contents as the contents as the flask.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"meters as the contents as the contents as the flask.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Incoherent answer and no conversion."
+  },
+  {
+    "session": "11 unit permission",
+    "turn": 1,
+    "prompt": "Use the converter to convert 250 centimeters to meters.",
+    "permit_calls": true,
+    "criterion": "2.5 meters.",
+    "answer": "2.5",
+    "selected_path": "host/observed-number",
+    "frame_origins": [
+      "learned-v2-head/typed-serialization",
+      "host/observed-number"
+    ],
+    "frames": [
+      "{\"call\":{\"name\":\"convert\",\"arguments\":{\"value\":250,\"from\":\"cm\",\"to\":\"m\"}}}",
+      "{\"text\": \"2.5\"}"
+    ],
+    "trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "name": "convert",
+        "arguments": {
+          "value": 250,
+          "from": "cm",
+          "to": "m"
+        },
+        "ok": true,
+        "data": {
+          "result": 2.5
+        }
+      }
+    ],
+    "failure": null,
+    "passed": true,
+    "reason": "Correct result, target unit established by prompt and successful trace."
+  },
+  {
+    "session": "11 unit permission",
+    "turn": 2,
+    "prompt": "Tools are off now. What distance did you just give me?",
+    "permit_calls": false,
+    "criterion": "2.5 meters from prior turn.",
+    "answer": "2",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"2\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No call as required, but replied 2 rather than 2.5."
+  },
+  {
+    "session": "12 supportive conversation",
+    "turn": 1,
+    "prompt": "I feel nervous before my first presentation tomorrow.",
+    "permit_calls": true,
+    "criterion": "Relevant acknowledgment, suggestion or question.",
+    "answer": "Got it. What else should it show?",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Got it. What else should it show?\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Question about what it should show missed the expressed anxiety."
+  },
+  {
+    "session": "12 supportive conversation",
+    "turn": 2,
+    "prompt": "The first minute is what scares me. Any small thing I can try?",
+    "permit_calls": true,
+    "criterion": "One practical opening-minute tactic.",
+    "answer": "Maverimar",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Maverimar\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No practical tactic."
+  },
+  {
+    "session": "13 ordinary editing",
+    "turn": 1,
+    "prompt": "Help me say “I'll be late” politely in a short text.",
+    "permit_calls": true,
+    "criterion": "Usable polite short message conveying lateness.",
+    "answer": "Sure. What would you like to be a good to be a good way to discuss?",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Sure. What would you like to be a good to be a good way to discuss?\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No usable draft."
+  },
+  {
+    "session": "13 ordinary editing",
+    "turn": 2,
+    "prompt": "Add that I'll arrive at 4.",
+    "permit_calls": true,
+    "criterion": "Revised text includes 4 and lateness.",
+    "answer": "I'm here. I'm excited about you want to use you want to use you have a bit this time about this time about a new book and have a new book and have a new book and are you're interested in the book.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"I'm here. I'm excited about you want to use you want to use you have a bit this time about this time about a new book and have a new book and have a new book and are you're interested in the book.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No usable revision."
+  },
+  {
+    "session": "14 everyday planning",
+    "turn": 1,
+    "prompt": "I'm packing for a rainy walk. What should I bring?",
+    "permit_calls": true,
+    "criterion": "At least one rain-appropriate item.",
+    "answer": "That's a great hobby, I'd love to learn, or a fun and a family.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"That's a great hobby, I'd love to learn, or a fun and a family.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No rain item."
+  },
+  {
+    "session": "14 everyday planning",
+    "turn": 2,
+    "prompt": "My hands need to be free. Which option fits?",
+    "permit_calls": true,
+    "criterion": "Hands-free rain protection.",
+    "answer": "You can also consider a good idea for a fun and a simple family is a good idea to share a good idea to share a good way to share a short or a family.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"You can also consider a good idea for a fun and a simple family is a good idea to share a good idea to share a good way to share a short or a family.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No hands-free option."
+  },
+  {
+    "session": "15 ordinary explanation",
+    "turn": 1,
+    "prompt": "Why do we see lightning before hearing thunder?",
+    "permit_calls": true,
+    "criterion": "Light travels faster than sound.",
+    "answer": "The message contains no date.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"The message contains no date.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "Unrelated date statement."
+  },
+  {
+    "session": "15 ordinary explanation",
+    "turn": 2,
+    "prompt": "Explain that to a six-year-old in one sentence.",
+    "permit_calls": true,
+    "criterion": "Accurate child-friendly one-sentence explanation.",
+    "answer": "Azanisen your handisen your own words of a tool is a small number that contains the the theAzanisen to the. It is a tool so the. It is a tool is a tool is a tool is a tool.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Azanisen your handisen your own words of a tool is a small number that contains the the theAzanisen to the. It is a tool so the. It is a tool is a tool is a tool is a tool.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No intelligible explanation."
+  },
+  {
+    "session": "16 ordinary choice",
+    "turn": 1,
+    "prompt": "I'm naming a grey kitten. Suggest two short names.",
+    "permit_calls": true,
+    "criterion": "Two plausible short names.",
+    "answer": "Say what people help with it show, or a measurement should it.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Say what people help with it show, or a measurement should it.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No names suggested."
+  },
+  {
+    "session": "16 ordinary choice",
+    "turn": 2,
+    "prompt": "Pick one of those and tell me why.",
+    "permit_calls": true,
+    "criterion": "Chooses a prior suggestion with a relevant reason.",
+    "answer": "Paste the sentence's name in the sentence is at the ideas and the ideas still back.",
+    "selected_path": "gpt2/dialogue",
+    "frame_origins": [
+      "gpt2/dialogue"
+    ],
+    "frames": [
+      "{\"text\":\"Paste the sentence's name in the sentence is at the ideas and the ideas still back.\"}"
+    ],
+    "trace": [],
+    "failure": null,
+    "passed": false,
+    "reason": "No choice or reason."
+  }
+]

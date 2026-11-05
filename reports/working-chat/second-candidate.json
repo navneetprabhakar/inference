@@ -1,0 +1,293 @@
+{
+  "status": {
+    "stage": "adapt",
+    "state": "trained",
+    "step": 5200,
+    "input_tokens": 3487556,
+    "target_tokens": 1236298,
+    "charged_inputs": 3487556,
+    "loss": 0.22492028772830963,
+    "gradient_norm": 4.398622989654541,
+    "elapsed": 4292.341064929962,
+    "weights_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609"
+  },
+  "config": {
+    "seed": 1459,
+    "stage": "adapt",
+    "base": "runs/working-chat-01/weights.pt",
+    "sha256": "c2d673376af27ea1b7c00603304d6bc612c7f42966b1cac7a4609baccebe670f",
+    "steps": 5200,
+    "lr": 0.00012,
+    "batch": 8,
+    "minutes": 135,
+    "weights": {
+      "copy": 0.025,
+      "chat": 0.085,
+      "natural": 0.055,
+      "tool": 0.07,
+      "varied_tool": 0.11,
+      "scaled": 0.13,
+      "broad": 0.035,
+      "compositional": 0.38,
+      "reporting": 0.075,
+      "numeric": 0.035
+    },
+    "corpus_counts": {
+      "copy": 3600,
+      "chat": 3394,
+      "natural": 241,
+      "tool": 8197,
+      "broad": 127,
+      "scaled": 1052,
+      "compositional": 15606,
+      "varied_tool": 5383,
+      "reporting": 7722,
+      "numeric": 15444
+    },
+    "token_cap": 7000000,
+    "dataset_sha256": {
+      "copy": "3a2e6defb3efd140b360c4001b1a9ca348af3e679fcf1169a49b66e0153df5f2",
+      "chat": "d7297f888eddb7bb0d9fad464a43ed5f480d92e7f5a4d3d95e242d9337eeffee",
+      "natural": "66297863f5b388dc325503ba034481e233384ec5cc666882a1c8727b0248a072",
+      "tool": "ed7fedd24b4b57222e46bfe0f374cb06b31b2b4cb281335c322d3fd1f4107a4e",
+      "broad": "940969b8e63577cbb13bcd2991700cd7affeb9cf340ced56b6a90f6a01e1af4c",
+      "scaled": "2d56a56976f4c5c6e2f888c860e1fdd3430b9b897fe98cc7958a4597d20bfa9c",
+      "compositional": "524782c3dceefdd0bfed7679e1e876b7c48c9f8f6bd871766a7c2576b06b5396",
+      "varied_tool": "0b8be4658a57a4d6dc9352b1f89ceb36955ea8fb90dce5b0c1fe60dffa9c6143",
+      "reporting": "83c855b783909359c73128f5ccdf34651f04c039472e7b913d5a6c12f40a17e7",
+      "numeric": "5644e9b143ec8d64af84a874f2bced0157fedd0d5cccf064880840448318483e"
+    },
+    "code_sha256": {
+      "fit_working.py": "0f90e0ea528a3f64409eca933dbbaf8bd38a6376279c55a39f047a55e0cb296b",
+      "local_chat.py": "325e0dd896bb5de0e66055c3dc7e6a011efb390e92faadd4852afb8307dc0382",
+      "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+    }
+  },
+  "development_A": {
+    "working-eval-a-product-v2-02": {
+      "conversations": {
+        "passed": 2,
+        "total": 20
+      },
+      "turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 2,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 4,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 4,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 25,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 9,
+        "total": 10
+      },
+      "readbacks_with_observation": {
+        "passed": 10,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 9,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": true,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 8
+    },
+    "working-eval-a-assistant-preview-02": {
+      "conversations": {
+        "passed": 2,
+        "total": 20
+      },
+      "turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 2,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 4,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 4,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 25,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 9,
+        "total": 10
+      },
+      "readbacks_with_observation": {
+        "passed": 10,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 9,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": true,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 8
+    },
+    "working-eval-a-product-02": {
+      "conversations": {
+        "passed": 1,
+        "total": 20
+      },
+      "turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 1,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 5,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 5,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 24,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 7,
+        "total": 8
+      },
+      "readbacks_with_observation": {
+        "passed": 8,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 7,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": false,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 10
+    },
+    "working-eval-a-raw-02": {
+      "conversations": {
+        "passed": 0,
+        "total": 20
+      },
+      "turns": {
+        "passed": 2,
+        "total": 40
+      },
+      "by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 0,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 0,
+        "total": 6
+      },
+      "first_call_per_required_turn": {
+        "passed": 0,
+        "total": 7
+      },
+      "complete_requested_call_sequence": {
+        "passed": 0,
+        "total": 7
+      },
+      "no_call_turns_without_proposal_or_protocol_failure": {
+        "passed": 23,
+        "total": 33
+      },
+      "faithful_given_observation": {
+        "passed": 8,
+        "total": 9
+      },
+      "readbacks_with_observation": {
+        "passed": 9,
+        "total": 10
+      },
+      "faithful_over_all_expected_readbacks": {
+        "passed": 8,
+        "total": 10
+      },
+      "counterfactual_whole_session_pair_pass": false,
+      "successful_calls_when_prohibited": 0,
+      "successful_unregistered_calls": 0,
+      "protocol_failures": 7
+    }
+  }
+}

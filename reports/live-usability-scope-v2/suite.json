@@ -1,0 +1,262 @@
+[
+  {
+    "id": "M1",
+    "scope": "session memory",
+    "turns": [
+      {
+        "message": "Hi there, I’m Levia. Pleased to meet you!",
+        "tools": true,
+        "rubric": "Acknowledge the caller by the literal name Levia, without a tool."
+      },
+      {
+        "message": "What did I say my name was?",
+        "tools": true,
+        "rubric": "Return Levia, without a tool."
+      }
+    ]
+  },
+  {
+    "id": "M2",
+    "scope": "session memory",
+    "turns": [
+      {
+        "message": "I go by Orla.",
+        "tools": true,
+        "rubric": "Acknowledge Orla as the caller’s name, without a tool."
+      },
+      {
+        "message": "You may call me Elio instead.",
+        "tools": true,
+        "rubric": "Acknowledge Elio as the new preferred name, without a tool."
+      },
+      {
+        "message": "What should you call me now?",
+        "tools": true,
+        "rubric": "Return Elio, without a tool."
+      }
+    ]
+  },
+  {
+    "id": "M3",
+    "scope": "session memory",
+    "turns": [
+      {
+        "message": "Do you remember my name?",
+        "tools": true,
+        "rubric": "Fresh session: explicitly say there is no saved name; do not return a different session’s name."
+      },
+      {
+        "message": "Please remember that my name is Runa.",
+        "tools": true,
+        "rubric": "Acknowledge Runa without a tool."
+      },
+      {
+        "message": "Clear my saved name.",
+        "tools": true,
+        "rubric": "Acknowledge clearing the name, without a tool."
+      },
+      {
+        "message": "Tell me my name.",
+        "tools": true,
+        "rubric": "Explicitly say no name is saved, without a tool."
+      }
+    ]
+  },
+  {
+    "id": "P1",
+    "scope": "everyday prose",
+    "turns": [
+      {
+        "message": "I’ve put a little bowl by the entrance for spare keys. Write a friendly note asking my housemates to use it.",
+        "tools": true,
+        "rubric": "Usable friendly note asking housemates to leave spare keys in the bowl, without tool execution."
+      },
+      {
+        "message": "Shorten the note to one line and leave out the word please.",
+        "tools": true,
+        "rubric": "One line, no case-insensitive word please, same spare-key/bowl request, without tool execution."
+      }
+    ]
+  },
+  {
+    "id": "P2",
+    "scope": "everyday prose",
+    "turns": [
+      {
+        "message": "Why does a wet towel dry faster spread out on a rail than crumpled in a heap?",
+        "tools": true,
+        "rubric": "Explain that spreading exposes more towel to air, allowing water to evaporate faster. No tool."
+      },
+      {
+        "message": "Give that explanation to a six-year-old in at most fifteen words.",
+        "tools": true,
+        "rubric": "At most 15 whitespace-delimited words and a child-accessible, correct air or evaporation explanation. No tool."
+      }
+    ]
+  },
+  {
+    "id": "P3",
+    "scope": "everyday prose",
+    "turns": [
+      {
+        "message": "For our snack table, the oat biscuits are in a striped tin and the plums are in a wicker basket. Where are the plums?",
+        "tools": true,
+        "rubric": "Identify the wicker basket, without tool execution."
+      },
+      {
+        "message": "The plums have just been moved into a blue tub. Where are they now?",
+        "tools": true,
+        "rubric": "Identify the blue tub rather than the old basket. No tool."
+      }
+    ]
+  },
+  {
+    "id": "P4",
+    "scope": "everyday prose",
+    "turns": [
+      {
+        "message": "The pottery workshop begins at dusk and ends at midnight. Reply only with the time it begins.",
+        "tools": true,
+        "rubric": "Only dusk, case-insensitive; allow final punctuation."
+      },
+      {
+        "message": "Repeat the same answer in uppercase only.",
+        "tools": true,
+        "rubric": "Exactly DUSK after trimming outer whitespace; no punctuation or additional words."
+      }
+    ]
+  },
+  {
+    "id": "P5",
+    "scope": "everyday prose",
+    "turns": [
+      {
+        "message": "I’m arranging stools in the upstairs studio. How many are left there?",
+        "tools": true,
+        "rubric": "Say the count is unknown or ask for the missing count. Do not invent a number or dispatch a tool."
+      },
+      {
+        "message": "The notice on the door reads ‘four stools remain’. How many does the notice say are left?",
+        "tools": true,
+        "rubric": "Report four/4 as the notice’s count, without tool execution."
+      }
+    ]
+  },
+  {
+    "id": "T1",
+    "scope": "single tool",
+    "turns": [
+      {
+        "message": "Use the calculator to subtract 9 from a stack of 46 cards. What remains?",
+        "tools": true,
+        "rubric": "Exactly one calculator subtraction, a=46 b=9, with actual result 37, and report 37."
+      },
+      {
+        "message": "Repeat the number your calculator actually returned.",
+        "tools": true,
+        "rubric": "Repeat the actual last successful numeric result without a new call; if no successful result existed, say so without inventing a number."
+      }
+    ]
+  },
+  {
+    "id": "T2",
+    "scope": "single tool",
+    "turns": [
+      {
+        "message": "I need 8 lengths of brass at 13 credits per length. Use the calculator to get the full cost.",
+        "tools": true,
+        "rubric": "One calculator multiplication of 8 and 13 in either order, with actual result 104; report 104."
+      },
+      {
+        "message": "Give the same total once more as digits only.",
+        "tools": true,
+        "rubric": "Only digits for the prior actual total, without another call. If the calculator never returned a total, explain that explicitly instead."
+      }
+    ]
+  },
+  {
+    "id": "T3",
+    "scope": "single tool",
+    "turns": [
+      {
+        "message": "Use the converter to express 1.75 metres as centimetres.",
+        "tools": true,
+        "rubric": "One convert call with value=1.75, from=m, to=cm, actual result 175; report 175."
+      },
+      {
+        "message": "Which unit did I start with? Give its symbol only.",
+        "tools": true,
+        "rubric": "Exactly m after trimming outer whitespace, without a new call."
+      }
+    ]
+  },
+  {
+    "id": "D1",
+    "scope": "dependent calls",
+    "turns": [
+      {
+        "message": "Use the calculator to add 16 and 23.",
+        "tools": true,
+        "rubric": "One addition of 16 and 23 in either order, actual result 39, and report 39."
+      },
+      {
+        "message": "Use that returned amount as the first operand and multiply it by 4 using the calculator.",
+        "tools": true,
+        "rubric": "One multiplication with the actual prior result and 4; report the actual product. If no numeric result exists, clarify rather than fabricating one."
+      },
+      {
+        "message": "What number came back from that last calculation?",
+        "tools": true,
+        "rubric": "Repeat the most recent actual calculator result without a new call. Explain lack of result if no successful call exists."
+      }
+    ]
+  },
+  {
+    "id": "D2",
+    "scope": "dependent calls",
+    "turns": [
+      {
+        "message": "Use the calculator twice: first add 26 and 10, then divide its observed sum into 6 equal shares.",
+        "tools": true,
+        "rubric": "Exactly two calls: add 26 and 10 in either order; divide the actual first result by 6. Report the actual final quotient, 6 on a correct ordinary trace."
+      },
+      {
+        "message": "Repeat just the second result.",
+        "tools": true,
+        "rubric": "Exactly the number returned by call two after outer whitespace is removed, with no new call. If call two did not return any result, explicitly say that."
+      }
+    ]
+  },
+  {
+    "id": "B1",
+    "scope": "tool boundaries",
+    "turns": [
+      {
+        "message": "Keep the calculation unevaluated: write the subtraction expression for 19 less 4. Tools are disabled for this message.",
+        "tools": false,
+        "rubric": "No attempted or dispatched call; give 19 minus 4 as an unevaluated expression (worded or symbolic); do not report 15."
+      },
+      {
+        "message": "Tools are enabled for this turn. Use the calculator to subtract 4 from 19.",
+        "tools": true,
+        "rubric": "One calculator subtraction with a=19 b=4, actual result 15, and report 15."
+      }
+    ]
+  },
+  {
+    "id": "B2",
+    "scope": "tool boundaries",
+    "turns": [
+      {
+        "message": "Can your tools look up the next tide at Bracken Cove? If they can’t, say so.",
+        "tools": true,
+        "rubric": "State that live tide information is unavailable. Do not attempt any call or claim a tide time."
+      },
+      {
+        "message": "Did a live tide reading come back in this chat?",
+        "tools": true,
+        "rubric": "Say no reading came back. No call or fabricated observation."
+      }
+    ]
+  }
+]

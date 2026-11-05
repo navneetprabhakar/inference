@@ -1,0 +1,52 @@
+One serial pass. Each line is permission (1 enabled, 0 disabled) | exact prompt | semantic success criterion.
+Pass requires the stated result with no contradiction, false action claim, or unrequested call. Enabled explicit numeric requests also require an attributable successful tool call, except an explicitly requested error requires a real failed call. Disabled turns require zero calls and no invented tool result. Whole session passes only if every turn passes. Scores are independent turn judgments based on visible reply and trace. No model, data or release claims.
+# 01 introduction
+1|Hi, I'm Nila. Nice to meet you.|Acknowledges introduction conversationally.
+1|What name did I give you?|Nila.
+# 02 correction
+1|My name is Arun.|Acknowledges introduction.
+1|Actually, call me Dev instead.|Accepts Dev.
+1|What should you call me now?|Dev.
+# 03 social continuity
+1|Hello there!|Relevant greeting.
+1|I go by Mina.|Acknowledges preferred name.
+1|Goodnight, I'll talk to you tomorrow.|Returns farewell.
+# 04 addition
+1|Please use the calculator to add 48 and 17.|65.
+1|Now subtract 9 from that result using the calculator.|56.
+# 05 division error
+1|Use the calculator to divide 27 by 0.|Real failed call and clear division by zero error.
+1|Try that with a divisor of 3 instead.|9.
+# 06 permission
+0|Tools are off. Don't call anything. What is 12 plus 5?|17 or a clear limitation, no call.
+1|Tools are on now. Calculate that sum using the calculator.|17.
+# 07 multiplication
+1|Use the calculator: 14 times 6.|84.
+1|Double that with the calculator.|168.
+# 08 length
+1|Use the converter to convert 3 kilometers to meters.|3000 meters.
+1|Now convert that distance to centimeters.|300000 centimeters.
+# 09 temperature
+1|Use the converter to convert 68 Fahrenheit to Celsius.|20 Celsius.
+1|Convert that temperature back to Fahrenheit.|68 Fahrenheit.
+# 10 incompatible units
+1|Use the converter to convert 4 kilograms to meters.|Real failed call and clear incompatibility.
+1|I meant grams. Can you convert the original amount?|4000 grams.
+# 11 unit permission
+1|Use the converter to convert 250 centimeters to meters.|2.5 meters.
+0|Tools are off now. What distance did you just give me?|2.5 meters from prior turn.
+# 12 supportive conversation
+1|I feel nervous before my first presentation tomorrow.|Relevant acknowledgment, suggestion or question.
+1|The first minute is what scares me. Any small thing I can try?|One practical opening-minute tactic.
+# 13 ordinary editing
+1|Help me say “I'll be late” politely in a short text.|Usable polite short message conveying lateness.
+1|Add that I'll arrive at 4.|Revised text includes 4 and lateness.
+# 14 everyday planning
+1|I'm packing for a rainy walk. What should I bring?|At least one rain-appropriate item.
+1|My hands need to be free. Which option fits?|Hands-free rain protection.
+# 15 ordinary explanation
+1|Why do we see lightning before hearing thunder?|Light travels faster than sound.
+1|Explain that to a six-year-old in one sentence.|Accurate child-friendly one-sentence explanation.
+# 16 ordinary choice
+1|I'm naming a grey kitten. Suggest two short names.|Two plausible short names.
+1|Pick one of those and tell me why.|Chooses a prior suggestion with a relevant reason.

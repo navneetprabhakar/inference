@@ -1,0 +1,16 @@
+{
+  "seed": 1717,
+  "training": "Two independent linear softmax heads, random initialization, CPU only; word, ordered word-bigram, and token character-gram features plus coarse numeric/unit classes. Original training forms have equal mass within each act and each act equal mass within mode.",
+  "iterations": 200,
+  "learning_rate": 0.08,
+  "l2": 0.00025,
+  "confidence_min": 0.70,
+  "margin_min": 0.20,
+  "known_word_fraction_min": 0.25,
+  "semantic_precision_min": 0.80,
+  "coverage_min": 0.45,
+  "max_coefficients": 100000,
+  "cpu_seconds_cap": 180,
+  "evaluation": "Five entire original forms per class reserved before generating variants. Compute unweighted row precision and coverage AND form-macro precision and coverage, with all labels including negative. Promote only if each mode clears row precision and coverage and form-weighted precision and coverage thresholds. Never convert external negative opening class into an executable action; model makes no tool decisions beyond tentative act proposals. Missing values or ambiguity must defer to host.",
+  "custody_sha256": "1e06c5d1f3781145a25b7d5ea82390758335b376544d693049b5c9694320cf98"
+}

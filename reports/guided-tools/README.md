@@ -1,0 +1,12 @@
+# Explicit guided tool dialogues
+
+**Withheld from serving after external evaluation.** The repaired candidate completed 2/12 fresh guided tasks and made one incorrect call after a rejected correction. The original panel yielded 8/14 complete sessions on both versions. The independent gates were missed. [External scorecards](../guided-external-acceptance/final-fresh-result.json).
+
+For the research evaluator, use `guided_chat.Chat` with the same pinned model, tokenizer and CPU guard as the ordinary preview. Send **/calculate** or **/convert** as a standalone, case-sensitive message. Only these commands open a guided request. Calculations then accept an operation choice and the operands; conversion collects an amount, source unit and target unit. Ordinary conversation still follows the existing preview path.
+
+- The workflow uses the accepted slot-dialogue head when an operation or pending dialogue act requires learned classification. Deterministic command selection, field validation, correction handling, and clarification text are host features. The actual typed proposal is dispatched by the normal offline broker. Model-selected and host-selected origins are reported separately.
+- Clear inputs for a permitted call run immediately. Disabled setup/partial turns do not require a later confirmation if tools are enabled on the completion turn. A completed request submitted while tools are disabled, or an explicit prohibition, requires an enabled **go ahead** before any call. Cancellation and subject/name switches clear the old request. An unresolvable correction clears obsolete inputs instead of carrying them into subsequent dispatch.
+- Registered conversions cover the units present in `tools.UNITS`. Unknown units, cross-dimensional pairs, ambiguous alternatives, malformed quantities, and unresolved revisions cannot dispatch a call. The result displayed is the broker's actual value or error; a recorded fixture may intentionally differ from arithmetic.
+- `regressions.json` records 18 real-model/broker checks, input source hashes, student weight hash and learned-head parameter count. Separately, 264 combinations of named unit direction and signed operands passed a CPU parser audit. These are integration regressions; no external benchmark prompts or results were used to write or change this workflow.
+
+Run `.venv/bin/python verify_guided_chat.py` for the self-contained regression report. No UI was changed by this implementation. The guided source is locked at SHA-256 `808fe59291b04dd3d67f6e494aaf123ad7892668b0036006acd74f6b5ceaf9dc`.

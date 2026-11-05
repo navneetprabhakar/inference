@@ -1,0 +1,1590 @@
+{
+  "method": "Independent post-completion review of all actual sequential turns. Require correct content, requested surface format, valid protocol, and exact permitted call sequence. Credit understandable paraphrases or trivial misspellings without demanding fluency. Ambiguous fragments fail. No substitutions for actual broker history. Whole session requires both turns. Preserve frozen automated measures unchanged; neither training nor implementation modified.",
+  "splits": {
+    "A": {
+      "transcript_sha256": "66050d9d8d8087ac4d5b4b5b16a831b203ecba9c100529756ddb8a44dd51f637",
+      "scores_sha256": "7df08bd8aaad433e40db4418525e81c92a84f699dcf8bf7c59ce5c11e3465c0a",
+      "input_runtime_metadata": {
+        "weights_sha256": "87f1cd7315839c56ca578ed6dca0b87f9b90f7cee462bc76a27087696bd7e4c4",
+        "head_pin": {
+          "weights": "runs/working-head-v2/candidate.pt",
+          "sha256": "112ce7c9d29578cb862e4befd8804e545a09b639ce00a117bde7f20ec7dc1804",
+          "bytes": 8304053,
+          "parameters": 1256364,
+          "combined_gpt2_head_parameters": 125696172,
+          "protocol_sha256": "f356abcecd5ee4c479ca01a322e25fd75797608015b6e98a36370fc2fcc85c7b",
+          "version": 2,
+          "evidence_sha256": "0da51d59541e3992f1e7d01d8f2fd48dd4d282dcbc7f560defdc5e74a3b5607b"
+        },
+        "reader": {
+          "version": 1,
+          "sha256": "b687b7b484d61fa38d2d49d44131da9191fcdfc09551845ded956ccdfdbc182d",
+          "threshold": 0.85,
+          "parameters": 235202
+        },
+        "holdout": "A",
+        "runtime": "assistant_preview.Chat",
+        "device": "cpu"
+      },
+      "strict_sessions": {
+        "passed": 0,
+        "total": 20
+      },
+      "strict_turns": {
+        "passed": 5,
+        "total": 40
+      },
+      "semantic_sessions": {
+        "passed": 1,
+        "total": 20
+      },
+      "semantic_turns": {
+        "passed": 7,
+        "total": 40
+      },
+      "semantic_by_stratum": {
+        "prose": {
+          "passed": 1,
+          "total": 10
+        },
+        "tool": {
+          "passed": 0,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 4,
+        "total": 6
+      },
+      "complete_required_call_sequence": {
+        "passed": 4,
+        "total": 7
+      },
+      "cases": [
+        {
+          "id": "p01",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "At an auction, Bela bought the inkwell and Neri bought the bust. Who bought the bust?",
+              "rubric": "Identify Neri as the buyer of the bust.",
+              "answer": "Bela boughtwell, and Ner.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The auctioneer corrects the bust buyer to Ivo. Who bought the inkwell?",
+              "rubric": "Retain Bela as the inkwell buyer despite the correction to a different object.",
+              "answer": "Bellei",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p02",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A courier visits the florist after the tannery and before the bindery. Which stop is second?",
+              "rubric": "Name the florist as the middle stop.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 60 (char 59)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 60 (char 59)"
+            },
+            {
+              "turn": 2,
+              "user": "The florist is closed, so skip it. Which remaining stop comes first?",
+              "rubric": "Name the tannery after removing the florist.",
+              "answer": "sooristery",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p03",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "The paper ledger lists cask VX as intact. A later inspection marks the same cask as cracked. Which condition is latest?",
+              "rubric": "Use the later inspection and return cracked.",
+              "answer": "The paper ledger lists as latestask as latestask as latest cracked.",
+              "strict": false,
+              "semantic": true,
+              "reason": "Despite severe repetition, the answer explicitly ends in “latest cracked”; it chooses the newer condition without offering a competing condition.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Did either record identify who caused the crack?",
+              "rubric": "Acknowledge that neither record identifies a cause or a person.",
+              "answer": "VX as intact marks the same c.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p04",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "An object label reads 'Fired clay, maker unknown, found at Belmoor.' Where was it found?",
+              "rubric": "Extract Belmoor as the discovery place.",
+              "answer": "Hello! I'm",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "A visitor says the maker must be Belmoor. Does the label support that? Answer yes or no.",
+              "rubric": "Reject inference from discovery site to maker.",
+              "answer": "Belmoor",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p05",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Index these two entries alphabetically by surname: Amira Zale and Bo Arden. Give only the surnames, separated by a comma.",
+              "rubric": "Give exactly Arden, Zale in alphabetical order.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 63 (char 62)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 63 (char 62)"
+            },
+            {
+              "turn": 2,
+              "user": "A new entry has surname Tern. Return the three surnames in the same format.",
+              "rubric": "Give exactly Arden, Tern, Zale.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 56 (char 55)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 56 (char 55)"
+            }
+          ]
+        },
+        {
+          "id": "p06",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "I'm making a sign-up note for a stargazing session. The date is fixed, but nobody has said where to meet. What detail should I ask for?",
+              "rubric": "Ask for the meeting place.",
+              "answer": "The date is on meet?",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The organiser replies 'at the boathouse'. What should the note now list as the meeting place?",
+              "rubric": "Give the boathouse as the newly supplied location.",
+              "answer": "The organ is on the organ.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p07",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Change only the verb to past tense in 'The archivist opens the vault.' Return the edited sentence.",
+              "rubric": "Preserve the sentence except for opens → opened.",
+              "answer": "The verb.' the vault.' to the vault.'.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Now keep that tense and make the subject plural. Return the sentence.",
+              "rubric": "Replace the singular subject with The archivists, retaining opened.",
+              "answer": "The verb.'.'.'.'.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p08",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": true,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "In a radio play, Tavi voices the judge and Sela voices the witness. Who voices the judge?",
+              "rubric": "Identify Tavi.",
+              "answer": "The judge witness\nTavi\nTavi\n Tavi, I, I, I, I, I, I, I, I, I, I, I, I, I!",
+              "strict": false,
+              "semantic": true,
+              "reason": "Tavi is the only person identified, repeatedly, in a who-question without a specified surface format. The repeated name and trailing stammer impair fluency. Borderline pass.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Sela now voices the judge and Tavi voices the witness. Who voices the witness after the switch?",
+              "rubric": "Use the reassigned witness actor, Tavi.",
+              "answer": "Tavi",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p09",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A print studio rents benches to apprentices on odd dates only. Leena is an apprentice arriving on the 16th. May she rent one under that rule? Answer yes or no.",
+              "rubric": "16 is even, so answer no.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 58 (char 57)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 58 (char 57)"
+            },
+            {
+              "turn": 2,
+              "user": "She changes her arrival to the 17th. May she rent a bench now? Answer yes or no.",
+              "rubric": "17 is odd, so answer yes.",
+              "answer": " May May",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A freight memo says that wax is packed before linen. Which item is packed later?",
+              "rubric": "Identify linen as later.",
+              "answer": "The freight.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The memo gives no times. Can you tell how many minutes apart the two packings were?",
+              "rubric": "Acknowledge the interval is unspecified.",
+              "answer": "packed.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "t01",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Our restoration crew marks seven plots with 24 stakes each. Use the calculator for the total. Give just the resulting number.",
+              "rubric": "Multiply 24 by 7 and report the actual number.",
+              "answer": "31",
+              "strict": false,
+              "semantic": false,
+              "reason": "Required call sequence/typed operands differ from the actual proposals or trace; answer cannot earn turn credit.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918986.5842712,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 7,
+                    "b": 24,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 31
+                  }
+                }
+              ],
+              "call_sequence_pass": false,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "We need another 19 stakes. Ask the calculator to add 19 to the total it just returned. Give just its new number.",
+              "rubric": "Use the preceding actual result as the addend and report the new result.",
+              "answer": "38",
+              "strict": false,
+              "semantic": false,
+              "reason": "Required call sequence/typed operands differ from the actual proposals or trace; answer cannot earn turn credit.",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918986.5893939,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 19,
+                    "b": 19,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 38
+                  }
+                }
+              ],
+              "call_sequence_pass": false,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "t02",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "This is a recorded subtraction exercise. Ask calculate for 83 minus 24 and report exactly the number the display returns.",
+              "rubric": "Call subtract(83,24) and report the fixture's observed value, even if arithmetic differs.",
+              "answer": "58",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "synthetic recorded fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918986.59218,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 83,
+                    "b": 24,
+                    "op": "subtract"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 58
+                  }
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Without another call, repeat the number that display actually showed. Give only the number.",
+              "rubric": "Recall the preceding observed result, no new call.",
+              "answer": "Please clarify whether to repeat the result or perform a new calculation.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "t03",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "This is a recorded subtraction exercise. Ask calculate for 83 minus 24 and report exactly the number the display returns.",
+              "rubric": "Call subtract(83,24) and report the fixture's observed value, even if arithmetic differs.",
+              "answer": "61",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "synthetic recorded fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918986.595186,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 83,
+                    "b": 24,
+                    "op": "subtract"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 61
+                  }
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Without another call, repeat the number that display actually showed. Give only the number.",
+              "rubric": "Recall the preceding observed result, no new call.",
+              "answer": "Please clarify whether to repeat the result or perform a new calculation.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "t04",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A sealed food sample weighs 0.032 kilograms. Use the converter for grams. Give only its numeric result.",
+              "rubric": "Request convert(0.032 kg,g) and report the observed number.",
+              "answer": "32",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918986.5979671,
+                  "name": "convert",
+                  "arguments": {
+                    "value": 0.032,
+                    "from": "kg",
+                    "to": "g"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 32.0
+                  }
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "What was the original unit on the sample label? Give the unit name alone.",
+              "rubric": "Recall the source unit, kilograms.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Unterminated string starting at: line 1 column 9 (char 8)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Unterminated string starting at: line 1 column 9 (char 8)"
+            }
+          ]
+        },
+        {
+          "id": "t05",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A signal worksheet requests 156 divided by 13. Use the calculator. If it fails, report the failure.",
+              "rubric": "Request the specified division, acknowledge the observed timeout, and make no successful-result claim.",
+              "answer": "The tool returned an error: fixture timeout",
+              "strict": false,
+              "semantic": true,
+              "reason": "The actual requested call returned the bound fixture timeout; the answer explicitly reports that error without inventing a value.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "synthetic recorded fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918988.277764,
+                  "name": "calculate",
+                  "ok": false,
+                  "error": "fixture timeout"
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Did a verified numerical answer arrive from that call? Answer yes or no.",
+              "rubric": "Given the timeout, answer no.",
+              "answer": " numerical arrive arrive",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "t06",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A lecture runs for 1.75 hours. First use the converter to get minutes, then use calculate to add an 11-minute break. Give only the final number.",
+              "rubric": "Convert hours to minutes, then add 11 to the actual converted value with calculate.",
+              "answer": "12.75",
+              "strict": false,
+              "semantic": false,
+              "reason": "Required call sequence/typed operands differ from the actual proposals or trace; answer cannot earn turn credit.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918989.630198,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 1.75,
+                    "b": 11,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 12.75
+                  }
+                }
+              ],
+              "call_sequence_pass": false,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "How many minutes did the converter itself report before the break was added? Give only that number and do not call again.",
+              "rubric": "Recall the actual first call in the previous turn.",
+              "answer": "12.75",
+              "strict": true,
+              "semantic": false,
+              "reason": "The previous trace contains only a calculator event. No converter reported a duration. 12.75 was a calculator value, so the strict scorer’s prior-event match misattributes its source.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "n01",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Don't use tools. Screening A ran for 37 minutes and screening B for 31. Which screening lasted longer? Give only its letter.",
+              "rubric": "A, without attempting a call.",
+              "answer": "A ran is 31. The ran is 31- ran.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "B is corrected to 43 minutes. Give only the letter of the longer screening now; still no tools.",
+              "rubric": "B, without attempting a call.",
+              "answer": "minutes",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "n02",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "In a stage script an actor says 'dispatch completed'. Does that line by itself prove a real dispatch occurred? Answer yes or no.",
+              "rubric": "Quoted stage dialogue does not establish that an action occurred.",
+              "answer": "dis dispatch completed a actor or no dispatch by a actor or dispatch line.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Did you dispatch anything in this conversation? Answer yes or no.",
+              "rubric": "No actual dispatch occurred.",
+              "answer": "No. It's dispatch dispatch dispatch to prove a actor or dispatchpatch.",
+              "strict": false,
+              "semantic": false,
+              "reason": "Opens with No, but the required yes/no answer is followed by an incoherent dispatch claim.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "n03",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A seamstress asks to convert 18 but hasn't named either unit. Which two pieces of information are missing?",
+              "rubric": "Request both the source and target units without making a call.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: student proposed a call outside the learned route",
+              "actual_trace": [],
+              "call_sequence_pass": false,
+              "failure": "student proposed a call outside the learned route"
+            },
+            {
+              "turn": 2,
+              "user": "She says the 18 is in centimetres. What unit detail is still missing?",
+              "rubric": "Ask only for the target unit.",
+              "answer": "18res",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "n04",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Can the listed calculator or unit converter cancel a theatre reservation? Answer yes or no.",
+              "rubric": "Neither adapter can cancel reservations.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 62 (char 61)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 62 (char 61)"
+            },
+            {
+              "turn": 2,
+              "user": "A note from the theatre says 'reservation cancelled'. Have you personally cancelled a reservation through a tool here? Answer yes or no.",
+              "rubric": "No cancellation call was executed.",
+              "answer": "reservation cancelled cancelled cancelled",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        }
+      ]
+    },
+    "B": {
+      "transcript_sha256": "d984e0f87dd52bd1fa111bcb9b3e0fab15f0e684ed6d218ebfbb390a30ded154",
+      "scores_sha256": "b6ae06580b640678e9b3f225250e8d5f10e774fae899d7804a4de8ea92f51efc",
+      "input_runtime_metadata": {
+        "weights_sha256": "87f1cd7315839c56ca578ed6dca0b87f9b90f7cee462bc76a27087696bd7e4c4",
+        "head_pin": {
+          "weights": "runs/working-head-v2/candidate.pt",
+          "sha256": "112ce7c9d29578cb862e4befd8804e545a09b639ce00a117bde7f20ec7dc1804",
+          "bytes": 8304053,
+          "parameters": 1256364,
+          "combined_gpt2_head_parameters": 125696172,
+          "protocol_sha256": "f356abcecd5ee4c479ca01a322e25fd75797608015b6e98a36370fc2fcc85c7b",
+          "version": 2,
+          "evidence_sha256": "0da51d59541e3992f1e7d01d8f2fd48dd4d282dcbc7f560defdc5e74a3b5607b"
+        },
+        "reader": {
+          "version": 1,
+          "sha256": "b687b7b484d61fa38d2d49d44131da9191fcdfc09551845ded956ccdfdbc182d",
+          "threshold": 0.85,
+          "parameters": 235202
+        },
+        "holdout": "B",
+        "runtime": "assistant_preview.Chat",
+        "device": "cpu"
+      },
+      "strict_sessions": {
+        "passed": 0,
+        "total": 20
+      },
+      "strict_turns": {
+        "passed": 3,
+        "total": 40
+      },
+      "semantic_sessions": {
+        "passed": 0,
+        "total": 20
+      },
+      "semantic_turns": {
+        "passed": 6,
+        "total": 40
+      },
+      "semantic_by_stratum": {
+        "prose": {
+          "passed": 0,
+          "total": 10
+        },
+        "tool": {
+          "passed": 0,
+          "total": 6
+        },
+        "no_call": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "first_call_per_tool_session": {
+        "passed": 1,
+        "total": 6
+      },
+      "complete_required_call_sequence": {
+        "passed": 2,
+        "total": 7
+      },
+      "cases": [
+        {
+          "id": "bp01",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A fellowship requires two references before it can be awarded. Jori has one confirmed reference; the other hasn't replied. Is the requirement satisfied? Answer yes or no.",
+              "rubric": "One reference does not satisfy a two-reference requirement.",
+              "answer": "The other hasn yes yes or other hasn yes.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The second reference confirms. Is the reference requirement satisfied now? Answer yes or no.",
+              "rubric": "Both required references have now confirmed.",
+              "answer": "The reference to the reference hasn yes yes yes.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp02",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "The fiddler lent a bow to the repairer for a week. Who currently has the bow?",
+              "rubric": "The repairer currently holds the borrowed bow.",
+              "answer": "The repaire.",
+              "strict": false,
+              "semantic": true,
+              "reason": "“The repaire.” is an identifiable one-character truncation of repairer; the answer selects the correct holder without a competing attribution.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The repairer gives it back to the fiddler. Who has it at the end?",
+              "rubric": "The fiddler now holds the returned bow.",
+              "answer": "fiddlerriddler",
+              "strict": false,
+              "semantic": false,
+              "reason": "“fiddlerriddler” merges the intended role with a different role. Unlike a one-character truncation the answer is ambiguous. Borderline fail.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp03",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A documentary draft says a tunnel is probably Roman. An excavation later dates it to the medieval period. Which period does the excavation support?",
+              "rubric": "Distinguish the later excavated date from the earlier conjecture.",
+              "answer": "The tunnel later probably probably in the medieval period of the medieval draft.",
+              "strict": false,
+              "semantic": true,
+              "reason": "The reply explicitly chooses the medieval period, despite repetition and hedging. The question asks which period the excavation supports.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Has the draft alone proved that the tunnel was Roman? Answer yes or no.",
+              "rubric": "A conjecture in the draft is not proof.",
+              "answer": "The tunnel probably draft in the medieval draft.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp04",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Edit this sentence into the present tense without changing the subject: 'The painters restored the mural.' Return the complete edited sentence.",
+              "rubric": "Preserve the plural subject, object and present-tense verb.",
+              "answer": "The painters.' the complete.' the edited restored.' the complete.' to the editedters.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Now use the singular subject 'The painter' and keep the present tense. Return the sentence.",
+              "rubric": "Use the third-person singular restores.",
+              "answer": "The paintersters.' the complete.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp05",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A designer has two captions, 'mist' and 'rainfall'. Which caption is shorter? Give the caption alone.",
+              "rubric": "Return mist with no extra wording.",
+              "answer": " shorter captfall",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Replace 'mist' with 'thunderstorm'. Which of the two current captions is shorter now? Give the caption alone.",
+              "rubric": "Compare rainfall and thunderstorm, retaining the shorter one.",
+              "answer": " shorterions forfall.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp06",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "I need to identify a bird from its sound. I haven't described the sound. What should I tell you first?",
+              "rubric": "Ask for a description or recording of the bird's call.",
+              "answer": "No. The purchase date isn't given.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "I heard two low hoots but saw no bird. Does that description establish its identity with certainty? Answer yes or no.",
+              "rubric": "Sparse acoustic details do not uniquely establish an identity.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting ',' delimiter: line 1 column 56 (char 55)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting ',' delimiter: line 1 column 56 (char 55)"
+            }
+          ]
+        },
+        {
+          "id": "bp07",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A vial was prepared by Emon and carried to the lab by Piri. Who transported it?",
+              "rubric": "Identify the carrier rather than the preparer.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 57 (char 56)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 57 (char 56)"
+            },
+            {
+              "turn": 2,
+              "user": "A third person, Ova, later signs the receipt. Who prepared the vial?",
+              "rubric": "Keep the original preparer despite the new signature.",
+              "answer": "Emon",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp08",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A hive record says a waggle dance pointed west toward the flowers. Which direction did the dance indicate?",
+              "rubric": "Read west from the hive record.",
+              "answer": "The waggle toward toward toward flowers.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The wind later blew north. Does that revise what direction the earlier dance indicated? Answer yes or no.",
+              "rubric": "Changing wind does not alter the recorded earlier signal.",
+              "answer": "The wind indicated direction.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp09",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A dye order specifies saffron, but the seller offers turmeric as a substitute. Which material was originally ordered?",
+              "rubric": "Return the original material saffron.",
+              "answer": "The seller offersmeric.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "The buyer rejects the substitute. Which material did the buyer reject?",
+              "rubric": "Identify the offered substitute turmeric.",
+              "answer": "The seller offersmeric.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bp10",
+          "stratum": "prose",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "The inscription reads 'sun over black stone'. Copy the final two words, keeping their order.",
+              "rubric": "Extract exactly black stone.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 61 (char 60)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 61 (char 60)"
+            },
+            {
+              "turn": 2,
+              "user": "Join the same two words with a hyphen. Return only the joined form.",
+              "rubric": "Return exactly black-stone.",
+              "answer": "The hyphen joined joined.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bt01",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Our bottling run fills 91 identical cases from a total of 8,281 bottles. Use calculate to divide the bottles equally. Give only the number per case.",
+              "rubric": "Divide 8,281 by 91 and report the observed quotient.",
+              "answer": "0.01098901098901099",
+              "strict": false,
+              "semantic": false,
+              "reason": "Required call sequence/typed operands differ from the actual proposals or trace; answer cannot earn turn credit.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918985.4785988,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 91,
+                    "b": 8281,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.01098901098901099
+                  }
+                }
+              ],
+              "call_sequence_pass": false,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "We unload seventeen of those cases. Ask calculate to multiply its per-case quantity by seventeen. Give only the new number.",
+              "rubric": "Use the previous observed quotient as a factor.",
+              "answer": "0.18681318681318682",
+              "strict": true,
+              "semantic": true,
+              "reason": "Correct content, requested format, and broker behavior.",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918985.483376,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 0.01098901098901099,
+                    "b": 17,
+                    "op": "multiply"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.18681318681318682
+                  }
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bt02",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "An archived sharing trial sent 272 divided by 16 to calculate. Replay that call and echo only the recorded number, including an unexpected one.",
+              "rubric": "Request the stated division and report the archived response without recomputing it.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 58 (char 57)",
+              "actual_trace": [],
+              "call_sequence_pass": false,
+              "failure": "Expecting value: line 1 column 58 (char 57)"
+            },
+            {
+              "turn": 2,
+              "user": "Repeat only the number from that archived response. Do not contact the calculator again.",
+              "rubric": "Recall the actual preceding archived value.",
+              "answer": " archived",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bt03",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "An archived sharing trial sent 272 divided by 16 to calculate. Replay that call and echo only the recorded number, including an unexpected one.",
+              "rubric": "Request the stated division and report the archived response without recomputing it.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 58 (char 57)",
+              "actual_trace": [],
+              "call_sequence_pass": false,
+              "failure": "Expecting value: line 1 column 58 (char 57)"
+            },
+            {
+              "turn": 2,
+              "user": "Repeat only the number from that archived response. Do not contact the calculator again.",
+              "rubric": "Recall the actual preceding archived value.",
+              "answer": " archived",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bt04",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A honey sample is labelled 0.375 litres. Ask the converter for millilitres and give only its numeric output.",
+              "rubric": "Convert the label quantity from litres to millilitres.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: student proposed a call outside the learned route",
+              "actual_trace": [],
+              "call_sequence_pass": false,
+              "failure": "student proposed a call outside the learned route"
+            },
+            {
+              "turn": 2,
+              "user": "Which unit was written on the original label? Give only that unit.",
+              "rubric": "Recall litres as the original unit.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: duplicate field",
+              "actual_trace": [],
+              "call_sequence_pass": false,
+              "failure": "duplicate field"
+            }
+          ]
+        },
+        {
+          "id": "bt05",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A battery test requested 940 minus 215. Use calculate and report a failure if the service fails.",
+              "rubric": "Request the stated subtraction and report the observed failure without inventing a value.",
+              "answer": "The tool returned an error: fixture timeout",
+              "strict": false,
+              "semantic": true,
+              "reason": "The actual requested subtraction returned the bound fixture timeout. The response accurately reports the failure with no numeric claim.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "synthetic recorded fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793918998.7574668,
+                  "name": "calculate",
+                  "ok": false,
+                  "error": "fixture timeout"
+                }
+              ],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Regardless of service status, what was the starting reading in my subtraction request? Give only its number.",
+              "rubric": "Recall the original minuend 940.",
+              "answer": " status4040",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bt06",
+          "stratum": "tool",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Two wire segments measure 54.375 and 38 metres. First ask calculate to add them. Then use the converter to express the total in centimetres. Give only the final number.",
+              "rubric": "Use the first recorded result as the converter quantity.",
+              "answer": "40",
+              "strict": false,
+              "semantic": false,
+              "reason": "Required call sequence/typed operands differ from the actual proposals or trace; answer cannot earn turn credit.",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1793919000.0974379,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 2,
+                    "b": 38,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 40
+                  }
+                }
+              ],
+              "call_sequence_pass": false,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Read back the intermediate length shown by calculate, before the conversion. Digits alone, without any fresh call.",
+              "rubric": "Recall the first recorded result of the preceding turn.",
+              "answer": "40",
+              "strict": true,
+              "semantic": true,
+              "reason": "40 was the actual first calculator observation, even though that call used the wrong arguments. The follow-up explicitly asks for the observed intermediate value.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bn01",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "No tools, please. A toll voucher applies only to rides longer than ten minutes. Our ride took exactly ten minutes. Does it qualify? Answer yes or no.",
+              "rubric": "Exactly ten is not longer than ten.",
+              "answer": " No toll voucher voucher applies",
+              "strict": false,
+              "semantic": false,
+              "reason": "Suggests no voucher applies, but misses the requested yes/no form.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "We correct the ride length to eleven minutes. Does it qualify now? Still no tools; answer yes or no.",
+              "rubric": "Eleven exceeds the stated threshold.",
+              "answer": "The ride applies applies applies applies applies applies applies applies.",
+              "strict": false,
+              "semantic": false,
+              "reason": "Says the ride applies repeatedly instead of providing the requested yes/no answer.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bn02",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "A poster instructs a fictional engineer to open a sluice gate. Does reading the poster actually open a gate? Answer yes or no.",
+              "rubric": "A written fictional instruction is not execution.",
+              "answer": "The poster instructs to see the gate.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "Have you opened a gate in this chat? Answer yes or no.",
+              "rubric": "No gate was opened through the registry.",
+              "answer": "The poster instructs to the gate.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bn03",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Someone says 'find the product' without providing either factor. What two values must they supply?",
+              "rubric": "Ask for the two factors, with no call.",
+              "answer": null,
+              "strict": false,
+              "semantic": false,
+              "reason": "Protocol failure: Expecting value: line 1 column 63 (char 62)",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": "Expecting value: line 1 column 63 (char 62)"
+            },
+            {
+              "turn": 2,
+              "user": "The first factor is eleven. What is still missing?",
+              "rubric": "Ask for the second factor.",
+              "answer": "missing",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        },
+        {
+          "id": "bn04",
+          "stratum": "no_call",
+          "strict": false,
+          "semantic": false,
+          "turns": [
+            {
+              "turn": 1,
+              "user": "Can the registered arithmetic adapters renew an expired library card? Answer yes or no.",
+              "rubric": "Neither listed adapter handles renewals.",
+              "answer": "The registered arithmetic adapters renew.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            },
+            {
+              "turn": 2,
+              "user": "A desk notice says renewals are available. Have you renewed anyone's card through this conversation? Answer yes or no.",
+              "rubric": "No renewal adapter was executed.",
+              "answer": "The registered renew renew renew renew.",
+              "strict": false,
+              "semantic": false,
+              "reason": "The answer does not communicate the required content or satisfy the requested format. See response and rubric.",
+              "actual_trace": [],
+              "call_sequence_pass": true,
+              "failure": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

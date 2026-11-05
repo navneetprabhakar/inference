@@ -1,0 +1,40 @@
+# Stanford natural language inference intake
+
+**51,415 training pairs and 2,754 reserved validation pairs are frozen.** The retained training text contains 1,109,468 positions when every pair is processed once and 1,004,013 positions after deduplicating both sentences across pairs. The 46,806 distinct training premises contribute 647,686 positions. The raw official split contains 550,152 labeled/unresolved rows, 12,803,170 repeated input positions and 6,314,163 distinct-sentence input positions. All counts use the project's actual GPT-2 tokenizer and exclude labels, separators and EOS.
+
+| Annotator evidence | Entailment train | Neutral train | Contradiction train | Unique train positions |
+|---|---:|---:|---:|---:|
+| Independently unanimous | 6,172 | 4,132 | 308 | 226,485 |
+| Single recorded source label | 39,086 | 371 | 1,346 | 798,687 |
+
+The evidence-tier counts of distinct text overlap; their sum overstates distinct positions across both tiers. The 2,754 validation pairs cover 1,271 images in 1,258 original premise/image components, with 54,449 distinct input positions. Verification compared every retained pair, vote list and source ID against the original train member. No complete image family, normalized sentence in either role, or exact pair crosses the two splits. The output digest is e243539f21faa5bec5fb2f680102bd48d34346e53cfedd4635beea9892d3384a for train and 27f536c77558016f90aba28470abfb409a2e0c1fde4d11aeeef211d3bbe307d9 for validation.
+
+SNLI contains directed English premise–hypothesis pairs with one of three human relation labels: entailment, contradiction or neutral. A caption gives the premise. A human wrote an entailed, incompatible or noncommittal hypothesis for the same depicted event. The supervised target is the published relation label; the actual examples are never converted into synthetic paraphrases or chat transcripts. One-way entailment does not establish equivalence: a statement about two dogs can entail a statement about animals while losing the number and species.
+
+## Provenance
+
+Stanford’s authors Samuel R. Bowman, Gabor Angeli, Christopher Potts and Christopher D. Manning released SNLI 1.0 under CC BY-SA 4.0. The NYU Faculty Digital Archive identifies that license for the dataset separately from its paper. The official Stanford endpoint was unavailable on this machine; the authors’ NYU server advertised the published archive size but closed the transfer after 80,494,248 bytes. The original train member was already complete. Its ZIP CRC32, exact uncompressed size, SHA-256 and row count were checked. Every premise, hypothesis and gold label was independently matched in order against Stanford’s official hash-pinned training parquet. The full-archive checksum could not be validated from an incomplete response. Only the official train JSONL member was opened. The packaged original development and test bodies stayed unread. [Stanford SNLI](https://nlp.stanford.edu/projects/snli/) · [Authors’ NYU archive](https://archive.nyu.edu/handle/2451/41728) · [Independent TFDS checksum](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/datasets/snli/checksums.tsv) · [Collection paper](https://aclanthology.org/D15-1075/)
+
+The original Flickr30k captions are credited to Peter Young, Alice Lai, Micah Hodosh and Julia Hockenmaier. Stanford describes these captions as Attribution-ShareAlike. The Flickr30k authors distinguish publicly distributable text and caption links from photographs subject to separate rights and restricted research/education access. No photographs or Flickr assets were fetched. Stanford also identifies a Visual Genome pilot subgroup in the training corpus. Visual Genome’s own publisher lists CC BY 4.0; the later release’s terms do not independently resolve every early pilot annotation. Every row with a vg_ caption or pair prefix is withheld. [Flickr30k authors and source terms](https://shannon.cs.illinois.edu/DenotationGraph/data/index.html) · [Visual Genome author notice](https://homes.cs.washington.edu/~ranjay/visualgenome/about.html)
+
+## Separation and use
+
+The source pipeline joins image IDs transitively whenever their normalized original premises are equal. It reserves whole components before reading any training sample. Validation has priority in duplicate selection. Pairs with conflicting labels, missing labels, disputed multi-annotator judgments, disallowed content or high textual overlap are excluded. No sealed or working project cases are opened by this builder. Unique sentence-position counts deduplicate normalized surface text across premise/hypothesis roles before re-tokenizing its source representative. They exclude repeated captions, label serialization and EOS tokens.
+
+Sample review found that ostensibly contradictory descriptions often featured different people or different activities potentially occurring at the same time. One neutral example dropped a hat while retaining a tie already asserted by the premise. The complete unrestricted strata were withheld. Multiple independent votes are required to be unanimous. Single-source entailment has a narrower shared-vocabulary filter. Single-source neutral requires an added color or material on a shared event/object. Single-source contradictions require explicit negation of common terms. The 3,747 Visual Genome rows, six unrecognized source-ID forms, unresolved and nonunanimous labels, observed sensitive cases and conflicting copies were excluded. Final sample IDs, 12 examples per label and vote tier, and all explicit held IDs appear in admission.json. Checked labels represent a sample of the admitted strata, not a full manual review.
+
+The classifier API stays separate from ordinary training. Use snli_semantic.training_pairs(seed) for independently unanimous examples, or explicitly request include_single=True to include qualifying single-source examples. snli_semantic.validation_pairs(seed) is a separate reader. Pass balanced=True to select an equal count per class without replacement in deterministic seeded order. This yields 924 unanimous training pairs (308 per label) or 4,962 pairs if singles are explicitly opted in. Only 14 unanimous contradictions survived in validation. Report per-class results and uncertainty rather than interpreting aggregate validation accuracy as transfer. Each returned record preserves sentence order, original label, vote evidence, source pair/caption IDs, image-family group, internal split and official train row.
+
+In the frozen train split, 202 of 308 unanimous contradiction hypotheses contain an explicit negative cue, compared with 33 of 6,172 entailment and 28 of 4,132 neutral hypotheses. Every optional singleton contradiction contains a negative cue by construction. Those strong shortcuts substantially limit this dataset as a probe of genuine semantic transfer. Published work classified roughly 67% of the original SNLI corpus from the hypothesis alone. Any later claim about transfer to newly worded user requests needs a held-out task evaluation, a hypothesis-only control, and a condition changing the premise while keeping the hypothesis fixed. This corpus provides no direct proof of improvement on the project’s paraphrase gap. [Annotation Artifacts in Natural Language Inference Data](https://aclanthology.org/N18-2017/)
+
+## Reproduction
+
+    .venv/bin/python reports/snli-semantic/acquire.py
+    .venv/bin/python reports/snli-semantic/recover.py
+    RAYON_NUM_THREADS=1 .venv/bin/python reports/snli-semantic/build.py
+    .venv/bin/python reports/snli-semantic/sample.py
+    RAYON_NUM_THREADS=1 .venv/bin/python reports/snli-semantic/freeze.py
+    .venv/bin/python reports/snli-semantic/verify.py
+    .venv/bin/python reports/snli-semantic/profile.py
+
+Reproduction requests only the archive prefix containing the complete train member, then verifies SHA-256 ee95dfbc57800f7b1f62b7602ad2b176c2b983210435a49238e660324a01e963 and ZIP CRC32 49ae08ed. The published checksum for the full archive is afb3d70a5af5d8de0d9d81e2637e0fb8c22d1235c2749d83125ca43dab0dbd3e at exactly 94,550,081 bytes. No GPU is used.

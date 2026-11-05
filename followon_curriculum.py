@@ -12,15 +12,16 @@ from tool_teaching import examples as tools, display
 from tool_teaching_varied import examples as varied_tools
 
 
-def additional_pools(tok,seed,original,chat_row,copy_row):
+def additional_pools(tok,seed,original,chat_row,copy_row,*,compositional_histories=None):
     # Only assemble train histories that cleared the separate set-custodian audits.
-    path=Path("reports/working-chat")
+    path=Path(__file__).resolve().parent/"reports/working-chat"
     extra=set(json.loads((path/"followon-excluded-histories.json").read_text()))
     broad_denied=set(json.loads((path/"broad-excluded-histories.json").read_text()))
     varied_denied=set(json.loads((path/'varied-tool-excluded-histories.json').read_text()))
     for name,make,deny in [('broad',broad,broad_denied),('scaled',scaled,extra),('compositional',compositions,extra),('varied_tool',varied_tools,varied_denied)]:
         original[name]=[]
-        for h in make(seed):
+        histories=compositional_histories if name=="compositional" and compositional_histories is not None else make(seed)
+        for h in histories:
             key=hashlib.sha256(json.dumps(h,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
             if key not in deny:
                 original[name].append(chat_row(tok,h))

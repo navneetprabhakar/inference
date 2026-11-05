@@ -18,7 +18,7 @@ main{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;min-hei
 <div class="layout">
 <aside class="side" aria-label="Model details">
   <div class="brand">Local chat</div>
-  <section class="model"><span class="label">Model</span><strong id="model">GPT-2 small</strong><span class="muted">124M parameters</span></section>
+  <section class="model"><span class="label">Model</span><strong id="model">GPT-2 small</strong><span id="parameter-count" class="muted"></span></section>
   <dl class="details"><dt>Device</dt><dd id="device">—</dd><dt>Checkpoint</dt><dd><code id="checkpoint">—</code></dd><dt>SHA-256</dt><dd><code id="digest">—</code></dd></dl>
   <details class="mobile-meta"><summary id="mobile-model">GPT-2 small</summary><code id="mobile-digest">—</code></details>
 </aside>
@@ -26,8 +26,9 @@ main{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;min-hei
   <header class="top"><h1>Conversation</h1><button class="outline" type="button" id="new">+ New chat</button></header>
   <div id="thread" aria-label="Conversation history">
     <div id="empty"><h2>Start a conversation</h2><div id="examples">
-      <button type="button" class="example" data-prompt="Introduce yourself in one sentence.">Introduce yourself</button>
-      <button type="button" class="example" data-tools="true" data-prompt="Use the calculator to add 14 and 37.">Try the calculator</button>
+      <button type="button" class="example" data-prompt="Hello, my name is Forge.">Set a chat name</button>
+      <button type="button" class="example" data-tools="true" data-prompt="Add 14 and 37.">Try the calculator</button>
+      <button type="button" class="example" data-tools="true" data-prompt="Convert 3 hours to minutes.">Convert units</button>
     </div></div>
     <div class="inner" id="messages" role="log" aria-live="polite"></div>
   </div>
@@ -55,7 +56,10 @@ function setBusy(value){
 async function post(path,payload){
   const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
   const data=await response.json();
-  if(!response.ok)throw new Error(data.error||'The local server could not complete the request.');
+  if(!response.ok){
+    const error=new Error(data.error||'The local server could not complete the request.');
+    error.status=response.status;throw error;
+  }
   return data;
 }
 function details(parent,title,data,cls){
@@ -72,7 +76,7 @@ function render(turn){
   }
   if(turn.answer!==null){
     const path=turn.selected_path||'gpt2/dialogue';
-    const source=path.startsWith('host/')?'Observed tool response':path.startsWith('learned-reader/')?'Model · context span':'Model answer';
+    const source=path==='host/session-memory'?'Session memory':(path.startsWith('host/observed-')||path==='learned-readback/host-trace-render')?'Observed tool response':path.startsWith('host/')?'Host response':path.startsWith('learned-dialogue-act/')?'Learned intent · host response':path.startsWith('learned-reader/')?'Model · context span':'Model answer';
     item.append(node('div',source,'speaker'),node('p',turn.answer,'message'));
   }
   if(turn.failure)item.append(node('div','Turn failed','speaker error'),node('p',String(turn.failure),'message error'));
@@ -84,14 +88,21 @@ async function openSession(resume){
   setBusy(true);setNotice('Opening local chat…');
   try{
     const current=resume?sessionStorage.getItem('local-chat-session'):null;
-    const data=await post('/api/session',current?{session:current}:{});
+    let data,expired=false;
+    try{data=await post('/api/session',current?{session:current}:{});}
+    catch(error){
+      if(!current||error.status!==404)throw error;
+      data=await post('/api/session',{});expired=true;
+    }
     token=data.session;pending=null;sessionStorage.setItem('local-chat-session',token);
+    byId('parameter-count').textContent=data.model.parameters.toLocaleString()+' parameters';
     byId('model').textContent=data.model.name;byId('device').textContent=data.model.device.toUpperCase();
     byId('digest').textContent=data.model.sha256;byId('checkpoint').textContent=data.model.checkpoint;
     byId('mobile-model').textContent=data.model.name+' · '+data.model.device.toUpperCase();
     byId('mobile-digest').textContent=data.model.checkpoint+' · '+data.model.sha256;
     byId('messages').replaceChildren();byId('empty').hidden=data.turns.length>0;
-    data.turns.forEach(render);tools.checked=false;field.value='';setNotice('');scrollEnd();
+    data.turns.forEach(render);tools.checked=false;field.value='';
+    setNotice(expired?'The previous session expired. A new chat is ready.':'');scrollEnd();
   }catch(err){setNotice(err.message,true);}
   finally{setBusy(false);}
 }

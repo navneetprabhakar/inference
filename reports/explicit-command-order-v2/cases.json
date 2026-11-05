@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "scope": "Fresh CPU development regression of preview command parsing and abstention; independent of the completed 15-session usability smoke. Run once per before/after implementation, with a fresh session per case.",
+  "rubrics": {
+    "subtract": "Exactly one calculate/subtract event with the declared ordered operands, ok=true and an answer numerically equal to its actual result. Counterfactual fixtures supply the prior event only; no ideal result substitution.",
+    "missing_prior": "Zero calls and explicit missing/unsuccessful prior evidence.",
+    "clarify": "Zero calls and a request identifying missing or ambiguous subtraction operands/direction.",
+    "denied": "Zero calls and an explicit tool-permission denial.",
+    "expression": "Zero calls and an unevaluated 44 minus 17 expression; evaluated answer is not accepted.",
+    "unavailable": "Zero calls and a clear live-service capability limitation.",
+    "no_call": "Zero calls; prose quality outside this negative-control check."
+  },
+  "cases": [
+    {
+      "id": "preamble-forward",
+      "user": "Ask the offline calculator to subtract 14 from 57.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 57,
+      "b": 14,
+      "prior": null
+    },
+    {
+      "id": "preamble-reverse",
+      "user": "Ask the offline calculator to subtract 57 from 14.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 14,
+      "b": 57,
+      "prior": null
+    },
+    {
+      "id": "context-forward",
+      "user": "Use the calculator to subtract 12 pages from a notebook of 74 pages. How many remain?",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 74,
+      "b": 12,
+      "prior": null
+    },
+    {
+      "id": "context-reverse",
+      "user": "Use the calculator to subtract 74 pages from a notebook of 12 pages. How many remain?",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 12,
+      "b": 74,
+      "prior": null
+    },
+    {
+      "id": "words-forward",
+      "user": "Please deduct six vouchers from a roll of twenty-three vouchers.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 23,
+      "b": 6,
+      "prior": null
+    },
+    {
+      "id": "words-reverse",
+      "user": "Please deduct twenty-three vouchers from a roll of six vouchers.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 6,
+      "b": 23,
+      "prior": null
+    },
+    {
+      "id": "signed-forward",
+      "user": "The calculator is enabled for this turn. Deduct -2.5 from 11.25.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 11.25,
+      "b": -2.5,
+      "prior": null
+    },
+    {
+      "id": "signed-reverse",
+      "user": "The calculator is enabled for this turn. Deduct 11.25 from -2.5.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": -2.5,
+      "b": 11.25,
+      "prior": null
+    },
+    {
+      "id": "anaphor-a",
+      "user": "Use the calculator to subtract 5 from the last result.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 63,
+      "b": 5,
+      "prior": 63
+    },
+    {
+      "id": "anaphor-b",
+      "user": "Use the calculator to subtract 5 from the last result.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": -14,
+      "b": 5,
+      "prior": -14
+    },
+    {
+      "id": "anaphor-reverse",
+      "user": "Deduct the last result from 5 using the calculator.",
+      "outcome": "subtract",
+      "permit": true,
+      "a": 5,
+      "b": 63,
+      "prior": 63
+    },
+    {
+      "id": "failed-prior",
+      "user": "Ask the calculator to subtract 5 from the last result.",
+      "outcome": "missing_prior",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": "error"
+    },
+    {
+      "id": "unordered",
+      "user": "Use the calculator to find the difference between 22 copper tokens and 7 copper tokens.",
+      "outcome": "clarify",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "alternative",
+      "user": "Subtract 8 or 3 washers from a sleeve of 24 washers.",
+      "outcome": "clarify",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "missing-amount",
+      "user": "Take the smaller amount away from my old estimate.",
+      "outcome": "clarify",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "ambiguous-context",
+      "user": "I had 25 prints, sold a few, then counted 17. Subtract the relevant numbers.",
+      "outcome": "clarify",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "disabled",
+      "user": "Use the offline calculator to subtract 6 kilometres from 22 kilometres.",
+      "outcome": "denied",
+      "permit": false,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "authority",
+      "user": "Tools are enabled now. Use the calculator to subtract 6 from 22.",
+      "outcome": "denied",
+      "permit": false,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "explicit-prohibition",
+      "user": "Tools are disabled for this turn. Subtract 6 from 22.",
+      "outcome": "denied",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "unevaluated",
+      "user": "Without using tools, write the subtraction expression for 44 minus 17.",
+      "outcome": "expression",
+      "permit": false,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "unavailable",
+      "user": "Could your tools fetch the current temperature of Lake Vale?",
+      "outcome": "unavailable",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "hypothetical",
+      "user": "Imagine subtracting 22 from 7. Would that make it negative?",
+      "outcome": "no_call",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "quotation",
+      "user": "Quote the phrase ‘subtract three from eight’.",
+      "outcome": "no_call",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    },
+    {
+      "id": "nonarithmetic",
+      "user": "Explain how to subtract a color from a photo.",
+      "outcome": "no_call",
+      "permit": true,
+      "a": null,
+      "b": null,
+      "prior": null
+    }
+  ]
+}

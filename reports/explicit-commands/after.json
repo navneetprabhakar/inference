@@ -1,0 +1,423 @@
+{
+  "stage": "after",
+  "checkpoint_sha": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "correct": 16,
+  "total": 16,
+  "control_calls": 0,
+  "cases": [
+    {
+      "name": "direct add",
+      "user": "Would you please add 12 and 7?",
+      "correct": true,
+      "answer": "19",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.991301,
+          "name": "calculate",
+          "arguments": {
+            "a": 12,
+            "b": 7,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": 19
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "direct subtract",
+      "user": "Subtract 13 from 6, please.",
+      "correct": true,
+      "answer": "-7",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.992734,
+          "name": "calculate",
+          "arguments": {
+            "a": 6,
+            "b": 13,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": -7
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "direct divide",
+      "user": "Calculate 18 / 4.",
+      "correct": true,
+      "answer": "4.5",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.9940438,
+          "name": "calculate",
+          "arguments": {
+            "op": "divide",
+            "a": 18,
+            "b": 4
+          },
+          "ok": true,
+          "data": {
+            "result": 4.5
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "direct multiply",
+      "user": "Multiply -8 by 3.",
+      "correct": true,
+      "answer": "-24",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.995018,
+          "name": "calculate",
+          "arguments": {
+            "a": -8,
+            "b": 3,
+            "op": "multiply"
+          },
+          "ok": true,
+          "data": {
+            "result": -24
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "valid conversion",
+      "user": "Please convert 2.5 kilometers into meters.",
+      "correct": true,
+      "answer": "2500",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.996238,
+          "name": "convert",
+          "arguments": {
+            "value": 2.5,
+            "from": "km",
+            "to": "m"
+          },
+          "ok": true,
+          "data": {
+            "result": 2500.0
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "word conversion",
+      "user": "Convert eight hours to minutes.",
+      "correct": true,
+      "answer": "480",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.9972749,
+          "name": "convert",
+          "arguments": {
+            "value": 8,
+            "from": "h",
+            "to": "min"
+          },
+          "ok": true,
+          "data": {
+            "result": 480.0
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "learned-v2-head/typed-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "failed division",
+      "user": "Calculate 8 / 0.",
+      "correct": true,
+      "answer": "The tool returned an error: division by zero",
+      "trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915885.998143,
+          "name": "calculate",
+          "ok": false,
+          "error": "division by zero"
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-serialization",
+        "host/observed-error"
+      ]
+    },
+    {
+      "name": "disabled arithmetic",
+      "user": "Multiply 7 by 14.",
+      "correct": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "disabled conversion",
+      "user": "Convert 9 kilograms to grams.",
+      "correct": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "incompatible units",
+      "user": "Convert 14 seconds to kilograms.",
+      "correct": true,
+      "answer": "s and kg are incompatible units (time and mass).",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "unsupported unit",
+      "user": "Convert 8 furlongs to meters.",
+      "correct": true,
+      "answer": "Unsupported conversion unit: furlongs.",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "wrong domain",
+      "user": "Please convert 3 kilograms into seconds.",
+      "correct": true,
+      "answer": "kg and s are incompatible units (mass and time).",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "reference with suffix",
+      "user": "Please subtract 5 from that result with the calculator.",
+      "correct": true,
+      "answer": "18",
+      "trace": [
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915886.001621,
+          "name": "calculate",
+          "arguments": {
+            "op": "subtract",
+            "a": 23,
+            "b": 5
+          },
+          "ok": true,
+          "data": {
+            "result": 18
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "counterfactual prior",
+      "user": "Divide the previous answer by 4 using the offline calculator.",
+      "correct": true,
+      "answer": "-4.5",
+      "trace": [
+        {
+          "call_id": "c2",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1793915886.002995,
+          "name": "calculate",
+          "arguments": {
+            "op": "divide",
+            "a": -18,
+            "b": 4
+          },
+          "ok": true,
+          "data": {
+            "result": -4.5
+          }
+        }
+      ],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-serialization",
+        "host/observed-number"
+      ]
+    },
+    {
+      "name": "reference from error",
+      "user": "Add 9 to that answer with the calculator.",
+      "correct": true,
+      "answer": "There is no successful result from the latest call to use.",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    },
+    {
+      "name": "reference disabled",
+      "user": "Multiply the last output by four using the calculator.",
+      "correct": true,
+      "answer": "This turn does not permit a new tool call.",
+      "trace": [],
+      "failure": null,
+      "origins": [
+        "host/explicit-command-notice"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "user": "How does a calculator work?",
+      "trace": 0,
+      "origins": [
+        "gpt2/dialogue"
+      ],
+      "answer": "It performs arithmetic on numbers.",
+      "failure": null
+    },
+    {
+      "user": "What does it mean to convert an image?",
+      "trace": 0,
+      "origins": [
+        "gpt2/dialogue"
+      ],
+      "answer": null,
+      "failure": "Expecting ',' delimiter: line 1 column 131 (char 130)"
+    },
+    {
+      "user": "Is twelve larger than five?",
+      "trace": 0,
+      "origins": [
+        "host/explicit-command-notice"
+      ],
+      "answer": "No tool was run. To request a calculation, give a direct command.",
+      "failure": null
+    },
+    {
+      "user": "My name is Rowan.",
+      "trace": 0,
+      "origins": [
+        "host/session-memory"
+      ],
+      "answer": "Hello, Rowan.",
+      "failure": null
+    },
+    {
+      "user": "Tell me about unit testing.",
+      "trace": 0,
+      "origins": [
+        "gpt2/dialogue"
+      ],
+      "answer": "Which trip are you asking about?",
+      "failure": null
+    },
+    {
+      "user": "What result did the tool return?",
+      "trace": 0,
+      "origins": [
+        "gpt2/dialogue"
+      ],
+      "answer": "The note doesn't say who left it.",
+      "failure": null
+    },
+    {
+      "user": "Do not calculate 9 / 3.",
+      "trace": 0,
+      "origins": [
+        "host/explicit-command-notice"
+      ],
+      "answer": "No tool was run. To request a calculation, give a direct command.",
+      "failure": null
+    },
+    {
+      "user": "If I multiplied seven by five, would the answer be even?",
+      "trace": 0,
+      "origins": [
+        "host/explicit-command-notice"
+      ],
+      "answer": "No tool was run. To request a calculation, give a direct command.",
+      "failure": null
+    },
+    {
+      "user": "Quote the phrase \u201cconvert 7 liters to grams\u201d.",
+      "trace": 0,
+      "origins": [
+        "gpt2/dialogue"
+      ],
+      "answer": null,
+      "failure": "Unterminated string starting at: line 1 column 73 (char 72)"
+    }
+  ]
+}

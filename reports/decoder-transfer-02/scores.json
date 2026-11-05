@@ -1,0 +1,747 @@
+{
+  "protocol_sha256": "e441d05266d6652f1d07c41155c3028b4544cffb7fa7025e66074b8ef47fe43e",
+  "weights_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "adjudication": "Single assistant, randomized per-case arm identifiers, frozen rubric, source user prompts suppressed during scoring. Fluency reported separately where it did not contradict a required fact.",
+  "summary": {
+    "paraphrase": {
+      "cases": 16,
+      "complete": 1,
+      "turns": 32,
+      "correct_turns": 6,
+      "protocol_valid_turns": 29,
+      "reference_text_matches": 5
+    },
+    "exact": {
+      "cases": 16,
+      "complete": 11,
+      "turns": 32,
+      "correct_turns": 25,
+      "protocol_valid_turns": 32,
+      "reference_text_matches": 24
+    }
+  },
+  "by_pool": {
+    "chat": {
+      "exact": {
+        "cases": 2,
+        "complete": 2,
+        "correct_turns": 4
+      },
+      "paraphrase": {
+        "cases": 2,
+        "complete": 0,
+        "correct_turns": 1
+      }
+    },
+    "compositional": {
+      "exact": {
+        "cases": 9,
+        "complete": 6,
+        "correct_turns": 15
+      },
+      "paraphrase": {
+        "cases": 9,
+        "complete": 1,
+        "correct_turns": 5
+      }
+    },
+    "natural": {
+      "exact": {
+        "cases": 5,
+        "complete": 3,
+        "correct_turns": 6
+      },
+      "paraphrase": {
+        "cases": 5,
+        "complete": 0,
+        "correct_turns": 0
+      }
+    }
+  },
+  "paired": {
+    "both": 1,
+    "exact_only": 10,
+    "paraphrase_only": 0,
+    "neither": 5
+  },
+  "cases": [
+    {
+      "id": "p01",
+      "pool": "natural",
+      "steps": [
+        851,
+        1671,
+        3094,
+        3418,
+        3507
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Neither reply addresses the distinction or gate classification.",
+        "answers": [
+          "In the main point and let the other person includes here.",
+          "Pia."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "First definition confuses the tasks; second mentions request but does not convey a coherent classification.",
+        "answers": [
+          "A question asks for a chance to do something you like a chance to do something.",
+          "It is the old and for a request."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p02",
+      "pool": "natural",
+      "steps": [
+        124,
+        683,
+        683,
+        1671,
+        2512,
+        3418,
+        3418,
+        3613,
+        3846,
+        4432
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Generic incoherent question then malformed output.",
+        "answers": [
+          "Sure. What brings you want to ask?",
+          null
+        ],
+        "failures": [
+          null,
+          "Expecting ',' delimiter: line 1 column 25 (char 24)"
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Asks for the rule and gives an actionable brush-return instruction.",
+        "answers": [
+          "What rule do you want members to follow?",
+          "Please clean the shared brushes before returning them."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p03",
+      "pool": "natural",
+      "steps": [
+        499,
+        1543,
+        1714,
+        2007,
+        2011,
+        2148,
+        2438,
+        2645,
+        2797,
+        3591,
+        3591,
+        4189,
+        4512
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Defines patience appropriately. Follow-up starts with watering and waiting as seed grows; repetition damages fluency but the required idea is present.",
+        "answers": [
+          "Patience means being able to wait without losing your temper.",
+          "You water a seed and wait while it grows, even when you can't see a seed and a seed and wait while it grows, even when you can a seed and a seed and have a seed and wait."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "First reply incomplete; numerical fragments on follow-up.",
+        "answers": [
+          null,
+          "H.\nHesorodyn-38.\n\n\n-38.\n\n\n\n-38.\n\n\n\n\n\n\n-38"
+        ],
+        "failures": [
+          "incomplete or multiple assistant frames",
+          null
+        ]
+      }
+    },
+    {
+      "id": "p04",
+      "pool": "natural",
+      "steps": [
+        508,
+        1335,
+        2021,
+        2032,
+        2076,
+        2160,
+        2698,
+        3668,
+        4165,
+        4487,
+        4655
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Accurately asks for note text and restates Thursday.",
+        "answers": [
+          "I can't see your kitchen table. Can you share the note's text?",
+          "The note says the lesson moved to Thursday."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Malformed first response and unrelated repeated words on follow-up.",
+        "answers": [
+          null,
+          "Could you have a the the the the the the the the the the the the the the the the. I'll share the the the the to the the to the to the have it?"
+        ],
+        "failures": [
+          "Expecting ',' delimiter: line 1 column 45 (char 44)",
+          null
+        ]
+      }
+    },
+    {
+      "id": "p05",
+      "pool": "natural",
+      "steps": [
+        285,
+        760,
+        1522,
+        1693,
+        1693,
+        2336,
+        2393,
+        2513,
+        3192,
+        3642,
+        5194
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Neither response supplies a decline.",
+        "answers": [
+          "That's a good to what you have a good idea. You can have a good way, or a good way, and what you're interested in your way, and what you're interested in your time.",
+          "The good idea are you could be a good family and a good way to be used for a good way to have a good idea. A-friendly?"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Neither response supplies a polite invitation decline.",
+        "answers": [
+          "Thanks for me to come from one?",
+          "I can't like me. I can't stated."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p06",
+      "pool": "compositional",
+      "steps": [
+        26
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Appropriate greeting, then correct name.",
+        "answers": [
+          "Hello! It's good to meet you.",
+          "Zelorudak"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Appropriate greeting, then correct name.",
+        "answers": [
+          "Hello! How can I help?",
+          "Zelorudak"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p07",
+      "pool": "compositional",
+      "steps": [
+        26
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          true
+        ],
+        "complete": false,
+        "reason": "Unrelated ticket question on greeting; repeats name correctly.",
+        "answers": [
+          "What was the ticket say?",
+          "Lunavodyn"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Appropriate greeting and correct name.",
+        "answers": [
+          "Nice to meet you too!",
+          "Lunavodyn"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p08",
+      "pool": "compositional",
+      "steps": [
+        9,
+        2350
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Copies the owner name twice rather than either tag.",
+        "answers": [
+          "Rovorusil",
+          "Rovorusil"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          false,
+          true
+        ],
+        "complete": false,
+        "reason": "Generates an incorrect first tag; identifies the second tag correctly.",
+        "answers": [
+          "Azanusil",
+          "Bellevusil"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p09",
+      "pool": "compositional",
+      "steps": [
+        9
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          false
+        ],
+        "complete": false,
+        "reason": "Correct old destination, then incorrect altered replacement name.",
+        "answers": [
+          "Gavenavin",
+          "Pavevuvin"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          true,
+          false
+        ],
+        "complete": false,
+        "reason": "Correct old destination, then incorrect altered replacement name.",
+        "answers": [
+          "Gavenavin",
+          "Pavevuvin"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p10",
+      "pool": "compositional",
+      "steps": [
+        9
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Neither generated name matches the two queue positions.",
+        "answers": [
+          "Pavilumar",
+          "Pavilumar"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          false,
+          true
+        ],
+        "complete": false,
+        "reason": "Wrong last person, then correct predecessor.",
+        "answers": [
+          "Ivranidor",
+          "Paveyarin"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p11",
+      "pool": "compositional",
+      "steps": [
+        15,
+        2221
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Acknowledges missing identity, then reports named witness answer correctly.",
+        "answers": [
+          "No. The person isn't identified.",
+          "Yorelireth"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Responds about a purchase date and later selects the location instead of the named carrier.",
+        "answers": [
+          "No. The purchase date isn't given.",
+          "Jevevudyn"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p12",
+      "pool": "compositional",
+      "steps": [
+        9,
+        2067
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Clarifies the missing choices and selects the requested label.",
+        "answers": [
+          "Which choices are you referring to?",
+          "Ulvarodyn"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          true
+        ],
+        "complete": false,
+        "reason": "Claims inability to see the conversation rather than clarifying choices. Second label is correct.",
+        "answers": [
+          "I can't see the conversation.",
+          "Ulvarodyn"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p13",
+      "pool": "compositional",
+      "steps": [
+        15,
+        1432,
+        2843
+      ],
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Returns the closed label for open and the open label for closed.",
+        "answers": [
+          "Gavemital",
+          "Azalavin"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Selects the proper label for both flag states.",
+        "answers": [
+          "Azalavin",
+          "Gavemital"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p14",
+      "pool": "compositional",
+      "steps": [
+        9
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Thanks the correct person for the slate and changes only the addressee.",
+        "answers": [
+          "Thank you, Ivritomor, for the slate.",
+          "Thank you, Azevumor, for the slate."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Gives wrong object and no thanks, then changes both name and requested speech act.",
+        "answers": [
+          "Ivritomor, for the plaque.",
+          "Azumor, could you bring the slate."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p15",
+      "pool": "chat",
+      "steps": [
+        4,
+        841,
+        2810,
+        4075
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Returns only the item and name.",
+        "answers": [
+          "hammer",
+          "Bo"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          true,
+          false
+        ],
+        "complete": false,
+        "reason": "Returns only the item correctly but supplies the wrong name.",
+        "answers": [
+          "hammer",
+          "Pia"
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "p16",
+      "pool": "chat",
+      "steps": [
+        4,
+        767
+      ],
+      "exact": {
+        "passed_turns": [
+          true,
+          true
+        ],
+        "complete": true,
+        "reason": "Tuesday and revised practice day Monday are both accurate.",
+        "answers": [
+          "Tuesday.",
+          "The practice is on Monday."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      },
+      "paraphrase": {
+        "passed_turns": [
+          false,
+          false
+        ],
+        "complete": false,
+        "reason": "Neither response identifies the relevant day.",
+        "answers": [
+          "Give the character a small date.",
+          "The band is to the left the left the left the left it."
+        ],
+        "failures": [
+          null,
+          null
+        ]
+      }
+    }
+  ]
+}

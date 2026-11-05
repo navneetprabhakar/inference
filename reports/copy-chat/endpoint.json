@@ -1,0 +1,81 @@
+{
+  "training": {
+    "stage": "copy chat SFT",
+    "state": "trained",
+    "step": 5500,
+    "train_model_inputs": 4280032,
+    "nonpadding_train_inputs": 3795134,
+    "positive_targets": 1053245,
+    "foil_targets": 42797,
+    "probe_model_inputs": 107928,
+    "tasks": {
+      "compositional": 1248,
+      "taskmaster_sft": 576,
+      "natural": 187,
+      "chat": 273,
+      "contrast": 1100,
+      "numeric": 110,
+      "varied_tool": 366,
+      "scaled": 431,
+      "squad": 428,
+      "reporting": 258,
+      "tool": 230,
+      "broad": 120,
+      "quac": 41,
+      "copy": 75,
+      "no_robots": 57
+    },
+    "attempt": 1,
+    "timestamp": 1793918946.767288,
+    "active_seconds": 4914.879918416962,
+    "elapsed_seconds": 4914.912019968033,
+    "reserved_model_inputs": 4387960,
+    "reserved_updates": 5500,
+    "remaining_model_inputs": 3112040,
+    "remaining_updates": 0,
+    "remaining_active_seconds": 4085.1200811660383,
+    "remaining_elapsed_seconds": 5885.087978839874,
+    "task": "contrast",
+    "loss": 0.032264165580272675,
+    "lr": 1.800000831983158e-05,
+    "gradient_norm": 1.6206915378570557,
+    "ce": 0.031286321580410004,
+    "rank": 0.0009778457460924983,
+    "gap": 8.501679420471191,
+    "probe_model_checkpoints": {
+      "1375": "41f34e2505f2e1d699b17a7d561d1484e6bc2fa5b18fae440a08106018e8777b",
+      "2750": "24c4d332846a8b91dfa7ba364efcc419c0ed03eae771410ca88915cd9507a120",
+      "5500": "1191df524ead6ff62f015b90463794687125f46488fb8379b1993ff1ffbebfaf"
+    },
+    "reason": "optimizer target reached",
+    "weights_sha256": "87f1cd7315839c56ca578ed6dca0b87f9b90f7cee462bc76a27087696bd7e4c4",
+    "endpoint_pairs_correct": 9,
+    "endpoint_pair_count": 28
+  },
+  "conditional_probes": {
+    "1375": {
+      "pairs_correct": 0,
+      "pair_count": 28,
+      "members_correct": 9,
+      "member_count": 56,
+      "model_checkpoint_sha256": "41f34e2505f2e1d699b17a7d561d1484e6bc2fa5b18fae440a08106018e8777b"
+    },
+    "2750": {
+      "pairs_correct": 4,
+      "pair_count": 28,
+      "members_correct": 10,
+      "member_count": 56,
+      "model_checkpoint_sha256": "24c4d332846a8b91dfa7ba364efcc419c0ed03eae771410ca88915cd9507a120"
+    },
+    "5500": {
+      "pairs_correct": 9,
+      "pair_count": 28,
+      "members_correct": 21,
+      "member_count": 56,
+      "model_checkpoint_sha256": "1191df524ead6ff62f015b90463794687125f46488fb8379b1993ff1ffbebfaf"
+    }
+  },
+  "raw_semantic_review": "adjudication-raw.json",
+  "product_semantic_review": "adjudication-product.json",
+  "release_decision": "Rejected. No development or independent validation threshold passed; original 100 unscored."
+}

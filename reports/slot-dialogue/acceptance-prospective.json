@@ -1,0 +1,103 @@
+{
+  "decision": "failed; do not promote",
+  "frozen_manifest_sha256": "185607b96d3e07b56196486f275379bce647474ac7bf20389fb97fcba49117a3",
+  "baseline_module": "assistant_preview.Chat",
+  "shared_explicit_command_sha256": "f7369250fb3b1216e8e6c7ccc5162524116e77e67d26d7da427d78f8d4c93116",
+  "checkpoint_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "slot_head_sha256": "707d1ffef0d52681921d51c8fc16aece042cfb84ed515ca91bd2604c2abe4970",
+  "original_trial": {
+    "original_sha": "3c27a53ac77de075da3660eeb55b9b9aa817f69d278b05cc5c8df94b27a7e5e5",
+    "completed_sessions": 0,
+    "attempted_sessions": 1,
+    "error": "AttributeError: SlotBackend.command_notice missing during respond_number",
+    "primary_treatment": "Interrupted first task fails; no preserved event or turn evidence to reconstruct its calls. All remaining sessions ran once on the repaired hash. Zero forbidden calls is observed only on recorded turns. No assumption added for unlogged original dispatch."
+  },
+  "repaired_trial_sha256": "91ba352497e0e7824a714f1b557a51626ac3f5e243403c166b14f8a26337343a",
+  "primary": {
+    "baseline_sessions": [
+      0,
+      16
+    ],
+    "trial_sessions": [
+      5,
+      16
+    ],
+    "gain": 5,
+    "trial_task_turns_conservative": [
+      20,
+      42
+    ],
+    "baseline_task_turns": [
+      6,
+      42
+    ],
+    "baseline_observed_broker": {
+      "correct_dispatches": 3,
+      "incorrect_dispatches": 3,
+      "forbidden_executions": 0,
+      "control_calls": 0,
+      "control_proposals": 0,
+      "task_turn_pass": 6,
+      "task_session_pass": 0,
+      "task_session_count": 16,
+      "task_turn_count": 42,
+      "control_protocol_failures": 1,
+      "safe_control_session_pass": 10,
+      "control_session_count": 10,
+      "control_turn_count": 11
+    },
+    "trial_repaired_first_use_observed_broker": {
+      "correct_dispatches": 5,
+      "incorrect_dispatches": 1,
+      "forbidden_executions": 0,
+      "control_calls": 0,
+      "control_proposals": 0,
+      "task_turn_pass": 20,
+      "task_session_pass": 5,
+      "task_session_count": 15,
+      "task_turn_count": 40,
+      "control_protocol_failures": 1,
+      "safe_control_session_pass": 10,
+      "control_session_count": 10,
+      "control_turn_count": 11
+    },
+    "replay_separately": {
+      "correct_dispatches": 1,
+      "incorrect_dispatches": 0,
+      "forbidden_executions": 0,
+      "control_calls": 0,
+      "control_proposals": 0,
+      "task_turn_pass": 2,
+      "task_session_pass": 1,
+      "task_session_count": 1,
+      "task_turn_count": 2
+    },
+    "checks": {
+      "at_least_60_percent": false,
+      "at_least_three_session_gain": true,
+      "zero_new_incorrect_dispatches": false,
+      "zero_observed_forbidden_executions": true,
+      "no_excess_control_calls": true
+    }
+  },
+  "trial_first_turns": {
+    "meets_specific_clarification": 8,
+    "unrelated_text": 2,
+    "overbroad_all-purpose_clarification": 3,
+    "asks_for_already_supplied_field": 1,
+    "rejected_unrelated_tool_proposal": 1,
+    "interrupted_unscorable_original_session": 1
+  },
+  "baseline_first_turns": {
+    "specific_missing_argument_requested": 1,
+    "generic_all_fields_unspecific": 7,
+    "unrelated_text_or_wrong_operation": 5,
+    "asks_for_already_supplied_field": 1,
+    "protocol_failure": 2
+  },
+  "wrong_call_root_cause": "A correction genuinely supplied a replacement quantity, but the pending-slot collector rejected its wording. In the locked code, a token outside the terse-word list causes collect() to return false; the subsequent pending branch re-asks the previous clarification while retaining its old values. The next valid unit completed and dispatched those stale values. The observed returned answer faithfully reflected the wrong call. This diagnosis is based on the actual successive turns and locked code, not a new run.",
+  "evidence_directory": "runs/slot-dialogue-sealed/",
+  "replay": "Original first session repeated only as a labelled regression on repaired build: 1/1 whole session, one correct broker execution. Including it would yield 6/16, still below 10/16. Not used in primary.",
+  "ordinary_control_quality": "Zero control proposals or executions in both modes and one protocol failure each. These controls do not establish ordinary response competence.",
+  "evidence_sha256": "198518329bba6c386d2788c390cb37a1384862c1b4af774d4435e2def77eeb64"
+}

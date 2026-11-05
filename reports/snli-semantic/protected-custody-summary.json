@@ -1,0 +1,61 @@
+{
+  "train_sha256": "e243539f21faa5bec5fb2f680102bd48d34346e53cfedd4635beea9892d3384a",
+  "total": 51415,
+  "approved": 41008,
+  "denied": 10407,
+  "direct_flagged_pairs": 4225,
+  "source_image_or_premise_groups_held": 3745,
+  "by_annotation_tier_and_label": {
+    "multi-unanimous/contradiction": {
+      "total": 308,
+      "eligible": 255,
+      "eligible_raw_token_positions": 5663,
+      "denied": 53,
+      "direct_hits": 13
+    },
+    "multi-unanimous/entailment": {
+      "total": 6172,
+      "eligible": 5173,
+      "eligible_raw_token_positions": 109465,
+      "denied": 999,
+      "direct_hits": 387
+    },
+    "multi-unanimous/neutral": {
+      "total": 4132,
+      "eligible": 3491,
+      "eligible_raw_token_positions": 78758,
+      "denied": 641,
+      "direct_hits": 97
+    },
+    "single-recorded/contradiction": {
+      "total": 1346,
+      "denied": 268,
+      "direct_hits": 85,
+      "eligible": 1078,
+      "eligible_raw_token_positions": 23149
+    },
+    "single-recorded/entailment": {
+      "total": 39086,
+      "eligible": 30704,
+      "eligible_raw_token_positions": 662777,
+      "denied": 8382,
+      "direct_hits": 3635
+    },
+    "single-recorded/neutral": {
+      "total": 371,
+      "eligible": 307,
+      "eligible_raw_token_positions": 7515,
+      "denied": 64,
+      "direct_hits": 8
+    }
+  },
+  "denylist_sha256": "64af4e1c568c38f659d61a849e7ffae8d7a28cb8c7de55c326e7c99e858a2c08",
+  "eligible_unique_text_token_positions": 816573,
+  "method": "Source pair/image/caption/premise-component and label/vote identity verified; exact sentences, copied 8-word spans, one token edit on 6\u201343 word protected statements, A/B/sealed protocol near-scenario screens. Propagate any hit to the full source image/premise group.",
+  "limits": "Singletons have only one recorded vote. No unverified label inversions or balanced-class claims. This source supplies directed NLI supervision, not original chat turns; lexical and source-group checks cannot prove universal semantic independence.",
+  "verified_source_image_group_overlap": 0,
+  "verified_source_image_overlap": 0,
+  "eligible_input_positions": 887327,
+  "three_class_balanced_multi_unanimous_ceiling": 765,
+  "training_policy": "Optional directed research data only; no use of internal validation or official publisher validation/test as teaching; no training change in this audit."
+}

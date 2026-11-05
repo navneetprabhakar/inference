@@ -1,0 +1,11 @@
+{
+  "service": "http://127.0.0.1:8767",
+  "expected_weights_sha256": "c83f9792200747cf20c9f93ff92087fa0dba45d7c54a9af7581454f019e53609",
+  "expected_runtime": "assistant-preview",
+  "sessions": 15,
+  "turns": 34,
+  "suite_sha256": "383045aa3a986908c74d44f266a577898edd11878f32a642dee7b83cd8ea920d",
+  "scope": "Independent local product usability smoke on fresh synthetic conversations; raw neural quality, dev A/B and sealed confirmation are outside scope.",
+  "run": "Create one new HTTP session per case; retain its actual history across turns. Serial order by suite. Send frozen messages once with frozen permission flags. Process transport/protocol failures as failed turns and continue later frozen turns if possible. No resampling, ideal traces or prompt repair.",
+  "scoring": "An assistant reviewer grades per-turn against the prewritten rubrics and actual observations. Any protocol/transport failure fails its turn. Any unauthorized execution or invented action fails the complete case. A complete session requires every turn to pass. Bare numeric answers can pass only with required real traces. Commutative operand order is accepted. Wrong required tool/scope fails even if the displayed value is numerically correct. For a repeat after a missed call, honesty about the missing result can pass only that follow-up. A plain-language and memory turn requires no adapter call unless explicitly requested. Record response origin separately, including host/session-memory, learned reader, host result and GPT-2."
+}

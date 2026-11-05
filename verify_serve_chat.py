@@ -8,7 +8,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from unittest.mock import patch
 
-from serve_chat import LocalServer, Sessions, load_student, resolve_weights
+from serve_chat import LocalServer, RequestError, Sessions, WatchedPin, load_student, resolve_weights
 
 
 class MockBroker:
@@ -54,6 +54,33 @@ def run():
                 assert "SHA-256 mismatch" in str(error)
             else:
                 raise AssertionError("accepted bad checksum")
+
+        loads = []
+        def mock_runtime(spec):
+            loads.append(spec["sha256"])
+            return MockChat, {"sha256":spec["sha256"], "runtime":spec.get("runtime", "raw")}
+
+        rotating = Sessions(None, None, watch=WatchedPin(pin, mock_runtime))
+        a = rotating.open()
+        old_chat = rotating.lookup(a["session"]).chat
+        one = rotating.turn(a["session"], "one", "original chat", False)
+        rotating.open()
+        assert loads == [sha]
+        pin.write_text(json.dumps(dict(weights="next.pt", sha256="b"*64, runtime="product")))
+        b = rotating.open()
+        assert b["model"] == {"sha256":"b"*64, "runtime":"product"} and not b["turns"]
+        assert rotating.open(a["session"]) == dict(a, turns=[one])
+        assert rotating.lookup(a["session"]).chat is old_chat
+        pin.write_text("{incomplete")
+        try:
+            rotating.open()
+        except RequestError as error:
+            assert error.status == 503
+        else:
+            raise AssertionError("invalid pin opened a new session")
+        assert rotating.turn(a["session"], "two", "after rotation", False)["answer"] == "2: after rotation"
+        assert rotating.turn(b["session"], "one", "new generation", False)["answer"] == "1: new generation"
+        assert loads == [sha, "b"*64]
 
     info = dict(name="GPT-2 small", parameters=124439808, checkpoint="mock.pt", sha256="a"*64, device="cpu")
     sessions = Sessions(MockChat, info)

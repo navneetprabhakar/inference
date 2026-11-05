@@ -1,0 +1,208 @@
+{
+  "status": {
+    "stage": "extended pretraining",
+    "state": "failed",
+    "step": 1150,
+    "target_tokens": 4710400,
+    "attempt": 1,
+    "input_tokens": 4710400,
+    "elapsed": 5067.750936746597,
+    "active_elapsed": 5067.708128166152,
+    "charged_resume_gap_seconds": 0.0,
+    "reserved_target_tokens": 4710400,
+    "remaining_target_tokens": 0,
+    "remaining_active_seconds": 2132.291871833848,
+    "remaining_elapsed_seconds": 5732.249063253403,
+    "observed_tokens_per_second": 929.4853000459391,
+    "active_tokens_per_second": 929.4931517108798,
+    "eta_active_seconds": 0.0,
+    "next_source_offsets": {
+      "wiki": 1177600,
+      "textbook": 1177600,
+      "stories": 2355200
+    },
+    "timestamp": 1793913990.501567,
+    "train_ce": 4.511615633964539,
+    "gradient_norm": 1.1646133661270142,
+    "lr": 6.000112145078006e-06,
+    "reason": "token budget reached"
+  },
+  "config": {
+    "spec": {
+      "corpus": "data/balanced-continuation-v1",
+      "manifest_sha256": "97ceba8dddcb6f8c289506f54c50dd06e223988b0efa6e85eaf542b6e5f7c48f",
+      "target_tokens": 4710400,
+      "active_seconds": 7200,
+      "elapsed_seconds": 10800,
+      "seed": 1201,
+      "mix": {
+        "wiki": 4,
+        "textbook": 4,
+        "stories": 8
+      },
+      "primary": "wiki",
+      "minimum_ce_improvement": 0.025,
+      "material_ce_regression": 0.05,
+      "warmup_steps": 60,
+      "validation_rows_per_source": 32,
+      "budget_name": "balanced-language-continuation-low-lr-02",
+      "parent_checkpoint": {
+        "path": "runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+        "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4"
+      },
+      "peak_lr": 6e-05
+    },
+    "model": {
+      "vocabulary": 50257,
+      "context": 1024,
+      "width": 768,
+      "heads": 12,
+      "depth": 12
+    },
+    "device": "mps",
+    "tokenizer": {
+      "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+      "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+    },
+    "dtype": "fp32",
+    "torch": "2.14.1",
+    "tokens_per_step": 4096,
+    "code": {
+      "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+      "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+      "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+      "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+      "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+      "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+      "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27"
+    },
+    "initialization": {
+      "mode": "local_pre_sft_weights",
+      "parent": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+        "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4",
+        "bytes": 1493456923,
+        "step": 600,
+        "target_tokens": 2457600,
+        "acceptance_report_sha256": "120cc3af4b7ffb566bd7fdc5104783a9886ef2c7414b0611303acb4b653e74b8"
+      },
+      "optimizer": "fresh_adamw"
+    }
+  },
+  "development": [
+    {
+      "validation": {
+        "wiki": 6.542326748371124,
+        "textbook": 6.684024810791016,
+        "stories": 3.3888638988137245
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the National Register of the National Register of Historic Places in the National Register of Historic Places in the National Register of the National",
+        "The child went to the garden because": "The child went to the garden because it was very happy.\nThe little girl was very happy and said, \"I'm sorry, I can't know"
+      },
+      "contrast_logit_margins": [
+        -0.15354245901107788,
+        0.3164074718952179,
+        1.3547348976135254,
+        -1.3401246070861816
+      ],
+      "step": 0
+    },
+    {
+      "validation": {
+        "wiki": 6.507464304566383,
+        "textbook": 6.398507207632065,
+        "stories": 3.3466405868530273
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the United States. The building was built in the United States. The building was built in the United States.  The",
+        "The child went to the garden because": "The child went to the garden because the bird was very happy. The bird was very happy. The bird was happy and the bird was happy."
+      },
+      "contrast_logit_margins": [
+        -0.43755945563316345,
+        0.5497565865516663,
+        2.0045151710510254,
+        -1.949206829071045
+      ],
+      "step": 115,
+      "primary_ce_improvement": 0.034862443804740906
+    },
+    {
+      "validation": {
+        "wiki": 6.4541401118040085,
+        "textbook": 6.243386909365654,
+        "stories": 3.227281406521797
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first-based-based-based-based-based-based-based-based-based-based-based",
+        "The child went to the garden because": "The child went to the garden because the park was very happy. The bird was very happy and said, \"I'm sorry, I can't be a"
+      },
+      "contrast_logit_margins": [
+        -0.5830793380737305,
+        0.6795912981033325,
+        1.3292226791381836,
+        -1.2765583992004395
+      ],
+      "step": 288,
+      "primary_ce_improvement": 0.05332419276237488
+    },
+    {
+      "validation": {
+        "wiki": 6.385722383856773,
+        "textbook": 6.091998353600502,
+        "stories": 3.066982217133045
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first-story, with a new house. The first time, the first time, there was a little girl named",
+        "The child went to the garden because": "The child went to the garden because the sun was very happy. The little girl was so happy that she could not find the little girl. She was so"
+      },
+      "contrast_logit_margins": [
+        -0.5391815900802612,
+        0.62171870470047,
+        0.6742420196533203,
+        -0.664208173751831
+      ],
+      "step": 575,
+      "primary_ce_improvement": 0.06841772794723511
+    },
+    {
+      "validation": {
+        "wiki": 6.339913412928581,
+        "textbook": 6.029043972492218,
+        "stories": 2.9720648378133774
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first time. The first time, there was a little girl named Lily. She loved to play with her toys and",
+        "The child went to the garden because": "The child went to the garden because the sun was very happy.\nThe little girl was so happy that the little girl was happy. The little girl was"
+      },
+      "contrast_logit_margins": [
+        -0.25197651982307434,
+        0.35204827785491943,
+        0.7336585521697998,
+        -0.7180154323577881
+      ],
+      "step": 862,
+      "primary_ce_improvement": 0.04580897092819214
+    },
+    {
+      "validation": {
+        "wiki": 6.318829581141472,
+        "textbook": 5.99729810655117,
+        "stories": 2.9244173541665077
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first-story, and a small house. The house was a big, red, red ball. The dog was",
+        "The child went to the garden because": "The child went to the garden because the sun was very happy. The little girl was happy and said, \"I'm sorry, little girl. I'm"
+      },
+      "contrast_logit_margins": [
+        -0.09931015968322754,
+        0.22939610481262207,
+        0.6934397220611572,
+        -0.6657555103302002
+      ],
+      "step": 1150,
+      "primary_ce_improvement": 0.021083831787109375
+    }
+  ],
+  "decision": "Terminal primary CE gain 0.02108 missed the frozen 0.025 minimum. Prior passing base used for pointer training; no second peak-LR retry. No student was initialized from this experimental branch."
+}
