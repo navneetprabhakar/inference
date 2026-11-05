@@ -1,0 +1,110 @@
+[
+  {
+    "title": "SmolLM training report",
+    "url": "https://huggingface.co/blog/smollm",
+    "finding_and_limit": "135M and 360M models trained on 600B tokens; data curation is central. Published budgets are reference points, not minimum requirements for this task.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "SmolLM2-135M-Instruct model card",
+    "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct",
+    "finding_and_limit": "135M, 2T pretraining tokens, Apache-2.0. Function-calling claim applies to 1.7B, not this size. No evidence it reaches our 60/100 conversation gate.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "Smol-SmolTalk dataset card",
+    "url": "https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk",
+    "finding_and_limit": "Shorter conversations for models below 1B; deliberately excludes function calling and advanced math. Useful chat source, not a complete tool curriculum.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "MobileLLM-125M model card",
+    "url": "https://huggingface.co/facebook/MobileLLM-125M",
+    "finding_and_limit": "125M and 1T training tokens; deep/thin design, shared embeddings and GQA. Research license and integration differences make this a design reference, not the first deployment choice.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "TinyStories",
+    "url": "https://arxiv.org/abs/2305.07759",
+    "finding_and_limit": "Small models can learn coherent constrained-domain stories. This does not establish general conversation or tool competence.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "Compute-optimal training / Chinchilla",
+    "url": "https://arxiv.org/abs/2203.15556",
+    "finding_and_limit": "Model size and training data must be considered together. Compute-optimal language loss does not imply a guaranteed chat threshold.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "LIMA",
+    "url": "https://arxiv.org/abs/2305.11206",
+    "finding_and_limit": "The 1,000-example alignment result starts with an already pretrained 65B model. It is not evidence that a weak 97.5M foundation can learn general language from 1,000 examples.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "APIGen",
+    "url": "https://arxiv.org/abs/2406.18518",
+    "finding_and_limit": "Separates format checking, actual execution and semantic verification. Its published performance does not transfer automatically to a 100M model.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "APIGen-MT",
+    "url": "https://arxiv.org/abs/2504.03601",
+    "finding_and_limit": "Uses verified task blueprints and complete multi-turn trajectories. Adopt the data-verification principle, not its larger-model benchmark numbers.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "MiniLLM",
+    "url": "https://arxiv.org/abs/2306.08543",
+    "finding_and_limit": "Distillation uses an on-policy objective and teacher distribution access. Text-only Codex-generated corrections are sequence supervision, not this white-box distillation method.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "Neural text degeneration",
+    "url": "https://arxiv.org/abs/1904.09751",
+    "finding_and_limit": "Decoding can cause repetitive text; sampling changes generation behavior without establishing factual correctness.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "Unlikelihood training",
+    "url": "https://arxiv.org/abs/1908.04319",
+    "finding_and_limit": "A training objective can suppress undesirable repetition. It is a secondary option after competence, not a substitute for grounding.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "XGrammar quick start",
+    "url": "https://xgrammar.mlc.ai/docs/latest/start/quick_start.html",
+    "finding_and_limit": "Grammar constraints can enforce JSON/schema structure. Correct syntax does not choose the right operation, arguments, permission or answer; local integration remains to be tested.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "FineWeb-Edu",
+    "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu",
+    "finding_and_limit": "Educational filtering offers a candidate source for foundation data. It is not individually verified truth or a substitute for source audits and deduplication.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "MLX LM",
+    "url": "https://github.com/ml-explore/mlx-lm",
+    "finding_and_limit": "Apple-silicon inference and fine-tuning support. Verify the chosen architecture, native template and numerical parity before adopting it.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "nanowhale-100m model card",
+    "url": "https://huggingface.co/HuggingFaceTB/nanowhale-100m",
+    "finding_and_limit": "Author reports ~110M total parameters, 2.6B pretraining tokens and 72.7M SFT tokens over 460K conversations. Held-out token accuracy is not conversation accuracy. Custom architecture increases integration risk.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "nanochat reference implementation",
+    "url": "https://github.com/karpathy/nanochat",
+    "finding_and_limit": "Inspectable end-to-end training and chat pipeline. Its accelerator cost/speed claims are not laptop ETAs or proof of performance under our parameter cap.",
+    "access_date_ist": "2026-11-03"
+  },
+  {
+    "title": "FunctionGemma",
+    "url": "https://deepmind.google/models/gemma/functiongemma/",
+    "finding_and_limit": "Specialized 270M tool model. It exceeds the current 200M cap and is only a possible future option if that cap changes.",
+    "access_date_ist": "2026-11-03"
+  }
+]

@@ -1,0 +1,198 @@
+{
+  "audit_kind": "read-only assistant audit; not independent human review",
+  "scope": "configs, frozen mixture/arrays/order, trainer/evaluator code, saved training state and reports; no training, decoding, data, or checkpoint mutation",
+  "measured": {
+    "frozen_config": {
+      "seed": 20261101,
+      "base_checkpoint": "runs/sft-v3/repair-lr3/milestones/2000000",
+      "base_checkpoint_sha256": "93bb235b29c8bdff5efe4e14bac223b92b5bc70fecc3023a22d8ed2d9b6fd781",
+      "learning_rate": 1e-05,
+      "batch_size": 2,
+      "checkpoint_every_steps": 25,
+      "max_nonpadding_input_tokens": 1000000,
+      "max_candidate_passes": 2,
+      "max_active_seconds": 14400
+    },
+    "mixture_records": {
+      "candidate": 4690,
+      "tool_replay": 256,
+      "total": 4946,
+      "tool_replay_record_fraction": 0.05175899716942984
+    },
+    "mixture_tokens": {
+      "full": {
+        "candidate_input": 635482,
+        "tool_replay_input": 77027,
+        "candidate_supervised": 342734,
+        "tool_replay_supervised": 12895
+      },
+      "consumed_prefix": {
+        "candidate_input": 392337,
+        "tool_replay_input": 49662,
+        "candidate_supervised": 211980,
+        "tool_replay_supervised": 8303
+      }
+    },
+    "consumed_prefix": {
+      "records": 3050,
+      "candidate": 2885,
+      "tool_replay": 165,
+      "nonpadding_input_tokens": 441999,
+      "supervised_assistant_tokens": 220283,
+      "candidate_pass1": 1436,
+      "candidate_pass2": 1449
+    },
+    "full_frozen_arrays": {
+      "mean_sequence_length": 145.05762232106753,
+      "mean_supervised_tokens": 71.90234532955924,
+      "fixed_sequence_width": 513,
+      "mean_effective_forward_fraction": 0.2827633963373636,
+      "padding_fraction": 0.7172366036626364
+    },
+    "tool_order": {
+      "first_20_positions": [
+        2,
+        30,
+        54,
+        73,
+        100,
+        101,
+        102,
+        103,
+        113,
+        140,
+        189,
+        275,
+        276,
+        277,
+        295,
+        301,
+        308,
+        317,
+        332,
+        380
+      ],
+      "mean_gap": 19.349,
+      "max_gap": 123
+    },
+    "checkpoint_state": {
+      "historical_pre_cleanup": {
+        "directories": 62,
+        "reported_size": "68 GiB",
+        "observed_bytes": 72573578847
+      },
+      "authorized_cleanup": {
+        "deleted_directories": 59,
+        "bytes_deleted": 69061937513,
+        "freed": "64.32 GiB",
+        "retained_directories": 3,
+        "retained_bytes": 3511641334,
+        "baseline_and_final_hashes_verified": true
+      },
+      "currently_present": 3,
+      "currently_observed_directory_size": "3.3G",
+      "provenance": "The 62 historical directories and three current directories are consecutive, documented states; the later authorized cleanup explains the difference."
+    },
+    "evaluation": {
+      "baseline_is_grade_source": true,
+      "baseline_sha256": "93bb235b29c8bdff5efe4e14bac223b92b5bc70fecc3023a22d8ed2d9b6fd781",
+      "partial_candidate_sha256": "96a57b77bca3b1df16947a38b793a772e38fc9511eba85d31013517c6a1b1567",
+      "development_tool_exact_trace": {
+        "baseline": "15/32",
+        "partial_candidate": "5/32"
+      },
+      "confirmation_tool_exact_trace": {
+        "baseline": "8/32",
+        "partial_candidate": "8/32"
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "status": "concrete",
+      "finding": "Tool replay is only 256/4,946 records (5.18%), with 165/3,050 (5.41%) in the consumed prefix. The frozen mixer first takes the first 256 eligible tool rows, then one global record shuffle; it does not token-balance, stratify, or enforce per-batch tool presence.",
+      "evidence": [
+        "configs/approved_next_three_sft_v1.json",
+        "scripts/prepare_approved_next_three_sft.py:20-34",
+        "data/approved-next-three-sft-v1/manifest.json",
+        "data/approved-next-three-sft-v1/order.json"
+      ]
+    },
+    {
+      "id": "F2",
+      "status": "concrete",
+      "finding": "The partial run includes both candidate passes in its prefix (1,436 pass-1 and 1,449 pass-2 rows), so training was exposed twice to much of the same candidate corpus before it stopped. This is permitted by config but reduces novel-example diversity within the incomplete run.",
+      "evidence": [
+        "data/approved-next-three-sft-v1/order.json",
+        "runs/approved-next-three-v1/training/status.json",
+        "scripts/train_approved_next_three_sft.py:53-56"
+      ]
+    },
+    {
+      "id": "F3",
+      "status": "concrete",
+      "finding": "Sequences are padded to 513 tokens without a model attention mask. Mean stored length is 145.06 tokens (28.28% of width), hence about 71.72% of forward positions are padding. Loss excludes padded targets, and causal direction means tail padding cannot affect earlier predictions, but this is substantial compute/memory inefficiency.",
+      "evidence": [
+        "scripts/sft_common.py:26-37",
+        "data/approved-next-three-sft-v1/episodes.npz"
+      ]
+    },
+    {
+      "id": "F4",
+      "status": "verified_correct",
+      "finding": "Assistant-only masking is aligned with next-token cross entropy: body tokens (including assistant EOS) are marked, then weights[1:] aligns each label with logits over tokens[:,:-1]. User/system/tool bodies, role prefixes, and padded targets receive zero loss. A tokenizer-only fixture confirmed mask sums and zero padded-tail mask; MLX loss execution was unavailable in this sandbox because Metal is unavailable.",
+      "evidence": [
+        "scripts/sft_common.py:26-37",
+        "CPU tokenizer fixture recorded in AUDIT.md"
+      ]
+    },
+    {
+      "id": "F5",
+      "status": "verified_chronology",
+      "finding": "There is no provenance contradiction. The 62 checkpoints / 68 GiB in the preserved Stage 2 reports describe the pre-cleanup state, when unbounded full checkpoint saves every 25 steps (with no retention policy) exhausted the disk reserve and stopped the run. A subsequently authorized, bounded cleanup documented 62 directories, retained 3, deleted 59 redundant checkpoints, and freed 64.32 GiB. Its result verifies the retained baseline and final model hashes, explaining the current three-directory / 3.3G state as chronology rather than unexplained disappearance.",
+      "evidence": [
+        "runs/approved-next-three-v1/STAGE2_REPORT.md:3",
+        "configs/approved_next_three_sft_v1.json",
+        "scripts/train_approved_next_three_sft.py:43-44,62",
+        "runs/disk-cleanup-v1/task.txt",
+        "runs/disk-cleanup-v1/manifest.json",
+        "runs/disk-cleanup-v1/result.json"
+      ]
+    },
+    {
+      "id": "F6",
+      "status": "concrete",
+      "finding": "The reported 15/32 to 5/32 tool-trace decline is a baseline-versus-partial-candidate development comparison, not the 100-chat baseline evaluation. The 100-chat raw records all use checkpoint SHA 93bb\u2026781, the selected baseline. The 5/32 result is correlation with an incomplete, heavily candidate-weighted SFT; this audit does not claim causality.",
+      "evidence": [
+        "reports/continuous-chat-100-v1/raw-records.jsonl",
+        "runs/approved-next-three-v1/stage2-result.json",
+        "scripts/evaluate_approved_next_three_sft.py:27-34"
+      ]
+    },
+    {
+      "id": "F7",
+      "status": "concrete",
+      "finding": "Decoding is greedy with cap 96, a rolling 512-token context budget, and repetition penalty 1.2 applied only to unique already-generated token IDs. Context token IDs are not penalized. The cap/rolling-history policy can expose the model to its own malformed previous replies; it is a plausible feedback mechanism, not proven causation for the observed drift.",
+      "evidence": [
+        "scripts/sft_common.py:76-92",
+        "scripts/evaluate_approved_next_three_sft.py:10"
+      ]
+    },
+    {
+      "id": "F8",
+      "status": "concrete",
+      "finding": "Checkpoint retention was operationally unsuitable for available disk: each retained checkpoint stores a 390MB model plus 780MB optimizer; checkpoint-every-25 creates frequent full snapshots. The preserved report says the run stopped at 441,999/1,000,000 tokens on the reserve guard. No retention policy existed in the trainer, so safe completion was structurally unlikely at that cadence/storage footprint.",
+      "evidence": [
+        "configs/approved_next_three_sft_v1.json",
+        "scripts/train_approved_next_three_sft.py:43-44,62",
+        "runs/approved-next-three-v1/STAGE2_REPORT.md:3"
+      ]
+    }
+  ],
+  "non_findings": [
+    "No evidence here establishes that limited tool replay caused the trace decline.",
+    "No evidence here supports blaming inadequate pretraining before addressing the concrete mixture, padding, retention, and decoding/context issues.",
+    "No held-out confirmation was reused by this audit; only existing aggregate/report outputs were read."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "created_unix": 1793683813.756968,
+  "sources": {
+    "v11": {
+      "path": "runs/eight-hour-improvement-v11/training/checkpoint-000001000465-1793655846351259000/model.safetensors",
+      "sha256": "d9b4eba2cb446078acff4029198b76caa63d0fdc40b92ca1aeda0346f335069b"
+    },
+    "v15": {
+      "path": "runs/eight-hour-improvement-v15/training/checkpoint-000001000019-1793659932608561000/model.safetensors",
+      "sha256": "72b2b0e8a61264af2d57a5578ec14453bab282796d7e431f38ba77f6ba12113e"
+    },
+    "p100": {
+      "path": "runs/local-campaign-v1/pilot/checkpoint-000100000000-1793326823120891000/model.safetensors",
+      "sha256": "bf054a64200f8f5230dc699c7bf821db52b7cc45dc124d695aaf280fe453b166"
+    },
+    "v18": {
+      "path": "runs/eight-hour-improvement-v18/training/checkpoint-000003000570-1793664446815075000/model.safetensors",
+      "sha256": "25ced9f981553aeed1d333d9421affb2572812b204d1aefcd56628ada812db68"
+    },
+    "p200": {
+      "path": "runs/continuation-v1/200m/checkpoint-000200000000-1793375728148476000/model.safetensors",
+      "sha256": "81bacc82d0b43cff2ac6ca80880cd548f0cbd395c2dae657f2b7523182150e34"
+    }
+  },
+  "candidates": [
+    {
+      "id": "rollback10",
+      "method": "global_rollback",
+      "scale": 0.1,
+      "formula": "V11 + 0.1*(P100-V11)",
+      "hypothesis": "Partial rollback may reduce overspecialization; may instead remove learned role/tool behavior."
+    },
+    {
+      "id": "embed_norm25",
+      "method": "embedding_norm_rollback",
+      "scale": 0.25,
+      "formula": "V11 + 0.25*(P100-V11) only tied embedding and all RMSNorm weights",
+      "hypothesis": "Test whether dominant tied input/output embedding and normalization drift contributes to degeneration; no semantic neuron claim."
+    },
+    {
+      "id": "sparse_v15_50",
+      "method": "sparse_v15_delta",
+      "scale": 0.5,
+      "formula": "V11 + 0.5*top20pct_per_tensor(V15-V11)",
+      "hypothesis": "Retain stronger donor parameter changes while excluding small changes; not TIES, not a repeat of failed dense V22."
+    },
+    {
+      "id": "clean_matrix25",
+      "method": "clean_matrix_transfer",
+      "scale": 0.25,
+      "formula": "V11 + 0.25*(V18-P200) only layer q/k/v/o/gate/up/down matrices",
+      "hypothesis": "Test transfer of a clean-SFT direction without dominant embedding/norm drift. Cross-branch co-adaptation may invalidate transfer."
+    }
+  ],
+  "development_sha256": "ab010a0484e08073c7fa2e25cf51f5aa7a40fb7d45cd11440012d7ee21a5a41e",
+  "decoding": {
+    "greedy": true,
+    "seed": 20261102,
+    "cap": 96,
+    "penalty": 1.2
+  },
+  "precision": "saved float32; evaluated bfloat16; report BF16 changed-coordinate fraction",
+  "interpretation": "Direct algebraic interventions, not manual installation of general capability. All original checkpoints and old STOP files immutable."
+}

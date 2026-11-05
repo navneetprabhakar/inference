@@ -1,0 +1,42 @@
+{
+  "status": "pilot_quality_gate_failed_do_not_train_or_scale",
+  "initial_candidates": 1000,
+  "authored": 200,
+  "curated": 800,
+  "fixed_sample_size": 120,
+  "curated_sample_inspected": 80,
+  "curated_sample_decisions": {
+    "quarantine": 61,
+    "provisional_no_blocker_seen": 19
+  },
+  "authored_sample_independent_review": "not_done",
+  "sample_flags": {
+    "verification_required": 15,
+    "scope_exclusion": 6,
+    "time_sensitive": 5,
+    "unsupported_generalization": 5,
+    "fabricated_live_information": 3,
+    "instruction_failure": 3,
+    "roleplay": 10,
+    "meaning_drift": 3,
+    "verbosity": 2,
+    "incorrect_code_explanation": 1,
+    "overclaim": 3,
+    "arithmetic_error": 1,
+    "meta_constraint": 2,
+    "inconsistent_explanation": 1,
+    "unsupported_capability_claim": 1
+  },
+  "total_quarantined_after_extended_screen": 83,
+  "remaining_candidates_not_approved": 917,
+  "training_ready_count": 0,
+  "sampling_note": "40 from each curated origin; not weighted by source prevalence, so not a corpus-wide error-rate estimate. Quarantine includes scope/verification/style concerns, not only proven falsehoods.",
+  "next_steps": [
+    "Broaden persona/live-claim filters and quarantine reviewed families.",
+    "Source more eligible short dialogues; only 1830 records passed initial whole-multiturn/length/content screens before overlap filtering in these two shards.",
+    "Do not silently relax complete-answer, context, dedup or evidence requirements to hit 8000 curated records.",
+    "Review replacement pilot before scaling; author gap-filling dialogues with meaningful variation."
+  ],
+  "training_started": false,
+  "cloud_spend_usd": 0
+}

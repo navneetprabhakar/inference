@@ -1,0 +1,55 @@
+{
+  "version": "local-author-v1",
+  "target_total": 10000,
+  "existing_chat_authored": 200,
+  "local_teacher_target": 9800,
+  "category_targets": {
+    "everyday": 3000,
+    "followup": 2000,
+    "explanation": 2000,
+    "writing": 1500,
+    "clarification": 1000,
+    "instruction": 500
+  },
+  "existing_category_counts": {
+    "everyday": 47,
+    "writing": 20,
+    "explanation": 54,
+    "clarification": 28,
+    "followup": 39,
+    "instruction": 12
+  },
+  "teacher_repo": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "teacher_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "teacher_local_path": "data/local-teacher-qwen3-4b",
+  "sampling": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20
+  },
+  "max_new_tokens": 768,
+  "attempts_per_slot": 20,
+  "student_context_limit": 513,
+  "cache_limit_bytes": 268435456,
+  "memory_limit_bytes": 12884901888,
+  "swap_growth_limit_mb": 1024,
+  "min_free_disk_bytes": 16106127360,
+  "battery_policy": "continue_on_battery",
+  "quality_review": "deferred_until_all_10000_generated",
+  "evaluation": "deferred_until_all_10000_generated",
+  "training_allowed": false,
+  "paid_apis_allowed": false,
+  "mechanical_checks_only": [
+    "valid JSON",
+    "exact alternating role count",
+    "nonempty content",
+    "complete EOS-finished teacher response",
+    "student context fit without truncation",
+    "exact duplicate conversation exclusion"
+  ],
+  "input_hashes": {
+    "existing-200.jsonl": "bcb750d89108c5dc8931038627f5d2b5324237c18c0da106c66192917e29101f",
+    "scenario-plan.json": "0d1e938b77f4d9cb16f88450f6009e71f8e3b367bea8f04fe3e2ae7912593d5e"
+  },
+  "tokenizer_sha256": "d14236a82744a26a30b251222629345c2e49343a26798825df50055b5005bf61"
+}
