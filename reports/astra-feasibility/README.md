@@ -13,7 +13,7 @@ Each loss uses a fixed 2,048-token sample per source. The broader manifest holds
 
 - `foundation.json` records tokenizer checks, CPU/MPS errors, memorization, CPU resume and the confirmation fingerprint. The same operator authored the confirmation set during the disposable pilot and had access to its text. The trainer reads explicit training shards.
 - `corpus.json` records split, counts, checksums, source limitations and sampled material. The local document manifest and article attribution index are in `data/feasibility-v1/`. Packing appends numeric EOT per document and allows training windows to cross that boundary.
-- `pilot.json` records the exact config, results, output samples and retained checkpoint hashes. The average across the short pilot was 1,197 targets/s including evaluation and writes. The separate sustained benchmark determines budget estimates.
+- `pilot.json` records the exact config, results, output samples and retained checkpoint hashes. The average across the short pilot was 1,197 targets/s including evaluation and writes. The subsequent benchmark measured 1,018 end-to-end targets/s. See [the final run result](RESULT.md) for the budget decision, supervised diagnostic and stop reason.
 - `runs/astra-foundation/`, `runs/astra-memorize-01/`, `runs/astra-pilot-01/` and `runs/astra-benchmark-01/` contain local telemetry or artifacts. Only sanitized results belong in Git.
 
 ## Reproduce

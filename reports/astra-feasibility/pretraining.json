@@ -1,0 +1,158 @@
+{
+  "state": {
+    "stage": "extended pretraining",
+    "state": "passed",
+    "step": 600,
+    "target_tokens": 2457600,
+    "attempt": 1,
+    "input_tokens": 2457600,
+    "elapsed": 2388.4123430252075,
+    "active_elapsed": 2388.3739207079634,
+    "charged_resume_gap_seconds": 0.0,
+    "reserved_target_tokens": 2457600,
+    "remaining_target_tokens": 0,
+    "remaining_active_seconds": 1511.6260792920366,
+    "remaining_elapsed_seconds": 3011.5876569747925,
+    "observed_tokens_per_second": 1028.968053685051,
+    "active_tokens_per_second": 1028.9846069293524,
+    "eta_active_seconds": 0.0,
+    "next_source_offsets": {
+      "wiki": 1382400,
+      "stories": 1075200
+    },
+    "timestamp": 1793898908.833539,
+    "train_ce": 5.165962859988213,
+    "gradient_norm": 0.9818355441093445,
+    "lr": 3.0002050466637822e-05,
+    "reason": "token budget reached"
+  },
+  "development": [
+    {
+      "validation": {
+        "wiki": 11.008539944887161,
+        "stories": 11.040488749742508
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built toPortland Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee Committee pit pit pit pit",
+        "The child went to the garden because": "The child went to the garden becausellersllers lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely lonely unrelated unrelated unrelated unrelated unrelated unrelated"
+      },
+      "contrast_logit_margins": [
+        -0.2296067327260971,
+        0.35749727487564087,
+        -0.11324363946914673,
+        -0.0778074860572815
+      ],
+      "step": 0
+    },
+    {
+      "validation": {
+        "wiki": 7.458816364407539,
+        "stories": 4.982720568776131
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first, and the first, and the first, and the first, and the first, and the first, and",
+        "The child went to the garden because": "The child went to the garden because the first the and the United was a time, and the park. The end. The end. The bird was a"
+      },
+      "contrast_logit_margins": [
+        0.029944419860839844,
+        0.06093877553939819,
+        -0.8227312564849854,
+        0.7960772514343262
+      ],
+      "step": 60,
+      "primary_ce_improvement": 3.549723580479622
+    },
+    {
+      "validation": {
+        "wiki": 6.999102011322975,
+        "stories": 4.203021943569183
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the park.\nThe time, the park was a little girl named Lily was so happy and said, \"I want",
+        "The child went to the garden because": "The child went to the garden because the park.\nThe bird was a big tree. The bird was so happy and the bird was so happy and the"
+      },
+      "contrast_logit_margins": [
+        0.40080541372299194,
+        -0.44190460443496704,
+        -0.12545108795166016,
+        0.12067031860351562
+      ],
+      "step": 150,
+      "primary_ce_improvement": 0.4597143530845642
+    },
+    {
+      "validation": {
+        "wiki": 6.672319307923317,
+        "stories": 3.789325200021267
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the first-story, and the first-story, and the first-story, and the first-story, and",
+        "The child went to the garden because": "The child went to the garden because it was so happy that she was so happy that she was so happy."
+      },
+      "contrast_logit_margins": [
+        1.033538818359375,
+        -1.0185432434082031,
+        1.0745034217834473,
+        -1.0901532173156738
+      ],
+      "step": 300,
+      "primary_ce_improvement": 0.3267827033996582
+    },
+    {
+      "validation": {
+        "wiki": 6.4849893897771835,
+        "stories": 3.5524667724967003
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the National Register of the National Register of the National Register of the National Register of the National Register of the National Register of",
+        "The child went to the garden because": "The child went to the garden because the end of the town. The bird was very happy and the bird was so happy."
+      },
+      "contrast_logit_margins": [
+        -0.26523375511169434,
+        0.39883196353912354,
+        1.5189001560211182,
+        -1.4970078468322754
+      ],
+      "step": 450,
+      "primary_ce_improvement": 0.18732991814613342
+    },
+    {
+      "validation": {
+        "wiki": 6.400541260838509,
+        "stories": 3.420429490506649
+      },
+      "samples": {
+        "A bridge is built to": "A bridge is built to the National Register of the National Register of Historic Places in the National Register of Historic Places in the National Register of the National",
+        "The child went to the garden because": "The child went to the garden because it was very happy.\nThe little girl was very happy and said, \"I'm sorry, I can't know"
+      },
+      "contrast_logit_margins": [
+        -0.15354245901107788,
+        0.3164074718952179,
+        1.3547348976135254,
+        -1.3401246070861816
+      ],
+      "step": 600,
+      "primary_ce_improvement": 0.08444812893867493
+    }
+  ],
+  "base": {
+    "file": "step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+    "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4",
+    "bytes": 1493456923
+  },
+  "protected_checkpoints": [
+    "step-000000-e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332.pt",
+    "step-000060-d19592042e2f03896a86926a49959e2f818061901a22e57823781d9669ec7bbb.pt",
+    "step-000150-f9dee5a0979371b9f0ef75635878db0a19cf53e28957fff1c0e2699f0b1e194b.pt",
+    "step-000300-3b11b5341efd84710ebddf108a85a79a543aa322652849189c1b66077e7f66c1.pt",
+    "step-000450-06995e6b837aa91566949c3b98ee3bcdda09a0be906ff4d205118f4ad445680e.pt",
+    "step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt"
+  ],
+  "model_parameters": 124439808,
+  "resources": {
+    "peak_thermal": 1,
+    "max_swap_growth_mib": 0.0,
+    "min_disk_gib": 84.93588638305664
+  },
+  "evidence": "Each source uses 32 fixed windows of 256 targets. Corpus manifest and source hashes in immutable run config. Contrast margins are logits for stated value minus distractor. A positive margin favors the stated value."
+}

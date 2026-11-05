@@ -1,0 +1,492 @@
+{
+  "run": {
+    "stage": "SFT diagnostic",
+    "state": "failed",
+    "phase": "done",
+    "input_tokens": 48210,
+    "target_tokens": 12438,
+    "step": 74,
+    "active_seconds": 311.72463670908473,
+    "wall_seconds": 311.72814297676086,
+    "reserved_input_tokens": 48210,
+    "reserved_target_tokens": 12438,
+    "remaining_inputs": 0,
+    "remaining_active_seconds": 1488.2753615831025,
+    "timestamp": 1793899235.479715,
+    "train_ce": 1.0238343477249146,
+    "gradient_norm": 3.4575588703155518,
+    "lr": 1.0045312005640844e-05,
+    "reason": "counterfactual transfer gate failed",
+    "endpoint_sha256": "3af9c8a66a7560ba20bc9d9c351736b50f3acc6d4978da317fdb9589793093b3",
+    "skills": {
+      "copy": {
+        "pairs": 20,
+        "both": 0,
+        "one": 0,
+        "neither": 20
+      },
+      "correction": {
+        "pairs": 20,
+        "both": 0,
+        "one": 0,
+        "neither": 20
+      },
+      "grounding": {
+        "pairs": 20,
+        "both": 0,
+        "one": 0,
+        "neither": 20
+      }
+    }
+  },
+  "assessor": "Two assistant reviewers scored separate randomized A/B case sets without seeing the key. Every turn failed; there were no disputed judgments.",
+  "results": {
+    "base": {
+      "conversations_passed": 0,
+      "conversations": 12,
+      "turns_passed": 0,
+      "turns": 24,
+      "protocol_complete": 0,
+      "tool_calls": 0,
+      "probe": {
+        "copy": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        },
+        "correction": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        },
+        "grounding": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        }
+      },
+      "cases": [
+        {
+          "id": "d01",
+          "group": "service-renaming",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The unrelated unfinished story omitted Heron. The Ibis follow-up was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d02",
+          "group": "lab-identifiers",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The repetitive incomplete first frame omitted both identifiers. The follow-up was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d03",
+          "group": "programming-explanation",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The incomplete first frame described a building instead of explaining the typo. The beginner follow-up was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d04",
+          "group": "farm-rota",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The malformed film description omitted harvesting. The swapped-task follow-up was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d05",
+          "group": "appointment-clarification",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The incomplete story asked no question about timing. The availability follow-up was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d06",
+          "group": "observation-summary",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The repetitive incomplete frame gave no observation summary. The shortening request was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d07",
+          "group": "hardware-yield",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Unrelated prose yielded no valid multiplication call or answer. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d08",
+          "group": "liquid-sampling",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Unrelated prose yielded no conversion or result. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d09",
+          "group": "fixture-disagreement",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Unrelated prose yielded no subtraction call or observed result. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d10",
+          "group": "pressure-outage",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Unrelated prose yielded no subtraction request or outage acknowledgment. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d11",
+          "group": "glossary-writing",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Unrelated prose yielded no glossary definition. The heading request went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d12",
+          "group": "nonexistent-adapter",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "No tool ran. Unrelated prose failed to answer the registry question, and the follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    "endpoint": {
+      "conversations_passed": 0,
+      "conversations": 12,
+      "turns_passed": 0,
+      "turns": 24,
+      "protocol_complete": 7,
+      "tool_calls": 0,
+      "probe": {
+        "copy": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        },
+        "correction": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        },
+        "grounding": {
+          "pairs": 20,
+          "both": 0,
+          "one": 0,
+          "neither": 20
+        }
+      },
+      "cases": [
+        {
+          "id": "d01",
+          "group": "service-renaming",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The acknowledgment omitted Heron. The malformed follow-up omitted Ibis.",
+          "actual_answers": [
+            "I've noted.",
+            null
+          ]
+        },
+        {
+          "id": "d02",
+          "group": "lab-identifiers",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "The answers about the sky omitted both the requested QF,VU pair and the VU lot identifier.",
+          "actual_answers": [
+            "I've noted and the sky.",
+            "I've noted for the sky."
+          ]
+        },
+        {
+          "id": "d03",
+          "group": "programming-explanation",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "Neither the acknowledgment nor \u201cThe man\u201d explained why a typo can break a program.",
+          "actual_answers": [
+            "I've noted for a small.",
+            "The man"
+          ]
+        },
+        {
+          "id": "d04",
+          "group": "farm-rota",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "Neither acknowledgment identified harvesting as the answer before or after the swap.",
+          "actual_answers": [
+            "I've noted.",
+            "I've noted, but I've noted to the sky."
+          ]
+        },
+        {
+          "id": "d05",
+          "group": "appointment-clarification",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "Mentioning time failed to ask when the haircut was wanted. The follow-up failed to acknowledge that appointment availability was unknown.",
+          "actual_answers": [
+            "I've noted and the time.",
+            "I've noted for the time."
+          ]
+        },
+        {
+          "id": "d06",
+          "group": "observation-summary",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The malformed call supplied no summary of the increase from two moons to five. The shortening request was unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d07",
+          "group": "hardware-yield",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "Malformed calculator request used incorrect arguments and never executed. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d08",
+          "group": "liquid-sampling",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The first answer described a story, skipped conversion and omitted 250 ml. The malformed follow-up omitted 0.25 litres.",
+          "actual_answers": [
+            "The story is a small.",
+            null
+          ]
+        },
+        {
+          "id": "d09",
+          "group": "fixture-disagreement",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "Both answers merely acknowledged the request. No subtraction call ran, and neither answer reported the fixture value 44.",
+          "actual_answers": [
+            "I've noted.",
+            "I've noted, but I've noted."
+          ]
+        },
+        {
+          "id": "d10",
+          "group": "pressure-outage",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": false,
+          "observed_calls": 0,
+          "reason": "The malformed request used 5 and 5, omitted the required subtraction and gave no outage acknowledgment. The follow-up went unserved.",
+          "actual_answers": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": "d11",
+          "group": "glossary-writing",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "Both turns abstained from tools. The first omitted the definition and the second supplied no usable heading.",
+          "actual_answers": [
+            "I've noted.",
+            "I've noted, but it's not know what was a small."
+          ]
+        },
+        {
+          "id": "d12",
+          "group": "nonexistent-adapter",
+          "passed_turns": [
+            false,
+            false
+          ],
+          "whole_pass": false,
+          "protocol_pass": true,
+          "observed_calls": 0,
+          "reason": "No tool ran. Neither acknowledgment answered whether the adapter existed or whether drilling took place.",
+          "actual_answers": [
+            "I've noted.",
+            "I've noted Tm."
+          ]
+        }
+      ]
+    }
+  },
+  "confirmation_cases_run": 0,
+  "confirmation_cases_sealed": 100,
+  "release_decision": "experimental; stop after failed development and transfer thresholds. No new optimizer sweep, live integration or promotion."
+}

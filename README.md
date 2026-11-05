@@ -17,6 +17,6 @@ Use `--device cpu` for the CPU path. The command builds random weights, checks t
 
 ## Current execution
 
-The tokenizer and decoder parity checks passed on CPU and MPS. The 124M student memorized an eight-target batch in seven updates. A separate 999,424-target diagnostic pilot improved held-out loss on both text sources. The run artifacts include generated samples and the checkpoint inventory. See the [feasibility report](reports/astra-feasibility/README.md) for the measured results and reproduction commands.
+The 124M student passed foundation and pretraining gates on the M4 Air. After 2,457,600 pretraining targets and 74 supervised updates, it passed 0/12 development conversations and 0/20 pairs in each required transfer skill. The run closed at that gate. See the [result and artifacts](reports/astra-feasibility/RESULT.md) and [foundation reproduction commands](reports/astra-feasibility/README.md).
 
 The previous project is preserved at [main commit c5b911b](https://github.com/navneetprabhakar/inference/commit/c5b911b5a4abe096f17848e1d119549e253a0092).
