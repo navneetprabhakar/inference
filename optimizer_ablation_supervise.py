@@ -145,7 +145,8 @@ def gpu_available(run):
         return True
 
 
-def foundation_supervisor_ready(spec):
+def foundation_supervisor_record(spec):
+    """Read the original supervisor's identity before trusting recovery metadata."""
     run = Path(spec['parent']['run'])
     value = json.loads(run.with_name(run.name+'-supervisor.json').read_bytes())
     original = json.loads(Path(spec['parent']['spec']).read_bytes())
@@ -157,9 +158,48 @@ def foundation_supervisor_ready(spec):
             or ident['trainer_sha256'] != original['code_sha256'].get(str(expected_trainer),
                                                        original['code_sha256'].get('base_train.py'))):
         raise ValueError('foundation supervisor identity mismatch')
-    if value['state'] == 'completed': return gpu_available(run)
-    if value['state'] in ('running','ready'): return False
+    return value
+
+
+def foundation_supervisor_ready(spec, value=None):
+    value = foundation_supervisor_record(spec) if value is None else value
+    if value['state'] == 'completed': return gpu_available(spec['parent']['run'])
+    if value['state'] in ('running','ready','cooldown'): return False
     raise ValueError('foundation supervisor did not complete successfully')
+
+
+def parent_wait_reason(record, supervisor, status, *, resource_limit=3600., now=None):
+    """Admit bounded recovery without mistaking a paused worker for a dead run.
+
+    Running workers update status, not their supervisor's launch timestamp.
+    Cooldown/relaunch activity updates the supervisor, not the paused worker.
+    Neither a stale worker nor an old 'running' supervisor label is sufficient.
+    """
+    now = time.time() if now is None else now
+
+    def fresh(timestamp):
+        return (type(timestamp) in (int, float) and math.isfinite(timestamp)
+                and -60 <= now-timestamp <= 600)
+
+    if record['state'] not in ('running', 'paused-lease', 'paused-resource', 'interrupted'):
+        raise ValueError('foundation is '+record['state'])
+    state = supervisor.get('state')
+    if state not in ('running', 'ready', 'cooldown'):
+        raise ValueError('foundation supervisor is '+str(state)+'; recovery is not active')
+    if state == 'cooldown':
+        since = supervisor.get('resource_since')
+        if type(since) not in (int, float) or not math.isfinite(since) or since > now+60:
+            raise ValueError('foundation cooldown lacks a valid original start time')
+        if now-since >= resource_limit:
+            raise TimeoutError('foundation resource recovery exceeded retry window')
+        if not fresh(supervisor.get('updated')):
+            raise ValueError('foundation cooldown supervisor heartbeat stale')
+        return 'foundation resource cooldown active; waiting within original retry window'
+    if fresh(status.get('timestamp')):
+        return 'foundation worker active or entering bounded recovery'
+    if fresh(supervisor.get('updated')):
+        return 'foundation supervisor recently launched or prepared recovery'
+    raise ValueError('foundation worker and recovery supervisor heartbeats stale; manual review required')
 
 
 def arm_record(run, template):
@@ -256,8 +296,18 @@ def supervise(spec_path, directory, *, trainer=None, parent_verifier=None, repor
         while state['parent'] is None:
             if check_control(): return state['state']
             record = parent_record(spec)
+            try: supervision = foundation_supervisor_record(spec)
+            except (ValueError, KeyError) as error:
+                publish('parent-rejected', str(error)); return state['state']
+            # The worker can publish completion between our ledger and supervisor
+            # reads. Reconcile that one-way transition before calling it invalid.
+            if supervision['state'] == 'completed' and record['state'] != 'completed':
+                record = parent_record(spec)
             if record['state'] == 'completed':
-                if not foundation_supervisor_ready(spec):
+                try: ready = foundation_supervisor_ready(spec, supervision)
+                except ValueError as error:
+                    publish('parent-rejected', str(error)); return state['state']
+                if not ready:
                     state['parent_resource_since'] = state.get('parent_resource_since') or time.time()
                     if time.time()-state['parent_resource_since'] >= resource_limit:
                         publish('resource-timeout','foundation finalization/GPU lock wait exceeded retry window'); return state['state']
@@ -267,12 +317,13 @@ def supervise(spec_path, directory, *, trainer=None, parent_verifier=None, repor
                 except ValueError as error: publish('parent-rejected', str(error)); return state['state']
                 publish('parent-verified', 'exact protected foundation endpoint verified')
                 break
-            if record['state'] not in ('running', 'paused-lease', 'paused-resource'):
-                publish('parent-rejected', 'foundation is '+record['state']); return state['state']
             status = json.loads((Path(spec['parent']['run'])/'status.json').read_bytes())
-            if time.time()-status['timestamp'] > 600:
-                publish('parent-rejected', 'foundation heartbeat stale; manual review required'); return state['state']
-            publish('waiting-parent', 'foundation still running; no ablation worker launched')
+            try: reason = parent_wait_reason(record, supervision, status, resource_limit=resource_limit)
+            except TimeoutError as error:
+                publish('resource-timeout', str(error)); return state['state']
+            except ValueError as error:
+                publish('parent-rejected', str(error)); return state['state']
+            publish('waiting-parent', reason+'; no ablation worker launched')
             wait(min(60., poll_seconds))
         materialized = []
         for index, arm in enumerate(spec['arms']):

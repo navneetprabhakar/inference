@@ -5,7 +5,9 @@ from pathlib import Path
 import tempfile
 import threading
 import time
-from optimizer_ablation_supervise import (supervise, signed_write, signed_read, digest, canonical, disk_reserve)
+from unittest.mock import patch
+from optimizer_ablation_supervise import (supervise, signed_write, signed_read, digest, canonical,
+                                          disk_reserve, atomic, parent_wait_reason, parent_record)
 
 WORKER = '''import json,hashlib,time,sys,os
 from pathlib import Path
@@ -53,7 +55,8 @@ def fixture(root, states=None):
     record=dict(spec=cs,state='completed',trained_tokens=99_999_744,reserved_tokens=99_999_744,checkpoints=[entry])
     signed_write(parent/'campaign.json',record)
     (parent/'status.json').write_text(json.dumps({'timestamp':time.time()}))
-    ps=dict(state='completed',identity=dict(spec=str(original),spec_sha256=digest(original),trainer=str(base),trainer_sha256=digest(base)))
+    ps=dict(state='completed',updated=time.time(),resource_since=None,
+            identity=dict(spec=str(original),spec_sha256=digest(original),trainer=str(base),trainer_sha256=digest(base)))
     parent.with_name(parent.name+'-supervisor.json').write_text(json.dumps(ps))
     arms=[]
     for i in range(3):
@@ -72,8 +75,23 @@ def fixture(root, states=None):
 
 def run_case(args, **kw):
     path,directory,worker,reporter,parent=args
-    return supervise(path,directory,trainer=worker,reporter=reporter,parent_verifier=lambda _:None,
-                     poll_seconds=.005,cooldown=.01,resource_limit=.2,disk_free=lambda _:10**15,**kw)
+    options=dict(trainer=worker,reporter=reporter,parent_verifier=lambda _:None,
+                 poll_seconds=.005,cooldown=.01,resource_limit=.2,disk_free=lambda _:10**15)
+    options.update(kw)
+    return supervise(path,directory,**options)
+
+
+def set_parent_waiting(args, ledger_state, supervisor_state, *, status_age=0, supervisor_age=0,
+                       resource_age=None):
+    parent=args[4]
+    record=signed_read(parent/'campaign.json');record['state']=ledger_state
+    signed_write(parent/'campaign.json',record)
+    path=parent.with_name(parent.name+'-supervisor.json')
+    value=json.loads(path.read_bytes())
+    value.update(state=supervisor_state,updated=time.time()-supervisor_age,
+                 resource_since=time.time()-resource_age if resource_age is not None else None)
+    atomic(path,value)
+    atomic(parent/'status.json',{'timestamp':time.time()-status_age})
 
 
 def run():
@@ -147,13 +165,84 @@ def run():
             time.sleep(.04);lock.close()
         t=threading.Thread(target=release);t.start();assert run_case(a)=='completed';t.join();count+=1
         a=fixture(root/'waiting-stop');p=a[4];record=signed_read(p/'campaign.json');record['state']='running';signed_write(p/'campaign.json',record)
+        set_parent_waiting(a,'running','running')
         t=threading.Thread(target=lambda:(time.sleep(.04),(p/'STOP').touch()));t.start()
         assert run_case(a)=='stopped';t.join();assert signed_read(a[1]/'supervisor.json')['arms'][0]['launches']==0;count+=1
         a=fixture(root/'stale');p=a[4];record=signed_read(p/'campaign.json');record['state']='running';signed_write(p/'campaign.json',record)
-        (p/'status.json').write_text(json.dumps({'timestamp':0}));assert run_case(a)=='parent-rejected';count+=1
+        set_parent_waiting(a,'running','running',status_age=900,supervisor_age=900)
+        assert run_case(a)=='parent-rejected';count+=1
         a=fixture(root/'calendar');p=a[4];record=signed_read(p/'campaign.json');record['state']='running';signed_write(p/'campaign.json',record)
+        set_parent_waiting(a,'running','running')
         s=json.loads(a[0].read_text());s['calendar_seconds']=.02;a[0].write_text(json.dumps(s))
         assert run_case(a)=='budget-exhausted';count+=1
+        # Parent recovery must not be mistaken for a terminal foundation failure.
+        for label, ledger_state, supervisor_state, age in [
+                ('interrupted-ready','interrupted','ready',None),
+                ('interrupted-relaunched','interrupted','running',None),
+                ('resource-cooldown','paused-resource','cooldown',900),
+                ('lease-preflight-cooldown','paused-lease','cooldown',900),
+                ('active-old-supervisor','running','running',None)]:
+            a=fixture(root/label)
+            active=label=='active-old-supervisor'
+            set_parent_waiting(a,ledger_state,supervisor_state,status_age=0 if active else 900,
+                               supervisor_age=900 if active else 0,resource_age=age)
+            no_early_launch=[]
+            def recover(args=a):
+                time.sleep(.04)
+                no_early_launch.append(all(not Path(x['run']).exists() for x in json.loads(args[0].read_bytes())['arms']))
+                parent=args[4];record=signed_read(parent/'campaign.json');record['state']='completed'
+                signed_write(parent/'campaign.json',record)
+                path=parent.with_name(parent.name+'-supervisor.json');value=json.loads(path.read_bytes())
+                value.update(state='completed',updated=time.time());atomic(path,value)
+            t=threading.Thread(target=recover);t.start()
+            result=run_case(a,resource_limit=3600)
+            assert result=='completed',(label,result,signed_read(a[1]/'supervisor.json')['reason'])
+            t.join();assert no_early_launch==[True];count+=1
+        for label, ledger_state, supervisor_state, status_age, supervisor_age, resource_age, expected in [
+                ('recovery-terminal','paused-resource','failed',900,0,900,'parent-rejected'),
+                ('recovery-supervisor-interrupted','interrupted','interrupted',0,0,None,'parent-rejected'),
+                ('recovery-stale-ready','interrupted','ready',900,900,None,'parent-rejected'),
+                ('recovery-stale-cooldown','paused-resource','cooldown',900,900,1000,'parent-rejected'),
+                ('recovery-window','paused-resource','cooldown',900,0,3601,'resource-timeout')]:
+            a=fixture(root/label)
+            set_parent_waiting(a,ledger_state,supervisor_state,status_age=status_age,
+                               supervisor_age=supervisor_age,resource_age=resource_age)
+            assert run_case(a,resource_limit=3600)==expected,label
+            assert signed_read(a[1]/'supervisor.json')['arms'][0]['launches']==0;count+=1
+        a=fixture(root/'recovery-identity')
+        set_parent_waiting(a,'paused-resource','cooldown',status_age=900,resource_age=900)
+        path=a[4].with_name(a[4].name+'-supervisor.json');value=json.loads(path.read_bytes())
+        value['identity']['trainer_sha256']='0'*64;atomic(path,value)
+        assert run_case(a,resource_limit=3600)=='parent-rejected';count+=1
+        a=fixture(root/'cooldown-stop')
+        set_parent_waiting(a,'paused-resource','cooldown',status_age=900,resource_age=900)
+        t=threading.Thread(target=lambda:(time.sleep(.04),(a[4]/'STOP').touch()));t.start()
+        assert run_case(a,resource_limit=3600)=='stopped';t.join()
+        assert signed_read(a[1]/'supervisor.json')['arms'][0]['launches']==0;count+=1
+        # A fresh launch timestamp is a finite grace, not indefinite permission.
+        record={'state':'running'};supervision={'state':'running','updated':10000}
+        assert parent_wait_reason(record,supervision,{'timestamp':9000},now=10000)
+        try:parent_wait_reason(record,supervision,{'timestamp':9000},now=10601)
+        except ValueError:pass
+        else:raise AssertionError('stale falsely-running parent admitted indefinitely')
+        count+=1
+        # Fresh cooldown publications do not reset the original resource deadline.
+        supervision={'state':'cooldown','updated':10000,'resource_since':9000}
+        assert parent_wait_reason({'state':'paused-resource'},supervision,{'timestamp':9000},now=10000)
+        supervision['updated']=12600
+        try:parent_wait_reason({'state':'paused-resource'},supervision,{'timestamp':9000},now=12600)
+        except TimeoutError:pass
+        else:raise AssertionError('cooldown publications reset parent resource deadline')
+        count+=1
+        a=fixture(root/'parent-completion-read-race');first=[True]
+        def raced_record(spec):
+            value=parent_record(spec)
+            if first[0]:
+                first[0]=False;value['state']='running'
+            return value
+        with patch('optimizer_ablation_supervise.parent_record',raced_record):
+            assert run_case(a)=='completed'
+        count+=1
         a=fixture(root/'tamper');assert run_case(a)=='completed'
         state=json.loads((a[1]/'supervisor.json').read_text());state['arms'][0]['launches']=999
         (a[1]/'supervisor.json').write_text(json.dumps(state))
@@ -167,6 +256,6 @@ def run():
         except ValueError:pass
         else:raise AssertionError('changed code accepted')
         count+=1
-    print(f'PASS {count} CPU subprocess cases: parent/lease/resource/STOP/budget/identity/reporting; no GPU or live run touched')
+    print(f'PASS {count} CPU cases, including real subprocesses: parent/lease/resource/STOP/budget/identity/reporting; no GPU or live run touched')
 
 if __name__=='__main__':run()
