@@ -1,0 +1,116 @@
+{
+  "state": "completed_unblinded_descriptive_review",
+  "source_sha256": "07db215896eb060459d4f27f440894ca809f026452a2e31fdc5a64902a7bb596",
+  "ratings_sha256": "4031d4ba58dfc53344f817fe2224b6c444eafd505da463c55efae4f21871a5ba",
+  "by_trained_targets": {
+    "40001536": {
+      "n": 32,
+      "mean_ce": 5.132674176245928,
+      "pair_accuracy": 0.0,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.03125,
+          "counts": {
+            "0": 31,
+            "1": 1,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.96875,
+          "counts": {
+            "0": 1,
+            "1": 31,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.75,
+          "counts": {
+            "0": 8,
+            "1": 24,
+            "2": 0
+          }
+        },
+        "repetition": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        }
+      },
+      "loop_count": 32,
+      "loop_rate": 1.0,
+      "empty_count": 0
+    },
+    "50003968": {
+      "n": 32,
+      "mean_ce": 4.987353641539812,
+      "pair_accuracy": 0.0,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.0625,
+          "counts": {
+            "0": 30,
+            "1": 2,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.96875,
+          "counts": {
+            "0": 1,
+            "1": 31,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.59375,
+          "counts": {
+            "0": 13,
+            "1": 19,
+            "2": 0
+          }
+        },
+        "repetition": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        }
+      },
+      "loop_count": 32,
+      "loop_rate": 1.0,
+      "empty_count": 0
+    }
+  },
+  "paired_dimension_changes": {
+    "relevance": {
+      "improved": 2,
+      "unchanged": 29,
+      "worsened": 1
+    },
+    "local_consistency": {
+      "improved": 1,
+      "unchanged": 30,
+      "worsened": 1
+    },
+    "language": {
+      "improved": 6,
+      "unchanged": 15,
+      "worsened": 11
+    },
+    "repetition": {
+      "improved": 0,
+      "unchanged": 32,
+      "worsened": 0
+    }
+  },
+  "finding": "No material usable-completion improvement at50M. CE falls, but both checkpoints loop32/32; neither has any relevance=2 or language=2 continuation. A few initial phrases change or improve while others deteriorate; context remains unused and strict paired discrimination stays zero.",
+  "supports": "A bounded SFT diagnostic can test whether explicit supervised conversation/tool examples change behavior; this audit supplies no evidence that it will succeed.",
+  "does_not_support": "No conversational readiness, tool competence, reliable context use, plateau/convergence claim, optimizer causal diagnosis or change of training budget follows from this fixed unblinded32prefix audit."
+}

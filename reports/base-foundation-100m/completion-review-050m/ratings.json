@@ -1,0 +1,1179 @@
+{
+  "evaluator": "AI reviewer /root/research_curriculum",
+  "review_type": "Unblinded subjective AI review; not ground truth or statistical certification",
+  "created": "2026-11-06T12:13:26.286137+00:00",
+  "plan_sha256": "923edcf5e48e50043b29a2e0cdceebf84e44edfad7a8ffe7e8a607dc57929c67",
+  "snapshot_sha256": "07db215896eb060459d4f27f440894ca809f026452a2e31fdc5a64902a7bb596",
+  "rubric": {
+    "unit": "Each fixed prefix and its up-to-48-token continuation.",
+    "dimensions": {
+      "relevance": "0 unrelated or incoherent; 1 partly relevant with drift; 2 follows the prefix throughout.",
+      "local_consistency": "0 contradicts prefix or itself; 1 ambiguous or minor inconsistency; 2 consistent with supplied facts and own continuation.",
+      "language": "0 mostly unreadable; 1 understandable with substantial grammatical defects; 2 readable connected language.",
+      "repetition": "0 stuck in repeated phrase or loop; 1 distracting redundancy; 2 no distracting repetition."
+    },
+    "report": "Report all dimension counts and means, loop rate, empty outputs and raw completions. A token-cap truncation alone is not a coherence failure. This is an informative base-completion rubric, without an absolute chat-readiness gate. Freeze rubric and disclose evaluator identity before outputs are judged."
+  },
+  "interpretation_notes": [
+    "Scores assess prefix plus entire continuation, not an isolated fluent fragment.",
+    "Local consistency=1 means indeterminate/nonsensical or ambiguous, not demonstrated consistency; 0 requires an explicit contradiction.",
+    "Language=1 includes parseable but disconnected repetitive clauses, consistent with the earlier reviewer interpretation; 2 requires readable connected language throughout.",
+    "Loop flags are manual judgments of distracting recurring phrases, not a statistical detector.",
+    "Token-cap truncation itself is not penalized; terminal partial bytes/words alone are not evidence of data corruption.",
+    "No outside factual verification. All 64 paired completions reviewed; checkpoint labels known. Cross-reviewer scores at earlier checkpoints are not directly comparable."
+  ],
+  "samples": [
+    {
+      "id": "40001536-P00-270634ac3400",
+      "case_id": "P00-270634ac3400",
+      "index": 0,
+      "trained_tokens": 40001536,
+      "prefix": "A metal spoon left in a bowl of hot soup gradually becomes warm because",
+      "generated": " it is not a good way to keep the same.\nThe first thing you can do is to keep the same thing from the same thing. It is a good idea to keep the same thing from the same thing. It is a good",
+      "raw_text": "A metal spoon left in a bowl of hot soup gradually becomes warm because it is not a good way to keep the same.\nThe first thing you can do is to keep the same thing from the same thing. It is a good idea to keep the same thing from the same thing. It is a good",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No heat-transfer explanation; repeated advice to keep the same thing.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P01-7797fc7a5581",
+      "case_id": "P01-7797fc7a5581",
+      "index": 1,
+      "trained_tokens": 40001536,
+      "prefix": "When sunlight passes through a small gap in the curtains,",
+      "generated": " the water is not a good way to get the water.\nThe water is a good way to get the water from the water. The water is a good way to get the water from the water. The water is a good way to",
+      "raw_text": "When sunlight passes through a small gap in the curtains, the water is not a good way to get the water.\nThe water is a good way to get the water from the water. The water is a good way to get the water from the water. The water is a good way to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Unrelated water tautologies replace the sunlight event.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P02-d5e7d75deabc",
+      "case_id": "P02-d5e7d75deabc",
+      "index": 2,
+      "trained_tokens": 40001536,
+      "prefix": "Water on a wet pavement disappears more quickly on a warm, windy day because",
+      "generated": " it is not a good way to keep the water from the water.\nThe water is a great way to keep the water from the water. It is a great way to keep the water from the water. It is a great way to",
+      "raw_text": "Water on a wet pavement disappears more quickly on a warm, windy day because it is not a good way to keep the water from the water.\nThe water is a great way to keep the water from the water. It is a great way to keep the water from the water. It is a great way to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No evaporation account; repeated water-from-water advice.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P03-a386ed060a46",
+      "case_id": "P03-a386ed060a46",
+      "index": 3,
+      "trained_tokens": 40001536,
+      "prefix": "A shadow changes its position during the afternoon as",
+      "generated": " well as the first time of the year.\nThe first time of the year is the first time of the year. The first time of the year is the first time of the year.\nThe first time of the year is the first",
+      "raw_text": "A shadow changes its position during the afternoon as well as the first time of the year.\nThe first time of the year is the first time of the year. The first time of the year is the first time of the year.\nThe first time of the year is the first",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No shadow mechanism; grammatical first-time-of-year tautology loops.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P04-a21897efb75c",
+      "case_id": "P04-a21897efb75c",
+      "index": 4,
+      "trained_tokens": 40001536,
+      "prefix": "A seed buried in damp soil begins to grow when",
+      "generated": " the soil is in the soil.\nThe soil is a great way to keep the soil healthy. The soil is a great way to keep the soil healthy.\nThe soil is a great way to keep the soil healthy. It is a",
+      "raw_text": "A seed buried in damp soil begins to grow when the soil is in the soil.\nThe soil is a great way to keep the soil healthy. The soil is a great way to keep the soil healthy.\nThe soil is a great way to keep the soil healthy. It is a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Soil vocabulary stays on topic but gives no growth condition; soil-healthy loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P05-c0d1e7b373c4",
+      "case_id": "P05-c0d1e7b373c4",
+      "index": 5,
+      "trained_tokens": 40001536,
+      "prefix": "The roots of a tree help it survive dry weather by",
+      "generated": " the soil.\nThe soil is a great way to keep the soil healthy. It is a great way to keep the soil healthy.\nThe soil is a great way to keep the soil healthy. It is a great way to keep the",
+      "raw_text": "The roots of a tree help it survive dry weather by the soil.\nThe soil is a great way to keep the soil healthy. It is a great way to keep the soil healthy.\nThe soil is a great way to keep the soil healthy. It is a great way to keep the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No action follows by the soil; repeated soil-health claims replace root function.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P06-3228fc04fc6e",
+      "case_id": "P06-3228fc04fc6e",
+      "index": 6,
+      "trained_tokens": 40001536,
+      "prefix": "In a shallow pond, insects gather near the surface while",
+      "generated": " the soil is not a good source of water.\nThe water is a good source of water. It is a good source of water. It is a good source of water. It is a good source of water. It is a good",
+      "raw_text": "In a shallow pond, insects gather near the surface while the soil is not a good source of water.\nThe water is a good source of water. It is a good source of water. It is a good source of water. It is a good source of water. It is a good",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No insects or pond contrast developed; repeats water as a source of water.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P07-f891f0347916",
+      "case_id": "P07-f891f0347916",
+      "index": 7,
+      "trained_tokens": 40001536,
+      "prefix": "As winter approaches, the leaves on some trees",
+      "generated": ", and the plants are not as much as possible.\nThe plants are very small, but they are not very small, but they are not very small. They are very small, but they are not very small, but they are not",
+      "raw_text": "As winter approaches, the leaves on some trees, and the plants are not as much as possible.\nThe plants are very small, but they are not very small, but they are not very small. They are very small, but they are not very small, but they are not",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "The leaves receive no predicate; plants are both very small and not very small.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P08-6067f78fa557",
+      "case_id": "P08-6067f78fa557",
+      "index": 8,
+      "trained_tokens": 40001536,
+      "prefix": "To repair a small tear in a cloth bag, begin by",
+      "generated": " a small, small, small, and a small, small, small, and a small, small, and a small, small, white, and a small, white, and a small, white, and a small, white, and",
+      "raw_text": "To repair a small tear in a cloth bag, begin by a small, small, small, and a small, small, small, and a small, small, and a small, small, white, and a small, white, and a small, white, and a small, white, and",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No repair action; almost entirely repeated small/white adjective fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P09-5b19a3ee48b5",
+      "case_id": "P09-5b19a3ee48b5",
+      "index": 9,
+      "trained_tokens": 40001536,
+      "prefix": "Before repainting a wooden chair, it is useful to",
+      "generated": " keep the house in the house.\nThe first thing is to do with the house. It is a great way to get the house. It is a great way to get the house. It is a great way to get the house.",
+      "raw_text": "Before repainting a wooden chair, it is useful to keep the house in the house.\nThe first thing is to do with the house. It is a great way to get the house. It is a great way to get the house. It is a great way to get the house.",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Completes a generic action about a house, not chair preparation; repeated house claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P10-7ed380e48833",
+      "case_id": "P10-7ed380e48833",
+      "index": 10,
+      "trained_tokens": 40001536,
+      "prefix": "A clear set of directions to a building should include",
+      "generated": " a building, a building, and a building.\nThe building is a great way to make a building. The building is a great way to make a building. The building is a great way to make a building. The building is a",
+      "raw_text": "A clear set of directions to a building should include a building, a building, and a building.\nThe building is a great way to make a building. The building is a great way to make a building. The building is a great way to make a building. The building is a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Building nouns and a building-making tautology do not give directions.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P11-5917bc56f6f5",
+      "case_id": "P11-5917bc56f6f5",
+      "index": 11,
+      "trained_tokens": 40001536,
+      "prefix": "When storing a bicycle for several months,",
+      "generated": " the car is not able to get the same amount of time.\nThe next time you can get a lot of time.\nThe next time you can get a lot of time.\nThe next time you can get a lot of time",
+      "raw_text": "When storing a bicycle for several months, the car is not able to get the same amount of time.\nThe next time you can get a lot of time.\nThe next time you can get a lot of time.\nThe next time you can get a lot of time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Switches bicycle storage to a car/time topic and repeats a disconnected sentence.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P12-7aaafb2fdf8d",
+      "case_id": "P12-7aaafb2fdf8d",
+      "index": 12,
+      "trained_tokens": 40001536,
+      "prefix": "The last bus had already left when the traveler reached the stop. After checking the empty road,",
+      "generated": " the car was able to get the car on the car.\nThe next day, the car was able to get the car on the car. The car was able to get the car on the car. The car was able to get the",
+      "raw_text": "The last bus had already left when the traveler reached the stop. After checking the empty road, the car was able to get the car on the car.\nThe next day, the car was able to get the car on the car. The car was able to get the car on the car. The car was able to get the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Invents a car getting a car onto a car, repeated instead of a traveler response.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P13-5b6c9f700d26",
+      "case_id": "P13-5b6c9f700d26",
+      "index": 13,
+      "trained_tokens": 40001536,
+      "prefix": "A gust of wind scattered the loose papers across the courtyard. The caretaker",
+      "generated": ", the first of the first-time, was the first-time-old-in-in-the-the-the-day-day-day, and the first-day-day-day-day, was the first",
+      "raw_text": "A gust of wind scattered the loose papers across the courtyard. The caretaker, the first of the first-time, was the first-time-old-in-in-the-the-the-day-day-day, and the first-day-day-day-day, was the first",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Caretaker has no meaningful action; compounds collapse into repeated day fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P14-e334d4039ff8",
+      "case_id": "P14-e334d4039ff8",
+      "index": 14,
+      "trained_tokens": 40001536,
+      "prefix": "The child found a small hole in the pocket and finally understood why",
+      "generated": " the child was able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be",
+      "raw_text": "The child found a small hole in the pocket and finally understood why the child was able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Repeats able to indefinitely without completing the explanation.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P15-459403a8dde3",
+      "case_id": "P15-459403a8dde3",
+      "index": 15,
+      "trained_tokens": 40001536,
+      "prefix": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would",
+      "generated": " have a little bit of the house.\nThe next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day",
+      "raw_text": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would have a little bit of the house.\nThe next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Unclear house phrase, followed by a next-day loop instead of reading the sign.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P16-42594aa9a69e",
+      "case_id": "P16-42594aa9a69e",
+      "index": 16,
+      "trained_tokens": 40001536,
+      "prefix": "From the top of the hill, the narrow river looked",
+      "generated": " at the top of the river. The river was the first to be the first river in the north of the north of the north of the north of the north of the north of the north of the north of the north of the north of",
+      "raw_text": "From the top of the hill, the narrow river looked at the top of the river. The river was the first to be the first river in the north of the north of the north of the north of the north of the north of the north of the north of the north of the north of",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Personifies the river looking at a river, then repeats north-of-the-north.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P17-edf3630395a3",
+      "case_id": "P17-edf3630395a3",
+      "index": 17,
+      "trained_tokens": 40001536,
+      "prefix": "Inside the old workshop, the shelves were lined with",
+      "generated": " the old and the other. The first time the story was the first time the story was the first time.\nThe first story was the first time of the story. The first story was the first time of the story. The first story",
+      "raw_text": "Inside the old workshop, the shelves were lined with the old and the other. The first time the story was the first time the story was the first time.\nThe first story was the first time of the story. The first story was the first time of the story. The first story",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Shelves lined with the old and other is indeterminate; repeated story/time tautologies.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P18-faf089764d60",
+      "case_id": "P18-faf089764d60",
+      "index": 18,
+      "trained_tokens": 40001536,
+      "prefix": "Rain tapped against the glass while the room",
+      "generated": " is not the same.\nThe first time the car is to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able",
+      "raw_text": "Rain tapped against the glass while the room is not the same.\nThe first time the car is to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Room is not the same gives no scene detail; shifts to a car and able-to loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P19-000d3e71b1bc",
+      "case_id": "P19-000d3e71b1bc",
+      "index": 19,
+      "trained_tokens": 40001536,
+      "prefix": "The empty railway platform grew brighter as",
+      "generated": " the city's house.\nThe first building was built in the city. The building was built in the city. The building was built in the city of the city. The building was built in the city. The building was built in the",
+      "raw_text": "The empty railway platform grew brighter as the city's house.\nThe first building was built in the city. The building was built in the city. The building was built in the city of the city. The building was built in the city. The building was built in the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Incomplete brightness cause; repeated city-building sentences drift from the platform.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P20-e168864b2ef0",
+      "case_id": "P20-e168864b2ef0",
+      "index": 20,
+      "trained_tokens": 40001536,
+      "prefix": "The box was too wide for the doorway, so the movers",
+      "generated": " were not a good way to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "raw_text": "The box was too wide for the doorway, so the movers were not a good way to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Movers are not a good way is malformed; unfinished able-to loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P21-1ce157b19cbf",
+      "case_id": "P21-1ce157b19cbf",
+      "index": 21,
+      "trained_tokens": 40001536,
+      "prefix": "The battery had run out during the night. In the morning, the alarm clock",
+      "generated": " was not only a little bit more than the same.\nThe first thing was that the car was in the first time. The first thing was that the car was in the first time. The first thing was that the car was in the",
+      "raw_text": "The battery had run out during the night. In the morning, the alarm clock was not only a little bit more than the same.\nThe first thing was that the car was in the first time. The first thing was that the car was in the first time. The first thing was that the car was in the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Alarm-clock consequence unspecified; repeats an unrelated car/time sentence.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P22-e2a991a6c075",
+      "case_id": "P22-e2a991a6c075",
+      "index": 22,
+      "trained_tokens": 40001536,
+      "prefix": "The path was blocked by a fallen branch, which meant",
+      "generated": " that the first man was a man of the first man.\nThe first man of the first man, the first man of the first man, was a man of the first man. The first man of the man, the first man of",
+      "raw_text": "The path was blocked by a fallen branch, which meant that the first man was a man of the first man.\nThe first man of the first man, the first man of the first man, was a man of the first man. The first man of the man, the first man of",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "First-man tautologies provide no consequence of the blocked path.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P23-fc6ac0508efa",
+      "case_id": "P23-fc6ac0508efa",
+      "index": 23,
+      "trained_tokens": 40001536,
+      "prefix": "Because the lid had not been closed tightly, the jar",
+      "generated": " was not a little bit.\nThe first thing was that the first man was in the first place. The first man was a man who was a man who was a man who was a man who was a man who was a man who",
+      "raw_text": "Because the lid had not been closed tightly, the jar was not a little bit.\nThe first thing was that the first man was in the first place. The first man was a man who was a man who was a man who was a man who was a man who was a man who",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Jar was not a little bit is malformed; man-who-was-a-man loop follows.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P24-e9e3a3b60917",
+      "case_id": "P24-e9e3a3b60917",
+      "index": 24,
+      "trained_tokens": 40001536,
+      "prefix": "A useful index at the back of a book allows readers to",
+      "generated": " be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "raw_text": "A useful index at the back of a book allows readers to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Never completes the index function; only able-to repetition.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P25-c3796c5c3543",
+      "case_id": "P25-c3796c5c3543",
+      "index": 25,
+      "trained_tokens": 40001536,
+      "prefix": "Public libraries serve several purposes within a community. Besides lending books,",
+      "generated": " the students are able to learn about the skills and skills they are able to learn.\nThe students are able to learn about the skills they are able to learn. They are also able to learn from the students’s learning environment.",
+      "raw_text": "Public libraries serve several purposes within a community. Besides lending books, the students are able to learn about the skills and skills they are able to learn.\nThe students are able to learn about the skills they are able to learn. They are also able to learn from the students’s learning environment.",
+      "scores": {
+        "relevance": 1,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Student learning is a plausible additional library use, but tautological skills wording and repetition prevent a sustained explanation.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P26-ab6bb7c2f8fd",
+      "case_id": "P26-ab6bb7c2f8fd",
+      "index": 26,
+      "trained_tokens": 40001536,
+      "prefix": "Written records help a team understand decisions made months earlier because",
+      "generated": " they were able to learn about the importance of the study.\nThe study was published in the journal Science and the University of California. The study was published in the journal Science.\nThe study was published in the journal Science.\nThe",
+      "raw_text": "Written records help a team understand decisions made months earlier because they were able to learn about the importance of the study.\nThe study was published in the journal Science and the University of California. The study was published in the journal Science.\nThe study was published in the journal Science.\nThe",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No account of written decision records; drifts to unsupported study-publication assertions and repetition.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P27-5be4c941e7a1",
+      "case_id": "P27-5be4c941e7a1",
+      "index": 27,
+      "trained_tokens": 40001536,
+      "prefix": "A map and a photograph show a place in different ways. A map",
+      "generated": " of the book is a great way to read.\nThe book is a great way to read. It is a great way to read. It is a great way to read. It is a great way to learn and learn. It is",
+      "raw_text": "A map and a photograph show a place in different ways. A map of the book is a great way to read.\nThe book is a great way to read. It is a great way to read. It is a great way to read. It is a great way to learn and learn. It is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Switches map/photograph comparison to repetitive book-reading claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P28-1a13337ab379",
+      "case_id": "P28-1a13337ab379",
+      "index": 28,
+      "trained_tokens": 40001536,
+      "prefix": "The two neighbors disagreed about the noise, but after listening to each other,",
+      "generated": " the two men were able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "raw_text": "The two neighbors disagreed about the noise, but after listening to each other, the two men were able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Neighbors receive no completed outcome; able-to loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P29-0a7f7507a6da",
+      "case_id": "P29-0a7f7507a6da",
+      "index": 29,
+      "trained_tokens": 40001536,
+      "prefix": "When the apprentice admitted the mistake, the supervisor",
+      "generated": " and the other who had the right to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be",
+      "raw_text": "When the apprentice admitted the mistake, the supervisor and the other who had the right to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be able to be",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Supervisor receives no completed response; an and-the-other fragment becomes able-to repetition.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P30-f850de1cb095",
+      "case_id": "P30-f850de1cb095",
+      "index": 30,
+      "trained_tokens": 40001536,
+      "prefix": "The visitor had brought an umbrella to return, but the owner",
+      "generated": " of the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man",
+      "raw_text": "The visitor had brought an umbrella to return, but the owner of the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man, the first man",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Owner receives no predicate; first-man fragments repeat.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "40001536-P31-6e25552984db",
+      "case_id": "P31-6e25552984db",
+      "index": 31,
+      "trained_tokens": 40001536,
+      "prefix": "Everyone had contributed something to the meal. As they sat down together,",
+      "generated": " they were able to get the right time to the day.\nThe first thing is that the first thing is that the first thing is to be a good job. The first thing is that the first thing is to be a good job.",
+      "raw_text": "Everyone had contributed something to the meal. As they sat down together, they were able to get the right time to the day.\nThe first thing is that the first thing is that the first thing is to be a good job. The first thing is that the first thing is to be a good job.",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No meaningful shared-meal action; repeats a first-thing/good-job clause.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P00-270634ac3400",
+      "case_id": "P00-270634ac3400",
+      "index": 0,
+      "trained_tokens": 50003968,
+      "prefix": "A metal spoon left in a bowl of hot soup gradually becomes warm because",
+      "generated": " it is not a good idea to be a good idea.\nThe first thing to do is to do is to do is to make sure that the light is not to be a good idea.\nThe first thing to do is to do",
+      "raw_text": "A metal spoon left in a bowl of hot soup gradually becomes warm because it is not a good idea to be a good idea.\nThe first thing to do is to do is to do is to make sure that the light is not to be a good idea.\nThe first thing to do is to do",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No warming mechanism; good-idea and thing-to-do loops with broken syntax.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P01-7797fc7a5581",
+      "case_id": "P01-7797fc7a5581",
+      "index": 1,
+      "trained_tokens": 50003968,
+      "prefix": "When sunlight passes through a small gap in the curtains,",
+      "generated": " the water is not a good idea to be able to make the water.\nThe water is a good idea to keep the water in the water. The water is a good idea to keep the water in the water. The water is a",
+      "raw_text": "When sunlight passes through a small gap in the curtains, the water is not a good idea to be able to make the water.\nThe water is a good idea to keep the water in the water. The water is a good idea to keep the water in the water. The water is a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Unrelated water-as-an-idea claims loop instead of describing incoming sunlight.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P02-d5e7d75deabc",
+      "case_id": "P02-d5e7d75deabc",
+      "index": 2,
+      "trained_tokens": 50003968,
+      "prefix": "Water on a wet pavement disappears more quickly on a warm, windy day because",
+      "generated": " it is a good idea to keep the air in the air.\nThe water is a good idea to keep the water in the air. The water is a good idea to keep the water in the air.\nThe water is a good",
+      "raw_text": "Water on a wet pavement disappears more quickly on a warm, windy day because it is a good idea to keep the air in the air.\nThe water is a good idea to keep the water in the air. The water is a good idea to keep the water in the air.\nThe water is a good",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Air/water terms do not explain disappearance; repeated water-in-air advice.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P03-a386ed060a46",
+      "case_id": "P03-a386ed060a46",
+      "index": 3,
+      "trained_tokens": 50003968,
+      "prefix": "A shadow changes its position during the afternoon as",
+      "generated": " the first day of the day.\nThe first day of the day was the first day of the day. The day was the day of the day. The day was the day of the day.\nThe day was the day of the",
+      "raw_text": "A shadow changes its position during the afternoon as the first day of the day.\nThe first day of the day was the first day of the day. The day was the day of the day. The day was the day of the day.\nThe day was the day of the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No shadow mechanism; repeated day-of-the-day tautologies.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P04-a21897efb75c",
+      "case_id": "P04-a21897efb75c",
+      "index": 4,
+      "trained_tokens": 50003968,
+      "prefix": "A seed buried in damp soil begins to grow when",
+      "generated": " the soil is dry.\nThe plant is a good source of soil for the soil. The plant is a good source of soil for the soil.\nThe plant is a good source of soil for the soil.\nThe plant is a",
+      "raw_text": "A seed buried in damp soil begins to grow when the soil is dry.\nThe plant is a good source of soil for the soil. The plant is a good source of soil for the soil.\nThe plant is a good source of soil for the soil.\nThe plant is a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Introduces dry soil without explaining the damp-seed condition, then repeats plant/soil tautologies.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P05-c0d1e7b373c4",
+      "case_id": "P05-c0d1e7b373c4",
+      "index": 5,
+      "trained_tokens": 50003968,
+      "prefix": "The roots of a tree help it survive dry weather by",
+      "generated": " the sun.\nThe plants are a few of the plants that are planted in the garden.\nThe plants are a few plants that are planted in the garden.\nThe plants are a few plants that are planted in the garden.\n",
+      "raw_text": "The roots of a tree help it survive dry weather by the sun.\nThe plants are a few of the plants that are planted in the garden.\nThe plants are a few plants that are planted in the garden.\nThe plants are a few plants that are planted in the garden.\n",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No root action follows by the sun; garden-plant sentences repeat and drift.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P06-3228fc04fc6e",
+      "case_id": "P06-3228fc04fc6e",
+      "index": 6,
+      "trained_tokens": 50003968,
+      "prefix": "In a shallow pond, insects gather near the surface while",
+      "generated": " the plant is not only a good idea to be a good idea.\nThe plant is a good idea to keep the plant’s roots.\nThe plant is a good idea to keep the plant’s roots.\nThe",
+      "raw_text": "In a shallow pond, insects gather near the surface while the plant is not only a good idea to be a good idea.\nThe plant is a good idea to keep the plant’s roots.\nThe plant is a good idea to keep the plant’s roots.\nThe",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Plant-as-an-idea category errors and root phrases replace the pond/insect contrast.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P07-f891f0347916",
+      "case_id": "P07-f891f0347916",
+      "index": 7,
+      "trained_tokens": 50003968,
+      "prefix": "As winter approaches, the leaves on some trees",
+      "generated": ", and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees",
+      "raw_text": "As winter approaches, the leaves on some trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees, and the trees",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Leaves receive no predicate; only and-the-trees fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P08-6067f78fa557",
+      "case_id": "P08-6067f78fa557",
+      "index": 8,
+      "trained_tokens": 50003968,
+      "prefix": "To repair a small tear in a cloth bag, begin by",
+      "generated": " a few days.\n- A small, small, small, and small, small, is a small, and a small, small, and a small, small, and a small, small, and a small, small, and a",
+      "raw_text": "To repair a small tear in a cloth bag, begin by a few days.\n- A small, small, small, and small, small, is a small, and a small, small, and a small, small, and a small, small, and a small, small, and a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No repair action; starts by a few days and degenerates into small fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P09-5b19a3ee48b5",
+      "case_id": "P09-5b19a3ee48b5",
+      "index": 9,
+      "trained_tokens": 50003968,
+      "prefix": "Before repainting a wooden chair, it is useful to",
+      "generated": " keep the house safe.\nThe first step is to keep the house safe and safe.\nThe first step is to keep the house safe and safe.\nThe first step is to keep the house safe and safe.\nThe first step",
+      "raw_text": "Before repainting a wooden chair, it is useful to keep the house safe.\nThe first step is to keep the house safe and safe.\nThe first step is to keep the house safe and safe.\nThe first step is to keep the house safe and safe.\nThe first step",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Grammatical house-safety advice is unrelated to preparing a chair and loops.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P10-7ed380e48833",
+      "case_id": "P10-7ed380e48833",
+      "index": 10,
+      "trained_tokens": 50003968,
+      "prefix": "A clear set of directions to a building should include",
+      "generated": " a building of a building, a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building",
+      "raw_text": "A clear set of directions to a building should include a building of a building, a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building, and a building",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Building-of-a-building fragments provide no direction information.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P11-5917bc56f6f5",
+      "case_id": "P11-5917bc56f6f5",
+      "index": 11,
+      "trained_tokens": 50003968,
+      "prefix": "When storing a bicycle for several months,",
+      "generated": " the company’s company’s company’s company’s company’s company’s company’s company’s company’s company’s company’s company’",
+      "raw_text": "When storing a bicycle for several months, the company’s company’s company’s company’s company’s company’s company’s company’s company’s company’s company’s company’",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Entire continuation is an unfinished company possessive loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P12-7aaafb2fdf8d",
+      "case_id": "P12-7aaafb2fdf8d",
+      "index": 12,
+      "trained_tokens": 50003968,
+      "prefix": "The last bus had already left when the traveler reached the stop. After checking the empty road,",
+      "generated": " the fire was not only the same.\nThe first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day",
+      "raw_text": "The last bus had already left when the traveler reached the stop. After checking the empty road, the fire was not only the same.\nThe first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day, the first day",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Unrelated fire phrase, then first-day fragments; traveler context is unused.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P13-5b6c9f700d26",
+      "case_id": "P13-5b6c9f700d26",
+      "index": 13,
+      "trained_tokens": 50003968,
+      "prefix": "A gust of wind scattered the loose papers across the courtyard. The caretaker",
+      "generated": " was the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to",
+      "raw_text": "A gust of wind scattered the loose papers across the courtyard. The caretaker was the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Caretaker was first to be never completes; phrase repeats throughout.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P14-e334d4039ff8",
+      "case_id": "P14-e334d4039ff8",
+      "index": 14,
+      "trained_tokens": 50003968,
+      "prefix": "The child found a small hole in the pocket and finally understood why",
+      "generated": " the dog was not a dog.\nThe dog was not only a dog. The dog was not only a dog. The dog was not a dog. The dog was not a dog. The dog was not a dog. The dog was",
+      "raw_text": "The child found a small hole in the pocket and finally understood why the dog was not a dog.\nThe dog was not only a dog. The dog was not only a dog. The dog was not a dog. The dog was not a dog. The dog was not a dog. The dog was",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Switches to a dog and explicitly says the dog was not a dog; no explanation of the pocket hole.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P15-459403a8dde3",
+      "case_id": "P15-459403a8dde3",
+      "index": 15,
+      "trained_tokens": 50003968,
+      "prefix": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would",
+      "generated": " have been able to do so.\nThe next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day,",
+      "raw_text": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would have been able to do so.\nThe next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day, the next day,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Able to do so has no supplied action referent; next-day loop follows.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P16-42594aa9a69e",
+      "case_id": "P16-42594aa9a69e",
+      "index": 16,
+      "trained_tokens": 50003968,
+      "prefix": "From the top of the hill, the narrow river looked",
+      "generated": " at the river, and the river was not only the same.\nThe river was the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to",
+      "raw_text": "From the top of the hill, the narrow river looked at the river, and the river was not only the same.\nThe river was the first to be the first to be the first to be the first to be the first to be the first to be the first to be the first to",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "River looks at itself, then first-to-be repetition prevents a scene description.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P17-edf3630395a3",
+      "case_id": "P17-edf3630395a3",
+      "index": 17,
+      "trained_tokens": 50003968,
+      "prefix": "Inside the old workshop, the shelves were lined with",
+      "generated": " the same day, and the other day, and the other day, and the other day, and the day, and the day, and the day, and the day, and the day, and the day, and the day, and",
+      "raw_text": "Inside the old workshop, the shelves were lined with the same day, and the other day, and the other day, and the other day, and the day, and the day, and the day, and the day, and the day, and the day, and the day, and",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Shelves lined with a day is a category mismatch; day fragments repeat.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P18-faf089764d60",
+      "case_id": "P18-faf089764d60",
+      "index": 18,
+      "trained_tokens": 50003968,
+      "prefix": "Rain tapped against the glass while the room",
+      "generated": " was not only a few days before the fire was not only a few days before the fire was not only a few days before the fire.\nThe first day, the first day, the first day, the first day, the first day",
+      "raw_text": "Rain tapped against the glass while the room was not only a few days before the fire was not only a few days before the fire was not only a few days before the fire.\nThe first day, the first day, the first day, the first day, the first day",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Room was a few days is malformed; fire/day clauses recurse.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P19-000d3e71b1bc",
+      "case_id": "P19-000d3e71b1bc",
+      "index": 19,
+      "trained_tokens": 50003968,
+      "prefix": "The empty railway platform grew brighter as",
+      "generated": " the city’s most important building.\nThe city’s largest building was built in the city of the city. The city was built in the city of the city, and the city was built in the city.\nThe",
+      "raw_text": "The empty railway platform grew brighter as the city’s most important building.\nThe city’s largest building was built in the city of the city. The city was built in the city of the city, and the city was built in the city.\nThe",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No cause of brightening; repeated city-of-city building assertions.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P20-e168864b2ef0",
+      "case_id": "P20-e168864b2ef0",
+      "index": 20,
+      "trained_tokens": 50003968,
+      "prefix": "The box was too wide for the doorway, so the movers",
+      "generated": " were not only a few days before the end of the day.\nThe first time the first day was the first day, and the first day was the first day. The first day was the day, and the day was the day,",
+      "raw_text": "The box was too wide for the doorway, so the movers were not only a few days before the end of the day.\nThe first time the first day was the first day, and the first day was the first day. The first day was the day, and the day was the day,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Movers described as a few days is malformed; day tautologies follow.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P21-1ce157b19cbf",
+      "case_id": "P21-1ce157b19cbf",
+      "index": 21,
+      "trained_tokens": 50003968,
+      "prefix": "The battery had run out during the night. In the morning, the alarm clock",
+      "generated": " was not only a few days before the end of the day.\nThe first time the engine was in the air, the engine was in the air, and the engine was in the air, and the engine was in the air. The",
+      "raw_text": "The battery had run out during the night. In the morning, the alarm clock was not only a few days before the end of the day.\nThe first time the engine was in the air, the engine was in the air, and the engine was in the air, and the engine was in the air. The",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Alarm clock described as a few days is malformed; unrelated engine-in-air sentence repeats.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P22-e2a991a6c075",
+      "case_id": "P22-e2a991a6c075",
+      "index": 22,
+      "trained_tokens": 50003968,
+      "prefix": "The path was blocked by a fallen branch, which meant",
+      "generated": " that the two were not only the same. The two were not only the same. The two were the same. The two were the same. The two were the same. The two were the same. The two were the same. The",
+      "raw_text": "The path was blocked by a fallen branch, which meant that the two were not only the same. The two were not only the same. The two were the same. The two were the same. The two were the same. The two were the same. The two were the same. The",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Undefined two are the same repeats without a consequence of the blocked path.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P23-fc6ac0508efa",
+      "case_id": "P23-fc6ac0508efa",
+      "index": 23,
+      "trained_tokens": 50003968,
+      "prefix": "Because the lid had not been closed tightly, the jar",
+      "generated": " was not only a few days before the end of the day.\nThe first time the first day was the first day of the day, and the first day was the first day of the day. The first day was the day of the",
+      "raw_text": "Because the lid had not been closed tightly, the jar was not only a few days before the end of the day.\nThe first time the first day was the first day of the day, and the first day was the first day of the day. The first day was the day of the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Jar described as a few days is malformed; first-day tautologies follow.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P24-e9e3a3b60917",
+      "case_id": "P24-e9e3a3b60917",
+      "index": 24,
+      "trained_tokens": 50003968,
+      "prefix": "A useful index at the back of a book allows readers to",
+      "generated": " be able to learn about the problems of the story.\nThe book is a great example of the book, and it is important to read the story.\nThe book is a great example of the book, and it is a great example",
+      "raw_text": "A useful index at the back of a book allows readers to be able to learn about the problems of the story.\nThe book is a great example of the book, and it is important to read the story.\nThe book is a great example of the book, and it is a great example",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Index purpose becomes vague story learning, then book-self-example tautologies; no usable index function.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P25-c3796c5c3543",
+      "case_id": "P25-c3796c5c3543",
+      "index": 25,
+      "trained_tokens": 50003968,
+      "prefix": "Public libraries serve several purposes within a community. Besides lending books,",
+      "generated": " the site is a great place to be a place to be a place to be a place where the site is a place to be a place where the site is a place to be a place.\nThe site is a place to be a",
+      "raw_text": "Public libraries serve several purposes within a community. Besides lending books, the site is a great place to be a place to be a place to be a place where the site is a place to be a place where the site is a place to be a place.\nThe site is a place to be a",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Library context is replaced by a site/place recursive loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P26-ab6bb7c2f8fd",
+      "case_id": "P26-ab6bb7c2f8fd",
+      "index": 26,
+      "trained_tokens": 50003968,
+      "prefix": "Written records help a team understand decisions made months earlier because",
+      "generated": " they are not able to understand the problem.\nThe study, published in the journal Nature, is a series of articles on the journal Nature, which is a series of articles on the journal Nature, the author of the journal Nature, the",
+      "raw_text": "Written records help a team understand decisions made months earlier because they are not able to understand the problem.\nThe study, published in the journal Nature, is a series of articles on the journal Nature, which is a series of articles on the journal Nature, the author of the journal Nature, the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Records do not receive an explanatory benefit; shifts to an unsupported Nature publication loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P27-5be4c941e7a1",
+      "case_id": "P27-5be4c941e7a1",
+      "index": 27,
+      "trained_tokens": 50003968,
+      "prefix": "A map and a photograph show a place in different ways. A map",
+      "generated": " of the site is a place of the site.\nThe site is a site of the site of the site. The site is a site of the site of the site. The site is a site of the site of the site. The",
+      "raw_text": "A map and a photograph show a place in different ways. A map of the site is a place of the site.\nThe site is a site of the site of the site. The site is a site of the site of the site. The site is a site of the site of the site. The",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "No map/photograph distinction; site-of-site tautologies repeat.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P28-1a13337ab379",
+      "case_id": "P28-1a13337ab379",
+      "index": 28,
+      "trained_tokens": 50003968,
+      "prefix": "The two neighbors disagreed about the noise, but after listening to each other,",
+      "generated": " they were able to do so.\nThe first day, the first day, the first day, the first day, the first day, the first day, the first day, the day, the day, the day, the day,",
+      "raw_text": "The two neighbors disagreed about the noise, but after listening to each other, they were able to do so.\nThe first day, the first day, the first day, the first day, the first day, the first day, the first day, the day, the day, the day, the day,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Able to do so supplies no resolution of the disagreement; day fragments repeat.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P29-0a7f7507a6da",
+      "case_id": "P29-0a7f7507a6da",
+      "index": 29,
+      "trained_tokens": 50003968,
+      "prefix": "When the apprentice admitted the mistake, the supervisor",
+      "generated": " said, “I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I�",
+      "raw_text": "When the apprentice admitted the mistake, the supervisor said, “I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I’m not sure I�",
+      "scores": {
+        "relevance": 1,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "A supervisor expressing uncertainty is a plausible initial response, but the quote loops on not sure and never develops it.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P30-f850de1cb095",
+      "case_id": "P30-f850de1cb095",
+      "index": 30,
+      "trained_tokens": 50003968,
+      "prefix": "The visitor had brought an umbrella to return, but the owner",
+      "generated": " of the city was not only the only one.\nThe city was the only city of the city, and the city was the city of the city. The city was the city of the city, and the city was the city of the",
+      "raw_text": "The visitor had brought an umbrella to return, but the owner of the city was not only the only one.\nThe city was the only city of the city, and the city was the city of the city. The city was the city of the city, and the city was the city of the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Owner becomes owner of a city with no return outcome; city tautologies repeat.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "50003968-P31-6e25552984db",
+      "case_id": "P31-6e25552984db",
+      "index": 31,
+      "trained_tokens": 50003968,
+      "prefix": "Everyone had contributed something to the meal. As they sat down together,",
+      "generated": " they were able to get the food they had to eat.\nThe next day, the next day, the next day, the next day, the day, the day, the day, the day, the day, the day, the",
+      "raw_text": "Everyone had contributed something to the meal. As they sat down together, they were able to get the food they had to eat.\nThe next day, the next day, the next day, the next day, the day, the day, the day, the day, the day, the day, the",
+      "scores": {
+        "relevance": 1,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "The first sentence follows the shared-meal scene through eating, then immediately collapses into day fragments.",
+      "loop": true,
+      "empty": false
+    }
+  ]
+}

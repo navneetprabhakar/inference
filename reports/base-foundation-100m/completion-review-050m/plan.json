@@ -1,0 +1,19 @@
+{
+  "evaluator": "AI reviewer /root/research_curriculum",
+  "blinding": "Unblinded. Checkpoint labels and reported 50M CE/context result known before text review. All 40M and 50M stored outputs reviewed side by side; no causal/statistical inference.",
+  "rubric": {
+    "unit": "Each fixed prefix and its up-to-48-token continuation.",
+    "dimensions": {
+      "relevance": "0 unrelated or incoherent; 1 partly relevant with drift; 2 follows the prefix throughout.",
+      "local_consistency": "0 contradicts prefix or itself; 1 ambiguous or minor inconsistency; 2 consistent with supplied facts and own continuation.",
+      "language": "0 mostly unreadable; 1 understandable with substantial grammatical defects; 2 readable connected language.",
+      "repetition": "0 stuck in repeated phrase or loop; 1 distracting redundancy; 2 no distracting repetition."
+    },
+    "report": "Report all dimension counts and means, loop rate, empty outputs and raw completions. A token-cap truncation alone is not a coherence failure. This is an informative base-completion rubric, without an absolute chat-readiness gate. Freeze rubric and disclose evaluator identity before outputs are judged."
+  },
+  "created": "2026-11-06T12:11:24.299780+00:00",
+  "source_path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/validation.json",
+  "source_sha256": "07db215896eb060459d4f27f440894ca809f026452a2e31fdc5a64902a7bb596",
+  "rubric_source_sha256": "0f8def8308e306f7f932139f7eab89bef27f2d4459d730bedae87c4d125e7d8d",
+  "comparison": "All32 fixed matched prefixes at40M and50M; deterministic IDs from original index and prefix SHA256; no output sampling or generation."
+}
