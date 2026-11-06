@@ -1,0 +1,62 @@
+{
+  "state": "passed",
+  "torch_version": "2.14.1",
+  "recorded_torch_version": "2.14.1",
+  "seed": 103,
+  "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+  "pid": 88800,
+  "device": "cpu",
+  "threads": 1,
+  "forward_calls": 0,
+  "training_steps": 0,
+  "historical_gpt2_sha256": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+  "rss_rlimit": "unavailable: current limit exceeds maximum limit; independent parent RSS watchdog enforced",
+  "original_initialization": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000000-e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332.pt",
+    "checkpoint_sha256": "e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332",
+    "pass_exact": true,
+    "tensor_count": 148,
+    "elements": 124439808,
+    "mismatches": []
+  },
+  "continuation_initialization": {
+    "parent_path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+    "child_path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/step-000000-0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75.pt",
+    "parent_sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4",
+    "child_sha256": "0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75",
+    "pass_exact": true,
+    "tensor_count": 148,
+    "elements": 124439808,
+    "mismatches": []
+  },
+  "elapsed_seconds": 3.4019224159419537,
+  "child_reported_peak_rss_bytes": 1698758656,
+  "audited_at_utc": "2026-11-06T02:15:29.913303+00:00",
+  "monitor_peak_rss_bytes": 1698791424,
+  "monitor_elapsed_seconds": 4.080405,
+  "limits": {
+    "wall_seconds": 300,
+    "rss_bytes": 2147483648,
+    "rss_sample_interval_seconds": 0.1
+  },
+  "limitations": [
+    "RSS was sampled every approximately 100 ms; macOS RLIMIT_RSS can be advisory. Child lifetime peak RSS is also checked after completion.",
+    "Exact local reproducibility and checkpoint linkage are established by matching tensor values. This is not independent attestation against a party able to replace all local evidence."
+  ],
+  "prior_attempts": [
+    {
+      "state": "failed",
+      "reason": "child process error",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/verify_lineage_values.py\", line 22, in <module>\n    resource.setrlimit(resource.RLIMIT_RSS,(2*1024**3,2*1024**3))\nValueError: current limit exceeds maximum limit\n",
+      "monitor_peak_rss_bytes": 201162752,
+      "monitor_elapsed_seconds": 0.668240875,
+      "audited_at_utc": "2026-11-06T02:14:47.251502+00:00"
+    }
+  ],
+  "metadata_audit_reference": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/reports/base-foundation-100m/lineage-audit.json",
+    "sha256": "1572611e326627b664c45e2ce8027dd20e1610b264dbac94b20493714f374a02",
+    "purpose": "Prior read-only audit independently hashed all three immutable checkpoint files and verified their identities and source lineage."
+  }
+}

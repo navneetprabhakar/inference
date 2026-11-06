@@ -1,0 +1,70 @@
+{
+  "name": "bare-mlx-own-base-tiny-cpu-parity-v1",
+  "scope": "Future tranche feasibility only; no live run change, GPU execution, pretrained weights, full-model allocation, or speed claim.",
+  "device": "CPU only",
+  "packages": {
+    "mlx": "0.32.4",
+    "mlx-metal": "0.32.4",
+    "numpy": "2.5.4"
+  },
+  "max_additional_disk_bytes": 1073741824,
+  "tiny_config": {
+    "vocabulary": 43,
+    "context": 16,
+    "width": 32,
+    "heads": 4,
+    "depth": 2
+  },
+  "seeds": [
+    4817,
+    5209,
+    6211
+  ],
+  "batch": 2,
+  "sequence_input_tokens": 12,
+  "learning_rate": 0.001,
+  "optimizer": {
+    "name": "AdamW",
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "epsilon": 1e-08,
+    "matrix_weight_decay": 0.1,
+    "other_weight_decay": 0.0,
+    "bias_correction": true,
+    "global_gradient_clip": 1.0,
+    "clip_epsilon": 1e-06
+  },
+  "maximum_errors": {
+    "logits_max_abs": 3e-05,
+    "loss_error": 2e-06,
+    "gradient_max_abs": 5e-05,
+    "gradient_relative_l2": 0.0002,
+    "clipped_max_abs": 5e-05,
+    "updated_max_abs": 2e-05,
+    "update_relative_l2": 0.01,
+    "moment1_max_abs": 5e-06,
+    "moment2_max_abs": 5e-06,
+    "causal_prefix_max_abs": 1e-06
+  },
+  "checks": [
+    "Identical exported random weights, no independent initialization mismatch.",
+    "Full logits, next-token mean loss, all parameter gradients, clipping, one AdamW update, first/second moments.",
+    "Causal suffix perturbation; tied token/output parameter count.",
+    "Three fixed seeds; all gates must pass; failures preserved; no threshold tuning.",
+    "Full124439808 parameter count by shape arithmetic only; no full model allocation."
+  ],
+  "code_sha256": {
+    "mlx_base.py": "5ed9c3d54ddaddf201c97eae679db6dd993a6abe5355e84790501e6f57867aa6",
+    "verify_mlx_base.py": "3166af283558a9bf8b49165bd3cc9dc1f8e8d2517a7a223e6c2a7a7b3543387e",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+  },
+  "sources": [
+    "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.set_default_device.html",
+    "https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.fast.scaled_dot_product_attention.html",
+    "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.4/python/mlx/optimizers/optimizers.py",
+    "https://raw.githubusercontent.com/ml-explore/mlx/v0.32.4/python/mlx/nn/layers/activations.py"
+  ]
+}

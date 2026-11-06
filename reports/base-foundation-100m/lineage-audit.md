@@ -1,0 +1,13 @@
+# Own-random base lineage audit
+
+Audited 2026-11-06T02:11:51.334020+00:00. The local evidence supports a random-initialized 124,439,808-parameter model, its original 600-step pretraining run, and the current continuation from that exact protected parent.
+
+1. **Original initialization.** `runs/astra-candidate-01/config.json` fixes seed **103**, has no parent checkpoint, and pins the historical trainer and architecture. The recorded Git commit is `ff30267a007b5ee2a524a84373f1d4711c8ed356`. All six recorded code hashes match the recovered Git blobs. The historical trainer seeds PyTorch, constructs GPT2 with random parameter initialization, then starts training. Its only model-state loading branch resumes an existing run.
+
+2. **Retained initial state.** `runs/astra-candidate-01/step-000000-e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332.pt` has SHA `e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332`. CPU mmap metadata verifies step 0, zero trained targets, zero source offsets, empty optimizer state and the same run identity as the terminal checkpoint.
+
+3. **Protected trained parent.** `runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt` has verified SHA `f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4`, step **600** and **2,457,600** trained targets. The checkpoint, status, protected list and acceptance report agree. The acceptance report is `reports/astra-feasibility/pretraining.json`, SHA `120cc3af4b7ffb566bd7fdc5104783a9886ef2c7414b0611303acb4b653e74b8`.
+
+4. **Current continuation.** `reports/base-foundation-100m/budget.json` and `runs/own-base-foundation-01/campaign-spec.json` identify that same parent and acceptance SHA. The new seed is **20261106**, with fresh AdamW moments. `base_train.py` invokes the verified local loader before its first update. `runs/own-base-foundation-01/step-000000-0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75.pt` has SHA `0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75`, matching campaign identity and zero optimizer entries. Every budget-pinned current code hash matches disk.
+
+The JSON audit contains absolute paths, full metadata, exact hashes and the live status snapshot. Local hashes establish integrity and consistency. They provide no independent attestation against replacement of all local evidence. This audit used CPU mmap metadata and source inspection; it did not reproduce seed-103 initialization, replay training or compare complete tensor values. The pinned GPT-2 tokenizer is reused. The ongoing campaign has no final outcome yet.

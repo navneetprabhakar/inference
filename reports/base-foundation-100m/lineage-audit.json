@@ -1,0 +1,405 @@
+{
+  "audited_at_utc": "2026-11-06T02:11:51.334020+00:00",
+  "conclusion": "Local records and recovered historical source substantiate own random initialization followed by local pretraining and the exact protected-parent continuation. No downloaded pretrained model weights appear in the verified initialization path.",
+  "original_seed": 103,
+  "continuation_seed": 20261106,
+  "parameter_count": 124439808,
+  "original_run": {
+    "config": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/config.json",
+      "sha256": "a8b3c16e4cc7aadbb81bff0ef2168eecf139695b16e685780ce88fccdbf583b1"
+    },
+    "guard": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/guard.json",
+      "sha256": "1f3edfe474188260106a72a01e143f6e90ac1073db7fb90c339201179580a44f"
+    },
+    "status": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/status.json",
+      "sha256": "2f79a66a044c7347b0dd29097393cf27197bb3bf8a0e841d67b4085e073e6dd7"
+    },
+    "protected": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/protected.json",
+      "sha256": "6e5754a0c50b049f6633f0c4393c32f60b16c59557e93d772339a09a6ddec2df"
+    },
+    "acceptance": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/reports/astra-feasibility/pretraining.json",
+      "sha256": "120cc3af4b7ffb566bd7fdc5104783a9886ef2c7414b0611303acb4b653e74b8"
+    },
+    "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+    "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "historical_code": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/pretrain.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:pretrain.py",
+        "sha256": "6ca87d2fffebe573d0330dbb5c8a19dbf3895f3b39e99f623fc8f296cbf6426e",
+        "matches_original_run_identity": true
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/train.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:train.py",
+        "sha256": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+        "matches_original_run_identity": true
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/gpt2.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:gpt2.py",
+        "sha256": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+        "matches_original_run_identity": true
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/checkpoint.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:checkpoint.py",
+        "sha256": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+        "matches_original_run_identity": true
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/guards.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:guards.py",
+        "sha256": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+        "matches_original_run_identity": true
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/tokenizer.py",
+        "git_commit": "ff30267a007b5ee2a524a84373f1d4711c8ed356",
+        "git_object_spec": "ff30267a007b5ee2a524a84373f1d4711c8ed356:tokenizer.py",
+        "sha256": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+        "matches_original_run_identity": true
+      }
+    ],
+    "spec_has_parent_checkpoint": false,
+    "initialization_path": "Historical pretrain.py calls torch.manual_seed(spec[seed]), constructs GPT2(model_config).to(device), and creates optimizer_for(model). It only loads checkpoint state on the previous-is-not-None resume branch. GPT2 initializes Linear/Embedding weights with local normal draws, zero Linear biases and residual projection rescaling. There is no pretrained-weight initialization branch in this historical trainer.",
+    "initial_checkpoint": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000000-e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332.pt",
+      "sha256": "e2906a5418dd471bf3368d0a21328d7260a42df84b39af73a71ede1d4cece332",
+      "metadata": {
+        "identity": {
+          "spec": {
+            "corpus": "data/extended-trial-v3",
+            "manifest_sha256": "e3b7f3ed6ef0e42fe61f3e4e35179cdf177324de86f90d2df01d41d37d8f50fe",
+            "target_tokens": 2457600,
+            "active_seconds": 3900,
+            "elapsed_seconds": 5400,
+            "seed": 103,
+            "mix": {
+              "wiki": 9,
+              "stories": 7
+            },
+            "primary": "wiki",
+            "minimum_ce_improvement": 0.025,
+            "material_ce_regression": 0.05,
+            "warmup_steps": 30,
+            "validation_rows_per_source": 32
+          },
+          "model": {
+            "vocabulary": 50257,
+            "context": 1024,
+            "width": 768,
+            "heads": 12,
+            "depth": 12
+          },
+          "device": "mps",
+          "tokenizer": {
+            "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+            "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+          },
+          "dtype": "fp32",
+          "torch": "2.14.1",
+          "tokens_per_step": 4096,
+          "code": {
+            "pretrain.py": "6ca87d2fffebe573d0330dbb5c8a19dbf3895f3b39e99f623fc8f296cbf6426e",
+            "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+            "gpt2.py": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+            "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+            "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+            "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966"
+          }
+        },
+        "step": 0,
+        "target_tokens": 0,
+        "optimizer_state_entries": 0,
+        "model_tensor_elements": 124439808,
+        "model_dtypes": [
+          "torch.float32"
+        ],
+        "protected": true,
+        "terminal": null,
+        "offsets": {
+          "wiki": 0,
+          "stories": 0
+        },
+        "campaign_id": null,
+        "spec_sha256": null
+      }
+    },
+    "terminal_checkpoint": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+      "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4",
+      "metadata": {
+        "identity": {
+          "spec": {
+            "corpus": "data/extended-trial-v3",
+            "manifest_sha256": "e3b7f3ed6ef0e42fe61f3e4e35179cdf177324de86f90d2df01d41d37d8f50fe",
+            "target_tokens": 2457600,
+            "active_seconds": 3900,
+            "elapsed_seconds": 5400,
+            "seed": 103,
+            "mix": {
+              "wiki": 9,
+              "stories": 7
+            },
+            "primary": "wiki",
+            "minimum_ce_improvement": 0.025,
+            "material_ce_regression": 0.05,
+            "warmup_steps": 30,
+            "validation_rows_per_source": 32
+          },
+          "model": {
+            "vocabulary": 50257,
+            "context": 1024,
+            "width": 768,
+            "heads": 12,
+            "depth": 12
+          },
+          "device": "mps",
+          "tokenizer": {
+            "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+            "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+          },
+          "dtype": "fp32",
+          "torch": "2.14.1",
+          "tokens_per_step": 4096,
+          "code": {
+            "pretrain.py": "6ca87d2fffebe573d0330dbb5c8a19dbf3895f3b39e99f623fc8f296cbf6426e",
+            "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+            "gpt2.py": "d6116e2475eac590e8192f8391a59713c5ede157077117c4d59e559f38cf280c",
+            "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+            "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+            "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966"
+          }
+        },
+        "step": 600,
+        "target_tokens": 2457600,
+        "optimizer_state_entries": 148,
+        "model_tensor_elements": 124439808,
+        "model_dtypes": [
+          "torch.float32"
+        ],
+        "protected": true,
+        "terminal": {
+          "state": "passed",
+          "reason": "token budget reached"
+        },
+        "offsets": {
+          "wiki": 1382400,
+          "stories": 1075200
+        },
+        "campaign_id": null,
+        "spec_sha256": null
+      }
+    }
+  },
+  "live_campaign": {
+    "budget": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/reports/base-foundation-100m/budget.json",
+      "sha256": "658702f471c49b4362c29f46795f5fc6b3135f7e7c7bd540e50d34c2c547fb7d"
+    },
+    "campaign_spec": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/campaign-spec.json",
+      "sha256": "30835950cbe6719597b4db82d990e43ad131e09be01c12b2d7f9b30c46629f9a"
+    },
+    "loader": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/pretrained_base.py",
+      "sha256": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27"
+    },
+    "trainer": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/base_train.py",
+      "sha256": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8"
+    },
+    "initial_checkpoint": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/step-000000-0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75.pt",
+      "sha256": "0af4b45e0de411f8a6838054fd06b0bc298169b843034f9c15400739510dfd75",
+      "metadata": {
+        "identity": {
+          "code": {
+            "base_run_control.py": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+            "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+            "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+            "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+            "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+            "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+            "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+            "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+            "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+          },
+          "corpus": {
+            "directory": "/Users/navneetprabhakar/Documents/git/image/inference/data/base-foundation-100m",
+            "manifest": "338cd084d16b17dae4a3ebcab0f14e5a7a32c0de03a227ff77a753502f62af18",
+            "validation": "d7f6a9c03268e7040217062188ecded99143a766e8c14bd7aafbf421a0068931"
+          },
+          "device": "mps",
+          "initialization": {
+            "mode": "own_pretraining",
+            "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+            "random_lineage_root": "120cc3af4b7ffb566bd7fdc5104783a9886ef2c7414b0611303acb4b653e74b8",
+            "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4"
+          },
+          "model": {
+            "context": 1024,
+            "depth": 12,
+            "heads": 12,
+            "vocabulary": 50257,
+            "width": 768
+          },
+          "protocol": {
+            "active_seconds": 129600,
+            "authorization": "User authorized hands-off local execution and corpus acquisition, then explicitly reaffirmed own base model objective; no pretrained weights and no paid compute",
+            "benchmark": {
+              "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/base-layout-benchmark-512/status.json",
+              "sha256": "1db518d0928e368110215f6b559ee4b925a57fa11d5999353fc86de784f544d6"
+            },
+            "bf16": true,
+            "budget_name": "own-base-foundation-100m-v1",
+            "calendar_seconds": 604800,
+            "code_sha256": {
+              "base_run_control.py": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+              "base_supervise.py": "d562897db01113892fb71ba8f0b976e755d6121bac49920ebc44a73a67317469",
+              "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+              "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+              "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+              "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+              "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+              "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+              "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+              "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+            },
+            "corpus": "/Users/navneetprabhakar/Documents/git/image/inference/data/base-foundation-100m",
+            "diagnostics": "/Users/navneetprabhakar/Documents/git/image/inference/reports/base-foundation-100m/diagnostics.json",
+            "diagnostics_sha256": "82ad6c3d7ddf2fba301ac1ecc68d77c3ad815bcee6608dbc21140782f91be03b",
+            "lease_seconds": 14400,
+            "length": 512,
+            "manifest_sha256": "338cd084d16b17dae4a3ebcab0f14e5a7a32c0de03a227ff77a753502f62af18",
+            "microbatch": 2,
+            "optimizer_initialization": "Fresh AdamW moments on verified own pre-SFT weights; full-state resumes thereafter",
+            "parent_checkpoint": {
+              "path": "runs/astra-candidate-01/step-000600-f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4.pt",
+              "sha256": "f029b7d3cf7921b72911697c38a6a697608af3646c2d9f8fe7d6ed90eda734a4"
+            },
+            "protocol_sha256": "452cb80565cee80278c6be9d92790cf67790684ed340548ea415378a8a02ee44",
+            "quality_policy": "Prospective fixed-window loss and text/context diagnostics; numerical/resource failures stop; two successive material regressions versus best trigger reproducibility check and stop; plateau is review-only",
+            "scheduler": {
+              "decay_start_tokens": 80000000,
+              "end_fraction": 0.1,
+              "horizon_tokens": 99999744,
+              "peak_lr": 6e-05,
+              "warmup_tokens": 1000000
+            },
+            "seed": 20261106,
+            "target_tokens": 99999744,
+            "targets_per_update": 8192,
+            "validation_blocks_sha256": "d7f6a9c03268e7040217062188ecded99143a766e8c14bd7aafbf421a0068931",
+            "verification_sha256": "d6c31ec63cf8aebf02e937a8063e62bcabef7e204d78ff4b27108eba0ffc2ee6"
+          },
+          "scheduler": {
+            "decay_start_tokens": 80000000,
+            "end_fraction": 0.1,
+            "horizon_tokens": 99999744,
+            "peak_lr": 6e-05,
+            "warmup_tokens": 1000000
+          },
+          "seed": 20261106,
+          "tokenizer": {
+            "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+            "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+          },
+          "torch_version": "2.14.1"
+        },
+        "step": 0,
+        "target_tokens": 0,
+        "optimizer_state_entries": 0,
+        "model_tensor_elements": 124439808,
+        "model_dtypes": [
+          "torch.float32"
+        ],
+        "protected": null,
+        "terminal": null,
+        "offsets": 0,
+        "campaign_id": "b76a392eaf89473f9984716d7f29330b",
+        "spec_sha256": "30835950cbe6719597b4db82d990e43ad131e09be01c12b2d7f9b30c46629f9a"
+      }
+    },
+    "current_code_checks": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/base_train.py",
+        "expected_sha256": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+        "actual_sha256": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/base_run_control.py",
+        "expected_sha256": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+        "actual_sha256": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/base_supervise.py",
+        "expected_sha256": "d562897db01113892fb71ba8f0b976e755d6121bac49920ebc44a73a67317469",
+        "actual_sha256": "d562897db01113892fb71ba8f0b976e755d6121bac49920ebc44a73a67317469"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/gpt2.py",
+        "expected_sha256": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+        "actual_sha256": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/train.py",
+        "expected_sha256": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+        "actual_sha256": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/guards.py",
+        "expected_sha256": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+        "actual_sha256": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/checkpoint.py",
+        "expected_sha256": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+        "actual_sha256": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/tokenizer.py",
+        "expected_sha256": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+        "actual_sha256": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/pretrained_base.py",
+        "expected_sha256": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+        "actual_sha256": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/pretrain.py",
+        "expected_sha256": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+        "actual_sha256": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad"
+      }
+    ],
+    "status_snapshot": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/status.json",
+      "sha256": "8c133687545bce373295e8ec0fff0283fd57da6ae264dfd6aa2acb91b8d1e555",
+      "timestamp": 1793931108.038777,
+      "step": 286,
+      "trained_tokens": 2342912,
+      "state": "running"
+    },
+    "initialization_path": "base_train resolves the original passing acceptance receipt, verifies the exact protected parent bytes and metadata using load_base, copies that model state into GPT2, and begins with fresh AdamW moments. The campaign identity embeds the exact parent SHA and acceptance report SHA; its own zero-step checkpoint has no optimizer moments."
+  },
+  "limitations": [
+    "Local SHA-256 checks provide integrity and consistency, not independent attestation against a party able to rewrite all local artifacts.",
+    "This audit did not rerun seed-103 full-model initialization, replay training, or compare full tensor values between parent and continuation step zero; checkpoint access was CPU mmap metadata only.",
+    "The historical guard records an empty tracked diff. Matching Git blobs were recovered and hash-verified; this does not capture every possible historical environment, dependency or process modification.",
+    "The original passing receipt reflects its historical evaluation criteria and does not establish conversational competence.",
+    "The tokenizer uses pinned existing GPT-2 assets; own random initialization refers to neural model weights, not invention of a tokenizer.",
+    "The live campaign is still running. Its immutable specification and initial checkpoint were audited; no final outcome is inferred."
+  ]
+}
