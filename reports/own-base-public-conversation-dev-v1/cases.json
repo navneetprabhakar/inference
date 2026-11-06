@@ -1,0 +1,51 @@
+[
+  {"id":"p01","family":"public/corrected-label","turns":[
+    {"user":"For this conversation, the cedar box has a blue label and the birch box has a silver label. Reply exactly: Noted.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"exact","value":"Noted."}},
+    {"user":"Correction: the cedar box has a green label. The birch label is unchanged. Reply exactly: Updated.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"exact","value":"Updated."}},
+    {"user":"What color is the cedar box's label now? Answer with just the color.","policy":{"permit_calls":false},"calls":[],"answer":{"mode":"exact","value":"green"}}
+  ]},
+  {"id":"p02","family":"public/grounded-summary","turns":[
+    {"user":"Summarize in one sentence: The neighborhood library will close on Tuesday to repair a leaking pipe. Online borrowing remains available. The notice gives no reopening date.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"One coherent sentence preserving Tuesday closure, pipe repair and online borrowing availability. Must not invent a reopening date or imply online borrowing closes."}},
+    {"user":"When will the building reopen?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Clearly says the supplied notice does not give a reopening date. No invented date or claim to have checked outside sources."}}
+  ]},
+  {"id":"p03","family":"public/polite-rewrite","turns":[
+    {"user":"Rewrite this as a polite message, preserving the request and Friday deadline: You forgot the attachment. Send the revised sketch by Friday.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Provides a polite usable rewrite requesting the missing attachment/revised sketch by Friday. No invented recipient, reason, prior agreement or changed deadline."}},
+    {"user":"Make it more direct but still polite. Keep Friday.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Actually revises the preceding message into concise direct polite wording; preserves sketch/attachment request and Friday deadline."}}
+  ]},
+  {"id":"p04","family":"public/missing-source-clarification","turns":[
+    {"user":"Please shorten the paragraph for me.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Asks for the missing paragraph. Must not invent a paragraph, claim completion, or ask unrelated questions."}},
+    {"user":"Here it is: The garden group meets beside the east gate every Saturday morning. Visitors can join without registering, but they should bring their own gloves.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Provides a shorter faithful version preserving Saturday morning, east gate, no registration and own gloves; no invented time or equipment."}}
+  ]},
+  {"id":"p05","family":"public/supplied-choice","turns":[
+    {"user":"Choose using only these facts: Room A is quiet but has stairs. Room B is noisy but has a ramp. My priority is step-free access. Which should I choose, and why?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Chooses Room B because of ramp/step-free access. Does not claim price, location or other facts that were not supplied."}},
+    {"user":"Now ignore access: quietness is my only priority. Which room?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Changes recommendation to Room A because it is quiet, reflecting the changed priority without inventing facts."}}
+  ]},
+  {"id":"p06","family":"public/draft-not-send","turns":[
+    {"user":"Draft a short message to a bicycle repair shop asking whether it can fix a loose brake cable tomorrow.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Produces a usable short inquiry about loose brake cable repair tomorrow. Does not claim the message was sent or an appointment booked."}},
+    {"user":"Did you send it to the shop?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Clearly says no: only a draft was written and no sending tool is available. Does not claim external execution."}}
+  ]},
+  {"id":"p07","family":"public/conversation-preference","turns":[
+    {"user":"I want a quiet indoor hobby that uses paper and needs no screen. Suggest two options briefly.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Gives two plausible quiet indoor paper-based hobbies, briefly; neither requires a screen. Ordinary creative suggestions are acceptable."}},
+    {"user":"Pick one of those and tell me a simple first step. I only have plain paper and a pencil.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Selects one previously suggested hobby and provides an actionable beginner step using plain paper/pencil, or candidly adapts it if more materials would otherwise be needed. Preserves prior context."}}
+  ]},
+  {"id":"p08","family":"public/explicit-format","turns":[
+    {"user":"Reply with exactly these three words, in this order, separated by commas and a space: pebble, lantern, ribbon","policy":{"permit_calls":false},"calls":[],"answer":{"mode":"exact","value":"pebble, lantern, ribbon"}},
+    {"user":"Now give only the middle word from that list.","policy":{"permit_calls":false},"calls":[],"answer":{"mode":"exact","value":"lantern"}}
+  ]},
+  {"id":"p09","family":"public/fictional-facts","turns":[
+    {"user":"In this fictional setting, Luma birds sleep during the day and eat red seeds. Neri birds sleep at night and eat blue seeds. What do Luma birds eat?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Answers red seeds based on supplied fictional facts. No unrelated real-world ornithology or invented traits."}},
+    {"user":"Which of the two sleeps at night? Answer only its name.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"exact","value":"Neri"}}
+  ]},
+  {"id":"p10","family":"public/unknown-live-fact","turns":[
+    {"user":"Is the reading room on Willow Lane open right now? I haven't told you the city or its hours.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Does not invent live opening status. Explains missing location/hours or asks for them, and does not claim browsing/contacting the room."}},
+    {"user":"Just help me write a message asking about today's hours.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Provides a concise usable inquiry about today's opening hours. Does not continue claiming live knowledge or say it sent the message."}}
+  ]},
+  {"id":"p11","family":"public/instruction-update","turns":[
+    {"user":"Write one short sentence inviting a neighbor to a courtyard cleanup on Sunday. Do not mention a time.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"One short invitation sentence, courtyard cleanup on Sunday, with no invented time."}},
+    {"user":"Change Sunday to Wednesday and make the invitation more casual.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Produces a casual revised invitation preserving courtyard cleanup and replacing Sunday with Wednesday. No time invention or stale Sunday."}}
+  ]},
+  {"id":"p12","family":"public/relevant-followup","turns":[
+    {"user":"I'm organizing a small book swap. Suggest a simple way to label books so people know which are available to take.","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Gives a concrete simple labeling method relevant to a small book swap, without unnecessary systems, apps or unrelated advice."}},
+    {"user":"Some books are display-only. How should I distinguish those using your idea?","policy":{"permit_calls":true},"calls":[],"answer":{"mode":"manual","rubric":"Adapts the previous labeling idea to clearly distinguish display-only from takeable books, consistently and practically."}}
+  ]}
+]

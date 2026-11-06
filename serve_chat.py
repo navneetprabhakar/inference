@@ -298,6 +298,7 @@ RUNTIMES = {
     "raw": "local_chat", "structured": "fallback_chat", "product": "product_chat",
     "product-v2": "followon_product_chat", "memory-preview": "memory_chat",
     "assistant-preview": "assistant_preview",
+    "own-base": "own_base_chat",
 }
 TRACE_RUNTIMES = {"assistant-preview"}
 FOLLOWON_RUNTIMES = TRACE_RUNTIMES | {"product-v2", "memory-preview"}
