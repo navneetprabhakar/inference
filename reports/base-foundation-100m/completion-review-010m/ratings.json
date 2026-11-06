@@ -1,0 +1,1135 @@
+{
+  "evaluator": "AI reviewer /root/base_completion_review_010m; separate context",
+  "review_type": "AI review only, separate context; not ground truth",
+  "status": "frozen_before_unblinding",
+  "frozen_at": "2026-11-06T03:43:02.764007+00:00",
+  "inputs_read": [
+    "plan.json",
+    "blind.json"
+  ],
+  "rubric": {
+    "unit": "Each fixed prefix and its up-to-48-token continuation.",
+    "dimensions": {
+      "relevance": "0 unrelated or incoherent; 1 partly relevant with drift; 2 follows the prefix throughout.",
+      "local_consistency": "0 contradicts prefix or itself; 1 ambiguous or minor inconsistency; 2 consistent with supplied facts and own continuation.",
+      "language": "0 mostly unreadable; 1 understandable with substantial grammatical defects; 2 readable connected language.",
+      "repetition": "0 stuck in repeated phrase or loop; 1 distracting redundancy; 2 no distracting repetition."
+    },
+    "report": "Report all dimension counts and means, loop rate, empty outputs and raw completions. A token-cap truncation alone is not a coherence failure. This is an informative base-completion rubric, without an absolute chat-readiness gate. Freeze rubric and disclose evaluator identity before outputs are judged."
+  },
+  "interpretation_notes": [
+    "Judged the whole prefix plus continuation. Mere shared nouns do not earn relevance credit when the continuation remains incoherent.",
+    "Indeterminate or nonsensical statements receive local_consistency=1; explicit incompatible identity claims receive 0. This ambiguity score is not evidence of demonstrated consistency.",
+    "Language reflects intelligibility and connected wording, not just presence of familiar words. Parseable but disconnected repetitive clauses in C-16 and D-20 receive 1.",
+    "Loops are independently flagged for recurring phrases; no output is penalized merely for token-cap truncation.",
+    "No outside fact checking, checkpoint identities, losses, pair scores, or other run files consulted."
+  ],
+  "samples": [
+    {
+      "id": "C-23",
+      "candidate": "C",
+      "prefix": "Because the lid had not been closed tightly, the jar",
+      "generated": " of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "Because the lid had not been closed tightly, the jar of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The jar receives no predicate or consequence; repeats “the same time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-14",
+      "candidate": "D",
+      "prefix": "The child found a small hole in the pocket and finally understood why",
+      "generated": " they are not just a lot of the body.\nThe first time, the body is the body of the body.\nThe child is the body of the body, and the body is the body.\nThe child is the body is",
+      "raw_text": "The child found a small hole in the pocket and finally understood why they are not just a lot of the body.\nThe first time, the body is the body of the body.\nThe child is the body of the body, and the body is the body.\nThe child is the body is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No explanation for the pocket hole; repeated body claims become “the child is the body is”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-06",
+      "candidate": "D",
+      "prefix": "In a shallow pond, insects gather near the surface while",
+      "generated": " the water.\nThe other hand of the water is the water, the water is the water.\nThe small, the water is the water.\nThe water is the water.\nThe water is the water, the water is the",
+      "raw_text": "In a shallow pond, insects gather near the surface while the water.\nThe other hand of the water is the water, the water is the water.\nThe small, the water is the water.\nThe water is the water.\nThe water is the water, the water is the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“While the water” lacks a predicate; repeated water tautologies replace a pond event.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-17",
+      "candidate": "D",
+      "prefix": "Inside the old workshop, the shelves were lined with",
+      "generated": " the body.\nThe first-based system was the most important for the body, and the body was the body.\nThe most common amount of the body is the body, the body is the body of the body.\nThe body",
+      "raw_text": "Inside the old workshop, the shelves were lined with the body.\nThe first-based system was the most important for the body, and the body was the body.\nThe most common amount of the body is the body, the body is the body of the body.\nThe body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Shelves lined with “the body” quickly drifts into an undefined system and repeated body claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-21",
+      "candidate": "D",
+      "prefix": "The battery had run out during the night. In the morning, the alarm clock",
+      "generated": " is the body, the body is a lot of the body.\nThe most important way to be a lot of the body.\nThe most common, the body is the body of the body.\nThe body is the body of the",
+      "raw_text": "The battery had run out during the night. In the morning, the alarm clock is the body, the body is a lot of the body.\nThe most important way to be a lot of the body.\nThe most common, the body is the body of the body.\nThe body is the body of the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Explicitly identifies the alarm clock as the body, conflicting with its supplied identity; repeats malformed body phrases without a morning consequence.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-13",
+      "candidate": "D",
+      "prefix": "A gust of wind scattered the loose papers across the courtyard. The caretaker",
+      "generated": " is the most important to be used in the same, and the other hand is the most important.\nThe most important way to be the same, the same, the body is the most important.\nThe most common, the body is",
+      "raw_text": "A gust of wind scattered the loose papers across the courtyard. The caretaker is the most important to be used in the same, and the other hand is the most important.\nThe most important way to be the same, the same, the body is the most important.\nThe most common, the body is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Caretaker is the most important to be used” is malformed; repeats “most important” without a response to scattered papers.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-09",
+      "candidate": "C",
+      "prefix": "Before repainting a wooden chair, it is useful to",
+      "generated": " the same time.\nThe most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "raw_text": "Before repainting a wooden chair, it is useful to the same time.\nThe most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No useful repainting action; “to the same time” leads into a repeated time fragment.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-20",
+      "candidate": "C",
+      "prefix": "The box was too wide for the doorway, so the movers",
+      "generated": ", the most of the most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the",
+      "raw_text": "The box was too wide for the doorway, so the movers, the most of the most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The movers receive no action; repeats “the most of” and “the same time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-20",
+      "candidate": "D",
+      "prefix": "The box was too wide for the doorway, so the movers",
+      "generated": " were the same.\nThe first time was the first time, the first time was the first time.\nThe first time was the first time, the first time was the first time.\nThe first time, the time was the time",
+      "raw_text": "The box was too wide for the doorway, so the movers were the same.\nThe first time was the first time, the first time was the first time.\nThe first time was the first time, the first time was the first time.\nThe first time, the time was the time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "“Movers were the same” leaves the doorway problem unresolved; subsequent sentences are parseable but only repeat “first time was the first time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-17",
+      "candidate": "C",
+      "prefix": "Inside the old workshop, the shelves were lined with",
+      "generated": " the same time.\nThe first time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "Inside the old workshop, the shelves were lined with the same time.\nThe first time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Shelves lined with “the same time” is indeterminate; repeats time fragments without workshop detail.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-02",
+      "candidate": "D",
+      "prefix": "Water on a wet pavement disappears more quickly on a warm, windy day because",
+      "generated": " they are not a lot of the body.\nThe most important way to be a lot of the body is not a lot of the body.\nThe most important way to be a lot of the body is the body.\nThe best",
+      "raw_text": "Water on a wet pavement disappears more quickly on a warm, windy day because they are not a lot of the body.\nThe most important way to be a lot of the body is not a lot of the body.\nThe most important way to be a lot of the body is the body.\nThe best",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Unanchored “they” and body claims do not explain pavement drying; repeats “most important way” and body phrases.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-15",
+      "candidate": "C",
+      "prefix": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would",
+      "generated": " be a lot of the same time, but the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time, the same",
+      "raw_text": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would be a lot of the same time, but the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Would be a lot of the same time” is unintelligible; repeats time fragments instead of a visitor response.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-07",
+      "candidate": "D",
+      "prefix": "As winter approaches, the leaves on some trees",
+      "generated": ", and the water.\nThe other hand, the water is the water, and the water is the water.\nThe other hand, the water is the water.\nThe other hand is the water, and the water is the water",
+      "raw_text": "As winter approaches, the leaves on some trees, and the water.\nThe other hand, the water is the water, and the water is the water.\nThe other hand, the water is the water.\nThe other hand is the water, and the water is the water",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Leaves receive no predicate; repeated water and “other hand” claims do not describe winter changes.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-12",
+      "candidate": "D",
+      "prefix": "The last bus had already left when the traveler reached the stop. After checking the empty road,",
+      "generated": " the end of the ground, the water is the water.\nThe other hand, the water is the water.\nThe other hand is the water.\nThe other hand is the water.\nThe other hand is the water.\n",
+      "raw_text": "The last bus had already left when the traveler reached the stop. After checking the empty road, the end of the ground, the water is the water.\nThe other hand, the water is the water.\nThe other hand is the water.\nThe other hand is the water.\nThe other hand is the water.\n",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No traveler action; shifts to water tautologies and repeats “The other hand is the water”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-14",
+      "candidate": "C",
+      "prefix": "The child found a small hole in the pocket and finally understood why",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time",
+      "raw_text": "The child found a small hole in the pocket and finally understood why the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No explanation for the pocket hole; “why” is followed only by repeated time fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-03",
+      "candidate": "D",
+      "prefix": "A shadow changes its position during the afternoon as",
+      "generated": " the world, the world is the most important way of the world.\nThe first time, the world is the most important way of the world.\nThe first time is the same way of the world is the same way of the world",
+      "raw_text": "A shadow changes its position during the afternoon as the world, the world is the most important way of the world.\nThe first time, the world is the most important way of the world.\nThe first time is the same way of the world is the same way of the world",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No shadow explanation; repeated claims about the world being a way become syntactically tangled.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-03",
+      "candidate": "C",
+      "prefix": "A shadow changes its position during the afternoon as",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "raw_text": "A shadow changes its position during the afternoon as the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No account of the changing shadow; repeats “the same time” without completing the clause.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-10",
+      "candidate": "C",
+      "prefix": "A clear set of directions to a building should include",
+      "generated": " a few of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the",
+      "raw_text": "A clear set of directions to a building should include a few of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“A few of the same time” supplies no directions and repeats without a meaningful clause.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-07",
+      "candidate": "C",
+      "prefix": "As winter approaches, the leaves on some trees",
+      "generated": ", and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "raw_text": "As winter approaches, the leaves on some trees, and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Leaves receive no predicate; a comma leads directly into a “same time” loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-16",
+      "candidate": "C",
+      "prefix": "From the top of the hill, the narrow river looked",
+      "generated": " at the house, and the house, and the house. The dog was a little girl named the house. The dog was a little girl named the house. The dog was a little girl. The dog was a little girl. The dog",
+      "raw_text": "From the top of the hill, the narrow river looked at the house, and the house, and the house. The dog was a little girl named the house. The dog was a little girl named the house. The dog was a little girl. The dog was a little girl. The dog",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 1,
+        "repetition": 0
+      },
+      "rationale": "Personifies the river as looking at a house, then explicitly calls a dog a little girl; readable clauses repeat that incompatible identity.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-18",
+      "candidate": "C",
+      "prefix": "Rain tapped against the glass while the room",
+      "generated": ", the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "Rain tapped against the glass while the room, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The room receives no predicate; repeats “the same time” after a comma.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-29",
+      "candidate": "C",
+      "prefix": "When the apprentice admitted the mistake, the supervisor",
+      "generated": " of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "When the apprentice admitted the mistake, the supervisor of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The supervisor receives no action; repeats time fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-04",
+      "candidate": "C",
+      "prefix": "A seed buried in damp soil begins to grow when",
+      "generated": " the water, the water, and the water.\n- The water is the water, and the water.\n- The water is the water.\n- The water is the water.\n- The water is the water.\n-",
+      "raw_text": "A seed buried in damp soil begins to grow when the water, the water, and the water.\n- The water is the water, and the water.\n- The water is the water.\n- The water is the water.\n- The water is the water.\n-",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Mentions water but supplies no growth condition; repeated water tautologies and fragments do not form an explanation.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-08",
+      "candidate": "D",
+      "prefix": "To repair a small tear in a cloth bag, begin by",
+      "generated": " the body.\n- The body is a lot of the body.\n- The body is the body of the body.\n- The body is the body of the body.\n- The body is the body.\n- The body",
+      "raw_text": "To repair a small tear in a cloth bag, begin by the body.\n- The body is a lot of the body.\n- The body is the body of the body.\n- The body is the body of the body.\n- The body is the body.\n- The body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No repair action follows “by the body”; repeated body tautologies fill the list.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-31",
+      "candidate": "C",
+      "prefix": "Everyone had contributed something to the meal. As they sat down together,",
+      "generated": " they were able to the time, they were able to be able to be used to be used in the same time.\nThe first time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "Everyone had contributed something to the meal. As they sat down together, they were able to the time, they were able to be able to be used to be used in the same time.\nThe first time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“They were able to the time” is malformed; loops on “able to”, “used”, and “same time” without a meal event.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-04",
+      "candidate": "D",
+      "prefix": "A seed buried in damp soil begins to grow when",
+      "generated": " the water is not only.\nThe most common amount of the body is the body, which is the body of the body.\nThe body is the body of the body, which is the body is the body.\nThe body is",
+      "raw_text": "A seed buried in damp soil begins to grow when the water is not only.\nThe most common amount of the body is the body, which is the body of the body.\nThe body is the body of the body, which is the body is the body.\nThe body is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“When the water is not only” is incomplete; drifts immediately into repeated malformed body claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-22",
+      "candidate": "C",
+      "prefix": "The path was blocked by a fallen branch, which meant",
+      "generated": " to the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same",
+      "raw_text": "The path was blocked by a fallen branch, which meant to the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Which meant to the same time” supplies no consequence of the blocked path; repeats time fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-25",
+      "candidate": "C",
+      "prefix": "Public libraries serve several purposes within a community. Besides lending books,",
+      "generated": " the most of the most of the most of the most of the most of the most of the same time of the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "raw_text": "Public libraries serve several purposes within a community. Besides lending books, the most of the most of the most of the most of the most of the most of the same time of the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No additional library purpose; loops on “the most of” and then “the same time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-08",
+      "candidate": "C",
+      "prefix": "To repair a small tear in a cloth bag, begin by",
+      "generated": " the water, and the water.\n- The man is a lot of the water, and the water.\n- The man is a lot of the water.\n- The man is a lot of the water.\n- The man",
+      "raw_text": "To repair a small tear in a cloth bag, begin by the water, and the water.\n- The man is a lot of the water, and the water.\n- The man is a lot of the water.\n- The man is a lot of the water.\n- The man",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No repair action follows “by”; switches to repeated unintelligible claims about a man and water.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-28",
+      "candidate": "D",
+      "prefix": "The two neighbors disagreed about the noise, but after listening to each other,",
+      "generated": " the other hand, the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand,",
+      "raw_text": "The two neighbors disagreed about the noise, but after listening to each other, the other hand, the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No outcome of the discussion; the entire continuation loops on “the other hand”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-16",
+      "candidate": "D",
+      "prefix": "From the top of the hill, the narrow river looked",
+      "generated": " at the ground.\nThe first time, the cat was the ground, and the cat was the cat.\nThe little bit of the cat was the cat, and the cat was the cat.\nThe cat was the cat, and",
+      "raw_text": "From the top of the hill, the narrow river looked at the ground.\nThe first time, the cat was the ground, and the cat was the cat.\nThe little bit of the cat was the cat, and the cat was the cat.\nThe cat was the cat, and",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The river looks at the ground, then a cat is explicitly identified as the ground; repeats cat tautologies with malformed surrounding clauses.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-01",
+      "candidate": "D",
+      "prefix": "When sunlight passes through a small gap in the curtains,",
+      "generated": " the body is a lot of the body.\nThe most common is the body of the body, the body is the body.\nThe body is the body of the body, which is the body, and the body is the body.",
+      "raw_text": "When sunlight passes through a small gap in the curtains, the body is a lot of the body.\nThe most common is the body of the body, the body is the body.\nThe body is the body of the body, which is the body, and the body is the body.",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No sunlight event; repeated body tautologies and “a lot of the body” are indeterminate.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-19",
+      "candidate": "D",
+      "prefix": "The empty railway platform grew brighter as",
+      "generated": " the world, and the world was the first-based and the world.\nThe first time, the world was the first-based, and the world was the first-based, and the first-based system was the first-based",
+      "raw_text": "The empty railway platform grew brighter as the world, and the world was the first-based and the world.\nThe first time, the world was the first-based, and the world was the first-based, and the first-based system was the first-based",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“As the world” never forms a brightness explanation; repeats the incomplete adjective “first-based”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-00",
+      "candidate": "C",
+      "prefix": "A metal spoon left in a bowl of hot soup gradually becomes warm because",
+      "generated": " it is a lot of the water.\nThe next time, the water is a lot of the water. The man is a lot of the water, and the water is a lot of the water.\nThe little girl is a lot",
+      "raw_text": "A metal spoon left in a bowl of hot soup gradually becomes warm because it is a lot of the water.\nThe next time, the water is a lot of the water. The man is a lot of the water, and the water is a lot of the water.\nThe little girl is a lot",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Does not explain warming; repeats “a lot of the water” and introduces a man and girl without connection.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-09",
+      "candidate": "D",
+      "prefix": "Before repainting a wooden chair, it is useful to",
+      "generated": " the body.\nThe most common is the body of the body, the body is the body.\nThe body is the body of the body, the body is the body.\nThe body is the body of the body, which is",
+      "raw_text": "Before repainting a wooden chair, it is useful to the body.\nThe most common is the body of the body, the body is the body.\nThe body is the body of the body, the body is the body.\nThe body is the body of the body, which is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No action follows “useful to the body”; repeats body tautologies.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-06",
+      "candidate": "C",
+      "prefix": "In a shallow pond, insects gather near the surface while",
+      "generated": " the water, the water, and the water, the water, and the water.\n- The water is a lot of the water.\n- The water is a lot of the water.\n- The water is a lot of the",
+      "raw_text": "In a shallow pond, insects gather near the surface while the water, the water, and the water, the water, and the water.\n- The water is a lot of the water.\n- The water is a lot of the water.\n- The water is a lot of the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No action follows “while”; repeats water fragments and “water is a lot of the water”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-29",
+      "candidate": "D",
+      "prefix": "When the apprentice admitted the mistake, the supervisor",
+      "generated": ", the body is not only.\nThe first time is the body of the body is the body.\nThe most important way of the body is the body.\nThe body is the body of the body, the body is the body",
+      "raw_text": "When the apprentice admitted the mistake, the supervisor, the body is not only.\nThe first time is the body of the body is the body.\nThe most important way of the body is the body.\nThe body is the body of the body, the body is the body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The supervisor receives no action; malformed body claims repeat without addressing the admitted mistake.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-05",
+      "candidate": "C",
+      "prefix": "The roots of a tree help it survive dry weather by",
+      "generated": " the water, and the water, and the water.\nThe next time, the water is a lot of the water, and the water is a lot of the water.\nThe next time, the water is a lot of the water",
+      "raw_text": "The roots of a tree help it survive dry weather by the water, and the water, and the water.\nThe next time, the water is a lot of the water, and the water is a lot of the water.\nThe next time, the water is a lot of the water",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Water vocabulary never becomes an intelligible action of roots; repeats “water is a lot of the water”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-28",
+      "candidate": "C",
+      "prefix": "The two neighbors disagreed about the noise, but after listening to each other,",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the time, the time, the time, the time",
+      "raw_text": "The two neighbors disagreed about the noise, but after listening to each other, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the time, the time, the time, the time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No outcome of the neighbors’ discussion; loops on “the same time” and “the time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-31",
+      "candidate": "D",
+      "prefix": "Everyone had contributed something to the meal. As they sat down together,",
+      "generated": " they were not a lot of the body.\nThe most common way to be a lot of the body, but they were not a lot of the body.\nThe most common thing that the body is that is the body, but the",
+      "raw_text": "Everyone had contributed something to the meal. As they sat down together, they were not a lot of the body.\nThe most common way to be a lot of the body, but they were not a lot of the body.\nThe most common thing that the body is that is the body, but the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“They were not a lot of the body” is indeterminate; repeats body phrases with malformed clauses instead of a meal event.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-27",
+      "candidate": "C",
+      "prefix": "A map and a photograph show a place in different ways. A map",
+      "generated": " of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time, the same",
+      "raw_text": "A map and a photograph show a place in different ways. A map of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The map receives no predicate; repeats time fragments instead of a comparison.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-26",
+      "candidate": "D",
+      "prefix": "Written records help a team understand decisions made months earlier because",
+      "generated": " they are not only.\nThe study is the most important way to be the same.\nThe first step is the most important way to be the same.\nThe first is that the same way is that the same way is to be",
+      "raw_text": "Written records help a team understand decisions made months earlier because they are not only.\nThe study is the most important way to be the same.\nThe first step is the most important way to be the same.\nThe first is that the same way is that the same way is to be",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Because they are not only” is incomplete; undefined study and step claims devolve into repeated “same way”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-00",
+      "candidate": "D",
+      "prefix": "A metal spoon left in a bowl of hot soup gradually becomes warm because",
+      "generated": " of the water.\nThe other hand of the water is the water, the water is the water.\nThe other hand is the water, and the water is the water.\nThe other hand is the water, and the water is",
+      "raw_text": "A metal spoon left in a bowl of hot soup gradually becomes warm because of the water.\nThe other hand of the water is the water, the water is the water.\nThe other hand is the water, and the water is the water.\nThe other hand is the water, and the water is",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Because of the water” offers no intelligible mechanism; the remainder loops on water and “the other hand”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-02",
+      "candidate": "C",
+      "prefix": "Water on a wet pavement disappears more quickly on a warm, windy day because",
+      "generated": " it is not a lot of the water.\nThe next day of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "raw_text": "Water on a wet pavement disappears more quickly on a warm, windy day because it is not a lot of the water.\nThe next day of the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“It is not a lot of the water” gives no intelligible explanation; then loops on “the same time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-30",
+      "candidate": "D",
+      "prefix": "The visitor had brought an umbrella to return, but the owner",
+      "generated": " was the first, and the first time, and the first time, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand",
+      "raw_text": "The visitor had brought an umbrella to return, but the owner was the first, and the first time, and the first time, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand, and the other hand",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Owner was the first” is unresolved; repeats “first time” before an extended “other hand” loop.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-26",
+      "candidate": "C",
+      "prefix": "Written records help a team understand decisions made months earlier because",
+      "generated": " the same time, the same time, and the same time, and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "raw_text": "Written records help a team understand decisions made months earlier because the same time, the same time, and the same time, and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No explanation of written records; repeats “the same time” without completing “because”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-10",
+      "candidate": "D",
+      "prefix": "A clear set of directions to a building should include",
+      "generated": " a variety of the body.\nThe most common system is the most important to be used to be used to be used to the body.\nThe most common system is the most common system that is the most important to be used in the",
+      "raw_text": "A clear set of directions to a building should include a variety of the body.\nThe most common system is the most important to be used to be used to be used to the body.\nThe most common system is the most common system that is the most important to be used in the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“A variety of the body” is unrelated to directions; a system digression loops on “to be used”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-18",
+      "candidate": "D",
+      "prefix": "Rain tapped against the glass while the room",
+      "generated": ", the water is the water.\nThe most common, the water is the water, the water is the water.\nThe water is the water, the water is the water.\nThe water is the water, the water is the",
+      "raw_text": "Rain tapped against the glass while the room, the water is the water.\nThe most common, the water is the water, the water is the water.\nThe water is the water, the water is the water.\nThe water is the water, the water is the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The room receives no predicate; loops on “the water is the water”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-11",
+      "candidate": "C",
+      "prefix": "When storing a bicycle for several months,",
+      "generated": " and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "raw_text": "When storing a bicycle for several months, and the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Never supplies bicycle storage guidance; repeats “the same time” after an unattached conjunction.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-19",
+      "candidate": "C",
+      "prefix": "The empty railway platform grew brighter as",
+      "generated": " a new, and the most of the most of the most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same",
+      "raw_text": "The empty railway platform grew brighter as a new, and the most of the most of the most of the same time, the same time, the same time, the same time, the same time, the same time, the same time, and the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“As a new” never becomes a clause; repeats “the most of” and “the same time” instead of explaining brightness.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-27",
+      "candidate": "D",
+      "prefix": "A map and a photograph show a place in different ways. A map",
+      "generated": " is a lot of the body.\nThe most important way to be a lot of the body.\nThe most common way to the body is the body.\nThe most common way to be the body is the body.\nThe body",
+      "raw_text": "A map and a photograph show a place in different ways. A map is a lot of the body.\nThe most important way to be a lot of the body.\nThe most common way to the body is the body.\nThe most common way to be the body is the body.\nThe body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 0,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Explicitly identifies a map as a quantity of the body, incompatible with its supplied identity; repeats malformed body claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-25",
+      "candidate": "D",
+      "prefix": "Public libraries serve several purposes within a community. Besides lending books,",
+      "generated": " the world is a new way to be a new way to be a new way to be a new way to be a new way to be used.\nThe first-based system is a lot of the same time.\nThe first time",
+      "raw_text": "Public libraries serve several purposes within a community. Besides lending books, the world is a new way to be a new way to be a new way to be a new way to be a new way to be used.\nThe first-based system is a lot of the same time.\nThe first time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No library purpose; loops on “a new way to be” and introduces an undefined “first-based system”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-13",
+      "candidate": "C",
+      "prefix": "A gust of wind scattered the loose papers across the courtyard. The caretaker",
+      "generated": " of the water, the water, and the water, and the water.\nThe first time of the water is the water, and the water, and the water is the water. The water is the water, and the water. The",
+      "raw_text": "A gust of wind scattered the loose papers across the courtyard. The caretaker of the water, the water, and the water, and the water.\nThe first time of the water is the water, and the water, and the water is the water. The water is the water, and the water. The",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The caretaker receives no action; water fragments and water tautologies replace the paper-scattering scene.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-22",
+      "candidate": "D",
+      "prefix": "The path was blocked by a fallen branch, which meant",
+      "generated": " that the “The “The “The “The ‘the” is “the” of the “the-s” is “the-the-s of the “the-",
+      "raw_text": "The path was blocked by a fallen branch, which meant that the “The “The “The “The ‘the” is “the” of the “the-s” is “the-the-s of the “the-",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No consequence of the blockage; collapses into repeated quoted “The” fragments and broken word pieces.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-24",
+      "candidate": "C",
+      "prefix": "A useful index at the back of a book allows readers to",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "raw_text": "A useful index at the back of a book allows readers to the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No reader action follows “to”; repeats time fragments instead of an index function.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-24",
+      "candidate": "D",
+      "prefix": "A useful index at the back of a book allows readers to",
+      "generated": " the body.\nThe first time, the body is the body of the body, and the body is the body of the body.\nThe body is the body, the body is the body, and the body is the body.\n",
+      "raw_text": "A useful index at the back of a book allows readers to the body.\nThe first time, the body is the body of the body, and the body is the body of the body.\nThe body is the body, the body is the body, and the body is the body.\n",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No reader action follows “to the body”; repeated body tautologies replace an index function.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-21",
+      "candidate": "C",
+      "prefix": "The battery had run out during the night. In the morning, the alarm clock",
+      "generated": " is that the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "raw_text": "The battery had run out during the night. In the morning, the alarm clock is that the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“The alarm clock is that the same time” is indeterminate; repeats time fragments without addressing the spent battery.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-11",
+      "candidate": "D",
+      "prefix": "When storing a bicycle for several months,",
+      "generated": " the same, the same, the body is not a lot of the body.\nThe most common, the body is the body, and the body is the body.\nThe body is the body of the body, which is the body",
+      "raw_text": "When storing a bicycle for several months, the same, the same, the body is not a lot of the body.\nThe most common, the body is the body, and the body is the body.\nThe body is the body of the body, which is the body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No bicycle storage action; repeats “the same” and indeterminate body claims.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-05",
+      "candidate": "D",
+      "prefix": "The roots of a tree help it survive dry weather by",
+      "generated": " the water.\nThe next time, the water is the water, and the water is the water.\nThe water is the water, the water is the water.\nThe water is the water, and the water is the water.",
+      "raw_text": "The roots of a tree help it survive dry weather by the water.\nThe next time, the water is the water, and the water is the water.\nThe water is the water, the water is the water.\nThe water is the water, and the water is the water.",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "No action follows “by the water”; repeated water tautologies do not explain root function.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-15",
+      "candidate": "D",
+      "prefix": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would",
+      "generated": " be a lot of the day.\nThe first time, the time of the day, the day, and the day of the day, and the day of the day.\nThe first time, the day of the day, and the",
+      "raw_text": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would be a lot of the day.\nThe first time, the time of the day, the day, and the day of the day, and the day of the day.\nThe first time, the day of the day, and the",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "“Would be a lot of the day” is unintelligible; repeats day fragments without a visitor response.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "D-23",
+      "candidate": "D",
+      "prefix": "Because the lid had not been closed tightly, the jar",
+      "generated": " of the body, and the body is not a lot of the body.\nThe most important way of the body is the body is the body, which is the body, and the body is the body.\nThe body is the body",
+      "raw_text": "Because the lid had not been closed tightly, the jar of the body, and the body is not a lot of the body.\nThe most important way of the body is the body is the body, which is the body, and the body is the body.\nThe body is the body",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The jar receives no predicate; repeated body clauses contain tangled “is the body is the body” syntax.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-30",
+      "candidate": "C",
+      "prefix": "The visitor had brought an umbrella to return, but the owner",
+      "generated": " of the first time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the time, and the time, the time, the time, the time",
+      "raw_text": "The visitor had brought an umbrella to return, but the owner of the first time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the time, and the time, the time, the time, the time",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "The owner receives no predicate; loops on “the same time” and “the time”.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-01",
+      "candidate": "C",
+      "prefix": "When sunlight passes through a small gap in the curtains,",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "raw_text": "When sunlight passes through a small gap in the curtains, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Never completes the sunlight event; consists of repeated “the same time” fragments.",
+      "loop": true,
+      "empty": false
+    },
+    {
+      "id": "C-12",
+      "candidate": "C",
+      "prefix": "The last bus had already left when the traveler reached the stop. After checking the empty road,",
+      "generated": " the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "raw_text": "The last bus had already left when the traveler reached the stop. After checking the empty road, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time, the same time,",
+      "scores": {
+        "relevance": 0,
+        "local_consistency": 1,
+        "language": 0,
+        "repetition": 0
+      },
+      "rationale": "Never describes the traveler’s next action; repeats “the same time” fragments.",
+      "loop": true,
+      "empty": false
+    }
+  ],
+  "candidate_aggregates": {
+    "C": {
+      "n": 32,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.96875,
+          "counts": {
+            "0": 1,
+            "1": 31,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.03125,
+          "counts": {
+            "0": 31,
+            "1": 1,
+            "2": 0
+          }
+        },
+        "repetition": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        }
+      },
+      "loop_count": 32,
+      "loop_rate": 1.0,
+      "empty_count": 0
+    },
+    "D": {
+      "n": 32,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.90625,
+          "counts": {
+            "0": 3,
+            "1": 29,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.03125,
+          "counts": {
+            "0": 31,
+            "1": 1,
+            "2": 0
+          }
+        },
+        "repetition": {
+          "mean": 0.0,
+          "counts": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        }
+      },
+      "loop_count": 32,
+      "loop_rate": 1.0,
+      "empty_count": 0
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "name": "own-base-mlx-tiny-state-bridge-v1",
+  "scope": "CPU-only tiny feasibility, no live checkpoint load or migration; no GPU/full model/pretrained weights.",
+  "seeds": [
+    4817,
+    5209,
+    6211
+  ],
+  "config": {
+    "vocabulary": 43,
+    "context": 16,
+    "width": 32,
+    "heads": 4,
+    "depth": 2
+  },
+  "conversion_step": 3,
+  "pause_step": 5,
+  "total_steps": 8,
+  "learning_rate": 0.001,
+  "effective_tokens": 36,
+  "microbatches": [
+    {
+      "batch": 1,
+      "length": 12
+    },
+    {
+      "batch": 2,
+      "length": 12
+    }
+  ],
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "eps": 1e-08,
+    "matrix_decay": 0.1,
+    "other_decay": 0,
+    "bias_correction": true,
+    "clip": 1.0
+  },
+  "maximum_errors": {
+    "loss_error": 5e-05,
+    "logits_max_abs": 0.0003,
+    "gradient_max_abs": 0.0002,
+    "accumulation_gradient_max_abs": 5e-06,
+    "weight_max_abs": 5e-05,
+    "m_max_abs": 2e-05,
+    "v_max_abs": 1e-06
+  },
+  "exact_requirements": [
+    "Torch-to-MLX-to-neutral full tensor roundtrip exact at step3.",
+    "MLX uninterrupted step3to8 vs fresh process restore step5to8: all weights,moments,groupstep,groupLR,explicitMLXkey,preservedTorchRNG,cursor exactly equal.",
+    "Losses and PRNG canaries after resume exactly equal.",
+    "Seven negative controls all refuse: corrupt bytes,missing moment,wrong optimizer step,missing RNG,wrong cursor,wrong decay,wrong experiment."
+  ],
+  "rng_policy": "Torch RNG preserved opaquely; assign explicit new MLXkey [0,seed], verify native key encoding; use canaries each update, no claim random stream equivalence between frameworks. No dropout/random training operations.",
+  "source_policy": "Reuse previous own-random tiny parameter fixtures; independently fixed random token matrices, no protected or live data.",
+  "initial_fixture_sha256": {
+    "4817": "4006a758f538bd6f707095b051909d3edac432e9a236b11239b11f9c4b4f3b59",
+    "5209": "7ab8f06bd9fdeee128f010ebce841c618a3102fa05cd2c768596f13945cfefdf",
+    "6211": "878151e73ad956e13105531f232671b1435b309cf28407f878f0a6aa24585ee9"
+  },
+  "code_sha256": {
+    "mlx_checkpoint_bridge.py": "bade9bee17777da884f2692f5898dc81db365d6fbdf351af6791637a81f9d0ba",
+    "verify_mlx_base_resume.py": "09d11ab4e2325fa23a5bc2decede678758d4f65966151210720de083170fe5f7",
+    "mlx_base.py": "5ed9c3d54ddaddf201c97eae679db6dd993a6abe5355e84790501e6f57867aa6",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+  },
+  "limits": {
+    "extra_disk_bytes": 1073741824,
+    "mlx_child_seconds": 180,
+    "resume_child_seconds": 60
+  },
+  "notes": [
+    "Fixed tolerances before execution; preserve failure instead of tuning gates.",
+    "Constant learning rate only; global campaign scheduler and crash controller not implemented.",
+    "Native MLXoptimizer state setter used; two native groups with explicit biascorrection."
+  ]
+}
