@@ -1,0 +1,147 @@
+{
+  "state": "passed",
+  "selected_layout": {
+    "dtype": "bf16 autocast with FP32 master and AdamW moments",
+    "microbatch": 2,
+    "context": 512,
+    "accumulation": 8,
+    "targets_per_update": 8192,
+    "parameters": 124439808
+  },
+  "selection_reason": "Best512 context layout,11% slower than fastest256 in initial short comparisons; explicit owner-directed tradeoff before second immutable run.",
+  "initial_comparisons": [
+    {
+      "name": "fp32-b2-t256",
+      "state": "passed",
+      "layout": [
+        "fp32-b2-t256",
+        2,
+        256,
+        false
+      ],
+      "updates": 12,
+      "train_ce": 10.372314453125,
+      "grad_norm": 242.83851623535156,
+      "measured_seconds": 39.45155500108376,
+      "tokens_per_second": 2076.4707499552196,
+      "mps_allocated": 1994236160,
+      "mps_driver": 4460429312
+    },
+    {
+      "name": "bf16-b2-t256",
+      "state": "passed",
+      "layout": [
+        "bf16-b2-t256",
+        2,
+        256,
+        true
+      ],
+      "updates": 12,
+      "train_ce": 10.140016555786133,
+      "grad_norm": 223.9041748046875,
+      "measured_seconds": 39.211905585136265,
+      "tokens_per_second": 2089.161410993827,
+      "mps_allocated": 2013503744,
+      "mps_driver": 4493983744
+    },
+    {
+      "name": "bf16-b2-t512",
+      "state": "passed",
+      "layout": [
+        "bf16-b2-t512",
+        2,
+        512,
+        true
+      ],
+      "updates": 12,
+      "train_ce": 8.078094482421875,
+      "grad_norm": 1.2270424365997314,
+      "measured_seconds": 43.92217071005143,
+      "tokens_per_second": 1865.1172898713974,
+      "mps_allocated": 2021892352,
+      "mps_driver": 5737594880
+    },
+    {
+      "name": "bf16-b4-t512",
+      "state": "passed",
+      "layout": [
+        "bf16-b4-t512",
+        4,
+        512,
+        true
+      ],
+      "updates": 12,
+      "train_ce": 8.078092575073242,
+      "grad_norm": 1.2271966934204102,
+      "measured_seconds": 48.03348708502017,
+      "tokens_per_second": 1705.4768448311918,
+      "mps_allocated": 2024120576,
+      "mps_driver": 7226572800
+    }
+  ],
+  "initial_status": "stopped",
+  "initial_stop_reason": "Explicit owner-directed switch from fastest256 to best512 sustained test; full quick comparisons and checkpoint smoke preserved.",
+  "numerical_comparison": {
+    "loss": 10.983610153198242,
+    "bf16_loss": 10.9814453125,
+    "loss_absolute_error": 0.0021648406982421875,
+    "logits_rms_error": 0.004314817953854799,
+    "gradient_relative_l2": 0.006492559417881031,
+    "gradient_norm": 23.034515380859375,
+    "actual_logits_dtype": "torch.bfloat16",
+    "passed": true
+  },
+  "checkpoint_roundtrip": "exact logits; model, optimizer, cursor, CPU/MPS RNG restored",
+  "sustained": {
+    "updates": 133,
+    "train_ce": 6.702982425689697,
+    "gradient_norm": 0.7357860207557678,
+    "training_seconds": 814.018013626337,
+    "elapsed_seconds": 815.1594233750366,
+    "training_tokens_per_second": 1338.4666945468057,
+    "end_to_end_tokens_per_second": 1336.5925319859205,
+    "mps_allocated": 2009440512,
+    "mps_driver": 5301387264
+  },
+  "late_window": {
+    "start_updates": 77,
+    "start_elapsed_seconds": 450.1196035409812,
+    "end_updates": 133,
+    "end_elapsed_seconds": 815.1594233750366,
+    "targets": 458752,
+    "elapsed_seconds": 365.0398198340554,
+    "tokens_per_second": 1256.717692356263
+  },
+  "combined_wall_seconds": 1159.37015914917,
+  "resources": {
+    "peak_thermal": 1,
+    "max_swap_growth_mib": 0.0,
+    "peak_rss_mib": 1418.671875,
+    "peak_sampled_mps_allocated": 2126758912,
+    "minimum_disk_gib": 50.32872009277344,
+    "selected_mps_driver_bytes": 5301387264
+  },
+  "planning": {
+    "rate": 1256.717692356263,
+    "hours_per_100m_excluding_eval_save": 22.103434961352598,
+    "days_per_1b_excluding_eval_save": 9.209764567230248
+  },
+  "limits": [
+    "Performance benchmark only; all randomly initialized model tensors and optimization updates discarded.",
+    "Repeated eligible wiki training text only, not a new foundation curriculum or quality evaluation.",
+    "Numerical comparison at same random initialization andB2T256; not full trajectory equivalence.",
+    "Measured selected context512 for13.6minutes, not a full24-hour thermal or reliability guarantee.",
+    "Tail window separately sampled from persisted progress snapshots; excludes earlier warmup/comparison/checkpoint cost."
+  ],
+  "files": {
+    "runs/base-layout-benchmark-01/config.json": "9df3c608e1ddcd37480867e51d0141fc7ff7b1bea64b0c6593039510dbcca31c",
+    "runs/base-layout-benchmark-01/source.py": "0ff58d885c59d3e6479c033e3c6e2c9288fa41cd27e09a0384703c61726691fe",
+    "runs/base-layout-benchmark-01/status.json": "a06073ce9dae89a61525ab6081a3b5ab7ce78130473da52e5a773b77aa0520a6",
+    "runs/base-layout-benchmark-01/resources.jsonl": "05b5c7485b9b046920a485df1b598f0393ecdda313c5cdb079b319677326bb7b",
+    "runs/base-layout-benchmark-512/config.json": "752f20575d499fbaefa455e4cbf7043dc0c1ecf9791e43a75412243208bd4b5f",
+    "runs/base-layout-benchmark-512/status.json": "1db518d0928e368110215f6b559ee4b925a57fa11d5999353fc86de784f544d6",
+    "runs/base-layout-benchmark-512/resources.jsonl": "acd873875ada910bc350423dbe1db172c05b838220fd6feb70ebf6dcaf351661",
+    "runs/base-layout-benchmark-512/late-window-observation.json": "c4927d93599d3d7b60f256589924c16eb9bef07697609a6425f34adab8a9b080",
+    "benchmark_base.py": "50d354a30255a4137dd9448d43ac4e9c7ae060324a74b3a539381f84d685899a"
+  }
+}

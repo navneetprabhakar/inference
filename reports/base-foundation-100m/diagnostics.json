@@ -1,0 +1,863 @@
+{
+  "schema": 1,
+  "authorship": "Original text authored prospectively by the independent evaluation agent in this session; no external teacher, corpus samples, model generations or sealed conversations consulted.",
+  "tokenizer": {
+    "encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+    "vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5"
+  },
+  "generation": {
+    "max_new_tokens": 48,
+    "frequency_target_tokens": 10000000,
+    "decoding": "Freeze deterministic decoding before step-zero evaluation; use the same settings at each milestone."
+  },
+  "counterfactual": {
+    "scoring": "Score every token of each full continuation and take its mean conditional log probability. Normalize the two scores with logsumexp if reporting choice probabilities. Strictly higher mean log probability for the correct continuation passes a member; ties fail. A pair passes only when both members pass. Also retain summed log likelihood as a secondary length-sensitivity measure. No absolute base-quality or chat gate.",
+    "token_boundary": "Encode prompt and alternatives separately then concatenate their token IDs for suffix likelihood, so every alternative token is scored and boundary segmentation is fixed. Do not score prompt tokens. Use identical alternative token IDs for both members."
+  },
+  "generation_rubric": {
+    "unit": "Each fixed prefix and its up-to-48-token continuation.",
+    "dimensions": {
+      "relevance": "0 unrelated or incoherent; 1 partly relevant with drift; 2 follows the prefix throughout.",
+      "local_consistency": "0 contradicts prefix or itself; 1 ambiguous or minor inconsistency; 2 consistent with supplied facts and own continuation.",
+      "language": "0 mostly unreadable; 1 understandable with substantial grammatical defects; 2 readable connected language.",
+      "repetition": "0 stuck in repeated phrase or loop; 1 distracting redundancy; 2 no distracting repetition."
+    },
+    "report": "Report all dimension counts and means, loop rate, empty outputs and raw completions. A token-cap truncation alone is not a coherence failure. This is an informative base-completion rubric, without an absolute chat-readiness gate. Freeze rubric and disclose evaluator identity before outputs are judged."
+  },
+  "prefixes": [
+    {
+      "id": "prefix-01",
+      "category": "physical explanation",
+      "text": "A metal spoon left in a bowl of hot soup gradually becomes warm because"
+    },
+    {
+      "id": "prefix-02",
+      "category": "physical explanation",
+      "text": "When sunlight passes through a small gap in the curtains,"
+    },
+    {
+      "id": "prefix-03",
+      "category": "physical explanation",
+      "text": "Water on a wet pavement disappears more quickly on a warm, windy day because"
+    },
+    {
+      "id": "prefix-04",
+      "category": "physical explanation",
+      "text": "A shadow changes its position during the afternoon as"
+    },
+    {
+      "id": "prefix-05",
+      "category": "natural world",
+      "text": "A seed buried in damp soil begins to grow when"
+    },
+    {
+      "id": "prefix-06",
+      "category": "natural world",
+      "text": "The roots of a tree help it survive dry weather by"
+    },
+    {
+      "id": "prefix-07",
+      "category": "natural world",
+      "text": "In a shallow pond, insects gather near the surface while"
+    },
+    {
+      "id": "prefix-08",
+      "category": "natural world",
+      "text": "As winter approaches, the leaves on some trees"
+    },
+    {
+      "id": "prefix-09",
+      "category": "procedural prose",
+      "text": "To repair a small tear in a cloth bag, begin by"
+    },
+    {
+      "id": "prefix-10",
+      "category": "procedural prose",
+      "text": "Before repainting a wooden chair, it is useful to"
+    },
+    {
+      "id": "prefix-11",
+      "category": "procedural prose",
+      "text": "A clear set of directions to a building should include"
+    },
+    {
+      "id": "prefix-12",
+      "category": "procedural prose",
+      "text": "When storing a bicycle for several months,"
+    },
+    {
+      "id": "prefix-13",
+      "category": "everyday narrative",
+      "text": "The last bus had already left when the traveler reached the stop. After checking the empty road,"
+    },
+    {
+      "id": "prefix-14",
+      "category": "everyday narrative",
+      "text": "A gust of wind scattered the loose papers across the courtyard. The caretaker"
+    },
+    {
+      "id": "prefix-15",
+      "category": "everyday narrative",
+      "text": "The child found a small hole in the pocket and finally understood why"
+    },
+    {
+      "id": "prefix-16",
+      "category": "everyday narrative",
+      "text": "The shopkeeper placed a handwritten sign beside the locked door. Anyone arriving early would"
+    },
+    {
+      "id": "prefix-17",
+      "category": "descriptive prose",
+      "text": "From the top of the hill, the narrow river looked"
+    },
+    {
+      "id": "prefix-18",
+      "category": "descriptive prose",
+      "text": "Inside the old workshop, the shelves were lined with"
+    },
+    {
+      "id": "prefix-19",
+      "category": "descriptive prose",
+      "text": "Rain tapped against the glass while the room"
+    },
+    {
+      "id": "prefix-20",
+      "category": "descriptive prose",
+      "text": "The empty railway platform grew brighter as"
+    },
+    {
+      "id": "prefix-21",
+      "category": "cause and effect",
+      "text": "The box was too wide for the doorway, so the movers"
+    },
+    {
+      "id": "prefix-22",
+      "category": "cause and effect",
+      "text": "The battery had run out during the night. In the morning, the alarm clock"
+    },
+    {
+      "id": "prefix-23",
+      "category": "cause and effect",
+      "text": "The path was blocked by a fallen branch, which meant"
+    },
+    {
+      "id": "prefix-24",
+      "category": "cause and effect",
+      "text": "Because the lid had not been closed tightly, the jar"
+    },
+    {
+      "id": "prefix-25",
+      "category": "expository prose",
+      "text": "A useful index at the back of a book allows readers to"
+    },
+    {
+      "id": "prefix-26",
+      "category": "expository prose",
+      "text": "Public libraries serve several purposes within a community. Besides lending books,"
+    },
+    {
+      "id": "prefix-27",
+      "category": "expository prose",
+      "text": "Written records help a team understand decisions made months earlier because"
+    },
+    {
+      "id": "prefix-28",
+      "category": "expository prose",
+      "text": "A map and a photograph show a place in different ways. A map"
+    },
+    {
+      "id": "prefix-29",
+      "category": "simple social narrative",
+      "text": "The two neighbors disagreed about the noise, but after listening to each other,"
+    },
+    {
+      "id": "prefix-30",
+      "category": "simple social narrative",
+      "text": "When the apprentice admitted the mistake, the supervisor"
+    },
+    {
+      "id": "prefix-31",
+      "category": "simple social narrative",
+      "text": "The visitor had brought an umbrella to return, but the owner"
+    },
+    {
+      "id": "prefix-32",
+      "category": "simple social narrative",
+      "text": "Everyone had contributed something to the meal. As they sat down together,"
+    }
+  ],
+  "pairs": [
+    {
+      "id": "pair-01",
+      "family": "location",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 21,
+          "prefix": "The spare blanket is in the chest. The cupboard contains empty baskets. The spare blanket can be found",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 21,
+          "prefix": "The spare blanket is in the cupboard. The chest contains empty baskets. The spare blanket can be found",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " in the chest.",
+        " in the cupboard."
+      ]
+    },
+    {
+      "id": "pair-02",
+      "family": "color",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 22,
+          "prefix": "The delivery bicycle has a yellow frame. The parked scooter is black. The frame of the delivery bicycle is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 22,
+          "prefix": "The delivery bicycle has a black frame. The parked scooter is yellow. The frame of the delivery bicycle is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " yellow.",
+        " black."
+      ]
+    },
+    {
+      "id": "pair-03",
+      "family": "time",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 17,
+          "prefix": "The inspection takes place before lunch. The cleaning happens after lunch. The inspection is scheduled",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 17,
+          "prefix": "The inspection takes place after lunch. The cleaning happens before lunch. The inspection is scheduled",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " before lunch.",
+        " after lunch."
+      ]
+    },
+    {
+      "id": "pair-04",
+      "family": "material",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 23,
+          "prefix": "The serving bowl is made of wood. The spoon is made of metal. The material used for the serving bowl is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 23,
+          "prefix": "The serving bowl is made of metal. The spoon is made of wood. The material used for the serving bowl is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " wood.",
+        " metal."
+      ]
+    },
+    {
+      "id": "pair-05",
+      "family": "ownership",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 23,
+          "prefix": "The cook owns the striped apron. The gardener owns the plain apron. The striped apron belongs to",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 23,
+          "prefix": "The gardener owns the striped apron. The cook owns the plain apron. The striped apron belongs to",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the cook.",
+        " the gardener."
+      ]
+    },
+    {
+      "id": "pair-06",
+      "family": "quantity",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 21,
+          "prefix": "There are four lamps in the hall and six in the kitchen. The number of lamps in the hall is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 21,
+          "prefix": "There are six lamps in the hall and four in the kitchen. The number of lamps in the hall is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " four.",
+        " six."
+      ]
+    },
+    {
+      "id": "pair-07",
+      "family": "sequence",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 16,
+          "prefix": "The bell rang, and then the gate opened. The event that happened first was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 16,
+          "prefix": "The gate opened, and then the bell rang. The event that happened first was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the bell ringing.",
+        " the gate opening."
+      ]
+    },
+    {
+      "id": "pair-08",
+      "family": "state",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 16,
+          "prefix": "The kitchen window is open and the bedroom window is closed. The kitchen window is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 16,
+          "prefix": "The kitchen window is closed and the bedroom window is open. The kitchen window is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " open.",
+        " closed."
+      ]
+    },
+    {
+      "id": "pair-09",
+      "family": "destination",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 22,
+          "prefix": "The parcel is going to the museum. The letter is going to the school. The destination of the parcel is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 22,
+          "prefix": "The parcel is going to the school. The letter is going to the museum. The destination of the parcel is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the museum.",
+        " the school."
+      ]
+    },
+    {
+      "id": "pair-10",
+      "family": "weather",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 21,
+          "prefix": "During the walk it rained. During the boat trip it stayed dry. The weather during the walk was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 21,
+          "prefix": "During the walk it stayed dry. During the boat trip it rained. The weather during the walk was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " rainy.",
+        " dry."
+      ]
+    },
+    {
+      "id": "pair-11",
+      "family": "surface",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 17,
+          "prefix": "The front steps were slippery, but the rear steps were dry. The front steps were",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 17,
+          "prefix": "The front steps were dry, but the rear steps were slippery. The front steps were",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " slippery.",
+        " dry."
+      ]
+    },
+    {
+      "id": "pair-12",
+      "family": "direction",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 19,
+          "prefix": "The stream flows east from the bridge. The road leads west. From the bridge the stream flows",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 19,
+          "prefix": "The stream flows west from the bridge. The road leads east. From the bridge the stream flows",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " east.",
+        " west."
+      ]
+    },
+    {
+      "id": "pair-13",
+      "family": "sound",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 17,
+          "prefix": "A whistle announced the beginning. A drum announced the end. The beginning was announced by",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 17,
+          "prefix": "A drum announced the beginning. A whistle announced the end. The beginning was announced by",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " a whistle.",
+        " a drum."
+      ]
+    },
+    {
+      "id": "pair-14",
+      "family": "size",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 16,
+          "prefix": "The larger parcel contains towels. The smaller parcel contains cups. The larger parcel contains",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 16,
+          "prefix": "The larger parcel contains cups. The smaller parcel contains towels. The larger parcel contains",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " towels.",
+        " cups."
+      ]
+    },
+    {
+      "id": "pair-15",
+      "family": "movement",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 14,
+          "prefix": "The cart moved uphill while the truck moved downhill. The cart was moving",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 14,
+          "prefix": "The cart moved downhill while the truck moved uphill. The cart was moving",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " uphill.",
+        " downhill."
+      ]
+    },
+    {
+      "id": "pair-16",
+      "family": "permission",
+      "length_group": "short",
+      "members": [
+        {
+          "prompt_tokens": 23,
+          "prefix": "Visitors may enter the courtyard, but the roof is closed to them. The place visitors are allowed to enter is",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 23,
+          "prefix": "Visitors may enter the roof, but the courtyard is closed to them. The place visitors are allowed to enter is",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the courtyard.",
+        " the roof."
+      ]
+    },
+    {
+      "id": "pair-17",
+      "family": "container",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 331,
+          "prefix": "The repair kit was packed in the canvas bag. The plastic case held cleaning cloths. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. According to the packing record, the repair kit was placed",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 331,
+          "prefix": "The repair kit was packed in the plastic case. The canvas bag held cleaning cloths. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. According to the packing record, the repair kit was placed",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " in the canvas bag.",
+        " in the plastic case."
+      ]
+    },
+    {
+      "id": "pair-18",
+      "family": "meeting",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 326,
+          "prefix": "The committee agreed to meet on Tuesday. The public tour was arranged for Friday. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The agreed day for the committee meeting was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 326,
+          "prefix": "The committee agreed to meet on Friday. The public tour was arranged for Tuesday. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The agreed day for the committee meeting was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " Tuesday.",
+        " Friday."
+      ]
+    },
+    {
+      "id": "pair-19",
+      "family": "role",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 323,
+          "prefix": "The carpenter carried the folding ladder. The painter carried the bucket. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The person carrying the folding ladder was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 323,
+          "prefix": "The painter carried the folding ladder. The carpenter carried the bucket. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The person carrying the folding ladder was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the carpenter.",
+        " the painter."
+      ]
+    },
+    {
+      "id": "pair-20",
+      "family": "equipment",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 326,
+          "prefix": "The evening guard used the hand torch. The morning guard used the desk lamp. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The light used by the evening guard was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 326,
+          "prefix": "The evening guard used the desk lamp. The morning guard used the hand torch. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The light used by the evening guard was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the hand torch.",
+        " the desk lamp."
+      ]
+    },
+    {
+      "id": "pair-21",
+      "family": "destination",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 328,
+          "prefix": "The empty crates were sent to the warehouse. The full crates were sent to the market. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The destination recorded for the empty crates was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 328,
+          "prefix": "The empty crates were sent to the market. The full crates were sent to the warehouse. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The destination recorded for the empty crates was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the warehouse.",
+        " the market."
+      ]
+    },
+    {
+      "id": "pair-22",
+      "family": "replacement",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 330,
+          "prefix": "The damaged hinge was replaced with a brass hinge. The iron hinge was kept as a spare. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The hinge installed as the replacement was made of",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 330,
+          "prefix": "The damaged hinge was replaced with an iron hinge. The brass hinge was kept as a spare. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The hinge installed as the replacement was made of",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " brass.",
+        " iron."
+      ]
+    },
+    {
+      "id": "pair-23",
+      "family": "location change",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 322,
+          "prefix": "The folded table was moved from the porch into the kitchen. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. After the move, the folded table was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 322,
+          "prefix": "The folded table was moved from the kitchen onto the porch. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. After the move, the folded table was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " in the kitchen.",
+        " on the porch."
+      ]
+    },
+    {
+      "id": "pair-24",
+      "family": "schedule change",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 321,
+          "prefix": "The rehearsal was moved from morning to evening. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Under the revised schedule, the rehearsal would take place",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 321,
+          "prefix": "The rehearsal was moved from evening to morning. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Under the revised schedule, the rehearsal would take place",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " in the evening.",
+        " in the morning."
+      ]
+    },
+    {
+      "id": "pair-25",
+      "family": "negation",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 327,
+          "prefix": "The final report says the damaged item was the fence, not the bench. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The item identified as damaged in the final report was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 327,
+          "prefix": "The final report says the damaged item was the bench, not the fence. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The item identified as damaged in the final report was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the fence.",
+        " the bench."
+      ]
+    },
+    {
+      "id": "pair-26",
+      "family": "comparison",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 321,
+          "prefix": "The blue rope was longer than the brown rope. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Of the two ropes, the longer one was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 321,
+          "prefix": "The brown rope was longer than the blue rope. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Of the two ropes, the longer one was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the blue rope.",
+        " the brown rope."
+      ]
+    },
+    {
+      "id": "pair-27",
+      "family": "delivery order",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 324,
+          "prefix": "The flour arrived before the rice. The sugar arrived last. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Of these deliveries, the one that arrived first was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 324,
+          "prefix": "The rice arrived before the flour. The sugar arrived last. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Of these deliveries, the one that arrived first was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the flour.",
+        " the rice."
+      ]
+    },
+    {
+      "id": "pair-28",
+      "family": "decision",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 324,
+          "prefix": "The group chose to repair the gate and leave the wall alone. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The repair that the group decided to undertake was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 324,
+          "prefix": "The group chose to repair the wall and leave the gate alone. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The repair that the group decided to undertake was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the gate repair.",
+        " the wall repair."
+      ]
+    },
+    {
+      "id": "pair-29",
+      "family": "instruction",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 328,
+          "prefix": "The workshop note says to keep the top drawer locked and the bottom drawer unlocked. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Following the workshop note, the top drawer should be",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 328,
+          "prefix": "The workshop note says to keep the bottom drawer locked and the top drawer unlocked. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. Following the workshop note, the top drawer should be",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " locked.",
+        " unlocked."
+      ]
+    },
+    {
+      "id": "pair-30",
+      "family": "source",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 331,
+          "prefix": "The water used for washing came from the well. The water used for watering came from the tank. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The source of the water used for washing was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 331,
+          "prefix": "The water used for washing came from the tank. The water used for watering came from the well. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The source of the water used for washing was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the well.",
+        " the tank."
+      ]
+    },
+    {
+      "id": "pair-31",
+      "family": "repair outcome",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 324,
+          "prefix": "After the repairs the radio worked, but the clock remained broken. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The item that was working after the repairs was",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 324,
+          "prefix": "After the repairs the clock worked, but the radio remained broken. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The item that was working after the repairs was",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " the radio.",
+        " the clock."
+      ]
+    },
+    {
+      "id": "pair-32",
+      "family": "method",
+      "length_group": "long",
+      "members": [
+        {
+          "prompt_tokens": 325,
+          "prefix": "The survey was completed by walking the route. The bicycle was left at the entrance. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The survey team completed the route",
+          "correct": 0
+        },
+        {
+          "prompt_tokens": 326,
+          "prefix": "The survey was completed by cycling the route. The walking equipment was left at the entrance. The remainder of the notebook describes how the day was organized. At the entrance, a notice explained where visitors could leave their coats. A worker checked the floor for loose objects before the doors were opened. Several people arrived carrying sheets of paper, and they waited until the person at the desk had finished speaking. The notes do not give their names. They describe the general arrangement of the room and the tasks that still needed attention. A large sheet on the wall provided a place for comments. Some comments were written neatly, while others were added in a hurry. The person maintaining the record copied each comment into a separate section so that it would be easy to find later. Outside, there was enough light to see the path clearly. Inside, a curtain moved slightly whenever someone opened the outer door. The work continued at a steady pace, with pauses whenever people needed to compare their notes. Nobody was expected to remember every detail without checking the written record. At the end of the day, the loose pages were placed together and checked for missing corners. This account of the surroundings does not revise any of the facts recorded at the beginning. The final section returns to those earlier facts rather than introducing a new decision. A reader consulting the notebook later should use the original record to identify the requested detail. The person reviewing these pages also checked that the paragraphs were in order. The cover was plain and carried no additional instructions. When the review was finished, the notebook was set aside for anyone who needed to consult the record again. The survey team completed the route",
+          "correct": 1
+        }
+      ],
+      "choices": [
+        " on foot.",
+        " by bicycle."
+      ]
+    }
+  ]
+}
