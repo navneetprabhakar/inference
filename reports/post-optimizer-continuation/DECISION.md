@@ -12,7 +12,7 @@ All three aligned sources are now admitted **only for the bounded diagnostic and
 
 Next concrete requirements:
 
-1. Complete the existing foundation and optimizer comparison and verify the selected own-base endpoint. At 50M fresh foundation targets, CE improved to 4.9874 but strict context pairs remain 0/32. This is not a usable base claim.
+1. Complete the existing foundation and optimizer comparison and verify the selected own-base endpoint. At 60M fresh foundation targets, CE improved to 4.8654 (50M: 4.9874), while strict context pairs reached only 1/32 (50M: 0/32). Inspection of all 32 saved completions still shows pervasive repetition and irrelevant continuations. This is not a usable base claim; the snapshot and qualitative-review limits are in `reports/base-foundation-100m/milestone-060m.json`.
 2. Run the reviewed, separately activated 1,024-context hardware preflight after the current GPU queue releases the lock. Its hard watchdog bound is 20 minutes, with actual long rows and FP32 validation. Do not infer behavioral context capability from a successful hardware test.
 3. Use measured throughput/resource evidence to freeze the SFT budget, source passes, LR schedule and complete resume identity. The new trainer's CPU checks include atomic attempted-compute charging and source mixing; real MPS execution remains untested.
 4. Train the diagnostic, export its verified own-lineage checkpoint, and run the frozen public/development conversation and tool sessions through the actual model. Preserve incomplete-run denominators and manual-pending judgments. Complete the unchanged acceptance gates only after a candidate is ready.
