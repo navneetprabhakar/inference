@@ -1,0 +1,16 @@
+from filter import rules,SUM3,SUM1,REWRITE
+def h(s,u,a):return [{'role':'system','text':s},{'role':'user','text':u},{'role':'assistant','text':a}]
+assert not rules(h(SUM3,'Alex confirmed 3 seats.','Alex confirmed 3 seats.'))
+assert 'summary_banned_pronoun' in rules(h(SUM3,'Alex confirmed seats.','He confirmed seats.'))
+assert 'summary_sentence_limit' in rules(h(SUM1,'Alex ran. Sam ran.','Alex ran. Sam ran.'))
+assert 'summary_sentence_limit' not in rules(h(SUM1,'Dr. Alex has 1.5 units.','Dr. Alex has 1.5 units.'))
+assert 'unsupported_numeric_literal' in rules(h(next(iter(REWRITE)),'We need 3 seats.','We need 5 seats.'))
+assert 'unsupported_numeric_literal' not in rules(h(next(iter(REWRITE)),'We need 1,000 seats.','We need 1000 seats.'))
+assert 'unresolved_meta_placeholder' in rules(h('','Use [num_sentences] sentences.','Okay.'))
+assert 'unresolved_meta_placeholder' not in rules(h('','Use [num_sentences] sentences (num_sentences: 3).','Okay.'))
+assert not rules(h('','Use [city] as a placeholder.','Visit [city].'))
+assert 'own_identity_or_external_claim' in rules(h('','Set a reminder.','I have set a reminder.'))
+assert not rules(h('','Set a reminder.','I cannot set reminders.'))
+assert not rules(h('You are a mythical dragon.','Tell a story.','I purchased a castle.'))
+assert 'own_identity_or_external_claim' in rules(h('','What do you know?','My last update in 2021 was comprehensive.'))
+print('13 synthetic checks passed')

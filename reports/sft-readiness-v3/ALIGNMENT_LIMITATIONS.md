@@ -1,0 +1,9 @@
+# Partial candidate limits before host-policy alignment
+
+This is a partial, unadmitted candidate snapshot, not a final SFT dataset. The SQLite cap stopped original-order scanning; committed rows do not represent the full source pool. `partial-finalization.json` binds reproducible SQL aggregates, source coverage, policy/code pins and the unchanged database/manifest byte hashes. Its metadata checks do not replace independent framing/provenance validation, root custody or quality review.
+
+The current counts precede the new runtime host-policy transformation and are **upper bounds**, not final trainable row or target totals. The final plain-chat transformation must prepend the explicit current-turn host policy as the first system guidance and retain any original source system text as additional task guidance; it must not silently discard source instructions. The formatter's optional single leading system frame means the transformation must explicitly define how host policy and retained source guidance are represented together. Root will specify that representation rather than simply inserting two invalid system frames.
+
+After transformation, remeasure every full history and the fixed256-token response reservation at1024context, preserving complete utterances. Added policy overhead can exclude examples or shorten eligible complete prefixes. Final assistant-target masking must follow the current permission boundary. Root's future tool-row transformation uses `own_base_sft_rows.last_turn_row` so earlier assistant turns are not supervised under current-turn permission. Accordingly, the snapshot's sum of all selected assistant targets is not a final last-turn-only training budget.
+
+No builder, original policy, database or existing manifest is modified by this note. No rerun, admission, GPU work, packing or source-system stripping follows from it. Root owns the final transformation after custody and independent quality review.

@@ -1,0 +1,19 @@
+# Next-stage decision, 2026-11-06
+
+The existing foundation and three optimizer arms continue unchanged. The 30M narrative / 30M web continuation proposal is **deferred**, not an automatic next job. Review found substantial web extraction/quality problems; stricter filtering of the prepared pool left fewer than 1M web training tokens and only 28 validation documents. No clean 30M web allocation has been established. See `reports/language-mixture-v3/DECISION.md` and its evidence. Do not relax filters or repeat documents silently to fill that proposal.
+
+Prioritize a separately bounded **conversation/tool SFT diagnostic from the selected own-base endpoint**, once its data and runtime checks pass. This tests whether the current base can acquire the actual interface before spending another language-training tranche. It is not an assertion that base pretraining is sufficient, and it cannot replace the final usability gates.
+
+The broader dialogue preparation preserved system-leading rewrite/summarization examples and measured actual 1,024-token framing with 256-token reply reservation. It froze 46,553 partial candidates; independent verification reproduced every selected raw-source prefix, hash, split and framing count. Root custody excluded 19,807 candidates. The subsequent limited content review proposes further exact-ID deferrals and leaves about 4.36M assistant targets, **before** host-policy transformation and additional label checks. These are not yet admitted training data. The source-order partial-build bias, missing everyday validation families and sampled teacher defects remain disclosed.
+
+Next concrete requirements:
+
+1. Finish targeted objective teacher-label checks and fresh content review. Preserve source systems/instructions explicitly during final transformation; never fix labels by silently discarding the instruction they violate.
+2. Use one shared current-turn host-policy prompt, dialogue serializer and tool-record projection for training and inference. Recount all final input/assistant targets and 256-token reply reservations after transformation. Supervise current-turn assistant frames only where permissions change; previous responses are context, not targets under a later policy.
+3. Replay and bind reusable tool lessons through the actual offline broker. Preserve real execution versus synthetic fixture provenance. The old tool-history serialization is incompatible and must not be fed directly to the new trainer.
+4. Freeze a bounded SFT budget, selected-parent/full-lineage checks, explicit optimizer initialization, deterministic sampler, source-specific validation and public/development conversation/tool scoring. A new training entrypoint must use verified resume and attempted-budget accounting; do not repurpose the old hardcoded SFT CLI.
+5. Run a bounded 1,024-context hardware preflight after the current GPU queue releases the lock. Measure the actual training configuration, upper-position exposure and complete-history behavior. Do not infer this support from the parent's 512-token training or from CPU wiring tests.
+
+The new standalone `own_base_chat.py` is a CPU-tested interface preparation, not a deployed or quality-tested assistant. It uses genuine decoder output, strict current dialogue framing and real offline broker records, with no fallback answers or semantic repair. Infrastructure failures propagate rather than counting as ordinary model protocol failures. The existing preview remains unchanged.
+
+After the diagnostic, actual development behavior determines the next intervention: more/base-focused training, better teaching data, bounded optimization changes or runtime fixes. The objective remains the full own-base conversation/tool delivery contract. No data-preparation receipt, optimizer result or SFT loss completes it.

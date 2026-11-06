@@ -1,0 +1,19 @@
+# Own-base delivery: completion remains unproven
+
+The active user objective is a usable conversation and tool-call model from our own randomly initialized base. Finishing the foundation, optimizer comparison, language continuation, runtime benchmark or SFT stage does not complete that objective. The user has authorized continued local work beyond those stages; immutable per-run budgets and STOP/resource protections still apply.
+
+## Evidence required for delivery
+
+- **Own weights:** retained random-initialization lineage and checkpoint hashes, verified architecture and total unique parameter count at or below 200M. No downloaded pretrained weights enter initialization or later continuation. Synthetic teaching data is distinguishable from pretrained student weights; no teacher answers for the evaluated student.
+- **Conversation:** coherent, relevant multi-turn responses, correction and recall, preserved facts in rewrites/summaries, clarification and appropriate limits. Story fluency, token loss and format validity are separate diagnostics. The full delivered history/context policy must be tested; training at 512 positions does not establish 1,024-token support.
+- **Tools:** the student selects the supported calculator/unit tool and arguments, the broker actually executes it, and subsequent student answers use the recorded result. Test dependent calls, corrections, missing arguments, incompatible units, errors, no-call turns and disabled-tool behavior. Host validation may reject unsafe/malformed proposals; it must not invent the model's answer or repair its semantic mistakes invisibly.
+- **Original release gate:** preserve the execution plan's 100-session scope and scoring: at least 60 complete sessions, including at least 36/60 prose, 18/30 tool-required, 24/30 correct unambiguous first requested calls and 9/10 no-call sessions. Zero critical scope/security failures. Whole-session success requires every substantive turn to pass; publish all denominators and uncertainty. A previously opened confirmation suite cannot be represented as fresh.
+- **Practical acceptance:** preserve the separately frozen 20-session, 62-turn gate in `reports/practical-usability-acceptance/freeze.json`: at least 16 complete sessions, zero incorrect executions and zero unauthorized executions. Its actual cases remain under root custody and unscored during development. No training, prompt selection or repair is based on those cases.
+- **Real local runtime:** one exact candidate and frozen decoding/formatting configuration must produce the scored behavior through the delivered chat interface, with genuine history and visible tool traces. Record raw student and served-system outcomes separately. Do not silently substitute the earlier experimental preview or host-generated responses.
+- **Reproducibility and operation:** retained base/candidate, tokenizer/data/prompt/runtime hashes, training and evaluation receipts, complete transcripts, checkpoint/resume verification, measured resource use, launch/stop instructions and a working rollback path. Preserve protected evidence and user files. No paid compute or unapproved real-system integration.
+
+## Selection and confirmation
+
+Use family-disjoint development data and prospective, bounded experiments for iteration. Before opening confirmation, freeze candidate weights, runtime, decoding, prompts, context policy and scoring. Confirmation results are evidence about that candidate, not a new optimization signal that can be repeatedly retested as independent. A failed gate leaves the goal incomplete and requires a documented new development/confirmation cycle.
+
+The current state contradicts completion: raw foundation generations remain repetitive, context diagnostics fail, no new-base conversation/tool SFT candidate has passed development, and both delivery-quality gates remain unmet. The optimizer report may select an optimizer recipe; it cannot certify usability.

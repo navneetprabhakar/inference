@@ -1,0 +1,5 @@
+# Custody-cleared SFT v3 content review
+
+Before judging, freeze eight eligible TRAIN selected histories for each of six constituents: sort by (input_tokens,doc_id), assign four rank quartiles, select two per quartile by smallest SHA256 of `sft-v3-quality-20261106|source|doc_id`. Exclude every root custody ID. Read every selected message, including retained teacher system messages. No reroll. Raw texts only in ignored data.
+
+Subjective AI review labels retain/review/hold assess coherent response, actual task compliance, preservation of supplied facts, unsupported external-action claims, role confusion and unresolved/corrupted prefixes. Suspected factual errors are not verified external facts. These 48 judgments cannot certify population quality statistically. Preserve original systems; future host-policy transformation needs separate checks. Propose exact-ID deferrals only, report remaining source counts/targets; do not extrapolate repairs to unreviewed examples. No admission, replenishment, protection relaxation, tokenization, model or protected-case access. Bound10minutes CPU and10MiB new artifacts; honor runs/STOP and data/sft-readiness-v3/STOP.
