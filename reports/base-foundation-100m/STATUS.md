@@ -1,6 +1,6 @@
-# Own-base run: 10M learning checkpoint
+# Own-base run: 40M learning checkpoint
 
-Status at the 10M evaluation: training continues. A usable conversational/tool model has **not** been demonstrated.
+Status at the 40M evaluation: training continues. A usable conversational/tool model has **not** been demonstrated.
 
 The student is the 124,439,808-parameter GPT-2 model from our own verified random-initialization lineage. This run continues the protected 2,457,600-target pre-SFT base with fresh optimizer moments, then restores full optimizer/RNG/cursor state between execution leases. No downloaded model weights enter this lineage.
 
@@ -10,6 +10,9 @@ The student is the 124,439,808-parameter GPT-2 model from our own verified rando
 | 1,007,616 | 6.5526 | 0/32 | 29/32 |
 | 5,005,312 | 6.1033 | 0/32 | 32/32 |
 | 10,002,432 | 5.8357 | 0/32 | 32/32 |
+| 20,004,864 | 5.5142 | 0/32 | Not independently rated |
+| 30,007,296 | 5.2862 | 0/32 | Not independently rated |
+| 40,001,536 | 5.1327 | 0/32 | Not independently rated |
 
 The train-only unigram reference has CE 7.5294 on the same 256 validation windows. The first-window CE improvement was 0.4823 nats (descriptive paired document SE 0.0143). At 5M, CE improved another 0.4493 nats (SE 0.0091) versus 1M. At 10M, CE improved another 0.2676 nats (SE 0.0045) versus 5M. Domains can correlate, so this SE is not an independent-domain uncertainty estimate.
 
@@ -32,3 +35,5 @@ The existing chat preview remains the earlier experimental assistant. This found
 Exact CPU value verification reproduced every original parameter from random seed103 and verified live initial weights equal the protected own-parent checkpoint; see `lineage-value-verification.md`. An isolated bare-MLX tiny CPU port also passed three-seed numerical checks; GPU speed and full-runtime migration remain untested. It does not participate in this frozen training run.
 
 A second isolated MLX experiment passed tiny CPU optimizer-state conversion and exact fresh-process resume for three seeds, including 21 refusal checks. It preserves AdamW moments instead of resetting them. This is preparation for a possible future runtime; full-model GPU speed, mixed precision and production recovery remain untested. See `reports/mlx-own-base-resume-feasibility/README.md`.
+
+The user approved the corrected three-arm optimizer experiment on 2026-11-06. Its frozen protocol is `reports/optimizer-ablation-v1/PROTOCOL.md`. It waits for the exact completed 100M endpoint, then compares preserved moments, reset moments and reset moments with beta2=0.9991988633566534 on the same next 19,996,672 targets per arm. All arms use a common explicit LR restart. CPU verification and independent review passed. No optimizer-screen outcome constitutes an assistant-quality pass.

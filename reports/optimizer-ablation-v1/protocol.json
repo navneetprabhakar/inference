@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "experiment": "own-base-optimizer-ablation-v1",
+  "status": "approved_for_runtime_freeze",
+  "purpose": "Screen optimizer moment initialization and beta2 on the same own-random-lineage foundation endpoint; not a model release.",
+  "parent": {
+    "run": "runs/own-base-foundation-01",
+    "spec": "reports/base-foundation-100m/budget.json",
+    "spec_sha256": "658702f471c49b4362c29f46795f5fc6b3135f7e7c7bd540e50d34c2c547fb7d",
+    "required_state": "completed",
+    "required_trained_tokens": 99999744,
+    "receipt_binding": "Resolve only after terminal full endpoint; require basename, SHA256, bytes, campaign spec SHA256 and ledger SHA256; never implicit latest."
+  },
+  "arms": [
+    {
+      "name": "preserve-095",
+      "optimizer_initialization": "Restore parent AdamW moments and per-parameter step counters; preserve beta2=.95. Restart scheduler only.",
+      "beta1": 0.9,
+      "beta2": 0.95
+    },
+    {
+      "name": "reset-095",
+      "optimizer_initialization": "Fresh zero AdamW moments and zero per-parameter step counters from identical parent weights.",
+      "beta1": 0.9,
+      "beta2": 0.95
+    },
+    {
+      "name": "reset-scaled",
+      "optimizer_initialization": "Fresh zero AdamW moments and zero per-parameter step counters from identical parent weights.",
+      "beta1": 0.9,
+      "beta2": 0.9991988633566534
+    }
+  ],
+  "common": {
+    "parameters": 124439808,
+    "weights": "Exact same verified own foundation endpoint tensors in all arms",
+    "source_offset": 99999744,
+    "target_tokens": 19996672,
+    "updates": 2441,
+    "length": 512,
+    "microbatch": 2,
+    "targets_per_update": 8192,
+    "gradient_accumulation": 8,
+    "seed": 20261106,
+    "bf16": true,
+    "master_parameters_and_moments": "float32",
+    "epsilon": 1e-08,
+    "matrix_weight_decay": 0.1,
+    "other_weight_decay": 0,
+    "gradient_clip": 1.0,
+    "corpus": "data/base-foundation-100m",
+    "manifest_sha256": "338cd084d16b17dae4a3ebcab0f14e5a7a32c0de03a227ff77a753502f62af18",
+    "validation_blocks_sha256": "d7f6a9c03268e7040217062188ecded99143a766e8c14bd7aafbf421a0068931",
+    "diagnostics": "reports/base-foundation-100m/diagnostics.json",
+    "diagnostics_sha256": "82ad6c3d7ddf2fba301ac1ecc68d77c3ad815bcee6608dbc21140782f91be03b",
+    "data_policy": "Same next previously unused stream and order for every arm; do not cycle; do not touch sealed conversation acceptance data"
+  },
+  "scheduler": {
+    "mode": "linear-rewarm-flat",
+    "start_lr": 6e-06,
+    "peak_lr": 6e-05,
+    "warmup_tokens": 1000000,
+    "horizon_tokens": 19996672,
+    "end_decay": false,
+    "position": "Arm-local committed targets at start of optimizer update",
+    "formula": "start_lr + (peak_lr-start_lr)*min(committed_targets/warmup_tokens,1)"
+  },
+  "budgets": {
+    "per_arm_attempted_targets": 19996672,
+    "aggregate_attempted_targets_ceiling": 60000000,
+    "planned_aggregate_attempted_targets": 59990016,
+    "per_arm_active_seconds": 36000,
+    "aggregate_active_seconds": 108000,
+    "lease_seconds": 14400,
+    "experiment_calendar_seconds": 604800,
+    "calendar_origin": "First experiment launch before any arm initialization",
+    "gpu_parallelism": 1,
+    "arm_order": [
+      "preserve-095",
+      "reset-095",
+      "reset-scaled"
+    ],
+    "replays": "Charge attempted targets and active time again; never refund or expand caps",
+    "active_time_accounting": "Model/optimizer initialization, evaluation and checkpointing inside Campaign count; read-only source/parent hash preflight is outside the active training timer and bounded by supervisor worker watchdog and experiment calendar deadline."
+  },
+  "evaluation": {
+    "nominal_targets": [
+      0,
+      1000000,
+      5000000,
+      10000000,
+      15000000,
+      20000000
+    ],
+    "scheduled_committed_targets": [
+      0,
+      1007616,
+      5005312,
+      10002432,
+      15007744,
+      19996672
+    ],
+    "also_evaluate_actual_endpoint": true,
+    "validation": "Original fixed 256 within-document windows, 512 targets each, FP32 mean CE",
+    "context": "Original32 counterfactual pairs; bothmembers must strictly prefer correct complete suffix by mean logprob; ties fail",
+    "generation": "Original32 prompts; greedy48token raw continuations; no repetition penalty, repair or host replacement",
+    "uncertainty": "Paired document-loss descriptive SE; correlated domains and repeated looks preclude formal independent-test significance claims",
+    "baseline": "Each arm verifies exact parent weights and retains baseline evaluation; source checkpoint remains protected"
+  },
+  "decision": {
+    "primary": "Compare each reset arm against preserved-moments control at matched committed targets; compare reset arms descriptively to isolate beta2.",
+    "eligibility": "All three arms must be terminal completed with exact19996672 committed targets and complete identical evaluation counts. Truncated or mismatched runs are inconclusive.",
+    "sustained_screen_advantage": "At each of10002432,15007744,19996672targets, paired mean CEgain over control must be>=.02nats AND strictly greater than2descriptivepairedSE.",
+    "secondary": "At all three latepoints candidate strictcontextpair count must not be lower thancontrol; endpoint repeated4gramflag count must not be higher thancontrol.",
+    "repeated_4gram_flag": {
+      "scope": "Generated continuation text only, excluding provided prefix",
+      "tokens": "re.findall(r'\\w+|[^\\w\\s]', text.casefold())",
+      "flag": "Any contiguous4-token tuple occurs at least3times",
+      "comparison": "Endpoint flag counts across all32fixedcompletions",
+      "meaning": "Deterministic repetition heuristic, not human fluency or quality judgment"
+    },
+    "selection": "If any candidate qualifies, prefer lowest endpoint mean CE; exactties use fixed arm order reset-095 then reset-scaled. Otherwise retain preserve-095 as reference.",
+    "inconclusive": "Missing exact completed endpoints, weak/mixed gains, or diagnostic tradeoffs: preserve control and report no qualifying alternative; no automatic extension, sweep, SFT or promotion.",
+    "release": "Optimizer loss selection only; no base quality or conversational/tool capability pass. Allcurves and32rawoutputs retained; sealed confirmation remainsclosed."
+  },
+  "safety": {
+    "resource_policy": "Inherit verified thermal/RSS/swap/disk/telemetry checks and STOP semantics; serious thermal>=2, repeatedRSS>18GiB, repeatedswapgrowth>1GiB or unreadable telemetry pauses safely",
+    "disk_floor_gib": 20,
+    "retention": "Each arm retains last2 full optimizer checkpoints INCLUDING endpoint; protect ONLY endpoint; initial baseline checkpoint remains rolling, source foundation parent protected; no protected intermediate/best checkpoints",
+    "disk_forecast": "Before first launch require free bytes >=20GiB + conservative all-remaining-arm last2 checkpoint bytes + one atomic temporary checkpoint + data/log allowance; use measured full parent checkpoint bytes with headroom. Recheck before each arm and save; if insufficient pause/report, never delete original protected artifacts.",
+    "numerical": "Stop nonfinite loss/gradient; same two-successive material regressions versus arm best beyond max(.20nats,5pairedSE) trigger deterministic confirmation then stop",
+    "recovery": "Immutable arm/experiment identity, full optimizer/RNG/cursor resume, bounded crash recovery; never override STOP or exhausted budget"
+  },
+  "freeze_requirements": [
+    "Root approved protocol; pin runtime and verification identities before execution",
+    "Pin implementation and verification hashes before launch",
+    "Pin each immutable arm template and top-level experiment specification",
+    "Only unresolved parent terminal receipt is substituted by supervisor; checksum and bind resulting spec before first arm work",
+    "Assert corpus span supports source_offset+target_tokens with shifted input and distinct targets",
+    "Verify parameter/moment/step initialization, scheduler boundary and exact interrupted-resume in tiny CPU tests",
+    "Verify aggregate attempt/time accounting and disk forecast across sequential arms"
+  ],
+  "interpretation_limits": [
+    "One seed and one shared stream are a screening experiment, not multi-seed optimizer superiority",
+    "Preserved-moments arm includes common LR restart and is NOT uninterrupted scheduler continuation",
+    "Beta2 token-horizon mapping is a hypothesis, not a general hyperparameter transfer law",
+    "No new architecture, tokenizer, data mixture, SFT or pretrained weights enter these arms"
+  ]
+}
