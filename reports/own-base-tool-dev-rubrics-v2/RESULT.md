@@ -1,0 +1,15 @@
+# Exposed tool development rubrics prepared
+
+All **422 custody-eligible exposed-development lessons /583 turns** compiled without dropping cases. Every lesson was re-adapted through the real CPU broker to check policies, source observations, current-turn framing and fit. Explicit compiled call dependencies resolved exactly to source proposals. `prepare` validated the full frozen case manifest.
+
+Independent source-answer reference controls produced **557 automated passes and 26 manual-pending turns**. These are existing teacher outputs, not model responses or model performance. The manual turns are missing-input clarifications (18) and operation naming (8); acceptable paraphrases are not forced into exact teacher wording. Hypothetical successful outcomes in some transient-error status branches also require manual adjudication if observed during a future model run.
+
+Compilation completed in **2.73 seconds** from freeze, under the preregistered CPU/time/memory/disk/STOP bounds. Output metadata and cases total 912,237 bytes. No generator was executed, no new lessons were generated, no protected cases were read, and no model/GPU was used.
+
+Preparation controls passed nine representative compiler families. The corrected evaluator passes all 18 CPU fixture groups, including failed-call proposal retries, actual success/error alternatives, explicit unit handling, nine-significant-digit display, strict raw values and malformed/punctuated numeric controls. The first v1 attempt remains preserved: it stopped on a scorer defect handling a sentence period after a decimal. V2 fixes only that punctuation normalization and pins v1 failure ancestry; numeric/call/unit rules were not relaxed.
+
+Retained mode counts: arithmetic156, conversion173, no-call-after10, no-call-expression12, missing-start6, missing-divisor10, missing-target2, permission-change8, two-calls7, transient10, paired-observation8, correct-input10, signed-conversion2, zero-divisor4, convert-chain4. The registered missing-source mode has no retained cases; no missing case was invented. The eight paired-observation cases form four complete groups by exact family/initial prompt/first-call identity; a model-level paired-session metric is not implemented here.
+
+Evidence is in ignored `data/own-base-tool-dev-rubrics-v2/{freeze.json,family-registry.json,cases.json,source-map.json,receipt.json}`. Canonical case hash: `dbd21270e504df0ae5e2581c42676a2b93a9074b6400245ab1fb5d0e47d2c0f8`. Receipt SHA256: `6a1d851a22984ede7cda1bab73d38b22460d98409fc6d37bf2ec734b5cdcdf51`.
+
+Limitations: these are exposed, template-based development cases, not sealed or novel generalization evidence. The exact-expression rubric is a narrow formatting check. Call matching remains exact (including operand order); error/numeric wording checks remain conservative and do not certify arbitrary semantics. Source-reference checks share the evaluator and adapter runtime, so separate root review remains valuable. No candidate evaluation, training admission or release claim follows from preparation.

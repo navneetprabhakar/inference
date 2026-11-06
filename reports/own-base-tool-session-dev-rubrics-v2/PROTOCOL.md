@@ -1,0 +1,15 @@
+# Four-call exposed-development rubric preparation
+
+Prepare exactly the eight custody-cleared exposed-development lessons from own-base-tool-session-extension-v1. No train lessons, regeneration, shortening, extra examples, private cases or models. Preserve original prompts and per-turn policies, three turns and four calls in the fixed 2+2+0 topology. Use the frozen symbolic form and parameter records to construct dependencies, never numeric coincidence: second call uses first result, third uses second result, fourth uses third result.
+
+Freeze the candidate database, source manifest, custody, symbolic verification, frozen source plans/forms, compiler, this protocol, corrected evaluator and serving/serialization/tokenizer code before execution. Wait for the evaluator's error-scoring correction before final freeze. Input mutation or missing case fails the whole preparation.
+
+All 24 answer turns are manual pending. First-turn review checks the actual second observation and any mentioned first observation; second-turn review checks the actual third and fourth observations, distinguishing intermediate from final, and source units. Preserve equivalent clear paraphrases; do not add literal-template answer scoring. The third-turn correction acknowledgment review requires that it acknowledge the supplied corrected starting amount, make clear the existing final observation has not changed, and make no new tool attempt. Preserve full session/turn denominators; manual pending is not a pass.
+
+Replay every original assistant frame through actual Chat and FixtureSession with a scripted generator, no model. Independently assert desired symbolic calls against frozen authored calls, actual dependency bindings, all four successful observations, original policy transitions, no third-turn attempts, and source controls. Expected controls: eight manual-pending sessions, 24 manual-pending answer turns, 16 automated call-bearing turns, eight automated no-call turns and 32 actual successful observations. Source controls verify protocol and calls only, not answer quality. No late-position coverage or model capability claim.
+
+Bounds from freeze through execution: 300 seconds, nice 10, one CPU thread, 200 MiB RSS, 50 MiB new output, 20 GiB free disk. Honor runs/STOP, foundation STOP and destination STOP. Preserve all eight cases or fail preparation. Diagnostic-only, no training admission.
+
+## Version 2 provenance refresh
+
+Preserve version 1 unchanged. Pin the stable cause-aware error scorer SHA256 7f79ca61facd74a3bfb7ca0e16d31cff3b53618155202f1aa688c599e9176877. Recompile and assert all eight cases exactly equal version 1 before source replay. Bind prior cases, receipt, freeze and source controls as historical provenance; prior source code pins are historical, not current runtime verification. No rubric, prompt, policy, dependency, source or manual-review semantics change. All 24 answers remain pending manual review.

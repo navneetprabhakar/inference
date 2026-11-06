@@ -57,6 +57,35 @@ def main():
     result=evaluate([c],{'synthetic':[{'call':call(2,0,'divide')},{'text':'The calculator failed. No result was returned.'}]})
     assert result['summary']['sessions']['passed']==1
     assert answer_score(c['turns'][0]['answer'],'It succeeded.',[[dict(ok=False)]]) is False
+    for contradictory in ('The tool did not return an error.',
+                          'The error was resolved and the tool worked.',
+                          'There was no error.', 'The tool failed but then worked.',
+                          'No numeric result was returned. The answer is five.',
+                          'The error was not a problem.', 'I expected an error.',
+                          'The calculator failed?'):
+        negative=evaluate([c],{'synthetic':[{'call':call(2,0,'divide')},{'text':contradictory}]})
+        assert negative['summary']['sessions']['passed']==0
+        assert negative['sessions'][0]['turns'][0]['score']['content_pass'] is False
+    for acknowledgment in ('The fixture returned an error: division by zero. No number was returned.',
+                           'The calculator failed.', 'No numeric result was returned.'):
+        positive=evaluate([c],{'synthetic':[{'call':call(2,0,'divide')},{'text':acknowledgment}]})
+        assert positive['summary']['sessions']['passed']==1
+    checks.append('real Chat rejects eight contradictory/speculative error answers; three whole acknowledgments pass')
+    for false_cause in ('The tool timed out.', 'The tool is unavailable.',
+                        'The tool was unavailable.', 'The tool was denied.', 'The tool was rejected.'):
+        negative=evaluate([c],{'synthetic':[{'call':call(2,0,'divide')},{'text':false_cause}]})
+        assert not negative['sessions'][0]['turns'][0]['score']['content_pass']
+    timeout_case=case([turn('Multiply two by three.',[call(2,3,'multiply')],
+                          dict(mode='error',observation=ref(0,field='ok')),
+                          fixture_for=call(2,3,'multiply'),fixture={'error':'fixture timeout'})])
+    timeout=evaluate([timeout_case],{'synthetic':[{'call':call(2,3,'multiply')},{'text':'The tool timed out.'}]})
+    assert timeout['summary']['sessions']['passed']==1
+    unavailable=deepcopy(timeout_case);unavailable['turns'][0]['policy']['fixture']['error']='service unavailable'
+    positive=evaluate([unavailable],{'synthetic':[{'call':call(2,3,'multiply')},{'text':'The service was unavailable.'}]})
+    assert positive['summary']['sessions']['passed']==1
+    wrong=evaluate([unavailable],{'synthetic':[{'call':call(2,3,'multiply')},{'text':'The tool timed out.'}]})
+    assert wrong['summary']['sessions']['passed']==0
+    checks.append('specific timeout/unavailable/denial causes require matching actual error observations')
     checks.append('actual error accepts non-teacher wording and rejects invented success')
     c=case([turn('Add two and three.',[call(2,3)],dict(mode='number',value=ref(0)),fixture_for=call(2,3),fixture={'result':91})])
     result=evaluate([c],{'synthetic':[{'call':call(2,3)},{'text':'The fixture reported 91.'}]})
@@ -136,6 +165,20 @@ def main():
     from tool_teaching import display as public_display
     for value in (1/3,-1/3,1234567890.25,1.2345678912345e-8,1234567890123):
         assert number_answer(public_display(value),value,display=display)
+    for value in (150.5,-150.5,0.25,-0.25,1.23456789e-9):
+        rendered=format(value,'.9g')
+        assert number_answer('The fixture reported '+rendered+'.',value,display=display)
+        assert number_answer(rendered+'!',value,display=display)
+    assert number_answer('The fixture reported 1.23456789e+09.',1234567890.25,display=display)
+    assert not number_answer('The fixture reported 1.23456789e+09.',1234567890.25)
+    assert not number_answer('The fixture reported -150.5, not 150.5.',-150.5)
+    assert not number_answer('150.5 151.5.',150.5)
+    for malformed in ('150..5.','150.5..','1.2.3.','1e+.','--150.5.'):
+        assert not number_answer(malformed,150.5)
+    assert not number_answer('150.5 km.',150.5,unit='m')
+    assert not number_answer('150.5 m.',150.5)
+    assert number_answer('150.5 m.',150.5,unit='m')
+    checks.append('decimal/exponent terminal punctuation without malformed/conflicting number or unit relaxation')
     checks.append('explicit nine-significant display matches public formatter; strict and adjacent-value refusals retained')
     c=case([turn('Divide one by three.',[call(1,3,'divide')],outcome(0,display=display))])
     result=evaluate([c],{'synthetic':[{'call':call(1,3,'divide')},{'text':'0.333333333'}]})

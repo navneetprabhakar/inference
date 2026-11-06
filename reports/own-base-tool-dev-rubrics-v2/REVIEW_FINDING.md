@@ -1,0 +1,5 @@
+# Independent review: error-answer false passes
+
+Root independent review found that v2's keyword-based error scoring passed complete sessions after a real failed tool call when the answer denied or claimed resolution of the error: `The tool did not return an error.` and `The error was resolved and the tool worked.` These are scorer defects. The earlier source-reference PASS receipt remains historical evidence and does not validate such negative controls.
+
+Original v2 compiler, protocol, freeze, case manifest and receipt remain unchanged. Supplemental evidence is `data/own-base-tool-dev-rubrics-v2/review-finding.json`, which binds the pre-fix scorer hash. The corrected scorer requires conservative complete acknowledgment forms; unknown or contradictory prose fails the automatic diagnostic. Real Chat regression controls cover the two reported examples and six additional negative forms. A separately frozen v3 must rerun all 422 source lessons before becoming the current diagnostic manifest. No model was evaluated.

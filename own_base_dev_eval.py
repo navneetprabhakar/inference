@@ -148,6 +148,10 @@ def resolve(value,observations,proposals=None):
 
 def number_answer(text,want,unit=None,display=None):
     if type(want) not in (int,float) or not isinstance(text,str):return False
+    # Remove at most one terminal sentence mark before numeric extraction.
+    # Repeated periods/malformed numeric syntax must remain invalid.
+    text=text.strip()
+    if text.endswith(('.', '!', '?')):text=text[:-1]
     expected=Decimal(str(want))
     if not expected.is_finite():return False
     if display is not None:
@@ -159,9 +163,34 @@ def number_answer(text,want,unit=None,display=None):
     if not matches or any(Decimal(m.group())!=expected for m in matches):return False
     if re.search(r'\b(not|never|unknown|maybe|approximately|about|expected|should|might|failed|error)\b',text,re.I):return False
     # Explicit readback wrappers; arbitrary prose with a stray number is not a pass.
-    rendered=NUMBER.sub('#',text).strip().rstrip('.!?')
+    rendered=NUMBER.sub('#',text).strip()
     suffix='' if unit is None else r'\s+'+re.escape(unit)
     return re.fullmatch(r'(?:(?:the (?:tool|fixture|calculator|converter|result|value|answer)|it)\s+(?:reported|returned|is|was|gave)\s+)?#'+suffix,rendered,re.I) is not None
+
+
+def error_answer(text,record):
+    """Conservative whole-answer acknowledgment; keywords alone never pass.
+
+    Unknown prose fails this automatic diagnostic. A caller may prospectively
+    designate an answer manual-pending instead of broadening the grammar.
+    """
+    if not isinstance(text,str) or record.get('ok') is not False:return False
+    value=text.strip().casefold()
+    if value.endswith(('.', '!')):value=value[:-1]
+    subject=r'(?:the )?(?:tool|fixture|calculator|converter|call|adapter|request|calculation|service)'
+    missing=r'(?:no (?:verified |numeric )?(?:result|number|value|answer)(?: was returned)?)'
+    cause=record.get('error')
+    cause=cause.casefold() if isinstance(cause,str) else None
+    verbs=[r'failed',r'returned (?:an? )?error']
+    # Cause-specific claims require an exact, known supporting observation.
+    if cause=='fixture timeout':verbs.append(r'timed out')
+    if cause in {'service unavailable','tool unavailable'}:verbs.extend((r'is unavailable',r'was unavailable'))
+    if cause in {'calls prohibited','tool unavailable'}:verbs.extend((r'was denied',r'was rejected'))
+    acknowledgment=subject+r' (?:'+'|'.join(verbs)+r')'
+    known={'division by zero','fixture timeout','service unavailable','fixture rate limit',
+           'calls prohibited','tool unavailable'}
+    if cause in known:acknowledgment+=r'(?:: '+re.escape(cause)+r')?'
+    return re.fullmatch(r'(?:'+missing+r'|'+acknowledgment+r'(?:[.;] '+missing+r')?)',value) is not None
 
 
 def answer_score(spec,text,observations,proposals=None):
@@ -176,10 +205,8 @@ def answer_score(spec,text,observations,proposals=None):
         if mode=='number':return number_answer(text,resolve(spec['value'],observations,proposals),resolve(spec['unit'],observations,proposals) if 'unit' in spec else None,spec.get('display'))
         if mode=='exact':return text==str(resolve(spec['value'],observations,proposals))
         if mode=='error':
-            observed=resolve(spec['observation'],observations,proposals)
-            return (observed is False and not NUMBER.search(text) and
-                    re.search(r'\b(error|failed|timeout|timed out|unavailable|denied|rejected|no (?:verified |numeric )?(?:result|number|value))\b',text,re.I) is not None and
-                    re.search(r'\b(?:no error|did not fail|succeeded|successful)\b',text,re.I) is None)
+            r=spec['observation']['ref']
+            return error_answer(text,observations[r['turn']][r['call']])
         return (('equals' not in spec or text==spec['equals']) and
                 all(s in text for s in spec.get('contains',[])) and
                 all(s not in text for s in spec.get('forbids',[])) and

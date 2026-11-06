@@ -1,0 +1,11 @@
+# Error-scoring correction and v3 reference controls
+
+V3 successfully recompiled **all 422 exposed-development lessons /583 turns** against corrected scorer SHA256 `3793b7cc7a467ccc966aa0be0fa020840908a4d6a3d4916cec420559cd01a81a`. Every complete lesson passed source identity, policy, authoritative broker replay, framing/fit and explicit call-dependency checks. Source-answer controls remain **557 automated passes /26 manual-pending turns**. No source labels, answer text, units, numeric precision or call rules were changed to obtain this result.
+
+The compiler completed in **1.46 seconds**. The 422-case canonical hash remains `dbd21270e504df0ae5e2581c42676a2b93a9074b6400245ab1fb5d0e47d2c0f8`, identical to v2; only scorer validation and frozen provenance changed. Current freeze hash: `27aae828c3cdf9e3ba541eb0faa406a8a3a085a0eb8a2c55c94952325a6788c4`. Receipts and source maps are in ignored `data/own-base-tool-dev-rubrics-v3/`.
+
+Root review found two false passes in v2: an answer denying an actual error, and an answer claiming it had been resolved. The fixed scorer requires complete error acknowledgments or complete no-result statements, optionally naming an exact observed known cause. It does not pass arbitrary text merely containing an error keyword. Unknown or contradictory prose fails this automatic diagnostic; a prospective manual rubric remains available for broader paraphrases.
+
+The full CPU core suite passes **19 groups**, including real Chat/broker tests rejecting both reported false passes plus six contradictory/speculative forms, while accepting three valid full acknowledgments. Nine representative compiler-family controls pass. All v2 pinned artifacts remain unchanged, with the separate `REVIEW_FINDING.md` and `review-finding.json` preserving pre-fix evidence. V1's decimal-punctuation preparation failure also remains preserved.
+
+These are exposed-source reference controls and synthetic scorer regressions, not candidate model performance. Conservative exact-call/numeric/error grammar still does not certify arbitrary semantic correctness. No model, GPU, private case or training admission was involved. Independent root review remains separate from this compiler's source-reference validation.
