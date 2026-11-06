@@ -1,0 +1,27 @@
+{
+  "version": "first-complete-exchange-profile-v1",
+  "scope": "Counts only. No candidate rows, token streams, source excerpts or admission decisions are written.",
+  "source_files": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-snapshot-20261105-c5b911b/data/sft-v1/raw/smol-smoltalk.parquet",
+      "sha256": "498cd4580014f42c40cfde066573564ed28e3e1548a5566715b615f5ea932856",
+      "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc"
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-snapshot-20261105-c5b911b/data/sft-v3/raw/smol-smoltalk-1.parquet",
+      "sha256": "5412c03df579fc7dd7d06c7f5249627d99d0621882fb8f2cd5c13582eb2a80f6",
+      "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc"
+    }
+  ],
+  "source_constituent": "smol-magpie-ultra-short",
+  "parent_policy": "Complete2..8 alternating user/assistant turns; apply unchanged v1 privacy/scope/encoding and external-action filters to FULL parent conversation.",
+  "pair_policy": "Count the first complete user message and assistant message, verbatim with role labels. Do not truncate either utterance. 48..511GPT2tokens plus EOT, assistant<=128GPT2tokens.",
+  "group_policy": "Same source-family hash split as v1; stable full-parent identity is pinned rawfileSHA plus rowindex. Only count each exact normalized first exchange once; no near-dedup, historical/root custody or new quality admission claimed.",
+  "budgets": {
+    "cpu_threads": 1,
+    "seconds": 600,
+    "additional_bytes": 1048576
+  },
+  "builder_sha256": "3791d576ebdcad69770f2584fdc0f417f5658a9a4b2503af0bd81d4d693842de",
+  "profiler_sha256": "f2ae1a091871585d9d1d4a60b25a039799a027563312200339d06739c8b23934"
+}

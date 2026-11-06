@@ -18,10 +18,12 @@ The train-only unigram reference has CE 7.5294 on the same 256 validation window
 
 Loss improved, but separate-context AI reviewers found zero relevant completions at all four checkpoints. Loop counts were 17/32, 29/32, 32/32 and 32/32 respectively. Ratings are subjective AI review, not ground truth; the randomized labels, rubric, raw outputs and unblinding receipt are preserved in `completion-review-001m/`, `completion-review-005m/` and `completion-review-010m/`. No conversational-quality improvement is claimed.
 
+A separate mechanical check, applied retrospectively using the optimizer screen's frozen rule (any generated four-token sequence repeated at least three times), flags 17, 29, 32, 31, 32, 32 and 32 of 32 completions at the seven checkpoints above. These counts are not independent relevance judgments and do not replace the blinded ratings. In particular, the 40M checkpoint still produces repetitive completions despite lower held-out CE.
+
 ## Operation
 
 - Run: `runs/own-base-foundation-01`; launched 2026-11-06 around 07:08 IST.
-- Frozen ceiling: 99,999,744 attempted targets, 36 active hours, seven calendar days; approximately 24 active hours expected from launch.
+- Frozen ceiling: 99,999,744 attempted targets, 36 active hours, seven calendar days. At approximately 45M, measured throughput is about 1,444 targets/second, giving roughly 10.6 active hours remaining; use the live status for subsequent estimates.
 - Next measurements: every 10M and the actual endpoint. Temporary resource stops and four-hour leases use the bounded supervisor.
 - Live status: `runs/own-base-foundation-01/status.json`; full fixed evaluations: `validation.json`; supervision: `runs/own-base-foundation-01-supervisor.json`.
 - LaunchAgent: `local.forge.own-base-foundation`. AC-only system-sleep prevention is bounded to the supervisor's lifetime. No display-sleep override.
