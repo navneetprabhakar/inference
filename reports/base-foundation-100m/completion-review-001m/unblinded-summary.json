@@ -1,0 +1,94 @@
+{
+  "evaluator": "AI reviewer /root/base_completion_review; same assistant family, separate context",
+  "ratings_sha256": "dcfd8c3d9a448c028c4356cb0c312eca36107afbbd2fddebf7e3830edb4caab3",
+  "blind_sha256": "ea0d70a15251b987cc2d91826b3cf826727369b2b1590316757c215c0e8c969a",
+  "checkpoint_mapping": {
+    "X": 0,
+    "Y": 1007616
+  },
+  "by_trained_targets": {
+    "0": {
+      "n": 32,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.0,
+          "count_distribution": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.9375,
+          "count_distribution": {
+            "0": 2,
+            "1": 30,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.625,
+          "count_distribution": {
+            "0": 13,
+            "1": 18,
+            "2": 1
+          }
+        },
+        "repetition": {
+          "mean": 0.53125,
+          "count_distribution": {
+            "0": 17,
+            "1": 13,
+            "2": 2
+          }
+        }
+      },
+      "mean_across_dimensions": 0.5234375,
+      "loop_count": 17,
+      "loop_rate": 0.53125,
+      "empty_count": 0
+    },
+    "1007616": {
+      "n": 32,
+      "dimensions": {
+        "relevance": {
+          "mean": 0.0,
+          "count_distribution": {
+            "0": 32,
+            "1": 0,
+            "2": 0
+          }
+        },
+        "local_consistency": {
+          "mean": 0.96875,
+          "count_distribution": {
+            "0": 1,
+            "1": 31,
+            "2": 0
+          }
+        },
+        "language": {
+          "mean": 0.09375,
+          "count_distribution": {
+            "0": 29,
+            "1": 3,
+            "2": 0
+          }
+        },
+        "repetition": {
+          "mean": 0.09375,
+          "count_distribution": {
+            "0": 29,
+            "1": 3,
+            "2": 0
+          }
+        }
+      },
+      "mean_across_dimensions": 0.2890625,
+      "loop_count": 29,
+      "loop_rate": 0.90625,
+      "empty_count": 0
+    }
+  },
+  "finding": "At 1,007,616 targets, held-out CE improved but blinded AI review found more greedy repetition: 29/32 loops versus baseline17/32. Relevance was0/32 for both. Context-pair accuracy stayed0/32. Continue fixed foundation protocol; no claim of conversational improvement."
+}

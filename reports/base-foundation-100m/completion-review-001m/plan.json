@@ -1,0 +1,15 @@
+{
+  "evaluator": "AI reviewer /root/base_completion_review; same assistant family, separate context",
+  "blinding": "No loss, pair accuracy or checkpoint identifiers supplied; randomized candidate labels and sample order. Root has already inspected four example continuations qualitatively.",
+  "rubric": {
+    "unit": "Each fixed prefix and its up-to-48-token continuation.",
+    "dimensions": {
+      "relevance": "0 unrelated or incoherent; 1 partly relevant with drift; 2 follows the prefix throughout.",
+      "local_consistency": "0 contradicts prefix or itself; 1 ambiguous or minor inconsistency; 2 consistent with supplied facts and own continuation.",
+      "language": "0 mostly unreadable; 1 understandable with substantial grammatical defects; 2 readable connected language.",
+      "repetition": "0 stuck in repeated phrase or loop; 1 distracting redundancy; 2 no distracting repetition."
+    },
+    "report": "Report all dimension counts and means, loop rate, empty outputs and raw completions. A token-cap truncation alone is not a coherence failure. This is an informative base-completion rubric, without an absolute chat-readiness gate. Freeze rubric and disclose evaluator identity before outputs are judged."
+  },
+  "created": "2026-11-06T01:56:22.459059+00:00"
+}
