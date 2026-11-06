@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -40,7 +41,7 @@ class SamplerTests(unittest.TestCase):
         file = self.run / 'fixture.pt'
         torch.save(payload, file)
         digest = sampler.digest(file)
-        name = f'step-000001-{digest}.pt'
+        name = f'step-{payload["step"]:06d}-{digest}.pt'
         file.rename(self.run / name)
         entry = dict(file=name, sha256=digest, bytes=(self.run / name).stat().st_size)
         ledger = dict(spec=spec, campaign_id='test-campaign', reserved_tokens=8192,
@@ -69,6 +70,26 @@ class SamplerTests(unittest.TestCase):
         _, receipt = sampler.verified_checkpoint(self.run, protected_step=1)
         self.assertFalse(receipt['separate_size_receipt'])
         self.assertTrue(receipt['protected'])
+
+    def test_zero_target_baseline_retains_parent_context(self):
+        self.fixture(payload_changes={'step': 0, 'trained_tokens': 0, 'offset': 0})
+        _, receipt = sampler.verified_checkpoint(self.run, protected_step=0)
+        self.assertEqual(receipt['trained_context'], 256)
+        sampler.validate_generation([1]*250, 6, 0., context=receipt['trained_context'])
+        with self.assertRaisesRegex(ValueError, 'trained context 256'):
+            sampler.validate_generation([1]*250, 7, 0., context=receipt['trained_context'])
+        with self.assertRaisesRegex(ValueError, 'trained context 256'):
+            sampler.complete(None, [1]*250, 7, context=receipt['trained_context'])
+
+    def test_cli_honors_checkpoint_context_before_generation(self):
+        tokenizer = SimpleNamespace(encode=lambda text: SimpleNamespace(ids=[1]*250))
+        args = ['base_sample.py', str(self.run), '--protected-step', '0', '--prompt', 'text', '--max-new-tokens', '7']
+        with patch.object(sampler.sys, 'argv', args), patch.object(sampler, 'load', return_value=tokenizer), \
+                patch.object(sampler, 'load_model', return_value=(None, {'trained_context': 256})), \
+                patch.object(sampler, 'complete') as generate:
+            with self.assertRaisesRegex(ValueError, 'trained context 256'):
+                sampler.main()
+            generate.assert_not_called()
 
     def test_corrupted_ledger(self):
         self.fixture()

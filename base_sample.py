@@ -141,7 +141,8 @@ def verified_checkpoint(run, *, step=None, protected_step=None, filename=None):
                 or not 0 <= trained <= ledger['reserved_tokens'] <= spec['token_limit']):
             raise ValueError('checkpoint cursor/token accounting mismatch')
         receipt = dict(file=str(path), sha256=expected_sha, bytes=stat.st_size, step=actual_step,
-                       trained_tokens=trained, protected=name in protected, trained_context=CONTEXT,
+                       trained_tokens=trained, protected=name in protected,
+                       trained_context=256 if trained == 0 else CONTEXT,
                        separate_size_receipt=name in receipts)
         # Optimizer states and evaluation transcripts are not needed for sampling.
         weights = payload['model']
@@ -160,20 +161,22 @@ def load_model(run, **selection):
     return model.eval(), receipt
 
 
-def validate_generation(prompt_ids, max_new_tokens, temperature):
+def validate_generation(prompt_ids, max_new_tokens, temperature, *, context=CONTEXT):
+    if type(context) is not int or context not in (256, CONTEXT):
+        raise ValueError('supported trained context must be 256 or 512')
     if not prompt_ids:
         raise ValueError('prompt must contain at least one token')
-    if type(max_new_tokens) is not int or not 1 <= max_new_tokens <= CONTEXT:
-        raise ValueError('max-new-tokens must be an integer from 1 to 512')
-    if len(prompt_ids) + max_new_tokens > CONTEXT:
-        raise ValueError('prompt plus requested continuation exceeds trained context 512; no silent truncation')
+    if type(max_new_tokens) is not int or not 1 <= max_new_tokens <= context:
+        raise ValueError(f'max-new-tokens must be an integer from 1 to {context}')
+    if len(prompt_ids) + max_new_tokens > context:
+        raise ValueError(f'prompt plus requested continuation exceeds trained context {context}; no silent truncation')
     if not math.isfinite(temperature) or temperature < 0:
         raise ValueError('temperature must be finite and nonnegative')
 
 
 @torch.inference_mode()
-def complete(model, prompt_ids, max_new_tokens=64, temperature=0., *, seed=0, eot=50256):
-    validate_generation(prompt_ids, max_new_tokens, temperature)
+def complete(model, prompt_ids, max_new_tokens=64, temperature=0., *, seed=0, eot=50256, context=CONTEXT):
+    validate_generation(prompt_ids, max_new_tokens, temperature, context=context)
     if next(model.parameters()).device.type != 'cpu':
         raise ValueError('this sampler is CPU-only to avoid competing with live MPS training')
     ids = list(prompt_ids)
@@ -207,8 +210,10 @@ def main():
     ids = tokenizer.encode(args.prompt).ids
     validate_generation(ids, args.max_new_tokens, args.temperature)
     model, receipt = load_model(args.run, step=args.step, protected_step=args.protected_step, filename=args.checkpoint)
+    validate_generation(ids, args.max_new_tokens, args.temperature, context=receipt['trained_context'])
     print('Raw own-base completion; not an assistant. ' + json.dumps(receipt), file=sys.stderr)
-    print(tokenizer.decode(complete(model, ids, args.max_new_tokens, args.temperature, seed=args.seed)))
+    print(tokenizer.decode(complete(model, ids, args.max_new_tokens, args.temperature,
+                                   seed=args.seed, context=receipt['trained_context'])))
 
 
 if __name__ == '__main__':

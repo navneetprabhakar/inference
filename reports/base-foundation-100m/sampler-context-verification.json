@@ -1,0 +1,33 @@
+{
+  "state": "passed",
+  "command": ".venv/bin/python verify_base_sample.py",
+  "tests": 20,
+  "device": "CPU",
+  "full_model_generation": false,
+  "change": "Zero-new-target baseline reports and enforces parent context256; positive campaign targets use512. CLI and complete honor selected receipt context.",
+  "new_regressions": [
+    "test_zero_target_baseline_retains_parent_context",
+    "test_cli_honors_checkpoint_context_before_generation"
+  ],
+  "historical_receipt_preserved": {
+    "path": "reports/base-foundation-100m/sampler-verification.json",
+    "sha256": "66ab49d2378f8cca3f7554027413ecc61c9403575f39ac0380d796ba41028e0e"
+  },
+  "frozen_runtime_hashes_unchanged": {
+    "base_train.py": true,
+    "base_run_control.py": true,
+    "base_supervise.py": true,
+    "gpt2.py": true,
+    "train.py": true,
+    "guards.py": true,
+    "checkpoint.py": true,
+    "tokenizer.py": true,
+    "pretrained_base.py": true,
+    "pretrain.py": true
+  },
+  "files": {
+    "base_sample.py": "12ea329517ae43f078f7befe1c05bcd0f6aa1b2ae45660b90d032b2c01ba279a",
+    "verify_base_sample.py": "78276b2c4b1136bf8379eb9e90ba0e0bfd9cf40f90141199d5d5f2a29e676f47",
+    "README-base-sample.md": "1e5c3f0f1de1fc3dd32e1ec794b605bccb1a86661b5a3fa0fe1456a2f6fce0af"
+  }
+}
