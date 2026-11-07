@@ -1,0 +1,256 @@
+{
+  "scope": "CPU-only prospective; no activation or model/checkpoint loading",
+  "datasets": [
+    {
+      "name": "chat",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-chat-aligned-v1/receipt.json",
+        "sha256": "bfa456aa10297baa99a882ca4d0441c1d9d8c583a9dc8551f3aba5747c564e1a"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-chat-aligned-v1/diagnostic-admission.json",
+        "sha256": "42cab2aaf2801f6ab609901da281d135798bb5fb39d88c107b428f67be585c92"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-chat-aligned-v1/independent-verification.json",
+        "sha256": "0540e910284ffd0fd3c6f33c2d998166d8ad2191f39f35a8d7653c7be56be488"
+      },
+      "development_split": "exposed-development",
+      "passes": 1,
+      "validation_rows": 2124,
+      "work_limits": {
+        "assistant_targets": 545588,
+        "input_tokens": 11453525,
+        "padded_tokens": 11453525,
+        "attention_cells": 3862989247,
+        "evaluation_targets": 185984
+      }
+    },
+    {
+      "name": "primary_tool",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-tool-aligned-v2/receipt.json",
+        "sha256": "16eeaf1bbc4327cdcdd1fed014731c187845a90c3ab90a97aed1db2a89157d6e"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-tool-aligned-v2/diagnostic-admission.json",
+        "sha256": "c414916d5ce294d517b4ba4a58c194290b682f66d52d49f5a743ee1f99abffe3"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-tool-aligned-v2/independent-verification.json",
+        "sha256": "4fb2338667765030373bc7399f63c552f221c108f6a7cdf450230cd98dfae6b4"
+      },
+      "development_split": "exposed-development",
+      "passes": 1,
+      "validation_rows": 652,
+      "work_limits": {
+        "assistant_targets": 206279,
+        "input_tokens": 3043356,
+        "padded_tokens": 3043356,
+        "attention_cells": 1229588730,
+        "evaluation_targets": 103492
+      }
+    },
+    {
+      "name": "four_call_extension",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-session-aligned-v2/receipt.json",
+        "sha256": "5f6ad7fd13f9d87a0dbb4c61c234ff1855e0a67b424c41a07ec85b6467e23abe"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-session-aligned-v2/diagnostic-admission.json",
+        "sha256": "dbfcf876b1fad95319ffb2d6577634495db9341d007bb5cebf62e969e5bcbd9c"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/grounded-session-aligned-v2/independent-verification.json",
+        "sha256": "217866b8a548f4db815dcf3fd0276bfc10ed3abad05d33a8385d76793c202113"
+      },
+      "development_split": "exposed-development",
+      "passes": 1,
+      "validation_rows": 162,
+      "work_limits": {
+        "assistant_targets": 90797,
+        "input_tokens": 1422938,
+        "padded_tokens": 1422938,
+        "attention_cells": 956165286,
+        "evaluation_targets": 38688
+      }
+    }
+  ],
+  "configuration": {
+    "microbatch": 1,
+    "evaluation_microbatch": 1,
+    "accumulation": 8,
+    "seed": 20261106,
+    "mixing": "proportional_source_update_midpoints",
+    "schedule_rows_limit": 40000
+  },
+  "updates": 3975,
+  "evaluation_steps": [
+    0,
+    2000,
+    3975
+  ],
+  "checkpoint_updates": 100,
+  "scheduler_proposal": {
+    "kind": "warmup_cosine_updates",
+    "warmup_updates": 199,
+    "peak_lr": 6e-05,
+    "end_fraction": 0.1
+  },
+  "sources": {
+    "chat": {
+      "training_rows": 25022,
+      "development_rows": 2124,
+      "updates": 3128,
+      "lengths": {
+        "min": 283,
+        "median": 331,
+        "p95": 375,
+        "max": 392
+      },
+      "training": {
+        "assistant_targets": 531777,
+        "input_tokens": 8361208,
+        "padded_tokens": 8361208,
+        "attention_cells": 2810367744,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 719279,
+        "padded_tokens": 719279,
+        "attention_cells": 244959355,
+        "evaluation_targets": 46496
+      },
+      "nominal": {
+        "assistant_targets": 531777,
+        "input_tokens": 10519045,
+        "padded_tokens": 10519045,
+        "attention_cells": 3545245809,
+        "evaluation_targets": 139488
+      },
+      "one_recovery_componentwise_bound": {
+        "assistant_targets": 13811,
+        "input_tokens": 934480,
+        "padded_tokens": 934480,
+        "attention_cells": 317743438,
+        "evaluation_targets": 46496
+      }
+    },
+    "primary_tool": {
+      "training_rows": 5278,
+      "development_rows": 652,
+      "updates": 660,
+      "lengths": {
+        "min": 170,
+        "median": 394,
+        "p95": 518,
+        "max": 581
+      },
+      "training": {
+        "assistant_targets": 200457,
+        "input_tokens": 1987021,
+        "padded_tokens": 1987021,
+        "attention_cells": 799809733,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 250406,
+        "padded_tokens": 250406,
+        "attention_cells": 101689904,
+        "evaluation_targets": 25873
+      },
+      "nominal": {
+        "assistant_targets": 200457,
+        "input_tokens": 2738239,
+        "padded_tokens": 2738239,
+        "attention_cells": 1104879445,
+        "evaluation_targets": 77619
+      },
+      "one_recovery_componentwise_bound": {
+        "assistant_targets": 5822,
+        "input_tokens": 305117,
+        "padded_tokens": 305117,
+        "attention_cells": 124709285,
+        "evaluation_targets": 25873
+      }
+    },
+    "four_call_extension": {
+      "training_rows": 1494,
+      "development_rows": 162,
+      "updates": 187,
+      "lengths": {
+        "min": 480,
+        "median": 700,
+        "p95": 768,
+        "max": 781
+      },
+      "training": {
+        "assistant_targets": 88059,
+        "input_tokens": 968900,
+        "padded_tokens": 968900,
+        "attention_cells": 647818690,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 106524,
+        "padded_tokens": 106524,
+        "attention_cells": 72152708,
+        "evaluation_targets": 9672
+      },
+      "nominal": {
+        "assistant_targets": 88059,
+        "input_tokens": 1288472,
+        "padded_tokens": 1288472,
+        "attention_cells": 864276814,
+        "evaluation_targets": 29016
+      },
+      "one_recovery_componentwise_bound": {
+        "assistant_targets": 2738,
+        "input_tokens": 134466,
+        "padded_tokens": 134466,
+        "attention_cells": 91888472,
+        "evaluation_targets": 9672
+      }
+    }
+  },
+  "training": {
+    "assistant_targets": 820293,
+    "input_tokens": 11317129,
+    "padded_tokens": 11317129,
+    "attention_cells": 4257996167,
+    "evaluation_targets": 0
+  },
+  "one_evaluation": {
+    "assistant_targets": 0,
+    "input_tokens": 1076209,
+    "padded_tokens": 1076209,
+    "attention_cells": 418801967,
+    "evaluation_targets": 82041
+  },
+  "nominal": {
+    "assistant_targets": 820293,
+    "input_tokens": 14545756,
+    "padded_tokens": 14545756,
+    "attention_cells": 5514402068,
+    "evaluation_targets": 246123
+  },
+  "one_recovery_componentwise_bound": {
+    "assistant_targets": 22371,
+    "input_tokens": 1374063,
+    "padded_tokens": 1374063,
+    "attention_cells": 534341195,
+    "evaluation_targets": 82041
+  },
+  "work_limits": {
+    "assistant_targets": 842664,
+    "input_tokens": 15919819,
+    "padded_tokens": 15919819,
+    "attention_cells": 6048743263,
+    "evaluation_targets": 328164
+  },
+  "analyzer_sha256": "0edb7011ee37c035ce52e74d9515f8bb900de9c7936ad565203f865dc8e37d86"
+}
