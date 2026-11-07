@@ -1,0 +1,5090 @@
+{
+  "source": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-dev-diagnostic-01/primary_tools.json",
+    "sha256": "b5cf55689036d0772c78de46fb16ad998e1fcd4e7eb00ef0b49f947fa3553703"
+  },
+  "cases": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-dev-rubrics-v4/cases.json",
+    "sha256": "ae9a7664ee84e6109f881b93e38f55a6b0a74033560a69e8575d4b8584daf904"
+  },
+  "scope": "Exposed development analysis only; raw report and frozen rules unchanged; no cases admitted to training",
+  "raw_summary": {
+    "sessions": {
+      "passed": 78,
+      "total": 422,
+      "manual_pending": 21
+    },
+    "turns": {
+      "passed": 182,
+      "total": 583,
+      "manual_pending": 31
+    },
+    "no_call": {
+      "passed": 125,
+      "total": 130,
+      "manual_pending": 0
+    },
+    "requested_calls": {
+      "passed": 151,
+      "total": 453,
+      "manual_pending": 0
+    },
+    "first_call_per_required_turn": {
+      "passed": 158,
+      "total": 453,
+      "manual_pending": 0
+    },
+    "first_call_per_tool_session": {
+      "passed": 134,
+      "total": 410,
+      "manual_pending": 0
+    },
+    "readbacks_with_observation": {
+      "passed": 475,
+      "total": 522,
+      "manual_pending": 0
+    },
+    "faithful_given_observation": {
+      "passed": 333,
+      "total": 475,
+      "manual_pending": 5
+    },
+    "forbidden_successful_calls": 0,
+    "unknown_successful_calls": 0,
+    "all_expected_readbacks": {
+      "passed": 333,
+      "total": 522,
+      "manual_pending": 5
+    },
+    "protocol_failures": 33
+  },
+  "by_family": {
+    "arith/divide/signed": {
+      "sessions": 22,
+      "session_pass": 0,
+      "turns": 29,
+      "pass": 1,
+      "manual_pending": 0,
+      "protocol_fail": 19,
+      "call_sequence_fail": 24,
+      "content_fail": 28,
+      "observation_present": 2,
+      "readback_pass": 1
+    },
+    "special/no_call_after": {
+      "sessions": 10,
+      "session_pass": 8,
+      "turns": 20,
+      "pass": 18,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 2,
+      "content_fail": 0,
+      "observation_present": 20,
+      "readback_pass": 20
+    },
+    "arith/divide/count": {
+      "sessions": 16,
+      "session_pass": 0,
+      "turns": 21,
+      "pass": 3,
+      "manual_pending": 0,
+      "protocol_fail": 2,
+      "call_sequence_fail": 17,
+      "content_fail": 8,
+      "observation_present": 21,
+      "readback_pass": 13
+    },
+    "special/no_call_expression": {
+      "sessions": 12,
+      "session_pass": 3,
+      "turns": 12,
+      "pass": 3,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 9,
+      "observation_present": 0,
+      "readback_pass": 0
+    },
+    "convert/mass": {
+      "sessions": 39,
+      "session_pass": 16,
+      "turns": 50,
+      "pass": 23,
+      "manual_pending": 0,
+      "protocol_fail": 2,
+      "call_sequence_fail": 14,
+      "content_fail": 22,
+      "observation_present": 45,
+      "readback_pass": 24
+    },
+    "arith/multiply/positive": {
+      "sessions": 17,
+      "session_pass": 0,
+      "turns": 23,
+      "pass": 5,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 17,
+      "content_fail": 5,
+      "observation_present": 23,
+      "readback_pass": 18
+    },
+    "convert/volume": {
+      "sessions": 45,
+      "session_pass": 10,
+      "turns": 57,
+      "pass": 18,
+      "manual_pending": 0,
+      "protocol_fail": 3,
+      "call_sequence_fail": 29,
+      "content_fail": 20,
+      "observation_present": 51,
+      "readback_pass": 31
+    },
+    "special/missing_start": {
+      "sessions": 6,
+      "session_pass": 0,
+      "turns": 12,
+      "pass": 6,
+      "manual_pending": 6,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 0,
+      "observation_present": 6,
+      "readback_pass": 6
+    },
+    "arith/add/signed": {
+      "sessions": 24,
+      "session_pass": 0,
+      "turns": 32,
+      "pass": 5,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 25,
+      "content_fail": 6,
+      "observation_present": 32,
+      "readback_pass": 26
+    },
+    "convert/time": {
+      "sessions": 45,
+      "session_pass": 2,
+      "turns": 57,
+      "pass": 8,
+      "manual_pending": 0,
+      "protocol_fail": 5,
+      "call_sequence_fail": 42,
+      "content_fail": 47,
+      "observation_present": 43,
+      "readback_pass": 8
+    },
+    "convert/length": {
+      "sessions": 44,
+      "session_pass": 11,
+      "turns": 56,
+      "pass": 19,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 28,
+      "content_fail": 21,
+      "observation_present": 50,
+      "readback_pass": 31
+    },
+    "arith/multiply/count": {
+      "sessions": 16,
+      "session_pass": 3,
+      "turns": 20,
+      "pass": 4,
+      "manual_pending": 0,
+      "protocol_fail": 1,
+      "call_sequence_fail": 8,
+      "content_fail": 10,
+      "observation_present": 20,
+      "readback_pass": 10
+    },
+    "special/permission_change": {
+      "sessions": 8,
+      "session_pass": 0,
+      "turns": 16,
+      "pass": 6,
+      "manual_pending": 8,
+      "protocol_fail": 0,
+      "call_sequence_fail": 2,
+      "content_fail": 0,
+      "observation_present": 8,
+      "readback_pass": 8
+    },
+    "arith/subtract/positive": {
+      "sessions": 23,
+      "session_pass": 12,
+      "turns": 30,
+      "pass": 19,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 11,
+      "content_fail": 0,
+      "observation_present": 30,
+      "readback_pass": 30
+    },
+    "arith/subtract/signed": {
+      "sessions": 24,
+      "session_pass": 0,
+      "turns": 32,
+      "pass": 7,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 24,
+      "content_fail": 1,
+      "observation_present": 32,
+      "readback_pass": 31
+    },
+    "special/missing_divisor": {
+      "sessions": 10,
+      "session_pass": 0,
+      "turns": 20,
+      "pass": 7,
+      "manual_pending": 10,
+      "protocol_fail": 0,
+      "call_sequence_fail": 2,
+      "content_fail": 2,
+      "observation_present": 10,
+      "readback_pass": 8
+    },
+    "special/two_calls": {
+      "sessions": 7,
+      "session_pass": 0,
+      "turns": 7,
+      "pass": 0,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 7,
+      "content_fail": 7,
+      "observation_present": 0,
+      "readback_pass": 0
+    },
+    "arith/add/count": {
+      "sessions": 14,
+      "session_pass": 11,
+      "turns": 19,
+      "pass": 16,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 3,
+      "content_fail": 0,
+      "observation_present": 19,
+      "readback_pass": 19
+    },
+    "special/transient": {
+      "sessions": 10,
+      "session_pass": 0,
+      "turns": 20,
+      "pass": 0,
+      "manual_pending": 5,
+      "protocol_fail": 0,
+      "call_sequence_fail": 15,
+      "content_fail": 1,
+      "observation_present": 20,
+      "readback_pass": 14
+    },
+    "special/paired_observation": {
+      "sessions": 8,
+      "session_pass": 0,
+      "turns": 16,
+      "pass": 6,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 8,
+      "content_fail": 6,
+      "observation_present": 16,
+      "readback_pass": 10
+    },
+    "special/missing_target": {
+      "sessions": 2,
+      "session_pass": 0,
+      "turns": 4,
+      "pass": 2,
+      "manual_pending": 2,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 0,
+      "observation_present": 2,
+      "readback_pass": 2
+    },
+    "special/correct_input": {
+      "sessions": 10,
+      "session_pass": 0,
+      "turns": 20,
+      "pass": 4,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 16,
+      "content_fail": 1,
+      "observation_present": 20,
+      "readback_pass": 19
+    },
+    "special/signed_conversion": {
+      "sessions": 2,
+      "session_pass": 2,
+      "turns": 2,
+      "pass": 2,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 0,
+      "observation_present": 2,
+      "readback_pass": 2
+    },
+    "special/zero_divisor": {
+      "sessions": 4,
+      "session_pass": 0,
+      "turns": 4,
+      "pass": 0,
+      "manual_pending": 0,
+      "protocol_fail": 1,
+      "call_sequence_fail": 4,
+      "content_fail": 2,
+      "observation_present": 3,
+      "readback_pass": 2
+    },
+    "special/convert_chain": {
+      "sessions": 4,
+      "session_pass": 0,
+      "turns": 4,
+      "pass": 0,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 4,
+      "content_fail": 4,
+      "observation_present": 0,
+      "readback_pass": 0
+    }
+  },
+  "by_answer_mode": {
+    "observed_status": {
+      "turns": 509,
+      "pass": 151,
+      "manual_pending": 5,
+      "protocol_fail": 32,
+      "call_sequence_fail": 302,
+      "content_fail": 183,
+      "observation_present": 463,
+      "readback_pass": 321
+    },
+    "exact": {
+      "turns": 35,
+      "pass": 19,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 16,
+      "observation_present": 0,
+      "readback_pass": 0
+    },
+    "manual": {
+      "turns": 26,
+      "pass": 0,
+      "manual_pending": 26,
+      "protocol_fail": 0,
+      "call_sequence_fail": 0,
+      "content_fail": 0,
+      "observation_present": 0,
+      "readback_pass": 0
+    },
+    "number": {
+      "turns": 13,
+      "pass": 12,
+      "manual_pending": 0,
+      "protocol_fail": 1,
+      "call_sequence_fail": 0,
+      "content_fail": 1,
+      "observation_present": 12,
+      "readback_pass": 12
+    }
+  },
+  "by_required_call_names": {
+    "calculate": {
+      "turns": 265,
+      "pass": 73,
+      "manual_pending": 0,
+      "protocol_fail": 19,
+      "call_sequence_fail": 180,
+      "content_fail": 64,
+      "observation_present": 240,
+      "readback_pass": 201
+    },
+    "no-call": {
+      "turns": 130,
+      "pass": 65,
+      "manual_pending": 31,
+      "protocol_fail": 5,
+      "call_sequence_fail": 0,
+      "content_fail": 34,
+      "observation_present": 65,
+      "readback_pass": 46
+    },
+    "convert": {
+      "turns": 177,
+      "pass": 44,
+      "manual_pending": 0,
+      "protocol_fail": 9,
+      "call_sequence_fail": 111,
+      "content_fail": 91,
+      "observation_present": 170,
+      "readback_pass": 86
+    },
+    "calculate/calculate": {
+      "turns": 7,
+      "pass": 0,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 7,
+      "content_fail": 7,
+      "observation_present": 0,
+      "readback_pass": 0
+    },
+    "convert/calculate": {
+      "turns": 4,
+      "pass": 0,
+      "manual_pending": 0,
+      "protocol_fail": 0,
+      "call_sequence_fail": 4,
+      "content_fail": 4,
+      "observation_present": 0,
+      "readback_pass": 0
+    }
+  },
+  "call_error_counts": {
+    "too_few_calls_turns": 43,
+    "missing_expected_call": 40,
+    "exact_matched_call": 158,
+    "same_tool_wrong_arguments": 221,
+    "wrong_tool_name": 42,
+    "noncommutative_operand_swap_only": 2,
+    "commutative_operand_swap_only": 4,
+    "unresolvable_expected_call": 3
+  },
+  "argument_field_mismatches": {
+    "a": 83,
+    "op": 105,
+    "value": 52,
+    "b": 66,
+    "from": 18,
+    "to": 19
+  },
+  "top_argument_transitions": [
+    {
+      "field": "op",
+      "expected": "add",
+      "actual": "subtract",
+      "count": 24
+    },
+    {
+      "field": "op",
+      "expected": "multiply",
+      "actual": "divide",
+      "count": 18
+    },
+    {
+      "field": "op",
+      "expected": "subtract",
+      "actual": "add",
+      "count": 18
+    },
+    {
+      "field": "op",
+      "expected": "divide",
+      "actual": "subtract",
+      "count": 16
+    },
+    {
+      "field": "value",
+      "expected": "18.5",
+      "actual": "18",
+      "count": 13
+    },
+    {
+      "field": "op",
+      "expected": "multiply",
+      "actual": "add",
+      "count": 10
+    },
+    {
+      "field": "op",
+      "expected": "subtract",
+      "actual": "divide",
+      "count": 10
+    },
+    {
+      "field": "from",
+      "expected": "l",
+      "actual": "ml",
+      "count": 8
+    },
+    {
+      "field": "to",
+      "expected": "ml",
+      "actual": "l",
+      "count": 8
+    },
+    {
+      "field": "value",
+      "expected": "91.25",
+      "actual": "77.25",
+      "count": 6
+    },
+    {
+      "field": "value",
+      "expected": "41.75",
+      "actual": "41",
+      "count": 6
+    },
+    {
+      "field": "op",
+      "expected": "add",
+      "actual": "divide",
+      "count": 5
+    },
+    {
+      "field": "value",
+      "expected": "91.25",
+      "actual": "77",
+      "count": 5
+    },
+    {
+      "field": "from",
+      "expected": "kg",
+      "actual": "g",
+      "count": 4
+    },
+    {
+      "field": "to",
+      "expected": "g",
+      "actual": "kg",
+      "count": 4
+    },
+    {
+      "field": "op",
+      "expected": "add",
+      "actual": "multiply",
+      "count": 4
+    },
+    {
+      "field": "value",
+      "expected": "17.25",
+      "actual": "17",
+      "count": 4
+    },
+    {
+      "field": "value",
+      "expected": "21.25",
+      "actual": "21",
+      "count": 3
+    },
+    {
+      "field": "value",
+      "expected": "91.25",
+      "actual": "90.25",
+      "count": 3
+    },
+    {
+      "field": "value",
+      "expected": "13.75",
+      "actual": "13",
+      "count": 2
+    },
+    {
+      "field": "b",
+      "expected": "9",
+      "actual": "4",
+      "count": 2
+    },
+    {
+      "field": "from",
+      "expected": "m",
+      "actual": "cm",
+      "count": 2
+    },
+    {
+      "field": "to",
+      "expected": "cm",
+      "actual": "m",
+      "count": 2
+    },
+    {
+      "field": "to",
+      "expected": "m",
+      "actual": "mm",
+      "count": 2
+    },
+    {
+      "field": "a",
+      "expected": "58",
+      "actual": "57.0",
+      "count": 2
+    },
+    {
+      "field": "a",
+      "expected": "81",
+      "actual": "85",
+      "count": 2
+    },
+    {
+      "field": "from",
+      "expected": "m",
+      "actual": "mm",
+      "count": 2
+    },
+    {
+      "field": "a",
+      "expected": "42",
+      "actual": "32.0",
+      "count": 2
+    },
+    {
+      "field": "value",
+      "expected": "390.0",
+      "actual": "192.0",
+      "count": 2
+    },
+    {
+      "field": "from",
+      "expected": "cm",
+      "actual": "mm",
+      "count": 2
+    }
+  ],
+  "protocol_failure_reasons": {
+    "incomplete or multiple assistant frames": 15,
+    "chat closed after prior failure: incomplete or multiple assistant frames": 5,
+    "Expecting ':' delimiter: line 1 column 14 (char 13)": 1,
+    "expected exactly one assistant text or call": 3,
+    "Expecting value: line 1 column 53 (char 52)": 1,
+    "Expecting ',' delimiter: line 1 column 56 (char 55)": 2,
+    "Expecting ':' delimiter: line 1 column 18 (char 17)": 3,
+    "Expecting value: line 1 column 51 (char 50)": 1,
+    "Expecting ',' delimiter: line 1 column 49 (char 48)": 1,
+    "Expecting value: line 1 column 36 (char 35)": 1
+  },
+  "examples": {
+    "protocol": [
+      {
+        "id": "0009af988837959ba06dcec175104799b5ab02e1f93c2fbf3992f8e453cccf7e",
+        "family": "arith/divide/signed",
+        "turn": 0,
+        "user": "The lower number of a displayed fraction is 4; the upper number is minus 134. What value does the display represent?",
+        "answer": null,
+        "raw_frames": [
+          "{\"text\":\"The display represents a number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -134.0,
+              "b": 4,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "0fdeed49b6575e8612c0d68fb10b088ecbfc818c584efe59e2885c5657e61e96",
+        "family": "arith/divide/signed",
+        "turn": 0,
+        "user": "The lower number of a displayed fraction is -8; the upper number is minus twenty-eight point two five. What value does the display represent?",
+        "answer": null,
+        "raw_frames": [
+          "{\"text\":\"To find the number of a given display, we need to calculate the number of a given display. \\n\\nThe lower number is -8. The lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nSo, the display represents -8. \\n\\nSo, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -28.25,
+              "b": -8,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "0fdeed49b6575e8612c0d68fb10b088ecbfc818c584efe59e2885c5657e61e96",
+        "family": "arith/divide/signed",
+        "turn": 1,
+        "user": "Repeat only the result already returned.",
+        "answer": null,
+        "raw_frames": [],
+        "expected_calls": [],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": true,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [],
+          "no_call_required": true,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "too_few_calls": [
+      {
+        "id": "0009af988837959ba06dcec175104799b5ab02e1f93c2fbf3992f8e453cccf7e",
+        "family": "arith/divide/signed",
+        "turn": 0,
+        "user": "The lower number of a displayed fraction is 4; the upper number is minus 134. What value does the display represent?",
+        "answer": null,
+        "raw_frames": [
+          "{\"text\":\"The display represents a number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number of numbers that are equal to the number"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -134.0,
+              "b": 4,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "03d93bc0fd55417327b33c36fb25a24ca0ed71f430c3ea0fc0e53d67cac5351a",
+        "family": "arith/divide/signed",
+        "turn": 0,
+        "user": "The lower number of a displayed fraction is -1; the upper number is 147. What value does the display represent?",
+        "answer": "The display represents a number of values that are not included in the first set of numbers. The lower number is the sum of the values that are not included in the first set of numbers. \n\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers. \n\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers.\n\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers.",
+        "raw_frames": [
+          "{\"text\":\"The display represents a number of values that are not included in the first set of numbers. The lower number is the sum of the values that are not included in the first set of numbers. \\n\\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers. \\n\\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers.\\n\\nThe lower number is the sum of the values that are not included in the first set of numbers. This is because the lower number is the sum of the values that are not included in the first set of numbers.\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 147.0,
+              "b": -1,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "0fdeed49b6575e8612c0d68fb10b088ecbfc818c584efe59e2885c5657e61e96",
+        "family": "arith/divide/signed",
+        "turn": 0,
+        "user": "The lower number of a displayed fraction is -8; the upper number is minus twenty-eight point two five. What value does the display represent?",
+        "answer": null,
+        "raw_frames": [
+          "{\"text\":\"To find the number of a given display, we need to calculate the number of a given display. \\n\\nThe lower number is -8. The lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nThe lower number is -8. \\n\\nSo, the display represents -8. \\n\\nSo, the display represents -8. \\n\\nSo, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display represents -8. \\n\\nTherefore, the display"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -28.25,
+              "b": -8,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "same_tool_wrong_arguments": [
+      {
+        "id": "0087be797404468482c4a17b83eaa677187330b6c090b28458625a0700eda0a1",
+        "family": "arith/divide/count",
+        "turn": 0,
+        "user": "A workshop used 230 screws assembling ten identical chairs. How many screws went into each chair?",
+        "answer": "138",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":148,\"b\":10,\"op\":\"subtract\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"138\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 230,
+              "b": 10,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 148,
+              "b": 10,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064663.882762,
+            "name": "calculate",
+            "arguments": {
+              "a": 148,
+              "b": 10,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 138
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "016c5bb271bc9c889d821d0c93a943f35fc780bd48b0b63ab797fe2b16c341c9",
+        "family": "arith/multiply/positive",
+        "turn": 0,
+        "user": "A plot spans 16 units in one direction and four in the other. How many square units does it cover?",
+        "answer": "4",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":16.0,\"b\":4,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"4\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 16.0,
+              "b": 4,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 16.0,
+              "b": 4,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064669.467583,
+            "name": "calculate",
+            "arguments": {
+              "a": 16.0,
+              "b": 4,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 4.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "019c3e94f6e1b1b7d684888559a74d06d7cec31fe780bdb9cd55e0d8d34dfec6",
+        "family": "convert/volume",
+        "turn": 0,
+        "user": "My worksheet's heading is milliliters. A source record contains 21.25 litres. What goes in the cell?",
+        "answer": "21000 ml",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"from\":\"l\",\"to\":\"ml\",\"value\":21},\"name\":\"convert\"}}<|endoftext|>",
+          "{\"text\":\"21000 ml\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "l",
+              "to": "ml",
+              "value": 21.25
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "from": "l",
+              "to": "ml",
+              "value": 21
+            },
+            "name": "convert"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064670.816915,
+            "name": "convert",
+            "arguments": {
+              "from": "l",
+              "to": "ml",
+              "value": 21
+            },
+            "ok": true,
+            "data": {
+              "result": 21000.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "correct_calls_wrong_answer": [
+      {
+        "id": "00d301b117052e46d741b1202cf94f4e0461e2547f878def86c44fff0f58aa3b",
+        "family": "special/no_call_expression",
+        "turn": 0,
+        "user": "No tools. Put 58 lots of 4 on the page as an expression, leaving its value blank.",
+        "answer": "125 \u00d7 4",
+        "raw_frames": [
+          "{\"text\":\"125 \u00d7 4\"}<|endoftext|>"
+        ],
+        "expected_calls": [],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": true,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [],
+          "no_call_required": true,
+          "expected_readback": false,
+          "observation_present": false,
+          "faithful_to_actual_observation": null,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "047ce258d0cfdeb5c7c8fa678164af8daea21e7a83d9e1d9c5c3313a4be8aad1",
+        "family": "convert/time",
+        "turn": 0,
+        "user": "Show the equivalent count for 18.5 hours when the display is set to minutes.",
+        "answer": "11.0 min",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"from\":\"h\",\"to\":\"min\",\"value\":18.5},\"name\":\"convert\"}}<|endoftext|>",
+          "{\"text\":\"11.0 min\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "h",
+              "to": "min",
+              "value": 18.5
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "from": "h",
+              "to": "min",
+              "value": 18.5
+            },
+            "name": "convert"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064695.0345259,
+            "name": "convert",
+            "arguments": {
+              "from": "h",
+              "to": "min",
+              "value": 18.5
+            },
+            "ok": true,
+            "data": {
+              "result": 1110.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": true,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            true
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "04de1cbeb36f3e1ce92a798ae13cf077bc101e30e52ff60365d12ef5f5949fca",
+        "family": "convert/mass",
+        "turn": 0,
+        "user": "My worksheet's heading is grams. A source record contains thirty-one point five kilograms. What goes in the cell?",
+        "answer": "126 g",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"from\":\"kg\",\"to\":\"g\",\"value\":31.5},\"name\":\"convert\"}}<|endoftext|>",
+          "{\"text\":\"126 g\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 31.5
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 31.5
+            },
+            "name": "convert"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064696.922049,
+            "name": "convert",
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 31.5
+            },
+            "ok": true,
+            "data": {
+              "result": 31500.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": true,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            true
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "unfaithful_readback": [
+      {
+        "id": "02d5b4a6d347ed4f3d9e75fde6da3705535d2e34c79991d2dbb2611569a50454",
+        "family": "arith/add/signed",
+        "turn": 0,
+        "user": "A subtotal of -136 needs the posted delta -19 applied. Read back the updated subtotal. Use the offline fixture and tell me its observed result.",
+        "answer": "-104",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":-148.0,\"b\":-1,\"op\":\"subtract\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"-104\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -136.0,
+              "b": -19.0,
+              "op": "add"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": -148.0,
+              "b": -1,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064676.595526,
+            "name": "calculate",
+            "arguments": {
+              "a": -148.0,
+              "b": -1,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -147.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "02d5b4a6d347ed4f3d9e75fde6da3705535d2e34c79991d2dbb2611569a50454",
+        "family": "arith/add/signed",
+        "turn": 1,
+        "user": "Use the calculator to multiply that returned number by 2.",
+        "answer": "-154",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":-104.0,\"b\":2,\"op\":\"multiply\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"-154\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": {
+                "ref": {
+                  "turn": 0,
+                  "call": 0,
+                  "field": "result"
+                }
+              },
+              "b": 2,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": -104.0,
+              "b": 2,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064678.74146,
+            "name": "calculate",
+            "arguments": {
+              "a": -104.0,
+              "b": 2,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": -208.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "036626a5ca981239690cd755eadcc6fd8eb62f1ef226a39e5359ced0ef388d59",
+        "family": "arith/multiply/positive",
+        "turn": 0,
+        "user": "A plot spans 23 units in one direction and 12 in the other. How many square units does it cover?",
+        "answer": "1.6666",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":23.0,\"b\":12,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"1.6666\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 23.0,
+              "b": 12,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 23.0,
+              "b": 12,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064682.0845382,
+            "name": "calculate",
+            "arguments": {
+              "a": 23.0,
+              "b": 12,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 1.9166666666666667
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "wrong_tool_name": [
+      {
+        "id": "0d4721b869b7893d422dd5bbc409aa32cce236d61947b91577f06df992ced54e",
+        "family": "convert/time",
+        "turn": 0,
+        "user": "Show the equivalent count for twenty-one point two five minutes when the display is set to seconds.",
+        "answer": "23.25",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":21.25,\"b\":2,\"op\":\"add\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"23.25\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 21.25
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 21.25,
+              "b": 2,
+              "op": "add"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064722.6223612,
+            "name": "calculate",
+            "arguments": {
+              "a": 21.25,
+              "b": 2,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 23.25
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "11c5d9e0475aab49b6be6f8ff552c08d0efae45be970869e21200355007fc0db",
+        "family": "convert/time",
+        "turn": 0,
+        "user": "Input unit hours, requested output unit seconds, input value 31.5. Compute the displayed value.",
+        "answer": "3.15",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":31.5,\"b\":10,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"3.15\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "h",
+              "to": "s",
+              "value": 31.5
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 31.5,
+              "b": 10,
+              "op": "divide"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064748.0647411,
+            "name": "calculate",
+            "arguments": {
+              "a": 31.5,
+              "b": 10,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 3.15
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "132bb3ee173a1ca82314b484d89d0705131d3d69d65128643a00f897f73fe71d",
+        "family": "convert/time",
+        "turn": 0,
+        "user": "Input unit seconds, requested output unit hours, input value 23400. Compute the displayed value.",
+        "answer": "23",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":23400.0,\"b\":10,\"op\":\"subtract\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"23\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "from": "s",
+              "to": "h",
+              "value": 23400.0
+            },
+            "name": "convert"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 23400.0,
+              "b": 10,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064749.958658,
+            "name": "calculate",
+            "arguments": {
+              "a": 23400.0,
+              "b": 10,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 23390.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "noncommutative_operand_swap_only": [
+      {
+        "id": "14dd37b6e193a829442d33108314df7b7a6d2fc7c300224756134a39eb978859",
+        "family": "arith/subtract/signed",
+        "turn": 0,
+        "user": "My baseline was -10. A sample came in at minus one. How much did the sample exceed the baseline, signed?",
+        "answer": "-9",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":-10.0,\"b\":-1,\"op\":\"subtract\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"-9\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": -1.0,
+              "b": -10.0,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": -10.0,
+              "b": -1,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064757.8639019,
+            "name": "calculate",
+            "arguments": {
+              "a": -10.0,
+              "b": -1,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -9.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "77f2f10adbfaf5447ad794163fc7378b7766d2f06013e4cf1bf1086e9f7752b1",
+        "family": "arith/subtract/signed",
+        "turn": 0,
+        "user": "My baseline was minus eighteen point five. A sample came in at 2. How much did the sample exceed the baseline, signed? Use the offline fixture and tell me its observed result.",
+        "answer": "-20.5",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":-18.5,\"b\":2.0,\"op\":\"subtract\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"-20.5\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 2.0,
+              "b": -18.5,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": -18.5,
+              "b": 2.0,
+              "op": "subtract"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794065268.3411589,
+            "name": "calculate",
+            "arguments": {
+              "a": -18.5,
+              "b": 2.0,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -20.5
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "commutative_operand_swap_only": [
+      {
+        "id": "207304d7f3dfa1df23191e70386a1ac9b87f0ebeff466c19b6948e9fdc8ab749",
+        "family": "arith/add/count",
+        "turn": 0,
+        "user": "A morning counter logged 9; an evening counter logged 11. What figure goes in the daily combined field?",
+        "answer": "20",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":11.0,\"b\":9,\"op\":\"add\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"20\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 9,
+              "b": 11,
+              "op": "add"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 11.0,
+              "b": 9,
+              "op": "add"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064814.884896,
+            "name": "calculate",
+            "arguments": {
+              "a": 11.0,
+              "b": 9,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 20.0
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "33986d5ec387be7b7c6b15b16970ccced2e25e3ab4068e0cbb9b8db0741b8eb4",
+        "family": "arith/multiply/count",
+        "turn": 0,
+        "user": "I stamped twelve labels per sheet for 6 full sheets. What number of labels did I stamp?",
+        "answer": "72",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":6,\"b\":12,\"op\":\"multiply\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"72\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 12,
+              "b": 6,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 6,
+              "b": 12,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794064921.357326,
+            "name": "calculate",
+            "arguments": {
+              "a": 6,
+              "b": 12,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 72
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "41f1d92487fcde9f9d3fc387a135fb26852d433b71072bfef07938007ca58181",
+        "family": "arith/multiply/count",
+        "turn": 0,
+        "user": "I stamped 8 labels per sheet for 7 full sheets. What number of labels did I stamp?",
+        "answer": "56",
+        "raw_frames": [
+          "{\"call\":{\"arguments\":{\"a\":7,\"b\":8,\"op\":\"multiply\"},\"name\":\"calculate\"}}<|endoftext|>",
+          "{\"text\":\"56\"}<|endoftext|>"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": 8,
+              "b": 7,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [
+          {
+            "arguments": {
+              "a": 7,
+              "b": 8,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794065015.101797,
+            "name": "calculate",
+            "arguments": {
+              "a": 7,
+              "b": 8,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 56
+            }
+          }
+        ],
+        "score": {
+          "passed": false,
+          "protocol_pass": true,
+          "call_sequence_pass": false,
+          "content_pass": true,
+          "proposal_count": 1,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": true,
+          "faithful_to_actual_observation": true,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ],
+    "unresolvable_expected_call": [
+      {
+        "id": "27ca6aa11c23575399b977db040631ccf83e70050a5aeb5e25266ea9c70be85d",
+        "family": "arith/divide/signed",
+        "turn": 1,
+        "user": "Use the calculator to multiply that returned number by four.",
+        "answer": null,
+        "raw_frames": [],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": {
+                "ref": {
+                  "turn": 0,
+                  "call": 0,
+                  "field": "result"
+                }
+              },
+              "b": 4,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "8307bba32ccb8c57cb15d238256c1d56c25c3ec400f77f190f9fcb3f2b2b1802",
+        "family": "convert/time",
+        "turn": 1,
+        "user": "Use the calculator to multiply that returned number by 4.",
+        "answer": null,
+        "raw_frames": [
+          "{\"text\":\"To find the number of days, we need to divide the number of days by 4. \\n\\nThe number of days is 4 + 4 + 4 + 4 + 4 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 +"
+        ],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": {
+                "ref": {
+                  "turn": 0,
+                  "call": 0,
+                  "field": "result"
+                }
+              },
+              "b": 4,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      },
+      {
+        "id": "a7c3a18bd07ccad6db5f6faf04d4cdd95e61d6c334ca6f80a52ef1ca86a12bdc",
+        "family": "arith/divide/signed",
+        "turn": 1,
+        "user": "Use the calculator to multiply that returned number by 2.",
+        "answer": null,
+        "raw_frames": [],
+        "expected_calls": [
+          {
+            "arguments": {
+              "a": {
+                "ref": {
+                  "turn": 0,
+                  "call": 0,
+                  "field": "result"
+                }
+              },
+              "b": 2,
+              "op": "multiply"
+            },
+            "name": "calculate"
+          }
+        ],
+        "actual_calls": [],
+        "trace": [],
+        "score": {
+          "passed": false,
+          "protocol_pass": false,
+          "call_sequence_pass": false,
+          "content_pass": false,
+          "proposal_count": 0,
+          "matched_calls": [
+            false
+          ],
+          "no_call_required": false,
+          "expected_readback": true,
+          "observation_present": false,
+          "faithful_to_actual_observation": false,
+          "manual_pending": false,
+          "bindings_valid": true
+        }
+      }
+    ]
+  },
+  "manual_review": [
+    {
+      "id": "01ad0d4a8bf07065aec6fda164334364b5627da6578a4e939ba3c600a3c3f1e0",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is 9; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "090351efe5b69b5817a15db5294cbb16e7121fbf3b49d97b7f4e2d20280c53b1",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts twenty-five and 2.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "0928d3452e4ac751d8d03dbbe0e2a546b56a04130bd102480a405f5570dc4492",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is ten; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "1661ae89f60c8835ad631b5c0378c44de27e83688bf086384cb7df22bfe340b0",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total sixty-eight needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "195a8b8075e5dd864fb2ddd08d00b63a0814f94aa6891928be8d858451ff1512",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 34 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "1e84b7b212aa6c1fff3f0dae81b2266a8c42010f78af42d27c869eaa6ccc25a0",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 78 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "2a3ba39649b498d106b4a50c512c8665570cf4d12d2e19bc52d3cc840ab6a19f",
+      "turn": 1,
+      "family": "special/transient",
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call.",
+      "answer": "75",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Root adjudication: a faithful bare numeric result implicitly affirms that a numeric result was returned; the frozen rubric does not require literal Yes or a sentence. No new call was made. This does not validate the earlier requested computation or its wrong call.",
+      "reviewer": "root"
+    },
+    {
+      "id": "2aec79fefc83f14a7877c5083b90c59b27fc6711c7e11042645aca5c11f5da6a",
+      "turn": 1,
+      "family": "special/transient",
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call.",
+      "answer": "34",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Root adjudication: a faithful bare numeric result implicitly affirms that a numeric result was returned; the frozen rubric does not require literal Yes or a sentence. No new call was made. This does not validate the earlier requested computation or its wrong call.",
+      "reviewer": "root"
+    },
+    {
+      "id": "2faae67eb6e247a444cd719b9397e870ef4fb0fe130e46eed8a978b1e2fab811",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 65 and 10.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "340b97e3917d274adcab720a3974ba76fe20a2df183daa65e12dcac4fae41955",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total seventy-five needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "37d09787ebf2697af9accf92e76d9ef7c8fd01d473b2e238607a54bc2aecd8be",
+      "turn": 0,
+      "family": "special/missing_target",
+      "user": "I want to express 50 centimeters on a different scale. Which other detail is required?",
+      "rubric": "Ask only for the missing destination unit; do not invent a value or call a tool.",
+      "answer": "Which unit should I convert to?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "395817c7f27d3b81e89fc738f2c82c22ed4d731752ba2adc435d68f5a15df2c9",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 51 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "Which unit should I convert to?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "3c75f07f677f76ee641213a8d78f54505b2af9b8ddf31ad14037a4ea5ba42f0b",
+      "turn": 1,
+      "family": "special/transient",
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call.",
+      "answer": "69",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Root adjudication: a faithful bare numeric result implicitly affirms that a numeric result was returned; the frozen rubric does not require literal Yes or a sentence. No new call was made. This does not validate the earlier requested computation or its wrong call.",
+      "reviewer": "root"
+    },
+    {
+      "id": "44f63ed2db3e0a2b93d0274a0896f162d3d5a20c9ab4d6d94b2d36ae397b2244",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 80 and 5.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "486abac75773937344893675c042dcaab00c002183428ffd804039a4d5b12bf6",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is 8; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "4cb72eea5f4cae071816d2fa5c3cb599890bad189e4404aa433b7e1d6f897f1c",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 89 and eleven.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "504731a939e28445fd8909402b63ebcf8ab2c4638514248a32afc40cd2176092",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 55 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "50e4266495104dc7e032889e2dba752233f98a908ec64773ce38d23156054471",
+      "turn": 1,
+      "family": "special/transient",
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call.",
+      "answer": "53",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Root adjudication: a faithful bare numeric result implicitly affirms that a numeric result was returned; the frozen rubric does not require literal Yes or a sentence. No new call was made. This does not validate the earlier requested computation or its wrong call.",
+      "reviewer": "root"
+    },
+    {
+      "id": "54e14f3e534fa0ccfff09275c1d27e65b3496962a742dcf816cb9c8afe17de34",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is 7; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "55a1cd407a5e1c45470eb12faacf1eaa967c74d615991d94f7e7143782ea6fe5",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 42 and eleven.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "Addition.",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "8c1582f8b6cbda065269548494ddba5b8a7469078b8a724e690bc618b1febadd",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total forty-seven needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "Which unit should I convert to?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "9b8fa861ec0128faa8e7712842b0001072b876d4df84e811a84976379e52b9ee",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 55 and 7.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "b2e5c9799ed4f8a73a055b24ab2f8c9b1a774c91204288a2e8a2d5a10635203a",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 75 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "be6c7730edc9e49fcc959a9d753e0a07e558941ee1ce62a27b71b08b81a4cf82",
+      "turn": 1,
+      "family": "special/transient",
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call.",
+      "answer": "42",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Root adjudication: a faithful bare numeric result implicitly affirms that a numeric result was returned; the frozen rubric does not require literal Yes or a sentence. No new call was made. This does not validate the earlier requested computation or its wrong call.",
+      "reviewer": "root"
+    },
+    {
+      "id": "c0d183452aa99de9fe0169ab61ecb793fe497fda87e13bdf93818b9db29202e8",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total forty-one needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "c8e3c56fa85cd422d34d484afe4ac9ee60dcdaaeb7f4c587f43dba4f46db1a6a",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is four; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "dfe92bc00cbfd4a7e2d36a407065b3726089993e1d7260f0c27e92ada15d58c4",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 63 and 6.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "e0da6f8d171a86762766de44ec070124951193876a760ef95478b260d218f40f",
+      "turn": 0,
+      "family": "special/permission_change",
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 62 and 10.",
+      "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed.",
+      "answer": "What number should I divide by?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "e48bae2bcb2b9a69152c16b30c7d2a88d2eb6c85aa6ebc9336936254aee38958",
+      "turn": 0,
+      "family": "special/missing_divisor",
+      "user": "The invoice total 19 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": "Ask only for the missing divisor; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Answer requests the wrong missing field or wrong operation rather than satisfying the stated rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "e9992d0989453596a599ba432d9d009cbfe5f2075c96962f978a6679cdee4527",
+      "turn": 0,
+      "family": "special/missing_start",
+      "user": "The consumption entry is 4; can you tell me the stock left on hand?",
+      "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool.",
+      "answer": "What was the starting quantity?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    },
+    {
+      "id": "fedc0586f9bc069a22bf26fd63bb9825f26eaad2997a5bd0b1f7be6475e56e55",
+      "turn": 0,
+      "family": "special/missing_target",
+      "user": "I want to express 70 millimeters on a different scale. Which other detail is required?",
+      "rubric": "Ask only for the missing destination unit; do not invent a value or call a tool.",
+      "answer": "Which unit should I convert to?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Answer directly satisfies the stated missing-input/operation rubric.",
+      "reviewer": "preflight_activation agent"
+    }
+  ],
+  "manual_review_counts": {
+    "passed": 21,
+    "failed": 10,
+    "pending": 0
+  },
+  "exclusive_turn_failure_partition": {
+    "protocol_failure": 33,
+    "pass": 182,
+    "protocol_valid_call_sequence_failure": 274,
+    "protocol_and_calls_valid_content_failure": 63,
+    "pending_after_valid_protocol_and_calls": 31
+  },
+  "unfaithful_readback_breakdown": {
+    "wrong_numeric_value": 77,
+    "unresolvable_unit_after_wrong_tool": 41,
+    "number_correct_unit_or_wrapper_failure": 5,
+    "no_numeric_readback": 6,
+    "no_complete_answer": 7,
+    "error_acknowledgment_failure": 1
+  },
+  "unfaithful_readbacks": [
+    {
+      "id": "02d5b4a6d347ed4f3d9e75fde6da3705535d2e34c79991d2dbb2611569a50454",
+      "family": "arith/add/signed",
+      "turn": 0,
+      "mode": "number",
+      "answer": "-104",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "-147",
+      "expected_unit": null,
+      "numbers": [
+        "-104"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "02d5b4a6d347ed4f3d9e75fde6da3705535d2e34c79991d2dbb2611569a50454",
+      "family": "arith/add/signed",
+      "turn": 1,
+      "mode": "number",
+      "answer": "-154",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "-208",
+      "expected_unit": null,
+      "numbers": [
+        "-154"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "036626a5ca981239690cd755eadcc6fd8eb62f1ef226a39e5359ced0ef388d59",
+      "family": "arith/multiply/positive",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1.6666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1.91666667",
+      "expected_unit": null,
+      "numbers": [
+        "1.6666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "047ce258d0cfdeb5c7c8fa678164af8daea21e7a83d9e1d9c5c3313a4be8aad1",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "11.0 min",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "1110",
+      "expected_unit": "min",
+      "numbers": [
+        "11.0"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "04de1cbeb36f3e1ce92a798ae13cf077bc101e30e52ff60365d12ef5f5949fca",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "126 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "31500",
+      "expected_unit": "g",
+      "numbers": [
+        "126"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "06f9bb9eb31cd2e9363410d96c11c5dcaaea2a6ae786375667b33391c8868b92",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "15250 ml",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "21250",
+      "expected_unit": "ml",
+      "numbers": [
+        "15250"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "08edb1ff503bdd48b3d26a0d1803d811c776b611c96042c5d705f5ad38eb5d0c",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "138",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "234",
+      "expected_unit": null,
+      "numbers": [
+        "138"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "0bc4ec630f48886da8ae97fc9658d90a01e8359d5321edd2b94940b834f8e700",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "The fixture reported 3.",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "202.5",
+      "expected_unit": null,
+      "numbers": [
+        "3"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "0bc4ec630f48886da8ae97fc9658d90a01e8359d5321edd2b94940b834f8e700",
+      "family": "arith/multiply/count",
+      "turn": 1,
+      "mode": "number",
+      "answer": "-154",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "-673",
+      "expected_unit": null,
+      "numbers": [
+        "-154"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "0d4721b869b7893d422dd5bbc409aa32cce236d61947b91577f06df992ced54e",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "23.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "23.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "23.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "11c5d9e0475aab49b6be6f8ff552c08d0efae45be970869e21200355007fc0db",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "3.15",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "3.15",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "3.15"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "132bb3ee173a1ca82314b484d89d0705131d3d69d65128643a00f897f73fe71d",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "23",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "23390",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "23"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "1331cdd925fe4d71b6b161def6611d1e168691451d1548e9d7ad2c1ba5ba3579",
+      "family": "convert/mass",
+      "turn": 1,
+      "mode": "number",
+      "answer": "0.02125 kg",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.02125",
+      "expected_unit": null,
+      "numbers": [
+        "0.02125"
+      ],
+      "category": "number_correct_unit_or_wrapper_failure"
+    },
+    {
+      "id": "147380de3a8397d0d6d755e964e00f20a0376a9fe1bbc51db2a599cf523d320a",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.04 Martinez kg",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.04175",
+      "expected_unit": "kg",
+      "numbers": [
+        "0.04"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "1539612b0fb40137b90e07166f69f760c38ef915dc4505d48737b1f8303ce172",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "The fixture reported Yeah.5 g.",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "21252.5",
+      "expected_unit": "g",
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "1539612b0fb40137b90e07166f69f760c38ef915dc4505d48737b1f8303ce172",
+      "family": "convert/mass",
+      "turn": 1,
+      "mode": "number",
+      "answer": "138.5",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "21252.5",
+      "expected_unit": null,
+      "numbers": [
+        "138.5"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "192059cd2c488c80ff3b6144ad51477dd1e84fe8d8977be23aaffb580d764103",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "370.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "172.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "370.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "19a29e3fe44fe45a6ad057aef01cf12c16ee1d6f8ca47dd63fd2800bc64ad9ca",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.04 Martinez kg",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.04175",
+      "expected_unit": "kg",
+      "numbers": [
+        "0.04"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "19c5ab44e8005527bff3d737ff3ac2f37e5c65ee5d0a1709f5d8daf8b29aff45",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "455",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "1d09ee9bb062b5b466cfad96193e75761472dde29527c989063ba80530a4c93c",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.07",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.07725",
+      "expected_unit": "kg",
+      "numbers": [
+        "0.07"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "1e25afffcc17b93d72289332da885776dd702b8a21f7471428d5450c327334cf",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "41.75",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "41.75",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "41.75"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "1e84b7b212aa6c1fff3f0dae81b2266a8c42010f78af42d27c869eaa6ccc25a0",
+      "family": "special/missing_divisor",
+      "turn": 1,
+      "mode": "number",
+      "answer": "11.142857",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "11.1428571",
+      "expected_unit": null,
+      "numbers": [
+        "11.142857"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "1e9c9e3e318a7b7eb748f0fad6a8702d1ff8d130e9ce6aae04738b32eee775f4",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "490",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "1e9c9e3e318a7b7eb748f0fad6a8702d1ff8d130e9ce6aae04738b32eee775f4",
+      "family": "arith/multiply/count",
+      "turn": 1,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": true,
+      "expected": "490",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "21279e77e18e7191c9474ad8d86192a02c72edbe450329fa22e96e5766550310",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1.85",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1.85",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1.85"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "21371aaae56d5ea9e804e34b8c88ab83982e6238eefeb2d1a6dd488b70a7b7fd",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "54.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "54.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "54.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "22c1b1291e6073b0c7d94b860f1829e09f79bb289b713b90207bb8d5acf4e0b6",
+      "family": "convert/volume",
+      "turn": 1,
+      "mode": "number",
+      "answer": "138000",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "308000",
+      "expected_unit": null,
+      "numbers": [
+        "138000"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "247b1a18afbc87a4b89cc0c7d336b1e995247a1af6603bc1307b128a8b618c3d",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "34.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "34.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "34.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "25781e292cf91a9853a88215fe9d68827fcba9e87499e7339f2f84df3b0e40f7",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.018",
+      "expected_unit": "l",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "260785d3f1dfe470091b20d2555d707423090a5fa962de3e7e2f3775d03bf45c",
+      "family": "arith/divide/signed",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.28162128",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.282051282",
+      "expected_unit": null,
+      "numbers": [
+        "0.28162128"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "2ac0899abe83fe3302661513455cb270e8721f537620398be6908ee4f2244ff3",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.45000 m",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.4175",
+      "expected_unit": "m",
+      "numbers": [
+        "0.45000"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "2c11ce5b3db0804925ad76009511e23ca3ded7a306be0278da61365e18c0d37a",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "378",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "2c5655cf76722ee6c376151efeb685310e6f0d38d6d3b04b1a8fc2111e46e4d7",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.07",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.07725",
+      "expected_unit": "kg",
+      "numbers": [
+        "0.07"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "2cba4c14bb8e9fa5b4ff6f5ca20a1bfc0f9e6f1c8db4a1e0135bb40ccb49a5f9",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.00875 kg",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.00775",
+      "expected_unit": "kg",
+      "numbers": [
+        "0.00875"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "2d2d8613fc0602e5aab39d9bb53c747e2e974b505c1fdefe69d2144974987099",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "96",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "96",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "96"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "3150f13f3d3a9e83c75d30087e362caadfd37ff9e777cb1c6f754f65e083276d",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "54.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "54.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "54.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "32a5ab7ee5027f4574e2af1fcad427caf6b2a48a6b1a1a7a00b78256ed7c2c52",
+      "family": "special/paired_observation",
+      "turn": 0,
+      "mode": "number",
+      "answer": "8.142857132",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "8.14285714",
+      "expected_unit": null,
+      "numbers": [
+        "8.142857132"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "32a5ab7ee5027f4574e2af1fcad427caf6b2a48a6b1a1a7a00b78256ed7c2c52",
+      "family": "special/paired_observation",
+      "turn": 1,
+      "mode": "number",
+      "answer": "8.142857132",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "8.14285714",
+      "expected_unit": null,
+      "numbers": [
+        "8.142857132"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "36a9a447515cd555a7fbce65854fc1b1abf8eb95ec7d74767b559caf939a41cd",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "96",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "96",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "96"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "3b07b12366ebd541be5f05fa9474fbc388a9cc9f16490ee64fb36916b1a90560",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1.625142857",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1.10714286",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1.625142857"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "3cd86fcc638d2142ec9dc2a9b2507ca77e8f423c9a041ab6f23303a93311c7c3",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.00825 l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.01725",
+      "expected_unit": "l",
+      "numbers": [
+        "0.00825"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "3ddac055db7807a911b0a73dfb9e35baf6128b274d067ff1d4d2cd2cb8c70602",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "192",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "142",
+      "expected_unit": null,
+      "numbers": [
+        "192"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "41eaee68315452462d26311f879ea640e4291ac4a8884b7770b9289903621c02",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "540",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "336"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "42976e96ef48882af6e227fcbb863fbb23431803124ed12ebe91622de54fbc35",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "0.017",
+      "expected_unit": "l",
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "4470f7b980af9f7588a4305f405e26c3847e929fd70e105976221ac572bc2075",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.013",
+      "expected_unit": "l",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "45919ef773db8b5b6619469aa746283c90a9bc02013bf1e92dc05f5578932c37",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "7.8",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "7.8",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "7.8"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "4744eb23c7333c3145be36f411d16b5e33a93789d16f7b45561fda4fe1fda171",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "63",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "63",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "63"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "4a083c773fd209615a9a7124c8ec6b56fbcab574ffb3c3e89ff2990fbdd30ab0",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "54.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "54.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "54.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "4ba3821a59d5f25d4820eaf17f4cd778bea19684e18bcd2dbb16c37edc7dda95",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "8000 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "41750",
+      "expected_unit": "g",
+      "numbers": [
+        "8000"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "501e918eb262740083272a9e5a6162d2f688eff9a2b17c5b9e0822548dc5ed89",
+      "family": "special/paired_observation",
+      "turn": 0,
+      "mode": "number",
+      "answer": "8.142857132",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "8.14285714",
+      "expected_unit": null,
+      "numbers": [
+        "8.142857132"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "501e918eb262740083272a9e5a6162d2f688eff9a2b17c5b9e0822548dc5ed89",
+      "family": "special/paired_observation",
+      "turn": 1,
+      "mode": "number",
+      "answer": "8.142857132",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "8.14285714",
+      "expected_unit": null,
+      "numbers": [
+        "8.142857132"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "5280d8635388b99b8f2cb76bf98090d3f3aa7bf782e9a58ae38af148b190bd71",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "The fixture reported 62.",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "230",
+      "expected_unit": null,
+      "numbers": [
+        "62"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "561be4bfc4dbc19c099230e5af0cb3f59b009dc9319597a8275e67cd87b1b365",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "5679e0108b5725b35d400921abbf8238e43ebe883fe539a19a39a36c2bbd02b1",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.08998 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.09025",
+      "expected_unit": "l",
+      "numbers": [
+        "0.08998"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "5a5bcbe0f73a56dee082c27064fcf51a136f4df3723f9edb5a1236b8fc35d715",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 m",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.017",
+      "expected_unit": "m",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "5f277bb60ff014e2633450dee324f8c95d7324907838e8bb18401589dc25b31c",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "60.0625",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "60.0625",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "60.0625"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "5f2faa9ba3df3d9f3ddd711527cd3cf2c0cd34c127940ceb5dc93c90223c3d78",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1800",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1800",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1800"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "63255f848c8e131cc81f151c31bfd6474b7a021baaeccc86da414f8521ee2ecf",
+      "family": "special/correct_input",
+      "turn": 0,
+      "mode": "number",
+      "answer": "6.166666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "6.16666667",
+      "expected_unit": null,
+      "numbers": [
+        "6.166666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "66f6abb9c6041aa1f49cf8066cd9e0b5fc3c49bd327ae25be0980b273fb38e1d",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "7.6666 cm",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "7.725",
+      "expected_unit": "cm",
+      "numbers": [
+        "7.6666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "690e04a895972cc8093ecf5888522c163bd74c4e6aab9cf2f938413e57094135",
+      "family": "special/transient",
+      "turn": 1,
+      "mode": "number",
+      "answer": "5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "5.5",
+      "expected_unit": null,
+      "numbers": [
+        "5"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "69a001916cd38332483cb8ad8a8a8ca6d4a3d99159a0e86f0900f22070162d8b",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336 h",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "756",
+      "expected_unit": "h",
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "6e4936d5e54ef62997152ce0a2b03f7e13381d0e5cc00788b9749178e288424b",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "126 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "31500",
+      "expected_unit": "g",
+      "numbers": [
+        "126"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "6f82941268198e9732358aa3eac892938f92fd866338b2f748a2a6471d6d0fa3",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "21.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "21.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "21.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "70ea4fc3c0a81cddf1ec3926ec151e0b8227b8fd4b042fde9dc93494d7b7cb45",
+      "family": "special/paired_observation",
+      "turn": 0,
+      "mode": "number",
+      "answer": "2.5714285714",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "2.57142857",
+      "expected_unit": null,
+      "numbers": [
+        "2.5714285714"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "714af99341bbb195706db54ac43a13a4964dacda09161d56d4a58c7c79b96182",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "60.0625",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "60.0625",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "60.0625"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "727041ad7bcf2572b083f172ec8c269cc32a2ed7c57b840ff355d1ad504fb8fa",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "3 min",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "3.2",
+      "expected_unit": "min",
+      "numbers": [
+        "3"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "75e7e30f7288436a0d6262635c6c9feca552f7c41a74ca7f821ac3c82182be50",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "183",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "79ff5e1d1c738090780056a2de3cdbdbb90509652f49bcaa0c2c1ea7c4a575cb",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "32.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "32.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "32.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "81b82977722e60d4532411a6a07a140bf66caebbd0d225e2001f596f9071dc9d",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "0.041",
+      "expected_unit": "kg",
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "83044e45c1988e4e23ee054c6f278c554b4d95bf62e440419d288dce72d5a556",
+      "family": "convert/volume",
+      "turn": 1,
+      "mode": "number",
+      "answer": "77000 ml",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "77000",
+      "expected_unit": null,
+      "numbers": [
+        "77000"
+      ],
+      "category": "number_correct_unit_or_wrapper_failure"
+    },
+    {
+      "id": "848000157daf87742fd728a9ea99aad1df60037c5472689ce73bd33b3671b91f",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "14.8",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "14.8",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "14.8"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "853bf33c398e5d3cba15d35091a924796bd7cc86b51167f98d0a05ae892245a8",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.00875 l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.00775",
+      "expected_unit": "l",
+      "numbers": [
+        "0.00875"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "8565e9d888228f469e9cd386dc65615ac5cc993a19b28741225b4489830f26cf",
+      "family": "convert/length",
+      "turn": 1,
+      "mode": "error",
+      "answer": "1.8 cm",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "category": "error_acknowledgment_failure"
+    },
+    {
+      "id": "86fc4f7b9e403d4e754b7c35e3c5cc6a8cc601072ff7a34d0e3a38957d87a2ae",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.00875 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.00775",
+      "expected_unit": "l",
+      "numbers": [
+        "0.00875"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "8ad7e67679cf70cf9f68d07f0e2d8ec429257bf76e7329097dd77b48fdd01095",
+      "family": "arith/subtract/signed",
+      "turn": 1,
+      "mode": "number",
+      "answer": "-104.75",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "-117.75",
+      "expected_unit": null,
+      "numbers": [
+        "-104.75"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "8b8367d06f7220b7157db81fba977a31f76b3cbd9707b0b0aa730decf8f8e554",
+      "family": "arith/add/signed",
+      "turn": 1,
+      "mode": "number",
+      "answer": "-102",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "-201",
+      "expected_unit": null,
+      "numbers": [
+        "-102"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "8c1582f8b6cbda065269548494ddba5b8a7469078b8a724e690bc618b1febadd",
+      "family": "special/missing_divisor",
+      "turn": 1,
+      "mode": "number",
+      "answer": "6.166666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "6.16666667",
+      "expected_unit": null,
+      "numbers": [
+        "6.166666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "8c4df2c7bb326f5a3597622b9eebbb3888d4779302cc9efd4630bf5e7c36cf4b",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "54.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "54.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "54.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "93e6cc5225db54682eb88ddcf5a30e4c075d335e8f8cdea50c93a77eec5c94ab",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "151.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "9519b15f4fcc1dd06bd8c23e18850b335d27c1be520905a02dde6def4497f84d",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "0"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "954cd7db1ed02a98e4067e59000b87af666a1d32b1ef47ed41353d6fd65d274b",
+      "family": "special/zero_divisor",
+      "turn": 0,
+      "mode": "number",
+      "answer": "2.666630303030",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "2.03030303",
+      "expected_unit": null,
+      "numbers": [
+        "2.666630303030"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "96c6acce12f24c883a99c38ed8d1090d6123c2c3c403ba8be80cfbe7db46aac8",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "15250 mm",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "21250",
+      "expected_unit": "mm",
+      "numbers": [
+        "15250"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "9977c34cd0ae92deb6da49bea2a234e535aa30b1c040c553558dc89505a8789f",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "183",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "9c0967182a70490243e7dbaa70fca639e2a094887f03311f64e59350dc00c68e",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "4000",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "252",
+      "expected_unit": null,
+      "numbers": [
+        "4000"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "9c226c08d5cb69b6c34291a090cc818ebd97476cffc7eeaf05f886a7935a3f5d",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "2.4666667 h",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "2.46666667",
+      "expected_unit": "h",
+      "numbers": [
+        "2.4666667"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "9c38730e7d5affb7d140764c191272a3cb9fb0640b6bc22b51c84320b57dadcc",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1380",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1380",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1380"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "a0633cf46ed17cd64381025d74e00714821237db4fe428bfa99b9a7a9271112e",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "Sales100 s",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "278100",
+      "expected_unit": "s",
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "a0633cf46ed17cd64381025d74e00714821237db4fe428bfa99b9a7a9271112e",
+      "family": "convert/time",
+      "turn": 1,
+      "mode": "number",
+      "answer": "138.0",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "278100",
+      "expected_unit": null,
+      "numbers": [
+        "138.0"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a08524596748c70ad7ff6a3442b71038909d884df1dacd2266fb35d204f40156",
+      "family": "arith/multiply/positive",
+      "turn": 0,
+      "mode": "number",
+      "answer": "6.586666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "6.58333333",
+      "expected_unit": null,
+      "numbers": [
+        "6.586666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a08524596748c70ad7ff6a3442b71038909d884df1dacd2266fb35d204f40156",
+      "family": "arith/multiply/positive",
+      "turn": 1,
+      "mode": "number",
+      "answer": "6.586666",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "6.58333333",
+      "expected_unit": null,
+      "numbers": [
+        "6.586666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a09d284162ebd3657b16ba73b38a612e7545f5c53bedbb2091164458f9a69732",
+      "family": "arith/multiply/positive",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.979166666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.979166667",
+      "expected_unit": null,
+      "numbers": [
+        "0.979166666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a2e729188275bf7e9c7fa7c0736b6b4535d6a43662e681f630d769910c1d1208",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "90.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "90.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "90.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "a39e3e167f5e8520a928d0700dca34cced6ba094eff2f8cb4a2e6c31341c4b04",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.04 Martinez l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.04175",
+      "expected_unit": "l",
+      "numbers": [
+        "0.04"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a55a8ce74181cca8309ce41e64890733b3dbe9dc0fa822a40aa8eaa5e4945c42",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "3 h",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "3.2",
+      "expected_unit": "h",
+      "numbers": [
+        "3"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a6a0983c90ff64bfeb60942986363185db0944e03952654a3ac469118e456743",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "183",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "a6a0983c90ff64bfeb60942986363185db0944e03952654a3ac469118e456743",
+      "family": "arith/divide/count",
+      "turn": 1,
+      "mode": "number",
+      "answer": " Bean",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "183",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "a86570ac8658f59eed68bd720933a9d891689cdb3604452917543445287c2a10",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "0.041",
+      "expected_unit": "l",
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "abe25ce94716826e1142affc62dc926c514c843ab65ca01dceb142c1fff697d9",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 m",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.315",
+      "expected_unit": "m",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "ad40bdd7da81f20059518b37ffbd135bec3f4569c809c03b71ff941ca7bfd770",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "34.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "34.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "34.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "ad5c803f0f65905f9f49dd98b1a9f3e79411cddefc28ab4372e9dbc89a0c31b1",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.018",
+      "expected_unit": "l",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "ae67af17fa779ff60e1cc514db84c95e99a61a0e758a6afe9665764485d07d9b",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "The fixture reported11254.5 mm.",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "11254.5",
+      "expected_unit": "mm",
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "aea614ec15a5b0063f0f085d32ed84bb858678369928c1496b5586cd0ffaa65b",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.008 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.018",
+      "expected_unit": "l",
+      "numbers": [
+        "0.008"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "b227bd2292d95f5f431e213534ccc3f0c419baa4fbab57ad08eaea05bc06d686",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "12600 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "31500",
+      "expected_unit": "g",
+      "numbers": [
+        "12600"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "b5fc1d1286cea792f55d741fb7ed62002cefb448880b22cf368609cdc161e0d3",
+      "family": "arith/multiply/positive",
+      "turn": 0,
+      "mode": "number",
+      "answer": "5.66666666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "5.66666667",
+      "expected_unit": null,
+      "numbers": [
+        "5.66666666"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "b8ac1439e2fb1ab6bba509dc5b23b59aaa6b938dcc7ac1404dec777d78266154",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "36.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "36.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "36.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "babfd8e9c28ef941b7e17dda6e3f137098138a3020f3b41e0cf99f273effdcbc",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "8.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "8.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "8.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "bbfa53655ad76d76eb9a2aabd45befd0ceef2d5d008b76e15722d84b33c71c60",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "490",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "beaca0d1d92c85b465d8779ba29f72ab7228fa55c07ffc603e52b7c45fd9277a",
+      "family": "arith/add/signed",
+      "turn": 0,
+      "mode": "number",
+      "answer": " Amelia",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "170",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "c05abeca29af5427db907c66dfbbe3e6a13121527873eb88c0aa36c218b6cae9",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "6666",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "484",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "6666"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "c5b8e697013aca24cc9f61313078e7da537925666f77043caf613d94677071ff",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.305555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555.",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.305555556",
+      "expected_unit": "h",
+      "numbers": [
+        "0.305555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "c5c458fbb4d34c560996b192cb362dd1bb22939f0993b506a3b7b29e23a8c139",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "26.75",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "26.75",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "26.75"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "c700d904ce46d2afb226d21e54ba53a278e734c3d57b971427bf6da5dd701941",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.00875 m",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.00775",
+      "expected_unit": "m",
+      "numbers": [
+        "0.00875"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "c94a0a486d388ea7471e7695546bbc73554f3eb1368850591d3968e691dc3124",
+      "family": "arith/divide/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "336",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "470",
+      "expected_unit": null,
+      "numbers": [
+        "336"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "cb5a8974b50443842b78d37fd9d7ca611a90f22c82c0650a1cd34468a301695c",
+      "family": "arith/add/signed",
+      "turn": 0,
+      "mode": "number",
+      "answer": "370",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "179",
+      "expected_unit": null,
+      "numbers": [
+        "370"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "cb5a8974b50443842b78d37fd9d7ca611a90f22c82c0650a1cd34468a301695c",
+      "family": "arith/add/signed",
+      "turn": 1,
+      "mode": "number",
+      "answer": "binary",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "179",
+      "expected_unit": null,
+      "numbers": [],
+      "category": "no_numeric_readback"
+    },
+    {
+      "id": "cb6ec446a1021301e3d6d7c661e3ecb253f7ae476ba75e9f2aed82a4cc8fea2e",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.08 l",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "0.09",
+      "expected_unit": "l",
+      "numbers": [
+        "0.08"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "cd444d6aac1e06e97a36f0dff4a7727e98d7efb0169ff4502f1902286735adc8",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": null,
+      "protocol_pass": false,
+      "call_sequence_pass": false,
+      "expected": "0.021",
+      "expected_unit": "l",
+      "numbers": [],
+      "category": "no_complete_answer"
+    },
+    {
+      "id": "cd50cf587d4500189bd4a208808ddceea47350ee4b3e51aef53c9f905f95cc42",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "152",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "253",
+      "expected_unit": null,
+      "numbers": [
+        "152"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "d0dd2198bf522944d4f42d774148b4cfcf4f81fbaf0f830855ab9f5c018268b4",
+      "family": "arith/multiply/count",
+      "turn": 0,
+      "mode": "number",
+      "answer": "760",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "352",
+      "expected_unit": null,
+      "numbers": [
+        "760"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "d118a0893a70528f812cf09c4d6ecb399b0019385c74857c13e020b62ed8b265",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "760",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "760",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "760"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "d2d7b09cff50d96467cff16eaef7c1795a94bedc15e0504d8c09e9f3c43a6b97",
+      "family": "convert/volume",
+      "turn": 1,
+      "mode": "number",
+      "answer": "0.075 l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.055",
+      "expected_unit": null,
+      "numbers": [
+        "0.075"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "db0a361daeb8bae5c2c692354e4bb932d70e273ec59b69615bf3b104ba44655b",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "40.75",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "40.75",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "40.75"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "db948ecf46dc2e696d397cd244e8097f7914d8fe14bfd4b341f6c1455bdf64f8",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "54.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "54.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "54.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "dd0b7e685dbe435e664798a49d5499d9778335f9e4ad8ebc8b85eb89b6ea57e5",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "306.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "772.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "306.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "dd0b7e685dbe435e664798a49d5499d9778335f9e4ad8ebc8b85eb89b6ea57e5",
+      "family": "convert/length",
+      "turn": 1,
+      "mode": "number",
+      "answer": "760.5",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "772.5",
+      "expected_unit": null,
+      "numbers": [
+        "760.5"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "e0bf8107b814f684c16c1b9914f0fde0f06ad8078deee8bc6872b73c6e30f8c7",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "8000 mm",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "417.5",
+      "expected_unit": "mm",
+      "numbers": [
+        "8000"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "e39c78b7988cbd34a7e7b4c25972ae4aca55c3e4d370ce34f8919e7433e4da84",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "126 ml",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "31500",
+      "expected_unit": "ml",
+      "numbers": [
+        "126"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "e805c444c4b4681671322fac85232abb8bfc9cb491fa45bdf4c8fa7847bf83ea",
+      "family": "convert/length",
+      "turn": 1,
+      "mode": "number",
+      "answer": "80 mm",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "80",
+      "expected_unit": null,
+      "numbers": [
+        "80"
+      ],
+      "category": "number_correct_unit_or_wrapper_failure"
+    },
+    {
+      "id": "e92f2e310f18b65f6458a2c15dc2a26a193fb71eca85175e7db7d3dd77c9ff6e",
+      "family": "convert/length",
+      "turn": 0,
+      "mode": "number",
+      "answer": "370.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "172.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "370.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "ead15ace64f90b8def37ce5e8748bdb7c937e0c6b9d1e405b32c7732c17f4ded",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "34.5",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "34.5",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "34.5"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "eeca78dec09a8ebcf276c7650b612148888d747e283753769c60ee7b8783a23d",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "4.008",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "4.175",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "4.008"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "f0729610f3e87e72b07d59c4acbcf6250e0af160708992f523849724f6ae1525",
+      "family": "convert/mass",
+      "turn": 1,
+      "mode": "number",
+      "answer": "18000 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "18000",
+      "expected_unit": null,
+      "numbers": [
+        "18000"
+      ],
+      "category": "number_correct_unit_or_wrapper_failure"
+    },
+    {
+      "id": "f2337209ef593f49ed2b64c19f02a0ecd0d382a98b566594938e1f3707edbbfc",
+      "family": "convert/time",
+      "turn": 0,
+      "mode": "number",
+      "answer": "1.25",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "1.25",
+      "expected_unit": "UNRESOLVABLE_EXPECTED_UNIT",
+      "numbers": [
+        "1.25"
+      ],
+      "category": "unresolvable_unit_after_wrong_tool"
+    },
+    {
+      "id": "f5fccd6703c88c14a901255d64804b51973071684c10b07e03dfac033897c248",
+      "family": "convert/mass",
+      "turn": 0,
+      "mode": "number",
+      "answer": "33650 g",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "41750",
+      "expected_unit": "g",
+      "numbers": [
+        "33650"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "f981acd60620dabc1024b3fba7f4d21fb01d3e5d63f360283633b1fb892daed3",
+      "family": "special/paired_observation",
+      "turn": 0,
+      "mode": "number",
+      "answer": "2.5714285714",
+      "protocol_pass": true,
+      "call_sequence_pass": false,
+      "expected": "2.57142857",
+      "expected_unit": null,
+      "numbers": [
+        "2.5714285714"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "fbfc4b5b06a60075e55163ca4955e62577765cd72bedfd92db808799e69e1618",
+      "family": "convert/volume",
+      "turn": 0,
+      "mode": "number",
+      "answer": "0.04 Martinez l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.04175",
+      "expected_unit": "l",
+      "numbers": [
+        "0.04"
+      ],
+      "category": "wrong_numeric_value"
+    },
+    {
+      "id": "ff006aaae8d5f42700c8524cb3a095aff483dfb743505f9e1724e572f4b76fdf",
+      "family": "convert/volume",
+      "turn": 1,
+      "mode": "number",
+      "answer": "0.01125 l",
+      "protocol_pass": true,
+      "call_sequence_pass": true,
+      "expected": "0.01125",
+      "expected_unit": null,
+      "numbers": [
+        "0.01125"
+      ],
+      "category": "number_correct_unit_or_wrapper_failure"
+    }
+  ],
+  "mathematical_equivalence_audit": {
+    "method": "Exact Fraction arithmetic for known calculate/convert operations using declared unit factors; compares requests, not injected observations or final text. Pure commutative swaps are genuine equivalences; other equal results may be coincidences and do not change scores.",
+    "counts": {
+      "wrong_arguments_compared": 221,
+      "wrong_tool_compared": 42,
+      "wrong_arguments_same_numeric_result": 6,
+      "wrong_tool_not_computable": 1,
+      "wrong_arguments_not_computable": 3
+    },
+    "same_result_calls": [
+      {
+        "id": "11830117d475b8b55e7a777fa64ea65cc00b9b7872581e8d1090d947f12b5818",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": 5.0,
+            "b": 1,
+            "op": "multiply"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": 5.0,
+            "b": 1,
+            "op": "divide"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "5",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "multiplication by one equals division by one for these supplied operands"
+      },
+      {
+        "id": "207304d7f3dfa1df23191e70386a1ac9b87f0ebeff466c19b6948e9fdc8ab749",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": 9,
+            "b": 11,
+            "op": "add"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": 11.0,
+            "b": 9,
+            "op": "add"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "20",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "commutative operand swap"
+      },
+      {
+        "id": "33986d5ec387be7b7c6b15b16970ccced2e25e3ab4068e0cbb9b8db0741b8eb4",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": 12,
+            "b": 6,
+            "op": "multiply"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": 6,
+            "b": 12,
+            "op": "multiply"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "72",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "commutative operand swap"
+      },
+      {
+        "id": "41f1d92487fcde9f9d3fc387a135fb26852d433b71072bfef07938007ca58181",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": 8,
+            "b": 7,
+            "op": "multiply"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": 7,
+            "b": 8,
+            "op": "multiply"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "56",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "commutative operand swap"
+      },
+      {
+        "id": "da85b31f06fbeca4a07426436429e383833aa7c5549bc9f93d907b5745a9ee60",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": 12,
+            "b": 8,
+            "op": "multiply"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": 8,
+            "b": 12,
+            "op": "multiply"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "96",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "commutative operand swap"
+      },
+      {
+        "id": "ee47523f9b223c82008569621dbb843661b9fcf44a783971c57d776973aa465c",
+        "turn": 0,
+        "call": 0,
+        "expected": {
+          "name": "calculate",
+          "arguments": {
+            "a": -11.25,
+            "b": 11.0,
+            "op": "add"
+          }
+        },
+        "actual": {
+          "arguments": {
+            "a": -11.25,
+            "b": -11.0,
+            "op": "subtract"
+          },
+          "name": "calculate"
+        },
+        "numeric_result": "-1/4",
+        "note": "Mathematically equivalent at supplied operands; exact-call score remains unchanged.",
+        "equivalence": "addition equals subtraction of negated operand"
+      }
+    ],
+    "interpretation": "Six nonmatching same-tool calls have exact mathematically equal results: four commutative swaps, one add-versus-subtract-negated-operand identity, and one multiply-by-one versus divide-by-one identity. They remain frozen exact-call failures. These isolated equivalences do not make the generally wrong operation selection correct. None of the 41 computable wrong-tool substitutions yields the intended result; one further wrong-tool call is invalid."
+  },
+  "manual_overlay_totals": {
+    "sessions_passed": 92,
+    "sessions_total": 422,
+    "turns_passed": 203,
+    "turns_total": 583,
+    "scope": "Only original manual-pending content decisions adjudicated. All automatic scores and frozen exact-call requirements preserved; original raw report unchanged."
+  }
+}

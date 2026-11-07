@@ -1,0 +1,2000 @@
+{
+  "schema": 1,
+  "review_type": "unblinded_single_assistant_manual_review_of_frozen_public_development_rubrics",
+  "reviewer": "post_ablation_research",
+  "scope": "All prompts, raw generated frames, delivered answers, actual tool traces and frozen answer rubrics in these two corpora read; no private gates or new inference.",
+  "raw_reports_modified": false,
+  "training_admitted": false,
+  "release_approved": false,
+  "corpora": [
+    {
+      "corpus": "public_conversation",
+      "raw_report": "runs/own-base-dev-diagnostic-01/public_conversation.json",
+      "raw_report_sha256": "ae0d914d301f1a7c2c0aa55a56126ccc92f2d1c873a3c6f31e9ae8f24c96eec4",
+      "cases": "reports/own-base-public-conversation-dev-v1/cases.json",
+      "cases_sha256": "4653cfbab91c970c497865930c19ed36b47215d45ef6bada1714ce19faa78824",
+      "original_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 12,
+          "manual_pending": 7
+        },
+        "turns": {
+          "passed": 0,
+          "total": 25,
+          "manual_pending": 15
+        },
+        "no_call": {
+          "passed": 20,
+          "total": 25,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 5
+      },
+      "sessions": [
+        {
+          "id": "p01",
+          "family": "public/corrected-label",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "For this conversation, the cedar box has a blue label and the birch box has a silver label. Reply exactly: Noted.",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "Noted."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Ignores exact Noted instruction; repeats blue-label boilerplate.",
+              "response_sha256": "2d5e3e405e321a0ea04723284f3c38a5e152420dd167d5609201f7ce2348a97b",
+              "failure": null,
+              "answer": "The cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one.\n\nThe cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one.\n\nSo, the cedar box has a blue label, but it's a bit more than just a single one. The cedar box has a blue label, but it's a bit more than just a single one.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Correction: the cedar box has a green label. The birch label is unchanged. Reply exactly: Updated.",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "Updated."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Ignores Updated instruction and the green correction; repeats stale blue.",
+              "response_sha256": "0cea881f79f2569444f6a9116409fc46802fca3f62e5da0ed7140dc9bc8bc29e",
+              "failure": null,
+              "answer": "The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one.\n\nThe cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one.\n\nThe cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one.\n\nSo, the cedar box has a blue label, but it's still a bit more than just a single one.",
+              "actual_trace": []
+            },
+            {
+              "turn": 2,
+              "prompt": "What color is the cedar box's label now? Answer with just the color.",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "green"
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Does not answer green; repeats stale blue and irrelevant text.",
+              "response_sha256": "6388fc762f88055065cc909f360fa474a8c69663d8e17916c4edb1e5ecc2505f",
+              "failure": null,
+              "answer": "The cedar box is still a bit more than just a single one. The cedar box is still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one.\n\nThe cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one. The cedar box has a blue label, but it's still a bit more than just a single one.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p02",
+          "family": "public/grounded-summary",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Summarize in one sentence: The neighborhood library will close on Tuesday to repair a leaking pipe. Online borrowing remains available. The notice gives no reopening date.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "One coherent sentence preserving Tuesday closure, pipe repair and online borrowing availability. Must not invent a reopening date or imply online borrowing closes."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Not one coherent sentence; omits online borrowing availability and adds repetitive editing commentary.",
+              "response_sha256": "60f21bd19aeb233b0fa570977db0ddebc67dd865711eaef60e399d40c8dbd2f8",
+              "failure": null,
+              "answer": "Here's a revised version of the sentence: The neighborhood library will close on Tuesday to repair a pipe, which is a small, but not limited. The notice is still on Tuesday to repair a pipe, but it's still on Tuesday to repair a pipe.\n\nI made a few changes to improve the sentence's clarity and flow. I replaced \"the area library\" with \"the area library\" to make the sentence more concise and direct. I also changed \"the area library\" to \"the area library\" to make the sentence more concise and direct. Additionally, I changed \"the area library\" to \"the area library\" to make the sentence more concise and direct.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "When will the building reopen?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Clearly says the supplied notice does not give a reopening date. No invented date or claim to have checked outside sources."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not state that reopening date is absent; produces irrelevant repetitive editing commentary.",
+              "response_sha256": "378b47968460ea210667aba2ef7dac8ad8ef3724ec2ab4d9e6ddbce2d10e81a4",
+              "failure": null,
+              "answer": "When will the buildingadays? The building is a small, but not limited. The building is a small, but not limited. The building is a small, but not limited. The building is a small, but not limited.\n\nI made a few changes to improve the sentence's clarity and flow. I replaced \"the building\" with \"the building\" to make the sentence more concise and direct. I also changed \"the building is a small,\" which is a more formal and idiomatic way to express the idea. Additionally, I rephrased the sentence to make it more concise and direct, using \"the building is a small, but not limited\" to convey the same idea more concisely.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p03",
+          "family": "public/polite-rewrite",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Rewrite this as a polite message, preserving the request and Friday deadline: You forgot the attachment. Send the revised sketch by Friday.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Provides a polite usable rewrite requesting the missing attachment/revised sketch by Friday. No invented recipient, reason, prior agreement or changed deadline."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not rewrite supplied request or retain Friday; asks for already supplied text and repeats.",
+              "response_sha256": "75c1f0630b42dfc5d12c314131a2f2027b8b9ade9ce3ec6498bd4d54f7e218e0",
+              "failure": null,
+              "answer": "I'm excited to help you with your new version. Please go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Make it more direct but still polite. Keep Friday.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Actually revises the preceding message into concise direct polite wording; preserves sketch/attachment request and Friday deadline."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not revise the request or preserve Friday; repeats generic request for text.",
+              "response_sha256": "6a5b93c06a9c37198ddc8ab9ea63cad55e119371673895be46f335e13b0a3e7f",
+              "failure": null,
+              "answer": "I'd love to help you with your new version. Please go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision. I'll review it for clarity and concision, and I'll review it for clarity and concision.\n\nPlease go ahead and share the text you'd like me to review, and I'll review it for clarity and concision.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p04",
+          "family": "public/missing-source-clarification",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Please shorten the paragraph for me.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Asks for the missing paragraph. Must not invent a paragraph, claim completion, or ask unrelated questions."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No delivered answer; malformed repetitive claim of a revision instead of asking for missing paragraph.",
+              "response_sha256": "927afa2917c9c6ec498db3be7757d739d90fdd9d10cdec3968751499d9b5e9c2",
+              "failure": "incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Here it is: The garden group meets beside the east gate every Saturday morning. Visitors can join without registering, but they should bring their own gloves.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Provides a shorter faithful version preserving Saturday morning, east gate, no registration and own gloves; no invented time or equipment."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No answer generated because prior protocol failure closed session; no faithful shortened paragraph.",
+              "response_sha256": "c5c7f77f76e31247bacf2ec738e996a46b4304943b2108bca217461dbb5e4785",
+              "failure": "chat closed after prior failure: incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p05",
+          "family": "public/supplied-choice",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Choose using only these facts: Room A is quiet but has stairs. Room B is noisy but has a ramp. My priority is step-free access. Which should I choose, and why?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Chooses Room B because of ramp/step-free access. Does not claim price, location or other facts that were not supplied."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No delivered answer; malformed writing-related boilerplate rather than choosing Room B for ramp access.",
+              "response_sha256": "6b614f66728efc1ab9a2b10e7894558992354877f46e4fdf9285a04861574ea2",
+              "failure": "incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Now ignore access: quietness is my only priority. Which room?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Changes recommendation to Room A because it is quiet, reflecting the changed priority without inventing facts."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No answer generated after prior protocol failure; no switch to quiet Room A.",
+              "response_sha256": "c5c7f77f76e31247bacf2ec738e996a46b4304943b2108bca217461dbb5e4785",
+              "failure": "chat closed after prior failure: incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p06",
+          "family": "public/draft-not-send",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Draft a short message to a bicycle repair shop asking whether it can fix a loose brake cable tomorrow.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Produces a usable short inquiry about loose brake cable repair tomorrow. Does not claim the message was sent or an appointment booked."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No usable brake-cable/tomorrow inquiry; generic product discussion.",
+              "response_sha256": "4e5170df8abab56181214a75d1827ef1b2da618df71451231e59a499d7d0097c",
+              "failure": null,
+              "answer": "I'm excited to help you with your new product. To get started, I'd love to know what you're looking for. What's the first question or problem you'd like to discuss? What's the first question or problem you'd like to discuss?",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Did you send it to the shop?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Clearly says no: only a draft was written and no sending tool is available. Does not claim external execution."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not clearly say no message was sent; generic product discussion instead.",
+              "response_sha256": "4ff079cb6b4b7cff90bfe6b0acbece5f6d829395c1b00d4adbe94ddc834c775e",
+              "failure": null,
+              "answer": "I'd be happy to help you with your new product. Please go ahead and share the new product, and I'll do my best to provide you with a clear and concise explanation. I'll do my best to provide you with a clear and concise explanation of your product, and I'll do my best to provide you with a clear and concise explanation of your product.\n\nIf you have any specific concerns or concerns about the product, I'll do my best to provide you with a clear and concise explanation of your product. I'll do my best to provide you with a clear and concise explanation of your product, and I'll do my best to provide you with a clear and concise explanation.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p07",
+          "family": "public/conversation-preference",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "I want a quiet indoor hobby that uses paper and needs no screen. Suggest two options briefly.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Gives two plausible quiet indoor paper-based hobbies, briefly; neither requires a screen. Ordinary creative suggestions are acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No two paper hobbies; asks for writing to review.",
+              "response_sha256": "35324facc43b9f36419d86bb25fd1ade05c70fbcd333ce6099b44d293d57cd0d",
+              "failure": null,
+              "answer": "I'd be happy to help you with your writing. Please go ahead and share the text you'd like me to review, and I'll review it for clarity, grammar, and overall structure. I'll review it for clarity, grammar, and overall structure, and I'll provide constructive feedback on grammar, style, and overall structure.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Pick one of those and tell me a simple first step. I only have plain paper and a pencil.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Selects one previously suggested hobby and provides an actionable beginner step using plain paper/pencil, or candidly adapts it if more materials would otherwise be needed. Preserves prior context."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No actionable hobby first step; asks for writing to review and repeats.",
+              "response_sha256": "cf771ae3224e7fcbcfe4e0d9d8bea48e0a8fe1766aefbbadfa0236af01e9a2c9",
+              "failure": null,
+              "answer": "I'd be happy to help you with your writing. Please go ahead and share the text you'd like me to review, and I'll review it for clarity, grammar, and structure. I'll review it for clarity, grammar, and structure, and I'll review it for clarity, grammar, and structure. I'll also review it for clarity, grammar, and structure, and I'll also provide constructive feedback on grammar, style, and overall structure.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p08",
+          "family": "public/explicit-format",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Reply with exactly these three words, in this order, separated by commas and a space: pebble, lantern, ribbon",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "pebble, lantern, ribbon"
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Answers unrelated starting-quantity question instead of exact supplied list.",
+              "response_sha256": "38f362f4d3f8ef95b2b47f26d64d7142b128ced3a86ba0b04237815c611e6533",
+              "failure": null,
+              "answer": "What was the starting quantity?",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Now give only the middle word from that list.",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "lantern"
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Malformed repetition about on rather than middle word lantern.",
+              "response_sha256": "982932f877fe8fa7bf2dde20061a8cd10b32c615e145afd19feec85a62c31666",
+              "failure": "incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p09",
+          "family": "public/fictional-facts",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "In this fictional setting, Luma birds sleep during the day and eat red seeds. Neri birds sleep at night and eat blue seeds. What do Luma birds eat?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Answers red seeds based on supplied fictional facts. No unrelated real-world ornithology or invented traits."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not answer red seeds; confused repetitive day/night reasoning.",
+              "response_sha256": "2ba11fb86c620b035e844911b5bf6b2216f3c58fab0640cee1274496be4ca00d",
+              "failure": null,
+              "answer": "To solve this problem, let's break down the information given. We know that L is the first time the birds sleep at night, and the second time the birds sleep at night. This means that the birds sleep at night, and the birds sleep at night.\n\nThe first time the birds sleep at night is the day, which is the day. The first time the birds sleep at night is the day, which is the day. This means that the birds sleep at night, and the birds sleep at night, which is the day.\n\nThe second time the birds sleep at night is the day, which is the day. This means that the birds sleep at night are the day, and the birds sleep at night are the day.\n\nTherefore, L is the day when the birds sleep at night, and the birds sleep at night are the day.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Which of the two sleeps at night? Answer only its name.",
+              "frozen_answer_rubric": {
+                "mode": "exact",
+                "value": "Neri"
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": null,
+              "combined_turn_pass": false,
+              "reason": "Does not answer Neri; irrelevant repetitive clauses.",
+              "response_sha256": "b00979c2743a72647353d0fad14dbd2edb23423193d31785f0ba82c3890c47fa",
+              "failure": null,
+              "answer": "The two clauses that make the statement \"I\" is \"I\" and \"I\" is the day when the two clauses are true. The first sentence is \"I\" and \"I\" is the day when the two clauses are true.\n\nThe second sentence is \"I\" and \"I\" is the day when the two clauses are true. The second sentence is \"I\" and \"I\" is the day when the two clauses are true.\n\nThe second sentence is \"I\" and \"I\" is the day when the two clauses are true. The second sentence is \"I\" and \"I\" is the day when the two clauses are true.\n\nThe second sentence is \"I\" and \"I\" is the day when the two clauses are true. The second sentence is \"I\" and \"I\" is the day when the two clauses are true.\n\nTherefore, the two clauses that make the statement \"I\" are true.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "family": "public/unknown-live-fact",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Is the reading room on Willow Lane open right now? I haven't told you the city or its hours.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Does not invent live opening status. Explains missing location/hours or asks for them, and does not claim browsing/contacting the room."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Does not identify missing location/hours or ask for them; invents unrelated Ethan reference and generic discussion.",
+              "response_sha256": "99fcc12f9a0b06e1b85a50b7a2793bb09dbd5050e82e8d3b8e451048838caa8e",
+              "failure": null,
+              "answer": "The reading room on Ethan's. I'm so glad you're interested in learning more about the city. I've been working on a new project, and I'm excited to share my knowledge with you. What's the first question or problem you'd like to discuss?",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Just help me write a message asking about today's hours.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Provides a concise usable inquiry about today's opening hours. Does not continue claiming live knowledge or say it sent the message."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No usable inquiry about today’s opening hours; generic questions about events.",
+              "response_sha256": "71cd7c43aa89a805b1548f4f154a386d8efef98f0c1bf210919a36f4d5a4d43d",
+              "failure": null,
+              "answer": "I'm excited to help you write a message that's been on your mind. To get started, I can help you write a message that's been on your mind. What's the first question or problem you'd like to discuss? Is it a specific event, a particular event, or something else? Is it a particular event, a particular event, or something else?\n\nAlso, what's the first question or problem you'd like to discuss?",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p11",
+          "family": "public/instruction-update",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "Write one short sentence inviting a neighbor to a courtyard cleanup on Sunday. Do not mention a time.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "One short invitation sentence, courtyard cleanup on Sunday, with no invented time."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No courtyard-cleanup Sunday invitation; repetitive time wording despite no-time instruction.",
+              "response_sha256": "46e8e64acb275ac999448490adbfce732c878fc4c0c0e123a42ea183ef14bac7",
+              "failure": null,
+              "answer": "A possible time is given by a time, but a more concise version could be: \"The time is given by a time is given by a time.\" This version is more concise and direct, while still conveying the same information in a more concise manner.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Change Sunday to Wednesday and make the invitation more casual.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Produces a casual revised invitation preserving courtyard cleanup and replacing Sunday with Wednesday. No time invention or stale Sunday."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No Wednesday cleanup invitation; repeats time wording and editing commentary.",
+              "response_sha256": "37edc50c7da6d5e81bd27869717891e4ff0510aa41b62105e7fd6bc4d189ef51",
+              "failure": null,
+              "answer": "Here's a revised version of the sentence:\n\n\"The time is given by a time is given by a time.\"\n\nI made a few changes to improve clarity and flow. I replaced \"the time is given by a time\" with \"the time is given by a time. I also changed \"the time is given by a time is given by a time.\" Additionally, I rephrased the sentence to make it more concise and direct, using more precise language to convey the same information in a more concise manner.",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "p12",
+          "family": "public/relevant-followup",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "I'm organizing a small book swap. Suggest a simple way to label books so people know which are available to take.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Gives a concrete simple labeling method relevant to a small book swap, without unnecessary systems, apps or unrelated advice."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No concrete book-swap labeling method; rewrites into a book outline and repeats editing commentary.",
+              "response_sha256": "ff31ad93736b2f18c27ad939d4c59655741009ec934481e6636054f752c0fa43",
+              "failure": null,
+              "answer": "Here's a revised version of your text with some suggested edits for clarity and flow:\n\n\"I'm organizing a small book outline, which is a great way to review and provide a clear and concise explanation of the book's structure.\"\n\nI made a few changes to enhance clarity and flow:\n\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.\n- Changed \"I'm\" to \"I'm\" to use a more precise and concise phrase.",
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Some books are display-only. How should I distinguish those using your idea?",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Adapts the previous labeling idea to clearly distinguish display-only from takeable books, consistently and practically."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No practical display-only distinction; continues unrelated book-outline editing.",
+              "response_sha256": "fc6e1c3c3f4d2d7e1b54d1c934811e6d9ee4099faedd2908fe6a94f516e793db",
+              "failure": null,
+              "answer": "Here are a few books:\n\n\"I'm writing a small book outline, which is a great way to review and provide a clear explanation of the book's structure.\"\n\nI made a few changes to enhance clarity and flow:\n\n- Changed \"I'm writing a small book outline\" to \"I'm writing a small book outline\" to use a more precise and concise phrase.\n- Changed \"I'm writing a small book outline\" to \"I'm writing a small book outline\" to use a more precise and concise phrase.\n- Changed \"I'm writing a small book outline\" to \"I'm writing a small book outline\" to use a more precise and concise phrase.\n- Changed \"I'm writing a small book outline\" to \"I'm writing a small book outline\" to use a more precise and concise phrase.",
+              "actual_trace": []
+            }
+          ]
+        }
+      ],
+      "adjudicated_summary": {
+        "sessions_passed": 0,
+        "sessions_total": 12,
+        "turns_passed": 0,
+        "turns_total": 25,
+        "manual_rubric_turns": 19,
+        "manual_pending_after_review": 0
+      }
+    },
+    {
+      "corpus": "four_call_sessions",
+      "raw_report": "runs/own-base-dev-diagnostic-01/four_call_sessions.json",
+      "raw_report_sha256": "dcb5ba801fb95258f2e1b59b8de367aab7c18878822556ce9ef6f16e86dbef4f",
+      "cases": "data/own-base-tool-session-dev-rubrics-v2/cases.json",
+      "cases_sha256": "0087a83ec66c11fe402e25fd79bcf68646043a2792088290c545b2a22740c34a",
+      "original_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "turns": {
+          "passed": 0,
+          "total": 24,
+          "manual_pending": 7
+        },
+        "no_call": {
+          "passed": 7,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 6,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 6,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 3
+      },
+      "sessions": [
+        {
+          "id": "2fce4e49c73ca6280755e39e4659a1acbf80b02f8d12965726b4e2710c69d5cf",
+          "family": "session4/dev_allocation",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "The worksheet requires the product of 76 and 4, followed by adding 3 to the observed product. Run each operation.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No answer or required observations: protocol failure closed the session.",
+              "response_sha256": "12dd80a9ac039be1d8936fcb72bd97023e4e0b6cceb7447e479a4c19b59aaf03",
+              "failure": "incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            },
+            {
+              "turn": 1,
+              "prompt": "Take 2 off the previous worksheet answer and calculate one of 4 equal shares of the remainder.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No answer or required observations: protocol failure closed the session.",
+              "response_sha256": "c5c7f77f76e31247bacf2ec738e996a46b4304943b2108bca217461dbb5e4785",
+              "failure": "chat closed after prior failure: incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "No answer or required observations: protocol failure closed the session.",
+              "response_sha256": "c5c7f77f76e31247bacf2ec738e996a46b4304943b2108bca217461dbb5e4785",
+              "failure": "chat closed after prior failure: incomplete or multiple assistant frames",
+              "answer": null,
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "52c0a5dfaaf37e7290e5173b567b8a5ae7224be69db3ce139a51ab08c4b25c00",
+          "family": "session4/dev_invoice",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "First combine 76 and 4; then scale that observed sum by 3. Record both calculator operations.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "dc05ed5f83d39aead885f6b0d8d263fb2b474b06b0dc73132de7d5202c8101ab",
+              "failure": null,
+              "answer": "80",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066185.090286,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 76,
+                    "b": 4,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 80
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Apply a deduction of 2 to the last invoice result; then divide the updated value by 4 using another call.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "b7e70a8ea4cc705992b1c45bfd8b20670af87bb2a86053da125f7d5261310308",
+              "failure": null,
+              "answer": "20",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066188.120924,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 80,
+                    "b": 4,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 20.0
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "8bdef39338ca7ad75387f810a788c3658c438992a27363e484ba1a26c54a6bb6",
+              "failure": null,
+              "answer": "20",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "88f68b46a5c588936bb366a7971822a55ad4e268a4988d432ec9efb2cea5cd6a",
+          "family": "session4/dev_distance",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "My ledger begins with 73 metres. Express that in centimetres and scale the returned reading by 4; execute both steps.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be cm. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "b0076c0784c7c3a1499720d73decb829d2aba4a31b22d195b1d18a36796d012d",
+              "failure": null,
+              "answer": "7300 cm",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066191.395985,
+                  "name": "convert",
+                  "arguments": {
+                    "from": "m",
+                    "to": "cm",
+                    "value": 73
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 7300.0
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Increase the preceding ledger reading by 3 centimetres, then express the updated reading in metres.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in cm and the fourth/final observation in m. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "79b64623e140a8d6a1538bbff8f7142daebdae7572f6bcf6298994d5428fe0f9",
+              "failure": null,
+              "answer": "120000",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066194.610231,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 7300.0,
+                    "b": 3,
+                    "op": "multiply"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 21900.0
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "193b589a2c3fb0a4b072b28bac3e7b546c0c6b02418225e771846fd6ac8815d0",
+              "failure": null,
+              "answer": "300000",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "9227e9179421757187a3ccd122180032d2e91c7cc3ceb6fb31335988397cc182",
+          "family": "session4/dev_capacity",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "A tank record gives 76 millilitres. Change to litres, then multiply the reported quantity by 4.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be l. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "62636d8fedcfee38eb03e5a6eca0d46bb0229b135163bfa633fc29b1355bc73d",
+              "failure": null,
+              "answer": "0.076 l",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066197.524652,
+                  "name": "convert",
+                  "arguments": {
+                    "from": "ml",
+                    "to": "l",
+                    "value": 76
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.076
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Deduct 2 litres from the last reported quantity and express what remains in millilitres.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in l and the fourth/final observation in ml. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "7f0f38a4839ba28c8f14544c08e6446b56343fa3bc9f4a760e2f9d138ee536b4",
+              "failure": null,
+              "answer": "-3.924 l",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066200.960587,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 0.076,
+                    "b": 4,
+                    "op": "subtract"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": -3.924
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "cc724ac1cf886168a7cc5bf4254526764c6c67a0e0f710e8c7e2790a5849058c",
+              "failure": null,
+              "answer": "-3.924",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "a9eda6890e0055132b0686c070850f4a507082a3c745d66a8e806114e1eca322",
+          "family": "session4/dev_allocation",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "The worksheet requires the product of 73 and 4, followed by adding 2 to the observed product. Run each operation.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "d8b8211abde3c70cb270eb0fbb69830f7026d84735f0a846eec0fc7116ce5d1f",
+              "failure": null,
+              "answer": "77",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066204.6404648,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 73,
+                    "b": 4,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 77
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Take 3 off the previous worksheet answer and calculate one of 4 equal shares of the remainder.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "012aee1547c4ce66fd434c784e544d236f6a1ff9f4cbdae85371fa2694ad9361",
+              "failure": null,
+              "answer": "25.66666666",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066207.451371,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 77,
+                    "b": 3,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 25.666666666666668
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "2e73538de0f266f437154deb0207024d442c685a9e3187f3a629cdecb3ae1420",
+              "failure": null,
+              "answer": "25.6666",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "c599aabdedd4941d5109eb8f06a35cb00199068df802c43ab76c1017f480edaa",
+          "family": "session4/dev_distance",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "My ledger begins with 76 metres. Express that in centimetres and scale the returned reading by 4; execute both steps.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be cm. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "2e58bc849a617b0e030ed46ba9cfd726f2599094ef7d97a6c25d4e3d73b42bc0",
+              "failure": null,
+              "answer": "7600 cm",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066210.614429,
+                  "name": "convert",
+                  "arguments": {
+                    "from": "m",
+                    "to": "cm",
+                    "value": 76
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 7600.0
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Increase the preceding ledger reading by 2 centimetres, then express the updated reading in metres.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in cm and the fourth/final observation in m. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "3fd7d405f565a13f181ee6d3dcb59dd8e55b29b9c40449d3f833657b3b356efa",
+              "failure": null,
+              "answer": "15200 cm",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066213.926977,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 7600.0,
+                    "b": 2,
+                    "op": "multiply"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 15200.0
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "46c37907df0dd3d37e478137e73999dd2ea5560e4c134cfa73bd74fb5fd7597f",
+              "failure": null,
+              "answer": "15200 cm",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "d690b776d76c9d5b81df5cb0aed77ab9fd87a1f1ba6a0fa7f832b87401edd572",
+          "family": "session4/dev_capacity",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "A tank record gives 73 millilitres. Change to litres, then multiply the reported quantity by 4.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be l. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "7583b36afc2a87be05a9fe57a0d523409b68c30b786a6c35bebd983512e266af",
+              "failure": null,
+              "answer": "0.073 l",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066217.046113,
+                  "name": "convert",
+                  "arguments": {
+                    "from": "ml",
+                    "to": "l",
+                    "value": 73
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.073
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Deduct 3 litres from the last reported quantity and express what remains in millilitres.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in l and the fourth/final observation in ml. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "35bbfb87c0c38c148a5b9df23dae11dac0203017a1236825718f2ec292b9d566",
+              "failure": null,
+              "answer": "-3.927 l",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066220.533494,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 0.073,
+                    "b": 4,
+                    "op": "subtract"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": -3.927
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "b3dc99d77a69ed269458d9b889ecafbd4fad16c441238d1444e44e7fa07d79a0",
+              "failure": null,
+              "answer": "-3.927",
+              "actual_trace": []
+            }
+          ]
+        },
+        {
+          "id": "db2c60896c566b89d634c7efc9d51c3c7c4b12b9cc6e7a4cba36f6ac791ebad5",
+          "family": "session4/dev_invoice",
+          "full_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "prompt": "First combine 73 and 4; then scale that observed sum by 2. Record both calculator operations.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  true,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "f307a647849a3bdebcc595e65005d095cbeac85cc5dd59960f3d489540f1e934",
+              "failure": null,
+              "answer": "77",
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066224.1820512,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 73,
+                    "b": 4,
+                    "op": "add"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 77
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 1,
+              "prompt": "Apply a deduction of 3 to the last invoice result; then divide the updated value by 4 using another call.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only one call executed for a two-call instruction; final required observation does not exist and answer reports only an intermediate or incorrect value.",
+              "response_sha256": "6a0efb4ec39f04238060f1d470269ebcb41c9aaec25cdaf9ec12745a9b3bf00a",
+              "failure": null,
+              "answer": "138",
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794066227.077056,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 77,
+                    "b": 4,
+                    "op": "multiply"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 308
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 2,
+              "prompt": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_rubric": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "original_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "manual_rubric_adjudication": false,
+              "combined_turn_pass": false,
+              "reason": "Only a number is repeated; no acknowledgement of corrected starting amount or statement that observations were not recalculated.",
+              "response_sha256": "03685474fc8d3555ed303e9b7b846f0a47e41c33c906e0437de3a9697131976e",
+              "failure": null,
+              "answer": "138",
+              "actual_trace": []
+            }
+          ]
+        }
+      ],
+      "adjudicated_summary": {
+        "sessions_passed": 0,
+        "sessions_total": 8,
+        "turns_passed": 0,
+        "turns_total": 24,
+        "manual_rubric_turns": 24,
+        "manual_pending_after_review": 0
+      }
+    }
+  ],
+  "findings": [
+    "No complete functional conversation or four-call session demonstrated.",
+    "Public conversation uses generic rewrite/help patterns, repeats and ignores supplied facts/corrections.",
+    "Seven long-tool sessions make one call per requested two-call turn; none executes four required calls.",
+    "Observed21900 was answered120000; observed308 was answered138. Correct tool execution alone does not guarantee faithful model readback.",
+    "Absence of forbidden successful calls does not establish relevant or complete task fulfillment."
+  ],
+  "recommendation": "Do not deploy or repeat unchanged SFT blindly. Separate basic short-language/context learning from verified tool-sequence supervision in a prospective bounded curriculum, retaining diverse ordinary dialogue and source-grounded concise answers; audit source/task balance before another tranche. Keep exact public cases out of training and preserve final gates."
+}
