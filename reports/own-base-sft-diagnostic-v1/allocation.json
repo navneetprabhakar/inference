@@ -1,0 +1,253 @@
+{
+  "scope": "prospective root-review SFT activation; no training launched",
+  "hardware_receipt": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-sft-preflight-01/hardware-receipt.json",
+    "sha256": "354db3003abedb52bb714489ada2fee986ec446cfecc0797f90258a97d0c9a08"
+  },
+  "configuration": {
+    "context": 1024,
+    "microbatch": 1,
+    "accumulation": 8,
+    "evaluation_microbatch": 1,
+    "bf16": true,
+    "seed": 20261106
+  },
+  "updates": 4565,
+  "training_rows": 36511,
+  "evaluation_events": 6,
+  "development_rows": 1118,
+  "nominal": {
+    "assistant_targets": 3939349,
+    "input_tokens": 21727764,
+    "padded_tokens": 21727764,
+    "attention_cells": 11713257860,
+    "evaluation_targets": 502440
+  },
+  "work_limits": {
+    "assistant_targets": 4333285,
+    "input_tokens": 24104001,
+    "padded_tokens": 24104001,
+    "attention_cells": 12984784951,
+    "evaluation_targets": 586180
+  },
+  "headroom": {
+    "assistant_targets": 393936,
+    "input_tokens": 2376237,
+    "padded_tokens": 2376237,
+    "attention_cells": 1271527091,
+    "evaluation_targets": 83740
+  },
+  "sources": {
+    "chat": {
+      "training": {
+        "assistant_targets": 3707850,
+        "input_tokens": 15895146,
+        "padded_tokens": 15895146,
+        "attention_cells": 9128105160,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 276162,
+        "padded_tokens": 276162,
+        "attention_cells": 156231042,
+        "evaluation_targets": 64228
+      },
+      "nominal": {
+        "assistant_targets": 3707850,
+        "input_tokens": 17552118,
+        "padded_tokens": 17552118,
+        "attention_cells": 10065491412,
+        "evaluation_targets": 385368
+      },
+      "limits": {
+        "assistant_targets": 4078635,
+        "input_tokens": 19417795,
+        "padded_tokens": 19417795,
+        "attention_cells": 11134532970,
+        "evaluation_targets": 449596
+      },
+      "headroom": {
+        "assistant_targets": 370785,
+        "input_tokens": 1865677,
+        "padded_tokens": 1865677,
+        "attention_cells": 1069041558,
+        "evaluation_targets": 64228
+      }
+    },
+    "primary_tool": {
+      "training": {
+        "assistant_targets": 225426,
+        "input_tokens": 2723314,
+        "padded_tokens": 2723314,
+        "attention_cells": 1043082764,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 216729,
+        "padded_tokens": 216729,
+        "attention_cells": 83618751,
+        "evaluation_targets": 17834
+      },
+      "nominal": {
+        "assistant_targets": 225426,
+        "input_tokens": 4023688,
+        "padded_tokens": 4023688,
+        "attention_cells": 1544795270,
+        "evaluation_targets": 107004
+      },
+      "limits": {
+        "assistant_targets": 247969,
+        "input_tokens": 4512749,
+        "padded_tokens": 4512749,
+        "attention_cells": 1732722298,
+        "evaluation_targets": 124838
+      },
+      "headroom": {
+        "assistant_targets": 22543,
+        "input_tokens": 489061,
+        "padded_tokens": 489061,
+        "attention_cells": 187927028,
+        "evaluation_targets": 17834
+      }
+    },
+    "four_call_extension": {
+      "training": {
+        "assistant_targets": 6073,
+        "input_tokens": 57422,
+        "padded_tokens": 57422,
+        "attention_cells": 39050370,
+        "evaluation_targets": 0
+      },
+      "one_evaluation": {
+        "assistant_targets": 0,
+        "input_tokens": 15756,
+        "padded_tokens": 15756,
+        "attention_cells": 10653468,
+        "evaluation_targets": 1678
+      },
+      "nominal": {
+        "assistant_targets": 6073,
+        "input_tokens": 151958,
+        "padded_tokens": 151958,
+        "attention_cells": 102971178,
+        "evaluation_targets": 10068
+      },
+      "limits": {
+        "assistant_targets": 6681,
+        "input_tokens": 173457,
+        "padded_tokens": 173457,
+        "attention_cells": 117529683,
+        "evaluation_targets": 11746
+      },
+      "headroom": {
+        "assistant_targets": 608,
+        "input_tokens": 21499,
+        "padded_tokens": 21499,
+        "attention_cells": 14558505,
+        "evaluation_targets": 1678
+      }
+    }
+  },
+  "forecast": {
+    "method": "max(row-scaled,input-scaled) per actual source length quartile; extension final-prefix sample applied conservatively to all extension rows; FP32 evaluation accounted separately",
+    "source": {
+      "chat": {
+        "training_strata": [
+          {
+            "stratum": "quartile-1",
+            "rows": 7270,
+            "input_tokens": 3010947,
+            "seconds": 1868.3118429197914
+          },
+          {
+            "stratum": "quartile-2",
+            "rows": 7271,
+            "input_tokens": 3545461,
+            "seconds": 1910.1697398155916
+          },
+          {
+            "stratum": "quartile-3",
+            "rows": 7270,
+            "input_tokens": 4095544,
+            "seconds": 2307.832079249347
+          },
+          {
+            "stratum": "quartile-4",
+            "rows": 7271,
+            "input_tokens": 5243194,
+            "seconds": 2844.0744662917277
+          }
+        ],
+        "training_seconds": 8930.388128276458,
+        "one_evaluation_seconds": 39.58862840794609,
+        "evaluations_seconds": 237.53177044767654
+      },
+      "primary_tool": {
+        "training_strata": [
+          {
+            "stratum": "quartile-1",
+            "rows": 1835,
+            "input_tokens": 528516,
+            "seconds": 366.56059398948855
+          },
+          {
+            "stratum": "quartile-2",
+            "rows": 1836,
+            "input_tokens": 688942,
+            "seconds": 404.3252415014591
+          },
+          {
+            "stratum": "quartile-3",
+            "rows": 1835,
+            "input_tokens": 702592,
+            "seconds": 386.4849473315392
+          },
+          {
+            "stratum": "quartile-4",
+            "rows": 1836,
+            "input_tokens": 803264,
+            "seconds": 453.7002807764802
+          }
+        ],
+        "training_seconds": 1611.0710635989672,
+        "one_evaluation_seconds": 28.201534945401363,
+        "evaluations_seconds": 169.20920967240818
+      },
+      "four_call_extension": {
+        "training_strata": [
+          {
+            "stratum": "all rows forecast from final-prefix measured throughput; conservative row/input maximum",
+            "rows": 87,
+            "input_tokens": 57422,
+            "seconds": 29.31062874006966
+          }
+        ],
+        "training_seconds": 29.31062874006966,
+        "one_evaluation_seconds": 1.800212311791256,
+        "evaluations_seconds": 10.801273870747536
+      }
+    },
+    "short_run_projected_work_seconds": 10988.312074606327,
+    "save_calls_nominal": 53,
+    "checkpoint_seconds_per_save_unmeasured_allowance": 30,
+    "initialization_and_resume_overhead_allowance_seconds": 600,
+    "slowdown_factor": 1.75,
+    "training_replay_factor": 1.1,
+    "evaluation_events_in_forecast": 7,
+    "total_forecast_seconds": 23391.214006582777,
+    "total_forecast_hours": 6.4975594462729935,
+    "active_ceiling_hours": 8,
+    "calendar_ceiling_hours": 48
+  },
+  "checks": [
+    "validate_launch PASS CPU metadata/pins/admission/hardware/path checks",
+    "exact deterministic schedule+all full evaluation costs fit every source/global work ceiling",
+    "no parent tensors or GPU initialized; real trainer verifies selected parent again before execution"
+  ],
+  "activation": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/reports/own-base-sft-diagnostic-v1/activation.json",
+    "sha256": "2494e461c853f6ad373ac7363b57d3259adb3137a3c640f3fda1ec412e45dd8c"
+  }
+}

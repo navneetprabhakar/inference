@@ -1,0 +1,296 @@
+{
+  "scope": "CPU-only prospective allocation analysis; no SFT activation, no GPU/model execution",
+  "datasets": {
+    "chat": "7970c9c35c76f1bfcc2dfded6589846db365e51166a84636a170de61b701b609",
+    "primary_tool": "17adc50fc4dd44b0a6df606d5e4212ec564fe2734db3f7c342e62100589da1c8",
+    "four_call_extension": "4b72130463efbf67dacf42b551edfbd851a9cd60c7e29f0e38c206c50655ce76"
+  },
+  "configuration": {
+    "microbatch": 1,
+    "evaluation_microbatch": 1,
+    "accumulation": 8,
+    "seed": 20261106,
+    "mixing": "proportional_source_update_midpoints"
+  },
+  "cadence_proposal": {
+    "checkpoint_updates": 250,
+    "validation_updates": 1000,
+    "validation_rows": "all admitted development rows per source; unchanged physical split labels"
+  },
+  "alternatives": {
+    "one_pass_each": {
+      "passes": [
+        1,
+        1,
+        1
+      ],
+      "updates": 4565,
+      "training_rows": 36511,
+      "evaluation_events": 6,
+      "training_work": {
+        "assistant_targets": 3939349,
+        "input_tokens": 18675882,
+        "padded_tokens": 18675882,
+        "attention_cells": 10210238294,
+        "evaluation_targets": 0
+      },
+      "one_evaluation_work": {
+        "assistant_targets": 0,
+        "input_tokens": 508647,
+        "padded_tokens": 508647,
+        "attention_cells": 250503261,
+        "evaluation_targets": 83740
+      },
+      "nominal_with_evaluation": {
+        "assistant_targets": 3939349,
+        "input_tokens": 21727764,
+        "padded_tokens": 21727764,
+        "attention_cells": 11713257860,
+        "evaluation_targets": 502440
+      },
+      "sources": {
+        "chat": {
+          "passes": 1,
+          "training_rows": 29082,
+          "training_updates": 3636,
+          "development_rows": 511,
+          "training_work": {
+            "assistant_targets": 3707850,
+            "input_tokens": 15895146,
+            "padded_tokens": 15895146,
+            "attention_cells": 9128105160,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 276162,
+            "padded_tokens": 276162,
+            "attention_cells": 156231042,
+            "evaluation_targets": 64228
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 3707850,
+            "input_tokens": 17552118,
+            "padded_tokens": 17552118,
+            "attention_cells": 10065491412,
+            "evaluation_targets": 385368
+          }
+        },
+        "primary_tool": {
+          "passes": 1,
+          "training_rows": 7342,
+          "training_updates": 918,
+          "development_rows": 583,
+          "training_work": {
+            "assistant_targets": 225426,
+            "input_tokens": 2723314,
+            "padded_tokens": 2723314,
+            "attention_cells": 1043082764,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 216729,
+            "padded_tokens": 216729,
+            "attention_cells": 83618751,
+            "evaluation_targets": 17834
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 225426,
+            "input_tokens": 4023688,
+            "padded_tokens": 4023688,
+            "attention_cells": 1544795270,
+            "evaluation_targets": 107004
+          }
+        },
+        "four_call_extension": {
+          "passes": 1,
+          "training_rows": 87,
+          "training_updates": 11,
+          "development_rows": 24,
+          "training_work": {
+            "assistant_targets": 6073,
+            "input_tokens": 57422,
+            "padded_tokens": 57422,
+            "attention_cells": 39050370,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 15756,
+            "padded_tokens": 15756,
+            "attention_cells": 10653468,
+            "evaluation_targets": 1678
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 6073,
+            "input_tokens": 151958,
+            "padded_tokens": 151958,
+            "attention_cells": 102971178,
+            "evaluation_targets": 10068
+          }
+        }
+      },
+      "one_replay_window_upper_bounds": {
+        "chat": {
+          "assistant_targets": 207357,
+          "input_tokens": 886557,
+          "padded_tokens": 886557,
+          "attention_cells": 516175995,
+          "evaluation_targets": 0
+        },
+        "primary_tool": {
+          "assistant_targets": 13204,
+          "input_tokens": 154548,
+          "padded_tokens": 154548,
+          "attention_cells": 60382507,
+          "evaluation_targets": 0
+        },
+        "four_call_extension": {
+          "assistant_targets": 664,
+          "input_tokens": 5694,
+          "padded_tokens": 5694,
+          "attention_cells": 4107606,
+          "evaluation_targets": 0
+        }
+      }
+    },
+    "chat1_tools3_extension3": {
+      "passes": [
+        1,
+        3,
+        3
+      ],
+      "updates": 6423,
+      "training_rows": 51369,
+      "evaluation_events": 8,
+      "training_work": {
+        "assistant_targets": 4402347,
+        "input_tokens": 24237354,
+        "padded_tokens": 24237354,
+        "attention_cells": 12374504562,
+        "evaluation_targets": 0
+      },
+      "one_evaluation_work": {
+        "assistant_targets": 0,
+        "input_tokens": 508647,
+        "padded_tokens": 508647,
+        "attention_cells": 250503261,
+        "evaluation_targets": 83740
+      },
+      "nominal_with_evaluation": {
+        "assistant_targets": 4402347,
+        "input_tokens": 28306530,
+        "padded_tokens": 28306530,
+        "attention_cells": 14378530650,
+        "evaluation_targets": 669920
+      },
+      "sources": {
+        "chat": {
+          "passes": 1,
+          "training_rows": 29082,
+          "training_updates": 3636,
+          "development_rows": 511,
+          "training_work": {
+            "assistant_targets": 3707850,
+            "input_tokens": 15895146,
+            "padded_tokens": 15895146,
+            "attention_cells": 9128105160,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 276162,
+            "padded_tokens": 276162,
+            "attention_cells": 156231042,
+            "evaluation_targets": 64228
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 3707850,
+            "input_tokens": 18104442,
+            "padded_tokens": 18104442,
+            "attention_cells": 10377953496,
+            "evaluation_targets": 513824
+          }
+        },
+        "primary_tool": {
+          "passes": 3,
+          "training_rows": 22026,
+          "training_updates": 2754,
+          "development_rows": 583,
+          "training_work": {
+            "assistant_targets": 676278,
+            "input_tokens": 8169942,
+            "padded_tokens": 8169942,
+            "attention_cells": 3129248292,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 216729,
+            "padded_tokens": 216729,
+            "attention_cells": 83618751,
+            "evaluation_targets": 17834
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 676278,
+            "input_tokens": 9903774,
+            "padded_tokens": 9903774,
+            "attention_cells": 3798198300,
+            "evaluation_targets": 142672
+          }
+        },
+        "four_call_extension": {
+          "passes": 3,
+          "training_rows": 261,
+          "training_updates": 33,
+          "development_rows": 24,
+          "training_work": {
+            "assistant_targets": 18219,
+            "input_tokens": 172266,
+            "padded_tokens": 172266,
+            "attention_cells": 117151110,
+            "evaluation_targets": 0
+          },
+          "one_evaluation_work": {
+            "assistant_targets": 0,
+            "input_tokens": 15756,
+            "padded_tokens": 15756,
+            "attention_cells": 10653468,
+            "evaluation_targets": 1678
+          },
+          "nominal_with_evaluation": {
+            "assistant_targets": 18219,
+            "input_tokens": 298314,
+            "padded_tokens": 298314,
+            "attention_cells": 202378854,
+            "evaluation_targets": 13424
+          }
+        }
+      },
+      "one_replay_window_upper_bounds": {
+        "chat": {
+          "assistant_targets": 148652,
+          "input_tokens": 631515,
+          "padded_tokens": 631515,
+          "attention_cells": 368900567,
+          "evaluation_targets": 0
+        },
+        "primary_tool": {
+          "assistant_targets": 27392,
+          "input_tokens": 326151,
+          "padded_tokens": 326151,
+          "attention_cells": 127100919,
+          "evaluation_targets": 0
+        },
+        "four_call_extension": {
+          "assistant_targets": 1248,
+          "input_tokens": 11380,
+          "padded_tokens": 11380,
+          "attention_cells": 8198744,
+          "evaluation_targets": 0
+        }
+      }
+    }
+  }
+}

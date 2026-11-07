@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "state": "reviewed_for_hardware_preflight",
+  "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-sft-preflight-01",
+  "configuration": {
+    "context": 1024,
+    "microbatch": 1,
+    "evaluation_microbatch": 1,
+    "accumulation": 8,
+    "bf16": true,
+    "evaluation_precision": "fp32"
+  },
+  "optimizer_report": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1/comparison.json",
+    "sha256": "f9ed0f50ac33ddd9617ec9abf3057fb4807085e6dec8a4a03eba28ae7f00ee3b"
+  },
+  "optimizer_experiment": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/reports/optimizer-ablation-v1/experiment-r2.json",
+    "sha256": "b9ff22eab43359344046d110348df0f7a2475eec51a3bb567040d6adc4917745"
+  },
+  "parent": {
+    "checkpoint": {
+      "bytes": 1493571931,
+      "file": "step-002441-100cdf77a1c34e5be3dfc79e4a1842caead481b652d871d03115ff5d897fcefb.pt",
+      "sha256": "100cdf77a1c34e5be3dfc79e4a1842caead481b652d871d03115ff5d897fcefb"
+    },
+    "ledger_sha256": "a37d1989a1d9e2f81e142049eaa351b0b0fcfab63e48ce58573b8c84334b29c2",
+    "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-preserve-095"
+  },
+  "datasets": [
+    {
+      "name": "chat",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-chat-aligned-v1/receipt.json",
+        "sha256": "7970c9c35c76f1bfcc2dfded6589846db365e51166a84636a170de61b701b609"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-chat-aligned-v1/diagnostic-admission.json",
+        "sha256": "f81ea52d212dc12d840ce212051257615e7254212e3ab64f24ab13ea151e9a3f"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-chat-aligned-v1/diagnostic-verification.json",
+        "sha256": "3fe360d9c755217d592abce188cac6c35413edc96c1e0f1303dfc0e280ae75d4"
+      },
+      "development_split": "validation"
+    },
+    {
+      "name": "primary_tool",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-aligned-v1/receipt.json",
+        "sha256": "17adc50fc4dd44b0a6df606d5e4212ec564fe2734db3f7c342e62100589da1c8"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-aligned-v1/diagnostic-admission.json",
+        "sha256": "15da9f853af5e3de03fcdb59fd2a24f1823df581af37554d184404ec086ff6cc"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-aligned-v1/diagnostic-verification.json",
+        "sha256": "783df680cf136541726371808f503f2ea6e8922d29965507f6325dde49c49442"
+      },
+      "development_split": "exposed-development"
+    },
+    {
+      "name": "four_call_extension",
+      "receipt": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-session-aligned-v1/receipt.json",
+        "sha256": "4b72130463efbf67dacf42b551edfbd851a9cd60c7e29f0e38c206c50655ce76"
+      },
+      "admission": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-session-aligned-v1/diagnostic-admission.json",
+        "sha256": "9a2b61b489b9d2b3dde17830ac800e77d58b43a6931da74c5e56cb6e1f3a6855"
+      },
+      "verification": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-session-aligned-v1/diagnostic-verification.json",
+        "sha256": "4de70f54b07f272036bd78a74af144e95145af99296903fc1f6a54371f85c019"
+      },
+      "development_split": "exposed-development"
+    }
+  ],
+  "extension_qualification": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/data/own-base-tool-session-aligned-v1/four-call-qualification.json",
+    "sha256": "3437c3414e3081f27aabd178911e10cd957ae66f17083c0d4226ffaed6619c7a"
+  },
+  "runtime_sha256": {
+    "own_base_sft_train.py": "647d2f1363fa41c9cc447e6bfea698c517895fbffda2ff3afdb0c833647b3200",
+    "own_base_sft_control.py": "0e0c92ba2cd4608fb02fa4100e82f7881fa02cdf2256d90c4da66a1f77b506d9",
+    "base_run_control.py": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+    "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+    "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+    "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "optimizer_ablation_report.py": "3cd557649478ff105759eb641a1a171572fe0cc8c2709f45778684fc13a24fa5",
+    "optimizer_ablation_train.py": "8ce464507606a2cee5b169f4a2fe417b14b6d84b117ab86d94f7ea9e52a4f939",
+    "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+    "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad"
+  },
+  "preflight_code_sha256": {
+    "own_base_sft_preflight.py": "e5791f432e56ba43d931e40a96e7492d4cd6402547ca1e893b6d58f253ebe002",
+    "verify_own_base_sft_preflight.py": "58d178ef73a7e3491327de5a07dcb9bee3aeecbe038479d6cf96919a4279ea0b",
+    "reports/own-base-sft-preflight/PROTOCOL.md": "29f1a773aed93bfdb229c3abfaa4b969444f4b1bf0d4e7bd024de049c63f58c3"
+  },
+  "stop_paths": [
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-preserve-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-scaled/STOP"
+  ]
+}
