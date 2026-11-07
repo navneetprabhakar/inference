@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "candidate": {
+    "manifest": "/Users/navneetprabhakar/Documents/git/image/inference/own-base-candidates/sft-diagnostic-01/manifest.json",
+    "manifest_sha256": "504f0117e548688ebdd782e1041f768347b8ca9a9cac09d4d65e206475b241bd"
+  },
+  "corpora": [
+    {
+      "id": "primary_tools",
+      "file_sha256": "ae9a7664ee84e6109f881b93e38f55a6b0a74033560a69e8575d4b8584daf904",
+      "canonical_sha256": "dbd21270e504df0ae5e2581c42676a2b93a9074b6400245ab1fb5d0e47d2c0f8",
+      "receipt_sha256": "b798a14e769769f0022f1c67821821b0b2eca71e8fcc29b19014b2f96e7ca2b9",
+      "freeze_sha256": "876edcdf5783037eca65940fded2da5405183131ca8af78d5b64df615d44bcc3",
+      "sessions": 422,
+      "turns": 583
+    },
+    {
+      "id": "four_call_sessions",
+      "file_sha256": "0087a83ec66c11fe402e25fd79bcf68646043a2792088290c545b2a22740c34a",
+      "canonical_sha256": "612b2882fd59a07d054619b6c43ece28ddee2b22f36dcf4ae316ae6f5a352d03",
+      "receipt_sha256": "5d4ac4aaa5a24469eddc25e09497ba35bf7eb59364b661f766982c2fc6f9348a",
+      "freeze_sha256": "15654c740fcb538b03a0b2e7bb7e96563f1b6490dd60a53540ca5de61e6a2485",
+      "sessions": 8,
+      "turns": 24
+    },
+    {
+      "id": "public_conversation",
+      "file_sha256": "4653cfbab91c970c497865930c19ed36b47215d45ef6bada1714ce19faa78824",
+      "canonical_sha256": "e81ed56dda59bc304e80ea96353582a45e310237913b17c0a2053890f84fd033",
+      "receipt_sha256": "ef717106ab0797113dde48a4a9138418411e39de88ae5c8a494db6ec684f73d5",
+      "freeze_sha256": "ef717106ab0797113dde48a4a9138418411e39de88ae5c8a494db6ec684f73d5",
+      "sessions": 12,
+      "turns": 25
+    }
+  ],
+  "runtime_sha256": {
+    "own_base_dev_run.py": "fc805ae22681ab7f1fbcbb114554fcb0078a0b0df905d0d02c531e74928dd1b0",
+    "own_base_dev_eval.py": "7f79ca61facd74a3bfb7ca0e16d31cff3b53618155202f1aa688c599e9176877",
+    "own_base_chat.py": "ee2e14c747d12e136e44d7214b15f7c34f1809ecd484d97a80f1564599cb0c65",
+    "own_base_sft_export.py": "2c1f6c3eb4d8468e7af0805c648a970befd473ba111d22239e5dd1171c21625a",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "dialogue.py": "4b4e3e1e1e9a13cebaae13754e3dc82d6fa75c19d05b7e74ef124739aef78f51",
+    "tools/__init__.py": "9926eb9a2932346b970cc34e48921cdb809c86dfd5616b509e84c8e760c9c220"
+  },
+  "budgets": {
+    "wall_seconds": 86400,
+    "heartbeat_seconds": 120,
+    "termination_grace_seconds": 10,
+    "max_frames": 4096,
+    "max_reserved_generation_tokens": 1048576,
+    "max_reserved_input_positions": 938999808,
+    "max_reserved_attention_cells": 846600863744,
+    "max_actual_generated_tokens": 1048576,
+    "max_rss_bytes": 19327352832,
+    "max_swap_growth_bytes": 1073741824,
+    "min_free_disk_bytes": 21474836480,
+    "max_output_bytes": 2147483648,
+    "max_thermal_state": 1
+  },
+  "output": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-dev-diagnostic-01",
+  "device": "mps",
+  "dtype": "float32",
+  "stop_paths": [
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-dev-diagnostic-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-sft-diagnostic-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-preserve-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-scaled/STOP"
+  ]
+}
