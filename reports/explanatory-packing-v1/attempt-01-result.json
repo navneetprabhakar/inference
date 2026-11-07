@@ -1,0 +1,13 @@
+{
+  "state": "incomplete_historical_hash_semantics_mismatch",
+  "session_id": 79805,
+  "exit_code": 1,
+  "seconds": 4.273380832979456,
+  "manifest_sha256": "a45409a2827e1a68eca8c9792b22967a7a5c96a315a75d83c100ff76f7188a60",
+  "failure": {
+    "type": "AssertionError",
+    "reason": "historical fulltext identity"
+  },
+  "source_evidence": "reports/corpus-readiness/build.py accept(wiki_intro(row)) stores raw_sha256 of full row[text] and normalized_sha256 of transformed training text. Raw article hash cannot equal hash of extracted intro.",
+  "preserve": "All failed output and original plan/build remain unchanged. New version must retain token roundtrip, complete shard coverage, original source identity and correct normalizer checks."
+}
