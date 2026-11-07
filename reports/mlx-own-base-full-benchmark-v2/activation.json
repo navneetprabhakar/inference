@@ -1,0 +1,593 @@
+{
+  "schema": 1,
+  "state": "reviewed_for_full_model_feasibility",
+  "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-02",
+  "worker": "mlx_full_benchmark_worker_v2.py",
+  "python": {
+    "torch": "/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python",
+    "mlx": "/Users/navneetprabhakar/Documents/git/image/inference/.venv-mlx-own-base/bin/python"
+  },
+  "versions": {
+    "torch": {
+      "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+      "torch": "2.14.1",
+      "numpy": "2.5.4"
+    },
+    "mlx": {
+      "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+      "mlx": "0.32.4",
+      "numpy": "2.5.4"
+    }
+  },
+  "source_spec": {
+    "corpus": "/Users/navneetprabhakar/Documents/git/image/inference/data/base-foundation-100m",
+    "manifest_sha256": "338cd084d16b17dae4a3ebcab0f14e5a7a32c0de03a227ff77a753502f62af18",
+    "validation_blocks_sha256": "d7f6a9c03268e7040217062188ecded99143a766e8c14bd7aafbf421a0068931",
+    "diagnostics": "/Users/navneetprabhakar/Documents/git/image/inference/reports/base-foundation-100m/diagnostics.json",
+    "diagnostics_sha256": "82ad6c3d7ddf2fba301ac1ecc68d77c3ad815bcee6608dbc21140782f91be03b",
+    "parent": {
+      "bytes": 1493704411,
+      "campaign_spec_sha256": "30835950cbe6719597b4db82d990e43ad131e09be01c12b2d7f9b30c46629f9a",
+      "checkpoint": "step-012207-2823f175b36061ca48e129e76d134baeb28591943f868c0b14020a63913904b6.pt",
+      "ledger_sha256": "4f0f2d28708651fb815143ef9bc6170403f3650800a71fdcb38f68ddaea865a8",
+      "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01",
+      "sha256": "2823f175b36061ca48e129e76d134baeb28591943f868c0b14020a63913904b6"
+    },
+    "source_offset": 99999744
+  },
+  "data": {
+    "train_path": "/Users/navneetprabhakar/Documents/git/image/inference/data/base-foundation-100m/fineweb-train.u16",
+    "train_sha256": "c5c03a01dac4d6ce11ab90cf651d63d5b47c991c9cdd02c523b192c09c6dab61",
+    "validation_path": "/Users/navneetprabhakar/Documents/git/image/inference/data/base-foundation-100m/fineweb-validation.u16",
+    "validation_sha256": "119a6fd8dd6d8bfdde6e6be1c44f3f09871e9dc4250298a40445f81d84b67eba",
+    "source_offset": 99999744,
+    "slice_targets": 16777216,
+    "validation_offsets": [
+      121,
+      2260
+    ]
+  },
+  "configuration": {
+    "microbatch": 2,
+    "length": 512,
+    "accumulation": 8,
+    "lr": 6e-05
+  },
+  "slice_targets": 16777216,
+  "targets_per_update": 8192,
+  "period_limits": {
+    "correctness": 2700.0,
+    "warmup": 900.0,
+    "measured": 5400.0,
+    "resume": 900.0,
+    "overhead": 900.0
+  },
+  "limits": {
+    "active_seconds": 10800,
+    "calendar_seconds": 21600,
+    "attempted_targets": 24993792,
+    "output_bytes": 4294967296,
+    "free_disk_bytes": 21474836480,
+    "rss_bytes": 19327352832,
+    "swap_growth_bytes": 1073741824,
+    "gpu_active_bytes": 12884901888,
+    "telemetry_seconds": 30,
+    "max_retries": 0
+  },
+  "driver_telemetry_policy": "MLX0.32.4 null with reason; mandatory active/cache/peak and OS guards",
+  "phases": [
+    {
+      "id": "A00-source",
+      "command": "source-convert",
+      "runtime": "torch-cpu",
+      "artifact": "neutral-source.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A0logits-cpu",
+      "command": "logits-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-torch-mps-fp32",
+      "command": "logits-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-mlx-gpu-fp32",
+      "command": "logits-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A0gradients-cpu",
+      "command": "gradients-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-torch-mps-fp32",
+      "command": "gradients-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-mlx-gpu-fp32",
+      "command": "gradients-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A1logits-cpu",
+      "command": "logits-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-torch-mps-fp32",
+      "command": "logits-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-mlx-gpu-fp32",
+      "command": "logits-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A1gradients-cpu",
+      "command": "gradients-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-torch-mps-fp32",
+      "command": "gradients-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-mlx-gpu-fp32",
+      "command": "gradients-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-cpu",
+      "command": "updates-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-torch-mps-fp32",
+      "command": "updates-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-mlx-gpu-fp32",
+      "command": "updates-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC0-torch-mps-fp32",
+      "command": "sustained",
+      "runtime": "torch-mps-fp32",
+      "artifact": "sustained-0.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC1-mlx-gpu-fp32",
+      "command": "sustained",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "sustained-1.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC2-torch-mps-bf16",
+      "command": "sustained",
+      "runtime": "torch-mps-bf16",
+      "artifact": "sustained-2.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-reference",
+      "command": "resume-reference",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-pause",
+      "command": "resume-pause",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-check",
+      "command": "resume-check",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    }
+  ],
+  "frozen_phase_plan": [
+    {
+      "id": "A00-source",
+      "command": "source-convert",
+      "runtime": "torch-cpu",
+      "artifact": "neutral-source.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A0logits-cpu",
+      "command": "logits-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-torch-mps-fp32",
+      "command": "logits-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-mlx-gpu-fp32",
+      "command": "logits-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0logits-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-logits.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A0gradients-cpu",
+      "command": "gradients-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-torch-mps-fp32",
+      "command": "gradients-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-mlx-gpu-fp32",
+      "command": "gradients-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": 0
+    },
+    {
+      "id": "A0gradients-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb0-gradients.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A1logits-cpu",
+      "command": "logits-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-torch-mps-fp32",
+      "command": "logits-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-mlx-gpu-fp32",
+      "command": "logits-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1logits-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-logits.npz",
+      "microbatch": null
+    },
+    {
+      "id": "A1gradients-cpu",
+      "command": "gradients-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-torch-mps-fp32",
+      "command": "gradients-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-mlx-gpu-fp32",
+      "command": "gradients-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": 1
+    },
+    {
+      "id": "A1gradients-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-mb1-gradients.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-cpu",
+      "command": "updates-reference",
+      "runtime": "torch-cpu",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-torch-mps-fp32",
+      "command": "updates-compare",
+      "runtime": "torch-mps-fp32",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-mlx-gpu-fp32",
+      "command": "updates-compare",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Aupdates-cleanup",
+      "command": "cleanup",
+      "runtime": "torch-cpu",
+      "artifact": "ref-updates.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC0-torch-mps-fp32",
+      "command": "sustained",
+      "runtime": "torch-mps-fp32",
+      "artifact": "sustained-0.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC1-mlx-gpu-fp32",
+      "command": "sustained",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "sustained-1.npz",
+      "microbatch": null
+    },
+    {
+      "id": "BC2-torch-mps-bf16",
+      "command": "sustained",
+      "runtime": "torch-mps-bf16",
+      "artifact": "sustained-2.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-reference",
+      "command": "resume-reference",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-pause",
+      "command": "resume-pause",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    },
+    {
+      "id": "Dresume-check",
+      "command": "resume-check",
+      "runtime": "mlx-gpu-fp32",
+      "artifact": "resume-reference.npz",
+      "microbatch": null
+    }
+  ],
+  "stop_paths": [
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-preserve-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-scaled/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-02/STOP"
+  ],
+  "code_sha256": {
+    "mlx_full_benchmark_control.py": "1eacabd85df439998eba8f90a04217b77d477f34239c26e7fc098bff14e9a5de",
+    "verify_mlx_full_benchmark_control.py": "4865a0d346e05bda55d761e55ab637dd1218bb985c422c20d0dea5d1009833a8",
+    "mlx_full_benchmark_worker.py": "d52951f2130e169807dd7e78b38a76590c1c4cc7da8deefcfcfd53d4507b538b",
+    "verify_mlx_full_benchmark_worker.py": "ade1ebcd679eecf6f5030d23c885a150339bf0003af986a0f8a9f3426bb0f7d9",
+    "mlx_own_base_adapter.py": "17b466ed678b170623b807e61c19e0f09c68c88bbb6fb2f5aea246c5df699b0b",
+    "mlx_own_base_source.py": "2f1f482c475ec36601cb47fca1e4e0d59b7ad4edaebcb803355ae3815b3da9bb",
+    "verify_mlx_own_base_adapter.py": "cdb73c402aa8522990eec1f34f829abd4346876e0e2ec3872734bc932e10e3ef",
+    "mlx_train_core.py": "0f79c0f997b4f3dd9e45bb3e3212d203dcd50273af75173fc74b518f9d23229c",
+    "own_base_neutral_state.py": "aec3d5f96011942282aa9c7ca767110e35814b1eac692d3b3faf3d9a80d59d83",
+    "own_base_dev_run.py": "fc805ae22681ab7f1fbcbb114554fcb0078a0b0df905d0d02c531e74928dd1b0",
+    "optimizer_ablation_train.py": "8ce464507606a2cee5b169f4a2fe417b14b6d84b117ab86d94f7ea9e52a4f939",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+    "base_run_control.py": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+    "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+    "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+    "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+    "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+    "reports/mlx-own-base-full-benchmark/PROTOCOL.md": "2e2934d169cd86a8c14fcd9a93da996a2d46744ac0494697a03a47e63a75bf80",
+    "reports/mlx-own-base-full-benchmark/CONTROLLER-NOTES.md": "2c7c1a8fc3989d5097076eb1592dbed4562ae0bb160f29cf9cc5a9482dc12541",
+    "reports/mlx-own-base-full-benchmark/prepare_spec.py": "1f24eb01cc6f9b0083c91b85552b1ab6ac4bd3e1de57b6ccc0db85a52a42b707",
+    "mlx_full_benchmark_control_v2.py": "5ed82df1d31b26c44325a52b756054b4a55e8d46c566a4ad40e8ddd924c21b4b",
+    "verify_mlx_full_benchmark_control_v2.py": "1a3b30d49862672526ebf19696124aaf50fe39a61646713b892f4152afc53785",
+    "mlx_full_benchmark_worker_v2.py": "99ca7063e6cab4ede25e05544ef968cba239e1f01de46931a6c1661ac821f252",
+    "verify_mlx_full_benchmark_worker_v2.py": "e31e5b31f4ed1bff06223c9ac901597323e64b3afce3b2add5555d1545937b0e",
+    "reports/mlx-own-base-full-benchmark-v2/PROTOCOL.md": "491ffd966be5d97ed52c8064f9ea33110b7575a5cc08454b7b7abcfa9577a95c",
+    "reports/mlx-own-base-full-benchmark-v2/prepare_spec.py": "e0b1e30bf5839ca8bf75b3dbfcde4c906bd4e9fe18b24f3645c162802b625998",
+    "reports/mlx-own-base-full-benchmark-v2/attempt-01-disposable-cleanup.json": "35a3178c17122a04550342d9394a89f75f48f787504482b6434d754585d95d81"
+  },
+  "tolerances": {
+    "causal_prefix_max": 1e-06,
+    "loss_abs": 0.0001,
+    "logit_rms": 0.0001,
+    "logit_max": 0.001,
+    "gradient_relative_l2": 0.001,
+    "gradient_max": 0.0001,
+    "norm_relative": 0.001,
+    "weight_max": 5e-05,
+    "update_delta_relative": 0.02,
+    "moment_max": 1e-05,
+    "resume_exact": true
+  },
+  "terminal_supervisors": {
+    "foundation": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01-supervisor.json",
+      "sha256": "057137266712aa2c319b6415e92db50620fc807002e185367042043e0ae5ffb3"
+    },
+    "optimizer": {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1/supervisor.json",
+      "sha256": "2215c7ad9910ea3c0216d3b108a0cf70413e367943b6fad7f3c6e213409e134d"
+    }
+  },
+  "benchmark_identity": {
+    "name": "own124m-fp32-feasibility-v1",
+    "source": {
+      "bytes": 1493704411,
+      "campaign_spec_sha256": "30835950cbe6719597b4db82d990e43ad131e09be01c12b2d7f9b30c46629f9a",
+      "checkpoint": "step-012207-2823f175b36061ca48e129e76d134baeb28591943f868c0b14020a63913904b6.pt",
+      "ledger_sha256": "4f0f2d28708651fb815143ef9bc6170403f3650800a71fdcb38f68ddaea865a8",
+      "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01",
+      "sha256": "2823f175b36061ca48e129e76d134baeb28591943f868c0b14020a63913904b6"
+    },
+    "source_offset": 99999744,
+    "configuration": {
+      "microbatch": 2,
+      "length": 512,
+      "accumulation": 8,
+      "lr": 6e-05
+    },
+    "tokenizer": "verified GPT-2 50257 IDs; EOT50256",
+    "versions": {
+      "torch": {
+        "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+        "torch": "2.14.1",
+        "numpy": "2.5.4"
+      },
+      "mlx": {
+        "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+        "mlx": "0.32.4",
+        "numpy": "2.5.4"
+      }
+    }
+  },
+  "prior_attempt": {
+    "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-01",
+    "files": {
+      "launch.json": {
+        "sha256": "57a69de5ca89ab6553c89b6242d565a0f327dadb71ba4fc38bf010c927441dce",
+        "bytes": 245
+      },
+      "terminal.json": {
+        "sha256": "5c8eda40964cd06e67378a07cdb34d03058cc88b598bd7c909a94bd0d4e3388f",
+        "bytes": 141
+      },
+      "benchmark-ledger.json": {
+        "sha256": "fac8eca84ac25c042fa148fd68d1a8da239ae7400a094b0dadd183506b8d8087",
+        "bytes": 2225
+      },
+      "spec.json": {
+        "sha256": "c70866ae1b907cbb5ba13dd96e50884565f0b5b1dce5ea977ecd579547d0f074",
+        "bytes": 14711
+      },
+      "phases/A0gradients-cleanup/watchdog.json": {
+        "sha256": "97fcd903fadd81e6924eacf965065b1df28ae39e5b63da0575e4d80aaa1f20b6",
+        "bytes": 350
+      }
+    },
+    "reserved_targets": 9216,
+    "committed_targets": 9216,
+    "period_seconds": {
+      "correctness": 21.064050334040076,
+      "warmup": 0.0,
+      "measured": 0.0,
+      "resume": 0.0,
+      "overhead": 0.0
+    },
+    "worker_active_seconds": 21.064050334040076,
+    "elapsed_wall_seconds": 23.572912454605103,
+    "launch_wall": 1794082379.915413,
+    "terminal_mtime_ns": 1794082403488325278
+  }
+}

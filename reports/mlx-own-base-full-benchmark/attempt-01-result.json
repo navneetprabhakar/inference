@@ -1,0 +1,32 @@
+{
+  "state": "incomplete_infrastructure_failure_not_performance_result",
+  "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-01",
+  "terminal": {
+    "state": "incomplete",
+    "error_type": "RunnerStop",
+    "error": "phase incomplete; no automaticretry",
+    "pending": null,
+    "automatic_retries": 0
+  },
+  "ledger_sha256": "fac8eca84ac25c042fa148fd68d1a8da239ae7400a094b0dadd183506b8d8087",
+  "activation_sha256": "3c459ae5a7420df74c36af615a5da6eafa05f0e8eabed2243feeba48cf06e424",
+  "attempted_targets": 9216,
+  "committed_targets": 9216,
+  "worker_accounted_seconds": 21.064050334040076,
+  "conservative_elapsed_seconds": 23.572912454605103,
+  "completed_phases": [
+    "A00-source",
+    "A0logits-cpu",
+    "A0logits-torch-mps-fp32",
+    "A0logits-mlx-gpu-fp32",
+    "A0logits-cleanup",
+    "A0gradients-cpu",
+    "A0gradients-torch-mps-fp32",
+    "A0gradients-mlx-gpu-fp32"
+  ],
+  "cause": "Owned reference cleanup raced parent output_bytes file stat. FileNotFoundError caused watchdog termination; no automatic retry.",
+  "full_model_parity_complete": false,
+  "sustained_speed_measured": false,
+  "native_resume_verified": false,
+  "proposed_action": "Versioned infrastructure correction with cumulative original budget accounting; preserve this run."
+}
