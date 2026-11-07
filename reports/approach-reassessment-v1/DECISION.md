@@ -30,3 +30,9 @@ At the older124M throughput reference,1B additional targets is about8.1active da
 - `model-recipes.md`: small-model architecture/pretraining/posttraining recipes and inspectable local-hardware examples, when finalized.
 
 No public model weights are adopted. No private acceptance cases opened. No claim of capability follows from this research or from eventual faster training alone.
+
+## Execution follow-up
+
+Read-only inspection of the original v3 candidate confirms the Everyday split problem: all811 pre-custody histories were grouped into only five first-user greeting families (390Hi,154Hey!,129Hello,128Hi there,10Hi.). Every group was assigned train. The cause therefore exists before custody filtering; it is not explained by a lack of substantive task diversity. `everyday-split-audit.json` pins the database and builder. Historical assignments remain unchanged. A prospective cohort design must group substantive scenario/near-duplicate histories while retaining full conversation context and all protected boundaries.
+
+Public Cosmopedia metadata shows the smallest complete official shard is1,174,424,341bytes, larger than the earlier1GiB proposed intake cap. Root authorizes a new prospective1.25GiB compressed cap for that exact hash-bound shard, with3GiB total additional output,20GiB disk floor,30minute wall cap andSTOP protection. This is an explicit bounded intake adjustment, not permission for the full122GB subset, unbounded download, or training admission. Downloader/plan review remains required before acquisition.

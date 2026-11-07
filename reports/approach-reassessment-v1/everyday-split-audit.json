@@ -1,0 +1,47 @@
+{
+  "state": "completed_read_only_split_diagnosis",
+  "database_sha256": "37f747a1b5bdd6c3df9545ad7691d7d550c74b65e3e740b785d0d88521c20321",
+  "builder_sha256": "98c824957786dd2e3c6a36f2f064bec8b7aee43086713c05d56790f922c8163c",
+  "source": "everyday-conversations",
+  "stage": "pre_custody_v3_candidate",
+  "documents": 811,
+  "families": [
+    {
+      "family": "8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4",
+      "documents": 390,
+      "split": "train",
+      "first_user": "Hi"
+    },
+    {
+      "family": "d827e9f36b788841b9e6cc22711185edbfbc17c5836b6292fe0fed85d18608b8",
+      "documents": 154,
+      "split": "train",
+      "first_user": "Hey!"
+    },
+    {
+      "family": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "documents": 129,
+      "split": "train",
+      "first_user": "Hello"
+    },
+    {
+      "family": "9b96a1fe1d548cbbc960cc6a0286668fd74a763667b06366fb2324269fcabaa4",
+      "documents": 128,
+      "split": "train",
+      "first_user": "Hi there"
+    },
+    {
+      "family": "0466d81a1252073449bc6f2606214debc6d26c23d6eabad01d623ae8376bbc67",
+      "documents": 10,
+      "split": "train",
+      "first_user": "Hi."
+    }
+  ],
+  "finding": "All811 candidate histories map to five greeting-based families, all assigned train. Family derives solely from normalized first user. This explains zero validation before custody; not evidence of no distinct substantive topics.",
+  "limitations": [
+    "Not a full source quality or custody audit.",
+    "Does not authorize moving existing protected/dev histories into train.",
+    "Existing candidate and all historical split identities unchanged."
+  ],
+  "next_policy": "For prospective fresh eligible data, define groups by substantive scenario/topic and near-duplicate full history, not boilerplate greeting alone; retain entire conversation and existing protected boundaries."
+}
