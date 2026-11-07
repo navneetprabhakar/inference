@@ -16,7 +16,7 @@ def words(text):return re.findall(r"\w+",normal(text))
 def shingles(text,n=5):
  w=words(text);return {tuple(w[i:i+n]) for i in range(max(0,len(w)-n+1))}
 
-def propose(records,*,salt,development_percent=20):
+def propose(records,*,salt,development_percent=20,check=lambda:None):
  """Return a split PROPOSAL, not custody clearance.
 
  status: old_train / untouched / historical_holdout / excluded / unknown.
@@ -37,6 +37,7 @@ def propose(records,*,salt,development_percent=20):
   a,b=find(a),find(b)
   if a!=b:parents[max(a,b)]=min(a,b)
  for r in rows:
+  check()
   if r['status'] not in {'old_train','untouched','historical_holdout','excluded','unknown'}:raise ValueError('unknown custody status')
   if not r.get('task_key') or not r.get('semantic_review_sha256'):raise ValueError('reviewed substantive grouping required')
   h=r['history'];body=h[int(bool(h and h[0]['role']=='system')):]
@@ -46,6 +47,7 @@ def propose(records,*,salt,development_percent=20):
   text='\n'.join(m['role']+': '+normal(m['text']) for m in h);texts.append(text);features.append(shingles(text))
  taskindex={};exactindex={};inverted={}
  for i,r in enumerate(rows):
+  check()
   for key,index in [(r['task_key'],taskindex),(texts[i],exactindex)]:
    if key in index:union(i,index[key])
    else:index[key]=i
@@ -60,6 +62,7 @@ def propose(records,*,salt,development_percent=20):
  for i,r in enumerate(rows):components.setdefault(find(i),[]).append(r)
  out=[]
  for component in components.values():
+  check()
   statuses={r['status'] for r in component};keys=sorted({r['task_key'] for r in component});gid=hashlib.sha256(json.dumps(keys,separators=(',',':')).encode()).hexdigest()
   if statuses&{'historical_holdout','excluded','unknown'}:split='quarantine'
   elif 'old_train' in statuses:split='train'
