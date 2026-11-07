@@ -1,0 +1,642 @@
+{
+  "primary": [
+    {
+      "split": "train",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/sensor_offset",
+      "forms": [
+        "A sensor register contains {a}. Use operation {op} with second operand {b} through calculate. Report its output.",
+        "Sensor register {a}; requested operation {op} with second operand {b}. Use calculate and read the result."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/numeric_tiles",
+      "forms": [
+        "For the numbered tiles {a} and {b}, perform {op} in that order with the calculator.",
+        "Tile A is {a}; tile B is {b}. Use the calculator for A {symbol} B."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/test_vector",
+      "forms": [
+        "Test vector: left={a}, right={b}. Run {op} and give the observed value.",
+        "Evaluate the test-vector expression ({a}) {symbol} ({b}) through calculate."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/calibration_pair",
+      "forms": [
+        "The calibration operands are {a} followed by {b}. The required arithmetic is {op}; call calculate.",
+        "Calibration check: {op} the first value {a} with the second value {b}, using the tool."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/audio_sample",
+      "forms": [
+        "An audio sample has components X={a}, Y={b}. Obtain X {symbol} Y from calculate.",
+        "On the audio worksheet, use calculate with first operand {a}, second operand {b}, operation {op}."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "arithmetic",
+      "kind": "arithmetic",
+      "family": "grounded-primary/test_bench",
+      "forms": [
+        "Bench instruction: start from {a}; {verb} {b}. Read the calculator result.",
+        "For this bench test, the ordered arithmetic inputs are {a} and {b}; select {op}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/field_probe",
+      "forms": [
+        "A field probe records {a} {src}. Use convert to express that reading in {dst}.",
+        "Translate the probe reading from {src} to {dst}; its numeric value is {a}. Use convert."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/material_tag",
+      "forms": [
+        "The material tag says {a} {src}. Replace the unit with {dst} through the converter.",
+        "For the material tag, convert value {a}, source unit {src}, destination {dst}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/timing_channel",
+      "forms": [
+        "Channel reading: {a} {src}. Request the equivalent in {dst} from convert.",
+        "The channel uses {src}; the output must use {dst}. Convert its reading {a}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/quantity_card",
+      "forms": [
+        "Quantity card: {a} {src}. Call the converter for {dst} and copy its reported value.",
+        "Rewrite the quantity card in {dst} by converting {a} {src}."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/lab_label",
+      "forms": [
+        "This lab label uses {src} for the reading {a}. Ask convert for the reading in {dst}.",
+        "A lab label must change units, from {src} into {dst}, for the measurement {a}. Use the tool."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "conversion",
+      "kind": "conversion",
+      "family": "grounded-primary/instrument_scale",
+      "forms": [
+        "Instrument input: {a} {src}; desired scale: {dst}. Retrieve the converted measurement.",
+        "Use the conversion adapter to re-express an instrument value of {a} {src} as {dst}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "chains",
+      "kind": "chain_calc",
+      "family": "grounded-primary/staged_register",
+      "forms": [
+        "Register pipeline: first {op} {a} and {b}; then apply {op2} with {c} to that returned value. Execute both calls.",
+        "Run two calculator steps: ({a}) {symbol} ({b}), then the observed result {symbol2} {c}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "chains",
+      "kind": "chain_calc",
+      "family": "grounded-primary/paired_module",
+      "forms": [
+        "Module one applies {op} to {a} and {b}. Module two applies {op2} to its output and {c}. Call both.",
+        "Execute the first calculation {a} {symbol} {b}. Feed its actual output into a second calculation with {op2} and {c}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "chains",
+      "kind": "chain_convert",
+      "family": "grounded-primary/scaled_reading",
+      "forms": [
+        "Convert {a} {src} to {dst}; then apply {op2} with {c} to the returned number. Use both tools.",
+        "First use convert on {a} {src} into {dst}. Next calculate its reported value {symbol2} {c}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "chains",
+      "kind": "chain_convert",
+      "family": "grounded-primary/unit_pipeline",
+      "forms": [
+        "Two stages: change {a} from {src} into {dst}, then apply {op2} with {c} to that observation.",
+        "Run the conversion ({a} {src} to {dst}), followed by a calculator {op2} with second operand {c}."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "chains",
+      "kind": "chain_calc",
+      "family": "grounded-primary/mixing_stage",
+      "forms": [
+        "The mixing routine first calculates {a} {symbol} {b}, then takes that returned value {symbol2} {c}. Execute both stages.",
+        "Use calculate twice for the mixing routine: {op} on {a} and {b}, followed by {op2} on its output and {c}."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "chains",
+      "kind": "chain_convert",
+      "family": "grounded-primary/measurement_stage",
+      "forms": [
+        "For the measurement routine, obtain {a} {src} in {dst}, then apply {op2} with {c} to the returned number.",
+        "Finish both measurement stages: convert {a} {src} to {dst}, and calculate that observation {symbol2} {c}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/recorded_channel",
+      "forms": [
+        "This is a recorded-channel test. Call calculate for {a} {symbol} {b}; report exactly what the channel returns.",
+        "Query the recorded channel with operation {op}, first value {a}, second value {b}. Read its response."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/replay_probe",
+      "forms": [
+        "Replay probe: submit {a} {symbol} {b} to calculate. Its observed response is authoritative.",
+        "For this replay probe, request calculate({op}, {a}, {b}) and quote the observed number."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/captured_reading",
+      "forms": [
+        "Retrieve the captured reading with a calculator call for {a} {symbol} {b}; use the returned record.",
+        "Captured-reading query: calculate {op} with {a} then {b}. Do not replace the observation with mental arithmetic."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/bound_fixture",
+      "forms": [
+        "For a fixture replay, call calculate on {a} {symbol} {b} and copy the observed result.",
+        "Use the bound fixture: operands {a}, {b}; operation {op}. Give its returned number."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/response_archive",
+      "forms": [
+        "Consult the response archive through calculate, requesting {a} {symbol} {b}. Report its stored return value.",
+        "Archive lookup via calculate: {op}, first operand {a}, second operand {b}. Use the returned record."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "observations",
+      "kind": "observation",
+      "family": "grounded-primary/simulated_channel",
+      "forms": [
+        "The simulated channel may return a test value. Request {a} {symbol} {b} and state the actual response.",
+        "Query the simulated channel using calculate with {a}, {b}, and {op}; read back the observation."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "state",
+      "kind": "correction",
+      "family": "grounded-primary/revise_operand",
+      "forms": [
+        "Calculate {a} {symbol} {b} for the revised-operand record.",
+        "Use {op} with first value {a} and second value {b}; record the tool result."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "state",
+      "kind": "correction",
+      "family": "grounded-primary/retained_field",
+      "forms": [
+        "Retained-field test: first={a}, second={b}, operation={op}. Execute it.",
+        "Record the calculator response to {a} {symbol} {b}; the operands may be corrected next."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "state",
+      "kind": "retry",
+      "family": "grounded-primary/retry_entry",
+      "forms": [
+        "Submit {a} {symbol} {b} to the retry-test fixture. Describe its response.",
+        "Run the retry-test request: operation {op}, a={a}, b={b}."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "state",
+      "kind": "retry",
+      "family": "grounded-primary/retry_station",
+      "forms": [
+        "At the retry station, call calculate for {a} {symbol} {b}.",
+        "The retry station expects calculate with {op} and ordered inputs {a}, {b}."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "state",
+      "kind": "correction",
+      "family": "grounded-primary/amended_operand",
+      "forms": [
+        "Amendment register: apply {op} to {a}, then {b}, and give the calculator result.",
+        "Before the amendment, compute {a} {symbol} {b} with calculate."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "state",
+      "kind": "retry",
+      "family": "grounded-primary/recover_request",
+      "forms": [
+        "Recovery rehearsal: issue calculate with {op}, {a}, {b}, and report what arrives.",
+        "Request {a} {symbol} {b} from the recovery fixture, keeping the requested call for possible retry."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "clarify",
+      "family": "grounded-primary/missing_rhs",
+      "forms": [
+        "I have the first operand {a} for {op}, but not the second. Ask for the missing operand.",
+        "Prepare to calculate {a} {symbol} an unspecified value. Which operand do you need?"
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "clarify_unit",
+      "family": "grounded-primary/missing_unit",
+      "forms": [
+        "A sample is {a} {src}; I omitted the destination unit. Ask me for it.",
+        "I need a conversion of {a} {src}, but have not chosen the output unit. What is missing?"
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "denied",
+      "family": "grounded-primary/permission_off",
+      "forms": [
+        "Calculate {a} {symbol} {b}, but tool execution is disabled. Explain the limitation without computing.",
+        "Tool calls are disabled for this turn. Can you execute {a} {symbol} {b}? State the restriction."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "zero",
+      "family": "grounded-primary/zero_rhs",
+      "forms": [
+        "Call calculate to divide {a} by zero and report the actual error.",
+        "Test division-by-zero handling: submit numerator {a}, denominator 0."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "expression",
+      "family": "grounded-primary/literal_expression",
+      "forms": [
+        "No execution: copy the expression ({a}) {symbol} ({b}) exactly.",
+        "Write only ({a}) {symbol} ({b}); do not calculate it or use tools."
+      ]
+    },
+    {
+      "split": "train",
+      "group": "nocall_error",
+      "kind": "operation",
+      "family": "grounded-primary/identify_operation",
+      "forms": [
+        "No tool calls. Which operation is denoted by {symbol} in ({a}) {symbol} ({b})?",
+        "Name the arithmetic operation represented by the symbol {symbol}. Do not execute it."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "clarify",
+      "family": "grounded-primary/incomplete_request",
+      "forms": [
+        "For the unfinished calculation, operand one is {a} and the operator is {symbol}; operand two is absent. Ask for it.",
+        "Which missing number must I supply to finish {a} {symbol} __? Do not call a tool yet."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "clarify_unit",
+      "family": "grounded-primary/absent_scale",
+      "forms": [
+        "I supplied {a} {src} for conversion but left its destination blank. Ask the necessary unit question.",
+        "The conversion source is {a} {src}. Request the destination unit before executing."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "denied",
+      "family": "grounded-primary/blocked_execution",
+      "forms": [
+        "Execution permission is off. Respond to a request for {a} {symbol} {b} without using a tool or inventing an answer.",
+        "This turn prohibits adapters. Explain why you cannot execute {a} {symbol} {b} now."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "zero",
+      "family": "grounded-primary/undefined_quotient",
+      "forms": [
+        "Obtain the adapter response for {a} divided by0, without hiding an error.",
+        "Ask the calculator for quotient {a}/0 and report its returned failure."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "expression",
+      "family": "grounded-primary/symbol_copy",
+      "forms": [
+        "Preserve this unevaluated expression in your reply: ({a}) {symbol} ({b}). No adapters.",
+        "Return just the written arithmetic ({a}) {symbol} ({b}), without evaluation."
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "group": "nocall_error",
+      "kind": "operation",
+      "family": "grounded-primary/operator_label",
+      "forms": [
+        "Label the operator {symbol} by its arithmetic name; no tool call.",
+        "In the symbolic calculation ({a}) {symbol} ({b}), name the operator rather than evaluating."
+      ]
+    }
+  ],
+  "session": [
+    {
+      "split": "train",
+      "family": "grounded-session/differential_path",
+      "kind": "calculate",
+      "index": 0,
+      "forms": [
+        "differential path stage: calculate {a} {symbol} {b}, then that result {symbol2} {c}.",
+        "differential path: first evaluate {a} {symbol} {b}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "add",
+        "multiply",
+        "subtract",
+        "divide"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/transfer_path",
+      "kind": "calculate",
+      "index": 1,
+      "forms": [
+        "transfer path stage: calculate {a} {symbol} {b}, then that result {symbol2} {c}.",
+        "transfer path: first evaluate {a} {symbol} {b}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "subtract",
+        "divide",
+        "add",
+        "multiply"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/amplitude_path",
+      "kind": "calculate",
+      "index": 2,
+      "forms": [
+        "amplitude path stage: calculate {a} {symbol} {b}, then that result {symbol2} {c}.",
+        "amplitude path: first evaluate {a} {symbol} {b}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "multiply",
+        "add",
+        "divide",
+        "subtract"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/baseline_path",
+      "kind": "calculate",
+      "index": 3,
+      "forms": [
+        "baseline path stage: calculate {a} {symbol} {b}, then that result {symbol2} {c}.",
+        "baseline path: first evaluate {a} {symbol} {b}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "divide",
+        "subtract",
+        "multiply",
+        "add"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/meter_path",
+      "kind": "convert",
+      "index": 4,
+      "forms": [
+        "meter path stage: convert {a} {src} to {dst}, then calculate its result {symbol2} {c}.",
+        "meter path: first obtain the conversion of {a} {src} to {dst}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "convert",
+        "multiply",
+        "subtract",
+        "divide"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/volume_path",
+      "kind": "convert",
+      "index": 5,
+      "forms": [
+        "volume path stage: convert {a} {src} to {dst}, then calculate its result {symbol2} {c}.",
+        "volume path: first obtain the conversion of {a} {src} to {dst}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "convert",
+        "divide",
+        "add",
+        "multiply"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/mass_path",
+      "kind": "convert",
+      "index": 6,
+      "forms": [
+        "mass path stage: convert {a} {src} to {dst}, then calculate its result {symbol2} {c}.",
+        "mass path: first obtain the conversion of {a} {src} to {dst}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "convert",
+        "add",
+        "multiply",
+        "subtract"
+      ]
+    },
+    {
+      "split": "train",
+      "family": "grounded-session/duration_path",
+      "kind": "convert",
+      "index": 7,
+      "forms": [
+        "duration path stage: convert {a} {src} to {dst}, then calculate its result {symbol2} {c}.",
+        "duration path: first obtain the conversion of {a} {src} to {dst}. Next evaluate returned value {symbol2} {c}."
+      ],
+      "operations": [
+        "convert",
+        "subtract",
+        "divide",
+        "add"
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "family": "grounded-session/actuator_path",
+      "kind": "calculate",
+      "index": 0,
+      "forms": [
+        "Begin actuator path routine with {a} {symbol} {b}; apply {op2} with {c} to its returned value.",
+        "For the opening pair of steps, evaluate {a} {symbol} {b} and then apply {op2} to that return with second operand {c}."
+      ],
+      "operations": [
+        "add",
+        "divide",
+        "multiply",
+        "subtract"
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "family": "grounded-session/flux_path",
+      "kind": "calculate",
+      "index": 1,
+      "forms": [
+        "Begin flux path routine with {a} {symbol} {b}; apply {op2} with {c} to its returned value.",
+        "For the opening pair of steps, evaluate {a} {symbol} {b} and then apply {op2} to that return with second operand {c}."
+      ],
+      "operations": [
+        "multiply",
+        "subtract",
+        "add",
+        "divide"
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "family": "grounded-session/range_path",
+      "kind": "convert",
+      "index": 2,
+      "forms": [
+        "Begin by converting {a} {src} into {dst}; apply {op2} with {c} to its returned value.",
+        "For the opening pair of steps, convert {a} {src} into {dst} and then apply {op2} to that return with second operand {c}."
+      ],
+      "operations": [
+        "convert",
+        "divide",
+        "multiply",
+        "add"
+      ]
+    },
+    {
+      "split": "exposed-development",
+      "family": "grounded-session/capacity_path",
+      "kind": "convert",
+      "index": 3,
+      "forms": [
+        "Begin by converting {a} {src} into {dst}; apply {op2} with {c} to its returned value.",
+        "For the opening pair of steps, convert {a} {src} into {dst} and then apply {op2} to that return with second operand {c}."
+      ],
+      "operations": [
+        "convert",
+        "multiply",
+        "add",
+        "subtract"
+      ]
+    }
+  ],
+  "common_templates": {
+    "followup_observation": [
+      "Without another call, repeat the recorded number.",
+      "Use the existing record only: which number was returned?"
+    ],
+    "correction": [
+      "Replace the first operand with {d}; keep the second operand {b} and operation {op}. Execute the corrected call.",
+      "Change only the first input to {d}; retain {b} as the second input and {op} as the operation. Recalculate."
+    ],
+    "retry": [
+      "Retry precisely the same requested call once.",
+      "Repeat the original proposal with unchanged arguments."
+    ],
+    "session_second": [
+      "Stage B: calculate the previous result {symbol3} {d}, then that result {symbol4} {b}.",
+      "Continue from the last observation: {op3} with {d}, followed by {op4} with {b}."
+    ],
+    "session_final": {
+      "recall": "No more calls. State my initial first value and the final observation.",
+      "recap": "No more calls. List the four returned numbers in order.",
+      "correction": "For my notes, the original first value is now {e}. Do not recalculate; state the correction and the unchanged final record."
+    }
+  },
+  "note": "All authoring precedes first instance generation. Alternate forms and contrast variants remain in the same construction family."
+}

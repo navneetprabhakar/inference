@@ -18,7 +18,7 @@ from types import SimpleNamespace
 from language_overlap_index import TextOverlapIndex
 from own_base_dev_eval import resolve
 from own_base_dev_run import read_inputs
-from protect_language_mixture import augment
+from protect_language_mixture import augment, candidate_history
 from protect_split import signature
 from tools import FixtureSession
 
@@ -48,8 +48,6 @@ def public_index(corpora, check=lambda: None):
             for turn in case['turns']:
                 counts['turns'] += 1
                 augment(shield, [turn['user']])
-                if turn['answer']['mode'] == 'exact':
-                    augment(shield, [turn['answer']['value']])
                 session.start_turn(**turn.get('policy', {'permit_calls': True}))
                 observations.append([])
                 proposals.append([])
@@ -65,6 +63,11 @@ def public_index(corpora, check=lambda: None):
                     observed = session.propose(json.dumps(call), assistant_call_boundary=True)
                     observations[-1].append(observed)
                     counts['expected_call_occurrences'] += 1
+                if turn['answer']['mode'] == 'exact':
+                    target = resolve(turn['answer']['value'], observations, proposals)
+                    if not isinstance(target, str):
+                        raise ValueError('exact public target must resolve to text')
+                    augment(shield, [target])
     counts['unique_call_signatures'] = len(shield.calls)
     return TextOverlapIndex([shield]), shield.calls, dict(counts)
 
@@ -83,8 +86,11 @@ def structured_calls(value):
 
 def candidate_content(row, kind):
     if kind == 'chat':
+        if not isinstance(row['text'], str) or len(row['text'].encode()) > 1024**2:
+            raise ValueError('candidate text bound')
         history = json.loads(row['selected_history_json'])
         texts = [row['text'], row['selected_history_json']]
+        texts.extend(m['text'] for m in candidate_history(row['text']))
     else:
         original = json.loads(row['original_lesson_json'])
         history = original['history']
@@ -171,7 +177,7 @@ def screen(directory, kind):
                        code_sha256=code_pins,
                        seconds=time.monotonic()-started,
                        method='All exposed user text/exact textual targets and resolved expected call signatures; no student generation or scoring.',
-                       limitations='Approximate lexical/structural exclusion, not semantic-independence proof. Final admission must also apply unchanged historical/private custody and independent semantic verification.')
+                       limitations='Approximate lexical/structural exclusion, not semantic-independence proof. Lexical indexing omits targets shorter than three normalized words; generic short answers are not a semantic contamination test. Final admission must also apply unchanged historical/private custody and independent semantic verification.')
         with out.open('x') as stream:
             json.dump(receipt, stream, indent=2)
             stream.write('\n')

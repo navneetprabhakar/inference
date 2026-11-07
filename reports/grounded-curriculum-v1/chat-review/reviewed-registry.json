@@ -1,0 +1,3523 @@
+{
+  "state": "reviewed_finite_surfaces_not_candidate_verification",
+  "surfaces": [
+    {
+      "id": "fulfillment/service-notice",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write a brief notice using only these details: the {place} pottery kiln is unavailable for maintenance; finished pieces can still be collected from {person}.",
+          "assistant": "The {place} pottery kiln is unavailable for maintenance. Finished pieces can still be collected from {person}."
+        },
+        {
+          "user": "Make the collection option the first sentence.",
+          "assistant": "Finished pieces can still be collected from {person}. The {place} pottery kiln is unavailable for maintenance."
+        }
+      ],
+      "state_kind": "notice_reorder",
+      "requirements": [
+        "kiln unavailable",
+        "collection available",
+        "recipient retained",
+        "reorder"
+      ],
+      "canonical_family": "fulfillment/service-notice",
+      "first_user_forms": [
+        "Write a brief notice using only these details: the {place} pottery kiln is unavailable for maintenance; finished pieces can still be collected from {person}.",
+        "Please turn these facts into a short notice: maintenance has made the pottery kiln at {place} unavailable. Collection of finished pieces from {person} is still possible. Include no other details."
+      ]
+    },
+    {
+      "id": "fulfillment/volunteer-invitation",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Draft a friendly invitation for a volunteer to help sort donated fabric at {place}. Tell them to ask {person} about joining. Do not add a schedule.",
+          "assistant": "Would you like to help sort donated fabric at {place}? Please ask {person} about joining."
+        },
+        {
+          "user": "Make it sound more formal without adding details.",
+          "assistant": "You are invited to help sort donated fabric at {place}. Please contact {person} if you would like to join."
+        }
+      ],
+      "state_kind": "invitation_style",
+      "requirements": [
+        "fabric sorting",
+        "place/person retained",
+        "no schedule"
+      ],
+      "canonical_family": "fulfillment/volunteer-invitation",
+      "first_user_forms": [
+        "Draft a friendly invitation for a volunteer to help sort donated fabric at {place}. Tell them to ask {person} about joining. Do not add a schedule.",
+        "Could you invite someone, in a friendly way, to volunteer sorting donated fabric at {place}? Direct anyone interested to {person}; leave out dates and times."
+      ]
+    },
+    {
+      "id": "fulfillment/equipment-reminder",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write a short reminder: {person} needs to return the borrowed compass to {place}. The case should be included.",
+          "assistant": "{person}, please return the borrowed compass and its case to {place}."
+        },
+        {
+          "user": "Mention the case before the compass.",
+          "assistant": "{person}, please return the case together with the borrowed compass to {place}."
+        }
+      ],
+      "state_kind": "reminder_reorder",
+      "requirements": [
+        "return compass and case",
+        "place/person retained"
+      ],
+      "canonical_family": "fulfillment/equipment-reminder",
+      "first_user_forms": [
+        "Write a short reminder: {person} needs to return the borrowed compass to {place}. The case should be included.",
+        "Please remind {person} briefly that the borrowed compass must be returned to {place}, together with its case."
+      ]
+    },
+    {
+      "id": "fulfillment/safe-order",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Give brief setup instructions using these facts: fasten the empty stand before placing the sign on it; {person} has the fasteners.",
+          "assistant": "Ask {person} for the fasteners and secure the empty stand. Then place the sign on it."
+        },
+        {
+          "user": "Why does the sign come last? Use only the supplied facts.",
+          "assistant": "The stand must be fastened while empty, before the sign is placed on it."
+        }
+      ],
+      "state_kind": "ordered_instructions",
+      "requirements": [
+        "stand before sign",
+        "fasteners holder",
+        "grounded explanation"
+      ],
+      "canonical_family": "fulfillment/safe-order",
+      "first_user_forms": [
+        "Give brief setup instructions using these facts: fasten the empty stand before placing the sign on it; {person} has the fasteners.",
+        "Write short instructions for setting up the sign. The stand must be fastened while it is empty, and only then may the sign be placed on it. The fasteners are with {person}."
+      ]
+    },
+    {
+      "id": "fulfillment/availability-update",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write a status update from these facts: {item} is ready for inspection at {place}; {thing} still needs assembly.",
+          "assistant": "{item} is ready for inspection at {place}. {thing} still needs assembly."
+        },
+        {
+          "user": "Make clear which item is not ready yet.",
+          "assistant": "{thing} is not ready yet because it still needs assembly. {item} is ready for inspection at {place}."
+        }
+      ],
+      "state_kind": "status_contrast",
+      "requirements": [
+        "ready/nonready distinction",
+        "no fabricated completion"
+      ],
+      "canonical_family": "fulfillment/availability-update",
+      "first_user_forms": [
+        "Write a status update from these facts: {item} is ready for inspection at {place}; {thing} still needs assembly.",
+        "Give a concise status report: inspection can begin for {item} at {place}, whereas assembly is still needed for {thing}."
+      ]
+    },
+    {
+      "id": "fulfillment/polite-decline",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Help {person} decline a request to lend {item}: it is already reserved for a demonstration. Keep the message courteous and brief.",
+          "assistant": "Sorry, I cannot lend {item} because it is already reserved for a demonstration."
+        },
+        {
+          "user": "Give the same explanation without an apology.",
+          "assistant": "I cannot lend {item} because it is already reserved for a demonstration. Thank you for understanding."
+        }
+      ],
+      "state_kind": "decline_style",
+      "requirements": [
+        "decline",
+        "reservation reason",
+        "style change"
+      ],
+      "canonical_family": "reason_preserving_apology_removal",
+      "first_user_forms": [
+        "Help {person} decline a request to lend {item}: it is already reserved for a demonstration. Keep the message courteous and brief."
+      ]
+    },
+    {
+      "id": "fulfillment/grounded-explanation",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Explain simply using only this information: {item} has a padded sleeve; the sleeve keeps it from rubbing against {thing} during transport.",
+          "assistant": "The padded sleeve stops {item} from rubbing against {thing} while they are transported."
+        },
+        {
+          "user": "Is the sleeve intended to separate the objects or count them? Explain.",
+          "assistant": "It is intended to separate them: the supplied information says it prevents rubbing during transport."
+        }
+      ],
+      "state_kind": "mechanism_explanation",
+      "requirements": [
+        "prevent rubbing",
+        "no invented capability"
+      ],
+      "canonical_family": "fulfillment/grounded-explanation",
+      "first_user_forms": [
+        "Explain simply using only this information: {item} has a padded sleeve; the sleeve keeps it from rubbing against {thing} during transport.",
+        "Using only the following facts, give an easy explanation of the sleeve: it is padded and prevents {item} from rubbing against {thing} in transport."
+      ]
+    },
+    {
+      "id": "fulfillment/two-stage-plan",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Give a short plan for preparing {item}. The supplied steps are to inspect its seams, then put it in a clean sleeve. Do not add other tasks.",
+          "assistant": "Inspect the seams of {item}. Then put it in a clean sleeve."
+        },
+        {
+          "user": "Which task should happen before packing?",
+          "assistant": "The seams should be inspected before {item} is put in the sleeve."
+        }
+      ],
+      "state_kind": "plan_sequence",
+      "requirements": [
+        "inspection before packing",
+        "only supplied tasks"
+      ],
+      "canonical_family": "fulfillment/two-stage-plan",
+      "first_user_forms": [
+        "Give a short plan for preparing {item}. The supplied steps are to inspect its seams, then put it in a clean sleeve. Do not add other tasks.",
+        "I need a brief preparation plan for {item}. Include exactly these tasks in this order: inspect the seams and put it in a clean sleeve."
+      ]
+    },
+    {
+      "id": "fulfillment/grounded-apology",
+      "group": "fulfillment",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Draft a brief apology to {person}. The repair of {item} is delayed because a replacement part has not arrived. No revised completion estimate is available.",
+          "assistant": "Sorry, the repair of {item} is delayed because the replacement part has not arrived. I do not have a revised completion estimate."
+        },
+        {
+          "user": "Remove the apology while keeping the facts.",
+          "assistant": "The repair of {item} is delayed because the replacement part has not arrived. No revised completion estimate is available."
+        }
+      ],
+      "state_kind": "apology_facts",
+      "requirements": [
+        "delay reason",
+        "no invented estimate"
+      ],
+      "canonical_family": "reason_preserving_apology_removal",
+      "first_user_forms": [
+        "Draft a brief apology to {person}. The repair of {item} is delayed because a replacement part has not arrived. No revised completion estimate is available."
+      ]
+    },
+    {
+      "id": "fulfillment/question-draft",
+      "group": "fulfillment",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "Help me ask {person} whether {place} accepts donated musical instruments. I do not know the policy. Write the question itself.",
+          "assistant": "Hello {person}, does {place} accept donated musical instruments?"
+        },
+        {
+          "user": "Add a question about which instruments are accepted, without assuming any are.",
+          "assistant": "Hello {person}, does {place} accept donated musical instruments? If so, which kinds are accepted?"
+        }
+      ],
+      "state_kind": "conditional_inquiry",
+      "requirements": [
+        "actual inquiry",
+        "no policy assumption"
+      ],
+      "canonical_family": "fulfillment/question-draft",
+      "first_user_forms": [
+        "Help me ask {person} whether {place} accepts donated musical instruments. I do not know the policy. Write the question itself.",
+        "Write the actual question I could send to {person} to find out if donated musical instruments are accepted by {place}. Their policy is unknown to me."
+      ]
+    },
+    {
+      "id": "fulfillment/thank-you",
+      "group": "fulfillment",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "Write a short thank-you to {person} for repairing the latch on {item}. Do not add anything they did not do.",
+          "assistant": "Thank you, {person}, for repairing the latch on {item}."
+        },
+        {
+          "user": "Make it warmer but keep the same factual claim.",
+          "assistant": "Thank you so much, {person}. I appreciate your work repairing the latch on {item}."
+        }
+      ],
+      "state_kind": "gratitude_style",
+      "requirements": [
+        "specified repair only",
+        "no invented facts"
+      ],
+      "canonical_family": "fulfillment/thank-you",
+      "first_user_forms": [
+        "Write a short thank-you to {person} for repairing the latch on {item}. Do not add anything they did not do.",
+        "Please thank {person} briefly for the latch repair on {item}. That repair is the only work you should mention."
+      ]
+    },
+    {
+      "id": "facts/storage",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The catalog says {item} is stored at {place}, while {thing} is at {alternate}. Where should someone look for {item}?",
+          "assistant": "They should look for {item} at {place}."
+        },
+        {
+          "user": "Where is the other catalog item stored?",
+          "assistant": "{thing}, the other catalog item, is stored at {alternate}."
+        }
+      ],
+      "state_kind": "two_locations",
+      "requirements": [
+        "correct item/location bindings"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "The catalog says {item} is stored at {place}, while {thing} is at {alternate}. Where should someone look for {item}?"
+      ]
+    },
+    {
+      "id": "facts/responsibilities",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "{person} handles arrivals at {place}; {other} handles departures at {place}. Who handles departures?",
+          "assistant": "{other} handles departures at {place}."
+        },
+        {
+          "user": "What responsibility belongs to {person}?",
+          "assistant": "{person} is responsible for arrivals at {place}."
+        }
+      ],
+      "state_kind": "two_roles",
+      "requirements": [
+        "correct person/role bindings"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "{person} handles arrivals at {place}; {other} handles departures at {place}. Who handles departures?"
+      ]
+    },
+    {
+      "id": "facts/material-record",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "According to the specification, {item} uses cotton padding and {thing} uses felt padding. What padding is specified for {thing}?",
+          "assistant": "The specified padding for {thing} is felt."
+        },
+        {
+          "user": "Is cotton the padding for both items?",
+          "assistant": "No. {item} uses cotton padding, while {thing} uses felt padding."
+        }
+      ],
+      "state_kind": "two_materials",
+      "requirements": [
+        "cotton/felt distinction",
+        "negative contrast"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "According to the specification, {item} uses cotton padding and {thing} uses felt padding. What padding is specified for {thing}?"
+      ]
+    },
+    {
+      "id": "facts/permission-record",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The posted rule allows {person} to inspect {item}, but only {other} may remove it from {place}. Who may remove it?",
+          "assistant": "Only {other} may remove {item} from {place}."
+        },
+        {
+          "user": "Does permission to inspect imply permission to remove it here?",
+          "assistant": "No. {person} may inspect it, but the stated removal permission belongs only to {other}."
+        }
+      ],
+      "state_kind": "role_permissions",
+      "requirements": [
+        "inspect/remove distinction"
+      ],
+      "canonical_family": "exclusive_role_distinction",
+      "first_user_forms": [
+        "The posted rule allows {person} to inspect {item}, but only {other} may remove it from {place}. Who may remove it?"
+      ]
+    },
+    {
+      "id": "facts/route-order",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The recorded route goes from {place} to {alternate}, then to {third}. Which stop comes immediately after {place}?",
+          "assistant": "The next stop after {place} is {alternate}."
+        },
+        {
+          "user": "Which location ends the recorded route?",
+          "assistant": "The recorded route ends at {third}."
+        }
+      ],
+      "state_kind": "ordered_locations",
+      "requirements": [
+        "sequence recall"
+      ],
+      "canonical_family": "facts/route-order",
+      "first_user_forms": [
+        "The recorded route goes from {place} to {alternate}, then to {third}. Which stop comes immediately after {place}?",
+        "A route record lists these stops in order: {place}, {alternate}, {third}. After leaving {place}, which stop is next?"
+      ]
+    },
+    {
+      "id": "facts/membership",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The complete stitching team roster consists only of {person} and {other}. {thirdperson} belongs to the transport team. Is {thirdperson} on the stitching roster?",
+          "assistant": "No. {thirdperson} belongs to the transport team, not the stitching team."
+        },
+        {
+          "user": "Name the people assigned to stitching.",
+          "assistant": "The stitching team includes {person} and {other}."
+        }
+      ],
+      "state_kind": "membership",
+      "requirements": [
+        "team membership",
+        "negative membership"
+      ],
+      "canonical_family": "facts/membership",
+      "first_user_forms": [
+        "The complete stitching team roster consists only of {person} and {other}. {thirdperson} belongs to the transport team. Is {thirdperson} on the stitching roster?",
+        "Only {person} and {other} are listed on the complete stitching team roster. The transport team includes {thirdperson}. Does the stitching roster contain {thirdperson}?"
+      ]
+    },
+    {
+      "id": "facts/exception",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Every crate in this note needs a seal except {item}. The crate called {thing} is also listed. Which of those two is exempt?",
+          "assistant": "{item} is exempt from the seal requirement."
+        },
+        {
+          "user": "Does {thing} still need a seal?",
+          "assistant": "Yes. {thing} still needs a seal; only {item} was exempted."
+        }
+      ],
+      "state_kind": "exception",
+      "requirements": [
+        "exception applied",
+        "default retained"
+      ],
+      "canonical_family": "facts/exception",
+      "first_user_forms": [
+        "Every crate in this note needs a seal except {item}. The crate called {thing} is also listed. Which of those two is exempt?",
+        "This note lists two crates, {item} and {thing}. All crates in the note require a seal with the sole exception of {item}. Which of these two does not require one?"
+      ]
+    },
+    {
+      "id": "facts/capacity-record",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The manifest lists capacity {n} for {item} and capacity {m} for {thing}. This is a lookup task, not arithmetic. State the capacity listed for {item}.",
+          "assistant": "The listed capacity for {item} is {n}."
+        },
+        {
+          "user": "Which item has the other listed capacity?",
+          "assistant": "{thing} has the other listed capacity, {m}."
+        }
+      ],
+      "state_kind": "numeric_lookup",
+      "requirements": [
+        "supplied numeric values copied",
+        "no arithmetic"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "The manifest lists capacity {n} for {item} and capacity {m} for {thing}. This is a lookup task, not arithmetic. State the capacity listed for {item}."
+      ]
+    },
+    {
+      "id": "facts/ownership",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "A signed note identifies {person} as the owner of {item}. {other} is only its temporary custodian. Who owns it?",
+          "assistant": "{person} owns {item}; {other} is its temporary custodian."
+        },
+        {
+          "user": "Does custody transfer ownership according to this note?",
+          "assistant": "No. The note distinguishes temporary custody from ownership and names {person} as the owner."
+        }
+      ],
+      "state_kind": "ownership_vs_custody",
+      "requirements": [
+        "ownership distinction"
+      ],
+      "canonical_family": "exclusive_role_distinction",
+      "first_user_forms": [
+        "A signed note identifies {person} as the owner of {item}. {other} is only its temporary custodian. Who owns it?"
+      ]
+    },
+    {
+      "id": "facts/access-condition",
+      "group": "facts",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Entry to {place} requires a badge. Entry to {alternate} requires a reservation. Which location requires a reservation?",
+          "assistant": "{alternate} requires a reservation for entry."
+        },
+        {
+          "user": "What is required at the other location?",
+          "assistant": "A badge is required for entry to {place}."
+        }
+      ],
+      "state_kind": "two_conditions",
+      "requirements": [
+        "condition/location bindings"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "Entry to {place} requires a badge. Entry to {alternate} requires a reservation. Which location requires a reservation?"
+      ]
+    },
+    {
+      "id": "facts/source-conflict",
+      "group": "facts",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "The first log says {item} went to {place}; the amended log says it went to {alternate}. Use the amended log. Where did it go?",
+          "assistant": "According to the amended log, {item} went to {alternate}."
+        },
+        {
+          "user": "Which destination belonged to the superseded log?",
+          "assistant": "The superseded first log listed {place} as the destination."
+        }
+      ],
+      "state_kind": "source_precedence",
+      "requirements": [
+        "amended source precedence",
+        "old source distinguished"
+      ],
+      "canonical_family": "facts/source-conflict",
+      "first_user_forms": [
+        "The first log says {item} went to {place}; the amended log says it went to {alternate}. Use the amended log. Where did it go?",
+        "For {item}, a first log gives {place} as the destination and an amended log gives {alternate}. Treat the amended entry as authoritative. What destination applies?"
+      ]
+    },
+    {
+      "id": "corrections/destination-change",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Record this dispatch fact: {item} is destined for {place}. Acknowledge it briefly.",
+          "assistant": "Noted: {item} is destined for {place}."
+        },
+        {
+          "user": "Replace that destination with {alternate}. State the current destination only in a short sentence.",
+          "assistant": "The current destination for {item} is {alternate}."
+        }
+      ],
+      "state_kind": "replace_destination",
+      "requirements": [
+        "overwrite destination"
+      ],
+      "canonical_family": "overwrite_single_binding",
+      "first_user_forms": [
+        "Record this dispatch fact: {item} is destined for {place}. Acknowledge it briefly."
+      ]
+    },
+    {
+      "id": "corrections/custodian-change",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The current custodian of {item} is {person}. Who is responsible for it?",
+          "assistant": "{person} is currently responsible for {item}."
+        },
+        {
+          "user": "The responsibility has moved to {other}. Who is responsible now?",
+          "assistant": "{other} is now responsible for {item}."
+        }
+      ],
+      "state_kind": "replace_person",
+      "requirements": [
+        "overwrite person"
+      ],
+      "canonical_family": "overwrite_single_binding",
+      "first_user_forms": [
+        "The current custodian of {item} is {person}. Who is responsible for it?"
+      ]
+    },
+    {
+      "id": "corrections/quantity-amendment",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The recorded identifier for {item} is {n}. Repeat the identifier with the item name.",
+          "assistant": "The recorded identifier for {item} is {n}."
+        },
+        {
+          "user": "That identifier was mistyped; replace it with {m}. What is the corrected identifier?",
+          "assistant": "The corrected identifier for {item} is {m}."
+        }
+      ],
+      "state_kind": "replace_identifier",
+      "requirements": [
+        "overwrite identifier",
+        "no calculation"
+      ],
+      "canonical_family": "overwrite_single_binding",
+      "first_user_forms": [
+        "The recorded identifier for {item} is {n}. Repeat the identifier with the item name."
+      ]
+    },
+    {
+      "id": "corrections/remove-member",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The approved participants are {person}, {other}, and {thirdperson}. Briefly list them.",
+          "assistant": "The approved participants are {person}, {other}, and {thirdperson}."
+        },
+        {
+          "user": "Remove {other} from the approved list. Who remains?",
+          "assistant": "{person} and {thirdperson} remain on the approved list."
+        }
+      ],
+      "state_kind": "remove_member",
+      "requirements": [
+        "remove one",
+        "retain other two"
+      ],
+      "canonical_family": "corrections/remove-member",
+      "first_user_forms": [
+        "The approved participants are {person}, {other}, and {thirdperson}. Briefly list them.",
+        "Please restate the approved participant list: {person}, {other}, {thirdperson}."
+      ]
+    },
+    {
+      "id": "corrections/add-member",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "{person} is assigned to inspect {item}. State that assignment.",
+          "assistant": "{person} is assigned to inspect {item}."
+        },
+        {
+          "user": "Add {other} as a second inspector without removing anyone. Who is assigned now?",
+          "assistant": "{person} and {other} are now assigned to inspect {item}."
+        }
+      ],
+      "state_kind": "add_member",
+      "requirements": [
+        "add without replacing"
+      ],
+      "canonical_family": "corrections/add-member",
+      "first_user_forms": [
+        "{person} is assigned to inspect {item}. State that assignment.",
+        "Please confirm the inspection assignment for {item}: {person} is the assigned inspector."
+      ]
+    },
+    {
+      "id": "corrections/permission-revoke",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The current rule permits {person} to move {item}. Summarize the permission.",
+          "assistant": "{person} is currently permitted to move {item}."
+        },
+        {
+          "user": "That permission is revoked. State the current rule.",
+          "assistant": "{person} is no longer permitted to move {item}."
+        }
+      ],
+      "state_kind": "revoke",
+      "requirements": [
+        "revoke permission"
+      ],
+      "canonical_family": "corrections/permission-revoke",
+      "first_user_forms": [
+        "The current rule permits {person} to move {item}. Summarize the permission.",
+        "Summarize the present permission concerning {item}: {person} is allowed to move it."
+      ]
+    },
+    {
+      "id": "corrections/rename-object",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The portable rack is called {item}. Use that name in a short acknowledgement.",
+          "assistant": "Noted: the portable rack is called {item}."
+        },
+        {
+          "user": "Rename the rack {thing}. What should it be called now?",
+          "assistant": "The rack should now be called {thing}."
+        }
+      ],
+      "state_kind": "rename",
+      "requirements": [
+        "new name supersedes old"
+      ],
+      "canonical_family": "overwrite_single_binding",
+      "first_user_forms": [
+        "The portable rack is called {item}. Use that name in a short acknowledgement."
+      ]
+    },
+    {
+      "id": "corrections/swap-roles",
+      "group": "corrections",
+      "split": "train",
+      "turns": [
+        {
+          "user": "{person} supervises packing and {other} supervises loading. Summarize these roles.",
+          "assistant": "{person} supervises packing, and {other} supervises loading."
+        },
+        {
+          "user": "Swap their responsibilities. Who now supervises packing?",
+          "assistant": "{other} now supervises packing, while {person} supervises loading."
+        }
+      ],
+      "state_kind": "swap_roles",
+      "requirements": [
+        "swap both bindings"
+      ],
+      "canonical_family": "corrections/swap-roles",
+      "first_user_forms": [
+        "{person} supervises packing and {other} supervises loading. Summarize these roles.",
+        "Please state both supervision assignments: packing belongs to {person}, loading belongs to {other}."
+      ]
+    },
+    {
+      "id": "corrections/retract-change",
+      "group": "corrections",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "The destination of {item} is {place}. A draft amendment would change it to {alternate}, but has not been approved. Which destination currently applies?",
+          "assistant": "{place} currently applies because the draft amendment has not been approved."
+        },
+        {
+          "user": "The draft amendment is cancelled. Confirm the applicable destination.",
+          "assistant": "The applicable destination remains {place}; the draft change was cancelled."
+        }
+      ],
+      "state_kind": "cancel_unapproved",
+      "requirements": [
+        "unapproved change not applied"
+      ],
+      "canonical_family": "corrections/retract-change",
+      "first_user_forms": [
+        "The destination of {item} is {place}. A draft amendment would change it to {alternate}, but has not been approved. Which destination currently applies?",
+        "{item} currently has destination {place}. An unapproved draft proposes {alternate} instead. Tell me the destination that is in force now."
+      ]
+    },
+    {
+      "id": "corrections/selective-update",
+      "group": "corrections",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "The note assigns {person} to {place} and {other} to {alternate}. Repeat both assignments.",
+          "assistant": "{person} is assigned to {place}, and {other} is assigned to {alternate}."
+        },
+        {
+          "user": "Move only {other} to {third}. State both current assignments.",
+          "assistant": "{person} remains assigned to {place}; {other} is now assigned to {third}."
+        }
+      ],
+      "state_kind": "selective_update",
+      "requirements": [
+        "one update",
+        "other preserved"
+      ],
+      "canonical_family": "corrections/selective-update",
+      "first_user_forms": [
+        "The note assigns {person} to {place} and {other} to {alternate}. Repeat both assignments.",
+        "Restate this pair of assignments from the note: {person} goes to {place}, while {other} goes to {alternate}."
+      ]
+    },
+    {
+      "id": "corrections/status-change",
+      "group": "corrections",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "{item} is awaiting inspection. Give a brief status statement.",
+          "assistant": "{item} is awaiting inspection."
+        },
+        {
+          "user": "Inspection is now complete, but packing has not started. State the updated status.",
+          "assistant": "Inspection of {item} is complete, and packing has not started."
+        }
+      ],
+      "state_kind": "partial_status_update",
+      "requirements": [
+        "completed vs unstarted distinction"
+      ],
+      "canonical_family": "corrections/status-change",
+      "first_user_forms": [
+        "{item} is awaiting inspection. Give a brief status statement.",
+        "Give the current status of {item} in one brief statement: it is waiting to be inspected."
+      ]
+    },
+    {
+      "id": "transformations/condense-notice",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Shorten this notice without losing facts: The inspection of {item} will take place at {place}. {person} will personally conduct this inspection.",
+          "assistant": "{person} will inspect {item} at {place}."
+        },
+        {
+          "user": "Make the object, rather than the person, the subject.",
+          "assistant": "{item} will be inspected by {person} at {place}."
+        }
+      ],
+      "state_kind": "compression_voice",
+      "requirements": [
+        "person/object/place retained"
+      ],
+      "canonical_family": "agent_action_voice",
+      "first_user_forms": [
+        "Shorten this notice without losing facts: The inspection of {item} will take place at {place}. {person} will personally conduct this inspection."
+      ]
+    },
+    {
+      "id": "transformations/polite-request",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Make this request courteous without changing it: Bring {item} to {place} and tell {person} when it arrives.",
+          "assistant": "Please bring {item} to {place} and let {person} know when it arrives."
+        },
+        {
+          "user": "Make it more direct while retaining both requested actions.",
+          "assistant": "Bring {item} to {place}, then notify {person} of its arrival."
+        }
+      ],
+      "state_kind": "request_tone",
+      "requirements": [
+        "two actions retained"
+      ],
+      "canonical_family": "transformations/polite-request",
+      "first_user_forms": [
+        "Make this request courteous without changing it: Bring {item} to {place} and tell {person} when it arrives.",
+        "Rephrase this instruction courteously, keeping both actions: take {item} to {place}, and notify {person} on its arrival."
+      ]
+    },
+    {
+      "id": "transformations/combine-facts",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Combine these facts into one sentence: {person} prepared {item}. {other} checked it.",
+          "assistant": "{person} prepared {item}, and {other} checked it."
+        },
+        {
+          "user": "Reverse the order of the clauses without changing who did what.",
+          "assistant": "{other} checked {item}, which {person} prepared."
+        }
+      ],
+      "state_kind": "combine_reorder",
+      "requirements": [
+        "agent/action bindings retained"
+      ],
+      "canonical_family": "transformations/combine-facts",
+      "first_user_forms": [
+        "Combine these facts into one sentence: {person} prepared {item}. {other} checked it.",
+        "Make one sentence from this information without changing the actors: preparation of {item} was done by {person}, and checking was done by {other}."
+      ]
+    },
+    {
+      "id": "transformations/active-voice",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Rewrite in active voice: {item} was repaired by {person} at {place}.",
+          "assistant": "{person} repaired {item} at {place}."
+        },
+        {
+          "user": "Now use passive voice again.",
+          "assistant": "{item} was repaired by {person} at {place}."
+        }
+      ],
+      "state_kind": "voice",
+      "requirements": [
+        "agent/object/place retained"
+      ],
+      "canonical_family": "agent_action_voice",
+      "first_user_forms": [
+        "Rewrite in active voice: {item} was repaired by {person} at {place}."
+      ]
+    },
+    {
+      "id": "transformations/separate-actions",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Turn this into two short sentences: {person} will collect {item} from {place} and {other} will inspect it.",
+          "assistant": "{person} will collect {item} from {place}. {other} will inspect it."
+        },
+        {
+          "user": "Join the sentences using a semicolon.",
+          "assistant": "{person} will collect {item} from {place}; {other} will inspect it."
+        }
+      ],
+      "state_kind": "sentence_boundary",
+      "requirements": [
+        "actions and actors retained"
+      ],
+      "canonical_family": "transformations/separate-actions",
+      "first_user_forms": [
+        "Turn this into two short sentences: {person} will collect {item} from {place} and {other} will inspect it.",
+        "Write two short sentences from these facts: {person} will collect {item} at {place}; inspection will be done by {other}."
+      ]
+    },
+    {
+      "id": "transformations/remove-duplication",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Remove the repeated fact: {item} is ready. {person} will collect it from {place}. {item} is ready.",
+          "assistant": "{item} is ready. {person} will collect it from {place}."
+        },
+        {
+          "user": "Keep the same facts in one sentence.",
+          "assistant": "{item} is ready for {person} to collect from {place}."
+        }
+      ],
+      "state_kind": "deduplicate",
+      "requirements": [
+        "single readiness claim",
+        "collection facts"
+      ],
+      "canonical_family": "transformations/remove-duplication",
+      "first_user_forms": [
+        "Remove the repeated fact: {item} is ready. {person} will collect it from {place}. {item} is ready.",
+        "Edit out the duplication in this update: {item} is ready; it is ready; {person} will collect it from {place}."
+      ]
+    },
+    {
+      "id": "transformations/plain-language",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Use simpler words without changing the meaning: {person} will transport {item} to {place} after authorization is received.",
+          "assistant": "{person} will take {item} to {place} after receiving permission."
+        },
+        {
+          "user": "Does that say permission has already been received?",
+          "assistant": "No. It says the move will happen after permission is received, not that permission has already arrived."
+        }
+      ],
+      "state_kind": "simplify_condition",
+      "requirements": [
+        "permission condition preserved"
+      ],
+      "canonical_family": "transformations/plain-language",
+      "first_user_forms": [
+        "Use simpler words without changing the meaning: {person} will transport {item} to {place} after authorization is received.",
+        "Put this in everyday language while preserving its condition: after permission is granted, {person} will transport {item} to {place}."
+      ]
+    },
+    {
+      "id": "transformations/positive-negative",
+      "group": "transformations",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Rewrite without the phrase not available: {item} is not available because it is being inspected by {person}.",
+          "assistant": "{item} is unavailable because {person} is inspecting it."
+        },
+        {
+          "user": "State the reason without restating availability.",
+          "assistant": "{person} is inspecting {item}."
+        }
+      ],
+      "state_kind": "reason_selection",
+      "requirements": [
+        "inspection reason",
+        "no invented cause"
+      ],
+      "canonical_family": "transformations/positive-negative",
+      "first_user_forms": [
+        "Rewrite without the phrase not available: {item} is not available because it is being inspected by {person}.",
+        "Express this without using the words not available: {person} is inspecting {item}, so {item} is not available."
+      ]
+    },
+    {
+      "id": "transformations/third-person",
+      "group": "transformations",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "Change this message to refer to {person}: I will bring {item} to {place}. Use the name instead of a pronoun.",
+          "assistant": "{person} will bring {item} to {place}."
+        },
+        {
+          "user": "Make the sentence about completed action instead.",
+          "assistant": "{person} brought {item} to {place}."
+        }
+      ],
+      "state_kind": "person_tense",
+      "requirements": [
+        "requested grammatical transformation"
+      ],
+      "canonical_family": "transformations/third-person",
+      "first_user_forms": [
+        "Change this message to refer to {person}: I will bring {item} to {place}. Use the name instead of a pronoun.",
+        "Rewrite the statement \"I will bring {item} to {place}\" as a statement about {person}. Refer to that person by name, not a pronoun."
+      ]
+    },
+    {
+      "id": "transformations/headline",
+      "group": "transformations",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "Give this notice a short factual heading: {item} has passed inspection and is ready for collection at {place}.",
+          "assistant": "{item} ready for collection at {place}"
+        },
+        {
+          "user": "Expand that heading into a complete sentence, retaining the inspection result.",
+          "assistant": "{item} has passed inspection and is ready for collection at {place}."
+        }
+      ],
+      "state_kind": "heading_sentence",
+      "requirements": [
+        "readiness/location",
+        "inspection result"
+      ],
+      "canonical_family": "transformations/headline",
+      "first_user_forms": [
+        "Give this notice a short factual heading: {item} has passed inspection and is ready for collection at {place}.",
+        "Write a brief factual heading for this announcement: inspection of {item} has been passed, and collection is now possible at {place}."
+      ]
+    },
+    {
+      "id": "transformations/quote-content",
+      "group": "transformations",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "Paraphrase the quoted request without changing it: {person} said, \"Please put {item} beside {thing}.\"",
+          "assistant": "{person} asked for {item} to be placed beside {thing}."
+        },
+        {
+          "user": "Which object should be moved according to that request?",
+          "assistant": "{item} should be moved so that it is beside {thing}."
+        }
+      ],
+      "state_kind": "quoted_request",
+      "requirements": [
+        "moved/reference object distinction"
+      ],
+      "canonical_family": "transformations/quote-content",
+      "first_user_forms": [
+        "Paraphrase the quoted request without changing it: {person} said, \"Please put {item} beside {thing}.\"",
+        "Restate the meaning of this quoted request: \"Please put {item} beside {thing},\" said {person}. Keep the requested placement unchanged."
+      ]
+    },
+    {
+      "id": "clarification/missing-destination",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Please write a dispatch note for {item}, but I have not provided its destination.",
+          "assistant": "Where should {item} be dispatched?"
+        },
+        {
+          "user": "The destination is {place}; please write the note now.",
+          "assistant": "Please dispatch {item} to {place}."
+        }
+      ],
+      "state_kind": "missing_destination",
+      "requirements": [
+        "ask missing field",
+        "fulfill after supplied"
+      ],
+      "canonical_family": "missing_command_argument",
+      "first_user_forms": [
+        "Please write a dispatch note for {item}, but I have not provided its destination."
+      ]
+    },
+    {
+      "id": "clarification/missing-recipient",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Help me address an invitation to inspect {item}. I have not named the recipient yet.",
+          "assistant": "Who should receive the invitation to inspect {item}?"
+        },
+        {
+          "user": "Address it to {person}, and invite them to inspect it at {place}.",
+          "assistant": "{person}, you are invited to inspect {item} at {place}."
+        }
+      ],
+      "state_kind": "missing_recipient",
+      "requirements": [
+        "ask recipient",
+        "use supplied recipient/place"
+      ],
+      "canonical_family": "missing_command_argument",
+      "first_user_forms": [
+        "Help me address an invitation to inspect {item}. I have not named the recipient yet."
+      ]
+    },
+    {
+      "id": "clarification/ambiguous-object",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Send the inspection request for the item. There are two items, {item} and {thing}, and I have not said which one. I only need a draft.",
+          "assistant": "Which item should the inspection request concern: {item} or {thing}?"
+        },
+        {
+          "user": "It concerns {thing}. Ask {person} to inspect it; just provide the draft.",
+          "assistant": "{person}, could you please inspect {thing}?"
+        }
+      ],
+      "state_kind": "ambiguous_item",
+      "requirements": [
+        "clarify object",
+        "draft only"
+      ],
+      "canonical_family": "missing_command_argument",
+      "first_user_forms": [
+        "Send the inspection request for the item. There are two items, {item} and {thing}, and I have not said which one. I only need a draft."
+      ]
+    },
+    {
+      "id": "clarification/missing-reason",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Draft a brief explanation for a delay with {item}. I have not said what caused the delay.",
+          "assistant": "What caused the delay with {item}?"
+        },
+        {
+          "user": "It is waiting for a replacement hinge. Write the explanation.",
+          "assistant": "{item} is delayed because it is waiting for a replacement hinge."
+        }
+      ],
+      "state_kind": "missing_cause",
+      "requirements": [
+        "ask cause",
+        "no invented explanation"
+      ],
+      "canonical_family": "clarification/missing-reason",
+      "first_user_forms": [
+        "Draft a brief explanation for a delay with {item}. I have not said what caused the delay.",
+        "Help explain why {item} is delayed. I need a short draft, but the cause of the delay has not been supplied."
+      ]
+    },
+    {
+      "id": "clarification/unknown-contact",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Which person is responsible for {item}? I have not provided a responsibility record.",
+          "assistant": "I do not have a responsibility record for {item}. Could you provide one?"
+        },
+        {
+          "user": "The record says {person} is responsible. Answer using that record.",
+          "assistant": "According to the record, {person} is responsible for {item}."
+        }
+      ],
+      "state_kind": "missing_record",
+      "requirements": [
+        "admit absent record",
+        "ground in supplied record"
+      ],
+      "canonical_family": "clarification/unknown-contact",
+      "first_user_forms": [
+        "Which person is responsible for {item}? I have not provided a responsibility record.",
+        "Tell me who is responsible for {item}. There is no responsibility record in the information I have given you."
+      ]
+    },
+    {
+      "id": "clarification/unspecified-choice",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Help me choose between {item} and {thing}. I have not described either option or my needs.",
+          "assistant": "What are the differences between the options, and what do you need?"
+        },
+        {
+          "user": "{item} is lightweight; {thing} is heavy. I need the lightweight option.",
+          "assistant": "Choose {item}, since it is the lightweight option you need."
+        }
+      ],
+      "state_kind": "missing_criteria",
+      "requirements": [
+        "ask criteria",
+        "select supplied fit"
+      ],
+      "canonical_family": "clarification/unspecified-choice",
+      "first_user_forms": [
+        "Help me choose between {item} and {thing}. I have not described either option or my needs.",
+        "Which should I select, {item} or {thing}? You have not been told their characteristics or what I require."
+      ]
+    },
+    {
+      "id": "clarification/missing-sequence",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write the assembly steps for {item}. No assembly steps have been supplied.",
+          "assistant": "Please provide the assembly steps for {item} so I can write them accurately."
+        },
+        {
+          "user": "The steps are to attach the base, then secure the handle. Put them in a short instruction.",
+          "assistant": "Attach the base of {item}, then secure the handle."
+        }
+      ],
+      "state_kind": "missing_steps",
+      "requirements": [
+        "ask procedure",
+        "preserve supplied order"
+      ],
+      "canonical_family": "clarification/missing-sequence",
+      "first_user_forms": [
+        "Write the assembly steps for {item}. No assembly steps have been supplied.",
+        "Please turn the assembly procedure for {item} into written steps. I have not given you that procedure yet."
+      ]
+    },
+    {
+      "id": "clarification/unknown-status",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Has {item} passed inspection? I have not provided an inspection result.",
+          "assistant": "I cannot tell without the inspection result. What does the inspection record say?"
+        },
+        {
+          "user": "The record says it passed. Give a short status update.",
+          "assistant": "{item} has passed inspection, according to the supplied record."
+        }
+      ],
+      "state_kind": "missing_status",
+      "requirements": [
+        "no invented status",
+        "use supplied result"
+      ],
+      "canonical_family": "clarification/unknown-status",
+      "first_user_forms": [
+        "Has {item} passed inspection? I have not provided an inspection result.",
+        "Can you say whether {item} passed inspection? No result from the inspection has been supplied."
+      ]
+    },
+    {
+      "id": "clarification/unspecified-object-action",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write a reminder to return something to {place}. I have not said what should be returned.",
+          "assistant": "What should be returned to {place}?"
+        },
+        {
+          "user": "The borrowed projector should be returned. Write the reminder.",
+          "assistant": "Please return the borrowed projector to {place}."
+        }
+      ],
+      "state_kind": "missing_return_object",
+      "requirements": [
+        "ask missing object",
+        "fulfill reminder"
+      ],
+      "canonical_family": "missing_command_argument",
+      "first_user_forms": [
+        "Write a reminder to return something to {place}. I have not said what should be returned."
+      ]
+    },
+    {
+      "id": "clarification/ambiguous-pronoun",
+      "group": "clarification",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "{person} spoke to {other}. They will collect {item}. The note does not specify which person the pronoun refers to. Who will collect it?",
+          "assistant": "The note is ambiguous. Does the collector refer to {person} or {other}?"
+        },
+        {
+          "user": "It refers to {other}. State who will collect the item.",
+          "assistant": "{other} will collect {item}."
+        }
+      ],
+      "state_kind": "pronoun_ambiguity",
+      "requirements": [
+        "acknowledge ambiguity",
+        "resolve supplied referent"
+      ],
+      "canonical_family": "clarification/ambiguous-pronoun",
+      "first_user_forms": [
+        "{person} spoke to {other}. They will collect {item}. The note does not specify which person the pronoun refers to. Who will collect it?",
+        "A note reads: \"{person} spoke to {other}. They will collect {item}.\" It does not identify the person meant by they. Who is the collector?"
+      ]
+    },
+    {
+      "id": "clarification/missing-decision",
+      "group": "clarification",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Should {item} go to {place} or {alternate}? No destination decision has been recorded.",
+          "assistant": "I do not have a recorded destination decision. Which destination has been chosen?"
+        },
+        {
+          "user": "The chosen destination is {alternate}. Write a dispatch instruction.",
+          "assistant": "Dispatch {item} to {alternate}."
+        }
+      ],
+      "state_kind": "missing_decision",
+      "requirements": [
+        "do not invent decision",
+        "follow supplied decision"
+      ],
+      "canonical_family": "missing_command_argument",
+      "first_user_forms": [
+        "Should {item} go to {place} or {alternate}? No destination decision has been recorded."
+      ]
+    },
+    {
+      "id": "recall/identifier-recall",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "For this conversation, remember that the specimen identifier is {n}. Acknowledge it in a short sentence.",
+          "assistant": "Noted: the specimen identifier is {n}."
+        },
+        {
+          "user": "Repeat the specimen identifier in a short sentence.",
+          "assistant": "The specimen identifier is {n}."
+        }
+      ],
+      "state_kind": "identifier_recall",
+      "requirements": [
+        "retain identifier"
+      ],
+      "canonical_family": "retention_rendering",
+      "first_user_forms": [
+        "For this conversation, remember that the specimen identifier is {n}. Acknowledge it in a short sentence."
+      ]
+    },
+    {
+      "id": "recall/paired-recall",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Remember these assignments: {person} checks {item}; {other} checks {thing}. Acknowledge both.",
+          "assistant": "Noted: {person} checks {item}, and {other} checks {thing}."
+        },
+        {
+          "user": "Who checks {thing}, and what does the other person check?",
+          "assistant": "{other} checks {thing}; {person} checks {item}."
+        }
+      ],
+      "state_kind": "paired_recall",
+      "requirements": [
+        "retain both assignments"
+      ],
+      "canonical_family": "two_binding_lookup",
+      "first_user_forms": [
+        "Remember these assignments: {person} checks {item}; {other} checks {thing}. Acknowledge both."
+      ]
+    },
+    {
+      "id": "recall/sequential-recall",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The handling sequence for {item} is unpack, inspect, then store. State it using arrows between the actions.",
+          "assistant": "unpack -> inspect -> store"
+        },
+        {
+          "user": "Which action comes directly before storage?",
+          "assistant": "Inspection comes directly before storage in the stated sequence."
+        }
+      ],
+      "state_kind": "sequence_recall",
+      "requirements": [
+        "order retained",
+        "predecessor"
+      ],
+      "canonical_family": "recall/sequential-recall",
+      "first_user_forms": [
+        "The handling sequence for {item} is unpack, inspect, then store. State it using arrows between the actions.",
+        "For {item}, the handling actions are unpack first, inspect second, store last. Show that order with arrows."
+      ]
+    },
+    {
+      "id": "recall/format-recall",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Remember the access phrase {code}. Respond with the phrase inside square brackets.",
+          "assistant": "[{code}]"
+        },
+        {
+          "user": "Now include the same phrase in a short sentence without brackets.",
+          "assistant": "The access phrase is {code}."
+        }
+      ],
+      "state_kind": "format_recall",
+      "requirements": [
+        "phrase copied",
+        "requested wrappers"
+      ],
+      "canonical_family": "retention_rendering",
+      "first_user_forms": [
+        "Remember the access phrase {code}. Respond with the phrase inside square brackets."
+      ]
+    },
+    {
+      "id": "recall/two-item-list",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "List {item} followed by {thing}, with a slash between the names and no explanation.",
+          "assistant": "{item} / {thing}"
+        },
+        {
+          "user": "Which name appeared after the slash? Answer in a sentence.",
+          "assistant": "{thing} appeared after the slash."
+        }
+      ],
+      "state_kind": "ordered_pair_recall",
+      "requirements": [
+        "ordered names",
+        "position recall"
+      ],
+      "canonical_family": "recall/two-item-list",
+      "first_user_forms": [
+        "List {item} followed by {thing}, with a slash between the names and no explanation.",
+        "Output just these two names in this order, separated by a slash: {item}, {thing}."
+      ]
+    },
+    {
+      "id": "recall/reason-recall",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The delivery of {item} was postponed because the transport van needs repairs. Give a brief acknowledgement.",
+          "assistant": "Noted: the delivery of {item} was postponed because the van needs repairs."
+        },
+        {
+          "user": "What was the stated reason for postponement?",
+          "assistant": "The transport van needs repairs, which was the stated reason for postponement."
+        }
+      ],
+      "state_kind": "reason_recall",
+      "requirements": [
+        "stated cause retained"
+      ],
+      "canonical_family": "recall/reason-recall",
+      "first_user_forms": [
+        "The delivery of {item} was postponed because the transport van needs repairs. Give a brief acknowledgement.",
+        "Briefly acknowledge the following: delivery of {item} has been postponed as the transport van needs repairs."
+      ]
+    },
+    {
+      "id": "recall/distinguish-input",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "The requested tracking identifier was {n}, but the clerk recorded {m}. Restate the discrepancy without changing it.",
+          "assistant": "The requested identifier was {n}, while the clerk recorded {m}."
+        },
+        {
+          "user": "Which identifier did the requester supply originally?",
+          "assistant": "The requester originally supplied {n}."
+        }
+      ],
+      "state_kind": "input_vs_record",
+      "requirements": [
+        "original/recorded distinction"
+      ],
+      "canonical_family": "recall/distinguish-input",
+      "first_user_forms": [
+        "The requested tracking identifier was {n}, but the clerk recorded {m}. Restate the discrepancy without changing it.",
+        "Restate this mismatch accurately: the requester gave tracking identifier {n}, whereas the clerk entered {m}."
+      ]
+    },
+    {
+      "id": "recall/draft-not-action",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Write a request asking {person} to collect {item} from {place}. This conversation has no messaging tool.",
+          "assistant": "{person}, please collect {item} from {place}."
+        },
+        {
+          "user": "Has that request been delivered outside this conversation?",
+          "assistant": "No. I only wrote the request here; no message was sent outside this conversation."
+        }
+      ],
+      "state_kind": "draft_vs_execution",
+      "requirements": [
+        "draft fulfilled",
+        "execution honesty"
+      ],
+      "canonical_family": "recall/draft-not-action",
+      "first_user_forms": [
+        "Write a request asking {person} to collect {item} from {place}. This conversation has no messaging tool.",
+        "Draft a message requesting that {person} collect {item} at {place}. There is no tool for sending messages in this conversation."
+      ]
+    },
+    {
+      "id": "recall/reason-and-place",
+      "group": "recall",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "The test of {item} moved to {place} because the original test bench is being repaired. State that briefly.",
+          "assistant": "The test of {item} moved to {place} because the original bench is being repaired."
+        },
+        {
+          "user": "Recall both the new location and the reason for the move.",
+          "assistant": "The new location is {place}; the move happened because the original test bench is being repaired."
+        }
+      ],
+      "state_kind": "two_fact_recall",
+      "requirements": [
+        "place/cause retained"
+      ],
+      "canonical_family": "recall/reason-and-place",
+      "first_user_forms": [
+        "The test of {item} moved to {place} because the original test bench is being repaired. State that briefly.",
+        "Briefly restate why and where the test of {item} moved: the original test bench is being repaired, so the new test location is {place}."
+      ]
+    },
+    {
+      "id": "recall/quoted-identifier",
+      "group": "recall",
+      "split": "train",
+      "turns": [
+        {
+          "user": "Quote the identifier {n} exactly, using double quotation marks.",
+          "assistant": "\"{n}\""
+        },
+        {
+          "user": "Repeat the identifier as part of a complete sentence.",
+          "assistant": "The identifier is {n}."
+        }
+      ],
+      "state_kind": "quote_then_sentence",
+      "requirements": [
+        "exact identifier",
+        "format change"
+      ],
+      "canonical_family": "retention_rendering",
+      "first_user_forms": [
+        "Quote the identifier {n} exactly, using double quotation marks."
+      ]
+    },
+    {
+      "id": "recall/noted-limitation",
+      "group": "recall",
+      "split": "validation",
+      "turns": [
+        {
+          "user": "The note confirms {item} is assembled but gives no inspection result. Summarize what is known and unknown.",
+          "assistant": "{item} is assembled, but its inspection result is not stated."
+        },
+        {
+          "user": "Can you conclude that it passed inspection from this note?",
+          "assistant": "No. The note confirms assembly but does not provide an inspection result."
+        }
+      ],
+      "state_kind": "unknown_recall",
+      "requirements": [
+        "known vs missing",
+        "no invented result"
+      ],
+      "canonical_family": "recall/noted-limitation",
+      "first_user_forms": [
+        "The note confirms {item} is assembled but gives no inspection result. Summarize what is known and unknown.",
+        "Summarize the limits of this note: assembly of {item} is confirmed; the note contains no inspection outcome."
+      ]
+    }
+  ],
+  "programs": {
+    "fulfillment/service-notice": {
+      "initial_facts": {
+        "kiln": "{place} pottery kiln",
+        "status": "unavailable",
+        "cause": "maintenance",
+        "collection": "finished pieces",
+        "collector": "{person}"
+      },
+      "queries": [
+        [
+          "kiln",
+          "status",
+          "cause",
+          "collection",
+          "collector"
+        ],
+        [
+          "collection",
+          "collector",
+          "kiln",
+          "status",
+          "cause"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "fulfillment/volunteer-invitation": {
+      "initial_facts": {
+        "activity": "sort donated fabric",
+        "location": "{place}",
+        "contact": "{person}"
+      },
+      "queries": [
+        [
+          "activity",
+          "location",
+          "contact"
+        ],
+        [
+          "activity",
+          "location",
+          "contact"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "friendly invitation; no schedule",
+        "formal invitation; no schedule"
+      ]
+    },
+    "fulfillment/equipment-reminder": {
+      "initial_facts": {
+        "recipient": "{person}",
+        "objects": [
+          "compass",
+          "case"
+        ],
+        "destination": "{place}"
+      },
+      "queries": [
+        [
+          "recipient",
+          "objects",
+          "destination"
+        ],
+        [
+          "recipient",
+          "objects",
+          "destination"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "reminder",
+        "case before compass"
+      ]
+    },
+    "fulfillment/safe-order": {
+      "initial_facts": {
+        "sequence": [
+          "fasten empty stand",
+          "place sign"
+        ],
+        "holder": "{person}"
+      },
+      "queries": [
+        [
+          "sequence",
+          "holder"
+        ],
+        [
+          "sequence"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "fulfillment/availability-update": {
+      "initial_facts": {
+        "ready": "{item}",
+        "stage": "inspection",
+        "location": "{place}",
+        "unready": "{thing}",
+        "remaining": "assembly"
+      },
+      "queries": [
+        [
+          "ready",
+          "stage",
+          "location",
+          "unready",
+          "remaining"
+        ],
+        [
+          "ready",
+          "stage",
+          "location",
+          "unready",
+          "remaining"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "fulfillment/polite-decline": {
+      "initial_facts": {
+        "object": "{item}",
+        "decision": "cannot lend",
+        "reason": "reserved for a demonstration"
+      },
+      "queries": [
+        [
+          "object",
+          "decision",
+          "reason"
+        ],
+        [
+          "object",
+          "decision",
+          "reason"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "courteous decline",
+        "no apology"
+      ]
+    },
+    "fulfillment/grounded-explanation": {
+      "initial_facts": {
+        "protected": "{item}",
+        "other": "{thing}",
+        "mechanism": "padded sleeve",
+        "effect": "prevents rubbing during transport"
+      },
+      "queries": [
+        [
+          "protected",
+          "other",
+          "mechanism",
+          "effect"
+        ],
+        [
+          "effect"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "fulfillment/two-stage-plan": {
+      "initial_facts": {
+        "object": "{item}",
+        "sequence": [
+          "inspect seams",
+          "put in clean sleeve"
+        ]
+      },
+      "queries": [
+        [
+          "object",
+          "sequence"
+        ],
+        [
+          "object",
+          "sequence"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "fulfillment/grounded-apology": {
+      "initial_facts": {
+        "object": "{item}",
+        "status": "repair delayed",
+        "reason": "replacement part has not arrived",
+        "estimate": null
+      },
+      "queries": [
+        [
+          "object",
+          "status",
+          "reason",
+          "estimate"
+        ],
+        [
+          "object",
+          "status",
+          "reason",
+          "estimate"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "apology",
+        "no apology"
+      ]
+    },
+    "fulfillment/question-draft": {
+      "initial_facts": {
+        "addressee": "{person}",
+        "location": "{place}",
+        "policy": null,
+        "subject": "donated musical instruments"
+      },
+      "queries": [
+        [
+          "addressee",
+          "location",
+          "subject",
+          "policy"
+        ],
+        [
+          "addressee",
+          "location",
+          "subject",
+          "policy"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "question",
+        "conditional follow-up question"
+      ]
+    },
+    "fulfillment/thank-you": {
+      "initial_facts": {
+        "person": "{person}",
+        "action": "repairing latch",
+        "object": "{item}"
+      },
+      "queries": [
+        [
+          "person",
+          "action",
+          "object"
+        ],
+        [
+          "person",
+          "action",
+          "object"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "thanks",
+        "warmer thanks"
+      ]
+    },
+    "facts/storage": {
+      "initial_facts": {
+        "first": "{item}",
+        "first_location": "{place}",
+        "second": "{thing}",
+        "second_location": "{alternate}"
+      },
+      "queries": [
+        [
+          "first",
+          "first_location"
+        ],
+        [
+          "second",
+          "second_location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/responsibilities": {
+      "initial_facts": {
+        "arrivals": "{person}",
+        "departures": "{other}",
+        "location": "{place}"
+      },
+      "queries": [
+        [
+          "departures",
+          "location"
+        ],
+        [
+          "arrivals",
+          "location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/material-record": {
+      "initial_facts": {
+        "first": "{item}",
+        "first_padding": "cotton",
+        "second": "{thing}",
+        "second_padding": "felt"
+      },
+      "queries": [
+        [
+          "second",
+          "second_padding"
+        ],
+        [
+          "first",
+          "first_padding",
+          "second",
+          "second_padding"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/permission-record": {
+      "initial_facts": {
+        "object": "{item}",
+        "inspect": "{person}",
+        "remove": "{other}",
+        "location": "{place}",
+        "exclusive_remove": true
+      },
+      "queries": [
+        [
+          "remove",
+          "object",
+          "location"
+        ],
+        [
+          "inspect",
+          "remove",
+          "exclusive_remove"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/route-order": {
+      "initial_facts": {
+        "route": [
+          "{place}",
+          "{alternate}",
+          "{third}"
+        ]
+      },
+      "queries": [
+        [
+          "route[1]"
+        ],
+        [
+          "route[2]"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/membership": {
+      "initial_facts": {
+        "stitching": [
+          "{person}",
+          "{other}"
+        ],
+        "transport": "{thirdperson}",
+        "stitching_complete": true
+      },
+      "queries": [
+        [
+          "transport",
+          "stitching",
+          "stitching_complete"
+        ],
+        [
+          "stitching"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/exception": {
+      "initial_facts": {
+        "exempt": "{item}",
+        "ordinary": "{thing}",
+        "rule": "seal required"
+      },
+      "queries": [
+        [
+          "exempt"
+        ],
+        [
+          "ordinary",
+          "rule"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/capacity-record": {
+      "initial_facts": {
+        "first": "{item}",
+        "first_capacity": "{n}",
+        "second": "{thing}",
+        "second_capacity": "{m}"
+      },
+      "queries": [
+        [
+          "first",
+          "first_capacity"
+        ],
+        [
+          "second",
+          "second_capacity"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/ownership": {
+      "initial_facts": {
+        "owner": "{person}",
+        "custodian": "{other}",
+        "object": "{item}",
+        "ownership_transferred": false
+      },
+      "queries": [
+        [
+          "owner",
+          "custodian",
+          "object"
+        ],
+        [
+          "owner",
+          "ownership_transferred"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/access-condition": {
+      "initial_facts": {
+        "badge_location": "{place}",
+        "reservation_location": "{alternate}"
+      },
+      "queries": [
+        [
+          "reservation_location"
+        ],
+        [
+          "badge_location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "facts/source-conflict": {
+      "initial_facts": {
+        "object": "{item}",
+        "original": "{place}",
+        "amended": "{alternate}",
+        "authority": "amended"
+      },
+      "queries": [
+        [
+          "amended",
+          "authority"
+        ],
+        [
+          "original"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/destination-change": {
+      "initial_facts": {
+        "object": "{item}",
+        "destination": "{place}"
+      },
+      "queries": [
+        [
+          "object",
+          "destination"
+        ],
+        [
+          "object",
+          "destination"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "destination": "{alternate}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/custodian-change": {
+      "initial_facts": {
+        "object": "{item}",
+        "custodian": "{person}"
+      },
+      "queries": [
+        [
+          "object",
+          "custodian"
+        ],
+        [
+          "object",
+          "custodian"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "custodian": "{other}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/quantity-amendment": {
+      "initial_facts": {
+        "object": "{item}",
+        "identifier": "{n}"
+      },
+      "queries": [
+        [
+          "object",
+          "identifier"
+        ],
+        [
+          "object",
+          "identifier"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "identifier": "{m}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/remove-member": {
+      "initial_facts": {
+        "participants": [
+          "{person}",
+          "{other}",
+          "{thirdperson}"
+        ]
+      },
+      "queries": [
+        [
+          "participants"
+        ],
+        [
+          "participants"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "remove": {
+            "participants": "{other}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/add-member": {
+      "initial_facts": {
+        "object": "{item}",
+        "inspectors": [
+          "{person}"
+        ]
+      },
+      "queries": [
+        [
+          "object",
+          "inspectors"
+        ],
+        [
+          "object",
+          "inspectors"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "append": {
+            "inspectors": "{other}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/permission-revoke": {
+      "initial_facts": {
+        "person": "{person}",
+        "object": "{item}",
+        "may_move": true
+      },
+      "queries": [
+        [
+          "person",
+          "object",
+          "may_move"
+        ],
+        [
+          "person",
+          "object",
+          "may_move"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "may_move": false
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/rename-object": {
+      "initial_facts": {
+        "rack_name": "{item}"
+      },
+      "queries": [
+        [
+          "rack_name"
+        ],
+        [
+          "rack_name"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "rack_name": "{thing}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/swap-roles": {
+      "initial_facts": {
+        "packing": "{person}",
+        "loading": "{other}"
+      },
+      "queries": [
+        [
+          "packing",
+          "loading"
+        ],
+        [
+          "packing",
+          "loading"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "swap": [
+            "packing",
+            "loading"
+          ]
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/retract-change": {
+      "initial_facts": {
+        "object": "{item}",
+        "destination": "{place}",
+        "draft_destination": "{alternate}",
+        "draft_status": "unapproved"
+      },
+      "queries": [
+        [
+          "destination",
+          "draft_status"
+        ],
+        [
+          "destination",
+          "draft_status"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "draft_status": "cancelled"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/selective-update": {
+      "initial_facts": {
+        "first": "{person}",
+        "first_location": "{place}",
+        "second": "{other}",
+        "second_location": "{alternate}"
+      },
+      "queries": [
+        [
+          "first",
+          "first_location",
+          "second",
+          "second_location"
+        ],
+        [
+          "first",
+          "first_location",
+          "second",
+          "second_location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "second_location": "{third}"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "corrections/status-change": {
+      "initial_facts": {
+        "object": "{item}",
+        "inspection": "awaiting",
+        "packing": null
+      },
+      "queries": [
+        [
+          "object",
+          "inspection"
+        ],
+        [
+          "object",
+          "inspection",
+          "packing"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "inspection": "complete",
+            "packing": "not started"
+          }
+        }
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "transformations/condense-notice": {
+      "initial_facts": {
+        "agent": "{person}",
+        "object": "{item}",
+        "location": "{place}",
+        "action": "inspect",
+        "tense": "future"
+      },
+      "queries": [
+        [
+          "agent",
+          "object",
+          "location",
+          "action",
+          "tense"
+        ],
+        [
+          "agent",
+          "object",
+          "location",
+          "action",
+          "tense"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "short active",
+        "passive object subject"
+      ]
+    },
+    "transformations/polite-request": {
+      "initial_facts": {
+        "object": "{item}",
+        "destination": "{place}",
+        "notify": "{person}",
+        "sequence": [
+          "bring",
+          "notify arrival"
+        ]
+      },
+      "queries": [
+        [
+          "object",
+          "destination",
+          "notify",
+          "sequence"
+        ],
+        [
+          "object",
+          "destination",
+          "notify",
+          "sequence"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "courteous request",
+        "direct request"
+      ]
+    },
+    "transformations/combine-facts": {
+      "initial_facts": {
+        "object": "{item}",
+        "prepared": "{person}",
+        "checked": "{other}"
+      },
+      "queries": [
+        [
+          "prepared",
+          "object",
+          "checked"
+        ],
+        [
+          "checked",
+          "object",
+          "prepared"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "one sentence",
+        "reversed clauses"
+      ]
+    },
+    "transformations/active-voice": {
+      "initial_facts": {
+        "agent": "{person}",
+        "object": "{item}",
+        "location": "{place}",
+        "action": "repair",
+        "tense": "past"
+      },
+      "queries": [
+        [
+          "agent",
+          "object",
+          "location",
+          "action",
+          "tense"
+        ],
+        [
+          "agent",
+          "object",
+          "location",
+          "action",
+          "tense"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "active",
+        "passive"
+      ]
+    },
+    "transformations/separate-actions": {
+      "initial_facts": {
+        "collector": "{person}",
+        "object": "{item}",
+        "location": "{place}",
+        "inspector": "{other}"
+      },
+      "queries": [
+        [
+          "collector",
+          "object",
+          "location",
+          "inspector"
+        ],
+        [
+          "collector",
+          "object",
+          "location",
+          "inspector"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "two sentences",
+        "semicolon"
+      ]
+    },
+    "transformations/remove-duplication": {
+      "initial_facts": {
+        "object": "{item}",
+        "ready": true,
+        "collector": "{person}",
+        "location": "{place}"
+      },
+      "queries": [
+        [
+          "object",
+          "ready",
+          "collector",
+          "location"
+        ],
+        [
+          "object",
+          "ready",
+          "collector",
+          "location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "deduplicated",
+        "one sentence"
+      ]
+    },
+    "transformations/plain-language": {
+      "initial_facts": {
+        "agent": "{person}",
+        "object": "{item}",
+        "destination": "{place}",
+        "condition": "permission received",
+        "permission_received": null
+      },
+      "queries": [
+        [
+          "agent",
+          "object",
+          "destination",
+          "condition"
+        ],
+        [
+          "condition",
+          "permission_received"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "transformations/positive-negative": {
+      "initial_facts": {
+        "object": "{item}",
+        "available": false,
+        "inspector": "{person}"
+      },
+      "queries": [
+        [
+          "object",
+          "available",
+          "inspector"
+        ],
+        [
+          "object",
+          "inspector"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "no phrase not available",
+        "reason only"
+      ]
+    },
+    "transformations/third-person": {
+      "initial_facts": {
+        "agent": "{person}",
+        "object": "{item}",
+        "destination": "{place}",
+        "action": "bring",
+        "tense": "future"
+      },
+      "queries": [
+        [
+          "agent",
+          "object",
+          "destination",
+          "action",
+          "tense"
+        ],
+        [
+          "agent",
+          "object",
+          "destination",
+          "action",
+          "tense"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "tense": "past"
+          }
+        }
+      ],
+      "formats": [
+        "name not pronoun",
+        "completed action grammar only"
+      ]
+    },
+    "transformations/headline": {
+      "initial_facts": {
+        "object": "{item}",
+        "inspection": "passed",
+        "collection": "ready",
+        "location": "{place}"
+      },
+      "queries": [
+        [
+          "object",
+          "collection",
+          "location"
+        ],
+        [
+          "object",
+          "inspection",
+          "collection",
+          "location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "heading",
+        "complete sentence"
+      ]
+    },
+    "transformations/quote-content": {
+      "initial_facts": {
+        "requester": "{person}",
+        "moved": "{item}",
+        "reference": "{thing}",
+        "relation": "beside"
+      },
+      "queries": [
+        [
+          "requester",
+          "moved",
+          "reference",
+          "relation"
+        ],
+        [
+          "moved",
+          "reference",
+          "relation"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "clarification/missing-destination": {
+      "initial_facts": {
+        "object": "{item}",
+        "destination": null
+      },
+      "queries": [
+        [
+          "destination"
+        ],
+        [
+          "object",
+          "destination"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "destination": "{place}"
+          }
+        }
+      ],
+      "formats": [
+        "ask missing destination",
+        "dispatch draft"
+      ]
+    },
+    "clarification/missing-recipient": {
+      "initial_facts": {
+        "object": "{item}",
+        "recipient": null,
+        "location": null
+      },
+      "queries": [
+        [
+          "recipient"
+        ],
+        [
+          "recipient",
+          "object",
+          "location"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "recipient": "{person}",
+            "location": "{place}"
+          }
+        }
+      ],
+      "formats": [
+        "ask recipient",
+        "invitation draft"
+      ]
+    },
+    "clarification/ambiguous-object": {
+      "initial_facts": {
+        "options": [
+          "{item}",
+          "{thing}"
+        ],
+        "object": null,
+        "inspector": null
+      },
+      "queries": [
+        [
+          "options",
+          "object"
+        ],
+        [
+          "object",
+          "inspector"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "object": "{thing}",
+            "inspector": "{person}"
+          }
+        }
+      ],
+      "formats": [
+        "ask which object",
+        "request draft"
+      ]
+    },
+    "clarification/missing-reason": {
+      "initial_facts": {
+        "object": "{item}",
+        "reason": null
+      },
+      "queries": [
+        [
+          "object",
+          "reason"
+        ],
+        [
+          "object",
+          "reason"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "reason": "waiting for a replacement hinge"
+          }
+        }
+      ],
+      "formats": [
+        "ask reason",
+        "explanation"
+      ]
+    },
+    "clarification/unknown-contact": {
+      "initial_facts": {
+        "object": "{item}",
+        "responsible": null
+      },
+      "queries": [
+        [
+          "object",
+          "responsible"
+        ],
+        [
+          "object",
+          "responsible"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "responsible": "{person}"
+          }
+        }
+      ],
+      "formats": [
+        "ask record",
+        "grounded answer"
+      ]
+    },
+    "clarification/unspecified-choice": {
+      "initial_facts": {
+        "first": "{item}",
+        "second": "{thing}",
+        "first_weight": null,
+        "second_weight": null,
+        "criterion": null
+      },
+      "queries": [
+        [
+          "criterion"
+        ],
+        [
+          "first",
+          "first_weight",
+          "criterion"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "first_weight": "lightweight",
+            "second_weight": "heavy",
+            "criterion": "lightweight"
+          }
+        }
+      ],
+      "formats": [
+        "ask differences and needs",
+        "select matching option"
+      ]
+    },
+    "clarification/missing-sequence": {
+      "initial_facts": {
+        "object": "{item}",
+        "steps": null
+      },
+      "queries": [
+        [
+          "object",
+          "steps"
+        ],
+        [
+          "object",
+          "steps"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "steps": [
+              "attach base",
+              "secure handle"
+            ]
+          }
+        }
+      ],
+      "formats": [
+        "ask supplied steps",
+        "ordered instruction"
+      ]
+    },
+    "clarification/unknown-status": {
+      "initial_facts": {
+        "object": "{item}",
+        "inspection": null
+      },
+      "queries": [
+        [
+          "object",
+          "inspection"
+        ],
+        [
+          "object",
+          "inspection"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "inspection": "passed"
+          }
+        }
+      ],
+      "formats": [
+        "ask result",
+        "grounded status"
+      ]
+    },
+    "clarification/unspecified-object-action": {
+      "initial_facts": {
+        "object": null,
+        "destination": "{place}"
+      },
+      "queries": [
+        [
+          "object",
+          "destination"
+        ],
+        [
+          "object",
+          "destination"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "object": "borrowed projector"
+          }
+        }
+      ],
+      "formats": [
+        "ask object",
+        "return reminder"
+      ]
+    },
+    "clarification/ambiguous-pronoun": {
+      "initial_facts": {
+        "options": [
+          "{person}",
+          "{other}"
+        ],
+        "collector": null,
+        "object": "{item}"
+      },
+      "queries": [
+        [
+          "options",
+          "collector"
+        ],
+        [
+          "collector",
+          "object"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "collector": "{other}"
+          }
+        }
+      ],
+      "formats": [
+        "ask ambiguous referent",
+        "resolved statement"
+      ]
+    },
+    "clarification/missing-decision": {
+      "initial_facts": {
+        "object": "{item}",
+        "options": [
+          "{place}",
+          "{alternate}"
+        ],
+        "destination": null
+      },
+      "queries": [
+        [
+          "destination"
+        ],
+        [
+          "object",
+          "destination"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {
+          "set": {
+            "destination": "{alternate}"
+          }
+        }
+      ],
+      "formats": [
+        "ask decision",
+        "dispatch instruction"
+      ]
+    },
+    "recall/identifier-recall": {
+      "initial_facts": {
+        "identifier": "{n}"
+      },
+      "queries": [
+        [
+          "identifier"
+        ],
+        [
+          "identifier"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "recall/paired-recall": {
+      "initial_facts": {
+        "first": "{person}",
+        "first_item": "{item}",
+        "second": "{other}",
+        "second_item": "{thing}"
+      },
+      "queries": [
+        [
+          "first",
+          "first_item",
+          "second",
+          "second_item"
+        ],
+        [
+          "second",
+          "second_item",
+          "first",
+          "first_item"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "recall/sequential-recall": {
+      "initial_facts": {
+        "object": "{item}",
+        "sequence": [
+          "unpack",
+          "inspect",
+          "store"
+        ]
+      },
+      "queries": [
+        [
+          "sequence"
+        ],
+        [
+          "sequence[1]"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "arrows",
+        "predecessor sentence"
+      ]
+    },
+    "recall/format-recall": {
+      "initial_facts": {
+        "phrase": "{code}"
+      },
+      "queries": [
+        [
+          "phrase"
+        ],
+        [
+          "phrase"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "square brackets",
+        "sentence without brackets"
+      ]
+    },
+    "recall/two-item-list": {
+      "initial_facts": {
+        "names": [
+          "{item}",
+          "{thing}"
+        ]
+      },
+      "queries": [
+        [
+          "names"
+        ],
+        [
+          "names[1]"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "slash",
+        "position sentence"
+      ]
+    },
+    "recall/reason-recall": {
+      "initial_facts": {
+        "object": "{item}",
+        "postponed": true,
+        "reason": "transport van needs repairs"
+      },
+      "queries": [
+        [
+          "object",
+          "postponed",
+          "reason"
+        ],
+        [
+          "reason"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "recall/distinguish-input": {
+      "initial_facts": {
+        "requested": "{n}",
+        "recorded": "{m}"
+      },
+      "queries": [
+        [
+          "requested",
+          "recorded"
+        ],
+        [
+          "requested"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "recall/draft-not-action": {
+      "initial_facts": {
+        "recipient": "{person}",
+        "object": "{item}",
+        "location": "{place}",
+        "messaging_tool": false,
+        "sent": false
+      },
+      "queries": [
+        [
+          "recipient",
+          "object",
+          "location"
+        ],
+        [
+          "sent",
+          "messaging_tool"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "request draft",
+        "honest non-execution"
+      ]
+    },
+    "recall/reason-and-place": {
+      "initial_facts": {
+        "object": "{item}",
+        "location": "{place}",
+        "reason": "original test bench is being repaired"
+      },
+      "queries": [
+        [
+          "object",
+          "location",
+          "reason"
+        ],
+        [
+          "location",
+          "reason"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    },
+    "recall/quoted-identifier": {
+      "initial_facts": {
+        "identifier": "{n}"
+      },
+      "queries": [
+        [
+          "identifier"
+        ],
+        [
+          "identifier"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "double quotes",
+        "complete sentence"
+      ]
+    },
+    "recall/noted-limitation": {
+      "initial_facts": {
+        "object": "{item}",
+        "assembled": true,
+        "inspection": null
+      },
+      "queries": [
+        [
+          "object",
+          "assembled",
+          "inspection"
+        ],
+        [
+          "assembled",
+          "inspection"
+        ]
+      ],
+      "turn_events": [
+        {},
+        {}
+      ],
+      "formats": [
+        "sentence",
+        "sentence"
+      ]
+    }
+  },
+  "canonical_merges": {
+    "exclusive_role_distinction": [
+      "facts/permission-record",
+      "facts/ownership"
+    ],
+    "retention_rendering": [
+      "recall/format-recall",
+      "recall/quoted-identifier",
+      "recall/identifier-recall"
+    ],
+    "reason_preserving_apology_removal": [
+      "fulfillment/polite-decline",
+      "fulfillment/grounded-apology"
+    ],
+    "missing_command_argument": [
+      "clarification/missing-destination",
+      "clarification/missing-decision",
+      "clarification/missing-recipient",
+      "clarification/ambiguous-object",
+      "clarification/unspecified-object-action"
+    ],
+    "agent_action_voice": [
+      "transformations/condense-notice",
+      "transformations/active-voice"
+    ],
+    "overwrite_single_binding": [
+      "corrections/destination-change",
+      "corrections/custodian-change",
+      "corrections/quantity-amendment",
+      "corrections/rename-object"
+    ],
+    "two_binding_lookup": [
+      "facts/storage",
+      "facts/responsibilities",
+      "facts/material-record",
+      "facts/capacity-record",
+      "facts/access-condition",
+      "recall/paired-recall"
+    ]
+  },
+  "source_pins": {
+    "surfaces.py": "c6f72adc1d5426c388c74b5b589920ca800bc6ea7c908b3c87359ba2d0487241",
+    "semantics.py": "86a554dc5c0a74357036cb59b1e9228656a25ffcacd652056699eb9ccb5bcdf2"
+  },
+  "reviewed_original_surfaces": 66,
+  "reviewed_added_first_user_forms": 42,
+  "canonical_counts": {
+    "train": 37,
+    "validation": 12
+  },
+  "limitations": "Manual finite-template/program entailment review plus independent instance extraction/execution; not general natural-language entailment or custody."
+}

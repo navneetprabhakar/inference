@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "seed": 20261109,
+  "state": "approved_for_candidate_generation",
+  "sources": {
+    "primary": {
+      "output": "data/grounded-tool-candidates-v2",
+      "caps": {
+        "train": 270000,
+        "exposed-development": 30000
+      },
+      "instances_per_family": {
+        "train": 192,
+        "exposed-development": 64
+      },
+      "group_percent": {
+        "arithmetic": 25,
+        "conversion": 20,
+        "chains": 20,
+        "observations": 15,
+        "state": 10,
+        "nocall_error": 10
+      }
+    },
+    "session": {
+      "output": "data/grounded-session-candidates-v2",
+      "caps": {
+        "train": 90000,
+        "exposed-development": 10000
+      },
+      "instances_per_family": {
+        "train": 72,
+        "exposed-development": 64
+      },
+      "group_percent": {
+        "recall": 34,
+        "recap": 33,
+        "correction": 33
+      }
+    }
+  },
+  "parameter_domains": {
+    "train_absolute_a": [
+      301,
+      1500
+    ],
+    "development_absolute_a": [
+      3101,
+      5000
+    ],
+    "fractions": [
+      0.125,
+      0.375,
+      0.625,
+      0.875
+    ],
+    "b_absolute_integer": [
+      13,
+      41
+    ],
+    "c_integer": [
+      3,
+      9
+    ],
+    "d_absolute_integer": [
+      43,
+      97
+    ],
+    "signs": [
+      -1,
+      1
+    ]
+  },
+  "selection": "Generate the fixed pool once; sort by SHA256(seed,source,split,group,doc_id); whole-history fit and split-signature rejection precede capped selection. Stop the category at its first otherwise eligible item that would exceed its cap. Never refill a stopped category or redistribute unused targets.",
+  "split": "Authored construction families and all their paraphrases/operation/number/observation contrasts stay in one split. Reject development histories sharing any complete tool call or complete parameter tuple with retained training histories; do not refill.",
+  "context": 1024,
+  "reply_reservation": 256,
+  "resource_limits": {
+    "seconds": 1200,
+    "rss_bytes": 1610612736,
+    "source_output_bytes": 268435456,
+    "free_disk_bytes": 21474836480
+  },
+  "not_authorized": [
+    "GPU execution",
+    "training",
+    "admission",
+    "final packing",
+    "private-case access",
+    "adaptive generation or refill"
+  ],
+  "provenance": "Actual allowed operations execute independent FixtureSession calls. Counterfactual numeric/error observations are explicitly synthetic recorded fixture bindings; no synthetic observation is labeled ordinary execution. Denied-tool examples issue no forbidden proposal.",
+  "revision": 2,
+  "numeric_display": "Exact str(observed numeric result), with integer normalization only; no implicit rounding. This includes every answer and session recap.",
+  "revision_scope": "Prospective correction of authored v1 numerical display, session surface selection and fixed development-pool coverage. v1 artifacts immutable; no v2 instances yet."
+}

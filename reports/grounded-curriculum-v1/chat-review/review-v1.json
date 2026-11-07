@@ -1,0 +1,511 @@
+{
+  "state": "BLOCKED_PREBUILD_REVIEW",
+  "surfaces_sha256": "91f49438fdbe41ed4df583004ddbdc8d313532ea9c260ed8d8cdec0cc6dd21b4",
+  "families_reviewed": 66,
+  "source_snapshot": "surfaces-reviewed-snapshot.py",
+  "required_equivalence_groups": {
+    "value_retention_rendering": [
+      "recall/identifier-recall",
+      "recall/format-recall",
+      "recall/quoted-identifier"
+    ],
+    "apology_removal_preserve_reason": [
+      "fulfillment/polite-decline",
+      "fulfillment/grounded-apology"
+    ],
+    "missing_destination_then_dispatch": [
+      "clarification/missing-destination",
+      "clarification/missing-decision"
+    ],
+    "agent_object_location_voice": [
+      "transformations/condense-notice",
+      "transformations/active-voice"
+    ],
+    "single_binding_overwrite": [
+      "corrections/destination-change",
+      "corrections/custodian-change",
+      "corrections/quantity-amendment",
+      "corrections/rename-object"
+    ],
+    "binary_binding_lookup": [
+      "facts/storage",
+      "facts/responsibilities",
+      "facts/material-record",
+      "facts/capacity-record",
+      "facts/access-condition",
+      "recall/paired-recall"
+    ]
+  },
+  "additional_grouping_question": [
+    "clarification/missing-recipient",
+    "clarification/ambiguous-object",
+    "clarification/unspecified-object-action"
+  ],
+  "reviews": [
+    {
+      "id": "fulfillment/service-notice",
+      "split": "train",
+      "canonical_review_group": "notice_reorder",
+      "finding": "Actual two-sentence notice includes outage and available collection; followup correctly reverses sentences without changing facts.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/volunteer-invitation",
+      "split": "train",
+      "canonical_review_group": "invitation_style",
+      "finding": "Produces invitation, task/place and joining contact; formal revision adds no schedule or unsupported activity.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/equipment-reminder",
+      "split": "train",
+      "canonical_review_group": "reminder_reorder",
+      "finding": "Reminds named borrower to return compass and case; revised item ordering is correct.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/safe-order",
+      "split": "train",
+      "canonical_review_group": "ordered_instructions",
+      "finding": "Securing empty stand precedes sign placement; holder of fasteners retained; explanation restates supplied ordering rather than inventing a safety mechanism.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/availability-update",
+      "split": "train",
+      "canonical_review_group": "status_contrast",
+      "finding": "Separates ready-for-inspection object from object still awaiting assembly; followup retains both statuses.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/polite-decline",
+      "split": "train",
+      "canonical_review_group": "apology_removal_preserve_reason",
+      "finding": "Direct refusal and supplied reservation reason; apology removed in second answer. Same construction as development grounded-apology.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/grounded-explanation",
+      "split": "train",
+      "canonical_review_group": "mechanism_explanation",
+      "finding": "Sleeve prevents rubbing in transit; separation-versus-counting answer is supported by supplied purpose.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/two-stage-plan",
+      "split": "train",
+      "canonical_review_group": "plan_sequence",
+      "finding": "Actually gives the two requested steps in order; predecessor answer identifies seam inspection.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/grounded-apology",
+      "split": "validation",
+      "canonical_review_group": "apology_removal_preserve_reason",
+      "finding": "Preserves delay, missing part and unavailable estimate; apology removal overlaps training polite-decline. Named recipient is not addressed explicitly, a minor fulfillment weakness rather than fabricated fact.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/question-draft",
+      "split": "validation",
+      "canonical_review_group": "conditional_inquiry",
+      "finding": "Asks the actual unknown policy question; conditional second question does not assume acceptance.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "fulfillment/thank-you",
+      "split": "validation",
+      "canonical_review_group": "gratitude_style",
+      "finding": "Expresses thanks for the specified latch repair only; warmer revision does not invent other help.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/storage",
+      "split": "train",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Correctly binds two objects to different locations and retrieves the other binding; binary-lookup canonical group required.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/responsibilities",
+      "split": "train",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Departure answer adds at-place although source explicitly locates only arrivals. Make shared location explicit; binary-lookup group.",
+      "semantic_status": "clarify_source_scope"
+    },
+    {
+      "id": "facts/material-record",
+      "split": "train",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Felt/cotton bindings correct; negative both-cotton answer supported. Binary-lookup/contrast variant, not a wholly separate semantic family.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/permission-record",
+      "split": "train",
+      "canonical_review_group": "role_permissions",
+      "finding": "Only-remover restriction supports denial that inspection permission grants removal.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/route-order",
+      "split": "train",
+      "canonical_review_group": "ordered_locations",
+      "finding": "Correct successor and terminal-location queries on the given three-stop list.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/membership",
+      "split": "train",
+      "canonical_review_group": "membership",
+      "finding": "BLOCKER: includes A/B is not an exhaustive stitching roster; membership in transport does not exclude stitching. Add explicit exhaustiveness/exclusivity.",
+      "semantic_status": "blocker"
+    },
+    {
+      "id": "facts/exception",
+      "split": "train",
+      "canonical_review_group": "exception",
+      "finding": "Applies exception only to named crate; retains stated general seal rule for the other listed crate.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/capacity-record",
+      "split": "train",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Copies supplied numeric attributes without arithmetic; other-object query is binary lookup.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/ownership",
+      "split": "validation",
+      "canonical_review_group": "ownership_vs_custody",
+      "finding": "Explicit owner versus only temporary custodian supports distinction; does not claim external property-law rule.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/access-condition",
+      "split": "validation",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Correctly retrieves location-specific entry condition and other condition; overlaps training binary binding lookups.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "facts/source-conflict",
+      "split": "validation",
+      "canonical_review_group": "source_precedence",
+      "finding": "Uses explicitly authoritative amended log and distinguishes historical destination; source selection differs from executing a new update.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/destination-change",
+      "split": "train",
+      "canonical_review_group": "single_binding_overwrite",
+      "finding": "Replaces a single destination and answers current state; one-binding overwrite group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/custodian-change",
+      "split": "train",
+      "canonical_review_group": "single_binding_overwrite",
+      "finding": "Replaces responsible person and retains object; one-binding overwrite group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/quantity-amendment",
+      "split": "train",
+      "canonical_review_group": "single_binding_overwrite",
+      "finding": "Copies corrected identifier, no arithmetic; one-binding overwrite group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/remove-member",
+      "split": "train",
+      "canonical_review_group": "remove_member",
+      "finding": "Removes exactly the named member and preserves remaining two.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/add-member",
+      "split": "train",
+      "canonical_review_group": "add_member",
+      "finding": "Adds second inspector while preserving first; not replacement.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/permission-revoke",
+      "split": "train",
+      "canonical_review_group": "revoke",
+      "finding": "Revocation changes permission to false; no stale permission in final answer.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/rename-object",
+      "split": "train",
+      "canonical_review_group": "single_binding_overwrite",
+      "finding": "New rack name supersedes old; one-binding overwrite with a renamed attribute.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/swap-roles",
+      "split": "train",
+      "canonical_review_group": "swap_roles",
+      "finding": "Swaps both assignments and correctly answers packing responsibility.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/retract-change",
+      "split": "validation",
+      "canonical_review_group": "cancel_unapproved",
+      "finding": "Unapproved draft never changes applicable destination; cancellation preserves original state.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/selective-update",
+      "split": "validation",
+      "canonical_review_group": "selective_update",
+      "finding": "Updates only the second assignment while explicitly preserving the first; meaningful two-binding composition.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "corrections/status-change",
+      "split": "validation",
+      "canonical_review_group": "partial_status_update",
+      "finding": "Updates inspection to complete while packing remains unstarted; does not infer overall readiness.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/condense-notice",
+      "split": "train",
+      "canonical_review_group": "agent_object_location_voice",
+      "finding": "BLOCKER: responsibility for inspection does not entail personally inspecting. Source must identify actual inspector. Active/passive construction overlaps active-voice.",
+      "semantic_status": "blocker"
+    },
+    {
+      "id": "transformations/polite-request",
+      "split": "train",
+      "canonical_review_group": "request_tone",
+      "finding": "Retains movement destination and arrival notification while adjusting courtesy/directness.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/combine-facts",
+      "split": "train",
+      "canonical_review_group": "combine_reorder",
+      "finding": "Retains actor/action bindings and correctly reverses clause order.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/active-voice",
+      "split": "train",
+      "canonical_review_group": "agent_object_location_voice",
+      "finding": "Preserves actual repair agent/object/place in active then passive voice; same program as corrected compression_voice.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/separate-actions",
+      "split": "train",
+      "canonical_review_group": "sentence_boundary",
+      "finding": "Preserves collection and inspection actors/location across sentence-boundary changes.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/remove-duplication",
+      "split": "train",
+      "canonical_review_group": "deduplicate",
+      "finding": "Removes duplicate readiness claim; retains collection actor/place when combining sentences.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/plain-language",
+      "split": "train",
+      "canonical_review_group": "simplify_condition",
+      "finding": "Preserves permission prerequisite; correctly distinguishes future condition from a completed grant.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/positive-negative",
+      "split": "train",
+      "canonical_review_group": "reason_selection",
+      "finding": "Uses unavailable instead of forbidden phrase; selects supplied inspection reason only.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/third-person",
+      "split": "validation",
+      "canonical_review_group": "person_tense",
+      "finding": "Requested person substitution and then requested tense conversion; past tense is an explicit transformation, not unsolicited factual invention.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/headline",
+      "split": "validation",
+      "canonical_review_group": "heading_sentence",
+      "finding": "Heading retains readiness/place; followup restores inspection fact from complete history. Useful history-dependent restoration.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "transformations/quote-content",
+      "split": "validation",
+      "canonical_review_group": "quoted_request",
+      "finding": "Preserves mover/reference-object direction in paraphrase and identifies the object requested to move.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/missing-destination",
+      "split": "train",
+      "canonical_review_group": "missing_destination_then_dispatch",
+      "finding": "Asks missing destination, then actually drafts dispatch instruction with supplied destination; canonical missing-destination group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/missing-recipient",
+      "split": "train",
+      "canonical_review_group": "missing_recipient",
+      "finding": "Asks recipient, then uses both later recipient and location in invitation; action-slot clarification overlap requires grouping/explicit program justification.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/ambiguous-object",
+      "split": "train",
+      "canonical_review_group": "ambiguous_item",
+      "finding": "Clarifies between two objects then drafts requested inspection message; no claim of sending it.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/missing-reason",
+      "split": "train",
+      "canonical_review_group": "missing_cause",
+      "finding": "Asks missing cause, then explains using supplied replacement hinge. No invented initial reason.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/unknown-contact",
+      "split": "train",
+      "canonical_review_group": "missing_record",
+      "finding": "Does not invent responsible person; uses supplied record after clarification.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/unspecified-choice",
+      "split": "train",
+      "canonical_review_group": "missing_criteria",
+      "finding": "Asks comparative facts and need, then chooses the explicitly matching lightweight object.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/missing-sequence",
+      "split": "train",
+      "canonical_review_group": "missing_steps",
+      "finding": "Asks absent procedure; later instruction preserves supplied base-before-handle order.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/unknown-status",
+      "split": "train",
+      "canonical_review_group": "missing_status",
+      "finding": "Declines unsupported inspection conclusion, then uses supplied positive result.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/unspecified-object-action",
+      "split": "validation",
+      "canonical_review_group": "missing_return_object",
+      "finding": "Asks return object, then provides reminder. Closely overlaps train missing command-argument clarification.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/ambiguous-pronoun",
+      "split": "validation",
+      "canonical_review_group": "pronoun_ambiguity",
+      "finding": "Explicitly unresolved referent is clarified before assigning collection to supplied person; no prior referent guess.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "clarification/missing-decision",
+      "split": "validation",
+      "canonical_review_group": "missing_destination_then_dispatch",
+      "finding": "Same missing destination -> supplied choice -> dispatch program as training missing-destination; alternatives are a variant, not disjoint construction.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/identifier-recall",
+      "split": "train",
+      "canonical_review_group": "value_retention_rendering",
+      "finding": "Retains supplied identifier without arithmetic; value-retention/rendering group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/paired-recall",
+      "split": "train",
+      "canonical_review_group": "binary_binding_lookup",
+      "finding": "Retains two person-object assignments and reverses retrieval order; binary-binding lookup group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/sequential-recall",
+      "split": "train",
+      "canonical_review_group": "sequence_recall",
+      "finding": "Arrow rendering and predecessor query preserve the given action sequence.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/format-recall",
+      "split": "train",
+      "canonical_review_group": "value_retention_rendering",
+      "finding": "Copies value inside delimiters then into sentence; same construction as development quoted-identifier.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/two-item-list",
+      "split": "train",
+      "canonical_review_group": "ordered_pair_recall",
+      "finding": "Exact ordered slash-delimited pair and correct second-item recall.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/reason-recall",
+      "split": "train",
+      "canonical_review_group": "reason_recall",
+      "finding": "Retains supplied postponement cause; does not invent alternatives.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/distinguish-input",
+      "split": "train",
+      "canonical_review_group": "input_vs_record",
+      "finding": "Preserves requested versus recorded identifier and retrieves original, not later recorded value.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/draft-not-action",
+      "split": "train",
+      "canonical_review_group": "draft_vs_execution",
+      "finding": "Produces actual draft, then honestly distinguishes in-chat text from external delivery.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/reason-and-place",
+      "split": "validation",
+      "canonical_review_group": "two_fact_recall",
+      "finding": "Recalls both destination and cause; this conjunctive two-relation task is meaningfully richer than cause-only recall.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/quoted-identifier",
+      "split": "validation",
+      "canonical_review_group": "value_retention_rendering",
+      "finding": "Copies identifier in quotes then sentence; cross-split duplicate of format-recall/value-retention group.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    },
+    {
+      "id": "recall/noted-limitation",
+      "split": "validation",
+      "canonical_review_group": "unknown_recall",
+      "finding": "Separates known assembly from missing inspection evidence; cannot infer passing status.",
+      "semantic_status": "supported_subject_to_canonical_split_and_instance_checks"
+    }
+  ],
+  "private_cases_read": false,
+  "candidates_read": false,
+  "admission": false
+}

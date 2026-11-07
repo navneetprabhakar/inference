@@ -68,6 +68,15 @@ class PublicCustodyTests(unittest.TestCase):
         self.assertEqual(set(structured_calls(history)), {signature(a), signature(b)})
         self.assertIn(json.dumps(original), texts)
 
+    def test_discarded_parent_turn_is_screened_individually(self):
+        index, _, _ = public_index(case([turn('Remember violet folio', [])]))
+        parent = 'User: Remember violet folio\nAssistant: Several unrelated details follow here.\nUser: A later unrelated request.\nAssistant: A different response.'
+        selected = [dict(role='user', text='A later unrelated request.'),
+                    dict(role='assistant', text='A different response.')]
+        texts, _ = candidate_content(dict(text=parent, selected_history_json=json.dumps(selected)), 'chat')
+        self.assertIn('Remember violet folio', texts)
+        self.assertTrue(any(index.matches(t) for t in texts))
+
     def test_builder_self_check_cannot_admit_to_screen(self):
         with tempfile.TemporaryDirectory(prefix='custody-test-', dir=ROOT/'data') as tmp:
             p = Path(tmp)
