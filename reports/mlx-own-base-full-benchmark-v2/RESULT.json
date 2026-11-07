@@ -1,0 +1,55 @@
+{
+  "state": "incomplete_resource_monitor_failure_not_performance_result",
+  "run": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-mlx-full-benchmark-02",
+  "phase": "Aupdates-mlx-gpu-fp32",
+  "reserved_targets_cumulative": 76800,
+  "committed_targets_cumulative": 68608,
+  "pending": {
+    "phase": "Aupdates-mlx-gpu-fp32",
+    "period": "correctness",
+    "targets": 8192,
+    "kind": "correctness-update",
+    "operation": 24
+  },
+  "worker_active_seconds_cumulative": 108.32235474768095,
+  "current_attempt_wall_seconds": 94.83262920379639,
+  "watchdog": {
+    "exit_code": -15,
+    "watchdog_reason": "Command '['ps', '-axo', 'pgid=,rss=']' timed out after 0.5 seconds",
+    "seconds": 18.848465458024293,
+    "within_deadline": true,
+    "child_pid": 4260,
+    "hard_stop_inflight_state": "unknown_until_durable_events_reconciled"
+  },
+  "mlx_memory_events": [
+    {
+      "event": "gpu_memory",
+      "phase": "Aupdates-mlx-gpu-fp32",
+      "period": "correctness",
+      "wall": 1794082831.779223,
+      "active": 1493317656,
+      "cache": 1196,
+      "driver": null,
+      "driver_unavailable": true,
+      "peak": 1493318452
+    },
+    {
+      "event": "gpu_memory",
+      "phase": "Aupdates-mlx-gpu-fp32",
+      "period": "correctness",
+      "wall": 1794082844.433095,
+      "active": 1493384288,
+      "cache": 16613925016,
+      "driver": null,
+      "driver_unavailable": true,
+      "peak": 14251263168
+    }
+  ],
+  "ledger_sha256": "8d0d2a3667ba76d757f9df42ff430c66e019809e330b7dbd4727c0124815cc84",
+  "limitations": [
+    "First MLX update completed; second reserved operation has no durable commit. No refund of attempts.",
+    "Peak14251263168bytes exceeds12GiB; sampled post-update active guard did not detect transient peak. No resource-fit claim.",
+    "No full two-update MLX parity, sustained speed or native-resume gate completed.",
+    "Do not change frozen tolerances or repeat same benchmark automatically. Investigate sequential microbatch compilation under a new prospective experiment."
+  ]
+}

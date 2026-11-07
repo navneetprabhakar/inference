@@ -1,0 +1,89 @@
+{
+  "state": "failed_bounded_benchmark_no_sustained_result",
+  "source_files": {
+    "terminal.json": "d15015d5c7374acad476cd0424805c287b2a0afb07f15abdd0b1d24ba1a203f3",
+    "benchmark-ledger.json": "8d0d2a3667ba76d757f9df42ff430c66e019809e330b7dbd4727c0124815cc84",
+    "launch.json": "2273d10a72f5cc6ed9d775e763dd95788909befc8426d59fdd3d81bd72475d5d",
+    "benchmark-events.jsonl": "052b7f3e15e2e5531de8884c4a4ce6ca0a878e9aabb5fffbd836974256f0b56d",
+    "phases/Aupdates-mlx-gpu-fp32/watchdog.json": "0c7b4af6c6f55dce988964c8819650fd7baef2653ab7cf28a936505e067f91dc"
+  },
+  "completed_phase_count": 19,
+  "cumulative_reserved_targets": 76800,
+  "cumulative_committed_targets": 68608,
+  "run02_reserved_targets": 67584,
+  "run02_committed_targets": 59392,
+  "pending": {
+    "phase": "Aupdates-mlx-gpu-fp32",
+    "period": "correctness",
+    "targets": 8192,
+    "kind": "correctness-update",
+    "operation": 24
+  },
+  "ledger_active_seconds_cumulative": 108.32235474768095,
+  "run02_conservative_wall_seconds": 94.83262920379639,
+  "combined_conservative_wall_seconds": 118.40554165840149,
+  "mlx_memory_events": [
+    {
+      "event": "gpu_memory",
+      "phase": "Aupdates-mlx-gpu-fp32",
+      "period": "correctness",
+      "wall": 1794082831.779223,
+      "active": 1493317656,
+      "cache": 1196,
+      "driver": null,
+      "driver_unavailable": true,
+      "peak": 1493318452
+    },
+    {
+      "event": "gpu_memory",
+      "phase": "Aupdates-mlx-gpu-fp32",
+      "period": "correctness",
+      "wall": 1794082844.433095,
+      "active": 1493384288,
+      "cache": 16613925016,
+      "driver": null,
+      "driver_unavailable": true,
+      "peak": 14251263168
+    }
+  ],
+  "mlx_update_commits": [
+    {
+      "event": "committed",
+      "phase": "Aupdates-mlx-gpu-fp32",
+      "period": "correctness",
+      "wall": 1794082844.441657,
+      "operation": 23,
+      "targets": 8192,
+      "kind": "correctness-update",
+      "metrics": {
+        "loss": 4.514030933380127,
+        "norm": 1.52284836769104,
+        "seconds": 12.552388583077118
+      }
+    }
+  ],
+  "watchdog": {
+    "exit_code": -15,
+    "watchdog_reason": "Command '['ps', '-axo', 'pgid=,rss=']' timed out after 0.5 seconds",
+    "seconds": 18.848465458024293,
+    "within_deadline": true,
+    "child_pid": 4260,
+    "hard_stop_inflight_state": "unknown_until_durable_events_reconciled"
+  },
+  "retained_run02_bytes": 2987084412,
+  "artifact_metadata": {
+    "ref-updates.npz": {
+      "bytes": 1493405828
+    },
+    "neutral-source.json": {
+      "bytes": 25572
+    },
+    "neutral-source.npz": {
+      "bytes": 1493455110
+    },
+    "ref-updates.json": {
+      "bytes": 453
+    }
+  },
+  "model_state_note": "Only neutral source and Torch reference artifacts remain; first MLX update was ledger committed but no accepted MLX endpoint checkpoint/phase comparison was published. Second update reservation stays unknown/nonrefundable."
+}
