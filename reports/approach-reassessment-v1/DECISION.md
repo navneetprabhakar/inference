@@ -1,5 +1,11 @@
 # Approach reassessment: change the learning plan
 
+## Current user-authorized parameter ceiling
+
+On 2026-11-08, after this review, the user explicitly authorized increasing the model ceiling to **1 billion total parameters**. This supersedes the earlier200M ceiling for prospective model selection. Random initialization, own-weight ancestry, local-only execution and zero paid compute remain in force; the user did not authorize pretrained student substitution or paid/cloud training. Historical experiments and their parameter counts/specifications stay unchanged.
+
+Do not automatically instantiate a1B model. Select architecture and size using measured training throughput, full optimizer/activation memory, tokenizer efficiency and attainable processed-data budget. A larger undertrained model is not an established improvement. The already frozen124M MLX benchmark remains a useful baseline and is not resized in place. Any larger-model feasibility run requires a new bounded disposable specification before execution. References below to the former cap describe the research scope at that time, not the current authorization.
+
 2026-11-08. User requested parallel primary-source research of open-source conversational models, their training and datasets. This decision supersedes treating narrative-only continuation as the default recovery run. It does not activate GPU training, change acceptance, or substitute pretrained student weights.
 
 ## Decision and rationale
