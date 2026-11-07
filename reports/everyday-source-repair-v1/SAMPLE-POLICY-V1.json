@@ -1,0 +1,25 @@
+{
+  "state": "prospective_train_only_diagnostic_sample_not_admitted",
+  "source": "data/everyday-source-review-v1",
+  "output": "data/everyday-quality-sample-v1",
+  "intake_policy_sha256": "c671e28119bce08479b64dc1c0eaebe4a2e72d88f2913ca67fa988028829f350",
+  "expected_counts": {
+    "old_train": 770,
+    "excluded": 41,
+    "unknown": 319
+  },
+  "seed": 20261110,
+  "records": 64,
+  "per_quartile": 16,
+  "length": "sum(len(message.content)) over all original messages, Unicode code points; includes original system and every turn",
+  "quartiles": "Sort eligible old_train by (full_history_character_length,doc_id); quartile=floor(rank*4/770)",
+  "within_quartile": "Partition by old_whole=0 or1; order nonempty cells by SHA256 canonical JSON [everyday-quality-cell-v1,seed,quartile,old_whole]; order rows in each cell by SHA256 canonical JSON [everyday-quality-row-v1,seed,doc_id],doc_id; round-robin nonempty cells until16 distinct histories selected",
+  "limits": {
+    "seconds": 120,
+    "rss_bytes": 536870912,
+    "output_bytes": 10485760,
+    "free_disk_bytes": 21474836480
+  },
+  "scope": "One fixed diagnostic sample, not a population quality estimate or certification. 41 excluded and319 UNKNOWN remain unselected/quarantined; all770 retain old TRAIN status. No DEV creation, tokenization, truncation, resampling or automatic admission. Root full-history custody and whole-history format-fit remain prerequisites. No770-record manual semantic registry is required by this policy.",
+  "selector_sha256": "fccbcfc9ab90d6a94436feeed597eb8be51e55ebc09f575650060f3d29629cd9"
+}
