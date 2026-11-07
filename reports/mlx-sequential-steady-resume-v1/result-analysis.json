@@ -1,0 +1,95 @@
+{
+  "state": "complete_analysis_of_incomplete_experiment_Torch_retained",
+  "pins": {
+    "spec.json": "e28d681e3ad0c6b8b90bba464355ecd6328d6eebfda43b4f7eaaa1e6fadfdf70",
+    "terminal.json": "f8e811665f162f1fe031dd4b9e5d96a0fdf9013dce283e0e61ed4c1fe9d6103c",
+    "ledger.json": "84f02c15762c7198f30f9d34a02cd7f163fe4f45ea390590d79804d3e551fa8c",
+    "events.jsonl": "ea18aa95747880e3e6ee999325c7bdbf37f6a6b9122313d847f2e73e943984bf",
+    "phases/steady/result.json": "cd8f671aee3a91f15ee3ba2bbc5c74cab4eca1cf20891fe3534bf871db1cdbea",
+    "phases/reference/result.json": "12de03895873d39efd40e1e68594d738a1055056210d4a6757fc337e071800ee",
+    "phases/pause/result.json": "d734d44eea3ec2910acd13212987eb16bd8df6ba362cdcd474e2f4e195f25a71",
+    "phases/resume/worker.stderr": "aa3aeee5f9a465a76ebd896e32ac6c5724d5135b83ff2ca56e3124b454b1036b",
+    "phases/resume/watchdog.json": "434c43e5353dd2f7dc26aa45e4e628fc34e807fc5126b95823214a2b391c3b0e",
+    "native/accepted.json": "a7ae80c54399fc5a2dc70e366a4c47661f4c35f67ddd30006142ca68fc176fe0"
+  },
+  "terminal": {
+    "state": "incomplete",
+    "error_type": "RunnerStop",
+    "error": "phase incomplete",
+    "ledger": {
+      "reserved_targets": 869376,
+      "committed_targets": 869376,
+      "pending": null
+    },
+    "wall_seconds": 695.9913614999969,
+    "no_retry": true
+  },
+  "steady": {
+    "prescribed_seconds": 600,
+    "observed_seconds": 600.0100597499404,
+    "last_commit_seconds": 586.8420045829844,
+    "updates": 92,
+    "targets": 753664,
+    "targets_per_second": 1256.1066666666666,
+    "bins_100_seconds": [
+      155648,
+      131072,
+      122880,
+      122880,
+      114688,
+      106496
+    ],
+    "last200_targets_per_second": 1105.92,
+    "idle_in_denominator": true
+  },
+  "resource_maxima": {
+    "active": 1991129256,
+    "peak": 4337259704,
+    "cache": 1103109288,
+    "rss": 3124592640
+  },
+  "post_clear_cache_max": 0,
+  "resume_watchdog": {
+    "exit_code": 1,
+    "watchdog_reason": null,
+    "seconds": 17.069300041999668,
+    "within_deadline": true,
+    "child_pid": 17204,
+    "hard_stop_inflight_state": null
+  },
+  "observed_resume_trace": [
+    {
+      "index": 2,
+      "loss": 4.376657485961914,
+      "norm": 1.7393009662628174,
+      "seconds": 6.115946333156899
+    },
+    {
+      "index": 3,
+      "loss": 4.636683940887451,
+      "norm": 1.702796220779419,
+      "seconds": 6.4228459999430925
+    }
+  ],
+  "observed_trace_deltas": [
+    {
+      "index": 2,
+      "loss_absolute": 4.76837158203125e-07,
+      "norm_absolute": 0.0
+    },
+    {
+      "index": 3,
+      "loss_absolute": 0.0,
+      "norm_absolute": 1.1920928955078125e-07
+    }
+  ],
+  "pause_vs_reference_second_update_norm_absolute": 2.384185791015625e-07,
+  "checkpoint_io": {
+    "save_seconds": 1.5369915829505771,
+    "read_seconds": 0.8170431670732796,
+    "bytes": 1493412468
+  },
+  "retained_output_bytes": 1494102550,
+  "unknown": "Failed actual digest was not persisted. Cannot identify which array or metadata field differed, compute state error magnitude, or attribute to serialization vs process/device arithmetic. Scalar differences already exist in pause branch before serialization.",
+  "action": "Root selected existing Torch backend; no rerun, criterion change or production MLX port."
+}

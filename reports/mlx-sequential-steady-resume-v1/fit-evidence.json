@@ -1,0 +1,61 @@
+{
+  "state": "source_fit_evidence_only",
+  "pins": {
+    "spec.json": "bc13828ff7c698460d1fd518b3d701c7e84976c5b686613e9cab061c159b2903",
+    "terminal.json": "462a81bc47a2d6fcffaa6ce9c6c6ac434487082aaef58b6ab19aa27a0c795014",
+    "watchdog.json": "b1bef4505086294a34fa0941b729f7049b9d70e8fda16b643a9d6c342044da88",
+    "ledger.json": "6df42b04b8c125f23937e01d6d94440773a6ea6f0769b02018503d428305c65f",
+    "result.json": "f9438d27be8d757c2e4675f9faf413a23373a89e668f2b50c6b0559e779d08a8",
+    "events.jsonl": "aee6cae4c7a739c800bd0dcf6b0647da11c8267b35d6933bff6789f0d2da4ae4"
+  },
+  "terminal": {
+    "state": "two_update_fit_only",
+    "watchdog": {
+      "exit_code": 0,
+      "watchdog_reason": null,
+      "seconds": 14.904373334022239,
+      "within_deadline": true,
+      "child_pid": 7496,
+      "hard_stop_inflight_state": null
+    },
+    "ledger": {
+      "reserved_targets": 16384,
+      "committed_targets": 16384,
+      "pending": null
+    },
+    "wall_seconds": 14.905105749843642,
+    "no_retry": true
+  },
+  "peak_bytes": 4356296888,
+  "peak_gib": 4.057117633521557,
+  "updates": [
+    {
+      "update": 1,
+      "loss": 4.514030933380127,
+      "norm": 1.5228484869003296,
+      "seconds": 4.373902208171785
+    },
+    {
+      "update": 2,
+      "loss": 4.605081558227539,
+      "norm": 1.7619489431381226,
+      "seconds": 4.225123875075951
+    }
+  ],
+  "comparison": {
+    "weight": {
+      "max_abs": 1.0542571544647217e-06,
+      "update_delta_relative_l2": 0.00010795696746720361
+    },
+    "m": {
+      "max_abs": 9.306531865149736e-07
+    },
+    "v": {
+      "max_abs": 6.55418261885643e-08
+    }
+  },
+  "limitations": [
+    "Two first-call updates only, not a sustained throughput result.",
+    "Native fullmodel freshprocess resume not yet tested."
+  ]
+}

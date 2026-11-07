@@ -1,0 +1,12 @@
+{
+  "state": "root_diagnosed_false_sqlite_integrity_failure",
+  "run": "data/explanatory-packed-v2",
+  "session": 75224,
+  "exit_code": 1,
+  "cause": "sqlite3.Row compared directly with tuple after setting row_factory; Row[0] is ok, but Row != (ok,). All13 historical input lanes had been indexed; candidate overlap never started.",
+  "tiny_reproduction": {
+    "row_equals_tuple": false,
+    "first_column": "ok"
+  },
+  "next": "Preserve v2; v3 corrects result extraction and adds targeted fixture and failuretrace context. No selection-policy change."
+}

@@ -1,0 +1,30 @@
+{
+  "state": "CPU_prepared_pending_root_review",
+  "draft_sha256": "15dcab1835c26fbc4b3715a7af154d8da24f3c102bba429c9d17ab460cacb7c6",
+  "distinct_cpu_test_groups": 7,
+  "exact_fresh_process_native_resume": true,
+  "actual_source_fit_code_metadata": "PASS_no_model_or_GPU",
+  "code_sha256": {
+    "mlx_sequential_steady.py": "09cda27a23baf9e00229b059789ede216290aa8192d82b8cb22a0d015c71b8e9",
+    "mlx_sequential_native.py": "d1462fe34a7afbb16e55ba68871ac93dcf351942f3b02a5613a90ef2cf17d140",
+    "verify_mlx_sequential_steady.py": "506053b8d13dbd349126c9674fb71adc6b42dd43f1ceaf8cbbb01c51f53186a1"
+  },
+  "limits": {
+    "wall_seconds": 1200,
+    "attempted_targets": 2212864,
+    "output_bytes": 2147483648,
+    "free_disk_bytes": 21474836480
+  },
+  "stages": [
+    "steady",
+    "reference",
+    "pause",
+    "resume"
+  ],
+  "limitations": [
+    "No GPU stage execution yet.",
+    "Native resume CPU fixture only until fullmodel stage passes.",
+    "Compiled callable identity preserved during restore; internal graph cache hits are not independently instrumented.",
+    "HistoricalTorch throughput comparison is not matched simultaneousprecision/data/hardware experiment."
+  ]
+}

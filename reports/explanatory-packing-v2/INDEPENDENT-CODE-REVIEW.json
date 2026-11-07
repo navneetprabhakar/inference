@@ -1,0 +1,27 @@
+{
+  "state": "PASS_independent_code_review_with_nonblocking_hardening_recommendation",
+  "verifier_sha256": "63a2d7a37b58aaabfc5f6cc875cce3a781b15ed1a6d9624665974abb98a6a1fb",
+  "builder_sha256": "96ed9c971e9f185b2d1868a5e7a85eb0bfed7564182529449ddbfb72fb50a007",
+  "protocol_sha256": "deb65ed484689c3c67f53d98ef041bd84b8680a6e5eaa6422299ce7392014f48",
+  "selector_sha256": "7c33a2aaf57171323677032eae52a5d99eceeea368f8d9654011e312222650f8",
+  "execution_performed": false,
+  "private_inputs_accessed": false,
+  "blocking_findings": [],
+  "hardening_recommendation": "Before verifier freeze explicitly require approved plan state, exact six historical prose and six SFT inventory entries and fixed limits; current prepare_plan already fixes these, so no actual omitted source was found.",
+  "coverage": [
+    "Historical entire indexed train/validation streams: SHA,size,contiguous ranges,EOT,decode/reencode,normalized training-text identity and documented raw-parent exceptions",
+    "All original/grounded SFT candidate whole-history text plus both narrative partitions",
+    "Generated text and seed against historical/narrative normalized exact and six-of-bottom12 CRC32 fingerprints",
+    "Candidate existing relation groups and generated-text edges unioned with minimum-row representative",
+    "Full group exclusion closure for custody, finite15holds and historical overlap",
+    "Prospective salts, whole eligible pool split and stable row ordering; no cap/refill",
+    "Every packed document independently retokenized, binary/index compared, no trailing rows/bytes",
+    "Complete aggregate counts and independent128document short/long validation selection plus hashes",
+    "Final input/output hashes and failure-preserving publication"
+  ],
+  "limitations": [
+    "Separate replay code shares the original builder author; this report is independent code review, not yet independent execution evidence.",
+    "Approximate lexical policy can miss short embedded utterances and semantic paraphrases; no semantic/factual certification.",
+    "Current approval pertains only to recorded verifier hash; subsequent hardening needs delta review."
+  ]
+}

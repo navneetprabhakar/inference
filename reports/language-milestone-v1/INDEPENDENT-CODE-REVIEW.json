@@ -1,0 +1,39 @@
+{
+  "state": "reviewed_code_no_numeric_or_checkpoint_contract_blocker",
+  "scope": "Read-only code review; no model, GPU, corpus scan, actual checkpoint or runtime test. Root activation review remains required.",
+  "files": {
+    "own_base_language_milestone.py": "efce78ef123012dd5ca46d469cf9ea1a9890c86010f8e91affd23fdeefbf8aee",
+    "own_base_language_continue.py": "a1771c75871ba1ac75ba07a889e612295c653460af4b3af636b62d56080b68ff",
+    "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+    "reports/language-milestone-v1/PROTOCOL.md": "6236c435345d6d051d0fb5dafb3b2c70f702f2298c8958826b9364f70ba12db5",
+    "reports/language-milestone-v1/prepare_protocol.py": "b4af6728b07dccc9caa44e0155462ee15c1135a13ce86d99c791d7d9dd57f3f0"
+  },
+  "verified": [
+    "Original foundation budget SHA pins exact diagnostic JSON, corpus manifest and validation-block inventory; Corpus verifies original shard bytes.",
+    "Frozen document_losses uses all 256 FP32 length512 blocks; frozen language_diagnostics preserves 32 binary two-member pairs and 32 greedy continuations up to48 tokens including early EOT.",
+    "Masked pair targets count answer positions; input and attention count full prefix+answer contexts. Raw generation reserves one target but full growing input context per forward.",
+    "Whole worst-case token/input/attention/time reservations persist after failure and early EOT. Per-forward reserves precede forward invocation.",
+    "Request binds exact accepted checkpoint bytes, signed paused campaign, committed cursor, latest inventory, immutable protocol and own initialization. Root decision is separate."
+  ],
+  "practical_findings": [
+    {
+      "severity": "policy_gap_before_activation_if_AC_required",
+      "finding": "No AC check in evaluator worker or launcher, and protocol does not state AC. Existing guards.Guard only logs battery; cannot claim inherited AC enforcement.",
+      "recommendation": "If AC is mandatory, explicitly require/check before allocation and at periodic resource checks."
+    },
+    {
+      "severity": "evidence_semantics",
+      "finding": "completed_forward event is emitted immediately after asynchronous MPS forward returns, before explicit device synchronization. Frozen CE/item synchronizes later, so completed final result remains credible but interrupted journal completion is overstated.",
+      "recommendation": "Rename event to dispatched_forward or synchronize before completion event."
+    },
+    {
+      "severity": "reproducibility",
+      "finding": "Protocol pins Python executable and code bytes, but neither verifies nor records actual Torch/NumPy versions.",
+      "recommendation": "Pin reviewed package versions and record them in receipt before first real evaluation."
+    }
+  ],
+  "other_limits": [
+    "Attention elements intentionally omit head/layer multipliers and are documented as sequence attention cells.",
+    "Root must inspect both completed result and clean watchdog receipt before decision; evaluator does not issue acceptance."
+  ]
+}
