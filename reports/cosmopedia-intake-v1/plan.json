@@ -1,0 +1,91 @@
+{
+  "state": "prepared_for_root_review_not_executed",
+  "source": {
+    "dataset": "HuggingFaceTB/smollm-corpus",
+    "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+    "path": "cosmopedia-v2/train-00000-of-00104.parquet",
+    "url": "https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus/resolve/3ba9d605774198c5868892d7a8deda78031a781f/cosmopedia-v2/train-00000-of-00104.parquet",
+    "sha256": "5a25721146377d6e7f288c244e991df93e672b8cc3e535fd4aac5da4cdb1491d",
+    "bytes": 1174424341,
+    "license_card": "odc-by",
+    "publisher_tokenizer": "Mistral-7B",
+    "selection": "smallest official whole shard by metadata size then path; no content inspection"
+  },
+  "output": "data/cosmopedia-intake-v1",
+  "limits": {
+    "compressed_bytes": 1342177280,
+    "additional_bytes": 3221225472,
+    "disk_floor_bytes": 21474836480,
+    "wall_seconds": 1800,
+    "rss_bytes": 1610612736
+  },
+  "cap_amendment": {
+    "original_proposal_bytes": 1073741824,
+    "new_bytes": 1342177280,
+    "reason": "all104 official shards exceed1GiB; smallest1174424341bytes,100682517bytes over original; root authorized1.25GiB prospectively; no ranges or source substitution"
+  },
+  "disk_forecast": {
+    "raw_exact_bytes": 1174424341,
+    "max_nonraw_output_bytes": 2046801131,
+    "worst_case_additional_bytes": 3221225472,
+    "required_start_free_bytes": 24696061952,
+    "observed_free_bytes": 221185507328,
+    "raw_rename_no_second_copy": true,
+    "no_full_text_extraction_copy": true
+  },
+  "expected_columns": [
+    "prompt",
+    "text",
+    "token_length",
+    "audience",
+    "format",
+    "seed_data"
+  ],
+  "sample": {
+    "seed": 20261108,
+    "count": 64,
+    "length": "four global rank quartiles using actualGPT2texttokens then source row tie-break;16perquartile",
+    "cells": "audience+format; hash ordered round robin across cells within each quartile; hash ordered rows without replacement; report omitted cells",
+    "selection_independent_of_quality": true,
+    "raw_text_and_prompt_preserved": true
+  },
+  "future_hooks": [
+    "stable revision/path/rowID",
+    "verbatimtextSHA256",
+    "NFKClowerwhitespacecollapsedtextSHA256",
+    "promptSHA256 forseed/familygrouping",
+    "rawparquet preserved forrootcustody andsourceprovenance"
+  ],
+  "pending": [
+    "root code/plan review before acquisition",
+    "64document manualqualityreview",
+    "independent verification",
+    "root custody/dedup andprospectivefamilysplit",
+    "admission"
+  ],
+  "pins": {
+    "reports/cosmopedia-intake-v1/intake.py": "060992c4545d38e897b5291dfa446a62a83cb63733b4fcebf5d5612a3bdaf732",
+    "reports/cosmopedia-intake-v1/source-tree.json": "5f6a4e287659f95e9057d63d6b31a7235015ce6cbf1dcb9e7eb8777799d77a51",
+    "reports/cosmopedia-intake-v1/source-README.md": "e09544d7132303ae6bbc6e156e984db0305d81561615476be49eabd4be4b8bed",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "data/tokenizer/encoder.json": "196139668be63f3b5d6574427317ae82f612a97c5d1cdaf36ed2256dbf636783",
+    "data/tokenizer/vocab.bpe": "1ce1664773c50f3e0cc8842619a93edc4624525b728b188a9e0be33b7726adc5",
+    "/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python": "1699bf8aa705a8bb71613bef5cdd7d7c8c9d9a188a841f41679aa9b5830b8f60",
+    "/Users/navneetprabhakar/Documents/git/image/inference/.venv/lib/python3.12/site-packages/pyarrow/__init__.py": "c43d79464ff3772907a7a2d50ccc61497d0ba717d80ddf01bac52d8d4b0578ed",
+    "/Users/navneetprabhakar/Documents/git/image/inference/.venv/lib/python3.12/site-packages/pyarrow/_parquet.cpython-312-darwin.so": "17b88c3fc926be9c631eb17df753e54dfbb37d6f0d5c4b25d1001127833aa082",
+    "/Users/navneetprabhakar/Documents/git/image/inference/.venv/lib/python3.12/site-packages/tokenizers/__init__.py": "148ecb122f3fee03be9abb1fe213dd85fbc691bf2ad2b437ff531533781a6a3a",
+    "/Users/navneetprabhakar/Documents/git/image/inference/.venv/lib/python3.12/site-packages/tokenizers/tokenizers.abi3.so": "899b244f19f1ddd6506c45ea0f7163f38952f2a552272a687a6ef4b9ddcc7327"
+  },
+  "runtime": {
+    "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]",
+    "executable": "/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python",
+    "pyarrow": "26.0.0",
+    "tokenizers": "0.22.2",
+    "parquet_use_threads": false
+  },
+  "source_schema_evidence": {
+    "path": "reports/cosmopedia-intake-v1/source-README.md",
+    "section": "dataset_info config_name cosmopedia-v2 features: prompt/text/audience/format/seed_data string;token_length int64",
+    "assertion": "exact column set and per-row types checked after acquisition; physical parquet schema not yet fetched"
+  }
+}
