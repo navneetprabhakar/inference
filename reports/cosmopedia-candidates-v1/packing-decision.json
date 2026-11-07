@@ -1,0 +1,36 @@
+{
+  "state": "approved_for_cpu_split_packing_only",
+  "training_admitted": false,
+  "pins": {
+    "reports/cosmopedia-candidates-v1/manual-quality-judgments.json": "3272ade2250d197c2f9724b6754fad2264545f8717eb35f7045aded2c134cbd0",
+    "reports/cosmopedia-candidates-v1/root-spot-review.json": "635fd622f1300e205489e2bc3eb4a0106c386f472ffa84c4c7a2cb253860304e",
+    "data/cosmopedia-explanatory-candidates-v1/quality-sample.jsonl": "dd83c3ece09ba587127307e56561675f3474f1cf07c4fdea1ec93caeb6caaeff",
+    "data/cosmopedia-explanatory-candidates-v1/candidate-verification-v2.json": "216a4bc80da9621133e657e544382b781ad748375b9710ba1f9c4a5aa186ae19",
+    "data/cosmopedia-explanatory-candidates-v1/receipt.json": "5cb8d2ff7852ec7808f20a06b8562e28ff98f80e9f9ac11e4c6e79c5b93f670e"
+  },
+  "excluded_doc_ids": [
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:308890",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:84402",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:335375",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:14139",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:260434",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:53690",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:253629",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:264665",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:72450",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:281820",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:317970",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:316121",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:96764",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:48135",
+    "3ba9d605774198c5868892d7a8deda78031a781f:cosmopedia-v2/train-00000-of-00104.parquet:202000"
+  ],
+  "policy": "Exclude these finite15 sampled holds and related groups along with custody/historical overlap exclusions. Retain review-rated documents. Freeze2percent group-heldout validation before any modelwork. Pack full surviving pool once; no quota refilling, no repeated documents, no30Mpackingcap. Preserve original narrative splits.",
+  "quality_scope": "Noisy synthetic language source; reviewed sample19retain30review15hold is format/lengthbalanced, not defect-rate estimate. Finite exclusions do not certify unsampled facts. Text-only pretraining candidate, not instruction-response gold.",
+  "prerequisites": [
+    "Completed rootcustody",
+    "Verified historical/cross-source text and seed overlap policy",
+    "Independent packed-token/provenance verification",
+    "Separate training admission and exposure budget"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "state": "CPU_prepared_pending_root_review",
+  "draft_sha256": "bbaa5dac0bc42cc29b3dfd6b18d47239af471c19fb60d7b3d5cf0b5bd4540d85",
+  "fit_cpu_test_groups": 5,
+  "core_cpu_test_groups": 6,
+  "actual_input_and_code_metadata_validation": "PASS_in_existing_MLX_environment_no_model_loaded",
+  "input_files": 16,
+  "runtime_files": 36,
+  "worker": "mlx_sequential_fit.py",
+  "scope": "Two updates only, no sustained timing or model export",
+  "host_memory": "Neutral converter shares NumPy weight/moment references; arrays/native/weights aliases deleted after initial evaluated core; baseline NPZ reopened per tensor for chunked numerical comparison.",
+  "timing": "Explicit update start plus evaluated microbatch interval and cache-clear durations; no isolated kernel or sustained speed claim.",
+  "limitations": [
+    "No GPU fit measured yet.",
+    "No full-model native resume tested by this fit probe.",
+    "Allocator guideline is not hard allocation prevention; peak checked after synchronized boundary.",
+    "Post-optimizer guard failure poisons in-memory core, not rollback."
+  ]
+}
