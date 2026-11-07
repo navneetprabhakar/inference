@@ -47,12 +47,12 @@ def screen():
     os.nice(10)
     try:
         check()
-        paths = {n: SOURCE/n for n in ('candidates.sqlite', 'receipt.json', 'candidate-verification.json')}
+        paths = {n: SOURCE/n for n in ('candidates.sqlite', 'receipt.json', 'candidate-verification-v2.json')}
         if any(p.is_symlink() for p in paths.values()):
             raise ValueError('artifact alias')
         pins = {n: sha(p) for n,p in paths.items()}
         receipt = json.loads(paths['receipt.json'].read_text())
-        proof = json.loads(paths['candidate-verification.json'].read_text())
+        proof = json.loads(paths['candidate-verification-v2.json'].read_text())
         if (proof['state'] != 'PASS_independent_explanatory_candidates_not_admitted'
                 or proof['failures'] != []
                 or proof['database_sha256'] != pins['candidates.sqlite']

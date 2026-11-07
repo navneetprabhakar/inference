@@ -1,0 +1,29 @@
+# Prospective mixed-source split and packing proposal
+
+Status: proposal only; no scan, split, packing or admission authorized by this file. Avoid another content-filter/sample cycle. This defines a reproducible data diagnostic, not factual certification.
+
+## Inputs and immutable boundaries
+
+Use completed explanatory candidates (149434 documents,92549266 GPT2+EOT tokens before pending custody/finite quality decisions), original policy/receipt, successful independent v2 proof, and root's source-bound custody receipt. Root must write the exact finite quality decision; the fresh64 review recommends15 holds and30 review rows, with review never an automatic exclusion. Preserve the old17 holds already excluded by projection. Pin all input and code hashes before execution; never modify candidate DB or prior failures.
+
+Narrative uses root's existing169200 train /3340 validation documents and31493507 /629749 tokens, subject to its independent packing proof. Preserve these original splits and every validation sample. Explanatory rows colliding with narrative are removed from the explanatory lane rather than moving narrative documents.
+
+## One overlap pass before split
+
+Current relation_group joins identical extracted seeds and approximately similar seed prompts, not generated-text similarity and not historical training ancestry. Root custody expressly does NOT establish historical training deduplication. Before claiming a fresh language holdout, inventory and hash-bind actual parent-lineage training/document indexes and any historical validation indexes. Conservative available named indexes include feasibility-v1, extended-trial-v1/v2/v3, balanced-continuation-v1 and base-foundation-100m; use actual lineage receipts to distinguish consumed data from merely prepared pools. Also include previously used original/grounded SFT text if parent ancestry includes it, and both narrative partitions. Do not inspect private evaluation cases: root custody remains its separate prerequisite.
+
+Exact checks: normalized generated text against historical/narrative full documents; extracted seed against historical/narrative full documents; canonical known source IDs where available. Normalize NFKC/lowercase/collapsed whitespace exactly as current projection. Historical rows with only hashes cannot establish near-text absence: resolve text from pinned retained source or reconstruct from verified whole-document token boundaries, recording the method. Missing text means an explicit incomplete overlap claim, not silently clean data.
+
+Near checks: use the already established conservative six-shared-bottom12 five-word fingerprint screen, prospectively frozen and separately audited, across explanatory generated text and extracted seed versus historical/narrative text and within explanatory generated text. This is approximate lexical overlap, not semantic equivalence; do not tune thresholds after seeing yield. Short documents still receive exact checks; disclose limited five-gram power. Construct connected groups combining current relation_group and generated-text near/exact edges before splitting. If any member matches historical/narrative text, exclude that whole new explanatory group from both new partitions. This conservative one-pass exclusion avoids putting relatives of a known-seen row in validation and avoids replay; report counts and token loss without refilling from other sources. A group cannot cross partitions even when only some members fit the token cap.
+
+## Freeze split then choose bounded train allocation
+
+Hash each final group ID with new salt `forge-explanatory-language-split-v1`; assign the lowest2% hash buckets to validation,98% to train. Freeze this before token-budget selection; no model-score selection or reshuffling. Group identity should be stable minimum original row ID after union, with all member IDs retained in an index. Hold all eligible validation groups unchanged. Record actual validation documents/tokens/length/format balance rather than force an exact quota.
+
+For the first mixed diagnostic, propose at most30000000 explanatory train tokens including EOT plus the existing narrative train lane (about31.49M), no wraps/repeats. Select whole train groups in fixed SHA256 priority order, accept groups that fit the remaining cap, record each refusal; never split a relation group between train and validation or truncate a document. Underfill is acceptable. This roughly equal language budget is a pragmatic hypothesis, not an optimized mixture. Do not over-weight or convert Alice/Bob dialogue into assistant-mask SFT. Keep per-source streams and source attribution so scheduling and losses remain auditable.
+
+## Packing and independent proof
+
+Fresh output only, bounded CPU wall/RSS/disk/STOP plan approved by root. Verified existing GPT2 tokenizer, ordinary source text verbatim plus one EOT50256 per whole document; little-endian uint16 streams. Index original row/doc/source IDs, final group, split, text/prompt hashes, token offsets and lengths; prompts stay provenance only, not concatenated training targets. Stable seeded order within each source/partition; no repeated documents or source-text rewrites. Preserve licensing metadata and exact upstream revision.
+
+Independent verifier must retokenize all selected text, reconstruct every byte and EOT, check nonoverlapping contiguous indexes, whole groups, complete exclusions/custody union, split assignment and bounded selection, and pin output hashes. Validation windows use the existing audited stratified selector with actual length-pool counts reported; no selected validation document is trained. Root admission remains separate. Measure per-source held-out language loss plus unchanged external conversation/context behavior; neither split-proof PASS nor lower loss means factual reliability or working tools.
