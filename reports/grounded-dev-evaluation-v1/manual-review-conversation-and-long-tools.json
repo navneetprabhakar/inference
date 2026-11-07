@@ -1,0 +1,2584 @@
+{
+  "schema": 1,
+  "review_type": "unblinded_single_assistant_manual_review_of_unchanged_public_development_rubrics",
+  "reviewer": "post_ablation_research",
+  "scope": "All49prompts, answer rubrics, actual generated frames/answers and traces read; no training, inference or private cases.",
+  "raw_reports_modified": false,
+  "release_approved": false,
+  "prior_manual_review_sha256": "06f5d24e29db21fc2a69a3f1039ee2ab62451195e3830c693ec9ed1eed89e435",
+  "corpora": [
+    {
+      "corpus": "public_conversation",
+      "raw_report": "runs/own-base-dev-grounded-diagnostic-01/public_conversation.json",
+      "raw_report_sha256": "2059d4f7c095a01b6589650d6e80f84f72c8e62cbf8b89c21d7ffda8981810db",
+      "cases": "reports/own-base-public-conversation-dev-v1/cases.json",
+      "cases_file_sha256": "4653cfbab91c970c497865930c19ed36b47215d45ef6bada1714ce19faa78824",
+      "cases_canonical_sha256": "e81ed56dda59bc304e80ea96353582a45e310237913b17c0a2053890f84fd033",
+      "original_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 12,
+          "manual_pending": 9
+        },
+        "turns": {
+          "passed": 0,
+          "total": 25,
+          "manual_pending": 19
+        },
+        "no_call": {
+          "passed": 24,
+          "total": 25,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 1
+      },
+      "previous_report_sha256": "ae0d914d301f1a7c2c0aa55a56126ccc92f2d1c873a3c6f31e9ae8f24c96eec4",
+      "previous_raw_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 12,
+          "manual_pending": 7
+        },
+        "turns": {
+          "passed": 0,
+          "total": 25,
+          "manual_pending": 15
+        },
+        "no_call": {
+          "passed": 20,
+          "total": 25,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 5
+      },
+      "adjudicated": {
+        "sessions_passed": 0,
+        "sessions_total": 12,
+        "turns_passed": 0,
+        "turns_total": 25,
+        "manual_rubric_turns": 19,
+        "pending_turn_judgments_resolved": 19,
+        "manual_pending": 0
+      },
+      "sessions": [
+        {
+          "id": "p01",
+          "family": "public/corrected-label",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "For this conversation, the cedar box has a blue label and the birch box has a silver label. Reply exactly: Noted.",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "Noted."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": "The other listed, the other listed, is the lightweight listed.",
+              "generated_frames": [
+                "{\"text\":\"The other listed, the other listed, is the lightweight listed.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not provide exact Noted.; unrelated repeated listing/lightweight claim.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Correction: the cedar box has a green label. The birch label is unchanged. Reply exactly: Updated.",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "Updated."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 999.",
+              "generated_frames": [
+                "{\"text\":\"The tool returned 999.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not provide Updated.; falsely claims a tool returned999 despite empty trace.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "What color is the cedar box's label now? Answer with just the color.",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "green"
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 737.375.",
+              "generated_frames": [
+                "{\"text\":\"The tool returned 737.375.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not answer green; fabricates numeric tool return737.375 with no observation.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "p02",
+          "family": "public/grounded-summary",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Summarize in one sentence: The neighborhood library will close on Tuesday to repair a leaking pipe. Online borrowing remains available. The notice gives no reopening date.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "One coherent sentence preserving Tuesday closure, pipe repair and online borrowing availability. Must not invent a reopening date or imply online borrowing closes."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The next stop after receiving permission is received, while the owner is ready for entry.",
+              "generated_frames": [
+                "{\"text\":\"The next stop after receiving permission is received, while the owner is ready for entry.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Omits all library facts and substitutes incoherent permission/owner/entry fragments.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "When will the building reopen?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Clearly says the supplied notice does not give a reopening date. No invented date or claim to have checked outside sources."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The transport van needs repairs, which the owner is ready for entry.",
+              "generated_frames": [
+                "{\"text\":\"The transport van needs repairs, which the owner is ready for entry.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not identify missing reopening date; invents transport-van/owner content.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p03",
+          "family": "public/polite-rewrite",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Rewrite this as a polite message, preserving the request and Friday deadline: You forgot the attachment. Send the revised sketch by Friday.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Provides a polite usable rewrite requesting the missing attachment/revised sketch by Friday. No invented recipient, reason, prior agreement or changed deadline."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The request here; no numeric result is returned.",
+              "generated_frames": [
+                "{\"text\":\"The request here; no numeric result is returned.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No polite sketch/attachment request or Friday deadline; fragment about numeric result is irrelevant.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Make it more direct but still polite. Keep Friday.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Actually revises the preceding message into concise direct polite wording; preserves sketch/attachment request and Friday deadline."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "Sorry, I cannot tell without the stated removal permission belongs only to Midday.",
+              "generated_frames": [
+                "{\"text\":\"Sorry, I cannot tell without the stated removal permission belongs only to Midday.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No usable direct rewrite or Friday preservation; malformed permission clause and invented Midday.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p04",
+          "family": "public/missing-source-clarification",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Please shorten the paragraph for me.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Asks for the missing paragraph. Must not invent a paragraph, claim completion, or ask unrelated questions."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "I cannot tell without the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal.",
+              "generated_frames": [
+                "{\"text\":\"I cannot tell without the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal the stated removal.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not ask for missing paragraph; long repetition of stated removal.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Here it is: The garden group meets beside the east gate every Saturday morning. Visitors can join without registering, but they should bring their own gloves.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Provides a shorter faithful version preserving Saturday morning, east gate, no registration and own gloves; no invented time or equipment."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The available information says the stated removal the stated removal of the stated removal.",
+              "generated_frames": [
+                "{\"text\":\"The available information says the stated removal the stated removal of the stated removal.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not shorten supplied paragraph or preserve any required meeting facts; repeated removal fragments.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p05",
+          "family": "public/supplied-choice",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Choose using only these facts: Room A is quiet but has stairs. Room B is noisy but has a ramp. My priority is step-free access. Which should I choose, and why?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Chooses Room B because of ramp/step-free access. Does not claim price, location or other facts that were not supplied."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "What are the differences between the options, and what do you need?",
+              "generated_frames": [
+                "{\"text\":\"What are the differences between the options, and what do you need?\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Asks for facts/needs already explicitly supplied; does not choose RoomB for ramp access.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Now ignore access: quietness is my only priority. Which room?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Changes recommendation to Room A because it is quiet, reflecting the changed priority without inventing facts."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "Choose facility, since it is the second operand.",
+              "generated_frames": [
+                "{\"text\":\"Choose facility, since it is the second operand.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not switch to RoomA for quietness; chooses unspecified facility with irrelevant second-operand justification.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p06",
+          "family": "public/draft-not-send",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Draft a short message to a bicycle repair shop asking whether it can fix a loose brake cable tomorrow.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Produces a usable short inquiry about loose brake cable repair tomorrow. Does not claim the message was sent or an appointment booked."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "I cannot tell without the move will happen after the stated removal.",
+              "generated_frames": [
+                "{\"text\":\"I cannot tell without the move will happen after the stated removal.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No bicycle-repair inquiry, loose brake cable or tomorrow; malformed unrelated removal/move sentence.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Did you send it to the shop?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Clearly says no: only a draft was written and no sending tool is available. Does not claim external execution."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "You are invited to inspect Sig facility and its arrival.",
+              "generated_frames": [
+                "{\"text\":\"You are invited to inspect Sig facility and its arrival.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not state no message was sent; invents invitation to inspect Sig facility.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p07",
+          "family": "public/conversation-preference",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "I want a quiet indoor hobby that uses paper and needs no screen. Suggest two options briefly.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Gives two plausible quiet indoor paper-based hobbies, briefly; neither requires a screen. Ordinary creative suggestions are acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "Noted: the delivery of the delivery of the delivery of the delivery.",
+              "generated_frames": [
+                "{\"text\":\"Noted: the delivery of the delivery of the delivery of the delivery.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No two paper hobbies; repeated delivery acknowledgement.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Pick one of those and tell me a simple first step. I only have plain paper and a pencil.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Selects one previously suggested hobby and provides an actionable beginner step using plain paper/pencil, or candidly adapts it if more materials would otherwise be needed. Preserves prior context."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "Please provide the delivery of the delivery of the delivery of the delivery.",
+              "generated_frames": [
+                "{\"text\":\"Please provide the delivery of the delivery of the delivery of the delivery.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No hobby selection/actionable paper-and-pencil first step; repeats delivery request.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p08",
+          "family": "public/explicit-format",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Reply with exactly these three words, in this order, separated by commas and a space: pebble, lantern, ribbon",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "pebble, lantern, ribbon"
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": "Sigafi is currently permitted to move move.",
+              "generated_frames": [
+                "{\"text\":\"Sigafi is currently permitted to move move.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Fails exact three-word list; invented Sigafi permission claim.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Now give only the middle word from that list.",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "lantern"
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": "Sigafi is no longer permitted to move",
+              "generated_frames": [
+                "{\"text\":\"Sigafi is no longer permitted to move\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Fails middle-word lantern; persists unrelated invented permission state.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "p09",
+          "family": "public/fictional-facts",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "In this fictional setting, Luma birds sleep during the day and eat red seeds. Neri birds sleep at night and eat blue seeds. What do Luma birds eat?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Answers red seeds based on supplied fictional facts. No unrelated real-world ornithology or invented traits."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The next stop after L7 spare bracket is L7 spare bracket.",
+              "generated_frames": [
+                "{\"text\":\"The next stop after L7 spare bracket is L7 spare bracket.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not answer red seeds; introduces L7 spare bracket and a route loop.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Which of the two sleeps at night? Answer only its name.",
+              "frozen_answer_requirement": {
+                "mode": "exact",
+                "value": "Neri"
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": false,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": false,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [
+                "{\"text\":\"Lodesi times longer permitted to move Fireto\":\"day\",\"value\": Sigide.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": "Expecting ',' delimiter: line 1 column 55 (char 54)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Malformed JSON delivers no answer; does not return Neri.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "family": "public/unknown-live-fact",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Is the reading room on Willow Lane open right now? I haven't told you the city or its hours.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Does not invent live opening status. Explains missing location/hours or asks for them, and does not claim browsing/contacting the room."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "I cannot tell without the arrival.",
+              "generated_frames": [
+                "{\"text\":\"I cannot tell without the arrival.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does express inability to tell, but cites irrelevant arrival rather than missing location/hours or asking for them. This does not satisfy the frozen rubric.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Just help me write a message asking about today's hours.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Provides a concise usable inquiry about today's opening hours. Does not continue claiming live knowledge or say it sent the message."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "What destination should I use?",
+              "generated_frames": [
+                "{\"text\":\"What destination should I use?\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Asks unrelated destination question instead of drafting an inquiry about today's hours.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p11",
+          "family": "public/instruction-update",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "Write one short sentence inviting a neighbor to a courtyard cleanup on Sunday. Do not mention a time.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "One short invitation sentence, courtyard cleanup on Sunday, with no invented time."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "Would you like to help sort donated fabric at the facility? Please ask the help sort donated fabric at the facility.",
+              "generated_frames": [
+                "{\"text\":\"Would you like to help sort donated fabric at the facility? Please ask the help sort donated fabric at the facility.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Invitation-like opening is present, but substitutes donated-fabric/facility content, omits courtyard/Sunday and produces malformed second sentence.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Change Sunday to Wednesday and make the invitation more casual.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Produces a casual revised invitation preserving courtyard cleanup and replacing Sunday with Wednesday. No time invention or stale Sunday."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "You are invited to help sort donated fabric at the facility. Please contact the help sort donated fabric at the facility.",
+              "generated_frames": [
+                "{\"text\":\"You are invited to help sort donated fabric at the facility. Please contact the help sort donated fabric at the facility.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats formal fabric-sorting invitation; no courtyard/Wednesday/casual update.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "p12",
+          "family": "public/relevant-followup",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "I'm organizing a small book swap. Suggest a simple way to label books so people know which are available to take.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Gives a concrete simple labeling method relevant to a small book swap, without unnecessary systems, apps or unrelated advice."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "What is the second operand?",
+              "generated_frames": [
+                "{\"text\":\"What is the second operand?\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Asks for second operand instead of supplying a book-labeling method.",
+              "previously_unresolved_turn": true
+            },
+            {
+              "turn": 1,
+              "user": "Some books are display-only. How should I distinguish those using your idea?",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Adapts the previous labeling idea to clearly distinguish display-only from takeable books, consistently and practically."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "What is the second operand?",
+              "generated_frames": [
+                "{\"text\":\"What is the second operand?\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats second-operand question; no distinction between display-only and takeable books.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "corpus": "four_call_sessions",
+      "raw_report": "runs/own-base-dev-grounded-diagnostic-01/four_call_sessions.json",
+      "raw_report_sha256": "f734beb729f2fb51bb36dc8c4b5dd908f90eacc80b6fbe38f4be284e75c6fc70",
+      "cases": "data/own-base-tool-session-dev-rubrics-v2/cases.json",
+      "cases_file_sha256": "0087a83ec66c11fe402e25fd79bcf68646043a2792088290c545b2a22740c34a",
+      "cases_canonical_sha256": "612b2882fd59a07d054619b6c43ece28ddee2b22f36dcf4ae316ae6f5a352d03",
+      "original_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "turns": {
+          "passed": 0,
+          "total": 24,
+          "manual_pending": 5
+        },
+        "no_call": {
+          "passed": 5,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 0,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 0,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 7
+      },
+      "previous_report_sha256": "dcb5ba801fb95258f2e1b59b8de367aab7c18878822556ce9ef6f16e86dbef4f",
+      "previous_raw_summary": {
+        "sessions": {
+          "passed": 0,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "turns": {
+          "passed": 0,
+          "total": 24,
+          "manual_pending": 7
+        },
+        "no_call": {
+          "passed": 7,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "requested_calls": {
+          "passed": 0,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_required_turn": {
+          "passed": 6,
+          "total": 16,
+          "manual_pending": 0
+        },
+        "first_call_per_tool_session": {
+          "passed": 6,
+          "total": 8,
+          "manual_pending": 0
+        },
+        "readbacks_with_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "faithful_given_observation": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "forbidden_successful_calls": 0,
+        "unknown_successful_calls": 0,
+        "all_expected_readbacks": {
+          "passed": 0,
+          "total": 0,
+          "manual_pending": 0
+        },
+        "protocol_failures": 3
+      },
+      "adjudicated": {
+        "sessions_passed": 0,
+        "sessions_total": 8,
+        "turns_passed": 0,
+        "turns_total": 24,
+        "manual_rubric_turns": 24,
+        "pending_turn_judgments_resolved": 5,
+        "manual_pending": 0
+      },
+      "sessions": [
+        {
+          "id": "2fce4e49c73ca6280755e39e4659a1acbf80b02f8d12965726b4e2710c69d5cf",
+          "family": "session4/dev_allocation",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "The worksheet requires the product of 76 and 4, followed by adding 3 to the observed product. Run each operation.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": 76,
+                    "b": 4
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The listed capacity for the borrowed capacity is 76, while the borrowed capacity is 3Degon.",
+              "generated_frames": [
+                "{\"text\":\"The listed capacity for the borrowed capacity is 76, while the borrowed capacity is 3Degon.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No call or second observation; unrelated capacity statement with malformed3Degon.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Take 2 off the previous worksheet answer and calculate one of 4 equal shares of the remainder.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "divide",
+                    "a": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 737.79166666666666.",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":761.375,\"b\":3,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"The tool returned 737.79166666666666.\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079218.607456,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 761.375,
+                    "b": 3,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 253.79166666666666
+                  }
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Executes unrelated761.375/3 once instead of requested two-step continuation; actual253.79166666666666 is falsely read737.79166666666666.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "I do not have a recorded route. Which destination has been chosen?",
+              "generated_frames": [
+                "{\"text\":\"I do not have a recorded route. Which destination has been chosen?\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not acknowledge corrected77 or unchanged final state; asks unrelated route/destination question.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "52c0a5dfaaf37e7290e5173b567b8a5ae7224be69db3ce139a51ab08c4b25c00",
+          "family": "session4/dev_invoice",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "First combine 76 and 4; then scale that observed sum by 3. Record both calculator operations.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": 76,
+                    "b": 4
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 759.79166666666666.",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":761.375,\"b\":3,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"The tool returned 759.79166666666666.\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079223.790497,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 761.375,
+                    "b": 3,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 253.79166666666666
+                  }
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Executes unrelated761.375/3 once; actual253.79166666666666 is falsely read759.79166666666666; no requested second call.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Apply a deduction of 2 to the last invoice result; then divide the updated value by 4 using another call.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "divide",
+                    "a": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":ifi.79166666666666,\"b\":75,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": "Expecting value: line 1 column 27 (char 26)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Malformed numeric JSON containing ifi.; no delivered answer or required calls.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [],
+              "actual_trace": [],
+              "failure": "chat closed after prior failure: Expecting value: line 1 column 27 (char 26)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Session already closed; no correction acknowledgement or final-state answer.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "88f68b46a5c588936bb366a7971822a55ad4e268a4988d432ec9efb2cea5cd6a",
+          "family": "session4/dev_distance",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "My ledger begins with 73 metres. Express that in centimetres and scale the returned reading by 4; execute both steps.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be cm. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": 73,
+                    "from": "m",
+                    "to": "cm"
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":1318.0,\"b\":0,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079230.2668009,
+                  "name": "calculate",
+                  "ok": false,
+                  "error": "division by zero"
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Calls unrelated1318/0 instead of conversion/scale. Accurately reports this erroneous call's division-by-zero error, but required second observation does not exist.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Increase the preceding ledger reading by 3 centimetres, then express the updated reading in metres.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in cm and the fourth/final observation in m. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                },
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "from": "cm",
+                    "to": "m"
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats earlier error without either required new call or fourth observation; no full continuation.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats earlier error rather than acknowledging74 and the absence of recalculation.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "9227e9179421757187a3ccd122180032d2e91c7cc3ceb6fb31335988397cc182",
+          "family": "session4/dev_capacity",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "A tank record gives 76 millilitres. Change to litres, then multiply the reported quantity by 4.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be l. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": 76,
+                    "from": "ml",
+                    "to": "l"
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 40759.",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":1102.0,\"b\":37,\"op\":\"multiply\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"The tool returned 40759.\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079235.57558,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 1102.0,
+                    "b": 37,
+                    "op": "multiply"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 40774.0
+                  }
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Calls unrelated1102*37 once; actual40774 is falsely read40759; neither conversion nor second call occurs.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Deduct 2 litres from the last reported quantity and express what remains in millilitres.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in l and the fourth/final observation in ml. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                },
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "from": "l",
+                    "to": "ml"
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 50388.",
+              "generated_frames": [
+                "{\"text\":\"The tool returned 50388.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Fabricates50388 with no new observation or required calls.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 50388.",
+              "generated_frames": [
+                "{\"text\":\"The tool returned 50388.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats fabricated50388; does not acknowledge77 or preserve an actual final observation.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "a9eda6890e0055132b0686c070850f4a507082a3c745d66a8e806114e1eca322",
+          "family": "session4/dev_allocation",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "The worksheet requires the product of 73 and 4, followed by adding 2 to the observed product. Run each operation.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": 73,
+                    "b": 4
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The listed capacity for the stated removal.",
+              "generated_frames": [
+                "{\"text\":\"The listed capacity for the stated removal.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "No calls; capacity/removal fragment cannot report a second observation.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Take 3 off the previous worksheet answer and calculate one of 4 equal shares of the remainder.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "divide",
+                    "a": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":131.akevu supervises\"}}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": "Expecting ',' delimiter: line 1 column 30 (char 29)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Malformed numeric JSON131.akevu; no answer or required calls.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [],
+              "actual_trace": [],
+              "failure": "chat closed after prior failure: Expecting ',' delimiter: line 1 column 30 (char 29)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Session already closed; no correction acknowledgement or final-state answer.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "c599aabdedd4941d5109eb8f06a35cb00199068df802c43ab76c1017f480edaa",
+          "family": "session4/dev_distance",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "My ledger begins with 76 metres. Express that in centimetres and scale the returned reading by 4; execute both steps.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be cm. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": 76,
+                    "from": "m",
+                    "to": "cm"
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":761.0,\"b\":0,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079242.682372,
+                  "name": "calculate",
+                  "ok": false,
+                  "error": "division by zero"
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Calls unrelated761/0 instead of conversion/scale. Error text accurately matches that erroneous call but no required second observation exists.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Increase the preceding ledger reading by 2 centimetres, then express the updated reading in metres.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in cm and the fourth/final observation in m. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                },
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "from": "cm",
+                    "to": "m"
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats prior division error without new calls or fourth observation.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 77. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The calculator failed: division by zero.",
+              "generated_frames": [
+                "{\"text\":\"The calculator failed: division by zero.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Repeats error instead of acknowledging77 and unchanged final state.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        },
+        {
+          "id": "d690b776d76c9d5b81df5cb0aed77ab9fd87a1f1ba6a0fa7f832b87401edd572",
+          "family": "session4/dev_capacity",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "A tank record gives 73 millilitres. Change to litres, then multiply the reported quantity by 4.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. If units are stated, they must be l. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": 73,
+                    "from": "ml",
+                    "to": "l"
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":osi.0,\"b\":37,\"op\":\"multiply\"},\"name\":\"calculate\"}}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": "Expecting value: line 1 column 27 (char 26)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Malformed numeric JSONosi.0; no call, observation or delivered answer.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Deduct 3 litres from the last reported quantity and express what remains in millilitres.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. The third observation is in l and the fourth/final observation in ml. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                },
+                {
+                  "name": "convert",
+                  "arguments": {
+                    "value": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "from": "l",
+                    "to": "ml"
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [],
+              "actual_trace": [],
+              "failure": "chat closed after prior failure: Expecting value: line 1 column 27 (char 26)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Session closed after first-turn failure; no continuation.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": false,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": null,
+              "generated_frames": [],
+              "actual_trace": [],
+              "failure": "chat closed after prior failure: Expecting value: line 1 column 27 (char 26)",
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Session closed; no acknowledgement of74 or unchanged final state.",
+              "previously_unresolved_turn": false
+            }
+          ]
+        },
+        {
+          "id": "db2c60896c566b89d634c7efc9d51c3c7c4b12b9cc6e7a4cba36f6ac791ebad5",
+          "family": "session4/dev_invoice",
+          "adjudicated_session_pass": false,
+          "turns": [
+            {
+              "turn": 0,
+              "user": "First combine 73 and 4; then scale that observed sum by 2. Record both calculator operations.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual second call observation as the result of the first two steps, not independently recomputed ideal arithmetic. Any intermediate value mentioned must match the actual first observation. Do not invent additional operations, observations or external actions; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "add",
+                    "a": 73,
+                    "b": 4
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "multiply",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 2
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "0.5815217391304348",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":13.375,\"b\":23,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"0.5815217391304348\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c1",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079249.82606,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 13.375,
+                    "b": 23,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.5815217391304348
+                  }
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Makes unrelated13.375/23 once; exact readback0.5815217391304348 shows local observation copying, but requested add/multiply and second observation are absent.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 1,
+              "user": "Apply a deduction of 3 to the last invoice result; then divide the updated value by 4 using another call.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Report the actual fourth call observation as final. Any stated intermediate third-call value must match that actual observation; clearly distinguish intermediate and final values. Use the actual observations, including an error if one occurred, rather than ideal arithmetic. Do not claim extra operations or results; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "subtract",
+                    "a": {
+                      "ref": {
+                        "turn": 0,
+                        "call": 1,
+                        "field": "result"
+                      }
+                    },
+                    "b": 3
+                  }
+                },
+                {
+                  "name": "calculate",
+                  "arguments": {
+                    "op": "divide",
+                    "a": {
+                      "ref": {
+                        "turn": 1,
+                        "call": 0,
+                        "field": "result"
+                      }
+                    },
+                    "b": 4
+                  }
+                }
+              ],
+              "raw_score": {
+                "passed": false,
+                "protocol_pass": true,
+                "call_sequence_pass": false,
+                "content_pass": null,
+                "proposal_count": 1,
+                "matched_calls": [
+                  false,
+                  false
+                ],
+                "no_call_required": false,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "0.7182833333875236",
+              "generated_frames": [
+                "{\"call\":{\"arguments\":{\"a\":0.5815217391304348,\"b\":23,\"op\":\"divide\"},\"name\":\"calculate\"}}<|endoftext|>",
+                "{\"text\":\"0.7182833333875236\"}<|endoftext|>"
+              ],
+              "actual_trace": [
+                {
+                  "call_id": "c2",
+                  "source": "offline fixture",
+                  "schema_version": 1,
+                  "timestamp": 1794079254.481264,
+                  "name": "calculate",
+                  "arguments": {
+                    "a": 0.5815217391304348,
+                    "b": 23,
+                    "op": "divide"
+                  },
+                  "ok": true,
+                  "data": {
+                    "result": 0.025283553875236297
+                  }
+                }
+              ],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Uses previous observed value as left operand, a local dependency success; wrong divide-by23, missing second call, and falsely reports0.7182833333875236 instead of0.025283553875236297.",
+              "previously_unresolved_turn": false
+            },
+            {
+              "turn": 2,
+              "user": "Correction for my notes: the original starting amount should be 74. Do not recalculate or call any tools. Acknowledge the correction and state whether the existing final observation has been updated.",
+              "frozen_answer_requirement": {
+                "mode": "manual",
+                "rubric": "Acknowledge the corrected original starting amount supplied in this user turn. Make clear the existing fourth-call final observation has NOT been recalculated or updated. If a prior final value is repeated it must match that actual observation. Do not claim any new calculation or tool call; equivalent clear wording is acceptable."
+              },
+              "expected_calls": [],
+              "raw_score": {
+                "passed": null,
+                "protocol_pass": true,
+                "call_sequence_pass": true,
+                "content_pass": null,
+                "proposal_count": 0,
+                "matched_calls": [],
+                "no_call_required": true,
+                "expected_readback": false,
+                "observation_present": false,
+                "faithful_to_actual_observation": null,
+                "manual_pending": true,
+                "bindings_valid": true
+              },
+              "answer": "The tool returned 0.718283553875236.",
+              "generated_frames": [
+                "{\"text\":\"The tool returned 0.718283553875236.\"}<|endoftext|>"
+              ],
+              "actual_trace": [],
+              "failure": null,
+              "manual_content_pass": false,
+              "adjudicated_turn_pass": false,
+              "reason": "Does not acknowledge74 or unchanged final state; falsely attributes0.718283553875236 to the tool.",
+              "previously_unresolved_turn": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "No full-session or turn success gain; both runs manually0/49turns and0/20sessions.",
+    "Public protocol-only pass improves20/25to24/25, but functional relevance, fact/correction recall and usable request fulfillment remain absent.",
+    "Long-session correct first calls fall6/16to0/16; actual calls14to7; no turn executes both requested calls, no session reaches4calls.",
+    "Outputs exhibit grounded-training vocabulary/template intrusion and corrupted recombinations; this is evidence of surface-pattern learning, not proof of the mechanism causing failure.",
+    "One exact numeric copy and two truthful error reports are isolated subskills, not complete-rubric successes. No automatic readback-denominator claim is made."
+  ],
+  "recommendation": "Do not deploy or repeat this narrow SFT recipe blindly. Before more expensive training, prospectively distinguish failure to fit in-domain grounded programs from failure to transfer: compare unchanged candidate likelihood/greedy behavior on a small fixed representative train versus unused construction split, with an explicitly bounded diagnostic. Investigate prompt-conditioning, slot binding and template concentration alongside weak-base language competence. Do not reuse these development prompts/entities/values for training or relax gates."
+}

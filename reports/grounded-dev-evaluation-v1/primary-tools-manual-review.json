@@ -1,0 +1,817 @@
+{
+  "source_pins": {
+    "runs/own-base-dev-grounded-diagnostic-01/primary_tools.json": "10391e4105fb1b0bd51d44f051ad309489af6f794a0fc1f3591d5aad01b3bdc8",
+    "data/own-base-tool-dev-rubrics-v4/cases.json": "ae9a7664ee84e6109f881b93e38f55a6b0a74033560a69e8575d4b8584daf904"
+  },
+  "scope": "Separate exposed-development overlay; raw scores and frozen rubric unchanged; no training/private inputs.",
+  "raw": {
+    "sessions": {
+      "passed": 0,
+      "total": 422,
+      "manual_pending": 0
+    },
+    "turns": {
+      "passed": 5,
+      "total": 583,
+      "manual_pending": 27
+    },
+    "no_call": {
+      "passed": 106,
+      "total": 130,
+      "manual_pending": 0
+    },
+    "requested_calls": {
+      "passed": 4,
+      "total": 453,
+      "manual_pending": 0
+    },
+    "first_call_per_required_turn": {
+      "passed": 4,
+      "total": 453,
+      "manual_pending": 0
+    },
+    "first_call_per_tool_session": {
+      "passed": 0,
+      "total": 410,
+      "manual_pending": 0
+    },
+    "readbacks_with_observation": {
+      "passed": 115,
+      "total": 522,
+      "manual_pending": 0
+    },
+    "faithful_given_observation": {
+      "passed": 28,
+      "total": 115,
+      "manual_pending": 1
+    },
+    "forbidden_successful_calls": 0,
+    "unknown_successful_calls": 0,
+    "all_expected_readbacks": {
+      "passed": 28,
+      "total": 522,
+      "manual_pending": 1
+    },
+    "protocol_failures": 116
+  },
+  "decisions": [
+    {
+      "id": "01ad0d4a8bf07065aec6fda164334364b5627da6578a4e939ba3c600a3c3f1e0",
+      "turn": 0,
+      "user": "The consumption entry is 9; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "090351efe5b69b5817a15db5294cbb16e7121fbf3b49d97b7f4e2d20280c53b1",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts twenty-five and 2.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "0928d3452e4ac751d8d03dbbe0e2a546b56a04130bd102480a405f5570dc4492",
+      "turn": 0,
+      "user": "The consumption entry is ten; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "1661ae89f60c8835ad631b5c0378c44de27e83688bf086384cb7df22bfe340b0",
+      "turn": 0,
+      "user": "The invoice total sixty-eight needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "195a8b8075e5dd864fb2ddd08d00b63a0814f94aa6891928be8d858451ff1512",
+      "turn": 0,
+      "user": "The invoice total 34 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "1e84b7b212aa6c1fff3f0dae81b2266a8c42010f78af42d27c869eaa6ccc25a0",
+      "turn": 0,
+      "user": "The invoice total 78 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "2aec79fefc83f14a7877c5083b90c59b27fc6711c7e11042645aca5c11f5da6a",
+      "turn": 1,
+      "user": "Was a numeric result returned? No tools.",
+      "rubric": {
+        "mode": "observed_status",
+        "observation": {
+          "ref": {
+            "turn": 0,
+            "call": 0,
+            "field": "ok"
+          }
+        },
+        "success": {
+          "mode": "manual",
+          "rubric": "Affirm that the actual earlier observation returned a numeric result; no new tool call."
+        },
+        "error": {
+          "mode": "error",
+          "observation": {
+            "ref": {
+              "turn": 0,
+              "call": 0,
+              "field": "ok"
+            }
+          }
+        }
+      },
+      "answer": "1.",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": true,
+        "observation_present": true,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "Faithful bare numeric return implicitly confirms a numeric result; applies prior root adjudication precedent. Actual wrong operation 11/11 returned1.0; this does not credit the requested calculation or session.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "2faae67eb6e247a444cd719b9397e870ef4fb0fe130e46eed8a978b1e2fab811",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 65 and 10.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "340b97e3917d274adcab720a3974ba76fe20a2df183daa65e12dcac4fae41955",
+      "turn": 0,
+      "user": "The invoice total seventy-five needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "37d09787ebf2697af9accf92e76d9ef7c8fd01d473b2e238607a54bc2aecd8be",
+      "turn": 0,
+      "user": "I want to express 50 centimeters on a different scale. Which other detail is required?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing destination unit; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "395817c7f27d3b81e89fc738f2c82c22ed4d731752ba2adc435d68f5a15df2c9",
+      "turn": 0,
+      "user": "The invoice total 51 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "44f63ed2db3e0a2b93d0274a0896f162d3d5a20c9ab4d6d94b2d36ae397b2244",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 80 and 5.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "486abac75773937344893675c042dcaab00c002183428ffd804039a4d5b12bf6",
+      "turn": 0,
+      "user": "The consumption entry is 8; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "4cb72eea5f4cae071816d2fa5c3cb599890bad189e4404aa433b7e1d6f897f1c",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 89 and eleven.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "504731a939e28445fd8909402b63ebcf8ab2c4638514248a32afc40cd2176092",
+      "turn": 0,
+      "user": "The invoice total 55 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "54e14f3e534fa0ccfff09275c1d27e65b3496962a742dcf816cb9c8afe17de34",
+      "turn": 0,
+      "user": "The consumption entry is 7; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "55a1cd407a5e1c45470eb12faacf1eaa967c74d615991d94f7e7143782ea6fe5",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 42 and eleven.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "8c1582f8b6cbda065269548494ddba5b8a7469078b8a724e690bc618b1febadd",
+      "turn": 0,
+      "user": "The invoice total forty-seven needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "9b8fa861ec0128faa8e7712842b0001072b876d4df84e811a84976379e52b9ee",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 55 and 7.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "b2e5c9799ed4f8a73a055b24ab2f8c9b1a774c91204288a2e8a2d5a10635203a",
+      "turn": 0,
+      "user": "The invoice total 75 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "c0d183452aa99de9fe0169ab61ecb793fe497fda87e13bdf93818b9db29202e8",
+      "turn": 0,
+      "user": "The invoice total forty-one needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "c8e3c56fa85cd422d34d484afe4ac9ee60dcdaaeb7f4c587f43dba4f46db1a6a",
+      "turn": 0,
+      "user": "The consumption entry is four; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "dfe92bc00cbfd4a7e2d36a407065b3726089993e1d7260f0c27e92ada15d58c4",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 63 and 6.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "e0da6f8d171a86762766de44ec070124951193876a760ef95478b260d218f40f",
+      "turn": 0,
+      "user": "Without calling a tool, identify the arithmetic needed to merge amounts 62 and 10.",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Identify addition/summing as the operation, without a tool call; equivalent operation names allowed."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "e48bae2bcb2b9a69152c16b30c7d2a88d2eb6c85aa6ebc9336936254aee38958",
+      "turn": 0,
+      "user": "The invoice total 19 needs distributing evenly. I didn't include the recipient count. What do you need?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing divisor; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": true,
+      "reason": "In the stated division, the missing second operand is the divisor/recipient count. The rubric permits equivalent requests and does not require a particular noun.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "e9992d0989453596a599ba432d9d009cbfe5f2075c96962f978a6679cdee4527",
+      "turn": 0,
+      "user": "The consumption entry is 4; can you tell me the stock left on hand?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing starting quantity; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    },
+    {
+      "id": "fedc0586f9bc069a22bf26fd63bb9825f26eaad2997a5bd0b1f7be6475e56e55",
+      "turn": 0,
+      "user": "I want to express 70 millimeters on a different scale. Which other detail is required?",
+      "rubric": {
+        "mode": "manual",
+        "rubric": "Ask only for the missing destination unit; do not invent a value or call a tool."
+      },
+      "answer": "What is the second operand?",
+      "original_score": {
+        "passed": null,
+        "protocol_pass": true,
+        "call_sequence_pass": true,
+        "content_pass": null,
+        "proposal_count": 0,
+        "matched_calls": [],
+        "no_call_required": true,
+        "expected_readback": false,
+        "observation_present": false,
+        "faithful_to_actual_observation": null,
+        "manual_pending": true,
+        "bindings_valid": true
+      },
+      "review_content_pass": false,
+      "reason": "Asks for a second operand instead of the missing starting quantity/destination unit, or fails to identify addition; frozen rubric not satisfied.",
+      "reviewer": "preflight_activation independent review"
+    }
+  ],
+  "manual_pass": 11,
+  "manual_fail": 16,
+  "pending": 0,
+  "overlay": {
+    "sessions_passed": 0,
+    "sessions_total": 422,
+    "turns_passed": 16,
+    "turns_total": 583
+  }
+}
