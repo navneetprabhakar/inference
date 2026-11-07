@@ -1,0 +1,8 @@
+# Small-data training evidence after the failed grounded pilot
+
+Two relevant primary studies were checked on2026-11-08. Neither supplies evidence that another small template-only fine-tuning run will produce a usable assistant.
+
+- [CLASS-IT, BabyLM2025](https://aclanthology.org/2025.babylm-main.30.pdf) studies100M/140M-parameter decoder models with conversational and question-answer instruction curricula. It reports modest supervised-task improvements, with sequential curricula stronger than merged data, but inconsistent zero-shot transfer. This supports measuring transfer separately from training/development loss; it does not demonstrate our conversation/tool requirements.
+- [Dialogue Is Not Enough, BabyLM2025](https://aclanthology.org/2025.babylm-main.29.pdf) pretrains on preserved child-caregiver dialogue triplets. Better dialogue-continuation discrimination coexists with poor broad benchmark performance. DPO improves its custom minimal-pair task; PPO has mixed or adverse effects. These results do not justify replacing broad language training with a dialogue-only corpus or adding reinforcement learning to the current weak base.
+
+Project inference: language-data variety and context conditioning remain central uncertainties. A bounded correct-versus-shuffled-context audit can discriminate memorization from useful conditioning; it is not an acceptance gate. Any next broader-language tranche needs verified available source data and an explicit learning-curve budget. Published small-data benchmark scores must not be represented as evidence of usable free conversation, successful tool execution, or a guaranteed minimum training-token requirement.

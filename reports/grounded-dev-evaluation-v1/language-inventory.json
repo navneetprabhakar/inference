@@ -1,0 +1,106 @@
+{
+  "state": "read_only_inventory_not_admission",
+  "candidate_database_sha256": "9d9292b5b31cc4f04aa6c9055d9275d3dcde8bf142505e78ecd669287259801c",
+  "candidate_database_bytes": 521474048,
+  "post_legacy_custody_and_v2_exclusions": {
+    "dialogue:train": {
+      "documents": 673,
+      "tokens": 237187
+    },
+    "dialogue:validation": {
+      "documents": 14,
+      "tokens": 4790
+    },
+    "stories:train": {
+      "documents": 169204,
+      "tokens": 31494305
+    },
+    "stories:validation": {
+      "documents": 3340,
+      "tokens": 629749
+    },
+    "web:train": {
+      "documents": 46816,
+      "tokens": 41602743
+    },
+    "web:validation": {
+      "documents": 998,
+      "tokens": 821413
+    }
+  },
+  "strict_web_v3": {
+    "state": "review_complete_not_admitted",
+    "training_admitted": false,
+    "ratings": {
+      "retain": 5,
+      "hold": 5,
+      "review": 6
+    },
+    "score4_after_filters_tokens": 809031,
+    "score4_after_all_sample_deferrals_tokens": 796609,
+    "factual_verification": "None; suspected issues and internal inconsistencies only.",
+    "profile_sha256": "3045d0d782124cf86bb061a7075963a870a6f8ec282b4c3949507ad524f45026",
+    "judgments_sha256": "f76008ff959f8333dd6e428c2625f528b8510a37ef06bb0440b5c1d85346182b"
+  },
+  "source_licenses": {
+    "stories": "CDLA-Sharing-1.0",
+    "dialogue": "Apache-2.0 card; smol-magpie-ultra-short constituent only",
+    "web": "ODC-By1.0 dataset collection; CommonCrawlsource terms"
+  },
+  "limitations": [
+    "Counts include EOT and precede current exposed-development custody and new quality admission.",
+    "Strict web count inherits pinned earlier profile; no new raw metadata scan or filter modification.",
+    "No private cases, source content, downloads, packing or training in this inventory.",
+    "Original archive story data00..03 raw paths missing; no matching filenames/archive found under git/image including ignored files. Candidate SQLite remains byte-identical to its historical independent provenance proof; new admission must explicitly resolve reproducibility requirements."
+  ],
+  "raw_file_availability": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data00.json",
+      "exists": false,
+      "expected_bytes": 140424235,
+      "actual_bytes": null
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-snapshot-20261105-c5b911b/data/sft-v1/raw/smol-smoltalk.parquet",
+      "exists": true,
+      "expected_bytes": 229710350,
+      "actual_bytes": 229710350
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-snapshot-20261105-c5b911b/data/sft-v3/raw/smol-smoltalk-1.parquet",
+      "exists": true,
+      "expected_bytes": 230298184,
+      "actual_bytes": 230298184
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data01.json",
+      "exists": false,
+      "expected_bytes": 140372109,
+      "actual_bytes": null
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data02.json",
+      "exists": false,
+      "expected_bytes": 140537677,
+      "actual_bytes": null
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-archive-20261029/restart/mac15m-feasibility-v1/upstream/data/TinyStories_all_data/data03.json",
+      "exists": false,
+      "expected_bytes": 140385817,
+      "actual_bytes": null
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference-snapshot-20261105-c5b911b/data/continuation-v1/raw/fineweb-new.parquet",
+      "exists": true,
+      "expected_bytes": 2152222432,
+      "actual_bytes": 2152222432
+    }
+  ],
+  "recovery_followup": {
+    "receipt": "reports/language-provenance-recovery-v1/receipt.json",
+    "receipt_sha256": "ad43d5e74aa636311af5b0fbff7bcdf5c5bf3fd3726e1a7b35ccdce9faeb5b55",
+    "state": "PASS_exact_raw_provenance_restored_not_admitted",
+    "original_paths_recreated": false
+  }
+}
