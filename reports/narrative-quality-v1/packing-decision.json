@@ -1,0 +1,45 @@
+{
+  "state": "approved_for_cpu_packing_only",
+  "training_admitted": false,
+  "pins": {
+    "reports/narrative-quality-v1/manifest.json": "53deb3ebfe9bac516284658d5439a117737bb2a100ef00ced44e281fa05273e2",
+    "reports/narrative-quality-v1/sample.jsonl": "f02869caf527ec2a6aac0874e7b46043a6b724735530da4b276aec2bccff2394",
+    "reports/narrative-quality-v1/judgments.json": "cc2ee4ecece3f0c41f8e505c9a697b8c98d5b58be04d523f4d6d0ebddb67c965",
+    "reports/narrative-quality-v1/ROOT-REVIEW.md": "743d377f8c1667bf164f56e04ea448e76930923459f338b3931818bdb507e6e4",
+    "data/narrative-candidates-v1/candidate-verification.json": "3b6a9f0cb7c0902a7b049abc3905bae775d1c6ee5b15dd0f27df826f9658e53d",
+    "data/narrative-candidates-v1/public-custody-binding.json": "4024fcaa281d9bdd858b0a2018175a7ba153d809ffa11923c1e1ed3ef54a6165"
+  },
+  "excluded_training_ids": [
+    "data02.json:50035",
+    "data02.json:96465",
+    "data03.json:8372",
+    "data01.json:56411"
+  ],
+  "excluded_training_tokens": 798,
+  "validation_policy": "Preserve all original 3340 validation documents and known defects. No post-review validation exclusions.",
+  "expected": {
+    "train": {
+      "documents": 169200,
+      "tokens": 31493507
+    },
+    "validation": {
+      "documents": 3340,
+      "tokens": 629749
+    }
+  },
+  "rationale": "Defer four strongest sampled training defects. Retain review-rated stories for bounded fictional language learning; weak plot connection and awkward vocabulary remain disclosed. This finite removal does not establish unreviewed corpus quality.",
+  "packing": {
+    "seed": 20261108,
+    "validation_documents": 128,
+    "short_quota": 32,
+    "long_quota": 96,
+    "max_output_bytes": 1073741824,
+    "disk_floor_bytes": 21474836480,
+    "max_seconds": 1800
+  },
+  "limitations": [
+    "Narrow synthetic narrative distribution; not assistant or tool supervision.",
+    "Seven of 32 sampled stories held and ten marked review; sample is descriptive, not certification.",
+    "No claim that 30M more targets yields usable conversation. No GPU activation."
+  ]
+}
