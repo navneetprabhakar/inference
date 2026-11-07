@@ -1,0 +1,42 @@
+{
+  "name": "sequential-microbatch-tiny-CPU-v1",
+  "scope": "CPU only no full model or GPU",
+  "config": {
+    "vocabulary": 43,
+    "context": 16,
+    "width": 32,
+    "heads": 4,
+    "depth": 2
+  },
+  "seeds": [
+    4817,
+    5209,
+    6211
+  ],
+  "beta2_values": [
+    0.95,
+    0.9991988633566534
+  ],
+  "learning_rates": [
+    0.001,
+    0.0008,
+    0.0004,
+    0.0002
+  ],
+  "fixture_sha256": {
+    "4817": "4006a758f538bd6f707095b051909d3edac432e9a236b11239b11f9c4b4f3b59",
+    "5209": "7ab8f06bd9fdeee128f010ebce841c618a3102fa05cd2c768596f13945cfefdf",
+    "6211": "878151e73ad956e13105531f232671b1435b309cf28407f878f0a6aa24585ee9"
+  },
+  "code_sha256": {
+    "mlx_sequential_train_core.py": "6aca3806847c939f8233b7d82792ef5014a61091bcc22da52c3032efed1ebce0",
+    "verify_mlx_sequential_train_core.py": "5d14838c9a9947f9971a701659d0da871e1d28dd8edb9e63ed02603ca7e64d9b",
+    "mlx_train_core.py": "0f79c0f997b4f3dd9e45bb3e3212d203dcd50273af75173fc74b518f9d23229c",
+    "mlx_base.py": "5ed9c3d54ddaddf201c97eae679db6dd993a6abe5355e84790501e6f57867aa6"
+  },
+  "resource_bounds": {
+    "seconds": 180,
+    "threads": 1
+  },
+  "tests": "Three Torch seeds; six4update compiled/eager/reference cases; unequal8microbatches; freshprocess2+2 exactresume; cliponce/statefixed; failures; peak/cache/RSS refusal"
+}
