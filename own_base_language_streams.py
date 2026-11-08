@@ -43,6 +43,23 @@ def verify_custody(receipts, candidate_sha256):
             require(projection.get('source_database_sha256')==original,'projection original source differs')
             quality=pinned(links['quality']);require(isinstance(quality,list) and all(isinstance(x,dict) and isinstance(x.get('doc_id'),str) for x in quality),'quality exclusion schema')
             scopes.update(('legacy','public-development'));excluded.update(denied);excluded.update(x['doc_id'] for x in quality)
+        elif kind=='broad_replay_v1':
+            require(proof.get('state')=='packed_pending_independent_verification' and proof.get('training_admitted') is False,'replay packing identity')
+            original=pinned(proof['source_manifest'])
+            require(original['candidate_database_sha256']==candidate_sha256,'replay original candidate identity')
+            evidence={Path(p['path']).name:(p,pinned(p)) for p in proof['evidence']}
+            audit_pin,audit=evidence['result.json'];public_pin,public=evidence['public-custody.json']
+            require(audit['state']=='PASS_existing_train_replay_integrity_not_admission' and audit['training_admitted'] is False,'complete replay audit')
+            require(audit['manifest_sha256']==public['manifest_sha256']==proof['source_manifest']['sha256'],'replay evidence source binding')
+            require(public['state']=='screened_not_admitted' and public['training_admitted'] is False and public['audit_sha256']==audit_pin['sha256'],'new public custody binding')
+            require(public['reviewed']==audit['documents'] and public['inventory']['sessions']==442 and public['inventory']['turns']==632,'full public replay screen')
+            require(len(audit['custody'])==2,'historical prose and conversation custody required')
+            for legacy_pin in audit['custody']:
+                legacy=pinned(legacy_pin)
+                require(legacy['state']=='cleared' and legacy['candidate_database_sha256']==candidate_sha256,'replay historical custody binding')
+                excluded.update(legacy['excluded_doc_ids'])
+            excluded.update(public['excluded_doc_ids']);excluded.update(proof['excluded_document_ids'])
+            scopes.update(('legacy','public-development'))
         else:raise ValueError('unknown custody schema; explicit adapter required')
     require(scopes=={'legacy','public-development'},'complete historical/public custody coverage required')
     return excluded
@@ -61,9 +78,12 @@ class AdmittedStreams:
             require(admission.get('training_admitted') is True and admission.get('manifest_sha256')==descriptor['manifest']['sha256'],'root training admission required')
             require(verification.get('state')=='PASS_canonical_manifest_projection' and verification.get('manifest_sha256')==descriptor['manifest']['sha256'] and verification.get('failures')==[],'canonical projection proof required')
             original_proof=pinned(verification['underlying_packing_proof']);original_manifest=pinned(verification['underlying_packing_manifest'])
-            original_states={'PASS_independent_narrative_packing_not_admitted':'manifest_sha256','PASS_separate_full_replay_not_admitted':'dataset_sha256'}
+            original_states={'PASS_independent_narrative_packing_not_admitted':'manifest_sha256','PASS_separate_full_replay_not_admitted':'dataset_sha256','PASS_independent_replay_packing_not_admitted':'manifest_sha256'}
             require(original_proof.get('state') in original_states and original_proof.get('failures')==[],'actual underlying packing verification required')
             require(original_proof[original_states[original_proof['state']]]==verification['underlying_packing_manifest']['sha256'],'underlying proof/manifest binding')
+            if original_proof['state']=='PASS_independent_replay_packing_not_admitted':
+                require(original_proof.get('every_retained_byte_compared') is True and original_proof.get('validation_unchanged') is True and original_proof.get('training_admitted') is False,'full replay byte/split verification')
+                require(any(c['kind']=='broad_replay_v1' and c['pin']==verification['underlying_packing_manifest'] for c in manifest['custody_receipts']),'replay custody binds verified packing')
             require(original_manifest.get('state')=='packed_pending_independent_verification' and original_manifest.get('failure') is None and verification.get('mapping_scope'),'actual complete packing and explicit projection scope')
             require(admission['verification_sha256']==descriptor['verification']['sha256'],'admission must bind independent proof')
             require(admission['custody_receipts']==manifest['custody_receipts'],'admission custody pins differ')

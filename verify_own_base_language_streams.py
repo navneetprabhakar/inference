@@ -66,4 +66,32 @@ class Tests(unittest.TestCase):
             admission=json.loads(Path(spec['sources'][0]['admission']['path']).read_text());admission['training_admitted']=False;spec['sources'][0]['admission']=self.write('admission.json',admission)
             with self.assertRaisesRegex(ValueError,'admission'):AdmittedStreams(spec)
 
+    def replay_fixture(self,root,invalid=None):
+        spec,m=self.fixture(root)
+        source=self.write('source.json',dict(candidate_database_sha256=m['candidate_sha256']))
+        legacy=m['custody_receipts'][0]['pin']
+        conversation=self.write('conversation.json',dict(state='cleared',candidate_database_sha256=m['candidate_sha256'],excluded_doc_ids=[]))
+        audit=self.write('result.json',dict(state='PASS_existing_train_replay_integrity_not_admission',training_admitted=False,manifest_sha256=source['sha256'],documents=2,custody=[legacy,conversation] if invalid!='missing_history' else [legacy]))
+        public=self.write('public-custody.json',dict(state='screened_not_admitted',training_admitted=False,manifest_sha256=source['sha256'],audit_sha256=audit['sha256'],reviewed=1 if invalid=='partial_screen' else 2,inventory=dict(sessions=442,turns=632),excluded_doc_ids=['train0'] if invalid=='excluded' else []))
+        packing=self.write('replay-packing.json',dict(state='packed_pending_independent_verification',training_admitted=False,failure=None,source_manifest=source,evidence=[audit,public],excluded_document_ids=[]))
+        m['custody_receipts']=[dict(kind='broad_replay_v1',pin=packing)]
+        descriptor=spec['sources'][0];descriptor['manifest']=self.write('manifest.json',m)
+        originalproof=self.write('replay-proof.json',dict(state='PASS_independent_replay_packing_not_admitted',manifest_sha256=packing['sha256'],failures=[],every_retained_byte_compared=invalid!='incomplete_bytes',validation_unchanged=True,training_admitted=False))
+        proof=json.loads(Path(descriptor['verification']['path']).read_text())
+        proof.update(manifest_sha256=descriptor['manifest']['sha256'],underlying_packing_manifest=packing,underlying_packing_proof=originalproof)
+        descriptor['verification']=self.write('independent.json',proof)
+        admission=json.loads(Path(descriptor['admission']['path']).read_text())
+        admission.update(manifest_sha256=descriptor['manifest']['sha256'],verification_sha256=descriptor['verification']['sha256'],custody_receipts=m['custody_receipts'])
+        descriptor['admission']=self.write('admission.json',admission)
+        return spec
+
+    def test_replay_adapter_and_fail_closed_evidence(self):
+        with tempfile.TemporaryDirectory() as td:
+            data=AdmittedStreams(self.replay_fixture(Path(td)))
+            rows,_=data.schedule.next_update(data.schedule.initial())
+            self.assertEqual(len(data.row(rows[0])),513)
+        for failure in ('missing_history','partial_screen','excluded','incomplete_bytes'):
+            with self.subTest(failure=failure),tempfile.TemporaryDirectory() as td:
+                with self.assertRaises(ValueError):AdmittedStreams(self.replay_fixture(Path(td),failure))
+
 if __name__=='__main__':unittest.main(verbosity=2)
