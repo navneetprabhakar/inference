@@ -1,0 +1,65 @@
+{
+  "state": "bounded_experiment_finished_not_usable",
+  "decision": {
+    "state": "root_reviewed_external_milestone",
+    "decision": "continue",
+    "request_sha256": "625fb916089129a1a6abc4465063cbcf012d42bd97612c0a7e978d518cb2cfd6",
+    "protocol_sha256": "58e582fbfb8de935ee9354853590d8af411e7e3a676d2a71b73c5d78d38d0604",
+    "result_receipts": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-broad-language-20m-01-external-evaluation/milestone-19996672/result.json",
+        "sha256": "450f0a0b9421b261bf11b4e5068658261a191430eb3871075832b4d0d16cbd44"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-broad-language-20m-01-external-evaluation/milestone-19996672/watchdog.json",
+        "sha256": "531e429eb56831c52b49818aa2c44b4a93de7dd370bedd90b636d612cd9078de"
+      }
+    ],
+    "review": "Endpoint review authorizes finalization at the existing training goal only, zero further optimizer updates. All32 raw completions reviewed: pervasive repetition and incorrect explanations remain; model is not usable or promoted. WebCE4.4891 to4.4546 to4.4181 and context-pair accuracy1/32 to3/32 to5/32 suggest weak directional progress, not demonstrated conversation/tool capability or statistical significance. No automatic extension or SFT admission. Preserve this own-base candidate and earlier evidence; next stage must address pretraining scale/coverage and diagnose repetition without redefining acceptance."
+  },
+  "series": [
+    {
+      "trained_targets": 0,
+      "web_ce": 4.48911564424634,
+      "paired_correct": 1,
+      "paired_count": 32,
+      "result": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-broad-language-20m-01-external-evaluation/milestone-0/result.json",
+        "sha256": "73b82ac68f4330cc3192126b7367e8553a95a833f20996a37585389078e0f359"
+      }
+    },
+    {
+      "trained_targets": 9994240,
+      "web_ce": 4.45457118190825,
+      "paired_correct": 3,
+      "paired_count": 32,
+      "result": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-broad-language-20m-01-external-evaluation/milestone-9994240/result.json",
+        "sha256": "be40bc70cd11d32f782da579023f1e4a9aef1813b0340687e9e08a38568755f4"
+      }
+    },
+    {
+      "trained_targets": 19996672,
+      "web_ce": 4.418134697712958,
+      "paired_correct": 5,
+      "paired_count": 32,
+      "result": {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-broad-language-20m-01-external-evaluation/milestone-19996672/result.json",
+        "sha256": "450f0a0b9421b261bf11b4e5068658261a191430eb3871075832b4d0d16cbd44"
+      }
+    }
+  ],
+  "checkpoint": {
+    "file": "step-002441-a30ad01178da892d1740a75498dd292816707cc894341f11725dee4445cad850.pt",
+    "sha256": "a30ad01178da892d1740a75498dd292816707cc894341f11725dee4445cad850",
+    "bytes": 1493674779
+  },
+  "raw_completions_reviewed": 32,
+  "usable": false,
+  "promoted": false,
+  "next_work": [
+    "Inspect sampling versus greedy repetition under a separately bounded diagnostic; no decoding tricks count as acceptance.",
+    "Assess fresh broad-language data and sustained pretraining scale before selecting the next finite training budget.",
+    "Preserve random-initialized lineage and held-out/private acceptance; no pretrained replacement."
+  ]
+}
