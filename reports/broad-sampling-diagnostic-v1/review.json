@@ -1,0 +1,41 @@
+{
+  "state": "reviewed_sampling_does_not_resolve_usability",
+  "result": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/broad-sampling-diagnostic-v1/result.json",
+    "sha256": "336e1dd7d78eb613bac0b478e28125b48dee82267f151b337f4d7e9e7f85fb24"
+  },
+  "watchdog": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/broad-sampling-diagnostic-v1/watchdog.json",
+    "sha256": "83ebfc08c4f712307398bde832f85e5daa712e60ad864e681e25af50dd671b73"
+  },
+  "reviewed_completions": 64,
+  "settings": [
+    {
+      "temperature": 0.8,
+      "top_p": 0.9
+    },
+    {
+      "temperature": 1.0,
+      "top_p": 0.9
+    }
+  ],
+  "finding": "Nucleus sampling reduces mechanical loops but remains incoherent, factually wrong and weakly conditioned on prompts. Higher temperature also introduces malformed words. Greedy decoding is not the sole usability bottleneck. No acceptance claim or decoding change promoted.",
+  "next_decision": "Prioritize fresh broad-language pretraining scale and source coverage; retain the124M model and own lineage. Do not spend another run on small optimizer or decoding variants.",
+  "research_context": [
+    {
+      "url": "https://huggingface.co/HuggingFaceTB/SmolLM-135M",
+      "reported_pretraining_tokens": 600000000000
+    },
+    {
+      "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M",
+      "reported_pretraining_tokens": 2000000000000
+    }
+  ],
+  "research_limit": "These are strong-model training recipes, not proven minimum token requirements for our acceptance target. They show why matching parameter count is not matching training investment.",
+  "local_compute_estimates": {
+    "assumed_targets_per_second": 1400,
+    "one_billion_days_excluding_overhead": 8.267195767195767,
+    "ten_billion_days_excluding_overhead": 82.67195767195767
+  },
+  "next_work": "Inventory/acquire additional fixed-revision broad text; retain domain holdouts, provenance and protected-set screening; prepare a sustained but finite budget with behavior gates. No additional training budget activated by this diagnostic."
+}
