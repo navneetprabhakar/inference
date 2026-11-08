@@ -1,0 +1,58 @@
+{
+  "state": "reviewed_failed_external_transfer_gate",
+  "decision": {
+    "state": "root_reviewed_external_milestone",
+    "decision": "stop",
+    "request_sha256": "c27507ebd106e3e74b305f67d8f5bcf417cf057e3fe57e1ffff428b1088cc181",
+    "protocol_sha256": "d7e84b1f817e8d3c52a7b443e9110338a5d1ea5fe1c084d74dc8015f1cd3545e",
+    "result_receipts": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-language-300m-01-external-evaluation/milestone-99999744/result.json",
+        "sha256": "4c2a8cf6070d8acf4ecf66fbe07c3d448853cde9a95b0a3087dcf144a6dee746"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-language-300m-01-external-evaluation/milestone-99999744/watchdog.json",
+        "sha256": "42c2382dcd57c847b551a41e6e3d3f58c50f040061d67a1b4f82991b6e1ba057"
+      }
+    ],
+    "review": "Stop this continuation at the first external gate: web CE regressed 4.48911564424634 to 4.978963398374617; paired context accuracy fell 1/32 to 0/32. All 32 new raw completions reviewed: repeated phrases, unsupported causal explanations, entity drift and synthetic textbook/story style remain prominent. Source validation improved but does not demonstrate transfer. No usable conversation or tool-call model demonstrated; no promotion, private acceptance or parameter scaling justified. Preserve parent and current checkpoint. Diagnose mixture/domain forgetting and design a separately frozen broad-language replay intervention before further training; do not resume this mixture unchanged."
+  },
+  "baseline": {
+    "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-language-300m-01-external-evaluation/milestone-0/result.json",
+    "sha256": "32ae0116be69eca7625db52991982565ef99f4773759efff5c35d2d1478d07dd"
+  },
+  "checkpoint": {
+    "file": "step-012207-c8f068caf53995d8a2ab514b90939c224f558a3ea225ffda2f7ebdb2f5c88ea2.pt",
+    "sha256": "c8f068caf53995d8a2ab514b90939c224f558a3ea225ffda2f7ebdb2f5c88ea2",
+    "bytes": 1493538459
+  },
+  "web_ce_baseline": 4.48911564424634,
+  "web_ce_current": 4.978963398374617,
+  "web_perplexity_ratio": 1.6320677254661549,
+  "paired_correct_baseline": 1,
+  "paired_correct_current": 0,
+  "paired_count": 32,
+  "source_validation": [
+    {
+      "trained_tokens": 0,
+      "mean_ce": {
+        "explanatory": 4.703013622379745,
+        "narrative": 3.980818344760987
+      }
+    },
+    {
+      "trained_tokens": 99999744,
+      "mean_ce": {
+        "explanatory": 3.103468264864442,
+        "narrative": 1.6871347534859409
+      }
+    }
+  ],
+  "raw_completions_reviewed": 32,
+  "interpretation": "Consistent with domain specialization/forgetting; this is a hypothesis, not an isolated causal finding. More of this unchanged mixture is not justified.",
+  "next_work": [
+    "Audit original broad-language TRAIN custody and replay availability without touching held-out/private data.",
+    "Design a bounded broad-language-dominant continuation with fixed transfer gates and preserved budgets/STOP safeguards.",
+    "Keep 124M architecture and defer SFT/scaling until transfer evidence supports them."
+  ]
+}
