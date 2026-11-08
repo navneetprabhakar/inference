@@ -1,0 +1,21 @@
+{
+  "state": "prospective_bounded_replay_test",
+  "rationale": "Test whether retaining broad-language coverage avoids the failed all-synthetic mixture transfer regression; not a claim that replay is sufficient pretraining.",
+  "parent_choice": "Original preserve-095 own-base checkpoint; do not inherit the failed 100M synthetic continuation.",
+  "changes": [
+    "75% broad replay,18.75% explanatory,6.25% narrative targets",
+    "New deterministic sampler seed",
+    "Earlier external gates at about10M and20M"
+  ],
+  "held_constant": [
+    "124M architecture",
+    "512 context",
+    "BF16 B2 accumulation8",
+    "constant6e-5 LR",
+    "complete original optimizer/RNG restoration"
+  ],
+  "interpretation": "Mixture intervention, not an isolated ablation: sampler seed and source allocation change. Public diagnostics have possible historical exposure; final private acceptance remains separate.",
+  "first_gate": "Stop on clear external degradation or persistent zero context-pair transfer with unusable raw completions; inspect all32 completions. Source loss alone never authorizes success.",
+  "endpoint": "No automatic extension. Require root review of external behavior before further pretraining, SFT or scaling.",
+  "prior_work": "Old failed campaign budgets, checkpoints and results remain intact; this is a new bounded experiment, not a retry with refunded work."
+}
