@@ -1,0 +1,38 @@
+{
+  "state": "25m_review_stop_unusable",
+  "decision": {
+    "state": "root_reviewed_external_milestone",
+    "decision": "stop",
+    "request_sha256": "cc02a3b005bcbd02036f9fdc173ae63649d7a0c6f23cb1f2dc9fb063e7c6e87b",
+    "protocol_sha256": "f6765da39eb2376e0d7670199106e0c0d1294e60e5237dcfc6a3d3d5c0d1cd22",
+    "result_receipts": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-language-100m-01-external-evaluation/milestone-24993792/result.json",
+        "sha256": "2926de7e26a9ed752ea89ce7b73ba307daee323efa4f902479d5ea40c184839a"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-language-100m-01-external-evaluation/milestone-24993792/watchdog.json",
+        "sha256": "7dd138a654b8be02ce9af5e506fdaf54c756425c4ea13ec6b8041757863382f1"
+      }
+    ],
+    "review": "All32 raw completions reviewed in full: pervasive looping, incorrect causality and context neglect remain. WebCE improves4.48911564424634 to4.395407707430422, paired context1/32 to2/32; this is not usable behavior. Apply prospective stop-on-clear-collapse policy; do not authorize remaining75M unchanged. Audit context sensitivity, causal masking, shifted targets and train/inference numerical correctness before selecting next intervention. No model promotion or private acceptance scoring."
+  },
+  "trained_targets": 24993792,
+  "baseline_web_ce": 4.48911564424634,
+  "web_ce": 4.395407707430422,
+  "context_pairs_correct": 2,
+  "context_pairs_total": 32,
+  "raw_completions_reviewed": 32,
+  "severely_repetitive_completions": 32,
+  "usable": false,
+  "checkpoint": {
+    "file": "step-003051-b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725.pt",
+    "sha256": "b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725",
+    "bytes": 1493534555
+  },
+  "next_work": [
+    "Audit causal attention and shifted-label implementation with independent reference comparisons.",
+    "Measure context sensitivity on public diagnostic inputs without modifying protected evidence.",
+    "Choose next bounded intervention from audit findings; do not resume unchanged stopped run."
+  ]
+}
