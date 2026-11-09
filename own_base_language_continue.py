@@ -28,7 +28,7 @@ ROOT=Path(__file__).resolve().parent
 _TICKET=None
 REQUIRED_CODE={'own_base_language_continue.py','own_base_language_control.py','own_base_language_streams.py','own_base_language_data.py',
  'own_base_language_launch.py','own_base_dev_run.py','checkpoint.py','guards.py','gpt2.py','train.py','base_train.py','own_base_sft_train.py','optimizer_ablation_train.py',
- 'optimizer_ablation_report.py','base_run_control.py','own_base_sft_control.py','tokenizer.py','pretrain.py','pretrained_base.py'}
+ 'optimizer_ablation_report.py','base_run_control.py','own_base_sft_control.py','tokenizer.py','pretrain.py','pretrained_base.py','own_base_language_parent.py'}
 
 
 def validate_launch(spec,run):
@@ -204,6 +204,11 @@ def run_training(spec,run,data,parent,*,device='mps',guard_factory=Guard,model_c
 
 def train(spec_path,run,*,resume=False):
     spec=pinned(spec_path);validate_launch(spec,run);check_external(spec,Path(run))
+    if 'language_parent' in spec:
+        from own_base_language_parent import verified_language_parent
+        data=AdmittedStreams(spec,check=lambda:check_external(spec,Path(run)))
+        parent=verified_language_parent(spec,data,lambda:check_external(spec,Path(run)))
+        spec['_resume']=resume;return run_training(spec,run,data,parent)
     from own_base_sft_train import verified_parent
     parent,name,receipt=verified_parent(spec)
     require(name=='preserve-095','frozen selected own parent required')

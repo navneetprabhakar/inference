@@ -176,6 +176,37 @@ class MixedSchedule:
         return True
 
 
+class ContinuedSchedule:
+    """New campaign counters over an unchanged source schedule at a proven offset."""
+    def __init__(self, base, start_updates):
+        require(integer(start_updates,1),'positive inherited source offset required')
+        base.state_at(start_updates)
+        self.base=base;self.start_updates=start_updates;self.length=base.length
+        self.identity=digest(dict(kind='continued_source_schedule_v1',base=base.identity,start_updates=start_updates))
+
+    def _local(self, state):
+        result=copy.deepcopy(state);result['updates']-=self.start_updates
+        result['plan_sha256']=self.identity
+        return result
+
+    def initial(self):return self.state_at(0)
+
+    def state_at(self, updates):
+        require(integer(updates),'invalid local update cursor')
+        return self._local(self.base.state_at(self.start_updates+updates))
+
+    def validate_resume(self, state):
+        require(state==self.state_at(state.get('updates')),'continued source cursor differs')
+        return True
+
+    def next_update(self, state):
+        self.validate_resume(state)
+        inherited=copy.deepcopy(state);inherited['updates']+=self.start_updates
+        inherited['plan_sha256']=self.base.identity
+        rows,next_state=self.base.next_update(inherited)
+        return rows,self._local(next_state)
+
+
 def validation_manifest(documents, windows, maximum_targets=512):
     """Freeze one unpadded window per held-out document; never filter by length."""
     require(integer(maximum_targets, 32) and maximum_targets <= 1024, 'validation maximum')

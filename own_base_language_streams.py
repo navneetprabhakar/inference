@@ -3,7 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
-from own_base_language_data import require, integer, MixedSchedule, validation_manifest
+from own_base_language_data import require, integer, MixedSchedule, ContinuedSchedule, validation_manifest
 
 
 def sha(path):
@@ -150,6 +150,9 @@ class AdmittedStreams:
             sources.append(dict(name=name,passes=descriptor['passes'],documents=training))
         require(not families['train']&families['validation'] and not fingerprints['train']&fingerprints['validation'],'cross-source train/validation leakage')
         self.schedule=MixedSchedule(dict(schema=1,seed=spec['seed'],length=spec['length'],sources=sources,row_source_cycle=spec['row_source_cycle']))
+        if spec.get('source_start_updates',0):
+            require('language_parent' in spec,'source continuation requires verified language parent')
+            self.schedule=ContinuedSchedule(self.schedule,spec['source_start_updates'])
         selected=pinned(spec['validation_selection']);self.validation=validation_manifest(held,selected['windows'],maximum_targets=512)
         require(selected['manifest']==self.validation,'frozen validation selection differs from admitted documents')
 
