@@ -1,0 +1,25 @@
+{
+  "state": "reviewed_training_scale_and_next_bounded_intervention",
+  "retained_lineage_targets": {
+    "original": 2457600,
+    "foundation": 99999744,
+    "selected_optimizer_branch": 19996672,
+    "fresh_text": 49987584,
+    "total": 172441600
+  },
+  "excluded": "Alternative optimizer branches, failed SFT, synthetic-dominant branch and replay branch are not in this checkpoint lineage.",
+  "learning_rate_history": "Foundation peak6e-5 decayed to6e-6; selected optimizer branch rewarm to6e-5; both fresh-text stages constant6e-5. No controlled local evidence yet that raising LR improves behavior.",
+  "research": [
+    {
+      "url": "https://huggingface.co/blog/smollm",
+      "finding": "Official SmolLM report:135M and360M trained600B tokens; not a minimum requirement or a feasible local reproduction."
+    },
+    {
+      "url": "https://arxiv.org/abs/2203.15556",
+      "finding": "Compute-optimal scaling jointly scales model and token budgets; does not establish assistant acceptance at a token threshold."
+    }
+  ],
+  "decision": "Retain124M model, complete another75M fresh targets from latest checkpoint. Preserve optimizer/RNG and cumulative6102 source updates. No reset, no model growth, no LR jump without local evidence.",
+  "gate_correction": "Prior written gate stopped on one lost context pair. New prospective material threshold is >=4 lost pairs or >=4 additional repetitive outputs versus campaign best, plus CE >baseline+0.15/nonfinite/resource/STOP. Persistent baseline failures still bar promotion. Prior STOP decisions remain unchanged.",
+  "limitations": "Another75M is not expected or promised to solve all deficits. Review endpoint; substantial additional fresh exposure may be required. No inference from CE alone to conversation/tool ability."
+}

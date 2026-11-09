@@ -30,6 +30,15 @@ def verify_payload(payload, campaign, ledger, entry):
         value=payload[name];require(isinstance(value,torch.Tensor) and value.dtype==torch.uint8 and value.numel()>0,'complete parent RNG required')
 
 
+def verify_source_handoff(payload, schedule):
+    old=payload['identity']['protocol']
+    offset=old.get('source_start_updates',0)
+    require(isinstance(offset,int) and not isinstance(offset,bool) and offset>=0,'invalid inherited source offset')
+    require(isinstance(schedule,ContinuedSchedule) and schedule.start_updates==offset+payload['step'],'inherited cumulative source offset differs')
+    prior=ContinuedSchedule(schedule.base,offset) if offset else schedule.base
+    require(payload['cursor']==prior.state_at(payload['step']),'parent data cursor not reproduced')
+
+
 def verified_language_parent(spec, data, check):
     receipt=pinned(spec['language_parent'])
     require(receipt['state']=='reviewed_language_checkpoint_handoff' and receipt['capability_promoted'] is False,'reviewed handoff required')
@@ -53,7 +62,6 @@ def verified_language_parent(spec, data, check):
     old=payload['identity']['protocol']
     for key in ['sources','seed','length','row_source_cycle','tokenizer','model']:
         require(spec[key]==old[key],'continued source/model contract changed: '+key)
-    require(isinstance(data.schedule,ContinuedSchedule) and data.schedule.start_updates==payload['step'],'inherited source offset differs')
-    require(payload['cursor']==data.schedule.base.state_at(payload['step']),'parent data cursor not reproduced')
+    verify_source_handoff(payload,data.schedule)
     require(spec['initialization']==dict(mode='own_pretraining',path=str(path),sha256=entry['sha256'],random_lineage_root=payload['identity']['initialization']['random_lineage_root']),'new initialization lineage differs')
     check();return payload

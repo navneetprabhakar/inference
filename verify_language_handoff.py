@@ -3,7 +3,7 @@ import copy
 import unittest
 import torch
 from own_base_language_data import MixedSchedule,ContinuedSchedule,digest
-from own_base_language_parent import verify_payload
+from own_base_language_parent import verify_payload,verify_source_handoff
 
 
 class Tests(unittest.TestCase):
@@ -28,6 +28,20 @@ class Tests(unittest.TestCase):
         wrong=wrapped.initial();wrong['sources']['fresh']['offset']=0
         with self.assertRaises(ValueError):wrapped.next_update(wrong)
         with self.assertRaises(ValueError):wrapped.state_at(6)
+
+    def test_cumulative_handoff_preserves_source_position(self):
+        base=self.schedule()
+        for offset in [0,2]:
+            old=ContinuedSchedule(base,offset) if offset else base
+            payload=dict(identity=dict(protocol=dict(source_start_updates=offset)),step=2,cursor=old.state_at(2))
+            new=ContinuedSchedule(base,offset+2)
+            verify_source_handoff(payload,new)
+            expected,_=base.next_update(base.state_at(offset+2))
+            actual,_=new.next_update(new.initial())
+            self.assertEqual(actual,expected)
+            wrong=copy.deepcopy(payload);wrong['cursor']['updates']+=1
+            with self.assertRaises(ValueError):verify_source_handoff(wrong,new)
+            with self.assertRaises(ValueError):verify_source_handoff(payload,ContinuedSchedule(base,offset+3))
 
     def fixture(self):
         identity=dict(initialization=dict(mode='own_pretraining',random_lineage_root='test-root'))

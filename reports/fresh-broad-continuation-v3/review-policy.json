@@ -1,0 +1,10 @@
+{
+  "state": "prospective_bounded_continuation_after_correctness_audit",
+  "rationale": "Preserve 50M learned updates and exact data/optimizer/RNG state; test longer fresh-text exposure after scoped math/device checks passed.",
+  "gates": "Baseline must reproduce prior50M external diagnostics. At each25M inspect all32 raw samples,32 context pairs and web loss. Stop for nonfinite values, resource/STOP violations, web CE > baseline+0.15 or material behavioral regression (at least4 fewer correct pairs versus the best checkpoint in this campaign, or at least4 additional repetitive completions). Smaller pair-count fluctuations require review, not automatic stop. Persistent baseline repetition alone is not grounds for resetting learned weights. No automatic extension beyond75M additional targets.",
+  "interpretation": "Loss improvement is not usability. No SFT or capability promotion without behavioral review; private conversation/tool acceptance remains required.",
+  "resource_budget": "30 active hours,5 calendar days,4hour leases;124M local model;zero paid compute;one source pass maximum.",
+  "baseline_ce": 4.328273639082909,
+  "baseline_context_correct": 1,
+  "baseline_repetitive": 32
+}
