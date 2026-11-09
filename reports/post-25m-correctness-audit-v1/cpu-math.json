@@ -1,0 +1,30 @@
+{
+  "state": "PASS_cpu_reference_math_not_model_quality",
+  "production_weights_loaded": false,
+  "checks": [
+    "Explicit per-head attention forward equivalence",
+    "Full-model parameter-gradient equivalence",
+    "Shifted next-token CE equals manual gathered log probabilities",
+    "Future suffix cannot affect earlier logits",
+    "Each full-sequence position equals separate prefix inference",
+    "Earlier context changes final-position logits",
+    "Masked projection equals unmasked positions",
+    "Microbatch accumulation equals full-batch normalized gradients"
+  ],
+  "max_forward_error": 1.1102230246251565e-16,
+  "max_gradient_error": 6.938893903907228e-17,
+  "future_leak_error": 0.0,
+  "prefix_inference_error": 1.3877787807814457e-16,
+  "random_model_context_effect": 0.008555151126486249,
+  "seconds": 0.3039215411990881,
+  "code_sha256": {
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "audit_language_math.py": "4fcf6785151e07587de3aa6722a9aa6f94ce4eff14aaf73f78152d56cef5bb8d",
+    "own_base_language_continue.py": "a1771c75871ba1ac75ba07a889e612295c653460af4b3af636b62d56080b68ff",
+    "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8"
+  },
+  "limitations": [
+    "Tiny random CPU FP64 fixture, not a trained-checkpoint or MPS/BF16 correctness proof.",
+    "Passing arithmetic checks does not establish learned context use or conversational capability."
+  ]
+}

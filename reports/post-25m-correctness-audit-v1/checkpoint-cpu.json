@@ -1,0 +1,76 @@
+{
+  "state": "PASS_actual_checkpoint_cpu_forward_equivalence_not_quality",
+  "checkpoint": {
+    "file": "step-003051-b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725.pt",
+    "sha256": "b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725",
+    "bytes": 1493534555
+  },
+  "trained_targets": 24993792,
+  "forward_calls": 4,
+  "max_sequence_length": 11,
+  "max_manual_attention_logit_difference": 2.193450927734375e-05,
+  "changed_context_probability_l1": 0.11504516750574112,
+  "probe_texts": [
+    "The box is red. The color of the box is",
+    "The box is blue. The color of the box is"
+  ],
+  "top_next_tokens": [
+    [
+      {
+        "token": " the",
+        "probability": 0.08892854303121567
+      },
+      {
+        "token": " a",
+        "probability": 0.05850478634238243
+      },
+      {
+        "token": " very",
+        "probability": 0.031004348769783974
+      },
+      {
+        "token": " called",
+        "probability": 0.028140582144260406
+      },
+      {
+        "token": " not",
+        "probability": 0.024455582723021507
+      }
+    ],
+    [
+      {
+        "token": " the",
+        "probability": 0.0875980481505394
+      },
+      {
+        "token": " a",
+        "probability": 0.05133584886789322
+      },
+      {
+        "token": " very",
+        "probability": 0.029867641627788544
+      },
+      {
+        "token": " called",
+        "probability": 0.026938438415527344
+      },
+      {
+        "token": " not",
+        "probability": 0.02643272466957569
+      }
+    ]
+  ],
+  "seconds": 2.8881016250234097,
+  "weights_written": false,
+  "code_sha256": {
+    "audit_language_checkpoint_cpu.py": "9d64223b4a44b97d1c79415716bd58add5dbf9c94652b00d29d7c13ed01048d9",
+    "audit_language_math.py": "4fcf6785151e07587de3aa6722a9aa6f94ce4eff14aaf73f78152d56cef5bb8d",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966"
+  },
+  "limitations": [
+    "CPU FP32 only; MPS and BF16 still untested by this audit.",
+    "Two simple public probes are a sensitivity check, not a context benchmark.",
+    "Teacher-forced forward equivalence does not establish coherent generation."
+  ]
+}
