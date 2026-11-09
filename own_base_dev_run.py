@@ -380,7 +380,9 @@ def supervise(command_factory,out,*,ticket,heartbeat_seconds,grace_seconds,max_r
                 left=remaining(ticket)
                 if left<=grace_seconds:raise RunnerStop('watchdog wall deadline with reserved termination grace')
                 check(process.pid,left-grace_seconds)
-                if group_rss(process.pid,timeout=min(.5,max(.01,remaining(ticket)-grace_seconds)))>max_rss_bytes:raise RunnerStop('watchdog process-group RSS cap')
+                # A loaded host can take more than0.5s to enumerate processes.
+                # Keep telemetry bounded by both2s and the termination margin.
+                if group_rss(process.pid,timeout=min(2.,max(.01,remaining(ticket)-grace_seconds)))>max_rss_bytes:raise RunnerStop('watchdog process-group RSS cap')
                 heartbeat=out/'heartbeat'
                 last=heartbeat.stat().st_mtime if heartbeat.exists() else ticket['wall_started']
                 if time.time()-last>=heartbeat_seconds:raise RunnerStop('watchdog heartbeat timeout')

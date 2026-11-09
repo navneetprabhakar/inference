@@ -1,0 +1,60 @@
+{
+  "state": "reviewed_external_language_milestone",
+  "runtime_versions": {
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "python": "3.12.11 (main, Aug 18 2025, 19:02:39) [Clang 20.1.4 ]"
+  },
+  "mandatory_ac_power": true,
+  "series": [
+    "original-web-256",
+    "context-pairs-32",
+    "raw-continuations-32"
+  ],
+  "python": "/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python",
+  "foundation_budget_sha256": "658702f471c49b4362c29f46795f5fc6b3135f7e7c7bd540e50d34c2c547fb7d",
+  "length": 512,
+  "generation_max": 48,
+  "precision": "fp32",
+  "code_sha256": {
+    "own_base_language_milestone.py": "710f0aa4427a0e693bb4d894e50142bde6a9fb4b60c5bfd4eecc3bf2f90a6b6c",
+    "own_base_dev_run.py": "3f632587c5ab2346297572a28990e06cee0979a5d4535e8a73e35eba6bd02905",
+    "base_train.py": "625b9492d0176f19337c5babad3a69bac72ffc33a996d9a7fbcc6111cb2b65b8",
+    "gpt2.py": "c15b287d5cb1e150bdbb467dca952ff697486022443abf451e45d6a086346c12",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "checkpoint.py": "4a420b735d9bfac1f4427e1af66cdeef7a16a325a9e62868cff8af212d2d2b66",
+    "guards.py": "985d2ba511c91af8977715f6d9c5d0333e2c9a7907e88285df2a234ef60af417",
+    "optimizer_ablation_train.py": "8ce464507606a2cee5b169f4a2fe417b14b6d84b117ab86d94f7ea9e52a4f939",
+    "base_run_control.py": "26d013cd478493c1b7ea646efb5d2f28f42f50185584bc43f67c9a3de76cdea1",
+    "pretrained_base.py": "5b85cd511a9d51b64cd006c5eb968ec40fb2bd76046361ebb0c6a1fa141d2b27",
+    "pretrain.py": "2f546927c7f877cf2a4f717bdc63d14c1a6eca93255d9fb2d0305f400a9f7aad",
+    "train.py": "940a4cd318a37ddf26206a90116e326f9d56dbb742513c6a2d547e4d1780cb59"
+  },
+  "worst_case": {
+    "attempted_targets": 132986,
+    "input_positions": 207880,
+    "attention_elements": 76261676,
+    "forwards": 1920
+  },
+  "budgets": {
+    "attempted_targets": 664930,
+    "input_positions": 1039400,
+    "attention_elements": 381308380,
+    "active_seconds": 4500,
+    "calendar_seconds": 432000
+  },
+  "per_milestone_seconds": 900,
+  "rss_limit_bytes": 19327352832,
+  "stop_paths": [
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-preserve-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-095/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/optimizer-ablation-v1-reset-scaled/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-foundation-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-continuation-01/STOP",
+    "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-language-100m-01/STOP"
+  ],
+  "planned_events": 5,
+  "accounting": "Reserve full worstcase per milestone before worker spawn; retain charge after crashes or early EOT. Per-forward journal records attempted target/input/attention counts and completion; no automatic retries.",
+  "interpretation": "External transfer evidence only, no assistant/tool acceptance; root decisions remain separate."
+}
