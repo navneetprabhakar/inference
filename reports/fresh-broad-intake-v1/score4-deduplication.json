@@ -1,0 +1,63 @@
+{
+  "state": "lexical_dedup_complete_not_admitted",
+  "training_admitted": false,
+  "selected_documents": 178323,
+  "counts": {
+    "historical_validation_documents": 14374,
+    "repeated_historical_span_skipped": 1960,
+    "validation_heldout_overlap": 6,
+    "train_heldout_overlap": 66,
+    "train_within_train_duplicate": 994,
+    "validation_retained_documents": 3613,
+    "validation_retained_publisher_tokens": 3189100,
+    "train_retained_documents": 173438,
+    "train_retained_publisher_tokens": 146938603,
+    "additional_domain_excluded_documents": 206
+  },
+  "plan": {
+    "method": "NFKC/casefold/whitespace normalized exact SHA256, or >=8 shared entries in bottom16 unique BLAKE2b-64 five-word shingles.",
+    "order": "All historical validation indexed first, then selected validation by priority, then selected train by priority.",
+    "heldout_policy": "Any selected train match to historical or selected validation excludes its entire domain family; within-train duplicate excludes document only.",
+    "limitations": [
+      "Approximate lexical matching can miss paraphrases, containment and some near duplicates.",
+      "Signature overlap is a conservative exclusion heuristic, not an exact Jaccard threshold; false positives are possible.",
+      "Public/private conversation custody remains covered by the separately pinned full-text screening, not re-scored here.",
+      "Historical TRAIN near duplicates are not screened here beyond the prior exact text/URL exclusions."
+    ],
+    "training_admitted": false
+  },
+  "bindings": {
+    "data/fresh-broad-score4-v1/selection.json": "48560fc8d0276c61baf7a0b784fcf49ae8ba3f26e12d9cb4a944767bd8e9ad74",
+    "data/fresh-broad-score4-v1/selected.jsonl": "e0c05ddbe989090e2af738b48f3adddf880125274f73c330353e41b5376859cf",
+    "reports/fresh-broad-intake-v1/deduplicate_score4.py": "040a2637b6265330f36e067b139e595dc956c40872b8ac58aa0e048682a0def2",
+    "reports/fresh-broad-intake-v1/quality_score_probe.py": "2dbe077284bf86a7f90e768bf0f44e33d2cb8154a2a71e16033f7fb6bd894c02",
+    "tokenizer.py": "362c96b6960c07b5d01073530b2fabde73ec952cea5c3b7e01f8cc0679513966",
+    "data/feasibility-v1/documents.jsonl": "e08b33c6fe6c95a5010a396a0bca3eccc9d3fbbd3e671881d8faa0d46172316e",
+    "data/feasibility-v1/wiki-validation.u16": "e773250b220697081c69e37c02dc4b35f1f398a301f2078b0ac84cbfcedce55d",
+    "data/feasibility-v1/stories-validation.u16": "b83e65efeac19f24da187b9b0cbe74de035472ea88ed00ac0d9b5a4207c23c5e",
+    "data/extended-trial-v1/documents.jsonl": "1c59772cd6a0f9d2d0a4d8e65d15d7e35bb28f82cc7859de11f2241f65821413",
+    "data/extended-trial-v1/wiki-validation.u16": "3e064f8313e740fdf3fb9360e69689fd0d50984ab186ea9a01641a614392f855",
+    "data/extended-trial-v1/stories-validation.u16": "e3aeca819806e25a1dcf63e8cf127064730ebfc2c9087291eeb492cedb408f27",
+    "data/extended-trial-v2/documents.jsonl": "ff0197a6851edfea48a6d4df6839e813dc93c8e65719be3d30bf0a8e65afebcc",
+    "data/extended-trial-v2/wiki-validation.u16": "65984cfd3b513ba2035c4c9eed7b15bfc91b0a83f579d2fa62a5f53172099824",
+    "data/extended-trial-v2/stories-validation.u16": "e3aeca819806e25a1dcf63e8cf127064730ebfc2c9087291eeb492cedb408f27",
+    "data/extended-trial-v3/documents.jsonl": "8cbdf74f529f041d0c7968c3c6b86472bd552de555e6829231f88a3d6aafb54c",
+    "data/extended-trial-v3/wiki-validation.u16": "9f6e5b1911f1f7f0c916e024209f67847a2d8462621e2d9f9c1a0dc4798b24cd",
+    "data/extended-trial-v3/stories-validation.u16": "e3aeca819806e25a1dcf63e8cf127064730ebfc2c9087291eeb492cedb408f27",
+    "data/balanced-continuation-v1/documents.jsonl": "716bf1b15a8b7faf3696474d45e4ac038b752b0d53c13235a31a170ba657d7bf",
+    "data/balanced-continuation-v1/wiki-validation.u16": "598b5ad6e9002fe197ffefcf7fcfbf47ddcda0c367db63e309aa93f6a3eebf9b",
+    "data/balanced-continuation-v1/stories-validation.u16": "d02952650339ae9bf55dd1cbe4543e9a8ab54ec838d427d9558ec00d182bf13a",
+    "data/balanced-continuation-v1/textbook-validation.u16": "d190064c73e7f0650d6bfba08bc6280336ae5f79f437842d367eb6786eb67d8c",
+    "data/base-foundation-100m/documents.jsonl": "f8db0c836fdbd5f86578f1285348601549ad25d5f4f19b790db278daec9b689b",
+    "data/base-foundation-100m/fineweb-validation.u16": "119a6fd8dd6d8bfdde6e6be1c44f3f09871e9dc4250298a40445f81d84b67eba",
+    "data/narrative-packed-v1/validation.documents.jsonl": "a9de4997f1b522641d910f7e509af0844760f1b5c277ab643883f4b7176c705f",
+    "data/narrative-packed-v1/narrative-validation.u16": "ad209ada1064f63831c102329f7986694b3b5e70e779fdbbd6983732591cbd39",
+    "data/explanatory-packed-v3/validation.documents.jsonl": "3f98865fe3557af6c3c21c1f38b03953067d93fcd8d5317c0922fac0f8711c1f",
+    "data/explanatory-packed-v3/explanatory-validation.u16": "a5a39d6a5411ff23932df14f5bfc7bf045eb3610a509a906819f45e442430e46"
+  },
+  "retained_sha256": "9e27172972a837dfecc56f305d96019fa19e56851e6172b71aaf3a0da298c209",
+  "decisions_sha256": "0b189910dc5e23e91fda1487cb9fe5603bc3a853afc6284a6f9134789e980a48",
+  "seconds": 85.1167988339439,
+  "excluded_domain_count": 47,
+  "result_sha256": "a0df62850a24e360a49b0c6857581734b9aee4e0e4f9ffba56360b5948c3a4e6"
+}
