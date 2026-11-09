@@ -1,0 +1,37 @@
+{
+  "state": "reviewed_stop_unusable_behavior",
+  "decision": {
+    "state": "root_reviewed_external_milestone",
+    "decision": "stop",
+    "request_sha256": "b11155d6e00ac7828f3a6b3744b940d8c2bc19df804429e26c6b271a5a04fddf",
+    "protocol_sha256": "d267a2fa6a94381165b9639eeda25965f389c75b5fd7968f2be3dbfad7238397",
+    "result_receipts": [
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-continuation-02-external-evaluation/milestone-24993792/result.json",
+        "sha256": "6bdc5cef143d9aa02cf47052ab52640384265e336b602812fdc7c3022d8dae48"
+      },
+      {
+        "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/own-base-fresh-broad-continuation-02-external-evaluation/milestone-24993792/watchdog.json",
+        "sha256": "94c9cf1c8fe8c3dfbda80ce0a5f06cefaaca981bc30280fadf838594e3e83030"
+      }
+    ],
+    "review": "All32 raw completions reviewed: pervasive repetitive loops, context neglect and incorrect causality persist. WebCE improved4.395407707430422 to4.328273639082909; context pairs fell2/32 to1/32 (lostpair25, now incorrect by0.0170364 mean log probability). Honor prospective stop for new behavioral regression. Single-pair change is weak evidence of broad deterioration, but no usability improvement demonstrated. Preserve50M fresh progress; do not reset original weights. No acceptance or promotion."
+  },
+  "additional_targets": 24993792,
+  "total_fresh_targets": 49987584,
+  "web_ce": 4.328273639082909,
+  "context_pairs_correct": 1,
+  "raw_completions_reviewed": 32,
+  "repetitive_completions": 32,
+  "usable": false,
+  "checkpoint": {
+    "file": "step-003051-ca727fddc3b48295b0c96e6d79cd54cd23cf5be6c7854210d91ed175ad123067.pt",
+    "sha256": "ca727fddc3b48295b0c96e6d79cd54cd23cf5be6c7854210d91ed175ad123067",
+    "bytes": 1493535131
+  },
+  "next_work": [
+    "Review training scale and inherited optimizer/LR history against existing evidence before next activation.",
+    "Preserve current learned progress; investigate finite intervention rather than resetting original parent.",
+    "Set explicit prospective material-regression thresholds; do not rewrite this stopped decision."
+  ]
+}
