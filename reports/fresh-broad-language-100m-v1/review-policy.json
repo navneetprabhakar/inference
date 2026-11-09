@@ -1,0 +1,21 @@
+{
+  "state": "prospective_bounded_fresh_text_test",
+  "rationale": "Train on 100M fresh broad-language targets after quality and custody filtering; avoid another synthetic-dominant continuation or repeated old-web replay.",
+  "parent_choice": "Original preserve-095 own-base checkpoint. This creates a comparable branch from the same verified parent as the prior two experiments. The weakly improved 20M replay endpoint is preserved, but not inherited; this costs its 20M updates and avoids an untested parent adapter.",
+  "changes": [
+    "100% fresh score>=4 broad text",
+    "100M finite target budget with gates at baseline,25M,50M,100M",
+    "One source pass maximum"
+  ],
+  "held_constant": [
+    "124M architecture",
+    "512 context",
+    "BF16 B2 accumulation8",
+    "constant6e-5 LR",
+    "complete original optimizer/RNG restoration"
+  ],
+  "interpretation": "Fresh-data intervention, not an isolated quality-threshold ablation. Prior public exposure remains possible; final private acceptance is separate.",
+  "gates": "Review external web loss, context-pair results and all32 raw continuations together. Stop on material external regression or clear collapse; source loss alone never authorizes success. Modest improvement is not usable conversation.",
+  "endpoint": "No automatic extension, SFT or parameter growth. Require behavioral review. This finite budget does not promise usable conversation.",
+  "resource_budget": "30 active hours,5 calendar days, existing4-hour lease/resource/STOP safeguards. No paid compute."
+}
