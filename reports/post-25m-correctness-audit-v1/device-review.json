@@ -1,0 +1,71 @@
+{
+  "state": "reviewed_device_audit_no_obvious_numerical_defect",
+  "result": {
+    "state": "completed_device_numerics_audit_not_quality",
+    "checkpoint": {
+      "file": "step-003051-b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725.pt",
+      "sha256": "b7d5cb1a217094316c268550afe647e245ec78aa8f75f5ea7c5bdcaf7923b725",
+      "bytes": 1493534555
+    },
+    "results": [
+      {
+        "mode": "cpu_fp32",
+        "ce": 4.12572717666626
+      },
+      {
+        "mode": "mps_fp32",
+        "ce": 4.125740051269531,
+        "ce_abs_difference": 1.2874603271484375e-05,
+        "gradient_cosine": 0.999999996071632,
+        "gradient_relative_l2": 7.244284394643625e-05,
+        "last_logits_max_abs_difference": 2.002716064453125e-05,
+        "within_prespecified_tolerance": true
+      },
+      {
+        "mode": "mps_bf16",
+        "ce": 4.125187397003174,
+        "ce_abs_difference": 0.0005397796630859375,
+        "gradient_cosine": 0.9999279511428909,
+        "gradient_relative_l2": 0.012007439095061512,
+        "last_logits_max_abs_difference": 0.07682991027832031,
+        "within_prespecified_tolerance": true
+      }
+    ],
+    "passed": true,
+    "source_sha256": "00f6e5f820e9aa5b9cea736017f4f571ccbb647cdb9bdc748926fedd9a3bec39",
+    "forward_backward_passes": 3,
+    "targets": 3072,
+    "optimizer_steps": 0,
+    "weights_written": false,
+    "limitations": "One full-size B2/T512 training batch; no optimizer trajectory equivalence or behavioral success established."
+  },
+  "watchdog": {
+    "exit_code": 0,
+    "watchdog_reason": null,
+    "seconds": 6.430578249972314,
+    "within_deadline": true,
+    "child_pid": 42690,
+    "hard_stop_inflight_state": null
+  },
+  "evidence": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/post-25m-device-audit-v1/reservation.json",
+      "sha256": "2c2cddd94ad7e3f29d9ec78f199d0aa1d0764a8bf775e1d771c31e54a7e332d1"
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/post-25m-device-audit-v1/result.json",
+      "sha256": "0b605a6409aa58298263d05affe47daaa438a04c5c27a739ee3f84546f584788"
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/post-25m-device-audit-v1/watchdog.json",
+      "sha256": "3c45c85ed156d604676a57f11c3fd515af6104ee3d1525c2b916d59cfb2b1bf1"
+    }
+  ],
+  "interpretation": "CPU reference math and full-size MPS/BF16 checks pass within declared scope. These results narrow the implementation-defect hypothesis, not prove the entire training system correct. Current base remains undertrained or otherwise poorly learned; no capability promotion.",
+  "next_actions": [
+    "Add explicitly verified language-checkpoint parent adapter so future runs preserve accepted25M progress and optimizer/RNG state.",
+    "Prepare a longer bounded continuation with fresh-data exposure accounting; do not restart the original parent again.",
+    "Revise prospective gates to separate new numerical/divergence failures from persistent poor baseline behavior, while continuing to report raw capability failures honestly."
+  ],
+  "training_authorized_by_this_receipt": false
+}
