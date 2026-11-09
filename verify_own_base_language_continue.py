@@ -7,7 +7,7 @@ import torch
 import checkpoint
 from gpt2 import Config,GPT2
 from train import optimizer_for
-from own_base_language_data import MixedSchedule,validation_manifest
+from own_base_language_data import MixedSchedule,ContinuedSchedule,validation_manifest
 from own_base_language_control import LanguageCampaign,CampaignStop
 from own_base_language_continue import run_training,restore,optimizer_step,validate_launch
 
@@ -41,6 +41,17 @@ class Tests(unittest.TestCase):
         return run_training(spec or self.spec,root,data or Data(),self.parent,device='cpu',guard_factory=CPUGuard,model_config=self.config,after_update=callback)
     def payload(self,path):
         e=json.loads((path/'latest.json').read_text())[0];return torch.load(path/e['file'],weights_only=True)
+    def test_continued_schedule_runs_validation_and_updates(self):
+        with tempfile.TemporaryDirectory() as td:
+            data=Data();data.schedule=ContinuedSchedule(data.schedule,1)
+            run=Path(td)/'continued'
+            self.assertEqual(self.execute(run,data),'completed')
+            payload=self.payload(run)
+            self.assertEqual(payload['step'],2)
+            self.assertEqual(payload['cursor'],data.schedule.state_at(2))
+            self.assertEqual(len(payload['history']),2)
+            self.assertIn('fixture',payload['best'])
+
     def test_full_moments_rng_initial_restore(self):
         m=GPT2(self.config);o,step=restore(m,self.parent,'cpu');self.assertEqual(step,1)
         for a,b in zip(o.state_dict()['state'].values(),self.parent['optimizer']['state'].values()):

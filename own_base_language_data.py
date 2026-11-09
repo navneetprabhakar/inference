@@ -182,6 +182,7 @@ class ContinuedSchedule:
         require(integer(start_updates,1),'positive inherited source offset required')
         base.state_at(start_updates)
         self.base=base;self.start_updates=start_updates;self.length=base.length
+        self.sources=base.sources
         self.identity=digest(dict(kind='continued_source_schedule_v1',base=base.identity,start_updates=start_updates))
 
     def _local(self, state):
