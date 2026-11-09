@@ -60,6 +60,33 @@ def verify_custody(receipts, candidate_sha256):
                 excluded.update(legacy['excluded_doc_ids'])
             excluded.update(public['excluded_doc_ids']);excluded.update(proof['excluded_document_ids'])
             scopes.update(('legacy','public-development'))
+        elif kind=='fresh_broad_score4_v1':
+            require(proof.get('state')=='packed_pending_independent_verification' and proof.get('training_admitted') is False and proof.get('candidate_database_sha256')==candidate_sha256,'fresh packing candidate identity')
+            root=Path(__file__).resolve().parent
+            for relative,value in proof['bindings'].items():
+                path=(root/relative).resolve()
+                require(path.is_relative_to(root) and not (root/relative).is_symlink() and sha(path)==value,'fresh provenance binding differs')
+            def evidence(relative):
+                require(relative in proof['bindings'],'fresh evidence binding missing')
+                return json.loads((root/relative).read_text())
+            custody=evidence('data/fresh-broad-candidates-v1/custody.json')
+            require(custody.get('state')=='screened_not_admitted' and custody.get('candidate_database_sha256')==candidate_sha256 and custody.get('training_admitted') is False,'fresh custody identity')
+            require(custody['reviewed']==2384706 and custody['public_inventory']['sessions']==442 and custody['public_inventory']['turns']==632 and custody['historical_chat_holdouts'] and custody['protected_sha256'],'fresh complete historical/public screening')
+            for path,value in custody['protected_sha256'].items():require(sha(path)==value,'fresh protected evidence changed')
+            for path,value in custody['historical_chat_holdouts'].items():require(sha(path)==value['sha256'],'fresh historical evidence changed')
+            excluded.update(custody['excluded_doc_ids'])
+            domains=set(custody['excluded_domain_families'])
+            for relative in ['reports/fresh-broad-intake-v1/quality-review.json','reports/fresh-broad-intake-v1/quality-score-review.json']:
+                domains.update(evidence(relative)['excluded_domains'])
+            dedup=evidence('data/fresh-broad-score4-dedup-v1/result.json')
+            require(dedup.get('state')=='lexical_dedup_complete_not_admitted' and dedup.get('training_admitted') is False,'fresh deduplication proof')
+            domains.update(dedup['excluded_domain_families'])
+            selected_path='data/fresh-broad-score4-v1/selected.jsonl'
+            require(selected_path in proof['bindings'],'fresh selection binding')
+            for line in (root/selected_path).open():
+                row=json.loads(line)
+                if row['domain'] in domains:excluded.add(row['doc_id'])
+            scopes.update(('legacy','public-development'))
         else:raise ValueError('unknown custody schema; explicit adapter required')
     require(scopes=={'legacy','public-development'},'complete historical/public custody coverage required')
     return excluded
@@ -78,9 +105,14 @@ class AdmittedStreams:
             require(admission.get('training_admitted') is True and admission.get('manifest_sha256')==descriptor['manifest']['sha256'],'root training admission required')
             require(verification.get('state')=='PASS_canonical_manifest_projection' and verification.get('manifest_sha256')==descriptor['manifest']['sha256'] and verification.get('failures')==[],'canonical projection proof required')
             original_proof=pinned(verification['underlying_packing_proof']);original_manifest=pinned(verification['underlying_packing_manifest'])
-            original_states={'PASS_independent_narrative_packing_not_admitted':'manifest_sha256','PASS_separate_full_replay_not_admitted':'dataset_sha256','PASS_independent_replay_packing_not_admitted':'manifest_sha256'}
-            require(original_proof.get('state') in original_states and original_proof.get('failures')==[],'actual underlying packing verification required')
+            original_states={'PASS_independent_narrative_packing_not_admitted':'manifest_sha256','PASS_separate_full_replay_not_admitted':'dataset_sha256','PASS_independent_replay_packing_not_admitted':'manifest_sha256','PASS_full_packed_span_replay_not_admitted':'manifest_sha256'}
+            fresh=original_proof.get('state')=='PASS_full_packed_span_replay_not_admitted'
+            require(original_proof.get('state') in original_states and (fresh or original_proof.get('failures')==[]),'actual underlying packing verification required')
             require(original_proof[original_states[original_proof['state']]]==verification['underlying_packing_manifest']['sha256'],'underlying proof/manifest binding')
+            if fresh:
+                require(original_proof.get('training_admitted') is False and original_proof['documents_sha256']==original_manifest['documents_sha256'],'fresh full-span proof identity')
+                require(original_proof['checked_documents']==sum(s['documents'] for s in original_manifest['shards'].values()),'fresh complete document proof')
+                require(any(c['kind']=='fresh_broad_score4_v1' and c['pin']==verification['underlying_packing_manifest'] for c in manifest['custody_receipts']),'fresh custody binds verified packing')
             if original_proof['state']=='PASS_independent_replay_packing_not_admitted':
                 require(original_proof.get('every_retained_byte_compared') is True and original_proof.get('validation_unchanged') is True and original_proof.get('training_admitted') is False,'full replay byte/split verification')
                 require(any(c['kind']=='broad_replay_v1' and c['pin']==verification['underlying_packing_manifest'] for c in manifest['custody_receipts']),'replay custody binds verified packing')
