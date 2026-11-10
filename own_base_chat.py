@@ -51,7 +51,7 @@ def stable_tool_record(record):
 
 class Chat:
     def __init__(self,model,tok,guard,*,generate=None,allowed_tools=('calculate','convert'),
-                 reply_budget=REPLY_BUDGET,context=CONTEXT):
+                 reply_budget=REPLY_BUDGET,context=CONTEXT,repetition_penalty=1.):
         if not callable(getattr(guard,'check',None)):raise ValueError('a runtime guard is required')
         if type(reply_budget)!=int or reply_budget!=REPLY_BUDGET:
             raise ValueError('own-base chat reserves exactly256 reply tokens')
@@ -59,6 +59,8 @@ class Chat:
             raise ValueError('own-base chat uses the complete1024-token context')
         if generate is None and model is None:raise ValueError('actual model required without explicit test callback')
         if generate is not None and not callable(generate):raise ValueError('generate callback must be callable')
+        from repetition_decode import validate_penalty
+        self.repetition_penalty=validate_penalty(repetition_penalty)
         self.model,self.tok,self.guard=model,tok,guard
         self.generate=generate
         self.reply_budget,self.context=reply_budget,context
@@ -74,8 +76,8 @@ class Chat:
 
     def _generate(self,prefix):
         if self.generate is not None:return self.generate(prefix,self.reply_budget)
-        from evaluate import greedy
-        return greedy(self.model,prefix,self.reply_budget,self.guard)
+        from repetition_decode import greedy
+        return greedy(self.model,prefix,self.reply_budget,self.guard,repetition_penalty=self.repetition_penalty)
 
     def turn(self,user,permit_calls=True,allowed_names=None,fixture_for=None,fixture=None):
         start=len(self.session.trace)

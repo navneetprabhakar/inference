@@ -1,0 +1,100 @@
+{
+  "state": "proposed_only_no_download_or_new_training_started",
+  "decision": "Change the data/learning experiment before allocating another open-ended continuation. Keep current 124M architecture; optional scaling to 1B is authorized in principle but not recommended until behavior improves.",
+  "answer_more_data": "Likely yes: current retained lineage has only 247.44M target tokens, about 1.99 per parameter. More of the same web text alone is not established as sufficient. We need a broader token budget plus easier coherent text and explicit context-dependent supervision, tested separately.",
+  "sources": [
+    {
+      "url": "https://huggingface.co/HuggingFaceTB/SmolLM-135M",
+      "finding": "135M model card reports 600B pretraining tokens with a curated mixed corpus. Shows similar size can learn useful language at much larger training scale; not a minimum required token count, and different architecture/tokenizer prevents direct extrapolation."
+    },
+    {
+      "url": "https://arxiv.org/abs/2305.07759",
+      "finding": "TinyStories demonstrates coherent restricted-domain stories in very small models using simple synthetic text. Supports easier-language curriculum experiments, not a guarantee of conversation or tools."
+    },
+    {
+      "url": "https://arxiv.org/abs/1904.09751",
+      "finding": "Greedy likelihood maximization can cause degeneration. Our penalty experiment reduces repeated phrases but leaves semantic failures; prior nucleus sampling also did not establish usability."
+    },
+    {
+      "url": "https://arxiv.org/abs/2209.11895",
+      "finding": "Induction-head work links learning dynamics to context use, with causal evidence in small attention-only models and correlational evidence in larger MLP models. Does not diagnose our model or justify adding layers without measurement."
+    },
+    {
+      "url": "https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk",
+      "finding": "Small-model-oriented conversation dataset, approximately 460k training rows, Apache-2.0 card. Candidate for later short conversation supervision after length, quality and contamination filtering."
+    },
+    {
+      "url": "https://huggingface.co/datasets/Salesforce/xlam-function-calling-60k",
+      "finding": "APIGen validates format, execution and semantics. Use this validation approach for our calculate/convert traces. Dataset is gated and includes unrelated APIs; do not import wholesale or treat leaderboard results as evidence for our random-initialized base."
+    }
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "name": "Freeze a fresh development test before data work",
+      "actions": [
+        "Keep existing private acceptance suites untouched. Preserve existing 32 public pairs as regression diagnostics, not training templates.",
+        "Create 200 new paired fact-flip cases with disjoint entity combinations, paraphrase families, distractors and balanced answer frequencies; stratify prompt lengths 32/128/256/480. Freeze a development/audit split before model testing.",
+        "Include exact copying, ownership, latest-state correction, negation, irrelevant distractors and answer-not-present cases. Report both-members-correct, single-member accuracy, margins and free-generation correctness separately.",
+        "Include synthetic nonce labels to separate fact recall from context binding; keep these diagnostics out of training.",
+        "Validate scorer on known-good and context-ignoring synthetic logits; report length-normalized and summed-logprob results."
+      ],
+      "reason": "Current 32-pair set is small and heavily inspected; more reliable measurement is needed before selecting a new recipe."
+    },
+    {
+      "phase": 1,
+      "name": "Admit a bounded training-only pilot corpus",
+      "target_tokens": 100000000,
+      "proposed_mix": {
+        "simple_coherent_stories_and_everyday_explanations": 50000000,
+        "fresh_high_quality_web": 40000000,
+        "context_dependent_short_prose": 10000000
+      },
+      "actions": [
+        "These ratios are an experiment, not a literature-proven optimum. Earlier synthetic-heavy training failed; inspect this mixture rather than assume synthetic data helps.",
+        "Use licensed public TinyStories/Cosmopedia subsets as candidates, excluding historical exact and near duplicates; favor complete short documents and plain causal explanations. Reject repetitive, malformed, unsupported and boilerplate passages.",
+        "Context prose must vary relations, wording, answer location and distractors, with balanced counterfactual versions generated from independently verified facts. Avoid the existing evaluation templates.",
+        "Split by document/source and template family before packing. Screen all historical/private evaluation custody sets using existing admission rules; add historical TRAIN near-dedup, which the previous corpus lacked beyond exact checks.",
+        "Human/agent inspect a stratified sample of at least 200 documents and 200 context examples; deterministically validate all generated context answers. Reject a source slice with systematic errors.",
+        "Pin dataset revision, license, raw shard hash, record IDs and packed hashes. Count actual tokenizer targets after filtering, not source row counts.",
+        "Stream to a bounded staging area; retain compact provenance and packed data, then delete raw staging only after reproducibility verification. No multi-GB download has been started."
+      ],
+      "disk_budget": "100M uint32 packed tokens roughly 0.4GB; cap raw/cache staging at 5GB and enforce existing free-space guard. Actual metadata/dedup footprint must be measured."
+    },
+    {
+      "phase": 2,
+      "name": "Sequential controlled pilot, only after user decision",
+      "design": "Two sequential 50M-target branches from the same protected endpoint: fresh broad-only control versus proposed mixed curriculum. Same optimizer, LR, batch, token budget and 512 context. Never overlapping weight writers. Control requires a newly admitted corpus: existing fresh source has only about 22M remaining.",
+      "estimated_local_training": "Combined 100M targets at historical 1400-1600 targets/sec: about 17.4-19.8 hours of training, excluding curation, evaluation and resource pauses. Not an ETA for usable chat.",
+      "evaluation": "Freeze protocol and thresholds before launch. Measure paired-context behavior and raw completion quality at start and endpoint; use existing resource guards throughout.",
+      "proposed_decision_rule": "Advance a mixture only if it improves development both-members-correct by at least 10 percentage points versus control, has a positive paired-bootstrap 95% interval on that difference, and improves manual contextual coherence without more than 0.15 nats broad-CE regression. Thresholds are proposed and must be frozen prospectively; private acceptance unchanged.",
+      "failure_action": "If neither branch materially improves context use, do not extend automatically: inspect corpus samples, training-vs-heldout gaps and a bounded memorize/generalize diagnostic to separate learning failure from transfer failure."
+    },
+    {
+      "phase": 3,
+      "name": "Scale tokens only after pilot evidence",
+      "proposal": "If the mixed curriculum wins, admit up to 1B additional clean target tokens in stages, retaining the 124M model and fixed audit gates. No guarantee that 1B is enough.",
+      "estimated_local_training": "1B at 1400-1600 targets/sec is about 7.2-8.3 days of pure training; total calendar time is longer. Re-benchmark if sequence length or hardware changes.",
+      "stop_rule": "No automatic continuation for CE improvement alone. Require prospective context/coherence progress at each major stage; stop if behavior remains flat.",
+      "context_length": "Before claiming full 1024-token chat, explicitly train/evaluate upper positions or change the product context contract through reviewed code. Do not silently truncate history."
+    },
+    {
+      "phase": 4,
+      "name": "Conversation and executable tool supervision",
+      "actions": [
+        "After base shows transferable coherence/context use, filter short smol-smoltalk-style conversations to the trained context and mix grounded multi-turn corrections, references and follow-ups.",
+        "Build calculate/convert episodes using the real broker with actual returned results, argument provenance, missing-argument questions, no-call negatives and dependent follow-ups. Schema checks alone are insufficient.",
+        "Use assistant-only loss for role/task instruction examples; retain a language replay slice. Choose token budget after tokenizing admitted data rather than promising a row count.",
+        "Separate paraphrase/template families and argument ranges across train/dev; never train on private acceptance or the new frozen audit set.",
+        "Assess whole sessions, wrong executions and result-grounded answers. Repetition penalty remains optional and requires tool-JSON validation before changing the default.",
+        "Only call the model usable after existing conversation/tool acceptance and practical session gates pass."
+      ]
+    }
+  ],
+  "not_claimed": [
+    "No causal proof of missing induction heads or insufficient layers.",
+    "No guaranteed token budget or date for usability.",
+    "No new training, cloud resource provisioning, dataset download or pretrained substitution performed."
+  ],
+  "recommendation": "Approve a controlled data-mixture pilot next, not another unchanged 75M continuation or a parameter jump. Completion of this plan is the agreed decision boundary."
+}
