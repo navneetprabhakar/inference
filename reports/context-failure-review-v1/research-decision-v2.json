@@ -1,0 +1,99 @@
+{
+  "state": "research_complete_training_remains_paused",
+  "date": "2026-11-10",
+  "supersedes": "research-plan.json experiment ordering; previous plan preserved as history",
+  "main_decision": "First establish learning efficiency and transferable context binding, then scale data. Keep 124M architecture for this diagnostic. Do not promise that another 50M-100M tokens will yield conversation.",
+  "local_findings": {
+    "lineage_targets": 247439360,
+    "parameters": 124439808,
+    "context_pairs_correct": "2/32",
+    "unchanged_choice_after_fact_flip": "28/32",
+    "current_lr": 6e-05,
+    "targets_per_update": 8192,
+    "prior_optimizer_comparison": "All three branches peaked at 6e-5; tested optimizer state/beta2, not peak LR.",
+    "implementation": "Reviewed gpt2.py: pre-norm causal attention, tied embeddings, standard residual scaling, shifted CE. Prior math/device audits narrow but do not eliminate implementation causes."
+  },
+  "external_comparators": [
+    {
+      "source": "https://raw.githubusercontent.com/karpathy/build-nanogpt/master/train_gpt2.py",
+      "finding": "124M GPT-2 reproduction recipe: approximately 10B targets, 524288-token effective batch, peak LR6e-4, cosine decay. Our batch is 64x smaller: copying LR directly is unjustified.",
+      "transfer": "Run controlled LR comparison; verify learning before blaming model capacity."
+    },
+    {
+      "source": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M",
+      "finding": "2T pretraining tokens; instruct MT-Bench1.98, IFEval about29.9. Demonstrates substantial training at this size but also persistent limitations.",
+      "transfer": "Model size alone does not ensure competent chat, even after enormous training."
+    },
+    {
+      "source": "https://arxiv.org/html/2606.22189v1",
+      "finding": "Single-run, self-evaluated 134.5M case study:10B initial plus3B continuation, one L20GPU, curated mixed data and SFT. RLVR reduced GSM8K performance.",
+      "transfer": "Closer resource-constrained comparison, not an independently reproduced guarantee. Even this receives about52.5x our retained token exposure."
+    },
+    {
+      "source": "https://arxiv.org/abs/2305.07759",
+      "finding": "Simple synthetic stories yield coherence in much smaller models.",
+      "transfer": "Test accessible coherent language as one curriculum component; story competence is not conversation/tool acceptance."
+    },
+    {
+      "source": "https://arxiv.org/abs/2205.05055",
+      "finding": "Controlled research links in-context learning to training distributions with dynamic meanings and bursty examples.",
+      "transfer": "Use varied context-specific entity bindings and counterfactuals; this is a hypothesis for our natural-language failures, not proof of cause."
+    },
+    {
+      "source": "https://raw.githubusercontent.com/huggingface/alignment-handbook/main/recipes/smollm2/README.md",
+      "finding": "135M/360M instruction models use smol-smoltalk SFT followed by UltraFeedback DPO.",
+      "transfer": "Separate general pretraining and instruction learning. Do not start DPO/RL while basic supervised learning is unproven."
+    },
+    {
+      "source": "https://arxiv.org/abs/2406.18518",
+      "finding": "APIGen validates generated tool data by format, actual execution and semantics.",
+      "transfer": "Use real calculate/convert traces, argument correctness and returned-result grounding; external fine-tuning results do not show 60k examples can replace pretraining."
+    },
+    {
+      "source": "https://raw.githubusercontent.com/karpathy/nanochat/master/README.md",
+      "finding": "End-to-end tokenizer/pretraining/finetuning/evaluation harness; headline speedrun targets an8xH100 node and benchmark-defined GPT-2 capability.",
+      "transfer": "Study pipeline design; do not transplant advertised wall-clock times to a Mac or equate benchmark score with our acceptance."
+    }
+  ],
+  "next_steps_proposed": [
+    {
+      "order": 1,
+      "experiment": "Memorize versus generalize diagnostic",
+      "design": "Use an isolated copy of own endpoint. Verify it can overfit128 independently generated, balanced context-binding examples with answer-only loss; evaluate disjoint entities and held-out paraphrase/template families separately. Preserve unmodified base and private acceptance.",
+      "interpretation": "Cannot memorize: inspect optimizer, loss masks, data and update magnitudes. Memorizes but cannot transfer: training distribution/generalization issue. Transfers but prose fails: language foundation remains weak. This diagnostic is not a product pass."
+    },
+    {
+      "order": 2,
+      "experiment": "Peak-LR screen",
+      "design": "Three sequential branches from same endpoint and preserved optimizer state:6e-5,1.2e-4,2.4e-4; same batch, same approved training rows and equal5M-target budget per arm, fixed brief warmup. Track gradient clipping, update/weight ratios, held-out CE and context metrics. Stop for nonfinite/resource failure.",
+      "interpretation": "15M targets total costs about2.6-3hours training at prior throughput, excluding setup/eval. Loss may select an optimization candidate, never prove conversation quality. Short horizon cannot establish final optimum. Values are proposed engineering choices, not proven recommendations from literature."
+    },
+    {
+      "order": 3,
+      "experiment": "Data-mixture screen at selected stable LR",
+      "design": "Sequential broad-only versus mixed simple prose/context data. Original50M-per-arm design can be used for screening, with frozen new development/audit cases and complete dedup provenance.",
+      "interpretation": "A win supports further evaluation; no short-run behavioral win is inconclusive about long-run potential. Do not use repeated tiny screens as a substitute for a multi-billion-token training budget."
+    },
+    {
+      "order": 4,
+      "experiment": "Serious pretraining budget decision",
+      "design": "If learning diagnostics are healthy, scope a1B-target initial stage within a possible3B-10B campaign, with prospective evaluation milestones and no automatic extension. Revisit hardware before committing months locally.",
+      "interpretation": "At1400-1600targets/sec:1B7.2-8.3days,3B21.7-24.8days,10B72.3-82.7days pure training. Estimates exclude downtime/eval and assume unchanged configuration. These are compute scales, not predicted usability thresholds. Any cloud investigation restricted to GCP per user; none provisioned."
+    },
+    {
+      "order": 5,
+      "experiment": "Conversation plus executable tool SFT",
+      "design": "Once foundation improves, use filtered short conversational data plus balanced actual tool traces, missing-argument clarification, no-call cases, corrections and grounded follow-ups. Evaluate full sessions and wrong execution, then consider preference optimization only if justified.",
+      "interpretation": "Keep original acceptance criteria. Train/evaluate1024positions before claiming full1024chat history; current512language path does not cover it."
+    }
+  ],
+  "rejected_shortcuts": [
+    "Another unchanged75M continuation",
+    "Immediate1B-parameter model on the same inadequate token budget",
+    "Treating repetition penalty as a reasoning fix",
+    "Assuming synthetic data is automatically good despite our previous failed synthetic-heavy branch",
+    "RL/DPO before reliable supervised behavior",
+    "Claiming source benchmark scores, low loss, memorization or tool JSON syntax demonstrate our goal"
+  ],
+  "limits": "No experiment launched, weights changed, cloud rented or dataset downloaded in this research turn. Research does not establish a guaranteed path to usable general conversation on current local compute."
+}
