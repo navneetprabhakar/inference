@@ -54,6 +54,18 @@ def select_resume(journal, config):
     if latest['step']!=config['resume_step']: raise ValueError('Authoritative step changed; reforecast/review lease')
     return latest
 
+def lease_controls(config):
+    """Operational lease/save cadence, deliberately outside numerical identity."""
+    kind=config.get('launch_kind','production')
+    if kind not in ('pilot','production'): raise ValueError('Explicit pilot/production launch kind required')
+    seconds=config['max_runtime_seconds']
+    cap=10800 if kind=='pilot' else 21600
+    if type(seconds) is not int or not 1200<=seconds<=cap:
+        raise ValueError('Lease must be 20min..3h for pilot or 20min..6h for production')
+    cadence=config.get('checkpoint_seconds',900)
+    if type(cadence) is not int or cadence not in (900,1800): raise ValueError('Checkpoint cadence must be900 or1800seconds')
+    return seconds,cadence
+
 def build_plan(config, ledger, qualification, price, index, *, now=None):
     """Validate reviewed evidence and return argv; does not reserve or create."""
     now=now or dt.datetime.now(dt.timezone.utc)
@@ -64,8 +76,7 @@ def build_plan(config, ledger, qualification, price, index, *, now=None):
     for key in ('bundle_sha256','config_sha256','index_sha256','kernel_sha256'): digest(config[key])
     if not re.fullmatch(r'forge-ownbase-[a-z0-9-]{1,40}',config['run_id']): raise ValueError('Invalid run id')
     if not re.fullmatch(r'[a-z]+-[a-z0-9]+[0-9]-[a-z]',config['zone']): raise ValueError('Invalid GCP zone')
-    seconds=config['max_runtime_seconds']
-    if type(seconds) is not int or not 1200<=seconds<=10800: raise ValueError('Lease must be 20min..3h')
+    seconds,_=lease_controls(config)
     step=config['resume_step']
     if type(step) is not int or not 0<=step<HORIZON or (config['mode']=='fresh' and step!=0) or config['mode'] not in ('fresh','resume'): raise ValueError('Invalid initial/resume step')
     limit=config.get('max_updates')
@@ -153,8 +164,10 @@ def stage(config,root,deadline):
     return root/'data'/index['campaign_path'],resume
 
 def worker(config,root,deadline):
+    _,cadence=lease_controls(config)
     campaign,resume=stage(config,root,deadline-600)
-    argv=[sys.executable,'-u','-m','cloud_training.nano_train','--campaign',str(campaign),'--repo',str(Path(root)/'nanochat-source'),'--output',str(Path(root)/'results'),'--backup-prefix',config['backup_prefix'],'--deadline-utc',dt.datetime.fromtimestamp(deadline,dt.timezone.utc).isoformat(),'--depth',str(config['depth']),'--microbatch',str(config['microbatch']),'--kernel-path',str(Path(root)/'kernel'),'--kernel-sha',config['kernel_sha256']]
+    argv=[sys.executable,'-u','-m','cloud_training.nano_train','--campaign',str(campaign),'--repo',str(Path(root)/'nanochat-source'),'--output',str(Path(root)/'results'),'--backup-prefix',config['backup_prefix'],'--deadline-utc',dt.datetime.fromtimestamp(deadline,dt.timezone.utc).isoformat(),'--depth',str(config['depth']),'--microbatch',str(config['microbatch']),'--kernel-path',str(Path(root)/'kernel'),'--kernel-sha',config['kernel_sha256'],'--checkpoint-seconds',str(cadence)]
+    argv+=['--tokenizer-dir',str(Path(root)/'tokenizer')]
     if resume: argv+=['--resume',str(resume)]
     if config.get('max_updates') is not None: argv+=['--max-updates',str(config['max_updates'])]
     for key in ('deterministic','deterministic_attention'):

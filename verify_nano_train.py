@@ -8,7 +8,7 @@ import subprocess
 from types import SimpleNamespace
 
 from cloud_training.nano_data import write_rows, sha256_file
-from cloud_training.nano_train import CampaignRows, CloudJournal, read_campaign, crossed_milestones, deadline_timestamp, lease_stop_step, evaluate_entries, next_evaluation, numerical_identity
+from cloud_training.nano_train import CampaignRows, CloudJournal, read_campaign, crossed_milestones, deadline_timestamp, lease_stop_step, evaluate_entries, next_evaluation, numerical_identity, validate_lease_seconds
 from cloud_training.nano_benchmark import schedule, BATCH, HORIZON
 
 
@@ -34,6 +34,14 @@ def fixture(root):
 
 
 class TrainTests(unittest.TestCase):
+    def test_lease_six_hour_boundary_and_checkpoint_reserve(self):
+        for seconds in (301,10800,10801,21600):
+            validate_lease_seconds(seconds,300)
+        for seconds,reserve in ((300,300),(299,300),(-1,300),(21601,300),
+                                (float('nan'),300),(float('inf'),300),(600,0)):
+            with self.subTest(seconds=seconds,reserve=reserve):
+                with self.assertRaises(ValueError):validate_lease_seconds(seconds,reserve)
+
     def test_interrupted_validation_is_due_after_resume(self):
         seen = []
         entries = ['dev-a', 'dev-b']

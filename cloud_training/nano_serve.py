@@ -112,13 +112,34 @@ class BrokerChat:
         return self._error('action_limit','No final text within two tool calls and one final action.', events)
 
 
-def generate_action(model, tokenizer, prompt_ids, max_tokens, *, temperature=0., seed=103):
+def penalize_generated_prose(logits, generated, controls, penalty=1.0):
+    """Sign-aware repetition penalty on this action's generated prose only.
+
+    Prompt/history/broker tokens are never inspected. Native tool frames bypass
+    the transform entirely, including JSON punctuation, argument and end tokens.
+    Special delimiter logits are never penalized. This does not repair answers.
+    """
+    if isinstance(penalty,bool) or not isinstance(penalty,(int,float)) or not math.isfinite(penalty) or penalty<1:
+        raise ValueError('Repetition penalty must be finite and >=1')
+    if penalty==1 or not generated or controls['<|python_start|>'] in generated:
+        return logits
+    repeated=sorted(set(generated)-set(controls.values()))
+    if not repeated:return logits
+    adjusted=logits.clone()
+    values=adjusted[...,repeated]
+    adjusted[...,repeated]=torch.where(values<0,values*penalty,values/penalty)
+    return adjusted
+
+
+def generate_action(model, tokenizer, prompt_ids, max_tokens, *, temperature=0., seed=103, repetition_penalty=1.0):
     """Simple bounded uncached generation; native delimiters end an action.
 
     Deliberately excludes upstream calculator handling. Prefix recomputation is
     slower than KV caching; this first adapter prioritizes train/serve equivalence.
     """
     controls = token_contract(tokenizer)
+    # Validate even when no token is generated yet.
+    penalize_generated_prose(torch.empty(0),[],controls,repetition_penalty)
     if type(max_tokens) is not int or max_tokens < 1:
         raise ValueError('Positive generation budget required')
     if not isinstance(prompt_ids, list) or len(prompt_ids)<2:
@@ -141,6 +162,7 @@ def generate_action(model, tokenizer, prompt_ids, max_tokens, *, temperature=0.,
             for _ in range(max_tokens):
                 logits = model(ids)[:, -1, :]
                 if not bool(torch.isfinite(logits).all()): raise ValueError('Nonfinite generation logits')
+                logits=penalize_generated_prose(logits,generated,controls,repetition_penalty)
                 if temperature:
                     token = int(torch.multinomial(torch.softmax(logits.float()/temperature, dim=-1).cpu(), 1, generator=generator).item())
                 else:
@@ -206,16 +228,18 @@ def main():
     p.add_argument('--device',choices=['cpu','mps','cuda'],default='cpu')
     p.add_argument('--tools',default='',help='Trusted host allowlist: calculate,convert; empty disables calls')
     p.add_argument('--reply-budget',type=int,default=256)
+    p.add_argument('--repetition-penalty',type=float,default=1.0,help='Generated prose only;1.0 preserves raw diagnostics,1.3 is an optional preset')
     p.add_argument('--allow-base',action='store_true',help='Diagnostic exploration only; does not claim usable chat')
     args=p.parse_args()
+    if not math.isfinite(args.repetition_penalty) or args.repetition_penalty<1:p.error('Repetition penalty must be finite and >=1')
     allowed=[] if not args.tools else args.tools.split(',')
     policy={'permit_calls':bool(allowed),'allowed_names':allowed};host_policy(policy)
     model,tok,metadata=load_own_bundle(args.repo,args.checkpoint,args.tokenizer,
         tokenizer_sha256=args.tokenizer_sha256,device=args.device,allow_base=args.allow_base)
-    chat=BrokerChat(tok,lambda ids,n:generate_action(model,tok,ids,n),
+    chat=BrokerChat(tok,lambda ids,n:generate_action(model,tok,ids,n,repetition_penalty=args.repetition_penalty),
                     context=min(CONTEXT,model.config.sequence_len),reply_budget=args.reply_budget)
     print(json.dumps({'status':'loaded','step':metadata['step'],'device':args.device,
-                      'tools':allowed,'diagnostic_base_mode':args.allow_base,'commands':['/reset','/quit']}))
+                      'tools':allowed,'repetition_penalty':args.repetition_penalty,'diagnostic_base_mode':args.allow_base,'commands':['/reset','/quit']}))
     while True:
         try: text=input('you> ')
         except (EOFError,KeyboardInterrupt): break

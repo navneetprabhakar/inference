@@ -1,0 +1,37 @@
+{
+  "phase": "preparing_full_immutable_corpus",
+  "own_base_retained_training_targets": 0,
+  "random_initialization_required": true,
+  "model_parameters": 536871738,
+  "planned_base_targets": 10000269312,
+  "gpu_active": false,
+  "restart_review": "reports/l4-qualification-v1/restart-review.json",
+  "corpus_progress": "reports/l4-qualification-v1/corpus-progress.json",
+  "backup_receipt": "runs/ownbase-v2-data/corpus/inventory-backup-receipt.json",
+  "production_bundle_sha256": "0ab526c369442878ed704c748397fbb1301df85cf818358863d228fdc423639e",
+  "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/0ab526c369442878ed704c748397fbb1301df85cf818358863d228fdc423639e.tar.gz",
+  "next": [
+    "Verify10B corpus and completed GCS inventory",
+    "Create hash-bound admission and immutable campaign",
+    "Bounded32update own-base pilot then fresh-VM resume pilot",
+    "Reforecast full campaign with observed production overhead before long lease"
+  ],
+  "budget": {
+    "total_cap_usd": 100,
+    "closed_compute_upper_usd": 8.1,
+    "ancillary_reserve_usd": 10,
+    "finish_reserve_usd": 10,
+    "hourly_envelope_usd": 2.5,
+    "not_final_invoice": true
+  },
+  "tests": {
+    "recovery_integration_cpu": 89,
+    "pinned_tokenizer_integration_cpu": 44,
+    "not_additive": true
+  },
+  "qualification_limits": [
+    "Tiny optimizer numerical residual accepted only for observed configuration",
+    "Fresh-VM main training integration pending",
+    "No usable-model claim yet"
+  ]
+}

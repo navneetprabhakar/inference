@@ -46,6 +46,14 @@ class CorpusTests(unittest.TestCase):
  def test_different_document_kept(self):
   self.assertTrue(self.index.admit('apple orange pear kiwi','a','train')[0])
   self.assertTrue(self.index.admit('server database request latency','b','train')[0])
+ def test_new_source_rollback_skips_anchor_scan_but_commits_prior_work(self):
+  self.index.admit('keep earlier document','earlier','validation')
+  statements=[];self.index.db.set_trace_callback(statements.append)
+  self.index.rollback_source('new-source')
+  self.index.db.set_trace_callback(None)
+  self.assertFalse(any(q.lstrip().upper().startswith('DELETE') for q in statements))
+  self.assertTrue(any(q.lstrip().upper().startswith('COMMIT') for q in statements))
+  self.assertEqual(self.index.db.execute('SELECT count(*) FROM docs').fetchone()[0],1)
  def test_interrupted_source_rollback_preserves_earlier_sources(self):
   self.index.admit('keep earlier document','earlier','validation')
   self.index.admit('remove partial document','partial','train')

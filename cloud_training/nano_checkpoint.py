@@ -19,6 +19,7 @@ import os
 from pathlib import Path
 import random
 import shutil
+import struct
 import tempfile
 
 import torch
@@ -171,6 +172,35 @@ def validate_bundle(path):
     return manifest
 
 
+def _exact_fingerprint(value):
+    """Typed recursive byte fingerprints; at most one tensor CPU copy at a time.
+
+    Capture BEFORE load_state_dict: CPU optimizer loads may alias payload tensors,
+    so comparing the mutated payload afterward would miss in-place corruption.
+    Device and strides are intentionally excluded for CPU-portable recovery.
+    """
+    if isinstance(value, torch.Tensor):
+        if value.layout != torch.strided:
+            raise ValueError('Exact restore verification requires dense strided tensors')
+        raw = value.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy()
+        digest = hashlib.sha256(memoryview(raw)).hexdigest()
+        return ('tensor', str(value.dtype), tuple(value.shape), digest)
+    if isinstance(value, dict):
+        return ('dict', {k: _exact_fingerprint(v) for k,v in value.items()})
+    if isinstance(value, (list, tuple)):
+        return (type(value).__name__, tuple(_exact_fingerprint(v) for v in value))
+    if type(value) is float:
+        return ('float', struct.pack('>d',value))
+    if value is None or type(value) in (str,int,bool):
+        return (type(value).__name__,value)
+    raise TypeError(f'Unsupported exact state type: {type(value).__name__}')
+
+
+def _verify_exact(expected, actual, component):
+    if expected != _exact_fingerprint(actual):
+        raise ValueError(f'Post-load exact state verification failed: {component}')
+
+
 def load_bundle(path, *, model, optimizer, scheduler=None, restore_rng=True, expected_identity=None):
     """Restore a validated bundle; returns exact caller-owned data state.
 
@@ -192,10 +222,20 @@ def load_bundle(path, *, model, optimizer, scheduler=None, restore_rng=True, exp
     if restore_rng and payload['rng']['torch_cuda'] is not None:
         if not torch.cuda.is_available() or len(payload['rng']['torch_cuda']) != torch.cuda.device_count():
             raise ValueError('Exact CUDA RNG restore requires matching device count')
+    expected = {key: _exact_fingerprint(payload[key]) for key in ('model','optimizer','scheduler','rng')}
     model.load_state_dict(payload['model'], strict=True)
     optimizer.load_state_dict(payload['optimizer'])
     if scheduler is not None:
         scheduler.load_state_dict(payload['scheduler'])
     if restore_rng:
         restore_rng_state(payload['rng'])
-    return {'metadata': metadata, 'data_state': payload['data_state'], 'manifest': manifest}
+    _verify_exact(expected['model'], model.state_dict(), 'model')
+    _verify_exact(expected['optimizer'], optimizer.state_dict(), 'optimizer')
+    _verify_exact(expected['scheduler'], scheduler.state_dict() if scheduler is not None else None, 'scheduler')
+    if restore_rng:
+        _verify_exact(expected['rng'], capture_rng(), 'rng')
+    verification = {'exact_state_verified': True, 'model': True, 'optimizer': True,
+                    'scheduler': scheduler is not None, 'rng': bool(restore_rng),
+                    'method': 'recursive typed SHA256 of exact tensor bytes and scalar metadata'}
+    return {'metadata': metadata, 'data_state': payload['data_state'], 'manifest': manifest,
+            'verification': verification}

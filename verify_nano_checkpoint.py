@@ -53,6 +53,55 @@ class CheckpointTests(unittest.TestCase):
         self.meta = {'step': 1, 'identity': self.identity}
         step(self.model, self.opt, self.sched, self.generator)
 
+    def test_verified_receipt_and_rng_restore(self):
+        self.save()
+        random.random();torch.rand(3);np.random.random()
+        model,opt,sched=make()
+        result=load_bundle(self.path,model=model,optimizer=opt,scheduler=sched)
+        self.assertTrue(result['verification']['exact_state_verified'])
+        self.assertTrue(result['verification']['rng'])
+        self.assertTrue(result['verification']['scheduler'])
+
+    def test_silent_optimizer_cast_rejected(self):
+        self.save()
+        model,opt,sched=make()
+        original=opt.load_state_dict
+        def altered(state):
+            original(state)
+            first=next(iter(opt.state.values()))
+            first['exp_avg']=first['exp_avg'].to(torch.float64)
+        with patch.object(opt,'load_state_dict',side_effect=altered):
+            with self.assertRaisesRegex(ValueError,'verification failed: optimizer'):
+                load_bundle(self.path,model=model,optimizer=opt,scheduler=sched)
+
+    def test_inplace_payload_alias_mutation_rejected(self):
+        self.save()
+        model,opt,sched=make()
+        original=opt.load_state_dict
+        def altered(state):
+            original(state)
+            # On CPU this also mutates the input payload through shared storage.
+            first=next(iter(opt.state.values()))
+            first['exp_avg'].add_(1)
+        with patch.object(opt,'load_state_dict',side_effect=altered):
+            with self.assertRaisesRegex(ValueError,'verification failed: optimizer'):
+                load_bundle(self.path,model=model,optimizer=opt,scheduler=sched)
+
+    def test_broken_rng_restore_rejected(self):
+        self.save()
+        model,opt,sched=make()
+        with patch('cloud_training.nano_checkpoint.restore_rng_state',return_value=None):
+            with self.assertRaisesRegex(ValueError,'verification failed: rng'):
+                load_bundle(self.path,model=model,optimizer=opt,scheduler=sched)
+
+    def test_exact_fingerprint_distinguishes_dtype_signed_zero_metadata(self):
+        from cloud_training.nano_checkpoint import _exact_fingerprint as fp
+        self.assertNotEqual(fp(torch.tensor([0.])),fp(torch.tensor([-0.])))
+        self.assertNotEqual(fp(torch.tensor([1.])),fp(torch.tensor([1.],dtype=torch.float64)))
+        self.assertNotEqual(fp({'step':1}),fp({'step':True}))
+        self.assertNotEqual(fp(0.),fp(-0.))
+        self.assertEqual(fp(torch.tensor(3.,dtype=torch.bfloat16)),fp(torch.tensor(3.,dtype=torch.bfloat16)))
+
     def save(self):
         return save_bundle(self.path, model=self.model, optimizer=self.opt, scheduler=self.sched,
                            metadata=self.meta, data_state={'exact': True, 'next_batch': 1,

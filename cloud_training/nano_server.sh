@@ -20,7 +20,7 @@ finish() {
   exit "$rc"
 }
 trap finish EXIT
-# Early local guard covers metadata/config/staging failures. Provider deletes disk.
+# Conservative bootstrap guard covers metadata/config failures; verified config reschedules it. Provider deletes disk.
 shutdown -h +175
 metadata() { curl --fail --silent --connect-timeout 5 --max-time 15 -H 'Metadata-Flavor: Google' "http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1"; }
 timeout 120 gcloud storage cp "$(metadata config-uri)" launch-config.json --quiet
@@ -29,7 +29,9 @@ printf '%s  launch-config.json\n' "$(metadata config-sha256)" | sha256sum -c -
 read -r DEADLINE LOCAL_MIN DEST < <(python3 - <<'PY'
 import json,time,re
 c=json.load(open('launch-config.json')); seconds=c['max_runtime_seconds']
-assert type(seconds) is int and 1200<=seconds<=10800
+kind=c.get('launch_kind','production'); assert kind in ('pilot','production')
+assert type(seconds) is int and 1200<=seconds<=(10800 if kind=='pilot' else 21600)
+cadence=c.get('checkpoint_seconds',900); assert type(cadence) is int and cadence in (900,1800)
 assert re.fullmatch(r'forge-ownbase-[a-z0-9-]{1,40}',c['run_id'])
 uptime=float(open('/proc/uptime').read().split()[0]); remaining=seconds-uptime
 assert remaining>900
@@ -67,6 +69,12 @@ export PYTHONPATH='/opt/ownbase-nano/vendor:/opt/ownbase-nano:/opt/ownbase-nano/
 "$PY" - <<'PY'
 import sysconfig,pathlib,torch
 assert pathlib.Path(sysconfig.get_path('include'),'Python.h').is_file()
+from importlib.metadata import version
+from nanochat.tokenizer import RustBPETokenizer
+assert version('rustbpe') == '0.1.0' and version('tiktoken') == '0.11.0'
+tokenizer = RustBPETokenizer.from_directory('tokenizer')
+probe = 'Own base tokenizer: 12.5 metres, blue notebook.'
+assert tokenizer.decode(tokenizer.encode(probe)) == probe
 assert torch.cuda.device_count()==1 and 'A100' in torch.cuda.get_device_name()
 x=torch.randn(128,128,device='cuda',requires_grad=True)
 torch.compile(lambda a:(a@a).square().mean())(x).backward(); torch.cuda.synchronize()

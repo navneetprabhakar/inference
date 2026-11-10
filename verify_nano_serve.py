@@ -6,7 +6,7 @@ import unittest
 import torch
 
 from cloud_training.nano_chat_format import SPECIALS, canonical
-from cloud_training.nano_serve import BrokerChat, generate_action
+from cloud_training.nano_serve import BrokerChat, generate_action, penalize_generated_prose
 
 
 class ByteTokenizer:
@@ -179,6 +179,34 @@ class ServeTests(unittest.TestCase):
                 with patch('cloud_training.nano_serve.verify_upstream',return_value=PINNED_REVISION):
                     with self.assertRaisesRegex(ValueError,reason):
                         load_own_bundle('unused',checkpoint,tok,tokenizer_sha256=digest)
+
+    def test_prose_penalty_identity_sign_and_scope(self):
+        controls={s:self.tok.encode_special(s) for s in SPECIALS}
+        logits=torch.zeros(1,32768);logits[0,65]=10;logits[0,66]=-2;logits[0,67]=8
+        self.assertIs(penalize_generated_prose(logits,[65],controls,1.0),logits)
+        adjusted=penalize_generated_prose(logits,[65,65,66,controls['<|assistant_end|>']],controls,2)
+        self.assertEqual(adjusted[0,65],5);self.assertEqual(adjusted[0,66],-4)
+        self.assertEqual(adjusted[0,67],8);self.assertEqual(logits[0,65],10)
+        for bad in (.9,float('nan'),float('inf'),True):
+            with self.assertRaises(ValueError):penalize_generated_prose(logits,[],controls,bad)
+
+    def test_tool_frame_bypasses_every_logit(self):
+        controls={s:self.tok.encode_special(s) for s in SPECIALS}
+        logits=torch.randn(1,32768)
+        for prefix in (self.call()[:1],self.call()[:-1],self.call()):
+            self.assertIs(penalize_generated_prose(logits,prefix,controls,1.3),logits)
+
+    def test_generation_penalty_ignores_prompt_and_changes_only_repetition(self):
+        class Alternatives(TinyLogits):
+            def forward(self,ids):
+                self.seen.append(ids.detach().clone())
+                out=torch.full((1,ids.shape[1],32768),-20.)
+                out[:,-1,65]=10.;out[:,-1,66]=9.
+                return out
+        # Repeated prompt A tokens do not penalize the first generated A.
+        raw=generate_action(Alternatives([]),self.tok,[65,65],2,repetition_penalty=1)
+        penalized=generate_action(Alternatives([]),self.tok,[65,65],2,repetition_penalty=1.3)
+        self.assertEqual(raw,[65,65]);self.assertEqual(penalized,[65,66])
 
     def test_generation_context_and_invalid_logits_fail(self):
         model=TinyLogits([0])

@@ -31,7 +31,7 @@ class LaunchTests(unittest.TestCase):
         self.ledger['allocations']=[{'state':'reserved_before_provisioning','reserved_usd':1}]
         with self.assertRaisesRegex(ValueError,'outstanding'): self.plan()
     def test_runtime_price_modes(self):
-        for key,value in [('max_runtime_seconds',10801),('max_updates',0),('deterministic',False),('mode','guess')]:
+        for key,value in [('max_runtime_seconds',21601),('max_updates',0),('deterministic',False),('mode','guess')]:
             with self.subTest(key=key):
                 c=copy.deepcopy(self.c); self.c[key]=value
                 with self.assertRaises(ValueError): self.plan()
@@ -68,6 +68,28 @@ class LaunchTests(unittest.TestCase):
                 with tarfile.open(p,'w:gz') as t:
                     m=tarfile.TarInfo(name); m.type=typ; t.addfile(m)
                 with self.assertRaises(ValueError): extract_verified(p,Path(d).resolve()/'out')
+    def test_six_hour_production_three_hour_pilot(self):
+        self.c['max_runtime_seconds']=21600
+        plan=self.plan()
+        self.assertEqual(plan['lease_hours'],6)
+        self.assertIn('--max-run-duration=21600s',plan['create_argv'])
+        self.assertIn('--instance-termination-action=DELETE',plan['create_argv'])
+        self.assertEqual(plan['projection']['rate_envelope_usd_per_hour'],2.5)
+        self.c['launch_kind']='pilot'; self.q['training_admitted']=True
+        with self.assertRaisesRegex(ValueError,'3h for pilot'): self.plan()
+        self.c['max_runtime_seconds']=10800
+        self.plan()
+    def test_checkpoint_cadence_defaults_and_propagates(self):
+        import time
+        for expected in (900,1800):
+            if expected==1800: self.c['checkpoint_seconds']=expected
+            with patch.object(L,'stage',return_value=(Path('/data/campaign.json'),None)), patch.object(L.subprocess,'call',return_value=0) as call:
+                L.worker(self.c,'/workspace',time.time()+1000)
+            args=call.call_args.args[0]
+            self.assertEqual(args[args.index('--checkpoint-seconds')+1],str(expected))
+        for invalid in (0,600,1801,True,900.0):
+            self.c['checkpoint_seconds']=invalid
+            with self.assertRaisesRegex(ValueError,'cadence'): self.plan()
     def test_inventory_four_workers_same_deadline(self):
         import threading,time
         index=copy.deepcopy(self.i)

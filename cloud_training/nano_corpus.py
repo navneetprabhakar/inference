@@ -67,6 +67,11 @@ class DedupIndex:
         self.db.execute('CREATE TABLE IF NOT EXISTS anchors(anchor TEXT, hash TEXT, PRIMARY KEY(anchor,hash))')
         self.db.execute('CREATE INDEX IF NOT EXISTS source_idx ON docs(source)')
     def rollback_source(self,source):
+        # New shards own no hashes: avoid scanning the entire unindexed anchor
+        # hash column just to delete an empty set. Preserve prior commit semantics.
+        if self.db.execute('SELECT 1 FROM docs WHERE source=? LIMIT 1',(source,)).fetchone() is None:
+            self.db.commit()
+            return
         self.db.execute('DELETE FROM anchors WHERE hash IN (SELECT hash FROM docs WHERE source=?)',(source,))
         self.db.execute('DELETE FROM docs WHERE source=?',(source,));self.db.commit()
     def admit(self,text,source,split):

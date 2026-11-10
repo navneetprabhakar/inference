@@ -9,7 +9,7 @@ import unittest
 import torch
 import torch.nn.functional as F
 from cloud_training.nano_sft import (BestFitConversations,JsonlConversations,backward_weighted,
-    collect_update,count_packed_rows,load_manifest,reset_sft_lrs,sft_schedule,evaluate_fixed,NATIVE_IGNORE,ensure_separate_output,replace_best_pin)
+    collect_update,count_packed_rows,load_manifest,reset_sft_lrs,sft_schedule,evaluate_fixed,NATIVE_IGNORE,ensure_separate_output,replace_best_pin,batch_recipe,validate_parent_chain,PINNED_REVISION)
 from cloud_training.nano_checkpoint import save_bundle,load_bundle
 from cloud_training.nano_benchmark import digest_state
 from cloud_training.nano_chat_format import SPECIALS,VERSION
@@ -164,6 +164,56 @@ class SFTTests(unittest.TestCase):
                 with self.assertRaises(ValueError):ensure_separate_output(base,output)
             self.assertEqual(list(base.iterdir()),[base/'sentinel'])
             self.assertEqual(ensure_separate_output(base,Path(t)/'sft')[1],(Path(t)/'sft').resolve())
+
+    def test_effective_batch_and_scaled_fresh_lrs(self):
+        self.assertEqual(batch_recipe(524288,4),{'batch_tokens':524288,'rows_per_update':256,'lr_batch_scale':1.0})
+        recipe=batch_recipe(32768,4)
+        self.assertEqual(recipe['rows_per_update'],16);self.assertEqual(recipe['lr_batch_scale'],.25)
+        model=TinyLM();opt=torch.optim.AdamW(model.parameters(),lr=.00001)
+        reset_sft_lrs(opt,[.02],recipe['lr_batch_scale'])
+        self.assertEqual(opt.param_groups[0]['initial_lr'],.004)
+        for batch,micro in [(0,4),(32769,4),(1048576,4),(32768,32),(32768,3),(True,1)]:
+            with self.assertRaises(ValueError):batch_recipe(batch,micro)
+
+    def test_small_batch_consumes_once_and_has_positive_last_update(self):
+        ds=FakeDataset([2049]*35);packing=BestFitConversations(ds)
+        updates=[];seen=0
+        while packing.consumed<len(ds):
+            before=packing.consumed
+            batches,count=collect_update(packing,4,16)
+            updates.append((packing.consumed-before,count,sft_schedule(before/len(ds),len(updates))[0]))
+            seen+=count
+        self.assertEqual([u[0] for u in updates],[16,16,3])
+        self.assertEqual(seen,35*2048)
+        self.assertTrue(all(u[2]>0 for u in updates))
+        self.assertEqual(collect_update(packing,4,16),([],0))
+
+    def test_verified_recursive_own_lineage_and_immutable_parents(self):
+        cfg={'sequence_len':2048,'vocab_size':32768,'n_layer':12,'n_embd':768,'n_head':6,'n_kv_head':6,'window_pattern':'SSSL'}
+        base_id={'phase':'base','initialization':'own_random','revision':PINNED_REVISION,'tokenizer_sha256':'a'*64,'config':cfg}
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);model=TinyLM();opt=torch.optim.AdamW(model.parameters())
+            def save(name,identity):
+                path=root/name
+                save_bundle(path,model=model,optimizer=opt,metadata={'step':1,'identity':identity},data_state={'exact':True,'next_batch':1})
+                return path,hashlib.sha256((path/'manifest.json').read_bytes()).hexdigest()
+            base,bsha=save('base',base_id)
+            self.assertEqual(validate_parent_chain(base,bsha,'a'*64,stage='general')[2],bsha)
+            sid={'phase':'sft','stage':'general','revision':PINNED_REVISION,'tokenizer_sha256':'a'*64,'config':cfg,'format_version':VERSION,'source_manifest_sha256':'b'*64,'base_bundle_manifest_sha256':bsha,'base_identity':base_id,'parent_bundle_manifest_sha256':bsha,'parent_identity':base_id}
+            general,gsha=save('general',sid)
+            before={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for d in (base,general) for p in d.iterdir()}
+            self.assertEqual(validate_parent_chain(general,gsha,'a'*64,stage='targeted',ancestors=[base])[2],bsha)
+            with self.assertRaisesRegex(ValueError,'Every ancestor'):validate_parent_chain(general,gsha,'a'*64,stage='targeted')
+            with self.assertRaises(ValueError):validate_parent_chain(general,gsha,'a'*64,stage='general',ancestors=[base])
+            tid={**sid,'stage':'targeted','source_manifest_sha256':'c'*64,'parent_bundle_manifest_sha256':gsha,'parent_identity':sid}
+            targeted,tsha=save('targeted',tid)
+            self.assertEqual(validate_parent_chain(targeted,tsha,'a'*64,stage='targeted',ancestors=[general,base])[2],bsha)
+            wrong,wsha=save('wrong',{**base_id,'initialization':'pretrained'})
+            with self.assertRaisesRegex(ValueError,'random'):validate_parent_chain(wrong,wsha,'a'*64,stage='general')
+            broken,broken_sha=save('broken',{**sid,'parent_identity':{**base_id,'initialization':'pretrained'}})
+            with self.assertRaisesRegex(ValueError,'identity mismatch'):validate_parent_chain(broken,broken_sha,'a'*64,stage='targeted',ancestors=[base])
+            after={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for d in (base,general) for p in d.iterdir()}
+            self.assertEqual(before,after)
 
     def test_manifest_never_admits_itself(self):
         with tempfile.TemporaryDirectory() as t:

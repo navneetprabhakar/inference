@@ -11,6 +11,7 @@ import hashlib
 import json
 import math
 import os
+import re
 from pathlib import Path
 import signal
 import subprocess
@@ -19,10 +20,10 @@ import time
 
 if __package__ in (None,''):
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from cloud_training.nano_benchmark import BATCH, PINNED_REVISION, atomic_json
+from cloud_training.nano_benchmark import BATCH, PINNED_REVISION, atomic_json, deterministic_attention
 from cloud_training.nano_chat_format import VERSION, encode_conversation
 from cloud_training.nano_data import sha256_file
-from cloud_training.nano_train import CloudJournal, deadline_timestamp
+from cloud_training.nano_train import CloudJournal, deadline_timestamp, numerical_identity
 
 NATIVE_IGNORE = -1  # Pinned nanochat GPT.forward, distinct from export labels -100.
 SEQUENCE = 2048
@@ -34,12 +35,28 @@ def sft_schedule(progress, step):
     return (1.0 if progress <= .5 else 2*(1-progress)), .85 + .10*min(step/300,1)
 
 
-def reset_sft_lrs(optimizer, fresh_lrs):
-    """Warm-start moments but restore fresh SFT LR ×0.8, never final base LR."""
+def batch_recipe(batch_tokens, microbatch):
+    """Explicit position-token batch, not assistant-target batch; never repeats data."""
+    if type(batch_tokens) is not int or not 32768<=batch_tokens<=BATCH or batch_tokens%SEQUENCE:
+        raise ValueError("Effective batch must be32768..524288 and divisible by2048")
+    rows=batch_tokens//SEQUENCE
+    if type(microbatch) is not int or microbatch<1 or rows%microbatch:
+        raise ValueError("Microbatch must divide effective batch rows")
+    return {"batch_tokens":batch_tokens,"rows_per_update":rows,"lr_batch_scale":math.sqrt(batch_tokens/BATCH)}
+
+
+def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0):
+    """Fresh LR ×0.8×sqrt(batch/reference), retaining moments from the parent.
+
+    Square-root scaling is an explicit conservative heuristic, not an assertion
+    of equivalent AdamW/Muon dynamics; select targeted settings on held-out dev.
+    """
+    if isinstance(batch_scale,bool) or not isinstance(batch_scale,(int,float)) or not math.isfinite(batch_scale) or not 0<batch_scale<=1:
+        raise ValueError("Invalid LR batch scale")
     if len(optimizer.param_groups)!=len(fresh_lrs):
         raise ValueError('Optimizer group mismatch')
     for group,lr in zip(optimizer.param_groups,fresh_lrs):
-        group['lr']=group['initial_lr']=lr*.8
+        group['lr']=group['initial_lr']=lr*.8*batch_scale
         if group.get('kind')=='muon':group['weight_decay']=0.0
 
 
@@ -256,7 +273,57 @@ def validate_base_metadata(base,expected_manifest_sha,tokenizer_sha):
     return metadata
 
 
+def validate_parent_chain(parent, expected_sha, tokenizer_sha, *, stage, ancestors=()):
+    """Verify every referenced immutable ancestor bundle, ending at own random base.
+
+    Embedded identities alone are insufficient. Targeted warm-start requires all
+    ancestor bundles locally; each edge binds an exact manifest hash + identity.
+    Hashes establish integrity inside trusted project storage, not authenticity.
+    """
+    from cloud_training.nano_checkpoint import validate_bundle
+    if stage not in ('general','targeted'): raise ValueError('Unknown SFT stage')
+    locations={}
+    for path in [parent,*ancestors]:
+        path=Path(path).resolve();validate_bundle(path)
+        key=sha256_file(path/'manifest.json')
+        if key in locations: raise ValueError('Duplicate ancestor bundle')
+        locations[key]=path
+    if expected_sha not in locations or locations[expected_sha]!=Path(parent).resolve(): raise ValueError('Parent manifest mismatch')
+    seen=set()
+    def visit(key,expected_identity=None):
+        if key in seen or len(seen)>=8: raise ValueError('Cyclic/overlong checkpoint lineage')
+        if key not in locations: raise ValueError('Every ancestor bundle is required')
+        seen.add(key);path=locations[key]
+        meta=json.loads((path/'metadata.json').read_text());identity=meta['identity']
+        if expected_identity is not None and identity!=expected_identity: raise ValueError('Ancestor identity mismatch')
+        if meta['step']<1 or identity.get('revision')!=PINNED_REVISION or identity.get('tokenizer_sha256')!=tokenizer_sha:
+            raise ValueError('Ancestor requires retained own-model updates and identical tokenizer/revision')
+        if identity.get('phase')=='base':
+            validate_base_metadata(path,key,tokenizer_sha)
+            return meta,key
+        if identity.get('phase')!='sft' or identity.get('format_version')!=VERSION:
+            raise ValueError('Only own SFT/base lineage permitted')
+        if not re.fullmatch('[0-9a-f]{64}',identity.get('source_manifest_sha256','')):
+            raise ValueError('SFT ancestor requires dataset identity')
+        parent_sha=identity.get('parent_bundle_manifest_sha256',identity.get('base_bundle_manifest_sha256'))
+        parent_identity=identity.get('parent_identity',identity.get('base_identity'))
+        if not isinstance(parent_identity,dict): raise ValueError('Missing parent identity')
+        root,root_sha=visit(parent_sha,parent_identity)
+        if identity.get('config')!=root['identity']['config']: raise ValueError('Ancestor architecture mismatch')
+        if identity.get('base_bundle_manifest_sha256')!=root_sha or identity.get('base_identity')!=root['identity']:
+            raise ValueError('SFT root provenance mismatch')
+        return root,root_sha
+    root,root_sha=visit(expected_sha)
+    parent_meta=json.loads((Path(parent)/'metadata.json').read_text())
+    wanted='base' if stage=='general' else 'sft'
+    if parent_meta['identity']['phase']!=wanted: raise ValueError(stage+' stage requires '+wanted+' parent')
+    if set(locations)!=seen: raise ValueError('Unused ancestor bundles rejected')
+    return parent_meta,root,root_sha
+
+
 def run(args):
+    if args.deterministic:
+        os.environ["CUBLAS_WORKSPACE_CONFIG"]=":4096:8"
     import torch
     from cloud_training.nano_checkpoint import save_bundle,load_bundle,capture_rng,restore_rng_state,validate_bundle
     from cloud_training.l4_recovery_check import upload_bundle
@@ -264,8 +331,12 @@ def run(args):
     base,out=ensure_separate_output(args.base,args.output)
     tokenizer_dir=Path(args.tokenizer).resolve()
     if sha256_file(tokenizer_dir/'tokenizer.pkl')!=args.tokenizer_sha:raise ValueError('Tokenizer file identity mismatch')
-    base_meta=validate_base_metadata(base,args.base_manifest_sha,args.tokenizer_sha)
+    base_meta,root_meta,root_sha=validate_parent_chain(base,args.base_manifest_sha,args.tokenizer_sha,stage=args.stage,ancestors=args.ancestor)
+    for ancestor in args.ancestor: ensure_separate_output(ancestor,out)
+    recipe=batch_recipe(args.batch_tokens,args.microbatch)
     manifest=load_manifest(args.manifest,args.tokenizer_sha)
+    if args.stage=='targeted' and manifest['_sha256']==base_meta['identity'].get('source_manifest_sha256'):
+        raise ValueError('Targeted stage requires a distinct explicitly admitted dataset')
     repo=Path(args.repo).resolve()
     if subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip()!=PINNED_REVISION or subprocess.check_output(['git','-C',str(repo),'status','--porcelain'],text=True).strip():
         raise ValueError('Pinned clean upstream checkout required')
@@ -275,11 +346,11 @@ def run(args):
     train=JsonlConversations(manifest['train']['_file'],tok,manifest['train']['sha256'])
     dev=JsonlConversations(manifest['validation']['_file'],tok,manifest['validation']['sha256'])
     if train.fingerprints&dev.fingerprints:raise ValueError('Train/development conversation overlap')
-    total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/256)
+    total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/recipe["rows_per_update"])
     if horizon<2:raise ValueError('Finite SFT corpus too small for this schedule; no automatic replay or zero-LR-only run')
     if args.validate_only:
         print(json.dumps({'status':'admitted_inputs_verified_not_GPU_qualified','packed_rows':total_rows,
-                          'planned_updates':horizon,'assistant_targets':sum(train.target_counts)},indent=2));return 0
+                          'planned_updates':horizon,'stage':args.stage,**recipe,'assistant_targets':sum(train.target_counts)},indent=2));return 0
     if not torch.__version__.startswith('2.9.') or not torch.cuda.is_available() or not torch.cuda.is_bf16_supported():
         raise ValueError('Pinned torch2.9 CUDA BF16 required')
     import nanochat.flash_attention as attention
@@ -287,6 +358,12 @@ def run(args):
         from kernels import get_local_kernel
         attention._fa3=get_local_kernel(Path(args.kernel_path),'flash_attn3').flash_attn_interface
         attention.HAS_FA3=True;attention.USE_FA3=attention._resolve_use_fa3()
+    if args.deterministic:
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.benchmark=False
+        torch.backends.cudnn.deterministic=True
+    attention_deterministic=bool(args.deterministic_attention or (args.deterministic and attention.USE_FA3))
+    if attention_deterministic: deterministic_attention(attention)
     from nanochat.gpt import GPT,GPTConfig
     from nanochat.common import COMPUTE_DTYPE
     if COMPUTE_DTYPE!=torch.bfloat16:raise ValueError('BF16 activations required')
@@ -297,13 +374,15 @@ def run(args):
     optimizer=model.setup_optimizer(unembedding_lr=.008,embedding_lr=.3,matrix_lr=.02,weight_decay=0.0,scalar_lr=.5)
     fresh_lrs=[g['lr'] for g in optimizer.param_groups]
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
-    reset_sft_lrs(optimizer,fresh_lrs)
+    reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"])
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
     files=('nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
-    identity={'phase':'sft','revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
-              'format_version':VERSION,'base_bundle_manifest_sha256':args.base_manifest_sha,'base_identity':base_meta['identity'],
+    identity={'phase':'sft','stage':args.stage,'parent_bundle_manifest_sha256':args.base_manifest_sha,
+              'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
+              'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
-              'batch_tokens':BATCH,'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
+              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],
+              'numerical_mode':numerical_identity(torch,attention_deterministic=attention_deterministic),'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
@@ -361,7 +440,7 @@ def run(args):
     while step<max_step:
         if stopping():reason='lease_or_signal';break
         cursor,rng=packing.state_dict(),capture_rng()
-        batches,count=collect_update(packing,args.microbatch)
+        batches,count=collect_update(packing,args.microbatch,recipe["rows_per_update"])
         if not batches:reason='dataset_complete';break
         torch.cuda.synchronize();tick=time.monotonic()
         try:
@@ -371,7 +450,7 @@ def run(args):
             model.zero_grad(set_to_none=True);packing.load_state_dict(cursor);restore_rng_state(rng)
             reason='lease_or_signal' if isinstance(error,InterruptedError) else 'training_failure'
             status['error']=str(error);break
-        lr,momentum=sft_schedule(packing.consumed/len(train),step)
+        lr,momentum=sft_schedule(cursor["consumed"]/len(train),step)
         for group in optimizer.param_groups:
             group['lr']=group['initial_lr']*lr
             if group['kind']=='muon':group['momentum']=momentum;group['weight_decay']=0.0
@@ -401,6 +480,11 @@ def main():
     for name in ('manifest','base','base-manifest-sha','tokenizer','tokenizer-sha','repo','output'):
         p.add_argument('--'+name,required=True)
     p.add_argument('--validate-only',action='store_true')
+    p.add_argument('--stage',choices=('general','targeted'),default='general')
+    p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
+    p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')
+    p.add_argument('--deterministic',action='store_true')
+    p.add_argument('--deterministic-attention',action='store_true')
     p.add_argument('--resume');p.add_argument('--backup-prefix');p.add_argument('--deadline-utc')
     p.add_argument('--kernel-path');p.add_argument('--kernel-sha')
     p.add_argument('--microbatch',type=int,default=4);p.add_argument('--cpu-threads',type=int,default=4)
@@ -408,17 +492,20 @@ def main():
     p.add_argument('--eval-rows',type=int,default=128);p.add_argument('--eval-every-updates',type=int,default=200)
     p.add_argument('--checkpoint-seconds',type=int,default=900);p.add_argument('--checkpoint-reserve-seconds',type=int,default=300)
     a=p.parse_args()
-    if a.microbatch<1 or 256%a.microbatch or min(a.cpu_threads,a.eval_rows,a.eval_every_updates,a.checkpoint_seconds,a.checkpoint_reserve_seconds)<1:
+    try: batch_recipe(a.batch_tokens,a.microbatch)
+    except ValueError as error: p.error(str(error))
+    if min(a.cpu_threads,a.eval_rows,a.eval_every_updates,a.checkpoint_seconds,a.checkpoint_reserve_seconds)<1:
         p.error('Invalid batch/interval settings')
     if a.eval_rows>512:p.error('Development loss budget capped at512rows')
     if a.max_updates is not None and a.max_updates<1:p.error('Positive max-updates required')
     if bool(a.kernel_path)!=bool(a.kernel_sha):p.error('Kernel path and hash required together')
     if not a.validate_only:
         if not a.deadline_utc or not a.backup_prefix:p.error('Reserved lease deadline and backup-prefix required')
-        if not a.checkpoint_reserve_seconds<deadline_timestamp(a.deadline_utc)-time.time()<=10800:p.error('Deadline must allow reserve and be within3hours')
+        if not a.checkpoint_reserve_seconds<deadline_timestamp(a.deadline_utc)-time.time()<=21600:p.error('Deadline must allow reserve and be within6hours')
     os.environ.setdefault('HF_HUB_OFFLINE','1');os.environ.setdefault('WANDB_MODE','disabled')
     os.environ.setdefault('PYTORCH_ALLOC_CONF','expandable_segments:True')
     _,out=ensure_separate_output(a.base,a.output)
+    for ancestor in a.ancestor: ensure_separate_output(ancestor,out)
     out.mkdir(parents=True,exist_ok=True)
     with (out/'.writer.lock').open('a+b') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)

@@ -168,6 +168,11 @@ def crossed_milestones(before, after):
     return [t for t in MILESTONES if before < t <= after]
 
 
+def validate_lease_seconds(seconds, reserve_seconds):
+    if not 0 < reserve_seconds < seconds <= 21600:
+        raise ValueError('Lease deadline must leave checkpoint reserve and be <=6 hours away')
+
+
 def deadline_timestamp(value):
     parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
     if parsed.tzinfo is None:
@@ -307,11 +312,14 @@ def run(args, campaign):
     decay = .28 * (ref_counts['transformer_matrices'] + ref_counts['lm_head']) / (counts['transformer_matrices'] + counts['lm_head'])
     optimizer = model.setup_optimizer(unembedding_lr=.008, embedding_lr=.3, scalar_lr=.5,
                                       matrix_lr=.02, weight_decay=decay)
+    from cloud_training.nano_probes import configuration as probe_configuration, load_tokenizer, run_probes
+    probe_tokenizer = load_tokenizer(args.tokenizer_dir, campaign['tokenizer_sha256']) if args.tokenizer_dir else None
     reader = CampaignRows(campaign)
-    source_files = ['nano_train.py', 'nano_benchmark.py', 'nano_checkpoint.py', 'nano_data.py', 'nano_eval.py', 'nano_retention.py', 'l4_recovery_check.py']
+    source_files = ['nano_train.py', 'nano_benchmark.py', 'nano_checkpoint.py', 'nano_data.py', 'nano_eval.py', 'nano_retention.py', 'l4_recovery_check.py', 'nano_probes.py']
     identity = {'phase': 'base', 'initialization': 'own_random', 'revision': revision, 'adapter_hashes': {f: sha256_file(Path(__file__).parent / f) for f in source_files},
                 'config': vars(cfg), 'tokenizer_sha256': campaign['tokenizer_sha256'], 'campaign_sha256': campaign['_sha256'], 'torch': torch.__version__,
                 'numerical_mode': numerical_identity(torch, attention_deterministic=attention_deterministic),
+                'probes': probe_configuration(probe_tokenizer is not None),
                 'batch_tokens': BATCH, 'microbatch': args.microbatch, 'horizon_updates': HORIZON,
                 'seed': args.seed, 'eval_every_tokens': args.eval_every_tokens, 'eval_tokens_per_shard': args.eval_tokens_per_shard, 'attention': 'fa3' if attention.USE_FA3 else 'sdpa', 'kernel_sha256': args.kernel_sha}
     step = 0
@@ -319,6 +327,9 @@ def run(args, campaign):
     milestone_steps = []
     if args.resume:
         restored = load_bundle(args.resume, model=model, optimizer=optimizer, expected_identity=identity)
+        if (restored.get('verification', {}).get('exact_state_verified') is not True
+            or restored['verification'].get('rng') is not True):
+            raise ValueError('Production resume requires exact restored state and RNG verification')
         step = restored['metadata']['step']
         reader.load_state_dict(restored['data_state']['reader'])
         if restored['data_state']['next_batch'] != step or reader.global_row != step * (BATCH // 2048):
@@ -447,6 +458,11 @@ def run(args, campaign):
         if step*BATCH >= next_eval or milestones or (args.max_updates and step == lease_end_step):
             status['validation'] = evaluate()
             next_eval = next_evaluation(next_eval, step*BATCH, args.eval_every_tokens, status['validation'])
+        if milestones and probe_tokenizer is not None:
+            probe_result = run_probes(model, probe_tokenizer, should_stop=should_stop)
+            probe_result.update(step=step, targets=step*BATCH, milestones=milestones)
+            atomic_json(out / f'base-probes-step-{step:08d}.json', probe_result)
+            status['base_probes'] = probe_result
         with (out / 'updates.jsonl').open('a') as log:
             log.write(json.dumps(status, allow_nan=False)+'\n'); log.flush()
         atomic_json(out / 'progress.json', status)
@@ -472,6 +488,7 @@ def main():
     p.add_argument('--kernel-path'); p.add_argument('--kernel-sha')
     p.add_argument('--deterministic', action='store_true', help='Strict PyTorch algorithms and deterministic FA3 backward')
     p.add_argument('--deterministic-attention', action='store_true', help='Deterministic staged FA3 backward')
+    p.add_argument('--tokenizer-dir', help='Enable fixed milestone-only base probes with the final own tokenizer')
     p.add_argument('--seed', type=int, default=103)
     p.add_argument('--checkpoint-seconds', type=int, default=900)
     p.add_argument('--checkpoint-reserve-seconds', type=int, default=300)
@@ -491,8 +508,10 @@ def main():
     if min(a.checkpoint_seconds,a.checkpoint_reserve_seconds,a.eval_every_tokens,a.eval_tokens_per_shard)<1 or a.eval_tokens_per_shard%2048:
         p.error('Positive intervals and whole-row eval budget required')
     seconds=deadline_timestamp(a.deadline_utc)-time.time()
-    if not a.checkpoint_reserve_seconds < seconds <= 10800:
-        p.error('Lease deadline must leave checkpoint reserve and be <=3 hours away')
+    try:
+        validate_lease_seconds(seconds, a.checkpoint_reserve_seconds)
+    except ValueError as exc:
+        p.error(str(exc))
     if bool(a.kernel_path)!=bool(a.kernel_sha):
         p.error('Pinned kernel path and SHA must be supplied together')
     os.environ.setdefault('HF_HUB_OFFLINE','1')

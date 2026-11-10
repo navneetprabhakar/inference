@@ -4,7 +4,7 @@ import argparse, gzip, hashlib, io, json, subprocess, tarfile
 
 REVISION = '92d63d4e8bb4df75c3b71618f31ddde2378b2bcd'
 TOKENIZER_SHA = 'ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5'
-MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano_eval',
+MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano_eval', 'nano_probes',
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
            'campaign_budget', 'runtime')
 
