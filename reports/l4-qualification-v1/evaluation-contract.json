@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-10",
+  "status": "base_evaluation_implemented_chat_adapter_pending",
+  "base_evaluation": {
+    "implementation": "cloud_training/nano_eval.py",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "api": "evaluate_packed(model,directory,tokenizer_sha256=...,token_budget=...,batch_rows=...,actual_revision=...,expected_manifest_sha256=...)",
+    "recommended_light_target_tokens": 1048576,
+    "recommended_milestone_target_tokens": 2097152,
+    "requirements": [
+      "validation split only",
+      "exact tokenizer and optional frozen manifest SHA256",
+      "whole-row exact token budget; reject insufficient corpus; never wrap",
+      "model vocabulary/context compatibility",
+      "no optimizer; inference_mode/eval only; restore module flags and RNG",
+      "token-weighted summed cross entropy, counts, source identities and elapsed time"
+    ],
+    "limits": [
+      "Source leakage admission is separate; manifest hash alone does not establish independence.",
+      "CE cannot serve as conversation/tool acceptance.",
+      "Use fixed dev corpus across checkpoints; changes require explicit versioning."
+    ]
+  },
+  "tests": {
+    "command": ".venv/bin/python verify_nano_eval.py",
+    "passed": 9,
+    "covers": [
+      "analytic CE/counts and no weight/gradient changes",
+      "batch partition invariance with uneven final batch",
+      "train split/tokenizer/revision/manifest rejection",
+      "oversize/nonwhole budget rejection",
+      "vocabulary/context rejection",
+      "model flags and RNG preserved",
+      "nonfinite failure restores training mode",
+      "actual pinned tiny GPT cached/uncached FP32 CPU parity across prefill and six decode steps with nonzero attention projection and smear"
+    ],
+    "full_model_or_gpu_allocated": false
+  },
+  "practical_acceptance": {
+    "suite_sha256": "1c2142d1636811a2e0ed984b2156878bf2bab70668a9dd670a02a25fa447bdff",
+    "protocol_sha256": "a46d8ff66b5c911bcdb2b6255700cce4b4cbed1ac16b979be74c044c8450da06",
+    "sessions": 20,
+    "turns": 62,
+    "minimum_complete_sessions": 16,
+    "maximum_incorrect_executions": 0,
+    "maximum_unauthorized_executions": 0,
+    "expected_executions": 16
+  },
+  "original_release_gates": {
+    "sessions_passed_minimum": 60,
+    "sessions_total": 100,
+    "prose_minimum": 36,
+    "prose_total": 60,
+    "tool_sessions_minimum": 18,
+    "tool_sessions_total": 30,
+    "correct_first_calls_minimum": 24,
+    "first_calls_total": 30,
+    "no_call_minimum": 9,
+    "no_call_total": 10,
+    "unauthorized_executions_maximum": 0
+  },
+  "sealed_test_policy": "Read freeze metadata only; no sealed answers or transcripts inspected, generated from, or modified.",
+  "serving_contract": {
+    "backend": "Own random-init nanochat checkpoint, own exact tokenizer/config; no pretrained fallback",
+    "context": 2048,
+    "required_tools": {
+      "calculate": [
+        "op",
+        "a",
+        "b"
+      ],
+      "convert": [
+        "value",
+        "from",
+        "to"
+      ]
+    },
+    "broker": "Existing tools.FixtureSession authorization, schema validation, call IDs and trusted result traces remain authoritative. No upstream automatic calculator/eval execution.",
+    "framing": "New native tokenizer conversation framing must represent assistant call proposals and tool results consistently in SFT and serving. Native upstream python tokens are not generic broker-call support.",
+    "loss": "Only assistant text and call targets supervised; system/user/tool observations masked. Complete conversations and valid boundaries only.",
+    "needed_adapter_work": [
+      "Replace old1024-context GPT2 framing adapter with nanochat2048 exact tokenizer adapter.",
+      "Separate ordinary assistant text from structured proposal boundaries; dispatch only authorized calculate/convert.",
+      "After broker result, resume model with actual observation; no answer synthesis/repair by host.",
+      "Test no-call/permission denial, invalid schema, replayed call IDs, result provenance, corrected operands and context overflow.",
+      "Measure full model Mac CPU/MPS cached inference memory/latency before claiming usable local delivery."
+    ],
+    "reported_separately": [
+      "raw model semantic errors",
+      "constrained-format validity",
+      "broker rejected calls",
+      "actual incorrect or unauthorized executions",
+      "whole-session completion"
+    ]
+  }
+}

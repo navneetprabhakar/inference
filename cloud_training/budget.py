@@ -5,7 +5,7 @@ import math
 from cloud_training.runtime import atomic_json
 import json
 
-CAP_USD=50.
+CAP_USD=100.  # User approved total project cap on 2026-11-10
 RESERVE_USD=10.  # storage, network, operations and invoice contingency
 HOURLY_ENVELOPE_USD=6.  # single A2-1g in selected US region incl disk/IP headroom
 
@@ -24,5 +24,7 @@ def reserve(path, allocation_id, hours):
         if sum(a['reserved_usd'] for a in state['allocations'])+cost+RESERVE_USD>CAP_USD:
             raise ValueError('explicit approval required beyond total budget')
         state['allocations'].append({'id':allocation_id,'hours':hours,'reserved_usd':cost,'state':'reserved_before_provisioning'})
+        state['total_including_ancillary_reserve_usd']=sum(a['reserved_usd'] for a in state['allocations'])+RESERVE_USD
+        state['remaining_unallocated_usd']=CAP_USD-state['total_including_ancillary_reserve_usd']
         atomic_json(path,state)
         return state

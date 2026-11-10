@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "version": "forge-nanochat-v1",
+  "status": "pure_format_and_parser_verified_serving_integration_pending",
+  "upstream_revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "vocabulary_size": 32768,
+  "context_tokens": 2048,
+  "reply_budget_default": 256,
+  "special_token_ids": {
+    "<|bos|>": 32759,
+    "<|user_start|>": 32760,
+    "<|user_end|>": 32761,
+    "<|assistant_start|>": 32762,
+    "<|assistant_end|>": 32763,
+    "<|python_start|>": 32764,
+    "<|python_end|>": 32765,
+    "<|output_start|>": 32766,
+    "<|output_end|>": 32767
+  },
+  "ownership": {
+    "ordinary_text": "Only model-generated assistant text; preserved verbatim. No host answer synthesis or repair.",
+    "policy": "Caller-provided per-user-turn permit_calls/allowed_names; user content cannot grant authority.",
+    "dispatch": "Existing tools.FixtureSession alone; formatter/parser never executes code or calls tools.",
+    "call_ids": "Broker-owned c1..c4 session sequence, stored as history metadata and inside observed result.",
+    "results": "Complete observed broker record, excluding volatile timestamp; no fabricated result replacement."
+  },
+  "schema_contract": {
+    "messages": [
+      "Optional initial {role:system,content:str}",
+      "{role:user,content:str}",
+      "{role:assistant,content:str} closes one assistant turn",
+      "{role:assistant,tool_call:{name,arguments},call_id} requires immediate matching tool record",
+      "{role:tool,call_id,record} continues the same open assistant turn"
+    ],
+    "policies": "List aligned exactly with user events; each {permit_calls:bool,allowed_names:list}. Omitted means calls disabled for general dialogue.",
+    "assistant_text": "Native text between assistant_start and assistant_end; no JSON text envelope.",
+    "calls": "python_start + canonical JSON {name,arguments} + python_end. Only calculate/convert schemas accepted.",
+    "results": "output_start + canonical stable broker record + output_end.",
+    "fixed_tokens": "Existing python_start/end IDs are REDEFINED as JSON transport delimiters, never Python instructions. No new vocabulary IDs.",
+    "host_policy_placement": "Masked ordinary text inside each user frame. Initial system text included only in the first user frame because the frozen tokenizer has no system-role token."
+  },
+  "loss_contract": {
+    "supervised": [
+      "assistant ordinary text",
+      "tool_call_start",
+      "tool_call_json",
+      "tool_call_end",
+      "assistant_end"
+    ],
+    "masked": [
+      "bos",
+      "system text",
+      "host policy",
+      "user text/boundaries",
+      "assistant_start",
+      "tool_result_start",
+      "tool_result_json",
+      "tool_result_end"
+    ],
+    "shift": "input_ids=ids[:-1]; labels=ids[1:] where mask[1:]==1, otherwise -100.",
+    "normalization": "SFT trainer must sum assistant-target losses and divide by total valid targets across accumulated microbatches; not implemented by formatter."
+  },
+  "generation_contract": [
+    "Before a new assistant turn: shared renderer appends assistant_start. After a broker result: continue after output_end without a second assistant_start.",
+    "Stop decoding on assistant_end for final text, or python_end for a proposal. A call is one action, not the completed user turn.",
+    "parse_generated returns text/call/invalid; unsupported names, malformed or duplicate JSON fields, missing arguments and partial frames remain invalid.",
+    "Parser acceptance is not authorization. Apply live broker policy/quotas even when parser says call; record broker error instead of inventing an answer.",
+    "Never use upstream nanochat.engine automatic calculator/Python handling for this stream. A dedicated broker-aware generation loop remains to be implemented.",
+    "Always rerender typed history through this formatter. JSON normalization changes whitespace/key ordering only; if generated call bytes differed, invalidate/rebuild any KV cache before continuation.",
+    "Literal special-token spellings in user/system/result/text content use ordinary BPE IDs, not control IDs.",
+    "No truncation or silent history dropping. Reject overflow before training/inference; a future explicit whole-turn history policy requires separate tests."
+  ],
+  "tests": {
+    "command": "runs/l4-data-prep/.venv/bin/python verify_nano_chat_format.py",
+    "passed": 9,
+    "coverage": [
+      "final tokenizer SHA and32768vocab",
+      "general native text and shiftedlabels",
+      "identicaltrain/serveprefix beforeandaftertool",
+      "assistant call supervision and fullymasked brokerresult",
+      "actualzero-division brokererror",
+      "literalcontroltokeninjection",
+      "complete supported proposal parsing andinvalidJSON/args",
+      "authoritativepolicy/call-ID/resultlinkage",
+      "2048contextoverflow andincompleteframes"
+    ]
+  },
+  "remaining_gates": [
+    "Actual broker-aware model serving loop and KV-cache behavior",
+    "SFT dataset mapping/filtering and execution replay admission",
+    "SFT masked-token-weighted optimizer tests",
+    "Model-driven conversation/tool acceptance; pure formatting tests do not establish learned behavior"
+  ],
+  "tool_lesson_format_integration": {
+    "train": {
+      "sessions": 128,
+      "max_context_tokens": 629,
+      "assistant_targets": 6375,
+      "tool_calls": 160,
+      "all_within_2048": true
+    },
+    "validation": {
+      "sessions": 128,
+      "max_context_tokens": 633,
+      "assistant_targets": 6617,
+      "tool_calls": 160,
+      "all_within_2048": true
+    }
+  }
+}

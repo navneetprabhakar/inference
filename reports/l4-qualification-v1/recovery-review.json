@@ -1,0 +1,67 @@
+{
+  "status": "local_checkpoint_primitive_verified_cloud_restore_pending",
+  "date": "2026-11-10",
+  "owned_files": [
+    "cloud_training/nano_checkpoint.py",
+    "verify_nano_checkpoint.py",
+    "cloud_training/l4_recovery_check.py"
+  ],
+  "tests": {
+    "command": ".venv/bin/python verify_nano_checkpoint.py",
+    "passed": 14,
+    "device": "CPU",
+    "proof": "Stochastic next batch, dropout forward, optimizer update, scheduler, Python/NumPy/Torch RNG match exactly after restore."
+  },
+  "bundle": {
+    "files": [
+      "payload.pt",
+      "metadata.json",
+      "manifest.json",
+      "COMMITTED"
+    ],
+    "publication": "Immutable unique step directory, exclusive sibling lock, temporary sibling directory, fsync files and directories, atomic rename; marker binds manifest and manifest binds every component size and SHA256.",
+    "restore": "Validate all files before torch.load(weights_only=True) and model mutation. Require compatible model/optimizer/scheduler and expected_identity for production."
+  },
+  "data_contract": {
+    "required": [
+      "exact=True",
+      "next_batch",
+      "private_generator_state_if_any",
+      "packing_buffers_if_any",
+      "prefetched_batch_if_any",
+      "dataset_hash_and_order_in_identity"
+    ],
+    "warning": "exact=True is a caller assertion, not mathematical verification. Synthetic generator resume proof does not establish exact real-data replay. Upstream nanochat row-group cursor cannot meet this contract by itself."
+  },
+  "upstream_findings": [
+    {
+      "path": "nanochat/dataloader.py",
+      "finding": "Approximate resume; buffers/prefetched batch are not included in row-group cursor."
+    },
+    {
+      "path": "nanochat/checkpoint_manager.py",
+      "finding": "Direct torch.save component files; no committed bundle, integrity manifest or atomic publication."
+    },
+    {
+      "path": "scripts/chat_sft.py",
+      "finding": "Saves at final step; periodic checkpoint/resume integration still required."
+    }
+  ],
+  "existing_cloud_controls": [
+    "server.sh uses process flock and shutdown timer plus stated independent provider maximum runtime; old launcher is diagnostic-specific and must not be reused unmodified.",
+    "budget.py still hardcodes $50, $6/hour and <=3 hour leases at audit time. Root must explicitly migrate policy/ledger to authorized $100 without dropping historical allocations.",
+    "GCS backup upload/remote validation/restore not implemented in this primitive. Upload payload, metadata and manifest first; verify bytes/hash after remote download; publish COMMITTED last. Test fresh-VM recovery and failed partial upload before long training.",
+    "Need real-data exact next-batch proof and CUDA optimizer-state/dtype parity; existing tiny CPU proof does not substitute for nanochat CUDA proof.",
+    "Checkpoint only after complete optimizer update and before starting next accumulation. Persist scheduler horizon and resolved optimizer settings as identity. Mid-accumulation interruption resumes prior committed update and replays abandoned work."
+  ],
+  "limitations": [
+    "No cloud mutation or GPU allocation performed.",
+    "CPU and CUDA global RNG supported; private generators must be in data_state. MPS-specific RNG not included.",
+    "Not a distributed sharded checkpoint implementation. One GPU/writer only.",
+    "Hash checks defend against corruption, not hostile trusted-bucket replacement.",
+    "Model and optimizer load_state_dict compatibility remains caller responsibility; use fresh reconstructed objects for restore attempts."
+  ],
+  "gcs_roundtrip_implementation": "Explicit CLI/helper uploads unique UUID prefix with COMMITTED last, fetches all components into fresh local directory, verifies hashes and identity; benchmark worker then restores downloaded bundle and compares next update. Mocked ordering and interrupted upload tests pass. Actual cloud test pending.",
+  "upload_only_implementation": "upload_bundle uses unique UUID prefix, gcloud storage cp transfer checksum validation and COMMITTED last. Receipt explicitly does not claim independent SHA256 readback. Use roundtrip_bundle for that proof.",
+  "checksum_reference": "https://docs.cloud.google.com/storage/docs/data-validation"
+}

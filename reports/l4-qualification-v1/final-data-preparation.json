@@ -1,0 +1,55 @@
+{
+  "status": "full_own_tokenizer_ready_not_training_admitted",
+  "target_chars": 2000000000,
+  "doc_cap": 10000,
+  "threads": 2,
+  "training_admitted": false,
+  "available_fit_characters": 2006793455,
+  "source_shards": 9,
+  "downloaded_bytes": 732757676,
+  "source_manifest_sha256": "0f4a22ac0a2553a04e953a31b7f40a7cacf21ffa6c3a552582d8b9399567aea3",
+  "worker_pid": 24681,
+  "worker_rss_kib": 645872,
+  "memory_free_percent": 87,
+  "tokenizer": {
+    "status": "full_own_tokenizer_fit_complete_not_corpus_admission",
+    "fit": {
+      "characters": 2000001128,
+      "documents": 758297,
+      "last_file": "runs/ownbase-v2-data/source/shard_00009.parquet",
+      "last_row_group": 80
+    },
+    "vocab": 32768,
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "source_manifest_sha256": "0f4a22ac0a2553a04e953a31b7f40a7cacf21ffa6c3a552582d8b9399567aea3",
+    "tokenizer_module_sha256": "cfbdf11d845225abbabf6536d0c6e971c7b1687009f5322150440163ea3f68b0",
+    "seconds": 89.05740118026733,
+    "threads": 2,
+    "roundtrip_passed": true,
+    "training_admitted": false
+  },
+  "outstanding": [
+    "exact/near duplicate and evaluation-contamination checks",
+    "final training tokenization and packing",
+    "immutable multi-shard admission manifest"
+  ],
+  "tests": {
+    "command": "runs/l4-data-prep/.venv/bin/python verify_nano_final_data.py",
+    "passed": 7,
+    "all_source_hashes_reverified": true,
+    "explicit_train_split_checked": true
+  },
+  "runtime_artifacts": {
+    "tokenizer_directory": "runs/ownbase-v2-data/tokenizer",
+    "token_bytes_pt_sha256": "c9e936b5879a1aebe9ad6ccb48458f86e6c0af43d29331d7949d3061368cdb80",
+    "sources_manifest": "runs/ownbase-v2-data/sources.json",
+    "download_ledger": "runs/ownbase-v2-data/download-ledger.json"
+  },
+  "download_resume_exercised": "One slow shard transfer interrupted and resumed with validated HTTP Range; all completed file hashes verified.",
+  "host": {
+    "ram_bytes": 25769803776,
+    "threads": 2,
+    "memory_guard": "RSS12GiB/systemavailable20%",
+    "disk_guard_free_gib": 80
+  }
+}

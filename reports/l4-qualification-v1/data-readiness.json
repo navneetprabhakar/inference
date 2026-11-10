@@ -1,0 +1,131 @@
+{
+  "status": "real_benchmark_data_and_provisional_own_tokenizer_ready",
+  "date": "2026-11-10",
+  "upstream_code_revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+  "dataset": {
+    "repository": "karpathy/climbmix-400b-shuffle",
+    "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "revision_verified_via": "https://huggingface.co/api/datasets/karpathy/climbmix-400b-shuffle",
+    "base_url": "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "validation_shard": "shard_06542.parquet",
+    "first_shard_bytes_head_verified": 92291918,
+    "original_source": "https://huggingface.co/datasets/nvidia/Nemotron-ClimbMix",
+    "original_license": "CC-BY-NC-4.0; preserve upstream terms despite repack badge"
+  },
+  "local_free_bytes_observed": 179078307840,
+  "existing_old_tokenizer_train_tokens": 267285444,
+  "existing_corpus_compatibility": "GPT2 vocabulary50257; must not feed existing IDs to new32768 vocabulary. Decode and retokenize only with original text/split lineage verified. Prefer new ClimbMix source for the selected recipe.",
+  "dependencies": {
+    "available": [
+      "pyarrow",
+      "tiktoken",
+      "numpy"
+    ],
+    "missing": [],
+    "isolated_env": "runs/l4-data-prep/.venv",
+    "pinned_packages": {
+      "rustbpe": "0.1.0",
+      "tiktoken": "0.11.0",
+      "pyarrow": "21.0.0"
+    }
+  },
+  "implemented": {
+    "writer": "cloud_training.nano_data.write_rows",
+    "reader": "cloud_training.nano_data.PackedRows",
+    "format": "uint16 little-endian fixed rows of T+1 tokens; x=row[:-1],y=row[1:]",
+    "cursor": "manifest SHA256 plus next_row; finite, sequential, no hidden prefetch or epoch wrap",
+    "admission": "writer sets training_admitted=false; hash checks prove integrity only",
+    "restart_contract": "Checkpoint cursor after last optimized batch. If prefetching, persist prefetch batch/cursor BEFORE next read, or disable prefetch. Exact reader state alone does not save optimizer/RNG."
+  },
+  "tests": {
+    "command": "python3 verify_nano_data.py",
+    "passed": 10,
+    "covers": [
+      "exact next batch after restore",
+      "no wrap/partial batch",
+      "data corruption",
+      "wrong tokenizer and split",
+      "foreign/invalid cursor",
+      "invalid rows cannot publish manifest",
+      "refuse overwrite"
+    ],
+    "commands": [
+      "python3 verify_nano_data.py",
+      "python3 verify_nano_prepare_data.py"
+    ],
+    "additional_integration": "12rows exact against pinned upstream generator"
+  },
+  "next_steps": [
+    "Stage benchmark tokenizer, token_bytes.pt, both packed splits and manifests via GCS before GPU launch.",
+    "Explicitly label any benchmark replay and discard benchmark weights.",
+    "For final corpus: train full own tokenizer; acquire bounded shards from measured yield; verify source license/dedup/holdout admission.",
+    "Implement fixed ordered multi-shard cursor for full10B and connect base checkpoint state."
+  ],
+  "important_correction": {
+    "upstream_packing_docstring": "About35%tokens cropped at T2048",
+    "raw_token_requirement_at_35pct_waste": 15384615385,
+    "meaning": "35% is upstream comment, not measured current mixture yield. Actual benchmark crop fraction~3.8%; plan full intake from measured new-tokenizer yield and accounting, not fixed20% or35% assumptions.",
+    "observed_benchmark_train_crop_fraction": 0.037882767618139364
+  },
+  "bounds": {
+    "downloaded_bytes": 184416235,
+    "cloud_mutations": false,
+    "trained_tokenizer": true,
+    "trained_model": false,
+    "weights_modified": false
+  },
+  "blockers": [
+    "Final own tokenizer needs full approved fit; current50M-char tokenizer is benchmark-only",
+    "Final corpus source-level deduplication/leakage/quality admission pending",
+    "Full10B acquisition and exact multi-shard cursor not yet implemented"
+  ],
+  "benchmark_artifacts": {
+    "root": "runs/l4-data-prep/benchmark",
+    "tokenizer_sha256": "2f5a044b597b6505675869ff2cc9a05a560eb798a3ceaac31739fb330bb965ea",
+    "tokenizer_fit": {
+      "characters": 50000000,
+      "documents": 18988
+    },
+    "roundtrip_passed": true,
+    "train_targets": 16777216,
+    "validation_targets": 1048576,
+    "context": 2048,
+    "vocab": 32768,
+    "token_bytes_pt": true,
+    "preparation_record": "runs/l4-data-prep/benchmark/preparation.json",
+    "source_manifest": "runs/l4-data-prep/source-manifest.json",
+    "source_files": [
+      {
+        "file": "shard_00000.parquet",
+        "bytes": 92291918,
+        "sha256": "054ddbd98abf30d773c54de578fc9d579bafeb6c14e04e97bd36aa90e825bf9b",
+        "url": "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/915333b4f8b8684f39aeaafea600fea6f43fb703/shard_00000.parquet"
+      },
+      {
+        "file": "shard_00001.parquet",
+        "bytes": 92124317,
+        "sha256": "d4cfe1de19f4fd976022a9047458655968bc5583582ec5fa714801ec2be2c93c",
+        "url": "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/915333b4f8b8684f39aeaafea600fea6f43fb703/shard_00001.parquet"
+      }
+    ],
+    "packing_parity": "12 rows matched pinned upstream generator exactly on a deterministic fixture; finite-tail behavior intentionally stops without replay",
+    "provisional": "50M chars vs2B-char upstream full fit; discard benchmark weights; not production data admission"
+  },
+  "long_benchmark": {
+    "directory": "runs/l4-data-prep/benchmark-long/train",
+    "rows": 22372,
+    "targets": 45817856,
+    "file_bytes": 91680456,
+    "sha256": "19e12769e05c27a3c7de6e79bda0fc545b1a77c86685deac506218f9299038c1",
+    "tokenizer_sha256": "2f5a044b597b6505675869ff2cc9a05a560eb798a3ceaac31739fb330bb965ea",
+    "first_shard_exhausted": true,
+    "source_documents": 86016,
+    "source_tokens": 54142366,
+    "cropped_tokens": 8302138,
+    "crop_fraction": 0.15333903213612793,
+    "hash_and_restore_check": "passed",
+    "threads": 2,
+    "original_benchmark_unchanged": true,
+    "limitation": "45.8Mtargets not67.1M: firstshard exhausted. At27.8ktokens/s approximately27.5minutes before restart reservation; cannot guarantee30minutes with this source alone."
+  }
+}

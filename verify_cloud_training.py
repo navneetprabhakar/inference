@@ -56,8 +56,9 @@ class Tests(unittest.TestCase):
         from cloud_training.budget import reserve
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'ledger.json'
-            reserve(p,'first',3);reserve(p,'second',3)
-            with self.assertRaises(ValueError):reserve(p,'third',3)
+            reserve(p,'first',3)
+            for i in range(4): reserve(p,f'additional-{i}',3)
+            with self.assertRaises(ValueError):reserve(p,'over-cap',3)
             with self.assertRaises(ValueError):reserve(p,'first',1)
             with self.assertRaises(ValueError):reserve(p,'bad',float('nan'))
 
