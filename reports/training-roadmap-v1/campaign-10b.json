@@ -1,0 +1,160 @@
+{
+  "state": "proposed_requires_budget_approval_above_50",
+  "date": "2026-11-10",
+  "supersedes": "plan.json budget-limited continuation ceilings and early context gate; original preserved as history.",
+  "current_status": {
+    "gpu_instances": 0,
+    "gpu_disks": 0,
+    "local_training_processes": 0,
+    "last_campaign": "All finite CUDA diagnostics completed.",
+    "activity": "Planning and readiness review; no background data preparation or training job claimed.",
+    "prior_compute_conservative_usd": 4.85,
+    "authorized_project_cap_usd": 50
+  },
+  "scope": {
+    "model_parameters": 124439808,
+    "own_random_initialization_lineage_only": true,
+    "new_base_training_targets": 10000000000,
+    "excludes": "Discarded comparison branches and subsequent SFT are additional; do not add them to the retained10B base exposure.",
+    "goal": "Useful local conversation plus calculate/convert tools under existing acceptance contract, not frontier/general-purpose parity."
+  },
+  "stages": [
+    {
+      "id": 1,
+      "name": "Data preparation and training corrections",
+      "elapsed_estimate_hours": [
+        6,
+        12
+      ],
+      "gpu_hours": [
+        0,
+        0
+      ],
+      "work": [
+        "Acquire, tokenize and admit sufficient diverse text for10Btargets; aim10Bdistinct admitted GPT2tokens, report actual unique exposure and any replay separately. Current267M corpus inventory is insufficient.",
+        "Start proposed pretraining mix70%quality-filtered broad text,20%explanatory,10%narrative; tune proportions only in one prospective comparison and freeze before main run. Context/task synthetic supervision is primarily a separate curriculum/SFT component.",
+        "Maintain source/license manifests, exact and near-duplicate screening and grouped train/development/acceptance isolation. Do not inspect sealed test answers for training design.",
+        "Stage token shards in GCS and train from local VM disk; a10Buint16token stream alone is20GB before indices/source text/checkpoints. Cap retained raw/source staging separately and clean reconstructible intermediates.",
+        "Extend and test runner for1024positions, scheduler, cursor and masked SFT; preserve exact resume across checkpoint boundaries.",
+        "Do CPU preprocessing locally or bounded CPU-only GCP worker; never rent A100 while awaiting data."
+      ],
+      "gate": "First phase shards admitted, full acquisition forecast feasible, source mix frozen, new worker tests and restore checks pass. Remaining shards can be prepared while training only if admission stays ahead and no GPU waiting is charged."
+    },
+    {
+      "id": 2,
+      "name": "One useful pilot and sustained benchmark",
+      "gpu_hours": [
+        1,
+        2
+      ],
+      "work": [
+        "Sequential50Mtarget broad control and50M corrected-mixture trial, same own parent and matched optimizer/batch.",
+        "Measure sustained1024token throughput, not just512microbenchmark; retune microbatch only to fit GPU, preserve effective batch for comparison.",
+        "Use held-out per-source loss, raw prose and crossed entity/template probes to select recipe. Do not require near-production conversation before meaningful pretraining.",
+        "Keep6e-5 as the conservative starting LR for current8192targetbatch; any batch/LR change requires a new stated pilot, no borrowed large-batch schedule."
+      ],
+      "gate": "Finite stable optimization, improving held-out loss, no material broad-language regression and affordable sustained throughput. A short-run context miss is not proof that multi-billion-token pretraining cannot help; limit further micro-experiments."
+    },
+    {
+      "id": 3,
+      "name": "10B-target base continuation",
+      "gpu_hours_estimate": [
+        46.3,
+        69.5
+      ],
+      "assumption": "40k-60ktargets/sec sustained training including ordinary step/checkpoint overhead is a planning assumption, not measured1024performance. Reforecast after stage2.",
+      "milestones_billions": [
+        1,
+        3,
+        6,
+        10
+      ],
+      "work": [
+        "Continue selected own base through1B,3B,6B,10B newtargets; retain optimizer continuity and deterministic dataset cursor.",
+        "Train at1024positions after successful benchmark. Freeze cosine schedule over main10Bcampaign, initially6e-5 to6e-6; change only for documented instability, preserving prior evidence.",
+        "Light evaluation every250Mtargets; full source-stratified language/context/prose assessment at milestone boundaries.",
+        "GCS checkpoints every15minutes, retain latest2plus milestone/best checkpoints; renew bounded provider leases only when budget and progress gates pass.",
+        "At1Band3B run a small separate instruction probe to assess whether foundation gains transfer to chat; count its compute, never merge probe weights back into base."
+      ],
+      "stop": "Nonfinite/divergent training, leakage, broken backups, insufficient remaining budget, or persistent validation deterioration. Flat gains across two substantive assessments trigger diagnosis, not endless spending. No automatic parameter scaling."
+    },
+    {
+      "id": 4,
+      "name": "Conversation and tool SFT",
+      "gpu_hours": [
+        3,
+        5
+      ],
+      "work": [
+        "Own-base assistant-only loss using exact serving serialization, full1024positions, EOT and tool frames.",
+        "Curate short human/public conversation, paraphrases, summaries, memory changes, missing-reference clarification and independent intent families.",
+        "Generate tool lessons through actual calculate/convert broker and verify call arguments plus observed-result-grounded responses. Include no-call, permissions, errors, operand order and dependent calls.",
+        "Use balanced sessions with bounded replay, small separate SFT optimizer and validation-based checkpoint selection. No paid teacher API assumed.",
+        "Assess both raw model quality and fixed serving decoder; no answer repair or pretrained fallback."
+      ],
+      "gate": "Development>=80%full sessions and conversation subset; >=98%valid callframes, >=95%correct tool/arguments and grounded responses, zero unauthorized/incorrect executed calls."
+    },
+    {
+      "id": 5,
+      "name": "Independent acceptance and usable local delivery",
+      "gpu_hours": [
+        1,
+        2
+      ],
+      "work": [
+        "Freeze selected model/decoder before final acceptance.",
+        "Preserve existing20sessions/62turns gate:>=16complete sessions, all16expected executions correct, zero wrong/unauthorized executions; satisfy applicable original release gates too.",
+        "Run own-base localchat interface on Mac with actualbroker; record representative full sessions, load/restart behavior, latency and memory.",
+        "Deliver protected model, tokenizer/config, reproducible launch, data lineage, assessment report and cost ledger. Failed checkpoints remain evidence, not a claimed usable release."
+      ]
+    }
+  ],
+  "budget_proposal": {
+    "currency": "USD",
+    "requested_total_project_cap": 400,
+    "currently_authorized_total": 50,
+    "increase_requested": 350,
+    "expected_total_range": [
+      250,
+      350
+    ],
+    "up_to80_a100_vm_hours_at_reference_rate": 293.87,
+    "reference_hourly_rate": 3.673385,
+    "reference_machine": "a2-highgpu-1g, oneA10040GB,12vCPU85GiB, on-demand us-central1",
+    "cpu_data_preparation_allowance": 10,
+    "disk_gcs_operations_egress_allowance": 20,
+    "prior_compute_conservative": 4.85,
+    "tax_fx_and_failure_contingency": 71.28,
+    "notes": [
+      "Requested400is a total cap including prior expense, not400additional. No authorization inferred from willingness to approve.",
+      "Reference rate includes VMCPU/RAM/GPU; do not double-count these components. Disk/storage and transfer are separate.",
+      "80VMhours is a compute ceiling at reference price, not guaranteed10B completion. SFT/evaluation count inside these hours. If throughput is slower or regional price higher, reduce affordable hours and reforecast before spending.",
+      "Existing$6/hledger rate remains in force until explicitly replacing it with verified regional price plus allocated overhead under an approved policy; do not silently weaken current guard.",
+      "Reserve remaining SFT/evaluation and ancillary budget before allocating base-training lease. Stop/reassess before hardcap; billing dashboard lag is not enforcement.",
+      "$10and$20are bounded engineering allowances, not quoted invoices. Tax/FX unknown; contingency is not a tax calculation.",
+      "30dayGCSretention with bounded artifact inventory; no credits or discounts assumed; no paid teacher models."
+    ]
+  },
+  "eta": {
+    "data_and_runner": "6-12hours initial estimate;10Bdata acquisition/quality work could extend this.",
+    "gpu_campaign": "Approximately52-79hours across all phases, conditional on sustained40k-60ktokens/sec and efficient checkpointing.",
+    "overall_calendar": "3-5days assuming capacity and data intake keep up. Reforecast after the first sustained benchmark.",
+    "guarantee": "10Btokens is a credible training-scale objective, not a guarantee of a usable assistant. Deliver a working model only if acceptance passes."
+  },
+  "pricing_sources": [
+    {
+      "url": "https://cloud.google.com/products/compute/pricing/accelerator-optimized",
+      "checked": "2026-11-10",
+      "claim": "A2standard a2-highgpu-1g displayed on-demand3.673385USD/hour in defaultUScentralregion."
+    },
+    {
+      "url": "https://cloud.google.com/storage/pricing",
+      "checked": "2026-11-10",
+      "claim": "Storage, operations and network usage priced separately."
+    }
+  ],
+  "immediate_actions_without_extra_approval": [
+    "Continue local preparation and tests under existing scope; no active training claimed.",
+    "Keep current50cap. Obtain explicit approval of proposed400total before provisioning a campaign requiring more."
+  ]
+}

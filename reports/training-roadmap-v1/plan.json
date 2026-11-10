@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "date": "2026-11-10",
+  "state": "execution_plan_prepared_not_a_quality_pass",
+  "objective": "Deliver a usable local conversation and calculate/convert tool-call model derived exclusively from our random-initialized base. Preserve existing acceptance criteria.",
+  "authorization": {
+    "gcp": "Authorized by user as needed; any zone; one GPU at a time.",
+    "project_total_cap_usd": 50,
+    "explicit_approval_required_above_cap": true,
+    "no_pretrained_model_weights": true,
+    "report_before_long_training": true
+  },
+  "evidence": [
+    {
+      "path": "reports/gcp-a100-diagnostic-v1/final-review.json",
+      "sha256": "7546877689704db969ddc757b9223a70114027cc8c1de3f03b9f024a64cac99c"
+    },
+    {
+      "path": "reports/gcp-a100-diagnostic-v1/spend-ledger.json",
+      "sha256": "9b6584ceb85278774084c159dd97b35646f6912106bc207e049d6d51a5b843c0"
+    },
+    {
+      "path": "reports/practical-usability-acceptance/freeze.json",
+      "sha256": "3ceaed4b3196732bc85656aec80c93fa7dd8c49e9341c1c0138662f76a154dd5"
+    }
+  ],
+  "starting_point": {
+    "parameters": 124439808,
+    "retained_lineage_targets": 247439360,
+    "parent_sha256": "1ed0112765831b061b654e4e80a48259012581e037c3208eae668a966e35e33a",
+    "parent_gcs": "gs://forge-ownbase-a100-20261110/input/parent.pt",
+    "proven": "Bounded CUDA math/update path and GCS restart.",
+    "not_proven": "Conversation, transferable context binding, tool correctness, sustained training throughput or full crash recovery at every boundary."
+  },
+  "corrections": [
+    {
+      "problem": "Raising LR degraded validation loss.",
+      "action": "Keep 6e-5 for the controlled pilot with identical optimizer state/batch. Later use a predeclared modest cosine decay, not another open-ended LR sweep."
+    },
+    {
+      "problem": "Perfect memorization with poor transfer; previous template split also changed entities.",
+      "action": "Create crossed entity/template holdouts, diverse labels, 2-6 entities, varied query positions, distractors, corrections and explicit counterfactuals. Separate training, development and final acceptance."
+    },
+    {
+      "problem": "512-token base path versus 1024-token serving.",
+      "action": "Keep 512 for the matched data pilot; then introduce 1024-token complete sequences. Rebenchmark with microbatch8 and effective8192 positions. Test evidence near beginning/middle/end and at 128/256/512/768+ token distances. Never advertise a length that fails."
+    },
+    {
+      "problem": "Repeated training on a small corpus can resemble progress.",
+      "action": "Report unique documents/tokens, replay exposure and per-source loss. Reuse admitted narrative/explanatory data transparently. Before a long run, audit enough new source material; never relabel replay as fresh."
+    },
+    {
+      "problem": "Short microbenchmark overstates end-to-end speed.",
+      "action": "Measure sustained throughput including evaluation, checkpoint upload and startup. Token targets are ceilings; provider lease/cost wins."
+    },
+    {
+      "problem": "Repetition penalty can hide weak semantics.",
+      "action": "Assess raw greedy generations plus a separately fixed serving decoder. Compare penalty1.0 versus existing1.3 on development only; exclude structural/call tokens or retain penalty1.0 for calls. Freeze chosen decoding before acceptance. Do not add an untested training penalty in the data comparison."
+    },
+    {
+      "problem": "Template-heavy SFT and host repairs can conceal model failures.",
+      "action": "Use assistant-only loss on actual serialized chat, EOT and tool frames; replay tools and verify arguments/results. Count raw model proposals separately from host rejections. No regex answer repair or pretrained fallback."
+    }
+  ],
+  "stages": [
+    {
+      "id": "A",
+      "name": "Prepare corrected data and assessments",
+      "gpu_hours_max": 0,
+      "work": [
+        "Validate current input and checkpoint hashes; preserve parent and acceptance freeze.",
+        "Build crossed context development suite and varied training examples; inspect samples, deduplicate by entity/template families and preserve source identity.",
+        "Audit existing admitted narrative/explanatory slices and remaining unused broad rows. Freeze source proportions and sample order before training.",
+        "Build end-to-end restart/crash tests for the new runner, including data cursor, LR scheduler, loss masks and sequence length.",
+        "Prepare larger diverse text intake locally while GPU is off; do not block on needless corpus re-downloads."
+      ],
+      "gate": "Verified manifests, frozen assessments, no train/held-out overlap, exact resume equivalence for new path; input package fully in GCS before provisioning."
+    },
+    {
+      "id": "B",
+      "name": "Equal-budget data comparison",
+      "gpu_hours_max": 0.75,
+      "targets_per_arm": 9994240,
+      "updates_per_arm": 1220,
+      "arms": [
+        {
+          "name": "broad_control",
+          "target_token_mix": {
+            "existing_admitted_broad": 1.0
+          }
+        },
+        {
+          "name": "corrected_mix",
+          "target_token_mix": {
+            "existing_admitted_broad": 0.6,
+            "admitted_narrative": 0.2,
+            "admitted_explanatory": 0.15,
+            "varied_context_text": 0.05
+          }
+        }
+      ],
+      "settings": {
+        "sequence": 512,
+        "effective_positions": 8192,
+        "microbatch": 16,
+        "lr": 6e-05,
+        "objective": "Full next-token CE for both arms; context examples include answers and EOT. Mask padding; log actual supervised targets. Do not confound mixture with answer-only loss.",
+        "start": "Same protected parent and optimizer for both arms, sequential runs."
+      },
+      "assessment": "Baseline, half-way light evaluation, endpoint full development. Paired held-out losses on fixed broad/narrative/explanatory windows; crossed context splits; original32 pairs; at least64 new prose prompts.",
+      "gate": "Mixture beats control on held-out mixture CE and context exactness by at least10 percentage points in both unseen-entity and unseen-template splits; broad CE regression <=0.05; no worse repetition. These are prospective engineering go/no-go thresholds, not statistical proof. If CE improves but context gate fails, allow at most one bounded supervised context pilot using contingency; do not start a long run automatically."
+    },
+    {
+      "id": "C",
+      "name": "Budgeted base continuation with context-length correction",
+      "gpu_hours_max": 2.5,
+      "target_tokens_max": 400000000,
+      "conditional_on": "Stage B passes, sufficient admitted data and remaining budget.",
+      "work": [
+        "Use the chosen mixture; keep124M architecture and current tokenizer. Report before starting this longer phase.",
+        "Introduce1024-token examples after a successful short parity/memory benchmark; effective8192positions, microbatch adjusted for memory.",
+        "Freeze learning schedule before start: peak6e-5, cosine to2e-5 over the allocated target budget, preserved optimizer; warm transition if needed and report it.",
+        "Checkpoint and evaluate every50Mtargets or30minutes, whichever comes first; retain latest plus best and protected parent. Full checkpoint backup at least every15minutes."
+      ],
+      "stop": "Nonfinite loss, resource/recovery failure, cost lease, broadCE degradation >0.10 at two assessments, or two successive milestones without development improvement. Do not consume remaining credit by default.",
+      "gate": "At least80% exact context answers in each crossed development split and70% fully-correct counterfactual pairs; at least75% coherent/relevant completions on64 frozen new prompts; repetitive collapse <=10%. If not met, retain evidence and stop scaling."
+    },
+    {
+      "id": "D",
+      "name": "Conversation and real tool SFT",
+      "gpu_hours_max": 1.0,
+      "supervised_target_tokens_max": 20000000,
+      "conditional_on": "Stage C language/context gate passes, or a clearly documented shorter successful candidate.",
+      "mix_by_session": {
+        "natural_dialogue_and_rewriting": 0.4,
+        "context_memory_corrections_and_clarifications": 0.3,
+        "tool_use_and_result_grounding": 0.2,
+        "no_call_permissions_and_error_recovery": 0.1
+      },
+      "work": [
+        "Use admitted public short conversation sources first; evaluate smol-smoltalk for additional short-form diversity only after provenance, license, leakage and quality review.",
+        "Use own-base exact chat framing and assistant-only loss including complete call JSON and EOT; tools calculate/convert are executed by the existing broker.",
+        "Never train assistant to invent tool observations. Include rejected requests, missing operands, ordered subtraction, dependent calls, incompatible units and result corrections.",
+        "One short overfit check of representative serialized sessions before full SFT. Start separate SFT optimizer explicitly; screen3e-5 on short dev pilot, with at most one1e-5 retry if forgetting.",
+        "At most2passes per admitted session; evaluate by held-out template/intent/session rather than random turns."
+      ],
+      "gate": "Development full-session success>=80%, valid tool JSON>=98%, correct tool/arguments>=95%, grounded returned answers>=95%, zero unauthorized/incorrect executed calls. Conversation subset also>=80%; averages cannot hide failed categories."
+    },
+    {
+      "id": "E",
+      "name": "Independent acceptance and local serving",
+      "gpu_hours_max": 0.75,
+      "work": [
+        "Freeze weights, tokenizer, framing, decoder and broker version before final evaluation.",
+        "Run existing practical-usability20sessions/62turns unchanged: >=16complete sessions; all16expected executions correct; zero incorrect/unauthorized executions.",
+        "Use separate original sealed acceptance if its prior release contract still applies; never tune on failed final cases.",
+        "Serve only passed candidate locally through existing own-base chat; show raw model outputs and actual broker records. Benchmark Mac latency/memory and replay representative chat/tool sessions there.",
+        "Publish checkpoint hash, source lineage, known limitations, cost ledger and reproducible run command; retain prior model for rollback."
+      ],
+      "failure": "Do not label as working. Preserve failed report; correction uses new development cases and a newly frozen confirmation set, within remaining budget."
+    }
+  ],
+  "budget": {
+    "prior_compute_upper_estimate_usd": 4.85,
+    "ancillary_reserve_usd": 10,
+    "remaining_unallocated_usd": 35.15,
+    "future_gpu_hours_max": 5,
+    "conservative_gpu_rate_usd_per_hour": 6,
+    "future_compute_reservation_usd": 30,
+    "future_per_lease_rounding_contingency_usd": 1.25,
+    "total_planned_upper_usd": 46.1,
+    "unallocated_contingency_usd": 3.9,
+    "rules": [
+      "Reserve worst-case VM lease before provisioning; reservations, not billing alerts, enforce cap.",
+      "Reconcile completed leases from provider timestamps; no credit balance assumption.",
+      "One active VM, any zone, no parallel weights writes. Prefer on-demand A100 for this short budget; do not introduce spot recovery risk without a measured benefit.",
+      "No additional paid APIs or model-generation services authorized by this plan.",
+      "No GPU idle during local data preparation. Stop/delete VM and auto-delete disk at every phase boundary; provider max runtime and guest shutdown both required."
+    ]
+  },
+  "recovery": {
+    "gcs": "gs://forge-ownbase-a100-20261110",
+    "retention_days": 30,
+    "backup": [
+      "Pinned base and exact tokenizer",
+      "Training shards/manifests and cursor/schedule state",
+      "Code archive hash and pinned machine image",
+      "Weights, FP32 optimizer, RNG, LR state and step",
+      "Evaluation results, raw outputs, tool traces and server logs"
+    ],
+    "requirements": [
+      "Roundtrip checksum and resume-update equality before each new training path.",
+      "Recovery artifacts verified before GPU deletion; original parent never overwritten.",
+      "No arbitrary full-machine image required; pinned image+code+inputs+checkpoint reconstruct server."
+    ]
+  },
+  "eta": {
+    "first_corrected_pilot_verdict": "2-4 hours after preparation begins, assuming source receipts remain valid and A100 capacity is available.",
+    "complete_budgeted_attempt": "8-16 hours for the current $50-limited tranche and assessments, not for the full10B campaign; no working-model guarantee.",
+    "usable_model": "No defensible guaranteed ETA until context/language gates pass. $50 may be insufficient; stop and report rather than quietly exceed it."
+  },
+  "scale_decision": "Do not move to360M/1B yet. Larger models reduce affordable token exposure. Revisit capacity only after transferable learning and a measured remaining-budget estimate; do not silently spend on a new architecture.",
+  "research_basis": [
+    {
+      "url": "https://github.com/huggingface/alignment-handbook/blob/main/recipes/smollm2/README.md",
+      "use": "Small-model SFT uses smol-smoltalk; informs short diverse conversation data, not pretrained weights or a performance guarantee."
+    },
+    {
+      "url": "https://github.com/karpathy/nanochat",
+      "use": "End-to-end pretraining/SFT/evaluation separation and measured systems throughput; headline cost is not transferable to this A100 run."
+    },
+    {
+      "url": "https://arxiv.org/abs/2502.02737",
+      "use": "Data-centric small-model training; our tiny compute budget is not comparable to published training scale."
+    }
+  ],
+  "execution_status": "Plan and local readiness preparation only at publication; no new GPU or long run launched.",
+  "overall_campaign": {
+    "parameters": 124439808,
+    "training_token_target": 10000000000,
+    "interpretation": "10B training tokens, not 10B parameters. User confirmed target.",
+    "first_major_milestone_tokens": 1000000000,
+    "current_budgeted_tranche": "The <=400M continuation ceiling is a first budget-limited tranche, not a replacement for the 10B campaign.",
+    "previous_research_plan": "reports/context-failure-review-v1/research-decision-v2.json proposed initial1B within possible3B-10B campaign.",
+    "budget_boundary": "Current $50 approval cannot fund the full10B campaign at measured throughput. Prepare curriculum and durable continuation to10B; execute only funded gated tranches. Explicit approval required before total project expense exceeds$50.",
+    "optimistic_compute_only_hours_at_88367_tokens_per_second": 31.43,
+    "conservative_compute_reservation_at_6_usd_hour": 188.61,
+    "estimate_limit": "Short512-token benchmark; sustained1024-token training, evaluation and backups will take longer. $6/hour is our conservative reservation rate, not a quoted GCP tariff."
+  },
+  "superseded_by": "campaign-10b.json for full campaign scope, milestones, cost and initial gating; proposed expanded budget is NOT authorized."
+}
