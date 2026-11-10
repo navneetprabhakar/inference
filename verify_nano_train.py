@@ -5,9 +5,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 import subprocess
+from types import SimpleNamespace
 
 from cloud_training.nano_data import write_rows, sha256_file
-from cloud_training.nano_train import CampaignRows, CloudJournal, read_campaign, crossed_milestones, deadline_timestamp, lease_stop_step
+from cloud_training.nano_train import CampaignRows, CloudJournal, read_campaign, crossed_milestones, deadline_timestamp, lease_stop_step, evaluate_entries, next_evaluation, numerical_identity
 from cloud_training.nano_benchmark import schedule, BATCH, HORIZON
 
 
@@ -33,6 +34,43 @@ def fixture(root):
 
 
 class TrainTests(unittest.TestCase):
+    def test_interrupted_validation_is_due_after_resume(self):
+        seen = []
+        entries = ['dev-a', 'dev-b']
+        def evaluate(entry):
+            seen.append(entry)
+            return {'loss': 2.0, 'entry': entry}
+        partial = evaluate_entries(entries, evaluate, lambda: len(seen) == 1)
+        self.assertFalse(partial['complete'])
+        # A milestone can trigger before the regular interval is due.
+        due = next_evaluation(250, 100, 250, partial)
+        saved = json.loads(json.dumps({'next_eval': due}))
+        self.assertLessEqual(saved['next_eval'], 100)
+        complete = evaluate_entries(entries, evaluate, lambda: False)
+        self.assertEqual([r['entry'] for r in complete['shards']], entries)
+        self.assertTrue(complete['complete'])
+        self.assertEqual(next_evaluation(saved['next_eval'],100,250,complete),250)
+        empty = evaluate_entries(entries,evaluate,lambda: True)
+        self.assertEqual(empty['shards'],[])
+        self.assertEqual(next_evaluation(250,100,250,empty),100)
+
+    def test_numerical_identity_binds_runtime_and_modes(self):
+        cuda = SimpleNamespace(get_device_name=lambda:'A100',get_device_capability=lambda:(8,0))
+        fake = SimpleNamespace(cuda=cuda,version=SimpleNamespace(cuda='12.9'),
+            are_deterministic_algorithms_enabled=lambda:True,
+            get_float32_matmul_precision=lambda:'highest',
+            backends=SimpleNamespace(cudnn=SimpleNamespace(deterministic=True,benchmark=False,allow_tf32=True)))
+        with patch.dict('os.environ',{'CUBLAS_WORKSPACE_CONFIG':':4096:8'}):
+            initial = numerical_identity(fake,attention_deterministic=True)
+            self.assertEqual(initial['sm'],[8,0])
+            self.assertEqual(initial['cublas_workspace_config'],':4096:8')
+            self.assertNotEqual(initial,numerical_identity(fake,attention_deterministic=False))
+            cuda.get_device_name=lambda:'L4'
+            self.assertNotEqual(initial,numerical_identity(fake,attention_deterministic=True))
+            cuda.get_device_name=lambda:'A100'
+            fake.version.cuda='12.8'
+            self.assertNotEqual(initial,numerical_identity(fake,attention_deterministic=True))
+
     def test_cross_shard_exact_resume_and_no_wrap(self):
         with tempfile.TemporaryDirectory() as t:
             c = read_campaign(fixture(t));r=CampaignRows(c)

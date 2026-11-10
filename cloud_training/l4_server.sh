@@ -27,6 +27,15 @@ trap finish EXIT
 shutdown -h +165
 RUN_ID=$(metadata run-id)
 DEST="$BASE/$RUN_ID"
+BENCH_SECONDS=$(metadata benchmark-seconds)
+BENCH_DEPTH=$(metadata benchmark-depth)
+BENCH_MICROBATCHES=$(metadata benchmark-microbatches | tr : ,)
+BENCH_REPEAT_GRADIENT=$(metadata benchmark-repeat-gradient-probe)
+BENCH_DETERMINISTIC_ATTENTION=$(metadata benchmark-deterministic-attention)
+BENCH_DETERMINISTIC=$(metadata benchmark-deterministic)
+for boolean in "$BENCH_REPEAT_GRADIENT" "$BENCH_DETERMINISTIC_ATTENTION" "$BENCH_DETERMINISTIC"; do
+  case "$boolean" in 0|1) ;; *) echo 'Invalid diagnostic boolean metadata'; exit 1 ;; esac
+done
 timeout 300 gcloud storage cp "$(metadata bundle-uri)" bundle.tar.gz --quiet
 printf '%s  bundle.tar.gz\n' "$(metadata code-sha256)" | sha256sum -c -
 tar -xzf bundle.tar.gz
@@ -68,5 +77,13 @@ mkdir -p results
   done
 ) &
 TELEMETRY=$!
-timeout --signal=TERM --kill-after=45s 6000 "$PY" -u -m cloud_training.nano_benchmark --repo nanochat-source --output results --seconds 1800 --wall-seconds 5400 --packed-data benchmark-data/train --tokenizer-sha 2f5a044b597b6505675869ff2cc9a05a560eb798a3ceaac31739fb330bb965ea --kernel-path kernel --backup-prefix "$DEST/recovery"
+BENCH_ARGS=(--repo nanochat-source --output results --seconds "$BENCH_SECONDS"
+  --depth "$BENCH_DEPTH" --microbatches "$BENCH_MICROBATCHES" --wall-seconds 5400
+  --packed-data benchmark-data/train
+  --tokenizer-sha 2f5a044b597b6505675869ff2cc9a05a560eb798a3ceaac31739fb330bb965ea
+  --kernel-path kernel --backup-prefix "$DEST/recovery")
+[ "$BENCH_REPEAT_GRADIENT" = 0 ] || BENCH_ARGS+=(--repeat-gradient-probe)
+[ "$BENCH_DETERMINISTIC_ATTENTION" = 0 ] || BENCH_ARGS+=(--deterministic-attention)
+[ "$BENCH_DETERMINISTIC" = 0 ] || BENCH_ARGS+=(--deterministic)
+timeout --signal=TERM --kill-after=45s 6000 "$PY" -u -m cloud_training.nano_benchmark "${BENCH_ARGS[@]}"
 kill "$TELEMETRY" || true

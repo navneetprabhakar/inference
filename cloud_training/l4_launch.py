@@ -9,9 +9,16 @@ BASE='gs://forge-ownbase-a100-20261110/l4-qualification-v1'
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--zone',default='us-central1-a');ap.add_argument('--run-id',required=True)
-    ap.add_argument('--machine',choices=('g2-standard-4','g2-standard-8','a2-highgpu-1g'),default='g2-standard-8');ap.add_argument('--provisioning',choices=('SPOT','STANDARD','FLEX_START'),default='SPOT');ap.add_argument('--wait-for',choices=('0s','30m'),default='0s');ap.add_argument('--async-create',action='store_true');ap.add_argument('--hours',type=int,choices=(2,3),default=3);ap.add_argument('--execute',action='store_true');a=ap.parse_args()
+    ap.add_argument('--machine',choices=('g2-standard-4','g2-standard-8','a2-highgpu-1g'),default='g2-standard-8');ap.add_argument('--provisioning',choices=('SPOT','STANDARD','FLEX_START'),default='SPOT');ap.add_argument('--microbatches',default='8,4,2,1');ap.add_argument('--seconds',type=int,default=1800);ap.add_argument('--depth',type=int,choices=(12,16),default=16);ap.add_argument('--wait-for',choices=('0s','30m'),default='0s');ap.add_argument('--async-create',action='store_true');ap.add_argument('--hours',type=int,choices=(2,3),default=3);ap.add_argument('--execute',action='store_true')
+    ap.add_argument('--repeat-gradient-probe',action='store_true')
+    ap.add_argument('--deterministic-attention',action='store_true')
+    ap.add_argument('--deterministic',action='store_true')
+    a=ap.parse_args()
     if not a.run_id.startswith('forge-ownbase-l4-') or not all(c.islower() or c.isdigit() or c=='-' for c in a.run_id):raise ValueError('invalid run id')
     if a.zone not in json.loads((ROOT/'reports/l4-qualification-v1/supported-zones.json').read_text()):raise ValueError('Zone not in verified supported-machine inventory')
+    from cloud_training.nano_benchmark import microbatches
+    microbatches(a.microbatches)
+    if not 60<=a.seconds<=1800: raise ValueError('Qualification duration60..1800seconds required')
     receipt=json.loads((ROOT/'reports/l4-qualification-v1/bundle-receipt.json').read_text())
     digest=receipt['bundle_sha256'];uri=f'{BASE}/source/{digest}.tar.gz'
     args=['gcloud','compute','instances','create',a.run_id,'--project='+PROJECT,'--zone='+a.zone,
@@ -23,7 +30,7 @@ def main():
           '--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com',
           '--scopes=https://www.googleapis.com/auth/devstorage.read_write',
           '--labels=purpose=ownbase-qualification,budget=usd100',
-          '--metadata=enable-oslogin=TRUE,block-project-ssh-keys=TRUE,code-sha256='+digest+',bundle-uri='+uri+',run-id='+a.run_id,
+          '--metadata=enable-oslogin=TRUE,block-project-ssh-keys=TRUE,code-sha256='+digest+',bundle-uri='+uri+',run-id='+a.run_id+',benchmark-seconds='+str(a.seconds)+',benchmark-depth='+str(a.depth)+',benchmark-microbatches='+a.microbatches.replace(',',':')+',benchmark-repeat-gradient-probe='+str(int(a.repeat_gradient_probe))+',benchmark-deterministic-attention='+str(int(a.deterministic_attention))+',benchmark-deterministic='+str(int(a.deterministic)),
           '--metadata-from-file=startup-script='+str(ROOT/'cloud_training/l4_server.sh'),'--quiet','--format=json']
     if a.provisioning=='FLEX_START': args.append('--request-valid-for-duration='+a.wait_for)
     if a.async_create: args.append('--async')

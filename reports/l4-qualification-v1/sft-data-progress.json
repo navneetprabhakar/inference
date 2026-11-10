@@ -1,0 +1,260 @@
+{
+  "date": "2026-11-10",
+  "status": "general_and_unique_tool_candidates_prepared_not_training_admitted",
+  "source": {
+    "repository": "HuggingFaceTB/smol-smoltalk",
+    "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc",
+    "license": "Apache-2.0 as declared in pinned upstream dataset card",
+    "url": "https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk",
+    "readme_sha256": "4de8fe5ebb738a835f780332c35ec5a7dd1e8dae058308e7caa176dca6bbf808",
+    "files": [
+      {
+        "bytes": 48177022,
+        "file": "test-00000-of-00001.parquet",
+        "sha256": "be6773dcce145f3918ff14237b1f765affa427b0b13f6a02d397e665ac908b9a"
+      },
+      {
+        "bytes": 229710350,
+        "file": "train-00000-of-00004.parquet",
+        "sha256": "498cd4580014f42c40cfde066573564ed28e3e1548a5566715b615f5ea932856"
+      },
+      {
+        "bytes": 230298184,
+        "file": "train-00001-of-00004.parquet",
+        "sha256": "5412c03df579fc7dd7d06c7f5249627d99d0621882fb8f2cd5c13582eb2a80f6"
+      },
+      {
+        "bytes": 230587255,
+        "file": "train-00002-of-00004.parquet",
+        "sha256": "aefcac6571abf275b4e1629baa01f326c0fe279d35cd0349b7439319923815a7"
+      },
+      {
+        "bytes": 231879938,
+        "file": "train-00003-of-00004.parquet",
+        "sha256": "c15edfca888c9924a626dad7b7f4e9f08d8f406f997ac13be46bc9be0a6192db"
+      }
+    ],
+    "parquet_download_bytes": 970652749,
+    "maximum_download_bytes": 1000000000
+  },
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "format_version": "forge-nanochat-v1",
+  "context_tokens": 2048,
+  "general": {
+    "directory": "runs/ownbase-v2-sft/general",
+    "manifest_sha256": "0b192f992d3eba560015451e8e1475c30a0690f7858cdd059fdc7b269f15d3f9",
+    "train": {
+      "assistant_targets": 286171425,
+      "bytes": 1835131341,
+      "file": "train.jsonl",
+      "sessions": 451749,
+      "sha256": "39d91fdfa1421253a755ed7ba20f6da9a7b28fb82b37653df8e3302aa0b7a29c"
+    },
+    "validation": {
+      "assistant_targets": 15043534,
+      "bytes": 96564019,
+      "file": "validation.jsonl",
+      "sessions": 23867,
+      "sha256": "2b4c5eff1961577cee7b607b5f432f5eb7f042f3d77315946a38540098c862d0"
+    },
+    "stats": {
+      "train": {
+        "accepted": 451749,
+        "assistant_targets": 286171425,
+        "max_sequence_tokens": 2048,
+        "multiturn_sessions": 274242,
+        "rejected": {
+          "context_overflow": 6289,
+          "duplicate_exact_conversation": 107,
+          "incomplete_conversation": 258,
+          "unsupported_external_action_claim": 574,
+          "unsupported_system_capability": 1,
+          "validation_prompt_overlap": 1363
+        },
+        "seen": 460341,
+        "sequence_tokens": 439111828,
+        "source_counts": {
+          "everyday-conversations": 1992,
+          "explore-instruct-rewrite": 3013,
+          "openhermes-50k": 47156,
+          "self-oss-instruct": 48070,
+          "smol-contraints": 33184,
+          "smol-magpie-ultra-short": 270435,
+          "smol-summarize-20k": 18849,
+          "smol-summarize-5k": 2715,
+          "smollm-rewrite-30k": 26335
+        },
+        "user_turns": 1004646
+      },
+      "validation": {
+        "accepted": 23867,
+        "assistant_targets": 15043534,
+        "max_sequence_tokens": 2046,
+        "multiturn_sessions": 14360,
+        "rejected": {
+          "context_overflow": 325,
+          "duplicate_exact_conversation": 1,
+          "incomplete_conversation": 10,
+          "unsupported_external_action_claim": 26
+        },
+        "seen": 24229,
+        "sequence_tokens": 23080387,
+        "source_counts": {
+          "everyday-conversations": 117,
+          "explore-instruct-rewrite": 183,
+          "openhermes-50k": 2482,
+          "self-oss-instruct": 2590,
+          "smol-contraints": 1802,
+          "smol-magpie-ultra-short": 14144,
+          "smol-summarize-20k": 992,
+          "smol-summarize-5k": 147,
+          "smollm-rewrite-30k": 1410
+        },
+        "user_turns": 52833
+      }
+    }
+  },
+  "tool_candidates": {
+    "directory": "runs/ownbase-v2-sft/tool-candidates",
+    "manifest_sha256": "ddd13bbf256fa0a5b5da5b7b61f4073e712d9b9f85b4f1ec682cdb37eb1b6cec",
+    "train": {
+      "assistant_targets": 870526,
+      "file": "train.jsonl",
+      "sessions": 16384,
+      "sha256": "1e183f8b5d0af24431ab1e8c09b7b833283f0bdc582f81688a710b102d711ff3"
+    },
+    "validation": {
+      "assistant_targets": 6617,
+      "file": "validation.jsonl",
+      "sessions": 128,
+      "sha256": "7f52dc9ee2ae88fd2bfa7b0b42bf3c043ddcf82269e44853deaa138d2eadd0f0"
+    },
+    "milestones": {
+      "16384": {
+        "actual_broker_calls": 21952,
+        "assistant_targets": 870526,
+        "family_counts": {
+          "arithmetic": 2248,
+          "clarification": 2243,
+          "conversion": 1758,
+          "correction": 2250,
+          "dependent_calls": 2243,
+          "error_recovery": 2240,
+          "no_call": 1165,
+          "permission": 2237
+        },
+        "prefix_bytes": 19957729,
+        "prefix_sha256": "1e183f8b5d0af24431ab1e8c09b7b833283f0bdc582f81688a710b102d711ff3",
+        "sessions": 16384
+      },
+      "8192": {
+        "actual_broker_calls": 10661,
+        "assistant_targets": 423441,
+        "family_counts": {
+          "arithmetic": 1080,
+          "clarification": 1077,
+          "conversion": 961,
+          "correction": 1079,
+          "dependent_calls": 1077,
+          "error_recovery": 1078,
+          "no_call": 765,
+          "permission": 1075
+        },
+        "prefix_bytes": 9833219,
+        "prefix_sha256": "21cc6ad4e7aefb5b6c13ffcc7f030bdcd1e458fc7a7adc54204c0d4d7433cd49",
+        "sessions": 8192
+      }
+    },
+    "duplicates_discarded": 1612,
+    "generation_attempts": 17996,
+    "entity_operation_counts": {
+      "Aster/add": 138,
+      "Aster/divide": 124,
+      "Aster/multiply": 132,
+      "Aster/subtract": 137,
+      "Birch/add": 150,
+      "Birch/divide": 135,
+      "Birch/multiply": 151,
+      "Birch/subtract": 153,
+      "Cedar/add": 128,
+      "Cedar/divide": 152,
+      "Cedar/multiply": 125,
+      "Cedar/subtract": 132,
+      "Dahlia/add": 147,
+      "Dahlia/divide": 149,
+      "Dahlia/multiply": 154,
+      "Dahlia/subtract": 141
+    }
+  },
+  "mixing_decision_pending": {
+    "combined_training_corpus_created": false,
+    "no_silent_replay": true,
+    "full_general_plus_8192_tool_target_fraction": 0.0014774898305400907,
+    "full_general_plus_16384_tool_target_fraction": 0.0030327483385869268,
+    "recommendation": "Use general SFT first, then decide a bounded targeted phase with an explicit general-conversation subset after held-out development. The available 8192/16384 unique tool prefixes are candidates, not authorization to replay or proof of generalization.",
+    "prefix_extraction": "Milestone prefix_bytes and prefix_sha256 bind the first8192rows exactly; materialize a separate file and admission receipt before selecting that subset."
+  },
+  "course_corrections": [
+    {
+      "finding": "Manual source spotcheck found assistant promises to schedule social posts despite no supported scheduling tool.",
+      "action": "Reject whole conversations containing conservative first-person external-action claims or the incompatible appointment/reminder system instruction; preserve source and do not rewrite answers.",
+      "train_rejected": 575,
+      "validation_rejected": 26,
+      "limit": "Regex filter can reject legitimate quoted/fictional statements and cannot detect every semantic false claim."
+    },
+    {
+      "finding": "Original bounded tool generator indexed entity names and operations with correlated modulo patterns.",
+      "action": "Candidate inventory now independently samples non-tool entity labels using a separate fixed RNG; arguments and actual broker observations remain unchanged.",
+      "proof": "All four train entity labels appear with all four arithmetic operations in the final16384candidate inventory; unit test rejects the original shortcut."
+    }
+  ],
+  "validation": {
+    "tests_command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 runs/l4-data-prep/.venv/bin/python verify_nano_sft_data.py",
+    "unit_tests_passed": 13,
+    "full_file_hashes_verified": true,
+    "loader_compatibility": {
+      "status": "passed_small_mixed_compatibility_only",
+      "splits": {
+        "train": {
+          "general_sessions": 8,
+          "tool_sessions": 4,
+          "packed_rows": 5,
+          "assistant_targets": 4334,
+          "exact_count_match": true
+        },
+        "validation": {
+          "general_sessions": 8,
+          "tool_sessions": 4,
+          "packed_rows": 6,
+          "assistant_targets": 6535,
+          "exact_count_match": true
+        }
+      },
+      "training_performed": false
+    },
+    "source_review": "Eight component examples spotchecked; the apparent off-topic OpenHermes answer was resolved by reading the complete few-shot prompt, so it was retained. This is not a comprehensive semantic audit.",
+    "sealed_acceptance_used": false
+  },
+  "resource_bounds": {
+    "cpu_threads": 1,
+    "general_peak_rss_bytes": 207978496,
+    "rss_limit_bytes": 4294967296,
+    "minimum_free_disk_bytes": 85899345920,
+    "general_processing_seconds": 266.45050037500187,
+    "reconstructible_bytes_reclaimed": 6734112504,
+    "cloud_training": false,
+    "model_weights_modified": false,
+    "paid_teacher_calls": 0
+  },
+  "remaining_admission_work": [
+    "Independent source quality/provenance review and near-duplicate/benchmark-contamination policy; exact dedup alone is insufficient.",
+    "Review conservative unsupported-action filter false positives/negatives before final admission.",
+    "Choose general then targeted phase size and explicitly count any general-data replay; current files are separate candidates.",
+    "Create signed-off hash-bound admission receipt only after those checks; every current manifest remains training_admitted=false.",
+    "Existing final conversation/tool acceptance remains unchanged and must be run on actual own-base SFT candidate."
+  ],
+  "code_sha256": {
+    "cloud_training/nano_sft_data.py": "08cc5672d55a087edea0b8fda3eb7e158c831f3dc18ef59dddd5b90c206f1032",
+    "verify_nano_sft_data.py": "930e09af89827c9866a3adfacb071c5e70275899e075edd02515d5e2c41f99b3"
+  }
+}

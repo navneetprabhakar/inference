@@ -21,6 +21,14 @@ class FinalDataTests(unittest.TestCase):
         result=download_resume('https://example.test/file',p,ledger,self.root/'ledger.json',opener=open_,guard=lambda _:None)
         self.assertEqual(p.read_bytes(),b'abcde');self.assertEqual(ledger['transferred_bytes'],5)
         self.assertEqual(result['bytes'],5)
+    def test_slow_transfer_keeps_accounted_partial_for_resume(self):
+        p=self.root/'file';ledger={'transferred_bytes':0}
+        with patch('cloud_training.nano_final_data.time.monotonic',side_effect=[0,60]):
+            with self.assertRaises(TimeoutError):
+                download_resume('https://example.test/file',p,ledger,self.root/'ledger.json',opener=lambda *a,**k:Response(b'ab',200,{'Content-Length':'3'}),guard=lambda _:None,minimum_rate=100,rate_grace_seconds=45)
+        self.assertEqual(ledger['transferred_bytes'],2)
+        self.assertEqual(p.with_suffix('.partial').read_bytes(),b'ab')
+        self.assertFalse(p.exists())
     def test_ignored_range_does_not_corrupt_partial(self):
         p=self.root/'file';p.with_suffix('.partial').write_bytes(b'ab')
         with self.assertRaises(RuntimeError):

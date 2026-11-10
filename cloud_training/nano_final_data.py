@@ -39,12 +39,13 @@ def check_disk(path, minimum=80*1024**3):
     if shutil.disk_usage(path).free<minimum:raise RuntimeError('free disk below80GiB guard')
 
 
-def download_resume(url,path,ledger,ledger_path,*,opener=urllib.request.urlopen,guard=check_disk):
+def download_resume(url,path,ledger,ledger_path,*,opener=urllib.request.urlopen,guard=check_disk,minimum_rate=0,rate_grace_seconds=45):
     """Resume only after validating server range; count all newly received bytes."""
     path=Path(path);part=path.with_suffix(path.suffix+'.partial')
     if path.exists():raise FileExistsError('completed file requires receipt verification by caller')
     start=part.stat().st_size if part.exists() else 0
     headers={'Range':f'bytes={start}-'} if start else {}
+    transfer_started=time.monotonic();received=0
     with opener(urllib.request.Request(url,headers=headers),timeout=60) as response:
         status=getattr(response,'status',200)
         if start:
@@ -63,6 +64,11 @@ def download_resume(url,path,ledger,ledger_path,*,opener=urllib.request.urlopen,
                 ledger['transferred_bytes']=ledger.get('transferred_bytes',0)+len(chunk)
                 f.write(chunk);f.flush()
                 atomic_json(ledger_path,ledger)
+                received+=len(chunk);elapsed=time.monotonic()-transfer_started
+                expected_length=response.headers.get('Content-Length')
+                complete=expected_length is not None and received==int(expected_length)
+                if not complete and minimum_rate and elapsed>rate_grace_seconds and received/elapsed<minimum_rate:
+                    raise TimeoutError('transfer below minimum rate; persisted partial can resume')
             os.fsync(f.fileno())
     length=response.headers.get('Content-Length')
     if length is not None and part.stat().st_size-start!=int(length):

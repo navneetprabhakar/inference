@@ -20,10 +20,38 @@ from datetime import datetime
 if __package__ in (None, ''):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cloud_training.nano_benchmark import BATCH, HORIZON, PINNED_REVISION, atomic_json, schedule
+from cloud_training.nano_benchmark import BATCH, HORIZON, PINNED_REVISION, atomic_json, schedule, deterministic_attention
 from cloud_training.nano_data import PackedRows, sha256_file
 
 MILESTONES = (1_000_000_000, 3_000_000_000, 6_000_000_000, 10_000_000_000)
+
+
+def evaluate_entries(entries, evaluate_one, should_stop):
+    """Explicit completeness prevents a lease boundary from skipping dev shards."""
+    results = []
+    for entry in entries:
+        if should_stop():
+            break
+        results.append(evaluate_one(entry))
+    return {'complete': len(results) == len(entries), 'shards': results,
+            'expected_shards': len(entries)}
+
+
+def next_evaluation(current, targets, interval, result):
+    return ((targets // interval + 1) * interval if result['complete']
+            else min(current, targets))
+
+
+def numerical_identity(torch, *, attention_deterministic):
+    return {'cuda': torch.version.cuda, 'gpu': torch.cuda.get_device_name(),
+            'sm': list(torch.cuda.get_device_capability()),
+            'deterministic_algorithms': torch.are_deterministic_algorithms_enabled(),
+            'deterministic_attention': attention_deterministic,
+            'float32_matmul_precision': torch.get_float32_matmul_precision(),
+            'cublas_workspace_config': os.environ.get('CUBLAS_WORKSPACE_CONFIG'),
+            'cudnn_deterministic': torch.backends.cudnn.deterministic,
+            'cudnn_benchmark': torch.backends.cudnn.benchmark,
+            'cudnn_allow_tf32': torch.backends.cudnn.allow_tf32}
 
 
 def read_campaign(path):
@@ -232,6 +260,8 @@ class CloudJournal:
 
 
 def run(args, campaign):
+    if args.deterministic:
+        os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
     import torch
     from cloud_training.nano_checkpoint import save_bundle, load_bundle, capture_rng, restore_rng_state
     from cloud_training.nano_eval import evaluate_packed
@@ -248,6 +278,13 @@ def run(args, campaign):
         from kernels import get_local_kernel
         attention._fa3 = get_local_kernel(Path(args.kernel_path), 'flash_attn3').flash_attn_interface
         attention.HAS_FA3 = True; attention.USE_FA3 = attention._resolve_use_fa3()
+    if args.deterministic:
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
+    attention_deterministic = bool(args.deterministic_attention or (args.deterministic and attention.USE_FA3))
+    if attention_deterministic:
+        deterministic_attention(attention)
     from nanochat.gpt import GPT, GPTConfig
     from nanochat.common import COMPUTE_DTYPE
     if COMPUTE_DTYPE != torch.bfloat16:
@@ -274,6 +311,7 @@ def run(args, campaign):
     source_files = ['nano_train.py', 'nano_benchmark.py', 'nano_checkpoint.py', 'nano_data.py', 'nano_eval.py', 'nano_retention.py', 'l4_recovery_check.py']
     identity = {'phase': 'base', 'initialization': 'own_random', 'revision': revision, 'adapter_hashes': {f: sha256_file(Path(__file__).parent / f) for f in source_files},
                 'config': vars(cfg), 'tokenizer_sha256': campaign['tokenizer_sha256'], 'campaign_sha256': campaign['_sha256'], 'torch': torch.__version__,
+                'numerical_mode': numerical_identity(torch, attention_deterministic=attention_deterministic),
                 'batch_tokens': BATCH, 'microbatch': args.microbatch, 'horizon_updates': HORIZON,
                 'seed': args.seed, 'eval_every_tokens': args.eval_every_tokens, 'eval_tokens_per_shard': args.eval_tokens_per_shard, 'attention': 'fa3' if attention.USE_FA3 else 'sdpa', 'kernel_sha256': args.kernel_sha}
     step = 0
@@ -343,15 +381,17 @@ def run(args, campaign):
             if old_step not in milestone_steps:
                 validate_bundle(old); shutil.rmtree(old)
     def evaluate():
-        evaluations = []
-        for entry in campaign['validation']:
-            if should_stop(): break
+        def one(entry):
             tokens = min(args.eval_tokens_per_shard, entry['_rows']*2048)
-            evaluations.append(evaluate_packed(model, entry['_directory'],
+            return evaluate_packed(model, entry['_directory'],
                 tokenizer_sha256=campaign['tokenizer_sha256'], token_budget=tokens,
                 batch_rows=args.microbatch, device=next(model.parameters()).device, actual_revision=revision,
-                expected_manifest_sha256=entry['manifest_sha256']))
-        return evaluations
+                expected_manifest_sha256=entry['manifest_sha256'])
+        return evaluate_entries(campaign['validation'], one, should_stop)
+    # Retry a partially completed scheduled evaluation before another update.
+    if args.resume and step * BATCH >= next_eval and not should_stop():
+        status['validation'] = evaluate()
+        next_eval = next_evaluation(next_eval, step * BATCH, args.eval_every_tokens, status['validation'])
     if args.max_updates and not should_stop():
         status['pilot_validation_start'] = evaluate()
     # Initial exact random-state recovery before any retained update.
@@ -404,9 +444,9 @@ def run(args, campaign):
         status.update(step=step, targets=step*BATCH, train_loss=average,
                       update_seconds=time.monotonic()-tick, peak_allocated_bytes=torch.cuda.max_memory_allocated())
         status['tokens_per_second_last_update'] = BATCH/status['update_seconds']
-        if (step*BATCH >= next_eval or milestones or (args.max_updates and step == lease_end_step)) and not should_stop():
+        if step*BATCH >= next_eval or milestones or (args.max_updates and step == lease_end_step):
             status['validation'] = evaluate()
-            next_eval = (step*BATCH // args.eval_every_tokens + 1) * args.eval_every_tokens
+            next_eval = next_evaluation(next_eval, step*BATCH, args.eval_every_tokens, status['validation'])
         with (out / 'updates.jsonl').open('a') as log:
             log.write(json.dumps(status, allow_nan=False)+'\n'); log.flush()
         atomic_json(out / 'progress.json', status)
@@ -430,6 +470,8 @@ def main():
     p.add_argument('--microbatch', type=int, default=4)
     p.add_argument('--cpu-threads', type=int, default=4)
     p.add_argument('--kernel-path'); p.add_argument('--kernel-sha')
+    p.add_argument('--deterministic', action='store_true', help='Strict PyTorch algorithms and deterministic FA3 backward')
+    p.add_argument('--deterministic-attention', action='store_true', help='Deterministic staged FA3 backward')
     p.add_argument('--seed', type=int, default=103)
     p.add_argument('--checkpoint-seconds', type=int, default=900)
     p.add_argument('--checkpoint-reserve-seconds', type=int, default=300)

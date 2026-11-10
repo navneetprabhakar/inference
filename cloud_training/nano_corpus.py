@@ -234,7 +234,13 @@ def main():
             needed=size-(partial.stat().st_size if partial.exists() else 0)
             if ledger['transferred_bytes']+needed>=args.download_cap:
                 report['intake_stop']='raw_download_cap';break
-            receipt=intake.download_resume(url,path,ledger,ledger_path,guard=resource_guard)
+            for attempt in range(3):
+                try:
+                    receipt=intake.download_resume(url,path,ledger,ledger_path,guard=resource_guard,minimum_rate=(512*1024 if attempt<2 else 0),rate_grace_seconds=45)
+                    break
+                except TimeoutError:
+                    if attempt==2:raise
+                    print(json.dumps({'resuming_slow_source':name,'attempt':attempt+2}),flush=True)
             acquired.append(receipt);atomic_json(acquired_path,acquired)
             pack_and_report(path,'train',receipt);next_id+=1
         report.update(status='bounded_corpus_packed_review_pending',raw_download_accounted_bytes=ledger['transferred_bytes'],raw_download_cap_bytes=args.download_cap)
