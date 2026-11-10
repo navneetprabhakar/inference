@@ -1,0 +1,33 @@
+{
+  "state": "local_preparation_complete_cloud_launch_held_for_billing_clarification",
+  "authorized_total_usd": 50,
+  "gcp_mutations_performed": false,
+  "gcp_task_expense_usd": 0,
+  "selected_project_observed": "executespecv1",
+  "a100_quota_us_central1": 16,
+  "existing_compute_instances_observed": 0,
+  "image_candidate": "pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261029",
+  "image_id": "5978977203592794102",
+  "tests": [
+    "CPU exact checkpoint/optimizer restart passed",
+    "masked loss accumulation passed",
+    "budget duplicate and over-cap reservations rejected",
+    "synthetic128train/128newentity/128newtemplate construction passed"
+  ],
+  "unverified": [
+    "CUDA numerical parity",
+    "GCS upload/download restore",
+    "A100 throughput",
+    "synthetic learning and LR diagnostics"
+  ],
+  "cloud_launch_requirements": [
+    "Resolve user instruction: when out of credits use reset instead of the53999freecredits. Do not infer permission to consume a particular credit pool.",
+    "Dedicated GCS bucket and service account; original local evidence retained.",
+    "Verify GCS-restored inputs by SHA256 before any GPU training.",
+    "Reserve conservative VM cost before creation. Initial <=3h A100 lease, no automatic restart, provider-enforced auto-delete plus host timeout.",
+    "Record $10 ancillary reserve and $6/hour conservative VM envelope; at most two3h allocations totals$46 including reserve; actual provider pricing and any existing task charges must be checked before reservation.",
+    "No long training; report diagnostics and costs first.",
+    "Keep GCS backup small with explicit lifecycle and local copies of results before cloud cleanup."
+  ],
+  "note": "Code is prepared, not CUDA-certified or deployed. No foolproof guarantee; actual restart proof is a launch gate."
+}
