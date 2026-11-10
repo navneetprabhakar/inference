@@ -156,5 +156,90 @@
   "immediate_actions_without_extra_approval": [
     "Continue local preparation and tests under existing scope; no active training claimed.",
     "Keep current50cap. Obtain explicit approval of proposed400total before provisioning a campaign requiring more."
-  ]
+  ],
+  "phase_budget": {
+    "status": "Proposed, not approved. Existing50USDtotal authorization still applies.",
+    "currency": "USD",
+    "total_project_cap_usd": 400,
+    "phases": [
+      {
+        "phase": 0,
+        "name": "Completed CUDA diagnostics",
+        "budget_usd": 5,
+        "status": "Completed; conservative compute estimate4.85USD, not final invoice.",
+        "deliverable": "CUDA benchmark, restart proof, learning diagnostics; VM and disk deleted."
+      },
+      {
+        "phase": 1,
+        "name": "Data and runner preparation",
+        "budget_usd": 15,
+        "deliverable": "Admitted text shards sufficient for campaign, provenance/deduplication, isolated holdouts,1024token runner and resume tests.",
+        "gate": "Data quality and recovery tests pass; no idle GPU while preparing."
+      },
+      {
+        "phase": 2,
+        "name": "Recipe pilot and sustained benchmark",
+        "budget_usd": 10,
+        "deliverable": "Two sequential50Mtoken comparison arms; sustained1024token throughput and cost forecast.",
+        "gate": "Stable optimization and held-out improvement; reforecast all remaining phases before main run."
+      },
+      {
+        "phase": 3,
+        "name": "Base training:0 to1B additional tokens",
+        "budget_usd": 30,
+        "deliverable": "First1B retained new base targets and milestone assessment.",
+        "gate": "Held-out language improvement, no divergence; inspect contextual transfer without requiring finished chat."
+      },
+      {
+        "phase": 4,
+        "name": "Base training:1B to3B",
+        "budget_usd": 50,
+        "deliverable": "Additional2B targets; language/context assessment and small independent SFT probe.",
+        "gate": "Progress justifies continuing; probe weights never merged into base."
+      },
+      {
+        "phase": 5,
+        "name": "Base training:3B to6B",
+        "budget_usd": 70,
+        "deliverable": "Additional3B targets; held-out source losses, contextual transfer and prose review.",
+        "gate": "No persistent degradation or unresolved plateau; affordable remaining path including SFT."
+      },
+      {
+        "phase": 6,
+        "name": "Base training:6B to10B",
+        "budget_usd": 95,
+        "deliverable": "Additional4Btargets, reaching10Bnew retained base-training targets; final base assessment.",
+        "gate": "Budget and throughput reforecast must cover4B plus remaining instruction/evaluation stages."
+      },
+      {
+        "phase": 7,
+        "name": "Conversation and tool SFT",
+        "budget_usd": 25,
+        "deliverable": "Own-base multi-turn conversation, memory/correction, calculator/conversion and error/no-call training.",
+        "gate": "Development>=80%full sessions,>=98%valid call frames,>=95%correct arguments and grounded replies; zero wrong/unauthorized executions."
+      },
+      {
+        "phase": 8,
+        "name": "Independent assessment and local delivery",
+        "budget_usd": 10,
+        "deliverable": "Frozen candidate, sealed acceptance, runnable Mac chat and measured latency.",
+        "gate": ">=16/20complete sessions, all16expected executions correct, zero wrong/unauthorized executions; applicable prior release gates remain."
+      },
+      {
+        "phase": 9,
+        "name": "Shared contingency and ancillary reserve",
+        "budget_usd": 90,
+        "deliverable": "GCS/disk/transfer, tax/FX, restart/setup overhead and bounded correction; not automatically spendable on more base training.",
+        "gate": "Preserve sufficient provision for billed overhead and final delivery; explicit approval required above400total."
+      }
+    ],
+    "accounting": [
+      "Phase amounts are spending ceilings/planning allocations, not guaranteed invoices.",
+      "Base phase allowances total245USD, approximately66.7VMhours at3.673385USD/hour; completing10B within that allowance requires about41.6ktargets/sec including overhead. This is not yet measured at1024positions.",
+      "Phase2comparison tokens and SFT targets are not counted toward the10Bretained base campaign. Existing247.4Mlineage targets are also outside the10Badditional target.",
+      "Phase0counts prior compute once. All historical/current storage and ancillary charges are covered by the shared reserve, not excluded.",
+      "Unspent allocations carry forward only after updating the ledger and protecting later stages; do not silently use tax/storage reserve for training.",
+      "If performance/cost invalidates the estimate, checkpoint and report before extending a phase or exhausting the overall cap."
+    ]
+  }
 }
