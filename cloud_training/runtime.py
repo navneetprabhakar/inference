@@ -122,6 +122,7 @@ def update(model, opt, rows, *, device, microbatch, lr, guard, bf16=True, labels
 def save(path, model, opt, *, cursor, identity):
     """Atomic local snapshot, verified before publication; backup is a separate gate."""
     path = Path(path)
+    identity = json.loads(json.dumps(identity, allow_nan=False))
     rng = np.random.get_state()
     payload = dict(model=model.state_dict(),optimizer=opt.state_dict(),cursor=cursor,
                    identity=identity,cpu_rng=torch.get_rng_state(),

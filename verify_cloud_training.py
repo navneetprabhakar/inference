@@ -15,7 +15,7 @@ class Tests(unittest.TestCase):
             model=GPT2(config);opt=optimizer(model)
             rows=np.array([[1,2,3,4,5],[6,7,8,9,10]])
             update(model,opt,rows,device='cpu',microbatch=1,lr=6e-5,guard=g,bf16=False)
-            path=root/'checkpoint.pt';receipt=save(path,model,opt,cursor=1,identity={'test':True})
+            path=root/'checkpoint.pt';receipt=save(path,model,opt,cursor=1,identity={'test':True,'torch':torch.__version__})
             self.assertEqual(sha(path),receipt['sha256'])
             update(model,opt,rows,device='cpu',microbatch=1,lr=6e-5,guard=g,bf16=False)
             other=GPT2(config);otheropt=optimizer(other)

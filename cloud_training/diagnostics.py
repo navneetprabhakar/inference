@@ -148,7 +148,7 @@ def run(args):
     rows=np.load(inputs/'train.npy',mmap_mode='r');tok=load(inputs/'data/tokenizer')
     held=json.loads((inputs/'validation.json').read_text())[:64]
     identity={'parent_sha256':manifest['files']['parent.pt']['sha256'],'input_manifest_sha256':sha(inputs/'inputs.json'),
-              'torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(),'mode':args.mode,'lr':args.lr,'microbatch':args.microbatch,'code_sha256':sha(Path(__file__)),'runtime_sha256':sha(ROOT/'cloud_training/runtime.py')}
+              'torch':str(torch.__version__),'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(),'mode':args.mode,'lr':args.lr,'microbatch':args.microbatch,'code_sha256':sha(Path(__file__)),'runtime_sha256':sha(ROOT/'cloud_training/runtime.py')}
     atomic_json(out/'identity.json',identity)
     backup(out/'identity.json',args.backup)
     if args.resume and args.mode not in ('memorize','lr'):raise ValueError('only learning stages resume')

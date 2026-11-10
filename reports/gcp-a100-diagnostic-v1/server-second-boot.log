@@ -1,0 +1,137 @@
+Shutdown scheduled for Tue 2026-11-10 11:03:22 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 222.5MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+........
+
+Average throughput: 933.6MiB/s
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+    
+    If you wish to install a non-Debian-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have python3-full installed.
+    
+    If you wish to install a non-Debian packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+    
+    See /usr/share/doc/python3.12/README.venv for more information.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  
+
+
+Average throughput: 3.1MiB/s
+Shutdown scheduled for Tue 2026-11-10 11:09:07 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 231.2MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+.........
+
+Average throughput: 838.5MiB/s
+Copying file://environment.txt to gs://forge-ownbase-a100-20261110/server/environment.txt
+Copying file://gpu.txt to gs://forge-ownbase-a100-20261110/server/gpu.txt
+  
+.
+
+Average throughput: 1.6MiB/s
+test_budget_reservations (__main__.Tests.test_budget_reservations) ... ok
+test_masked_accumulation (__main__.Tests.test_masked_accumulation) ... ok
+test_restart_matches_uninterrupted (__main__.Tests.test_restart_matches_uninterrupted) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.602s
+
+OK
+Copying file://results/preflight/identity.json to gs://forge-ownbase-a100-20261110/results/preflight/identity.json
+  
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/ownbase/cloud_training/diagnostics.py", line 242, in <module>
+    run(p.parse_args())
+  File "/opt/ownbase/cloud_training/diagnostics.py", line 177, in run
+    cp=out/'restart-proof.pt';save(cp,model,opt,cursor=1,identity=identity)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ownbase/cloud_training/runtime.py", line 135, in save
+    verified = torch.load(tmp,map_location='cpu',weights_only=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/serialization.py", line 1529, in load
+    raise pickle.UnpicklingError(_get_wo_message(str(e))) from None
+_pickle.UnpicklingError: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL torch.torch_version.TorchVersion was not an allowed global by default. Please use `torch.serialization.add_safe_globals([torch.torch_version.TorchVersion])` or the `torch.serialization.safe_globals([torch.torch_version.TorchVersion])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 114, in apport_excepthook
+    report["ExecutableTimestamp"] = str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ownbase/-m'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/ownbase/cloud_training/diagnostics.py", line 242, in <module>
+    run(p.parse_args())
+  File "/opt/ownbase/cloud_training/diagnostics.py", line 177, in run
+    cp=out/'restart-proof.pt';save(cp,model,opt,cursor=1,identity=identity)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ownbase/cloud_training/runtime.py", line 135, in save
+    verified = torch.load(tmp,map_location='cpu',weights_only=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/serialization.py", line 1529, in load
+    raise pickle.UnpicklingError(_get_wo_message(str(e))) from None
+_pickle.UnpicklingError: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL torch.torch_version.TorchVersion was not an allowed global by default. Please use `torch.serialization.add_safe_globals([torch.torch_version.TorchVersion])` or the `torch.serialization.safe_globals([torch.torch_version.TorchVersion])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  

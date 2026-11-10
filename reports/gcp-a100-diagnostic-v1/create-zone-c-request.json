@@ -1,0 +1,29 @@
+{
+  "args": [
+    "gcloud",
+    "compute",
+    "instances",
+    "create",
+    "forge-ownbase-a100-01",
+    "--project=executespecv1",
+    "--zone=us-central1-c",
+    "--machine-type=a2-highgpu-1g",
+    "--image=pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261029",
+    "--image-project=deeplearning-platform-release",
+    "--boot-disk-size=100GB",
+    "--boot-disk-type=pd-standard",
+    "--boot-disk-auto-delete",
+    "--maintenance-policy=TERMINATE",
+    "--no-restart-on-failure",
+    "--max-run-duration=3h",
+    "--instance-termination-action=DELETE",
+    "--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+    "--scopes=https://www.googleapis.com/auth/devstorage.read_write",
+    "--labels=purpose=ownbase-diagnostics,budget=usd50",
+    "--metadata=enable-oslogin=TRUE,block-project-ssh-keys=TRUE,code-sha256=2d42734f46bc38ecabe61ca44894a187c4ada7602d372d00089e598b3f6e5735",
+    "--metadata-from-file=startup-script=cloud_training/server.sh",
+    "--quiet",
+    "--format=json",
+    "--no-address"
+  ]
+}
