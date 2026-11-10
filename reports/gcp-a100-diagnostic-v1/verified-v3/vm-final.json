@@ -1,0 +1,134 @@
+{
+  "canIpForward": false,
+  "cpuPlatform": "Intel Cascade Lake",
+  "creationTimestamp": "2026-11-10T00:31:59.038-08:00",
+  "deletionProtection": false,
+  "disks": [
+    {
+      "autoDelete": true,
+      "boot": true,
+      "deviceName": "persistent-disk-0",
+      "diskSizeGb": "100",
+      "guestOsFeatures": [
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        },
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "GVNIC"
+        }
+      ],
+      "index": 0,
+      "interface": "SCSI",
+      "kind": "compute#attachedDisk",
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+      ],
+      "mode": "READ_WRITE",
+      "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/disks/forge-ownbase-a100-01",
+      "type": "PERSISTENT"
+    }
+  ],
+  "fingerprint": "zeHaUw37PHg=",
+  "guestAccelerators": [
+    {
+      "acceleratorCount": 1,
+      "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/acceleratorTypes/nvidia-tesla-a100"
+    }
+  ],
+  "id": "1098146269288687761",
+  "kind": "compute#instance",
+  "labelFingerprint": "HSTLL14wCQY=",
+  "labels": {
+    "budget": "usd50",
+    "purpose": "ownbase-diagnostics"
+  },
+  "lastStartTimestamp": "2026-11-10T00:42:59.937-08:00",
+  "lastStopTimestamp": "2026-11-10T00:41:25.869-08:00",
+  "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/machineTypes/a2-highgpu-1g",
+  "metadata": {
+    "fingerprint": "MObdHSSKh2g=",
+    "items": [
+      {
+        "key": "block-project-ssh-keys",
+        "value": "TRUE"
+      },
+      {
+        "key": "code-sha256",
+        "value": "7132c919c01f35d9f64992351b3a6e9ae44198cb9282e1f0a15b8aac1dcc1c02"
+      },
+      {
+        "key": "enable-oslogin",
+        "value": "TRUE"
+      },
+      {
+        "key": "startup-script",
+        "value": "#!/bin/bash\nset -Eeuo pipefail\nexport CLOUDSDK_CORE_DISABLE_PROMPTS=1\nBASE=gs://forge-ownbase-a100-20261110\nexport RESULTS=results-v3\nmkdir -p /opt/ownbase\ncd /opt/ownbase\nexec 9>/opt/ownbase/gpu.lock\nflock -n 9\nexec > >(tee -a /opt/ownbase/server.log) 2>&1\nfinish() {\n  rc=$?\n  printf '{\"exit_code\":%s,\"finished_utc\":\"%s\"}\\n' \"$rc\" \"$(date -u +%FT%TZ)\" > /opt/ownbase/server-status.json\n  gcloud storage cp /opt/ownbase/server.log /opt/ownbase/server-status.json \"$BASE/server/\" --quiet || true\n  shutdown -h now || true\n}\ntrap finish EXIT\n# Provider maximum VM runtime is the independent outer limit; this timer\n# remains effective if the worker or startup process becomes unresponsive.\nshutdown -h +165\nmetadata() { curl --fail --silent -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\ngcloud storage cp \"$BASE/source/code.tar.gz\" code.tar.gz --quiet\nprintf '%s  code.tar.gz\\n' \"$(metadata code-sha256)\" | sha256sum -c -\ntar -xzf code.tar.gz\nmkdir -p inputs\ngcloud storage cp --recursive \"$BASE/input/*\" inputs/ --quiet\nPY=\"\"\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n  if [ -x \"$candidate\" ] && \"$candidate\" -c 'import torch,numpy; assert torch.version.cuda' 2>/dev/null; then PY=\"$candidate\"; break; fi\ndone\nif [ -z \"$PY\" ]; then echo 'No preinstalled CUDA PyTorch interpreter found'; find /opt -maxdepth 4 -name 'python*' -print; exit 1; fi\n# Install our single verified offline wheel into task-local vendor, without\n# altering the image's externally managed Python installation.\n\"$PY\" -c 'import zipfile; zipfile.ZipFile(\"wheels/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl\").extractall(\"vendor\")'\nexport PYTHONPATH=\"/opt/ownbase/vendor:/opt/ownbase\"\n\"$PY\" -m pip freeze > environment.txt\nnvidia-smi > gpu.txt\ngcloud storage cp environment.txt gpu.txt \"$BASE/server/\" --quiet\n\"$PY\" verify_cloud_training.py\n# Every stage is bounded; no long-training command exists in this launcher.\nrun_stage() {\n  stage=$1;shift\n  timeout --signal=TERM --kill-after=30s 1800 \"$PY\" -m cloud_training.diagnostics \"$@\" --inputs inputs --output \"$RESULTS/$stage\" --backup \"$BASE/$RESULTS/$stage\" --seconds 1650\n}\nrun_stage preflight preflight\nrun_stage benchmark benchmark\nMICRO=$(\"$PY\" -c 'import json,os;v=json.load(open(os.environ[\"RESULTS\"]+\"/benchmark/result.json\"));print(max([x for x in v[\"results\"] if \"tokens_per_second\" in x],key=lambda x:x[\"tokens_per_second\"])[\"microbatch\"])')\nrun_stage memorize memorize --microbatch \"$MICRO\"\nrun_stage lr-low lr --lr 0.00006 --microbatch \"$MICRO\"\nrun_stage lr-medium lr --lr 0.00012 --microbatch \"$MICRO\"\nrun_stage lr-high lr --lr 0.00024 --microbatch \"$MICRO\"\nprintf '{\"state\":\"all_diagnostics_complete_no_long_training\"}\\n' > complete.json\ngcloud storage cp complete.json \"$BASE/$RESULTS/complete.json\" --quiet\n"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "name": "forge-ownbase-a100-01",
+  "networkInterfaces": [
+    {
+      "fingerprint": "1MjyOAnNdUA=",
+      "kind": "compute#networkInterface",
+      "name": "nic0",
+      "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+      "networkIP": "10.128.0.40",
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "resourceStatus": {
+    "effectiveInstanceMetadata": {
+      "blockProjectSshKeysMetadataValue": true,
+      "enableOsloginMetadataValue": true,
+      "vmDnsSettingMetadataValue": "ZonalOnly"
+    },
+    "scheduling": {
+      "terminationTimestamp": "2026-11-10T11:42:45.269768Z"
+    }
+  },
+  "satisfiesPzi": false,
+  "scheduling": {
+    "automaticRestart": false,
+    "instanceTerminationAction": "DELETE",
+    "maxRunDuration": {
+      "nanos": 0,
+      "seconds": "10800"
+    },
+    "onHostMaintenance": "TERMINATE",
+    "preemptible": false,
+    "provisioningModel": "STANDARD"
+  },
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/instances/forge-ownbase-a100-01",
+  "serviceAccounts": [
+    {
+      "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_write"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "shieldedInstanceIntegrityPolicy": {
+    "updateAutoLearnPolicy": true
+  },
+  "startRestricted": false,
+  "status": "RUNNING",
+  "tags": {
+    "fingerprint": "42WmSpB8rSM="
+  },
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f"
+}

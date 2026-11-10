@@ -1,0 +1,470 @@
+Shutdown scheduled for Tue 2026-11-10 11:17:45 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 226.9MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+........
+
+Average throughput: 965.5MiB/s
+Copying file://environment.txt to gs://forge-ownbase-a100-20261110/server/environment.txt
+Copying file://gpu.txt to gs://forge-ownbase-a100-20261110/server/gpu.txt
+  
+.
+
+Average throughput: 3.3MiB/s
+test_budget_reservations (__main__.Tests.test_budget_reservations) ... ok
+test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut) ... ERROR
+test_masked_accumulation (__main__.Tests.test_masked_accumulation) ... ok
+test_restart_matches_uninterrupted (__main__.Tests.test_restart_matches_uninterrupted) ... ok
+
+======================================================================
+ERROR: test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/ownbase/verify_cloud_training.py", line 45, in test_context_pairs_prevent_entity_label_shortcut
+    splits=synthetic(load())
+                     ^^^^^^
+  File "/opt/ownbase/tokenizer.py", line 17, in load
+    if sha256((directory / name).read_bytes()).hexdigest() != expected:
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ownbase/data/tokenizer/encoder.json'
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.616s
+
+FAILED (errors=1)
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  
+
+
+Average throughput: 1.2MiB/s
+Shutdown scheduled for Tue 2026-11-10 11:22:05 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 236.2MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+............
+
+Average throughput: 603.1MiB/s
+Copying file://environment.txt to gs://forge-ownbase-a100-20261110/server/environment.txt
+Copying file://gpu.txt to gs://forge-ownbase-a100-20261110/server/gpu.txt
+  
+.
+
+Average throughput: 440.8kiB/s
+test_budget_reservations (__main__.Tests.test_budget_reservations) ... ok
+test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut) ... ok
+test_masked_accumulation (__main__.Tests.test_masked_accumulation) ... ok
+test_restart_matches_uninterrupted (__main__.Tests.test_restart_matches_uninterrupted) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.723s
+
+OK
+Copying file://results-v2/preflight/identity.json to gs://forge-ownbase-a100-20261110/results-v2/preflight/identity.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v2/preflight/restart-proof.pt to gs://forge-ownbase-a100-20261110/results-v2/preflight/restart-proof.pt
+  
+.......................................................................................
+
+Average throughput: 99.0MiB/s
+Copying gs://forge-ownbase-a100-20261110/results-v2/preflight/restart-proof.pt to file://results-v2/preflight/restart-proof.pt.gcs-restore
+  
+......
+
+Average throughput: 1.1GiB/s
+Copying file://results-v2/preflight/result.json to gs://forge-ownbase-a100-20261110/results-v2/preflight/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v2/preflight/result.json to file://results-v2/preflight/result.json.gcs-restore
+  
+
+{"state": "passed", "mode": "preflight"}
+Copying file://results-v2/benchmark/identity.json to gs://forge-ownbase-a100-20261110/results-v2/benchmark/identity.json
+  
+
+Copying file://results-v2/benchmark/result.json to gs://forge-ownbase-a100-20261110/results-v2/benchmark/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v2/benchmark/result.json to file://results-v2/benchmark/result.json.gcs-restore
+  
+
+{"state": "completed_disposable_benchmark", "mode": "benchmark"}
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'results/benchmark/result.json'
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 114, in apport_excepthook
+    report["ExecutableTimestamp"] = str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ownbase/-c'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'results/benchmark/result.json'
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  
+.
+
+Average throughput: 82.7kiB/s
+Shutdown scheduled for Tue 2026-11-10 11:28:27 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 221.4MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+...........Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+.
+
+Average throughput: 606.0MiB/s
+Copying file://environment.txt to gs://forge-ownbase-a100-20261110/server/environment.txt
+Copying file://gpu.txt to gs://forge-ownbase-a100-20261110/server/gpu.txt
+  
+.
+
+Average throughput: 812.5kiB/s
+test_budget_reservations (__main__.Tests.test_budget_reservations) ... ok
+test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut) ... ok
+test_masked_accumulation (__main__.Tests.test_masked_accumulation) ... ok
+test_restart_matches_uninterrupted (__main__.Tests.test_restart_matches_uninterrupted) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.703s
+
+OK
+Copying file://results-v3/preflight/identity.json to gs://forge-ownbase-a100-20261110/results-v3/preflight/identity.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/preflight/restart-proof.pt to gs://forge-ownbase-a100-20261110/results-v3/preflight/restart-proof.pt
+  
+.........................................................................
+
+Average throughput: 121.1MiB/s
+Copying gs://forge-ownbase-a100-20261110/results-v3/preflight/restart-proof.pt to file://results-v3/preflight/restart-proof.pt.gcs-restore
+  
+.....
+
+Average throughput: 1.5GiB/s
+Copying file://results-v3/preflight/result.json to gs://forge-ownbase-a100-20261110/results-v3/preflight/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/preflight/result.json to file://results-v3/preflight/result.json.gcs-restore
+  
+
+{"state": "passed", "mode": "preflight"}
+Copying file://results-v3/benchmark/identity.json to gs://forge-ownbase-a100-20261110/results-v3/benchmark/identity.json
+  
+
+Copying file://results-v3/benchmark/result.json to gs://forge-ownbase-a100-20261110/results-v3/benchmark/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/benchmark/result.json to file://results-v3/benchmark/result.json.gcs-restore
+  
+
+{"state": "completed_disposable_benchmark", "mode": "benchmark"}
+Copying file://results-v3/memorize/identity.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/identity.json
+  
+
+Copying file://results-v3/memorize/synthetic.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/synthetic.json
+  
+.
+Copying file://results-v3/memorize/baseline.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/baseline.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/memorize/memorize-0064.pt to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0064.pt
+  
+..........................................................
+
+Average throughput: 162.2MiB/s
+Copying file://results-v3/memorize/memorize-0064.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0064.json
+  
+
+Copying file://results-v3/memorize/progress.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/memorize/memorize-0128.pt to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0128.pt
+  
+..........................................................
+
+Average throughput: 164.5MiB/s
+Copying file://results-v3/memorize/memorize-0128.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0128.json
+  
+
+Copying file://results-v3/memorize/progress.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/memorize/memorize-0192.pt to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0192.pt
+  
+.....................................................................................................
+
+Average throughput: 82.0MiB/s
+Copying file://results-v3/memorize/memorize-0192.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0192.json
+  
+
+Copying file://results-v3/memorize/progress.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/memorize/memorize-0256.pt to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0256.pt
+  
+...........................................................
+
+Average throughput: 160.4MiB/s
+Copying file://results-v3/memorize/memorize-0256.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/memorize-0256.json
+  
+
+Copying file://results-v3/memorize/progress.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/progress.json
+  
+
+Copying file://results-v3/memorize/result.json to gs://forge-ownbase-a100-20261110/results-v3/memorize/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/memorize/result.json to file://results-v3/memorize/result.json.gcs-restore
+  
+
+{"state": "completed_diagnostic_not_acceptance", "mode": "memorize"}
+Copying file://results-v3/lr-low/identity.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/identity.json
+  
+
+Copying file://results-v3/lr-low/baseline.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/baseline.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-low/lr-0200.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0200.pt
+  
+...........................................................
+
+Average throughput: 160.7MiB/s
+Copying file://results-v3/lr-low/lr-0200.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0200.json
+  
+
+Copying file://results-v3/lr-low/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-low/lr-0400.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0400.pt
+  
+..........................................................................
+
+Average throughput: 119.7MiB/s
+Copying file://results-v3/lr-low/lr-0400.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0400.json
+  
+
+Copying file://results-v3/lr-low/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-low/lr-0600.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0600.pt
+  
+.................................................................................
+
+Average throughput: 107.0MiB/s
+Copying file://results-v3/lr-low/lr-0600.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0600.json
+  
+
+Copying file://results-v3/lr-low/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-low/lr-0610.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0610.pt
+  
+...............................................................................................
+
+Average throughput: 88.7MiB/s
+Copying file://results-v3/lr-low/lr-0610.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/lr-0610.json
+  
+
+Copying file://results-v3/lr-low/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/progress.json
+  
+
+Copying file://results-v3/lr-low/result.json to gs://forge-ownbase-a100-20261110/results-v3/lr-low/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/lr-low/result.json to file://results-v3/lr-low/result.json.gcs-restore
+  
+
+{"state": "completed_lr_screen_not_acceptance", "mode": "lr"}
+Copying file://results-v3/lr-medium/identity.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/identity.json
+  
+
+Copying file://results-v3/lr-medium/baseline.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/baseline.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-medium/lr-0200.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0200.pt
+  
+...........................................................................................
+
+Average throughput: 92.6MiB/s
+Copying file://results-v3/lr-medium/lr-0200.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0200.json
+  
+
+Copying file://results-v3/lr-medium/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-medium/lr-0400.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0400.pt
+  
+..........................................................
+
+Average throughput: 162.7MiB/s
+Copying file://results-v3/lr-medium/lr-0400.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0400.json
+  
+
+Copying file://results-v3/lr-medium/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-medium/lr-0600.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0600.pt
+  
+................................................................................
+
+Average throughput: 108.8MiB/s
+Copying file://results-v3/lr-medium/lr-0600.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0600.json
+  
+
+Copying file://results-v3/lr-medium/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-medium/lr-0610.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0610.pt
+  
+........................................................
+
+Average throughput: 172.3MiB/s
+Copying file://results-v3/lr-medium/lr-0610.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/lr-0610.json
+  
+
+Copying file://results-v3/lr-medium/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/progress.json
+  
+
+Copying file://results-v3/lr-medium/result.json to gs://forge-ownbase-a100-20261110/results-v3/lr-medium/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/lr-medium/result.json to file://results-v3/lr-medium/result.json.gcs-restore
+  
+
+{"state": "completed_lr_screen_not_acceptance", "mode": "lr"}
+Copying file://results-v3/lr-high/identity.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/identity.json
+  
+
+Copying file://results-v3/lr-high/baseline.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/baseline.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-high/lr-0200.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0200.pt
+  
+......................................................................................
+
+Average throughput: 100.1MiB/s
+Copying file://results-v3/lr-high/lr-0200.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0200.json
+  
+
+Copying file://results-v3/lr-high/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-high/lr-0400.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0400.pt
+  
+...................................................................
+
+Average throughput: 135.4MiB/s
+Copying file://results-v3/lr-high/lr-0400.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0400.json
+  
+
+Copying file://results-v3/lr-high/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-high/lr-0600.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0600.pt
+  
+....................................................................................
+
+Average throughput: 102.1MiB/s
+Copying file://results-v3/lr-high/lr-0600.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0600.json
+  
+
+Copying file://results-v3/lr-high/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/progress.json
+  
+
+ERROR: Cannot check if the destination bucket is compatible for running parallel composite uploads as the user does not permission to perform GET operation on the bucket. The operation will be performed without parallel composite upload feature and hence might perform relatively slower.
+Copying file://results-v3/lr-high/lr-0610.pt to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0610.pt
+  
+...................................................................
+
+Average throughput: 136.0MiB/s
+Copying file://results-v3/lr-high/lr-0610.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/lr-0610.json
+  
+
+Copying file://results-v3/lr-high/progress.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/progress.json
+  
+
+Copying file://results-v3/lr-high/result.json to gs://forge-ownbase-a100-20261110/results-v3/lr-high/result.json
+  
+
+Copying gs://forge-ownbase-a100-20261110/results-v3/lr-high/result.json to file://results-v3/lr-high/result.json.gcs-restore
+  
+
+{"state": "completed_lr_screen_not_acceptance", "mode": "lr"}
+Copying file://complete.json to gs://forge-ownbase-a100-20261110/results-v3/complete.json
+  
+
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  

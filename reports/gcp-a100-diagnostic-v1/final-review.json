@@ -1,0 +1,228 @@
+{
+  "state": "diagnostics_complete_no_long_training_or_promotion",
+  "date": "2026-11-10",
+  "scope": "Own random-initialized 124M parent; one A100; finite diagnostics only.",
+  "preflight": {
+    "state": "passed",
+    "fp32_cpu_cuda_max_abs": 4.100799560546875e-05,
+    "restart_weight_max_abs": 0.0,
+    "first": {
+      "ce": 3.618929862976074,
+      "gradient_norm": 12.501392364501953,
+      "supervised_targets": 128
+    },
+    "second": {
+      "ce": 3.197604179382324,
+      "gradient_norm": 10.684491157531738,
+      "supervised_targets": 128
+    },
+    "resumed": {
+      "ce": 3.197604179382324,
+      "gradient_norm": 10.684491157531738,
+      "supervised_targets": 128
+    },
+    "gcs_restore_verified": true
+  },
+  "benchmark": {
+    "state": "completed_disposable_benchmark",
+    "results": [
+      {
+        "microbatch": 2,
+        "effective_tokens": 8192,
+        "measured_updates": 10,
+        "seconds": 2.127221992999992,
+        "tokens_per_second": 38510.320159143026,
+        "peak_allocated_bytes": 3150197760
+      },
+      {
+        "microbatch": 4,
+        "effective_tokens": 8192,
+        "measured_updates": 10,
+        "seconds": 1.2725807970000034,
+        "tokens_per_second": 64373.122864276396,
+        "peak_allocated_bytes": 4001695744
+      },
+      {
+        "microbatch": 8,
+        "effective_tokens": 8192,
+        "measured_updates": 10,
+        "seconds": 1.0287969990000079,
+        "tokens_per_second": 79626.98188236004,
+        "peak_allocated_bytes": 5713872384
+      },
+      {
+        "microbatch": 16,
+        "effective_tokens": 8192,
+        "measured_updates": 10,
+        "seconds": 0.9270396519999906,
+        "tokens_per_second": 88367.30966498166,
+        "peak_allocated_bytes": 8652447232
+      }
+    ]
+  },
+  "memorization": {
+    "train": {
+      "choice_correct": 128,
+      "both_members_correct": 64,
+      "pairs": 64,
+      "exact_with_eot": 128,
+      "n": 128
+    },
+    "entities": {
+      "choice_correct": 68,
+      "both_members_correct": 34,
+      "pairs": 64,
+      "exact_with_eot": 68,
+      "n": 128
+    },
+    "template": {
+      "choice_correct": 65,
+      "both_members_correct": 2,
+      "pairs": 64,
+      "exact_with_eot": 65,
+      "n": 128
+    }
+  },
+  "lr_screen": [
+    {
+      "name": "lr-low",
+      "lr": 6e-05,
+      "targets": 4997120,
+      "baseline_ce": 3.8666060343384743,
+      "endpoint_ce": 3.8622071109712124,
+      "paired_mean_ce_delta": -0.004398923367261887,
+      "documents_improved": 37,
+      "documents": 64,
+      "context_pairs_correct": 2,
+      "context_pairs_total": 32,
+      "completions_with_repeated_word_4gram": 32,
+      "completions": 32,
+      "mean_repeated_word_4gram_fraction": 0.4915660236813718,
+      "manual_completion_review": "All 32 reviewed: repetition, factual errors or context drift; no usability pass.",
+      "finite_history": true
+    },
+    {
+      "name": "lr-medium",
+      "lr": 0.00012,
+      "targets": 4997120,
+      "baseline_ce": 3.8666060343384743,
+      "endpoint_ce": 3.9681191481649876,
+      "paired_mean_ce_delta": 0.10151311382651329,
+      "documents_improved": 1,
+      "documents": 64,
+      "context_pairs_correct": 3,
+      "context_pairs_total": 32,
+      "completions_with_repeated_word_4gram": 32,
+      "completions": 32,
+      "mean_repeated_word_4gram_fraction": 0.5487304541656558,
+      "manual_completion_review": "All 32 reviewed: repetition, factual errors or context drift; no usability pass.",
+      "finite_history": true
+    },
+    {
+      "name": "lr-high",
+      "lr": 0.00024,
+      "targets": 4997120,
+      "baseline_ce": 3.8666060343384743,
+      "endpoint_ce": 4.162667769938707,
+      "paired_mean_ce_delta": 0.2960617356002331,
+      "documents_improved": 0,
+      "documents": 64,
+      "context_pairs_correct": 1,
+      "context_pairs_total": 32,
+      "completions_with_repeated_word_4gram": 30,
+      "completions": 32,
+      "mean_repeated_word_4gram_fraction": 0.5020725783920831,
+      "manual_completion_review": "All 32 reviewed: repetition, factual errors or context drift; no usability pass.",
+      "finite_history": true
+    }
+  ],
+  "interpretation": [
+    "CUDA and bounded restart checks passed; this does not certify every training path.",
+    "The model fits all 128 training examples but only 68 unseen-entity and 65 changed-template examples out of 128. The two-label diagnostic exposes weak transfer; it does not establish the sole cause.",
+    "Low LR is least damaging in this short screen. Its 0.0044 CE improvement is small; higher LR alone does not fix the model. This is not a long-run optimal-LR search.",
+    "Same baseline and data across arms verified. Fresh 64-document validation differs from previous 256-document suite; do not compare their absolute CE.",
+    "All 96 endpoint completions reviewed. No conversation/tool acceptance was run or passed; none of these branches is promoted."
+  ],
+  "recommended_next_experiment": {
+    "decision": "Keep 124M architecture and 6e-5 control; test training distribution before enlarging model or launching long pretraining.",
+    "design": "Sequential equal-token branches from the protected parent: existing admitted broad-text control versus a quality-audited coherent-text mixture with diverse counterfactual entity-binding examples. Keep tokenizer, optimizer, batch and evaluation constant.",
+    "data_requirements": [
+      "Deduplicate and filter incoherent/repetitive documents; preserve provenance and license admission.",
+      "Vary entity forms, labels, query position, distractors and paraphrases; split by entity and template family, not random rows.",
+      "Add a template-only holdout using known entities to distinguish template shift from combined entity/template shift.",
+      "Evaluate independent contextual probes and raw generations; reserve private acceptance for a selected candidate."
+    ],
+    "proposed_budget": "10M targets per branch (20M total), one A100, maximum one-hour lease after data and cost preflight; proposed only, not started.",
+    "gate": "Require improved held-out language and meaningful context transfer without repetitive collapse before investing in longer pretraining; subsequently validate conversation SFT and executable tool traces separately.",
+    "limits": "No guarantee that 20M more tokens produces a useful assistant. A larger model and repetition penalties do not address the demonstrated transfer failure by themselves."
+  },
+  "backup_policy": "GCS training inputs, exact code bundle, pinned image identity, environment, checkpoints with SHA receipts, reports and server logs. 30-day lifecycle. Original local parent remains unchanged. Optional local multi-GB checkpoint mirror canceled due to slow transfer; no local archive claimed.",
+  "cleanup": {
+    "vm_deleted": true,
+    "boot_disk_deleted": true,
+    "verified_utc": "2026-11-10T09:03:21.509290+00:00",
+    "remaining_project_model_instances": 0,
+    "remaining_project_model_disks": 0
+  },
+  "cost": {
+    "cap_usd": 50.0,
+    "ancillary_reserve_usd": 10.0,
+    "allocations": [
+      {
+        "id": "forge-ownbase-a100-01",
+        "hours": 3,
+        "reserved_usd": 0.55,
+        "state": "closed_verified_TERMINATED",
+        "start_utc": "2026-11-10T08:17:50.423+00:00",
+        "stop_utc": "2026-11-10T08:19:54.634+00:00",
+        "original_reservation_usd": 18.0,
+        "note": "Conservative$6/h rounded-up minutes plus$0.25 margin; not final invoice. Separate$10 ancillary reserve retained."
+      },
+      {
+        "id": "forge-ownbase-a100-01-restart-1",
+        "hours": 3,
+        "reserved_usd": 0.55,
+        "state": "closed_verified_TERMINATED",
+        "start_utc": "2026-11-10T08:23:36.267+00:00",
+        "stop_utc": "2026-11-10T08:26:10.769+00:00",
+        "original_reservation_usd": 18.0,
+        "note": "Conservative$6/h rounded-up minutes plus$0.25 margin; not final invoice. Separate$10 ancillary reserve retained."
+      },
+      {
+        "id": "forge-ownbase-a100-01-restart-2",
+        "hours": 3,
+        "reserved_usd": 0.65,
+        "state": "closed_verified_TERMINATED",
+        "start_utc": "2026-11-10T08:32:13.388Z",
+        "stop_utc": "2026-11-10T08:35:16.770Z",
+        "original_reservation_usd": 18,
+        "note": "Verified stopped;4rounded minutes at$6/hour plus$0.25; not final invoice."
+      },
+      {
+        "id": "forge-ownbase-a100-01-restart-3",
+        "hours": 3,
+        "reserved_usd": 0.75,
+        "state": "closed_verified_TERMINATED",
+        "start_utc": "2026-11-10T08:36:35.817Z",
+        "stop_utc": "2026-11-10T08:41:25.869Z",
+        "original_reservation_usd": 18,
+        "note": "Verified stopped;5rounded minutes at$6/hour plus$0.25; not final invoice."
+      },
+      {
+        "id": "forge-ownbase-a100-01-restart-4",
+        "hours": 3,
+        "reserved_usd": 2.35,
+        "state": "closed_verified_DELETED",
+        "start_utc": "2026-11-10T00:42:59.937000-08:00",
+        "deletion_verified_utc": "2026-11-10T09:03:21.509290+00:00",
+        "original_reservation_usd": 18,
+        "note": "Conservative upper runtime through verified deletion, rounded up minutes at $6/hour plus $0.25; not final invoice."
+      }
+    ],
+    "compute_upper_estimate_usd": 4.85,
+    "total_including_ancillary_reserve_usd": 14.85,
+    "remaining_unallocated_usd": 35.15,
+    "billing_status": "Conservative estimates, final billing not reconciled. $10 reserve retained for 30-day GCS retention, operations, egress and other ancillary charges."
+  },
+  "backup_bytes": 28403209469
+}

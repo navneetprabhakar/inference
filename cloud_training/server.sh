@@ -2,6 +2,7 @@
 set -Eeuo pipefail
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 BASE=gs://forge-ownbase-a100-20261110
+export RESULTS=results-v3
 mkdir -p /opt/ownbase
 cd /opt/ownbase
 exec 9>/opt/ownbase/gpu.lock
@@ -39,14 +40,14 @@ gcloud storage cp environment.txt gpu.txt "$BASE/server/" --quiet
 # Every stage is bounded; no long-training command exists in this launcher.
 run_stage() {
   stage=$1;shift
-  timeout --signal=TERM --kill-after=30s 1800 "$PY" -m cloud_training.diagnostics "$@" --inputs inputs --output "results-v2/$stage" --backup "$BASE/results-v2/$stage" --seconds 1650
+  timeout --signal=TERM --kill-after=30s 1800 "$PY" -m cloud_training.diagnostics "$@" --inputs inputs --output "$RESULTS/$stage" --backup "$BASE/$RESULTS/$stage" --seconds 1650
 }
 run_stage preflight preflight
 run_stage benchmark benchmark
-MICRO=$("$PY" -c 'import json;v=json.load(open("results/benchmark/result.json"));print(max([x for x in v["results"] if "tokens_per_second" in x],key=lambda x:x["tokens_per_second"])["microbatch"])')
+MICRO=$("$PY" -c 'import json,os;v=json.load(open(os.environ["RESULTS"]+"/benchmark/result.json"));print(max([x for x in v["results"] if "tokens_per_second" in x],key=lambda x:x["tokens_per_second"])["microbatch"])')
 run_stage memorize memorize --microbatch "$MICRO"
 run_stage lr-low lr --lr 0.00006 --microbatch "$MICRO"
 run_stage lr-medium lr --lr 0.00012 --microbatch "$MICRO"
 run_stage lr-high lr --lr 0.00024 --microbatch "$MICRO"
 printf '{"state":"all_diagnostics_complete_no_long_training"}\n' > complete.json
-gcloud storage cp complete.json "$BASE/results-v2/complete.json" --quiet
+gcloud storage cp complete.json "$BASE/$RESULTS/complete.json" --quiet

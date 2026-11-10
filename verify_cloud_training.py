@@ -39,6 +39,19 @@ class Tests(unittest.TestCase):
             update(b,optimizer(b),rows,labels=labels,device='cpu',microbatch=2,lr=6e-5,guard=g,bf16=False)
             for x,y in zip(a.parameters(),b.parameters()):torch.testing.assert_close(x,y,rtol=1e-4,atol=1e-6)
 
+    def test_context_pairs_prevent_entity_label_shortcut(self):
+        from cloud_training.diagnostics import synthetic
+        from tokenizer import load
+        splits=synthetic(load())
+        for cases in splits.values():
+            self.assertEqual(len(cases),128)
+            for a,b in zip(cases[::2],cases[1::2]):
+                self.assertEqual(a['target'],b['target'])
+                self.assertEqual(a['pair_id'],b['pair_id'])
+                self.assertNotEqual(a['correct'],b['correct'])
+                self.assertNotEqual(a['prefix'],b['prefix'])
+        self.assertFalse({x['target'] for x in splits['train']} & {x['target'] for x in splits['entities']})
+
     def test_budget_reservations(self):
         from cloud_training.budget import reserve
         with tempfile.TemporaryDirectory() as d:

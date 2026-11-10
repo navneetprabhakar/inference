@@ -61,20 +61,21 @@ def synthetic(tok):
     """Diagnostic-only examples: separate entities and wording, balanced bindings."""
     values=[' amber',' violet']
     def case(i,split):
-        a=f'unit {i+1000 if split=="train" else i+7000}'
-        b=f'unit {i+3000 if split=="train" else i+9000}'
-        correct=i%2
+        a=f'unit {i//2+1000 if split=="train" else i//2+7000}'
+        b=f'unit {i//2+3000 if split=="train" else i//2+9000}'
+        binding=i%2;target_index=(i//2)%2;correct=binding^target_index
+        target=(a,b)[target_index]
         if split=='template':
-            prefix=f'Registry entry: {a} carries the{values[correct]} marker; {b} carries the{values[1-correct]} marker. Report the marker assigned to {a}:'
+            prefix=f'Registry entry: {a} carries the{values[binding]} marker; {b} carries the{values[1-binding]} marker. Report the marker assigned to {target}:'
         else:
-            prefix=f'The tag on {a} is{values[correct]}. The tag on {b} is{values[1-correct]}. The tag on {a} is'
+            prefix=f'The tag on {a} is{values[binding]}. The tag on {b} is{values[1-binding]}. The tag on {target} is'
         answer=values[correct]+'.'
         p=tok.encode(prefix).ids;ans=tok.encode(answer).ids+[EOT]
         assert tok.encode(prefix+answer).ids==p+ans[:-1]
         ids=p+ans;assert len(ids)<=96
         row=ids+[EOT]*(96-len(ids));labels=[-100]*95
         labels[len(p)-1:len(ids)-1]=ans
-        return {'prefix':prefix,'answer':answer,'row':row,'labels':labels,'correct':correct,'choices':[v+'.' for v in values]}
+        return {'prefix':prefix,'answer':answer,'row':row,'labels':labels,'correct':correct,'target':target,'pair_id':i//2,'choices':[v+'.' for v in values]}
     return {s:[case(i,s) for i in range(128)] for s in ('train','entities','template')}
 
 
@@ -99,7 +100,7 @@ def binding_scores(model,cases,tok,guard,device):
             ids.append(token)
         exact+=generated==expected
         scores.append({'correct':chosen==case['correct'],'scores':choices,'generated':tok.decode(generated),'expected':case['answer']})
-    return {'choice_correct':correct,'exact_with_eot':exact,'n':len(cases),'rows':scores}
+    return {'choice_correct':correct,'both_members_correct':sum(scores[i]['correct'] and scores[i+1]['correct'] for i in range(0,len(scores),2)),'pairs':len(scores)//2,'exact_with_eot':exact,'n':len(cases),'rows':scores}
 
 
 @torch.inference_mode()

@@ -1,0 +1,57 @@
+Shutdown scheduled for Tue 2026-11-10 11:17:45 UTC, use 'shutdown -c' to cancel.
+Copying gs://forge-ownbase-a100-20261110/source/code.tar.gz to file://code.tar.gz
+  
+
+
+Average throughput: 226.9MiB/s
+code.tar.gz: OK
+Copying gs://forge-ownbase-a100-20261110/input/inputs.json to file://inputs/inputs.json
+Copying gs://forge-ownbase-a100-20261110/input/parent.pt to file://inputs/parent.pt
+  
+Copying gs://forge-ownbase-a100-20261110/input/public-diagnostics.json to file://inputs/public-diagnostics.json
+Copying gs://forge-ownbase-a100-20261110/input/rows.json to file://inputs/rows.json
+Copying gs://forge-ownbase-a100-20261110/input/train.npy to file://inputs/train.npy
+Copying gs://forge-ownbase-a100-20261110/input/validation.json to file://inputs/validation.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/encoder.json to file://inputs/data/tokenizer/encoder.json
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6 to file://inputs/data/tokenizer/reference/6c7ea1a7e38e3a7f062df639a5b80947f075ffe6
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee to file://inputs/data/tokenizer/reference/6d1cbeee0f20b3d9449abfede4726ed8212e3aee
+Copying gs://forge-ownbase-a100-20261110/input/data/tokenizer/vocab.bpe to file://inputs/data/tokenizer/vocab.bpe
+........
+
+Average throughput: 965.5MiB/s
+Copying file://environment.txt to gs://forge-ownbase-a100-20261110/server/environment.txt
+Copying file://gpu.txt to gs://forge-ownbase-a100-20261110/server/gpu.txt
+  
+.
+
+Average throughput: 3.3MiB/s
+test_budget_reservations (__main__.Tests.test_budget_reservations) ... ok
+test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut) ... ERROR
+test_masked_accumulation (__main__.Tests.test_masked_accumulation) ... ok
+test_restart_matches_uninterrupted (__main__.Tests.test_restart_matches_uninterrupted) ... ok
+
+======================================================================
+ERROR: test_context_pairs_prevent_entity_label_shortcut (__main__.Tests.test_context_pairs_prevent_entity_label_shortcut)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/ownbase/verify_cloud_training.py", line 45, in test_context_pairs_prevent_entity_label_shortcut
+    splits=synthetic(load())
+                     ^^^^^^
+  File "/opt/ownbase/tokenizer.py", line 17, in load
+    if sha256((directory / name).read_bytes()).hexdigest() != expected:
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ownbase/data/tokenizer/encoder.json'
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.616s
+
+FAILED (errors=1)
+Copying file:///opt/ownbase/server.log to gs://forge-ownbase-a100-20261110/server/server.log
+Copying file:///opt/ownbase/server-status.json to gs://forge-ownbase-a100-20261110/server/server-status.json
+  
