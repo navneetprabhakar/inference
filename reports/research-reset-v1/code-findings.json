@@ -1,0 +1,200 @@
+[
+  {
+    "path": "scripts/base_train.py",
+    "needle": "--save-every",
+    "hits": [
+      {
+        "line": 77,
+        "text": "parser.add_argument(\"--save-every\", type=int, default=-1, help=\"save checkpoints every N steps (-1 = only at end)\")"
+      }
+    ]
+  },
+  {
+    "path": "scripts/base_train.py",
+    "needle": "--total-batch-size",
+    "hits": [
+      {
+        "line": 11,
+        "text": "python -m scripts.base_train --depth=4 --max-seq-len=512 --device-batch-size=1 --eval-tokens=512 --core-metric-every=-1 --total-batch-size=512 --num-iterations=20"
+      },
+      {
+        "line": 61,
+        "text": "parser.add_argument(\"--total-batch-size\", type=int, default=-1, help=\"total batch size in tokens. decent numbers are e.g. 524288. (-1 = auto-compute optimal)\")"
+      }
+    ]
+  },
+  {
+    "path": "scripts/base_train.py",
+    "needle": "--embedding-lr",
+    "hits": [
+      {
+        "line": 62,
+        "text": "parser.add_argument(\"--embedding-lr\", type=float, default=0.3, help=\"learning rate for embedding parameters (Adam)\")"
+      }
+    ]
+  },
+  {
+    "path": "scripts/base_train.py",
+    "needle": "--warmup-steps",
+    "hits": [
+      {
+        "line": 67,
+        "text": "parser.add_argument(\"--warmup-steps\", type=int, default=40, help=\"number of steps for LR warmup\")"
+      }
+    ]
+  },
+  {
+    "path": "scripts/base_train.py",
+    "needle": "--warmdown-ratio",
+    "hits": [
+      {
+        "line": 68,
+        "text": "parser.add_argument(\"--warmdown-ratio\", type=float, default=0.65, help=\"ratio of iterations for LR warmdown\")"
+      }
+    ]
+  },
+  {
+    "path": "scripts/base_train.py",
+    "needle": "dataloader_state_dict",
+    "hits": [
+      {
+        "line": 330,
+        "text": "dataloader_resume_state_dict = None if not resuming else meta_data[\"dataloader_state_dict\"]"
+      },
+      {
+        "line": 333,
+        "text": "x, y, dataloader_state_dict = next(train_loader) # kick off load of the very first batch of data"
+      },
+      {
+        "line": 491,
+        "text": "\"dataloader_state_dict\": dataloader_state_dict,"
+      },
+      {
+        "line": 518,
+        "text": "x, y, dataloader_state_dict = next(train_loader) # prefetch the next batch while the GPU is busy with forward/backward"
+      },
+      {
+        "line": 566,
+        "text": "epoch = f\"{dataloader_state_dict['epoch']} pq: {dataloader_state_dict['pq_idx']} rg: {dataloader_state_dict['rg_idx']}\""
+      }
+    ]
+  },
+  {
+    "path": "scripts/chat_sft.py",
+    "needle": "if last_step:",
+    "hits": [
+      {
+        "line": 392,
+        "text": "if last_step:"
+      },
+      {
+        "line": 417,
+        "text": "if last_step:"
+      }
+    ]
+  },
+  {
+    "path": "scripts/chat_sft.py",
+    "needle": "loss = loss / grad_accum_steps",
+    "hits": [
+      {
+        "line": 428,
+        "text": "loss = loss / grad_accum_steps # each .backward() is a grad sum => normalize loss here"
+      }
+    ]
+  },
+  {
+    "path": "scripts/chat_sft.py",
+    "needle": "SmolTalk(split=\"train\")",
+    "hits": [
+      {
+        "line": 163,
+        "text": "SmolTalk(split=\"train\"), # 460K rows of general conversations"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/dataloader.py",
+    "needle": "approximate resume",
+    "hits": [
+      {
+        "line": 29,
+        "text": "Handles DDP sharding and approximate resume. Each yield is (text_batch, (pq_idx, rg_idx, epoch))"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/dataloader.py",
+    "needle": "base_idx = resume_rg_idx",
+    "hits": [
+      {
+        "line": 54,
+        "text": "base_idx = resume_rg_idx // ddp_world_size"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/checkpoint_manager.py",
+    "needle": "torch.save(model_data",
+    "hits": [
+      {
+        "line": 46,
+        "text": "torch.save(model_data, model_path)"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/checkpoint_manager.py",
+    "needle": "torch.save(optimizer_data",
+    "hits": [
+      {
+        "line": 57,
+        "text": "torch.save(optimizer_data, optimizer_path)"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/engine.py",
+    "needle": "def use_calculator",
+    "hits": [
+      {
+        "line": 46,
+        "text": "def use_calculator(expr):"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/engine.py",
+    "needle": "return eval(",
+    "hits": [
+      {
+        "line": 40,
+        "text": "return eval(formula, {\"__builtins__\": {}}, {})"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/tokenizer.py",
+    "needle": "mask = mask[:max_tokens]",
+    "hits": [
+      {
+        "line": 223,
+        "text": "mask = mask[:max_tokens]"
+      }
+    ]
+  },
+  {
+    "path": "nanochat/flash_attention.py",
+    "needle": "get_kernel(hf_kernel)",
+    "hits": [
+      {
+        "line": 37,
+        "text": "return get_kernel(hf_kernel).flash_attn_interface"
+      },
+      {
+        "line": 41,
+        "text": "return get_kernel(hf_kernel).flash_attn_interface"
+      }
+    ]
+  }
+]
