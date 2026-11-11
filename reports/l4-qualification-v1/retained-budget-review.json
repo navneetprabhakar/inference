@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "status": "review_candidate_no_budget_mutation",
+  "checked_utc": "2026-11-11T02:24:17.584982+00:00",
+  "decision": {
+    "provider_hard_cutoff_hours": 32,
+    "provider_max_runtime_seconds": 115200,
+    "base_and_setup_deadline_hours": 28,
+    "protected_finish_hours": 4,
+    "recommendation": "Retain one VM through bounded base, diagnostic SFT and assessment phases; stop base at hour28 or earlier quality failure, preserve final4h. 10B is a target, not an approved completion guarantee.",
+    "expected_base_targets_range_billions": [
+      9.0,
+      9.8
+    ],
+    "usable_model_guaranteed": false
+  },
+  "budget": {
+    "project_cap_usd": 100,
+    "prior_closed_allocation_sum_usd": 8.98,
+    "new_compute_envelope_rate_usd_per_hour": 2.5,
+    "new_compute_reservation_usd": 80,
+    "ancillary_reserve_usd": 10,
+    "total_upper_planning_envelope_usd": 98.98,
+    "unallocated_margin_usd": 1.02,
+    "finish_compute_usd_included_in_80": 10,
+    "warning": "Do not add another $10 finish reserve: it is inside the32h compute reservation. This is a planning envelope, not a billing invoice.",
+    "ledger_inconsistency": "compute_upper_estimate_usd remains8.1 but allocation sum is8.98; use8.98. No ledger edited."
+  },
+  "pilot_measurement": {
+    "updates": 32,
+    "targets": 16777216,
+    "gpu_wall_seconds": 895.313,
+    "all_update_seconds": 238.3034381389998,
+    "wall_minus_optimizer_seconds": 657.0095618610002,
+    "step1_compile_inclusive_seconds": 79.25119594199998,
+    "steady_sample_updates": [
+      2,
+      32
+    ],
+    "steady_count": 31,
+    "steady_mean_seconds": 5.130717490225801,
+    "steady_median_seconds": 5.13572903599993,
+    "steady_min_seconds": 5.10140148000005,
+    "steady_max_seconds": 5.146428489000073,
+    "steady_targets_per_second": 102186.09794805254,
+    "remaining_updates_to_10b": 19042,
+    "remaining_optimizer_hours_to_10b": 27.138645124688807,
+    "validation_ce_start": 10.39821371436119,
+    "validation_ce_end": 5.803871169686317,
+    "limitation": "Only31 steady updates (~159s); not a long-duration throughput confidence interval. Loss improvement is not conversation/tool acceptance."
+  },
+  "overhead": {
+    "pilot_non_optimizer_wall_minutes": 10.950159364350004,
+    "pilot_start_eval_seconds": 6.633700561,
+    "pilot_end_eval_seconds": 6.240316932,
+    "initial_checkpoint_upload_seconds": 17.921922427,
+    "initial_checkpoint_upload_bytes": 1543562682,
+    "optimizer_checkpoint_upload_seconds": 38.503870918,
+    "optimizer_checkpoint_upload_bytes": 3826065134,
+    "configured_checkpoint_interval_seconds": 1800,
+    "checkpoint_caveat": "Measured upload excludes local serialization, hashing, journal and retention operations. Do not extrapolate upload alone as total checkpoint cost.",
+    "planning_total_checkpoint_seconds_each": [
+      60,
+      90
+    ],
+    "planning_checkpoint_total_hours": [
+      0.9,
+      1.4
+    ],
+    "planning_setup_compile_resume_hours": [
+      0.2,
+      0.5
+    ],
+    "planning_eval_quality_diagnostic_hours": [
+      0.4,
+      0.8
+    ],
+    "planning_sublease_restart_hours": [
+      0.1,
+      0.3
+    ],
+    "full10b_base_lifecycle_hours_range": [
+      28.74,
+      30.14
+    ],
+    "reason": "27.139 optimizer-hours plus stated components; excludes protected final4h. A28h base wall window cannot defensibly promise10B.",
+    "diagnostic_bound": "At3B and6B, diagnosticSFT<=600s plus rawquality<=600s each, up to2400s total. Included in base overhead, separate from protected final4h."
+  },
+  "phase_allocation": [
+    {
+      "phase": "Setup, resumed base, scheduled checkpoint/eval and3B/6Bdiagnostics",
+      "wall_hours_max": 28,
+      "compute_envelope_usd_max": 70
+    },
+    {
+      "phase": "Final bounded SFT, conversation/tool assessment, export and durable checkpoint",
+      "wall_hours_reserved": 4,
+      "compute_envelope_usd": 10,
+      "suballocation_suggestion_hours": {
+        "sft": 2.5,
+        "assessment": 1,
+        "checkpoint_cleanup": 0.5
+      },
+      "limitation": "SFT throughput and quality unknown; bound by time and acceptance tests, not assumed trained targetcount."
+    }
+  ],
+  "ancillary_assumptions": {
+    "pd_balanced_gib": 200,
+    "pd_usd_per_gib_hour": 0.000136986,
+    "pd_32h_usd": 0.8767104,
+    "gcs_standard_usd_per_gib_hour": 2.7397e-05,
+    "gcs_retained_inventory_gib_planning_ceiling": 100,
+    "gcs_30day_storage_ceiling_usd": 1.972584,
+    "remaining_ancillary_cushion_usd_approx": 7.15,
+    "conditions": [
+      "Same-region us-central1 GCS and VM; no chargeable repeated Internet checkpoint downloads.",
+      "Retain latest2 plus explicit milestones, bound total GCS inventory; confirm actual inventory before reservation.",
+      "Delete attached bootdisk with VM; no orphaned disks, premium image fees or other running project resources.",
+      "Reserve also covers earlier storage/operations, limited final export and tax/FX uncertainty; actual account billing not audited.",
+      "30day storage bound is finite: keeping backups indefinitely continues expense beyond this estimate."
+    ],
+    "not_measured_inventory": true
+  },
+  "pricing": {
+    "current_official_flex_a2_highgpu_1g_usd_hour": 2,
+    "conservative_compute_provision_percent": 25,
+    "sources": [
+      "https://cloud.google.com/products/dws/pricing",
+      "https://cloud.google.com/storage/pricing",
+      "https://cloud.google.com/compute/disks-image-pricing"
+    ],
+    "caveat": "DWS variable prices apply while running; November2026 changes announced. Recheck launch pricing and stop/recompute if rate exceeds envelope. Tax/account charges not independently verified."
+  },
+  "operating_conditions": [
+    "Provider DELETE at32h from actual instance runtime start, plus earlier local checkpoint deadline; include all idle/setup time.",
+    "Current trainer caps one process lease at6h; supervisor must resume exact journal on same VM without extending provider cutoff.",
+    "At hour28 end base at a durable checkpoint even if10B target incomplete. Keep planned schedule identity unchanged; ending early on10B schedule means less final annealing and must be recorded.",
+    "No new spend outside this reservation without deducting from remaining cap. Provider stop must be confirmed and reservation reconciled.",
+    "General SFT corpus still requires admission. Finish readiness is a launch gate; GPU idle time is charged.",
+    "Stop or course-correct at3B/6B only based on defined quality gates; cannot promise a usable conversation model from base CE."
+  ],
+  "evidence": [
+    "runs/forge-ownbase-v2-pilot-01-results/results/updates.jsonl",
+    "runs/forge-ownbase-v2-pilot-01-results/results/result.json",
+    "reports/gcp-a100-diagnostic-v1/spend-ledger.json",
+    "reports/l4-qualification-v1/forge-ownbase-v2-pilot-01-config.json",
+    "reports/l4-qualification-v1/forge-ownbase-v2-pilot-01-plan.json"
+  ]
+}

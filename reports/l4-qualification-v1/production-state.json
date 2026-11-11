@@ -1,28 +1,35 @@
 {
-  "phase": "preparing_full_immutable_corpus",
-  "own_base_retained_training_targets": 0,
+  "phase": "retained_vm_running_bootstrap",
+  "own_base_retained_training_targets": 16777216,
   "random_initialization_required": true,
   "model_parameters": 536871738,
   "planned_base_targets": 10000269312,
-  "gpu_active": false,
+  "gpu_active": true,
   "restart_review": "reports/l4-qualification-v1/restart-review.json",
   "corpus_progress": "reports/l4-qualification-v1/corpus-progress.json",
   "backup_receipt": "runs/ownbase-v2-data/corpus/inventory-backup-receipt.json",
-  "production_bundle_sha256": "0ab526c369442878ed704c748397fbb1301df85cf818358863d228fdc423639e",
-  "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/0ab526c369442878ed704c748397fbb1301df85cf818358863d228fdc423639e.tar.gz",
+  "production_bundle_sha256": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9",
+  "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz",
   "next": [
-    "Verify10B corpus and completed GCS inventory",
-    "Create hash-bound admission and immutable campaign",
-    "Bounded32update own-base pilot then fresh-VM resume pilot",
-    "Reforecast full campaign with observed production overhead before long lease"
+    "ObserveGPUallocation andcheckpoint32restore",
+    "ExactCEresume pilot32to64; automaticbasecontinuation onpass",
+    "1Brawquality check;3Band6Binstructiondiagnostics",
+    "Protected4hfinaltuning/assessment within100USD"
   ],
   "budget": {
     "total_cap_usd": 100,
-    "closed_compute_upper_usd": 8.1,
+    "closed_compute_upper_usd": 8.98,
     "ancillary_reserve_usd": 10,
     "finish_reserve_usd": 10,
     "hourly_envelope_usd": 2.5,
-    "not_final_invoice": true
+    "not_final_invoice": true,
+    "pilot_reserved_usd": 0,
+    "whole_campaign_forecast_usd": 99.88017589632437,
+    "forecast_requires_revision": false,
+    "retained_compute_reserved_usd": 80,
+    "total_envelope_usd": 98.98,
+    "protected_finish_hours": 4,
+    "ten_billion_guaranteed": false
   },
   "tests": {
     "recovery_integration_cpu": 89,
@@ -33,5 +40,28 @@
     "Tiny optimizer numerical residual accepted only for observed configuration",
     "Fresh-VM main training integration pending",
     "No usable-model claim yet"
-  ]
+  ],
+  "updated_utc": "2026-11-11T02:33:38.618647+00:00",
+  "pilot_run_id": "forge-ownbase-v2-pilot-01",
+  "pilot_operation": "operation-1794356897865-65ff5457f5e2a-149b1cab-523b3d32",
+  "corpus_admitted": true,
+  "corpus_backup_complete": true,
+  "pilot_result": "runs/forge-ownbase-v2-pilot-01-results/results/result.json",
+  "validation_ce_start": 10.39821371436119,
+  "validation_ce_end": 5.803871169686317,
+  "allocation_policy": {
+    "requested_by_user": "Reuse the same VM and GPU; avoid losing allocation between stages",
+    "retain_allocation_between_successful_stages": true,
+    "recovery_test": "Restart the training process on the allocated VM; restore from the authoritative GCS checkpoint",
+    "shutdown_conditions": [
+      "Project budget deadline",
+      "Unrecoverable failure",
+      "Training and assessment complete"
+    ],
+    "existing_pilot_vm_already_deleted_before_request": true,
+    "implementation_status": "implemented_and_cpu_tested; replacement allocation requested",
+    "budget_cap_usd": 100
+  },
+  "run_id": "forge-ownbase-v2-retained-01",
+  "provider_delete_utc": "2026-11-12T10:32:45.482940Z"
 }

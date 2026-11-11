@@ -80,6 +80,19 @@ class BackupTests(unittest.TestCase):
                 scan(report,root,root/'receipt',time.monotonic()+10,runner=self.fake_cloud(remote,[]))
             self.assertFalse((root/'receipt').exists())
 
+    def test_known_missing_cat_variant_but_permission_error_raises(self):
+        from cloud_training.nano_inventory_backup import remote_metadata
+        uri='gs://test-bucket/corpus/shard_00046/manifest.json'
+        def missing(args,deadline):
+            raise subprocess.CalledProcessError(1,args,stderr=(
+                'ERROR: (gcloud.storage.cat) The following URLs matched no objects or files:\n  '+uri))
+        self.assertFalse(remote_metadata(uri,'a'*64,time.monotonic()+10,missing))
+        def forbidden(args,deadline):
+            raise subprocess.CalledProcessError(1,args,stderr=(
+                'ERROR: (gcloud.storage.cat) HTTPError 403: Access denied.'))
+        with self.assertRaises(subprocess.CalledProcessError):
+            remote_metadata(uri,'a'*64,time.monotonic()+10,forbidden)
+
     def test_lock_excludes_second_uploader(self):
         with tempfile.TemporaryDirectory() as t:
             p=Path(t)/'lock'

@@ -38,6 +38,9 @@ class LaunchTests(unittest.TestCase):
                 self.c=c
         self.p['checked_utc']='2026-11-08T00:00:00Z'
         with self.assertRaisesRegex(ValueError,'Fresh price'): self.plan()
+    def test_published_price_preserves_hourly_provision(self):
+        self.p['usd_per_hour']=2.01
+        with self.assertRaisesRegex(ValueError,'Price outside reviewed envelope'): self.plan()
     def test_inventory_paths_duplicates_tokenizer(self):
         for path in ('../x','/tmp/x','x/../y','x//y'):
             with self.assertRaises(ValueError): relative(path)

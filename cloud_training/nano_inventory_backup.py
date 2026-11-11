@@ -75,7 +75,7 @@ def remote_metadata(uri,expected,deadline,runner):
     try:raw=runner(['cat',uri],deadline)
     except subprocess.CalledProcessError as exc:
         error=(exc.stderr or '')
-        if re.search(r'\b404\b|No URLs matched|NotFound',error):return False
+        if re.search(r'\b404\b|No URLs matched|NotFound|The following URLs matched no objects or files:',error):return False
         raise
     if hashlib.sha256(raw.encode()).hexdigest()!=expected:raise ValueError('Existing remote metadata mismatch: '+uri)
     return True

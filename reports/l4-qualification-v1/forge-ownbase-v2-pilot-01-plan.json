@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "review_only_not_reserved",
+  "projection": {
+    "remaining_hours": 28.71207035852975,
+    "remaining_compute_envelope_usd": 71.78017589632438,
+    "rate_envelope_usd_per_hour": 2.5,
+    "not_an_invoice": true
+  },
+  "lease_hours": 1.0,
+  "create_argv": [
+    "gcloud",
+    "compute",
+    "instances",
+    "create",
+    "forge-ownbase-v2-pilot-01",
+    "--project=executespecv1",
+    "--zone=us-central1-b",
+    "--machine-type=a2-highgpu-1g",
+    "--provisioning-model=FLEX_START",
+    "--image=pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261029",
+    "--image-project=deeplearning-platform-release",
+    "--boot-disk-size=200GB",
+    "--boot-disk-type=pd-balanced",
+    "--boot-disk-auto-delete",
+    "--maintenance-policy=TERMINATE",
+    "--no-restart-on-failure",
+    "--max-run-duration=3600s",
+    "--instance-termination-action=DELETE",
+    "--no-address",
+    "--subnet=default",
+    "--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+    "--scopes=https://www.googleapis.com/auth/devstorage.read_write",
+    "--labels=purpose=ownbase-training,budget=usd100",
+    "--request-valid-for-duration=1800s",
+    "--metadata=bundle-uri=gs://forge-ownbase-a100-20261110/ownbase-v2/source/2f441bd9bca959a1e1641d723229ce7ce755c4eccb40a186187cae998080fe19.tar.gz,code-sha256=2f441bd9bca959a1e1641d723229ce7ce755c4eccb40a186187cae998080fe19,config-uri=gs://forge-ownbase-a100-20261110/ownbase-v2/launches/forge-ownbase-v2-pilot-01.json,config-sha256=0cbd80ae02801e169bb090616d9ff28ca7777db3329e9f6e9acbd0d22a84014b",
+    "--metadata-from-file=startup-script=cloud_training/nano_server.sh",
+    "--quiet",
+    "--format=json",
+    "--async"
+  ],
+  "required_before_execution": [
+    "campaign_budget.reserve with this projection and reviewed receipt paths",
+    "confirm zero existing project ownbase GPU instances/requests",
+    "confirm private bucket IAM and subnet Private Google Access",
+    "confirm complete 10B campaign inventory and exact authoritative ready journal",
+    "reconcile provider deletion and ledger after every lease"
+  ]
+}

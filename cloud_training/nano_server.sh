@@ -29,8 +29,8 @@ printf '%s  launch-config.json\n' "$(metadata config-sha256)" | sha256sum -c -
 read -r DEADLINE LOCAL_MIN DEST < <(python3 - <<'PY'
 import json,time,re
 c=json.load(open('launch-config.json')); seconds=c['max_runtime_seconds']
-kind=c.get('launch_kind','production'); assert kind in ('pilot','production')
-assert type(seconds) is int and 1200<=seconds<=(10800 if kind=='pilot' else 21600)
+kind=c.get('launch_kind','production'); assert kind in ('pilot','production','retained')
+assert type(seconds) is int and 1200<=seconds<=(10800 if kind=='pilot' else 115200 if kind=='retained' else 21600)
 cadence=c.get('checkpoint_seconds',900); assert type(cadence) is int and cadence in (900,1800)
 assert re.fullmatch(r'forge-ownbase-[a-z0-9-]{1,40}',c['run_id'])
 uptime=float(open('/proc/uptime').read().split()[0]); remaining=seconds-uptime
@@ -83,7 +83,10 @@ mkdir -p results
 (
   while sleep 120; do
     timeout 30 gcloud storage cp server.log "$DEST/server.log" --quiet || true
-    for f in results/*.json; do [ ! -f "$f" ] || timeout 30 gcloud storage cp "$f" "$DEST/results/" --quiet || true; done
+    # Small nested progress/result/log evidence only; never sync weight payloads.
+    for f in results/*.json results/stage-*/*.json results/stage-*/worker.log results/review-*/*.json results/review-*/worker.log results/review-*/sft/progress.json results/review-*/sft/result.json; do
+      [ ! -f "$f" ] || timeout 30 gcloud storage cp "$f" "$DEST/$f" --quiet || true
+    done
   done
 ) &
 TELEMETRY=$!

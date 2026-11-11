@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "review_only_not_reserved",
+  "projection": {
+    "remaining_hours": 29.609764828841524,
+    "remaining_compute_envelope_usd": 74.02441207210381,
+    "rate_envelope_usd_per_hour": 2.5,
+    "not_an_invoice": true,
+    "target_is_budget_adaptive": true,
+    "fits_base_time_budget": false
+  },
+  "lease_hours": 32.0,
+  "retained_budget": {
+    "lifetime_hours": 32.0,
+    "finish_hours_within_lifetime": 4.0,
+    "base_and_setup_hours_max": 28.0,
+    "reserved_compute_usd": 80.0,
+    "total_envelope_usd": 98.98,
+    "not_an_invoice": true
+  },
+  "create_argv": [
+    "gcloud",
+    "compute",
+    "instances",
+    "create",
+    "forge-ownbase-v2-retained-01",
+    "--project=executespecv1",
+    "--zone=us-central1-b",
+    "--machine-type=a2-highgpu-1g",
+    "--provisioning-model=FLEX_START",
+    "--image=pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261029",
+    "--image-project=deeplearning-platform-release",
+    "--boot-disk-size=200GB",
+    "--boot-disk-type=pd-balanced",
+    "--boot-disk-auto-delete",
+    "--maintenance-policy=TERMINATE",
+    "--no-restart-on-failure",
+    "--max-run-duration=115200s",
+    "--instance-termination-action=DELETE",
+    "--no-address",
+    "--subnet=default",
+    "--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+    "--scopes=https://www.googleapis.com/auth/devstorage.read_write",
+    "--labels=purpose=ownbase-training,budget=usd100",
+    "--request-valid-for-duration=1800s",
+    "--metadata=bundle-uri=gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz,code-sha256=c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9,config-uri=gs://forge-ownbase-a100-20261110/ownbase-v2/launches/forge-ownbase-v2-retained-01.json,config-sha256=8d8f996e428ee5836d6cddc21b2e31a91dd24251493b12bc104c5dcc342078a6",
+    "--metadata-from-file=startup-script=cloud_training/nano_server.sh",
+    "--quiet",
+    "--format=json",
+    "--async"
+  ],
+  "required_before_execution": [
+    "campaign_budget.reserve_retained for full lifetime with protected finish inside lifetime",
+    "confirm zero existing project ownbase GPU instances/requests",
+    "confirm private bucket IAM and subnet Private Google Access",
+    "confirm complete 10B campaign inventory and exact authoritative ready journal",
+    "reconcile provider deletion and ledger after every lease"
+  ]
+}

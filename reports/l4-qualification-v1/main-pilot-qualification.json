@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "restart_verified": true,
+  "production_ready": false,
+  "training_admitted": true,
+  "scope": "Operational checkpoint restoration and same-process next-update model equivalence for this measured runtime; fresh-VM main pilot still required.",
+  "raw_result_sha256": "24e2db95ac1db9728c12d2544dd923da8d093a4acca5668352e4515f3539144b",
+  "raw_status_preserved": "restart_mismatch",
+  "depth": 16,
+  "microbatch": 16,
+  "deterministic": true,
+  "deterministic_attention": false,
+  "effective_fa3_deterministic": true,
+  "tokens_per_second": 103386.42924581179,
+  "exact": [
+    "GCS readback integrity",
+    "restored pre-update model and optimizer state",
+    "data cursor and private generator",
+    "next-update input bytes",
+    "next-update loss",
+    "all536871738 model weights after next update"
+  ],
+  "scoped_exception": {
+    "optimizer_fp32_values_differing": 37,
+    "max_abs_difference": 1.355076051368087e-10,
+    "max_buffer_rms_difference": 1.654953146355429e-14,
+    "max_buffer_relative_l2_difference": 1.163781014813233e-08,
+    "nonfinite_or_metadata_differences": 0,
+    "acceptance": "Observed residual in two Muon momentum buffers only; no blanket future allclose threshold, no claim of full-state bitwise trajectories."
+  },
+  "evidence": [
+    "Exact pre-state restoration excludes persisted-state corruption in this test.",
+    "No-load same-state backward experiment also varies; runtime nondeterminism exists independent of checkpoint loading. It does not uniquely identify every residual kernel."
+  ],
+  "remaining": [
+    "Full immutable10B corpus admission",
+    "Exact post-load runtime state/RNG checks in main trainer",
+    "Fresh-process two-lease pilot with final tokenizer/data",
+    "Learning and conversation/tool quality assessments"
+  ],
+  "source": "https://docs.pytorch.org/docs/2.9/notes/randomness.html",
+  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+  "admission_receipt_sha256": "8abb0a61ba68b4e7aaaadefe9ab13548ed19a147696ede9933c271b1c8b09112",
+  "purpose": "Bounded main pilot only; production still requires fresh-VM two-lease proof"
+}

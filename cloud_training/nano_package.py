@@ -6,7 +6,8 @@ REVISION = '92d63d4e8bb4df75c3b71618f31ddde2378b2bcd'
 TOKENIZER_SHA = 'ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5'
 MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano_eval', 'nano_probes',
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
-           'campaign_budget', 'runtime')
+           'campaign_budget', 'runtime', 'nano_campaign', 'nano_sft',
+           'nano_serve', 'nano_chat_format', 'nano_quality')
 
 def sha(path):
     with Path(path).open('rb') as f: return hashlib.file_digest(f, 'sha256').hexdigest()
@@ -54,6 +55,8 @@ def build(root, target):
             if p.is_symlink(): raise ValueError('No package symlinks')
             if p.is_file() and '__pycache__' not in p.parts: files[name+'/'+p.relative_to(folder).as_posix()] = p
     for name in MODULES: files['cloud_training/'+name+'.py'] = root/'cloud_training'/ (name+'.py')
+    files['tools/__init__.py']=root/'tools/__init__.py'
+    files['cloud_training/evaluation/conversation-tools-dev.json']=root/'cloud_training/evaluation/conversation-tools-dev.json'
     files['cloud_training/nano_server.sh'] = root/'cloud_training/nano_server.sh'
     for name in ('kernel-lock.json','python-headers-lock.json'): files[name] = root/'reports/l4-qualification-v1'/name
     manifest = {'schema':1,'revision':REVISION,'tokenizer_sha256':TOKENIZER_SHA,

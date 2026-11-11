@@ -256,11 +256,63 @@
       "stop_or_verified_deletion_utc": "2026-11-10T10:25:48.557-08:00",
       "hourly_close_envelope_usd": 2.5,
       "note": "Rounded upper running minutes through verified deletion at A100Flex2USD+25percent provision, plus0.25 margin; disk/GCS ancillary reserve. Not final invoice."
+    },
+    {
+      "id": "forge-ownbase-v2-pilot-01",
+      "hours": 1.0,
+      "reserved_usd": 0.88,
+      "state": "closed_verified_DELETED",
+      "purpose": "admitted_base_training",
+      "forecast": {
+        "remaining_hours": 28.71207035852975,
+        "remaining_compute_envelope_usd": 71.78017589632438,
+        "rate_envelope_usd_per_hour": 2.5,
+        "not_an_invoice": true
+      },
+      "price_receipt": "reports/l4-qualification-v1/a100-flex-price-prepilot.json",
+      "admission_receipt": "runs/ownbase-v2-campaign/admission.json",
+      "original_reservation_usd": 2.5,
+      "start_utc": "2026-11-11T00:28:45.986Z",
+      "stop_or_verified_deletion_utc": "2026-11-11T00:43:41.299Z",
+      "hourly_close_envelope_usd": 2.5,
+      "note": "15 rounded running minutes at2.50/hour plus0.25 margin, rounded up; VM deletion confirmed. Disk/GCS ancillary reserve. Not invoice."
+    },
+    {
+      "id": "forge-ownbase-v2-retained-01",
+      "hours": 32,
+      "reserved_usd": 80.0,
+      "state": "running_reserved_lifetime",
+      "purpose": "retained_base_sft_assessment",
+      "finish_hours_within_lifetime": 4,
+      "budget": {
+        "lifetime_hours": 32,
+        "finish_hours_within_lifetime": 4,
+        "base_and_setup_hours_max": 28,
+        "reserved_compute_usd": 80.0,
+        "total_envelope_usd": 98.98,
+        "not_an_invoice": true
+      },
+      "receipts": {
+        "price_receipt": {
+          "path": "reports/l4-qualification-v1/a100-flex-price-retained.json",
+          "sha256": "4dc0d1d00728201476ee738349e88e8e042f9686021850a5661fe50e96d5c908"
+        },
+        "admission_receipt": {
+          "path": "runs/ownbase-v2-campaign/admission.json",
+          "sha256": "8abb0a61ba68b4e7aaaadefe9ab13548ed19a147696ede9933c271b1c8b09112"
+        },
+        "budget_review": {
+          "path": "reports/l4-qualification-v1/retained-budget-review.json",
+          "sha256": "0d55a1f222b7f4248003a240a567190569bfc644a3724d4f7e712b487684c693"
+        }
+      },
+      "start_utc": "2026-11-11T02:32:57.814Z",
+      "provider_delete_utc": "2026-11-12T10:32:45.482940Z"
     }
   ],
-  "compute_upper_estimate_usd": 8.1,
-  "total_including_ancillary_reserve_usd": 18.1,
-  "remaining_unallocated_usd": 81.9,
+  "compute_upper_estimate_usd": 8.98,
+  "total_including_ancillary_reserve_usd": 98.98,
+  "remaining_unallocated_usd": 1.02,
   "billing_status": "Conservative estimates, final billing not reconciled. $10 reserve retained for 30-day GCS retention, operations, egress and other ancillary charges.",
   "authorization": {
     "date": "2026-11-10",

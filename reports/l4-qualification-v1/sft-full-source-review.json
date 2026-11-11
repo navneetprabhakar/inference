@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "checked_utc": "2026-11-11T02:30:50.137332+00:00",
+  "status": "ready_for_root_experimental_admission_review",
+  "training_admitted": false,
+  "proposals": {
+    "general": {
+      "manifest": "runs/ownbase-v2-sft/full-review/general-manifest-proposal.json",
+      "manifest_sha256": "4dc735b5f73a1b78d8a851c2ac00177634f4b334b88d1caeba140b7d7173e608",
+      "receipt": "runs/ownbase-v2-sft/full-review/general-admission-proposal.json",
+      "training_admitted": false,
+      "train": {
+        "assistant_targets": 275734697,
+        "bytes": 1776621908,
+        "file": "../general-reviewed-v4/train.jsonl",
+        "sessions": 435854,
+        "sha256": "7a5ce088436a2dc93210e8a7eca5c266f05971787034a0d53fe02a5d38cb2c18"
+      },
+      "validation": {
+        "assistant_targets": 15043534,
+        "bytes": 96564019,
+        "file": "../general-reviewed-v4/validation.jsonl",
+        "sessions": 23867,
+        "sha256": "2b4c5eff1961577cee7b607b5f432f5eb7f042f3d77315946a38540098c862d0"
+      }
+    },
+    "targeted": {
+      "manifest": "runs/ownbase-v2-sft/full-review/targeted-manifest-proposal.json",
+      "manifest_sha256": "126e5b7484f8e4d583666cf9c2117b6613d6ca2c2e18df199c3da9401a521bf9",
+      "receipt": "runs/ownbase-v2-sft/full-review/targeted-admission-proposal.json",
+      "training_admitted": false,
+      "train": {
+        "assistant_targets": 870526,
+        "file": "../tool-candidates/train.jsonl",
+        "sessions": 16384,
+        "sha256": "1e183f8b5d0af24431ab1e8c09b7b833283f0bdc582f81688a710b102d711ff3"
+      },
+      "validation": {
+        "assistant_targets": 6617,
+        "file": "../tool-candidates/validation.jsonl",
+        "sessions": 128,
+        "sha256": "7f52dc9ee2ae88fd2bfa7b0b42bf3c043ddcf82269e44853deaa138d2eadd0f0"
+      }
+    }
+  },
+  "full_source_audit": {
+    "training_admitted": false,
+    "sources": {
+      "general": {
+        "manifest_sha256": "0b192f992d3eba560015451e8e1475c30a0690f7858cdd059fdc7b269f15d3f9",
+        "splits": {
+          "validation": {
+            "sessions": 23867,
+            "assistant_targets": 15043534,
+            "sequence_tokens": 23080387
+          },
+          "train": {
+            "exact_conversation_overlap": 0,
+            "exact_user_sequence_overlap": 0,
+            "sessions_with_any_normalized_user_prompt_in_any_dev": 15894,
+            "sessions": 451749,
+            "assistant_targets": 286171425,
+            "sequence_tokens": 439111828
+          }
+        }
+      },
+      "tool-candidates": {
+        "manifest_sha256": "ddd13bbf256fa0a5b5da5b7b61f4073e712d9b9f85b4f1ec682cdb37eb1b6cec",
+        "splits": {
+          "validation": {
+            "actual_calls": 160,
+            "adapter_errors": 16,
+            "sessions": 128,
+            "assistant_targets": 6617,
+            "sequence_tokens": 57582
+          },
+          "train": {
+            "exact_conversation_overlap": 0,
+            "exact_user_sequence_overlap": 0,
+            "sessions_with_any_normalized_user_prompt_in_any_dev": 0,
+            "actual_calls": 21952,
+            "adapter_errors": 2240,
+            "sessions": 16384,
+            "assistant_targets": 870526,
+            "sequence_tokens": 7542478
+          }
+        }
+      }
+    },
+    "started": 1794363981.578372,
+    "seconds": 169.39653897285461
+  },
+  "corrected_general": {
+    "parent_manifest_sha256": "0b192f992d3eba560015451e8e1475c30a0690f7858cdd059fdc7b269f15d3f9",
+    "removed_conversations": 15895,
+    "removed_ids_file": "removed-ids.json",
+    "reason": "Demonstrated erroneous arithmetic puzzle and Unicode encode/decode exception example; remaining source semantic correctness not guaranteed.",
+    "retained_sequence_tokens": 422480601,
+    "validation_unchanged": true,
+    "prompt_filter": "Exclude any individual normalized NFKC casefold whitespace-collapsed userturn shared with either source development split; generic followups included conservatively."
+  },
+  "general_source_provenance": {
+    "repository": "HuggingFaceTB/smol-smoltalk",
+    "revision": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc",
+    "license": "Apache-2.0 datasetcard",
+    "all_five_local_source_hashes_verified": true,
+    "source_hash_receipt": "runs/ownbase-v2-sft/full-review/source-hashes.json"
+  },
+  "verification": {
+    "all_original_sessions_encoded_with_final_own_tokenizer": true,
+    "all_stored_target_counts_match": true,
+    "only_assistant_text_call_end_spans_supervised": true,
+    "tool_records_reexecuted_against_actual_offline_broker": true,
+    "tool_grounding_receipt": "runs/ownbase-v2-sft/full-review/tool-grounding.json",
+    "corrected_general_is_unmodified_subset": true,
+    "corrected_general_no_normalized_individual_user_turn_in_either_dev": true,
+    "exact_dedup_and_full_user_sequence_disjoint": true,
+    "sealed_acceptance_accessed": false,
+    "runtime_load_manifest_contract": "Root must explicitly set receipt and manifest training_admitted=true in NEW admitted artifacts and update receipt SHA. Current proposals deliberately fail runtime admission.",
+    "corrected_independent_check": "runs/ownbase-v2-sft/full-review/corrected-independent-check.json",
+    "corrected_independent_check_passed": true
+  },
+  "sample_quality": {
+    "known_bad_ids_removed": [
+      "df6ed43fe3117be0e3f6aed1d0e91dd1a345943a0b17e30f42a0e4abeb5e55f0",
+      "acde1c4b7c12a5d3eaeeb07f00f0291111ff44aa817abf25d5ff76c13d6f0080"
+    ],
+    "demonstrated_errors": [
+      "Impossible8ball unknown heavier/lighter puzzle in2weighings; imaginary comparisons.",
+      "Unicode encode/decode exception mismatch, invalid exception constructor; independently identified benchmarkagent."
+    ],
+    "additional_fixed_spaced_general_rows_inspected": [
+      20000,
+      40000,
+      60000,
+      80000,
+      100000,
+      120000,
+      140000,
+      160000
+    ],
+    "conclusion": "Broad conversation/editing/roleplay coverage, inherited verbosity and multilingual examples; sample review is not quality certification.",
+    "tool_samples": "Arithmetic, metric conversion, corrected entity operand, division-by-zero recovery inspected; full broker records and latest-observation grounding checked."
+  },
+  "operating_recommendation": {
+    "general": "One bounded pass of corrected general; measure actual SFT throughput before promising completion.",
+    "targeted": "One bounded pass of narrow tool corpus, then measure general retention before choosing it as final. No automatic replay.",
+    "finish": "Within protected4h; latest safe checkpoint and measured assessment take precedence over exhausting data.",
+    "major_limits": [
+      "Near-duplicate semantic train/dev separation not proven.",
+      "Public general test is development, not final acceptance.",
+      "Format masking does not eliminate source factual/coding mistakes.",
+      "Targeted tool-only phase may harm general retention; compare generalSFT and targeted checkpoints."
+    ]
+  },
+  "storage_review": "reports/l4-qualification-v1/retained-storage-review.json"
+}

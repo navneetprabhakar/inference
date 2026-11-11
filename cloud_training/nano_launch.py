@@ -57,9 +57,9 @@ def select_resume(journal, config):
 def lease_controls(config):
     """Operational lease/save cadence, deliberately outside numerical identity."""
     kind=config.get('launch_kind','production')
-    if kind not in ('pilot','production'): raise ValueError('Explicit pilot/production launch kind required')
+    if kind not in ('pilot','production','retained'): raise ValueError('Explicit pilot/production launch kind required')
     seconds=config['max_runtime_seconds']
-    cap=10800 if kind=='pilot' else 21600
+    cap=10800 if kind=='pilot' else 115200 if kind=='retained' else 21600
     if type(seconds) is not int or not 1200<=seconds<=cap:
         raise ValueError('Lease must be 20min..3h for pilot or 20min..6h for production')
     cadence=config.get('checkpoint_seconds',900)
@@ -83,10 +83,14 @@ def build_plan(config, ledger, qualification, price, index, *, now=None):
     if limit is not None and (type(limit) is not int or limit<1 or step+limit>HORIZON): raise ValueError('Invalid pilot bound')
     if config.get('depth')!=16 or config.get('microbatch') not in (1,2,4,8,16): raise ValueError('Unqualified geometry')
     kind=config.get('launch_kind','production')
-    if kind not in ('pilot','production'): raise ValueError('Explicit pilot/production launch kind required')
+    if kind not in ('pilot','production','retained'): raise ValueError('Explicit pilot/production launch kind required')
     if qualification.get('restart_verified') is not True or qualification.get('campaign_sha256')!=index['campaign_sha256']: raise ValueError('Reviewed benchmark restart/data qualification required')
     if kind=='pilot':
         if limit is None or limit>32 or qualification.get('training_admitted') is not True: raise ValueError('Pilot requires admitted data and <=32 bounded updates')
+    elif kind=='retained':
+        from cloud_training.nano_campaign import validate_config
+        validate_config(config)
+        if qualification.get('training_admitted') is not True: raise ValueError('Retained pilot requires admitted data')
     elif qualification.get('production_ready') is not True:
         raise ValueError('Production requires reviewed fresh-process two-lease recovery proof')
     queue_seconds=config.get('request_valid_seconds',0)
@@ -97,22 +101,30 @@ def build_plan(config, ledger, qualification, price, index, *, now=None):
     checked=dt.datetime.fromisoformat(price['checked_utc'].replace('Z','+00:00'))
     if checked.tzinfo is None or not 0<=(now-checked).total_seconds()<=86400: raise ValueError('Fresh price evidence required')
     rate=price['usd_per_hour']
-    if isinstance(rate,bool) or not isinstance(rate,(float,int)) or not math.isfinite(rate) or not 0<rate<=2.5 or price.get('machine_type')!='a2-highgpu-1g' or price.get('provisioning_model')!='FLEX_START' or not price.get('source'): raise ValueError('Price outside reviewed envelope')
+    # The fixed $2.50 envelope includes a 25% provision over the published price.
+    if isinstance(rate,bool) or not isinstance(rate,(float,int)) or not math.isfinite(rate) or not 0<rate<=2.0 or price.get('machine_type')!='a2-highgpu-1g' or price.get('provisioning_model')!='FLEX_START' or not price.get('source'): raise ValueError('Price outside reviewed envelope')
     projection=forecast(remaining_tokens=(HORIZON-step)*BATCH,tokens_per_second=qualification['tokens_per_second'],overhead_fraction=config['overhead_fraction'],setup_hours=config['remaining_setup_hours'])
     if ledger.get('cap_usd')!=100 or any(a['state'].startswith(('reserved','running','queued')) for a in ledger['allocations']): raise ValueError('Cap mismatch or outstanding GPU allocation')
     amounts=[ledger['ancillary_reserve_usd'],*[a['reserved_usd'] for a in ledger['allocations']]]
     if any(isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x) or x<0 for x in amounts): raise ValueError('Invalid financial ledger')
-    if projection['remaining_compute_envelope_usd']<seconds/3600*2.5: raise ValueError('Shorten final lease to remaining campaign forecast')
-    spent=sum(a['reserved_usd'] for a in ledger['allocations'])
-    if spent+ledger['ancillary_reserve_usd']+10+max(projection['remaining_compute_envelope_usd'],seconds/3600*2.5)>100: raise ValueError('Whole campaign exceeds remaining budget')
+    retained_budget=None
+    if kind=='retained':
+        from cloud_training.campaign_budget import retained_cost
+        retained_budget=retained_cost(ledger,hours=seconds/3600,finish_hours=config['retained']['protected_finish_seconds']/3600)
+        projection['target_is_budget_adaptive']=True
+        projection['fits_base_time_budget']=projection['remaining_hours']<=seconds/3600-config['retained']['protected_finish_seconds']/3600
+    else:
+        if projection['remaining_compute_envelope_usd']<seconds/3600*2.5: raise ValueError('Shorten final lease to remaining campaign forecast')
+        spent=sum(a['reserved_usd'] for a in ledger['allocations'])
+        if spent+ledger['ancillary_reserve_usd']+10+max(projection['remaining_compute_envelope_usd'],seconds/3600*2.5)>100: raise ValueError('Whole campaign exceeds remaining budget')
     command=['gcloud','compute','instances','create',config['run_id'],'--project=executespecv1','--zone='+config['zone'],'--machine-type=a2-highgpu-1g','--provisioning-model=FLEX_START','--image=pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261029','--image-project=deeplearning-platform-release','--boot-disk-size=200GB','--boot-disk-type=pd-balanced','--boot-disk-auto-delete','--maintenance-policy=TERMINATE','--no-restart-on-failure','--max-run-duration='+str(seconds)+'s','--instance-termination-action=DELETE','--no-address','--subnet=default','--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com','--scopes=https://www.googleapis.com/auth/devstorage.read_write','--labels=purpose=ownbase-training,budget=usd100','--request-valid-for-duration='+str(queue_seconds)+'s','--metadata='+','.join(k+'='+str(config[v]) for k,v in [('bundle-uri','bundle_uri'),('code-sha256','bundle_sha256'),('config-uri','config_uri'),('config-sha256','config_sha256')]),'--metadata-from-file=startup-script=cloud_training/nano_server.sh','--quiet','--format=json']
     if queue_seconds: command.append('--async')
-    return {'schema':1,'status':'review_only_not_reserved','projection':projection,'lease_hours':seconds/3600,'create_argv':command,'required_before_execution':['campaign_budget.reserve with this projection and reviewed receipt paths','confirm zero existing project ownbase GPU instances/requests','confirm private bucket IAM and subnet Private Google Access','confirm complete 10B campaign inventory and exact authoritative ready journal','reconcile provider deletion and ledger after every lease']}
+    return {'schema':1,'status':'review_only_not_reserved','projection':projection,'lease_hours':seconds/3600,'retained_budget':retained_budget,'create_argv':command,'required_before_execution':[('campaign_budget.reserve_retained for full lifetime with protected finish inside lifetime' if kind=='retained' else 'campaign_budget.reserve with this projection and reviewed receipt paths'),'confirm zero existing project ownbase GPU instances/requests','confirm private bucket IAM and subnet Private Google Access','confirm complete 10B campaign inventory and exact authoritative ready journal','reconcile provider deletion and ledger after every lease']}
 
 def run_cloud(args,deadline):
     remaining=deadline-time.time()
     if remaining<=0: raise TimeoutError('Staging deadline expired')
-    return subprocess.check_output(['gcloud','storage',*args,'--quiet'],text=True,timeout=remaining)
+    return subprocess.check_output(['gcloud','storage',*args,'--quiet'],text=True,timeout=remaining,stderr=subprocess.STDOUT)
 
 def fetch(source,target,expected,deadline,bytes_expected=None):
     uri(source); digest(expected); target=Path(target)
@@ -146,32 +158,39 @@ def stage(config,root,deadline):
     from cloud_training.nano_train import read_campaign
     campaign=read_campaign(root/'data'/index['campaign_path'])
     if sum(e['_rows'] for e in campaign['train'])*2048 < HORIZON*BATCH: raise ValueError('Full immutable 10B-token inventory required before retained pilot')
-    resume=None
-    if config['mode']=='resume':
-        journal_uri=config['backup_prefix']+'/retention-journal.json'
-        first=json.loads(run_cloud(['objects','describe',journal_uri,'--format=json'],deadline))
-        raw=run_cloud(['cat',journal_uri],deadline)
-        second=json.loads(run_cloud(['objects','describe',journal_uri,'--format=json'],deadline))
-        if not first.get('generation') or first['generation']!=second.get('generation'): raise ValueError('Journal changed while reading')
-        receipt=select_resume(json.loads(raw),config)
-        resume=root/'resume'; resume.mkdir(exist_ok=False)
-        for name in ('payload.pt','metadata.json','manifest.json','COMMITTED'):
-            run_cloud(['cp',receipt['remote_prefix']+'/'+name,str(resume/name)],deadline)
-        from cloud_training.nano_checkpoint import validate_bundle
-        if validate_bundle(resume)!=receipt['manifest']: raise ValueError('Checkpoint differs from trusted receipt')
-        metadata=json.loads((resume/'metadata.json').read_text())
-        if metadata['identity']!=receipt['identity'] or metadata['step']!=config['resume_step']: raise ValueError('Resume metadata differs')
+    resume=restore_resume(config,root/'resume',deadline) if config['mode']=='resume' else None
     return root/'data'/index['campaign_path'],resume
 
-def worker(config,root,deadline):
-    _,cadence=lease_controls(config)
-    campaign,resume=stage(config,root,deadline-600)
-    argv=[sys.executable,'-u','-m','cloud_training.nano_train','--campaign',str(campaign),'--repo',str(Path(root)/'nanochat-source'),'--output',str(Path(root)/'results'),'--backup-prefix',config['backup_prefix'],'--deadline-utc',dt.datetime.fromtimestamp(deadline,dt.timezone.utc).isoformat(),'--depth',str(config['depth']),'--microbatch',str(config['microbatch']),'--kernel-path',str(Path(root)/'kernel'),'--kernel-sha',config['kernel_sha256'],'--checkpoint-seconds',str(cadence)]
+def restore_resume(config,destination,deadline):
+    journal_uri=config['backup_prefix']+'/retention-journal.json'
+    first=json.loads(run_cloud(['objects','describe',journal_uri,'--format=json'],deadline))
+    raw=run_cloud(['cat',journal_uri],deadline)
+    second=json.loads(run_cloud(['objects','describe',journal_uri,'--format=json'],deadline))
+    if not first.get('generation') or first['generation']!=second.get('generation'): raise ValueError('Journal changed while reading')
+    receipt=select_resume(json.loads(raw),config)
+    resume=Path(destination); resume.mkdir(parents=True,exist_ok=False)
+    for name in ('payload.pt','metadata.json','manifest.json','COMMITTED'):
+        run_cloud(['cp',receipt['remote_prefix']+'/'+name,str(resume/name)],deadline)
+    from cloud_training.nano_checkpoint import validate_bundle
+    if validate_bundle(resume)!=receipt['manifest']: raise ValueError('Checkpoint differs from trusted receipt')
+    metadata=json.loads((resume/'metadata.json').read_text())
+    if metadata['identity']!=receipt['identity'] or metadata['step']!=config['resume_step']: raise ValueError('Resume metadata differs')
+    return resume
+
+def worker_argv(config,root,campaign,resume,output,deadline):
+    cadence=config.get('checkpoint_seconds',900)
+    argv=[sys.executable,'-u','-m','cloud_training.nano_train','--campaign',str(campaign),'--repo',str(Path(root)/'nanochat-source'),'--output',str(output),'--backup-prefix',config['backup_prefix'],'--deadline-utc',dt.datetime.fromtimestamp(deadline,dt.timezone.utc).isoformat(),'--depth',str(config['depth']),'--microbatch',str(config['microbatch']),'--kernel-path',str(Path(root)/'kernel'),'--kernel-sha',config['kernel_sha256'],'--checkpoint-seconds',str(cadence)]
     argv+=['--tokenizer-dir',str(Path(root)/'tokenizer')]
     if resume: argv+=['--resume',str(resume)]
     if config.get('max_updates') is not None: argv+=['--max-updates',str(config['max_updates'])]
     for key in ('deterministic','deterministic_attention'):
         if config[key]: argv+=['--'+key.replace('_','-')]
+    return argv
+
+def worker(config,root,deadline):
+    _,cadence=lease_controls(config)
+    campaign,resume=stage(config,root,deadline-600)
+    argv=worker_argv(config,root,campaign,resume,Path(root)/'results',deadline)
     # Train handles TERM/update-boundary checkpoint; outer timeout guards hangs.
     return subprocess.call(['timeout','--signal=TERM','--kill-after=60s',str(max(1,int(deadline-time.time()))),*argv])
 
@@ -182,6 +201,9 @@ if __name__=='__main__':
     config['config_sha256']=sha(a.config)
     if a.action=='worker':
         if a.deadline is None: p.error('--deadline required')
+        if config.get('launch_kind')=='retained':
+            from cloud_training.nano_campaign import run_campaign
+            raise SystemExit(run_campaign(config,a.root,a.deadline))
         raise SystemExit(worker(config,a.root,a.deadline))
     load=lambda name:json.loads(Path(getattr(a,name)).read_text())
     print(json.dumps(build_plan(config,load('ledger'),load('qualification'),load('price'),load('index')),indent=2))
