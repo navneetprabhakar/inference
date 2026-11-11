@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "created_utc": "2026-11-11T17:16:34.810473+00:00",
-  "status": "executing_qualification_pilot",
+  "status": "teacher_production_generation",
   "student": {
     "initialization": "own_random",
     "parameters": 536871738,
@@ -30,7 +30,7 @@
     "Only after base/conversation tuning: separate4Kextension qualification and re-evaluation"
   ],
   "qualification_pilot": {
-    "status": "running",
+    "status": "generation_complete_semantic_review_pending",
     "directory": "runs/teacher-student-execution-v1/substantive-pilot",
     "planned_dialogues": 48,
     "requirements": [
@@ -40,7 +40,11 @@
       "Whole rendered dialogue within2048tokens",
       "Final-state answer independently matches seeded source facts"
     ],
-    "avoid": "Do not count repetitive acknowledgments or template variants as broad conversational coverage"
+    "avoid": "Do not count repetitive acknowledgments or template variants as broad conversational coverage",
+    "generated_dialogues": 48,
+    "generated_assistant_targets": 6252,
+    "mean_assistant_targets_per_dialogue": 130.25,
+    "scale_readiness": "Not yet qualified; current token yield would miss2Mtargets at10000dialogues. Enrich or expand accepted dialogue count after review."
   },
   "curriculum_mix_proposal": {
     "coherent_contextful_conversation": 0.5,
@@ -97,5 +101,21 @@
     "admitted": "immutable manifests and source hashes",
     "trained": "student checkpoint lineage and actual supervised token counters",
     "evaluated": "heldout transcripts and frozen acceptance outcomes"
-  }
+  },
+  "production_generation": {
+    "status": "qualification_passed_candidate_generation_authorized",
+    "model": "gpt-6.1-terra",
+    "directory": "runs/teacher-student-execution-v1/production",
+    "generation_target_candidates": 10000,
+    "generation_target_assistant_tokens": 2000000,
+    "candidate_not_training_admission": true,
+    "worker": "cloud_training.generate_teacher_context",
+    "supervisor": "cloud_training.teacher_generation_campaign",
+    "per_candidate_min_assistant_targets": 200,
+    "max_hours_per_run": 12,
+    "max_cohorts": 220,
+    "on_error": "Stop, preserve receipts; no automatic paidAPI or quotareset",
+    "qualification": "reports/l4-qualification-v1/teacher-rich-qualification.json"
+  },
+  "updated_utc": "2026-11-11T18:08:01.297958+00:00"
 }

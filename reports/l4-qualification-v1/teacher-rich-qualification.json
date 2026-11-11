@@ -1,0 +1,22 @@
+{
+  "created_utc": "2026-11-11T18:08:33.398464+00:00",
+  "allow_candidate_generation": true,
+  "training_admitted": false,
+  "model": "gpt-6.1-terra",
+  "candidate_dialogues": 48,
+  "assistant_targets": 11423,
+  "mean_assistant_targets": 237.97916666666666,
+  "rejections": 0,
+  "progress_sha256": "f374903a9759ea2ce0b5240386d73087e80797c2097c0378dcb141965c06e25c",
+  "mechanical_checks": "All retained dialogues have200+assistant targets,2048maxpositions,12alternating messages and exact seeded latest/latest/original final state",
+  "root_semantic_review": "Eight complete representative dialogues spanning all8domains inspected; useful explanations and correction consistency. Full corpus semantic review remains pending.",
+  "production_prompt_correction": "Remove artificial internal IDs and fictional-preface boilerplate in subsequent cohorts",
+  "scope": "Permit candidate generation only, not wholesale training admission or quality claim",
+  "requires_before_admission": [
+    "Semantic review",
+    "Cross-source near duplicates",
+    "Exact source-dev and exposed prompt exclusion",
+    "Scenario-level heldout partition",
+    "Teacher-output provenance and token accounting"
+  ]
+}
