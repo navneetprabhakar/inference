@@ -1,13 +1,16 @@
 OWN-BASE MODEL — TRAINING AUDIT
-Updated: 2026-11-11T02:53:12.058645+00:00
+Updated: 2026-11-11T04:37:05.501040+00:00
 
 CURRENT STATE
 - The 537M-parameter model is training from our own random initialization.
 - A100 VM: forge-ownbase-v2-retained-01, us-central1-b. Retained across stages.
-- Recovery passed. Checkpoint 64 contains 33,554,432 training tokens.
-- Held-out loss improved from 10.3982 at initialization to 5.8039 at step 32,
-  then 5.1133 at step 64. These are language-learning results, not chat acceptance.
-- Base training is continuing toward the first 1B-token assessment.
+- Recovery passed. Latest reported durable checkpoint: 1120 / 587,202,560 tokens.
+- Latest observed training progress: 626,524,160 tokens at about103K tokens/s.
+- Held-out loss: 3.2137 at250M tokens, then3.0281 at500M tokens.
+  These are language-learning results, not conversation/tool acceptance.
+- First1B raw conversation/tool baseline is approximately70minutes away.
+- Local supervisor telemetry-read race was repaired;18tests passed and its
+  historical blocker was preserved. GPU training was not interrupted.
 
 COMPLETED
 1. Prepared and verified 10.027B training tokens and a separate development split.

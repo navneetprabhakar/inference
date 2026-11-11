@@ -1,6 +1,6 @@
 {
   "phase": "base_training_same_retained_vm",
-  "own_base_retained_training_targets": 33554432,
+  "own_base_retained_training_targets": 587202560,
   "random_initialization_required": true,
   "model_parameters": 536871738,
   "planned_base_targets": 10000269312,
@@ -11,10 +11,9 @@
   "production_bundle_sha256": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9",
   "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz",
   "next": [
-    "ObserveGPUallocation andcheckpoint32restore",
-    "ExactCEresume pilot32to64; automaticbasecontinuation onpass",
-    "1Brawquality check;3Band6Binstructiondiagnostics",
-    "Protected4hfinaltuning/assessment within100USD"
+    "1B raw conversation and tool baseline",
+    "3B/6B isolated instruction diagnostics",
+    "Protected final tuning and acceptance within $100"
   ],
   "budget": {
     "total_cap_usd": 100,
@@ -40,7 +39,7 @@
     "Scoped tinyoptimizerresidual retained from qualification; nofulltrajectorybitwiseclaim",
     "Conversation/tool qualitynotyetestablished"
   ],
-  "updated_utc": "2026-11-11T02:52:17.703347+00:00",
+  "updated_utc": "2026-11-11T04:37:05.501040+00:00",
   "pilot_run_id": "forge-ownbase-v2-pilot-01",
   "pilot_operation": "operation-1794356897865-65ff5457f5e2a-149b1cab-523b3d32",
   "corpus_admitted": true,
@@ -63,9 +62,11 @@
   },
   "run_id": "forge-ownbase-v2-retained-01",
   "provider_delete_utc": "2026-11-12T10:32:45.482940Z",
-  "observed_training_step": 64,
-  "observed_training_targets": 33554432,
+  "observed_training_step": 1195,
+  "observed_training_targets": 626524160,
   "restore_validation_ce_exact": true,
-  "latest_committed_step": 64,
-  "production_ready": true
+  "latest_committed_step": 1120,
+  "production_ready": true,
+  "latest_validation_ce": 3.028135724365711,
+  "latest_validation_milestone_tokens": 500000000
 }

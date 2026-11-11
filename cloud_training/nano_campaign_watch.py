@@ -41,7 +41,7 @@ class Cloud:
             generation=int(meta['generation'])
             try:return generation,self.run(['cat',source+'#'+str(generation)])
             except subprocess.CalledProcessError as error:
-                if '404' not in str(error.output):raise
+                if not any(message in str(error.output) for message in ('404', 'The following URLs matched no objects or files:')):raise
                 fresh=json.loads(self.run(['objects','describe',source,'--format=json']))
                 if int(fresh['generation'])==generation or attempt==2:raise
                 meta=fresh

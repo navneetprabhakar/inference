@@ -134,6 +134,14 @@ class WatchTests(unittest.TestCase):
         with patch.object(cloud,'run',side_effect=[missing]) as run:
             with self.assertRaises(subprocess.CalledProcessError):cloud.snapshot(source)
             self.assertEqual(run.call_count,1)
+    def test_actual_gcloud_missing_generation_wording_requires_changed_generation(self):
+        cloud=W.Cloud(time.time()+100);source=self.config['retained']['control_uri']
+        missing=subprocess.CalledProcessError(1,['gcloud'],output=b'ERROR: (gcloud.storage.cat) The following URLs matched no objects or files:')
+        with patch.object(cloud,'run',side_effect=[b'{"generation":"7"}',missing,b'{"generation":"8"}',b'new']):
+            self.assertEqual(cloud.snapshot(source),(8,b'new'))
+        with patch.object(cloud,'run',side_effect=[b'{"generation":"7"}',missing,b'{"generation":"7"}']):
+            with self.assertRaises(subprocess.CalledProcessError):cloud.snapshot(source)
+
     def test_cloud_snapshot_max_three_generation_attempts(self):
         cloud=W.Cloud(time.time()+100);source=self.config['retained']['control_uri']
         missing=subprocess.CalledProcessError(1,['gcloud'],output=b'HTTP404')
