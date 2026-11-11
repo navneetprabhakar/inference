@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "created_utc": "2026-11-11T17:16:34.810473+00:00",
+  "status": "executing_qualification_pilot",
+  "student": {
+    "initialization": "own_random",
+    "parameters": 536871738,
+    "context_tokens": 2048,
+    "pretrained_student_substitution": false
+  },
+  "teacher": {
+    "model": "gpt-6.1-terra",
+    "transport": "codex_cli",
+    "reviewer": "independent checks plus root transcript review; separate Sol critique where useful",
+    "paid_api_fallback": false
+  },
+  "targets": {
+    "accepted_dialogues": 10000,
+    "accepted_assistant_targets_min": 2000000,
+    "accepted_assistant_targets_max_initial": 5000000,
+    "scale_after_measured_student_gain_only": true,
+    "estimates_not_minimum_proven_requirements": true
+  },
+  "execution_order": [
+    "Continue current base training with fixed6B diagnostic",
+    "Generate and qualify teacher data concurrently on local CPU",
+    "Reach10Bbase target subject to authorized budget/deadline; report any shortfall",
+    "General conversation SFT, then admitted targeted/context teacher mixture",
+    "Independent conversation, context and real broker acceptance evaluation",
+    "Only after base/conversation tuning: separate4Kextension qualification and re-evaluation"
+  ],
+  "qualification_pilot": {
+    "status": "running",
+    "directory": "runs/teacher-student-execution-v1/substantive-pilot",
+    "planned_dialogues": 48,
+    "requirements": [
+      "4-6 user turns",
+      "At least2substantive45-80word assistant responses",
+      "Known facts, explicit corrections, topic return, unchanged-fact recall",
+      "Whole rendered dialogue within2048tokens",
+      "Final-state answer independently matches seeded source facts"
+    ],
+    "avoid": "Do not count repetitive acknowledgments or template variants as broad conversational coverage"
+  },
+  "curriculum_mix_proposal": {
+    "coherent_contextful_conversation": 0.5,
+    "grounded_instruction_and_explanations": 0.2,
+    "tool_use_permissions_clarification_and_recovery": 0.3,
+    "ratio_is_starting_recipe_not_validated_optimum": true
+  },
+  "quality_gates": [
+    "Measure own-tokenizer assistant targets, not total prompt/output bytes",
+    "Exact and semantic near-duplicate filtering across teacher cohorts",
+    "Exclude allsource development and exposed diagnostic prompts; never read sealed answers",
+    "Replay every retained tool call against actual broker and verify grounded final answers",
+    "Hold out entire scenarios/entities/template families rather than individual turns",
+    "Review full qualification pilot and sample allfamilies in later batches",
+    "Stop generation on quota/auth errors; user handles usage resets",
+    "Do not admit new datasets solely because JSON parses or broker calls succeed"
+  ],
+  "training_integration": {
+    "current_approved_teacher_train_sessions": 79,
+    "current_teacher_dev_sessions": 6,
+    "queued_final_targeted": "runs/ownbase-v2-sft/targeted-context-admitted-v3/manifest.json",
+    "larger_teacher_mixture": "publish new immutable admitted version after verification, then migrate onlyfinal watcher input under exclusive lock",
+    "general_instruction_data_already_available_assistant_targets": 275734697,
+    "fixed3b_6b_diagnostic_changed": false,
+    "student_training_gate": "Check valid response endings, loss and tool frames before interpreting content accuracy",
+    "explicit_finite_epochs": "Any replay must be intentional, counted and recorded; no hidden corpus wrap"
+  },
+  "evaluation": {
+    "development_sessions_target": 500,
+    "separate_from_sealed_final_acceptance": true,
+    "metrics": [
+      "Completed conversation turns",
+      "Latestfact correctness undercorrection",
+      "Earlierfact retention aftertopic return",
+      "Reference resolution and instruction adherence",
+      "Valid toolframes, correctarguments, actualexecution and finalgrounding",
+      "Repetition and short/long coherence judged from raw transcripts"
+    ],
+    "if6Bformatstillfails": "Prioritize label/optimizer/termination/protocol learning diagnostic before more base or larger teacher corpus"
+  },
+  "cost_and_lifecycle": {
+    "approved_gcp_total_cap_usd": 100,
+    "proposed_150_not_approved": true,
+    "new_gcp_generation_compute": 0,
+    "same_vm_single_weight_writer": true,
+    "original_budget_cutoff_epoch": 1794476714,
+    "teacher_cli_usage": "Existing account allowance; stop on quota errors, never automatic paid API fallback",
+    "training_cost": "Measure packed throughput and reallocate existing base/final budget if needed; no unapproved extension"
+  },
+  "tracking": {
+    "generated": "candidate files and teacher CLI usage receipts",
+    "verified": "mechanical state/broker checks",
+    "reviewed": "semantic and contamination review receipts",
+    "admitted": "immutable manifests and source hashes",
+    "trained": "student checkpoint lineage and actual supervised token counters",
+    "evaluated": "heldout transcripts and frozen acceptance outcomes"
+  }
+}
