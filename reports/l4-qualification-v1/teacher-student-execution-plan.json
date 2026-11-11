@@ -103,7 +103,7 @@
     "evaluated": "heldout transcripts and frozen acceptance outcomes"
   },
   "production_generation": {
-    "status": "qualification_passed_candidate_generation_authorized",
+    "status": "running_after_length_prompt_calibration",
     "model": "gpt-6.1-terra",
     "directory": "runs/teacher-student-execution-v1/production",
     "generation_target_candidates": 10000,
@@ -115,7 +115,14 @@
     "max_hours_per_run": 12,
     "max_cohorts": 220,
     "on_error": "Stop, preserve receipts; no automatic paidAPI or quotareset",
-    "qualification": "reports/l4-qualification-v1/teacher-rich-qualification.json"
+    "qualification": "reports/l4-qualification-v1/teacher-rich-qualification.json",
+    "verified_candidates": 78,
+    "generated_assistant_targets": 17782,
+    "reason": "6of12responses below200assistanttokens in cohort001batch002; rejected and stopped by quality gate",
+    "next": "Revise substantive-response generation recipe before resuming; retain existing quality threshold",
+    "resume_verified_candidates": 78,
+    "resume_assistant_targets": 17782,
+    "correction": "Prompt95-125words for two substantive replies;200assistant-token guard retained. Original deadline and counts preserved."
   },
   "updated_utc": "2026-11-11T18:08:01.297958+00:00"
 }
