@@ -12,7 +12,7 @@ from cloud_training.nano_package import TOKENIZER_SHA,sha
 from cloud_training.nano_campaign import validate_command
 from cloud_training.nano_launch import uri
 
-RECIPE_SHA='363a10155bf70c9744dce46a1391c1e32f5ba607ff7f33009c1a46cb4ef8b903'
+RECIPE_SHA='7f93a86704a272e1aea881125d460738bebc690d998536c1ff8d2bb3b97fde8a'
 DATA_PREFIX='gs://forge-ownbase-a100-20261110/ownbase-v2/sft/diagnostic-admitted-v1'
 REMOTE_ROOT='/opt/ownbase-nano'
 
@@ -50,7 +50,7 @@ class Cloud:
     def cas(self,path,source,generation):return self.run(['cp',str(path),source,'--if-generation-match='+str(generation)])
 
 def reviewed_inputs(recipe_path,admitted):
-    if sha(recipe_path)!=RECIPE_SHA:raise ValueError('Only frozen diagnostic-v3 recipe permitted')
+    if sha(recipe_path)!=RECIPE_SHA:raise ValueError('Only reviewed diagnostic recovery recipe permitted')
     recipe=json.loads(Path(recipe_path).read_text())
     msha,files=admitted_files(admitted,DATA_PREFIX)
     return recipe,msha,files
@@ -92,7 +92,7 @@ def command_base(config,step,watch_id):
 
 def sft_command(config,recipe,files,step,milestone,checkpoint,manifest_sha):
     replacements={'admitted_manifest':REMOTE_ROOT+'/sft/diagnostic-admitted-v1/manifest.json','base_checkpoint':checkpoint,'base_manifest_sha':manifest_sha,
-                  'tokenizer_dir':REMOTE_ROOT+'/tokenizer','repo':REMOTE_ROOT+'/nanochat-source','isolated_sft_gcs_prefix':config['backup_prefix'].rsplit('/',1)[0]+f'/diagnostic-{milestone}b',
+                  'tokenizer_dir':REMOTE_ROOT+'/tokenizer','repo':REMOTE_ROOT+'/nanochat-source','isolated_sft_gcs_prefix':config['backup_prefix'].rsplit('/',1)[0]+f'/diagnostic-{milestone}b-recovery-v1',
                   'kernel_dir':REMOTE_ROOT+'/kernel','kernel_sha':config['kernel_sha256']}
     template=recipe['sft_argv_template'][3:];args=[];i=0
     while i<len(template):
@@ -101,7 +101,7 @@ def sft_command(config,recipe,files,step,milestone,checkpoint,manifest_sha):
         for key,val in replacements.items():value=value.replace('{'+key+'}',val)
         if '{' in value:raise ValueError('Unresolved diagnostic recipe argument')
         args.append(value);i+=1
-    return {**command_base(config,step,f'{milestone}b-sft'),'action':'run_stage','stage':'sft','seconds':480,'expected_end_step':155,'args':args,'fetch_files':files}
+    return {**command_base(config,step,f'{milestone}b-sft'),'action':'run_stage','stage':'sft','seconds':recipe['budget']['sft_process_hard_seconds'],'expected_end_step':155,'args':args,'fetch_files':files}
 
 def quality_command(config,step,milestone,checkpoint,manifest_sha):
     return {**command_base(config,step,f'{milestone}b-quality'),'action':'run_stage','stage':'quality','seconds':180,
@@ -227,7 +227,7 @@ class Watcher:
                           '--backup-prefix',self.config['backup_prefix'].rsplit('/',1)[0]+'/final-'+name+'/checkpoints',
                           '--stage',name,'--batch-tokens','524288' if name=='general' else '32768','--microbatch','8',
                           '--seed','103','--eval-rows','64','--eval-every-updates','200' if name=='general' else '64',
-                          '--checkpoint-seconds','1800','--checkpoint-reserve-seconds','120','--deterministic','--deterministic-attention',
+                          '--checkpoint-seconds','1800','--checkpoint-reserve-seconds','300','--deterministic','--deterministic-attention',
                           '--kernel-path',REMOTE_ROOT+'/kernel','--kernel-sha',self.config['kernel_sha256']]
                     if name=='targeted':args+=['--ancestor',base['path']]
                     command.update(args=args,fetch_files=files,review_receipt='root-approved-full-sft-admission-review;manifest-sha256:'+msha)

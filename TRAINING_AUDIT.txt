@@ -1,16 +1,16 @@
 OWN-BASE MODEL — TRAINING AUDIT
-Updated: 2026-11-11T04:37:05.501040+00:00
+Updated: 2026-11-11T05:35:47.596410+00:00
 
 CURRENT STATE
 - The 537M-parameter model is training from our own random initialization.
 - A100 VM: forge-ownbase-v2-retained-01, us-central1-b. Retained across stages.
-- Recovery passed. Latest reported durable checkpoint: 1120 / 587,202,560 tokens.
-- Latest observed training progress: 626,524,160 tokens at about103K tokens/s.
-- Held-out loss: 3.2137 at250M tokens, then3.0281 at500M tokens.
+- Recovery passed. Latest reported durable checkpoint: 1825 / 956,825,600 tokens.
+- Latest observed training progress: 970,457,088 tokens at about 103K tokens/s.
+- Latest held-out loss remains 2.9579 from the 750M evaluation.
   These are language-learning results, not conversation/tool acceptance.
-- First1B raw conversation/tool baseline is approximately70minutes away.
-- Local supervisor telemetry-read race was repaired;18tests passed and its
-  historical blocker was preserved. GPU training was not interrupted.
+- Reaching 1B is approximately 5–10 minutes away, followed by checkpointing
+  and the first raw conversation/tool baseline. Results expected in10–20minutes.
+- No current supervisor blocker is recorded.
 
 COMPLETED
 1. Prepared and verified 10.027B training tokens and a separate development split.
@@ -67,3 +67,39 @@ AUDIT SOURCES AND LIVE LOGS
 - Recovery evidence: reports/l4-qualification-v1/retained-recovery-qualified.json
 - Budget review: reports/l4-qualification-v1/retained-budget-review.json
 - Quality stages: reports/l4-qualification-v1/quality-stage-plan.json
+
+2026-11-11T05:46:49.540322+00:00 — Live GCS update: 1B base stage completed at step 1908 (1,000,341,504 targets), held-out CE 2.922127. Raw-base conversation/tool development evaluation completed: 0/6 automated checks, invalid assistant frames, no usability pass. Four completion probes show repetition; blue-notebook and Kochi beginnings correct. Same-VM next base stage started 05:43:26 UTC toward step 5723 (~3B); next planned diagnostic SFT/quality check at 3B. Evidence: runs/current-campaign-status.json and runs/retained-1b-quality.json. No control commands changed. $100 cap unchanged.
+
+2026-11-11 06:05 UTC heartbeat: live stage-002 running, step 2129 / 1,116,209,152 targets; journal confirms step 1908 / 1,000,341,504 targets retained. Last-update throughput 103,228 targets/s. Latest held-out CE remains 2.922127 at 1B; raw-base development score 0/6, no usability claim. Next 3B SFT/quality gate estimated 5.5–6 hours including overhead. No current watcher BLOCKER. Same VM and single controller preserved; $100 cap and provider deletion unchanged. Evidence: runs/heartbeat-0605-* files.
+
+2026-11-11 06:35 UTC: live stage-002 running, step 2456, 1,287,651,328 observed targets; committed step 2257, 1,183,318,016 targets. Held-out CE 2.899284 at 1.25B improved from 2.922127 at 1B. Last update ~103k targets/s; observed 30-minute progress ~95k targets/s including overhead. 3B instruction diagnostic/quality gate ETA ~5–5.5 hours. No active watcher BLOCKER. Conversation/tool result remains raw-base 0/6; no usability claim. Same VM, single control writer, $100 cap, and provider deletion unchanged. Evidence runs/heartbeat-0635-*.json.
+
+2026-11-11T06:58:47.597567+00:00 — Completed read-only learning/usability investigation. Found 5 attempted 128-token invalid-frame responses and 3 blocked descendant turns in 1B suite; raw base format is untrained, while CE improves and raw repetition persists. Reviewed shared SFT/serving format, label shift/masking, diagnostic data mixing, SFT runtime risks, narrow-suite ceiling risk and primary SmolLM/nanochat sources. Report: reports/l4-qualification-v1/learning-usability-investigation-20261111.txt. No live training/controller changes.
+
+2026-11-11 07:05 UTC: stage-002 running; 1,462,239,232 observed targets, step 2789; committed step 2611 / 1,368,915,968 targets. Last held-out CE unchanged 2.899284 at 1.25B (1.5B evaluation not reached). ~103k targets/s update, ~97k/s observed over last30min. 3B diagnostic ETA4.5–5h. No active BLOCKER; same VM/control writer and $100 cap unchanged. No new conversation/tool assessment; untuned baseline remains0/6. Evidence runs/heartbeat-0705-*.json.
+
+2026-11-11 07:35 UTC: live stage002 running; step 3116, 1,633,681,408 targets; committed step 2965, 1,554,513,920 targets. Fixed held-out CE 2.884743 at1.5B, improved from2.899284 at1.25B. Effective progress ~95k targets/s over30min; last update103k/s. Next3B instruction diagnostic/quality ETA4–4.5h. No current BLOCKER; no new usability assessment. Same VM and single writer preserved, $100 cap and2026-11-12T10:32:45Z provider deletion unchanged. Evidence runs/heartbeat-0735-*.json.
+
+2026-11-11 08:05 UTC: live stage002 running; step 3437, 1,801,977,856 targets; committed step 3318, 1,739,587,584 targets. Fixed held-out CE 2.869874 at1.75B improves from2.884743 at1.5B. Effective30min progress ~93.5k targets/s; last update103k/s. 3B instruction diagnostic/quality ETA3.5–4h. No current BLOCKER; no new conversation/tool result or usability claim. Same VM/control writer, $100 cap and provider deletion unchanged. Evidence runs/heartbeat-0805-*.json.
+
+2026-11-11 08:35 UTC: stage002 running; step 3763, 1,972,895,744 observed targets; committed step 3670, 1,924,136,960 targets. Latest held-out CE remains2.869874 at1.75B; 2B evaluation not yet reached. Effective30min throughput ~95k targets/s; update103k/s. Next3B instruction diagnostic/quality ETA3–3.5h. No active watcher BLOCKER. No new conversation/tool assessment. Same VM/single writer preserved; $100 cap and provider deletion unchanged. Evidence runs/heartbeat-0835-*.json.
+
+2026-11-11 09:05 UTC: live stage002 running; step 4060, 2,128,609,280 observed targets; committed step 4022, 2,108,686,336 targets. Held-out CE 2.861297 at2B versus2.869874 at1.75B. Snapshot progress ~86.5k targets/s over30min (includes telemetry lag/overhead); latest optimizer update103k/s. 3B instruction diagnostic/quality ETA2.5–3h. No active BLOCKER; no new usability assessment. Same VM/single writer preserved; $100 cap and provider deletion unchanged. Evidence runs/heartbeat-0905-*.json.
+
+2026-11-11 09:35 UTC: stage002 running, step 4386, 2,299,527,168 observed targets; committed step 4374, 2,293,235,712 targets. Held-out CE 2.860887 at2.25B versus2.861297 at2B: essentially flat this interval, not sufficient alone to establish sustained plateau. Effective30min throughput95k targets/s; last update103k/s. 3B instruction diagnostic/quality ETA2–2.5h. No active BLOCKER; no new usability assessment. Same VM/single writer, $100 cap and provider deletion unchanged. Evidence runs/heartbeat-0935-*.json.
+
+2026-11-11 10:05 UTC: live stage002 running; step 4727, 2,478,309,376 observed targets; latest committed step 4727, 2,478,309,376 targets. Latest held-out CE remains2.860887 at2.25B; 2.5B evaluation pending. Effective30min throughput99k targets/s; last update103k/s. 3B instruction diagnostic/quality ETA1.5–2h. No active BLOCKER or new conversation/tool result. Same VM/single writer preserved; $100 cap and provider deletion unchanged. Evidence runs/heartbeat-1005-*.json.
+
+2026-11-11 10:35 UTC: stage002 running; step 5065, 2,655,518,720 observed targets; latest committed step 4727, 2,478,309,376 targets. Held-out CE 2.848849 at2.5B, improves from2.860887 at2.25B after near-flat prior interval. Effective30min progress98k targets/s; update103k/s. 3B instruction diagnostic/quality ETA65–80min including transition and diagnostic overhead, conditional on diagnostic completion. No active BLOCKER/new usability result. Same VM/single writer, $100 cap/provider deletion unchanged. Evidence runs/heartbeat-1035-*.json.
+
+2026-11-11T10:47:49.496603+00:00 — User requested repetition penalty. Changed local nano_serve CLI default to1.3 for generated prose; existing implementation exempts tool frames, control tokens and prompt history. Raw generation API and frozen checkpoint evaluations remain1.0 for comparable evidence. Serving tests:17 run,16 passed,1 skipped. No active GPU/deployed bundle/weights/controller changes; default applies on next launch using updated local serving code.
+
+2026-11-11 11:05 UTC: stage002 running; step 5388, 2,824,863,744 observed targets; committed step 5079, 2,662,858,752 targets. Held-out CE 2.839809 at2.75B versus2.848849 at2.5B. Effective30min progress94k targets/s; update103k/s. 3B base ETA~30–35min; instruction diagnostic/quality results~40–50min if successful. No active BLOCKER/new usability assessment. Same VM/single writer and $100 cap/provider deletion unchanged. Evidence runs/heartbeat-1105-*.json.
+
+2026-11-11 11:35 UTC: live stage002 running, step 5712, 2,994,733,056 observed targets; latest committed step 5431, 2,847,408,128 targets. Latest held-out CE remains2.839809 at2.75B; 3B eval/checkpoint transition imminent (11 updates remaining in telemetry). Effective30min progress94k targets/s, last update103k/s. Expected 3B transition within minutes; SFT/quality result estimate15–25min conditional on completed diagnostic and transfers. No active watcher BLOCKER. No new usability result. Same VM/control writer preserved; $100 cap/provider deletion unchanged. Evidence runs/heartbeat-1135-*.json.
+
+2026-11-11T11:49:05.529167+00:00 — BLOCKER: 3B base stage completed; SFT failed before first training update during initial checkpoint retention-journal ready publication: TimeoutError Retention journal operation deadline expired. Campaign failed_closed at11:44:31 UTC; live GCE status TERMINATED (VM exists, stopped). Conversation/tool diagnostic did not run. No control mutation/reprovision attempted during status check. Evidence GCS review-001/worker.log and runs/3b-result.json. Requires checkpoint-deadline correction and same-VM recovery assessment within remaining $100 cap.
+
+2026-11-11T12:21:24.720030+00:00 — Same-VM recovery started successfully; authoritative3B bundle verified and controller awaiting revised diagnostic. Added hash-bound milestone recovery, archived failed status, preserved base numerical identity. 46 controller/watcher tests passed. New diagnostic reserve300s/stage900s and isolated GCS prefix. Prior local watcher exited; archived its state to runs/retained-campaign-watch-failed-3b-v1; one replacement watcher owns a fresh control URI. FLEX_START scheduling update rejected; provider original deletion no longer assumed. Fixed earlier cutoff2026-11-12T09:45:14Z enforced by OS shutdown/controller timeout plus local stop watchdog. Conservative project envelope96.90 USD including10 USD ancillary reserve, cap100. Reporting automation updated. Local3B evaluation download continues.
+
+2026-11-11T12:25:10.879048+00:00 — Completed requested3B conversation/tool evaluation locally on MPS after GCS checkpoint SHA verification. Raw1.0 and repetition1.3 both0/6 automated passes; each has5 invalid-frame attempts plus3 blocked descendant turns; no successful broker tool execution. Penalty reduces prose loops but not correctness. Reports reports/l4-qualification-v1/conversation-eval-3b/. These untuned-base results do not assess in-progress SFT recovery.

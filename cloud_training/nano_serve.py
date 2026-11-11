@@ -228,7 +228,7 @@ def main():
     p.add_argument('--device',choices=['cpu','mps','cuda'],default='cpu')
     p.add_argument('--tools',default='',help='Trusted host allowlist: calculate,convert; empty disables calls')
     p.add_argument('--reply-budget',type=int,default=256)
-    p.add_argument('--repetition-penalty',type=float,default=1.0,help='Generated prose only;1.0 preserves raw diagnostics,1.3 is an optional preset')
+    p.add_argument('--repetition-penalty',type=float,default=1.3,help='Generated prose only; defaults to1.3 for chat. Use1.0 for raw diagnostics; tool JSON and control tokens are exempt.')
     p.add_argument('--allow-base',action='store_true',help='Diagnostic exploration only; does not claim usable chat')
     args=p.parse_args()
     if not math.isfinite(args.repetition_penalty) or args.repetition_penalty<1:p.error('Repetition penalty must be finite and >=1')

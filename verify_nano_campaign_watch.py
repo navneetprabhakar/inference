@@ -149,10 +149,10 @@ class WatchTests(unittest.TestCase):
             with self.assertRaises(subprocess.CalledProcessError):cloud.snapshot(source)
             self.assertEqual(sum(call.args[0][0]=='cat' for call in run.call_args_list),3)
     def test_actual_reviewed_recipe_files_no_cloud(self):
-        recipe,msha,files=W.reviewed_inputs('runs/ownbase-v2-sft/diagnostic-v3/recipe-candidate.json','runs/ownbase-v2-sft/diagnostic-admitted-v1')
+        recipe,msha,files=W.reviewed_inputs('reports/l4-qualification-v1/diagnostic-recovery-recipe-v1.json','runs/ownbase-v2-sft/diagnostic-admitted-v1')
         self.assertEqual(len(files),4);self.assertEqual(recipe['subset']['planned_updates'],155)
         command=W.sft_command(self.config,recipe,files,5723,3,'/opt/ownbase-nano/results/base/step','a'*64)
-        self.assertNotIn('--output',command['args']);self.assertNotIn('--deadline-utc',command['args']);self.assertEqual(command['seconds'],480)
+        self.assertNotIn('--output',command['args']);self.assertNotIn('--deadline-utc',command['args']);self.assertEqual(command['seconds'],900)
         self.assertEqual(command['args'][command['args'].index('--microbatch')+1],'8')
 
 if __name__=='__main__':unittest.main()

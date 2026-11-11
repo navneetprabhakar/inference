@@ -9,6 +9,25 @@ class CampaignTests(unittest.TestCase):
     def setUp(self):
         self.c={'launch_kind':'retained','mode':'resume','resume_step':32,'max_runtime_seconds':115200,'campaign_sha256':'a'*64,'retained':{'reviewed':True,'allow_pilot_then_base':True,'review_receipt':'review-v1','expected_start_ce':C.EXPECTED_CE,'protected_finish_seconds':14400}}
     def val(self,ce):return {'complete':True,'expected_shards':1,'shards':[{'cross_entropy_nats':ce}]}
+    def test_recovery_binds_status_campaign_and_authoritative_checkpoint(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'results').mkdir();(root/'data').mkdir()
+            (root/'data/campaign.json').write_text('{}')
+            status={'status':'failed_closed','step':5723,'reason':'milestone_quality_review','error':'timeout','stages':[{'status':'complete','end_step':5723}],'review_stages':[{}]}
+            raw=json.dumps(status).encode();path=root/'results/campaign-status.json';path.write_bytes(raw)
+            recovery={'step':5723,'status_sha256':hashlib.sha256(raw).hexdigest(),'manifest_sha256':hashlib.sha256(b'{}').hexdigest(),'next_review_number':2}
+            config={**self.c,'campaign_sha256':hashlib.sha256(b'{}').hexdigest()}
+            def restore(c,destination,deadline):
+                self.assertEqual(c['resume_step'],5723)
+                destination.mkdir();(destination/'manifest.json').write_text('{}');return destination
+            with patch.object(C,'restore_resume',side_effect=restore):
+                path.write_bytes(raw+b' ')
+                with self.assertRaisesRegex(ValueError,'status changed'):C.recover_campaign(config,root,recovery,time.time()+10000)
+                path.write_bytes(raw)
+                with self.assertRaisesRegex(ValueError,'skip failed'):C.recover_campaign(config,root,{**recovery,'next_review_number':1},time.time()+10000)
+                campaign,resume,recovered=C.recover_campaign(config,root,recovery,time.time()+10000)
+                self.assertNotIn('error',recovered)
+                self.assertEqual((root/'results/failed-status-5723.json').read_bytes(),raw)
     def test_review_lifetime_and_protected_finish(self):
         C.validate_config(self.c)
         for key,value in [('reviewed',False),('expected_start_ce',5.8),('protected_finish_seconds',3600),('worker_seconds',21601),('review_wait_seconds',1000)]:

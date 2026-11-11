@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "status": "root_revised_after_initial_checkpoint_timeout",
+  "training_admitted": false,
+  "candidate_manifest_sha256": "4ebc6e1506f143d90a63b88fb6bc28e9639cba33dee757d982b9066b19f6a474",
+  "admission_candidate_sha256": "a47a86c9e6ddfb166e2c7e7e302eaa8d8bb34ad1499c03415f9088b2c3e66b16",
+  "same_recipe_at_base_targets": [
+    3000000000,
+    6000000000
+  ],
+  "subset": {
+    "train_sessions": 6144,
+    "dev_sessions": 384,
+    "train_assistant_targets": 2731938,
+    "packed_rows": {
+      "train": 2479,
+      "validation": 153
+    },
+    "planned_updates": 155,
+    "padded_train_position_tokens": 5076992
+  },
+  "training": {
+    "stage": "general",
+    "mixture": "4096 general +2048 broker tool conversations; one pass, no replay",
+    "batch_tokens": 32768,
+    "microbatch": 8,
+    "max_updates": 155,
+    "seed": 103,
+    "eval_rows": 64,
+    "eval_every_updates": 155,
+    "checkpoint_seconds": 900,
+    "checkpoint_reserve_seconds": 300,
+    "deterministic": true,
+    "deterministic_attention": true,
+    "optimizer": "Pinned MuonAdamW warm-start from immutable own base; fresh LR\u00d70.8\u00d7sqrt(32768/524288); Muon decay0; existing nano_sft schedule"
+  },
+  "budget": {
+    "combined_stage_hard_seconds": 1080,
+    "sft_process_hard_seconds": 900,
+    "quality_process_hard_seconds": 180,
+    "two_stages_max_hours": 0.6,
+    "two_stages_compute_envelope_usd": 1.5,
+    "compute_only_seconds_at_50000_position_tokens_per_second": 101.53984,
+    "unmeasured_overheads": [
+      "GPU compile",
+      "full base load and exact optimizer/RNG verification",
+      "initial and final checkpoint upload",
+      "CPU formatting",
+      "validation and conversation generation"
+    ],
+    "estimate_not_guarantee": true,
+    "failure_policy": "Timeout or incomplete horizon produces incomplete diagnostic, not comparable recipe/pass; do not silently extend budget.",
+    "allocation_policy": "Deduct extra diagnostic time from remaining base time; do not extend $100 cap or original absolute shutdown boundary.",
+    "gpu_validation": "pending; not yet deployed"
+  },
+  "isolation": {
+    "outputs": "Separate immutable SFT branch and separate GCS checkpoints prefix at each milestone",
+    "base_optimizer_or_weights_modified": false,
+    "resume_base": "Original base checkpoint only; never load SFT branch into base trainer"
+  },
+  "comparison": {
+    "same_subset_and_recipe_hash_required": true,
+    "completed_updates_required": 155,
+    "quality_suite": "cloud_training/evaluation/conversation-tools-dev.json",
+    "quality_suite_sha256": "0cb4109ff2a6800b3f828c70f3880c89a160e73798777c05bad94e05dc7a20cc",
+    "repetition_penalty": 1.0,
+    "manual_transcript_review_required": true
+  },
+  "sft_argv_template": [
+    "python",
+    "-m",
+    "cloud_training.nano_sft",
+    "--manifest",
+    "{admitted_manifest}",
+    "--base",
+    "{base_checkpoint}",
+    "--base-manifest-sha",
+    "{base_manifest_sha}",
+    "--tokenizer",
+    "{tokenizer_dir}",
+    "--tokenizer-sha",
+    "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "--repo",
+    "{repo}",
+    "--output",
+    "{isolated_sft_output}",
+    "--backup-prefix",
+    "{isolated_sft_gcs_prefix}/checkpoints",
+    "--deadline-utc",
+    "{stage_start_plus_900s}",
+    "--stage",
+    "general",
+    "--batch-tokens",
+    "32768",
+    "--microbatch",
+    "8",
+    "--max-updates",
+    "155",
+    "--seed",
+    "103",
+    "--eval-rows",
+    "64",
+    "--eval-every-updates",
+    "155",
+    "--checkpoint-seconds",
+    "900",
+    "--checkpoint-reserve-seconds",
+    "300",
+    "--deterministic",
+    "--deterministic-attention",
+    "--kernel-path",
+    "{kernel_dir}",
+    "--kernel-sha",
+    "{kernel_sha}"
+  ],
+  "root_review_required": [
+    "Review candidate provenance/quality and exact hashes",
+    "Publish separate admitted manifest/receipt without modifying source candidates",
+    "Bind recipe hash in stage hook and cost allocation",
+    "Verify horizon completion and committed branch before launching quality without --allow-base"
+  ],
+  "revision_reason": "Initial checkpoint save/upload/journal publication exceeded120seconds before first SFT update. Same numerical recipe; larger wall-clock allocation."
+}

@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "launch_kind": "retained",
+  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+  "backup_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/campaign-b2f327b0119c/checkpoints",
+  "bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz",
+  "bundle_sha256": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9",
+  "config_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/launches/forge-ownbase-v2-retained-01.json",
+  "index_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/campaign-b2f327b0119c/metadata/data-index.json",
+  "index_sha256": "40f00bdb5d9bb651e894978f8147baac59f8607c24d47fa0a0d0c63d82094af0",
+  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+  "run_id": "forge-ownbase-v2-retained-01",
+  "zone": "us-central1-b",
+  "max_runtime_seconds": 115200,
+  "request_valid_seconds": 1800,
+  "resume_step": 32,
+  "mode": "resume",
+  "depth": 16,
+  "microbatch": 16,
+  "deterministic": true,
+  "deterministic_attention": false,
+  "checkpoint_seconds": 1800,
+  "overhead_fraction": 0.08,
+  "remaining_setup_hours": 0.3,
+  "retained": {
+    "reviewed": true,
+    "allow_pilot_then_base": true,
+    "review_receipt": "reports/l4-qualification-v1/retained-lifecycle-review.json",
+    "expected_start_ce": 5.803871169686317,
+    "pilot_updates": 32,
+    "protected_finish_seconds": 14400,
+    "worker_seconds": 21600,
+    "control_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/control/forge-ownbase-v2-retained-01-recovery-v1.json",
+    "review_wait_seconds": 900,
+    "recovery": {
+      "step": 5723,
+      "status_sha256": "359226fd4c42abf711c3c27fb7113f06c115f1f9f6b6954b31162cf1d1411d05",
+      "manifest_sha256": "47b57fcc2c0bca4941e0f0ba6a23f98a75900deefae0b2a99bbe1aeeefd662c0",
+      "next_review_number": 2,
+      "reason": "Initial SFT checkpoint120s budget exhausted; retry isolated recipe with300s reserve and900s stage."
+    }
+  }
+}

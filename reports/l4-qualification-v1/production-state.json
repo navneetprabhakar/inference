@@ -1,6 +1,6 @@
 {
-  "phase": "base_training_same_retained_vm",
-  "own_base_retained_training_targets": 587202560,
+  "phase": "3b_instruction_diagnostic_recovery",
+  "own_base_retained_training_targets": 3000500224,
   "random_initialization_required": true,
   "model_parameters": 536871738,
   "planned_base_targets": 10000269312,
@@ -11,8 +11,8 @@
   "production_bundle_sha256": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9",
   "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz",
   "next": [
-    "1B raw conversation and tool baseline",
-    "3B/6B isolated instruction diagnostics",
+    "3B isolated instruction diagnostic and conversation/tool evaluation",
+    "6B matched diagnostic comparison",
     "Protected final tuning and acceptance within $100"
   ],
   "budget": {
@@ -25,10 +25,11 @@
     "pilot_reserved_usd": 0,
     "forecast_requires_revision": false,
     "retained_compute_reserved_usd": 80,
-    "total_envelope_usd": 98.98,
+    "total_envelope_usd": 96.89666666666668,
     "protected_finish_hours": 4,
     "ten_billion_guaranteed": false,
-    "remaining_10b_base_hours_estimate": 29.609764828841524
+    "remaining_10b_base_hours_estimate": 29.609764828841524,
+    "recovery_receipt": "runs/recovery-3b-v1/budget.json"
   },
   "tests": {
     "recovery_integration_cpu": 89,
@@ -39,7 +40,7 @@
     "Scoped tinyoptimizerresidual retained from qualification; nofulltrajectorybitwiseclaim",
     "Conversation/tool qualitynotyetestablished"
   ],
-  "updated_utc": "2026-11-11T04:37:05.501040+00:00",
+  "updated_utc": "2026-11-11T12:21:24.719697+00:00",
   "pilot_run_id": "forge-ownbase-v2-pilot-01",
   "pilot_operation": "operation-1794356897865-65ff5457f5e2a-149b1cab-523b3d32",
   "corpus_admitted": true,
@@ -61,12 +62,15 @@
     "budget_cap_usd": 100
   },
   "run_id": "forge-ownbase-v2-retained-01",
-  "provider_delete_utc": "2026-11-12T10:32:45.482940Z",
-  "observed_training_step": 1195,
-  "observed_training_targets": 626524160,
+  "provider_delete_utc": null,
+  "observed_training_step": 5723,
+  "observed_training_targets": 3000500224,
   "restore_validation_ce_exact": true,
-  "latest_committed_step": 1120,
+  "latest_committed_step": 5723,
   "production_ready": true,
-  "latest_validation_ce": 3.028135724365711,
-  "latest_validation_milestone_tokens": 500000000
+  "latest_validation_ce": 2.8330608531832695,
+  "latest_validation_milestone_tokens": 3000000000,
+  "recovery_config": "reports/l4-qualification-v1/retained-recovery-3b-config.json",
+  "absolute_stop_utc": "2026-11-12T09:45:14Z",
+  "provider_guard_note": "FLEX_START SetScheduling rejected; provider max duration remains32h and original deletion cannot be assumed after restart. Absolute OS shutdown, controller timeout and independent local stop watchdog enforce earlier budget boundary."
 }

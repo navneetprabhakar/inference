@@ -1,0 +1,34 @@
+Own-base learning versus usability investigation — 2026-11-11
+
+Conclusion
+Base learning is improving, but conversational usability is not established. The current 0/6 result primarily measures missing instruction/chat-format training, not six independent reasoning failures. Repetition in ordinary base completions is nevertheless a real quality problem. No evidence presently proves that the planned budget or 10B tokens will produce a generally useful assistant.
+
+Verified findings
+1. Fixed held-out CE: 2.957877 at 750M, 2.922127 at 1B, 2.899284 at 1.25B. Improvement is real on that fixed sample; this is not a comprehensive capability benchmark.
+2. All five attempted generations in the 1B chat suite emitted 128 tokens and failed assistant framing. Three subsequent turns were session_blocked and never independently generated. Six automated checks plus two manual turns therefore cannot be interpreted as eight independent content failures.
+3. nano_corpus.py encodes ordinary documents with BOS. It does not supply native user/assistant/tool training frames. nano_chat_format.py and nano_serve.py require assistant_end or python_end delimiters. General and tool instruction training has not yet occurred for this base. Increasing raw-text pretraining alone does not directly teach this protocol.
+4. Four raw completion probes are independent of chat framing: all repeat; two begin with the correct context fact (blue notebook and Kochi), but one then invents biographical context. Four short exposed examples cannot estimate general context accuracy.
+5. Serving and SFT both use encode_conversation. SFT masks user/policy/tool-observation labels, supervises assistant endings and tool frames, shifts labels once, and uses the upstream -1 ignore index. Inspection found no obvious serialization/masking mismatch; this is not GPU proof of learning.
+6. Diagnostic data are mixed through the file rather than all tools at the end: six consecutive 1024-example blocks each contain 268–323 actual tool-call conversations. No obvious family-order curriculum bug was found.
+7. Planned diagnostic is only 2.732M supervised assistant targets /155 updates, with 480 seconds including startup, compile, initial checkpoint, training and final backup. Its runtime is not established. Failure to finish must be classified as incomplete engineering execution, not evidence the base cannot learn.
+8. General SFT has 275.735M assistant targets; targeted SFT only 0.871M, roughly 0.32% of general target count. Sequential targeted training can still have a large effect, so this ratio is a coverage warning, not a predicted score. Narrow templates and synthetic source errors remain risks.
+9. Full general SFT retokenizes all 459,721 train+dev conversations before GPU training, then encodes training conversations again on demand. Preflight/compile/upload time must be included in the 9000-second allocation; raw base throughput alone cannot guarantee completion.
+10. Six automatic checks are too coarse to measure broad improvement. The current 6B controller requires at least one new pass and no lost passes. A tie, including a 6/6 ceiling, triggers manual review; it does not prove stalled learning. Preserve that review instead of interpreting it mechanically.
+
+Recommended decision path (no runtime/control changes made)
+- Preserve active base training. At 3B use the isolated planned SFT branch; do not wait until 10B to discover format-learning failures.
+- Inspect completion of all155 updates, actual supervised target count, SFT dev loss, valid-ending rate, and raw attempted outputs before interpreting task scores.
+- Distinguish invalid-frame attempts, blocked descendants, wrong facts, wrong tool names/arguments, broker success, and incorrect final grounding. A blocked descendant is not an independent context failure.
+- If SFT is complete but framing still fails, prioritize a bounded format-learning/overfit diagnostic and optimizer/label/termination investigation over more billions of raw tokens. No uncontrolled replay or extra spend is authorized by this report.
+- If framing works but content fails, inspect held-out task families and targeted supervision; use verified examples and a general-conversation replay mixture if targeted-only tuning causes forgetting. Any changed recipe needs its own identity and matched comparison.
+- Keep raw greedy results for longitudinal comparisons. Evaluate a prose repetition penalty separately after instruction tuning; it cannot teach tool schemas, repair reasoning, or establish context understanding.
+- Broaden development coverage without exposing final acceptance answers before claiming usability. Do not change the existing checkpoint comparison suite mid-comparison.
+
+External comparison
+Hugging Face SmolLM report: 135M/360M models used600B pretraining tokens and separate instruction tuning. This demonstrates that small parameter count is not low training effort; it is NOT a minimum-token requirement for our narrower goal.
+https://huggingface.co/blog/smollm
+Upstream nanochat has a separate chat_sft stage, including base optimizer loading. Our base-only evaluation is not comparable to a fully post-trained nanochat assistant.
+https://github.com/karpathy/nanochat/blob/master/scripts/chat_sft.py
+
+Evidence
+runs/heartbeat-0635-progress.json; runs/retained-1b-quality.json; runs/retained-update-0543.json; cloud_training/nano_corpus.py; nano_chat_format.py; nano_serve.py; nano_sft.py; nano_campaign_watch.py; admitted diagnostic/general/targeted manifests. Live GPU, weights, deployed code, control object and watcher were not modified by this investigation.

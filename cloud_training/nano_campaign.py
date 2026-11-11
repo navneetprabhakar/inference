@@ -160,6 +160,36 @@ def execute_review_stage(command,config,root,number,deadline):
             receipts.append({'uri':target,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
     return {'stage':command['stage'],'review_receipt':command['review_receipt'],'output':str(output),'evidence':receipts,'started_utc':started,'finished_utc':now_utc(),'argv':args,'argv_sha256':hashlib.sha256(json.dumps(args).encode()).hexdigest(),'quality_assessment':quality,'sft_assessment':sft_summary,'command':command,'command_sha256':hashlib.sha256(json.dumps(command,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
 
+def recover_campaign(config,root,recovery,deadline):
+    """Explicit, hash-bound recovery of a stopped milestone; no inferred resume."""
+    path=root/'results/campaign-status.json'
+    raw=path.read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=recovery['status_sha256']:
+        raise ValueError('Recovery status changed')
+    status=json.loads(raw);step=recovery['step']
+    if status.get('status')!='failed_closed' or status.get('step')!=step or status.get('reason')!='milestone_quality_review':
+        raise ValueError('Recovery requires failed milestone review')
+    if step not in [math.ceil(n/BATCH) for n in MILESTONES]:
+        raise ValueError('Recovery step is not a milestone')
+    last=status['stages'][-1]
+    if last.get('status')!='complete' or last.get('end_step')!=step:
+        raise ValueError('Recovery base stage incomplete')
+    if recovery['next_review_number']<=len(status.get('review_stages',[])):
+        raise ValueError('Recovery must skip failed review directory')
+    campaign=root/'data/campaign.json'
+    if hashlib.sha256(campaign.read_bytes()).hexdigest()!=config['campaign_sha256']:
+        raise ValueError('Recovery campaign changed')
+    current={**config,'resume_step':step}
+    resume=restore_resume(current,root/f'resume-recovery-{step}',deadline-900)
+    if hashlib.sha256((resume/'manifest.json').read_bytes()).hexdigest()!=recovery['manifest_sha256']:
+        raise ValueError('Recovery checkpoint manifest changed')
+    archive=root/'results'/f'failed-status-{step}.json'
+    with archive.open('xb') as f:f.write(raw)
+    status.pop('error',None)
+    status['recovery_receipt']=recovery
+    return campaign,resume,status
+
+
 def run_campaign(config,root,deadline):
     retained=validate_config(config);root=Path(root).resolve()
     if not time.time()+1200<deadline<=time.time()+115200: raise ValueError('Bounded provider-aligned lifetime required')
@@ -168,12 +198,26 @@ def run_campaign(config,root,deadline):
     def report():
         status['updated_utc']=now_utc()
         atomic_json(results/'campaign-status.json',status)
-    report()
     try:
-        campaign,resume=stage(config,root,deadline-900)
+        recovery=retained.get('recovery')
+        if recovery:
+            campaign,resume,status=recover_campaign(config,root,recovery,deadline)
+        else:
+            report()
+            campaign,resume=stage(config,root,deadline-900)
         identity=json.loads((resume/'metadata.json').read_text())['identity']
-        step=32;number=0;generation=0;review_number=0
+        step=recovery['step'] if recovery else 32
+        number=len(status['stages']) if recovery else 0
+        generation=0;review_number=recovery['next_review_number'] if recovery else 0
         base_deadline=deadline-retained['protected_finish_seconds']
+        if recovery:
+            status.update(status='awaiting_review',reason='milestone_quality_review',step=step);report()
+            while True:
+                command,generation=poll_command(config,step,generation,deadline)
+                if command is None or command['action']=='stop':
+                    status.update(status='stopped',reason='recovery_review_timeout_or_stop');report();return 0
+                if command['action']=='continue_base':break
+                status.setdefault('review_stages',[]).append(execute_review_stage(command,config,root,review_number,deadline));review_number+=1;report()
         while True:
             if step>=HORIZON or base_deadline-time.time()<1200:
                 status.update(status='awaiting_review',reason='protected_finish_boundary',step=step);report()
