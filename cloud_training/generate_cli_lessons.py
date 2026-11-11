@@ -7,14 +7,14 @@ from cloud_training.nano_chat_format import encode_conversation
 
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--batches',type=int,default=4);p.add_argument('--seed-offset',type=int,default=8103);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--batches',type=int,default=4);p.add_argument('--seed-offset',type=int,default=8103);p.add_argument('--model',choices=['gpt-5.6-sol','gpt-6.1-terra'],default='gpt-5.6-sol');a=p.parse_args()
  if not 1<=a.batches<=4:raise ValueError('One invocation limited to4batches')
  root=Path(a.output).resolve();root.mkdir(parents=True,exist_ok=False)
  schema=Path('reports/l4-qualification-v1/terra-generation-v1/schema.json').resolve()
  sys.path.insert(0,str(Path('runs/nanochat-source').resolve()))
  from nanochat.tokenizer import RustBPETokenizer
  tok=RustBPETokenizer.from_directory('runs/ownbase-v2-data/tokenizer')
- state={'model':'gpt-5.6-sol','transport':'codex_cli','seed_offset':a.seed_offset,'status':'running','training_admitted':False,'batches':[]};seen=set()
+ state={'model':a.model,'transport':'codex_cli','seed_offset':a.seed_offset,'status':'running','training_admitted':False,'batches':[]};seen=set()
  def save():state['updated_utc']=datetime.now(timezone.utc).isoformat();(root/'progress.json').write_text(json.dumps(state,indent=2)+'\n')
  save()
  for i in range(a.batches):
@@ -24,7 +24,7 @@ def main():
   settings=['community garden, craft supplies, borrowed equipment, and event setup','repair desk, delivery instructions, storage labels, and shared calendars','school club, library loans, picnic packing, and room arrangements','volunteer shifts, recipe constraints supplied by the user, workshop materials, and sports equipment']
   prompt='Conversation scenario settings for this batch: '+settings[i%len(settings)]+'. Use varied fictional names. Do not reuse Maya aisle/window seat examples. Generation cohort '+str(a.seed_offset)+'.\n'+prompt
   (d/'prompt.txt').write_text(prompt)
-  argv=['codex','exec','--ignore-user-config','--ephemeral','--skip-git-repo-check','--sandbox','read-only','-C',str(d),'-m','gpt-5.6-sol','-c','model_reasoning_effort="low"','--output-schema',str(schema),'--output-last-message',str(d/'output.json'),'--json','-']
+  argv=['codex','exec','--ignore-user-config','--ephemeral','--skip-git-repo-check','--sandbox','read-only','-C',str(d),'-m',a.model,'-c','model_reasoning_effort="low"','--output-schema',str(schema),'--output-last-message',str(d/'output.json'),'--json','-']
   with (d/'events.jsonl').open('w') as out,(d/'stderr.log').open('w') as err:
    result=subprocess.run(argv,input=prompt,text=True,stdout=out,stderr=err,timeout=600)
   if result.returncode:state.update(status='blocked_cli_error',failed_batch=i);save();return 2
@@ -34,7 +34,7 @@ def main():
     messages=c['messages'];assert 4<=len(messages)<=8
     assert all(m['role']==('user' if n%2==0 else 'assistant') for n,m in enumerate(messages))
     assert len(messages)%2==0
-    row={'messages':messages,'provenance':{'model':'gpt-5.6-sol','family':c['family'],'semantic_review':'pending','training_admitted':False}}
+    row={'messages':messages,'provenance':{'model':a.model,'family':c['family'],'semantic_review':'pending','training_admitted':False}}
     encode_conversation(tok,messages);rows.append(row)
    except (ValueError,AssertionError) as e:rejected.append({'family':c.get('family'),'reason':str(e)})
   ids=[r['session_id'] for r in raw['tool_rewrites']]
@@ -45,7 +45,7 @@ def main():
    for m,text in zip(users,r['user_messages']):m['content']=text
    replay=validate_lesson(s);calls+=replay['actual_calls']
    encode_conversation(tok,s['messages'],policies=s['policies'])
-   rows.append({'messages':s['messages'],'policies':s['policies'],'provenance':{'model':'gpt-5.6-sol','family':s['family'],'seed_id':r['session_id'],'broker_replayed':True,'prompt_semantic_review':'pending','training_admitted':False}})
+   rows.append({'messages':s['messages'],'policies':s['policies'],'provenance':{'model':a.model,'family':s['family'],'seed_id':r['session_id'],'broker_replayed':True,'prompt_semantic_review':'pending','training_admitted':False}})
   accepted=[];positions=targets=0
   for row in rows:
    h=hashlib.sha256(json.dumps(row['messages'],sort_keys=True).encode()).hexdigest()

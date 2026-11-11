@@ -59,7 +59,7 @@ class WatchTests(unittest.TestCase):
             watch.tick(status);self.assertIn('incomplete',watch.state['blocker']);self.assertEqual(cloud.writes,[])
     def test_final_chain_starts_general_bounded_and_serial(self):
         with tempfile.TemporaryDirectory() as t:
-            cloud=Cloud();watch=self.watch(t,cloud,{'general':('g'*64,[]),'targeted':('t'*64,[])})
+            cloud=Cloud();watch=self.watch(t,cloud,{'general':('a'*64,[{'path':'sft/general-admitted-v1/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/general','sha256':'a'*64,'bytes':1}]),'targeted':('b'*64,[{'path':'sft/targeted-teacher-admitted-v2/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/targeted','sha256':'b'*64,'bytes':1}])})
             watch.state['final_base']={'path':'/opt/ownbase-nano/results/stage-1/step','sha256':'a'*64}
             status={'status':'awaiting_review','reason':'protected_finish_boundary','step':17000,'review_stages':[]}
             watch.tick(status);self.assertEqual(len(cloud.writes),1)
@@ -67,7 +67,7 @@ class WatchTests(unittest.TestCase):
             watch.tick(status);self.assertEqual(len(cloud.writes),1)
     def test_finish_insufficient_provider_time_no_command(self):
         with tempfile.TemporaryDirectory() as t:
-            cloud=Cloud();cloud.deadline=time.time()+1000;watch=self.watch(t,cloud,{'general':('g'*64,[]),'targeted':('t'*64,[])})
+            cloud=Cloud();cloud.deadline=time.time()+1000;watch=self.watch(t,cloud,{'general':('a'*64,[{'path':'sft/general-admitted-v1/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/general','sha256':'a'*64,'bytes':1}]),'targeted':('b'*64,[{'path':'sft/targeted-teacher-admitted-v2/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/targeted','sha256':'b'*64,'bytes':1}])})
             watch.state['final_base']={'path':'/opt/ownbase-nano/results/stage/step','sha256':'a'*64}
             watch.tick({'status':'awaiting_review','reason':'protected_finish_boundary','step':17000,'review_stages':[]})
             self.assertIn('insufficient',watch.state['blocker']);self.assertEqual(cloud.writes,[])
@@ -92,13 +92,14 @@ class WatchTests(unittest.TestCase):
                 watch.tick(status);self.assertEqual(len(cloud.writes),3)
     def test_final_targeted_uses_general_parent_and_original_base_ancestor(self):
         with tempfile.TemporaryDirectory() as t:
-            cloud=Cloud();watch=self.watch(t,cloud,{'general':('g'*64,[]),'targeted':('t'*64,[])})
+            cloud=Cloud();watch=self.watch(t,cloud,{'general':('a'*64,[{'path':'sft/general-admitted-v1/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/general','sha256':'a'*64,'bytes':1}]),'targeted':('b'*64,[{'path':'sft/targeted-teacher-admitted-v2/manifest.json','uri':'gs://forge-ownbase-a100-20261110/test/targeted','sha256':'b'*64,'bytes':1}])})
             watch.state['final_base']={'path':'/opt/ownbase-nano/results/base/step','sha256':'a'*64}
             watch.state['final-general-checkpoint']={'path':'/opt/ownbase-nano/results/general/step','sha256':'b'*64}
             done=('final-general','final-general-quality');watch.state['sent'].update({k:'done' for k in done});watch.state['final_completed']={k:{} for k in done}
             status={'status':'awaiting_review','reason':'protected_finish_boundary','step':17000,'review_stages':[{'command':{'watch_id':k}} for k in done]}
             watch.tick(status);c=cloud.writes[-1];args=c['args']
             self.assertEqual(c['watch_id'],'final-targeted');self.assertEqual(c['seconds'],1800)
+            self.assertEqual(args[args.index('--manifest')+1],'/opt/ownbase-nano/sft/targeted-teacher-admitted-v2/manifest.json')
             self.assertEqual(args[args.index('--base')+1],watch.state['final-general-checkpoint']['path'])
             self.assertEqual(args[args.index('--ancestor')+1],watch.state['final_base']['path'])
     def test_absent_initial_control_created_with_generation_zero(self):

@@ -222,7 +222,9 @@ class Watcher:
                 if kind=='sft':
                     msha,files=self.final_inputs[name]
                     parent=base if name=='general' else self.state['final-general-checkpoint']
-                    args=['--manifest',REMOTE_ROOT+'/sft/'+name+'-admitted-v1/manifest.json','--base',parent['path'],'--base-manifest-sha',parent['sha256'],
+                    manifest_paths=[f['path'] for f in files if f['path'].endswith('/manifest.json') and f['sha256']==msha]
+                    if len(manifest_paths)!=1:raise ValueError('Unique admitted final manifest required')
+                    args=['--manifest',REMOTE_ROOT+'/'+manifest_paths[0],'--base',parent['path'],'--base-manifest-sha',parent['sha256'],
                           '--tokenizer',REMOTE_ROOT+'/tokenizer','--tokenizer-sha',TOKENIZER_SHA,'--repo',REMOTE_ROOT+'/nanochat-source',
                           '--backup-prefix',self.config['backup_prefix'].rsplit('/',1)[0]+'/final-'+name+'/checkpoints',
                           '--stage',name,'--batch-tokens','524288' if name=='general' else '32768','--microbatch','8',
@@ -267,7 +269,7 @@ def main():
     a=p.parse_args();config=json.loads(Path(a.config).read_text());recipe,msha,files=reviewed_inputs(a.recipe,a.admitted)
     if not time.time()<a.deadline_epoch<=time.time()+32*3600:raise ValueError('Watcher deadline must be within32h')
     if bool(a.final_general)!=bool(a.final_targeted):raise ValueError('Both admitted final datasets required')
-    final_inputs=None if not a.final_general else {name:admitted_files(path,'gs://forge-ownbase-a100-20261110/ownbase-v2/sft/'+name+'-admitted-v1') for name,path in [('general',a.final_general),('targeted',a.final_targeted)]}
+    final_inputs=None if not a.final_general else {name:admitted_files(path,'gs://forge-ownbase-a100-20261110/ownbase-v2/sft/'+Path(path).name) for name,path in [('general',a.final_general),('targeted',a.final_targeted)]}
     if not a.execute:
         print(json.dumps({'status':'dry_run_no_cloud','recipe_sha256':RECIPE_SHA,'manifest_sha256':msha,'fetch_files':files,'poll_seconds':120},indent=2));return
     root=Path(a.directory);root.mkdir(parents=True,exist_ok=True)
