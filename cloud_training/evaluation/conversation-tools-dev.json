@@ -1,0 +1,107 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "context-correction",
+      "turns": [
+        {
+          "user": "My parcel is in Nashik. Reply only: noted",
+          "exact_answers": [
+            "noted"
+          ]
+        },
+        {
+          "user": "Correction: the parcel is now in Mysuru. Reply only: updated",
+          "exact_answers": [
+            "updated"
+          ]
+        },
+        {
+          "user": "Where is my parcel now? Reply with only the city name.",
+          "exact_answers": [
+            "Mysuru"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculate-grounding",
+      "turns": [
+        {
+          "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 73,
+                "b": 19
+              }
+            }
+          ],
+          "exact_answers": [
+            "54"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "convert-grounding",
+      "turns": [
+        {
+          "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "convert",
+              "arguments": {
+                "value": 3.25,
+                "from": "km",
+                "to": "m"
+              }
+            }
+          ],
+          "exact_answers": [
+            "3250",
+            "3250.0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "no-call",
+      "turns": [
+        {
+          "user": "Do not use tools. Reply only: ready",
+          "exact_answers": [
+            "ready"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conversation-review",
+      "turns": [
+        {
+          "user": "I have twenty minutes to tidy my desk and prepare for a meeting. Suggest a short practical plan.",
+          "rubric": "Relevant feasible plan within20minutes; coherent, no repetition or invented actions."
+        },
+        {
+          "user": "The meeting was cancelled. Change your plan so I can focus on tidying.",
+          "rubric": "Uses the prior context, respects cancellation, revises plan coherently; no claimed tool action."
+        }
+      ]
+    }
+  ]
+}

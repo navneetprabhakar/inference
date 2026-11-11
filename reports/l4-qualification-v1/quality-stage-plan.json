@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "budget_cap_usd": 100,
+  "additional_budget_authorized": false,
+  "budget_policy": {
+    "retain_same_gpu_between_stages": true,
+    "protect_instruction_tuning_and_assessment": true,
+    "idle_time_counts_as_spend": true,
+    "no_new_allocation_until_reforecast_and_lifecycle_ready": true,
+    "allow_reallocation_within_total_cap": true
+  },
+  "evaluation_suite": "cloud_training/evaluation/conversation-tools-dev.json",
+  "evaluation_runner": "cloud_training.nano_quality",
+  "base_checkpoints_tokens": [
+    1000000000,
+    3000000000,
+    6000000000,
+    10000000000
+  ],
+  "stages": [
+    {
+      "at": "Every250Mbase tokens",
+      "check": "Fixed held-out CE; compare same examples; stop on nonfinite losses; investigate two successive >5percent regressions before continuing."
+    },
+    {
+      "at": "1Bbase tokens",
+      "check": "Raw base probes plus bounded raw conversation/tool baseline. Diagnostic only: base has not learned chat framing."
+    },
+    {
+      "at": "3Bbase tokens",
+      "check": "Save immutable base; train separate capped instruction diagnostic branch using fixed admitted development-training subset; run conversation/tool suite. Never merge SFT weights or optimizer into base."
+    },
+    {
+      "at": "6Bbase tokens",
+      "check": "Repeat the identical instruction diagnostic recipe and suite from this base. Compare context, correctness, repetition and broker calls against3B. If no measurable gain, pause further base spend for data/recipe review."
+    },
+    {
+      "at": "Final chosen base, at or before10B",
+      "check": "General SFT then development suite; targeted tool SFT then same suite and independent broader development rubric review."
+    },
+    {
+      "at": "Final candidate",
+      "check": "Run frozen original acceptance gates once selected on development. Never use sealed answers for training or tuning."
+    }
+  ],
+  "diagnostic_limits": {
+    "max_gpu_seconds_each": 600,
+    "max_total_gpu_seconds": 3600,
+    "included_in_existing_finish_reserve": true,
+    "outer_process_timeout_required": true,
+    "instruction_branch_requires_admitted_manifest_and_costed_recipe": true,
+    "if_time_expires": "Incomplete result, never pass; reforecast rather than silently extend"
+  },
+  "comparison_requirements": [
+    "Same suite hash, decoding and instruction diagnostic recipe",
+    "Compare raw penalty1.0 across checkpoints; optional serving penalty separately",
+    "Exact calls require actual broker dispatch and correct arguments",
+    "Check model final answer separately from successful tool execution",
+    "Open-ended coherence and grounding require transcript review; small exact probes alone cannot establish usability",
+    "0wrong or unauthorized executed calls; preserve existing final acceptance thresholds"
+  ],
+  "implementation_status": {
+    "development_runner": "implemented_cpu_unit_tested",
+    "stage_controller": "pending_retained_VM_lifecycle_integration",
+    "model_assessment": "not_yet_run",
+    "sealed_acceptance_answers": "not_accessed"
+  }
+}
