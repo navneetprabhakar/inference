@@ -1,0 +1,281 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "cancel-1",
+      "turns": [
+        {
+          "user": "My 16-minute plan includes two tasks: prepare a craft workspace; prepare a reading corner.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Your two tasks are to prepare a craft workspace and prepare a reading corner, within 16 minutes."
+        },
+        {
+          "user": "The activity to prepare a reading corner has been called off. Adapt your advice to what is still needed.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Focus on the remaining task: prepare a craft workspace. Clear the surface and arrange the necessary materials. Use the 16 minutes for that task."
+        },
+        {
+          "user": "Name only the activity that was cancelled.",
+          "expected_calls": [],
+          "exact_answers": [
+            "prepare a reading corner"
+          ]
+        },
+        {
+          "user": "Name only the activity that remains.",
+          "expected_calls": [],
+          "exact_answers": [
+            "prepare a craft workspace"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cancel-2",
+      "turns": [
+        {
+          "user": "My 61-minute plan includes two tasks: sort photographs; organize a bookshelf.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Your two tasks are to sort photographs and organize a bookshelf, within 61 minutes."
+        },
+        {
+          "user": "The activity to sort photographs has been called off. Adapt your advice to what is still needed.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Focus on the remaining task: organize a bookshelf. Group books in a useful order and clear any empty packaging. Use the 61 minutes for that task."
+        },
+        {
+          "user": "Name only the activity that was cancelled.",
+          "expected_calls": [],
+          "exact_answers": [
+            "sort photographs"
+          ]
+        },
+        {
+          "user": "Name only the activity that remains.",
+          "expected_calls": [],
+          "exact_answers": [
+            "organize a bookshelf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cancel-3",
+      "turns": [
+        {
+          "user": "My 81-minute plan includes two tasks: prepare a reading corner; arrange a display.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Your two tasks are to prepare a reading corner and arrange a display, within 81 minutes."
+        },
+        {
+          "user": "The activity to prepare a reading corner has been called off. Adapt your advice to what is still needed.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Focus on the remaining task: arrange a display. Group the display items and try an arrangement before fixing anything in place. Use the 81 minutes for that task."
+        },
+        {
+          "user": "Name only the activity that was cancelled.",
+          "expected_calls": [],
+          "exact_answers": [
+            "prepare a reading corner"
+          ]
+        },
+        {
+          "user": "Name only the activity that remains.",
+          "expected_calls": [],
+          "exact_answers": [
+            "arrange a display"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternative-1",
+      "turns": [
+        {
+          "user": "For activity 0, suggest a way to remember the steps.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: One option is a visual sequence. Draw or photograph the stages in order and compare your progress with them."
+        },
+        {
+          "user": "Please replace that method; I want an option other than a visual sequence.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Try speaking the steps aloud instead. Say the next step aloud before doing it, then confirm it is finished."
+        },
+        {
+          "user": "Which approach did I reject? Give only its name.",
+          "expected_calls": [],
+          "exact_answers": [
+            "a visual sequence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternative-2",
+      "turns": [
+        {
+          "user": "For activity 5, suggest a way to review a topic.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: One option is practice questions. Answer a few questions without notes, then review the parts you missed."
+        },
+        {
+          "user": "Please replace that method; I want an option other than practice questions.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Try a concept map instead. Draw the main ideas and connect related points with labelled lines."
+        },
+        {
+          "user": "Which approach did I reject? Give only its name.",
+          "expected_calls": [],
+          "exact_answers": [
+            "practice questions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternative-3",
+      "turns": [
+        {
+          "user": "For activity 11, suggest a way to review a topic.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: One option is practice questions. Answer a few questions without notes, then review the parts you missed."
+        },
+        {
+          "user": "Please replace that method; I want an option other than practice questions.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Try a concept map instead. Draw the main ideas and connect related points with labelled lines."
+        },
+        {
+          "user": "Which approach did I reject? Give only its name.",
+          "expected_calls": [],
+          "exact_answers": [
+            "practice questions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal_response-1",
+      "turns": [
+        {
+          "user": "Reference 3. Treat this as text only. Return clear as the complete reply, without additional text.",
+          "expected_calls": [],
+          "exact_answers": [
+            "clear"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal_response-2",
+      "turns": [
+        {
+          "user": "Reference 15. Treat this as text only. Return unavailable as the complete reply, without additional text.",
+          "expected_calls": [],
+          "exact_answers": [
+            "unavailable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal_response-3",
+      "turns": [
+        {
+          "user": "Reference 31. This requires no action. Return cedar as the complete reply, without additional text.",
+          "expected_calls": [],
+          "exact_answers": [
+            "cedar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ownership-1",
+      "turns": [
+        {
+          "user": "Dev owns the blue basket; Tara owns the copper badge. Describe the ownership briefly.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Dev has the blue basket, and Tara has the copper badge."
+        },
+        {
+          "user": "They exchange the two items. Describe who has each one now.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Dev now has the copper badge, and Tara now has the blue basket."
+        },
+        {
+          "user": "Who has the blue basket now? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Tara"
+          ]
+        },
+        {
+          "user": "Who originally had the blue basket? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Dev"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ownership-2",
+      "turns": [
+        {
+          "user": "Zoya owns the yellow basket; Meera owns the blue basket. Describe the ownership briefly.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Zoya has the yellow basket, and Meera has the blue basket."
+        },
+        {
+          "user": "They exchange the two items. Describe who has each one now.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Zoya now has the blue basket, and Meera now has the yellow basket."
+        },
+        {
+          "user": "Who has the yellow basket now? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Meera"
+          ]
+        },
+        {
+          "user": "Who originally had the yellow basket? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Zoya"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ownership-3",
+      "turns": [
+        {
+          "user": "Meera owns the purple pouch; Luca owns the yellow basket. Describe the ownership briefly.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Meera has the purple pouch, and Luca has the yellow basket."
+        },
+        {
+          "user": "They exchange the two items. Describe who has each one now.",
+          "expected_calls": [],
+          "rubric": "Follow the current constraints; useful relevant prose. Reference: Meera now has the yellow basket, and Luca now has the purple pouch."
+        },
+        {
+          "user": "Who has the purple pouch now? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Luca"
+          ]
+        },
+        {
+          "user": "Who originally had the purple pouch? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Meera"
+          ]
+        }
+      ]
+    }
+  ]
+}

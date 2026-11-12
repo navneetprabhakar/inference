@@ -1,0 +1,3213 @@
+{
+  "checkpoint_manifest_sha256": "911558f640a8fe94a40a0735c5c58c6e34b474ae72ba623d69afbde4623eba28",
+  "suite_sha256": "6677973fd4c6729f2bbd661d0d05eb5c1bcc5983061bfd5b17f6a12aa1439031",
+  "step": 90,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 32768,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "eval_every_updates": 200,
+    "eval_rows": 64,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 90,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.25,
+    "lr_multiplier": 0.25,
+    "microbatch": 8,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 1439,
+    "parent_bundle_manifest_sha256": "00d401640ae41dc1ce862cf17af961eb089336f1021909d64d680c85bea780e5",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 32768,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_updates": 200,
+      "eval_rows": 64,
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 176,
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "lr_batch_scale": 0.25,
+      "microbatch": 8,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 2815,
+      "parent_bundle_manifest_sha256": "1ffcc23b62000dcd64006a55fd6fdb3a53b8e7ae1028c6da9f0243bf5e00868f",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+        "base_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "batch_tokens": 32768,
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_updates": 170,
+        "eval_rows": 64,
+        "format_version": "forge-nanochat-v1",
+        "horizon_updates": 169,
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "lr_batch_scale": 0.25,
+        "microbatch": 8,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "packed_rows": 2692,
+        "parent_bundle_manifest_sha256": "769b8738a9f1cc0d33d2bcf3959c74d5be27f3eb162623241a135d0b662f7aa8",
+        "parent_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 32768,
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_updates": 40,
+          "eval_rows": 64,
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 76,
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "lr_batch_scale": 0.25,
+          "microbatch": 8,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 1208,
+          "parent_bundle_manifest_sha256": "876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 32768,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_updates": 250,
+            "eval_rows": 64,
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 14603,
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "lr_batch_scale": 0.25,
+            "microbatch": 8,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 233633,
+            "parent_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "81bce708e5ead239c1572a41606567d73493e2939383a5c6e279bdbac71062df",
+            "stage": "general",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "phase": "sft",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "8312756029c48b64b840392706c48101549a0f56463152c5ceb00a43da434e12",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "phase": "sft",
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "source_manifest_sha256": "79b304bcebaef31b5a44393cb3b647acb1c47436f9ecdfc56c8c20f82dd61458",
+        "stage": "targeted",
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "source_manifest_sha256": "57be7b83bbeeae568b78cb7539ceb0912824106edc6c3fa04fdc12db254ce2e6",
+      "stage": "targeted",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 103,
+    "source_manifest_sha256": "3caa690337d826e8d59768a5da0c1c2c23f3f68d8fbd96b0604bf281779c4f00",
+    "stage": "targeted",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 256,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "teacher_study",
+      "turn": 0,
+      "user": "The Aster workshop topic is fractions, its duration is fifteen minutes, and the material is a red notebook. Suggest a simple session structure.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: You could open by asking participants what they already understand about fractions, then use the notebook to record a simple example and their observations. Follow that with a short practice activity in which participants explain their thinking, rather than only giving an answer. Close by revisiting the opening question and noting anything that remains confusing. Keep the example and difficulty flexible until you know the participants\u2019 experience. The notebook can hold both the example and a brief summary, making it useful after the session. This structure gives the workshop a beginning, an active middle and a clear close without assuming additional materials.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Session structure: \n- Define the purpose and scope of the session.\n- Use the duration to decide how long the session will last.\n- Organize the material in a useful order.\n- Use the session to check progress and make any necessary promises.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              83,
+              12173,
+              2224,
+              58,
+              20208,
+              45,
+              24468,
+              262,
+              2734,
+              288,
+              9463,
+              286,
+              262,
+              6066,
+              307,
+              45,
+              3200,
+              262,
+              6955,
+              283,
+              5405,
+              614,
+              820,
+              262,
+              6066,
+              465,
+              1513,
+              307,
+              45,
+              5682,
+              834,
+              262,
+              1067,
+              287,
+              257,
+              3079,
+              1689,
+              307,
+              45,
+              3200,
+              262,
+              6066,
+              283,
+              1915,
+              3432,
+              288,
+              713,
+              641,
+              2155,
+              15446,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Session structure: \n- Define the purpose and scope of the session.\n- Use the duration to decide how long the session will last.\n- Organize the material in a useful order.\n- Use the session to check progress and make any necessary promises."
+            },
+            "seconds": 1.4482892830000083
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_study",
+      "turn": 1,
+      "user": "Change the topic to drawing, not fractions. How would the activity change?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Begin with an invitation to make a simple mark or sketch in the red notebook, without prescribing a subject the group has not chosen. Then give participants space to observe what they have drawn and try a deliberate change, such as varying a line or adding detail. Ask them to describe what they noticed, keeping the discussion optional if sharing feels uncomfortable. Close by inviting each person to note an idea they might want to explore further. The session can remain focused on observation and experimentation; you do not need to assume a particular skill level, finished artwork or additional equipment.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "activity change: drawing would become an activity, as the activity would depend on the specific topic.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              14046,
+              1259,
+              58,
+              4265,
+              750,
+              1455,
+              346,
+              2341,
+              44,
+              352,
+              262,
+              2341,
+              750,
+              3639,
+              331,
+              262,
+              1425,
+              4209,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "activity change: drawing would become an activity, as the activity would depend on the specific topic."
+            },
+            "seconds": 0.34071686599999396
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_study",
+      "turn": 2,
+      "user": "The duration is ten minutes, not fifteen minutes.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Updated: drawing for ten minutes, using the red notebook.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "15",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1296,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "15"
+            },
+            "seconds": 0.035886325999996416
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_study",
+      "turn": 3,
+      "user": "What if someone dislikes sharing their work?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Make sharing optional and let them reflect privately in the notebook.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Some people might find it unfulfilling. Others might find it uncomfortable.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3793,
+              737,
+              1175,
+              942,
+              338,
+              546,
+              735,
+              102,
+              2902,
+              46,
+              12002,
+              1175,
+              942,
+              338,
+              10587,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Some people might find it unfulfilling. Others might find it uncomfortable."
+            },
+            "seconds": 0.35306709600000374
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_study",
+      "turn": 4,
+      "user": "Give me a concise opening prompt.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: \u201cMake a mark or sketch in the red notebook, then notice what you would like to explore.\u201d",
+      "result": {
+        "status": "complete",
+        "assistant_text": "What is the purpose of the activity?",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1089,
+              306,
+              262,
+              2734,
+              286,
+              262,
+              2341,
+              63,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "What is the purpose of the activity?"
+            },
+            "seconds": 0.1769174869999972
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_study",
+      "turn": 5,
+      "user": "Return only the current topic, current duration and original material, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Occlude the `current` and `original` variables.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              24786,
+              10515,
+              262,
+              8060,
+              20970,
+              96,
+              288,
+              8060,
+              18530,
+              96,
+              7147,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Occlude the `current` and `original` variables."
+            },
+            "seconds": 0.25650244599999894
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 0,
+      "user": "For the Orchid project, the room is Lark Studio, the time is 11:30, and the item is a blue folder. How should I prepare?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Begin with a short checklist covering the room, the time, and the folder. Decide what you need the folder for and keep it somewhere easy to find when you leave. Before the event, check the room information against your own notes and consider whether anyone else needs the same details. You could also prepare a brief description of the folder's purpose so it is easy to identify. Keep your checklist flexible: if the room or time changes, update the relevant entry and share the corrected information with anyone who depends on it. Finally, review the list before setting out.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Spend 6 hours to prepare the Orchid project: choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5771,
+              499,
+              32,
+              54,
+              2153,
+              283,
+              4724,
+              262,
+              23203,
+              320,
+              1323,
+              58,
+              2462,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Spend 6 hours to prepare the Orchid project: choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5338750159999961
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 1,
+      "user": "The room has changed from Lark Studio to Cedar Hall.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Noted: Cedar Hall is the current room.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              2153,
+              283,
+              4724,
+              262,
+              15837,
+              46,
+              7661,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5308163290000039
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 2,
+      "user": "Can you suggest a concise preparation checklist?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: A practical checklist could cover locating the blue folder, checking its contents, and keeping it accessible for the project. Add a separate line for confirming Cedar Hall and another for checking the recorded time before you go. If other people need the details, prepare a short message that makes the location and time easy to spot. You can also decide where to place the folder once you arrive so it does not get overlooked. Avoid filling the list with assumptions about the event; add only steps that match what you actually need to do. Review the list whenever a detail changes.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              2153,
+              283,
+              4724,
+              262,
+              15837,
+              46,
+              7661,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5234990879999941
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 3,
+      "user": "Correction: the time is 09:00, not 11:30.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Updated to 09:00. The room remains Cedar Hall.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              2153,
+              283,
+              4724,
+              262,
+              15837,
+              46,
+              7661,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5982090749999998
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 4,
+      "user": "What should stand out in a message?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Put Cedar Hall and 09:00 prominently, with the blue folder mentioned where relevant.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              2153,
+              283,
+              4724,
+              262,
+              15837,
+              46,
+              7661,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5999036000000046
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_event",
+      "turn": 5,
+      "user": "Return only the current room, current time and original item, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              2153,
+              283,
+              4724,
+              262,
+              15837,
+              46,
+              7661,
+              346,
+              5794,
+              420,
+              262,
+              490,
+              779,
+              14247,
+              1672,
+              288,
+              6336,
+              338,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 hours to prepare the Room. Choose an item from the Lark Studio list and arrange it in the order they will be used."
+            },
+            "seconds": 0.5944630400000079
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 0,
+      "user": "For the Aster group, Leela is the person, Tuesday is the day, and the task is label the boxes. Help me plan the assignment.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Write the assignment with the person, day, and task together, then clarify what information each label should contain. If the group already has a labeling convention, provide it to the assigned person; otherwise, agree on one before the work begins. Check whether the boxes can be identified reliably and set aside any whose contents or destination are unclear. Once the labels are applied, review them for legibility and consistency. Record unresolved questions so they can be answered rather than guessed. The assignment can remain simple, but clear labeling criteria will make the result easier for the group to use.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "plan the assignment",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              17610,
+              262,
+              10816,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "plan the assignment"
+            },
+            "seconds": 0.06625592000000324
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 1,
+      "user": "Correction: Arun is the person.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Arun is now assigned.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Arun is the person.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4484,
+              364,
+              306,
+              262,
+              1105,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Arun is the person."
+            },
+            "seconds": 0.1210830819999984
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 2,
+      "user": "What should Arun do with an ambiguous box?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: He could set it aside and note what makes it ambiguous, such as an unclear description or an uncertain destination. Rather than choosing a label based on a guess, he should ask someone who can confirm the intended information. In the meantime, he can continue with boxes whose labels are clear, provided the group agrees with that approach. Once the question is resolved, he can apply the confirmed label and check that it follows the same convention as the others. A short record of unresolved boxes can help the group see what remains without treating the whole task as blocked.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Arun should check the boxes before fulfilling the assignment.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4484,
+              364,
+              728,
+              1915,
+              262,
+              7143,
+              1003,
+              17115,
+              262,
+              10816,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Arun should check the boxes before fulfilling the assignment."
+            },
+            "seconds": 0.21755082499998935
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 3,
+      "user": "Correction: the day is Saturday.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The assigned day is now Saturday.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Arun should check the boxes before fulfilling the assignment.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4484,
+              364,
+              728,
+              1915,
+              262,
+              7143,
+              1003,
+              17115,
+              262,
+              10816,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Arun should check the boxes before fulfilling the assignment."
+            },
+            "seconds": 0.20315994999999987
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 4,
+      "user": "Draft a short reminder.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Arun, please label the boxes on Saturday.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Spend a day to check the boxes before fulfilling the assignment.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5771,
+              499,
+              257,
+              1132,
+              283,
+              1915,
+              262,
+              7143,
+              1003,
+              17115,
+              262,
+              10816,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Spend a day to check the boxes before fulfilling the assignment."
+            },
+            "seconds": 0.2629552860000075
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_shift",
+      "turn": 5,
+      "user": "Return only the current person, current day and original task, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Occlude the `current_person`, `current_day`, and `original_task` in the list.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              24786,
+              10515,
+              262,
+              8060,
+              20970,
+              95,
+              15699,
+              96,
+              44,
+              8060,
+              20970,
+              95,
+              1247,
+              96,
+              44,
+              288,
+              8060,
+              18530,
+              95,
+              116,
+              2216,
+              96,
+              287,
+              262,
+              1672,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Occlude the `current_person`, `current_day`, and `original_task` in the list."
+            },
+            "seconds": 0.5119194990000011
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 0,
+      "user": "For Meadow project, I'm making cardboard circles for Arun. Can you help me think through the craft?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by deciding what the finished pieces are meant to do, since that will guide their size and construction. Check whether the cardboard is suitable for the intended use and whether it can be cut cleanly with the tools you have. A reusable template can help keep the circles consistent, while a sample lets you test the shape and finish before making the rest. Consider whether the edges need smoothing or covering for comfortable handling. You might also ask Arun about any preferences relevant to the gift or its use, without assuming a particular occasion or design.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Sure, I can help you think through the craft. Here's a possible direction to explore: \n\n- Start by making cardboard circles for Arun. \n- Next, use the remaining cardboard to craft the other circles. \n- Finally, glue the circles together to form the Arun.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              22865,
+              44,
+              333,
+              363,
+              638,
+              313,
+              1293,
+              752,
+              262,
+              4604,
+              46,
+              2650,
+              386,
+              257,
+              1449,
+              3355,
+              283,
+              2799,
+              58,
+              10809,
+              45,
+              5743,
+              430,
+              1246,
+              12917,
+              11104,
+              324,
+              1510,
+              364,
+              46,
+              20208,
+              45,
+              8206,
+              44,
+              612,
+              262,
+              6059,
+              12917,
+              283,
+              4604,
+              262,
+              548,
+              11104,
+              46,
+              20208,
+              45,
+              7320,
+              44,
+              8491,
+              262,
+              11104,
+              1707,
+              283,
+              918,
+              262,
+              1510,
+              364,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Sure, I can help you think through the craft. Here's a possible direction to explore: \n\n- Start by making cardboard circles for Arun. \n- Next, use the remaining cardboard to craft the other circles. \n- Finally, glue the circles together to form the Arun."
+            },
+            "seconds": 0.9486185749999976
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 1,
+      "user": "Correction: the material is cloth.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The material is now cloth.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Cloth is a fabric material that can be used for a variety of applications, including clothing, upholstery, and drapery.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3201,
+              743,
+              306,
+              257,
+              3303,
+              1067,
+              334,
+              363,
+              315,
+              682,
+              324,
+              257,
+              2125,
+              286,
+              2604,
+              44,
+              1256,
+              4962,
+              44,
+              27155,
+              44,
+              288,
+              4610,
+              435,
+              121,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Cloth is a fabric material that can be used for a variety of applications, including clothing, upholstery, and drapery."
+            },
+            "seconds": 0.45347737900000595
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 2,
+      "user": "What changes should I consider when working with that material?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Cloth behaves differently from a rigid sheet, so first consider whether the pieces need to hold their shape or remain flexible. You could test a small sample to see how easily the edges fray and whether a hem, adhesive, or another finish suits the fabric and intended use. A template can still help with consistency, but secure or mark the material carefully before cutting so it doesn't shift. Choose any joining or finishing method based on the cloth you actually have and the tools available. Check the result for comfort and durability before committing to the full design.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "When working with cloth, it's important to handle it with care and avoid damaging any. Here are some tips to keep in mind: \n\n- Use a cloth to wipe any spills or accidents. \n- Avoid using cotton or wool as these can cause fibers to get twisted. \n- Use a cloth to clean up any spills. \n- Avoid using paper or other fibers as they can cause fibers to get torn. \n- Store cloth in a separate area to prevent it from getting dirty.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1712,
+              1737,
+              347,
+              3603,
+              44,
+              338,
+              386,
+              922,
+              283,
+              3775,
+              338,
+              347,
+              1102,
+              288,
+              1901,
+              9303,
+              641,
+              46,
+              2650,
+              339,
+              595,
+              2976,
+              283,
+              1061,
+              287,
+              1910,
+              58,
+              10809,
+              45,
+              3200,
+              257,
+              3603,
+              283,
+              12879,
+              641,
+              17484,
+              351,
+              8149,
+              46,
+              20208,
+              45,
+              7312,
+              844,
+              6927,
+              351,
+              9144,
+              352,
+              657,
+              363,
+              1316,
+              7189,
+              283,
+              662,
+              20453,
+              46,
+              20208,
+              45,
+              3200,
+              257,
+              3603,
+              283,
+              1368,
+              585,
+              641,
+              17484,
+              46,
+              20208,
+              45,
+              7312,
+              844,
+              1952,
+              351,
+              548,
+              7189,
+              352,
+              472,
+              363,
+              1316,
+              7189,
+              283,
+              662,
+              11844,
+              46,
+              20208,
+              45,
+              12607,
+              3603,
+              287,
+              257,
+              4137,
+              1360,
+              283,
+              1352,
+              338,
+              420,
+              2091,
+              9519,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "When working with cloth, it's important to handle it with care and avoid damaging any. Here are some tips to keep in mind: \n\n- Use a cloth to wipe any spills or accidents. \n- Avoid using cotton or wool as these can cause fibers to get twisted. \n- Use a cloth to clean up any spills. \n- Avoid using paper or other fibers as they can cause fibers to get torn. \n- Store cloth in a separate area to prevent it from getting dirty."
+            },
+            "seconds": 1.737937372999994
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.04938271604938271,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 3,
+      "user": "Change the shape to stars.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The shape is now stars.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Stars can be changed to stars by taking a moment to rotate the planet. Here's a possible direction to explore: \n\n- Rotate the planet to a different shape. \n- Use the planet's mass to create a new object. \n- Clear any empty packaging. \n- Store the stars in a clear place.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1486,
+              1121,
+              363,
+              315,
+              4386,
+              283,
+              6327,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              11712,
+              262,
+              3811,
+              46,
+              2650,
+              386,
+              257,
+              1449,
+              3355,
+              283,
+              2799,
+              58,
+              10809,
+              45,
+              12781,
+              372,
+              262,
+              3811,
+              283,
+              257,
+              804,
+              2599,
+              46,
+              20208,
+              45,
+              3200,
+              262,
+              3811,
+              386,
+              2089,
+              283,
+              1273,
+              257,
+              725,
+              1651,
+              46,
+              20208,
+              45,
+              12861,
+              641,
+              7296,
+              6703,
+              46,
+              20208,
+              45,
+              12607,
+              262,
+              6327,
+              287,
+              257,
+              2027,
+              1314,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Stars can be changed to stars by taking a moment to rotate the planet. Here's a possible direction to explore: \n\n- Rotate the planet to a different shape. \n- Use the planet's mass to create a new object. \n- Clear any empty packaging. \n- Store the stars in a clear place."
+            },
+            "seconds": 1.275147081
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 4,
+      "user": "What's a useful first test?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Cut a sample star and check whether its points and edges hold up as intended.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "A useful first test is to check that the planet is habitable.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              65,
+              3079,
+              815,
+              1126,
+              306,
+              283,
+              1915,
+              334,
+              262,
+              3811,
+              306,
+              2637,
+              497,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "A useful first test is to check that the planet is habitable."
+            },
+            "seconds": 0.3107798839999987
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_craft",
+      "turn": 5,
+      "user": "Return only the current material, current shape and original recipient, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "To separate the material from the recipient, you can use the `|` operator. Here's a possible direction to explore: \n\n- Rotate the planet to a different shape. \n- Use the planet's mass to create a new object. \n- Clear any empty packaging. \n- Store the stars in a clear place.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2060,
+              4137,
+              262,
+              1067,
+              420,
+              262,
+              15583,
+              44,
+              313,
+              363,
+              612,
+              262,
+              8060,
+              124,
+              96,
+              10908,
+              46,
+              2650,
+              386,
+              257,
+              1449,
+              3355,
+              283,
+              2799,
+              58,
+              10809,
+              45,
+              12781,
+              372,
+              262,
+              3811,
+              283,
+              257,
+              804,
+              2599,
+              46,
+              20208,
+              45,
+              3200,
+              262,
+              3811,
+              386,
+              2089,
+              283,
+              1273,
+              257,
+              725,
+              1651,
+              46,
+              20208,
+              45,
+              12861,
+              641,
+              7296,
+              6703,
+              46,
+              20208,
+              45,
+              12607,
+              262,
+              6327,
+              287,
+              257,
+              2027,
+              1314,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "To separate the material from the recipient, you can use the `|` operator. Here's a possible direction to explore: \n\n- Rotate the planet to a different shape. \n- Use the planet's mass to create a new object. \n- Clear any empty packaging. \n- Store the stars in a clear place."
+            },
+            "seconds": 1.306396031999995
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 0,
+      "user": "The Lumen club has six items in Bin D, labeled wooden clips. How should we make the inventory easy to check?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Use one simple inventory entry that places the label, location and quantity together. The person checking it can find the bin, compare its contents with the label and count the items before recording the result. Include a small space for a discrepancy or question rather than silently changing the record when something looks wrong. If someone moves the contents, have that person update the location in the same entry so the next check starts in the right place. Keep the record readable enough that another club member can understand what was checked and what still needs clarification.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Make the inventory easy to check by taking a moment to write down what is needed before carrying anything.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              7326,
+              262,
+              12432,
+              1793,
+              283,
+              1915,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              3788,
+              1024,
+              686,
+              306,
+              2183,
+              1003,
+              7442,
+              2684,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Make the inventory easy to check by taking a moment to write down what is needed before carrying anything."
+            },
+            "seconds": 0.34202953099999434
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 1,
+      "user": "Correction: the bin is Bin A.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The current bin is Bin A.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "bin",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              20120,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "bin"
+            },
+            "seconds": 0.035681689999989885
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 2,
+      "user": "What should someone do if the count does not match the record?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: First, count the contents again and make sure the person is looking at the entry labeled wooden clips. Record the observed count alongside the existing record rather than assuming either one is correct. Then check whether the club has any explanation for the difference, such as a move that has not yet been recorded. If the cause remains unclear, leave a concise note for the person responsible for the inventory and avoid presenting the discrepancy as resolved. Once the club confirms the correct count, update the entry and remove or mark the question as resolved. That makes the correction traceable and useful to the next checker.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "If the count does not match the record, try taking a moment to check that the item is clear.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1257,
+              262,
+              1336,
+              793,
+              433,
+              4103,
+              262,
+              2241,
+              44,
+              1408,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              5794,
+              306,
+              2027,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "If the count does not match the record, try taking a moment to check that the item is clear."
+            },
+            "seconds": 0.3865601620000092
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 3,
+      "user": "Correction: the quantity is three.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The quantity is now three.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "3",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              51,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3"
+            },
+            "seconds": 0.04533765499999731
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 4,
+      "user": "Write a concise inventory line.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Bin A \u2014 three \u2014 wooden clips.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Inventory",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              848,
+              917,
+              697,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Inventory"
+            },
+            "seconds": 0.07828575499999602
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_inventory",
+      "turn": 5,
+      "user": "Return only the current bin, current quantity and original label, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Occlude only the current bin, current quantity and original label.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              24786,
+              10515,
+              766,
+              262,
+              1394,
+              9422,
+              44,
+              1394,
+              7280,
+              288,
+              3313,
+              4924,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Occlude only the current bin, current quantity and original label."
+            },
+            "seconds": 0.2670058939999933
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 0,
+      "user": "For Juniper circle, the priority is organize the shelves, the deadline is Sunday, and the file is plan.txt. Help me structure the work.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by inspecting the shelves and deciding what a useful arrangement would look like. Group items by a practical rule, such as purpose or frequency of use, if that fits what is actually there. Set aside anything whose placement is uncertain rather than making an unsupported decision. Record the proposed groups and open questions in plan.txt, then arrange the agreed items and check that labels are understandable. Finish by reviewing whether the result makes items easy to find and return. Keep the plan flexible enough to reflect what the inspection reveals, and note any remaining decisions for the circle.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Spend 4 days to organize the work: group the tasks by importance and complete the tasks in the order they will be used. Use the remaining 5 days to plan the week: group the lessons by type and set useful goals.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5771,
+              499,
+              32,
+              52,
+              1773,
+              283,
+              12875,
+              262,
+              751,
+              58,
+              1756,
+              262,
+              3783,
+              430,
+              3234,
+              288,
+              1761,
+              262,
+              3783,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              3200,
+              262,
+              6059,
+              32,
+              53,
+              1773,
+              283,
+              1186,
+              262,
+              2050,
+              58,
+              1756,
+              262,
+              5528,
+              430,
+              1275,
+              288,
+              943,
+              3079,
+              3849,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Spend 4 days to organize the work: group the tasks by importance and complete the tasks in the order they will be used. Use the remaining 5 days to plan the week: group the lessons by type and set useful goals."
+            },
+            "seconds": 0.7930282890000058
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 1,
+      "user": "Correction: the priority is repair the sign.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The priority is now repair the sign.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 days to repair the sign. Group the damaged signs by type and put useful ones in. Finish by taking a moment to check that the repaired signs are up to buty.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              1773,
+              283,
+              4182,
+              262,
+              945,
+              46,
+              6891,
+              262,
+              5117,
+              3224,
+              430,
+              1275,
+              288,
+              1480,
+              3079,
+              2701,
+              287,
+              46,
+              31287,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              16200,
+              3224,
+              339,
+              585,
+              283,
+              506,
+              121,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 days to repair the sign. Group the damaged signs by type and put useful ones in. Finish by taking a moment to check that the repaired signs are up to buty."
+            },
+            "seconds": 0.6967403649999966
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 2,
+      "user": "How should the plan change?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Replace the shelf organization steps in the plan with a short assessment of the sign. Describe the visible problem, then identify what needs to be confirmed before choosing a repair method. Record the proposed approach, any materials or help that may be needed, and who agrees to handle each action. Avoid assuming the sign's material or the nature of its damage until someone checks it. Include a final inspection to confirm the repair addresses the observed problem. Use plan.txt to distinguish confirmed observations from questions, so the circle can update the approach without mistaking an early guess for a decision.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 days to check the progress of the plan. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              1773,
+              283,
+              1915,
+              262,
+              3432,
+              286,
+              262,
+              1186,
+              46,
+              6891,
+              262,
+              3783,
+              430,
+              3234,
+              288,
+              1761,
+              262,
+              3783,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              31287,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              3783,
+              339,
+              5784,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 days to check the progress of the plan. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed."
+            },
+            "seconds": 0.7335873530000043
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 3,
+      "user": "What belongs in the final inspection?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Check the original problem, the quality of the repair, and any unresolved concerns identified during assessment.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 days to check that the plan is up to date. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              1773,
+              283,
+              1915,
+              334,
+              262,
+              1186,
+              306,
+              585,
+              283,
+              4018,
+              46,
+              6891,
+              262,
+              3783,
+              430,
+              3234,
+              288,
+              1761,
+              262,
+              3783,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              31287,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              3783,
+              339,
+              5784,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 days to check that the plan is up to date. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed."
+            },
+            "seconds": 0.8762284750000049
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.02631578947368418,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 4,
+      "user": "Correction: the deadline is Wednesday.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The deadline is now Wednesday.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 days to check that the plan is up to date. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              1773,
+              283,
+              1915,
+              334,
+              262,
+              1186,
+              306,
+              585,
+              283,
+              4018,
+              46,
+              6891,
+              262,
+              3783,
+              430,
+              3234,
+              288,
+              1761,
+              262,
+              3783,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              31287,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              3783,
+              339,
+              5784,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 days to check that the plan is up to date. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed."
+            },
+            "seconds": 0.8947459510000044
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.02631578947368418,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_project",
+      "turn": 5,
+      "user": "Return only the current priority, current deadline and original file, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the 7 days to check that the current priority is being used. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              32,
+              55,
+              1773,
+              283,
+              1915,
+              334,
+              262,
+              1394,
+              8504,
+              306,
+              991,
+              682,
+              46,
+              6891,
+              262,
+              3783,
+              430,
+              3234,
+              288,
+              1761,
+              262,
+              3783,
+              287,
+              262,
+              1689,
+              472,
+              465,
+              315,
+              682,
+              46,
+              31287,
+              430,
+              2308,
+              257,
+              3538,
+              283,
+              1915,
+              334,
+              262,
+              3783,
+              339,
+              5784,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the 7 days to check that the current priority is being used. Group the tasks by importance and complete the tasks in the order they will be used. Finish by taking a moment to check that the tasks are completed."
+            },
+            "seconds": 0.9116317820000006
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.02631578947368418,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 0,
+      "user": "The Orchid team wants seven blue items for Leela. How should we plan the purchase?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by describing the item clearly enough that whoever places the order can identify it. Check that blue is available and that the requested quantity can be supplied together. Before confirming, review the item description, color, quantity, and recipient in one place so a mismatch is easy to spot. You could also ask Leela whether there are any preferences that affect the choice, without assuming there are any. Once the details are settled, keep the purchase note concise and use it as the basis for the order. If availability creates a problem, bring the options back to the team before substituting anything.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Spend seven blue items for Leela.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5771,
+              499,
+              5615,
+              2860,
+              2952,
+              324,
+              2512,
+              13677,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Spend seven blue items for Leela."
+            },
+            "seconds": 0.16391131600001074
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 1,
+      "user": "Correction: the color should be red, not blue.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Understood: red is the current color.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the red, not blue, items.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              1896,
+              44,
+              433,
+              2860,
+              44,
+              2952,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the red, not blue, items."
+            },
+            "seconds": 0.16854620399999476
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 2,
+      "user": "What would a useful order note include?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: A useful order note should make the selection and handoff easy to verify. Name the item once it is specified, then state the color, quantity, and intended recipient together. Include any product details the team agrees are essential, such as a particular style or specification, but leave unspecified details open until someone confirms them. A short review prompt can help: \u201cPlease check the item and these details before placing the order.\u201d Keep any questions about availability separate from the confirmed request, so a proposed alternative is not mistaken for an approved change. The note can be shared with whoever is responsible for placing the purchase.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "A useful order note should include the item to be purchased, the action to be taken, and any relevant instructions.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              65,
+              3079,
+              1689,
+              3706,
+              728,
+              1426,
+              262,
+              5794,
+              283,
+              315,
+              8996,
+              44,
+              262,
+              2872,
+              283,
+              315,
+              2739,
+              44,
+              288,
+              641,
+              4745,
+              4152,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "A useful order note should include the item to be purchased, the action to be taken, and any relevant instructions."
+            },
+            "seconds": 0.4057166300000006
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 3,
+      "user": "Change the quantity from seven to four.",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The quantity is now four.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "7",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "7"
+            },
+            "seconds": 0.03562800400000299
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 4,
+      "user": "Should we substitute if red is unavailable?",
+      "policy": null,
+      "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Ask the team before choosing a substitute.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "if red is unavailable.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              345,
+              1896,
+              306,
+              17212,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "if red is unavailable."
+            },
+            "seconds": 0.11553574299999525
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "teacher_purchase",
+      "turn": 5,
+      "user": "Return only the current color, current quantity and original recipient, separated by |.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Occipital.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              24786,
+              514,
+              1309,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Occipital."
+            },
+            "seconds": 0.09771338000000185
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    }
+  ],
+  "automated_passed": 0,
+  "automated_total": 7,
+  "manual_review_turns": 35,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 53.496851539999994,
+  "hard_process_timeout_seconds": 540
+}
