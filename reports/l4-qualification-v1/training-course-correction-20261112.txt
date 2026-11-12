@@ -1,0 +1,67 @@
+OWN-BASE TRAINING: COURSE CORRECTION — 2026-11-12
+
+Decision
+Keep the immutable 537M own-base checkpoint at 6,000,476,160 tokens. Do not spend the remaining budget blindly reaching 10B. First establish that the current model can learn the conversation/tool protocol in an isolated SFT branch. Do not deploy 4K, grow parameters or change base numerics during this investigation.
+
+Established evidence
+1. Base held-out CE improved from 2.825294 at3.25B to2.666492 at6B. This is real next-token learning, not a usability demonstration.
+2. Matched diagnostic SFT:6144conversations,155updates,2731938assistanttargets,one finite pass. At3B masked devCE ended1.612357; at6B1.469404. Actual exposed conversation/tool checks remain0/6 atboth milestones, zero successful broker calls.
+3. This diagnostic covers only0.99percent of the275734697assistanttargets already available for full general SFT. Full conversation training has not happened. The result cannot establish that additional base learning has zero value or that the architecture is incapable of conversation.
+4. Own-tokenizer audit:4096general sessions supply2628987targets;2048tool sessions supply102951targets, only3.7684percent of the training objective. Average token loss is dominated by general prose despite tools being one-third of sessions. Assistant-end tokens are0.452percent of targets. These fractions explain weak observability; they alone do not prove causality.
+5. General assistant completion median297tokens;87.42percent exceed128tokens, the diagnostic per-action generation budget. Tool text median6tokens. A generic longer reply can time out; however exact short commands and tool requests are still genuinely wrong. Increasing generation budget alone will not fix instruction adherence.
+6. Inspected encoding uses shifted labels, assistant text/tool delimiters/end supervision, ignored user/tool observations, globally normalized valid-target accumulation. No confirmed off-by-one/masking fault found. Tests are useful but do not replace real checkpoint token-level measurements.
+7. SFT uses pretraining optimizer moments and conservative fresh LR multiplier0.8*sqrt(32768/524288)=0.2. Upstream nanochat also supports optimizer warm-start and LR reset, so warm-start is not inherently a bug. The extra batch scale and short155update horizon remain hypotheses to test, not proven causes.
+8. Training usesFA3, quality usesSDPA. Full-prefix generation should be compatible; compare actual logits/argmax because numerical equivalence is not established by architecture identity.
+9. 6B watcher correctly blocked no-improvement. Controller later exhausted review wait and stopped the VM. The shutdown was a lifecycle-policy consequence, not evidence of a bad checkpoint. Later status reports were not remediation.
+
+Ranked hypotheses
+HIGH: diagnostic too small, prose-token-dominated and poor match to short protocol/termination tasks; full SFT not yet exercised.
+MEDIUM: insufficient new-protocol/stop-token adaptation under short conservative schedule; optimizer carryover may affect adaptation.
+MEDIUM: packing cross-conversation attention/position distribution or training/inference numerical difference. Needs direct comparison, not assumptions.
+LOWER / NOT ESTABLISHED: irrecoverably bad base, model too small, need billions more teacher tokens. Cannot conclude these before learnability checks.
+
+Sequential experimental plan; one writer, existing VM only
+A. Zero-GPU preparation: preserve checkpoints/config/data manifests and current control owner; review actual final budget before restart. Create a separate repair recipe, never rewrite original3B/6Bevidence. Frozen evaluation prompts must not enter training. Prepare independent short protocol training/dev fixtures, plus token-category diagnostics.
+B. Pipeline proof, hard<=30GPUminutes: train32–64fresh supervised examples (ordinary text with valid endings, corrections, actual toolcalls/observed results) for explicit counted repeated passes. Require>=95percent exact training-action recovery and>=99percent valid action termination on the training fixtures. Memorization is a wiring check, not a usable model claim. Inspect label gradients and special-token probabilities if it fails; stop all scale-up. Fresh held-out fixtures are separately scored.
+C. Bounded optimizer ablation only ifBlearns, hard<=45GPUminutes TOTAL: same seed/data/target budget, sequential branches from same6Bbase. Baseline warm-start and0.2LRfraction versus fresh optimizer with conservative warmup/LRs. Only add one higher-LR warm-start arm if first two remain ambiguous and budget allows. Measure first-action accuracy, stop-token CE/rank, tool-start CE/rank, exact JSON arguments, real broker execution and prose CE separately. No winner from aggregate CE alone.
+D. Protocol curriculum,<=60GPUminutes: concise conversations and tool episodes, balanced by supervised target contribution, not only session counts. Include corrections, no-call decisions, valid tool framing, result grounding and varied paraphrases/numbers. Start without cross-session packing for the wiring experiment. If packing is reintroduced, verify isolated/packed context effects. Use explicit finite epochs and record replay; no hidden infinite wrap. Do not invent weighted-loss magic as a substitute for balanced data.
+E. Broad SFT, initial<=2GPUhours: use admitted general conversations with short/medium answers plus verified protocol/context examples. Run full finite recipe in resumable slices if measurements justify;275Mtargets is availability, not a promise to consume all within2h. Admit teacher candidates only after semantic, duplication, split and broker checks. Keep broad prose and targeted tool learning interleaved enough to watch forgetting. Evaluate generated turns every10–15minutes, with separate short exact tasks and longer open answers. Longer answer budgets256–512 for open prompts, keep short tasks strict. Preserve raw128token original results for comparison.
+F. Gate before more base: require >=95percent valid endings, >=90percent toolframe/schema validity, >=80percent successful tool+argument+grounded final outcomes, >=80percent held-out fact/correction accuracy on a fresh >=100turn development suite. These are proposed engineering gates, not established model scores. Inspect complete multi-turn transcripts and repetition. Then evaluate untouched final acceptance. Only after clear gain consider finishing base10B or4Kadaptation; do not treat10B as more valuable than final usability under fixed budget.
+
+Cost and lifecycle
+Initial qualification ceiling:4.25GPUhours acrossB–E =10.625USD at existing conservative2.50USD/hour envelope, plus persistent storage/transfer. This is an experiment allowance, not a new project cap. Before restart reconcile cumulative VM usage and reserves against100USD and absolute stop1794476714; shrink phaseE if headroom or cutoff is tighter. No newGPU, no parallel weight writes, no budget extension. Restart of stoppedFlex VM is not guaranteed; do not imply retained allocation is assured.
+Fix review-stop behavior only in a separate bounded recovery controller: explicit state training/awaiting_diagnostic/blocked/VMstopped; terminal status overrides stale progress.json. A failed quality gate prevents blind base continuation, but should preserve time for a pre-authorized short diagnosis under a hard idle timeout. Single control writer, CAS, GCS checkpoint commit/resume and independent stop guard remain mandatory. No provisioning/control mutation was performed by this review.
+
+Sources checked
+Pinned nanochat implementation, optimizer warm-start/reset and packing:
+https://github.com/karpathy/nanochat/blob/92d63d4e8bb4df75c3b71618f31ddde2378b2bcd/scripts/chat_sft.py
+SmolLM2 small-model SFT: smol-smoltalk, two epochs, warmup and separate SFT recipe. AdamW LR values are NOT directly portable to our Muon/AdamW groups:
+https://raw.githubusercontent.com/huggingface/alignment-handbook/main/recipes/smollm2/sft/config_smol.yaml
+Dataset:460k conversations, specifically adapted for135M/360M rather than billions of teacher tokens as a prerequisite:
+https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk
+SmolLM2 paper: strong public-model benchmarks also rely on extensive base pretraining; its results do not promise our6Btoken base will match them:
+https://arxiv.org/abs/2502.02737
+
+Local supporting evidence
+reports/l4-qualification-v1/sft-diagnostic-composition-20261112.json
+runs/heartbeat-2209-quality.json
+runs/heartbeat-2209-sft.json
+cloud_training/nano_sft.py
+cloud_training/nano_chat_format.py
+cloud_training/nano_serve.py
+
+SECOND REVIEW ADDENDUM
+The6Bscore0/6 includes two automatic context turns blocked by the preceding failed turn: four automatic cases were independently attempted. Preserve the result but do not interpret it as six independent failures or proof of absent base learning.
+Low tool-target share and128token limit are hypotheses/measurement concerns, not established root causes.128tokens cannot explain failure on short exact replies. Twelve thousand supervised endings might still be sufficient; measure probabilities rather than assuming scarcity caused failure.
+User reauthenticated GCP and authorized required diagnostic actions. SameVM restarted2026-11-12T01:55:37UTC; original startup backed up locally/GCS. User corrected proposed30minVMshutdown: diagnostic process only is bounded, VM retained until original budget cutoff1794476714. Reconciled conservative future envelope87.04USD including10USDancillary reserve; not billed spend. No base or SFT weights changed.
+First read-only startup failed before model load because an ad-hoc filename inspect.py shadowed Python standard library inspect. Replaced with cloud_training.nano_protocol_diagnostics module. IAPSSH port22 unavailable; used in-place VMreset to rerun corrected startup, preserving same instance. This is a new diagnostic wrapper defect, not the cause of earlier training failures.
+Read-only GPU measurements compare teacher-forced token categories on short train/dev examples and FA3/SDPA logits, with limited greedy train/dev actions. Purposive samples are wiring evidence, not representative generalization scores. Optimizer comparisons should be conditional: if existing settings pass the learnability proof, proceed to targeted/broad SFT rather than spend automatically on multiple optimizer arms.
+
+ACTUAL GPU SECOND-PASS RESULTS — SAME A100 /6B SFT
+Completed40length-spread conversations, stratified general/text,tools/text,calculate,convert andcombinedtools, each with train/dev samples. These are purposive diagnostics, not a generalization benchmark.
+Sampled training tool-start/JSON/end tokens have100percent teacher-forced top1; actual sampled train first-action generation produces syntactically valid correct-looking calls. This materially weakens the hypothesis of a globally broken label/transport/optimizer pipeline; the existing training can learn the protocol.
+Held-out toolJSON teacher-forced top1 remains94–99percent bysamplegroup, but free generation emits invalidoperations sum/amount, orcallsattext-onlyturns. Highper-tokenaccuracy does not ensure a validcorrectwholeaction. Erroraccumulation, instructioninterpretation anddistributiongeneralization are better-supported bottlenecks than globally missingdelimiters. Actual argument/semantic accuracy remains separate from syntax.
+The original exposed suite rerun remains0/6 at128 AND512replytokens. Longerbudget allows some completed prose but doesnotfix shortinstruction/tool failures. Answer-lengthcap is a secondarymeasurementissue, not theprimaryresolution.
+FA3/SDPA teacher-forced top1 agreement99.5–99.7percent onthreecall-containingtrainprefixes (98.65percent ontext-onlytoolsource). Some logits differ up to0.74; no bitwise equivalence claimed. Both paths support learnedprotocol; backendparity remains a secondarynumericcheck, not the evidenced maincause.
+Revised order: skip automaticoptimizercomparison and redundant initialmemorizationrun, because currentcheckpoint already learns sampledtrainingactions. Build/admit diversified shortcommands, contextualcorrections andschema-grounded calls with broaderparaphrases/operands/decimals; evaluate freshfreegeneration andexactwholeactions, not tokenCE. Use compact currentoptimizerpilot first. Only investigate optimizerreplacement if this curriculum fails tolearn. Then broadenSFT; leave4K/modelgrowth/base10Bcontinuation conditional on usabilitygain and remainingbudget. Teacherproductioncandidates are contextdialogues, not automatically toolcurriculum and not admitted.
+Artifacts:reports/l4-qualification-v1/6b-deep-diagnostic-v1/{summary.json,token-diagnostics-v3.json}. Local6BSFTcheckpoint additionally downloaded andhashverified; immutable6BbaseandSFT bundles unchanged.

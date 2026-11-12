@@ -1,6 +1,6 @@
 {
-  "phase": "3b_instruction_diagnostic_recovery",
-  "own_base_retained_training_targets": 3000500224,
+  "phase": "6b_assessment_complete_course_correction_required",
+  "own_base_retained_training_targets": 6000476160,
   "random_initialization_required": true,
   "model_parameters": 536871738,
   "planned_base_targets": 10000269312,
@@ -11,9 +11,9 @@
   "production_bundle_sha256": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9",
   "production_bundle_uri": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz",
   "next": [
-    "3B isolated instruction diagnostic and conversation/tool evaluation",
-    "6B matched diagnostic comparison",
-    "Protected final tuning and acceptance within $100"
+    "Diversify and admit short instruction/context/tool curriculum; prioritize held-out whole-action generation",
+    "Run bounded SFT pilot on same VM using existing optimizer before considering optimizer changes",
+    "Resume broader tuning/base continuation only with observed usability improvement within $100"
   ],
   "budget": {
     "total_cap_usd": 100,
@@ -40,7 +40,7 @@
     "Scoped tinyoptimizerresidual retained from qualification; nofulltrajectorybitwiseclaim",
     "Conversation/tool qualitynotyetestablished"
   ],
-  "updated_utc": "2026-11-11T12:21:24.719697+00:00",
+  "updated_utc": "2026-11-12T02:11:36.953452+00:00",
   "pilot_run_id": "forge-ownbase-v2-pilot-01",
   "pilot_operation": "operation-1794356897865-65ff5457f5e2a-149b1cab-523b3d32",
   "corpus_admitted": true,
@@ -63,14 +63,53 @@
   },
   "run_id": "forge-ownbase-v2-retained-01",
   "provider_delete_utc": null,
-  "observed_training_step": 5723,
-  "observed_training_targets": 3000500224,
+  "observed_training_step": 11445,
+  "observed_training_targets": 6000476160,
   "restore_validation_ce_exact": true,
-  "latest_committed_step": 5723,
+  "latest_committed_step": 11445,
   "production_ready": true,
-  "latest_validation_ce": 2.8330608531832695,
-  "latest_validation_milestone_tokens": 3000000000,
+  "latest_validation_ce": 2.6664920300245285,
+  "latest_validation_milestone_tokens": 6000000000,
   "recovery_config": "reports/l4-qualification-v1/retained-recovery-3b-config.json",
   "absolute_stop_utc": "2026-11-12T09:45:14Z",
-  "provider_guard_note": "FLEX_START SetScheduling rejected; provider max duration remains32h and original deletion cannot be assumed after restart. Absolute OS shutdown, controller timeout and independent local stop watchdog enforce earlier budget boundary."
+  "provider_guard_note": "FLEX_START SetScheduling rejected; provider max duration remains32h and original deletion cannot be assumed after restart. Absolute OS shutdown, controller timeout and independent local stop watchdog enforce earlier budget boundary.",
+  "sft_observed_step": 155,
+  "sft_latest_committed_step": 155,
+  "sft_complete_verified": true,
+  "diagnostic_3b_score": {
+    "passed": 0,
+    "total": 6,
+    "sft_development_ce_start": 2.1907165499887538,
+    "sft_development_ce_end": 1.6123568736810683,
+    "successful_tool_calls": 0
+  },
+  "live_status_verified": true,
+  "final_targeted_manifest": "runs/ownbase-v2-sft/targeted-context-admitted-v3/manifest.json",
+  "context_curriculum_teacher_train_sessions": 48,
+  "context_extension_order": "After10Btarget and conversation/tool tuning, subject to budget approval",
+  "diagnostic_6b_score": {
+    "passed": 0,
+    "total": 6,
+    "sft_development_ce_start": 1.9679749337846644,
+    "sft_development_ce_end": 1.4694043751736525,
+    "successful_tool_calls": 0
+  },
+  "blocker": "6B_no_improvement_or_regression_requires_manual_review",
+  "vm_status": "RUNNING",
+  "active_training": false,
+  "diagnostic_directory": "runs/6b-deep-diagnostic-v1",
+  "budget_recheck": "runs/6b-deep-diagnostic-v1/budget.json",
+  "model_usable": false,
+  "assessment_restart_requested": false,
+  "latest_protocol_assessment": "reports/l4-qualification-v1/6b-deep-diagnostic-v1/summary.json",
+  "diagnostic_6b_extended_budget_score": {
+    "128": {
+      "passed": 0,
+      "total": 6
+    },
+    "512": {
+      "passed": 0,
+      "total": 6
+    }
+  }
 }
