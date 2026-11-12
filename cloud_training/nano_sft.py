@@ -37,8 +37,8 @@ def sft_schedule(progress, step):
 
 def batch_recipe(batch_tokens, microbatch):
     """Explicit position-token batch, not assistant-target batch; never repeats data."""
-    if type(batch_tokens) is not int or not 32768<=batch_tokens<=BATCH or batch_tokens%SEQUENCE:
-        raise ValueError("Effective batch must be32768..524288 and divisible by2048")
+    if type(batch_tokens) is not int or not 8192<=batch_tokens<=BATCH or batch_tokens%SEQUENCE:
+        raise ValueError("Effective batch must be8192..524288 and divisible by2048")
     rows=batch_tokens//SEQUENCE
     if type(microbatch) is not int or microbatch<1 or rows%microbatch:
         raise ValueError("Microbatch must divide effective batch rows")

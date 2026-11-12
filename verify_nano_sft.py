@@ -57,6 +57,17 @@ class SFTTests(unittest.TestCase):
             except StopIteration:break
         self.assertEqual(sorted(seen),list(range(9)))
 
+    def test_small_corrective_batch_matches_previous_initial_lr_and_target_weighting(self):
+        small=batch_recipe(8192,4);previous=batch_recipe(32768,8)
+        self.assertEqual(small['rows_per_update'],4)
+        self.assertAlmostEqual(small['lr_batch_scale']*.25,previous['lr_batch_scale']*.125)
+        data=FakeDataset([2049]*4);pack=BestFitConversations(data)
+        batches,targets=collect_update(pack,4,small['rows_per_update'])
+        self.assertEqual(len(batches),1)
+        self.assertEqual(targets,8192)
+        for batch,micro in ((4096,2),(8193,4),(8192,8)):
+            with self.assertRaises(ValueError):batch_recipe(batch,micro)
+
     def test_epoch_boundary_resume_matches_uninterrupted_and_binds_epoch_count(self):
         base=FakeDataset([5,7,4]);base.target_counts=[4,6,3]
         data=FiniteEpochDataset(base,3);pack=BestFitConversations(data,capacity=8,buffer_size=2)
