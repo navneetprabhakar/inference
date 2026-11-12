@@ -1,0 +1,15 @@
+Natural conversation pilot — approved12November2026; GPU remainsOFF
+
+Scope:200new teacher-generated dialogues viaCodexCLI gpt-6.1-terra, medium effort. Earlier templated runs remainpaused. No training or admission by generator.
+
+Generation:20cohorts×10dialogues across20themes. A separate private-user call reacts to actual prior replies. Assistant calls receive visible messages only, never scenario secrets or a prewritten answer. Ordinary sessions end naturally after4–12exchanges;50paired sessions (25pairs) use5–9exchanges and a shared final action request, with one earlier material fact/preference changed. Eachrole call batches independent sessions for efficiency. No fixed sentence-count/answer-copy ending. Context limit2048tokens; reject overlength rather than truncate. Individualassistantmax150words allows variable response length. Model can generate imperfect data: candidate status is explicit.
+
+Review:full-dialogue independent CLI review,1–5naturalness/context-use/usefulness scores and specific failure reasons; everyassistantturn checked against visible history. Extract turn-numbered fact/preference ledger for audit only. Pairedfinal requests also run without history; rootreview compares answers and checks that changed histories produce meaningfully different appropriate responses. Exact normalized user-sequence dedup in generator; near-duplicate and scenario-group checks before admission. Shared pair group must stay in one split. Allrelatedtemplates/briefs should be grouped when evaluating generalization.
+
+Gates:first10completed dialogues require rootqualification receipt before continuing. Root will inspect50completepilotdialogues including reviewerpasses/rejects before formaladmission. No auto-admission from scores. Semantically redundant answers, weak context dependence, leakage from privatebriefs, incoherence and unhelpfulgenericprose are grounds for rejection. Acceptance is quality, not200passedrecords. Pilot output may be smaller after review/dedup/context fit.
+
+Execution:one locked generator; stop onCLI/auth/schema errors, no paidAPI fallback,12hourlocalwallbound. Writesonlydedicatedruns directory; noGCScontrolorVMoperations. Logs/input/output/schema savedpercall. Training files later contain onlyvisiblemessages; privatebriefs and ledger are audit/provenance. Existing model weights unchanged.
+
+Reporting:30minuteconcise summaries and actualsamples labelledteacher-generated. Blockers earlier. VM staysOFF unless explicitlyauthorized later. Candidate/admitted/trained counts separate.
+
+Qualification correction: first10generated,9context-fit,rootreadall9. Onlybirthdaypair(2) passesrootreview;7rejected forpaddinggratitudeloops,onealsoforgotthesibling. Modelreviewpassedall9 and wasoverruled. Futurepairedsessions finishwithsharedfinalrequestassoonasresolved(after4exchanges), nofixed-lengthpadding. Futurefullsessionreviewusestightenedledger-firsthigh-effortprompt;stillnotadmission. Contextoverflowisexcludedperdialoguewithouttruncation. ExplicitrecoveryreusescompletedCLIcallsonlywhenprompt/schemaexactlymatchandturn.completedeventexists.
