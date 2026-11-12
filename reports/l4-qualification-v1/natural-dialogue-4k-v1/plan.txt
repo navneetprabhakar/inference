@@ -1,0 +1,23 @@
+4K context and natural conversation execution plan — 2026-11-12
+
+Authorization and boundaries
+User approved 4K support and matching teacher material, with 8K as a later goal.
+The same GCP VM stays OFF. No cloud training or provisioning is authorized by this local data step. Existing checkpoints remain trained at 2048 tokens; no capability claim follows from changing configuration. Total GCP authorization remains $150.
+
+Implemented context transition
+Explicit --context-tokens 4096 --allow-context-extension creates a separate SFT child of the immutable 2K checkpoint. Learned tensor shapes and parameter count stay unchanged. Native RoPE is extended without rescaling; SSSL short attention becomes 1024 tokens and full attention 4096. This is recorded in checkpoint lineage, not silently applied. Default framing remains 2048. Dataset manifest, admission receipt, packing cursor and checkpoint config bind the selected context. Serving uses the checkpoint context. 8K remains rejected pending a separate qualification.
+
+Local teacher pilot
+One GPT-6.1-Terra Codex CLI worker targets 200 dialogues, including 50 paired variants. Separate calls simulate the user with a private brief and the assistant with visible history only. Half the cohorts use a substantive reference document and 6–10 exchanges; others preserve shorter conversations. Length is measured with our tokenizer, never padded or silently truncated. Report under-2K, 2K–3K and 3K–4K counts. Longer references alone do not prove useful context: later answers must integrate earlier material and intervening corrections. Paired variants share a final request but must produce meaningfully different correct answers. History-ablated probes test whether the final request alone suffices.
+
+Review and admission
+First cohort waits for root qualification. The CLI reviewer reconstructs the fact ledger and scores every assistant response. Root review overrides model scores. Inspect at least 50 full dialogues, sampling passes and rejects, before admission. Reject stale constraints, gratitude loops, private-brief leakage, filler and incorrect grounded details. Exact user-sequence dedup runs during generation; semantic/template and cross-dataset dedup are required before admission. Keep each scenario pair and document family in the same train/development split. Review ledgers, private briefs and ablation answers never become training targets. Counters must distinguish generated, fitting unique, CLI-pass, root-reviewed and admitted. No generated row is automatically admitted.
+
+Training and evaluation gate — not started
+Preserve the best immutable 2K checkpoint and existing tool-call data. Build a mixed-length admitted dataset: shorter conversation/tool examples plus genuinely context-dependent 2K–4K conversations. Add reviewed long tool histories separately, checking schema validity, argument values, tool-result grounding and corrections before actions. Do not infer tool improvement from dialogue-only examples. Run a bounded CUDA smoke, exact restart check and reduced-microbatch memory benchmark before any continuation. Compare 2K baseline and 4K candidate on held-out short conversation, long context, tool calls and repetition. Promote only if longer-context behavior improves without losing tool gains; otherwise retain the parent.
+
+16GB deployment and later 8K
+The target is inference within a 16GB machine, not training within 16GB. Full 537M-model peak RAM and latency at 4K have not been measured; the tiny CPU smoke is not that benchmark. Require full-model prompt processing and generation measurements with operating-system headroom before claiming fit. Existing decoding is uncached, so latency matters as well as memory. After 4K qualification, implement and measure 8K as a separate transition with new long examples and regression checks. Do not increase the window automatically during a run.
+
+Validation completed
+60 CPU tests passed across context, SFT, framing, serving and quality suites, including a real tiny native-GPT 4096-token forward/backward, exact weight preservation, lineage enforcement, full-conversation packing and restart cursor boundaries. No 537M CUDA run or 4K model training has occurred.

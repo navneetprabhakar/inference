@@ -26,7 +26,8 @@ from cloud_training.nano_data import sha256_file
 from cloud_training.nano_train import CloudJournal, deadline_timestamp, numerical_identity
 
 NATIVE_IGNORE = -1  # Pinned nanochat GPT.forward, distinct from export labels -100.
-SEQUENCE = 2048
+from cloud_training.nano_context import DEFAULT_CONTEXT, SUPPORTED_CONTEXTS, transition_config, validate_context_edge
+SEQUENCE = DEFAULT_CONTEXT
 
 
 def sft_schedule(progress, step):
@@ -35,11 +36,12 @@ def sft_schedule(progress, step):
     return (1.0 if progress <= .5 else 2*(1-progress)), .85 + .10*min(step/300,1)
 
 
-def batch_recipe(batch_tokens, microbatch):
+def batch_recipe(batch_tokens, microbatch, context=SEQUENCE):
     """Explicit position-token batch, not assistant-target batch; never repeats data."""
-    if type(batch_tokens) is not int or not 8192<=batch_tokens<=BATCH or batch_tokens%SEQUENCE:
-        raise ValueError("Effective batch must be8192..524288 and divisible by2048")
-    rows=batch_tokens//SEQUENCE
+    if type(context) is not int or context not in SUPPORTED_CONTEXTS:raise ValueError('Unsupported sequence length')
+    if type(batch_tokens) is not int or not 8192<=batch_tokens<=BATCH or batch_tokens%context:
+        raise ValueError("Effective batch must be8192..524288 and divisible by the selected context")
+    rows=batch_tokens//context
     if type(microbatch) is not int or microbatch<1 or rows%microbatch:
         raise ValueError("Microbatch must divide effective batch rows")
     return {"batch_tokens":batch_tokens,"rows_per_update":rows,"lr_batch_scale":math.sqrt(batch_tokens/BATCH)}
@@ -62,16 +64,17 @@ def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0, multiplier=1.0):
         if group.get('kind')=='muon':group['weight_decay']=0.0
 
 
-def load_manifest(path, tokenizer_sha):
+def load_manifest(path, tokenizer_sha, context=SEQUENCE):
     path=Path(path).resolve();m=json.loads(path.read_text())
     if m.get('schema')!=1 or m.get('training_admitted') is not True or m.get('format_version')!=VERSION:
         raise ValueError('Admitted SFT manifest with exact format version required')
-    if m.get('tokenizer_sha256')!=tokenizer_sha or m.get('context_tokens')!=SEQUENCE:
+    if m.get('tokenizer_sha256')!=tokenizer_sha or m.get('context_tokens')!=context:
         raise ValueError('SFT tokenizer/context mismatch')
     admission=m.get('admission',{});receipt=path.parent/admission.get('receipt','')
     if not receipt.is_file() or sha256_file(receipt)!=admission.get('sha256'):
         raise ValueError('Missing/changed SFT admission receipt')
     review=json.loads(receipt.read_text())
+    if context==4096 and review.get('context_tokens')!=context:raise ValueError('4K admission receipt must bind context')
     expected=[m.get(k,{}).get('sha256') for k in ('train','validation')]
     if (review.get('training_admitted') is not True or review.get('tokenizer_sha256')!=tokenizer_sha
         or review.get('format_version')!=VERSION or review.get('jsonl_sha256')!=expected):
@@ -87,7 +90,9 @@ def load_manifest(path, tokenizer_sha):
 
 class JsonlConversations:
     """Hash-bound offsets and lengths; full conversations are encoded on demand."""
-    def __init__(self,path,tokenizer,expected_sha):
+    def __init__(self,path,tokenizer,expected_sha,context=SEQUENCE):
+        if type(context) is not int or context not in SUPPORTED_CONTEXTS:raise ValueError('Unsupported dataset context')
+        self.context=context
         self.path=Path(path);self.tokenizer=tokenizer;self.sha=expected_sha
         if sha256_file(path)!=expected_sha:raise ValueError('JSONL identity changed')
         self.offsets=[];self.lengths=[];self.target_counts=[];self.fingerprints=set();self.row_fingerprints=[]
@@ -107,7 +112,7 @@ class JsonlConversations:
 
     def _render(self,row):
         if type(row)!=dict or 'messages' not in row:raise ValueError('Canonical conversation required')
-        rendered=encode_conversation(self.tokenizer,row['messages'],policies=row.get('policies'),context=SEQUENCE)
+        rendered=encode_conversation(self.tokenizer,row['messages'],policies=row.get('policies'),context=self.context)
         if not any(rendered['mask'][1:]):raise ValueError('No assistant supervision')
         return rendered
 
@@ -133,7 +138,7 @@ class FiniteEpochDataset:
     def __init__(self,dataset,epochs):
         if type(epochs) is not int or not 1<=epochs<=8 or not len(dataset):
             raise ValueError('Finite epochs must be an integer in1..8 with nonempty data')
-        self.dataset=dataset;self.epochs=epochs;self.tokenizer=dataset.tokenizer
+        self.dataset=dataset;self.epochs=epochs;self.tokenizer=dataset.tokenizer;self.context=getattr(dataset,"context",SEQUENCE)
         self.lengths=dataset.lengths*epochs
         self.target_counts=dataset.target_counts*epochs
         self.sha=hashlib.sha256(f'{dataset.sha}:finite_epochs:{epochs}'.encode()).hexdigest()
@@ -147,7 +152,8 @@ class FiniteEpochDataset:
 
 class BestFitConversations:
     """Pinned best-fit algorithm, finite buffer100; no epoch wrap or truncation."""
-    def __init__(self,dataset,*,capacity=2049,buffer_size=100):
+    def __init__(self,dataset,*,capacity=None,buffer_size=100):
+        if capacity is None:capacity=getattr(dataset,"context",SEQUENCE)+1
         if capacity<2 or buffer_size<1 or any(n>capacity for n in dataset.lengths):
             raise ValueError('Conversation does not fit a complete row')
         self.dataset=dataset;self.capacity=capacity;self.buffer_size=buffer_size
@@ -332,7 +338,7 @@ def validate_parent_chain(parent, expected_sha, tokenizer_sha, *, stage, ancesto
         parent_identity=identity.get('parent_identity',identity.get('base_identity'))
         if not isinstance(parent_identity,dict): raise ValueError('Missing parent identity')
         root,root_sha=visit(parent_sha,parent_identity)
-        if identity.get('config')!=root['identity']['config']: raise ValueError('Ancestor architecture mismatch')
+        validate_context_edge(parent_identity,identity)
         if identity.get('base_bundle_manifest_sha256')!=root_sha or identity.get('base_identity')!=root['identity']:
             raise ValueError('SFT root provenance mismatch')
         return root,root_sha
@@ -356,8 +362,10 @@ def run(args):
     if sha256_file(tokenizer_dir/'tokenizer.pkl')!=args.tokenizer_sha:raise ValueError('Tokenizer file identity mismatch')
     base_meta,root_meta,root_sha=validate_parent_chain(base,args.base_manifest_sha,args.tokenizer_sha,stage=args.stage,ancestors=args.ancestor)
     for ancestor in args.ancestor: ensure_separate_output(ancestor,out)
-    recipe=batch_recipe(args.batch_tokens,args.microbatch)
-    manifest=load_manifest(args.manifest,args.tokenizer_sha)
+    target_context=args.context_tokens
+    target_config,context_change=transition_config(base_meta['identity']['config'],target_context,allow_extension=args.allow_context_extension)
+    recipe=batch_recipe(args.batch_tokens,args.microbatch,target_context)
+    manifest=load_manifest(args.manifest,args.tokenizer_sha,target_context)
     if args.stage=='targeted' and manifest['_sha256']==base_meta['identity'].get('source_manifest_sha256'):
         raise ValueError('Targeted stage requires a distinct explicitly admitted dataset')
     repo=Path(args.repo).resolve()
@@ -366,8 +374,8 @@ def run(args):
     sys.path.insert(0,str(repo))
     from nanochat.tokenizer import RustBPETokenizer
     tok=RustBPETokenizer.from_directory(str(tokenizer_dir))
-    train=JsonlConversations(manifest['train']['_file'],tok,manifest['train']['sha256'])
-    dev=JsonlConversations(manifest['validation']['_file'],tok,manifest['validation']['sha256'])
+    train=JsonlConversations(manifest['train']['_file'],tok,manifest['train']['sha256'],context=target_context)
+    dev=JsonlConversations(manifest['validation']['_file'],tok,manifest['validation']['sha256'],context=target_context)
     if train.fingerprints&dev.fingerprints:raise ValueError('Train/development conversation overlap')
     if args.epochs>1:train=FiniteEpochDataset(train,args.epochs)
     total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/recipe["rows_per_update"])
@@ -392,7 +400,7 @@ def run(args):
     from nanochat.common import COMPUTE_DTYPE
     if COMPUTE_DTYPE!=torch.bfloat16:raise ValueError('BF16 activations required')
     torch.set_num_threads(args.cpu_threads)
-    config=GPTConfig(**base_meta['identity']['config'])
+    config=GPTConfig(**target_config)
     with torch.device('meta'):model=GPT(config)
     model.to_empty(device='cuda');model.init_weights();model.train()
     optimizer=model.setup_optimizer(unembedding_lr=.008,embedding_lr=.3,matrix_lr=.02,weight_decay=0.0,scalar_lr=.5)
@@ -400,7 +408,7 @@ def run(args):
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
     reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
-    files=('nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
+    files=('nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
     identity={'phase':'sft','stage':args.stage,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
@@ -410,6 +418,7 @@ def run(args):
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
+    if context_change is not None:identity['context_transition']=context_change
     packing=BestFitConversations(train);step=0;trained_targets=0;best_dev=None;best_step=None
     if args.resume:
         restored=load_bundle(args.resume,model=model,optimizer=optimizer,expected_identity=identity)
@@ -508,6 +517,8 @@ def main():
     p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
     p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')
     p.add_argument('--lr-multiplier',type=float,default=1.0,help='Explicit reduced SFT learning rate, recorded in checkpoint identity; (0,1]')
+    p.add_argument('--context-tokens',type=int,choices=SUPPORTED_CONTEXTS,default=SEQUENCE)
+    p.add_argument('--allow-context-extension',action='store_true',help='Explicit warm start2Kto4K; never edits the parent checkpoint')
     p.add_argument('--epochs',type=int,default=1,help='Explicit finite passes over admitted training data;1..8, no implicit replay')
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--deterministic-attention',action='store_true')
@@ -520,7 +531,7 @@ def main():
     a=p.parse_args()
     if not 1<=a.epochs<=8:p.error('Epochs must be in1..8')
     if not math.isfinite(a.lr_multiplier) or not 0<a.lr_multiplier<=1:p.error('LR multiplier must be finite in (0,1]')
-    try: batch_recipe(a.batch_tokens,a.microbatch)
+    try: batch_recipe(a.batch_tokens,a.microbatch,a.context_tokens)
     except ValueError as error: p.error(str(error))
     if min(a.cpu_threads,a.eval_rows,a.eval_every_updates,a.checkpoint_seconds,a.checkpoint_reserve_seconds)<1:
         p.error('Invalid batch/interval settings')

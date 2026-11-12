@@ -11,7 +11,8 @@ import json
 from tools import FIELDS, OPERATIONS, UNITS, bounded_number, decode_proposal, validate_arguments
 
 VERSION = 'forge-nanochat-v1'
-CONTEXT = 2048
+from cloud_training.nano_context import DEFAULT_CONTEXT, MAX_CONTEXT
+CONTEXT = DEFAULT_CONTEXT
 SPECIALS = ('<|bos|>', '<|user_start|>', '<|user_end|>', '<|assistant_start|>',
             '<|assistant_end|>', '<|python_start|>', '<|python_end|>',
             '<|output_start|>', '<|output_end|>')
@@ -104,8 +105,8 @@ def encode_conversation(tokenizer, messages, *, policies=None, context=CONTEXT,
     provided by training_example(). A generation prefix ends after user_start...
     assistant_start or after a complete observed output_end.
     """
-    if type(context) is not int or not 1 <= context <= CONTEXT:
-        raise ValueError('Context must be within the trained 2048-token limit')
+    if type(context) is not int or not 1 <= context <= MAX_CONTEXT:
+        raise ValueError('Context must be within the supported4096-token framing limit')
     if type(for_generation) is not bool or type(reply_budget) is not int or not 1 <= reply_budget < context:
         raise ValueError('Invalid generation policy')
     if not isinstance(messages,list) or not messages:

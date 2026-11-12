@@ -19,7 +19,7 @@ import time
 
 import torch
 
-from cloud_training.nano_chat_format import (VERSION, CONTEXT, canonical,
+from cloud_training.nano_chat_format import (VERSION, CONTEXT, MAX_CONTEXT, canonical,
     encode_conversation, host_policy, parse_generated, stable_record, token_contract)
 from cloud_training.nano_checkpoint import validate_bundle
 from cloud_training.nano_eval import verify_upstream
@@ -36,8 +36,8 @@ class BrokerChat:
     def __init__(self, tokenizer, generate, *, context=CONTEXT, reply_budget=256, system=None):
         self.tokenizer = tokenizer
         token_contract(tokenizer)
-        if type(context) is not int or not 1 < context <= CONTEXT:
-            raise ValueError('Context must fit the trained 2048-token contract')
+        if type(context) is not int or not 1 < context <= MAX_CONTEXT:
+            raise ValueError('Context must fit the supported4096-token framing contract')
         if type(reply_budget) is not int or not 1 <= reply_budget < context:
             raise ValueError('Invalid reply budget')
         self.generate, self.context, self.reply_budget = generate, context, reply_budget
@@ -192,7 +192,7 @@ def load_own_bundle(repo, checkpoint, tokenizer_directory, *, tokenizer_sha256,
     if not allow_base and (identity.get('phase') != 'sft' or identity.get('format_version') != VERSION):
         raise ValueError('Chat requires forge-nanochat-v1 SFT identity; --allow-base is diagnostic only')
     config = identity['config']
-    if config.get('vocab_size') != 32768 or not 2 <= config.get('sequence_len',0) <= CONTEXT:
+    if config.get('vocab_size') != 32768 or not 2 <= config.get('sequence_len',0) <= MAX_CONTEXT:
         raise ValueError('Unsupported own-base vocabulary/context')
     device = torch.device(device)
     if device.type not in {'cpu','mps','cuda'}: raise ValueError('Unsupported inference device')
@@ -237,7 +237,7 @@ def main():
     model,tok,metadata=load_own_bundle(args.repo,args.checkpoint,args.tokenizer,
         tokenizer_sha256=args.tokenizer_sha256,device=args.device,allow_base=args.allow_base)
     chat=BrokerChat(tok,lambda ids,n:generate_action(model,tok,ids,n,repetition_penalty=args.repetition_penalty),
-                    context=min(CONTEXT,model.config.sequence_len),reply_budget=args.reply_budget)
+                    context=model.config.sequence_len,reply_budget=args.reply_budget)
     print(json.dumps({'status':'loaded','step':metadata['step'],'device':args.device,
                       'tools':allowed,'repetition_penalty':args.repetition_penalty,'diagnostic_base_mode':args.allow_base,'commands':['/reset','/quit']}))
     while True:
