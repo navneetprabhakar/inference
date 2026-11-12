@@ -8,9 +8,12 @@ ROOT=Path('runs/natural-dialogue-4k-v1').resolve();ROOT.mkdir(exist_ok=True)
 lock=Path('runs/concise-teacher-generation.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
 RESUME=os.environ.get('NATURAL_RESUME')=='1'
 if (ROOT/'progress.json').exists() and not RESUME:raise RuntimeError('Run exists; explicit audited resume required')
-tok=RustBPETokenizer.from_directory('runs/ownbase-v2-data/tokenizer');rng=random.Random(116043);deadline=time.monotonic()+12*3600
+tok=RustBPETokenizer.from_directory('runs/ownbase-v2-data/tokenizer');rng=random.Random(116043);deadline=time.monotonic()+max(0,12*3600-(time.time()-ROOT.stat().st_birthtime))
 state={'status':'running','model':'gpt-6.1-terra','method':'separate_private_user_and_visible_assistant_calls','target_dialogues':200,'context_tokens':4096,'length_bands':{'under_2048':0,'2048_to_3071':0,'3072_to_4096':0},'generated':0,'context_fit_unique':0,'review_passed':0,'review_rejected':0,'training_admitted':0,'calls':0,'cohorts':[]};seen=set()
 def save():
+ admission=ROOT/'admitted-v1/preparation.json'
+ if admission.exists():
+  a=json.loads(admission.read_text());state['training_admitted']=a['root_passed_selected'];state['admitted_tool_replay']=sum(v.get('tool_replay_dialogues',0) for v in a['counts'].values());state['admission_manifest']=str(ROOT/'admitted-v1/manifest.json')
  state['updated_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat();p=ROOT/'progress.json';t=p.with_suffix('.tmp');t.write_text(json.dumps(state,indent=2)+'\n');t.replace(p)
 def obj(props):return {'type':'object','properties':props,'required':list(props),'additionalProperties':False}
 def arr(item):return {'type':'array','items':item}
@@ -43,12 +46,15 @@ try:
   prompt='''Create diverse realistic private scenario briefs, NOT conversations or prescribed user lines. No tools/files/network. Each brief describes a user goal, background facts/preferences, something initially unstated and a plausible complication. Ordinary low-risk situations or fully fictional supplied facts; no medical/legal/financial advice, external factual lookup or actions requiring real services. Vary emotional tone, formality, user expertise and task. Avoid repeated folder/room/colour recall exercises. Context should affect practical work, not end in a trivia quiz. Use different situations within this broad theme. Do not require all scenarios to include cancellation or correction. Include useful natural goals, not manufactured instruction-following puzzles. '''
   prompt+=('For each scenario also provide a paired_brief differing in ONE material preference/fact that must be revealed early and makes the final artifact different. shared_final_request is a natural action request, identical in both worlds, not a recall question. ' if paired else 'paired_brief and shared_final_request must be empty strings. ')
   prompt+=('Include a coherent500–800word reference_text: realistic fictional notes, draft or specification needed to perform the task. Use connected paragraphs, not filler or repeated lists. Include several relevant facts and competing constraints. The reference is public and identical in paired worlds; exclude the one private differing preference/fact. The actual task should require integrating this material with later conversation. ' if long_context else 'reference_text must be an empty string. ')
+  if cohort>=6:
+   prompt+='Design substantive goals with several related decisions or deliverables that naturally require revisiting earlier constraints. Avoid a repeated rewrite-this/rewrite-again structure or a fixed correction on the second turn. End when the user goal is satisfied; never manufacture gratitude loops. '
+   if long_context:prompt=prompt.replace('500–800word','900–1100word')+' The reference must contain useful interdependent details, not padding. Later work must combine several parts of it with facts revealed in conversation. Aim for a realistic ongoing task, not a one-question summary. '
   prompt+='Theme: '+themes[cohort]+' IDs: '+json.dumps(ids)
   briefs=keyed(cli(d/'briefs',prompt,brief_schema)['scenarios'],ids);sessions={}
   for identifier,b in briefs.items():
    length=rng.randint(6,10) if long_context else rng.randint(4,8)
    reference=b['reference_text']
-   if long_context and not 400<=len(reference.split())<=1000:raise ValueError('Reference length outside qualification bounds')
+   if long_context and not 400<=len(reference.split())<=(1200 if cohort>=6 else 1000):raise ValueError('Reference length outside qualification bounds')
    if not long_context and reference.strip():raise ValueError('Unexpected reference in short-context cohort')
    for suffix,brief in ([('a',b['private_brief']),('b',b['paired_brief'])] if paired else [('',b['private_brief'])]):
     if not brief.strip():raise ValueError('Empty scenario brief')
@@ -57,10 +63,10 @@ try:
    active={k:s for k,s in sessions.items() if not s['done']}
    if not active:break
    up=[{'id':k,'private_situation':s['private_brief'],'reference_available':s['reference_text'],'history':s['messages'],'turn_number':turn+1,'remaining_turns':s['max_turns']-turn} for k,s in active.items()]
-   u=keyed(cli(d/f'user-{turn:02d},'.replace(',',''),'Simulate only the USER next turn independently for each session. No tools/files/network. React naturally to the actual assistant response; reveal relevant private facts when needed, clarify misunderstandings, reject an unsuitable answer, or change direction when plausible. Do not repeat the full background every turn. Do not manufacture a correction, detour or final recall question on a fixed schedule. Resolve the actual goal. Vary short and detailed messages; do not ask only mechanical factual questions. In first turn reveal enough to start helping, but not the full private brief. A supplied reference_available document will be attached by the host to your first message: refer to it naturally but do not copy it yourself. Ask for genuine work that uses it, and react to the actual assistant answer. resolved=true only when prior response actually resolves the goal and the new message can naturally close it; only after at least4exchanges. Private scenario text is never to be quoted wholesale. Return next user message and resolved flag. DATA:'+json.dumps(up),user_schema)['turns'],active)
+   u=keyed(cli(d/f'user-{turn:02d},'.replace(',',''),'Simulate only the USER next turn independently for each session. No tools/files/network. React naturally to the actual assistant response; reveal relevant private facts when needed, clarify misunderstandings, reject an unsuitable answer, or change direction when plausible. Do not repeat the full background every turn. Do not manufacture a correction, detour or final recall question on a fixed schedule. Resolve the actual goal. Vary short and detailed messages; do not ask only mechanical factual questions. In first turn reveal enough to start helping, but not the full private brief. A supplied reference_available document will be attached by the host to your first message: refer to it naturally but do not copy it yourself. Ask for genuine work that uses it, and react to the actual assistant answer. resolved=true only when prior response actually resolves the goal and the new message can naturally close it; only after at least4exchanges. Private scenario text is never to be quoted wholesale. Return next user message and resolved flag. DATA:'.replace('only after at least4exchanges.', 'as soon as the substantive goal is satisfied; do not add another thank-you after an acknowledgement.' if cohort>=6 else 'only after at least4exchanges.')+json.dumps(up),user_schema)['turns'],active)
    for k,s in active.items():
     message=u[k]['message']
-    if s['shared_final_request'] and (turn==s['max_turns']-1 or (turn+1>=4 and u[k]['resolved'])):
+    if s['shared_final_request'] and (turn==s['max_turns']-1 or ((turn+1>=4 if cohort<6 else turn+1>=2) and u[k]['resolved'])):
      message=s['shared_final_request'];s['final_request_sent']=True
     if not message.strip():raise ValueError('Empty user turn')
     if turn==0 and s['reference_text']:message+='\n\nReference material:\n'+s['reference_text']
@@ -73,7 +79,7 @@ try:
     if not answer.strip() or len(answer.split())>500:
      s['invalid_reason']='empty_or_oversized_assistant_response';s['done']=True;continue
     s['messages'].append({'role':'assistant','content':answer})
-    s['done']=s.get('final_request_sent',False) or turn+1>=s['max_turns'] or (not s['shared_final_request'] and turn+1>=4 and u[k]['resolved'])
+    s['done']=s.get('final_request_sent',False) or turn+1>=s['max_turns'] or (not s['shared_final_request'] and (turn+1>=4 if cohort<6 else turn+1>=2) and u[k]['resolved'])
   kept=[];excluded=[]
   for s in sessions.values():
    state['generated']+=1
