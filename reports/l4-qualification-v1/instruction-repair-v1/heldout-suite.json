@@ -1,0 +1,469 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "convert-1",
+      "turns": [
+        {
+          "user": "Case Saffron-8: Express the measurement 825 l using ml. Use convert and give only the numeric result.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "l",
+                "to": "ml",
+                "value": 825
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "825000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculate-1",
+      "turns": [
+        {
+          "user": "Case Ochre-10: Evaluate the multiplication of 1945 and 199. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1945,
+                "b": 199,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "387055"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-1",
+      "turns": [
+        {
+          "user": "Case Indigo-6: Reference Indigo-1752. Return just this token: understood",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "understood"
+          ]
+        },
+        {
+          "user": "The response must consist solely of no.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "no"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-2",
+      "turns": [
+        {
+          "user": "Case Ochre-10: Reference Ochre-499. Return just this token: received",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "received"
+          ]
+        },
+        {
+          "user": "The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state-1",
+      "turns": [
+        {
+          "user": "Case Saffron-4: Dakar is the venue city for Saffron. The response must consist solely of understood.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "understood"
+          ]
+        },
+        {
+          "user": "The venue city for Saffron has changed to Bergen. The response must consist solely of saved.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "saved"
+          ]
+        },
+        {
+          "user": "Give only the latest venue city for Saffron.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "Bergen"
+          ]
+        },
+        {
+          "user": "Name only the first venue city mentioned for Saffron.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "Dakar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two_entities-1",
+      "turns": [
+        {
+          "user": "Case Crimson-0: Crimson uses locker 1916. Indigo uses locker 105. The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "Crimson now has locker 652; leave Indigo as it was. The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to Indigo.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "105"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to Crimson.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "652"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two_entities-2",
+      "turns": [
+        {
+          "user": "Case Crimson-5: Crimson uses locker 1655. Ochre uses locker 1287. Return just this token: complete",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "complete"
+          ]
+        },
+        {
+          "user": "Crimson now has locker 69; leave Ochre as it was. The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to Ochre.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1287"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to Crimson.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "69"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "convert-2",
+      "turns": [
+        {
+          "user": "Case Saffron-11: Express the measurement 61 m using cm. Use convert and give only the numeric result.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "m",
+                "to": "cm",
+                "value": 61
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "6100"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculate-2",
+      "turns": [
+        {
+          "user": "Case Crimson-12: Total these amounts: 1235 and 824. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1235,
+                "b": 824,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "2059"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tool_correction-1",
+      "turns": [
+        {
+          "user": "Case Ochre-7: What quotient results from 12712 over 1816? Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 12712,
+                "b": 1816,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "7"
+          ]
+        },
+        {
+          "user": "Replace the first input with 294192, retain the other input and operation, and recalculate. Return only the number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 294192,
+                "b": 1816,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "162"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tool_correction-2",
+      "turns": [
+        {
+          "user": "Case Crimson-9: Find the difference, first 480, second 1376. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 480,
+                "b": 1376,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-896"
+          ]
+        },
+        {
+          "user": "Replace the first input with 1243, retain the other input and operation, and recalculate. Return only the number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1243,
+                "b": 1376,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-133"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state-2",
+      "turns": [
+        {
+          "user": "Case Indigo-5: Quito is the venue city for Indigo. Return just this token: acknowledged",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "acknowledged"
+          ]
+        },
+        {
+          "user": "The venue city for Indigo has changed to Dakar. The response must consist solely of saved.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "saved"
+          ]
+        },
+        {
+          "user": "Give only the latest venue city for Indigo.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "Dakar"
+          ]
+        },
+        {
+          "user": "Name only the first venue city mentioned for Indigo.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "Quito"
+          ]
+        }
+      ]
+    }
+  ]
+}

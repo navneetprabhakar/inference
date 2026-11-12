@@ -1,0 +1,5 @@
+Instruction repair v1: same A100, single writer, $100 cap, original absolute cutoff.
+Parent: broad conversation 1000-update checkpoint, 876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92.
+Curriculum: 6000 balanced synthetic dialogues, 166067 assistant targets; 96 disjoint development dialogues. No hidden system prompt. Source-reviewed template semantics and independent arithmetic/state/broker checks passed. This is not teacher generation or general conversation acceptance.
+Before/after: fixed 12 development sessions (28 scored turns) plus original suite after tuning. One finite corpus pass; no epoch repetition. Preserve previous branches. SFT at most1800sec, full process3600sec, hard budget shutdown unchanged.
+Decision: require response improvements, review family-level errors and original regressions. Loss alone is insufficient. If a small serving-aligned curriculum does not improve even its heldout siblings, test same-data lower LR before adding more data. Broader context/tool diversity follows proven learning.

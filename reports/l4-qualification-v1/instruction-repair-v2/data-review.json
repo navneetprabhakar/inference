@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "e282159ff1bfccc827bb979337117dc2e1166b34e07218c606bbe5bcebad80c0",
+    "fb75637d86a66785094bc75a70fef876477dfe5941c4bbca6cffbbea619d8a94"
+  ],
+  "review": "Root source review plus independent fraction arithmetic, state-answer, replayed broker, serving-format, length and split checks. This verifies bounded template semantics, not broad natural-language coverage.",
+  "counts": {
+    "train": {
+      "families": {
+        "two_entities": 2200,
+        "state": 2200,
+        "literal": 2200,
+        "convert": 2126,
+        "calculate": 2200,
+        "tool_correction": 2200
+      },
+      "actual_calls_replayed": 8726,
+      "positions": 5290189,
+      "assistant_targets": 377927
+    },
+    "validation": {
+      "families": {
+        "tool_correction": 16,
+        "two_entities": 16,
+        "calculate": 16,
+        "state": 16,
+        "literal": 16,
+        "convert": 16
+      },
+      "actual_calls_replayed": 64,
+      "positions": 38920,
+      "assistant_targets": 2771
+    }
+  },
+  "builder_sha256": "ec54ecec025eb453dad18c038377fc73b83cf294bf220ef0427c110a49822c77",
+  "verifier_sha256": "5ad9e0bd8bc8d22f23fcbcd4ce88b1310958564f746e86a168d93e0135a2d4f6",
+  "limits": [
+    "Development templates and entity pools are disjoint; original development prompts excluded verbatim. No sealed final acceptance accessed.",
+    "Synthetic templates, not teacher-generated or proof of general conversation quality."
+  ]
+}
