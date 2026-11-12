@@ -43,6 +43,18 @@ class FakeDataset:
 class SFTTests(unittest.TestCase):
     def setUp(self):torch.manual_seed(101)
 
+    def test_reduced_lr_preserves_optimizer_state_and_rejects_invalid_scales(self):
+        parameter=torch.nn.Parameter(torch.tensor([1.0]))
+        opt=torch.optim.AdamW([parameter],lr=.02)
+        parameter.grad=torch.ones_like(parameter);opt.step()
+        state=copy.deepcopy(opt.state_dict()['state'])
+        reset_sft_lrs(opt,[.02],.25,.25)
+        self.assertAlmostEqual(opt.param_groups[0]['lr'],.001)
+        self.assertAlmostEqual(opt.param_groups[0]['initial_lr'],.001)
+        for key,value in state[0].items():torch.testing.assert_close(opt.state_dict()['state'][0][key],value)
+        for bad in (0,-1,1.1,float('nan'),float('inf'),True):
+            with self.assertRaises(ValueError):reset_sft_lrs(opt,[.02],.25,bad)
+
     def test_uneven_mask_accumulation_equals_global_target_objective(self):
         initial=TinyLM();full=copy.deepcopy(initial);split=copy.deepcopy(initial)
         xs=[[1,2,3,4],[2,3,4,5],[3,4,5,6]]

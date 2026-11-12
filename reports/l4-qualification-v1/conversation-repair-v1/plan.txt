@@ -1,0 +1,8 @@
+Conversation repair v1
+Goal: restore everyday instruction following and useful multi-turn planning while keeping the latest tool gains.
+Own537M student; start at instruction-v3step176. Verify all four immutable ancestors back to6B own-base. Same VM/A100; one writer; $100 cap; original cutoff09:45UTC unchanged.
+New dataset7408train/298335assistanttargets: exact acknowledgments with distracting facts, natural first-person location corrections, practical plans that adapt to cancelled tasks, and3000replayed tool dialogues. No noisy general-chat subset or unreviewed Terra candidates.70dev dialogues; underlying planning combinations and all dev user sequences held out.
+One finite pass at0.25 of previous SFT learning rate. Keep optimizer moments and all other recipe settings. LR scale is checkpointed;41CPU tests passed including scale validation and moment preservation.
+New36turn suite:28exact scored turns plus8open planning turns requiring manual review. Before/after same suite; original suite and priorv3/v2suites after.
+Hard tool regression gate: retain both original tool successes and all8tool turns in previous v3suite. No promotion if any of those10cases fails. Also inspect old context checks and actual open-ended text; gate pass is not a usability claim.
+SFT1800sec maximum including300backup reserve. Overall5400sec hard ceiling includes loading/evaluations; typical20min estimate. Preserve GCS checkpoint lineage, use no old campaign control URI.

@@ -45,7 +45,7 @@ def batch_recipe(batch_tokens, microbatch):
     return {"batch_tokens":batch_tokens,"rows_per_update":rows,"lr_batch_scale":math.sqrt(batch_tokens/BATCH)}
 
 
-def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0):
+def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0, multiplier=1.0):
     """Fresh LR ×0.8×sqrt(batch/reference), retaining moments from the parent.
 
     Square-root scaling is an explicit conservative heuristic, not an assertion
@@ -53,10 +53,12 @@ def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0):
     """
     if isinstance(batch_scale,bool) or not isinstance(batch_scale,(int,float)) or not math.isfinite(batch_scale) or not 0<batch_scale<=1:
         raise ValueError("Invalid LR batch scale")
+    if isinstance(multiplier,bool) or not isinstance(multiplier,(int,float)) or not math.isfinite(multiplier) or not 0<multiplier<=1:
+        raise ValueError('LR multiplier must be finite in (0,1]')
     if len(optimizer.param_groups)!=len(fresh_lrs):
         raise ValueError('Optimizer group mismatch')
     for group,lr in zip(optimizer.param_groups,fresh_lrs):
-        group['lr']=group['initial_lr']=lr*.8*batch_scale
+        group['lr']=group['initial_lr']=lr*.8*batch_scale*multiplier
         if group.get('kind')=='muon':group['weight_decay']=0.0
 
 
@@ -374,14 +376,14 @@ def run(args):
     optimizer=model.setup_optimizer(unembedding_lr=.008,embedding_lr=.3,matrix_lr=.02,weight_decay=0.0,scalar_lr=.5)
     fresh_lrs=[g['lr'] for g in optimizer.param_groups]
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
-    reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"])
+    reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
     files=('nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
     identity={'phase':'sft','stage':args.stage,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
-              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],
+              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,
               'numerical_mode':numerical_identity(torch,attention_deterministic=attention_deterministic),'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
@@ -483,6 +485,7 @@ def main():
     p.add_argument('--stage',choices=('general','targeted'),default='general')
     p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
     p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')
+    p.add_argument('--lr-multiplier',type=float,default=1.0,help='Explicit reduced SFT learning rate, recorded in checkpoint identity; (0,1]')
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--deterministic-attention',action='store_true')
     p.add_argument('--resume');p.add_argument('--backup-prefix');p.add_argument('--deadline-utc')
@@ -492,6 +495,7 @@ def main():
     p.add_argument('--eval-rows',type=int,default=128);p.add_argument('--eval-every-updates',type=int,default=200)
     p.add_argument('--checkpoint-seconds',type=int,default=900);p.add_argument('--checkpoint-reserve-seconds',type=int,default=300)
     a=p.parse_args()
+    if not math.isfinite(a.lr_multiplier) or not 0<a.lr_multiplier<=1:p.error('LR multiplier must be finite in (0,1]')
     try: batch_recipe(a.batch_tokens,a.microbatch)
     except ValueError as error: p.error(str(error))
     if min(a.cpu_threads,a.eval_rows,a.eval_every_updates,a.checkpoint_seconds,a.checkpoint_reserve_seconds)<1:
