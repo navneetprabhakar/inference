@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "323d02c817d5a570514ea95f43a2a3ba5852209cac527dc745136fbd320a3034",
+    "155d111c3353ec42bf680a6214ec7414719cfc82f3db56c854ceb5978929f3fd"
+  ],
+  "review": "Experimental non-writing teacher subset: every row mechanical format/final-state/length checks; 14 additional whole-dialogue root reviews, not individual review of entire pool. Excluded all stale flags and sampled rewrite failure. Entire underlying fact combinations grouped apart, exact prior eval prompts excluded. Prior admitted rehearsal exact copied and calls replayed.",
+  "counts": {
+    "train": {
+      "families": {
+        "acknowledgment": 1500,
+        "convert": 1000,
+        "tool_correction": 1000,
+        "grounded_plan": 1408,
+        "natural_context": 1500,
+        "teacher_craft": 236,
+        "teacher_inventory": 248,
+        "teacher_project": 262,
+        "teacher_event": 238,
+        "calculate": 1000,
+        "teacher_shift": 246,
+        "teacher_study": 252,
+        "teacher_purchase": 250
+      },
+      "assistant_targets": 771700,
+      "positions": 4361480,
+      "tool_calls_replayed": 4000
+    },
+    "validation": {
+      "families": {
+        "teacher_study": 28,
+        "teacher_event": 36,
+        "grounded_plan": 22,
+        "acknowledgment": 24,
+        "teacher_shift": 27,
+        "teacher_craft": 22,
+        "teacher_inventory": 32,
+        "teacher_project": 19,
+        "teacher_purchase": 24,
+        "natural_context": 24
+      },
+      "assistant_targets": 54186,
+      "positions": 193674,
+      "tool_calls_replayed": 0
+    }
+  },
+  "excluded": {
+    "quality_screen": 333
+  },
+  "replay_source_sha256": "5e043d7c7990d106a84c09120b9da0a95d33a09021743370601eee81a0a1e798",
+  "builder_sha256": "325904561a6c46526af1733c6b97c931480650927a5519808af2b765f9c2f2a1",
+  "limits": [
+    "Only 3-4 teacher field values; not broad factual coverage.",
+    "First pilot admission does not imply semantic certification of every row.",
+    "Manual prose and protected-tool gates required before promotion."
+  ]
+}

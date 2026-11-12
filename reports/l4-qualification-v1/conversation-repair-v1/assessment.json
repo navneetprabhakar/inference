@@ -1,0 +1,29 @@
+{
+  "tool_gains_preserved": true,
+  "required_tool_cases_passed": 10,
+  "required_tool_cases_total": 10,
+  "manual_conversation_review_required": true,
+  "regression_v2_passed": 28,
+  "regression_v2_total": 28,
+  "regression_v3_passed": 28,
+  "regression_v3_total": 28,
+  "status": "complete",
+  "before_passed": 22,
+  "after_passed": 26,
+  "total": 28,
+  "original_suite_passed": 4,
+  "usable_model_claim": false,
+  "next": "Review exact action and transcript regressions before broader tuning",
+  "updates": 90,
+  "assistant_targets": 298335,
+  "dev_ce_before": 1.469576576506474,
+  "dev_ce_after": 0.05759447105377319,
+  "checkpoint": "gs://forge-ownbase-a100-20261110/ownbase-v2/conversation-repair-v1/checkpoints/checkpoint-73e68fb7922a43c599b22cc4f5f0b2da",
+  "manual_review": {
+    "planning_turns": 8,
+    "clearly_satisfactory": 1,
+    "finding": "Several initial plans omit one task; cancellations sometimes retain the cancelled task; invented odd/even leaf advice is nonsensical. One final stationery plan is useful.",
+    "original_planning": "Generated plans now complete but time allocations and task details are wrong.",
+    "decision": "No broad usability promotion despite protected tool10/10 and improved exact facts."
+  }
+}

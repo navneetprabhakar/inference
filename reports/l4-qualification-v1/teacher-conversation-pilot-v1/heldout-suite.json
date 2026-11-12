@@ -1,0 +1,264 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "teacher_study",
+      "turns": [
+        {
+          "user": "The Aster workshop topic is fractions, its duration is fifteen minutes, and the material is a red notebook. Suggest a simple session structure.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: You could open by asking participants what they already understand about fractions, then use the notebook to record a simple example and their observations. Follow that with a short practice activity in which participants explain their thinking, rather than only giving an answer. Close by revisiting the opening question and noting anything that remains confusing. Keep the example and difficulty flexible until you know the participants\u2019 experience. The notebook can hold both the example and a brief summary, making it useful after the session. This structure gives the workshop a beginning, an active middle and a clear close without assuming additional materials."
+        },
+        {
+          "user": "Change the topic to drawing, not fractions. How would the activity change?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Begin with an invitation to make a simple mark or sketch in the red notebook, without prescribing a subject the group has not chosen. Then give participants space to observe what they have drawn and try a deliberate change, such as varying a line or adding detail. Ask them to describe what they noticed, keeping the discussion optional if sharing feels uncomfortable. Close by inviting each person to note an idea they might want to explore further. The session can remain focused on observation and experimentation; you do not need to assume a particular skill level, finished artwork or additional equipment."
+        },
+        {
+          "user": "The duration is ten minutes, not fifteen minutes.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Updated: drawing for ten minutes, using the red notebook."
+        },
+        {
+          "user": "What if someone dislikes sharing their work?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Make sharing optional and let them reflect privately in the notebook."
+        },
+        {
+          "user": "Give me a concise opening prompt.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: \u201cMake a mark or sketch in the red notebook, then notice what you would like to explore.\u201d"
+        },
+        {
+          "user": "Return only the current topic, current duration and original material, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "drawing | ten minutes | red notebook"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_event",
+      "turns": [
+        {
+          "user": "For the Orchid project, the room is Lark Studio, the time is 11:30, and the item is a blue folder. How should I prepare?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Begin with a short checklist covering the room, the time, and the folder. Decide what you need the folder for and keep it somewhere easy to find when you leave. Before the event, check the room information against your own notes and consider whether anyone else needs the same details. You could also prepare a brief description of the folder's purpose so it is easy to identify. Keep your checklist flexible: if the room or time changes, update the relevant entry and share the corrected information with anyone who depends on it. Finally, review the list before setting out."
+        },
+        {
+          "user": "The room has changed from Lark Studio to Cedar Hall.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Noted: Cedar Hall is the current room."
+        },
+        {
+          "user": "Can you suggest a concise preparation checklist?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: A practical checklist could cover locating the blue folder, checking its contents, and keeping it accessible for the project. Add a separate line for confirming Cedar Hall and another for checking the recorded time before you go. If other people need the details, prepare a short message that makes the location and time easy to spot. You can also decide where to place the folder once you arrive so it does not get overlooked. Avoid filling the list with assumptions about the event; add only steps that match what you actually need to do. Review the list whenever a detail changes."
+        },
+        {
+          "user": "Correction: the time is 09:00, not 11:30.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Updated to 09:00. The room remains Cedar Hall."
+        },
+        {
+          "user": "What should stand out in a message?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Put Cedar Hall and 09:00 prominently, with the blue folder mentioned where relevant."
+        },
+        {
+          "user": "Return only the current room, current time and original item, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Cedar Hall | 09:00 | blue folder"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_shift",
+      "turns": [
+        {
+          "user": "For the Aster group, Leela is the person, Tuesday is the day, and the task is label the boxes. Help me plan the assignment.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Write the assignment with the person, day, and task together, then clarify what information each label should contain. If the group already has a labeling convention, provide it to the assigned person; otherwise, agree on one before the work begins. Check whether the boxes can be identified reliably and set aside any whose contents or destination are unclear. Once the labels are applied, review them for legibility and consistency. Record unresolved questions so they can be answered rather than guessed. The assignment can remain simple, but clear labeling criteria will make the result easier for the group to use."
+        },
+        {
+          "user": "Correction: Arun is the person.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Arun is now assigned."
+        },
+        {
+          "user": "What should Arun do with an ambiguous box?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: He could set it aside and note what makes it ambiguous, such as an unclear description or an uncertain destination. Rather than choosing a label based on a guess, he should ask someone who can confirm the intended information. In the meantime, he can continue with boxes whose labels are clear, provided the group agrees with that approach. Once the question is resolved, he can apply the confirmed label and check that it follows the same convention as the others. A short record of unresolved boxes can help the group see what remains without treating the whole task as blocked."
+        },
+        {
+          "user": "Correction: the day is Saturday.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The assigned day is now Saturday."
+        },
+        {
+          "user": "Draft a short reminder.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Arun, please label the boxes on Saturday."
+        },
+        {
+          "user": "Return only the current person, current day and original task, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Arun | Saturday | label the boxes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_craft",
+      "turns": [
+        {
+          "user": "For Meadow project, I'm making cardboard circles for Arun. Can you help me think through the craft?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by deciding what the finished pieces are meant to do, since that will guide their size and construction. Check whether the cardboard is suitable for the intended use and whether it can be cut cleanly with the tools you have. A reusable template can help keep the circles consistent, while a sample lets you test the shape and finish before making the rest. Consider whether the edges need smoothing or covering for comfortable handling. You might also ask Arun about any preferences relevant to the gift or its use, without assuming a particular occasion or design."
+        },
+        {
+          "user": "Correction: the material is cloth.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The material is now cloth."
+        },
+        {
+          "user": "What changes should I consider when working with that material?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Cloth behaves differently from a rigid sheet, so first consider whether the pieces need to hold their shape or remain flexible. You could test a small sample to see how easily the edges fray and whether a hem, adhesive, or another finish suits the fabric and intended use. A template can still help with consistency, but secure or mark the material carefully before cutting so it doesn't shift. Choose any joining or finishing method based on the cloth you actually have and the tools available. Check the result for comfort and durability before committing to the full design."
+        },
+        {
+          "user": "Change the shape to stars.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The shape is now stars."
+        },
+        {
+          "user": "What's a useful first test?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Cut a sample star and check whether its points and edges hold up as intended."
+        },
+        {
+          "user": "Return only the current material, current shape and original recipient, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "cloth | stars | Arun"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_inventory",
+      "turns": [
+        {
+          "user": "The Lumen club has six items in Bin D, labeled wooden clips. How should we make the inventory easy to check?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Use one simple inventory entry that places the label, location and quantity together. The person checking it can find the bin, compare its contents with the label and count the items before recording the result. Include a small space for a discrepancy or question rather than silently changing the record when something looks wrong. If someone moves the contents, have that person update the location in the same entry so the next check starts in the right place. Keep the record readable enough that another club member can understand what was checked and what still needs clarification."
+        },
+        {
+          "user": "Correction: the bin is Bin A.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The current bin is Bin A."
+        },
+        {
+          "user": "What should someone do if the count does not match the record?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: First, count the contents again and make sure the person is looking at the entry labeled wooden clips. Record the observed count alongside the existing record rather than assuming either one is correct. Then check whether the club has any explanation for the difference, such as a move that has not yet been recorded. If the cause remains unclear, leave a concise note for the person responsible for the inventory and avoid presenting the discrepancy as resolved. Once the club confirms the correct count, update the entry and remove or mark the question as resolved. That makes the correction traceable and useful to the next checker."
+        },
+        {
+          "user": "Correction: the quantity is three.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The quantity is now three."
+        },
+        {
+          "user": "Write a concise inventory line.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Bin A \u2014 three \u2014 wooden clips."
+        },
+        {
+          "user": "Return only the current bin, current quantity and original label, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Bin A | three | wooden clips"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_project",
+      "turns": [
+        {
+          "user": "For Juniper circle, the priority is organize the shelves, the deadline is Sunday, and the file is plan.txt. Help me structure the work.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by inspecting the shelves and deciding what a useful arrangement would look like. Group items by a practical rule, such as purpose or frequency of use, if that fits what is actually there. Set aside anything whose placement is uncertain rather than making an unsupported decision. Record the proposed groups and open questions in plan.txt, then arrange the agreed items and check that labels are understandable. Finish by reviewing whether the result makes items easy to find and return. Keep the plan flexible enough to reflect what the inspection reveals, and note any remaining decisions for the circle."
+        },
+        {
+          "user": "Correction: the priority is repair the sign.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The priority is now repair the sign."
+        },
+        {
+          "user": "How should the plan change?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Replace the shelf organization steps in the plan with a short assessment of the sign. Describe the visible problem, then identify what needs to be confirmed before choosing a repair method. Record the proposed approach, any materials or help that may be needed, and who agrees to handle each action. Avoid assuming the sign's material or the nature of its damage until someone checks it. Include a final inspection to confirm the repair addresses the observed problem. Use plan.txt to distinguish confirmed observations from questions, so the circle can update the approach without mistaking an early guess for a decision."
+        },
+        {
+          "user": "What belongs in the final inspection?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Check the original problem, the quality of the repair, and any unresolved concerns identified during assessment."
+        },
+        {
+          "user": "Correction: the deadline is Wednesday.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The deadline is now Wednesday."
+        },
+        {
+          "user": "Return only the current priority, current deadline and original file, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "repair the sign | Wednesday | plan.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher_purchase",
+      "turns": [
+        {
+          "user": "The Orchid team wants seven blue items for Leela. How should we plan the purchase?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Start by describing the item clearly enough that whoever places the order can identify it. Check that blue is available and that the requested quantity can be supplied together. Before confirming, review the item description, color, quantity, and recipient in one place so a mismatch is easy to spot. You could also ask Leela whether there are any preferences that affect the choice, without assuming there are any. Once the details are settled, keep the purchase note concise and use it as the basis for the order. If availability creates a problem, bring the options back to the team before substituting anything."
+        },
+        {
+          "user": "Correction: the color should be red, not blue.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Understood: red is the current color."
+        },
+        {
+          "user": "What would a useful order note include?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: A useful order note should make the selection and handoff easy to verify. Name the item once it is specified, then state the color, quantity, and intended recipient together. Include any product details the team agrees are essential, such as a particular style or specification, but leave unspecified details open until someone confirms them. A short review prompt can help: \u201cPlease check the item and these details before placing the order.\u201d Keep any questions about availability separate from the confirmed request, so a proposed alternative is not mistaken for an approved change. The note can be shared with whoever is responsible for placing the purchase."
+        },
+        {
+          "user": "Change the quantity from seven to four.",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: The quantity is now four."
+        },
+        {
+          "user": "Should we substitute if red is unavailable?",
+          "expected_calls": [],
+          "rubric": "Answer the actual request coherently, preserve latest corrections, no invented actions. Reference: Ask the team before choosing a substitute."
+        },
+        {
+          "user": "Return only the current color, current quantity and original recipient, separated by |.",
+          "expected_calls": [],
+          "exact_answers": [
+            "red | four | Leela"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -106,9 +106,11 @@ def main():
     p.add_argument('--allow-base',action='store_true')
     p.add_argument('--repetition-penalty',type=float,default=1.0)
     p.add_argument('--seconds',type=int,default=600)
+    p.add_argument('--reply-budget',type=int,default=128)
     p.add_argument('--worker',action='store_true',help=argparse.SUPPRESS)
     a=p.parse_args()
     if not 1<=a.seconds<=600:p.error('Checks require a1..600second total process budget')
+    if not 1<=a.reply_budget<=512:p.error('Reply budget must be 1..512 tokens')
     if not math.isfinite(a.repetition_penalty) or a.repetition_penalty!=1.0:
         p.error('Stage comparisons require raw repetition penalty1.0')
     checkpoint=Path(a.checkpoint).resolve()
@@ -122,7 +124,7 @@ def main():
     provenance={'checkpoint_manifest_sha256':actual,'suite_sha256':hashlib.sha256(raw).hexdigest(),
         'step':metadata['step'],'identity':metadata['identity'],'repetition_penalty':1.0,
         'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        'decoding':{'temperature':0,'reply_budget_per_action':128,'max_actions_per_turn':3},
+        'decoding':{'temperature':0,'reply_budget_per_action':a.reply_budget,'max_actions_per_turn':3},
         'diagnostic_base_mode':a.allow_base,'usable_model_claim':False,
         'scope':'Raw base diagnostic, not instruction-trained acceptance' if a.allow_base else 'Exposed development assessment, not final acceptance'}
     if not a.worker:
@@ -142,7 +144,7 @@ def main():
         'device':a.device,'attention':'fa3' if attention.USE_FA3 else 'sdpa',
         'gpu':torch.cuda.get_device_name() if a.device=='cuda' else None}
     factory=lambda:BrokerChat(tok,lambda ids,n:generate_action(model,tok,ids,n,
-        repetition_penalty=1.0),reply_budget=128,context=model.config.sequence_len)
+        repetition_penalty=1.0),reply_budget=a.reply_budget,context=model.config.sequence_len)
     publish=lambda report:atomic_report(a.output,{**provenance,**report})
     report=run_suite(factory,suite,deadline=time.monotonic()+a.seconds,publish=publish)
     publish(report)

@@ -1,0 +1,23 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {"id":"invitation-revision","turns":[
+      {"user":"Draft a friendly invitation to a board-game afternoon on Friday in the Blue Room. Keep it to two short sentences.","expected_calls":[],"rubric":"A usable invitation, exactly two short sentences; Friday and Blue Room preserved; no invented time, names or confirmed arrangements."},
+      {"user":"Change the day to Monday. Keep the room and friendly tone. Give only the revised invitation.","expected_calls":[],"rubric":"Revised invitation says Monday and Blue Room, no stale Friday or unnecessary commentary."},
+      {"user":"Which room did I choose? Answer with the room name only.","expected_calls":[],"exact_answers":["Blue Room"]}
+    ]},
+    {"id":"ownership-change","turns":[
+      {"user":"In this fictional example, Ada has the striped folder and Ben has the plain folder. Reply only with: understood","expected_calls":[],"exact_answers":["understood"]},
+      {"user":"Ada and Ben exchange folders. Who now has the striped folder? Answer with the name only.","expected_calls":[],"exact_answers":["Ben"]},
+      {"user":"Who had the striped folder before the exchange? Answer with the name only.","expected_calls":[],"exact_answers":["Ada"]}
+    ]},
+    {"id":"adapt-advice","turns":[
+      {"user":"In at most two sentences, explain how a checklist can help someone avoid missing steps.","expected_calls":[],"rubric":"Relevant simple explanation of external memory/visible steps; no repetition, irrelevant clarification or claim that work was performed."},
+      {"user":"I prefer not to use a checklist. Suggest one different method, briefly.","expected_calls":[],"rubric":"Offers a sensible different method such as a fixed routine or verbal review, respects preference and remains concise."}
+    ]},
+    {"id":"clarification-and-grounding","turns":[
+      {"user":"Can you move it there?","expected_calls":[],"rubric":"Recognizes missing referents and asks what item/location is meant; does not claim to have moved anything."},
+      {"user":"I mean suggest where to put my drawing supplies so I can find them easily. I will move them myself.","expected_calls":[],"rubric":"Gives relevant concise organizational advice, does not keep demanding already resolved referents and does not claim physical action."}
+    ]}
+  ]
+}

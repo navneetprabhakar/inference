@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/2306.13649",
+      "relevance": "Primary on-policy distillation paper: static teacher contexts can differ from student-generated contexts. Does not establish cause in this model or justify claiming a hard-target repair implements the paper."
+    },
+    {
+      "url": "https://github.com/huggingface/transformers/blob/main/docs/source/en/padding_free.md",
+      "relevance": "Primary implementation documentation: sequence boundaries prevent attention mixing between packed examples. Our current SFT concatenates conversations without attention isolation; measure actual effect before changing it."
+    }
+  ],
+  "hypotheses_not_confirmed": [
+    "early token errors compound during generation",
+    "cross-conversation context can make packed loss optimistic"
+  ],
+  "gpu_probe": "full-versus-prefix logits, isolated loss, identical packed loss across serving/training attention backends"
+}
