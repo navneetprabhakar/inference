@@ -124,6 +124,27 @@ class JsonlConversations:
         return rendered['ids'],rendered['mask']
 
 
+class FiniteEpochDataset:
+    """Explicit finite replay, with epoch count bound into the restart identity.
+
+    Keeps the admitted order each epoch. Development data is never repeated.
+    Virtual indices let the existing exact packing cursor span epoch boundaries.
+    """
+    def __init__(self,dataset,epochs):
+        if type(epochs) is not int or not 1<=epochs<=8 or not len(dataset):
+            raise ValueError('Finite epochs must be an integer in1..8 with nonempty data')
+        self.dataset=dataset;self.epochs=epochs;self.tokenizer=dataset.tokenizer
+        self.lengths=dataset.lengths*epochs
+        self.target_counts=dataset.target_counts*epochs
+        self.sha=hashlib.sha256(f'{dataset.sha}:finite_epochs:{epochs}'.encode()).hexdigest()
+
+    def __len__(self):return len(self.lengths)
+
+    def get(self,index):
+        if type(index) is not int or not 0<=index<len(self):raise IndexError(index)
+        return self.dataset.get(index%len(self.dataset))
+
+
 class BestFitConversations:
     """Pinned best-fit algorithm, finite buffer100; no epoch wrap or truncation."""
     def __init__(self,dataset,*,capacity=2049,buffer_size=100):
@@ -348,6 +369,7 @@ def run(args):
     train=JsonlConversations(manifest['train']['_file'],tok,manifest['train']['sha256'])
     dev=JsonlConversations(manifest['validation']['_file'],tok,manifest['validation']['sha256'])
     if train.fingerprints&dev.fingerprints:raise ValueError('Train/development conversation overlap')
+    if args.epochs>1:train=FiniteEpochDataset(train,args.epochs)
     total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/recipe["rows_per_update"])
     if horizon<2:raise ValueError('Finite SFT corpus too small for this schedule; no automatic replay or zero-LR-only run')
     if args.validate_only:
@@ -383,7 +405,7 @@ def run(args):
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
-              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,
+              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,'epochs':args.epochs,
               'numerical_mode':numerical_identity(torch,attention_deterministic=attention_deterministic),'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
@@ -486,6 +508,7 @@ def main():
     p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
     p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')
     p.add_argument('--lr-multiplier',type=float,default=1.0,help='Explicit reduced SFT learning rate, recorded in checkpoint identity; (0,1]')
+    p.add_argument('--epochs',type=int,default=1,help='Explicit finite passes over admitted training data;1..8, no implicit replay')
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--deterministic-attention',action='store_true')
     p.add_argument('--resume');p.add_argument('--backup-prefix');p.add_argument('--deadline-utc')
@@ -495,6 +518,7 @@ def main():
     p.add_argument('--eval-rows',type=int,default=128);p.add_argument('--eval-every-updates',type=int,default=200)
     p.add_argument('--checkpoint-seconds',type=int,default=900);p.add_argument('--checkpoint-reserve-seconds',type=int,default=300)
     a=p.parse_args()
+    if not 1<=a.epochs<=8:p.error('Epochs must be in1..8')
     if not math.isfinite(a.lr_multiplier) or not 0<a.lr_multiplier<=1:p.error('LR multiplier must be finite in (0,1]')
     try: batch_recipe(a.batch_tokens,a.microbatch)
     except ValueError as error: p.error(str(error))

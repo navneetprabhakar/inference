@@ -1,0 +1,421 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "concise_cancellation-1",
+      "turns": [
+        {
+          "user": "I have 12 minutes to sort the laundry and sort the sewing supplies. Suggest a brief plan for both activities.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "sort the laundry",
+              "sort the sewing supplies"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Spend 6 minutes to sort the laundry, then use the remaining 6 minutes to sort the sewing supplies."
+        },
+        {
+          "user": "Cancel the activity to sort the sewing supplies; please adapt the advice.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "sort the laundry",
+              "12"
+            ],
+            "forbid": [
+              "sort the sewing supplies"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Use the full 12 minutes to sort the laundry into the groups you need."
+        },
+        {
+          "user": "I now have 48 minutes. Adapt your advice to that time.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "sort the laundry",
+              "48"
+            ],
+            "forbid": [
+              "sort the sewing supplies"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Use the 48 minutes to sort the laundry, taking time to separate items by their care needs."
+        },
+        {
+          "user": "How many minutes did I originally have? Answer with only the number.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "12"
+          },
+          "exact_answers": [
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_preference-1",
+      "turns": [
+        {
+          "user": "How could labelled boxes help someone organize small items? Explain briefly.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Labelled boxes give small items designated places, making them easier to find and put away."
+        },
+        {
+          "user": "I would prefer an alternative to labelled boxes. Suggest a different method briefly.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "transparent trays"
+            ],
+            "forbid": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Try transparent trays so you can see the contents while keeping different types of small items separate."
+        },
+        {
+          "user": "How could I begin with your alternative? Give one brief, practical step.",
+          "expected_calls": [],
+          "checks": {
+            "forbid": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Place one type of small item in a transparent tray and choose an accessible spot for it."
+        },
+        {
+          "user": "Which method did I reject? Return only its name.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "labelled boxes"
+          },
+          "exact_answers": [
+            "labelled boxes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_cancellation-2",
+      "turns": [
+        {
+          "user": "Help me divide 24 minutes between two tasks: prepare a lesson outline and sort the shoe rack. Keep your advice short.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "prepare a lesson outline",
+              "sort the shoe rack"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Spend 12 minutes to prepare a lesson outline and 12 minutes to sort the shoe rack."
+        },
+        {
+          "user": "I no longer need to sort the shoe rack. Revise the plan to focus on the remaining activity.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "prepare a lesson outline",
+              "24"
+            ],
+            "forbid": [
+              "sort the shoe rack"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Use all 24 minutes to prepare a lesson outline, starting with the main objective and then listing the key points."
+        },
+        {
+          "user": "I now have 36 minutes. Adapt your advice to that time.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "prepare a lesson outline",
+              "36"
+            ],
+            "forbid": [
+              "sort the shoe rack"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Use the 36 minutes to prepare a lesson outline, leaving time to review the sequence and clarify the main points."
+        },
+        {
+          "user": "How many minutes did I originally have? Answer with only the number.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "24"
+          },
+          "exact_answers": [
+            "24"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_clarification-1",
+      "turns": [
+        {
+          "user": "Can you handle the arrangement?",
+          "expected_calls": [],
+          "checks": {
+            "question": true
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: What would you like arranged, and what kind of help do you need?"
+        },
+        {
+          "user": "I mean suggest where to keep my camera accessories in a narrow shelf, so I can find them. I will move them myself.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "camera accessories"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Keep the camera accessories together on the narrow shelf, with frequently used items at the front."
+        },
+        {
+          "user": "I cannot buy any new containers. Revise the suggestion using what I already have.",
+          "expected_calls": [],
+          "checks": {
+            "forbid": [
+              "buy a",
+              "purchase a"
+            ],
+            "contains": []
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Use an existing pouch or box for small pieces, and place it toward the front of the shelf."
+        },
+        {
+          "user": "What items are we organizing? Answer with only the item name.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "camera accessories"
+          },
+          "exact_answers": [
+            "camera accessories"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_clarification-2",
+      "turns": [
+        {
+          "user": "Can you sort that out for me?",
+          "expected_calls": [],
+          "checks": {
+            "question": true
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: What would you like me to help you sort out?"
+        },
+        {
+          "user": "I mean suggest where to keep my camera accessories in a busy work area, so I can find them. I will move them myself.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "camera accessories"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Keep your camera accessories together in a designated, easy-to-reach spot away from the busiest part of your work surface."
+        },
+        {
+          "user": "I cannot buy any new containers. Revise the suggestion using what I already have.",
+          "expected_calls": [],
+          "checks": {
+            "forbid": [
+              "buy a",
+              "purchase a"
+            ],
+            "contains": []
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Choose an existing drawer or clear a small shelf space, and keep the accessories together there."
+        },
+        {
+          "user": "What items are we organizing? Answer with only the item name.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "camera accessories"
+          },
+          "exact_answers": [
+            "camera accessories"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_invitation-1",
+      "turns": [
+        {
+          "user": "Write a friendly invitation to a book discussion on Tuesday in the Ivory Room. Use exactly two short sentences and give only the invitation.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "book discussion",
+              "Tuesday",
+              "Ivory Room"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a book discussion on Tuesday in the Ivory Room. We'd love to hear your thoughts!"
+        },
+        {
+          "user": "The day has changed to Saturday. Rewrite the invitation in two sentences while preserving the activity and room.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "book discussion",
+              "Saturday",
+              "Ivory Room"
+            ],
+            "forbid": [
+              "Tuesday"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a book discussion on Saturday in the Ivory Room. We'd love to hear your thoughts!"
+        },
+        {
+          "user": "The location is now the Teal Room. Update the invitation again without changing the current day.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "book discussion",
+              "Saturday",
+              "Teal Room"
+            ],
+            "forbid": [
+              "Tuesday",
+              "Ivory Room"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a book discussion on Saturday in the Teal Room. We'd love to hear your thoughts!"
+        },
+        {
+          "user": "What is the current day? Reply with its name only.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "Saturday"
+          },
+          "exact_answers": [
+            "Saturday"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_preference-2",
+      "turns": [
+        {
+          "user": "Explain briefly how labelled boxes could help me organize small items.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Labelled boxes group small items by category and make it easier to find and return them."
+        },
+        {
+          "user": "I would prefer an alternative to labelled boxes. Suggest a different method briefly.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "transparent trays"
+            ],
+            "forbid": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Try transparent trays to group items while keeping their contents visible."
+        },
+        {
+          "user": "Give me one practical first step for your new suggestion, without returning to the rejected method.",
+          "expected_calls": [],
+          "checks": {
+            "forbid": [
+              "labelled boxes"
+            ]
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Choose one transparent tray and place a single category of small items in it."
+        },
+        {
+          "user": "Which method did I reject? Return only its name.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "labelled boxes"
+          },
+          "exact_answers": [
+            "labelled boxes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concise_invitation-2",
+      "turns": [
+        {
+          "user": "Write a friendly invitation to a painting class on Saturday in the Copper Room. Use exactly two short sentences and give only the invitation.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "painting class",
+              "Saturday",
+              "Copper Room"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a painting class on Saturday in the Copper Room. We would love to see you there!"
+        },
+        {
+          "user": "Use Monday instead of the old day. Give only the updated two-sentence invitation.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "painting class",
+              "Monday",
+              "Copper Room"
+            ],
+            "forbid": [
+              "Saturday"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a painting class on Monday in the Copper Room. We would love to see you there!"
+        },
+        {
+          "user": "The location is now the Violet Room. Update the invitation again without changing the current day.",
+          "expected_calls": [],
+          "checks": {
+            "contains": [
+              "painting class",
+              "Monday",
+              "Violet Room"
+            ],
+            "forbid": [
+              "Saturday",
+              "Copper Room"
+            ],
+            "sentences": 2
+          },
+          "rubric": "Follow latest corrections, practical concise advice, no false actions. Reference: Join us for a painting class on Monday in the Violet Room. We would love to see you there!"
+        },
+        {
+          "user": "What is the current day? Reply with its name only.",
+          "expected_calls": [],
+          "checks": {
+            "exact": "Monday"
+          },
+          "exact_answers": [
+            "Monday"
+          ]
+        }
+      ]
+    }
+  ]
+}

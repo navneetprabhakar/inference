@@ -8,7 +8,7 @@ import unittest
 
 import torch
 import torch.nn.functional as F
-from cloud_training.nano_sft import (BestFitConversations,JsonlConversations,backward_weighted,
+from cloud_training.nano_sft import (BestFitConversations,FiniteEpochDataset,JsonlConversations,backward_weighted,
     collect_update,count_packed_rows,load_manifest,reset_sft_lrs,sft_schedule,evaluate_fixed,NATIVE_IGNORE,ensure_separate_output,replace_best_pin,batch_recipe,validate_parent_chain,PINNED_REVISION)
 from cloud_training.nano_checkpoint import save_bundle,load_bundle
 from cloud_training.nano_benchmark import digest_state
@@ -42,6 +42,38 @@ class FakeDataset:
 
 class SFTTests(unittest.TestCase):
     def setUp(self):torch.manual_seed(101)
+
+    def test_explicit_epochs_preserve_targets_and_stop_without_implicit_wrap(self):
+        base=FakeDataset([5,7,4]);base.target_counts=[4,6,3]
+        data=FiniteEpochDataset(base,3)
+        self.assertEqual(len(data),9)
+        self.assertEqual(sum(data.target_counts),39)
+        for i in range(9):self.assertEqual(data.get(i),base.get(i%3))
+        for i in (-1,9,True):
+            with self.assertRaises(IndexError):data.get(i)
+        pack=BestFitConversations(data,capacity=12,buffer_size=3);seen=[]
+        while True:
+            try:seen.extend(pack.next_indices())
+            except StopIteration:break
+        self.assertEqual(sorted(seen),list(range(9)))
+
+    def test_epoch_boundary_resume_matches_uninterrupted_and_binds_epoch_count(self):
+        base=FakeDataset([5,7,4]);base.target_counts=[4,6,3]
+        data=FiniteEpochDataset(base,3);pack=BestFitConversations(data,capacity=8,buffer_size=2)
+        for _ in range(4):pack.next_row()
+        state=pack.state_dict();expected=[]
+        while True:
+            try:expected.append(pack.next_row())
+            except StopIteration:break
+        resumed=BestFitConversations(data,capacity=8,buffer_size=2);resumed.load_state_dict(state);actual=[]
+        while True:
+            try:actual.append(resumed.next_row())
+            except StopIteration:break
+        self.assertEqual(actual,expected)
+        wrong=BestFitConversations(FiniteEpochDataset(base,2),capacity=8,buffer_size=2)
+        with self.assertRaises(ValueError):wrong.load_state_dict(state)
+        for value in (0,9,True,1.5):
+            with self.assertRaises(ValueError):FiniteEpochDataset(base,value)
 
     def test_reduced_lr_preserves_optimizer_state_and_rejects_invalid_scales(self):
         parameter=torch.nn.Parameter(torch.tensor([1.0]))

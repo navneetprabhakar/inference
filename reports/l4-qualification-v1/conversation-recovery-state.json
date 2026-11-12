@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-12T06:41:51.216863+00:00",
+  "updated_utc": "2026-11-12T07:23:07.745996+00:00",
   "phase": "conversation_and_tool_repair_not_base_continuation",
   "base_tokens": 6000476160,
   "parameters": 536871738,
@@ -21,8 +21,19 @@
     "constraint-repair-v1": "Rejected for promotion: generalexact4/4 and somecancellationgains,17/18expandedtools and contextregressions.",
     "balanced-constraint-repair-v1": "Rejected: 17/18 tools,23/28oldcontext despite15/18newconstraint and4/4generalexact."
   },
-  "next_trial": "literal-state-repair-v1",
+  "next_trial": "concise-teacher-repair-v1",
   "promotion_rule": "All18 prior passing toolcases preserved; no material exact-context regression; manually assess prose/constraints. Otherwise keep immutable fallback.",
   "reporting": "Concise30minute summaries; interrupt only blocker/budgetrisk.",
-  "next_trial_status": "launched"
+  "next_trial_status": "launched_four_explicit_epochs",
+  "best_development_candidate": {
+    "checkpoint": "gs://forge-ownbase-a100-20261110/ownbase-v2/literal-state-repair-v1/checkpoints/checkpoint-cf024e79d2174d578d129daf45764f04",
+    "manifest_sha256": "05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8",
+    "tools": "18/18",
+    "v2": "28/28",
+    "v3": "28/28",
+    "context": "27/28",
+    "general_exact": "4/4",
+    "teacher_finalfacts": "7/7",
+    "general_usable": false
+  }
 }

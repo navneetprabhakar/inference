@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "0d672d41d5d5aa94ca226f0f3896a8e3a2db831b1e899a178abc4cc8006c38f8",
+    "7aa16a9f2e519241754ebfcc6d7ab849ce83871956997bfcaeb733cad06bd949"
+  ],
+  "review": "Root full pilot and two production dialogues per batch; all-row state/format/length and conservative time-allocation screen. Candidate fact combinations grouped apart; exact user sequences isolated; exact old eval user prompts excluded. Prior tool/context replay exact-membership selected and replayed. Copy surface targets checked verbatim.",
+  "counts": {
+    "train": {
+      "families": {
+        "tool_correction": 100,
+        "concise_preference": 27,
+        "literal": 100,
+        "calculate": 100,
+        "wide_copy": 100,
+        "concise_invitation": 32,
+        "concise_cancellation": 32,
+        "convert": 100,
+        "state": 75,
+        "concise_clarification": 30,
+        "literal_reply": 300,
+        "two_entities": 75,
+        "update_state": 75,
+        "natural_context": 75
+      },
+      "assistant_targets_per_pass": 30135,
+      "positions_per_pass": 389208,
+      "tool_calls_replayed": 400
+    },
+    "validation": {
+      "families": {
+        "concise_invitation": 7,
+        "concise_preference": 5,
+        "concise_cancellation": 7,
+        "concise_clarification": 6
+      },
+      "assistant_targets_per_pass": 1679,
+      "positions_per_pass": 12433,
+      "tool_calls_replayed": 0
+    }
+  },
+  "semantic_review_sha256": "f1fca08208cb85dab8c083abd9ae949d282294826aacfb1f96bc2d86602fc5c8",
+  "flags_excluded": [],
+  "builder_sha256": "7dba2d1fd83002fee72699386288ee1a7401382cdda9c3ddb9c97016dea13fde",
+  "limits": [
+    "Teacher review sampled, not individual certification of all rows.",
+    "Four planned epochs are repeated exposure, not four times as much unique data.",
+    "Manual prose and full18tool gates remain required."
+  ]
+}

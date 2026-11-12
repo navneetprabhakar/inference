@@ -1,0 +1,32 @@
+{
+  "tool_gains_preserved": true,
+  "required_tool_cases_passed": 18,
+  "required_tool_cases_total": 18,
+  "manual_conversation_review_required": true,
+  "regression_v2_passed": 28,
+  "regression_v2_total": 28,
+  "regression_v3_passed": 28,
+  "regression_v3_total": 28,
+  "status": "complete",
+  "before_passed": 9,
+  "after_passed": 23,
+  "total": 24,
+  "original_suite_passed": 4,
+  "usable_model_claim": false,
+  "next": "Review exact action and transcript regressions before broader tuning",
+  "checkpoint_manifest_sha256": "05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8",
+  "checkpoint": "gs://forge-ownbase-a100-20261110/ownbase-v2/literal-state-repair-v1/checkpoints/checkpoint-cf024e79d2174d578d129daf45764f04",
+  "updates": 605,
+  "assistant_targets": 1881829,
+  "old_context_passed": 27,
+  "old_context_total": 28,
+  "general_exact_passed": 4,
+  "general_exact_total": 4,
+  "teacher_final_state_passed": 7,
+  "teacher_final_state_total": 7,
+  "manual_review": {
+    "finding": "Fact recall improved and all18tools restored. Open-ended responses still violate sentence constraints, retain cancelled activities and falsely claim physical action. Originalready/noted outputs remain prepare/dotted.",
+    "general_usable": false,
+    "decision": "Best current exact-task candidate, preserve earlier fallback; continue concise conversational supervision."
+  }
+}
