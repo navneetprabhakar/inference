@@ -1,0 +1,14 @@
+Bounded broad-conversation pilot
+Reason: narrow targeted pilot improved stopping but only 2/35 exact heldout passes,
+with one lost multi-tool success and worse masked dev loss. It is not promoted.
+Start from immutable 6B own-base, leaving both diagnostic/targeted branches intact.
+Use already admitted general-admitted-v1 (435,854 train dialogues), streamed and
+hash verified by existing SFT worker. Train at most 1,000 updates / 32.768M position
+tokens; assistant-token count is measured separately. This is NOT a full corpus pass.
+Keep the original optimizer recipe and 2K context. Evaluate dev every 250 updates.
+SFT deadline 45 minutes, including a 300-second checkpoint reserve. Total process
+70 minutes maximum; same VM, $100 total cap and original absolute cutoff unchanged.
+After training, automatically assess the frozen 20-session/35-turn suite and original
+suite against the committed checkpoint. Upload logs, summaries and checkpoint receipts.
+Compare to both 6B diagnostic and targeted pilot. No automatic 10B continuation or
+usability claim; review regressions and actual transcripts before further scaling.

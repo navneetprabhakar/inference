@@ -1,7 +1,37 @@
-Repair execution plan, double-checked against6B GPU evidence
-1. SameVM and same6B SFT parent; immutablebaseancestor verified.100USDcap and1794476714cutoff unchanged.
-2. First bounded intervention: already admitted targeted-context-v3,16463train/134dev,873656assistanttargets,243updates,onepass. Counts bound to admitted manifest. This tests whether targetedSFT improves heldout action behavior before spending on newdata/optimizerablation.
-3. Evaluate frozen20sample heldout suite before and after; original6B suite after. No validation examples entertraining. Count correct entireactions andactualbrokerresults, not tokenCE.
-4. SFTmax1800seconds incl300checkpointreserve; baseline/after quality each<=600seconds; totalpilot<=3600seconds/2.50USDcompute upper. VMretainedbetweenphases.
-5. Scale only if heldout passedturncount increases without increased invalidactions and original suite doesnotregress. Otherwise inspect transcripts andprepare diverse paraphrases/operands/policydecisions; never blindly resume10B. GeneralSFT and4K remainlatergates.
-Doublecheck: protocollearnedontrain;128vs512both0/6; no justification for optimizerreplacement first. Existingadmittedcurriculum is controlledfirstpilot, not aclaim that narrowtemplates solvegeneralization. Checkpoint must commit beforeevaluation.
+Repair execution plan — 12 November 2026
+
+Decision
+Test a bounded targeted-SFT repair before broader training. The 6B checkpoint
+learns familiar protocol examples but fails held-out instruction/action choices.
+Increasing the reply limit from 128 to 512 did not improve the original suite.
+
+1. Preserve the same VM, GPU, immutable 6B ancestor and 6B SFT parent.
+   Keep the $100 total cap and absolute shutdown cutoff (1794476714).
+2. Measure a frozen 20-session held-out development baseline.
+3. Train one finite pass over already admitted targeted-context-v3:
+   16,463 training dialogues, 873,656 assistant targets, 243 updates.
+   No held-out examples enter training. Preserve checkpoint lineage in GCS.
+4. Repeat the identical held-out checks and the original development suite.
+   Inspect exact tool choices, arguments, broker outcomes, context retention,
+   completion and repetition. Token loss alone cannot qualify the repair.
+5. Advance only if held-out passed turns increase, invalid actions do not
+   increase and the original suite does not regress. Review transcripts.
+   If the pilot fails, use observed failure categories to prepare diverse,
+   verified instruction/context/tool examples before another bounded trial.
+6. Broader conversation tuning follows a successful repair gate. Continue
+   toward 10B base tokens only with evidence supporting the remaining spend.
+   Keep the 4K context extension after base completion and conversation tuning.
+
+Pilot limits
+SFT: at most 1,800 seconds including a 300-second checkpoint reserve.
+Individual quality process: at most 600 seconds.
+Whole pilot: at most 3,600 seconds / $2.50 compute upper estimate.
+Retain the VM between phases; the original total-budget cutoff still applies.
+
+Double-check findings
+Sampled familiar tool start/JSON/end tokens reached 100% teacher-forced top-1.
+Held-out generation still chose invalid operations or the wrong tool.
+Both 128- and 512-token original-suite evaluations scored 0/6; two of those
+checks were blocked downstream of an earlier context failure.
+No evidence currently justifies an optimizer replacement as the first fix.
+The 20-session development suite is narrow and is not final usability acceptance.
