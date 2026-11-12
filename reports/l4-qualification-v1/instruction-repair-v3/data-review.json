@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "bd842aa64a2a2c12e896e3e320f0341c18ee94ea00ed1e7269abfe7c1c03cfb5",
+    "8e17cb464eaa9cd6fe5ddead96a99d60a685848114283f97e693185d41e37700"
+  ],
+  "review": "Root source review plus independent fraction arithmetic, state-answer, replayed broker, serving-format, length and split checks. This verifies bounded template semantics, not broad natural-language coverage. General replay is an exact subset of previously admitted training data; semantic noise remains possible.",
+  "counts": {
+    "train": {
+      "families": {
+        "convert": 2121,
+        "general_replay": 1442,
+        "tool_correction": 2200,
+        "calculate": 2200,
+        "two_entities": 2200,
+        "state": 2200,
+        "literal": 2200
+      },
+      "actual_calls_replayed": 8721,
+      "positions": 5655579,
+      "assistant_targets": 475382
+    },
+    "validation": {
+      "families": {
+        "literal": 16,
+        "two_entities": 16,
+        "state": 16,
+        "convert": 16,
+        "tool_correction": 16,
+        "calculate": 16
+      },
+      "actual_calls_replayed": 64,
+      "positions": 38680,
+      "assistant_targets": 2776
+    }
+  },
+  "builder_sha256": "b454ba6edd06ead5e1d9ace436f97dee789cfc0dcdcfd82042d232057aa4374a",
+  "base_builder_sha256": "f4f3b6c7bc48625b47f6b6344580bdf28cc425833a19fadf093e1cf86b79c671",
+  "general_replay_source_sha256": "7a5ce088436a2dc93210e8a7eca5c266f05971787034a0d53fe02a5d38cb2c18",
+  "verifier_sha256": "a6df5409e8e52306c1a2113519c683753119fbe05e66921f166e8ba0cb4ca967",
+  "limits": [
+    "Development templates and entity pools are disjoint; original development prompts excluded verbatim. No sealed final acceptance accessed.",
+    "Synthetic templates, not teacher-generated or proof of general conversation quality."
+  ]
+}

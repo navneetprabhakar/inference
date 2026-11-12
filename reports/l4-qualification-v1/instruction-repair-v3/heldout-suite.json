@@ -1,0 +1,472 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "literal-1",
+      "turns": [
+        {
+          "user": "Request record-447293. Only output the word shown here: invalid",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "invalid"
+          ]
+        },
+        {
+          "user": "Request record-447293. Constrain your entire response to this word: accepted",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "accepted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two_entities-1",
+      "turns": [
+        {
+          "user": "record-326120 uses locker 25, and record-839656 uses locker 162. Constrain your entire response to this word: today",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "today"
+          ]
+        },
+        {
+          "user": "The new locker for record-326120 is 329; the other locker stays the same. Only output the word shown here: latest",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "latest"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-839656.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "162"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-326120.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "329"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state-1",
+      "turns": [
+        {
+          "user": "record-897989 has location code UFU-578. Only output the word shown here: continue",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "continue"
+          ]
+        },
+        {
+          "user": "Change record-897989 to location code LNL-877. Only output the word shown here: continue",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "continue"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-897989.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "LNL-877"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-897989.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "UFU-578"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "convert-1",
+      "turns": [
+        {
+          "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "16998.6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two_entities-2",
+      "turns": [
+        {
+          "user": "record-801359 uses locker 1715, and record-193925 uses locker 1364. Only output the word shown here: thanks",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "thanks"
+          ]
+        },
+        {
+          "user": "The new locker for record-801359 is 465; the other locker stays the same. Constrain your entire response to this word: earliest",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "earliest"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-193925.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1364"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-801359.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "465"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tool_correction-1",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "2925"
+          ]
+        },
+        {
+          "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "2228"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tool_correction-2",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "646"
+          ]
+        },
+        {
+          "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-917"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculate-1",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculate-2",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "3136"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "state-2",
+      "turns": [
+        {
+          "user": "record-465612 has location code RHY-227. Only output the word shown here: final",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "final"
+          ]
+        },
+        {
+          "user": "Change record-465612 to location code SGP-186. Constrain your entire response to this word: retained",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "retained"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-465612.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "SGP-186"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-465612.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "RHY-227"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-2",
+      "turns": [
+        {
+          "user": "Request record-330795. Only output the word shown here: west",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "west"
+          ]
+        },
+        {
+          "user": "Request record-330795. Only output the word shown here: tomorrow",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "tomorrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "convert-2",
+      "turns": [
+        {
+          "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "22468.2"
+          ]
+        }
+      ]
+    }
+  ]
+}

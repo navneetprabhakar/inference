@@ -1,0 +1,2203 @@
+{
+  "checkpoint_manifest_sha256": "769b8738a9f1cc0d33d2bcf3959c74d5be27f3eb162623241a135d0b662f7aa8",
+  "suite_sha256": "972dc731260ceaf2f54e0aab94fdeeabebb098d5a404836aa1e39b1d1989684d",
+  "step": 76,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 32768,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "eval_every_updates": 40,
+    "eval_rows": 64,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 76,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.25,
+    "microbatch": 8,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 1208,
+    "parent_bundle_manifest_sha256": "876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 32768,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_updates": 250,
+      "eval_rows": 64,
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 14603,
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "lr_batch_scale": 0.25,
+      "microbatch": 8,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 233633,
+      "parent_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "source_manifest_sha256": "81bce708e5ead239c1572a41606567d73493e2939383a5c6e279bdbac71062df",
+      "stage": "general",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 103,
+    "source_manifest_sha256": "8312756029c48b64b840392706c48101549a0f56463152c5ceb00a43da434e12",
+    "stage": "targeted",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "cbcae265ef93b0542ca9f38a7cc82ff763e774b59a93b0a01d493c218dad76a8",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 128,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "tool_correction-1",
+      "turn": 0,
+      "user": "Find the difference, first 715, second 1875. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "-1160",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7426,
+              53,
+              1191,
+              98,
+              8220,
+              1344,
+              4092,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 715,
+                  "b": 1875,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":715,\"b\":1875,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 1.1278632309999992
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 715,
+                "b": 1875,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456753.9907827,
+              "name": "calculate",
+              "arguments": {
+                "a": 715,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": -1160
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              45,
+              1495,
+              2249,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "-1160"
+            },
+            "seconds": 0.06898017799999678
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456753.9907827,
+            "name": "calculate",
+            "arguments": {
+              "a": 715,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1160
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-1",
+      "turn": 1,
+      "user": "Replace the first input with 1883, retain the other input and operation, and recalculate. Return only the number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "8",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1344,
+              7820,
+              1191,
+              98,
+              8220,
+              1344,
+              4092,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1883,
+                  "b": 1875,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1883,\"b\":1875,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.6664715920000006
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1883,
+                "b": 1875,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456754.7320557,
+              "name": "calculate",
+              "arguments": {
+                "a": 1883,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 8
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              56,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "8"
+            },
+            "seconds": 0.0398209379999912
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456753.9907827,
+            "name": "calculate",
+            "arguments": {
+              "a": 715,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1160
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456754.7320557,
+            "name": "calculate",
+            "arguments": {
+              "a": 1883,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 8
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 0,
+      "user": "record-638506 uses locker 1268. record-332617 uses locker 1704. The response must consist solely of active.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "active",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5122,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "active"
+            },
+            "seconds": 0.042803602000006435
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 1,
+      "user": "record-638506 now has locker 1996; leave record-332617 as it was. Return just this token: confirmed",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "confirmed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              25508,
+              3097,
+              284,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "confirmed"
+            },
+            "seconds": 0.06769839700000091
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 2,
+      "user": "Give only the unchanged locker number belonging to record-332617.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Raff",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              2555,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Raff"
+            },
+            "seconds": 0.059552629999998885
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 3,
+      "user": "Give only the revised locker number belonging to record-638506.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1996",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              819,
+              6411,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1996"
+            },
+            "seconds": 0.05282711699999254
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 0,
+      "user": "record-408818 uses locker 584. record-342311 uses locker 709. The response must consist solely of queued.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Rceived",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              32561,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Rceived"
+            },
+            "seconds": 0.050555475999999544
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 1,
+      "user": "record-408818 now has locker 1758; leave record-342311 as it was. The response must consist solely of confirmed.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "confirmed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              25508,
+              3097,
+              284,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "confirmed"
+            },
+            "seconds": 0.06880136399999515
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 2,
+      "user": "Give only the unchanged locker number belonging to record-342311.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Rceived",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              32561,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Rceived"
+            },
+            "seconds": 0.05137453999999764
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 3,
+      "user": "Give only the revised locker number belonging to record-408818.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1758",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1802,
+              6990,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1758"
+            },
+            "seconds": 0.05208582600000966
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "calculate-1",
+      "turn": 0,
+      "user": "Evaluate the multiplication of 596 and 267. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "159132",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7254,
+              54,
+              1191,
+              98,
+              8220,
+              3592,
+              55,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 596,
+                  "b": 267,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":596,\"b\":267,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5372539749999987
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 596,
+                "b": 267,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456755.7935917,
+              "name": "calculate",
+              "arguments": {
+                "a": 596,
+                "b": 267,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 159132
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1296,
+              6556,
+              3712,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "159132"
+            },
+            "seconds": 0.06693538599999727
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456755.7935917,
+            "name": "calculate",
+            "arguments": {
+              "a": 596,
+              "b": 267,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 159132
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 0,
+      "user": "At first, record-233316 is located at AXK-619. The response must consist solely of closed.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "closed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              30475,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "closed"
+            },
+            "seconds": 0.0335463890000085
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 1,
+      "user": "Update the location of record-233316 to TNH-862. Return just this token: saved",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "saved",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              115,
+              11311,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "saved"
+            },
+            "seconds": 0.049949353999991786
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 2,
+      "user": "Give only the current location code for record-233316.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ryan",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              12344,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ryan"
+            },
+            "seconds": 0.051674615999999673
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 3,
+      "user": "Name only the initial location code mentioned for record-233316.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ryan",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              12344,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ryan"
+            },
+            "seconds": 0.051015989999996236
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "calculate-2",
+      "turn": 0,
+      "user": "Case record-594152-9: Find the difference, first 205, second 1838. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "unsupported operation",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              568,
+              53,
+              1191,
+              98,
+              8220,
+              1344,
+              5314,
+              1191,
+              394,
+              14424,
+              31795,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "unsupported operation"
+            },
+            "seconds": 0.49448713200000327
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": false,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-1",
+      "turn": 0,
+      "user": "Case record-478059-0: Reference record-478059-1016. The response must consist solely of open.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "open",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              16904,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "open"
+            },
+            "seconds": 0.03396183400001007
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-1",
+      "turn": 1,
+      "user": "The response must consist solely of yes.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "yes",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              10200,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "yes"
+            },
+            "seconds": 0.04294969500000434
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-2",
+      "turn": 0,
+      "user": "Case record-325956-6: Evaluate the multiplication of 1088 and 938. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1020544",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              769,
+              6954,
+              1191,
+              98,
+              8220,
+              7286,
+              56,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1088,
+                  "b": 938,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1088,\"b\":938,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5228718139999984
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1088,
+                "b": 938,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456757.1779501,
+              "name": "calculate",
+              "arguments": {
+                "a": 1088,
+                "b": 938,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 1020544
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              769,
+              568,
+              6722,
+              52,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1020544"
+            },
+            "seconds": 0.08489920099999892
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456757.1779501,
+            "name": "calculate",
+            "arguments": {
+              "a": 1088,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 1020544
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-2",
+      "turn": 1,
+      "user": "Replace the first input with 265, retain the other input and operation, and recalculate. Return only the number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "248570",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              3592,
+              53,
+              1191,
+              98,
+              8220,
+              7286,
+              56,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 265,
+                  "b": 938,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":265,\"b\":938,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.597353358999996
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 265,
+                "b": 938,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456757.8668633,
+              "name": "calculate",
+              "arguments": {
+                "a": 265,
+                "b": 938,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 248570
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2254,
+              5545,
+              2819,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "248570"
+            },
+            "seconds": 0.0775379570000041
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456757.1779501,
+            "name": "calculate",
+            "arguments": {
+              "a": 1088,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 1020544
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456757.8668633,
+            "name": "calculate",
+            "arguments": {
+              "a": 265,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 248570
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 0,
+      "user": "At first, record-532234 is located at QEK-593. The response must consist solely of draft.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Doha",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              68,
+              2692,
+              97,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Doha"
+            },
+            "seconds": 0.06502596700001106
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 1,
+      "user": "Update the location of record-532234 to AVD-634. Return just this token: saved",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "saved",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              115,
+              11311,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "saved"
+            },
+            "seconds": 0.050041093000004366
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 2,
+      "user": "Give only the current location code for record-532234.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ryan",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              12344,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ryan"
+            },
+            "seconds": 0.05060541099999227
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 3,
+      "user": "Name only the initial location code mentioned for record-532234.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ryan",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              12344,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ryan"
+            },
+            "seconds": 0.051040032000003066
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "convert-1",
+      "turn": 0,
+      "user": "Case record-739044-12: Express the measurement 1705 kg using g. Use convert and give only the numeric result.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1705000",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              10988,
+              14137,
+              2026,
+              14424,
+              103,
+              14137,
+              13674,
+              8220,
+              1802,
+              3898,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "kg",
+                  "to": "g",
+                  "value": 1705
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"kg\",\"to\":\"g\",\"value\":1705},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.44287361799999303
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 1705
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456758.6325536,
+              "name": "convert",
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 1705
+              },
+              "ok": true,
+              "data": {
+                "result": 1705000.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1802,
+              3898,
+              925,
+              48,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1705000"
+            },
+            "seconds": 0.0847159439999956
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456758.6325536,
+            "name": "convert",
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 1705
+            },
+            "ok": true,
+            "data": {
+              "result": 1705000.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "convert-2",
+      "turn": 0,
+      "user": "Express the measurement 1609 km using m. Use convert and give only the numeric result.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1609000",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              13657,
+              14137,
+              2026,
+              14424,
+              109,
+              14137,
+              13674,
+              8220,
+              1661,
+              3760,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "km",
+                  "to": "m",
+                  "value": 1609
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"km\",\"to\":\"m\",\"value\":1609},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.44469607099999564
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 1609
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794456759.1688547,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 1609
+              },
+              "ok": true,
+              "data": {
+                "result": 1609000.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1661,
+              3760,
+              925,
+              48,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1609000"
+            },
+            "seconds": 0.08540026900000441
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794456759.1688547,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 1609
+            },
+            "ok": true,
+            "data": {
+              "result": 1609000.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-2",
+      "turn": 0,
+      "user": "Reference record-580851-1835. Return just this token: draft",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Empty assistant answer",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32763
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Empty assistant answer"
+            },
+            "seconds": 0.01796917100000428
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-2",
+      "turn": 1,
+      "user": "The response must consist solely of confirmed.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    }
+  ],
+  "automated_passed": 17,
+  "automated_total": 28,
+  "manual_review_turns": 0,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 39.256744147999996,
+  "hard_process_timeout_seconds": 540
+}
