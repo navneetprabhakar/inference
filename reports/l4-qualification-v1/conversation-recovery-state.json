@@ -1,6 +1,6 @@
 {
-  "updated_utc": "2026-11-12T08:13:23.191932+00:00",
-  "phase": "conversation_and_tool_repair_not_base_continuation",
+  "updated_utc": "2026-11-12T10:32:27.459128+00:00",
+  "phase": "offline_conversation_data_only",
   "base_tokens": 6000476160,
   "parameters": 536871738,
   "context": 2048,
@@ -19,12 +19,13 @@
   "experimental_branches": {
     "teacher-conversation-pilot-v1": "Rejected for promotion: richer prose/finalfact gains,17/18expandedtools and negativeconstraintsfail.",
     "constraint-repair-v1": "Rejected for promotion: generalexact4/4 and somecancellationgains,17/18expandedtools and contextregressions.",
-    "balanced-constraint-repair-v1": "Rejected: 17/18 tools,23/28oldcontext despite15/18newconstraint and4/4generalexact."
+    "balanced-constraint-repair-v1": "Rejected: 17/18 tools,23/28oldcontext despite15/18newconstraint and4/4generalexact.",
+    "concise-teacher-repair-v3": "Completed194updates/120540targetexposures. Concisecontracts9/32to28/32, priorcontext28/28; tools17/18 and generalexact2/4. Not promoted; literal605 remains best."
   },
   "next_trial": "concise-teacher-repair-v3",
   "promotion_rule": "All18 prior passing toolcases preserved; no material exact-context regression; manually assess prose/constraints. Otherwise keep immutable fallback.",
   "reporting": "Concise30minute summaries; interrupt only blocker/budgetrisk.",
-  "next_trial_status": "same_vm_restart_cleanup_preflight",
+  "next_trial_status": "no_gpu_training_user_requested_stop",
   "best_development_candidate": {
     "checkpoint": "gs://forge-ownbase-a100-20261110/ownbase-v2/literal-state-repair-v1/checkpoints/checkpoint-cf024e79d2174d578d129daf45764f04",
     "manifest_sha256": "05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8",
@@ -36,9 +37,10 @@
     "teacher_finalfacts": "7/7",
     "general_usable": false
   },
-  "live_vm_status": "RUNNING; latest training worker exited",
-  "blocker": "GCS startup log confirms OSError errno28 while saving initial step0. No new optimizer updates.",
+  "live_vm_status": "TERMINATED (stopped); provider confirmed",
+  "blocker": null,
   "budget": "reports/l4-qualification-v1/conversation-recovery-150-v1/budget.json",
   "execution_plan": "reports/l4-qualification-v1/conversation-recovery-150-v1/plan.txt",
-  "teacher_generation": "runs/conversation-recovery-150-v1/teacher-pilot/progress.json"
+  "teacher_generation": "runs/conversation-data-offline-v1/production/progress.json",
+  "watchdog": "retired_after_confirmed_VM_stop"
 }

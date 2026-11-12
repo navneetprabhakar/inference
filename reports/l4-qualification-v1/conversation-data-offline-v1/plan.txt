@@ -1,0 +1,15 @@
+Offline conversation-data work,12November2026
+VM stopped at user request; no GPU restart or training in this phase. Existing disks/GCS checkpoints retained. Storage charges may continue; no running-GPU compute.150USD project cap remains.
+
+Evidence-driven data corrections
+The previous286candidates contain193unique complete user sequences. Preserve raw outputs; maintain a separate deduplicated candidate pool. Counts are not training admissions.
+New teacher lessons target observed mistakes: respecting rejected methods, tracking referents after ownership changes, returning after topic detours, accumulating constraints, asking clarification before editing, and grounding answers in supplied corrected results. Fictional supplied calculator results are not genuine tool executions and will not be labelled as such.
+
+Execution
+CodexCLI gpt-6.1-terra, medium effort, one locked generator, no paid API fallback.12dialogue pilot read in full;10 retained as reviewed candidates,2excluded for weak/awkward prose. Bounded24batches×12raw dialogs; global full-user-sequence dedup; stop on CLI/auth failure,>25percent mechanical failure or<50percent novel yield. Candidate diversity, not raw token count, is the objective.2048token fit checked with actual model tokenizer;4user/assistantpairs,<=60words per response.
+
+Admission gate before future training
+Full provenance, normalized user-sequence dedup, scenario-group train/dev separation, token counts, replayed true tool traces from verified fixtures. Review contradictory states, canceled-task reintroduction, invented actions, meaningless generic prose, unrealistic physical advice and grammar. Mechanical pass alone never implies accepted data. Keep new full-session assessment scenarios separate; any prompt used for repairs becomes development. No candidate is automatically trained.
+
+Artifacts and reports
+Raw CLI output and logs under runs/conversation-data-offline-v1. Reports/scripts/audit inGit; existing raw and deduplicated files preserved.30minute concise updates only; stoppedVM state must not be reported as training. No duplicate generator or autonomous restart.
