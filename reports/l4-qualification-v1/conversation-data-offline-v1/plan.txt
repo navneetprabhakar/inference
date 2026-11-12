@@ -13,3 +13,5 @@ Full provenance, normalized user-sequence dedup, scenario-group train/dev separa
 
 Artifacts and reports
 Raw CLI output and logs under runs/conversation-data-offline-v1. Reports/scripts/audit inGit; existing raw and deduplicated files preserved.30minute concise updates only; stoppedVM state must not be reported as training. No duplicate generator or autonomous restart.
+
+Full-dialogue review queue now runs separately from generation, reading completed candidate files only. Every candidate receives a pass/reject reason bound to its full-message SHA256. Reviewer uses CodexCLI Terra medium effort with no tools. This process never admits data. Root exclusions and grouped dedup/split checks must be applied before formal admission. First20production dialogues root-reviewed;3excluded. Next30minuteupdate includes2–3actual teacher-candidate excerpts, clearly distinguished from own-base model responses.
