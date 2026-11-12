@@ -1,0 +1,1525 @@
+{
+  "checkpoint_manifest_sha256": "a363abdeb7e65cee795a8d98c846534ba943e16e442f77ff65018a7a93cbe9c3",
+  "suite_sha256": "0cb4109ff2a6800b3f828c70f3880c89a160e73798777c05bad94e05dc7a20cc",
+  "step": 473,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 32768,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "eval_every_updates": 1000,
+    "eval_rows": 64,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 473,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.25,
+    "lr_multiplier": 0.25,
+    "microbatch": 8,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 7557,
+    "parent_bundle_manifest_sha256": "9f9380f90b4b4f030e222be05f5641d1a6ab89403347e4fc85b53eceeaa21a0a",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 32768,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_updates": 200,
+      "eval_rows": 64,
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 139,
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "lr_batch_scale": 0.25,
+      "lr_multiplier": 0.25,
+      "microbatch": 8,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 2215,
+      "parent_bundle_manifest_sha256": "911558f640a8fe94a40a0735c5c58c6e34b474ae72ba623d69afbde4623eba28",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+        "base_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "batch_tokens": 32768,
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_updates": 200,
+        "eval_rows": 64,
+        "format_version": "forge-nanochat-v1",
+        "horizon_updates": 90,
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "lr_batch_scale": 0.25,
+        "lr_multiplier": 0.25,
+        "microbatch": 8,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "packed_rows": 1439,
+        "parent_bundle_manifest_sha256": "00d401640ae41dc1ce862cf17af961eb089336f1021909d64d680c85bea780e5",
+        "parent_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 32768,
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_updates": 200,
+          "eval_rows": 64,
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 176,
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "lr_batch_scale": 0.25,
+          "microbatch": 8,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 2815,
+          "parent_bundle_manifest_sha256": "1ffcc23b62000dcd64006a55fd6fdb3a53b8e7ae1028c6da9f0243bf5e00868f",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 32768,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_updates": 170,
+            "eval_rows": 64,
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 169,
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "lr_batch_scale": 0.25,
+            "microbatch": 8,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 2692,
+            "parent_bundle_manifest_sha256": "769b8738a9f1cc0d33d2bcf3959c74d5be27f3eb162623241a135d0b662f7aa8",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+              "base_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                  "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                  "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "batch_tokens": 524288,
+                "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_tokens": 250000000,
+                "eval_tokens_per_shard": 1048576,
+                "horizon_updates": 19074,
+                "initialization": "own_random",
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "microbatch": 16,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "phase": "base",
+                "probes": {
+                  "decoding": "greedy raw, no repetition penalty",
+                  "enabled": true,
+                  "max_new_tokens_per_prompt": 32,
+                  "max_total_new_tokens": 128,
+                  "prompts": [
+                    "The rain stopped just before sunrise. When Mira opened the window,",
+                    "A library lends books to readers. Readers return the books so that",
+                    "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                    "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                  ],
+                  "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                  "version": 1
+                },
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "batch_tokens": 32768,
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_updates": 40,
+              "eval_rows": 64,
+              "format_version": "forge-nanochat-v1",
+              "horizon_updates": 76,
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "lr_batch_scale": 0.25,
+              "microbatch": 8,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "packed_rows": 1208,
+              "parent_bundle_manifest_sha256": "876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92",
+              "parent_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "base_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "batch_tokens": 32768,
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_updates": 250,
+                "eval_rows": 64,
+                "format_version": "forge-nanochat-v1",
+                "horizon_updates": 14603,
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "lr_batch_scale": 0.25,
+                "microbatch": 8,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "packed_rows": 233633,
+                "parent_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "parent_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "phase": "sft",
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "source_manifest_sha256": "81bce708e5ead239c1572a41606567d73493e2939383a5c6e279bdbac71062df",
+                "stage": "general",
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "phase": "sft",
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "source_manifest_sha256": "8312756029c48b64b840392706c48101549a0f56463152c5ceb00a43da434e12",
+              "stage": "targeted",
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "79b304bcebaef31b5a44393cb3b647acb1c47436f9ecdfc56c8c20f82dd61458",
+            "stage": "targeted",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "phase": "sft",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "57be7b83bbeeae568b78cb7539ceb0912824106edc6c3fa04fdc12db254ce2e6",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "phase": "sft",
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "source_manifest_sha256": "3caa690337d826e8d59768a5da0c1c2c23f3f68d8fbd96b0604bf281779c4f00",
+        "stage": "targeted",
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 137,
+      "source_manifest_sha256": "bb652b12d397cee8ab4119d1b19f69bdbc7412022039278531f8045e609fe257",
+      "stage": "targeted",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 141,
+    "source_manifest_sha256": "edcbdfa9399c776932b1495f94bb153e84fe41341fbc3a0414515fab285dd2a3",
+    "stage": "targeted",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 128,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "context-correction",
+      "turn": 0,
+      "user": "My parcel is in Nashik. Reply only: noted",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "dotted",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              100,
+              24323,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "dotted"
+            },
+            "seconds": 0.34624413000005916
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "context-correction",
+      "turn": 1,
+      "user": "Correction: the parcel is now in Mysuru. Reply only: updated",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "updated",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1162,
+              14655,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "updated"
+            },
+            "seconds": 0.0809801760000255
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "context-correction",
+      "turn": 2,
+      "user": "Where is my parcel now? Reply with only the city name.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Mysuru",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              77,
+              1076,
+              19702,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Mysuru"
+            },
+            "seconds": 0.07130309699994086
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "calculate-grounding",
+      "turn": 0,
+      "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+      "policy": {
+        "permit_calls": true,
+        "allowed_names": [
+          "calculate"
+        ]
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "54",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7480,
+              1191,
+              98,
+              8220,
+              819,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 73,
+                  "b": 19,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":73,\"b\":19,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.49459517399998276
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465073.1699824,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 54
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              6722,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "54"
+            },
+            "seconds": 0.03449424000007184
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465073.1699824,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "convert-grounding",
+      "turn": 0,
+      "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+      "policy": {
+        "permit_calls": true,
+        "allowed_names": [
+          "convert"
+        ]
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "3250",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              13657,
+              14137,
+              2026,
+              14424,
+              109,
+              14137,
+              13674,
+              8220,
+              51,
+              46,
+              1932,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "km",
+                  "to": "m",
+                  "value": 3.25
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"km\",\"to\":\"m\",\"value\":3.25},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.4748758429999498
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 3.25
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465073.6853325,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 3.25
+              },
+              "ok": true,
+              "data": {
+                "result": 3250.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3712,
+              1458,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3250"
+            },
+            "seconds": 0.050829514000042764
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465073.6853325,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 3.25
+            },
+            "ok": true,
+            "data": {
+              "result": 3250.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "no-call",
+      "turn": 0,
+      "user": "Do not use tools. Reply only: ready",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "prepare",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4019,
+              112,
+              526,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "prepare"
+            },
+            "seconds": 0.06536562200005847
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "conversation-review",
+      "turn": 0,
+      "user": "I have twenty minutes to tidy my desk and prepare for a meeting. Suggest a short practical plan.",
+      "policy": null,
+      "rubric": "Relevant feasible plan within20minutes; coherent, no repetition or invented actions.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Spend most of the first day to tidy your desk: arrange the necessary materials and decide how to handle any unresolved items. Use the remaining time to prepare for a meeting: choose a venue, arrange the agenda, and decide how to check progress.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5771,
+              499,
+              698,
+              286,
+              262,
+              815,
+              1132,
+              283,
+              22815,
+              387,
+              7776,
+              58,
+              6336,
+              262,
+              2155,
+              1642,
+              288,
+              5405,
+              614,
+              283,
+              3775,
+              641,
+              546,
+              428,
+              7130,
+              2952,
+              46,
+              3200,
+              262,
+              6059,
+              619,
+              283,
+              4724,
+              324,
+              257,
+              5498,
+              58,
+              2462,
+              257,
+              22003,
+              44,
+              6336,
+              262,
+              18297,
+              44,
+              288,
+              5405,
+              614,
+              283,
+              1915,
+              3432,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Spend most of the first day to tidy your desk: arrange the necessary materials and decide how to handle any unresolved items. Use the remaining time to prepare for a meeting: choose a venue, arrange the agenda, and decide how to check progress."
+            },
+            "seconds": 0.8672630029999482
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.025000000000000022,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "conversation-review",
+      "turn": 1,
+      "user": "The meeting was cancelled. Change your plan so I can focus on tidying.",
+      "policy": null,
+      "rubric": "Uses the prior context, respects cancellation, revises plan coherently; no claimed tool action.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Use the twenty minutes to check the meeting's purpose and decide how to handle questions. Review the agenda and decide what needs to be done before the meeting, then review the remaining time to review the items you have arranged. If the agenda is unclear, ask the people involved before deciding what needs to be changed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5445,
+              262,
+              10852,
+              2369,
+              283,
+              1915,
+              262,
+              5498,
+              386,
+              2734,
+              288,
+              5405,
+              614,
+              283,
+              3775,
+              2282,
+              46,
+              8211,
+              262,
+              18297,
+              288,
+              5405,
+              686,
+              1508,
+              283,
+              315,
+              1944,
+              1003,
+              262,
+              5498,
+              44,
+              856,
+              2968,
+              262,
+              6059,
+              619,
+              283,
+              2968,
+              262,
+              2952,
+              313,
+              419,
+              10838,
+              46,
+              846,
+              262,
+              18297,
+              306,
+              14967,
+              44,
+              2251,
+              262,
+              737,
+              2924,
+              1003,
+              12249,
+              686,
+              1508,
+              283,
+              315,
+              4386,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Use the twenty minutes to check the meeting's purpose and decide how to handle questions. Review the agenda and decide what needs to be done before the meeting, then review the remaining time to review the items you have arranged. If the agenda is unclear, ask the people involved before deciding what needs to be changed."
+            },
+            "seconds": 1.0636031029999913
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.018867924528301883,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    }
+  ],
+  "automated_passed": 4,
+  "automated_total": 6,
+  "manual_review_turns": 2,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 21.876137873999937,
+  "hard_process_timeout_seconds": 540
+}

@@ -1,0 +1,2708 @@
+{
+  "checkpoint_manifest_sha256": "189eee2c900b689cb509d637fd29469e92ba9eb8c157c15c80a1e950f5fcb15a",
+  "suite_sha256": "834f31a33a9d09e5afc1d3677233fe7d86256ae3ba6aaa519a76e9e0f091a0cb",
+  "step": 201,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 32768,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "eval_every_updates": 200,
+    "eval_rows": 64,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 201,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.25,
+    "lr_multiplier": 0.25,
+    "microbatch": 8,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 3205,
+    "parent_bundle_manifest_sha256": "9f9380f90b4b4f030e222be05f5641d1a6ab89403347e4fc85b53eceeaa21a0a",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 32768,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_updates": 200,
+      "eval_rows": 64,
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 139,
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "lr_batch_scale": 0.25,
+      "lr_multiplier": 0.25,
+      "microbatch": 8,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 2215,
+      "parent_bundle_manifest_sha256": "911558f640a8fe94a40a0735c5c58c6e34b474ae72ba623d69afbde4623eba28",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+        "base_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "batch_tokens": 32768,
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_updates": 200,
+        "eval_rows": 64,
+        "format_version": "forge-nanochat-v1",
+        "horizon_updates": 90,
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "lr_batch_scale": 0.25,
+        "lr_multiplier": 0.25,
+        "microbatch": 8,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "packed_rows": 1439,
+        "parent_bundle_manifest_sha256": "00d401640ae41dc1ce862cf17af961eb089336f1021909d64d680c85bea780e5",
+        "parent_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 32768,
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_updates": 200,
+          "eval_rows": 64,
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 176,
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "lr_batch_scale": 0.25,
+          "microbatch": 8,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 2815,
+          "parent_bundle_manifest_sha256": "1ffcc23b62000dcd64006a55fd6fdb3a53b8e7ae1028c6da9f0243bf5e00868f",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 32768,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_updates": 170,
+            "eval_rows": 64,
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 169,
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "lr_batch_scale": 0.25,
+            "microbatch": 8,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 2692,
+            "parent_bundle_manifest_sha256": "769b8738a9f1cc0d33d2bcf3959c74d5be27f3eb162623241a135d0b662f7aa8",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+              "base_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                  "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                  "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "batch_tokens": 524288,
+                "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_tokens": 250000000,
+                "eval_tokens_per_shard": 1048576,
+                "horizon_updates": 19074,
+                "initialization": "own_random",
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "microbatch": 16,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "phase": "base",
+                "probes": {
+                  "decoding": "greedy raw, no repetition penalty",
+                  "enabled": true,
+                  "max_new_tokens_per_prompt": 32,
+                  "max_total_new_tokens": 128,
+                  "prompts": [
+                    "The rain stopped just before sunrise. When Mira opened the window,",
+                    "A library lends books to readers. Readers return the books so that",
+                    "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                    "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                  ],
+                  "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                  "version": 1
+                },
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "batch_tokens": 32768,
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_updates": 40,
+              "eval_rows": 64,
+              "format_version": "forge-nanochat-v1",
+              "horizon_updates": 76,
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "lr_batch_scale": 0.25,
+              "microbatch": 8,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "packed_rows": 1208,
+              "parent_bundle_manifest_sha256": "876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92",
+              "parent_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "base_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "batch_tokens": 32768,
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_updates": 250,
+                "eval_rows": 64,
+                "format_version": "forge-nanochat-v1",
+                "horizon_updates": 14603,
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "lr_batch_scale": 0.25,
+                "microbatch": 8,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "packed_rows": 233633,
+                "parent_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "parent_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "phase": "sft",
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "source_manifest_sha256": "81bce708e5ead239c1572a41606567d73493e2939383a5c6e279bdbac71062df",
+                "stage": "general",
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "phase": "sft",
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "source_manifest_sha256": "8312756029c48b64b840392706c48101549a0f56463152c5ceb00a43da434e12",
+              "stage": "targeted",
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "79b304bcebaef31b5a44393cb3b647acb1c47436f9ecdfc56c8c20f82dd61458",
+            "stage": "targeted",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "phase": "sft",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "57be7b83bbeeae568b78cb7539ceb0912824106edc6c3fa04fdc12db254ce2e6",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "phase": "sft",
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "source_manifest_sha256": "3caa690337d826e8d59768a5da0c1c2c23f3f68d8fbd96b0604bf281779c4f00",
+        "stage": "targeted",
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 137,
+      "source_manifest_sha256": "bb652b12d397cee8ab4119d1b19f69bdbc7412022039278531f8045e609fe257",
+      "stage": "targeted",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 141,
+    "source_manifest_sha256": "bcf87cf31dc9f83905f50ed8a6acf53bc0a1957df644b2f980c107442239b43f",
+    "stage": "targeted",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 128,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "acknowledgment-1",
+      "turn": 0,
+      "user": "My violin case has label JSV-773. Answer solely with: verified",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "verified",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              337,
+              1602,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "verified"
+            },
+            "seconds": 0.34545121999997264
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-1",
+      "turn": 1,
+      "user": "The label is now LXJ-191. Your whole response should be the word agreed.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "agreed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              493,
+              8319,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "agreed"
+            },
+            "seconds": 0.06273868599998877
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "grounded_plan-1",
+      "turn": 0,
+      "user": "Help me fit two activities into 89 minutes: prepare a reading corner, then sort photographs. Keep the plan brief.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 89-minute budget; cover prepare a reading corner and sort photographs.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "You could use the 89 minutes for that task. First, prepare a reading corner: clear the seat, arrange the books and check the light. Then sort photographs: group the photographs by occasion and set uncertain ones aside.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1749,
+              850,
+              612,
+              262,
+              32,
+              7723,
+              2369,
+              324,
+              334,
+              3704,
+              46,
+              3949,
+              44,
+              4724,
+              257,
+              2801,
+              6438,
+              58,
+              2027,
+              262,
+              6692,
+              44,
+              6336,
+              262,
+              3725,
+              288,
+              1915,
+              262,
+              912,
+              46,
+              3262,
+              4170,
+              8207,
+              58,
+              1756,
+              262,
+              8207,
+              430,
+              12265,
+              288,
+              943,
+              8476,
+              2701,
+              9601,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "You could use the 89 minutes for that task. First, prepare a reading corner: clear the seat, arrange the books and check the light. Then sort photographs: group the photographs by occasion and set uncertain ones aside."
+            },
+            "seconds": 0.7561745079999582
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-1",
+      "turn": 1,
+      "user": "Cancel the activity to sort photographs. Revise the advice for the activity that remains.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 89-minute budget; focus on prepare a reading corner after sort photographs is cancelled.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Focus on the remaining activity: prepare a reading corner. Clear the seat, arrange the books and check the light. Use the 89 minutes for that task.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              21898,
+              331,
+              262,
+              6059,
+              2341,
+              58,
+              4724,
+              257,
+              2801,
+              6438,
+              46,
+              12861,
+              262,
+              6692,
+              44,
+              6336,
+              262,
+              3725,
+              288,
+              1915,
+              262,
+              912,
+              46,
+              3200,
+              262,
+              32,
+              7723,
+              2369,
+              324,
+              334,
+              3704,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Focus on the remaining activity: prepare a reading corner. Clear the seat, arrange the books and check the light. Use the 89 minutes for that task."
+            },
+            "seconds": 0.5447570339999857
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-1",
+      "turn": 2,
+      "user": "Return only the number of minutes in my original time budget.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "89",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              7723,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "89"
+            },
+            "seconds": 0.03481790499995441
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-1",
+      "turn": 0,
+      "user": "The current storage location of my sketchbook is AYM-897. Answer solely with: cedar",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "cedar",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              782,
+              285,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "cedar"
+            },
+            "seconds": 0.04941768100002264
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-1",
+      "turn": 1,
+      "user": "Use YKE-542 as its updated location. Answer solely with: received",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "received",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              260,
+              32561,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "received"
+            },
+            "seconds": 0.050184426999976495
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-1",
+      "turn": 2,
+      "user": "State just the most recent location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "AYM-897",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11409,
+              77,
+              45,
+              7723,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "AYM-897"
+            },
+            "seconds": 0.1157041090000348
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-1",
+      "turn": 3,
+      "user": "State just the original location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "AYM-897",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11409,
+              77,
+              45,
+              7723,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "AYM-897"
+            },
+            "seconds": 0.10055183199995099
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-2",
+      "turn": 0,
+      "user": "The current storage location of my badge is PLT-962. Your whole response should be the word visible.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "visible",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5463,
+              794,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "visible"
+            },
+            "seconds": 0.048336997999967934
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-2",
+      "turn": 1,
+      "user": "Use FQX-457 as its updated location. Answer solely with: closed",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "closed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              30475,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "closed"
+            },
+            "seconds": 0.034096546999990096
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-2",
+      "turn": 2,
+      "user": "State just the most recent location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "PLT-962",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              12085,
+              84,
+              45,
+              6411,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "PLT-962"
+            },
+            "seconds": 0.09870292899995547
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-2",
+      "turn": 3,
+      "user": "State just the original location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "PLT-962",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              12085,
+              84,
+              45,
+              6411,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "PLT-962"
+            },
+            "seconds": 0.09931963100007124
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-3",
+      "turn": 0,
+      "user": "The current storage location of my violin case is JGM-315. Answer solely with: cedar",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "cedar",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              782,
+              285,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "cedar"
+            },
+            "seconds": 0.048468779000018
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-3",
+      "turn": 1,
+      "user": "Use RLM-124 as its updated location. Answer solely with: morning",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "morning",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              109,
+              27565,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "morning"
+            },
+            "seconds": 0.049556565999978375
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-3",
+      "turn": 2,
+      "user": "State just the most recent location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "RLM-124",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11639,
+              77,
+              45,
+              1176,
+              52,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "RLM-124"
+            },
+            "seconds": 0.09851726299996244
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-3",
+      "turn": 3,
+      "user": "State just the original location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "JGM-315",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              74,
+              18767,
+              45,
+              4198,
+              53,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "JGM-315"
+            },
+            "seconds": 0.09903528500001357
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "grounded_plan-2",
+      "turn": 0,
+      "user": "Help me fit two activities into 78 minutes: check the garden plants, then organize craft supplies. Keep the plan brief.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 78-minute budget; cover check the garden plants and organize craft supplies.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "You could start by checking the garden plants: look at the leaves and soil before deciding which plants need attention. Use the remaining 39 minutes to organize craft supplies: group materials by type and put frequently used items within reach. Keep the plan flexible: if the activities take longer than expected, adjust the balance between checking and organizing. A brief final review can catch a mismatch between the intended outcome and the available time.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1749,
+              850,
+              965,
+              430,
+              7919,
+              262,
+              1810,
+              1238,
+              58,
+              1184,
+              415,
+              262,
+              2264,
+              288,
+              1489,
+              1003,
+              12249,
+              537,
+              1238,
+              606,
+              2596,
+              46,
+              3200,
+              262,
+              6059,
+              32,
+              5627,
+              2369,
+              283,
+              12875,
+              4604,
+              6400,
+              58,
+              1756,
+              1642,
+              430,
+              1275,
+              288,
+              1480,
+              4183,
+              682,
+              2952,
+              1386,
+              2910,
+              46,
+              4539,
+              262,
+              1186,
+              6619,
+              58,
+              601,
+              262,
+              2258,
+              967,
+              2257,
+              628,
+              3835,
+              44,
+              2713,
+              262,
+              3054,
+              843,
+              7919,
+              288,
+              16100,
+              46,
+              327,
+              6212,
+              3449,
+              2968,
+              363,
+              4927,
+              257,
+              22895,
+              1418,
+              843,
+              262,
+              5610,
+              7562,
+              288,
+              262,
+              1555,
+              619,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "You could start by checking the garden plants: look at the leaves and soil before deciding which plants need attention. Use the remaining 39 minutes to organize craft supplies: group materials by type and put frequently used items within reach. Keep the plan flexible: if the activities take longer than expected, adjust the balance between checking and organizing. A brief final review can catch a mismatch between the intended outcome and the available time."
+            },
+            "seconds": 1.3658774589999894
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-2",
+      "turn": 1,
+      "user": "Cancel the activity to organize craft supplies. Revise the advice for the activity that remains.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 78-minute budget; focus on check the garden plants after organize craft supplies is cancelled.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Focus on the remaining activity: check the garden plants. Look at the leaves and soil before deciding which plants need attention. Use the 39 minutes for that task.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              21898,
+              331,
+              262,
+              6059,
+              2341,
+              58,
+              1915,
+              262,
+              1810,
+              1238,
+              46,
+              6031,
+              415,
+              262,
+              2264,
+              288,
+              1489,
+              1003,
+              12249,
+              537,
+              1238,
+              606,
+              2596,
+              46,
+              3200,
+              262,
+              32,
+              5627,
+              2369,
+              324,
+              334,
+              3704,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Focus on the remaining activity: check the garden plants. Look at the leaves and soil before deciding which plants need attention. Use the 39 minutes for that task."
+            },
+            "seconds": 0.5592916809999906
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-2",
+      "turn": 2,
+      "user": "Return only the number of minutes in my original time budget.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The original time budget is 78.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              3313,
+              619,
+              5182,
+              306,
+              32,
+              7556,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The original time budget is 78."
+            },
+            "seconds": 0.15077946299993528
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-4",
+      "turn": 0,
+      "user": "The current storage location of my violin case is HTD-152. Your whole response should be the word initial.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "initial",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              258,
+              19899,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "initial"
+            },
+            "seconds": 0.04807894900000065
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-4",
+      "turn": 1,
+      "user": "Use KFG-917 as its updated location. Your whole response should be the word tomorrow.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "tomorrow",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              116,
+              304,
+              8364,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "tomorrow"
+            },
+            "seconds": 0.06853823200003717
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-4",
+      "turn": 2,
+      "user": "State just the most recent location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "HTD-917",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11588,
+              68,
+              45,
+              6556,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "HTD-917"
+            },
+            "seconds": 0.09872481100001096
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": false,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "natural_context-4",
+      "turn": 3,
+      "user": "State just the original location code.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "HTD-152",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11588,
+              68,
+              45,
+              1296,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "HTD-152"
+            },
+            "seconds": 0.1000476599999729
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-2",
+      "turn": 0,
+      "user": "My violin case has label DLZ-228. Your whole response should be the word replaced.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "replaced",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              260,
+              29900,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "replaced"
+            },
+            "seconds": 0.04834223700004259
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-2",
+      "turn": 1,
+      "user": "The label is now DPJ-188. Your whole response should be the word confirmed.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "confirmed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              25508,
+              3097,
+              284,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "confirmed"
+            },
+            "seconds": 0.06747614899995824
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-3",
+      "turn": 0,
+      "user": "My badge has label HPX-224. Your whole response should be the word final.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "final",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              102,
+              1258,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "final"
+            },
+            "seconds": 0.04913926199992602
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-3",
+      "turn": 1,
+      "user": "The label is now GMG-323. Answer solely with: verified",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "verified",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              337,
+              1602,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "verified"
+            },
+            "seconds": 0.050697109000111595
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-4",
+      "turn": 0,
+      "user": "My badge has label PPJ-207. Answer solely with: confirmed",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "confirmed",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              25508,
+              3097,
+              284,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "confirmed"
+            },
+            "seconds": 0.06495683299999655
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "acknowledgment-4",
+      "turn": 1,
+      "user": "The label is now WSY-298. Your whole response should be the word evening.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "evening",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8048,
+              272,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "evening"
+            },
+            "seconds": 0.049812217000066994
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "grounded_plan-3",
+      "turn": 0,
+      "user": "Help me fit two activities into 85 minutes: check the garden plants, then prepare a craft workspace. Keep the plan brief.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 85-minute budget; cover check the garden plants and prepare a craft workspace.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "You could start by checking the garden plants: look at the leaves and soil before deciding which plants need attention. Use the remaining 15 minutes to prepare a craft workspace: clear the surface and arrange the necessary materials. Keep the plan flexible: the exact time and location can be chosen after checking the plants and the intended use. If the activities are intended to be completed together, record the agreed completion time and any unresolved questions. The exact details can be added only after the plan is confirmed.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1749,
+              850,
+              965,
+              430,
+              7919,
+              262,
+              1810,
+              1238,
+              58,
+              1184,
+              415,
+              262,
+              2264,
+              288,
+              1489,
+              1003,
+              12249,
+              537,
+              1238,
+              606,
+              2596,
+              46,
+              3200,
+              262,
+              6059,
+              32,
+              1296,
+              2369,
+              283,
+              4724,
+              257,
+              4604,
+              19124,
+              58,
+              2027,
+              262,
+              1664,
+              288,
+              6336,
+              262,
+              2155,
+              1642,
+              46,
+              4539,
+              262,
+              1186,
+              6619,
+              58,
+              262,
+              2714,
+              619,
+              288,
+              3197,
+              363,
+              315,
+              6355,
+              966,
+              7919,
+              262,
+              1238,
+              288,
+              262,
+              5610,
+              612,
+              46,
+              846,
+              262,
+              2258,
+              339,
+              5610,
+              283,
+              315,
+              5784,
+              1707,
+              44,
+              2241,
+              262,
+              11155,
+              12451,
+              619,
+              288,
+              641,
+              546,
+              428,
+              7130,
+              2282,
+              46,
+              370,
+              2714,
+              3701,
+              363,
+              315,
+              2850,
+              766,
+              966,
+              262,
+              1186,
+              306,
+              8987,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "You could start by checking the garden plants: look at the leaves and soil before deciding which plants need attention. Use the remaining 15 minutes to prepare a craft workspace: clear the surface and arrange the necessary materials. Keep the plan flexible: the exact time and location can be chosen after checking the plants and the intended use. If the activities are intended to be completed together, record the agreed completion time and any unresolved questions. The exact details can be added only after the plan is confirmed."
+            },
+            "seconds": 1.6165864589999046
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-3",
+      "turn": 1,
+      "user": "Cancel the activity to prepare a craft workspace. Revise the advice for the activity that remains.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 85-minute budget; focus on check the garden plants after prepare a craft workspace is cancelled.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Focus on the remaining activity: check the garden plants. Look at the leaves and soil before deciding which plants need attention. Use the 85 minutes for that task.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              21898,
+              331,
+              262,
+              6059,
+              2341,
+              58,
+              1915,
+              262,
+              1810,
+              1238,
+              46,
+              6031,
+              415,
+              262,
+              2264,
+              288,
+              1489,
+              1003,
+              12249,
+              537,
+              1238,
+              606,
+              2596,
+              46,
+              3200,
+              262,
+              32,
+              5545,
+              2369,
+              324,
+              334,
+              3704,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Focus on the remaining activity: check the garden plants. Look at the leaves and soil before deciding which plants need attention. Use the 85 minutes for that task."
+            },
+            "seconds": 0.5563791230000561
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-3",
+      "turn": 2,
+      "user": "Return only the number of minutes in my original time budget.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "85",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5545,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "85"
+            },
+            "seconds": 0.03480413500005852
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "grounded_plan-4",
+      "turn": 0,
+      "user": "Help me fit two activities into 34 minutes: sort stationery, then prepare a craft workspace. Keep the plan brief.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 34-minute budget; cover sort stationery and prepare a craft workspace.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "You could start by reviewing the two activities and deciding how they will be completed. Sort stationery according to the person doing the work, and prepare a craft workspace if that is what the group needs. The remaining activity can be divided into the two, with the group deciding how to divide it. Keep the plan flexible: the activities can be grouped into the two, and the remaining time can be spent on the remaining activity.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1749,
+              850,
+              965,
+              430,
+              18759,
+              262,
+              802,
+              2258,
+              288,
+              12249,
+              614,
+              472,
+              465,
+              315,
+              5784,
+              46,
+              348,
+              422,
+              5422,
+              2134,
+              1958,
+              283,
+              262,
+              1105,
+              2213,
+              262,
+              751,
+              44,
+              288,
+              4724,
+              257,
+              4604,
+              19124,
+              601,
+              334,
+              306,
+              686,
+              262,
+              1756,
+              1508,
+              46,
+              370,
+              6059,
+              2341,
+              363,
+              315,
+              6631,
+              609,
+              262,
+              802,
+              44,
+              347,
+              262,
+              1756,
+              12249,
+              614,
+              283,
+              10245,
+              338,
+              46,
+              4539,
+              262,
+              1186,
+              6619,
+              58,
+              262,
+              2258,
+              363,
+              315,
+              20679,
+              609,
+              262,
+              802,
+              44,
+              288,
+              262,
+              6059,
+              619,
+              363,
+              315,
+              5343,
+              331,
+              262,
+              6059,
+              2341,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "You could start by reviewing the two activities and deciding how they will be completed. Sort stationery according to the person doing the work, and prepare a craft workspace if that is what the group needs. The remaining activity can be divided into the two, with the group deciding how to divide it. Keep the plan flexible: the activities can be grouped into the two, and the remaining time can be spent on the remaining activity."
+            },
+            "seconds": 1.3751213499999722
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-4",
+      "turn": 1,
+      "user": "Cancel the activity to prepare a craft workspace. Revise the advice for the activity that remains.",
+      "policy": null,
+      "rubric": "Give useful concise advice grounded in the 34-minute budget; focus on sort stationery after prepare a craft workspace is cancelled.",
+      "result": {
+        "status": "complete",
+        "assistant_text": "Focus on the remaining activity: sort stationery. Group pens, paper and other supplies and separate unusable items. Use the 34 minutes for that task.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              21898,
+              331,
+              262,
+              6059,
+              2341,
+              58,
+              4170,
+              5422,
+              2134,
+              46,
+              6891,
+              18396,
+              44,
+              1952,
+              288,
+              548,
+              6400,
+              288,
+              4137,
+              6271,
+              497,
+              2952,
+              46,
+              3200,
+              262,
+              32,
+              5253,
+              2369,
+              324,
+              334,
+              3704,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Focus on the remaining activity: sort stationery. Group pens, paper and other supplies and separate unusable items. Use the 34 minutes for that task."
+            },
+            "seconds": 0.5328260549999868
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "grounded_plan-4",
+      "turn": 2,
+      "user": "Return only the number of minutes in my original time budget.",
+      "policy": null,
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "34",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5253,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "34"
+            },
+            "seconds": 0.03409440399991581
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    }
+  ],
+  "automated_passed": 24,
+  "automated_total": 28,
+  "manual_review_turns": 8,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 27.932975227000043,
+  "hard_process_timeout_seconds": 540
+}

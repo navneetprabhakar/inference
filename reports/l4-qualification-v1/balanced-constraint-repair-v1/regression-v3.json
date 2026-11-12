@@ -1,0 +1,2889 @@
+{
+  "checkpoint_manifest_sha256": "a363abdeb7e65cee795a8d98c846534ba943e16e442f77ff65018a7a93cbe9c3",
+  "suite_sha256": "6b8dd99f4636281719f9a36138d846d533a0c067680418854e7b4007bbfa99b6",
+  "step": 473,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 32768,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "eval_every_updates": 1000,
+    "eval_rows": 64,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 473,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.25,
+    "lr_multiplier": 0.25,
+    "microbatch": 8,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 7557,
+    "parent_bundle_manifest_sha256": "9f9380f90b4b4f030e222be05f5641d1a6ab89403347e4fc85b53eceeaa21a0a",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 32768,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_updates": 200,
+      "eval_rows": 64,
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 139,
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "lr_batch_scale": 0.25,
+      "lr_multiplier": 0.25,
+      "microbatch": 8,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 2215,
+      "parent_bundle_manifest_sha256": "911558f640a8fe94a40a0735c5c58c6e34b474ae72ba623d69afbde4623eba28",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_sft.py": "734caf5a013a39d9ca922cc118c1de31db30f24e7351ff426e011da8f8acf649",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+        "base_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "batch_tokens": 32768,
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_updates": 200,
+        "eval_rows": 64,
+        "format_version": "forge-nanochat-v1",
+        "horizon_updates": 90,
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "lr_batch_scale": 0.25,
+        "lr_multiplier": 0.25,
+        "microbatch": 8,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "packed_rows": 1439,
+        "parent_bundle_manifest_sha256": "00d401640ae41dc1ce862cf17af961eb089336f1021909d64d680c85bea780e5",
+        "parent_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 32768,
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_updates": 200,
+          "eval_rows": 64,
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 176,
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "lr_batch_scale": 0.25,
+          "microbatch": 8,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 2815,
+          "parent_bundle_manifest_sha256": "1ffcc23b62000dcd64006a55fd6fdb3a53b8e7ae1028c6da9f0243bf5e00868f",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 32768,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_updates": 170,
+            "eval_rows": 64,
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 169,
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "lr_batch_scale": 0.25,
+            "microbatch": 8,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 2692,
+            "parent_bundle_manifest_sha256": "769b8738a9f1cc0d33d2bcf3959c74d5be27f3eb162623241a135d0b662f7aa8",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+              "base_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                  "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                  "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "batch_tokens": 524288,
+                "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_tokens": 250000000,
+                "eval_tokens_per_shard": 1048576,
+                "horizon_updates": 19074,
+                "initialization": "own_random",
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "microbatch": 16,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "phase": "base",
+                "probes": {
+                  "decoding": "greedy raw, no repetition penalty",
+                  "enabled": true,
+                  "max_new_tokens_per_prompt": 32,
+                  "max_total_new_tokens": 128,
+                  "prompts": [
+                    "The rain stopped just before sunrise. When Mira opened the window,",
+                    "A library lends books to readers. Readers return the books so that",
+                    "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                    "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                  ],
+                  "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                  "version": 1
+                },
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "batch_tokens": 32768,
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_updates": 40,
+              "eval_rows": 64,
+              "format_version": "forge-nanochat-v1",
+              "horizon_updates": 76,
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "lr_batch_scale": 0.25,
+              "microbatch": 8,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "packed_rows": 1208,
+              "parent_bundle_manifest_sha256": "876a849e8be1a131b6b879d1120bccb51610714f05c05ffae74367cce5a79c92",
+              "parent_identity": {
+                "adapter_hashes": {
+                  "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                  "nano_chat_format.py": "f725c3444dbbab887b5ed184533dcdaeb0128b3e3e7f28f494e41f6c72b7b5c9",
+                  "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                  "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                  "nano_sft.py": "6e5ff0db69e41c708cb7f6601f15f918d70f98a15a5983634708a063cf320e1c",
+                  "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                },
+                "attention": "fa3",
+                "base_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "base_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "batch_tokens": 32768,
+                "config": {
+                  "n_embd": 1024,
+                  "n_head": 8,
+                  "n_kv_head": 8,
+                  "n_layer": 16,
+                  "sequence_len": 2048,
+                  "vocab_size": 32768,
+                  "window_pattern": "SSSL"
+                },
+                "eval_every_updates": 250,
+                "eval_rows": 64,
+                "format_version": "forge-nanochat-v1",
+                "horizon_updates": 14603,
+                "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                "lr_batch_scale": 0.25,
+                "microbatch": 8,
+                "numerical_mode": {
+                  "cublas_workspace_config": ":4096:8",
+                  "cuda": "12.9",
+                  "cudnn_allow_tf32": true,
+                  "cudnn_benchmark": false,
+                  "cudnn_deterministic": true,
+                  "deterministic_algorithms": true,
+                  "deterministic_attention": true,
+                  "float32_matmul_precision": "highest",
+                  "gpu": "NVIDIA A100-SXM4-40GB",
+                  "sm": [
+                    8,
+                    0
+                  ]
+                },
+                "packed_rows": 233633,
+                "parent_bundle_manifest_sha256": "dc1114859dd1cd9a3b9b82aeab5ff335be912366997f4e9d3b851465ee41994e",
+                "parent_identity": {
+                  "adapter_hashes": {
+                    "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                    "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                    "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                    "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                    "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                    "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                    "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                    "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+                  },
+                  "attention": "fa3",
+                  "batch_tokens": 524288,
+                  "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+                  "config": {
+                    "n_embd": 1024,
+                    "n_head": 8,
+                    "n_kv_head": 8,
+                    "n_layer": 16,
+                    "sequence_len": 2048,
+                    "vocab_size": 32768,
+                    "window_pattern": "SSSL"
+                  },
+                  "eval_every_tokens": 250000000,
+                  "eval_tokens_per_shard": 1048576,
+                  "horizon_updates": 19074,
+                  "initialization": "own_random",
+                  "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+                  "microbatch": 16,
+                  "numerical_mode": {
+                    "cublas_workspace_config": ":4096:8",
+                    "cuda": "12.9",
+                    "cudnn_allow_tf32": true,
+                    "cudnn_benchmark": false,
+                    "cudnn_deterministic": true,
+                    "deterministic_algorithms": true,
+                    "deterministic_attention": true,
+                    "float32_matmul_precision": "highest",
+                    "gpu": "NVIDIA A100-SXM4-40GB",
+                    "sm": [
+                      8,
+                      0
+                    ]
+                  },
+                  "phase": "base",
+                  "probes": {
+                    "decoding": "greedy raw, no repetition penalty",
+                    "enabled": true,
+                    "max_new_tokens_per_prompt": 32,
+                    "max_total_new_tokens": 128,
+                    "prompts": [
+                      "The rain stopped just before sunrise. When Mira opened the window,",
+                      "A library lends books to readers. Readers return the books so that",
+                      "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                      "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                    ],
+                    "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                    "version": 1
+                  },
+                  "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                  "seed": 103,
+                  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                  "torch": "2.9.1+cu129"
+                },
+                "phase": "sft",
+                "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+                "seed": 103,
+                "source_manifest_sha256": "81bce708e5ead239c1572a41606567d73493e2939383a5c6e279bdbac71062df",
+                "stage": "general",
+                "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+                "torch": "2.9.1+cu129"
+              },
+              "phase": "sft",
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "source_manifest_sha256": "8312756029c48b64b840392706c48101549a0f56463152c5ceb00a43da434e12",
+              "stage": "targeted",
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "79b304bcebaef31b5a44393cb3b647acb1c47436f9ecdfc56c8c20f82dd61458",
+            "stage": "targeted",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "phase": "sft",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "57be7b83bbeeae568b78cb7539ceb0912824106edc6c3fa04fdc12db254ce2e6",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "phase": "sft",
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "source_manifest_sha256": "3caa690337d826e8d59768a5da0c1c2c23f3f68d8fbd96b0604bf281779c4f00",
+        "stage": "targeted",
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 137,
+      "source_manifest_sha256": "bb652b12d397cee8ab4119d1b19f69bdbc7412022039278531f8045e609fe257",
+      "stage": "targeted",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 141,
+    "source_manifest_sha256": "edcbdfa9399c776932b1495f94bb153e84fe41341fbc3a0414515fab285dd2a3",
+    "stage": "targeted",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 128,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "literal-1",
+      "turn": 0,
+      "user": "Request record-447293. Only output the word shown here: invalid",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "invalid",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              258,
+              2580,
+              320,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "invalid"
+            },
+            "seconds": 0.3792102329999807
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-1",
+      "turn": 1,
+      "user": "Request record-447293. Constrain your entire response to this word: accepted",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "accepted",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              22245,
+              284,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "accepted"
+            },
+            "seconds": 0.054316298999992796
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 0,
+      "user": "record-326120 uses locker 25, and record-839656 uses locker 162. Constrain your entire response to this word: today",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "today",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              116,
+              4244,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "today"
+            },
+            "seconds": 0.05421501800003625
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 1,
+      "user": "The new locker for record-326120 is 329; the other locker stays the same. Only output the word shown here: latest",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "latest",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32312,
+              350,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "latest"
+            },
+            "seconds": 0.05257750799989935
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 2,
+      "user": "Give only the unchanged locker number belonging to record-839656.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "162",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1661,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "162"
+            },
+            "seconds": 0.052937283000005664
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-1",
+      "turn": 3,
+      "user": "Give only the revised locker number belonging to record-326120.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "329",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3712,
+              57,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "329"
+            },
+            "seconds": 0.053314958999976625
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 0,
+      "user": "record-897989 has location code UFU-578. Only output the word shown here: continue",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "continue",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              22217,
+              600,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "continue"
+            },
+            "seconds": 0.05052698399993005
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 1,
+      "user": "Change record-897989 to location code LNL-877. Only output the word shown here: continue",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "continue",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              22217,
+              600,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "continue"
+            },
+            "seconds": 0.05187682899997981
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 2,
+      "user": "Give only the current location code for record-897989.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "LNL-877",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              76,
+              23273,
+              45,
+              7626,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "LNL-877"
+            },
+            "seconds": 0.10299842500000977
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-1",
+      "turn": 3,
+      "user": "Name only the initial location code mentioned for record-897989.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "UFU-578",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              85,
+              70,
+              85,
+              45,
+              7046,
+              56,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "UFU-578"
+            },
+            "seconds": 0.12052247799999805
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "convert-1",
+      "turn": 0,
+      "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "16998.6",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              2757,
+              14137,
+              2026,
+              14424,
+              115,
+              14137,
+              13674,
+              8220,
+              3559,
+              51,
+              46,
+              4198,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "min",
+                  "to": "s",
+                  "value": 283.31
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"min\",\"to\":\"s\",\"value\":283.31},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.4925575190000018
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465192.556214,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              },
+              "ok": true,
+              "data": {
+                "result": 16998.6
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1661,
+              4360,
+              56,
+              46,
+              54,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "16998.6"
+            },
+            "seconds": 0.10270726999999624
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465192.556214,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 283.31
+            },
+            "ok": true,
+            "data": {
+              "result": 16998.6
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 0,
+      "user": "record-801359 uses locker 1715, and record-193925 uses locker 1364. Only output the word shown here: thanks",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "thanks",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              385,
+              2966,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "thanks"
+            },
+            "seconds": 0.05010801299999912
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 1,
+      "user": "The new locker for record-801359 is 465; the other locker stays the same. Constrain your entire response to this word: earliest",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "earliest",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              543,
+              9312,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "earliest"
+            },
+            "seconds": 0.05109855699993204
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 2,
+      "user": "Give only the unchanged locker number belonging to record-193925.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1364",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1757,
+              5902,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1364"
+            },
+            "seconds": 0.05107770999995864
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "two_entities-2",
+      "turn": 3,
+      "user": "Give only the revised locker number belonging to record-801359.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "465",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              6249,
+              53,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "465"
+            },
+            "seconds": 0.05191168299995752
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-1",
+      "turn": 0,
+      "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "2925",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1495,
+              4713,
+              1191,
+              98,
+              8220,
+              1802,
+              6886,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1133,
+                  "b": 1792,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1133,\"b\":1792,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.49652959000002284
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465193.3881266,
+              "name": "calculate",
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 2925
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4048,
+              1932,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "2925"
+            },
+            "seconds": 0.05874791999997342
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465193.3881266,
+            "name": "calculate",
+            "arguments": {
+              "a": 1133,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2925
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-1",
+      "turn": 1,
+      "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "2228",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              6003,
+              54,
+              1191,
+              98,
+              8220,
+              1802,
+              6886,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 436,
+                  "b": 1792,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":436,\"b\":1792,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5882572680000067
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465194.0425513,
+              "name": "calculate",
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 2228
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2356,
+              3559,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "2228"
+            },
+            "seconds": 0.05971137600010934
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465193.3881266,
+            "name": "calculate",
+            "arguments": {
+              "a": 1133,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2925
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465194.0425513,
+            "name": "calculate",
+            "arguments": {
+              "a": 436,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2228
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-2",
+      "turn": 0,
+      "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "646",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              819,
+              4220,
+              1191,
+              98,
+              8220,
+              1176,
+              7046,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1903,
+                  "b": 1257,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1903,\"b\":1257,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5312485760000527
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465194.6415925,
+              "name": "calculate",
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 646
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5902,
+              54,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "646"
+            },
+            "seconds": 0.05186871399996562
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465194.6415925,
+            "name": "calculate",
+            "arguments": {
+              "a": 1903,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 646
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "tool_correction-2",
+      "turn": 1,
+      "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "-917",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              5253,
+              48,
+              1191,
+              98,
+              8220,
+              1176,
+              7046,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 340,
+                  "b": 1257,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":340,\"b\":1257,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.6096218999999792
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465195.3109286,
+              "name": "calculate",
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": -917
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              45,
+              6556,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "-917"
+            },
+            "seconds": 0.07843096900001001
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465194.6415925,
+            "name": "calculate",
+            "arguments": {
+              "a": 1903,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 646
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465195.3109286,
+            "name": "calculate",
+            "arguments": {
+              "a": 340,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -917
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "calculate-1",
+      "turn": 0,
+      "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "4",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              4198,
+              7609,
+              1191,
+              98,
+              8220,
+              8217,
+              52,
+              1191,
+              394,
+              14424,
+              16358,
+              445,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 3176,
+                  "b": 794,
+                  "op": "divide"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":3176,\"b\":794,\"op\":\"divide\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5082366510000611
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465195.906184,
+              "name": "calculate",
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              },
+              "ok": true,
+              "data": {
+                "result": 4.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              52,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "4"
+            },
+            "seconds": 0.03441112699999849
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465195.906184,
+            "name": "calculate",
+            "arguments": {
+              "a": 3176,
+              "b": 794,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 4.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "calculate-2",
+      "turn": 0,
+      "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "3136",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1495,
+              7254,
+              1191,
+              98,
+              8220,
+              819,
+              7405,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1159,
+                  "b": 1977,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1159,\"b\":1977,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.49171866699998645
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465196.4403646,
+              "name": "calculate",
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 3136
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4198,
+              4069,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3136"
+            },
+            "seconds": 0.05106432399998084
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465196.4403646,
+            "name": "calculate",
+            "arguments": {
+              "a": 1159,
+              "b": 1977,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 3136
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 0,
+      "user": "record-465612 has location code RHY-227. Only output the word shown here: final",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "final",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              102,
+              1258,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "final"
+            },
+            "seconds": 0.050171761000001425
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 1,
+      "user": "Change record-465612 to location code SGP-186. Constrain your entire response to this word: retained",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "retained",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              260,
+              15875,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "retained"
+            },
+            "seconds": 0.051441195000052176
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 2,
+      "user": "Give only the current location code for record-465612.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "SGP-186",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              83,
+              24701,
+              45,
+              1344,
+              54,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "SGP-186"
+            },
+            "seconds": 0.10435375099996236
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "state-2",
+      "turn": 3,
+      "user": "Name only the initial location code mentioned for record-465612.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "RHY-227",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              72,
+              89,
+              45,
+              2356,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "RHY-227"
+            },
+            "seconds": 0.12040434800007915
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-2",
+      "turn": 0,
+      "user": "Request record-330795. Only output the word shown here: west",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "west",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5539,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "west"
+            },
+            "seconds": 0.03434127699995315
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "literal-2",
+      "turn": 1,
+      "user": "Request record-330795. Only output the word shown here: tomorrow",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "tomorrow",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              116,
+              304,
+              8364,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "tomorrow"
+            },
+            "seconds": 0.06770791500002815
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "convert-2",
+      "turn": 0,
+      "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "22468.2",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              2757,
+              14137,
+              2026,
+              14424,
+              115,
+              14137,
+              13674,
+              8220,
+              5348,
+              52,
+              46,
+              6604,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "min",
+                  "to": "s",
+                  "value": 374.47
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"min\",\"to\":\"s\",\"value\":374.47},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.48334276399998544
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794465197.4545105,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              },
+              "ok": true,
+              "data": {
+                "result": 22468.2
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2356,
+              6249,
+              56,
+              46,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "22468.2"
+            },
+            "seconds": 0.10093510000001515
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794465197.4545105,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 374.47
+            },
+            "ok": true,
+            "data": {
+              "result": 22468.2
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    }
+  ],
+  "automated_passed": 28,
+  "automated_total": 28,
+  "manual_review_turns": 0,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 24.886130075999972,
+  "hard_process_timeout_seconds": 540
+}
