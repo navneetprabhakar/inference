@@ -1,0 +1,20 @@
+{
+  "patches": [
+    {
+      "old": "Revisions use ASCII decimal digits, with no size limit imposed by the parser.",
+      "new": "Revisions use ASCII decimal digits, subject to the configured `csv.field_size_limit`; chunk conversion avoids Python's integer-string conversion limit."
+    },
+    {
+      "old": "    records = {}\n    try:\n        header = next(reader, None)",
+      "new": "    records = {}\n    start = 1\n    try:\n        header = next(reader, None)"
+    },
+    {
+      "old": "        errors.append(f'CSV syntax error near physical row {reader.line_num}: {exc}')",
+      "new": "        errors.append(f'CSV syntax error starting at physical row {start}: {exc}')"
+    },
+    {
+      "old": "        result, errors = read_catalogue('book_id,title,revision\\nA,good,1\\nB,\"unfinished')\n        self.assertIsNone(result)\n        self.assertTrue(any('CSV syntax error' in e for e in errors))",
+      "new": "        result, errors = read_catalogue('book_id,title,revision\\nA,good,1\\nB,\"unfinished\\nrecord')\n        self.assertIsNone(result)\n        self.assertTrue(any('CSV syntax error starting at physical row 3' in e for e in errors))"
+    }
+  ]
+}

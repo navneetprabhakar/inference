@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "v3-06-topk",
+      "pass": true,
+      "reason": "The assistant tracks the evolving contract, gives correct examples and a suitable implementation, and distinguishes generator exhaustion from repeated iteration requests.",
+      "turn_evidence": "1: Identifies mutation, slicing behavior, ID ordering, and stability. 2: Correctly computes the current and intended orders. 3: Handles zero and leaves negative behavior unspecified. 4: Applies the new negative-k and generator requirements. 5: Explains the limits of the generator test. 6: Supplies a stable, non-mutating implementation, runnable tests with a second-iteration detector, and a sound sort-versus-heap comparison."
+    },
+    {
+      "id": "v3-06-attendance",
+      "pass": true,
+      "reason": "All counts and calculator results are consistent, the correction carries forward, and the final explanation remains an unsent draft.",
+      "turn_evidence": "1: Separates 44 people, 56 reservations, 50 active registrations, and attendance. 2: Uses the observed 56\u22126=50 result. 3: Reconciles the two-session categories to 42 active people. 4: Uses the observed 50+1=51 result and updates cancellations to 5 and active people to 43. 5: Uses the observed 51\u00f743 result and explains the denominator. 6: Incorporates the corrected figures and missing check-in limitation in a draft."
+    },
+    {
+      "id": "v3-06-branching",
+      "pass": false,
+      "reason": "The first eight-path table drops the existing rule that sharing the note prompts disclosure, despite the instruction to keep all other rules. The later correction repairs the final table but does not erase the earlier error.",
+      "turn_evidence": "1: Extracts inventory, knowledge, and the unspecified door location. 2: Correctly maps route reachability. 3: Tracks sharing and token consequences. 4: Correctly distinguishes knowledge from willingness. 5: Incorrectly omits the motive from both share-without-asking paths. 6: After the user's correction, revises all eight combinations and writes a reachable ending with a knowledge-grounded signal."
+    },
+    {
+      "id": "v3-06-measure",
+      "pass": false,
+      "reason": "The numerical analysis and final demonstration are correct, but an intermediate turn declines the explicitly requested calculator call based on an unsupported claim that no calls remain.",
+      "turn_evidence": "1: Converts units and treats C's change as unknown. 2\u20133: Uses observed conversion and calculation results and compares absolute and proportional decreases correctly. 4: Applies the corrected 191 cm measurement and retires stale values. 5: Gives the correct 9\u00f7200=4.5% directly, but provides no calculator result and asserts without supporting evidence that no calls remain. 6: Uses the corrected figures and accurately explains C's missing observation."
+    }
+  ]
+}

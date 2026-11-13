@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "v3-05-csv",
+      "pass": false,
+      "reason": "The final parser can raise an uncaught ValueError for an otherwise valid long, nonnegative revision on Python versions with the default integer-string conversion limit. That violates its stated return contract and prevents collection of later row errors.",
+      "turn_evidence": "Assistant turns 1\u20132 correctly diagnose CSV splitting, duplicates, the valid blank title, and missing headers. Turns 3\u20136 preserve physical row numbering, first-wins ties, the row 5 error, and the header distinction. Turn 7 proposes an all-or-nothing contract. Turn 8 implements and tests those ordinary cases, but int(revision_text) can fail on a digit string longer than Python's configured conversion limit; the code neither handles that failure nor states a revision-length limit."
+    },
+    {
+      "id": "v3-05-scale",
+      "pass": true,
+      "reason": "The assistant tracks the scale correction, distinguishes measured from inferred dimensions, and grounds requested tool calculations in the supplied results. The final comparison and dialogue are arithmetically consistent.",
+      "turn_evidence": "Turn 1 correctly derives 600 cm and 375 cm at 1:50 while leaving height unknown. Turns 2\u20133 use the recorded calculator result 600 and conversion result 6.0. Turn 4 rejects a fixed height. Turn 5 replaces the inferences with 480 cm and 300 cm at 1:40 while retaining the valid unit conversion. Turns 6\u20137 use recorded results 480 and 360. Turn 8 correctly computes the old 450 cm height from the later 9 cm measurement and explains all three corrected dimensions."
+    },
+    {
+      "id": "v3-05-reliability",
+      "pass": true,
+      "reason": "The assistant consistently separates observed effects, local success, acknowledgement, delivery guarantees, and idempotency, including concurrent attempts and the ambiguous lost-response case.",
+      "turn_evidence": "Turns 1\u20132 reject the unsupported acknowledgement and message-loss claims, then incorporate A's crash before acknowledgement. Turns 3\u20134 address overlapping B and C deliveries and atomic enforcement of K7. Turn 5 correctly limits the meaning of local SUCCESS. Turn 6 supplies contrasting traces with acknowledgement timing and overlap. Turns 7\u20138 explain lost responses, retry risk, and the limits of a potentially stale verification lookup without introducing the canceled checklist."
+    },
+    {
+      "id": "v3-05-language",
+      "pass": false,
+      "reason": "The closing passage presents the 1984 display as established fact even though the assistant had identified its source as unresolved. This weakens the requested distinction between evidence and unsupported claims.",
+      "turn_evidence": "Turn 1 distinguishes the ledger from Mara's recollection and flags the unsourced 1984 account. Turns 2\u20133 keep interpretations open and accessible. Turn 4 incorporates Mara as organizer and speaker, Iven as apprentice, and the unknown thread placement. Turns 5\u20136 preserve the unresolved timeline and exact quoted sentence. Turn 7 explicitly says the source for the 1984 account still needs identification. Turn 8 preserves the corrected roles, exact quote, and rain uncertainty, but states the 1984 display and visitor activity without that qualification."
+    }
+  ]
+}

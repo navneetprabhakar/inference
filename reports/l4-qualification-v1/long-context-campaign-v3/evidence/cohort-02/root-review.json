@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-13T06:55:50.782111+00:00",
+  "reviews": [
+    {
+      "id": "v3-02-intervals",
+      "sha256": "e42ee408f4c429f6dc5a9339f8d2cdf8768f8473e7b45605123e66bdd9165f67",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All14messages read. Correct max-end bug diagnosis, half-open empty/reversed/touching decisions, one-pass generator validation and input preservation; closed integer adjacency comparison correctly kept separate.7displayedtests and503 independent checks pass.2406tokens, excluded below3072; preserve as possible future substantive implementation followup source."
+    },
+    {
+      "id": "v3-02-caption",
+      "sha256": "2a59494a9c1c58d4df102600b700f9351a18729660366b9b1005d713fc476908",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All14messages read. Corrected Garden/Harbor content and focus order retained. But message1 promises clear the panel where supplied behavior specifies clearing selection and does not establish panel contents after deselection. No invented app behavior accepted.1600tokens, excluded; needs clarification/repair before any later reuse."
+    },
+    {
+      "id": "v3-02-fabric",
+      "sha256": "da52bf9e6b927e03c1ddd5a2d322053b21cedf8899468f4a8d767f1cc3cf4400",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All25messages read; four actual toolcalls replay. Correct35cm cut versus30cmfinished, corrected340cm minus20 unusable=320,8x35=280, consecutivecuts leave40cm continuous usable remainder meeting25threshold. Suggestions not false completed physical actions.2576tokens; below3072, no admission."
+    },
+    {
+      "id": "v3-02-search",
+      "sha256": "5604f8fd8a76a9d3e2b87203fe4649b7017531427e309e2a2018d42af5fa9640",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All14messages read. Message9 introduces unspecified text-match eligibility despite user explicitly supplying text scores and score>=2 qualification; wrongly questions whether C qualifies. Later user clarification and correct final orders do not erase wrong intermediate target.1548tokens; reject, advisory CLI pass overridden."
+    }
+  ],
+  "root_reviewed": 4,
+  "content_passed": 2,
+  "selected": 0
+}

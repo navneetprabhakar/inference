@@ -1,0 +1,40 @@
+{
+  "rows": [
+    {
+      "id": "v3-01-exhibit",
+      "pass": false,
+      "reason": "The final dialogue implicitly maps the before-and-after models to the dated edge observations, although the records do not establish how those dates relate to the run.",
+      "turn_evidence": "The visitor describes A\u2019s before model as sharper and after model as rounder; the facilitator says, \u201cThat matches the notebook\u2019s descriptions\u201d on 4 and 11 April."
+    },
+    {
+      "id": "v3-02-intervals",
+      "pass": true,
+      "reason": "The explanations, implementation, and regression tests preserve the agreed half-open interval rules and input handling.",
+      "turn_evidence": "The final subtraction function reuses merge, handles blackouts spanning multiple availability intervals, and validates blackout input even when availability is empty."
+    },
+    {
+      "id": "v3-02-fabric",
+      "pass": true,
+      "reason": "The calculations and cutting options consistently use the corrected length, preserve a continuous remainder where required, and distinguish cutting from finished length.",
+      "turn_evidence": "The final response calculates nine strips as 315 cm, leaving 5 cm of the 320 cm usable length."
+    },
+    {
+      "id": "v3-05-csv",
+      "pass": false,
+      "reason": "The parser claims to impose no revision size limit, but Python\u2019s CSV reader has a field-size limit. Sufficiently long revisions therefore produce a CSV error despite containing valid digits.",
+      "turn_evidence": "The final contract says \u201cno size limit imposed by the parser,\u201d while read_catalogue uses csv.reader without adjusting csv.field_size_limit."
+    },
+    {
+      "id": "v3-05-scale",
+      "pass": true,
+      "reason": "The answers correctly update the scale-derived dimensions while retaining the measured dimensions and distinguishing valid unit conversions from obsolete inferences.",
+      "turn_evidence": "The final card uses 1:40 and gives inferred dimensions of 4.8 m, 3 m, and 3.6 m."
+    },
+    {
+      "id": "v3-05-reliability",
+      "pass": true,
+      "reason": "The discussion maintains the distinction between local response records, service evidence, acknowledgements, retries, and concurrent idempotency.",
+      "turn_evidence": "The final timelines distinguish a pre-call started marker from SUCCESS and explain why worker-local records cannot coordinate duplicate service effects."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-13T07:26:58.901952+00:00",
+  "reviews": [
+    {
+      "id": "v3-06-topk",
+      "sha256": "894826167ea5747982408800faf2527a5224922cc1317b7283dddbb71a3f9dba",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All12messages read. Stable scoreties and repeatedIDs handled withoutIDcomparison, zero/negativek and iterable semantics correct. Explicitly distinguishes generator exhaustion from repeatediterationrequests.7providedpytest tests and301 independent checks pass using existing Python pytest environment.2522tokens, short."
+    },
+    {
+      "id": "v3-06-attendance",
+      "sha256": "10654cb183949919b6c0173305ef9a2e84d0eb6817d703e7ea276678179c1c6f",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All19messages read. Threecalls replay;44people/56registrations initial50active and42activepeople, correction51active/5canceled/43activepeople, ratio51/43 correct. Doesnotinferattendance frommissingcheckin and finalisunsentdraft.2322tokens, short."
+    },
+    {
+      "id": "v3-06-branching",
+      "sha256": "96d963c711acfe924d3da4f6281c9153196b03aa41370b26adde022a4c737260",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All12messages read. Originalsharing trigger silently dropped from first eight-path table after user adds asking trigger while preservingother rules; at minimum the rule-change ambiguity should have been surfaced rather than assumingloss. Lateruserclarificationandcorrectfinaltable do not erase wrongintermediate target.2332tokens, reject."
+    },
+    {
+      "id": "v3-06-measure",
+      "sha256": "f34cd2576e6e1e5f2deccb4d9e738fe2e59fb8914271bf4afd3285cf5a6d68e4",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All21messages read with authoritativepolicies and fourtool records. CorrectA200->189 original11cm/5.5%, corrected191gives9cm/4.5%; B7.5->6gives1.5cm/20%; Cmissingunknown. CLIrejectoverridden: message18 truthfully reportsno callsremain after4actualcalls, and its policypermit_calls=false. Manualratio andderived-versusmeasured distinction correct.2207tokens, short."
+    }
+  ],
+  "root_reviewed": 4,
+  "content_passed": 3,
+  "selected": 0
+}

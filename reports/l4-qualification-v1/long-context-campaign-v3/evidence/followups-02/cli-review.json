@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "v3-01-exhibit",
+      "pass": true,
+      "reason": "The calculations, tool results, corrected measurement, and limits of the observations remain consistent throughout. The final dialogue presents separate prepared samples as an exhibit design choice.",
+      "turn_evidence": "The correction changes A\u2019s loss to 78 \u2212 62 = 16 mm, and the later calculator result and dialogue use 16 mm."
+    },
+    {
+      "id": "v3-05-csv",
+      "pass": false,
+      "reason": "The parser stops validating a row when any required field is missing, so it can omit other validation errors despite the all-or-nothing error-collection contract.",
+      "turn_evidence": "In the final parser, `if row_errors: ... continue` runs before validation of `book_id` and `revision`. With header `book_id,revision,title` and row `,bad`, it reports the missing title but omits the empty ID and invalid revision."
+    },
+    {
+      "id": "v3-02-fabric",
+      "pass": true,
+      "reason": "The assistant consistently uses the corrected length, cutting length, unusable ends, and revised reuse rule. Its arithmetic and tradeoff assessment are correct.",
+      "turn_evidence": "It calculates 320 cm usable, 280 cm for eight strips, and 40 cm remaining; nine strips leave 5 cm, while two 20 cm pieces qualify only under the revised combined-length rule."
+    },
+    {
+      "id": "v3-05-reliability",
+      "pass": true,
+      "reason": "The explanations distinguish local response records, service evidence, acknowledgements, retries, and atomic idempotency without claiming the trace establishes an unstated queue guarantee.",
+      "turn_evidence": "The final interleaving correctly shows B and C both observing an absent key before either acts, allowing duplicate effects unless the deduplication decision and effect are coordinated."
+    }
+  ]
+}

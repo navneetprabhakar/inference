@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-13T07:36:32.100199+00:00",
+  "reviews": [
+    {
+      "id": "v3-01-exhibit",
+      "sha256": "a31d0f2c1d071c2ae457e2a77f45e3b064e19337485a890d12e7056b8622bd2b",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Narrow final dialogue now explicitly separates dated edge samples from undated length pairs; accurate78-62=16, unknown duration and causal limits. Original history and prior repair reviewed; only final assistant changed."
+    },
+    {
+      "id": "v3-05-csv",
+      "sha256": "b1e7393810369bc44534b2f5e565a9430f1065657f19fdff4ad22583bf115084",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Full rewrite exceeds4096 and is excluded without truncation. Changes tuple interface unnecessarily; CLI flags incomplete per-field reporting on structurally incomplete rows, but original user only explicitly requires every row validated. No admission or executable pass claimed for this overflow version."
+    },
+    {
+      "id": "v3-02-fabric",
+      "sha256": "622847def5004b73d351104e4bfd4ab2dd06a24515bb716e9efd569689ab664b",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "New combined-length policy correctly changes only two20cm scraps eligibility; unchanged35cm practice requirement prevents extra learner plus25cm demo. All earlier corrections retained."
+    },
+    {
+      "id": "v3-05-reliability",
+      "sha256": "7420372f225a163eea899a77559717d59fffdd052025df951b1b4442952a3870",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Correct explicit B/C current-read interleaving; observing absence is not reservation, reservation alone does not solve crash recovery, atomic dedup/effect/recoverable result properly conditional."
+    }
+  ],
+  "root_reviewed": 4,
+  "content_passed": 3,
+  "selected": 3
+}

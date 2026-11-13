@@ -1,0 +1,44 @@
+{
+  "utc": "2026-11-13T07:09:09.404735+00:00",
+  "reviews": [
+    {
+      "id": "v3-03-ledger",
+      "sha256": "b43cfc6a0cb0bfd29600c89fea888a09fc26f0c3df6133740504909db4294900",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "All14messages read, including4 complete code versions and separate test suite. Preserves patch/zero/None distinctions, duplicate rejection, strict nonnegative integer/nonboolean quantities, key validation, atomic failure and one-shot input. No persistence after cancellation.437independent checks across4versions and9displayed tests pass.3632tokens; substantive late implementation/tests."
+    },
+    {
+      "id": "v3-03-audio",
+      "sha256": "5c1f4a826d34333cbae2de64557ccff2ed91e8c83723e56784fee3ed59294110",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All21messages read. Three tools replay; correct48->50 reviewed correction,32->30unreviewed,6/50=.12. Distinguishes clips/label events and no unsupported unreviewed quality or error-type claims.2546tokens, below3072; preserve sound source without admission."
+    },
+    {
+      "id": "v3-03-fiction",
+      "sha256": "947d5af6b828a750bb94ee9a79fa025786ba252503c131526c024c933e2639de",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All16messages read including original vignette. LatestTess shortly-after-three and uncertainty correctly retained. But discovery message13 adds roof sitting slightly askew as a new visible clue immediately guiding discovery, contrary to explicit no-new-clue request. Prior source establishes a loose hinge, not an askew roof at discovery. Exclude this version; do not let correct final editorial correction hide intermediate constraint violation."
+    },
+    {
+      "id": "v3-03-bounds",
+      "sha256": "e8e29997c419acc35ef9e4a36baf2f9d1c430ce2058428f1ebde75ebe0ccea21",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All14messages read. Original mean3 and correctedmean4, four-observation counterexamples, n3example and missing-versus-zero denominator cases correct; title cancellation respected.1689tokens, too short for this supplement."
+    }
+  ],
+  "root_reviewed": 4,
+  "content_passed": 3,
+  "selected": 1
+}
