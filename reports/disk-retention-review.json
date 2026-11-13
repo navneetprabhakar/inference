@@ -1,0 +1,73 @@
+{
+  "scope": "Retention guidance for cleanup thread; no files deleted",
+  "keep": [
+    "runs/retained-campaign-watch",
+    "runs/retained-campaign-watch-failed-3b-v1",
+    "runs/recovery-3b-v1",
+    "runs/ownbase-v2-sft/*-admitted-v1",
+    "runs/ownbase-v2-data/tokenizer",
+    "runs/nanochat-source",
+    "runs/l4-data-prep/.venv",
+    "runs/eval-3b-local",
+    "runs/terra-conversation-v1",
+    "reports",
+    "TRAINING_AUDIT.txt",
+    "ASTRA_EXECUTION_PLAN.md",
+    "reports/practical-usability-acceptance",
+    "reports/explanatory-packing-v1/verify.py",
+    "own-base-candidates/*/export-start.json",
+    "Metadata/manifests in runs/ownbase-v2-data/corpus/packed and runs/ownbase-v2-campaign; row payloads now reside in GCS",
+    "runs/6b-deep-diagnostic-v1",
+    "runs/eval-6b-sft-local",
+    "runs/ownbase-v2-sft/targeted-context-admitted-v3",
+    "runs/teacher-student-execution-v1"
+  ],
+  "candidates_pending_cleanup_thread_verification": [
+    {
+      "path": "runs/ownbase-v2-data/corpus/dedup.sqlite",
+      "purpose": "Corpus preparation dedup database; completed base training consumes packed shards, not sqlite. Verify exact path and no open writers; preserve source/admission/dedup summary receipts before removal. Not claimed GCS-backed up."
+    },
+    {
+      "path": "runs/own-base-foundation-01",
+      "purpose": "Historical model experiment; not referenced by current nanochat runtime. Retain manifests/reports, verify user-required checkpoint backup before deleting payloads."
+    },
+    {
+      "path": "data/fresh-broad-candidates-v1/candidates.sqlite",
+      "purpose": "Historical corpus intermediate; not current immutable base index. Verify no parallel CPU preprocessing and source provenance before removal."
+    }
+  ],
+  "active_training": "6B base stopped after failed quality diagnostic; preparing same-VM read-only GPU diagnosis. No corpus preprocessing or SQLite writes started by this task.",
+  "protected_runtime_reason": "Local watcher reads admitted datasets to publish hashes/file lists. Own tokenizer and upstream source needed for local generation validation. Local3B bundle just downloaded and used for evaluations; preserve until explicit broader retention decision.",
+  "read_only_evidence": [
+    "reports/l4-qualification-v1/production-state.json",
+    "reports/l4-qualification-v1/retained-storage-review.json",
+    "runs/ownbase-v2-data/corpus/inventory-backup-receipt.json"
+  ],
+  "completed_corpus_eviction": "reports/corpus-gcs-local-eviction-20261111.json",
+  "updated_utc": "2026-11-12T01:54:40.835779+00:00",
+  "compression_decisions": [
+    {
+      "path": "runs/ownbase-v2-data/corpus/dedup.sqlite",
+      "safe_to_compress": true,
+      "required_checks": [
+        "Cleanup owner must recheck no open files and no sidecar WAL/SHM with unapplied transactions",
+        "Lossless compression only; verify decompressed SHA256 equals source before removing original",
+        "Preserve original path, SHA256 and exact restore command in receipt; restore before rerunning preprocessing"
+      ],
+      "required_by_current_diagnostic": false,
+      "backed_up_in_gcs": false
+    },
+    {
+      "path": "data/fresh-broad-candidates-v1/candidates.sqlite",
+      "safe_to_compress": true,
+      "required_checks": [
+        "Cleanup owner must recheck no open files and no sidecar WAL/SHM with unapplied transactions",
+        "Lossless compression only; verify decompressed SHA256 equals source before removing original",
+        "Preserve original path, SHA256 and exact restore command in receipt; restore before rerunning preprocessing"
+      ],
+      "required_by_current_diagnostic": false,
+      "backed_up_in_gcs": false
+    }
+  ],
+  "compression_scope": "Guidance only; no deletion/discard authorization for unbacked-up database contents. Lossless verified reversible compression preserves the databases."
+}

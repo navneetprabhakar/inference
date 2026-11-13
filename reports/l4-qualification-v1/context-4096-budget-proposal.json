@@ -1,0 +1,55 @@
+{
+  "created_utc": "2026-11-11T16:23:31.149790+00:00",
+  "status": "proposal_150_not_authorized",
+  "authorized_total_usd": 100,
+  "recommended_total_cap_usd": 150,
+  "prior_full_campaign_envelope_usd": 96.9,
+  "phases": [
+    {
+      "phase": "4K CUDA compatibility and throughput benchmark",
+      "additional_compute_hours_max": 1,
+      "additional_reserve_usd": 2.5
+    },
+    {
+      "phase": "4K continuation on long multi-turn and grounded tool sequences",
+      "additional_compute_hours_max": 8,
+      "additional_reserve_usd": 20
+    },
+    {
+      "phase": "Conversation and tool SFT using admitted teacher mixtures",
+      "additional_compute_hours_max": 4,
+      "additional_reserve_usd": 10
+    },
+    {
+      "phase": "Context-distance, conversation and tool acceptance evaluation",
+      "additional_compute_hours_max": 1,
+      "additional_reserve_usd": 2.5
+    },
+    {
+      "phase": "Additional backup/storage allowance",
+      "additional_reserve_usd": 2
+    }
+  ],
+  "additional_work_envelope_usd": 37,
+  "combined_work_envelope_usd": 133.9,
+  "contingency_usd": 16.1,
+  "rate_assumption_usd_per_hour": 2.5,
+  "not_invoice_or_quality_guarantee": true,
+  "implementation_worktree": "/Users/navneetprabhakar/Documents/git/image/context-worktrees/inference-4096",
+  "implementation_scope": [
+    "Explicit2K-to4K config/lineage transition preserving learned weight tensor shapes",
+    "Long-sequence packing and assistant-only masks",
+    "Matched RoPE/attention policy across training and inference",
+    "Checkpoint recovery and serialization/serving limits updated together",
+    "CUDA microbatch/throughput measurement before allocating extension tokens",
+    "Short-context regression and long-distance fact correction/tool-result tests"
+  ],
+  "decision_gates": [
+    "Current2K training and fixed6B diagnostic continue",
+    "At6B choose4K branch only after CUDA qualification; preserve original checkpoint",
+    "No live adaptation or increased billing guard until explicit new total-cap approval",
+    "Reforecast token target from measured4K throughput; do not guarantee10B within budget",
+    "Preserve sameVM if possible; verify provider termination timestamp before reserving extra hours",
+    "No spend beyond approved cap; any further overrun requires user approval"
+  ]
+}
