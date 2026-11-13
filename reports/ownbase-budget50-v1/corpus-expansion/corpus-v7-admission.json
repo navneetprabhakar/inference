@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "2f627d9025f6ad0749174ec87b03eca91c427d21c613cca7fe2f82d7ebd9e6ec",
+    "a12cc23e583473b93ce1f328215afae08fe3eb0d7d3d3368a24bd0f29fc76964"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v6/manifest.json",
+  "parent_manifest_sha256": "881cbb60a864dc2d449880b832093cabb8623e65096768c429eb7dcbc73f087f",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-05/root-review.json": "da84074e87019942eca431b29adfebfa86bed12358851969184087242d122a88",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-05-retry/root-review.json": "5c80747f92abee6fa00bf29f3afb28b8d562dd5a637fff51377d962a14aab48c"
+  },
+  "selected": [
+    {
+      "id": "b50-exhibit-labels",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3323,
+      "assistant_targets": 1120,
+      "assistant_targets_after_2048": 534,
+      "assistant_targets_after_3072": 187,
+      "tool_call_positions": [
+        2972,
+        3066
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.010851871947911014
+    },
+    {
+      "id": "b50-paper-template",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 4076,
+      "assistant_targets": 1960,
+      "assistant_targets_after_2048": 1236,
+      "assistant_targets_after_3072": 432,
+      "tool_call_positions": [
+        3865,
+        3959
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.00878409616273694
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-oral-history",
+      "reason": "Full dialogue reviewed. Correctly swaps speakers and preserves interview/event date distinction, imaginary dialogue labeling and final uncertainty. However early ledger frames the different earlier locations as an unresolved conflict without evidence they are mutually exclusive or contemporaneous; final panel explicitly recognizes both may be true. Conservatively excluded for intermediate overstatement and3032tokens below3072 admission floor."
+    },
+    {
+      "id": "b50-card-game-rules",
+      "reason": "Full20-message history reviewed. Resource accounting, last-played-first cancellation, no refunds, pending-target requirement and open-priority caveats remain correct. Final dialogue uses cancelled Snare and explicit no-further-actions assumption. Native encoding exceeds4096; stale context_tokens3536 describes the prior saved version, not final length. Excluded without truncation; do not count partial prefix as new accepted session."
+    },
+    {
+      "id": "b50-paper-template",
+      "reason": "Full15-message history reviewed. Center and corner bounds/overlap examples correct, inclusive board margins and strict positive-area overlap preserved. Validator, four supplied tests,1485 independent placement checks, rotation options and full eight-rectangle layout pass(1492totalchecks). Final numeric resource task extension pending; source not selected to avoid duplicate versions."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

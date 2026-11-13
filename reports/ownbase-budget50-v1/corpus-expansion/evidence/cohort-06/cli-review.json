@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-room-booking-policy",
+      "pass": true,
+      "reason": "All turns follow the fictional booking rules, preserve the distinction between the trial cancellation and the later current state, and apply the prospective priority correctly.",
+      "turn_evidence": "1: Corrects interval, ID, promotion and priority errors; derives A1/A3 confirmed. 2: Traces all five requests correctly. 3: Trial cancellation of A1 leaves all three waiting. 4: Policy reflects the agreed rules. 5: Restores the original state and notes unknown priority designations. 6: Adds A6 first on the waitlist without displacing bookings. 7: Compares allocation and cancellation review correctly. 8: Roleplay avoids promising space. 9: Clarifies that cancellation does not guarantee confirmation. 10: Cancelling A1 promotes A6 and leaves A2/A4/A5 waiting. 11: Handover accurately carries forward every status and the review procedure."
+    },
+    {
+      "id": "b50-instruction-routing",
+      "pass": true,
+      "reason": "The routing traces, budget boundaries, revised fallback implementation and tests are consistent across the original and changed rules. Execution is not claimed.",
+      "turn_evidence": "1: Corrects local delivery, forwarding, parking and omega routing. 2: M1 and M2 deliver at B with zero budget. 3: M3 forwards B\u2192A and parks with budget 2. 4: Rejects the proposed B\u2192C route and delivery. 5: Unknown destination parks at C unchanged. 6: Original Python implementation checks delivery, route existence and budget in the proper order. 7: Explains fallback outcomes and identifies its scope as unresolved. 8: Revised implementation applies fallback at every node and terminates self-forwards through budget exhaustion. 9: Tests assert status, location, budget and trace for the requested cases. 10: Dialogue correctly distinguishes forwarding from arrival and contrasts original parking with revised exhaustion."
+    },
+    {
+      "id": "b50-box-label-parser",
+      "pass": true,
+      "reason": "The parser, state description, tests and offset revision implement the supplied grammar consistently; claims of execution are avoided.",
+      "turn_evidence": "1: Explains split failure and supplies a parser that handles quoting and rejection rules. 2: Correctly traces quoted commas, escaped quotes, whitespace and trailing emptiness. 3: Identifies all three malformed cases. 4: Gives complete state and end-of-input transitions. 5: Provides focused valid and invalid tests. 6: Adds meaningful boundary cases. 7: Returns field-start offsets with correct examples, including offset 17 for the final empty field, and supplies corresponding tests."
+    },
+    {
+      "id": "b50-gallery-seating",
+      "pass": true,
+      "reason": "The responses maintain the corrected and revised maps, reservations and capacity, and the scheduling calculation is grounded in the supplied calculator results.",
+      "turn_evidence": "1: Corrects numbering, reservations and corridor placement. 2: Gives row-by-row verification. 3: Supplies an observable checklist. 4: Moves seats 7\u201312 to D while retaining A and C. 5: Checks all 18 numbers and reservation positions. 6: States that the guest's assignment is pending. 7: Removes wording that could suggest confirmation. 8: Handover uses the revised map and pending-assignment wording. 9: Calculator calls return 93\u00f718 = 5.166666666666667 and 6\u00d727 = 162; the response correctly rounds to six groups and identifies the 22-minute overrun. 10: Correctly identifies five sessions, 90 places and three remaining attendees, with practical alternatives."
+    }
+  ]
+}

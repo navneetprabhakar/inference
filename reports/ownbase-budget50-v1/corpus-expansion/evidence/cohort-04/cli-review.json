@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-event-ledger",
+      "pass": true,
+      "reason": "The assistant consistently applies arrival order, duplicate-ID precedence, version checks, capacity accounting, and the revised tombstone rule. The reducer makes its underspecified policy choices explicit, and its tests match those choices.",
+      "turn_evidence": "Assistant 1 traces E1\u2013E4 to A=5, B=0, free=5; 2\u20133 ignore repeated E3 IDs while flagging inconsistent bodies as a data-quality concern; 4\u20135 correctly classify E5 as stale, E6 as accepted, and E7 as a conflict; 6 exposes reducer assumptions; 7\u20138 implement and test tombstones; 9 uses the earlier A/B/C state and leaves D at v3 with one unit free."
+    },
+    {
+      "id": "b50-stage-directions",
+      "pass": false,
+      "reason": "The knowledge ledger asserts that Mara knows the note\u2019s contents, although ownership alone does not establish that knowledge. Later turns otherwise track disclosures, custody, and physical continuity well.",
+      "turn_evidence": "Assistant 1 identifies the observation and custody contradictions; 2 adds the unsupported claim that Mara knows the contents; 3 reveals ownership and location, which the user then revises; 4 preserves those secrets; 5 traces the revised staging; 6\u20137 develop Ivo\u2019s inference; 8 makes Mara\u2019s disclosure private and explicitly returns the sealed note; 9 identifies the weakness in Ivo\u2019s certainty and preserves scene-three continuity."
+    },
+    {
+      "id": "b50-tile-routes",
+      "pass": false,
+      "reason": "The assistant assumes the 3\u00d74 grid means each board requires 12 tiles when the needed board and stock figures were not supplied. The later user explicitly distinguishes tile requirements from grid dimensions; the corrected calculation is grounded in the recorded tool results.",
+      "turn_evidence": "Assistant 1\u20133 correctly explain orthogonal moves and the directed gate; 4 provides a verifier and focused tests; 5\u20136 give and review a valid repair; 7 states an unsupported requirement of 12 tiles per board while correctly identifying missing figures; 8\u20139 request calculations whose recorded results are 126 and 26; 10 correctly derives 12 base boards, 14 including spares, and a 26-tile shortage."
+    },
+    {
+      "id": "b50-transcript-timing",
+      "pass": true,
+      "reason": "The assistant preserves half-open overlap semantics, standalone zero-length cues, input immutability, and label ordering through the change from sorted to unsorted input. The code and examples support the stated behavior.",
+      "turn_evidence": "Assistant 1 gives the correct initial union and diagnoses touching, nesting, mutation, and invalid ranges; 2 supplies valid nesting and deduplication examples; 3 implements the sorted-input rules; 4 supplies focused tests; 5 updates the implementation for unsorted input and demonstrates labels in original input order rather than chronological order."
+    }
+  ]
+}

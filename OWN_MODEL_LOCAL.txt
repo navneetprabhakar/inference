@@ -1,0 +1,37 @@
+OWN MODEL — LOCAL TERMINAL GUIDE
+Updated 13 November 2026. Training/comparison is still in progress.
+
+CURRENT VERIFIED FALLBACK
+From this repository, run:
+  ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605 --repetition-penalty 1.0
+
+This uses the existing local .venv, tokenizer and own-model bundle. It automatically
+selects Apple MPS on this Mac. No cloud VM or network is needed for inference.
+The model was trained from our own random initialization; no pretrained substitute.
+
+Type a request at you>. Commands:
+  /reset       Start a new conversation.
+  /tools off   Disable the offline calculator and unit converter.
+  /tools on    Re-enable those two bounded tools.
+  /quit        Exit.
+Add --raw to see complete model/broker records. Add --device cpu to force CPU.
+
+LIMITS THAT MATTER
+- The trained context is 2,048 tokens, including history and reply reservation.
+  Newly generated 3K–4K data has not been trained. Reset when context is exhausted.
+- Tools only calculate and convert supported metric lengths. They do not run code,
+  access files, browse, send messages or perform physical actions.
+- Retained step605 preserves18/18 exposed tool regression cases, but root review
+  found only6/180 passing turns and0/60 complete sessions on a broader synthetic
+  assessment. Treat this as an experimental model, not a reliable assistant.
+- Local MPS qualification observed about4.72seconds load and4.42GB peak process
+  RSS. Separate MPS allocation/driver figures overlap memory accounting; do not
+  add them to RSS. No general latency or production throughput claim is made.
+
+AFTER TRAINING
+The default ./chat-own.sh selection remains deliberately pending. The active task
+will verify candidate bundle hashes, review generated outputs, test the selected
+bundle locally, and write reports/ownbase-budget50-v1/local-selection.json.
+A newer checkpoint is not automatically better. If neither pilot passes the
+quality/retention comparison, step605 remains the explicit fallback and new
+training artifacts remain experimental. See OWN_BASE_HANDOFF.txt for live status.

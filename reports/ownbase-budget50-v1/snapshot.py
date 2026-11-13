@@ -8,8 +8,16 @@ def read(name):return request('https://storage.googleapis.com/storage/v1/b/'+buc
 vm=request('https://compute.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/instances/forge-ownbase-budget50-v1',timeout=30)
 state=read('controller.json');phase=state['phase'];progress=None
 if phase=='base_training':progress=read('bootstrap/results/budget50-v1/base-'+str(state['goal_step'])+'/progress.json')
-start=datetime.datetime.fromisoformat(vm['lastStartTimestamp']);now=datetime.datetime.now(datetime.timezone.utc);hours=(now-start).total_seconds()/3600
-row={'utc':now.isoformat(),'provider_status':vm['status'],'phase':phase,'elapsed_hours':round(hours,3),'conservative_compute_accrual_usd':round(hours*2.5,2),'ancillary_reserved_usd':15,'total_envelope_to_date_usd':round(hours*2.5+15,2),'incremental_cap_usd':50,'invoice_verified':False,'provider_duration_seconds':vm['scheduling']['maxRunDuration']['seconds'],'progress':{k:progress.get(k) for k in ['status','step','targets','train_loss','tokens_per_second_last_update','last_checkpoint']} if progress else None,'controller':state}
+start=datetime.datetime.fromisoformat(vm['lastStartTimestamp']);now=datetime.datetime.now(datetime.timezone.utc);end=now
+if vm['status']=='TERMINATED' and vm.get('lastStopTimestamp'):end=min(now,datetime.datetime.fromisoformat(vm['lastStopTimestamp']))
+hours=max(0,(end-start).total_seconds()/3600)
+validation_ce=None
+if progress:
+ (R/'base-progress-latest.json').write_text(json.dumps(progress,indent=2)+'\n')
+ validation=progress.get('validation',{});shards=validation.get('shards',[])
+ if validation.get('complete') and shards:
+  count=sum(v['target_tokens'] for v in shards);validation_ce=sum(v['cross_entropy_nats']*v['target_tokens'] for v in shards)/count
+row={'utc':now.isoformat(),'provider_status':vm['status'],'phase':phase,'elapsed_hours':round(hours,3),'conservative_compute_accrual_usd':round(hours*2.5,2),'ancillary_reserved_usd':15,'total_envelope_to_date_usd':round(hours*2.5+15,2),'incremental_cap_usd':50,'invoice_verified':False,'last_heldout_ce':validation_ce,'provider_duration_seconds':vm['scheduling']['maxRunDuration']['seconds'],'progress':{k:progress.get(k) for k in ['status','step','targets','train_loss','tokens_per_second_last_update','last_checkpoint']} if progress else None,'controller':state}
 (R/'latest-snapshot.json').write_text(json.dumps(row,indent=2)+'\n')
 with (R/'snapshots.jsonl').open('a') as f:f.write(json.dumps(row)+'\n')
 brief={k:v for k,v in row.items() if k not in ['progress','controller']}

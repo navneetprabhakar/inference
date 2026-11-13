@@ -50,5 +50,142 @@
     "development_targets_after3072": 1518,
     "trained": false,
     "full4k_ready": false
+  },
+  "current_long_context_corpus": {
+    "path": "runs/long-context-corpus-v8",
+    "manifest_sha256": "3ce0e3b0145de392ef8d130c186585e5a055576fb1648ebbade449ef12710298",
+    "sessions": 521,
+    "train_targets": 134781,
+    "development_targets": 35974,
+    "train_targets_after3072": 9238,
+    "development_targets_after3072": 2796,
+    "independent_gcs_readback": true,
+    "trained": false,
+    "full4k_ready": false
+  },
+  "latest_base_observation": {
+    "utc": "2026-11-13T10:41:25.679607+00:00",
+    "provider_status": "RUNNING",
+    "phase": "base_training",
+    "elapsed_hours": 1.886,
+    "conservative_compute_accrual_usd": 4.72,
+    "ancillary_reserved_usd": 15,
+    "total_envelope_to_date_usd": 19.72,
+    "incremental_cap_usd": 50,
+    "invoice_verified": false,
+    "provider_duration_seconds": "50400",
+    "progress": {
+      "status": "running",
+      "step": 12489,
+      "targets": 6547832832,
+      "train_loss": 2.6169629096984863,
+      "tokens_per_second_last_update": 103659.61759590707,
+      "last_checkpoint": {
+        "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00012314",
+        "upload": {
+          "status": "gcs_bundle_uploaded",
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-b44e41c699ba420ca00b746ff96ab056",
+          "seconds": 54.35895544499999,
+          "bytes_one_way": 3826065236,
+          "identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "step": 12314,
+          "manifest": {
+            "files": {
+              "metadata.json": {
+                "bytes": 2851,
+                "sha256": "93174bb50ad4baf39751ad068c2f82fc77ee512eb29d9feb877e1b43bdb5ff3c"
+              },
+              "payload.pt": {
+                "bytes": 3826061953,
+                "sha256": "b9d0b7f0319492fd22bf23b5574d6f94856b3334af7674037dbda0a5181aec4b"
+              }
+            },
+            "step": 12314,
+            "version": 1
+          },
+          "publication_order": [
+            "payload.pt",
+            "metadata.json",
+            "manifest.json",
+            "COMMITTED"
+          ],
+          "transfer_integrity": "gcloud storage cp built-in checksum validation",
+          "independent_sha256_readback": false,
+          "note": "Upload receipt only; fresh-machine restore and next update not tested."
+        },
+        "step": 12314
+      }
+    },
+    "controller": {
+      "phase": "base_training",
+      "utc": "2026-11-13T08:54:30.677854+00:00",
+      "elapsed_hours": 0.10200700627432929,
+      "start_step": 11445,
+      "goal_step": 13352,
+      "deadline_utc": "2026-11-13T20:18:23.452636+00:00"
+    }
   }
 }

@@ -1,0 +1,41 @@
+{
+  "reviewer": "root",
+  "reviews": [
+    {
+      "id": "b50-room-booking-policy",
+      "sha256": "157f9f9823b459673df540f85f12ec7987c984fd7da666086cd2e4e60d8021cd",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "All22messages reviewed. Half-open adjacency, unique IDs, full-interval conflict checks, copy-of-state cancellation and explicit reset to original state handled correctly. A6 priority only reorders waitlist; cancellation A1 promotesA6 without displacingA3. Final ledger and customer notice exactly match finite earlier requests; no actual booking or certification claims."
+    },
+    {
+      "id": "b50-instruction-routing",
+      "sha256": "7217d044bc66501326f112891db8e606e401a6292af24d0f63c4936e39d91048",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "All20messages reviewed. Original traces, parking before exhaustion when no route, zero-budget local delivery and one decrement per forward correct. New fallback answer explicitly flags uncertainty about scope atA, then user clarifies every node; revised self-loop counts trace/budget correctly. Both implementations validated over120states each; nine supplied test assertion cases execute. Pytest runner unavailable locally, so do not claim pytest passed. No real-network execution claims."
+    },
+    {
+      "id": "b50-box-label-parser",
+      "sha256": "f862fb0ea5b0b990258a12597aec17a79eeb95bf606b9700fa1ebfe23e1dbb7d",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "validation",
+      "reason": "All15messages reviewed. Quoted commas/doubledquotes, whitespace/newlines, trailingemptyfields and invalid quoting correct. Offset version preserves source indices including openingquote and endboundary17. Independent regex grammar oracle checks21845 strings perversion; supplied unittestcases pass. No tool calls or final batch calculation before context-reserve stop; admitted as natural code conversation, not arithmetic workflow. All visible user requests answered."
+    },
+    {
+      "id": "b50-gallery-seating",
+      "sha256": "f9176b8baf753942ea2bb976d739b95bb4af0828914290507118d42f509bdfb3",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Full25messages reviewed. Maps, corrected rows, reserved capacity and93/18=>6groups=>162minutes are correct. But intermediate host roleplay saysCertainly and promises notification once a seat is assigned despite unresolved assignment, which the next user explicitly asks to correct. Conservative quality exclusion preserves that intermediate defect; later careful wording does not erase it."
+    }
+  ]
+}

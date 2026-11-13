@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "4e9b2bd5ed0a68a19f42530803875022ae9107f528abc9242a8c3e57677d8890",
+    "a12cc23e583473b93ce1f328215afae08fe3eb0d7d3d3368a24bd0f29fc76964"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v5/manifest.json",
+  "parent_manifest_sha256": "a07acca4b86ef5bf03e0df48706814b19ecbfdf81d0edaca8603017fb97f4de9",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-04/root-review.json": "098e753281a576921368332b4d8a47f8639d6f13acd73a29c3c84a70afc3f0a4",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-04/root-review.json": "80ebc73a92d69c40f5040488f5375f7f315e382a217b915d4134f8b432471a33"
+  },
+  "selected": [
+    {
+      "id": "b50-event-ledger",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3842,
+      "assistant_targets": 2493,
+      "assistant_targets_after_2048": 1396,
+      "assistant_targets_after_3072": 637,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0004108463434675431
+    },
+    {
+      "id": "b50-transcript-timing",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3700,
+      "assistant_targets": 2329,
+      "assistant_targets_after_2048": 1300,
+      "assistant_targets_after_3072": 617,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0091324200913242
+    },
+    {
+      "id": "b50-stage-directions",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3900,
+      "assistant_targets": 2435,
+      "assistant_targets_after_2048": 1291,
+      "assistant_targets_after_3072": 608,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0003206155819172812
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-stage-directions",
+      "reason": "Original early knowledge ledger invents that Mara knows contents merely from ownership; not supplied by user. Initial diagnosis also misreads the quoted claim about other people knowing contents. All later scenes/custody reviewed and coherent, but later valid targets cannot erase early unsupported knowledge. Teacher replacement of two early answers pending."
+    },
+    {
+      "id": "b50-tile-routes",
+      "reason": "Full dialogue reviewed. Routes and integer-cell examples are correct, but assistant infers12 physical tiles per board from3x4 grid despite no tile packing rule. Later user clarifies9 and corrects missing initial numeric facts; this does not erase the unsupported intermediate12 target. Numeric-pair verifier also lacks explicit integer-coordinate validation. Excluded; do not count as successful late retrieval of hidden brief numbers."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "bf34c91380bdaa9f308df59c33a0ec451fedd91ad11753b126d5cf73daa126d0",
+    "6df8e888cdff36fd8f84bac49c4ff870baee466befc9c761e274deab96eda48b"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v7/manifest.json",
+  "parent_manifest_sha256": "4c1a5f1927c9bd7fa41ee36e5b07dcdabd52b56355999cf24f50447fe9ebe5b2",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-06/root-review.json": "dc4803271eaa4ef38d91ae54a931ea6b050c1912ac1566aea5cff8e299c9bdbc"
+  },
+  "selected": [
+    {
+      "id": "b50-room-booking-policy",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3510,
+      "assistant_targets": 1811,
+      "assistant_targets_after_2048": 850,
+      "assistant_targets_after_3072": 314,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0
+    },
+    {
+      "id": "b50-instruction-routing",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3830,
+      "assistant_targets": 2255,
+      "assistant_targets_after_2048": 1366,
+      "assistant_targets_after_3072": 628,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.00037993920972644377
+    },
+    {
+      "id": "b50-box-label-parser",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3941,
+      "assistant_targets": 2191,
+      "assistant_targets_after_2048": 1226,
+      "assistant_targets_after_3072": 661,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.009182736455463728
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-gallery-seating",
+      "reason": "Full25messages reviewed. Maps, corrected rows, reserved capacity and93/18=>6groups=>162minutes are correct. But intermediate host roleplay saysCertainly and promises notification once a seat is assigned despite unresolved assignment, which the next user explicitly asks to correct. Conservative quality exclusion preserves that intermediate defect; later careful wording does not erase it."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}
