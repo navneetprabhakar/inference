@@ -1,48 +1,63 @@
 {
-  "utc": "2026-11-13T02:15:49.554659+00:00",
-  "phase": "partial_root_review_batch_verified",
-  "local_manifest": "/Users/navneetprabhakar/Documents/git/image/inference/runs/natural-dialogue-4k-v1/review-batch-v2/manifest.json",
+  "utc": "2026-11-13T04:23:50.419946+00:00",
+  "phase": "all_200_root_reviewed_final_pilot_verified",
   "generated": 200,
-  "root_reviewed": 143,
-  "root_content_passed": 132,
-  "root_rejected": 11,
-  "awaiting_root_review": 57,
-  "natural_dialogues_admitted": 97,
-  "excluded_counts": {
-    "root_reject": 11,
-    "fewer_than_two_substantive_assistant_turns": 35,
-    "not_root_reviewed": 57
-  },
-  "tool_replay_dialogues": 188,
+  "root_reviewed": 200,
+  "root_content_passed": 186,
+  "root_rejected": 14,
+  "awaiting_root_review": 0,
+  "natural_dialogues_admitted": 147,
+  "single_exchange_excluded": 39,
+  "tool_replay_dialogues": 338,
+  "actual_trained_targets": 0,
+  "local_manifest": "/Users/navneetprabhakar/Documents/git/image/inference/runs/natural-dialogue-4k-v1/admitted-v2/manifest.json",
   "length_bands": {
-    "under_2048": 81,
-    "2048_to_3071": 16,
+    "under_2048": 99,
+    "2048_to_3071": 48,
     "3072_to_4096": 0
   },
+  "substantive_assistant_turn_distribution": {
+    "4": 16,
+    "3": 63,
+    "2": 67,
+    "5": 1
+  },
+  "train_assistant_targets_after_position_2048": 14956,
   "packing": {
     "train": {
-      "sessions": 238,
-      "assistant_targets": 49712,
-      "packed_4096_rows": 38,
-      "maximum_dialogue_tokens": 2852
+      "sessions": 387,
+      "natural_dialogues": 118,
+      "tool_replay_dialogues": 269,
+      "assistant_targets": 83852,
+      "packed_4096_rows": 70,
+      "maximum_dialogue_tokens": 2994
     },
     "validation": {
-      "sessions": 47,
-      "assistant_targets": 9321,
-      "packed_4096_rows": 7,
-      "maximum_dialogue_tokens": 2502
+      "sessions": 98,
+      "natural_dialogues": 29,
+      "tool_replay_dialogues": 69,
+      "assistant_targets": 21999,
+      "packed_4096_rows": 17,
+      "maximum_dialogue_tokens": 2622
     }
   },
-  "actual_trained_targets": 0,
   "full_4k_extension_corpus_ready": false,
-  "next_gate": "Complete 57 remaining full root reviews; then repair generation for substantive long multi-turn and tool workflows. All five 3K+ candidates rejected.",
+  "maximum_admitted_dialogue_tokens": 2994,
   "generator_running": false,
-  "vm": "No start/mutation commands issued; last verified TERMINATED. Current read-only status check blocked by expired GCP authentication.",
+  "vm": "No VM or cloud commands issued; VM remains required OFF. Last verified TERMINATED; live verification previously blocked by auth.",
+  "gcs_backup": "Prior admitted-v1 backup preserved. Final admitted-v2 backup pending GCP authentication; local review and validation complete.",
+  "prior_split_drift_fixed": [
+    "natural-04-00",
+    "natural-04-01"
+  ],
+  "next_gate": "Review complete. For 4K extension, prepare clean3072-4096token substantive conversations and long tool workflows; benchmark full-model memory before training.",
   "limitations": [
     "Small pilot, not evidence of model usability.",
     "Lexical near-duplicate screen plus full root review; not embedding-based semantic equivalence detection.",
     "Validation is development data, not a pristine benchmark.",
-    "No newly generated long tool dialogues in this version; tool replay is short-context."
-  ],
-  "gcs_backup": "admitted-v1 backup preserved; review-batch-v2 new backup pending authentication"
+    "No newly generated long tool dialogues in this version; tool replay is short-context.",
+    "Most candidates are structured planning/document-grounded conversations, not a broad casual dialogue corpus.",
+    "All five3K+generated examples rejected; zero admitted3K+coverage.",
+    "Content passes exclude39single-answer examples; no inference of model improvement from data admission."
+  ]
 }

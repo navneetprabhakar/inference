@@ -1,0 +1,63 @@
+{
+  "utc": "2026-11-13T04:23:50.419946+00:00",
+  "phase": "all_200_root_reviewed_final_pilot_verified",
+  "generated": 200,
+  "root_reviewed": 200,
+  "root_content_passed": 186,
+  "root_rejected": 14,
+  "awaiting_root_review": 0,
+  "natural_dialogues_admitted": 147,
+  "single_exchange_excluded": 39,
+  "tool_replay_dialogues": 338,
+  "actual_trained_targets": 0,
+  "local_manifest": "/Users/navneetprabhakar/Documents/git/image/inference/runs/natural-dialogue-4k-v1/admitted-v2/manifest.json",
+  "length_bands": {
+    "under_2048": 99,
+    "2048_to_3071": 48,
+    "3072_to_4096": 0
+  },
+  "substantive_assistant_turn_distribution": {
+    "4": 16,
+    "3": 63,
+    "2": 67,
+    "5": 1
+  },
+  "train_assistant_targets_after_position_2048": 14956,
+  "packing": {
+    "train": {
+      "sessions": 387,
+      "natural_dialogues": 118,
+      "tool_replay_dialogues": 269,
+      "assistant_targets": 83852,
+      "packed_4096_rows": 70,
+      "maximum_dialogue_tokens": 2994
+    },
+    "validation": {
+      "sessions": 98,
+      "natural_dialogues": 29,
+      "tool_replay_dialogues": 69,
+      "assistant_targets": 21999,
+      "packed_4096_rows": 17,
+      "maximum_dialogue_tokens": 2622
+    }
+  },
+  "full_4k_extension_corpus_ready": false,
+  "maximum_admitted_dialogue_tokens": 2994,
+  "generator_running": false,
+  "vm": "No VM or cloud commands issued; VM remains required OFF. Last verified TERMINATED; live verification previously blocked by auth.",
+  "gcs_backup": "Prior admitted-v1 backup preserved. Final admitted-v2 backup pending GCP authentication; local review and validation complete.",
+  "prior_split_drift_fixed": [
+    "natural-04-00",
+    "natural-04-01"
+  ],
+  "next_gate": "Review complete. For 4K extension, prepare clean3072-4096token substantive conversations and long tool workflows; benchmark full-model memory before training.",
+  "limitations": [
+    "Small pilot, not evidence of model usability.",
+    "Lexical near-duplicate screen plus full root review; not embedding-based semantic equivalence detection.",
+    "Validation is development data, not a pristine benchmark.",
+    "No newly generated long tool dialogues in this version; tool replay is short-context.",
+    "Most candidates are structured planning/document-grounded conversations, not a broad casual dialogue corpus.",
+    "All five3K+generated examples rejected; zero admitted3K+coverage.",
+    "Content passes exclude39single-answer examples; no inference of model improvement from data admission."
+  ]
+}

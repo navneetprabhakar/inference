@@ -75,7 +75,24 @@ def prepare(out,admit=False):
  candidates=[(r,e) for r,e in candidates if r['id'] not in dropped]
  excluded.extend({'id':x,'reason':'cross_family_near_duplicate'} for x in sorted(dropped))
  groups=sorted({find(r['group']) for r,e in candidates},key=digest)
- dev=set(groups[:max(1,len(groups)//5)]) if len(groups)>1 else set()
+ # Expanding the corpus must not promote an earlier development family to train.
+ # Preserve assignments from every admitted snapshot; development wins if an
+ # older snapshot already moved a family between splits. No pilot has trained yet.
+ prior_groups={'train':set(),'validation':set()};split_sources={}
+ for mp in sorted(ROOT.glob('*/manifest.json')):
+  previous=json.loads(mp.read_text())
+  if not previous.get('training_admitted'):continue
+  load_manifest(mp,toksha,4096)
+  split_sources[str(mp)]=sha(mp)
+  for split in prior_groups:
+   for row in map(json.loads,(mp.parent/previous[split]['file']).read_text().splitlines()):
+    if row.get('family')=='natural_dialogue_4k':
+     group=row['provenance']['group']
+     if group in parents:prior_groups[split].add(find(group))
+ dev=prior_groups['validation']&set(groups)
+ desired=max(1,len(groups)//5) if len(groups)>1 else 0
+ fresh=[g for g in groups if g not in dev and g not in prior_groups['train']]
+ dev.update(fresh[:max(0,desired-len(dev))])
  rows={'train':[],'validation':[]};counts={s:collections.Counter() for s in rows};targets={s:0 for s in rows}
  for r,e in candidates:
   split='validation' if find(r['group']) in dev else 'train'
@@ -112,6 +129,8 @@ def prepare(out,admit=False):
   p=out/(split+'.jsonl');p.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rr))
   manifest[split]={'file':p.name,'sha256':sha(p),'bytes':p.stat().st_size,'sessions':len(rr),'assistant_targets':targets[split]}
  report={'training_admitted':bool(admit),'root_reviewed':len(verified_reviews),'root_passed_selected':sum(c['natural_dialogues'] for c in counts.values()),'ready_for_admission':ready,'counts':{s:dict(c) for s,c in counts.items()},'excluded':excluded,'near_duplicates':near,'independent_groups':len(groups),'prior_corpus_exact_screen_sha256':external_hashes,'source_tool_manifest_sha256':sha(source/'manifest.json'),'root_review_files':{str(p):sha(p) for p in reviewfiles},'builder_sha256':sha(__file__),'limitations':['Small pilot, not evidence of model usability.','Lexical near-duplicate screen plus full root review; not embedding-based semantic equivalence detection.','Validation is development data, not a pristine benchmark.','No newly generated long tool dialogues in this version; tool replay is short-context.']}
+ report['prior_split_manifest_sha256']=split_sources
+ report['prior_cross_split_groups_quarantined_to_development']=sorted(prior_groups['train']&prior_groups['validation'])
  (out/'preparation.json').write_text(json.dumps(report,indent=2)+'\n')
  if admit:
   receipt={**report,'schema':1,'context_tokens':4096,'format_version':VERSION,'tokenizer_sha256':toksha,'jsonl_sha256':[manifest[s]['sha256'] for s in rows]}
