@@ -1,0 +1,91 @@
+{
+  "utc": "2026-11-13T14:00:42.230211+00:00",
+  "selected": [
+    {
+      "id": "b50-log-sections",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3726,
+      "assistant_targets": 1423,
+      "assistant_targets_after_2048": 599,
+      "assistant_targets_after_3072": 350,
+      "tool_call_positions": [
+        2718,
+        3245,
+        3340
+      ],
+      "replayed_tool_calls": 3,
+      "max_prior_jaccard": 0.010126582278481013
+    },
+    {
+      "id": "b50-circular-buffer",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3718,
+      "assistant_targets": 2289,
+      "assistant_targets_after_2048": 1417,
+      "assistant_targets_after_3072": 646,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.009644670050761422
+    },
+    {
+      "id": "b50-monotone-window",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3652,
+      "assistant_targets": 2457,
+      "assistant_targets_after_2048": 1243,
+      "assistant_targets_after_3072": 580,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.001920860545524395
+    },
+    {
+      "id": "b50-music-notation",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3863,
+      "assistant_targets": 2450,
+      "assistant_targets_after_2048": 1351,
+      "assistant_targets_after_3072": 786,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.00104675505931612
+    }
+  ],
+  "supplement_counts": {
+    "train": 3,
+    "validation": 1
+  },
+  "packing": {
+    "train": {
+      "rows": 117,
+      "targets": 179160,
+      "max_dialogue_tokens": 4076
+    },
+    "validation": {
+      "rows": 29,
+      "targets": 49712,
+      "max_dialogue_tokens": 3941
+    }
+  },
+  "full_corpus_coverage": {
+    "train": {
+      "assistant_targets_after_2048": 63995,
+      "assistant_targets_after_3072": 16969,
+      "sessions_at_least_3072": 51
+    },
+    "validation": {
+      "assistant_targets_after_2048": 17961,
+      "assistant_targets_after_3072": 5941,
+      "sessions_at_least_3072": 11
+    }
+  },
+  "prior_split_membership": "Every prior row retained byte-for-byte in original split",
+  "actual_trained_targets": 0,
+  "manifest_sha256": "c467b309cdec71b103d911c9550992d9f52785e46c7111f29a6f31d61595722b",
+  "full_4k_extension_corpus_ready": false,
+  "vm": "Separate50USDbase continuation active; no4Ktraining",
+  "backup": "Local verified; immutable GCSupload/readback follows"
+}

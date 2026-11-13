@@ -2,18 +2,20 @@ OWN-BASE MODEL — EXECUTION HANDOFF
 As of 13 November 2026. Repository: /Users/navneetprabhakar/Documents/git/image/inference
 Branch: codex/gpt2-from-scratch. Use git log and origin/codex/gpt2-from-scratch for the latest published revision. Current execution evidence is under reports/ownbase-budget50-v1/.
 
-1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 13:22 UTC
+1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 14:01 UTC
 
 - Objective: run a useful conversational/tool model locally, trained from our own randomly initialized 536,871,738-parameter base. No pretrained replacement. The trained context is still 2,048 tokens.
 - User authorized hands-off GPU execution with a fresh $50 incremental GCP cap, VM/GPU selection, roughly 30-minute updates, and GCS backup before shutdown. This supersedes earlier VM-off and same-VM-only restrictions.
-- Active VM: forge-ownbase-budget50-v1, A10040GB/a2-highgpu-1g,FLEX_START,us-central1-b; original retained VM off.7B milestone saved step13352 /7,000,293,376tokens,CE2.607672.8B continuation active; latest13:16UTC observation7,341,080,576tokens andCE2.594195. Base loss is not conversation acceptance.
-- Cost guard: max14GPU hours at conservative2.50USD/hour (35USD) plus15USD ancillaryreserve. Compute estimate11.18USD at13:16UTC; invoice unavailable. ProviderSTOP, guest shutdown, independent watchdog, phase deadlines and backupreserve remain unchanged.
+- Active VM: forge-ownbase-budget50-v1, A10040GB/a2-highgpu-1g,FLEX_START,us-central1-b; original retained VM off.7B milestone saved step13352 /7,000,293,376tokens,CE2.607672.8B continuation active; latest13:48UTC observation7,502,036,992tokens andCE2.578081 Base loss is not conversation acceptance.
+- Cost guard: max14GPU hours at conservative2.50USD/hour (35USD) plus15USD ancillaryreserve. Compute estimate12.50USD at13:48UTC; invoice unavailable. ProviderSTOP, guest shutdown, independent watchdog, phase deadlines and backupreserve remain unchanged.
 - Retained local605 baseline runs on MPS and preserves18/18 protected tool checks. Full new assessment is poor:6/180 individual turns and0/60 complete three-turn sessions pass root review. Do not claim general usefulness.
 - Active SFT packet is V2: one8-epoch diagnostic from the eventual new base and one4-epoch low-LR branch from retained605, at most two pilots under the existing deadlines. This replaces the redundant new-base4-epoch arm. All7 retained ancestry payloads are independently SHA-verified on the VM; targeted CPU preflight passes. No SFT has started yet; no automatic promotion.
-- Current immutable long-context corpus is V18: 546 sessions (436 train/110 development), 171,147 training and 47,255 development targets. After 3072: 14,979 train/5,361 development; 47 train/10 development long sessions. 38 new accepted scenarios, 81 fully reviewed versions across 64 initial scenarios. New late targets 9,853 train + 4,709 development. Prior rows/splits byte-preserved; every immutable V4–V18 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
+- Current immutable long-context corpus is V20: 551 sessions (440 train/111 development), 179,160 training and 49,712 development targets. After 3072: 16,969 train/5,941 development; 51 train/11 development long sessions. 43 new accepted scenarios, 101 fully reviewed versions across 80 initial scenarios. New late targets 11,843 train + 5,289 development. Prior rows/splits byte-preserved; every immutable V4–V20 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
 - Additional matched MPS retention:110/112 historical normalized exact checks,109/112 byte-exact plus expected calls; one normalization pass hides a verbatim casing error. Root reviewed14open outputs:2 acceptable but weak. These are exposed retention cases, not broad quality. Candidates must preserve passing cases; training packet unchanged.
 - Local launcher: ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605. Real MPS smoke returns54 for73-19 through the broker. Default reviewed checkpoint selection is pending training/comparison.
-- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852 verified alive13:16UTC. Cohorts01–16 fully root reviewed; cohort17 generating. V18 adds sparse matrix, round-robin and weighted-ticket conversations:1,888dense/permutation cases,2,801scheduler cases and1,536selector tickets pass. No actual tool calls in these three; family counts follow actual calls. Handoff and review counts now reconcile from hash-bound evidence. Latest pushedbatchd953515 coversV14; V15–V18 queued for nextbatch. User updates minimal every30minutes; last13:19UTC, next13:49UTC.
+- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852. Cohorts01–20 and selected repairs/extensions fully reviewed; cohort21 generating. V20 adds section parser, circular buffer, monotone time window and music worksheet validator. Independent checks:4096parser sequences,23328buffer sequences,11340window sequences,6561music rows; overflow geometry separately checked1296cell pairs but excluded. Latest pushed4081ca0 coversV18; V19–V20 plus localHTTP delivery queued for batch. Last training update13:48UTC; next14:18UTC.
+
+LOCAL CHAT PREVIEW — user requested an interactive port/API during training. http://127.0.0.1:8765 serves retained605/MPS, PID69660; receipt runs/ownbase-budget50-v1/local-chat-server.json. LOCAL_CHAT_API.txt documents POST /api/chat and browser. FullHTTPsmoke3/4turns,1/2sessions; resultrecallfails. No newmodelpromotion. Before later MPS candidate assessments, pause this server to keep one MPS model at a time, then restore the preview with an explicit reviewed checkpoint; preserve user-facing model identity.
 
 2. NON-NEGOTIABLE OPERATING CONSTRAINTS
 
@@ -182,7 +184,7 @@ Do not declare a usable general model, completed 10B training, 4K-trained weight
 Paths below are relative to the repository root shown above.
 - OWN_BASE_HANDOFF.txt: this current operational summary.
 - reports/ownbase-budget50-v1/sft-packet-v2.json: active frozen next-stage script/config hashes; V1 is superseded and never dispatched.
-- runs/long-context-corpus-v18/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
+- runs/long-context-corpus-v20/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
 - reports/ownbase-budget50-v1/local-baseline-review.json: full180-turn MPS assessment, not a usability claim.
 - OWN_BASE_NEXT_STEPS.txt: complete proposed next-phase plan, including conditional VM training.
 - TRAINING_AUDIT.txt: append-only history; its original CURRENT STATE header is obsolete. Read newest entries, not that header.

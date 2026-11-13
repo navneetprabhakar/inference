@@ -1,0 +1,22 @@
+[
+  [
+    "b50-log-sections",
+    "tool",
+    "A small in-memory text parser recognizes section headers [name], key=value entries, and blank/comment lines; duplicate keys within a section reject, same key across sections valid, repeated section header reopens prior section rather than replacing it. Actual buggy implementation resets state and silently overwrites. Need failing example, explicit whitespace/comment contract, corrected pure parser and independent expected mappings/errors, later preserve equals signs inside values. Early storage model each accepted entry uses exactly36payloadbytes and payload-only budget900bytes; final reviewed fixture grows to18acceptedentries. Final calculator multiply/subtract yields modeled payload and spare budget, explicitly excludes object/encoding overhead and does not claim measured memory."
+  ],
+  [
+    "b50-circular-buffer",
+    "tool",
+    "Pure circular buffer simulator with explicit capacity, oldest-first logical snapshot, append and pop semantics and no real concurrent threads. Actual buggy implementation wraps write index but confuses full with empty and returns stale element after pop. Need trace, corrected implementation and independent list oracle, later resize preserves newest values when shrinking and all logical order when growing. Early payload-only model each stored sample costs24bytes with budget400bytes; revised capacity13afterlate resize. Final calculator total and remaining modeled payload budget; no measured RAM or actual device operation claimed."
+  ],
+  [
+    "b50-rectangle-intersection",
+    "natural",
+    "Half-open axis-aligned integer rectangles (x0,y0,x1,y1), require nonnegative extents, zero-area allowed but no intersecting area, edge-touch gives empty. Actual buggy intersection uses inclusive boundaries and swaps axes. Need concrete non-square trace, corrected pure implementation, independent integer-cell set oracle, then clip a list of labelled rectangles against a fixed viewport while retaining labels/order and not mutating input. Later translate both scene and viewport by an offset and prove/check equivariance; distinguish geometric clipping from union/dedup of overlaps. Standard library only."
+  ],
+  [
+    "b50-monotone-window",
+    "natural",
+    "A pure reference model processes a supplied sequence of timestamped observations with nondecreasing integer timestamps, retaining a fixed window (now-width,now] and counting by category. Actual buggy code expires equality incorrectly and assumes one record per timestamp. Need boundary trace with simultaneous events, explicit zero/positive width contract, corrected implementation and independent filter-from-history oracle. Later support a query with no new event that advances the clock and expires old records, but never silently rewind time. Explain difference between elapsed time and event count; preserve all inputs and report invalid decreasing timestamps explicitly."
+  ]
+]

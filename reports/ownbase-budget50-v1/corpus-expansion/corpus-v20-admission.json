@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "a553f0760ecdd5f4127f82c332d5a954d890e910521924ad185d1a92cebde4a2",
+    "50ea382c54199d27d9239e7246ae363ef96933ac9fbb9a15ff7693e93f8ab5bc"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v19/manifest.json",
+  "parent_manifest_sha256": "960c242b9eb1aa79a41e77e65bdfc58be255b7f45e93419aa20188b77d4aa590",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-20/root-review.json": "5043231373206ac5a958b27f2fdd5e19d5dbdfde9ab25f2a1054d8dc24e2bb8f",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-19/root-review.json": "4864235dc244d7a7300cc1a68021739d62889f7d1966b678ac92c2ff639137c1"
+  },
+  "selected": [
+    {
+      "id": "b50-log-sections",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3726,
+      "assistant_targets": 1423,
+      "assistant_targets_after_2048": 599,
+      "assistant_targets_after_3072": 350,
+      "tool_call_positions": [
+        2718,
+        3245,
+        3340
+      ],
+      "replayed_tool_calls": 3,
+      "max_prior_jaccard": 0.010126582278481013
+    },
+    {
+      "id": "b50-circular-buffer",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3718,
+      "assistant_targets": 2289,
+      "assistant_targets_after_2048": 1417,
+      "assistant_targets_after_3072": 646,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.009644670050761422
+    },
+    {
+      "id": "b50-monotone-window",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3652,
+      "assistant_targets": 2457,
+      "assistant_targets_after_2048": 1243,
+      "assistant_targets_after_3072": 580,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.001920860545524395
+    },
+    {
+      "id": "b50-music-notation",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3863,
+      "assistant_targets": 2450,
+      "assistant_targets_after_2048": 1351,
+      "assistant_targets_after_3072": 786,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.00104675505931612
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-rectangle-intersection",
+      "reason": "All8assistantturns read: swappedaxes/strict-halfopen trace, celloracle, labels/order/immutability, commontranslation and separate overlapping survivors correct.1296cell-oracle pairs plus complete suppliedchecks pass.Whole dialogue overflowed4096;2926storedcounter is stale pre-overflow prefix. Exclude whole version without truncation."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

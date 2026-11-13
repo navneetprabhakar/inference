@@ -1,0 +1,47 @@
+OWN MODEL — LOCAL CHAT
+
+Browser: http://127.0.0.1:8765
+Health:  GET /api/health
+Chat:    POST /api/chat
+
+Currently serves the retained step605 checkpoint on Apple MPS. The new GCP
+training is separate and still running. No automatic checkpoint replacement.
+Model:536,871,738parameters;2,048token context;192token reply budget; raw greedy
+decode/repetition penalty1.0. Generated answers are not repaired by the host.
+
+Start a conversation:
+  curl -s http://127.0.0.1:8765/api/chat \
+    -H 'Content-Type: application/json' \
+    -d '{"message":"Use the calculator to subtract 19 from 73.","permit_calls":true}'
+
+The response includes session, answer, trace (actual offline tool results),
+frames, and failure. Pass the returned session to continue:
+  curl -s http://127.0.0.1:8765/api/chat \
+    -H 'Content-Type: application/json' \
+    -d '{"session":"PASTE_RETURNED_SESSION","message":"What was the result?"}'
+
+Omit session to start fresh. Optional id provides idempotent retries within that
+session: reuse the same id/message/permit_calls after an uncertain response.
+Changing a request under an existing id returns409. Tools default off per turn;
+available tools are calculate and length conversion(m/cm/mm/km), not web or shell.
+At most2calls per turn and4per session. Browser has a per-turn tools checkbox.
+
+Runtime: loopback only, one inference at a time, up to16 in-memory sessions,
+64turns/session, no silent context trimming. Restart loses sessions. A malformed
+model action is shown as a failure; use New chat to reset a blocked conversation.
+Browser endpoints /api/session and /api/turn remain available too.
+
+Start/restart from the repository:
+  ./chat-own-server.sh \
+    --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605 \
+    --port 8765
+
+Active PID/health receipt: runs/ownbase-budget50-v1/local-chat-server.json
+Server log: runs/ownbase-budget50-v1/local-chat-server.log
+No user chats are written to logs. Our synthetic smoke results are preserved in
+runs/ownbase-budget50-v1/local-http-quality.json.
+
+Quality observed:3/4tiny smoke turns correct,1/2complete sessions. Calculator
+73-19 correctly returns54, but the follow-up incorrectly recalls73. Notebook
+ownership and a correction both work. The larger retained605 assessment remains
+6/180turns,0/60complete sessions: broad conversation is not reliable yet.

@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "0af144ee1654edf39331a9f671071c004ce035390ce1993bd03ae73bd25fccdd",
+    "e1eeb7caf8b69377bb78333aa2af7c45de3a3dfaf99045edfec84d870c93b193"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v18/manifest.json",
+  "parent_manifest_sha256": "1aca5253494693d988e8696c32d1c55b3826534420f178be00cf99b2d795ab22",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-17/root-review.json": "67a5473cbfb1d50da336c441f5bb97e4b80d5f86879a6c680362bf7192a57162",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-18/root-review.json": "2fb63f91e883d2458f7aaa34c677f58a85d498354a50e94af1cfd35fa4798cb1"
+  },
+  "selected": [
+    {
+      "id": "b50-story-tense",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3280,
+      "assistant_targets": 1851,
+      "assistant_targets_after_2048": 835,
+      "assistant_targets_after_3072": 208,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.000357653791130186
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-boardgame-tutorial",
+      "reason": "All original messages/policies exact-prefix verified against fullyread cohort17; added turn fully read. Minimum-move matrix, alternating skips, legal impossible-state trace and unspecified-clue caveat correct.224independent graph-search states pass.3062tokens falls10below strict3072threshold; exclude without padding."
+    },
+    {
+      "id": "b50-score-appeal",
+      "reason": "Original fullyread cohort18 messages/policies exact-prefix verified; added appeal response fullyread. Correctly separates withdrawn allegation from disproof/verification and tracks corrected base and later Star evidence.3046tokens remains26below strict3072; exclude without padding."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

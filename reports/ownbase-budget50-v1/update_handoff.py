@@ -37,7 +37,8 @@ state.update(utc=now.isoformat(), latest_base_observation=snapshot,
                  'train_targets_after3072':coverage['train']['assistant_targets_after_3072'],
                  'development_targets_after3072':coverage['validation']['assistant_targets_after_3072'],
                  'independent_gcs_readback':True, 'trained':False,
-                 'full4k_ready':verification['full_4k_extension_corpus_ready']},
+                 'full4k_corpus_ready':verification['full_4k_extension_corpus_ready'],
+                 'full4k_ready':False},  # Hardware/quality qualification is still outstanding.
              active_corpus_generation=active)
 for stale in ('observed', 'observed_progress'): state.pop(stale, None)
 state_path.write_text(json.dumps(state, indent=2)+'\n')
@@ -45,6 +46,15 @@ state_path.write_text(json.dumps(state, indent=2)+'\n')
 handoff = Path('OWN_BASE_HANDOFF.txt'); text = handoff.read_text()
 text = re.sub(r'EXECUTIVE SUMMARY — CURRENT AT [^\n]+',
               'EXECUTIVE SUMMARY — CURRENT AT '+now.strftime('%d %B %Y, %H:%M UTC').upper(), text, count=1)
+observed_at = datetime.datetime.fromisoformat(snapshot['utc']).strftime('%H:%M')
+if snapshot.get('progress') and snapshot['phase'] == 'base_training':
+    targets = snapshot['progress']['targets']
+    ce = snapshot.get('last_heldout_ce')
+    if targets is not None and ce is not None:
+        text = re.sub(r'latest\d\d:\d\dUTC observation[\d,]+tokens andCE[\d.]+',
+                      f'latest{observed_at}UTC observation{targets:,}tokens andCE{ce:.6f}', text, count=1)
+text = re.sub(r'Compute estimate[\d.]+USD at\d\d:\d\dUTC',
+              f'Compute estimate{snapshot["conservative_compute_accrual_usd"]:.2f}USD at{observed_at}UTC', text, count=1)
 paragraph = (
     f'- Current immutable long-context corpus is {version.upper()}: {train["sessions"]+dev["sessions"]} sessions '
     f'({train["sessions"]} train/{dev["sessions"]} development), {train["assistant_targets"]:,} training and '

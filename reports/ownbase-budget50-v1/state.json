@@ -1,5 +1,5 @@
 {
-  "utc": "2026-11-13T13:22:09.735062+00:00",
+  "utc": "2026-11-13T14:01:51.038430+00:00",
   "phase": "base_training_sft_v2_preflight_ready",
   "vm": "forge-ownbase-budget50-v1",
   "zone": "us-central1-b",
@@ -35,46 +35,47 @@
     "protected_tools": "18/18",
     "device": "mps"
   },
-  "corpus": "long-context-corpus-v18; all files GCS SHA readback verified; untrained",
+  "corpus": "long-context-corpus-v20; all files GCS SHA readback verified; untrained",
   "current_long_context_corpus": {
-    "path": "runs/long-context-corpus-v18",
-    "manifest_sha256": "1aca5253494693d988e8696c32d1c55b3826534420f178be00cf99b2d795ab22",
-    "sessions": 546,
-    "train_targets": 171147,
-    "development_targets": 47255,
-    "train_targets_after3072": 14979,
-    "development_targets_after3072": 5361,
+    "path": "runs/long-context-corpus-v20",
+    "manifest_sha256": "c467b309cdec71b103d911c9550992d9f52785e46c7111f29a6f31d61595722b",
+    "sessions": 551,
+    "train_targets": 179160,
+    "development_targets": 49712,
+    "train_targets_after3072": 16969,
+    "development_targets_after3072": 5941,
     "independent_gcs_readback": true,
     "trained": false,
+    "full4k_corpus_ready": false,
     "full4k_ready": false
   },
   "latest_base_observation": {
-    "utc": "2026-11-13T13:16:36.445013+00:00",
+    "utc": "2026-11-13T13:48:21.726109+00:00",
     "provider_status": "RUNNING",
     "machine_type": "a2-highgpu-1g",
     "provisioning_model": "FLEX_START",
     "phase": "base_training",
-    "elapsed_hours": 4.472,
-    "conservative_compute_accrual_usd": 11.18,
+    "elapsed_hours": 5.002,
+    "conservative_compute_accrual_usd": 12.5,
     "ancillary_reserved_usd": 15,
-    "total_envelope_to_date_usd": 26.18,
+    "total_envelope_to_date_usd": 27.5,
     "incremental_cap_usd": 50,
     "invoice_verified": false,
-    "last_heldout_ce": 2.5941949784755707,
+    "last_heldout_ce": 2.5780807733535767,
     "telemetry_note": null,
     "provider_duration_seconds": "50400",
     "progress": {
       "status": "running",
-      "step": 14002,
-      "targets": 7341080576,
-      "train_loss": 2.636000394821167,
-      "tokens_per_second_last_update": 103715.02666538593,
+      "step": 14309,
+      "targets": 7502036992,
+      "train_loss": 2.5788402557373047,
+      "tokens_per_second_last_update": 103714.99982916741,
       "last_checkpoint": {
-        "path": "/opt/ownbase-nano/results/budget50-v1/base-15259/step-00013880",
+        "path": "/opt/ownbase-nano/results/budget50-v1/base-15259/step-00014232",
         "upload": {
           "status": "gcs_bundle_uploaded",
-          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-8baeacfec0c94940814007724260b82c",
-          "seconds": 85.61220215899993,
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-b7eca84307cb4ed28cf5a2b9f41c96f8",
+          "seconds": 39.59676004799985,
           "bytes_one_way": 3826065236,
           "identity": {
             "adapter_hashes": {
@@ -140,19 +141,19 @@
             "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
             "torch": "2.9.1+cu129"
           },
-          "step": 13880,
+          "step": 14232,
           "manifest": {
             "files": {
               "metadata.json": {
                 "bytes": 2851,
-                "sha256": "38075ddb62dc624d636e7f8687b03e3f1251dc328e4e18e775820a697fa978f1"
+                "sha256": "b5a3046c21c76b3819f332da7203b899f4b0446925b625b2298ff71b31adc8be"
               },
               "payload.pt": {
                 "bytes": 3826061953,
-                "sha256": "0c0492c16fc5c23966a8fb11b62dcea18cff85834d82e9a338e68e76ea23e135"
+                "sha256": "99a66cd84ee230718b4a0622f1e272633116d5816d27108f86e2bbd64a872cf7"
               }
             },
-            "step": 13880,
+            "step": 14232,
             "version": 1
           },
           "publication_order": [
@@ -165,7 +166,7 @@
           "independent_sha256_readback": false,
           "note": "Upload receipt only; fresh-machine restore and next update not tested."
         },
-        "step": 13880
+        "step": 14232
       }
     },
     "controller": {
@@ -189,6 +190,6 @@
   },
   "base_7b_review": "base-7b-review.json",
   "active_corpus_generation": [
-    "cohort-17"
+    "cohort-21"
   ]
 }

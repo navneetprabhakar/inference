@@ -5,7 +5,7 @@ R=Path('runs/ownbase-budget50-v1');D=R/'evidence-backups';D.mkdir(exist_ok=True)
 stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');tmp=D/(stamp+'.tar.gz');files=[]
 for root in [Path('reports/ownbase-budget50-v1'),R/'eval-candidates',R/'corpus-expansion',R/'local-evaluations']:
  files.extend(p for p in root.rglob('*') if p.is_file() and '__pycache__' not in p.parts)
-for name in ['OWN_BASE_HANDOFF.txt','OWN_BASE_NEXT_STEPS.txt','TRAINING_AUDIT.txt','OWN_MODEL_LOCAL.txt','chat-own.sh','cloud_training/nano_chat_cli.py']:files.append(Path(name))
+for name in ['OWN_BASE_HANDOFF.txt','OWN_BASE_NEXT_STEPS.txt','TRAINING_AUDIT.txt','OWN_MODEL_LOCAL.txt','chat-own.sh','cloud_training/nano_chat_cli.py','LOCAL_CHAT_API.txt','chat-own-server.sh','own-chat.html','cloud_training/nano_chat_http.py','verify_nano_chat_http.py']:files.append(Path(name))
 for p in R.glob('*.json'):files.append(p)
 # Candidate payloads already have their own immutable GCS bundles; archive metadata only.
 for p in (R/'local-candidates').rglob('*'):
