@@ -1,0 +1,16 @@
+"""Category-specific assessment supplement. Candidates require full review."""
+import json, subprocess, fcntl
+from pathlib import Path
+root=Path('runs/ownbase-budget50-v1/eval-candidates')
+lock=Path('runs/concise-teacher-generation.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+schema=(root/'batch-01/schema.json').read_text()
+subjects={7:('natural',12,'No code, arithmetic, conversions, tools or counting puzzles. Twelve DIFFERENT practical reasoning families: evidence versus interpretation, changed priority, interrupted writing task, conditional instructions, conflicting constraints, missing information, correction of attribution, uncertainty, revision of a short explanation, cancellation, comparing stated options, preserving exceptions. Avoid gallery dependencies, pickup boards, meetings, gardening, access ramps, volunteer staffing and choosing meeting rooms already used.'),8:('code_state',10,'No tools. Ten DIFFERENT small Python topics: exhausted generator, finally overriding return, chained comparison, negative slicing, unpacking mismatch, sorted versus sort return, dictionary missing versus present None, floating-point equality, enumerate start index, duplicate dictionary key. Do NOT use aliasing, copying, default mutable arguments, truthiness fallback, mutation during iteration, scope/global/nonlocal, strip/strings, lambda late binding, summing loop, or missing return already used. Provide small executable snippets and corrections, not broad algorithms.')}
+for n,(cat,count,extra) in subjects.items():
+ d=root/f'batch-{n:02d}';d.mkdir(exist_ok=False);(d/'schema.json').write_text(schema)
+ prompt=f'''Do not use tools, files, network or agents. Return exactly {count} new assessment sessions, IDs b50-{n:02d}-01 onwards. Category ONLY {cat}. {extra} Each session has3 substantive USER turns, including changed facts or requirements and grounded recall. Every user turn must be coherent independently of whether the model answered earlier turns correctly; do not plant the correct earlier answer in followups. Use concrete supplied evidence. Each family must be a distinct descriptive scenario name, not category. Rubrics must state correct expected facts, constraints, reasoning and acceptable alternatives. No assistant dialogue. This is NEVER training data. All expected_calls=[], permit_calls=false. acceptable_answers=[] except genuinely requested exact short outputs; most questions need explanation. Each complete conversation including short answers must fit1800tokens. No external actions or medical/legal/financial advice. Do not overconstrain valid alternative wording.'''
+ (d/'prompt.txt').write_text(prompt)
+ args=['codex','exec','--ignore-user-config','--ephemeral','--skip-git-repo-check','--sandbox','read-only','-C',str(d.resolve()),'-m','gpt-6.1-terra','-c','model_reasoning_effort="high"','--output-schema',str((d/'schema.json').resolve()),'--output-last-message',str((d/'output.json').resolve()),'--json','-']
+ with (d/'events.jsonl').open('w') as out,(d/'stderr.log').open('w') as err:r=subprocess.run(args,input=prompt,text=True,stdout=out,stderr=err,timeout=600)
+ assert r.returncode==0
+ assert len(json.loads((d/'output.json').read_text())['sessions'])==count
+ print(json.dumps({'batch':n,'generated':count,'reviewed':0}),flush=True)

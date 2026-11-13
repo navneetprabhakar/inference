@@ -1,0 +1,719 @@
+{
+  "schema": 1,
+  "reviewer": "root",
+  "raw_candidates_reviewed": 82,
+  "selected_sessions": 60,
+  "selected_turns": 180,
+  "categories": {
+    "natural": 20,
+    "tool": 20,
+    "code_state": 20
+  },
+  "suite_sha256": "d7acf5e46deab0fe2644489557a4743522c5dec65035931d39472b11bd0f3c48",
+  "raw_sources": [
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-01/output.json",
+      "sha256": "aa26ec8fea43df5b4fa2028b810ac62994fed2a90906a54a5b7216689a72d2ff"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-02/output.json",
+      "sha256": "c35e4e49334b513ef9ff929ce07d82b5bdb2c156a4f38372ca506573b72ee3ad"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-03/output.json",
+      "sha256": "9a3a5a4980005a533a05d983e1e1fe17a7e1fb8bd92e1e40eff6e78e984f716c"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-04/output.json",
+      "sha256": "b3fd3597b8c988d9f4e7b628e602449949923d5b45a1f0a8cba04717775b8a24"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-05/output.json",
+      "sha256": "cdda6b65a376b6ea057769e27ccaeb8bf906099ba2b27e616b333d6719a97c8b"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-06/output.json",
+      "sha256": "f884eadbf5f29b9aaf6d51491d4977667f6fecd0ed841b035ef34c83ed363e19"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-07/output.json",
+      "sha256": "8c74266e93bdbe7be58178bb880b6aa230a761f705bf4ca5a1728cbc876791fd"
+    },
+    {
+      "path": "runs/ownbase-budget50-v1/eval-candidates/batch-08/output.json",
+      "sha256": "b303b8a5dacfd4bfdfcf466de3fe9e2e36fb4fddb1c6dd67d0b8e3ce24ce99dd"
+    }
+  ],
+  "edits": [
+    {
+      "id": "b50-01-09",
+      "turn": 2,
+      "field": "rubric",
+      "before": "Explain that the number cannot be determined: removing three posters from the original full tubes could leave all six occupied or could empty a tube only if removals and initial counts permitted it. Since each initially held eight and only three were removed, all six original tubes necessarily still contain posters; the five additional tubes are empty. Correct conclusion: 6 occupied tubes.",
+      "after": "Six original tubes still contain posters. Each began with eight and only three posters total were removed, so none can have been emptied. The five additional tubes are empty and do not change the occupied count. No tool call.",
+      "reason": "Original rubric contradicted itself, initially claiming insufficient information."
+    },
+    {
+      "id": "b50-07-04",
+      "turn": 0,
+      "field": "user",
+      "before": "For a workshop handout, use a diagram only if the explanation has more than one step. The explanation is: 'Open the app and select Help.' What should the handout include?",
+      "after": "For a workshop handout, include a diagram whenever the explanation has more than one step; otherwise a diagram is optional. The explanation is: 'Open the app and select Help.' What should the handout include?",
+      "reason": "Only-if did not mean if; clarify the intended conditional to match the task and both downstream rubrics."
+    },
+    {
+      "id": "b50-07-08",
+      "turn": 1,
+      "field": "rubric",
+      "before": "Reflect that the later forecast indicates lower likelihood while retaining the possibility of rain. Do not claim certainty or invent a probability.",
+      "after": "The later forecast supplies a low-likelihood description while retaining the possibility of rain. Do not infer a numeric probability or certainty. The original statement did not specify a likelihood, so do not claim a measured decrease from a known previous probability.",
+      "reason": "Unspecified prior likelihood does not establish a decrease."
+    }
+  ],
+  "excluded": {
+    "b50-01-03": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-01-07": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-02-06": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-02-07": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-02-08": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-02-10": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-03-05": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-03-06": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-03-07": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-03-08": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-03-10": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-04-02": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-05-07": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-05-08": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-02": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-03": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-04": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-05": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-07": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-08": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-09": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict.",
+    "b50-06-10": "Not selected: redundant scenario/mechanism or category mix; this is not an error verdict."
+  },
+  "reference_tool_calls_replayed": 47,
+  "reference_traces": [
+    {
+      "session": "b50-01-02",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 96,
+          "b": 18
+        }
+      },
+      "result": 78
+    },
+    {
+      "session": "b50-01-02",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 78,
+          "b": 7
+        }
+      },
+      "result": 71
+    },
+    {
+      "session": "b50-01-02",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 96,
+          "b": 16
+        }
+      },
+      "result": 80
+    },
+    {
+      "session": "b50-01-02",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 80,
+          "b": 7
+        }
+      },
+      "result": 73
+    },
+    {
+      "session": "b50-01-05",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 2.4,
+          "from": "km",
+          "to": "m"
+        }
+      },
+      "result": 2400.0
+    },
+    {
+      "session": "b50-01-05",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "add",
+          "a": 2400,
+          "b": 650
+        }
+      },
+      "result": 3050
+    },
+    {
+      "session": "b50-01-05",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 3050,
+          "b": 150
+        }
+      },
+      "result": 2900
+    },
+    {
+      "session": "b50-01-09",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 8,
+          "b": 6
+        }
+      },
+      "result": 48
+    },
+    {
+      "session": "b50-01-09",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 48,
+          "b": 3
+        }
+      },
+      "result": 45
+    },
+    {
+      "session": "b50-02-03",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 18,
+          "b": 7
+        }
+      },
+      "result": 126
+    },
+    {
+      "session": "b50-02-03",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 126,
+          "b": 14
+        }
+      },
+      "result": 112
+    },
+    {
+      "session": "b50-02-05",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 3.6,
+          "from": "km",
+          "to": "m"
+        }
+      },
+      "result": 3600.0
+    },
+    {
+      "session": "b50-02-05",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "add",
+          "a": 3600,
+          "b": 450
+        }
+      },
+      "result": 4050
+    },
+    {
+      "session": "b50-02-09",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "divide",
+          "a": 96,
+          "b": 12
+        }
+      },
+      "result": 8.0
+    },
+    {
+      "session": "b50-02-09",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 8,
+          "b": 3
+        }
+      },
+      "result": 5
+    },
+    {
+      "session": "b50-03-01",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 2.4,
+          "from": "m",
+          "to": "cm"
+        }
+      },
+      "result": 240.0
+    },
+    {
+      "session": "b50-03-01",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 240,
+          "b": 65
+        }
+      },
+      "result": 175
+    },
+    {
+      "session": "b50-03-01",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 240,
+          "b": 85
+        }
+      },
+      "result": 155
+    },
+    {
+      "session": "b50-03-02",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 18,
+          "b": 750
+        }
+      },
+      "result": 13500
+    },
+    {
+      "session": "b50-03-02",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 13500,
+          "from": "g",
+          "to": "kg"
+        }
+      },
+      "result": 13.5
+    },
+    {
+      "session": "b50-03-02",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 15,
+          "b": 750
+        }
+      },
+      "result": 11250
+    },
+    {
+      "session": "b50-03-02",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 3,
+          "b": 750
+        }
+      },
+      "result": 2250
+    },
+    {
+      "session": "b50-03-03",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 3.5,
+          "from": "h",
+          "to": "min"
+        }
+      },
+      "result": 210.0
+    },
+    {
+      "session": "b50-03-03",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 210,
+          "b": 42
+        }
+      },
+      "result": 168
+    },
+    {
+      "session": "b50-03-04",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 7.2,
+          "from": "km",
+          "to": "m"
+        }
+      },
+      "result": 7200.0
+    },
+    {
+      "session": "b50-03-04",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 7200,
+          "b": 1850
+        }
+      },
+      "result": 5350
+    },
+    {
+      "session": "b50-03-09",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "divide",
+          "a": 264,
+          "b": 12
+        }
+      },
+      "result": 22.0
+    },
+    {
+      "session": "b50-03-09",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "divide",
+          "a": 264,
+          "b": 8
+        }
+      },
+      "result": 33.0
+    },
+    {
+      "session": "b50-03-09",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 7,
+          "b": 33
+        }
+      },
+      "result": 231
+    },
+    {
+      "session": "b50-04-01",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "add",
+          "a": 47,
+          "b": 36
+        }
+      },
+      "result": 83
+    },
+    {
+      "session": "b50-04-01",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "add",
+          "a": 47,
+          "b": 29
+        }
+      },
+      "result": 76
+    },
+    {
+      "session": "b50-04-03",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 8,
+          "b": 14
+        }
+      },
+      "result": 112
+    },
+    {
+      "session": "b50-04-03",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 7,
+          "b": 14
+        }
+      },
+      "result": 98
+    },
+    {
+      "session": "b50-04-04",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 150,
+          "from": "min",
+          "to": "h"
+        }
+      },
+      "result": 2.5
+    },
+    {
+      "session": "b50-04-04",
+      "turn": 1,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 120,
+          "from": "min",
+          "to": "h"
+        }
+      },
+      "result": 2.0
+    },
+    {
+      "session": "b50-04-05",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "divide",
+          "a": 125,
+          "b": 5
+        }
+      },
+      "result": 25.0
+    },
+    {
+      "session": "b50-04-05",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 125,
+          "b": 13
+        }
+      },
+      "result": 112
+    },
+    {
+      "session": "b50-04-06",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 4.75,
+          "from": "kg",
+          "to": "g"
+        }
+      },
+      "result": 4750.0
+    },
+    {
+      "session": "b50-04-06",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 4750,
+          "b": 250
+        }
+      },
+      "result": 4500
+    },
+    {
+      "session": "b50-04-07",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 2,
+          "from": "km",
+          "to": "m"
+        }
+      },
+      "result": 2000.0
+    },
+    {
+      "session": "b50-04-07",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "add",
+          "a": 2000,
+          "b": 750
+        }
+      },
+      "result": 2750
+    },
+    {
+      "session": "b50-04-08",
+      "turn": 0,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "multiply",
+          "a": 7,
+          "b": 8
+        }
+      },
+      "result": 56
+    },
+    {
+      "session": "b50-04-08",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 64,
+          "b": 56
+        }
+      },
+      "result": 8
+    },
+    {
+      "session": "b50-04-09",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 4,
+          "from": "min",
+          "to": "s"
+        }
+      },
+      "result": 240.0
+    },
+    {
+      "session": "b50-04-09",
+      "turn": 1,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 240,
+          "b": 45
+        }
+      },
+      "result": 195
+    },
+    {
+      "session": "b50-04-10",
+      "turn": 0,
+      "call": {
+        "name": "convert",
+        "arguments": {
+          "value": 860,
+          "from": "mm",
+          "to": "cm"
+        }
+      },
+      "result": 86.0
+    },
+    {
+      "session": "b50-04-10",
+      "turn": 2,
+      "call": {
+        "name": "calculate",
+        "arguments": {
+          "op": "subtract",
+          "a": 86,
+          "b": 23
+        }
+      },
+      "result": 63
+    }
+  ],
+  "review_notes": [
+    "All selected users and rubrics read in full before model outputs. All8batches reviewed; raw candidates preserved.",
+    "Three selected-spec corrections explicit above; unselected b50-03-10 has escaped-newline/scope ambiguity and is not used.",
+    "Commutative operands and valid alternate arithmetic sequences must be accepted in manual review; exact reference-call comparator is diagnostic only.",
+    "Code semantics checked independently in verify_assessment.py.",
+    "No claim of semantic independence from every historic training family; basic Python and arithmetic concepts intentionally overlap, scenarios newly authored.",
+    "No new training admission and no acceptance score inferred from corpus counts."
+  ]
+}
