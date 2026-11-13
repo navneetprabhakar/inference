@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "25b6e9bdf14e4cb40cb499585a82fc88cba3b1c62cda9af75a1d26cb34e8f81d",
+    "23bbefb3f890dcbbfe8ba559f2c522a64dc0cb97c0efe0ced6dc804bf8d7c051"
+  ],
+  "parent_manifest": "runs/natural-dialogue-4k-v1/admitted-v2/manifest.json",
+  "parent_manifest_sha256": "0ab29654fa95764d8920a66da6fe2feae762b9b7f4c8919f7dcfe0cf2741fa72",
+  "root_review_sha256": {
+    "runs/long-context-qualification-v3/root-review.json": "1a9d003516cc8b6b1c1d9d4d636db0fe15e17770fc3366e6393a4c452066d434",
+    "runs/long-context-production-final-v1/root-review.json": "93589481f90da5b484b3f863f44e2ca96b90320e805ffc75e29bb9ce9319795a"
+  },
+  "selected": [
+    {
+      "id": "long-parser",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3724,
+      "assistant_targets": 2805,
+      "assistant_targets_after_3072": 652,
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0
+    },
+    {
+      "id": "long-packs",
+      "split": "validation",
+      "family": "long_context_tool",
+      "context_tokens": 2745,
+      "assistant_targets": 882,
+      "assistant_targets_after_3072": 0,
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.0004152823920265781
+    },
+    {
+      "id": "long-display",
+      "split": "validation",
+      "family": "long_context_tool",
+      "context_tokens": 2955,
+      "assistant_targets": 1002,
+      "assistant_targets_after_3072": 0,
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.009239815203695927
+    },
+    {
+      "id": "production-viewpoint",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3077,
+      "assistant_targets": 1601,
+      "assistant_targets_after_3072": 5,
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0
+    },
+    {
+      "id": "production-guide",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 2782,
+      "assistant_targets": 1489,
+      "assistant_targets_after_3072": 0,
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0005107252298263534
+    },
+    {
+      "id": "production-labels",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3472,
+      "assistant_targets": 1204,
+      "assistant_targets_after_3072": 110,
+      "replayed_tool_calls": 3,
+      "max_prior_jaccard": 0.007495069033530572
+    },
+    {
+      "id": "production-measures",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3100,
+      "assistant_targets": 929,
+      "assistant_targets_after_3072": 28,
+      "replayed_tool_calls": 3,
+      "max_prior_jaccard": 0.008387698042870456
+    }
+  ],
+  "excluded": [
+    {
+      "id": "long-letters",
+      "reason": "All four exchanges read: early promise, courtyard users, lease uncertainty and reciprocal concessions preserved; original fictional memories are appropriate creative additions. Valid but1593tokens, excluded from targeted long supplement."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "No VM/cloud activity, no full-model4Ktraining or RAM test."
+  ]
+}
