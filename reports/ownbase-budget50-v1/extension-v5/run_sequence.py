@@ -28,16 +28,17 @@ for item in packet['files']:
 env=os.environ.copy();env['PYTHONPATH']=str(code)+':'+str(ROOT/'vendor')+':'+str(ROOT/'nanochat-source');env['NANOCHAT_DTYPE']='bfloat16'
 sys.path.insert(0,str(code));from cloud_training.nano_checkpoint import validate_bundle
 validate_bundle(base);candidates=[]
+cp(prefix+'/extension-v5/assess_v5.py',HERE/'assessment-v5.py');assert sha(HERE/'assessment-v5.py')=='0f3ec628f7a5df8ab0d5f590db7218382142276f8017a04ddac9cc58879c005d'
 try:
  # User order: exact10B base -> matched assessment -> SFT -> same assessment.
  assert json.loads((base/'metadata.json').read_text())['step']==19074, '10B required before this SFT sequence'
  publish('pre_sft_assessment',base_manifest_sha256=sha(base/'manifest.json'))
  pre=HERE/'base10b-assessment.json'
- args=[sys.executable,str(code/'assessment.py'),'--checkpoint',str(base),'--tokenizer',str(ROOT/'tokenizer'),'--repo',str(ROOT/'nanochat-source'),'--suite',str(HERE/'assessment.json'),'--output',str(pre),'--device','cuda','--seconds','1800']
+ args=[sys.executable,str(HERE/'assessment-v5.py'),'--checkpoint',str(base),'--tokenizer',str(ROOT/'tokenizer'),'--repo',str(ROOT/'nanochat-source'),'--suite',str(HERE/'assessment.json'),'--output',str(pre),'--device','cuda','--seconds','1800','--allow-base']
  rc=run(args,HERE/'base10b-assessment.log',1860)
  report=json.loads(pre.read_text())
  assert rc==0 and report['status']=='complete_requires_full_review' and len(report['records'])==180,'Pre-SFT check incomplete; do not silently skip order'
- args=[sys.executable,'-m','cloud_training.nano_quality','--repo',str(ROOT/'nanochat-source'),'--checkpoint',str(base),'--checkpoint-manifest-sha256',sha(base/'manifest.json'),'--tokenizer',str(ROOT/'tokenizer'),'--tokenizer-sha256',c['parent_receipt']['identity']['tokenizer_sha256'],'--suite',str(HERE/'protected.json'),'--output',str(HERE/'base10b-protected.json'),'--seconds','120','--reply-budget','128']
+ args=[sys.executable,'-m','cloud_training.nano_quality','--repo',str(ROOT/'nanochat-source'),'--checkpoint',str(base),'--checkpoint-manifest-sha256',sha(base/'manifest.json'),'--tokenizer',str(ROOT/'tokenizer'),'--tokenizer-sha256',c['parent_receipt']['identity']['tokenizer_sha256'],'--suite',str(HERE/'protected.json'),'--output',str(HERE/'base10b-protected.json'),'--allow-base','--seconds','120','--reply-budget','128']
  rc=run(args,HERE/'base10b-protected-driver.log',150)
  assert rc==0,'Pre-SFT protected check incomplete'
  # The retained605 comparison arm is deferred; train the exact10B branch only.
@@ -66,7 +67,7 @@ try:
   # Readback is verified and can be discarded; primary local+GCS bundles remain.
   import shutil;shutil.rmtree(readback)
   if time.time()<end-240:
-   args=[sys.executable,str(code/'assessment.py'),'--checkpoint',str(checkpoint),'--tokenizer',str(ROOT/'tokenizer'),'--repo',str(ROOT/'nanochat-source'),'--suite',str(HERE/'assessment.json'),'--output',str(HERE/(name+'-assessment.json')),'--device','cuda','--seconds',str(min(1800,int(end-time.time()-180)))]
+   args=[sys.executable,str(HERE/'assessment-v5.py'),'--checkpoint',str(checkpoint),'--tokenizer',str(ROOT/'tokenizer'),'--repo',str(ROOT/'nanochat-source'),'--suite',str(HERE/'assessment.json'),'--output',str(HERE/(name+'-assessment.json')),'--device','cuda','--seconds',str(min(1800,int(end-time.time()-180)))]
    rc=run(args,HERE/(name+'-assessment.log'),min(1860,end-time.time()-120));candidates[-1]['assessment_exit_code']=rc
    post=json.loads((HERE/(name+'-assessment.json')).read_text())
    assert rc==0 and post['status']=='complete_requires_full_review' and len(post['records'])==180,'Post-SFT assessment incomplete'

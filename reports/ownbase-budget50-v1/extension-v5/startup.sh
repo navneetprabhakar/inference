@@ -27,7 +27,7 @@ python3 - <<'PY'
 import hashlib,json,os
 from pathlib import Path
 p=json.loads(Path('extension-packet.json').read_text())
-assert p['hashes']=={'run_sequence.py':'0cda4734065f14dc5045db502f695493513e15ea17efaf6fe1c605c26a4e23ab','supervisor.py':'308eb72ea08435dea9f61fc64a26e45df9a4c38b182394fd55c96b9f9356f4c8'}
+assert {k:p['hashes'][k] for k in ('run_sequence.py','supervisor.py')}=={'run_sequence.py':'b325bd8f4e1384498fa953119862224595614c30d193bb15563ce96b910f2893','supervisor.py':'cb07bfbbe505426db2628df30162681b8f94c715b5810fbea40a0f895a9a60e9'}
 for src,dest in [('run_sequence.py','run-extension-sequence.py'),('supervisor.py','run-extension-supervisor.py')]:
  path=Path('extension-'+src);assert hashlib.sha256(path.read_bytes()).hexdigest()==p['hashes'][src];os.replace(path,dest)
 PY

@@ -17,7 +17,7 @@ def cmd(pid):return Path(f'/proc/{pid}/cmdline').read_bytes().replace(b'\0',b' '
 def live(pid):
  try:return Path(f'/proc/{pid}/stat').read_text().split(') ',1)[1].split()[0]!='Z'
  except FileNotFoundError:return False
-SFT_SHA='0cda4734065f14dc5045db502f695493513e15ea17efaf6fe1c605c26a4e23ab'
+SFT_SHA='b325bd8f4e1384498fa953119862224595614c30d193bb15563ce96b910f2893'
 parent=None;failure=None
 try:
  assert lease['prior_compute_hours']+lease['duration_seconds']/3600<=16
