@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "3a5479b6637972d78da33017ba96e66de77587664e1ab69a2f347e575964fcc9",
+    "80ba9c7d9dea73be67e8e0f749563755bc9a8057f28e9bd8707967bb011f18ec"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v10/manifest.json",
+  "parent_manifest_sha256": "36d83a0764a5fb07ab28b707e1404827cde8d08321060c534d5639e6a0920c23",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-09/root-review.json": "8a2a2fef6e960703a163b82b7ef482e6c1d1862da219c66a4964d3208944f90f"
+  },
+  "selected": [
+    {
+      "id": "b50-cue-timeline",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3951,
+      "assistant_targets": 1846,
+      "assistant_targets_after_2048": 863,
+      "assistant_targets_after_3072": 315,
+      "tool_call_positions": [
+        3686,
+        3783
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.009541117673784643
+    },
+    {
+      "id": "b50-svg-coordinate",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3946,
+      "assistant_targets": 1840,
+      "assistant_targets_after_2048": 719,
+      "assistant_targets_after_3072": 302,
+      "tool_call_positions": [
+        3671,
+        3764
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.010105263157894737
+    },
+    {
+      "id": "b50-cache-clock",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3469,
+      "assistant_targets": 2191,
+      "assistant_targets_after_2048": 855,
+      "assistant_targets_after_3072": 311,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0031446540880503146
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-borrow-ledger",
+      "reason": "Content passes full root review: recorded versus actual custody, reports and intentions separated, prospective policy and hypothetical scenes not treated as past events. Whole dialogue2459tokens remains below3072 admission threshold; not padded or truncated."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

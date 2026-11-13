@@ -1,0 +1,110 @@
+{
+  "source": "runs/ownbase-budget50-v1/local-baseline-retention.json",
+  "source_sha256": "4df9ed0da0bcc9da2d4812b1f63e00e0d9104988d67b6d13a958d6f9cb4d49cf",
+  "device": "mps",
+  "records": 126,
+  "historical_normalized_exact_passed": 110,
+  "historical_normalized_exact_total": 112,
+  "byte_exact_and_expected_calls_passed": 109,
+  "normalized_pass_but_verbatim_failure": [
+    {
+      "session": "literal-wide_copy-4",
+      "turn": 0,
+      "answer": "What",
+      "exact_answers": [
+        "what"
+      ],
+      "reason": "Historical normalization hides casing mismatch; this verbatim-copy request fails strict reproduction."
+    }
+  ],
+  "manual_open_turns": [
+    {
+      "session": "context-grounded_plan-1",
+      "turn": 0,
+      "pass": false,
+      "reason": "Invents44 remaining minutes without a coherent allocation and adds unrelated boilerplate."
+    },
+    {
+      "session": "context-grounded_plan-1",
+      "turn": 1,
+      "pass": false,
+      "reason": "Continues the explicitly cancelled photograph-sorting activity."
+    },
+    {
+      "session": "context-grounded_plan-2",
+      "turn": 0,
+      "pass": false,
+      "reason": "Mentions both tasks but does not provide a usable time allocation; padded generic advice."
+    },
+    {
+      "session": "context-grounded_plan-2",
+      "turn": 1,
+      "pass": false,
+      "reason": "Keeps organizing supplies after that task was cancelled."
+    },
+    {
+      "session": "context-grounded_plan-3",
+      "turn": 0,
+      "pass": false,
+      "reason": "Claims85minutes for plants plus15for craft and invents a remaining-time balance."
+    },
+    {
+      "session": "context-grounded_plan-3",
+      "turn": 1,
+      "pass": false,
+      "reason": "Reintroduces cancelled craft task and unsupported15minutes."
+    },
+    {
+      "session": "context-grounded_plan-4",
+      "turn": 0,
+      "pass": false,
+      "reason": "Allocates34minutes then17remaining, exceeding the stated34-minute window."
+    },
+    {
+      "session": "context-grounded_plan-4",
+      "turn": 1,
+      "pass": true,
+      "reason": "Retains34minutes and the sole sorting activity without reintroducing cancelled craft; acceptable but generic."
+    },
+    {
+      "session": "general-invitation-revision",
+      "turn": 0,
+      "pass": false,
+      "reason": "Placeholder salutation and instruction to invite a board-game do not form a usable two-sentence invitation."
+    },
+    {
+      "session": "general-invitation-revision",
+      "turn": 1,
+      "pass": false,
+      "reason": "Gives a request to send/change an invite instead of the revised invitation."
+    },
+    {
+      "session": "general-adapt-advice",
+      "turn": 0,
+      "pass": false,
+      "reason": "Relevant explanation exceeds the explicit two-sentence maximum."
+    },
+    {
+      "session": "general-adapt-advice",
+      "turn": 1,
+      "pass": false,
+      "reason": "Suggests the checklist the user explicitly rejected."
+    },
+    {
+      "session": "general-clarification-and-grounding",
+      "turn": 0,
+      "pass": false,
+      "reason": "Claims it can arrange a physical move and does not resolve missing object/location."
+    },
+    {
+      "session": "general-clarification-and-grounding",
+      "turn": 1,
+      "pass": true,
+      "reason": "Groups supplies in reachable labeled storage without claiming action; relevant despite weak/repetitive style."
+    }
+  ],
+  "manual_open_passed": 2,
+  "manual_open_total": 14,
+  "scope": "Additional exposed retention only. Exact equality/calls verified mechanically; all14open outputs,2normalized failures and1casing variant read by root. Does not supersede0/60 broad-session assessment.",
+  "promotion_rule": "Compare each candidate with this matched local baseline; preserve previously passing retention cases and review all new assessment outputs. No automatic promotion."
+}

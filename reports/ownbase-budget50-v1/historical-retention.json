@@ -1,0 +1,1640 @@
+{
+  "purpose": "development_only_never_train",
+  "sessions": [
+    {
+      "id": "instruction-v2-tool_correction-1",
+      "turns": [
+        {
+          "user": "Find the difference, first 715, second 1875. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 715,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-1160"
+          ]
+        },
+        {
+          "user": "Replace the first input with 1883, retain the other input and operation, and recalculate. Return only the number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1883,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-two_entities-1",
+      "turns": [
+        {
+          "user": "record-638506 uses locker 1268. record-332617 uses locker 1704. The response must consist solely of active.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "active"
+          ]
+        },
+        {
+          "user": "record-638506 now has locker 1996; leave record-332617 as it was. Return just this token: confirmed",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-332617.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1704"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-638506.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1996"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-two_entities-2",
+      "turns": [
+        {
+          "user": "record-408818 uses locker 584. record-342311 uses locker 709. The response must consist solely of queued.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "queued"
+          ]
+        },
+        {
+          "user": "record-408818 now has locker 1758; leave record-342311 as it was. The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-342311.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "709"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-408818.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1758"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-calculate-1",
+      "turns": [
+        {
+          "user": "Evaluate the multiplication of 596 and 267. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 596,
+                "b": 267,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "159132"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-state-1",
+      "turns": [
+        {
+          "user": "At first, record-233316 is located at AXK-619. The response must consist solely of closed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "closed"
+          ]
+        },
+        {
+          "user": "Update the location of record-233316 to TNH-862. Return just this token: saved",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "saved"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-233316.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "TNH-862"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-233316.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "AXK-619"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-calculate-2",
+      "turns": [
+        {
+          "user": "Case record-594152-9: Find the difference, first 205, second 1838. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 205,
+                "b": 1838,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-1633"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-literal-1",
+      "turns": [
+        {
+          "user": "Case record-478059-0: Reference record-478059-1016. The response must consist solely of open.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "open"
+          ]
+        },
+        {
+          "user": "The response must consist solely of yes.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "yes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-tool_correction-2",
+      "turns": [
+        {
+          "user": "Case record-325956-6: Evaluate the multiplication of 1088 and 938. Obtain the answer through calculate; output the number alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1088,
+                "b": 938,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "1020544"
+          ]
+        },
+        {
+          "user": "Replace the first input with 265, retain the other input and operation, and recalculate. Return only the number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 265,
+                "b": 938,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "248570"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-state-2",
+      "turns": [
+        {
+          "user": "At first, record-532234 is located at QEK-593. The response must consist solely of draft.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "draft"
+          ]
+        },
+        {
+          "user": "Update the location of record-532234 to AVD-634. Return just this token: saved",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "saved"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-532234.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "AVD-634"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-532234.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "QEK-593"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-convert-1",
+      "turns": [
+        {
+          "user": "Case record-739044-12: Express the measurement 1705 kg using g. Use convert and give only the numeric result.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 1705
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "1705000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-convert-2",
+      "turns": [
+        {
+          "user": "Express the measurement 1609 km using m. Use convert and give only the numeric result.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 1609
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "1609000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v2-literal-2",
+      "turns": [
+        {
+          "user": "Reference record-580851-1835. Return just this token: draft",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "draft"
+          ]
+        },
+        {
+          "user": "The response must consist solely of confirmed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-literal-1",
+      "turns": [
+        {
+          "user": "Request record-447293. Only output the word shown here: invalid",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "invalid"
+          ]
+        },
+        {
+          "user": "Request record-447293. Constrain your entire response to this word: accepted",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "accepted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-two_entities-1",
+      "turns": [
+        {
+          "user": "record-326120 uses locker 25, and record-839656 uses locker 162. Constrain your entire response to this word: today",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "today"
+          ]
+        },
+        {
+          "user": "The new locker for record-326120 is 329; the other locker stays the same. Only output the word shown here: latest",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "latest"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-839656.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "162"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-326120.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "329"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-state-1",
+      "turns": [
+        {
+          "user": "record-897989 has location code UFU-578. Only output the word shown here: continue",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "continue"
+          ]
+        },
+        {
+          "user": "Change record-897989 to location code LNL-877. Only output the word shown here: continue",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "continue"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-897989.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "LNL-877"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-897989.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "UFU-578"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-convert-1",
+      "turns": [
+        {
+          "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "16998.6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-two_entities-2",
+      "turns": [
+        {
+          "user": "record-801359 uses locker 1715, and record-193925 uses locker 1364. Only output the word shown here: thanks",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "thanks"
+          ]
+        },
+        {
+          "user": "The new locker for record-801359 is 465; the other locker stays the same. Constrain your entire response to this word: earliest",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "earliest"
+          ]
+        },
+        {
+          "user": "Give only the unchanged locker number belonging to record-193925.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "1364"
+          ]
+        },
+        {
+          "user": "Give only the revised locker number belonging to record-801359.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "465"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-tool_correction-1",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "2925"
+          ]
+        },
+        {
+          "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "2228"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-tool_correction-2",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "646"
+          ]
+        },
+        {
+          "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "-917"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-calculate-1",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-calculate-2",
+      "turns": [
+        {
+          "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "exact_answers": [
+            "3136"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-state-2",
+      "turns": [
+        {
+          "user": "record-465612 has location code RHY-227. Only output the word shown here: final",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "final"
+          ]
+        },
+        {
+          "user": "Change record-465612 to location code SGP-186. Constrain your entire response to this word: retained",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "retained"
+          ]
+        },
+        {
+          "user": "Give only the current location code for record-465612.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "SGP-186"
+          ]
+        },
+        {
+          "user": "Name only the initial location code mentioned for record-465612.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "RHY-227"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-literal-2",
+      "turns": [
+        {
+          "user": "Request record-330795. Only output the word shown here: west",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "west"
+          ]
+        },
+        {
+          "user": "Request record-330795. Only output the word shown here: tomorrow",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "exact_answers": [
+            "tomorrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instruction-v3-convert-2",
+      "turns": [
+        {
+          "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              },
+              "name": "convert"
+            }
+          ],
+          "exact_answers": [
+            "22468.2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-wide_copy-1",
+      "turns": [
+        {
+          "user": "For QTFC-251, reproduce this text verbatim without additions: sister",
+          "expected_calls": [],
+          "exact_answers": [
+            "sister"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-wide_copy-2",
+      "turns": [
+        {
+          "user": "For BAQJ-748, reproduce this text verbatim without additions: acia grilling worksheet",
+          "expected_calls": [],
+          "exact_answers": [
+            "acia grilling worksheet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-wide_copy-3",
+      "turns": [
+        {
+          "user": "For NLRQ-474, reproduce this text verbatim without additions: entire bamboo trousers",
+          "expected_calls": [],
+          "exact_answers": [
+            "entire bamboo trousers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-wide_copy-4",
+      "turns": [
+        {
+          "user": "For NVVZ-100, reproduce this text verbatim without additions: what",
+          "expected_calls": [],
+          "exact_answers": [
+            "what"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-update_state-1",
+      "turns": [
+        {
+          "user": "For record XCVS-327, my box is in MSSS-563. Acknowledge briefly.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Understood."
+          ]
+        },
+        {
+          "user": "Please record ASMY-766 as its latest location instead of the earlier one.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Updated."
+          ]
+        },
+        {
+          "user": "What is the latest recorded location? Output its code alone.",
+          "expected_calls": [],
+          "exact_answers": [
+            "ASMY-766"
+          ]
+        },
+        {
+          "user": "Give only the earlier location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "MSSS-563"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-update_state-2",
+      "turns": [
+        {
+          "user": "For record VSDX-342, my notebook is in ARRM-169. Acknowledge briefly.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Understood."
+          ]
+        },
+        {
+          "user": "Please record KDEE-248 as its latest location instead of the earlier one.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Updated."
+          ]
+        },
+        {
+          "user": "What is the latest recorded location? Output its code alone.",
+          "expected_calls": [],
+          "exact_answers": [
+            "KDEE-248"
+          ]
+        },
+        {
+          "user": "Give only the earlier location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "ARRM-169"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-update_state-3",
+      "turns": [
+        {
+          "user": "For record WYBQ-589, my bag is in AHDM-549. Acknowledge briefly.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Understood."
+          ]
+        },
+        {
+          "user": "Please record FWTA-331 as its latest location instead of the earlier one.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Updated."
+          ]
+        },
+        {
+          "user": "What is the latest recorded location? Output its code alone.",
+          "expected_calls": [],
+          "exact_answers": [
+            "FWTA-331"
+          ]
+        },
+        {
+          "user": "Give only the earlier location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "AHDM-549"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-update_state-4",
+      "turns": [
+        {
+          "user": "For record JRDX-553, my box is in DQHC-308. Acknowledge briefly.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Understood."
+          ]
+        },
+        {
+          "user": "Please record RZZY-692 as its latest location instead of the earlier one.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Updated."
+          ]
+        },
+        {
+          "user": "What is the latest recorded location? Output its code alone.",
+          "expected_calls": [],
+          "exact_answers": [
+            "RZZY-692"
+          ]
+        },
+        {
+          "user": "Give only the earlier location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "DQHC-308"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-ordered_subtract-1",
+      "turns": [
+        {
+          "user": "Using calculate, subtract the second operand (-891) from the first operand (1731) for PAHR-628. Reply with the number alone.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 1731,
+                "b": -891
+              }
+            }
+          ],
+          "exact_answers": [
+            "2622"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-ordered_subtract-2",
+      "turns": [
+        {
+          "user": "Using calculate, subtract the second operand (-2605) from the first operand (-1022) for BWXH-522. Reply with the number alone.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": -1022,
+                "b": -2605
+              }
+            }
+          ],
+          "exact_answers": [
+            "1583"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-ordered_subtract-3",
+      "turns": [
+        {
+          "user": "Using calculate, subtract the second operand (-377) from the first operand (1185) for ZGCT-652. Reply with the number alone.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 1185,
+                "b": -377
+              }
+            }
+          ],
+          "exact_answers": [
+            "1562"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literal-ordered_subtract-4",
+      "turns": [
+        {
+          "user": "Using calculate, subtract the second operand (-2845) from the first operand (1128) for YNJQ-957. Reply with the number alone.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 1128,
+                "b": -2845
+              }
+            }
+          ],
+          "exact_answers": [
+            "3973"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-acknowledgment-1",
+      "turns": [
+        {
+          "user": "My violin case has label JSV-773. Answer solely with: verified",
+          "expected_calls": [],
+          "exact_answers": [
+            "verified"
+          ]
+        },
+        {
+          "user": "The label is now LXJ-191. Your whole response should be the word agreed.",
+          "expected_calls": [],
+          "exact_answers": [
+            "agreed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-grounded_plan-1",
+      "turns": [
+        {
+          "user": "Help me fit two activities into 89 minutes: prepare a reading corner, then sort photographs. Keep the plan brief.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 89-minute budget; cover prepare a reading corner and sort photographs."
+        },
+        {
+          "user": "Cancel the activity to sort photographs. Revise the advice for the activity that remains.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 89-minute budget; focus on prepare a reading corner after sort photographs is cancelled."
+        },
+        {
+          "user": "Return only the number of minutes in my original time budget.",
+          "expected_calls": [],
+          "exact_answers": [
+            "89"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-natural_context-1",
+      "turns": [
+        {
+          "user": "The current storage location of my sketchbook is AYM-897. Answer solely with: cedar",
+          "expected_calls": [],
+          "exact_answers": [
+            "cedar"
+          ]
+        },
+        {
+          "user": "Use YKE-542 as its updated location. Answer solely with: received",
+          "expected_calls": [],
+          "exact_answers": [
+            "received"
+          ]
+        },
+        {
+          "user": "State just the most recent location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "YKE-542"
+          ]
+        },
+        {
+          "user": "State just the original location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "AYM-897"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-natural_context-2",
+      "turns": [
+        {
+          "user": "The current storage location of my badge is PLT-962. Your whole response should be the word visible.",
+          "expected_calls": [],
+          "exact_answers": [
+            "visible"
+          ]
+        },
+        {
+          "user": "Use FQX-457 as its updated location. Answer solely with: closed",
+          "expected_calls": [],
+          "exact_answers": [
+            "closed"
+          ]
+        },
+        {
+          "user": "State just the most recent location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "FQX-457"
+          ]
+        },
+        {
+          "user": "State just the original location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "PLT-962"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-natural_context-3",
+      "turns": [
+        {
+          "user": "The current storage location of my violin case is JGM-315. Answer solely with: cedar",
+          "expected_calls": [],
+          "exact_answers": [
+            "cedar"
+          ]
+        },
+        {
+          "user": "Use RLM-124 as its updated location. Answer solely with: morning",
+          "expected_calls": [],
+          "exact_answers": [
+            "morning"
+          ]
+        },
+        {
+          "user": "State just the most recent location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "RLM-124"
+          ]
+        },
+        {
+          "user": "State just the original location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "JGM-315"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-grounded_plan-2",
+      "turns": [
+        {
+          "user": "Help me fit two activities into 78 minutes: check the garden plants, then organize craft supplies. Keep the plan brief.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 78-minute budget; cover check the garden plants and organize craft supplies."
+        },
+        {
+          "user": "Cancel the activity to organize craft supplies. Revise the advice for the activity that remains.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 78-minute budget; focus on check the garden plants after organize craft supplies is cancelled."
+        },
+        {
+          "user": "Return only the number of minutes in my original time budget.",
+          "expected_calls": [],
+          "exact_answers": [
+            "78"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-natural_context-4",
+      "turns": [
+        {
+          "user": "The current storage location of my violin case is HTD-152. Your whole response should be the word initial.",
+          "expected_calls": [],
+          "exact_answers": [
+            "initial"
+          ]
+        },
+        {
+          "user": "Use KFG-917 as its updated location. Your whole response should be the word tomorrow.",
+          "expected_calls": [],
+          "exact_answers": [
+            "tomorrow"
+          ]
+        },
+        {
+          "user": "State just the most recent location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "KFG-917"
+          ]
+        },
+        {
+          "user": "State just the original location code.",
+          "expected_calls": [],
+          "exact_answers": [
+            "HTD-152"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-acknowledgment-2",
+      "turns": [
+        {
+          "user": "My violin case has label DLZ-228. Your whole response should be the word replaced.",
+          "expected_calls": [],
+          "exact_answers": [
+            "replaced"
+          ]
+        },
+        {
+          "user": "The label is now DPJ-188. Your whole response should be the word confirmed.",
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-acknowledgment-3",
+      "turns": [
+        {
+          "user": "My badge has label HPX-224. Your whole response should be the word final.",
+          "expected_calls": [],
+          "exact_answers": [
+            "final"
+          ]
+        },
+        {
+          "user": "The label is now GMG-323. Answer solely with: verified",
+          "expected_calls": [],
+          "exact_answers": [
+            "verified"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-acknowledgment-4",
+      "turns": [
+        {
+          "user": "My badge has label PPJ-207. Answer solely with: confirmed",
+          "expected_calls": [],
+          "exact_answers": [
+            "confirmed"
+          ]
+        },
+        {
+          "user": "The label is now WSY-298. Your whole response should be the word evening.",
+          "expected_calls": [],
+          "exact_answers": [
+            "evening"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-grounded_plan-3",
+      "turns": [
+        {
+          "user": "Help me fit two activities into 85 minutes: check the garden plants, then prepare a craft workspace. Keep the plan brief.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 85-minute budget; cover check the garden plants and prepare a craft workspace."
+        },
+        {
+          "user": "Cancel the activity to prepare a craft workspace. Revise the advice for the activity that remains.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 85-minute budget; focus on check the garden plants after prepare a craft workspace is cancelled."
+        },
+        {
+          "user": "Return only the number of minutes in my original time budget.",
+          "expected_calls": [],
+          "exact_answers": [
+            "85"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "context-grounded_plan-4",
+      "turns": [
+        {
+          "user": "Help me fit two activities into 34 minutes: sort stationery, then prepare a craft workspace. Keep the plan brief.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 34-minute budget; cover sort stationery and prepare a craft workspace."
+        },
+        {
+          "user": "Cancel the activity to prepare a craft workspace. Revise the advice for the activity that remains.",
+          "expected_calls": [],
+          "rubric": "Give useful concise advice grounded in the 34-minute budget; focus on sort stationery after prepare a craft workspace is cancelled."
+        },
+        {
+          "user": "Return only the number of minutes in my original time budget.",
+          "expected_calls": [],
+          "exact_answers": [
+            "34"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-invitation-revision",
+      "turns": [
+        {
+          "user": "Draft a friendly invitation to a board-game afternoon on Friday in the Blue Room. Keep it to two short sentences.",
+          "expected_calls": [],
+          "rubric": "A usable invitation, exactly two short sentences; Friday and Blue Room preserved; no invented time, names or confirmed arrangements."
+        },
+        {
+          "user": "Change the day to Monday. Keep the room and friendly tone. Give only the revised invitation.",
+          "expected_calls": [],
+          "rubric": "Revised invitation says Monday and Blue Room, no stale Friday or unnecessary commentary."
+        },
+        {
+          "user": "Which room did I choose? Answer with the room name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Blue Room"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-ownership-change",
+      "turns": [
+        {
+          "user": "In this fictional example, Ada has the striped folder and Ben has the plain folder. Reply only with: understood",
+          "expected_calls": [],
+          "exact_answers": [
+            "understood"
+          ]
+        },
+        {
+          "user": "Ada and Ben exchange folders. Who now has the striped folder? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Ben"
+          ]
+        },
+        {
+          "user": "Who had the striped folder before the exchange? Answer with the name only.",
+          "expected_calls": [],
+          "exact_answers": [
+            "Ada"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-adapt-advice",
+      "turns": [
+        {
+          "user": "In at most two sentences, explain how a checklist can help someone avoid missing steps.",
+          "expected_calls": [],
+          "rubric": "Relevant simple explanation of external memory/visible steps; no repetition, irrelevant clarification or claim that work was performed."
+        },
+        {
+          "user": "I prefer not to use a checklist. Suggest one different method, briefly.",
+          "expected_calls": [],
+          "rubric": "Offers a sensible different method such as a fixed routine or verbal review, respects preference and remains concise."
+        }
+      ]
+    },
+    {
+      "id": "general-clarification-and-grounding",
+      "turns": [
+        {
+          "user": "Can you move it there?",
+          "expected_calls": [],
+          "rubric": "Recognizes missing referents and asks what item/location is meant; does not claim to have moved anything."
+        },
+        {
+          "user": "I mean suggest where to put my drawing supplies so I can find them easily. I will move them myself.",
+          "expected_calls": [],
+          "rubric": "Gives relevant concise organizational advice, does not keep demanding already resolved referents and does not claim physical action."
+        }
+      ]
+    }
+  ],
+  "source_hashes": [
+    {
+      "label": "instruction-v2",
+      "source": "reports/l4-qualification-v1/instruction-repair-v2/heldout-suite.json",
+      "sha256": "972dc731260ceaf2f54e0aab94fdeeabebb098d5a404836aa1e39b1d1989684d",
+      "historical_cuda_exact_passed": 28,
+      "historical_cuda_exact_total": 28
+    },
+    {
+      "label": "instruction-v3",
+      "source": "reports/l4-qualification-v1/instruction-repair-v3/heldout-suite.json",
+      "sha256": "6b8dd99f4636281719f9a36138d846d533a0c067680418854e7b4007bbfa99b6",
+      "historical_cuda_exact_passed": 28,
+      "historical_cuda_exact_total": 28
+    },
+    {
+      "label": "literal",
+      "source": "reports/l4-qualification-v1/literal-state-repair-v1/heldout-suite.json",
+      "sha256": "f8fe1a28d92cd348a253d3ed27528aeed287fd12f900432fcde3927c00df21c1",
+      "historical_cuda_exact_passed": 23,
+      "historical_cuda_exact_total": 24
+    },
+    {
+      "label": "context",
+      "source": "reports/l4-qualification-v1/conversation-repair-v1/heldout-suite.json",
+      "sha256": "834f31a33a9d09e5afc1d3677233fe7d86256ae3ba6aaa519a76e9e0f091a0cb",
+      "historical_cuda_exact_passed": 27,
+      "historical_cuda_exact_total": 28
+    },
+    {
+      "label": "general",
+      "source": "reports/l4-qualification-v1/conversation-repair-v1/general-challenge.json",
+      "sha256": "227972e447b239e4ddbc131b53ec20af046c7bd800158f91b085d4943e95ef4b",
+      "historical_cuda_exact_passed": 4,
+      "historical_cuda_exact_total": 4
+    }
+  ],
+  "scope": "Historical exposed retention, whole session histories preserved. Establish matched MPS baseline; do not claim independent benchmark results. Training packet unchanged."
+}

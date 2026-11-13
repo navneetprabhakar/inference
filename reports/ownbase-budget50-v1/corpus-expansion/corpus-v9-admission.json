@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "44b9dbdf6db5a739dde261888d4b17257678bd02f25e86a0b6fce4a297c20859",
+    "9a9ab73c9281a462f8abded61215d28365daaed99346b58c63915be7fca88b20"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v8/manifest.json",
+  "parent_manifest_sha256": "3ce0e3b0145de392ef8d130c186585e5a055576fb1648ebbade449ef12710298",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-07/root-review.json": "07ea72a1bc75507ddb5ce31e7a1807c70ccfe3f68367b2f017fa51d3acb08a7e",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-07/root-review.json": "5a581654017f5c157c426528232247ab72780cd5434329c67f4718abf2d7d922",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-08/root-review.json": "19a373016867aec4acec6bdd7cbec242d8c57ce7e26b93ab285b8ba1bcbb5618"
+  },
+  "selected": [
+    {
+      "id": "b50-puzzle-proof",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3642,
+      "assistant_targets": 2160,
+      "assistant_targets_after_2048": 1259,
+      "assistant_targets_after_3072": 570,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0003748125937031484
+    },
+    {
+      "id": "b50-proposal-ledger",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3422,
+      "assistant_targets": 1737,
+      "assistant_targets_after_2048": 865,
+      "assistant_targets_after_3072": 247,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.00034328870580157915
+    },
+    {
+      "id": "b50-reading-packet",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3853,
+      "assistant_targets": 1298,
+      "assistant_targets_after_2048": 598,
+      "assistant_targets_after_3072": 211,
+      "tool_call_positions": [
+        3577,
+        3672
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.009868421052631578
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-proposal-ledger",
+      "reason": "All18messages reviewed. Named-revision approval, pending versus withdrawn versus rejected status, unsupported posted-hours implication and reported May21 correction tracked correctly. No implied physical document update.2468tokens is short; new substantive version-scope continuation pending."
+    },
+    {
+      "id": "b50-puzzle-proof",
+      "reason": "All18messages reviewed. Invariant versus reachability, complete two-state original cycle, addedB-toC path and non-guaranteed arrival under revised nondeterminism correct. BFS original/revised assertions execute.2498tokens is short; universal-termination continuation pending."
+    },
+    {
+      "id": "b50-reading-packet",
+      "reason": "All25messages reviewed. Most selection/approval/immutability/odd-participant handling and final real133/33 tool results are correct. Initial extra-handout shortage20 silently assumes one additional sheet per handout, although that quantity/accounting is unspecified. Later clarification does not erase intermediate assumption. Teacher replacement requested with explicitly conditional hypothetical arithmetic."
+    },
+    {
+      "id": "b50-map-legend",
+      "reason": "All27messages reviewed. Route directions, proposal/confirmed/closed status and later75/25 arithmetic correct. But first requested calculator answer claims it is waiting for a current calculator result when no tool call was made. Reject phantom pending-tool state; later successful calls do not erase intermediate false workflow target."
+    },
+    {
+      "id": "b50-proposal-ledger",
+      "reason": "Full20message history reviewed; hypothetical paragraph clearly distinct fromapprovedR2, exactrevisionP3/R1scope and unsupportedposted-hours evidencehandledcorrectly.2975tokens below3072; later substantive approval transition pending."
+    },
+    {
+      "id": "b50-reading-packet",
+      "reason": "Conditional extra-handout arithmetic now appropriately labeled, but regenerated audit adds approval labels toGlassOrchard/SmallLanterns when user explicitly established approval onlyforNightFerryM1. Conservative provenance defect; second replacement requested, original and firstrepair retained."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

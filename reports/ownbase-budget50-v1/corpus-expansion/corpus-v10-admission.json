@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "50148193fd4293d588554da15aacd4c8351c4944fe5e5d56273af295aa51427f",
+    "9a9ab73c9281a462f8abded61215d28365daaed99346b58c63915be7fca88b20"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v9/manifest.json",
+  "parent_manifest_sha256": "d56627d0736fcb9f064aa11c3249757f45718b49e5cc058de86ddf97016242ad",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-08/root-review.json": "a9bab13339a0642ba5f858fd3c1b6250702817868bcc762ec482abd2ce97d871"
+  },
+  "selected": [
+    {
+      "id": "b50-queue-protocol",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3261,
+      "assistant_targets": 1921,
+      "assistant_targets_after_2048": 919,
+      "assistant_targets_after_3072": 104,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0006349206349206349
+    },
+    {
+      "id": "b50-stage-rehearsal",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3294,
+      "assistant_targets": 1806,
+      "assistant_targets_after_2048": 772,
+      "assistant_targets_after_3072": 139,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0005161290322580645
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-display-case",
+      "reason": "Arithmetic and all four actual host calls correct, but turns repeatedly restate 1200/1160 width and artificially postpone the straightforward decision across diagram, note and handover. Reject low-information repetition despite 3137 native tokens; length alone does not qualify."
+    },
+    {
+      "id": "b50-programme-credits",
+      "reason": "All assistant turns read. Credit facts, approvals, withdrawal and arithmetic correct, but assistant message22 defers expressly requested available calculator work as awaiting a result without making a call; user has to repeat request. Later correct 100/30 does not repair the incomplete supervision."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

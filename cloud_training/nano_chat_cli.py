@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--no-tools', action='store_true')
     parser.add_argument('--raw', action='store_true', help='Include complete broker/model evidence as JSON')
     parser.add_argument('--reply-budget', type=int, default=256)
-    parser.add_argument('--repetition-penalty', type=float, default=1.3)
+    parser.add_argument('--repetition-penalty', type=float, default=1.0, help='Defaults to the unmodified greedy decoding used for candidate comparison')
     args = parser.parse_args()
     if not 1 <= args.reply_budget <= 512:
         parser.error('Reply budget must be 1..512 tokens')

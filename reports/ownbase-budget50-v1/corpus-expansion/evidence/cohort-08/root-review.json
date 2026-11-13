@@ -1,0 +1,42 @@
+{
+  "utc": "2026-11-13T11:47:55.598360+00:00",
+  "reviewer": "root",
+  "reviews": [
+    {
+      "id": "b50-queue-protocol",
+      "sha256": "5cf31f57b0bfb178dc452ef9fedbd9ee579dcf6feddd24255a6aa32b8dc946a3",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Initial version changes correctly left unspecified until user defines them; duplicate results distinguished from current state; explicit retry does not imply work; both reducer revisions and supplied tests executed against 20000 independent oracle sequences/80000 commands. Final out-of-order state uses version6 and correctly infers retry then start from adjacent states. Immutable payload caveat explicit. All assistant turns read."
+    },
+    {
+      "id": "b50-stage-rehearsal",
+      "sha256": "ccb998039a6f4e479ebb0e3f9f887dd1094b560214935f7b71da3d3119c062e2",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Every assistant turn read: initial missing transfer/content disclosure detected without inventing knowledge; revised fiction visibly transfers and reads note; hearing versus sight tracked; changed entrance explicitly scoped as an assumption; alternative custody paths and final chosen ending resolve all three props. Prior stage-directions example compared: distinct two-envelope hearing/entrance problem; retained in train with related family, no cross-split reuse."
+    },
+    {
+      "id": "b50-display-case",
+      "sha256": "dd7a3e2fc9cfcc393c43bd7867147440f3e22314e43ae0e7b730811012d0a5f9",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Arithmetic and all four actual host calls correct, but turns repeatedly restate 1200/1160 width and artificially postpone the straightforward decision across diagram, note and handover. Reject low-information repetition despite 3137 native tokens; length alone does not qualify."
+    },
+    {
+      "id": "b50-programme-credits",
+      "sha256": "5231eb5a00f4982c9eef170714da073773b5e84956b3d55c22a8710b7ae48a15",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "All assistant turns read. Credit facts, approvals, withdrawal and arithmetic correct, but assistant message22 defers expressly requested available calculator work as awaiting a result without making a call; user has to repeat request. Later correct 100/30 does not repair the incomplete supervision."
+    }
+  ]
+}

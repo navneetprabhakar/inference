@@ -1,5 +1,5 @@
 {
-  "utc": "2026-11-13T09:56:50.171988+00:00",
+  "utc": "2026-11-13T11:15:54.713691+00:00",
   "phase": "base_training_sft_v2_preflight_ready",
   "vm": "forge-ownbase-budget50-v1",
   "zone": "us-central1-b",
@@ -18,11 +18,109 @@
   "new_gpu": "NVIDIA A100-SXM4-40GB",
   "baseline_base_tokens": 6000476160,
   "observed_progress": {
-    "step": 11447,
-    "targets": 6001524736,
-    "train_loss": 2.637026786804199,
-    "peak_allocated_bytes": 28254506496,
-    "tokens_per_second_last_update": 103640.70490203022
+    "status": "running",
+    "step": 12833,
+    "targets": 6728187904,
+    "train_loss": 2.5869579315185547,
+    "tokens_per_second_last_update": 103603.13632197204,
+    "last_checkpoint": {
+      "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00012665",
+      "upload": {
+        "status": "gcs_bundle_uploaded",
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-d043286634b449628ca798de8c1998c2",
+        "seconds": 56.00527600700025,
+        "bytes_one_way": 3826065236,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "step": 12665,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 2851,
+              "sha256": "d607741dcc03b4ba7f796f141ab4362c5008e6c69415ac038011a86467109497"
+            },
+            "payload.pt": {
+              "bytes": 3826061953,
+              "sha256": "a31eec09dd3836ecefbda9fc9ad0aad8b510bf21ca5351845ef7348e3b5bb2e8"
+            }
+          },
+          "step": 12665,
+          "version": 1
+        },
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "transfer_integrity": "gcloud storage cp built-in checksum validation",
+        "independent_sha256_readback": false,
+        "note": "Upload receipt only; fresh-machine restore and next update not tested."
+      },
+      "step": 12665
+    }
   },
   "budget_cap_usd": 50,
   "compute_reservation_usd": 35,
@@ -30,7 +128,7 @@
   "invoice_verified": false,
   "original_vm": "TERMINATED; untouched",
   "local_baseline": "MPS runtime succeeds; result-recall followup fails, no usability claim",
-  "next": "Review 7B milestone; monitor V2 dispatch; review cohort03; after training fully evaluate candidates, back up all new data and deliver verified local selection.",
+  "next": "Review7B milestone and monitor V2 dispatch; evaluate/download both candidates on MPS with matched retention; fully review outputs; verify all GCS backups before shutdown and local delivery.",
   "temporary_firewall": "forge-ownbase-budget50-iap, sourceIAP range only, targetrun-specifictag; delete at closeout",
   "active_sft_packet": "sft-packet-v2.json",
   "sft_dispatch_pid": 21135,
@@ -42,50 +140,45 @@
     "protected_tools": "18/18",
     "device": "mps"
   },
-  "corpus": "long-context-corpus-v4; GCS readback verified; untrained",
-  "long_context_corpus_v5": {
-    "manifest_sha256": "a07acca4b86ef5bf03e0df48706814b19ecbfdf81d0edaca8603017fb97f4de9",
-    "sessions": 513,
-    "train_targets_after3072": 6432,
-    "development_targets_after3072": 1518,
-    "trained": false,
-    "full4k_ready": false
-  },
+  "corpus": "long-context-corpus-v11; all files GCS SHA readback verified; untrained",
   "current_long_context_corpus": {
-    "path": "runs/long-context-corpus-v8",
-    "manifest_sha256": "3ce0e3b0145de392ef8d130c186585e5a055576fb1648ebbade449ef12710298",
-    "sessions": 521,
-    "train_targets": 134781,
-    "development_targets": 35974,
-    "train_targets_after3072": 9238,
-    "development_targets_after3072": 2796,
+    "path": "runs/long-context-corpus-v11",
+    "manifest_sha256": "4db2e9172345cae21d098c42fa28bcc84b19da638fc075a3afd0d98e75c941d4",
+    "sessions": 529,
+    "train_targets": 145229,
+    "development_targets": 40325,
+    "train_targets_after3072": 10556,
+    "development_targets_after3072": 3677,
     "independent_gcs_readback": true,
     "trained": false,
     "full4k_ready": false
   },
   "latest_base_observation": {
-    "utc": "2026-11-13T10:41:25.679607+00:00",
+    "utc": "2026-11-13T12:00:59.001575+00:00",
     "provider_status": "RUNNING",
+    "machine_type": "a2-highgpu-1g",
+    "provisioning_model": "FLEX_START",
     "phase": "base_training",
-    "elapsed_hours": 1.886,
-    "conservative_compute_accrual_usd": 4.72,
+    "elapsed_hours": 3.212,
+    "conservative_compute_accrual_usd": 8.03,
     "ancillary_reserved_usd": 15,
-    "total_envelope_to_date_usd": 19.72,
+    "total_envelope_to_date_usd": 23.03,
     "incremental_cap_usd": 50,
     "invoice_verified": false,
+    "last_heldout_ce": 2.6238014847040176,
     "provider_duration_seconds": "50400",
     "progress": {
       "status": "running",
-      "step": 12489,
-      "targets": 6547832832,
-      "train_loss": 2.6169629096984863,
-      "tokens_per_second_last_update": 103659.61759590707,
+      "step": 13275,
+      "targets": 6959923200,
+      "train_loss": 2.5517377853393555,
+      "tokens_per_second_last_update": 103592.24171382004,
       "last_checkpoint": {
-        "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00012314",
+        "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00013192",
         "upload": {
           "status": "gcs_bundle_uploaded",
-          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-b44e41c699ba420ca00b746ff96ab056",
-          "seconds": 54.35895544499999,
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-47eca665760a48b8aed3c19a4b61ef7f",
+          "seconds": 37.741448025000864,
           "bytes_one_way": 3826065236,
           "identity": {
             "adapter_hashes": {
@@ -151,19 +244,19 @@
             "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
             "torch": "2.9.1+cu129"
           },
-          "step": 12314,
+          "step": 13192,
           "manifest": {
             "files": {
               "metadata.json": {
                 "bytes": 2851,
-                "sha256": "93174bb50ad4baf39751ad068c2f82fc77ee512eb29d9feb877e1b43bdb5ff3c"
+                "sha256": "ad5520a901bc6f91c28f6a508d6517b45c455c17898a198f28be75ac878ba517"
               },
               "payload.pt": {
                 "bytes": 3826061953,
-                "sha256": "b9d0b7f0319492fd22bf23b5574d6f94856b3334af7674037dbda0a5181aec4b"
+                "sha256": "2ebf39a0a63e2519657fb26f85520aaa9d46d74ab0d868b10c0eb0a32855e5ca"
               }
             },
-            "step": 12314,
+            "step": 13192,
             "version": 1
           },
           "publication_order": [
@@ -176,7 +269,7 @@
           "independent_sha256_readback": false,
           "note": "Upload receipt only; fresh-machine restore and next update not tested."
         },
-        "step": 12314
+        "step": 13192
       }
     },
     "controller": {
@@ -186,6 +279,121 @@
       "start_step": 11445,
       "goal_step": 13352,
       "deadline_utc": "2026-11-13T20:18:23.452636+00:00"
+    }
+  },
+  "local_historical_retention": {
+    "normalized_exact_passed": 110,
+    "normalized_exact_total": 112,
+    "byte_exact_and_calls_passed": 109,
+    "open_manual_passed": 2,
+    "open_total": 14,
+    "source": "local-baseline-retention-review.json",
+    "device": "mps",
+    "exposed_development_only": true
+  },
+  "observed": {
+    "status": "running",
+    "step": 13275,
+    "targets": 6959923200,
+    "train_loss": 2.5517377853393555,
+    "tokens_per_second_last_update": 103592.24171382004,
+    "last_checkpoint": {
+      "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00013192",
+      "upload": {
+        "status": "gcs_bundle_uploaded",
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-47eca665760a48b8aed3c19a4b61ef7f",
+        "seconds": 37.741448025000864,
+        "bytes_one_way": 3826065236,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "step": 13192,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 2851,
+              "sha256": "ad5520a901bc6f91c28f6a508d6517b45c455c17898a198f28be75ac878ba517"
+            },
+            "payload.pt": {
+              "bytes": 3826061953,
+              "sha256": "2ebf39a0a63e2519657fb26f85520aaa9d46d74ab0d868b10c0eb0a32855e5ca"
+            }
+          },
+          "step": 13192,
+          "version": 1
+        },
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "transfer_integrity": "gcloud storage cp built-in checksum validation",
+        "independent_sha256_readback": false,
+        "note": "Upload receipt only; fresh-machine restore and next update not tested."
+      },
+      "step": 13192
     }
   }
 }
