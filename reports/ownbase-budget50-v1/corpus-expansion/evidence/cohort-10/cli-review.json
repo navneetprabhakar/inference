@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-subtitle-wrap",
+      "pass": true,
+      "reason": "All seven assistant turns follow the original requirements and subsequent boundary and indentation decisions. The examples, implementation, tests, and final trace are consistent.",
+      "turn_evidence": "1: Correctly traces the original counterexample and its unwanted leading blank line. 2: Defines empty paragraphs and preserves each boundary with two newlines. 3: Implements greedy wrapping without mutating input. 4: Tests the requested cases and agreed boundaries. 5: Compares against a separately expressed reference over bounded generated cases. 6: Counts indentation within width and defines over-width and width-at-or-below-indent behavior. 7: Applies that revised policy to the original counterexample with correct line lengths."
+    },
+    {
+      "id": "b50-rle-chunks",
+      "pass": true,
+      "reason": "The assistant consistently applies the grammar, incremental output contract, length limit, and terminal error behavior. The implementation and comparison tests support the stated behavior.",
+      "turn_evidence": "1: Specifies ASCII grammar, retained state, and bounded count accumulation. 2: Correctly traces all feeds and finish, including premature processing. 3: Defines commit timing, incremental returns, and the limit check. 4: Implements those rules and an explicit error state. 5: Correctly identifies detection points for each invalid stream. 6: Provides an independent parser and tests partitions, handling errors from both feed and finish."
+    },
+    {
+      "id": "b50-kit-revision",
+      "pass": true,
+      "reason": "The assistant preserves version ancestry, approvals, and the corrected kit count. Both calculator calls are authorized and their observed results support the final demand and shortfall.",
+      "turn_evidence": "1: Identifies v1 as approved, v2 as rejected, and v3 as approved from v1. 2: Compares both versions against v1 without inventing a substitution. 3: Provides a pure comparison function with explicit replacement annotations. 4: Shows consistent independent examples. 5: Applies the function to the ledger and approvals. 6: Corrects the attribution in the requested dialogue. 7: Updates the plan to 29 kits and defers arithmetic. 8: Uses two permitted calculator calls: 29 \u00d7 3 = 87 and 87 \u2212 74 = 13; the final response matches both results."
+    },
+    {
+      "id": "b50-session-seating",
+      "pass": true,
+      "reason": "The assistant revises the allocation policy when the card budget is separated, then consistently applies first fit and the withdrawal update. It keeps the independent event-wide total distinct.",
+      "turn_evidence": "1: Demonstrates party splitting and cancelled-offer capacity being counted. 2: Initially includes the card budget in allocation. 3: Removes that constraint after the user's correction and implements validated first-fit allocation. 4: Gives correct exact-fit and fragmented-capacity examples. 5: Produces a consistent four-session allocation and pending queue. 6: Frees C's seats, assigns O, and leaves Q and R pending without moving others. 7: Distinguishes offers, confirmations, withdrawals, pending parties, and the separate total of 19 booked parties, while deferring the card calculation."
+    }
+  ]
+}

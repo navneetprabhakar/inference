@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "3a202c3997050ec76d92d5b86c9faad1e087a2bec0e099da04ca93c00f43bf7e",
+    "fa2f9b3a7f61ace81ad7430709c2fda396e3db353439172cea3ca0ccf8030c3d"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v13/manifest.json",
+  "parent_manifest_sha256": "240fe9a7b4e90de52ef241cea87c8a1fe64e8096ace48154b67d9b3f370e82ba",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-12/root-review.json": "0386b20d1146c83e42846dded26a1533013dae22690a2781cc6920cd756ba252",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-12/root-review.json": "d615897e5b318fd12e4b1a74dbbf0899bd222b7cec5e9dadaf314dfa0f2d93a3"
+  },
+  "selected": [
+    {
+      "id": "b50-script-props",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 4071,
+      "assistant_targets": 2158,
+      "assistant_targets_after_2048": 1192,
+      "assistant_targets_after_3072": 633,
+      "tool_call_positions": [
+        3502,
+        3596
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.007186489399928135
+    },
+    {
+      "id": "b50-audio-interview",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3681,
+      "assistant_targets": 2218,
+      "assistant_targets_after_2048": 1218,
+      "assistant_targets_after_3072": 481,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0005575689991636465
+    },
+    {
+      "id": "b50-exhibit-order",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3488,
+      "assistant_targets": 1688,
+      "assistant_targets_after_2048": 896,
+      "assistant_targets_after_3072": 336,
+      "tool_call_positions": [
+        2443,
+        2537
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.007901668129938543
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-audio-interview",
+      "reason": "Every turn read. Distinct spring/autumn occasions not forced into contradiction; firsthand/secondhand memory, before-demolition constraint, uncertain years and programme matching versus attendance identity separated. Programme described as corroborating, not proof of personal attendance; specific-event connection remains unresolved.3030tokens lacks late3072supervision, so original not selected; substantive counterfactual-timeline followup reviewed separately."
+    },
+    {
+      "id": "b50-workshop-instructions",
+      "reason": "Reject first assistant diagnosis: it says top/bottom spacers must run horizontally despite the stated vertical spacer geometry being ambiguous and compatible with short pieces outside the path. User explicitly corrects this; later careful assumptions do not repair that erroneous target."
+    },
+    {
+      "id": "b50-exhibit-order",
+      "reason": "Every turn read. All classroom observations explicitly hypothetical; alternative mechanisms qualified, unchanged observations separated from revised oxygen explanation; rota breaks correct. Host78/29sheet calculation uses original6/49 and latest13groups. Whole2990tokens below3072; additional distinct observation-record artifact reviewed separately."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

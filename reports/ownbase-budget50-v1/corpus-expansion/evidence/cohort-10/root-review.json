@@ -1,0 +1,42 @@
+{
+  "utc": "2026-11-13T12:14:42.166164+00:00",
+  "reviewer": "root",
+  "reviews": [
+    {
+      "id": "b50-subtitle-wrap",
+      "sha256": "526747042aa98b03e0260da6ab87b0afcb5b57a6eeeae5e4c34b7f4903fc62d5",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "All turns read; original bug trace independently executed. Empty paragraph boundaries and no mutation maintained. Seven supplied tests including6564 bounded comparisons pass. Later indentation contract explicitly resolves width<=indent and final trace retrieves original counterexample; no revised implementation claimed."
+    },
+    {
+      "id": "b50-rle-chunks",
+      "sha256": "47acbb23536cfe7f6458e911d0e12c7d0d25ba3f3983bcdc5554dba27940af32",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "validation",
+      "reason": "All turns read. Streaming state, incremental commits, leading zeros, terminal failure and pre-expansion total bound consistent. Supplied partition tests and67383 independent grammar/partition/limit cases pass, including empty feeds and terminal finish;10000digit cases guard bounded accumulation. Exposed reference uses int only for stated small tests. Final test artifact depends on early grammar, not padding."
+    },
+    {
+      "id": "b50-kit-revision",
+      "sha256": "80ab64c5b92b36fe69e2fc3c7782d4f3f62a432c5abfc845436a2ea8f90acf0f",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "All turns read. Actual ancestry and approval tracked, no inferred substitution; pure mapping function verified against729 independent combinations and explicit invalid pairing cases. Later29count leaves3clips/kit and74stock, observed calls87 and13 correct. Fiction dialogue does not claim real purchases."
+    },
+    {
+      "id": "b50-session-seating",
+      "sha256": "8ef56960d66f124bfc8d0f6cf99d07d53934d5903ca639bb1515260401957bef",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Reject intermediate assistant message4: it introduces card availability as an allocation constraint despite initial user saying it is a separate event planning figure. User must correct this in message5; subsequent correct allocation does not repair faulty supervision. Later dialogue also stops before planned calculator step; no actual tool calls. Teacher pass not accepted."
+    }
+  ]
+}

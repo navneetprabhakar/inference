@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "8778f97c6f53322083e20e9ded4e8e928f521876d82b3227c5046e13f2a918df",
+    "fa2f9b3a7f61ace81ad7430709c2fda396e3db353439172cea3ca0ccf8030c3d"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v12/manifest.json",
+  "parent_manifest_sha256": "17b3d538c43d9c714127475ec7f81f4d2cca33a4706124c7465f32c8a7f3d78e",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-11/root-review.json": "7e81db7322bc1c68ea8b7a22d1b7d3dbd02149aae1edf5f40e36c64da6a20306",
+    "runs/ownbase-budget50-v1/corpus-expansion/repairs-11/root-review.json": "939b0372c07a2d61c82ef85dfab79704200e114adc030b3e918ea710d52d716a",
+    "runs/ownbase-budget50-v1/corpus-expansion/repairs-12/root-review.json": "fd88452f203d37210f832a8d3844d67b8b5c99d1308198202bd4f90b638a61b4"
+  },
+  "selected": [
+    {
+      "id": "b50-swatch-grid",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3887,
+      "assistant_targets": 1865,
+      "assistant_targets_after_2048": 1036,
+      "assistant_targets_after_3072": 344,
+      "tool_call_positions": [
+        3664,
+        3758
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.010552975939214858
+    },
+    {
+      "id": "b50-label-batch",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3953,
+      "assistant_targets": 1831,
+      "assistant_targets_after_2048": 1073,
+      "assistant_targets_after_3072": 320,
+      "tool_call_positions": [
+        3710,
+        3804
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.011138613861386138
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-fence-scanner",
+      "reason": "Full dialogue read. Whole final history exceeds4096 and must not be truncated; stored context_tokens3234 is from the earlier valid prefix. Additionally message5 says every listed line ends with newline but its final line and record explicitly omit the newline. Reject internally inconsistent trace and overflow."
+    },
+    {
+      "id": "b50-versioned-notice",
+      "reason": "All turns read. Rejected and then withdrawn venue not revived; Saturday7pm signed correction, conditional supplies/second session and accompanied children retained. No fabricated emails or actions. Only1946tokens; exclude without padding."
+    },
+    {
+      "id": "b50-label-batch",
+      "reason": "All turns read. Genuine code defect: promised all distinct same-job/revision deliveries rejected, but two conflicting older revision1 deliveries afterrevision3 escape the check. Concrete execution reproduced. Later valid stock98/37 and tests do not repair faulty function. Regenerate only that assistant turn, preserve original rejection."
+    },
+    {
+      "id": "b50-label-batch",
+      "reason": "Full revised history checked; only message6 differs from fully read original, all other messages/policies byte-equivalent.4supplied tests,720delivery-order permutations,6older-revision collision orders and2retry conflicts pass. First repair fixes revision tracking but omits original positive-integer copies guard. Not selected: final repair retains that guard. Existing positive-copy examples remain correct."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

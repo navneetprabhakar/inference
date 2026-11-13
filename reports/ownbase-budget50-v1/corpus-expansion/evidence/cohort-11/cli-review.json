@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-fence-scanner",
+      "pass": false,
+      "reason": "The scanner and tests generally follow the evolving contract, but the worked trace contradicts itself about the final line\u2019s ending, which matters for an exact-content exercise.",
+      "turn_evidence": "T1 identifies the fence, whitespace, metadata, and unclosed-block defects. T2 correctly distinguishes opener and closer rules and preserves line endings. T3 says every line ends in \\n, but line 11 and the expected record explicitly have no final newline. T4 implements the original scanner. T5 proposes unrun state-machine tests. T6 explains Python-only collection while tracking all blocks. T7 correctly traces the Ruby counterexample. T8 implements and tests the revised rules without claiming execution."
+    },
+    {
+      "id": "b50-versioned-notice",
+      "pass": true,
+      "reason": "The responses track approvals, withdrawn proposals, unresolved conditions, and the signed time correction without inventing external actions.",
+      "turn_evidence": "T1 separates N1 claims from approvals and unsupported assertions. T2 drafts the N2 notice with venue and supplies unresolved. T3 prepares the requested private checklist. T4 preserves the conditions in dialogue. T5 incorporates withdrawal of Cedar Hall. T6 applies the signed N3 time change without inferring a venue or emails. T7 prints the current Saturday 7:00 p.m. notice with the adult, supply, venue, and second-session conditions."
+    },
+    {
+      "id": "b50-label-batch",
+      "pass": false,
+      "reason": "The implementation overstates its conflict handling: it does not always reject multiple distinct deliveries for the same job revision when a later revision has already become the current maximum.",
+      "turn_evidence": "T1 correctly traces the flawed output. T2 explains eligibility, retries, copies, and distinct jobs. T3 claims multiple distinct deliveries for the same job revision raise errors, but revisions 1, 2, 1 with distinct retry IDs do not trigger that check for the second revision-1 row. T4 proposes unrun tests that do not cover this case. T5 correctly computes 84 needed and a 23-label shortfall. T6 updates the plan to 98 and 37. T7 uses two authorized calculator calls, observes 98 and 37, and gives a grounded operator decision."
+    },
+    {
+      "id": "b50-swatch-grid",
+      "pass": true,
+      "reason": "The responses correctly handle the finite four-connected fill, preserve the input, and use observed calculator results for the revised plan.",
+      "turn_evidence": "T1 correctly traces the original grid and identifies the eight-neighbor defect. T2 gives a diagonal-leak counterexample and accurately qualifies the same-color loop. T3 specifies copy-returning boundary behavior. T4 supplies a pure fill and independent finite-set oracle with an unrun worked comparison. T5 proposes unrun tests for boundaries and input preservation. T6 gives a correct translation and inverse mapping. T7 uses two authorized calculator calls yielding 72 cards and a shortage of 22."
+    }
+  ]
+}

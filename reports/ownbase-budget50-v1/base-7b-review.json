@@ -1,0 +1,112 @@
+{
+  "utc": "2026-11-13T12:16:28.881418+00:00",
+  "step": 13352,
+  "base_tokens": 7000293376,
+  "status": "bounded_pilot_complete",
+  "reason": "pilot_update_limit",
+  "heldout_ce": 2.6076720356941223,
+  "previous_6b_ce": 2.6664920300245285,
+  "improvement": 0.05881999433040619,
+  "validation_complete": true,
+  "checkpoint": {
+    "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00013352",
+    "upload": {
+      "status": "gcs_bundle_uploaded",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-276e72e9863045ca9fef1d0102ec2df1",
+      "seconds": 39.8317528030002,
+      "bytes_one_way": 3826065246,
+      "identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "step": 13352,
+      "manifest": {
+        "files": {
+          "metadata.json": {
+            "bytes": 2861,
+            "sha256": "e41019c2bb880af32d2a669ae93224633a614356d5dfee751e3078ca5faa3498"
+          },
+          "payload.pt": {
+            "bytes": 3826061953,
+            "sha256": "f106c82dce4aa7d38457606305ebee5161b4d85ca27a68a0e9d67ae0cc7851b7"
+          }
+        },
+        "step": 13352,
+        "version": 1
+      },
+      "publication_order": [
+        "payload.pt",
+        "metadata.json",
+        "manifest.json",
+        "COMMITTED"
+      ],
+      "transfer_integrity": "gcloud storage cp built-in checksum validation",
+      "independent_sha256_readback": false,
+      "note": "Upload receipt only; fresh-machine restore and next update not tested."
+    },
+    "step": 13352
+  },
+  "raw_result_sha256": "b5654829f88ab26086170d097aed25d07046d0fbc6333b42711bc21aecef0180",
+  "decision": "Continue bounded8B stage; loss improved, guardrails unchanged. Not conversation acceptance.",
+  "continuation_observed": "Fresh stage restored7B and reached13359 at12:12UTC."
+}
