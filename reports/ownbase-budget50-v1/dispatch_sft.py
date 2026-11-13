@@ -4,9 +4,11 @@ from pathlib import Path
 from urllib.parse import quote
 from gcp_api import request
 R=Path('runs/ownbase-budget50-v1');P=Path('reports/ownbase-budget50-v1');lock=(R/'sft-dispatch.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-c=json.loads((P/'launch-config.json').read_text());packet=json.loads((P/'sft-packet.json').read_text());assert packet['all_packet_files_independent_sha_readback'];prefix=c['run_prefix'];bucket=prefix.split('/')[2];obj='/'.join(prefix.split('/')[3:]);deadline=json.loads((R/'launch-receipt.json').read_text())['external_stop_epoch']-1800
+c=json.loads((P/'launch-config.json').read_text());packet=json.loads((P/'sft-packet-v2.json').read_text());assert packet['all_packet_files_independent_sha_readback'];prefix=c['run_prefix'];bucket=prefix.split('/')[2];obj='/'.join(prefix.split('/')[3:]);deadline=json.loads((R/'launch-receipt.json').read_text())['external_stop_epoch']-1800
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def read(name):return request('https://storage.googleapis.com/storage/v1/b/'+bucket+'/o/'+quote(obj+'/'+name,safe='')+'?alt=media',timeout=30)
+preflight=json.loads((P/'retained-preflight.json').read_text());assert preflight['exit_code']==0 and len(preflight['entries'])==7 and all(x['payload_sha256_verified'] for x in preflight['entries'])
+(R/'sft-dispatch-pid.json').write_text(json.dumps({'pid':os.getpid(),'packet':'sft-packet-v2','retired_v1_pid':14114})+'\n')
 last=None
 while time.time()<deadline:
  try:

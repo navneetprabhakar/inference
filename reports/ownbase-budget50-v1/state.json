@@ -1,6 +1,6 @@
 {
-  "utc": "2026-11-13T08:59:59.290231+00:00",
-  "phase": "base_training_confirmed",
+  "utc": "2026-11-13T09:56:50.171988+00:00",
+  "phase": "base_training_sft_v2_preflight_ready",
   "vm": "forge-ownbase-budget50-v1",
   "zone": "us-central1-b",
   "provider_status": "RUNNING",
@@ -30,6 +30,25 @@
   "invoice_verified": false,
   "original_vm": "TERMINATED; untouched",
   "local_baseline": "MPS runtime succeeds; result-recall followup fails, no usability claim",
-  "next": "Review7B milestone; prepare frozen evaluation and qualified SFT; verifyallnewdataGCS before shutdown",
-  "temporary_firewall": "forge-ownbase-budget50-iap, sourceIAP range only, targetrun-specifictag; delete at closeout"
+  "next": "Review 7B milestone; monitor V2 dispatch; review cohort03; after training fully evaluate candidates, back up all new data and deliver verified local selection.",
+  "temporary_firewall": "forge-ownbase-budget50-iap, sourceIAP range only, targetrun-specifictag; delete at closeout",
+  "active_sft_packet": "sft-packet-v2.json",
+  "sft_dispatch_pid": 21135,
+  "local_assessment": {
+    "turns_passed": 6,
+    "turns_total": 180,
+    "complete_sessions_passed": 0,
+    "sessions_total": 60,
+    "protected_tools": "18/18",
+    "device": "mps"
+  },
+  "corpus": "long-context-corpus-v4; GCS readback verified; untrained",
+  "long_context_corpus_v5": {
+    "manifest_sha256": "a07acca4b86ef5bf03e0df48706814b19ecbfdf81d0edaca8603017fb97f4de9",
+    "sessions": 513,
+    "train_targets_after3072": 6432,
+    "development_targets_after3072": 1518,
+    "trained": false,
+    "full4k_ready": false
+  }
 }

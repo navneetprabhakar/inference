@@ -1,0 +1,16 @@
+{
+  "rows": [
+    {
+      "id": "b50-undo-buffer",
+      "pass": true,
+      "reason": "The implementations, history traces, cursor behavior, eviction sequence, and executable assertions are consistent with the stated requirements.",
+      "turn_evidence": "The final trace correctly records the pre-edit cursor for undo and the current cursor for redo, and evicts the oldest of five snapshots."
+    },
+    {
+      "id": "b50-dependency-plan",
+      "pass": true,
+      "reason": "Each revision preserves the requested validation scope, lexical scheduling, and duplicate-edge handling. The final cycle reconstruction produces a closed path along prerequisite edges.",
+      "turn_evidence": "The final tests verify reachable cycles, a self-cycle, missing dependencies, lexical scheduling, repeated prerequisites, and an ignored disconnected cycle."
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "a758f1a37b48fb583dc01f083f9b8eee76c3b56b8b3c641cabcde031589f1b60",
+    "4a8b33d37c33fd3199c8a448c481a85249d4b57b9e90133b643ce22f429e95d8"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v4/manifest.json",
+  "parent_manifest_sha256": "3d1df32b6a4588b96537a2924096e4321d0faed9551e41fc1e8826162540681c",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-03/root-review.json": "d72623ebaea0e5228a3d66bbc6bd3a5e22bae045053c4dbad52f54dad0618916",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-03/root-review.json": "4b8654169498258b1b4f09353be113c840d10540c87132d885f03dab5f72c744"
+  },
+  "selected": [
+    {
+      "id": "b50-sheet-plan",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3365,
+      "assistant_targets": 2014,
+      "assistant_targets_after_2048": 802,
+      "assistant_targets_after_3072": 97,
+      "tool_call_positions": [
+        3138,
+        3233
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.009230769230769232
+    },
+    {
+      "id": "b50-undo-buffer",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3926,
+      "assistant_targets": 3179,
+      "assistant_targets_after_2048": 1720,
+      "assistant_targets_after_3072": 854,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0
+    },
+    {
+      "id": "b50-dependency-plan",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3706,
+      "assistant_targets": 2909,
+      "assistant_targets_after_2048": 1500,
+      "assistant_targets_after_3072": 634,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0012658227848101266
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-dependency-plan",
+      "reason": "Correct whole-graph validation followed by explicit target-only scope revision. Both versions exhaustively checked on all512 three-node graphs; duplicates and heap lexical ordering hold. Too short for3K admission; substantive cycle-witness continuation pending."
+    },
+    {
+      "id": "b50-undo-buffer",
+      "reason": "Final repeated standalone class drops the prior constructor string validation and unnecessarily repeats the full implementation for a sequence request. Earlier versions and displayed tests pass; this does not erase the final regression. Replacement requested; original excluded despite CLI pass."
+    },
+    {
+      "id": "b50-test-matrix",
+      "reason": "Code, all23 selected rows and arithmetic are correct;1225 independent slice combinations pass. Conservatively excluded for incomplete calculator use at the first scheduling answer: it calculates276 and23/3 with tools but states96 elapsed without requested tool verification, supplied only after another user request. Later correction does not retroactively certify earlier instruction adherence; CLI pass overridden."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

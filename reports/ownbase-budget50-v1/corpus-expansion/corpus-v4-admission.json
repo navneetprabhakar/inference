@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "aa896db06bcbc1250cdb26efcecdb518474b7c1ef1a48586d61cfc362e109595",
+    "12059dacf62b256dfe2788abd93a46f59b997c563c98ba21cce0c44b14df67ee"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v3/manifest.json",
+  "parent_manifest_sha256": "ba6f513f6a97780f03e66b3166f897339520479a4975b5b9792e42007f8a560f",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-01/root-review.json": "85b6c87ffc989ee84508c2cbdbac388700217f64597700dc05957c2e363a8a4c",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-02/root-review.json": "f2c867d8ce67c06586b952d458aea981a04c896eee27164e3aece383cf69f539"
+  },
+  "selected": [
+    {
+      "id": "b50-photo-catalog",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3789,
+      "assistant_targets": 1760,
+      "assistant_targets_after_2048": 958,
+      "assistant_targets_after_3072": 355,
+      "tool_call_positions": [
+        1310,
+        1404,
+        3469,
+        3563
+      ],
+      "replayed_tool_calls": 4,
+      "max_prior_jaccard": 0.008071025020177562
+    },
+    {
+      "id": "b50-seed-exhibit",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3304,
+      "assistant_targets": 1857,
+      "assistant_targets_after_2048": 910,
+      "assistant_targets_after_3072": 232,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.00045392646391284613
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-seed-exhibit",
+      "reason": "Alloriginal, visitorroleplay, confoundedfactorredesign andlaterdemonstration scope clarificationcorrect. Original12/8/4andcartcase preserved; hypotheticalworksheet explicitlylabeled; unknownhistoricalsamplesnotinvented. Latestcompleteversionselected; rawinheritedlate_targetsfieldis stale and ignored in favorofreencoding."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

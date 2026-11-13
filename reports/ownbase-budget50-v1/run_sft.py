@@ -16,7 +16,7 @@ def run(args,log,limit):
    try:return p.wait(timeout=120)
    except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);p.wait();return 124
 CONFIG_SHA256 = None  # Filled in the immutable dispatched copy by prepare_sft_packet.py.
-cp(prefix+'/sft-packet/config.json',HERE/'config.json');assert CONFIG_SHA256 and sha(HERE/'config.json')==CONFIG_SHA256
+cp(prefix+'/sft-packet-v2/config.json',HERE/'config.json');assert CONFIG_SHA256 and sha(HERE/'config.json')==CONFIG_SHA256
 packet=json.loads((HERE/'config.json').read_text());assert packet['run_id']==c['run_id']
 parent=json.loads((OUT/'base-parent.json').read_text());base=Path(parent['checkpoint']);assert sha(base/'manifest.json')==parent['manifest_sha256']
 code=HERE/'code';code.mkdir();archive=HERE/'code.tar.gz';cp(packet['code_uri'],archive);assert sha(archive)==packet['code_sha256']
@@ -29,16 +29,22 @@ env=os.environ.copy();env['PYTHONPATH']=str(code)+':'+str(ROOT/'vendor')+':'+str
 sys.path.insert(0,str(code));from cloud_training.nano_checkpoint import validate_bundle
 validate_bundle(base);candidates=[]
 try:
- for epochs in [4,8]:
+ for recipe in packet['finite_recipes']:
+  epochs=recipe['epochs']
   if time.time()>end-900:publish('skipped_insufficient_reserved_time',epochs=epochs);break
-  name=f'pilot-2k-{epochs}epochs';dest=HERE/name;deadline=min(end-600,time.time()+720)
+  name=recipe['name'];dest=HERE/name;deadline=min(end-600,time.time()+720)
+  selected_base=base if recipe['stage']=='general' else ROOT/'retained-lineage/literal-state-repair-v1'
+  selected_sha=sha(selected_base/'manifest.json')
+  if recipe['stage']=='targeted':assert selected_sha==packet['retained_lineage']['items'][0]['manifest_sha256']
+  ancestors=[] if recipe['stage']=='general' else [ROOT/'resume' if item['name']=='base6b' else ROOT/'retained-lineage'/item['name'] for item in packet['retained_lineage']['items'][1:]]
   if deadline-time.time()<420:break
-  publish('training',recipe=name,base_manifest_sha256=parent['manifest_sha256'],finite_epochs=epochs,scope='Small fully reviewed2K corpus; diagnostic, not broadSFT or4K training')
-  args=[sys.executable,'-m','cloud_training.nano_sft','--manifest',str(HERE/'data/manifest.json'),'--base',str(base),'--base-manifest-sha',parent['manifest_sha256'],'--tokenizer',str(ROOT/'tokenizer'),'--tokenizer-sha',c['parent_receipt']['identity']['tokenizer_sha256'],'--repo',str(ROOT/'nanochat-source'),'--output',str(dest),'--stage','general','--batch-tokens','8192','--microbatch','4','--epochs',str(epochs),'--lr-multiplier','1.0','--context-tokens','2048','--deterministic','--deterministic-attention','--kernel-path',str(ROOT/'kernel'),'--kernel-sha',c['kernel_sha256'],'--eval-rows','128','--eval-every-updates','50','--checkpoint-reserve-seconds','240','--backup-prefix',prefix+'/sft/'+name+'/checkpoints','--deadline-utc',datetime.datetime.fromtimestamp(deadline,datetime.timezone.utc).isoformat()]
+  publish('training',recipe=name,base_manifest_sha256=selected_sha,finite_epochs=epochs,scope='Small fully reviewed2K corpus; diagnostic, not broadSFT or4K training')
+  args=[sys.executable,'-m','cloud_training.nano_sft','--manifest',str(HERE/'data/manifest.json'),'--base',str(selected_base),'--base-manifest-sha',selected_sha,'--tokenizer',str(ROOT/'tokenizer'),'--tokenizer-sha',c['parent_receipt']['identity']['tokenizer_sha256'],'--repo',str(ROOT/'nanochat-source'),'--output',str(dest),'--stage',recipe['stage'],'--batch-tokens','8192','--microbatch','4','--epochs',str(epochs),'--lr-multiplier',str(recipe['lr_multiplier']),'--context-tokens','2048','--deterministic','--deterministic-attention','--kernel-path',str(ROOT/'kernel'),'--kernel-sha',c['kernel_sha256'],'--eval-rows','128','--eval-every-updates','50','--checkpoint-reserve-seconds','240','--backup-prefix',prefix+'/sft/'+name+'/checkpoints','--deadline-utc',datetime.datetime.fromtimestamp(deadline,datetime.timezone.utc).isoformat()]
+  for ancestor in ancestors:args+=['--ancestor',str(ancestor)]
   rc=run(args,HERE/(name+'.log'),max(1,deadline-time.time()+30));resultfile=dest/'result.json'
   if rc or not resultfile.exists():publish('pilot_failed',recipe=name,exit_code=rc);break
   result=json.loads(resultfile.read_text());last=result.get('last_checkpoint');assert last
-  checkpoint=Path(last['path']);validate_bundle(checkpoint)
+  checkpoint=Path(last['path']);validate_bundle(checkpoint);assert json.loads((checkpoint/'metadata.json').read_text())['step']>0
   # Verify GCS payload independently before evaluation or shutdown. All four files.
   readback=HERE/(name+'-readback');readback.mkdir()
   for file in ['payload.pt','metadata.json','manifest.json','COMMITTED']:cp(last['upload']['remote_prefix']+'/'+file,readback/file,timeout=300)

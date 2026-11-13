@@ -1,0 +1,41 @@
+{
+  "reviewer": "root",
+  "reviews": [
+    {
+      "id": "b50-dependency-plan",
+      "sha256": "6a43bc0fda98e54fa4c123754d640f031772213fc9560aaf37cb844206a177a0",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Correct whole-graph validation followed by explicit target-only scope revision. Both versions exhaustively checked on all512 three-node graphs; duplicates and heap lexical ordering hold. Too short for3K admission; substantive cycle-witness continuation pending."
+    },
+    {
+      "id": "b50-undo-buffer",
+      "sha256": "6462f4d6710f31c11c6ad7e6c989f9dc4e88474c7dc391696a02c2f6df38506d",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Final repeated standalone class drops the prior constructor string validation and unnecessarily repeats the full implementation for a sequence request. Earlier versions and displayed tests pass; this does not erase the final regression. Replacement requested; original excluded despite CLI pass."
+    },
+    {
+      "id": "b50-sheet-plan",
+      "sha256": "77b0df2fe6dc21da99f6834312ead9710c885b1fcb88c00b0a009342e95500a5",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Every assistant turn fully reviewed. Five-page and14-page indices/blanks correct; all six sequential insertions and20-page slots correct. Original input preserved, duplicate labels valid. All assistant code executes; independent exhaustive lengths0..100 index/label coverage passes. Real fixture calls57*5=285 and285-280=5 grounded in earlier stock. No claim of printer compatibility or execution."
+    },
+    {
+      "id": "b50-test-matrix",
+      "sha256": "61148335a70e8ca7b208b4cf7309d7df7db95b11f56ca382d7764e8dbe8d43a2",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "validation",
+      "reason": "Code, all23 selected rows and arithmetic are correct;1225 independent slice combinations pass. Conservatively excluded for incomplete calculator use at the first scheduling answer: it calculates276 and23/3 with tools but states96 elapsed without requested tool verification, supplied only after another user request. Later correction does not retroactively certify earlier instruction adherence; CLI pass overridden."
+    }
+  ]
+}
