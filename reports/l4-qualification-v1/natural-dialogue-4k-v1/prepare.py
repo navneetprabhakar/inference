@@ -44,6 +44,10 @@ def prepare(out,admit=False):
    keep=v.get('keep_message_count',len(r['messages']))
    assert type(keep) is int and 2<=keep<=len(r['messages']) and keep%2==0
    r['messages']=r['messages'][:keep]
+   # A thank-you exchange does not turn a one-answer example into context data.
+   # Root review explicitly trims closing-only suffixes before this check.
+   if sum(m['role']=='assistant' for m in r['messages'])<2:
+    excluded.append({'id':r['id'],'reason':'fewer_than_two_substantive_assistant_turns'});continue
    userkey=digest([norm(m['content']) for m in r['messages'] if m['role']=='user'])
    if userkey in external_keys:excluded.append({'id':r['id'],'reason':'prior_corpus_exact_user_sequence'});continue
    if userkey in seen:excluded.append({'id':r['id'],'reason':'duplicate_user_sequence'});continue
