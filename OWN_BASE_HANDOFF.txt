@@ -1,6 +1,6 @@
 OWN-BASE MODEL — EXECUTION HANDOFF
 As of 13 November 2026. Repository: /Users/navneetprabhakar/Documents/git/image/inference
-Branch: codex/gpt2-from-scratch. Latest implementation/data commit before this handoff: 8b4262a.
+Branch: codex/gpt2-from-scratch. Previous implementation/data commit: 8b4262a. Latest continuation is the commit containing this handoff and reports/l4-qualification-v1/long-context-continuation-v2/.
 
 1. EXECUTIVE SUMMARY
 
@@ -10,7 +10,7 @@ Branch: codex/gpt2-from-scratch. Latest implementation/data commit before this h
 - Best retained tuned checkpoint: literal-state-repair-v1, step 605. Narrow development results are good; general conversation is still unreliable. Do not present it as generally usable.
 - Current workstream is LOCAL DATA PREPARATION: generate natural multi-turn conversations, review every complete dialogue, validate tool traces, deduplicate, and build meaningful 3K–4K context coverage.
 - Latest generation/review batch FINISHED. No generator, review worker, or GPU training was left running by that batch. There are no unreviewed candidates remaining in that bounded batch.
-- Combined new pilot corpus: 492 sessions, 89,075 training assistant targets and 26,688 development assistant targets. NONE of this 4K natural-corpus work has been trained into the model.
+- Combined pilot corpus: 497 sessions, 96,791 training assistant targets and 26,688 development assistant targets. NONE of this 4K natural-corpus work has been trained into the model.
 - VM must remain OFF. Last provider-verified state was TERMINATED; later GCP authentication expired. No cloud command was issued during the latest local work, so do not claim a fresh live status check.
 
 2. NON-NEGOTIABLE OPERATING CONSTRAINTS
@@ -95,7 +95,7 @@ Completed 200-dialogue 4K pilot:
 - Fixed split drift: two earlier development groups had moved into an untrained intermediate training split. Final admission quarantines them back to development and preserves prior held-out groups.
 - Immutable original final corpus: runs/natural-dialogue-4k-v1/admitted-v2/.
 
-Latest long-context work (completed 13 November):
+Earlier long-context work (completed 13 November, before this continuation):
 - 16 unique new scenarios; 24 full reviewed versions including separate repairs/extensions. Do not call those 24 unique new conversations.
 - Rejected or repaired timing errors, inconsistent leftovers, repeated quota disputes, confusing pieces with makers, and overstating "not recorded" as "never measured."
 - Seven final dialogues admitted: four training, three development. Ancestor/repaired versions are not duplicated into the corpus.
@@ -104,19 +104,27 @@ Latest long-context work (completed 13 November):
 - Training examples include creative viewpoint/continuity, offline-app help, pottery-label allocation and model-measurement interpretation. Tool arguments must use earlier corrected facts, not just copy arguments supplied in the latest user message.
 - Genuine longer workflow example: a later request for a second spare set retrieves the earlier revised 21-piece count, calls 21 x 3, and preserves privacy rules. Another retrieves 42 cm and the corrected 7.5 cm for a ratio of 5.6, without inferring real-world scale or clearance.
 
+Latest hands-off continuation (13 November):
+- Six unique new scenarios, ten complete dialogue versions fully root-reviewed: nine content passes, one rejected for a false claim that calculator division is unavailable. One additional generation attempt failed on a malformed proposal envelope; it is not a completed/reviewed dialogue.
+- Five final training sessions admitted: event-reducer debugging, LRU-cache debugging, game-kit return workflow, tactile timeline teaching, and document-import evidence interpretation. The short seed-observation conversation is sound but excluded from this long-context supplement. Original/shorter/rejected ancestors are not duplicated.
+- New final lengths: 3,042 / 3,149 / 3,416 / 3,623 / 3,843 tokens. Four meet the strict 3,072-token threshold; do not count the 3,042-token session in that bin.
+- Added 7,716 training assistant targets, including 4,452 after position 2,048 and 1,339 after position 3,072. The revised import workflow has a real calculator call starting at token 3,632, retrieving the earlier total attempts and revised success count without the user restating operands.
+- Ten final tool calls replay exactly. Reducer: nine displayed regression subcases plus 725 independent checks. Cache: five displayed tests plus 4,000 independent state-machine steps against a list-based reference.
+- Explicit schema-constrained proposal repair removes the false tool limitation. All retained intermediate assistant targets were reviewed, not just final answers. Complete raw candidate/review evidence is archived under reports/l4-qualification-v1/long-context-continuation-v2/evidence/ with source hashes.
+
 Current combined admitted corpus:
-  runs/long-context-corpus-v1/manifest.json
-  Manifest SHA256: 351cce911f249a42d282291309d82967c70fc9a0dbef2f34784557703f3f17df
-  492 total sessions: 150 natural, four new multi-turn tool workflows, 338 older tool replays.
-  Training: 391 sessions / 89,075 assistant targets.
+  runs/long-context-corpus-v2/manifest.json
+  Manifest SHA256: b6334cf9fbb60c4f3c809bb20ed69e5104cf6dec991896e5df6f57d1321cb655
+  497 total sessions: 152 natural, seven new multi-turn tool workflows, 338 older tool replays.
+  Training: 396 sessions / 96,791 assistant targets.
   Development: 101 sessions / 26,688 assistant targets.
-  New supplement alone: 5,223 training assistant targets.
-  Only 143 NEW training assistant targets occur after position 3,072; development has 652.
-  Therefore the 4K gap is STARTED, NOT CLOSED. This is still a small pilot, not a sufficient extension curriculum.
+  Training assistant targets after 3,072: 1,482 (previously 143); development unchanged at 652.
+  Seven training and one development sessions reach 3,072 tokens. Maximum is 3,843.
+  This remains a small pilot. The 4K gap is NOT CLOSED; none of this corpus has been trained.
 
-Validation performed: exact and 5-gram overlap checks, source hashes, full root review, actual tool replay, native framing/token fit without truncation, immutable source lineage, original split rows preserved byte-for-byte, and packed-target conservation. No embedding-based semantic deduplication claim.
+Validation: exact and 5-gram overlap checks across prior/new sources, source/review hashes, complete root review, actual tool replay, independent executable-code checks, native framing without truncation, packed-target conservation, prior training rows retained byte-for-byte and development file entirely byte-identical. No embedding-based semantic deduplication claim. Distinct unseen evaluation families are reserved in the new plan, but this is NOT a frozen or scored evaluation suite.
 
-Local combined corpus is verified. Approved synthetic supplement, review reports, scripts and audit are committed/pushed as 8b4262a. New GCS backup is pending authentication; prior backups remain intact. GCP auth must not block more local work.
+All local generators finished; no pending full-dialogue reviews. Corpus and synthetic evidence verified locally; commit/push are batched with this handoff. New GCS backup remains pending authentication; prior backups remain intact. No cloud commands issued. GCP authentication must not block further local work.
 
 6. CONTEXT WINDOW AND TOOL RUNTIME
 
@@ -155,9 +163,10 @@ Do not declare a usable general model, completed 10B training, 4K-trained weight
 Paths below are relative to the repository root shown above.
 - OWN_BASE_HANDOFF.txt: this current operational summary.
 - TRAINING_AUDIT.txt: append-only history; its original CURRENT STATE header is obsolete. Read newest entries, not that header.
-- reports/l4-qualification-v1/long-context-qualification-v1/corpus-state.json: latest corpus summary.
-- runs/long-context-corpus-v1/{manifest,admission,verification}.json: actual loadable corpus identities and checks.
-- reports/l4-qualification-v1/long-context-qualification-v1/: generation/revision/verification/build scripts, all review receipts, committed supplement-train.jsonl and supplement-validation.jsonl. Copied corpus-manifest.json here is an evidence snapshot; use the runs/ manifest for training.
+- reports/l4-qualification-v1/long-context-continuation-v2/corpus-state.json: latest corpus summary and new batch counters.
+- runs/long-context-corpus-v2/{manifest,admission,verification,independent-verification}.json: actual current loadable corpus identities and checks. V1 is preserved immutable.
+- reports/l4-qualification-v1/long-context-continuation-v2/: current generation/repair/build/verification scripts, supplement, evidence archive, hash index and corpus-state. Use runs/l4-data-prep/.venv/bin/python; top-level .venv lacks rustbpe.
+- reports/l4-qualification-v1/long-context-qualification-v1/: earlier generation/revision/verification/build scripts, all review receipts, committed supplement-train.jsonl and supplement-validation.jsonl. Copied corpus-manifest.json here is an evidence snapshot; use the runs/ manifest for training.
 - runs/long-context-production-final-v1/: final teacher candidates, CLI evidence and full root review; completed, not a running worker.
 - runs/long-context-qualification-v3/: successful qualification candidates; selected examples are development-only.
 - reports/l4-qualification-v1/natural-dialogue-4k-v1/: original 200-dialogue plan, all cohort reviews and prior verification.

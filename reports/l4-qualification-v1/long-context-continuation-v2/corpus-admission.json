@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "de40f361ad7ae407c3e1ca7aaefd18c50d8ab79042683eb56af9a4522a149e55",
+    "23bbefb3f890dcbbfe8ba559f2c522a64dc0cb97c0efe0ced6dc804bf8d7c051"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v1/manifest.json",
+  "parent_manifest_sha256": "351cce911f249a42d282291309d82967c70fc9a0dbef2f34784557703f3f17df",
+  "root_review_sha256": {
+    "runs/long-context-continuation-final-v2/root-review.json": "0aeaa21768e812fee802a0d6b1f5fdb96d4e26b55560b6eaa14ea4a2d8f4c67e",
+    "runs/long-context-continuation-cohort-b-revised-v2/root-review.json": "7accd276e8a89415ced3c137bb95530b58438930206a994226413774cefc9100",
+    "runs/long-context-import-final-v2/root-review.json": "16a3610978797c0b0b4b83bcfa0b6b72d5ffea34378e18e6c8c587cef4ac14db"
+  },
+  "selected": [
+    {
+      "id": "continuation-debug",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3623,
+      "assistant_targets": 2291,
+      "assistant_targets_after_2048": 1238,
+      "assistant_targets_after_3072": 442,
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0
+    },
+    {
+      "id": "continuation-kits",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3042,
+      "assistant_targets": 1057,
+      "assistant_targets_after_2048": 596,
+      "assistant_targets_after_3072": 0,
+      "replayed_tool_calls": 4,
+      "max_prior_jaccard": 0.010298661174047374
+    },
+    {
+      "id": "continuation-ribbon",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3149,
+      "assistant_targets": 1062,
+      "assistant_targets_after_2048": 710,
+      "assistant_targets_after_3072": 77,
+      "replayed_tool_calls": 4,
+      "max_prior_jaccard": 0.011322696860524962
+    },
+    {
+      "id": "continuation-cache",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3416,
+      "assistant_targets": 2011,
+      "assistant_targets_after_2048": 1208,
+      "assistant_targets_after_3072": 344,
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.001314060446780552
+    },
+    {
+      "id": "continuation-import",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3843,
+      "assistant_targets": 1295,
+      "assistant_targets_after_2048": 700,
+      "assistant_targets_after_3072": 476,
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.00949367088607595
+    }
+  ],
+  "excluded": [
+    {
+      "id": "continuation-import",
+      "reason": "All19messages read. Message4 refuses requested calculator use and falsely says supported division unavailable. Reject entire version despite correct later evidence handling and arithmetic. Separate immutable repair required; cannot retain this wrong intermediate target."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "No VM/cloud activity, no full-model4Ktraining or RAM test."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "rows": [
+    {
+      "id": "continuation-cache",
+      "pass": true,
+      "reason": "The assistant carries the established requirements into a usable LRU implementation and focused standard-library tests. It does not claim the tests were run.",
+      "turn_evidence": "Assistant 1 identifies shared state, FIFO behavior, capacity errors, and None ambiguity. Assistants 2\u20133 correctly trace read and update eviction order. Assistants 4\u20136 address sentinel misses, zero capacity, negative capacity, and instance isolation. Assistants 7\u20138 assess OrderedDict and propose regression cases. Assistant 9 implements and tests those decisions, while stating the capacity assumptions and that the tests were not run."
+    },
+    {
+      "id": "continuation-import",
+      "pass": false,
+      "reason": "The arithmetic and evolving incident account are correct, but the assistant fails the explicit calculator request: it performs the division directly and asserts, without evidence, that the permitted calculator proposal cannot perform it. That is a failure across the full dialogue even though the final explanation is sound.",
+      "turn_evidence": "Assistant 1 distinguishes attempts, documents, success evidence, and unknown states. Assistant 2 gives the correct 1.25 average but does not propose or use a calculator and makes an unsupported tool-capability claim. Assistants 3\u20134 correctly explain 85%, unknown states, and interrupted responses. Assistants 5\u20136 incorporate the 60 newly evidenced completions, yielding 1,080 completed and 120 unknown. Assistants 7\u20138 distinguish content accuracy and calculate the revised 90%. Assistant 9 uses the latest evidence, worked examples, and remaining uncertainties without drafting the dropped email."
+    }
+  ]
+}
