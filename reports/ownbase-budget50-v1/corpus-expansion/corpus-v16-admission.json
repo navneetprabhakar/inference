@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "f921b8f9c6dbd63331ed8cbedebb0a0b28195394902f837c6649afe98013cdeb",
+    "1f6dcb9d28eb70ecc67629ee2bf4f1fc7522a4452885a2e2d89e8488fef0b016"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v15/manifest.json",
+  "parent_manifest_sha256": "c1fce62d2d9a8cb45ebdc67281fe7261f43cee2f7cfd90ba4a978d62c2b47bce",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-14/root-review.json": "bd482a841e4e4d005564482ebc864f9bf25d5712b7a1befa1f37ef10efb6119e",
+    "runs/ownbase-budget50-v1/corpus-expansion/extensions-14/root-review.json": "78e4c35165926f905b8a744920a123e1fcd0596ac3dccc28f1ca09741bc4fd20"
+  },
+  "selected": [
+    {
+      "id": "b50-reservation-sweep",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3338,
+      "assistant_targets": 1432,
+      "assistant_targets_after_2048": 708,
+      "assistant_targets_after_3072": 117,
+      "tool_call_positions": [
+        3094,
+        3188
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.013663967611336033
+    },
+    {
+      "id": "b50-merge-streams",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3169,
+      "assistant_targets": 1667,
+      "assistant_targets_after_2048": 774,
+      "assistant_targets_after_3072": 33,
+      "tool_call_positions": [
+        2952,
+        3046
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.012276785714285714
+    },
+    {
+      "id": "b50-token-invariant",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3661,
+      "assistant_targets": 2292,
+      "assistant_targets_after_2048": 1246,
+      "assistant_targets_after_3072": 589,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0006053268765133172
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-token-invariant",
+      "reason": "All turns read. Original parity invariant, constructive legality/termination, odd and even boundary traces, at-most versus exactly-once characterization correct for8tokens.2590tokens belowthreshold; meaningful arbitraryN/zero-token extension reviewed separately."
+    },
+    {
+      "id": "b50-meeting-minutes",
+      "reason": "All turns read. Rumor/proposal/investigation/vote distinction maintained, three actual voters correct; later flyer-only rescission does not undo dateapproval or prove no pastprinting/spending. Open owners and outcomes accurately qualified.2460tokens belowthreshold; left unpadded."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

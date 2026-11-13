@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-prefix-catalog",
+      "pass": true,
+      "reason": "All turns satisfy the evolving lookup contract. The final calculation uses the revised section count and earlier stock figures, with both results grounded in authorized tool calls.",
+      "turn_evidence": "Turns 1\u20132 identify the three independent defects and give a correct counterexample. Turns 3\u20135 handle boundaries, provide a correct implementation, and test it against a separate bounded oracle. Turn 6 changes matching to case-insensitive while preserving and sorting distinct original spellings, including Unicode case-folding tests. Turn 7 uses two calculator calls: 9\u00d77=63 and 63\u221231=32; its explanation reflects the revised lookup semantics."
+    },
+    {
+      "id": "b50-transaction-groups",
+      "pass": false,
+      "reason": "The multi-counter implementation narrows the earlier contract from an ordered sequence of changes to only lists and tuples, without authorization. Other reviewed calculations and examples are sound.",
+      "turn_evidence": "Turns 1\u20134 correctly trace partial mutation, revise ownership, implement a pure single-counter function, and test intermediate balances. Turn 5 specifies an ordered sequence of change pairs and validation before application. Turn 6 accepts only list or tuple containers and pairs, excluding other ordered sequence types allowed by that specification; its trace and tests otherwise support atomic rejection and validation precedence. Turn 7 uses two authorized calculator calls for 8\u00d78=64 and 64\u221229=35, and correctly distinguishes rejection from success."
+    },
+    {
+      "id": "b50-manual-ambiguity",
+      "pass": false,
+      "reason": "The first assistant turn incorrectly asserts a geometric conflict between left-right slot positions and a front-back difference. A later correction does not erase that earlier error.",
+      "turn_evidence": "Turn 1 calls the 'behind' description inconsistent with the stated left-right positions, although both relationships can coexist. Turn 2 correctly retracts the geometric contradiction and identifies the unresolved mapping of slots 1 and 2. Turns 3\u20136 consistently place P in A and Q in B, preserve the stated lid role, and use descriptive labels tied to the specified viewpoint."
+    },
+    {
+      "id": "b50-switching-puzzle",
+      "pass": false,
+      "reason": "The first enumerator violates the explicit built-ins-only constraint by importing itertools. The later revision fixes the issue, but every assistant turn must be reviewed.",
+      "turn_evidence": "Turns 1\u20133 correctly establish parity, prove reachability, and trace a legal two-move example. Turn 4 imports itertools despite the request for Python built-ins only; its search logic is otherwise sound and its result is presented conditionally. Turns 5\u20136 correctly extend the proof to a path and then disconnected graphs. Turn 7 acknowledges the constraint in practice by providing an import-free enumerator and a correct path trace."
+    }
+  ]
+}

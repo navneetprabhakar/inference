@@ -1,0 +1,22 @@
+[
+  [
+    "b50-sparse-transpose",
+    "natural",
+    "A sparse integer matrix represented by explicit (row,column,value) triples and a declared shape, including empty rows and columns. Actual buggy transpose swaps coordinates but forgets shape and overwrites duplicate entries. Contract duplicate coordinates sum, zero totals omitted, bounds checked before summing, input unchanged. Need concrete non-square counterexample with duplicate cancellation, corrected implementation, independent dense-matrix oracle, and later reshape-free row/column permutation with precise mapping direction and final worked trace retrieving original shape. Standard library only; do not infer dimensions from nonzero entries."
+  ],
+  [
+    "b50-round-robin",
+    "tool",
+    "A fictional work queue with labelled jobs and finite positive integer work units, quantum2, FIFO round robin and no new arrivals during the run. Actual buggy implementation appends a completed job and loops. Need trace, explicit completion contract, corrected pure simulator returning slices and finish order, independent conservation/fairness checks, later zero-work input policy as immediate completion without consuming a time slice. Early7workshops eachneed6queue demonstration cards, stock23; late9workshops approved. Final two calculator calls compute cards and shortage; schedule is simulation, not actual jobs executed."
+  ],
+  [
+    "b50-rubric-evidence",
+    "natural",
+    "Fictional student poster review with an actual detailed rubric and two short source posters. Separate clarity, evidence attribution, and experiment design; each criterion has explicit 0/1/2 anchors. One poster writes fluent unsupported claims, another awkwardly reports limited observations accurately. Need criterion-by-criterion justified assessment, a substantial revision of one poster preserving evidence limits, realistic teacher-student dialogue about why writing polish is not evidence, later one new observation changes only a named criterion, and final revised rubric feedback without claiming a real grade was submitted. Avoid arbitrary numerical score changes not justified by anchors."
+  ],
+  [
+    "b50-ticket-selector",
+    "tool",
+    "Fictional deterministic weighted selector: given ordered labels and nonnegative integer weights, an integer ticket in [0,total) selects the half-open cumulative interval containing it. Zero-weight labels never selected. Actual buggy function uses <= upper bound and mishandles ticket0 with leading zero weight. Need boundary trace, explicit validation, pure implementation and independent expanded-list oracle for small weights, then later removal of a zero-weight label must not change any other selection or ticket numbering. Early8activity booths need5printed selector cards each, stock19; late10booths approved. Final two calculator calls compute requirement and shortage. No random draw or actual reward distribution claimed."
+  ]
+]

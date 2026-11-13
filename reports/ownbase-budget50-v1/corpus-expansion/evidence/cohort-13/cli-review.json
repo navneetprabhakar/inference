@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-path-reducer",
+      "pass": false,
+      "reason": "The first response misreports the implementation\u2019s result for `../a`, a concrete error in the requested trace. Later responses correctly apply the contract.",
+      "turn_evidence": "1: Correctly traces `a/../b` and identifies acceptance of `/a`, but says `../a` returns `.`; the function actually returns `a`. 2: Defines immediate rejection above root and the remaining contract correctly. 3: Implements the contract. 4: Provides an independent reduction model and bounded tests with appropriate limitations. 5: Defines and implements independently validated directory bases. 6: Correctly traces both base cases. 7: Distinguishes file contents from the supplied path. 8: Correctly combines the earlier traces. 9: Correctly traces the revised child escaping above root."
+    },
+    {
+      "id": "b50-score-ranking",
+      "pass": true,
+      "reason": "The responses preserve the ranking policy and ledger revision, and the final arithmetic is supported by two permitted calculator results.",
+      "turn_evidence": "1: Correctly identifies missing-score errors and the reversal\u2019s effects. 2: Defines stable ties and finite-real score assumptions. 3: Implements the stated policy without mutating the input. 4: Tests explicit rankings and eligibility boundaries. 5: Ranks A, B, C using the original ledger. 6: Applies B\u2019s rescinded finalization and revises the ranking to A, C. 7: Uses two authorized calls, obtaining 50 and 23, and correctly treats certificates as planned supplies."
+    },
+    {
+      "id": "b50-floor-stencil",
+      "pass": false,
+      "reason": "The penultimate response did not use the requested calculator to find the shortfall, despite an available second call; it left the procurement quantity as an unevaluated expression. The subsequent turn corrects this but does not erase the earlier omission.",
+      "turn_evidence": "1: Correctly diagnoses discarded negative coordinates and merged gaps. 2: Defines maximal intervals, ordering, duplicates, and empty input. 3: Implements the compressor. 4: Tests coverage, maximality, ordering, and examples. 5: Derives the original intervals and exclusive ends. 6: Correctly translates cells and intervals. 7: Uses one authorized calculator call for 77 but gives only `77 \u2212 45` for the requested shortfall and procurement decision; a second call was available. 8: Uses a calculator to obtain 32, orders 32, and explains how separate row metadata preserves empty rows."
+    },
+    {
+      "id": "b50-panel-moderation",
+      "pass": true,
+      "reason": "The responses consistently distinguish firsthand observations, the unverified rumor, the notice, and the unstarted proposal, and incorporate the later editorial withdrawal.",
+      "turn_evidence": "1: Corrects the rumor attribution and trial-status errors while retaining observational limits. 2: Produces a supported public summary. 3: Audits the summary and identifies omitted qualifications and the narrower fact that Birch did not ask about earlier plans. 4: Creates a dialogue that preserves the transcript\u2019s distinctions. 5: Treats withdrawal as an editorial decision and retains the attributed notice. 6: Omits the quotation and its substance, preserves the notice\u2019s limits, and accurately describes the trial as a submitted, unstarted proposal."
+    }
+  ]
+}

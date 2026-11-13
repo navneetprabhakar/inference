@@ -2,18 +2,18 @@ OWN-BASE MODEL — EXECUTION HANDOFF
 As of 13 November 2026. Repository: /Users/navneetprabhakar/Documents/git/image/inference
 Branch: codex/gpt2-from-scratch. Use git log and origin/codex/gpt2-from-scratch for the latest published revision. Current execution evidence is under reports/ownbase-budget50-v1/.
 
-1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 12:46 UTC
+1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 13:22 UTC
 
 - Objective: run a useful conversational/tool model locally, trained from our own randomly initialized 536,871,738-parameter base. No pretrained replacement. The trained context is still 2,048 tokens.
 - User authorized hands-off GPU execution with a fresh $50 incremental GCP cap, VM/GPU selection, roughly 30-minute updates, and GCS backup before shutdown. This supersedes earlier VM-off and same-VM-only restrictions.
-- Active VM: forge-ownbase-budget50-v1, A10040GB/a2-highgpu-1g,FLEX_START,us-central1-b; original retained VM off.7B milestone saved at step13352 /7,000,293,376tokens with complete heldoutCE2.607672 versus6B2.666492 (gain0.05882).8B continuation restored that checkpoint and reached13359 at12:12UTC, about104Ktargets/sec. No conversation-quality claim from base loss.
-- Cost guard: maximum14 GPU hours at the conservative $2.50/hour envelope ($35), plus $15 ancillary reserve. Estimated compute accrued $9.12 at12:27UTC; actual invoice unavailable. Provider STOP, guest shutdown, independent local watchdog, phase deadlines and backup reserve remain active.
+- Active VM: forge-ownbase-budget50-v1, A10040GB/a2-highgpu-1g,FLEX_START,us-central1-b; original retained VM off.7B milestone saved step13352 /7,000,293,376tokens,CE2.607672.8B continuation active; latest13:16UTC observation7,341,080,576tokens andCE2.594195. Base loss is not conversation acceptance.
+- Cost guard: max14GPU hours at conservative2.50USD/hour (35USD) plus15USD ancillaryreserve. Compute estimate11.18USD at13:16UTC; invoice unavailable. ProviderSTOP, guest shutdown, independent watchdog, phase deadlines and backupreserve remain unchanged.
 - Retained local605 baseline runs on MPS and preserves18/18 protected tool checks. Full new assessment is poor:6/180 individual turns and0/60 complete three-turn sessions pass root review. Do not claim general usefulness.
 - Active SFT packet is V2: one8-epoch diagnostic from the eventual new base and one4-epoch low-LR branch from retained605, at most two pilots under the existing deadlines. This replaces the redundant new-base4-epoch arm. All7 retained ancestry payloads are independently SHA-verified on the VM; targeted CPU preflight passes. No SFT has started yet; no automatic promotion.
-- Current immutable long-context corpus is V14:537sessions (429train/108development),158,581training and43,089development targets. After3072:12,990train/4,444development;40train/8development long sessions.29new accepted scenarios add11,656late targets acrosssplits.64versions across48initial scenarios fully reviewed; repairs/extensions not unique. Prior rows/splits byte-preserved; every immutable V4–V14 file independently GCS SHA read back. Untrained and below full4K readiness gate.
+- Current immutable long-context corpus is V18: 546 sessions (436 train/110 development), 171,147 training and 47,255 development targets. After 3072: 14,979 train/5,361 development; 47 train/10 development long sessions. 38 new accepted scenarios, 81 fully reviewed versions across 64 initial scenarios. New late targets 9,853 train + 4,709 development. Prior rows/splits byte-preserved; every immutable V4–V18 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
 - Additional matched MPS retention:110/112 historical normalized exact checks,109/112 byte-exact plus expected calls; one normalization pass hides a verbatim casing error. Root reviewed14open outputs:2 acceptable but weak. These are exposed retention cases, not broad quality. Candidates must preserve passing cases; training packet unchanged.
 - Local launcher: ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605. Real MPS smoke returns54 for73-19 through the broker. Default reviewed checkpoint selection is pending training/comparison.
-- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852. Cohorts01–12 plus selected repairs/extensions fully root reviewed; cohort13 generating. V14 adds stage-prop handoff4071tokens, oral-history counterfactual timelines3681tokens, and causal observation-record3488tokens. Workshop manual rejected for initial unsupported spacer-orientation override despite later correction. All accepted tool calls replayed; no synthetic real actions.7Breview and matched local retention evidence saved. User requests minimal updates every30minutes; next12:49UTC.
+- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852 verified alive13:16UTC. Cohorts01–16 fully root reviewed; cohort17 generating. V18 adds sparse matrix, round-robin and weighted-ticket conversations:1,888dense/permutation cases,2,801scheduler cases and1,536selector tickets pass. No actual tool calls in these three; family counts follow actual calls. Handoff and review counts now reconcile from hash-bound evidence. Latest pushedbatchd953515 coversV14; V15–V18 queued for nextbatch. User updates minimal every30minutes; last13:19UTC, next13:49UTC.
 
 2. NON-NEGOTIABLE OPERATING CONSTRAINTS
 
@@ -114,7 +114,7 @@ Latest hands-off continuation (13 November):
 - Ten final tool calls replay exactly. Reducer: nine displayed regression subcases plus 725 independent checks. Cache: five displayed tests plus 4,000 independent state-machine steps against a list-based reference.
 - Explicit schema-constrained proposal repair removes the false tool limitation. All retained intermediate assistant targets were reviewed, not just final answers. Complete raw candidate/review evidence is archived under reports/l4-qualification-v1/long-context-continuation-v2/evidence/ with source hashes.
 
-Current combined admitted corpus:
+Historical pre-run combined admitted corpus (current version is in section 1):
   runs/long-context-corpus-v3/manifest.json
   Manifest SHA256: ba6f513f6a97780f03e66b3166f897339520479a4975b5b9792e42007f8a560f
   508 total sessions:158 natural,12 new multi-turn tool workflows,338 older tool replays.
@@ -182,12 +182,12 @@ Do not declare a usable general model, completed 10B training, 4K-trained weight
 Paths below are relative to the repository root shown above.
 - OWN_BASE_HANDOFF.txt: this current operational summary.
 - reports/ownbase-budget50-v1/sft-packet-v2.json: active frozen next-stage script/config hashes; V1 is superseded and never dispatched.
-- runs/long-context-corpus-v4/: current immutable corpus, verified and GCS-backed; separate from frozen2K training inputs.
+- runs/long-context-corpus-v18/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
 - reports/ownbase-budget50-v1/local-baseline-review.json: full180-turn MPS assessment, not a usability claim.
 - OWN_BASE_NEXT_STEPS.txt: complete proposed next-phase plan, including conditional VM training.
 - TRAINING_AUDIT.txt: append-only history; its original CURRENT STATE header is obsolete. Read newest entries, not that header.
 - reports/l4-qualification-v1/long-context-campaign-v3/corpus-state.json: latest corpus summary and campaign counters.
-- runs/long-context-corpus-v3/{manifest,admission,verification,independent-verification}.json: current loadable corpus identities and checks. V1/V2 preserved immutable.
+- runs/long-context-corpus-v3/{manifest,admission,verification,independent-verification}.json: historical baseline corpus identities and checks. All versions preserved immutable.
 - reports/l4-qualification-v1/long-context-campaign-v3/: current generation/repair/build/verification scripts, supplement, evidence archive, hash index and corpus-state. Use runs/l4-data-prep/.venv/bin/python; top-level .venv lacks rustbpe.
 - reports/l4-qualification-v1/long-context-qualification-v1/: earlier generation/revision/verification/build scripts, all review receipts, committed supplement-train.jsonl and supplement-validation.jsonl. Copied corpus-manifest.json here is an evidence snapshot; use the runs/ manifest for training.
 - runs/long-context-production-final-v1/: final teacher candidates, CLI evidence and full root review; completed, not a running worker.

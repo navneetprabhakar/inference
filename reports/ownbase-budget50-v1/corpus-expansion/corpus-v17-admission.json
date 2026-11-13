@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "49b3ce4f3420e3575fec45458d43be13d897e6fb8eae629a3359eef232ea2f9b",
+    "1f6dcb9d28eb70ecc67629ee2bf4f1fc7522a4452885a2e2d89e8488fef0b016"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v16/manifest.json",
+  "parent_manifest_sha256": "445e3306d70549377d5c0f8114c6a5d339a226bca2c58d68bd3c9efa4c28fde7",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-15/root-review.json": "cf235cb2a5411dd556d3a3a888c2870ef8445715484d623070b5693bc3ee165d"
+  },
+  "selected": [
+    {
+      "id": "b50-prefix-catalog",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3242,
+      "assistant_targets": 1418,
+      "assistant_targets_after_2048": 597,
+      "assistant_targets_after_3072": 95,
+      "tool_call_positions": [
+        2990,
+        3084
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.011571841851494697
+    },
+    {
+      "id": "b50-transaction-groups",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3783,
+      "assistant_targets": 1916,
+      "assistant_targets_after_2048": 1103,
+      "assistant_targets_after_3072": 358,
+      "tool_call_positions": [
+        3521,
+        3615
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.016589861751152075
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-manual-ambiguity",
+      "reason": "First assistant asserts behind/left-right is a geometric conflict, then correctly retracts when user asks: left/right does not rule out depth offset and numbered slots unmapped. Reject wrong intermediate reasoning despite later correction;1790tokens also belowthreshold."
+    },
+    {
+      "id": "b50-switching-puzzle",
+      "reason": "Mathematical parity/path/component reasoning correct, but user explicitly requests built-ins-only enumerator and assistant imports itertools. Later user must ask again and repair does not remove violating intermediate target.2318tokens also belowthreshold."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

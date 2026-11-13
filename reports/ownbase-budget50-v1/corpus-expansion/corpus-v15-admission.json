@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "7779cc432b298065d0f023f3580d1e3d65a67c751fb8a002347cc96d012013ab",
+    "fa2f9b3a7f61ace81ad7430709c2fda396e3db353439172cea3ca0ccf8030c3d"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v14/manifest.json",
+  "parent_manifest_sha256": "943f4aaccf087c96a797c1c6ac55d4396c0f95371ed09c3d8ed9db5ec0ad0854",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-13/root-review.json": "f6d95909b1904110896399c9001df29dd141303c1787b59b2c2f89d12e0265a0"
+  },
+  "selected": [
+    {
+      "id": "b50-score-ranking",
+      "split": "train",
+      "family": "long_context_tool",
+      "context_tokens": 3257,
+      "assistant_targets": 1366,
+      "assistant_targets_after_2048": 379,
+      "assistant_targets_after_3072": 108,
+      "tool_call_positions": [
+        2992,
+        3086
+      ],
+      "replayed_tool_calls": 2,
+      "max_prior_jaccard": 0.012181616832779624
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-path-reducer",
+      "reason": "Every assistant turn read. First assistant claims original normalize(../a) returns dot; actual supplied function returns a, independently executed. Reject incorrect intermediate trace. Later repeated final traces also add little distinct supervision; no repair admitted."
+    },
+    {
+      "id": "b50-floor-stencil",
+      "reason": "Every assistant turn read. Geometry and arithmetic correct, but message16 stops after first calculator call and leaves explicitly requested shortfall as77-45 rather than using the second available call. User must repeat the request. Later32result does not repair incomplete tool workflow target."
+    },
+    {
+      "id": "b50-panel-moderation",
+      "reason": "Every assistant turn read. Quoted rumor not represented as fact; proposal not completed trial; observation scope and notice limits preserved, withdrawn quotation/substance omitted from finalpublicrecap.2652tokens belowlate3072threshold, left unpadded."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

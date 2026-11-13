@@ -1,0 +1,42 @@
+{
+  "utc": "2026-11-13T13:12:52.096810+00:00",
+  "reviewer": "root",
+  "reviews": [
+    {
+      "id": "b50-prefix-catalog",
+      "sha256": "284e4c26c83e4ede3264cf39321bbdeba150d9c9677dad9477b79d804e107cd2",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Full history read. Substring/prefix, exact spelling dedup, lexical ordering and limit sequencing correct; later Unicode casefold matching preserves distinct originalspellings.10230original and6552revised bounded suppliedoracle cases pass. Final63/32host results correctly use original7/31 andnew9sections; no publication claim."
+    },
+    {
+      "id": "b50-transaction-groups",
+      "sha256": "7cfa0000ea04c5d1f5c9f05406bb5d5db1dde3ce1f4c7f8ab1f407480f92d937",
+      "full_dialogue_reviewed": true,
+      "content_pass": true,
+      "selected_for_supplement": true,
+      "split": "train",
+      "reason": "Full history read. Initialcontract only forbids mutation on rejection; initial success-commit option explicitlyproposed, thenuser requests purity on success and code follows. Single-counter3905prefixsum cases pass; later all-input-validation precedence, whole-group rollback and newdict ownership correct,9999independent named-counter prefixsum cases plus suppliedinvalid-input cases pass. Final64/35host results grounded."
+    },
+    {
+      "id": "b50-manual-ambiguity",
+      "sha256": "898a42d0cefe9aabc13dc2c2273c0ba53ba5e37a5034af10df5729aeb0d7153d",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "First assistant asserts behind/left-right is a geometric conflict, then correctly retracts when user asks: left/right does not rule out depth offset and numbered slots unmapped. Reject wrong intermediate reasoning despite later correction;1790tokens also belowthreshold."
+    },
+    {
+      "id": "b50-switching-puzzle",
+      "sha256": "ef04678e23c8e3254da6202efa6550fcb0a805adb41c8fc70913342057268506",
+      "full_dialogue_reviewed": true,
+      "content_pass": false,
+      "selected_for_supplement": false,
+      "split": "train",
+      "reason": "Mathematical parity/path/component reasoning correct, but user explicitly requests built-ins-only enumerator and assistant imports itertools. Later user must ask again and repair does not remove violating intermediate target.2318tokens also belowthreshold."
+    }
+  ]
+}

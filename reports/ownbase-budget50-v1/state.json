@@ -1,5 +1,5 @@
 {
-  "utc": "2026-11-13T11:15:54.713691+00:00",
+  "utc": "2026-11-13T13:22:09.735062+00:00",
   "phase": "base_training_sft_v2_preflight_ready",
   "vm": "forge-ownbase-budget50-v1",
   "zone": "us-central1-b",
@@ -17,118 +17,13 @@
   },
   "new_gpu": "NVIDIA A100-SXM4-40GB",
   "baseline_base_tokens": 6000476160,
-  "observed_progress": {
-    "status": "running",
-    "step": 12833,
-    "targets": 6728187904,
-    "train_loss": 2.5869579315185547,
-    "tokens_per_second_last_update": 103603.13632197204,
-    "last_checkpoint": {
-      "path": "/opt/ownbase-nano/results/budget50-v1/base-13352/step-00012665",
-      "upload": {
-        "status": "gcs_bundle_uploaded",
-        "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-d043286634b449628ca798de8c1998c2",
-        "seconds": 56.00527600700025,
-        "bytes_one_way": 3826065236,
-        "identity": {
-          "adapter_hashes": {
-            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
-            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
-            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
-            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
-            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
-            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
-            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
-            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
-          },
-          "attention": "fa3",
-          "batch_tokens": 524288,
-          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
-          "config": {
-            "n_embd": 1024,
-            "n_head": 8,
-            "n_kv_head": 8,
-            "n_layer": 16,
-            "sequence_len": 2048,
-            "vocab_size": 32768,
-            "window_pattern": "SSSL"
-          },
-          "eval_every_tokens": 250000000,
-          "eval_tokens_per_shard": 1048576,
-          "horizon_updates": 19074,
-          "initialization": "own_random",
-          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
-          "microbatch": 16,
-          "numerical_mode": {
-            "cublas_workspace_config": ":4096:8",
-            "cuda": "12.9",
-            "cudnn_allow_tf32": true,
-            "cudnn_benchmark": false,
-            "cudnn_deterministic": true,
-            "deterministic_algorithms": true,
-            "deterministic_attention": true,
-            "float32_matmul_precision": "highest",
-            "gpu": "NVIDIA A100-SXM4-40GB",
-            "sm": [
-              8,
-              0
-            ]
-          },
-          "phase": "base",
-          "probes": {
-            "decoding": "greedy raw, no repetition penalty",
-            "enabled": true,
-            "max_new_tokens_per_prompt": 32,
-            "max_total_new_tokens": 128,
-            "prompts": [
-              "The rain stopped just before sunrise. When Mira opened the window,",
-              "A library lends books to readers. Readers return the books so that",
-              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
-              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
-            ],
-            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
-            "version": 1
-          },
-          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
-          "seed": 103,
-          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
-          "torch": "2.9.1+cu129"
-        },
-        "step": 12665,
-        "manifest": {
-          "files": {
-            "metadata.json": {
-              "bytes": 2851,
-              "sha256": "d607741dcc03b4ba7f796f141ab4362c5008e6c69415ac038011a86467109497"
-            },
-            "payload.pt": {
-              "bytes": 3826061953,
-              "sha256": "a31eec09dd3836ecefbda9fc9ad0aad8b510bf21ca5351845ef7348e3b5bb2e8"
-            }
-          },
-          "step": 12665,
-          "version": 1
-        },
-        "publication_order": [
-          "payload.pt",
-          "metadata.json",
-          "manifest.json",
-          "COMMITTED"
-        ],
-        "transfer_integrity": "gcloud storage cp built-in checksum validation",
-        "independent_sha256_readback": false,
-        "note": "Upload receipt only; fresh-machine restore and next update not tested."
-      },
-      "step": 12665
-    }
-  },
   "budget_cap_usd": 50,
   "compute_reservation_usd": 35,
   "other_reserve_usd": 15,
   "invoice_verified": false,
   "original_vm": "TERMINATED; untouched",
   "local_baseline": "MPS runtime succeeds; result-recall followup fails, no usability claim",
-  "next": "Review7B milestone and monitor V2 dispatch; evaluate/download both candidates on MPS with matched retention; fully review outputs; verify all GCS backups before shutdown and local delivery.",
+  "next": "Monitor8B continuation and bounded V2 dispatch; review corpus16; evaluate/download candidates on MPS with matched retention; verify GCS backup before shutdown/local delivery.",
   "temporary_firewall": "forge-ownbase-budget50-iap, sourceIAP range only, targetrun-specifictag; delete at closeout",
   "active_sft_packet": "sft-packet-v2.json",
   "sft_dispatch_pid": 21135,
@@ -140,46 +35,46 @@
     "protected_tools": "18/18",
     "device": "mps"
   },
-  "corpus": "long-context-corpus-v14; all files GCS SHA readback verified; untrained",
+  "corpus": "long-context-corpus-v18; all files GCS SHA readback verified; untrained",
   "current_long_context_corpus": {
-    "path": "runs/long-context-corpus-v14",
-    "manifest_sha256": "943f4aaccf087c96a797c1c6ac55d4396c0f95371ed09c3d8ed9db5ec0ad0854",
-    "sessions": 537,
-    "train_targets": 158581,
-    "development_targets": 43089,
-    "train_targets_after3072": 12990,
-    "development_targets_after3072": 4444,
+    "path": "runs/long-context-corpus-v18",
+    "manifest_sha256": "1aca5253494693d988e8696c32d1c55b3826534420f178be00cf99b2d795ab22",
+    "sessions": 546,
+    "train_targets": 171147,
+    "development_targets": 47255,
+    "train_targets_after3072": 14979,
+    "development_targets_after3072": 5361,
     "independent_gcs_readback": true,
     "trained": false,
     "full4k_ready": false
   },
   "latest_base_observation": {
-    "utc": "2026-11-13T12:46:25.151939+00:00",
+    "utc": "2026-11-13T13:16:36.445013+00:00",
     "provider_status": "RUNNING",
     "machine_type": "a2-highgpu-1g",
     "provisioning_model": "FLEX_START",
     "phase": "base_training",
-    "elapsed_hours": 3.969,
-    "conservative_compute_accrual_usd": 9.92,
+    "elapsed_hours": 4.472,
+    "conservative_compute_accrual_usd": 11.18,
     "ancillary_reserved_usd": 15,
-    "total_envelope_to_date_usd": 24.92,
+    "total_envelope_to_date_usd": 26.18,
     "incremental_cap_usd": 50,
     "invoice_verified": false,
-    "last_heldout_ce": 2.6076720356941223,
+    "last_heldout_ce": 2.5941949784755707,
     "telemetry_note": null,
     "provider_duration_seconds": "50400",
     "progress": {
       "status": "running",
-      "step": 13703,
-      "targets": 7184318464,
-      "train_loss": 2.5772461891174316,
-      "tokens_per_second_last_update": 104023.73843108104,
+      "step": 14002,
+      "targets": 7341080576,
+      "train_loss": 2.636000394821167,
+      "tokens_per_second_last_update": 103715.02666538593,
       "last_checkpoint": {
-        "path": "/opt/ownbase-nano/results/budget50-v1/base-15259/step-00013524",
+        "path": "/opt/ownbase-nano/results/budget50-v1/base-15259/step-00013880",
         "upload": {
           "status": "gcs_bundle_uploaded",
-          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-4f442100a69e4fbdb334491733a838e6",
-          "seconds": 70.95406027299941,
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-8baeacfec0c94940814007724260b82c",
+          "seconds": 85.61220215899993,
           "bytes_one_way": 3826065236,
           "identity": {
             "adapter_hashes": {
@@ -245,19 +140,19 @@
             "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
             "torch": "2.9.1+cu129"
           },
-          "step": 13524,
+          "step": 13880,
           "manifest": {
             "files": {
               "metadata.json": {
                 "bytes": 2851,
-                "sha256": "46e9bfc582986ffd788b6bbea2bd1cc67add0cb43bad4df04153697758e3b19a"
+                "sha256": "38075ddb62dc624d636e7f8687b03e3f1251dc328e4e18e775820a697fa978f1"
               },
               "payload.pt": {
                 "bytes": 3826061953,
-                "sha256": "35f95d5cd439b6d35eedaf7b66a37c02e60342b0c84a6dd9b8636a5efe3c54b7"
+                "sha256": "0c0492c16fc5c23966a8fb11b62dcea18cff85834d82e9a338e68e76ea23e135"
               }
             },
-            "step": 13524,
+            "step": 13880,
             "version": 1
           },
           "publication_order": [
@@ -270,7 +165,7 @@
           "independent_sha256_readback": false,
           "note": "Upload receipt only; fresh-machine restore and next update not tested."
         },
-        "step": 13524
+        "step": 13880
       }
     },
     "controller": {
@@ -292,110 +187,8 @@
     "device": "mps",
     "exposed_development_only": true
   },
-  "observed": {
-    "status": "running",
-    "step": 13703,
-    "targets": 7184318464,
-    "train_loss": 2.5772461891174316,
-    "tokens_per_second_last_update": 104023.73843108104,
-    "last_checkpoint": {
-      "path": "/opt/ownbase-nano/results/budget50-v1/base-15259/step-00013524",
-      "upload": {
-        "status": "gcs_bundle_uploaded",
-        "remote_prefix": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-4f442100a69e4fbdb334491733a838e6",
-        "seconds": 70.95406027299941,
-        "bytes_one_way": 3826065236,
-        "identity": {
-          "adapter_hashes": {
-            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
-            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
-            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
-            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
-            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
-            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
-            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
-            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
-          },
-          "attention": "fa3",
-          "batch_tokens": 524288,
-          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
-          "config": {
-            "n_embd": 1024,
-            "n_head": 8,
-            "n_kv_head": 8,
-            "n_layer": 16,
-            "sequence_len": 2048,
-            "vocab_size": 32768,
-            "window_pattern": "SSSL"
-          },
-          "eval_every_tokens": 250000000,
-          "eval_tokens_per_shard": 1048576,
-          "horizon_updates": 19074,
-          "initialization": "own_random",
-          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
-          "microbatch": 16,
-          "numerical_mode": {
-            "cublas_workspace_config": ":4096:8",
-            "cuda": "12.9",
-            "cudnn_allow_tf32": true,
-            "cudnn_benchmark": false,
-            "cudnn_deterministic": true,
-            "deterministic_algorithms": true,
-            "deterministic_attention": true,
-            "float32_matmul_precision": "highest",
-            "gpu": "NVIDIA A100-SXM4-40GB",
-            "sm": [
-              8,
-              0
-            ]
-          },
-          "phase": "base",
-          "probes": {
-            "decoding": "greedy raw, no repetition penalty",
-            "enabled": true,
-            "max_new_tokens_per_prompt": 32,
-            "max_total_new_tokens": 128,
-            "prompts": [
-              "The rain stopped just before sunrise. When Mira opened the window,",
-              "A library lends books to readers. Readers return the books so that",
-              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
-              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
-            ],
-            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
-            "version": 1
-          },
-          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
-          "seed": 103,
-          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
-          "torch": "2.9.1+cu129"
-        },
-        "step": 13524,
-        "manifest": {
-          "files": {
-            "metadata.json": {
-              "bytes": 2851,
-              "sha256": "46e9bfc582986ffd788b6bbea2bd1cc67add0cb43bad4df04153697758e3b19a"
-            },
-            "payload.pt": {
-              "bytes": 3826061953,
-              "sha256": "35f95d5cd439b6d35eedaf7b66a37c02e60342b0c84a6dd9b8636a5efe3c54b7"
-            }
-          },
-          "step": 13524,
-          "version": 1
-        },
-        "publication_order": [
-          "payload.pt",
-          "metadata.json",
-          "manifest.json",
-          "COMMITTED"
-        ],
-        "transfer_integrity": "gcloud storage cp built-in checksum validation",
-        "independent_sha256_readback": false,
-        "note": "Upload receipt only; fresh-machine restore and next update not tested."
-      },
-      "step": 13524
-    }
-  },
-  "base_7b_review": "base-7b-review.json"
+  "base_7b_review": "base-7b-review.json",
+  "active_corpus_generation": [
+    "cohort-17"
+  ]
 }

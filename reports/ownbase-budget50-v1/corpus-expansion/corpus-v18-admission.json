@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "training_admitted": true,
+  "context_tokens": 4096,
+  "format_version": "forge-nanochat-v1",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "jsonl_sha256": [
+    "350f97dd073f747e04acd52eb0c7830a9246d9af84a136be3fb4d7b444d9f2d3",
+    "e1eeb7caf8b69377bb78333aa2af7c45de3a3dfaf99045edfec84d870c93b193"
+  ],
+  "parent_manifest": "runs/long-context-corpus-v17/manifest.json",
+  "parent_manifest_sha256": "c36d6f688d3b498da5ff59af553af8e08b0b4064bb41a70a729af57c07fe9189",
+  "root_review_sha256": {
+    "runs/ownbase-budget50-v1/corpus-expansion/cohort-16/root-review.json": "455132d8bc53f45fbc79d560f3100650e650202597953172fd7e79aec0a9ebb7"
+  },
+  "selected": [
+    {
+      "id": "b50-sparse-transpose",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3758,
+      "assistant_targets": 2622,
+      "assistant_targets_after_2048": 1419,
+      "assistant_targets_after_3072": 686,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.0008616975441619991
+    },
+    {
+      "id": "b50-round-robin",
+      "split": "train",
+      "family": "long_context_natural",
+      "context_tokens": 3889,
+      "assistant_targets": 2145,
+      "assistant_targets_after_2048": 1162,
+      "assistant_targets_after_3072": 592,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.010451306413301662
+    },
+    {
+      "id": "b50-ticket-selector",
+      "split": "validation",
+      "family": "long_context_natural",
+      "context_tokens": 3608,
+      "assistant_targets": 1874,
+      "assistant_targets_after_2048": 928,
+      "assistant_targets_after_3072": 328,
+      "tool_call_positions": [],
+      "replayed_tool_calls": 0,
+      "max_prior_jaccard": 0.012754085292945397
+    }
+  ],
+  "excluded": [
+    {
+      "id": "b50-rubric-evidence",
+      "reason": "All6assistantturns fullyread: criteria distinguished, implicit question in fluent poster accepted as reasonable clarity interpretation; revised observations preserve limits, dated log strengthens attribution without unjustified score increase. Content sound but2270tokens, below3072long-context admission."
+    }
+  ],
+  "actual_trained_targets": 0,
+  "limitations": [
+    "Small pilot supplement, not a complete4Kextension corpus.",
+    "Development scenarios influenced generation design and are not a pristine benchmark.",
+    "Exact and5gram overlap checked; no embedding-based semantic deduplication.",
+    "Only calculate/convert workflows; no broader tool orchestration coverage.",
+    "Separate boundedGPUbase training is active; thisnew4Kcorpus remainsuntrained and excludedfromfrozen2KSFTpacket."
+  ]
+}

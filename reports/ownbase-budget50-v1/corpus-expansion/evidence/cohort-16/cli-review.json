@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "b50-sparse-transpose",
+      "pass": true,
+      "reason": "All seven responses preserve the matrix contract and build on earlier work. The implementations and proposed tests address the requested cases without claiming execution.",
+      "turn_evidence": "1: Identifies four independent defects. 2: Correctly traces cancellation and the swapped shape. 3: Validates coordinates before accumulation and removes zero totals. 4: Uses a shape-driven dense oracle, including zero dimensions. 5: Proposes invalid-coordinate and immutability tests without claiming execution. 6: Defines old-to-new bijections over complete dimensions. 7: Implements and tests permutations independently, including non-self-inverse maps and cancellation."
+    },
+    {
+      "id": "b50-round-robin",
+      "pass": true,
+      "reason": "The responses correctly trace and implement FIFO scheduling, then apply the revised zero-work policy. No user requested a tool calculation, and no tool results are fabricated.",
+      "turn_evidence": "1: Correctly traces perpetual requeueing of completed jobs. 2: Defines slices, finish order, validation, and termination. 3: Implements the original positive-work contract without mutating the supplied sequence. 4: Shows the correct five-slice queue trace. 5: Proposes an independent round-based oracle and discloses that checks were not observed. 6: Updates validation and immediate completion for zero-work jobs. 7: Correctly traces mixed jobs under the revised policy."
+    },
+    {
+      "id": "b50-rubric-evidence",
+      "pass": true,
+      "reason": "The responses consistently apply the independent rubric criteria and track the rewrite and later attribution improvement without inventing evidence or changing unsupported scores.",
+      "turn_evidence": "1: Interprets the anchors without scoring. 2: Scores both posters and distinguishes clarity, attribution, and design. 3: Rewrites B while preserving observations and limitations. 4: Raises clarity to 2 while retaining attribution 2 and design 1. 5: Uses both posters and the rewrite in a relevant dialogue. 6: Recognizes that the dated log strengthens attribution but does not justify a higher score or a stronger design."
+    },
+    {
+      "id": "b50-ticket-selector",
+      "pass": true,
+      "reason": "The responses correctly handle half-open boundaries, validation, and zero-weight labels across the full dialogue. No user requested a tool calculation, and no tool results are fabricated.",
+      "turn_evidence": "1: Correctly compares actual and intended outcomes for all five tickets. 2: Defines uniqueness, bounds, positive total, and boolean rejection. 3: Implements strict upper-bound selection and validation. 4: Proposes a small expanded-list oracle and states its scaling limitation. 5: Covers invalid inputs and discloses tests were not executed. 6: Shows that removing a zero-weight label preserves boundaries. 7: Produces a consistent instructor demonstration with boundary and invalid tickets."
+    }
+  ]
+}
