@@ -1,0 +1,181 @@
+{
+  "checkpoint": "literal-state-repair-v1/step-00000605",
+  "torch": "2.14.1",
+  "device": "mps",
+  "load_seconds": 4.720700625010068,
+  "total_seconds": 8.169151083013276,
+  "process_peak_rss_bytes": 4417519616,
+  "mps_allocated_bytes": 2157974784,
+  "mps_driver_bytes": 3272294400,
+  "records": [
+    {
+      "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+      "seconds": 2.450252458016621,
+      "result": {
+        "status": "complete",
+        "assistant_text": "54",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7480,
+              1191,
+              98,
+              8220,
+              819,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 73,
+                  "b": 19,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":73,\"b\":19,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 2.2551137919945177
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794559820.9678972,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 54
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              6722,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "54"
+            },
+            "seconds": 0.1942869999911636
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794559820.9678972,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      }
+    },
+    {
+      "user": "What was the result of that subtraction? Reply with only the number.",
+      "seconds": 0.998173207975924,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The result is 19.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              987,
+              306,
+              32,
+              819,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The result is 19."
+            },
+            "seconds": 0.9975977079884615
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794559820.9678972,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      }
+    }
+  ],
+  "scope": "Existing retained baseline onactualM4; not newtraining or broad acceptance"
+}

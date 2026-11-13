@@ -11,13 +11,13 @@ Branch: codex/gpt2-from-scratch. Previous corpus commit:16baed5. Latest campaign
 - Current workstream is LOCAL DATA PREPARATION: generate natural multi-turn conversations, review every complete dialogue, validate tool traces, deduplicate, and build meaningful 3K–4K context coverage.
 - Completed sustained local campaign-v3: six cohorts/24 unique scenarios,36 complete versions fully reviewed,11 final3K–4K sessions admitted after code/tool/lineage checks. Next local work remains authorized; no GPU training.
 - Combined pilot corpus:508 sessions,115,754 training assistant targets and26,688 development assistant targets. Training supervision after3072 increased from1,482 to5,126 targets. NONE of this4K corpus has been trained into the model.
-- VM must remain OFF. Last provider-verified state was TERMINATED; later GCP authentication expired. No cloud command was issued during the latest local work, so do not claim a fresh live status check.
+- NEW AUTHORIZATION13November: user approved hands-off execution with a50USD incremental GCP cap, VM/GPU selection,30-minute training updates and GCS backup before shutdown. Original retained VM freshly verified TERMINATED. A separate bounded A100 Flex-start allocation is RUNNING with optimizer updates confirmed; current state is in runs/ownbase-budget50-v1/. This overrides earlier VM-off/same-VM-only constraints for this run.
 
 2. NON-NEGOTIABLE OPERATING CONSTRAINTS
 
 - Latest total authorized GCP cap is $150, raised explicitly on 12 November. Earlier $100 limits are superseded; $150 is a total project cap, not fresh remaining credit.
-- User subsequently explicitly stopped GPU work. Budget authorization does NOT authorize restarting the VM now. Continue local generation/review without requiring GCP authentication.
-- If GPU work is later authorized: reuse forge-ownbase-v2-retained-01 in project executespecv1, zone us-central1-b. Do not provision a replacement or assume the old allocation remains obtainable.
+- Historical GPU stop was superseded by the latest explicit50USD execution request. Current allocation:35USD compute envelope (14h at2.50USD/h) plus15USD storage/transfer/uncertainty reserve. Historical150USD figures are not a verified invoice or fresh available credit.
+- Selected new VM:forge-ownbase-budget50-v1, a2-highgpu-1g/A10040GB,FLEX_START,us-central1-b. Old Flex-start scheduling update was rejected, so it stays OFF; fresh VM has provider STOP at14h and persistent boot disk. Never run two GPU instances concurrently.
 - Single weight writer/controller and single locked local generator. Never overwrite historical GCS control commands, weights, admission receipts, or checkpoint identities.
 - Preserve GCS backups and the verified local best checkpoint. Delete local payloads only with independently verified restore evidence, not because a filename looks old.
 - Teacher is Codex CLI gpt-6.1-terra. No automatic paid API fallback or quota reset. Earlier requests for other model versions were superseded by the Terra request.
@@ -195,4 +195,12 @@ Paths below are relative to the repository root shown above.
 - reports/l4-qualification-v1/production-state.json: historical 6B milestone evidence. gpu_active=true, $100 budget and production_ready flags are STALE; do not use them as current worker state, budget, or conversational readiness.
 - runs/retained-campaign-watch/: old campaign watcher state/events/BLOCKER files; do not restart its controller based on an old running flag.
 
-Resume principle: local corpus work is authorized; GPU remains off. Read newest evidence, preserve immutable lineage, complete review/admission locally, and report real quality rather than candidate counts.
+Resume principle: follow the newest50USD launch receipt and live provider state. Do not restart old jobs or exceed the new run cap. Preserve immutable lineage and verify GCS backup before normal shutdown; provider cutoff remains the emergency outer boundary.
+
+ACTIVE50USD EXECUTION —13NOVEMBER2026
+- reports/ownbase-budget50-v1/: launch configuration, startup, bounded base controller and independent watchdog. Runtime receipts: runs/ownbase-budget50-v1/.
+- Same537M/2K base resumes at11445 in a separate GCS checkpoint lineage; original6B and tuned605/fallback preserved. Goal10B conditional on learning and time, then reviewed SFT/local delivery.4K remains conditional on data and memory qualification.
+- Provider14h STOP, guest shutdown13h50, base phase11h30, later training12h30, backup deadline13h40, independent local stop watchdog. No old deadlines or commands reused.
+- Fresh GCP auth/billing enabled. Billing export dataset exists but has no tables: no actual invoice claim. API IPv4 workaround is per-process; no global network settings changed.
+-50 CPU checks pass after using existing torch environment and pinned upstream import path. Fresh-machine6B restore succeeded; first new updates observed at~104Ktargets/sec and28GB peak allocation. Provider14hSTOP verified. Four immediate capacity requests failed; a single30min queue obtained capacity within~30seconds.
+- Prior VM-off statements in historical sections describe completed local work, not current authorization.
