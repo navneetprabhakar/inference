@@ -1,10 +1,13 @@
 OWN MODEL — LOCAL CHAT
 
+STATUS: stopped at user request on13November2026; port8765 is closed.
+The endpoints and commands below describe how the implementation works.
+
 Browser: http://127.0.0.1:8765
 Health:  GET /api/health
 Chat:    POST /api/chat
 
-Currently serves the retained step605 checkpoint on Apple MPS. The new GCP
+When started, serves the retained step605 checkpoint on Apple MPS. The new GCP
 training is separate and still running. No automatic checkpoint replacement.
 Model:536,871,738parameters;2,048token context;192token reply budget; raw greedy
 decode/repetition penalty1.0. Generated answers are not repaired by the host.

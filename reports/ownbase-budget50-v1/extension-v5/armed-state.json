@@ -1,0 +1,24 @@
+{
+  "utc": "2026-11-13T20:15:28.002575+00:00",
+  "status": "armed_waiting_current_base_backup_and_stop",
+  "launcher_pid": 314,
+  "extension_vm": "forge-ownbase-extension-v5",
+  "maximum_additional_gpu_seconds": 7200,
+  "total_cap_usd": 55,
+  "prior_run_cap_seconds": 50400,
+  "cumulative_compute_ceiling_hours": 16,
+  "storage_transfer_reserve_usd": 15,
+  "live_runtime_edit_rejected_by_provider": true,
+  "existing_disk_reused": true,
+  "no_simultaneous_gpu": true,
+  "current_base_worker_untouched": 172461,
+  "extension_sequence": "finish any smallbase remainder -> exact10B check -> SFT -> samecheck -> verifiedbackup -> shutdown",
+  "automatic_extension_requires": [
+    "CurrentVMTERMINATED",
+    "GCSbackupreceiptverified",
+    "Exactcheckpointmanifestpinned",
+    "Cumulativebudgetcheck",
+    "NootherGPUrunning"
+  ],
+  "provider_allocation_status": "Notyetrequested; waitforoldVMstop"
+}

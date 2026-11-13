@@ -1,0 +1,60 @@
+{
+  "utc": "2026-11-13T17:07:33.582926+00:00",
+  "status": "verified_queued_inputs_not_yet_trained",
+  "packet": "sft-packet-v2",
+  "manifest_sha256": "f22ac188eac1de0aa49a9cd01e61dc67213f8c12b0f10fdb11a36a5312ead8c4",
+  "counts": {
+    "train": {
+      "sessions": 349,
+      "families": {
+        "natural_dialogue_4k": 80,
+        "convert": 112,
+        "calculate": 105,
+        "tool_correction": 52
+      },
+      "codex_teacher_sessions": 80,
+      "assistant_targets": 43183
+    },
+    "validation": {
+      "sessions": 88,
+      "families": {
+        "natural_dialogue_4k": 19,
+        "calculate": 27,
+        "tool_correction": 13,
+        "convert": 29
+      },
+      "codex_teacher_sessions": 19,
+      "assistant_targets": 10609
+    }
+  },
+  "recipes": [
+    {
+      "name": "new-base-2k-8epochs",
+      "stage": "general",
+      "epochs": 8,
+      "batch_tokens": 8192,
+      "lr_multiplier": 1.0
+    },
+    {
+      "name": "retained605-2k-4epochs",
+      "stage": "targeted",
+      "epochs": 4,
+      "batch_tokens": 8192,
+      "lr_multiplier": 0.125
+    }
+  ],
+  "new_3k_4k_corpus_used": false,
+  "reason": "Current qualified context is2048; do not truncate or claim late-context training.",
+  "required_after_training": [
+    "Check training checkpoint identity and consumed manifest against this receipt.",
+    "Report actual completed updates and assistant targets; distinguish early stop from full passes.",
+    "Full semantic review of180turns/60sessions; report natural/tool/code categories separately.",
+    "Review correct routing, tool arguments, actual execution, result grounding, follow-up recall, permissions, failures and fabricated execution.",
+    "18 protected tool regressions and126 historical retention turns; exposed suites are not unseen generalization.",
+    "Matched MPS assessment; preserve incumbent if new candidates regress."
+  ],
+  "limitations": [
+    "269train tool/correction rows are synthetic curriculum, not80additional Codex natural conversations.",
+    "Generated source rows may retain historical training_admitted:false provenance; admission authority is the hash-bound reviewed dataset receipt, not an assertion that those old source fields changed."
+  ]
+}

@@ -25,7 +25,7 @@ main{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;min-hei
 <main>
   <header class="top"><h1>Conversation</h1><button class="outline" type="button" id="new">+ New chat</button></header>
   <div id="thread" aria-label="Conversation history">
-    <div id="empty"><h2>Test the own model</h2><p>Retained checkpoint 605 · 2K context. Conversation quality is experimental; new GCP training is still running.</p><div id="examples">
+    <div id="empty"><h2>Test the own model</h2><p id="preview-note">Pinned local checkpoint. Conversation quality is experimental.</p><div id="examples">
       <button type="button" class="example" data-prompt="The blue notebook belongs to Mira. Who owns it?">Try context recall</button>
       <button type="button" class="example" data-tools="true" data-prompt="Use the calculator to subtract 19 from 73.">Try the calculator</button>
       <button type="button" class="example" data-tools="true" data-prompt="Convert 3 meters to centimeters.">Convert units</button>
@@ -69,6 +69,9 @@ function render(turn){
   byId('empty').hidden=true;
   const item=node('article',null,'turn');
   item.append(node('div','You','speaker'),node('p',turn.message,'message user-msg'));
+  item.append(node('p',turn.permit_calls
+    ? (turn.trace.length ? 'Tools enabled · '+turn.trace.length+' executed call(s)' : 'Tools enabled · no tool executed')
+    : 'Tools disabled · answer generated without a calculator','notice'));
   for(const event of turn.trace){
     const name=event.name||'Proposal';
     const observed=event.ok?JSON.stringify(event.data?.result):String(event.error||'Execution failed');
@@ -96,6 +99,7 @@ async function openSession(resume){
     }
     token=data.session;pending=null;sessionStorage.setItem('own-nano-chat-session',token);
     byId('parameter-count').textContent=data.model.parameters.toLocaleString()+' parameters';
+    byId('preview-note').textContent='Checkpoint step '+data.model.step+' · '+data.model.context_tokens.toLocaleString()+'-token context. Conversation quality is experimental.';
     byId('model').textContent=data.model.name;byId('device').textContent=data.model.device.toUpperCase();
     byId('digest').textContent=data.model.sha256;byId('checkpoint').textContent=data.model.checkpoint;
     byId('mobile-model').textContent=data.model.name+' · '+data.model.device.toUpperCase();

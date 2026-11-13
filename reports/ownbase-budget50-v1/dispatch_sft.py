@@ -10,8 +10,10 @@ def read(name):return request('https://storage.googleapis.com/storage/v1/b/'+buc
 preflight=json.loads((P/'retained-preflight.json').read_text());assert preflight['exit_code']==0 and len(preflight['entries'])==7 and all(x['payload_sha256_verified'] for x in preflight['entries'])
 (R/'sft-dispatch-pid.json').write_text(json.dumps({'pid':os.getpid(),'packet':'sft-packet-v2','retired_v1_pid':14114})+'\n')
 last=None
+if (R/'sft-disabled-by-user.json').exists(): raise SystemExit('SFT cancelled by latest user instruction')
 while time.time()<deadline:
  try:
+  if (R/'sft-disabled-by-user.json').exists(): break
   state=read('controller.json');phase=state['phase']
   if phase!=last:print(datetime.datetime.now(datetime.timezone.utc).isoformat(),phase,flush=True);last=phase
   if phase=='final_backup':break

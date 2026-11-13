@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "authorized_utc": "2026-11-13T18:51:44.872027+00:00",
+  "authorization": "User: increase time please i am ok with additional $5",
+  "previous_total_cap_usd": 50,
+  "incremental_authorization_usd": 5,
+  "total_cap_usd": 55,
+  "compute_upper_usd_per_hour": 2.5,
+  "total_compute_hours_ceiling": 16,
+  "storage_transfer_uncertainty_reserve_usd": 15,
+  "additional_compute_hours_ceiling": 2,
+  "current_lease_provider_hours": 14,
+  "current_lease_deadlines_changed": false,
+  "extension_status": "authorized_reserved_not_launched",
+  "execution_constraint": "Provider time limit change requires stop. Preserve current lease guards; additional lease only after checkpoint/GCS verification and cumulative budget accounting. Never run GPUs concurrently.",
+  "priority": [
+    "Complete current10Btarget if practical using verified resume",
+    "Complete reviewedCodex SFT and strict assessment",
+    "Back up before shutdown"
+  ],
+  "fallback": "If capacity, restore, setup or budget leaves insufficient time, retain verified checkpoints and do not claim extension executed.",
+  "provider_reference": "https://docs.cloud.google.com/compute/docs/instances/limit-vm-runtime"
+}

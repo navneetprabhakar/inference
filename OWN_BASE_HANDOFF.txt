@@ -2,7 +2,10 @@ OWN-BASE MODEL — EXECUTION HANDOFF
 As of 13 November 2026. Repository: /Users/navneetprabhakar/Documents/git/image/inference
 Branch: codex/gpt2-from-scratch. Use git log and origin/codex/gpt2-from-scratch for the latest published revision. Current execution evidence is under reports/ownbase-budget50-v1/.
 
-1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 14:01 UTC
+LATEST CONTROL OVERRIDE — 14NOV2026 01:46IST
+Read reports/ownbase-budget50-v1/extension-v5/README.txt first. Currentcap55USD. Finish10BbaseoncurrentVM, verifiedGCSbackup, then transferpersistentdisktoasequentialtwo-hourA100lease for exact10Bprecheck->CodexSFT->postcheck->verifiedbackup->shutdown. Extensioncapacitynotyetrequested; local launcherPID314armed. OldV4supervisor180852suspended;169758basecloseoutresumed;172461GPUworkerunchanged. AllolderSFTcancellation andsame-lease-only timing statementsbeloware superseded. LocalHTTPstaysOFF. Currentstructuredstate.jsonincludeslatesttelemetry.
+
+1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 14:12 UTC
 
 - Objective: run a useful conversational/tool model locally, trained from our own randomly initialized 536,871,738-parameter base. No pretrained replacement. The trained context is still 2,048 tokens.
 - User authorized hands-off GPU execution with a fresh $50 incremental GCP cap, VM/GPU selection, roughly 30-minute updates, and GCS backup before shutdown. This supersedes earlier VM-off and same-VM-only restrictions.
@@ -10,12 +13,12 @@ Branch: codex/gpt2-from-scratch. Use git log and origin/codex/gpt2-from-scratch 
 - Cost guard: max14GPU hours at conservative2.50USD/hour (35USD) plus15USD ancillaryreserve. Compute estimate12.50USD at13:48UTC; invoice unavailable. ProviderSTOP, guest shutdown, independent watchdog, phase deadlines and backupreserve remain unchanged.
 - Retained local605 baseline runs on MPS and preserves18/18 protected tool checks. Full new assessment is poor:6/180 individual turns and0/60 complete three-turn sessions pass root review. Do not claim general usefulness.
 - Active SFT packet is V2: one8-epoch diagnostic from the eventual new base and one4-epoch low-LR branch from retained605, at most two pilots under the existing deadlines. This replaces the redundant new-base4-epoch arm. All7 retained ancestry payloads are independently SHA-verified on the VM; targeted CPU preflight passes. No SFT has started yet; no automatic promotion.
-- Current immutable long-context corpus is V20: 551 sessions (440 train/111 development), 179,160 training and 49,712 development targets. After 3072: 16,969 train/5,941 development; 51 train/11 development long sessions. 43 new accepted scenarios, 101 fully reviewed versions across 80 initial scenarios. New late targets 11,843 train + 5,289 development. Prior rows/splits byte-preserved; every immutable V4–V20 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
+- Current immutable long-context corpus is V21: 553 sessions (441 train/112 development), 181,384 training and 52,108 development targets. After 3072: 17,301 train/6,274 development; 52 train/12 development long sessions. 45 new accepted scenarios, 109 fully reviewed versions across 88 initial scenarios. New late targets 12,175 train + 5,622 development. Prior rows/splits byte-preserved; every immutable V4–V21 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
 - Additional matched MPS retention:110/112 historical normalized exact checks,109/112 byte-exact plus expected calls; one normalization pass hides a verbatim casing error. Root reviewed14open outputs:2 acceptable but weak. These are exposed retention cases, not broad quality. Candidates must preserve passing cases; training packet unchanged.
 - Local launcher: ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605. Real MPS smoke returns54 for73-19 through the broker. Default reviewed checkpoint selection is pending training/comparison.
-- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852. Cohorts01–20 and selected repairs/extensions fully reviewed; cohort21 generating. V20 adds section parser, circular buffer, monotone time window and music worksheet validator. Independent checks:4096parser sequences,23328buffer sequences,11340window sequences,6561music rows; overflow geometry separately checked1296cell pairs but excluded. Latest pushed4081ca0 coversV18; V19–V20 plus localHTTP delivery queued for batch. Last training update13:48UTC; next14:18UTC.
+- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852. Cohorts01–22 and selected repairs/extensions fully reviewed; cohort23 generating; probability-reporting and quantifier-certificate extensions queued. V21 adds tombstone reservation workflow and code-point run-group splitting;7776event-set and1348split-boundary checks pass. V20 adds section parser, circular buffer, monotone time window and music worksheet validator. Independent checks:4096parser sequences,23328buffer sequences,11340window sequences,6561music rows; overflow geometry separately checked1296cell pairs but excluded. Latest pushed31e0b6c coversV20 and localHTTP delivery; V21 review evidence queued for next batch. Last training update13:48UTC; next14:18UTC.
 
-LOCAL CHAT PREVIEW — user requested an interactive port/API during training. http://127.0.0.1:8765 serves retained605/MPS, PID69660; receipt runs/ownbase-budget50-v1/local-chat-server.json. LOCAL_CHAT_API.txt documents POST /api/chat and browser. FullHTTPsmoke3/4turns,1/2sessions; resultrecallfails. No newmodelpromotion. Before later MPS candidate assessments, pause this server to keep one MPS model at a time, then restore the preview with an explicit reviewed checkpoint; preserve user-facing model identity.
+LOCAL CHAT PREVIEW — STOPPED at user request. PID69660 terminated and port8765 verified closed; receipt runs/ownbase-budget50-v1/local-chat-server.json. Do not restart automatically. CLI/MPS evaluation remains available. LOCAL_CHAT_API.txt describes the implemented API, not a currently running deployment.
 
 2. NON-NEGOTIABLE OPERATING CONSTRAINTS
 
@@ -184,7 +187,7 @@ Do not declare a usable general model, completed 10B training, 4K-trained weight
 Paths below are relative to the repository root shown above.
 - OWN_BASE_HANDOFF.txt: this current operational summary.
 - reports/ownbase-budget50-v1/sft-packet-v2.json: active frozen next-stage script/config hashes; V1 is superseded and never dispatched.
-- runs/long-context-corpus-v20/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
+- runs/long-context-corpus-v21/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
 - reports/ownbase-budget50-v1/local-baseline-review.json: full180-turn MPS assessment, not a usability claim.
 - OWN_BASE_NEXT_STEPS.txt: complete proposed next-phase plan, including conditional VM training.
 - TRAINING_AUDIT.txt: append-only history; its original CURRENT STATE header is obsolete. Read newest entries, not that header.
@@ -220,3 +223,39 @@ ACTIVE50USD EXECUTION —13NOVEMBER2026
 - Local MPS baseline assessment is running; initial natural responses visibly mishandle facts/constraints. This is the existing605fallback, not new training. Do not present it as a usable general assistant.
 - Separate local corpus-expansion/cohort-01 generates four new visible-history scenarios with delayed useful tool decisions; full root review/admission pending. No new corpus is automatically added to the frozen SFT packet.
 - Runtime sessions and process ownership are under runs/ownbase-budget50-v1; latest-snapshot.json is current live observation. Original retainedVM remains off. All prior VM-off-only and old150USD statements are historical, superseded by user's50USD training authorization.
+
+LOCAL USER ARITHMETIC CHECK — 13 NOV 2026
+- User screenshots show incorrect39+1=73and72-19=18. Original session permissions unknown. Controlled fresh sessions: tools disabled0/3correct; enabled3/3correct with actual calculator calls(54,40,53). Raw/review:local-user-arithmetic-repro.json in runtime and local-user-arithmetic-review.json in reports. This is permission-sensitive diagnostic evidence, not broad quality improvement. UI now explicitly labels per-turn tool permission/execution; reload page, no server restart or model change.
+
+LOCAL PREVIEW STOPPED — 2026-11-13T16:56:15.217258+00:00
+User requested local deployment stop. PID69660 terminated; port8765 verified closed. Do not restart local HTTP preview without new user authorization. GCP training authorization remains active.
+
+FOLLOW-ON SCHOOL CURRICULUM PLAN — 13 NOVEMBER 2026
+User confirmed current plan must finish first and requested detailed maths/science planning through CBSE XII. OWN_SCHOOL_MATH_SCIENCE_PLAN.txt records organic-source eligibility, original Codex/programmatic generation, full verification, curriculum stages,12K pilot, frozen evaluation, conditional training and separate budget authorization. Plan only: no new data ingestion, generation campaign, VM or spending launched.
+
+USER RECONFIRMED TRAINING AND STRICT REVIEW — 2026-11-13T17:07:33.582926+00:00
+Continue approximately30-minute VM updates during execution. Verified queuedV2manifest includes80Codex teacher conversations and269synthetic tool/correction train sessions;349total,43183assistant targets/pass. New3K–4Kcorpus is NOT in this2Kpacket. Actual use must be verified from completed training checkpoint identity and targets before claiming trained. Report full conversation and real tool-call correctness separately. See reports/ownbase-budget50-v1/training-data-use-audit.json. Latest17:06UTC VM8.5223B,CE2.525500,conservativecompute20.76USD+15USDreserve; SFT still pending.
+
+LIVE UPDATE — 13NOV2026 23:31IST /18:01UTC
+ProviderRUNNING; base8,811,708,416tokens step16807,heldoutCE2.510752,~103743tokens/sec. Conservativecompute23.05USD+15USDancillaryreserve=38.05USD envelope,notinvoice. LatestreportedGCScheckpoint16666; uploadreceipt is not independentreadback. SFTnotstarted, dispatcher andbudgetguard alive. LocalHTTPremainsstopped. No newconversation-quality result yet.
+
+9B MILESTONE — 14NOV2026 00:13IST /13NOV18:43UTC
+Confirmed9,000,452,096tokens step17167; heldoutCE2.499508. Result andGCSuploadreceipt reviewed; independentreadback not yet claimed. Nextbase stage17167->19074announced18:40UTC; firstprogressnotyetpublished. Currentcomputeestimate24.80USD+15reserve=39.80USD. ProviderRUNNING,guard/dispatcher alive,SFTpending. Basephaseharddeadline20:18UTC(01:48IST14Nov), worker exits earlier forbackup;10Bnotguaranteed.
+
+BUDGET AMENDMENT — 2026-11-13T18:51:44.872027+00:00
+User authorizes additional5USD; cumulative cap55USD, not a fresh55USD budget. Reserve15USD retained; conservativecompute ceiling40USD/16totalhours. Current14hprovider/guest/watchdog/worker deadlines UNCHANGED. Extra2h is reserved, NOTapplied or launched. GCPtime-limit modification requiresstop. Prepare checkpoint-based continuation only afterGCSverification, cumulativeelapsedcost check, and no concurrentGPU. See reports/ownbase-budget50-v1/budget-amendment-v1.json.
+
+LATEST USER OVERRIDE — 2026-11-13T18:55:54.222972+00:00
+Finish10Bbase, then back up andstop; doNOTexecuteSFT. Dispatcher21135stopped anddisabled-markerchecked. Base-only supervisor169758launched onVM; freezesoldcontroller1791, gracefullycheckpointsoldworker166131, resumesinbase-19074-closeout withtrainendboot48000/checkpointreserve600/backupend49200. Provider50400,guest49800,localwatchdogunchanged. ExtraVMnotlaunched;55USDcap retained. Finalresult muststateactualtokens/goalreached; neverinfer10Bfromtarget. FullresultsinventoryandfinalbundleindependentGCSreadback precedenormalshutdown. ConversationcorpusV21and2Kpacket remainuntrained.
+
+BASE-ONLY TRANSITION VERIFIED — 13NOV18:58:41UTC
+Oldworker166131finished checkpointstep17322; newcontroller validatedbundleandidentity and launched solecontinuation toward19074 inbase-19074-closeout. Train/checkpointhardend22:08UTC(03:38IST), cutoff21:58UTC; backupdeadline22:28UTC(03:58IST); gueststop22:38/provider22:48unchanged. Local evidence3372files independentlyGCSreadbackverified at18:56UTC. Final10Bcompletion andVMshutdown stillpending.
+
+AUTHORITATIVE USER CORRECTION — 2026-11-13T19:22:54.469924+00:00
+SFTmustNOTbecancelled. Exactorder:10B -> matched180turn/18protectedbasechecks -> reviewedCodex2KSFT -> samematchedchecks -> collect/backupeverything -> shutdown. OrderedV4supersedesbase-onlyandundeployedV3. ExistingGPUworker172461continues; oldbase-onlysupervisor169758issuspendedbynewcontroller. V4scriptsindependentlyhashverifiedonVM. No secondretained605arm inthislease:prioritizenew10Bcomparison. Trainingdata/recipe8epochunchanged. Fullsemanticreviewrequired; automatedchecksnotqualityacceptance. Current14hproviderunchanged;sequenceendboot48600,backupdeadline49620,guest49800. Totalcap55USD. Ifanypartincomplete,reportitandpreserveevidence; nofalsecompletedclaim. LocalHTTPstaysOFF.
+
+LIVE UPDATE — 14NOV2026 01:13IST /13NOV19:43UTC
+ProviderRUNNING, base9,304,014,848tokens step17746,heldoutCE2.486919,~103694tokens/sec. LatestreportedGCScheckpoint17671. Conservativecompute27.31USD+15USDreserve=42.31USD envelope;cap55USD. OrderedV4policy10B->precheck->SFT->postcheck remainsactive;noneofthesepost-base stagesstarted. Currentpaceplaces10Bnear03:15–03:30IST; downstreamtimeistightwithinexisting14hlease;donotclaimcompletionbeforeevidence.
+
+LATEST RUNTIME EXTENSION — 2026-11-13T20:15:28.002575+00:00
+GCP400: SetScheduling unsupportedforFlexStart. Userrequestsfinishandallowspotentialbudgetincrease; currentnumericcapremains55USD. ExtensionV5packet6filesGCSindependentreadbackverified. LauncherPID314waitsoldVMTERMINATED+verifiedbasebackup, checks16h cumulativecompute+15reserve<=55, detachesexistingpersistentbootdisk (notdeleted), createsforge-ownbase-extension-v5 sameA100zonewith<=7200sproviderSTOP. NoGPUoverlap. Guest+independentguard alsoenforcelease. OldV4supervisor180852paused; base-onlycloseout169758resumed solelytofinishbase+backupsbeforetransfer; worker172461untouched. ThisisNOTSFTcancellation. Extensionexecutesfull180turn/18protectedprecheck, originalnew-base8epochSFT, matchedpostchecks, finalGCSinventory/readbackandshutdown. Secondary605armdeferred. Tinybaseremainderfallback<=240updatesbeforechecks ifoldcutofffallsjustshort. Capacitynotyetallocated; launcherfailure.jsonmustbemonitored. CurrentVM10B+handoverstillpending. Snapshothelperwilluseactive-vm.jsonandcumulativecostafterallocation.
