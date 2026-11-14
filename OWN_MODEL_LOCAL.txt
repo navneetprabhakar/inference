@@ -1,40 +1,55 @@
-OWN MODEL — LOCAL TERMINAL GUIDE
-Updated 14 November 2026. Cloud training completed; local candidate validation is in progress.
+OWN MODEL — LOCAL TESTING
+Updated14November2026. VM and HTTP preview remain OFF.
 
-CURRENT VERIFIED FALLBACK
-From this repository, run:
-  ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605 --repetition-penalty 1.0
+NEW10B + SFT MODEL
+From this repository:
+  ./chat-own-latest.sh
+  ./chat-own-latest.sh --raw
 
-This uses the existing local .venv, tokenizer and own-model bundle. It automatically
-selects Apple MPS on this Mac. No cloud VM or network is needed for inference.
-The model was trained from our own random initialization; no pretrained substitute.
+This explicitly loads:
+  runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
+Manifest SHA256:
+  e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
+Download/verification receipt:
+  runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs-download.json
+Local smoke receipt (MPS execution verified):
+  reports/ownbase-budget50-v1/final-review/local-smoke.json
+This is the final194-update experimental checkpoint, not a quality promotion.
 
-Type a request at you>. Commands:
-  /reset       Start a new conversation.
-  /tools off   Disable the offline calculator and unit converter.
-  /tools on    Re-enable those two bounded tools.
+PREVIOUS605 CHECKPOINT (also retained locally)
+  ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605
+Its prior strict score was6/180 turns and0/60 sessions. It is not a reliable fallback
+assistant; it is a preserved comparison checkpoint.
+
+Both commands use the existing .venv, frozen tokenizer and nanochat source. Apple
+MPS is selected automatically. Once the download is verified, no cloud access or
+VM is needed for inference. Cleanup preserves both bundles and the runtime.
+
+COMMANDS
+  /reset       Clear conversation state; required after an incomplete/error turn.
+  /tools off   Disable the offline calculator and converter.
+  /tools on    Enable those two bounded tools.
   /quit        Exit.
-Add --raw to see complete model/broker records. Add --device cpu to force CPU.
+Use --raw to inspect model/broker frames, --device cpu for CPU execution.
 
-LIMITS THAT MATTER
-- The trained context is 2,048 tokens, including history and reply reservation.
-  Newly generated 3K–4K data has not been trained. Reset when context is exhausted.
-- Tools only calculate and convert supported length, mass, volume and time units. They do not run code,
-  access files, browse, send messages or perform physical actions.
-- Retained step605 preserves18/18 exposed tool regression cases, but root review
-  found only6/180 passing turns and0/60 complete sessions on a broader synthetic
-  assessment. Treat this as an experimental model, not a reliable assistant.
-- Local MPS qualification observed about4.72seconds load and4.42GB peak process
-  RSS. Separate MPS allocation/driver figures overlap memory accounting; do not
-  add them to RSS. No general latency or production throughput claim is made.
+LIMITS
+-537M parameters, own random initialization,2,048-token trained context including
+ history, host policy and reply reservation. No pretrained substitute.
+-Converter supports listed length, mass, volume and time units. Tools do not run
+ code, browse, read files, send messages or perform physical actions.
+-New194 checkpoint: CUDA strict5/180 turns,0/60 conversations; narrow exposed
+ tool checks18/18. Repetition, invented facts, wrong operands and stale state
+ remain common. Local smoke success establishes execution, not general quality.
+-Full matched MPS180-turn and126-retention assessment was deferred for cleanup.
+-Long3K–4Kcorpus V4–V21 remains untrained and is archived in GCS.
+-Best-development step50 is preserved in GCS but has not been conversation-tested.
+ See reports/ownbase-budget50-v1/final-review/best-step50-preserved.json.
 
-AFTER TRAINING
-The default ./chat-own.sh selection remains deliberately pending. The active task
-will verify candidate bundle hashes, review generated outputs, test the selected
-bundle locally, and write reports/ownbase-budget50-v1/local-selection.json.
-A newer checkpoint is not automatically better. If neither pilot passes the
-quality/retention comparison, step605 remains the explicit fallback and new
-training artifacts remain experimental. See OWN_BASE_HANDOFF.txt for live status.
-
-LOCAL INTERACTIVE PREVIEW —13NOV2026
-Browser/API running at http://127.0.0.1:8765 on retained605/MPS while GCP training continues. See LOCAL_CHAT_API.txt. Newtraineddefaultselection remains pending. TinyHTTPsmoke3/4turns, with failedresultrecall; no generalqualityclaim.
+RESTORING OFFLOADED TRAINING ARTIFACTS
+Code, small manifests/reports, model weights above and runtime remain local.
+Archived corpus/historical payloads are indexed under:
+  reports/local-gcs-cleanup-20261114/
+Each group receipt contains GCS URI, object generation, archive checksum,
+per-file SHA256 and restore command. Set REPO_ROOT to this repository's absolute
+path before using the recorded restore command. Local payload absence after
+cleanup is intentional; restore the required group before data/training tools.

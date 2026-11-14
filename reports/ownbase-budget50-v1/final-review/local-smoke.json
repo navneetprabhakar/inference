@@ -1,0 +1,419 @@
+{
+  "utc": "2026-11-14T01:43:38.212799+00:00",
+  "checkpoint_manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54",
+  "device": "mps",
+  "exit_code": 0,
+  "wall_seconds": 13.709489208005834,
+  "local_inference_verified": true,
+  "quality_accepted": false,
+  "scope": "Four local smoke prompts, three explicit calculator cases and one simple fact query. Not a full local quality assessment.",
+  "inputs": "Use calculate to subtract 19 from 73. Reply with only the numeric result.\n/reset\nUse calculate to add 1 to 39. Reply with only the numeric result.\n/reset\nUse calculate to subtract 19 from 72. Reply with only the numeric result.\n/reset\nMy blue notebook belongs to Maya. My green notebook belongs to Dev. Who owns the blue notebook?\n/quit\n",
+  "records": [
+    {
+      "status": "complete",
+      "assistant_text": "54",
+      "events": [
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            32764,
+            25311,
+            17428,
+            4990,
+            8220,
+            25311,
+            97,
+            8220,
+            7480,
+            1191,
+            98,
+            8220,
+            819,
+            1191,
+            394,
+            14424,
+            11988,
+            116,
+            803,
+            34,
+            125,
+            1191,
+            10005,
+            14424,
+            7388,
+            1762,
+            372,
+            34,
+            125,
+            32765
+          ],
+          "parsed": {
+            "kind": "call",
+            "proposal": {
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            },
+            "raw": "{\"arguments\":{\"a\":73,\"b\":19,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+            "requires_broker_policy_check": true
+          },
+          "seconds": 1.9299340409925207
+        },
+        {
+          "kind": "broker_decision",
+          "decision": {
+            "call_id": "c1",
+            "stage": "adapter",
+            "dispatched": true,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            }
+          },
+          "record": {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794620611.5653949,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        },
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            6722,
+            32763
+          ],
+          "parsed": {
+            "kind": "text",
+            "text": "54"
+          },
+          "seconds": 0.15970254101557657
+        }
+      ],
+      "reset_required": false,
+      "broker_trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1794620611.5653949,
+          "name": "calculate",
+          "arguments": {
+            "a": 73,
+            "b": 19,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": 54
+          }
+        }
+      ],
+      "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+    },
+    {
+      "status": "complete",
+      "assistant_text": "40",
+      "events": [
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            32764,
+            25311,
+            17428,
+            4990,
+            8220,
+            25311,
+            97,
+            8220,
+            49,
+            1191,
+            98,
+            8220,
+            5627,
+            1191,
+            394,
+            14424,
+            4670,
+            34,
+            125,
+            1191,
+            10005,
+            14424,
+            7388,
+            1762,
+            372,
+            34,
+            125,
+            32765
+          ],
+          "parsed": {
+            "kind": "call",
+            "proposal": {
+              "arguments": {
+                "a": 1,
+                "b": 39,
+                "op": "add"
+              },
+              "name": "calculate"
+            },
+            "raw": "{\"arguments\":{\"a\":1,\"b\":39,\"op\":\"add\"},\"name\":\"calculate\"}",
+            "requires_broker_policy_check": true
+          },
+          "seconds": 1.6836890840204433
+        },
+        {
+          "kind": "broker_decision",
+          "decision": {
+            "call_id": "c1",
+            "stage": "adapter",
+            "dispatched": true,
+            "name": "calculate",
+            "arguments": {
+              "a": 1,
+              "b": 39,
+              "op": "add"
+            }
+          },
+          "record": {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794620613.409397,
+            "name": "calculate",
+            "arguments": {
+              "a": 1,
+              "b": 39,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 40
+            }
+          }
+        },
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            1962,
+            32763
+          ],
+          "parsed": {
+            "kind": "text",
+            "text": "40"
+          },
+          "seconds": 0.17359291698085144
+        }
+      ],
+      "reset_required": false,
+      "broker_trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1794620613.409397,
+          "name": "calculate",
+          "arguments": {
+            "a": 1,
+            "b": 39,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": 40
+          }
+        }
+      ],
+      "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+    },
+    {
+      "status": "complete",
+      "assistant_text": "53",
+      "events": [
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            32764,
+            25311,
+            17428,
+            4990,
+            8220,
+            25311,
+            97,
+            8220,
+            6340,
+            1191,
+            98,
+            8220,
+            819,
+            1191,
+            394,
+            14424,
+            11988,
+            116,
+            803,
+            34,
+            125,
+            1191,
+            10005,
+            14424,
+            7388,
+            1762,
+            372,
+            34,
+            125,
+            32765
+          ],
+          "parsed": {
+            "kind": "call",
+            "proposal": {
+              "arguments": {
+                "a": 72,
+                "b": 19,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            },
+            "raw": "{\"arguments\":{\"a\":72,\"b\":19,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+            "requires_broker_policy_check": true
+          },
+          "seconds": 1.8973562080063857
+        },
+        {
+          "kind": "broker_decision",
+          "decision": {
+            "call_id": "c1",
+            "stage": "adapter",
+            "dispatched": true,
+            "name": "calculate",
+            "arguments": {
+              "a": 72,
+              "b": 19,
+              "op": "subtract"
+            }
+          },
+          "record": {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794620615.480955,
+            "name": "calculate",
+            "arguments": {
+              "a": 72,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 53
+            }
+          }
+        },
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            6658,
+            32763
+          ],
+          "parsed": {
+            "kind": "text",
+            "text": "53"
+          },
+          "seconds": 0.15311720804311335
+        }
+      ],
+      "reset_required": false,
+      "broker_trace": [
+        {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1794620615.480955,
+          "name": "calculate",
+          "arguments": {
+            "a": 72,
+            "b": 19,
+            "op": "subtract"
+          },
+          "ok": true,
+          "data": {
+            "result": 53
+          }
+        }
+      ],
+      "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+    },
+    {
+      "status": "error",
+      "error_code": "invalid_model_action",
+      "detail": "tool unavailable",
+      "assistant_text": null,
+      "events": [
+        {
+          "kind": "model_action",
+          "raw_ids": [
+            32764,
+            25311,
+            17428,
+            4990,
+            8220,
+            25311,
+            6471,
+            14424,
+            16336,
+            46,
+            574,
+            107,
+            1172,
+            7544,
+            14137,
+            2026,
+            14424,
+            16336,
+            46,
+            574,
+            107,
+            1172,
+            7544,
+            14137,
+            13674,
+            8220,
+            1176,
+            925,
+            125,
+            1191,
+            10005,
+            14424,
+            20840,
+            22251,
+            34,
+            125,
+            32765
+          ],
+          "parsed": {
+            "kind": "invalid",
+            "error": "tool unavailable"
+          },
+          "seconds": 2.2629607080016285
+        }
+      ],
+      "reset_required": true,
+      "broker_trace": []
+    }
+  ]
+}

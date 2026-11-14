@@ -1,0 +1,77 @@
+WHY CONVERSATION STILL FAILS — evidence from this run, 14 November 2026
+
+The completed run learned some language and narrow tool patterns. It did not
+produce a reliable conversational model. The strongest measured problem is an
+overfit, very small instruction-tuning stage; the remaining base-model limitations
+and training choices have not been isolated with controlled comparisons.
+
+1. We trained a tiny instruction packet eight times.
+   There were349 unique training sessions:80 Codex natural conversations and269
+   synthetic calculator/converter/correction sessions. That is43,183 distinct
+   supervised assistant tokens per pass, not345,464 distinct tokens; the larger
+   number is the same packet repeated8times.269/349 sessions are tool templates.
+   This packet was explicitly a diagnostic. Treating completion of that packet
+   as the path to general conversation was not justified by its breadth.
+
+2. There is direct evidence of SFT overfitting.
+   Development CE:3.1210 before SFT -> best2.3124 at update50 ->3.6175 at update194.
+   The final training-batch loss was approximately0.0000839. Training fit became
+   extremely strong while development loss deteriorated. The final checkpoint
+   is therefore a poor default candidate. Step50 is preserved in GCS, but its
+   conversation quality is unknown; lower loss does not prove a useful model.
+   Completing the requested8epochs preserved the planned experiment, but I should
+   have made the best-development versus final-checkpoint comparison central to
+   delivery rather than treating the final step as the primary candidate.
+
+3. Most new conversation work never reached this model.
+   New3K–4K corpus versions V4–V21 are backed up, but this model was trained at2K.
+   Those longer examples were excluded rather than silently truncated. That was
+   correct data handling, but it leaves a mismatch between corpus-generation
+   effort and actual trained supervision. More generated files on disk did not
+   mean more learned conversational behavior.
+
+4. Narrow tools were learned; task interpretation and state did not transfer.
+   Protected exposed/template tool cases pass18/18. In natural workflows only
+   6of22 dispatched calls have the correct operation, operands and units; one
+   of those still omits the requested explanation. Follow-ups overwrite the
+   wrong operand or reuse old state. At least3 outputs change fractional tool
+   results into0. Thus the broker executes correctly, but the model often asks
+   it the wrong question or reports its result incorrectly. A coincidental56
+   computed as64-8 for a7*8 request must not count as workflow correctness.
+
+5. Base language learning is real but limited evidence for reasoning.
+   At10B tokens, held-out base CE is2.4571. The base completion probes correctly
+   continue Arun's notebook as blue and the parcel's latest location as Kochi,
+   but also repeat sentences and introduce awkward details. This rules out
+   claiming that it learned nothing. It does not establish instruction following,
+   multi-turn state, arithmetic or science knowledge. We cannot attribute the
+   failures solely to537M parameter count or assert that more base tokens would
+   solve them without a controlled test.
+
+6. Evaluation exposed the problem; execution success must not hide it.
+   The final SFT passes5/180 strict turns,0/60 complete sessions, with natural
+   conversation0/60 and code/state0/60.57 outputs have valid complete frames;
+  45 fail protocol/actions and78 follow-ups are blocked by earlier failures.
+   Those78 are not independent failed generations. The synthetic suite is a
+   development diagnostic, not an unseen public benchmark. The prior605 fallback
+   also fails broadly (6/180); returning to it is preservation, not a solution.
+
+What is not established
+- No demonstrated tokenizer, shifted-label or serving-format defect from this
+  review. SFT uses assistant-only shifted labels; training and serving share the
+  same encoder; the narrow18-case pass is evidence that the basic path works.
+  This is not a complete exclusion of optimizer, packing or numerical issues.
+- No measured proof that step50 fixes conversation, that a4K extension fixes
+  reasoning, or that adding school science data fixes dialogue.
+- The retained605 secondary SFT arm did not run. Full matched MPS180+126 testing
+  of the new candidate was deferred when the user prioritized cleanup. A local
+  smoke check establishes execution only, not model quality.
+
+Pragmatic next decision (not authorization for more training)
+Keep the VM off. First compare preserved step50 and194 on the same small frozen
+local conversation/state checks. Audit a few exact encoded training/inference
+pairs and token masks. Then design one limited SFT experiment with a materially
+broader2K conversational mix, varied state corrections, and held-out paraphrases;
+select checkpoints with generated-answer gates as well as development loss.
+Do not repeat the same tiny packet for more epochs or spend on school/4K training
+as a presumed cure. The school curriculum remains a separate follow-on plan.

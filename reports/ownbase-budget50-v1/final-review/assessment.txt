@@ -54,7 +54,13 @@ Both run VMs and the original retained VM are TERMINATED. Final run shutdown:
 Conservative compute estimate$34.17 plus$15 ancillary reserve=$49.17 envelope,
 within$55 authorized cap. Actual invoice is not verified; retained storage persists.
 
-Local candidate download and MPS validation remain pending; see handoff for latest.
+Local candidate download SHA256-verified; MPS smoke completed (3/3 explicit
+calculator requests correct; notebook ownership request fails via unavailable tool). Full matched MPS suite deferred
+by user cleanup priority. See handoff for latest.
+
+Additional overfitting evidence: SFT development CE starts3.1210, reaches its best
+2.3124 at step50, then rises to3.6175 at step194. The step50 bundle is preserved
+in GCS but has not been conversation-tested; lower CE alone cannot select it.
 Next training should be a separately designed experiment with broader verified
 instruction/state data and frozen generalization gates. Do not spend more GPU
 merely because narrow training loss is low. The school curriculum document is a

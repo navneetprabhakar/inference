@@ -14,7 +14,7 @@ assert re.fullmatch(re.escape(uri+'/sft/'+a.name+'/checkpoints/checkpoint-')+'[0
 root=Path('runs/ownbase-budget50-v1/local-candidates');root.mkdir(exist_ok=True);dest=root/a.name;dest.mkdir(exist_ok=True)
 sha=lambda path:hashlib.file_digest(path.open('rb'),'sha256').hexdigest()
 for name in ['metadata.json','manifest.json','COMMITTED','payload.pt']:
- subprocess.run(['gcloud','storage','cp',row['remote_prefix']+'/'+name,str(dest/name),'--quiet'],check=True,timeout=900)
+ subprocess.run(['gcloud','storage','cp',row['remote_prefix']+'/'+name,str(dest/name),'--quiet'],check=True,timeout=3600)
 assert sha(dest/'manifest.json')==row['manifest_sha256'];manifest=validate_bundle(dest)
 meta=json.loads((dest/'metadata.json').read_text());assert meta['identity']['phase']=='sft' and meta['step']>0
 receipt={'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'name':a.name,'checkpoint':str(dest),'remote_prefix':row['remote_prefix'],'manifest_sha256':row['manifest_sha256'],'payload_sha256':sha(dest/'payload.pt'),'payload_bytes':(dest/'payload.pt').stat().st_size,'step':meta['step'],'training_status':row['training_status'],'trained_assistant_targets':row['trained_assistant_targets'],'local_bundle_verified':True,'local_inference_verified':False,'promoted':False}
