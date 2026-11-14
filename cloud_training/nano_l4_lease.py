@@ -12,7 +12,7 @@ def plan(*,project,zone,name,image,service_account,bootstrap,now,hours,prior_res
     if not .5<=hours<=6 or prior_reserved_usd<0:raise ValueError('Invalid lease duration or previous reservations')
     if now.tzinfo is None:raise ValueError('Timezone-aware current time required')
     if not re.fullmatch(r'[a-z][a-z0-9-]{4,61}[a-z0-9]',project):raise ValueError('Explicit project required')
-    if zone not in ('us-central1-a','us-central1-b','us-central1-c','us-central1-f'):raise ValueError('Only priced region allowed')
+    if zone not in ('us-central1-a','us-central1-b','us-central1-c','us-east1-b','us-east1-c','us-east1-d','us-east4-a','us-east4-c','us-west1-a','us-west1-b','us-west1-c'):raise ValueError('Only priced region allowed')
     if not re.fullmatch(r'forge-english-[a-z0-9-]{1,35}',name):raise ValueError('Dedicated English diagnostic name required')
     if not image.startswith('projects/deeplearning-platform-release/global/images/'):raise ValueError('Pinned DLVM image required')
     if not service_account.endswith('.iam.gserviceaccount.com'):raise ValueError('Explicit service account required')

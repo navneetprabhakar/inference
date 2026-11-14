@@ -6,11 +6,15 @@ class LeaseTests(unittest.TestCase):
   r=plan(**self.args());a=r['create_argv']
   self.assertIn('--instance-termination-action=STOP',a);self.assertIn('--no-boot-disk-auto-delete',a)
   self.assertIn('--termination-time=2026-11-14T01:00:00Z',a);self.assertNotIn('--boot-disk-auto-delete',a);self.assertLess(r['compute_envelope_usd']+r['reserve_usd'],10)
+ def test_same_rate_verified_regions_keep_envelope(self):
+  for zone in ('us-east1-b','us-east4-c','us-west1-a'):
+   a=self.args();a['zone']=zone;r=plan(**a)
+   self.assertEqual(r['compute_envelope_usd'],plan(**self.args())['compute_envelope_usd'])
  def test_cumulative_cost_cannot_reset(self):
   a=self.args();a.update(hours=6,prior_reserved_usd=1)
   with self.assertRaises(ValueError):plan(**a)
  def test_rejects_unpriced_region_and_unbounded_time(self):
-  for changes in [dict(zone='asia-south1-a'),dict(hours=7),dict(hours=float('nan')),dict(hours=True),dict(prior_reserved_usd=-1)]:
+  for changes in [dict(zone='asia-south1-a'),dict(zone='us-central1-f'),dict(hours=7),dict(hours=float('nan')),dict(hours=True),dict(prior_reserved_usd=-1)]:
    a=self.args();a.update(changes)
    with self.assertRaises(ValueError):plan(**a)
 if __name__=='__main__':unittest.main()

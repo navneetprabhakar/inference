@@ -1,176 +1,115 @@
 OWN MODEL — AUTHORITATIVE HANDOFF
-Updated14 November2026. This replaces accumulated contradictory live-status notes.
-Earlier handoff history is preserved in Git at4876a1638a86ce622443c8da961286a3c87d67d0.
+Updated14 November2026. Current facts supersede historical planning in Git.
 
-CURRENT DECISION: QUALITY HOLD, VM OFF, LOCAL MODELS AVAILABLE
-User priority: deep RCA, enforceable remediation/guardrails, quality above volume
-and hands-off execution. Do useful local work autonomously; never turn a failed
-quality gate into another automatic training extension. Read AGENTS.md.
+CURRENT DECISION: L4 CAPACITY HOLD; ALL VMs OFF; NO NEW TRAINING
+User priority: English conversation first, then maths, then CBSE through Class12.
+User said start, use a cheaper GPU, and proceed hands off after the changed
+assessment. Current operational envelope10USDwithin the earlier15USDceiling;
+L4 only, no automatic GPU/price/budget upgrade. Quality above volume.
 
-ENGLISH-FIRST EXECUTION — L4 QUALIFICATION PREPARED
-Latest user instructions: start, choose cheaper GPU, proceed hands off. Proceed
-within a10USDoperational envelope below the previously discussed15USDceiling;
-no A100 upgrade or automatic extension. Prior conditional hold is historical.
-Read reports/english-first-v1:24reviewed fit sessions/72turns/656unique targets,
-12new development sessions/36turns; current194strict baseline0/36,0/12sessions.
-Diagnostic-only contract allows at most64updates/64finite epochs at native2K;
-this explicitly differs from the unchanged production10update corrective contract.
-Replay is not new data, development regression guards remain, and diagnostic
-checkpoints are barred from release. Actual CLI preflight passed;78local tests
-passed. New restart schedule uses validation every update in both branches;
-fresh-process actual-loop tests use mocked compute/I/O, not GPU qualification.
-A two-hour L4 qualification-only lease is prepared, with fixed absolute STOP,
-non-auto-delete disk and GCS readback. No fit pilot starts in that worker.
-Outstanding: execute GPU recovery comparison and fault/stop qualification; only
-then consider bounded fit experiment. Local models preserved; release untouched.
+CURRENT ENGLISH DIAGNOSTIC — reports/english-first-v1/
+-24reviewed fit sessions/72turns/656unique assistant targets, derived from the
+ reviewed corrective core.12new everyday development sessions/36turns/556reference
+ targets. Full manual source/reference review plus real tokenizer/mask/prefix checks.
+-Current194MPS baseline:0/36strict turns,0/12complete passing sessions.16finished
+ answers fail semantics/instructions;7invalid actions;13blocked followups count
+ as failures. Full raw/decoded/per-turn review retained. No quality improvement.
+-The tiny fit set tests training-example learnability, NOT broad conversation.
+ New dev includes broader everyday dialogue than fit training: failure there is
+ not isolated proof of deficient foundation capacity. Same author, no independent
+ reviewer claim. Development is never training or pristine release data.
+-Isolated english_fit_diagnostic contract requires native2K, exact reviewed24/12
+ data, immutable base and explicit --fit-diagnostic. Both no-call policy modes
+ covered; positive tool workflows remain separate regression tests.
+-Only this diagnostic permits64finite epochs/64updates,LRmultiplier<=.25. Production
+ default8epochs and old corrective4K10-update bounds remain unchanged. Actual
+64epoch packet=384rows/96full-schedule updates,41,984replay targets. The64update
+ cap stops BEFORE completing64epochs; these are not new/unique targets.
+-Development regression guards remain active. Early stop before fit is inconclusive
+ about maximum learnability; never automatically extend. Fit go target23/24complete
+ training sessions, then unseen transfer. Diagnostic checkpoints are explicitly
+ blocked from release regardless of other evidence. No serving default change.
+-Real CLI validate-only passes.140related CPU tests passed; expanded4lease tests
+ subsequently passed. These are component/control-flow checks, not GPU acceptance.
+ Qualification cadence1 aligns2vs1+1observations. Fresh-process tests execute the
+ actual SFT while-body with mocked compute/I/O; real CUDA/GCS proof remains absent.
 
-USER PRIORITY — ENGLISH CONVERSATION -> MATHS -> CBSE
-English conversation is the immediate capability goal. First demonstrate relevant,
-coherent replies, instruction following, multi-turn memory/corrections, appropriate
-clarification and clean stopping on unseen everyday conversations. Start at native
-2K; add longer context only after short conversation transfers. Tools remain a
-protected regression/policy check, not the main learning objective or a substitute
-for conversation. Maths and CBSE curriculum expansion are deferred.
-After English passes reviewed held-out evaluation and local MPS verification,
-branch into maths with independently checked answers; only after maths qualifies,
-expand into CBSE subjects through Class12. Preserve English regression gates in
-both later stages. Version any revised diagnostic data/contract separately; do not
-alter the frozen corrective corpus/release or quietly relax its acceptance gates.
-This priority clarification does not activate the conditional GPU cap. VMs stay OFF.
+CLOUD ATTEMPTS / BUDGET
+Single g2-standard-8/L4 qualification request; fixed absolute STOP, non-auto-delete
+ disk, private networking, earlier worker cutoff, GCS input/readback and closeout.
+11supported zones across us-central1/us-east1/us-east4/us-west1 failed with confirmed
+ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS. An additional us-central1-f request was
+rejected because that machine type is unsupported; per-zone API preflight now
+prevents recurrence. Oregon a/b briefly showed STAGING, then failed; no worker ran.
+All operations reconciled; no new VM or disk remains;3existing VMs TERMINATED.
+Live Billing Catalog validates same-or-lower regional rate than reserved0.853624312
+USD/hour. Two-hour compute reservation2.13406078USDwas released after reconciliation.
+Estimated compute spend0; not an invoice claim. Existing storage/GCS still bills.
+No automatic retries remain. Old request deadline09:44:50UTC14Nov must NOT be reused.
+See live-status.json, spend-ledger.json, operation receipts and cloud-closeout.json.
 
-FEASIBILITY DEEP DIVE — CURRENT 4K PILOT RECOMMENDATION WITHDRAWN
-Read reports/feasibility-deep-dive-v1/ASSESSMENT.txt before further execution.
-New matched local base/50/194 diagnostics show some language/science signal but
-unreliable state/arithmetic outside chat framing.12 contrastive cases:9/8/7 correct
-preferences, NOT generation accuracy or proof of broad regression. Strict chat
-quality remains failed. First10planned updates give only675/104361targets to NEW
-short natural/state repairs; long data dominates. The recipe changes too many
-variables to diagnose failure. Recommend native2K tiny-fit then held-out transfer
-before4K curriculum; full proposed gates/limits are in the assessment. No new
-training contract activated and no frozen data/release modified.15USD is diagnostic
-spend only, not a justified recovery budget. Conditional authorization remains
-inactive; all VMs OFF and local weights preserved. Historical pilot parameters
-below describe the superseded proposal, not instructions to launch it.
+BACKUPS / LOCAL PRESERVATION
+Qualification runtime and reviewed packet independently downloaded/hash-verified
+from GCS. No new model/checkpoint exists. Latest compact evidence receipt:
+reports/english-first-v1/backup-receipt.json (created during this closeout).
+Prior current models, tokenizer, pinned nanochat source and .venv remain local:
+-Base10B: runs/local-readiness-v1/base10b
+ SHA7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53
+-Step50: runs/quality-rca-v1/step-00000050
+ SHA ff051a947bfeefc11ca7679aa5e785baaec04d103e466c89d8be3cb87ed490b1
+-SFT194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
+ SHA e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
+-SFT605: runs/literal-state-repair-v1/results/sft/step-00000605
+ SHA05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8
+Use ./chat-own-latest.sh --raw for explicit experimental194MPS CLI. HTTP8765 stays off.
+GCS future-use index: reports/local-gcs-cleanup-20261114/future-use-index.json.
+Prior base/corpus/model backups: gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
+Do not rerun archive_payloads.py or retired restore/allocator scripts.497obsolete
+local payloads and248unneeded GCS objects were already removed. Keep future-use
+corpus, selected weights and compact evidence; do not duplicate obsolete archives.
 
-SECOND ASSESSMENT — MATERIAL CHANGE, CONDITIONAL CAP NOT ACTIVATED
-User approved$15only if the second review reached the same result. It did not.
-See reports/readiness-second-review-v1/ASSESSMENT.txt and reproduction.json.
-The proposed2-update vs1+1restart experiment observes different validation steps
-(0,2 versus0,1,2). Actual ValidationGuard reproduction shows this can change stop
-state independently of recovery correctness.150component tests did not cover the
-complete proposed qualification orchestration. Prior local-readiness conclusion
-was too broad. Align validation schedules and add an integration regression;
-keep exact state comparisons. Complete the new STOP lease/bootstrap checks.
-Budget arithmetic unchanged, but cap condition unmet: keep every VM OFF, no new
-training or release exposure. Existing local models remain available.
+WHY THE RECIPE CHANGED
+Read reports/feasibility-deep-dive-v1/ASSESSMENT.txt and
+reports/quality-rca-v1/RCA_AND_REMEDIATION.txt.
+Own537M:10,000,269,312base tokens, native2048context. Actual SFT194 had349unique
+sessions/43,183assistant targets,8epochs;80Codex natural dialogues trained.
+V4–V21long expansions were NOT trained. Old data had zero enabled-tools/no-call
+coverage. DevCE3.1210->best2.3124at50->3.6175at194. Old run did not stop regression.
+Strict CUDA5/180turns,0/60sessions despite protected tools18/18. Matched50/194checks
+both4/16, calculator-only. Rollback has not established conversation recovery.
+Raw base/50/194cloze diagnostics9/8/7of12correct preferences show some knowledge but
+unreliable state/arithmetic; NOT generation accuracy or proof of broad regression.
+Old4Kpilot gave675/104361targets to NEW short natural/state repairs and changed too
+many variables together. That pilot recommendation is withdrawn. Establish short
+learning/transfer first; no broad assistant or CBSE success/budget promise.
 
-PRIOR LOCAL COMPONENT CHECKS — VALID WITH THE LIMITATION ABOVE
-See reports/local-readiness-v1/READINESS_AND_BUDGET.txt and gpu-proposal.json.
-150 tests pass. Fixed short-example starvation with order-preserving buffer1,
-missing package dependencies, and development reply-budget truncation. Full
-61-session/232-turn development suite is prepared in13shards; original system
-instructions preserved;21long reference answers now have sufficient reply space.
-Full537M/4096-token MPS forward smoke passed; this is not conversation acceptance.
-All3local models and frozen release hashes revalidated; release remains unused.
-Original10Bbase restored to runs/local-readiness-v1/base10b and fully SHA-verified.
-Actual training CLI validate-only PASSED:274packed rows over2epochs,35full-schedule
-updates; pilots remain capped at10updates. validation.json records local PASS,
-GPU not authorized/not qualified; campaign-readiness.json correctly remains HOLD.
-Latest readiness delta backup: reports/local-readiness-v1/backup-receipt.json.
-Minimum lower-cost proposal$10L4/6hours; recommended$15A100Flex-start/4hours,
-including$5reserve. Qualification-only$5/1hour. None is approved or guarantees
-completion. Fullrelease/promotion is separate. Existing400GiBdisks cost about
-$40/month at list rates, plus GCS; off does not mean storage is free.
-Do not use old DELETE-on-timeout launchers. New bounded STOP lease and non-auto-
-delete recovery disk required. Newer pinned DLVM image is proposed explicitly
-because old20261029image is deprecated; verify exact runtime at boot.
+FROZEN CORRECTIVE CORPUS — PRESERVE, NOT CURRENT DIAGNOSTIC RECIPE
+reports/corrective-corpus-v1 remains immutable:31freeze-bound files, release unused.
+Combined candidate272train/61dev,175,346unique train targets;17,187after3072.
+215inherited dialogues retain hash-bound historical review;338narrow legacy rows
+excluded. Source/reference review completed; not a model-quality acceptance.
+Release63sessions/189turns is source-disjoint but Codex-authored; do not claim an
+independent human benchmark. No exploratory model selection on this release.
+Existing4Kcontract/gates remain intact for that candidate. Do not mix it silently
+into the English tiny-fit control or weaken its thresholds for promotion.
 
-CORRECTIVE CORPUS / RELEASE — DATA ADMITTED, GPU STILL ON HOLD
-reports/corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt is the current execution report.
-New core100train/18development conversations, fully reviewed; balanced100training
-turns per policy/action mode. Combined4Kcandidate272train/61dev,175,346train targets;
-17,187targets after3072.215inherited dialogues retain SHA-bound historical full review;
-two were freshly reread and repaired for192-token reply headroom.338legacy narrow
-synthetic template rows excluded from both splits; originals remain preserved.
-Release63sessions/189turns includes3structured3K+stress cases. All181new source/test
-scenarios reviewed; release has NOT been run on a model. Single-use release custody,
-context preflight and immutable freeze are enforced. Do not regenerate this version.
-Strict current194MPS development baseline:2/54turns,0/18sessions; full raw review saved.
-Corrective-corpus phase passed112tests; current local-readiness suite passes150.
-No retraining or quality promotion. Full data/lineage evidence is
-backed up using reports/corrective-corpus-v1/backup-receipt.json.
-Use candidate-4k/manifest.json and quality-contract.json; the short core alone is
-NOT the training packet. GPU requires finite new budget,4K/restart/fault qualification
-and bounded pilot review. Max10updates/pilot,2epochs,LRmultiplier0.125,evalinterval10.
+NEXT ACTIONS / HARD STOPS
+1. Cheap-L4 capacity is the immediate external blocker. Prepare a NEW absolute
+   deadline/run ID and reconcile cumulative ledger before any future request.
+   Existing verified runtime can be reused only if all source hashes still match.
+2. Qualification FIRST:2vs1+1actual SFT updates, verified GCS fresh-process restore,
+   exact model/optimizer/RNG/cursor/quality-loop equality; real signal/upload/STOP
+   fault checks. Current worker performs restart comparison only and explicitly
+   cannot run a fit pilot. Fault qualification remains outstanding.
+3. Only after qualification passes: bounded English fit from10Bbase under its
+   diagnostic contract; review training fit and every unseen development output,
+   best AND last, plus protected tool regression checks. No release promotion.
+   Two failed bounded pilots force diagnosis/hold; no automatic dose/LR increase.
+4. Establish broader unseen English transfer before long-context curriculum.
+   Then full independent release custody and matched local MPS checks before any
+   acceptance. Maths follows English, CBSE follows maths; protect English later.
+5. Verify required GCS readbacks before normal shutdown. Hard STOP still applies
+   on backup failure; keep non-auto-delete recovery disk/sole copies. Healthy GPU
+   updates roughly30minutes; report failures promptly. No unattended open-ended VM.
 
-COMPLETED TRAINING / HONEST QUALITY
-Own537M (536,871,738 parameters),2048context, random initialization.
-Base:10,000,269,312 tokens. SFT:194updates,8epochs,349unique train sessions,
-43,183unique assistant targets /345,464replayed target exposures.
-Actual trained Codex natural conversations:80. V4–V21 3K–4K expansion NOT trained.
-Matched CUDA strict assessment:5/180 turns,0/60 complete sessions after SFT;
-protected exposed tools18/18. Base0/180 protocol passes is not zero language knowledge.
-Dev CE3.1210->best2.3124 at50->final3.6175. Neither194 nor605 is quality accepted.
-
-DEEP RCA AND NEW CONTROLS
-reports/quality-rca-v1/RCA_AND_REMEDIATION.txt is the detailed diagnosis and recovery plan.
-packet-audit.json: all437train/dev sessions audited;1,046prefix checks,403tool replays.
-Confirmed coverage gap: ZERO tools-enabled/no-call turns in BOTH train and dev.
-Final low training loss described672converter targets, not mean full-corpus loss.
-Natural conversations contribute74.8% of supervised targets; session ratios mislead.
-Old loop did not stop validation regression; controller evaluated final, not best.
-New local paired-policy diagnostics compare actual earlier/final checkpoints;
-see paired-review.json and raw/decoded outputs. No default-model promotion.
-
-Code now requires a quality contract, per-family/full-dev regression guards,
-persisted stop state, deterministic epoch shuffling, best+last evaluation receipts,
-complete hash-bound release review and protected checks. Closed allocator scripts
-exit immediately. A new campaign admission decision remains HOLD. CPU validation
-is in reports/quality-rca-v1/validation.json. These changes are NOT GPU-qualified.
-Corrective corpus admission and independent release freeze are now complete.
-GPU fault qualification, bounded generated pilot checks and local4Kqualification
-remain incomplete; corpus readiness alone must not authorize a GPU launch.
-
-LOCAL MODELS — KEEP
-New194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
-manifest SHA e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
-Run ./chat-own-latest.sh --raw for explicit experimental CLI testing on MPS.
-Previous605: runs/literal-state-repair-v1/results/sft/step-00000605
-manifest SHA05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8
-Step50 diagnostic location/verified identity: reports/quality-rca-v1/checkpoint-status.json.
-Keep tokenizer, pinned nanochat source and .venv. No HTTP listener on8765.
-
-CLOUD / COST / BACKUP
-All three ownbase VMs TERMINATED; latest verified status local-readiness-v1/cloud-readonly.json.
-Prior campaign cap$55; conservative compute$34.17 plus$15reserve=$49.17 envelope,
-not an invoice. A new numeric training budget is not assigned. Do not relaunch a
-closed lease or assume permission to spend indefinitely. Persistent disks remain.
-GCS root gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
-Useful corpus: data/long-context-corpus-v21/, actual2K SFT and packed base retained.
-Useful weights:10B base, step50, final194 and selected605 backups retained.
-Future-use index: reports/local-gcs-cleanup-20261114/future-use-index.json.
-Latest corrective-data backup: reports/corrective-corpus-v1/backup-receipt.json.
-Earlier RCA backup: reports/quality-rca-v1/backup-receipt.json.
-Earlier verified evidence: reports/ownbase-budget50-v1/latest-local-backup.json.
-
-RETENTION ALREADY COMPLETED — DO NOT RESTART OLD ARCHIVE
-497obsolete local payloads absent (~184.23GB logical);~180.70GB free recovered in
-last direct-delete pass.248unnecessary archive/superseded corpus GCS objects and
-17redundant evidence snapshots removed. User specifically wants only future-use
-GCS data. Do not rerun archive_payloads.py or retired group restore commands.
-
-NEXT ACTIONS / STOP CONDITIONS
-1. Read corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt. Preserve the frozen packet;
-   no more uncontrolled generation or silent mixing with historical templates.
-2. Correct the second-review qualification scheduling defect and add an integrated
-   restart/guard test. Component receipts are not end-to-end launch readiness.
-   The conditional$15approval was not activated; report the changed result first.
-   Bind a new cumulative budget ledger, STOP lease and non-auto-delete bootstrap.
-3. Qualify4K/restart/fault handling before substantive training. At most two bounded
-   10update pilots; compare generated best AND last plus protected regressions.
-4. Freeze candidate selection before the one-shot release. Full release and matched
-   MPS checks required before promotion. No threshold/budget/LR/epoch escalation.
-5. Verify required backups before normal shutdown; retain durable recovery copies
-   if upload fails. Healthy VM updates~30minutes; failures reported promptly.
-
-No repaired-model claim. No new GPU training or local HTTP deployment started.
+No new GPU training, repaired-model claim or local HTTP deployment.

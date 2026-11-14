@@ -1,0 +1,74 @@
+{
+  "status": "prepared_qualification_only",
+  "create_argv": [
+    "gcloud",
+    "compute",
+    "instances",
+    "create",
+    "forge-english-q-1114-074450",
+    "--project=executespecv1",
+    "--zone=us-east4-a",
+    "--machine-type=g2-standard-8",
+    "--provisioning-model=STANDARD",
+    "--maintenance-policy=TERMINATE",
+    "--no-restart-on-failure",
+    "--termination-time=2026-11-14T09:44:50Z",
+    "--metadata=own-deadline-utc=2026-11-14T09:44:50Z,bundle-uri=gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz,bundle-sha256=b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1,packet-uri=gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet-reviewed.tar.gz,packet-sha256=db4ef12361ce7941c12cdca50f8d3e02ce105907803998f79e085bd38861295d,enable-oslogin=TRUE,block-project-ssh-keys=TRUE",
+    "--instance-termination-action=STOP",
+    "--boot-disk-size=100GB",
+    "--boot-disk-type=pd-balanced",
+    "--no-boot-disk-auto-delete",
+    "--image=projects/deeplearning-platform-release/global/images/pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261111",
+    "--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+    "--scopes=https://www.googleapis.com/auth/devstorage.read_write",
+    "--no-address",
+    "--subnet=default",
+    "--metadata-from-file=startup-script=/Users/navneetprabhakar/Documents/git/image/inference/reports/english-first-v1/bootstrap.sh",
+    "--quiet",
+    "--format=json",
+    "--async"
+  ],
+  "machine": "g2-standard-8",
+  "gpu": "1x L4",
+  "list_rate_usd_per_hour": 0.853624312,
+  "compute_envelope_usd": 2.13406078,
+  "reserve_usd": 3.5,
+  "operational_cap_usd": 10,
+  "cumulative_reserved_before_usd": 0,
+  "latest_local_stop_utc": "2026-11-14T09:44:50Z",
+  "max_runtime_seconds": 7200,
+  "worker_reserve_seconds": 900,
+  "provider_termination": "STOP",
+  "boot_disk_auto_delete": false,
+  "requirements": [
+    "Reserve complete lease in durable cumulative ledger before provisioning.",
+    "Bootstrap must enforce earlier local deadline from metadata, including reboots.",
+    "Reconcile provider runtime before refunding any reservation.",
+    "Verified GCS readback before normal stop; retain disk on any backup failure.",
+    "No automatic machine/zone-price/budget upgrade. No training until qualification passes."
+  ],
+  "bootstrap_sha256": "466b6c891311ca4f644f277cfabcbb43f6296df67e66e6f3bbf01a34f5bcce33",
+  "run_id": "forge-english-q-1114-074450",
+  "backup_prefix": "gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450",
+  "inputs": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/runtime.tar.gz",
+      "uri": "gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz",
+      "sha256": "b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1"
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/packet-reviewed.tar.gz",
+      "uri": "gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet-reviewed.tar.gz",
+      "sha256": "db4ef12361ce7941c12cdca50f8d3e02ce105907803998f79e085bd38861295d"
+    }
+  ],
+  "price_source": "https://cloud.google.com/products/compute/pricing/accelerator-optimized",
+  "price_checked_utc": "2026-11-14T07:44:50.021123+00:00",
+  "limits": "No pilot until exact recovery and fault drills pass. No A100 upgrade.",
+  "prelaunch_revision": {
+    "previous_request_sha256": "95039d0d97fd947c347377b23758982e1ec70f6ab1aae238ea2d32d3a256f321",
+    "reason": "Include bootstrap log and durable closeout readback; assert native SDPA on L4. No VM provisioned."
+  },
+  "retry_reason": "Capacity-only failure reconciled; verified same-or-lower-priced L4 region, same absolute expiry and reservation.",
+  "regional_price_review_sha256": "7c29ceac5e2cb68158497db0cf4216bcc79e0676d190cbdc516da636cc66336c"
+}
