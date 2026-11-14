@@ -1,7 +1,7 @@
 # Own-model work: quality-first operating rules
 
 Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup.
-The user's current instructions override this file. Current campaign status: L4 CAPACITY HOLD, no new training; English diagnostic prepared; corrective-corpus-v1 release frozen.
+The user's current instructions override this file. Current status: PAUSED by user; final A100 run closed; VM/disk retired after verified backups. No GPU starts, allocations, retries, extensions or training without explicit resume. Signal-resume exactness failed; no fit pilot or release acceptance. Evidence: reports/english-a100-v1/. Corrective-corpus-v1 remains immutable.
 
 - User priority: English conversation first, then maths, then CBSE through Class12. Defer maths/CBSE corpus expansion until preceding capability gates pass. Tool checks protect regressions but do not substitute for English conversation acceptance.
 - Optimize for demonstrated conversation/tool quality, not tokens, epochs, corpus size or job completion.
@@ -24,7 +24,9 @@ The user's current instructions override this file. Current campaign status: L4 
 - Corrective pilots default to packing buffer1 to preserve seeded order; longest-first packing was measured to starve short lessons inside a10update pilot. Bind buffer size to checkpoint identity.
 - For the existing4Kcorrective candidate, evaluate all61development sessions/232turns through local-readiness-v1/development-shards, preserving system prompts and predeclared per-turn reply budgets. No partial-shard pass. Independent release remains separate and unused.
 
-- Latest start/cheaper-GPU/hands-off authorization: L4 under10USDoperational envelope within prior15USDceiling; no automatic upgrade/extension.11supported zones failed capacity; all VMs off, no new disk, no worker ran. No automatic retry is pending. Reconcile the ledger and prepare a fresh lease before any future attempt; never rerun the closed request.
+- Historical L4 start/cheaper-GPU/hands-off authorization: L4 under10USDoperational envelope within prior15USDceiling; no automatic upgrade/extension.11supported zones failed capacity; all VMs off, no new disk, no worker ran. No automatic retry is pending. Reconcile the ledger and prepare a fresh lease before any future attempt; never rerun the closed request.
 - Native2K english_fit_diagnostic is isolated from production. Explicit fit flag and reviewed24/12input hashes are mandatory; <=64finite epochs/64updates, LRmultiplier<=.25, active development regression stops, no release eligibility. Keep unique targets separate from replay exposures. Actual64epoch schedule is96updates, so64update cap ends earlier.
 - Restart qualification MUST align observation schedules (cadence1 for2vs1+1), preserve exact comparison and prove actual CUDA/GCS recovery. CPU control-flow checks do not establish GPU readiness. Current worker is qualification-only; signal/upload/provider-stop fault checks remain outstanding before a fit pilot.
 - Never use DELETE-on-timeout launchers. Require fixed absolute provider STOP, non-auto-delete recovery disk, verified GCS backups before normal shutdown, and hard stop with disk preservation on backup failure.
+
+- Final run closed on14Nov2026 at09:42:45UTC. Normal CUDA/GCS restart passed; signal rollback was exact but resumed update failed exact comparison. Upload-rejection and independent provider-STOP drills were not reached. Keep project paused, local models available, HTTP off.

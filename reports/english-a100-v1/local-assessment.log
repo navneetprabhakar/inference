@@ -1,0 +1,19 @@
+Copying gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208/repair/uninterrupted/checkpoints/checkpoint-f53c4e656ca145ebb4f43331d0b74d11/payload.pt to file:///Users/navneetprabhakar/Documents/git/image/inference/runs/english-a100-v1/local-diagnostic-step2/payload.pt
+
+Traceback (most recent call last):
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/english-a100-v1/local_assessment.py", line 9, in <module>
+    subprocess.run(['gcloud','storage','cp',selection['uri']+'/'+name,str(dst/name),'--quiet'],check=True,timeout=300)
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 2141, in _communicate
+    self.wait(timeout=self._remaining_time(endtime))
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 2045, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['gcloud', 'storage', 'cp', 'gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208/repair/uninterrupted/checkpoints/checkpoint-f53c4e656ca145ebb4f43331d0b74d11/payload.pt', '/Users/navneetprabhakar/Documents/git/image/inference/runs/english-a100-v1/local-diagnostic-step2/payload.pt', '--quiet']' timed out after 299.99991354200756 seconds

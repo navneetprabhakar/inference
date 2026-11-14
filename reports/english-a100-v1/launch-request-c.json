@@ -1,0 +1,68 @@
+{
+  "status": "plan_only_not_launch_ready",
+  "create_argv": [
+    "gcloud",
+    "compute",
+    "instances",
+    "create",
+    "forge-english-a100-1114-084208",
+    "--project=executespecv1",
+    "--zone=us-central1-c",
+    "--machine-type=a2-highgpu-1g",
+    "--provisioning-model=STANDARD",
+    "--maintenance-policy=TERMINATE",
+    "--no-restart-on-failure",
+    "--termination-time=2026-11-14T09:57:08Z",
+    "--metadata=own-deadline-utc=2026-11-14T09:57:08Z,bundle-uri=gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz,bundle-sha256=b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1,packet-uri=gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208/inputs/packet.tar.gz,packet-sha256=b38c7410b3c8d5bf2857e24cddab59ad1a25d33005363dc98144f1668dcf8043,enable-oslogin=TRUE,block-project-ssh-keys=TRUE",
+    "--instance-termination-action=STOP",
+    "--boot-disk-size=100GB",
+    "--boot-disk-type=pd-balanced",
+    "--no-boot-disk-auto-delete",
+    "--image=projects/deeplearning-platform-release/global/images/pytorch-2-9-cu129-ubuntu-2404-nvidia-580-v20261111",
+    "--service-account=forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+    "--scopes=https://www.googleapis.com/auth/devstorage.read_write",
+    "--no-address",
+    "--subnet=default",
+    "--metadata-from-file=startup-script=/Users/navneetprabhakar/Documents/git/image/inference/reports/english-a100-v1/bootstrap.sh",
+    "--quiet",
+    "--format=json",
+    "--async"
+  ],
+  "machine": "a2-highgpu-1g",
+  "gpu": "1x A100 40GB",
+  "list_rate_usd_per_hour": 3.673385,
+  "compute_envelope_usd": 5.739664062500001,
+  "reserve_usd": 3.5,
+  "operational_cap_usd": 10,
+  "cumulative_reserved_before_usd": 0,
+  "latest_local_stop_utc": "2026-11-14T09:57:08Z",
+  "max_runtime_seconds": 4500,
+  "worker_reserve_seconds": 900,
+  "provider_termination": "STOP",
+  "boot_disk_auto_delete": false,
+  "requirements": [
+    "Reserve complete lease in durable cumulative ledger before provisioning.",
+    "Bootstrap must enforce earlier local deadline from metadata, including reboots.",
+    "Reconcile provider runtime before refunding any reservation.",
+    "Verified GCS readback before normal stop; retain disk on any backup failure.",
+    "No automatic machine/zone-price/budget upgrade. No training until qualification passes."
+  ],
+  "run_id": "forge-english-a100-1114-084208",
+  "price_source": "https://cloud.google.com/products/compute/pricing/accelerator-optimized",
+  "authorization": "User: check the next GPU class and keep going; unchanged $10 operational cap; qualification only",
+  "bootstrap_sha256": "466b6c891311ca4f644f277cfabcbb43f6296df67e66e6f3bbf01a34f5bcce33",
+  "backup_prefix": "gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208",
+  "inputs": [
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/runtime.tar.gz",
+      "uri": "gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz",
+      "sha256": "b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1",
+      "independent_readback": true
+    },
+    {
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-a100-v1/packet.tar.gz",
+      "uri": "gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208/inputs/packet.tar.gz",
+      "sha256": "b38c7410b3c8d5bf2857e24cddab59ad1a25d33005363dc98144f1668dcf8043"
+    }
+  ]
+}

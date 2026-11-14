@@ -1,0 +1,22 @@
+[
+  {
+    "case": "closed",
+    "blocked": true,
+    "reason": "Lease guard failed: allocation['name'] == request['run_id'] and allocation['state'] == 'reserved_before_provisioning'"
+  },
+  {
+    "case": "over_cap",
+    "blocked": true,
+    "reason": "Lease guard failed: sum(a['reserved_compute_usd'] for a in ledger['allocations']) + ledger['reserve_usd'] <= ledger['operational_cap_usd']"
+  },
+  {
+    "case": "wrong_request",
+    "blocked": true,
+    "reason": "Lease guard failed: allocation['request_sha256'] == sha(P / 'launch-request.json')"
+  },
+  {
+    "case": "unverified_inputs",
+    "blocked": true,
+    "reason": "Lease guard failed: proof['all_verified']"
+  }
+]

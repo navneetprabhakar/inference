@@ -1,11 +1,45 @@
 OWN MODEL — AUTHORITATIVE HANDOFF
-Updated14 November2026. Current facts supersede historical planning in Git.
+Updated 14 November 2026. Current facts supersede historical plans in Git.
 
-CURRENT DECISION: L4 CAPACITY HOLD; ALL VMs OFF; NO NEW TRAINING
-User priority: English conversation first, then maths, then CBSE through Class12.
-User said start, use a cheaper GPU, and proceed hands off after the changed
-assessment. Current operational envelope10USDwithin the earlier15USDceiling;
-L4 only, no automatic GPU/price/budget upgrade. Quality above volume.
+CURRENT: PAUSED BY USER — FINAL GPU RUN CLOSED; NO FURTHER STARTS
+User: "this is the last run ... going to pause this project after this".
+Final A100 VM forge-english-a100-1114-084208, us-central1-f, TERMINATED
+at09:42:45UTC14Nov2026, then VM and redundant disk deleted after verified backups.
+Three prior VMs remain TERMINATED. No active writer, retry or fit pilot.
+English conversation remains first; maths/CBSE deferred. No accepted model.
+Final compute estimate $3.349724 across A100 allocations (not invoice verified;
+storage/network additional, $3.50 reserve). All compute reservations released.
+Operational cap remained $10, within prior $15 ceiling. See spend-ledger.json.
+
+Normal CUDA/GCS restart PASS: uninterrupted2updates vs1+fresh restore+1,
+all159tensors/1,409,489,630elements bitwise equal and quality loop equal.
+Real mid-accumulation SIGTERM: live rollback payload byte-identical to initial
+state. Subsequent resumed update FAILED exact comparison: HOLD. Training loss
+before update matched, but development CE after update differed. Kernel-level
+cause is not established. Offline comparison:4/159tensors differ (190model
+weight values,30optimizer values); metadata/RNG/data state equal. Localized
+numerical divergence does not explain gross conversation failure. Upload-rejection and independent providerSTOP drills
+were not reached. No64-update English fit pilot or release test ran.
+Required checkpoint and evidence readbacks verified before normal shutdown.
+Normal shutdown is NOT proof of independent provider-stop fault qualification.
+See repair/backup-reconciliation.json and faults/worker-backup-check.json.
+
+Two launcher defects fixed with regression tests: missing /checkpoints suffix;
+stale local retention journal used for backup verification. Reconciled against
+current authoritative GCS journals; all4 required restart bundles read back.
+144component tests passed. Neither CPU tests nor normal restart grant readiness.
+
+Full local MPS review of preselected diagnostic step2: English0/36turns,
+0/12sessions (12invalid frames,24blocked followups); protected tools0/18turns,
+0/14sessions (14invalid frames,4blocked), zero actual executed calls.
+All raw frames and blocked denominators retained. Exposed development only;
+not independent release evidence. Existing194baseline also0/36English turns.
+This2-update base-derived checkpoint consumed882replay assistant targets from
+656unique targets. It is an infrastructure diagnostic, not a completed SFT;
+its failures do not establish that a completed fit pilot cannot learn.
+Default unchanged. Local models and explicit diagnostic CLI remain available;
+HTTP8765off. No sealed release consumed; corrective corpus remains frozen.
+Evidence: reports/english-a100-v1/; final rationale in PAUSE_ASSESSMENT.txt.
 
 CURRENT ENGLISH DIAGNOSTIC — reports/english-first-v1/
 -24reviewed fit sessions/72turns/656unique assistant targets, derived from the
@@ -32,9 +66,9 @@ CURRENT ENGLISH DIAGNOSTIC — reports/english-first-v1/
 -Real CLI validate-only passes.140related CPU tests passed; expanded4lease tests
  subsequently passed. These are component/control-flow checks, not GPU acceptance.
  Qualification cadence1 aligns2vs1+1observations. Fresh-process tests execute the
- actual SFT while-body with mocked compute/I/O; real CUDA/GCS proof remains absent.
+ actual SFT while-body with mocked compute/I/O; normal CUDA/GCS proof now passes; fault qualification remains incomplete.
 
-CLOUD ATTEMPTS / BUDGET
+HISTORICAL L4 CAPACITY ATTEMPTS / CLOSED BUDGET
 Single g2-standard-8/L4 qualification request; fixed absolute STOP, non-auto-delete
  disk, private networking, earlier worker cutoff, GCS input/readback and closeout.
 11supported zones across us-central1/us-east1/us-east4/us-west1 failed with confirmed
@@ -50,7 +84,8 @@ See live-status.json, spend-ledger.json, operation receipts and cloud-closeout.j
 
 BACKUPS / LOCAL PRESERVATION
 Qualification runtime and reviewed packet independently downloaded/hash-verified
-from GCS. No new model/checkpoint exists. Latest compact evidence receipt:
+from GCS. New A100 diagnostic checkpoints exist; none are accepted models.
+Historical pre-A100 compact evidence receipt:
 reports/english-first-v1/backup-receipt.json (created during this closeout).
 Prior current models, tokenizer, pinned nanochat source and .venv remain local:
 -Base10B: runs/local-readiness-v1/base10b
@@ -94,22 +129,10 @@ Existing4Kcontract/gates remain intact for that candidate. Do not mix it silentl
 into the English tiny-fit control or weaken its thresholds for promotion.
 
 NEXT ACTIONS / HARD STOPS
-1. Cheap-L4 capacity is the immediate external blocker. Prepare a NEW absolute
-   deadline/run ID and reconcile cumulative ledger before any future request.
-   Existing verified runtime can be reused only if all source hashes still match.
-2. Qualification FIRST:2vs1+1actual SFT updates, verified GCS fresh-process restore,
-   exact model/optimizer/RNG/cursor/quality-loop equality; real signal/upload/STOP
-   fault checks. Current worker performs restart comparison only and explicitly
-   cannot run a fit pilot. Fault qualification remains outstanding.
-3. Only after qualification passes: bounded English fit from10Bbase under its
-   diagnostic contract; review training fit and every unseen development output,
-   best AND last, plus protected tool regression checks. No release promotion.
-   Two failed bounded pilots force diagnosis/hold; no automatic dose/LR increase.
-4. Establish broader unseen English transfer before long-context curriculum.
-   Then full independent release custody and matched local MPS checks before any
-   acceptance. Maths follows English, CBSE follows maths; protect English later.
-5. Verify required GCS readbacks before normal shutdown. Hard STOP still applies
-   on backup failure; keep non-auto-delete recovery disk/sole copies. Healthy GPU
-   updates roughly30minutes; report failures promptly. No unattended open-ended VM.
-
-No new GPU training, repaired-model claim or local HTTP deployment.
+Project paused. No autonomous cloud starts, retries, training, dataset expansion
+or promotion. Preserve local models, future-use corpus, mismatch states and
+hash-bound evidence in GCS. See reports/english-a100-v1/backup-receipt.json.
+Only after explicit user resume: diagnose resumed-update divergence with gradient
+and optimizer-boundary fingerprints; finish signal/upload/provider fault gates;
+then bounded English learnability and unseen transfer. No maths/CBSE before
+English acceptance. No release exposure for exploratory model selection.

@@ -1,0 +1,386 @@
+[
+  {
+    "canIpForward": false,
+    "cpuPlatform": "Unknown CPU Platform",
+    "creationTimestamp": "2026-11-13T00:47:48.477-08:00",
+    "deletionProtection": false,
+    "fingerprint": "_Vk0ED6eGwM=",
+    "guestAccelerators": [
+      {
+        "acceleratorCount": 1,
+        "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/acceleratorTypes/nvidia-tesla-a100"
+      }
+    ],
+    "id": "516292751753179227",
+    "kind": "compute#instance",
+    "labelFingerprint": "v7K9U94ohh4=",
+    "labels": {
+      "budget": "usd50",
+      "purpose": "ownbase-training"
+    },
+    "lastStartTimestamp": "2026-11-13T00:48:15.555-08:00",
+    "lastStopTimestamp": "2026-11-13T14:01:23.630-08:00",
+    "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/machineTypes/a2-highgpu-1g",
+    "metadata": {
+      "fingerprint": "nS4F7DxyBVA=",
+      "items": [
+        {
+          "key": "bundle-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz"
+        },
+        {
+          "key": "code-sha256",
+          "value": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9"
+        },
+        {
+          "key": "config-sha256",
+          "value": "9d4f63ea02c3ef126061b416e7b3ff51b6c31fdf4474f85ab5fd7abdca3fbbea"
+        },
+        {
+          "key": "config-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/launch/launch-config-us-central1-b-queued.json"
+        },
+        {
+          "key": "runner-sha256",
+          "value": "1379a48619f3213f1e286cbe22e9fbdb5af5b3fa788b6a5f0a4996175f98a27e"
+        },
+        {
+          "key": "runner-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/launch/run_base.py"
+        },
+        {
+          "key": "seed-journal-sha256",
+          "value": "64db47dc5159b803a79fe99e82f5cbc8040f1fe773988d261cc532e5efe325c8"
+        },
+        {
+          "key": "seed-journal-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/retention-journal.json"
+        },
+        {
+          "key": "startup-script",
+          "value": "#!/bin/bash\n# Single admitted lease only; provider DELETE deadline remains the outer guard.\nset -Eeuo pipefail\nexport CLOUDSDK_CORE_DISABLE_PROMPTS=1 HF_HUB_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1\nexport NANOCHAT_DTYPE=bfloat16 OMP_NUM_THREADS=4 TORCHINDUCTOR_COMPILE_THREADS=2\nmkdir -p /opt/ownbase-nano\ncd /opt/ownbase-nano\nexec 9>gpu.lock\nflock -n 9\nexec > >(tee -a server.log) 2>&1\nDEST=\"gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/bootstrap\"\nTELEMETRY=''\nfinish() {\n  rc=$?; trap - EXIT\n  [ -z \"$TELEMETRY\" ] || kill \"$TELEMETRY\" 2>/dev/null || true\n  printf '{\"exit_code\":%s,\"finished_utc\":\"%s\"}\\n' \"$rc\" \"$(date -u +%FT%TZ)\" > server-status.json\n  timeout 120 gcloud storage cp server.log server-status.json \"$DEST/\" --quiet || true\n  if [ -d results ]; then timeout 180 gcloud storage rsync --recursive --exclude='.*payload[.]pt' results \"$DEST/results\" --quiet || true; fi\n  shutdown -h now || true\n  exit \"$rc\"\n}\ntrap finish EXIT\n# Conservative bootstrap guard covers metadata/config failures; verified config reschedules it. Provider deletes disk.\nshutdown -h +20\nmetadata() { curl --fail --silent --connect-timeout 5 --max-time 15 -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\ntimeout 120 gcloud storage cp \"$(metadata config-uri)\" launch-config.json --quiet\nprintf '%s  launch-config.json\\n' \"$(metadata config-sha256)\" | sha256sum -c -\n# Deadline starts at OS boot, not after data transfer/compiler setup.\nread -r DEADLINE LOCAL_MIN DEST < <(python3 - <<'PY'\nimport json,time,re\nc=json.load(open('launch-config.json')); seconds=c['max_runtime_seconds']\nkind=c.get('launch_kind','production'); assert kind in ('pilot','production','retained')\nassert type(seconds) is int and 1200<=seconds<=(10800 if kind=='pilot' else 115200 if kind=='retained' else 21600)\ncadence=c.get('checkpoint_seconds',900); assert type(cadence) is int and cadence in (900,1800)\nassert re.fullmatch(r'forge-ownbase-[a-z0-9-]{1,40}',c['run_id'])\nuptime=float(open('/proc/uptime').read().split()[0]); remaining=seconds-uptime\nassert remaining>900\nassert c['budget']['compute_reservation_usd']+c['budget']['storage_transfer_and_uncertainty_reserve_usd']<=50\nassert seconds==50400 and c['run_id']=='forge-ownbase-budget50-v1'\nprint(int(time.time()+remaining-1200),max(1,int((remaining-600)/60)), c['run_prefix']+'/bootstrap')\nPY\n)\nshutdown -c || true\nshutdown -h \"+$LOCAL_MIN\"\ntimeout 600 gcloud storage cp \"$(metadata bundle-uri)\" bundle.tar.gz --quiet\nprintf '%s  bundle.tar.gz\\n' \"$(metadata code-sha256)\" | sha256sum -c -\n# Bootstrap extraction rejects all links/devices and path traversal before writes.\npython3 - <<'PY'\nimport tarfile,pathlib\nwith tarfile.open('bundle.tar.gz','r:gz') as t:\n    names=set()\n    for m in t.getmembers():\n        p=pathlib.PurePosixPath(m.name)\n        assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name not in names\n        assert m.name not in ('launch-config.json','server.log','gpu.lock','bundle.tar.gz')\n        names.add(m.name)\n    t.extractall('.',filter='data')\nfrom cloud_training.nano_package import extract_verified\nextract_verified('bundle.tar.gz','.')\nPY\nfor deb in debs/*.deb; do dpkg-deb -x \"$deb\" /; done\nPY=''\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n  if [ -x \"$candidate\" ] && \"$candidate\" -c 'import torch,numpy; assert torch.__version__.startswith(\"2.9.1\"); assert torch.version.cuda==\"12.9\"' 2>/dev/null; then PY=\"$candidate\"; break; fi\ndone\n[ -n \"$PY\" ] || { echo 'Pinned PyTorch runtime missing'; exit 1; }\n\"$PY\" - <<'PY'\nimport pathlib,zipfile\nfor wheel in pathlib.Path('wheels').glob('*.whl'): zipfile.ZipFile(wheel).extractall('vendor')\nPY\nexport PYTHONPATH='/opt/ownbase-nano/vendor:/opt/ownbase-nano:/opt/ownbase-nano/nanochat-source'\n\"$PY\" - <<'PY'\nimport sysconfig,pathlib,torch\nassert pathlib.Path(sysconfig.get_path('include'),'Python.h').is_file()\nfrom importlib.metadata import version\nfrom nanochat.tokenizer import RustBPETokenizer\nassert version('rustbpe') == '0.1.0' and version('tiktoken') == '0.11.0'\ntokenizer = RustBPETokenizer.from_directory('tokenizer')\nprobe = 'Own base tokenizer: 12.5 metres, blue notebook.'\nassert tokenizer.decode(tokenizer.encode(probe)) == probe\nassert torch.cuda.device_count()==1 and 'A100' in torch.cuda.get_device_name()\nx=torch.randn(128,128,device='cuda',requires_grad=True)\ntorch.compile(lambda a:(a@a).square().mean())(x).backward(); torch.cuda.synchronize()\nPY\nmkdir -p results\n(\n  while sleep 120; do\n    timeout 30 gcloud storage cp server.log \"$DEST/server.log\" --quiet || true\n    # Small nested progress/result/log evidence only; never sync weight payloads.\n    while IFS= read -r -d '' f; do\n      timeout 30 gcloud storage cp \"$f\" \"$DEST/$f\" --quiet || true\n    done < <(find results -type f \\( -name 'progress.json' -o -name 'result.json' -o -name 'controller.json' -o -name 'failure.json' \\) -print0)\n  done\n) &\nTELEMETRY=$!\ngcloud storage cp \"$(metadata runner-uri)\" run-budget50.py --quiet\nprintf '%s  run-budget50.py\\n' \"$(metadata runner-sha256)\" | sha256sum -c -\ngcloud storage cp \"$(metadata seed-journal-uri)\" seed-journal.json --quiet\nprintf '%s  seed-journal.json\\n' \"$(metadata seed-journal-sha256)\" | sha256sum -c -\n\"$PY\" -u run-budget50.py\n"
+        }
+      ],
+      "kind": "compute#metadata"
+    },
+    "name": "forge-ownbase-budget50-v1",
+    "networkInterfaces": [
+      {
+        "fingerprint": "KaOjGLYRPp4=",
+        "kind": "compute#networkInterface",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+        "networkIP": "10.128.0.48",
+        "stackType": "IPV4_ONLY",
+        "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+      }
+    ],
+    "resourceStatus": {
+      "effectiveInstanceMetadata": {
+        "enableOsloginMetadataValue": true,
+        "vmDnsSettingMetadataValue": "ZonalOnly"
+      },
+      "scheduling": {
+        "terminationTimestamp": "2026-11-13T22:48:02.742463Z"
+      }
+    },
+    "scheduling": {
+      "automaticRestart": false,
+      "instanceTerminationAction": "STOP",
+      "maxRunDuration": {
+        "nanos": 0,
+        "seconds": "50400"
+      },
+      "onHostMaintenance": "TERMINATE",
+      "preemptible": false,
+      "provisioningModel": "FLEX_START"
+    },
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/instances/forge-ownbase-budget50-v1",
+    "serviceAccounts": [
+      {
+        "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/devstorage.read_write"
+        ]
+      }
+    ],
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true,
+      "enableSecureBoot": false,
+      "enableVtpm": true
+    },
+    "shieldedInstanceIntegrityPolicy": {
+      "updateAutoLearnPolicy": true
+    },
+    "startRestricted": false,
+    "status": "TERMINATED",
+    "tags": {
+      "fingerprint": "AfjX7HL23Y8=",
+      "items": [
+        "forge-ownbase-budget50"
+      ]
+    },
+    "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b"
+  },
+  {
+    "canIpForward": false,
+    "cpuPlatform": "Unknown CPU Platform",
+    "creationTimestamp": "2026-11-13T14:01:49.499-08:00",
+    "deletionProtection": false,
+    "disks": [
+      {
+        "autoDelete": false,
+        "boot": true,
+        "deviceName": "persistent-disk-0",
+        "diskSizeGb": "200",
+        "guestOsFeatures": [
+          {
+            "type": "VIRTIO_SCSI_MULTIQUEUE"
+          },
+          {
+            "type": "UEFI_COMPATIBLE"
+          },
+          {
+            "type": "GVNIC"
+          }
+        ],
+        "index": 0,
+        "interface": "SCSI",
+        "kind": "compute#attachedDisk",
+        "licenses": [
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+        ],
+        "mode": "READ_WRITE",
+        "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/disks/forge-ownbase-budget50-v1",
+        "type": "PERSISTENT"
+      }
+    ],
+    "fingerprint": "uy_CLVurhj4=",
+    "guestAccelerators": [
+      {
+        "acceleratorCount": 1,
+        "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/acceleratorTypes/nvidia-tesla-a100"
+      }
+    ],
+    "id": "1207089940112487970",
+    "kind": "compute#instance",
+    "labelFingerprint": "xQnRxTkEITs=",
+    "labels": {
+      "budget": "usd55",
+      "purpose": "ownbase-training"
+    },
+    "lastStartTimestamp": "2026-11-13T14:02:21.673-08:00",
+    "lastStopTimestamp": "2026-11-13T14:29:18.221-08:00",
+    "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/machineTypes/a2-highgpu-1g",
+    "metadata": {
+      "fingerprint": "WbGW5ApL0PU=",
+      "items": [
+        {
+          "key": "extension-budget-sha",
+          "value": "e7924fc7492cb60d1dfb2da8c6308c076a7b92c28ca35407947534333954087a"
+        },
+        {
+          "key": "extension-budget-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/extension-v5/budget.json"
+        },
+        {
+          "key": "startup-script",
+          "value": "#!/bin/bash\nset -euo pipefail\nROOT=/opt/ownbase-nano\ncd \"$ROOT\"\nexec >> \"$ROOT/extension-startup.log\" 2>&1\nshutdown -h +10\nexec 9> \"$ROOT/gpu.lock\"\nflock -n 9\nmetadata() { curl -fsS -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\ngcloud storage cp \"$(metadata extension-budget-uri)\" extension-budget.json --quiet\nEXTENSION_BUDGET_SHA=$(metadata extension-budget-sha)\nexport EXTENSION_BUDGET_SHA\npython3 - <<'PY'\nimport hashlib,json,os,subprocess,time,math\nfrom pathlib import Path\np=Path('extension-budget.json');assert hashlib.sha256(p.read_bytes()).hexdigest()==os.environ['EXTENSION_BUDGET_SHA']\nb=json.loads(p.read_text());assert b['total_cap_usd']==55 and 3600<=b['duration_seconds']<=7200\nassert b['prior_compute_hours']+b['duration_seconds']/3600<=16\nremaining=b['duration_seconds']-float(Path('/proc/uptime').read_text().split()[0])-120\nassert remaining>1800\nsubprocess.run(['shutdown','-c'],check=False)\nsubprocess.run(['shutdown','-h','+'+str(max(1,math.floor(remaining/60)))],check=True)\nPY\nPREFIX=gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/extension-v5\nfor file in run_sequence.py supervisor.py packet.json; do gcloud storage cp \"$PREFIX/$file\" \"$ROOT/extension-$file\" --quiet; done\npython3 - <<'PY'\nimport hashlib,json,os\nfrom pathlib import Path\np=json.loads(Path('extension-packet.json').read_text())\nassert {k:p['hashes'][k] for k in ('run_sequence.py','supervisor.py')}=={'run_sequence.py':'b325bd8f4e1384498fa953119862224595614c30d193bb15563ce96b910f2893','supervisor.py':'cb07bfbbe505426db2628df30162681b8f94c715b5810fbea40a0f895a9a60e9'}\nfor src,dest in [('run_sequence.py','run-extension-sequence.py'),('supervisor.py','run-extension-supervisor.py')]:\n path=Path('extension-'+src);assert hashlib.sha256(path.read_bytes()).hexdigest()==p['hashes'][src];os.replace(path,dest)\nPY\nexport PYTHONPATH=\"$ROOT:$ROOT/vendor:$ROOT/nanochat-source\"\nexport NANOCHAT_DTYPE=bfloat16\n/usr/bin/python3 -u run-extension-supervisor.py\n"
+        }
+      ],
+      "kind": "compute#metadata"
+    },
+    "name": "forge-ownbase-extension-v5",
+    "networkInterfaces": [
+      {
+        "fingerprint": "TyBCvtCiRB0=",
+        "kind": "compute#networkInterface",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+        "networkIP": "10.128.0.49",
+        "stackType": "IPV4_ONLY",
+        "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+      }
+    ],
+    "resourceStatus": {
+      "effectiveInstanceMetadata": {
+        "enableOsloginMetadataValue": true,
+        "vmDnsSettingMetadataValue": "ZonalOnly"
+      },
+      "scheduling": {
+        "terminationTimestamp": "2026-11-14T00:02:09.802991Z"
+      }
+    },
+    "scheduling": {
+      "automaticRestart": false,
+      "instanceTerminationAction": "STOP",
+      "maxRunDuration": {
+        "nanos": 0,
+        "seconds": "7200"
+      },
+      "onHostMaintenance": "TERMINATE",
+      "preemptible": false,
+      "provisioningModel": "FLEX_START"
+    },
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/instances/forge-ownbase-extension-v5",
+    "serviceAccounts": [
+      {
+        "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/devstorage.read_write"
+        ]
+      }
+    ],
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true,
+      "enableSecureBoot": false,
+      "enableVtpm": true
+    },
+    "startRestricted": false,
+    "status": "TERMINATED",
+    "tags": {
+      "fingerprint": "AfjX7HL23Y8=",
+      "items": [
+        "forge-ownbase-budget50"
+      ]
+    },
+    "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b"
+  },
+  {
+    "canIpForward": false,
+    "cpuPlatform": "Unknown CPU Platform",
+    "creationTimestamp": "2026-11-10T18:32:29.715-08:00",
+    "deletionProtection": false,
+    "disks": [
+      {
+        "autoDelete": true,
+        "boot": true,
+        "deviceName": "persistent-disk-0",
+        "diskSizeGb": "200",
+        "guestOsFeatures": [
+          {
+            "type": "VIRTIO_SCSI_MULTIQUEUE"
+          },
+          {
+            "type": "UEFI_COMPATIBLE"
+          },
+          {
+            "type": "GVNIC"
+          }
+        ],
+        "index": 0,
+        "interface": "SCSI",
+        "kind": "compute#attachedDisk",
+        "licenses": [
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+          "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+        ],
+        "mode": "READ_WRITE",
+        "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/disks/forge-ownbase-v2-retained-01",
+        "type": "PERSISTENT"
+      }
+    ],
+    "fingerprint": "INV0lnD0Deg=",
+    "guestAccelerators": [
+      {
+        "acceleratorCount": 1,
+        "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/acceleratorTypes/nvidia-tesla-a100"
+      }
+    ],
+    "id": "30975771021307218",
+    "kind": "compute#instance",
+    "labelFingerprint": "GyikA2wzYgQ=",
+    "labels": {
+      "budget": "usd100",
+      "purpose": "ownbase-training"
+    },
+    "lastStartTimestamp": "2026-11-11T17:55:37.582-08:00",
+    "lastStopTimestamp": "2026-11-12T02:29:40.092-08:00",
+    "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/machineTypes/a2-highgpu-1g",
+    "metadata": {
+      "fingerprint": "veLCK0jyBEU=",
+      "items": [
+        {
+          "key": "bundle-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/source/c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9.tar.gz"
+        },
+        {
+          "key": "code-sha256",
+          "value": "c197e36753b48df0b1c23597424ad44825d052ecf9260b7cd0b203be46ecb9b9"
+        },
+        {
+          "key": "config-sha256",
+          "value": "8d8f996e428ee5836d6cddc21b2e31a91dd24251493b12bc104c5dcc342078a6"
+        },
+        {
+          "key": "config-uri",
+          "value": "gs://forge-ownbase-a100-20261110/ownbase-v2/launches/forge-ownbase-v2-retained-01.json"
+        },
+        {
+          "key": "startup-script",
+          "value": "#!/bin/bash\nset -Eeuo pipefail\nexport CLOUDSDK_CORE_DISABLE_PROMPTS=1 HF_HUB_OFFLINE=1 NANOCHAT_DTYPE=bfloat16\nexport PYTHONPATH=/opt/ownbase-nano/vendor:/opt/ownbase-nano:/opt/ownbase-nano/nanochat-source\ncd /opt/ownbase-nano\nDEADLINE=1794519914\nNOW=$(date +%s)\n[ \"$NOW\" -lt \"$DEADLINE\" ] || { shutdown -h now; exit 1; }\nMINUTES=$(( (DEADLINE-NOW)/60 ))\nshutdown -c || true\nshutdown -h +\"$MINUTES\"\nmkdir -p /run/ownbase-recovery\nexec > >(tee -a /run/ownbase-recovery/startup.log) 2>&1\nexec 8>gpu.lock\nflock -n 8\ngcloud storage cp gs://forge-ownbase-a100-20261110/ownbase-v2/conversation-recovery-150-v1/cleanup.py /run/ownbase-recovery/cleanup.py --quiet\n/usr/bin/python3 /run/ownbase-recovery/cleanup.py\nflock -u 8\nmkdir -p concise-teacher-repair-v3-launch\nexec > >(tee -a concise-teacher-repair-v3-launch/startup.log) 2>&1\nexec 9>gpu.lock\nflock -n 9\nP=gs://forge-ownbase-a100-20261110/ownbase-v2/concise-teacher-repair-v3\ntrap 'timeout 120 gcloud storage cp concise-teacher-repair-v3-launch/startup.log \"$P/startup.log\" --quiet || true' EXIT\nmkdir -p sft/concise-teacher-repair-admitted-v1\nfor F in manifest.json admission.json train.jsonl validation.jsonl; do\n gcloud storage cp \"gs://forge-ownbase-a100-20261110/ownbase-v2/sft/concise-teacher-repair-admitted-v1/$F\" \"sft/concise-teacher-repair-admitted-v1/$F\" --quiet\ndone\ngcloud storage cp \"$P/heldout-suite.json\" instruction-heldout-suite.json --quiet\ngcloud storage cp \"$P/run.py\" concise-teacher-repair-v3-launch/run_pilot.py --quiet\ngcloud storage cp \"$P/regression-suite.json\" instruction-v3-regression-suite.json --quiet\ngcloud storage cp \"$P/regression-v2-suite.json\" instruction-v2-regression-suite.json --quiet\ngcloud storage cp \"$P/nano_quality.py\" cloud_training/nano_quality.py --quiet\necho \"89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b  cloud_training/nano_quality.py\" | sha256sum -c -\ngcloud storage cp \"$P/general-challenge.json\" general-conversation-challenge.json --quiet\ngcloud storage cp \"$P/conversation-regression-suite.json\" conversation-regression-suite.json --quiet\ngcloud storage cp \"$P/teacher-regression-suite.json\" teacher-regression-suite.json --quiet\ngcloud storage cp \"$P/constraint-regression-suite.json\" constraint-regression-suite.json --quiet\ncp cloud_training/nano_sft.py concise-teacher-repair-v3-launch/previous-nano-sft.py\ngcloud storage cp \"$P/nano_sft.py\" cloud_training/nano_sft.py --quiet\necho \"9e4a1020774cd568634100c381e8cd2603dfbbd613a191105c3c77d4a120ba4f  cloud_training/nano_sft.py\" | sha256sum -c -\ntimeout 5400 /usr/bin/python3 -u concise-teacher-repair-v3-launch/run_pilot.py\n"
+        }
+      ],
+      "kind": "compute#metadata"
+    },
+    "name": "forge-ownbase-v2-retained-01",
+    "networkInterfaces": [
+      {
+        "fingerprint": "FaMxcLyeEZM=",
+        "kind": "compute#networkInterface",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+        "networkIP": "10.128.0.47",
+        "stackType": "IPV4_ONLY",
+        "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+      }
+    ],
+    "resourceStatus": {
+      "effectiveInstanceMetadata": {
+        "enableOsloginMetadataValue": true,
+        "vmDnsSettingMetadataValue": "ZonalOnly"
+      }
+    },
+    "scheduling": {
+      "automaticRestart": false,
+      "instanceTerminationAction": "DELETE",
+      "maxRunDuration": {
+        "nanos": 0,
+        "seconds": "115200"
+      },
+      "onHostMaintenance": "TERMINATE",
+      "preemptible": false,
+      "provisioningModel": "FLEX_START"
+    },
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b/instances/forge-ownbase-v2-retained-01",
+    "serviceAccounts": [
+      {
+        "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/devstorage.read_write"
+        ]
+      }
+    ],
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true,
+      "enableSecureBoot": false,
+      "enableVtpm": true
+    },
+    "shieldedInstanceIntegrityPolicy": {
+      "updateAutoLearnPolicy": true
+    },
+    "startRestricted": false,
+    "status": "TERMINATED",
+    "tags": {
+      "fingerprint": "42WmSpB8rSM="
+    },
+    "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-b"
+  }
+]

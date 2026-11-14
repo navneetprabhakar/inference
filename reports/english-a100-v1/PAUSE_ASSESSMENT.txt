@@ -1,0 +1,66 @@
+PAUSE ASSESSMENT — 14NOV2026
+Decision: project paused; no further GPU work. No usable conversation model accepted.
+
+MODEL QUALITY
+Full raw MPS review: diagnostic2 English0/36turns,0/12sessions; protected tools
+0/18turns,0/14sessions, zero executed calls. Repeated prompts/policy fragments,
+unrelated prose and missing end frames; followups blocked, never excluded.
+Existing194English baseline0/36. This is not an improvement claim or a fair
+finished-SFT comparison: diagnostic2 is only2updates from base,882replay targets,
+24fit sessions/656unique assistant targets, intentionally no positive tool training.
+No64-update fit pilot ran. Tiny-fit learnability and unseen transfer remain unknown.
+Sealed release unused; reviews are Codex assessments of exposed development.
+
+PROVEN ENGINEERING FAILURES
+1. Initial launcher omitted required /checkpoints suffix. Failed before training.
+2. Backup verification used stale local retention journal after resume pruned an
+old step0. Fixed future template to read authoritative remote journals per namespace.
+Both now have regression tests;144component checks passed. No required data lost.
+3. Normal2vs1+1CUDA restart was bitwise exact. Real SIGTERM partial accumulation
+rolled live state back exactly, but the next restored update failed exactness.
+Initial payloads identical; input counts and preupdate training loss identical;
+postupdate development CE4.281193081423533vs4.281452096623482. Full checkpoint
+comparison is retained separately. Root kernel/optimizer cause remains unproven.
+4. Fault worker asserted before persisting failed comparison details. Saved bundles
+allow offline recovery; future worker must persist evidence before fail-closed gates.
+
+DO NOT OVERCLAIM RCA
+Candidate fails framing and conversation. Two updates do not test full learning.
+Historical SFT had small/narrow target coverage, missing enabled-tools/no-call
+coverage, regression50->194without stop, and tool-heavy acceptance blind spots.
+These are observed recipe/process defects, not proof of a single foundation cause.
+SDPA backward, compiled optimizer warmup or a fresh-step0 initialization path
+remain hypotheses. Do not call tolerance relaxation a fix. Instrument gradients
+and optimizer boundaries before proposing another paid run, only after user resume.
+
+QUALIFICATION / RETENTION
+Signal-resume gate blocked further work; upload-rejection/providerSTOP drill not
+reached. Required GCS bundles and evidence read back before normal shutdown.
+Normal shutdown does not establish provider fault-stop behavior.
+Selected diagnostic local: runs/english-a100-v1/local-diagnostic-step2.
+Explicit CLI: ./chat-own-diagnostic-step2.sh --raw. Existing default194 unchanged:
+./chat-own-latest.sh --raw. Base10B,50,194,605and tokenizer preserved; HTTP off.
+Current GCS prefix: gs://forge-ownbase-a100-20261110/english-a100-v1/
+Required mismatch weights retained for future RCA; no sole copies deleted.
+Final compute estimate$3.349724, not invoice; storage/egress additional, covered
+by reserved$3.50contingency. No cap increase and no active compute reservation.
+Final evidence receipt: backup-receipt.json. Recovery disk disposition is recorded
+in retention-closeout.json; prior existing resources are unchanged.
+
+RESUME ONLY ON EXPLICIT USER INSTRUCTION
+Fix/instrument divergence, complete all fault gates, then bounded fit and transfer;
+independent release and local MPS acceptance before serving changes. English first.
+No automatic retries, larger corpus, longer epochs or further spend while paused.
+
+OFFLINE COMPARISON COMPLETE
+Both CUDA-produced bundles downloaded and hash-validated locally. Exact comparison:
+4/159tensors differ,220/1,409,489,630elements; metadata/RNG/data state equal.
+Model:190values across layer9/layer13attn.ve_gate.weight, maxabs2.0772218704223633e-5.
+Optimizer:30values across state15momentum/second-momentum buffers; overall maxabs
+5.650594830513e-4. No nonfinite values. Quality loop differs. Exact gate remains HOLD.
+This is localized numerical divergence, not broad checkpoint corruption and not
+an established explanation of gross conversation failure. Gradients were not
+persisted; zero gradient mismatches in this report does not prove equal gradients.
+Next diagnostic boundary is those gate gradients and grouped Muon state/update;
+no GPU verification or root-kernel attribution is claimed. Keep both states locally
+and in GCS for explicit future resume. See faults/local-signal-resume-comparison.json.

@@ -27,6 +27,24 @@ def download_bundle(remote,destination,reserve=900):
  destination.mkdir()
  for name in ('payload.pt','metadata.json','manifest.json','COMMITTED'):copy(remote+'/'+name,destination/name,reserve)
  return validate_bundle(destination)
+def authoritative_journals(paths):
+ # Local snapshots from an earlier process may name bundles pruned on resume.
+ # Deduplicate namespaces and consult current remote authority after writers join.
+ grouped={}
+ for path in paths:
+  local=json.loads(path.read_text());prefix=local['campaign_prefix']
+  if prefix not in (REMOTE+'/uninterrupted/checkpoints',REMOTE+'/split/checkpoints'):raise ValueError('Unexpected qualification namespace')
+  grouped.setdefault(prefix,[]).append(local)
+ journals=[]
+ for index,(prefix,locals_) in enumerate(sorted(grouped.items())):
+  target=ROOT/('authoritative-journal-'+str(index)+'.json')
+  copy(prefix+'/retention-journal.json',target,reserve=120)
+  current=json.loads(target.read_text())
+  if current['campaign_prefix']!=prefix or current.get('lease_phase')!='ready':raise ValueError('Unfinished authoritative checkpoint operation')
+  if any(current['identity']!=old['identity'] for old in locals_):raise ValueError('Authoritative journal identity mismatch')
+  if any(e['state'] not in ('committed','deleted') for e in current['entries']):raise ValueError('Unfinished authoritative retention operation')
+  journals.append(current)
+ return journals
 def sft(branch,*,resume=None):
  spec=restart_branches()[branch];name=branch
  argv=[sys.executable,'-m','cloud_training.nano_sft','--repo',str(ROOT/'nanochat-source'),
@@ -37,7 +55,7 @@ def sft(branch,*,resume=None):
        '--microbatch','1','--epochs','64','--max-updates',str(spec['max_updates']),'--lr-multiplier','.25',
        '--eval-every-updates',str(spec['eval_every_updates']),'--eval-rows','512',
        '--deterministic','--checkpoint-reserve-seconds','600','--deadline-utc',config['worker_deadline_utc'],
-       '--backup-prefix',REMOTE+('/split' if branch.startswith('split') else '/uninterrupted')]
+       '--backup-prefix',REMOTE+('/split/checkpoints' if branch.startswith('split') else '/uninterrupted/checkpoints')]
  if resume is not None:argv+=['--resume',str(resume)]
  run(argv,name+'.log')
  return OUT/name
@@ -66,8 +84,7 @@ finally:
  # read back every live receipt; never substitute a successful cp for hash validation.
  try:
   proofs=[]
-  for journal in sorted(OUT.glob('*/retention-journal.json')):
-   journal_data=json.loads(journal.read_text())
+  for journal_data in authoritative_journals(sorted(OUT.glob('*/retention-journal.json'))):
    if journal_data.get('lease_phase')!='ready':raise ValueError('Unfinished checkpoint operation; retain recovery disk')
    for entry in journal_data['entries']:
     if entry['state']!='committed':continue

@@ -1,0 +1,56 @@
+{
+  "endTime": "2026-11-14T00:42:54.430-08:00",
+  "error": {
+    "errors": [
+      {
+        "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+        "errorDetails": [
+          {
+            "help": {
+              "links": [
+                {
+                  "description": "Troubleshooting documentation",
+                  "url": "https://cloud.google.com/compute/docs/resource-error"
+                }
+              ]
+            }
+          },
+          {
+            "localizedMessage": {
+              "locale": "en-US",
+              "message": "A a2-highgpu-1g VM instance with 1 nvidia-tesla-a100 accelerator(s) is currently unavailable in the us-central1-a zone. Consider trying your request in the us-central1-c zone(s), which currently has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+            }
+          },
+          {
+            "errorInfo": {
+              "domain": "compute.googleapis.com",
+              "metadatas": {
+                "attachment": "nvidia-tesla-a100:1",
+                "vmType": "a2-highgpu-1g",
+                "zone": "us-central1-a",
+                "zonesAvailable": "us-central1-c"
+              },
+              "reason": "resource_availability"
+            }
+          }
+        ],
+        "message": "The zone 'projects/executespecv1/zones/us-central1-a' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'."
+      }
+    ]
+  },
+  "httpErrorMessage": "SERVICE UNAVAILABLE",
+  "httpErrorStatusCode": 503,
+  "id": "6679682490662494696",
+  "insertTime": "2026-11-14T00:42:48.050-08:00",
+  "kind": "compute#operation",
+  "name": "operation-1794645767519-6603887787baf-07cfaeb9-0b5a84f5",
+  "operationType": "insert",
+  "progress": 100,
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-a/operations/operation-1794645767519-6603887787baf-07cfaeb9-0b5a84f5",
+  "startTime": "2026-11-14T00:42:48.080-08:00",
+  "status": "DONE",
+  "targetId": "3917696263643308520",
+  "targetLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-a/instances/forge-english-a100-1114-084208",
+  "user": "admin@executespec.ai",
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-a"
+}

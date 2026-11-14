@@ -1,0 +1,146 @@
+{
+  "canIpForward": false,
+  "cpuPlatform": "Unknown CPU Platform",
+  "creationTimestamp": "2026-11-14T00:44:40.998-08:00",
+  "deletionProtection": false,
+  "disks": [
+    {
+      "autoDelete": false,
+      "boot": true,
+      "deviceName": "persistent-disk-0",
+      "diskSizeGb": "100",
+      "guestOsFeatures": [
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        },
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "GVNIC"
+        }
+      ],
+      "index": 0,
+      "interface": "SCSI",
+      "kind": "compute#attachedDisk",
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+      ],
+      "mode": "READ_WRITE",
+      "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/disks/forge-english-a100-1114-084208",
+      "type": "PERSISTENT"
+    }
+  ],
+  "fingerprint": "jNpVUcOQTDY=",
+  "guestAccelerators": [
+    {
+      "acceleratorCount": 1,
+      "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/acceleratorTypes/nvidia-tesla-a100"
+    }
+  ],
+  "id": "1781486101636424087",
+  "kind": "compute#instance",
+  "labelFingerprint": "42WmSpB8rSM=",
+  "lastStartTimestamp": "2026-11-14T00:44:55.578-08:00",
+  "lastStopTimestamp": "2026-11-14T00:49:53.702-08:00",
+  "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/machineTypes/a2-highgpu-1g",
+  "metadata": {
+    "fingerprint": "ef0iDJ-E_RE=",
+    "items": [
+      {
+        "key": "block-project-ssh-keys",
+        "value": "TRUE"
+      },
+      {
+        "key": "bundle-sha256",
+        "value": "b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1"
+      },
+      {
+        "key": "bundle-uri",
+        "value": "gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz"
+      },
+      {
+        "key": "enable-oslogin",
+        "value": "TRUE"
+      },
+      {
+        "key": "own-deadline-utc",
+        "value": "2026-11-14T09:57:08Z"
+      },
+      {
+        "key": "packet-sha256",
+        "value": "b38c7410b3c8d5bf2857e24cddab59ad1a25d33005363dc98144f1668dcf8043"
+      },
+      {
+        "key": "packet-uri",
+        "value": "gs://forge-ownbase-a100-20261110/english-a100-v1/forge-english-a100-1114-084208/inputs/packet.tar.gz"
+      },
+      {
+        "key": "startup-script",
+        "value": "#!/bin/bash\nset -euo pipefail\nmkdir -p /opt/english\ncd /opt/english\nexec > >(tee -a /opt/english/bootstrap.log) 2>&1\nexec 9>/opt/english/worker.lock\nflock -n 9 || exit 2\nmetadata() { curl --fail --silent --show-error --max-time 10 -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\n# Fixed absolute expiry survives retries/reboots; provider STOP is independent.\nDEADLINE=$(metadata own-deadline-utc)\nMINUTES=$(python3 - \"$DEADLINE\" <<'PY'\nimport datetime,sys,time\nremaining=datetime.datetime.fromisoformat(sys.argv[1].replace('Z','+00:00')).timestamp()-time.time()\nassert remaining>1200\nprint(max(1,int((remaining-60)//60)))\nPY\n)\nshutdown -h \"+$MINUTES\"\n# Copy only private, hash-bound code/config; extraction rejects links/traversal.\ntimeout 600 gcloud storage cp \"$(metadata bundle-uri)\" runtime.tar.gz --quiet\nprintf '%s  runtime.tar.gz\\n' \"$(metadata bundle-sha256)\" | sha256sum -c -\ntimeout 120 gcloud storage cp \"$(metadata packet-uri)\" packet.tar.gz --quiet\nprintf '%s  packet.tar.gz\\n' \"$(metadata packet-sha256)\" | sha256sum -c -\npython3 - <<'PY'\nimport tarfile,pathlib\nfor archive in ('runtime.tar.gz','packet.tar.gz'):\n with tarfile.open(archive) as t:\n  names=set()\n  for m in t.getmembers():\n   p=pathlib.PurePosixPath(m.name)\n   assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name not in names\n   assert not pathlib.Path(m.name).exists()\n   names.add(m.name)\n  t.extractall('.',filter='data')\nfrom cloud_training.nano_package import extract_verified\nextract_verified('runtime.tar.gz','.')\nPY\nfor deb in debs/*.deb; do dpkg-deb -x \"$deb\" /; done\nPYTHON=''\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n if [ -x \"$candidate\" ] && \"$candidate\" -c 'import torch; assert torch.__version__.startswith(\"2.9.1\"); assert torch.version.cuda==\"12.9\"' 2>/dev/null; then PYTHON=\"$candidate\"; break; fi\ndone\n[ -n \"$PYTHON\" ] || exit 3\n\"$PYTHON\" - <<'PY'\nimport zipfile,pathlib\nfor w in pathlib.Path('wheels').glob('*.whl'):zipfile.ZipFile(w).extractall('vendor')\nPY\nexport PYTHONPATH=/opt/english/vendor:/opt/english:/opt/english/nanochat-source\nexport HF_HUB_OFFLINE=1 WANDB_MODE=disabled\n\"$PYTHON\" -u gpu_qualify.py\n# No disk deletion. A failed normal-backup check leaves compute to its hard STOP\n# deadline and retains disk for recovery; do not claim a clean closeout.\nif [ -f /opt/english/normal-stop-ready ] && ! [ -f /opt/english/backup-failure.txt ]; then shutdown -h now; fi\n"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "name": "forge-english-a100-1114-084208",
+  "networkInterfaces": [
+    {
+      "fingerprint": "k_cB1nB51pY=",
+      "kind": "compute#networkInterface",
+      "name": "nic0",
+      "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+      "networkIP": "10.128.0.56",
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "resourceStatus": {
+    "effectiveInstanceMetadata": {
+      "blockProjectSshKeysMetadataValue": true,
+      "enableOsloginMetadataValue": true,
+      "vmDnsSettingMetadataValue": "ZonalOnly"
+    },
+    "scheduling": {
+      "terminationTimestamp": "2026-11-14T09:57:08Z"
+    }
+  },
+  "satisfiesPzi": false,
+  "scheduling": {
+    "automaticRestart": false,
+    "instanceTerminationAction": "STOP",
+    "onHostMaintenance": "TERMINATE",
+    "preemptible": false,
+    "provisioningModel": "STANDARD",
+    "terminationTime": "2026-11-14T09:57:08Z"
+  },
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f/instances/forge-english-a100-1114-084208",
+  "serviceAccounts": [
+    {
+      "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_write"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "shieldedInstanceIntegrityPolicy": {
+    "updateAutoLearnPolicy": true
+  },
+  "startRestricted": false,
+  "status": "TERMINATED",
+  "tags": {
+    "fingerprint": "TfwAQ-S6gb4=",
+    "items": [
+      "laxmi-wmv2-training-01"
+    ]
+  },
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-f"
+}

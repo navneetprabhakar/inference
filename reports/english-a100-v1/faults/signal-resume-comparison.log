@@ -1,0 +1,19 @@
+WARNING:
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+WARNING: [0] Failed to send all data from [stdin].
+Connection to compute.1781486101636424087 closed by remote host.
+client_loop: send disconnect: Broken pipe
+
+Recommendation: To check for possible causes of SSH connectivity issues and get
+recommendations, rerun the ssh command with the --troubleshoot option.
+
+gcloud compute ssh forge-english-a100-1114-084208 --project=executespecv1 --zone=us-central1-f --troubleshoot
+
+Or, to investigate an IAP tunneling issue:
+
+gcloud compute ssh forge-english-a100-1114-084208 --project=executespecv1 --zone=us-central1-f --troubleshoot --tunnel-through-iap
+
+ERROR: (gcloud.compute.ssh) [/usr/bin/ssh] exited with return code [255].

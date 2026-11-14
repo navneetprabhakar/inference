@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/english/cloud_training/nano_sft.py", line 635, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/opt/english/cloud_training/nano_sft.py", line 632, in main
+    return run(a)
+           ^^^^^^
+  File "/opt/english/cloud_training/nano_sft.py", line 476, in run
+    journal=CloudJournal(out/'retention-journal.json',campaign_prefix=args.backup_prefix,identity=identity,resume_step=step if args.resume else None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_train.py", line 193, in __init__
+    self.prefix = _prefix(campaign_prefix)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_retention.py", line 27, in _prefix
+    raise ValueError('Explicit campaign prefix ending /checkpoints required')
+ValueError: Explicit campaign prefix ending /checkpoints required
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 114, in apport_excepthook
+    report["ExecutableTimestamp"] = str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/english/-m'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/english/cloud_training/nano_sft.py", line 635, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/opt/english/cloud_training/nano_sft.py", line 632, in main
+    return run(a)
+           ^^^^^^
+  File "/opt/english/cloud_training/nano_sft.py", line 476, in run
+    journal=CloudJournal(out/'retention-journal.json',campaign_prefix=args.backup_prefix,identity=identity,resume_step=step if args.resume else None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_train.py", line 193, in __init__
+    self.prefix = _prefix(campaign_prefix)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_retention.py", line 27, in _prefix
+    raise ValueError('Explicit campaign prefix ending /checkpoints required')
+ValueError: Explicit campaign prefix ending /checkpoints required
+Scaling the LR for the AdamW parameters ∝1/√(1024/768) = 0.866025
