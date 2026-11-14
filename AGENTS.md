@@ -23,3 +23,5 @@ The user's current instructions override this file. Current campaign status: GPU
 - Corrective pilots default to packing buffer1 to preserve seeded order; longest-first packing was measured to starve short lessons inside a10update pilot. Bind buffer size to checkpoint identity.
 - Evaluate all61development sessions/232turns through local-readiness-v1/development-shards, preserving system prompts and predeclared per-turn reply budgets. No partial-shard pass. Independent release remains separate and unused.
 - The proposed$15A100 or$10L4 caps are NOT approved. Keep VMs off until explicit cap approval. Never reuse a DELETE-on-timeout launcher for corrective qualification; require provider STOP and preserve recovery disk on backup failure.
+
+- Second review found qualification observation schedules differ for2vs1+1updates. The user15USDcap is conditional on an unchanged assessment, so it is NOT activated. Report/read readiness-second-review-v1 first; fix the controlled experiment before any GPU launch. Passing component tests is not full qualification-runner readiness.

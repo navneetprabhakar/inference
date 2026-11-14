@@ -1,0 +1,65 @@
+{
+  "utc": "2026-11-14T06:01:13.138949+00:00",
+  "result": "material_readiness_change_hold_vm_off",
+  "scope": "Deterministic CPU reproduction using actual ValidationGuard and observation schedules implied by nano_sft step==max_step. Not a GPU experiment or observed model losses.",
+  "hypothetical_identical_step_losses": {
+    "0": 3.0,
+    "1": 3.3,
+    "2": 3.3
+  },
+  "branches": {
+    "uninterrupted_2_updates": {
+      "observations": [
+        [
+          0,
+          3.0
+        ],
+        [
+          2,
+          3.3
+        ]
+      ],
+      "guard_state": {
+        "best_ce": 3.0,
+        "best_step": 0,
+        "last_step": 2,
+        "last_ce": 3.3,
+        "strikes": 1,
+        "stopped": false
+      }
+    },
+    "one_update_then_resume_one": {
+      "observations": [
+        [
+          0,
+          3.0
+        ],
+        [
+          1,
+          3.3
+        ],
+        [
+          2,
+          3.3
+        ]
+      ],
+      "guard_state": {
+        "best_ce": 3.0,
+        "best_step": 0,
+        "last_step": 2,
+        "last_ce": 3.3,
+        "strikes": 2,
+        "stopped": true
+      }
+    }
+  },
+  "cause": "Planned uninterrupted max_updates2 observes0,2; planned split max_updates1 then resume1 observes0,1,2 with eval_every5. The extra observation can change stop state/best selection independent of restart correctness.",
+  "consequence": "The proposed qualification is not a controlled equivalence test. Existing150tests did not execute the complete planned SFT branch protocol.",
+  "authorization": "User15USDapproval conditional on unchanged second assessment; condition not met. No VM launch authorized by this review.",
+  "price_recheck": {
+    "a2-highgpu-1g_flex_usd_hour": 2.0,
+    "source": "https://cloud.google.com/products/dws/pricing",
+    "proposed_cap_usd": 15,
+    "conclusion": "Budget arithmetic unchanged; launch readiness changed."
+  }
+}

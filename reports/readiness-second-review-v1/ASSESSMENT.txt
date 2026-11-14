@@ -1,0 +1,46 @@
+SECOND READINESS REVIEW — 14 NOVEMBER 2026
+Decision changed: HOLD. Do not start a VM under the conditional approval.
+
+Confirmed defect in the proposed qualification experiment:
+- nano_sft evaluates when step % eval_every_updates == 0 OR step == max_step.
+- Proposed qualification uses eval_every_updates=5: uninterrupted max_updates=2
+  observes development at steps0,2; max_updates=1 then resume1 observes0,1,2.
+- The persisted ValidationGuard therefore sees different evidence. With identical
+  hypothetical losses CE0=3.0, CE1=3.3, CE2=3.3, the uninterrupted branch has one
+  regression strike; split branch has two and stops. Reproduced using the actual
+  ValidationGuard, without a model or GPU. These losses are an illustrative
+  counterexample, not measured model results.
+- nano_restart_compare compares saved quality-loop state as well as model,
+  optimizer, RNG and cursor. The extra validation can produce a false recovery
+  failure or change best-checkpoint selection. It need not fail for every loss
+  sequence, but it is not a controlled equivalence experiment as proposed.
+
+Correction required before launch:
+1. Align observation schedules across qualification branches. One valid proposed
+   correction is qualification-only eval_every_updates=1 in BOTH branches; keep
+   pilot cadence5 separately. Do not ignore guard-state differences or relax the
+   exact comparator to hide the problem.
+2. Add an integration regression exercising actual training-loop decisions across
+   process boundaries, including stop/best selection, not only the comparator or
+   guard in isolation. Also exercise signal-driven interruption without adding a
+   synthetic validation boundary.
+3. Finish and verify the new cumulative lease/STOP/non-auto-delete bootstrap and
+   fault-recovery controls. Previous reporting already listed these as unbound;
+   component preflight does not prove an end-to-end hands-off runner is ready.
+4. Reassess the complete revised protocol before treating any cap as actionable.
+
+Still valid: the150component tests passed; data freeze, full-bundle hashes and
+local537M/4Kforward smoke remain useful scoped evidence. They did not cover the
+complete planned qualification orchestration. The statement that local readiness
+was complete was too broad.
+
+Budget arithmetic remains unchanged: Google currently lists a2-highgpu-1g
+Flex-start at$2/hour. Four cumulative billable hours=$8,25%compute margin=$10,
+plus$5reserve gives$15. This is a bounded attempt envelope, not guaranteed
+completion. No request for more budget follows from this finding.
+Source rechecked: https://cloud.google.com/products/dws/pricing
+
+Authorization: user approved$15 IF AND ONLY IF the second assessment reached the
+same result. It did not. Report the changed result first; do not activate the cap,
+launch a VM, train, or consume release tests. Existing local models remain intact.
+See reproduction.json and cloud-status.json. No new GPU spend or VM was started.

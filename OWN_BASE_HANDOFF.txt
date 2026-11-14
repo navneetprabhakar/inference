@@ -7,7 +7,19 @@ User priority: deep RCA, enforceable remediation/guardrails, quality above volum
 and hands-off execution. Do useful local work autonomously; never turn a failed
 quality gate into another automatic training extension. Read AGENTS.md.
 
-LOCAL READINESS FOLLOW-UP — CAP NOT APPROVED
+SECOND ASSESSMENT — MATERIAL CHANGE, CONDITIONAL CAP NOT ACTIVATED
+User approved$15only if the second review reached the same result. It did not.
+See reports/readiness-second-review-v1/ASSESSMENT.txt and reproduction.json.
+The proposed2-update vs1+1restart experiment observes different validation steps
+(0,2 versus0,1,2). Actual ValidationGuard reproduction shows this can change stop
+state independently of recovery correctness.150component tests did not cover the
+complete proposed qualification orchestration. Prior local-readiness conclusion
+was too broad. Align validation schedules and add an integration regression;
+keep exact state comparisons. Complete the new STOP lease/bootstrap checks.
+Budget arithmetic unchanged, but cap condition unmet: keep every VM OFF, no new
+training or release exposure. Existing local models remain available.
+
+PRIOR LOCAL COMPONENT CHECKS — VALID WITH THE LIMITATION ABOVE
 See reports/local-readiness-v1/READINESS_AND_BUDGET.txt and gpu-proposal.json.
 150 tests pass. Fixed short-example starvation with order-preserving buffer1,
 missing package dependencies, and development reply-budget truncation. Full
@@ -105,9 +117,10 @@ GCS data. Do not rerun archive_payloads.py or retired group restore commands.
 NEXT ACTIONS / STOP CONDITIONS
 1. Read corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt. Preserve the frozen packet;
    no more uncontrolled generation or silent mixing with historical templates.
-2. Local checks are complete; see local-readiness-v1/validation.json. Await explicit
-   cap approval. Proposed$15A100/$10L4 caps are not authorization. Before allocating,
-   bind a new cumulative budget ledger, STOP lease and non-auto-delete disk/bootstrap.
+2. Correct the second-review qualification scheduling defect and add an integrated
+   restart/guard test. Component receipts are not end-to-end launch readiness.
+   The conditional$15approval was not activated; report the changed result first.
+   Bind a new cumulative budget ledger, STOP lease and non-auto-delete bootstrap.
 3. Qualify4K/restart/fault handling before substantive training. At most two bounded
    10update pilots; compare generated best AND last plus protected regressions.
 4. Freeze candidate selection before the one-shot release. Full release and matched
