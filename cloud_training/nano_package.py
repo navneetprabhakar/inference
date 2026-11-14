@@ -8,7 +8,7 @@ MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
            'campaign_budget', 'runtime', 'nano_campaign', 'nano_sft',
            'nano_serve', 'nano_chat_format', 'nano_quality', 'nano_context',
-           'nano_quality_gate', 'nano_corpus_guard', 'nano_restart_compare')
+           'nano_quality_gate', 'nano_fit_contract', 'nano_qualification_schedule', 'nano_corpus_guard', 'nano_restart_compare')
 
 def verify_module_closure(root, modules=MODULES):
     """Fail locally if a packaged adapter imports an omitted project module."""

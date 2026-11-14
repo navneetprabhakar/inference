@@ -137,8 +137,8 @@ class FiniteEpochDataset:
     An explicit seed shuffles each epoch; None preserves historical audit order. Development data is never repeated.
     Virtual indices let the existing exact packing cursor span epoch boundaries.
     """
-    def __init__(self,dataset,epochs,seed=None):
-        if type(epochs) is not int or not 1<=epochs<=8 or not len(dataset):
+    def __init__(self,dataset,epochs,seed=None,*,diagnostic_only=False):
+        if type(epochs) is not int or not 1<=epochs<=(64 if diagnostic_only else 8) or not len(dataset):
             raise ValueError('Finite epochs must be an integer in1..8 with nonempty data')
         self.dataset=dataset;self.epochs=epochs;self.tokenizer=dataset.tokenizer;self.context=getattr(dataset,"context",SEQUENCE)
         self.order=[]
@@ -406,15 +406,23 @@ def run(args):
     if train.fingerprints&dev.fingerprints:raise ValueError('Train/development conversation overlap')
     contract_path=Path(args.quality_contract)
     contract=json.loads(contract_path.read_text());contract_sha=sha256_file(contract_path)
+    diagnostic_only=bool(getattr(args,'fit_diagnostic',False))
+    if diagnostic_only != (contract.get('objective')=='english_fit_diagnostic'):
+        raise ValueError('Diagnostic mode requires explicit flag and matching isolated contract')
+    if diagnostic_only and args.stage!='general':raise ValueError('Fit diagnostic must start from immutable base')
     admission=json.loads((Path(args.manifest).resolve().parent/manifest['admission']['receipt']).read_text())
     coverage={'train':dataset_coverage(train),'development':dataset_coverage(dev)}
-    errors=contract_errors(contract,manifest=manifest,admission=admission,train=coverage['train'],dev=coverage['development'],epochs=args.epochs,lr_multiplier=args.lr_multiplier,eval_interval=args.eval_every_updates,max_updates=args.max_updates)
+    checker=contract_errors
+    if diagnostic_only:
+        from cloud_training.nano_fit_contract import errors as checker, validate_review_file
+        validate_review_file(args.manifest,admission,contract)
+    errors=checker(contract,manifest=manifest,admission=admission,train=coverage['train'],dev=coverage['development'],epochs=args.epochs,lr_multiplier=args.lr_multiplier,eval_interval=args.eval_every_updates,max_updates=args.max_updates)
     atomic_json(out/'quality-preflight.json',{'status':'blocked' if errors else 'diagnostic_ready_not_quality_accepted','contract_sha256':contract_sha,'coverage':coverage,'reasons':errors})
     if errors:raise ValueError('Quality preflight blocked: '+'; '.join(errors))
     if args.resume:
         saved_guards=json.loads((Path(args.resume)/'metadata.json').read_text())['loop']['quality_guards']
         if any(g['stopped'] for g in saved_guards.values()):raise ValueError('Quality-stopped experiment cannot auto-resume; preserve it and define a new bounded experiment')
-    train=FiniteEpochDataset(train,args.epochs,seed=args.seed)
+    train=FiniteEpochDataset(train,args.epochs,seed=args.seed,diagnostic_only=diagnostic_only)
     total_rows=count_packed_rows(train,buffer_size=args.packing_buffer_size);horizon=math.ceil(total_rows/recipe["rows_per_update"])
     if horizon<2:raise ValueError('Finite SFT corpus too small for this schedule; no automatic replay or zero-LR-only run')
     if args.validate_only:
@@ -445,8 +453,8 @@ def run(args):
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
     reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
-    files=('nano_quality_gate.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
-    identity={'phase':'sft','stage':args.stage,'quality_contract_sha256':contract_sha,'data_order_sha256':train.sha,'parent_bundle_manifest_sha256':args.base_manifest_sha,
+    files=('nano_quality_gate.py','nano_fit_contract.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
+    identity={'phase':'sft','diagnostic_only':diagnostic_only,'stage':args.stage,'quality_contract_sha256':contract_sha,'data_order_sha256':train.sha,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
@@ -589,6 +597,7 @@ def main():
     p.add_argument('--lr-multiplier',type=float,default=1.0,help='Explicit reduced SFT learning rate, recorded in checkpoint identity; (0,1]')
     p.add_argument('--context-tokens',type=int,choices=SUPPORTED_CONTEXTS,default=SEQUENCE)
     p.add_argument('--allow-context-extension',action='store_true',help='Explicit warm start2Kto4K; never edits the parent checkpoint')
+    p.add_argument('--fit-diagnostic',action='store_true',help='Isolated English learnability diagnostic, never a release candidate')
     p.add_argument('--epochs',type=int,default=1,help='Explicit finite passes over admitted training data;1..8, no implicit replay')
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--deterministic-attention',action='store_true')
@@ -601,7 +610,7 @@ def main():
     p.add_argument('--checkpoint-seconds',type=int,default=900);p.add_argument('--checkpoint-reserve-seconds',type=int,default=300)
     a=p.parse_args()
     if not 1<=a.packing_buffer_size<=100:p.error('Packing buffer must be in1..100')
-    if not 1<=a.epochs<=8:p.error('Epochs must be in1..8')
+    if not 1<=a.epochs<=(64 if a.fit_diagnostic else 8):p.error('Epoch limit exceeded for selected mode')
     if not math.isfinite(a.lr_multiplier) or not 0<a.lr_multiplier<=1:p.error('LR multiplier must be finite in (0,1]')
     try: batch_recipe(a.batch_tokens,a.microbatch,a.context_tokens)
     except ValueError as error: p.error(str(error))

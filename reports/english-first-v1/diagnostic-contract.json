@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "objective": "english_fit_diagnostic",
+  "diagnostic_only": true,
+  "dataset_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "context_tokens": 2048,
+  "required_parent_manifest_sha256": "ad31597742cde8eb657ad1a2365efd713bb80eed257c84ea6becef1bba1aa348",
+  "review_sha256": "c3891971baeaefa5c619e989e1fee7b9e0274c633ce647568f2a9eb3bb3e75b0",
+  "development_suite_sha256": "4f1a92bfc7733b6e09febffcd84c8f2419a58f773458490cbbe698c7087586d7",
+  "unresolved_required_data": [],
+  "recipe_limits": {
+    "max_epochs": 64,
+    "max_pilot_updates": 64,
+    "max_eval_interval": 5,
+    "max_lr_multiplier": 0.25
+  },
+  "regression": {
+    "relative_tolerance": 0.05,
+    "patience": 2
+  },
+  "fit_go_gate": {
+    "complete_training_sessions_minimum": 23,
+    "training_sessions": 24,
+    "no_invalid_or_forbidden_tool_actions": true
+  },
+  "notes": [
+    "Explicit isolated diagnostic permits up to64finite epochs/updates; production default remains8epochs and existing corrective pilot remains10updates.",
+    "656unique training targets; replay counts never represented as new data.",
+    "Development regression guards remain active. A stop before fit is inconclusive about maximum learnability, not grounds for automatic extension.",
+    "No promotion even if tiny fit passes. Independent transfer and protected tool tests remain required."
+  ]
+}

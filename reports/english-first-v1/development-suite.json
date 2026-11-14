@@ -1,0 +1,541 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 2048,
+  "sessions": [
+    {
+      "id": "english_dev_quiet_evening",
+      "source_group": "english_dev_quiet_evening",
+      "category": "preferences",
+      "turns": [
+        {
+          "user": "I have had a noisy day and want a quiet evening at home. I do not want to look at a screen. Suggest something simple.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "You could sit somewhere comfortable and read a book, or listen to gentle music with the screen off.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "I would rather do something with my hands, and I have paper and pencils.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Try sketching something nearby, such as a cup or a plant. It does not need to be detailed.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "What preference from my first message should you still respect?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "You wanted a quiet activity at home without looking at a screen.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_neighbor_chat",
+      "source_group": "english_dev_neighbor_chat",
+      "category": "social_response",
+      "turns": [
+        {
+          "user": "I am new in my building and feel awkward starting a conversation with a neighbor. How could I begin?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "A simple greeting is enough: \"Hi, I have just moved in. How long have you lived here?\"",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "That question feels a little personal. Could I start without asking anything?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "You could say, \"Hi, I have just moved in and wanted to introduce myself.\"",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Would that guarantee they want to talk?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. It gives them an opening, but they may be busy or prefer to keep the exchange brief.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_hobby_restart",
+      "source_group": "english_dev_hobby_restart",
+      "category": "preferences",
+      "turns": [
+        {
+          "user": "I used to enjoy drawing, but now I keep waiting until I can make something good. What is a small way to restart?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Try a quick sketch of an ordinary object without trying to make it polished. The aim is simply to draw again.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Please avoid setting a timer or giving me a daily challenge.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Choose an object that catches your eye and draw it when you feel like it. You can stop after a few lines.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Can you sum up that approach in one sentence?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Make a small, imperfect sketch when you feel like drawing, without a schedule or performance target.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_speaker_feedback",
+      "source_group": "english_dev_speaker_feedback",
+      "category": "social_response",
+      "turns": [
+        {
+          "user": "My friend showed me a short story. I liked the opening, but the ending confused me. How can I say that kindly?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "You could say, \"The opening drew me in, but I was not sure what happened at the end. Could you tell me what you intended?\"",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Do not ask them to explain it; I just want to give feedback.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The opening drew me in, but I found the ending hard to follow.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Did I say the whole story was confusing?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. You said the ending confused you and that you liked the opening.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_plant_care_note",
+      "source_group": "english_dev_plant_care_note",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "My housemate left this note: \"The balcony door sticks. Lift the handle before pulling.\" Explain what I should do using only that note.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Lift the handle, then pull the balcony door.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Does the note say the lock is broken?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. It says the door sticks, but does not say the lock is broken.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Would pushing the door follow the note?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "No. The note says to pull it after lifting the handle.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_visit_uncertainty",
+      "source_group": "english_dev_visit_uncertainty",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "My cousin said, \"I might visit after the festival.\" Should I tell everyone the visit is confirmed?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. \"Might\" means the visit is still uncertain.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "She has now written, \"I have booked my journey and will arrive on Saturday.\" What changed?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "She has now confirmed her travel and given Saturday as her arrival day.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Do we know her arrival time?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. She gave a day, but no arrival time.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_reading_place",
+      "source_group": "english_dev_reading_place",
+      "category": "state",
+      "turns": [
+        {
+          "user": "I put my bookmark in the green novel, then moved it into the travel diary. Where should I look for it?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "In the travel diary.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "The green novel is now on the desk. I have not moved the bookmark again. Does that change your answer?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. The bookmark is still in the travel diary.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Actually, I have just taken the bookmark out and put it in my bag. Where is it now?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "In your bag.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_shared_umbrella",
+      "source_group": "english_dev_shared_umbrella",
+      "category": "state",
+      "turns": [
+        {
+          "user": "Nisha owns an umbrella. Omar borrowed it and is carrying it today. Who owns it, and who has it?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Nisha owns the umbrella; Omar currently has it.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Omar returned it to Nisha. Did ownership change?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "No. Nisha still owns it, and now she has it back.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Nisha then gave it to Dev as a gift. Who owns it now?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Dev.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_recipe_missing",
+      "source_group": "english_dev_recipe_missing",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Can you tell me whether this recipe uses an oven?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Please share the recipe or its instructions so I can check.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "The instructions say to mix the ingredients, put them in a pan, and cook on the stove until thick.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Those instructions use the stove and do not mention an oven.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "What temperature should I set the oven to?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The instructions do not call for an oven or give an oven temperature.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_ambiguous_choice",
+      "source_group": "english_dev_ambiguous_choice",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Which one should I keep?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "What are you choosing between, and what matters most to you?",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Two notebooks: one fits in my pocket; the other has more room for sketches. I want to carry it on walks.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The pocket-sized notebook sounds better suited to carrying on walks, if its pages are large enough for what you want to note.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Now my priority is large drawings at home. Would your advice change?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Yes. The notebook with more room for sketches would better fit that priority.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_topic_return",
+      "source_group": "english_dev_topic_return",
+      "category": "conversation_memory",
+      "turns": [
+        {
+          "user": "Help me name a little reading corner. I want a calm name, not something grand.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "How about \"Quiet Corner\"?",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "A different question: what does \"borrow\" mean?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "To borrow something is to use it temporarily with permission and then return it.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Back to the reading corner: what name did you suggest?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Quiet Corner.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    },
+    {
+      "id": "english_dev_closing_exchange",
+      "source_group": "english_dev_closing_exchange",
+      "category": "conversation_memory",
+      "turns": [
+        {
+          "user": "I finally finished sorting the cupboard I had been avoiding.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "That sounds like a relief to have it done.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "It is. I am not looking for another task, just sharing.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Understood. You can enjoy having that one finished.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        },
+        {
+          "user": "Thanks, that is all for now.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "You are welcome. Take care.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Judge meaning, not exact wording. Relevant natural English; preserve stated preferences and current state; no invented facts/actions, gratuitous tasks or tools; honor requested scope; clean assistant end. Equivalent useful answers are acceptable. Grade against actual prior model replies when referring back to them."
+        }
+      ]
+    }
+  ]
+}

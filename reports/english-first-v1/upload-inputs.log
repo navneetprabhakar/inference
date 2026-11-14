@@ -1,0 +1,16 @@
+WARNING: Parallel composite upload was turned ON to get the best performance on
+uploading large objects. If you would like to opt-out and instead
+perform a normal upload, run:
+`gcloud config set storage/parallel_composite_upload_enabled False`
+If you would like to disable this warning, run:
+`gcloud config set storage/parallel_composite_upload_enabled True`
+Note that with parallel composite uploads, your object might be
+uploaded as a composite object
+(https://cloud.google.com/storage/docs/composite-objects), which means
+that any user who downloads your object will need to use crc32c
+checksums to verify data integrity. gcloud storage is capable of
+computing crc32c checksums, but this might pose a problem for other
+clients.
+
+Copying file:///Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/runtime.tar.gz to gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz
+  

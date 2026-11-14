@@ -112,6 +112,8 @@ def evaluation_candidates(journal,best_step,last_step):
 def release_decision(*, raw, raw_sha256, suite, suite_sha256, review, contract, checkpoint_identity, protected=None, protected_suite=None, protected_suite_sha256=None):
     """Derive scores from complete hash-bound per-turn review; aggregate claims ignored."""
     errors=[]
+    if contract.get('diagnostic_only') or checkpoint_identity.get('diagnostic_only'):
+        return {'status':'blocked','reasons':['Diagnostic fit checkpoints cannot authorize release'],'quality_accepted':False}
     for value in [raw_sha256,suite_sha256,contract.get('_sha256'),raw.get('checkpoint_manifest_sha256')]:
         if not isinstance(value,str) or not re.fullmatch('[0-9a-f]{64}',value):errors.append('Missing immutable release evidence hash')
     if contract.get('require_one_shot_release'):

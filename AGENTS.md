@@ -26,3 +26,5 @@ The user's current instructions override this file. Current campaign status: GPU
 - The proposed$15A100 or$10L4 caps are NOT approved. Keep VMs off until explicit cap approval. Never reuse a DELETE-on-timeout launcher for corrective qualification; require provider STOP and preserve recovery disk on backup failure.
 
 - Second review found qualification observation schedules differ for2vs1+1updates. The user15USDcap is conditional on an unchanged assessment, so it is NOT activated. Report/read readiness-second-review-v1 first; fix the controlled experiment before any GPU launch. Passing component tests is not full qualification-runner readiness.
+
+- Latest user start/cheaper-GPU/hands-off instructions follow the changed assessment: prepare L4 under10USDoperational envelope within prior15USDceiling. Historical conditional-cap notes are superseded for this bounded English diagnostic. No A100 upgrade. Native2K diagnostic_only contract is separate from production; it permits64bounded updates/epochs, preserves regression stops, and can never authorize release. Qualification must precede the fit pilot.
