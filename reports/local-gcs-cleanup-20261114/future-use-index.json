@@ -1,0 +1,45 @@
+{
+  "policy": "Keep only future training/testing inputs, selected model bundles and compact provenance/evaluation evidence. Delete obsolete experiments and rebuildable intermediates; do not archive them.",
+  "local_models": [
+    {
+      "path": "runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs",
+      "gcs": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/sft/new-base-2k-8epochs/checkpoints/checkpoint-f1f5245fb1c342e697ba1b3c770247b3",
+      "manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54",
+      "quality_accepted": false
+    },
+    {
+      "path": "runs/literal-state-repair-v1/results/sft/step-00000605",
+      "gcs": "gs://forge-ownbase-a100-20261110/ownbase-v2/literal-state-repair-v1/checkpoints/checkpoint-cf024e79d2174d578d129daf45764f04",
+      "manifest_sha256": "05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8",
+      "quality_accepted": false
+    }
+  ],
+  "gcs_required": {
+    "base10b": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/base/checkpoints/checkpoint-bcfb32abdbba44eaa3c7107af1adb7b2",
+    "sft_best_development_step50": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/results/sft-stage/new-base-2k-8epochs/step-00000050/",
+    "base_training_corpus": "gs://forge-ownbase-a100-20261110/ownbase-v2/corpus-inventory/",
+    "latest_reviewed_conversations": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/data/long-context-corpus-v21/",
+    "actual_2k_sft_inputs": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/data/sft-2k/",
+    "training_code_and_config": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/sft-packet-v2/",
+    "evaluation_and_provenance": "gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/results/",
+    "latest_local_evidence_receipt": "reports/ownbase-budget50-v1/latest-local-backup.json"
+  },
+  "local_runtime_kept": [
+    ".venv",
+    "runs/nanochat-source",
+    "runs/ownbase-v2-data/tokenizer",
+    "cloud_training",
+    "tools",
+    "chat-own.sh",
+    "chat-own-latest.sh"
+  ],
+  "new_blanket_archives": "Removed;248 unnecessary archive/superseded snapshot objects deleted with generation checks.",
+  "old_archival_group_receipts": "Historical only; their restore commands are retired. Use this index instead.",
+  "scope": "This cleanup removes local obsolete payloads and newly created unnecessary GCS archives/superseded conversation snapshots. It does not claim a full audit of every historical object elsewhere in the existing bucket.",
+  "data_manifest_sha256": {
+    "latest_v21": "d453f03566861975b85d85120b097c8554ba800f2e93d87a0448e4c4149992ba",
+    "actual_2k_sft": "f22ac188eac1de0aa49a9cd01e61dc67213f8c12b0f10fdb11a36a5312ead8c4"
+  },
+  "base10b_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+  "evidence_retention": "Only latest verified evidence archive retained; evidence-retention.json records retirement of17obsolete snapshots."
+}

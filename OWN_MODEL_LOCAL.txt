@@ -45,11 +45,15 @@ LIMITS
 -Best-development step50 is preserved in GCS but has not been conversation-tested.
  See reports/ownbase-budget50-v1/final-review/best-step50-preserved.json.
 
-RESTORING OFFLOADED TRAINING ARTIFACTS
-Code, small manifests/reports, model weights above and runtime remain local.
-Archived corpus/historical payloads are indexed under:
-  reports/local-gcs-cleanup-20261114/
-Each group receipt contains GCS URI, object generation, archive checksum,
-per-file SHA256 and restore command. Set REPO_ROOT to this repository's absolute
-path before using the recorded restore command. Local payload absence after
-cleanup is intentional; restore the required group before data/training tools.
+FUTURE DATA AND RETENTION
+Both local models, tokenizer, .venv and source remain available. Obsolete experiment
+weights and rebuildable preprocessing intermediates were deleted, not retained in
+GCS. Old per-group archive restore commands are retired.
+
+Use reports/local-gcs-cleanup-20261114/future-use-index.json for canonical GCS
+locations:10B base, best-development step50, final194, retained605, packed base
+training corpus, latest reviewed V21 conversations, actual2K SFT inputs and evidence.
+To restore V21 for further corpus work, from this repository:
+  gcloud storage rsync --recursive gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/data/long-context-corpus-v21 runs/long-context-corpus-v21
+Verify its manifest SHA256 against the index/evidence before training. V21 remains
+untrained; merely restoring it does not change the model.

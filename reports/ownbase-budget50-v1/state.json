@@ -1,6 +1,6 @@
 {
-  "utc": "2026-11-14T01:44:49.576282+00:00",
-  "phase": "vm_off_local_delivery_and_gcs_cleanup",
+  "utc": "2026-11-14T01:53:43.519208+00:00",
+  "phase": "closed_training_local_delivery_and_cleanup_complete",
   "vm": "forge-ownbase-extension-v5",
   "zone": "us-central1-b",
   "provider_status": "TERMINATED",
@@ -18,7 +18,7 @@
   "invoice_verified": false,
   "original_vm": "TERMINATED; untouched",
   "local_baseline": "MPS runtime succeeds; result-recall followup fails, no usability claim",
-  "next": "Complete GCS archive migration of inactive payloads, preserve both local models and runtime, then final evidence backup and closeout.",
+  "next": "User local testing and review of failure diagnosis; no further training scheduled.",
   "temporary_firewall": "Removed; deletion operation complete and GET404 verified.",
   "active_sft_packet": "extension-v5/packet.json (frozenV2data/code/recipe)",
   "sft_dispatch_pid": null,
@@ -78,13 +78,13 @@
   "promoted": false,
   "conservative_compute_usd": 34.17,
   "conservative_envelope_with_reserve_usd": 49.17,
-  "local_full_assessment": "deferred_by_user_cleanup_priority",
+  "local_full_assessment": "deferred_by_user_cleanup_priority; no full MPS score claimed",
   "local_model_retention": [
     "new-base-2k-8epochs",
     "literal-state-repair-v1/step-00000605"
   ],
   "cleanup_progress": "reports/local-gcs-cleanup-20261114/progress.json",
-  "cleanup_pid": 16561,
+  "cleanup_pid": null,
   "local_new_model": {
     "checkpoint": "runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs",
     "bundle_verified": true,
@@ -92,5 +92,9 @@
     "smoke": "3/3 explicit calculator checks; notebook ownership query proposes unavailable tool",
     "quality_accepted": false,
     "command": "./chat-own-latest.sh --raw"
-  }
+  },
+  "cleanup_complete": true,
+  "cleanup_policy": "Delete obsolete artifacts; GCS only for future-use data and selected models/evidence.",
+  "future_use_index": "reports/local-gcs-cleanup-20261114/future-use-index.json",
+  "post_cleanup_smoke": "reports/local-gcs-cleanup-20261114/post-cleanup-local-smoke.json"
 }

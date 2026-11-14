@@ -7,7 +7,9 @@ from urllib.parse import quote
 sys.path.insert(0,str(Path('reports/ownbase-budget50-v1').resolve()))
 from gcp_api import request
 R=Path('reports/local-gcs-cleanup-20261114');W=Path('runs/gcs-cleanup-20261114');W.mkdir(exist_ok=True)
-plan=json.loads((R/'plan.json').read_text());lock=threading.Lock();receipts=[]
+plan=json.loads((R/'plan.json').read_text())
+if plan.get('status')=='retired_by_user':raise SystemExit('Blanket archival retired by user; use future-use retention index.')
+lock=threading.Lock();receipts=[]
 bucket='forge-ownbase-a100-20261110';prefix='local-archive-20261114'
 def digest(p,kind='sha256'):
  with p.open('rb') as f:return hashlib.file_digest(f,kind).digest()

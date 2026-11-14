@@ -1,0 +1,121 @@
+{
+  "utc": "2026-11-14T01:51:44.621949+00:00",
+  "exit_code": 0,
+  "device": "mps",
+  "result": {
+    "status": "complete",
+    "assistant_text": "40",
+    "events": [
+      {
+        "kind": "model_action",
+        "raw_ids": [
+          32764,
+          25311,
+          17428,
+          4990,
+          8220,
+          25311,
+          97,
+          8220,
+          49,
+          1191,
+          98,
+          8220,
+          5627,
+          1191,
+          394,
+          14424,
+          4670,
+          34,
+          125,
+          1191,
+          10005,
+          14424,
+          7388,
+          1762,
+          372,
+          34,
+          125,
+          32765
+        ],
+        "parsed": {
+          "kind": "call",
+          "proposal": {
+            "arguments": {
+              "a": 1,
+              "b": 39,
+              "op": "add"
+            },
+            "name": "calculate"
+          },
+          "raw": "{\"arguments\":{\"a\":1,\"b\":39,\"op\":\"add\"},\"name\":\"calculate\"}",
+          "requires_broker_policy_check": true
+        },
+        "seconds": 1.76224741601618
+      },
+      {
+        "kind": "broker_decision",
+        "decision": {
+          "call_id": "c1",
+          "stage": "adapter",
+          "dispatched": true,
+          "name": "calculate",
+          "arguments": {
+            "a": 1,
+            "b": 39,
+            "op": "add"
+          }
+        },
+        "record": {
+          "call_id": "c1",
+          "source": "offline fixture",
+          "schema_version": 1,
+          "timestamp": 1794621104.199467,
+          "name": "calculate",
+          "arguments": {
+            "a": 1,
+            "b": 39,
+            "op": "add"
+          },
+          "ok": true,
+          "data": {
+            "result": 40
+          }
+        }
+      },
+      {
+        "kind": "model_action",
+        "raw_ids": [
+          1962,
+          32763
+        ],
+        "parsed": {
+          "kind": "text",
+          "text": "40"
+        },
+        "seconds": 0.16021587495924905
+      }
+    ],
+    "reset_required": false,
+    "broker_trace": [
+      {
+        "call_id": "c1",
+        "source": "offline fixture",
+        "schema_version": 1,
+        "timestamp": 1794621104.199467,
+        "name": "calculate",
+        "arguments": {
+          "a": 1,
+          "b": 39,
+          "op": "add"
+        },
+        "ok": true,
+        "data": {
+          "result": 40
+        }
+      }
+    ],
+    "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+  },
+  "scope": "Runtime and current model still execute after payload deletion; one narrow tool case, not general quality acceptance."
+}
