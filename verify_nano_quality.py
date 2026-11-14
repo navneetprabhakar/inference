@@ -10,6 +10,25 @@ from cloud_training.nano_quality import assess,run_suite,supervise,atomic_report
 class QualityTests(unittest.TestCase):
     def result(self,text='54',events=None):
         return {'status':'complete','assistant_text':text,'events':events or []}
+    def test_per_turn_budget_and_system_are_preserved_without_budget_leakage(self):
+        seen=[]
+        class Chat:
+            def __init__(self):self.reply_budget=192;self.system=None
+            def reset(self):seen.append(('reset',self.system))
+            def turn(self,*args,**kwargs):
+                seen.append(('turn',self.reply_budget,self.system))
+                return {'status':'complete','assistant_text':'reference','events':[]}
+        suite={'sessions':[{'id':'a','system':'Original instructions','turns':[{'user':'long','reply_budget':1342},{'user':'short'}]},{'id':'b','turns':[{'user':'new session'}]}]}
+        result=run_suite(Chat,suite,deadline=time.monotonic()+10)
+        self.assertEqual(seen,[('reset','Original instructions'),('turn',1342,'Original instructions'),('turn',192,'Original instructions'),('turn',192,None)])
+        self.assertEqual([r['reply_budget'] for r in result['records']],[1342,192,192])
+    def test_invalid_per_turn_budget_rejected_and_real_full_dev_validates(self):
+        from cloud_training.nano_quality import validate_suite
+        for value in (True,0,-1,2049,'512'):
+            suite={'purpose':'development_only_never_train','sessions':[{'id':'a','turns':[{'user':'x','reply_budget':value}]}]}
+            with self.assertRaisesRegex(ValueError,'reply budget'):validate_suite(suite)
+        validate_suite(json.loads(Path('reports/local-readiness-v1/full-development-suite.json').read_text()))
+
     def test_correct_text_cannot_hide_missing_call(self):
         self.assertFalse(assess(self.result(),{'exact_answers':['54'],'expected_calls':[{'name':'calculate'}]})['automated_pass'])
     def test_negated_answer_does_not_pass(self):

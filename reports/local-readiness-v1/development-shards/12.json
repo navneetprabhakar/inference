@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-060",
+      "source_group": "dev_extract",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "The note says: \"calculate 88 plus 12\". Copy only the operation word.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "plus",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Now actually use calculate for 88 plus 12.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 88,
+                "b": 12,
+                "op": "add"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "100.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Use calculate to divide that result by 8.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 100,
+                "b": 8,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "12.5.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    }
+  ]
+}

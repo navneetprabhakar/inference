@@ -1,0 +1,67 @@
+{
+  "utc": "2026-11-14T05:28:38.642258+00:00",
+  "freeze": {
+    "status": "verified_not_training_authorization",
+    "files": 31,
+    "release_model_exposures": 0
+  },
+  "splits": {
+    "train": {
+      "sessions": 272,
+      "packed_rows": 274,
+      "assistant_targets": 350692,
+      "restart_boundaries_checked": 274,
+      "every_conversation_once_per_declared_epoch": true,
+      "family_target_mass": {
+        "natural_dialogue_4k": 145914,
+        "tool": 7864,
+        "long_context_tool": 87154,
+        "code_state": 862,
+        "long_context_natural": 107402,
+        "natural": 1496
+      },
+      "first_10_updates_family_targets": {
+        "natural_dialogue_4k": 42948,
+        "tool": 2260,
+        "long_context_tool": 26351,
+        "code_state": 276,
+        "long_context_natural": 32127,
+        "natural": 399
+      },
+      "first_10_updates_targets": 104361
+    },
+    "validation": {
+      "sessions": 61,
+      "packed_rows": 26,
+      "assistant_targets": 50013,
+      "restart_boundaries_checked": 26,
+      "every_conversation_once_per_declared_epoch": true,
+      "family_target_mass": {
+        "long_context_natural": 28225,
+        "natural": 149,
+        "natural_dialogue_4k": 19223,
+        "tool": 460,
+        "long_context_tool": 1884,
+        "code_state": 72
+      },
+      "first_10_updates_family_targets": {},
+      "first_10_updates_targets": 0
+    }
+  },
+  "recipe": {
+    "batch_tokens": 32768,
+    "rows_per_update": 8,
+    "lr_batch_scale": 0.25,
+    "packing_buffer_size": 1,
+    "epochs": 2,
+    "seed": 103,
+    "max_updates": 10,
+    "lr_multiplier": 0.125,
+    "eval_rows": 512,
+    "eval_every_updates": 5
+  },
+  "limitations": [
+    "CPU packing/restart only; no CUDA optimizer equivalence or GPU memory proof.",
+    "Fresh 4K extension uses native RoPE; usable long-context behavior remains unproven."
+  ]
+}

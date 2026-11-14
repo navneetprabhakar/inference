@@ -1,18 +1,29 @@
-OWN MODEL — CURRENT NEXT STEPS,14 NOVEMBER2026
+OWN MODEL — CURRENT NEXT STEPS, 14 NOVEMBER 2026
 
-Offline corrective data checks PASS; GPU and HTTP remain OFF. No retraining yet.
-See reports/corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt and OWN_BASE_HANDOFF.txt.
+Local readiness checks PASS; all VMs and HTTP remain OFF. No training authorized.
+See reports/local-readiness-v1/READINESS_AND_BUDGET.txt, validation.json and
+campaign-readiness.json. The last correctly remains HOLD pending cap/GPU gates.
 
-Completed:100new training/18development dialogues; reviewed4Kcandidate272train/61dev,
-175,346train targets;63independent release scenarios/189turns frozen and unused;
-112tests pass. Current194MPS baseline2/54strict turns,0/18complete sessions.
+Completed: 150 tests; actual10Bbase restored and full-SHA verified; real training
+CLI preflight; full537M/4K MPS forward smoke; token/mask/cursor checks; full61-session
+232-turn exposed development suite. Fixed packing starvation, missing package
+modules and long-answer truncation. Independent189-turn release remains unused.
+No quality improvement claimed: current194baseline remains2/54turns,0/18sessions.
 
-Next: finite qualification budget/lease ->4K/restart/backup fault qualification ->
-at most two10update pilots with full dev/protected/best+last review -> preselect one
-candidate -> single-use independent release -> full local MPS qualification ->
-verified GCS closeout and shutdown. Never waive quality gates to finish training.
+Budget proposal only: recommended$15A100Flex-start, maximum4billable hours total
+across all leases, including$5reserve. Lower-cost$10L4/6hours is unqualified and
+capacity-uncertain. Qualification-only$5/1hour. None is approved. Reprice before
+allocation; no automatic fallback, budget increase or extension.
+Existing400GiBdisks continue billing (~$40/month list), plus GCS, while VMs are off.
 
-Do not regenerate frozen corrective-corpus-v1 in place or run release against old
-models for curiosity. The short core is not the full admitted training packet.
-Local194/605remain available for explicit testing; no default-model replacement.
+After explicit cap approval: bind fresh STOP/non-auto-delete lease and bootstrap;
+qualify4K/runtime, exact fresh-process/GCS restart, signal/backup/provider-stop
+failures; only then at most two10update pilots. Use buffer1, microbatch1,32768batch
+positions,seed103,2declared epochs,LRmultiplier0.125,full dev evaluation every5updates.
+Review all232dev+18protected turns for best AND last. Two failures mean HOLD.
+
+Release and matched local MPS acceptance remain separate gates, not promised
+within the qualification/pilot allowance. Verify required GCS backups before
+normal shutdown; retain recovery disk on backup failure and still stop at deadline.
+Preserve local194/605/50 and the restored10Bbase; no default-model replacement.
 School maths/science curriculum remains deferred until basic conversation qualifies.

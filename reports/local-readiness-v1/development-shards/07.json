@@ -1,0 +1,511 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-035",
+      "source_group": "b50-box-label-parser",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "A fictional workshop uses 18 boxes per batch, 7 labels per box, and has 600 labels in stock. I need a pure Python parser for this label notation: fields are comma-delimited; quoted fields may contain commas; doubled double quotes inside a quoted field decode to one literal quote. Preserve all whitespace and trailing empty fields. Empty input is one empty field. Reject an unclosed quote, any quote inside an unquoted field, and any character after a closing quote before the next comma or end of input.\n\nThe current implementation is:\n\n```python\ndef parse_label(line):\n    return line.split(',')\n```\n\nExplain how it fails against the grammar, including what happens with `red,\"blue,green\",white`. Do not claim to execute the code.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "`split(',')` treats every comma as a delimiter, including commas inside quoted fields. For `red,\"blue,green\",white`, it returns `['red', '\"blue', 'green\"', 'white']` instead of `['red', 'blue,green', 'white']`. It also leaves outer and doubled quotes intact and accepts invalid quoting. It does preserve whitespace and trailing empty fields, and returns one empty field for empty input.\n\nA parser for the specified grammar:\n\n```python\ndef parse_label(line):\n    fields = []\n    i = 0\n    n = len(line)\n\n    while True:\n        field = []\n        if i < n and line[i] == '\"':\n            i += 1\n            while True:\n                if i == n:\n                    raise ValueError('unclosed quote')\n                if line[i] == '\"':\n                    i += 1\n                    if i < n and line[i] == '\"':\n                        field.append('\"')\n                        i += 1\n                    else:\n                        break\n                else:\n                    field.append(line[i])\n                    i += 1\n            if i < n and line[i] != ',':\n                raise ValueError('character after closing quote')\n        else:\n            while i < n and line[i] != ',':\n                if line[i] == '\"':\n                    raise ValueError('quote inside unquoted field')\n                field.append(line[i])\n                i += 1\n\n        fields.append(''.join(field))\n        if i == n:\n            return fields\n        i += 1  # Skip the delimiter; a trailing comma starts an empty field.\n```",
+          "reply_budget": 486,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Manually trace how the parser handles `red,\"blue,green\",` and `\"a\"\"b\", x`. Show the decoded fields and explain the trailing empty field and preserved whitespace.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "For `red,\"blue,green\",`, the parser reads `red` as an unquoted field, then reads `blue,green` inside quotes, keeping the comma as data. The final comma starts another field; because input ends immediately, that field is empty. Result: `['red', 'blue,green', '']`.\n\nFor `\"a\"\"b\", x`, the parser reads a quoted field. The doubled quotes decode to one literal quote, producing `a\"b`. After the delimiter, it reads ` x` as an unquoted field and preserves the leading space. Result: `['a\"b', ' x']`.",
+          "reply_budget": 213,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Classify these inputs under the grammar: `\"open`, `ab\"cd`, and `\"ok\"x`. For each, explain exactly where and why the parser must reject it.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "- `\"open`: The parser reaches the end while still inside the quoted field, so it rejects an unclosed quote.\n- `ab\"cd`: While reading an unquoted field, it encounters the quote after `ab` and rejects the quote inside that field.\n- `\"ok\"x`: After the closing quote, it encounters `x` instead of a comma or the end of input, so it rejects the character after the closing quote.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Describe the parser as explicit finite-state transitions, including how it handles delimiters, escaped quotes, malformed input, and end of input in each state.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Use four states, starting with an empty field buffer and an empty output list:\n\n- **Field start:** On a comma, append an empty field and remain here. On `\"`, enter *quoted*. On any other character, add it to the buffer and enter *unquoted*. At end of input, append an empty field and finish.\n- **Unquoted:** On a comma, append the buffer, clear it, and enter *field start*. On `\"`, reject the input. On any other character, add it to the buffer. At end of input, append the buffer and finish.\n- **Quoted:** On `\"`, enter *after quote*. On any other character, including a comma, add it to the buffer. At end of input, reject the unclosed quoted field.\n- **After quote:** On `\"`, add one literal quote to the buffer and return to *quoted*; together the two quotes form an escape. On a comma, append the buffer, clear it, and enter *field start*. On any other character, reject it. At end of input, append the buffer and finish.\n\nCharacters are copied without trimming, so whitespace is preserved. Returning to *field start* after a final comma produces the trailing empty field; starting there at end of input makes empty input one empty field.",
+          "reply_budget": 354,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Using the parser you supplied, write focused tests for valid and invalid inputs, including empty input, trailing commas, quoted commas, escaped quotes, preserved whitespace, and each malformed-quote case. Do not claim to have run them.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "These tests use Python\u2019s built-in `unittest` and assume `parse_label` is in scope. They have not been run.\n\n```python\nimport unittest\n\n\nclass TestParseLabel(unittest.TestCase):\n    def test_valid_inputs(self):\n        cases = [\n            ('', ['']),\n            ('red,', ['red', '']),\n            (',,', ['', '', '']),\n            ('red,\"blue,green\",white', ['red', 'blue,green', 'white']),\n            ('\"a\"\"b\", x', ['a\"b', ' x']),\n            ('  red ,\" blue \"', ['  red ', ' blue ']),\n            ('\"\"', ['']),\n        ]\n        for line, expected in cases:\n            with self.subTest(line=line):\n                self.assertEqual(parse_label(line), expected)\n\n    def test_malformed_quotes(self):\n        cases = [\n            ('\"open', 'unclosed quote'),\n            ('ab\"cd', 'quote inside unquoted field'),\n            ('\"ok\"x', 'character after closing quote'),\n        ]\n        for line, error in cases:\n            with self.subTest(line=line):\n                with self.assertRaisesRegex(ValueError, error):\n                    parse_label(line)\n\n\nif __name__ == '__main__':\n    unittest.main()\n```",
+          "reply_budget": 403,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Review your tests against the full grammar and the parser you supplied. Identify any meaningful coverage gaps and add cases needed to address them, without claiming to run them.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "The existing tests cover the main categories, but miss several useful boundaries: quoted fields at end of input, an empty quoted field followed by a delimiter, multiple trailing empty fields after a quoted field, and invalid whitespace after a closing quote. Add these cases to the existing lists:\n\n```python\n# Valid cases\n('\"blue,green\"', ['blue,green']),\n('\"\",', ['', '']),\n('\"a\",,', ['a', '', '']),\n('\"\"\"\"', ['\"']),  # One escaped quote in a quoted field.\n('\"a\\n b\",c', ['a\\n b', 'c']),\n\n# Malformed cases: (input, expected error)\n('\"ok\" ', 'character after closing quote'),\n(' \"ok\"', 'quote inside unquoted field'),\n('\"a\"\"', 'unclosed quote'),\n```\n\nThe newline case checks that characters other than quotes, including newlines, are preserved inside quoted fields. These additions have not been run.",
+          "reply_budget": 288,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Extend the parser so it returns each decoded field together with its zero-based source start offset. For a quoted field, the offset points to its opening quote; for an empty field, it points to its field boundary. Provide the complete revised implementation and focused tests, including escaped quotes and a final empty field. Do not claim to have run them.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Each result is `(decoded_field, source_start_offset)`. An empty field\u2019s offset is its boundary, including `len(line)` after a trailing comma.\n\n```python\ndef parse_label(line):\n    fields = []\n    i = 0\n    n = len(line)\n\n    while True:\n        start = i\n        field = []\n        if i < n and line[i] == '\"':\n            i += 1\n            while True:\n                if i == n:\n                    raise ValueError('unclosed quote')\n                if line[i] == '\"':\n                    i += 1\n                    if i < n and line[i] == '\"':\n                        field.append('\"')\n                        i += 1\n                    else:\n                        break\n                else:\n                    field.append(line[i])\n                    i += 1\n            if i < n and line[i] != ',':\n                raise ValueError('character after closing quote')\n        else:\n            while i < n and line[i] != ',':\n                if line[i] == '\"':\n                    raise ValueError('quote inside unquoted field')\n                field.append(line[i])\n                i += 1\n\n        fields.append((''.join(field), start))\n        if i == n:\n            return fields\n        i += 1\n```\n\n```python\nimport unittest\n\n\nclass TestParseLabel(unittest.TestCase):\n    def test_valid_fields_and_offsets(self):\n        cases = [\n            ('', [('', 0)]),\n            (',,', [('', 0), ('', 1), ('', 2)]),\n            ('red,\"blue,green\",',\n             [('red', 0), ('blue,green', 4), ('', 17)]),\n            ('\"a\"\"b\", x', [('a\"b', 0), (' x', 7)]),\n            ('\"\",', [('', 0), ('', 3)]),\n            ('  x ,\" y \"', [('  x ', 0), (' y ', 5)]),\n        ]\n        for line, expected in cases:\n            with self.subTest(line=line):\n                self.assertEqual(parse_label(line), expected)\n\n    def test_invalid_quotes(self):\n        for line in ('\"open', 'ab\"cd', '\"ok\"x', '\"ok\" '):\n            with self.subTest(line=line):\n                with self.assertRaises(ValueError):\n                    parse_label(line)\n\n\nif __name__ == '__main__':\n    unittest.main()\n```\n\nThese tests have not been run.",
+          "reply_budget": 724,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ],
+      "system": "Use authorized calculate or convert tools when the user requests a tool calculation; ground answers in observed results. Explain planning choices naturally."
+    },
+    {
+      "id": "dev-full-036",
+      "source_group": "b50-puzzle-proof",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "A token machine has three boxes, A, B, and C, and exactly two distinguishable tokens, red and blue. Each token occupies one box, and a box can hold both. Initially red is in A and blue is in B. Blue never moves. A legal move takes red from A to B or from B to A; no other moves are allowed. The goal is any state with red in C. A state is the ordered pair (red box, blue box).\n\nAn author argues: \u201cThe blue token always stays in B, so the machine is constrained. Since each move changes the red token\u2019s box and there are only three boxes, repeated moves must eventually put red in C. Therefore every state reaches the goal.\u201d\n\nIdentify the claim and distinguish the blue-token invariant from the reachability argument. Where does the reasoning fail?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The author claims every state can reach a state where red is in C. Blue remaining in B is an invariant for all states reachable from the initial state, but it says nothing about whether red can reach C. The reachability argument fails because changing boxes does not require visiting every box: red can only alternate between A and B. From the initial state, the only reachable states are (A, B) and (B, B), so the goal is unreachable.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Trace the legal sequence starting from the initial state until it repeats. In the proposed sequence (A,B), (B,B), (C,B), identify the first illegal step and explain why it is illegal.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The legal sequence is (A, B) \u2192 (B, B) \u2192 (A, B), where the initial state repeats. In the proposed sequence, the first illegal step is (B, B) \u2192 (C, B): red may move from B only to A, not to C.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Why does having a finite number of boxes allow the machine to repeat states rather than guarantee that red eventually reaches C?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "A finite set of states means that a sufficiently long sequence must revisit a state; it does not mean every state must be visited. Here, the allowed moves cycle between (A, B) and (B, B), and neither move can take red to C.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Give a worked counterexample to the author\u2019s claim: list all states reachable from the initial state and show why neither has a legal transition to a goal state.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "From the initial state, the complete set of reachable states is:\n\n- (A, B): the only legal move takes red from A to B, producing (B, B).\n- (B, B): the only legal move takes red from B to A, producing (A, B).\n\nNeither state has a legal transition that puts red in C. The moves repeat between these two states, so the initial state is a counterexample to the claim that every state reaches the goal.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The author now adds exactly one rule: red may also move from B to C. All previous rules and the initial state remain unchanged. Enumerate the complete reachable state set and directed transitions, and use them to determine whether every reachable state can reach the goal.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The complete reachable state set is {(A, B), (B, B), (C, B)}. Blue remains in B throughout. The directed transitions are:\n\n- (A, B) \u2192 (B, B)\n- (B, B) \u2192 (A, B)\n- (B, B) \u2192 (C, B)\n\nThere are no legal moves from (C, B). Every reachable state can reach the goal: (C, B) already satisfies it; (B, B) reaches it in one move; and (A, B) reaches it via (B, B). A particular sequence can still alternate between A and B forever without taking the new move.",
+          "reply_budget": 207,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Does the result for every reachable state also establish that arbitrary states with blue outside B can be reached from the specified start? Explain the distinction.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "No. Reachability from the specified start concerns only states that can be produced by legal moves from (A, B). Because blue never moves, every such state has blue in B. States with blue outside B cannot be reached from that start.\n\nThe conclusion that every reachable state can reach the goal does not establish that arbitrary states are themselves reachable from the start.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Write a standalone, pure Python breadth-first search that returns a witness path to the goal or None. Include focused tests for both the original rules and the revised rules, and explain what each test establishes. Do not assume the code has been executed.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\nfrom collections import deque\n\n\ndef witness_path(revised=False):\n    start = (\"A\", \"B\")\n    queue = deque([start])\n    parent = {start: None}\n\n    while queue:\n        state = queue.popleft()\n        red, blue = state\n        if red == \"C\":\n            path = []\n            while state is not None:\n                path.append(state)\n                state = parent[state]\n            return path[::-1]\n\n        destinations = {\"A\": (\"B\",), \"B\": (\"A\",), \"C\": ()}\n        if revised and red == \"B\":\n            next_boxes = (\"A\", \"C\")\n        else:\n            next_boxes = destinations[red]\n        for next_red in next_boxes:\n            next_state = (next_red, blue)\n            if next_state not in parent:\n                parent[next_state] = state\n                queue.append(next_state)\n    return None\n\n\ndef test_original():\n    assert witness_path() is None\n\n\ndef test_revised():\n    assert witness_path(revised=True) == [\n        (\"A\", \"B\"), (\"B\", \"B\"), (\"C\", \"B\")\n    ]\n\n\nif __name__ == \"__main__\":\n    test_original()\n    test_revised()\n    print(\"Tests passed\")\n```\n\nThe original-rules test checks that exhaustive search finds no goal. The revised-rules test checks the shortest witness path using the added B\u2192C move. The code and tests have not been executed here.",
+          "reply_budget": 427,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Using the revised transition graph, explain why reversing the witness path need not produce a legal path.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The witness path is (A, B) \u2192 (B, B) \u2192 (C, B). Reversing it starts with (C, B) \u2192 (B, B), but the revised rules add only B \u2192 C, not C \u2192 B. In fact, there are no legal moves from (C, B). A directed transition need not be legal in reverse.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Write a separate teaching dialogue in which a learner challenges the original proof and works through the blue-in-B constraint and the directionality of the revised rule. Use the machine\u2019s established rules without adding new ones.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Learner: The original argument says red must eventually reach C because there are only three boxes. Why must it visit all three?\n\nTeacher: It doesn\u2019t. What can happen from the initial state, (A, B)?\n\nLearner: Red can move from A to B, giving (B, B). Then its only original move is back to A, giving (A, B) again. It can repeat forever without reaching C.\n\nTeacher: Right. What does blue staying in B establish?\n\nLearner: Every state reachable from the initial state has blue in B. That constraint alone doesn\u2019t tell us whether red can reach C; the allowed red moves decide that.\n\nTeacher: Now add the revised rule: red may move from B to C. Can it reach C?\n\nLearner: Yes: (A, B) \u2192 (B, B) \u2192 (C, B). But it could still keep alternating between A and B.\n\nTeacher: Can it reverse that witness path?\n\nLearner: No. The added rule allows B \u2192 C, not C \u2192 B. There\u2019s no legal move from C under the revised rules, so the reversed path starts with an illegal step.",
+          "reply_budget": 303,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The author now claims that because a goal path exists, every maximal legal execution must eventually reach a goal. Write a complete finite-graph Python checker using a least fixed point for this universal eventual-arrival property, treating infinite executions that avoid the goal and non-goal dead ends as failures. Apply it to the revised machine\u2019s reachable graph and, separately, to a clearly hypothetical variant with the B-to-A transition deleted. Include focused tests and explain why a BFS witness alone cannot certify the property. Keep the actual machine rules unchanged.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The least fixed point starts with goal states and repeatedly adds a non-goal state only when it has at least one successor and **all** successors are already in the set. The nonempty-successor condition excludes non-goal dead ends. States left outside the fixed point have a possible maximal execution that avoids the goal, through a dead end or a cycle.\n\n```python\nfrom collections import deque\n\n\ndef reachable_graph(start, transitions):\n    \"\"\"Return the directed subgraph reachable from start.\"\"\"\n    graph = {}\n    pending = deque([start])\n    seen = {start}\n    while pending:\n        state = pending.popleft()\n        successors = tuple(transitions.get(state, ()))\n        graph[state] = successors\n        for nxt in successors:\n            if nxt not in seen:\n                seen.add(nxt)\n                pending.append(nxt)\n    return graph\n\n\ndef universal_eventual_arrival(graph, is_goal):\n    \"\"\"Return states from which every maximal execution reaches a goal.\n\n    graph must map every state and successor to its successors. A goal\n    counts as reached immediately, even if it has outgoing edges.\n    \"\"\"\n    states = set(graph)\n    if any(nxt not in states for successors in graph.values()\n           for nxt in successors):\n        raise ValueError(\"graph must include every successor\")\n\n    winning = {state for state in states if is_goal(state)}\n    while True:\n        added = {\n            state for state in states - winning\n            if graph[state] and all(nxt in winning for nxt in graph[state])\n        }\n        if not added:\n            return winning\n        winning.update(added)\n\n\nSTART = (\"A\", \"B\")\nA = (\"A\", \"B\")\nB = (\"B\", \"B\")\nC = (\"C\", \"B\")\n\n# Actual revised machine: the original moves plus B -> C.\nREVISED = {A: (B,), B: (A, C), C: ()}\n\n# Hypothetical only: delete B -> A from the revised machine.\nVARIANT = {A: (B,), B: (C,), C: ()}\n\n\ndef goal(state):\n    return state[0] == \"C\"\n\n\ndef test_revised_cycle_can_avoid_goal():\n    graph = reachable_graph(START, REVISED)\n    assert set(graph) == {A, B, C}\n    assert universal_eventual_arrival(graph, goal) == {C}\n\n\ndef test_hypothetical_variant_forces_goal():\n    graph = reachable_graph(START, VARIANT)\n    assert universal_eventual_arrival(graph, goal) == {A, B, C}\n\n\ndef test_non_goal_dead_end_fails():\n    graph = {A: (B,), B: ()}\n    assert universal_eventual_arrival(graph, goal) == set()\n\n\nif __name__ == \"__main__\":\n    test_revised_cycle_can_avoid_goal()\n    test_hypothetical_variant_forces_goal()\n    test_non_goal_dead_end_fails()\n```\n\n- **Actual revised machine:** Only C satisfies the universal property. From A or B, an execution can alternate A \u2192 B \u2192 A forever, avoiding C, even though B \u2192 C is available.\n- **Hypothetical variant:** All three reachable states satisfy the property: A \u2192 B \u2192 C is forced, B \u2192 C is forced, and C is already a goal. This deletion does not change the actual rules.\n- **Tests:** The first checks the avoiding cycle, the second the forced route, and the third rejection of a non-goal dead end. They are provided for execution; they have not been run.\n- A BFS witness establishes that **some** path reaches a goal. It cannot establish that **every** maximal execution does: it does not rule out an indefinitely repeated alternative or a non-goal dead end.",
+          "reply_budget": 1004,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-037",
+      "source_group": "b50-cache-clock",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I need a deterministic in-memory TTL cache for a single-threaded Python program, without external packages or network access. The supplied monotonic fake clock returns seconds. A value is live only while now < expires_at; expired entries are removed lazily when their key is read. Setting a key replaces its value and starts a fresh TTL, while reading a live key must not refresh it. Keys are independent. Reject nonpositive TTLs, and reserve None for a miss so it cannot be stored.\n\n```python\nclass Cache:\n    def __init__(self, clock):\n        self.clock = clock\n        self.data = {}\n\n    def set(self, key, value, ttl):\n        self.data[key] = [value, self.clock(), ttl]\n\n    def get(self, key):\n        if key not in self.data:\n            return None\n        value, last, ttl = self.data[key]\n        if self.clock() - last > ttl:\n            return None\n        self.data[key][1] = self.clock()\n        return value\n```\n\nInspect this code against those semantics and identify the defects.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The expiry comparison should use `>= ttl`: an entry is already expired exactly at its deadline. An expired entry must also be deleted when its key is read.\n\nA live read currently resets the timestamp, incorrectly refreshing its TTL. Store a fixed `expires_at = clock() + ttl` on each set, and leave it unchanged on reads. Reject nonpositive TTLs and reject `None` values so a stored value cannot be confused with a miss. Replacing a key should overwrite both its value and expiry; keys otherwise remain independent.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Show two worked counterexamples using the existing code: one where a live read extends a key\u2019s life, and one at exact expiry. Include the clock times and expected versus actual results.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Assume the fake clock remains at the stated time until advanced.\n\n1. **Live read extends life:** Set `k` to `\"lamp\"` at t=0 with TTL 10. Read it at t=6: expected and actual are `\"lamp\"`, but the code resets `last` to 6. At t=11, the expected result is `None` because the original expiry was t=10; the actual result is `\"lamp\"` because only 5 seconds have passed since the read.\n2. **Exact expiry:** Set `k` to `\"lamp\"` at t=0 with TTL 10 and read it at t=10. Expected: `None`, with the expired entry removed. Actual: `\"lamp\"`, because `10 > 10` is false; the code also resets `last` to 10.",
+          "reply_budget": 260,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement the corrected cache and a controllable fake clock in Python. Make the expiry and validation assumptions explicit.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Expiry is fixed at `set` time; `now == expires_at` is expired. TTLs must be finite positive real numbers, excluding booleans. Keys must be hashable, and the supplied clock must return finite monotonic seconds.\n\n```python\nfrom math import isfinite\nfrom numbers import Real\n\n\nclass FakeClock:\n    def __init__(self, start=0):\n        self.now = start\n\n    def __call__(self):\n        return self.now\n\n    def advance(self, seconds):\n        if (isinstance(seconds, bool) or not isinstance(seconds, Real)\n                or not isfinite(seconds) or seconds < 0):\n            raise ValueError('advance must be finite and nonnegative')\n        self.now += seconds\n\n\nclass Cache:\n    def __init__(self, clock):\n        self.clock = clock\n        self.data = {}\n\n    def set(self, key, value, ttl):\n        if value is None:\n            raise ValueError('None is reserved for a miss')\n        if (isinstance(ttl, bool) or not isinstance(ttl, Real)\n                or not isfinite(ttl) or ttl <= 0):\n            raise ValueError('TTL must be finite and positive')\n        self.data[key] = (value, self.clock() + ttl)\n\n    def get(self, key):\n        entry = self.data.get(key)\n        if entry is None:\n            return None\n        value, expires_at = entry\n        if self.clock() >= expires_at:\n            del self.data[key]\n            return None\n        return value\n```\n\nFor example, after `set('k', 'lamp', 10)` at time 0, a read at time 6 returns `lamp`; a read at time 10 returns `None` and removes the entry. Time arithmetic is assumed not to overflow.",
+          "reply_budget": 508,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Design property-style tests for this cache using deterministic operation sequences and an independently expressed reference model. Include overwrites, exact expiry boundaries, and multiple keys.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The following deterministic tests compare the cache against a reference model expressed in terms of elapsed age since each write. They check every read and verify lazy removal, including exact deadlines and overwrites.\n\n```python\nimport unittest\n\nclass TestCacheProperties(unittest.TestCase):\n    def test_operation_sequences(self):\n        sequences = [\n            # A live read does not refresh expiry.\n            [('set', 'a', 'old', 10), ('advance', 6),\n             ('get', 'a'), ('advance', 4), ('get', 'a')],\n            # Overwrite starts a fresh TTL, even after the old deadline.\n            [('set', 'a', 'old', 3), ('advance', 4),\n             ('set', 'a', 'new', 5), ('advance', 4),\n             ('get', 'a'), ('advance', 1), ('get', 'a')],\n            # Keys expire independently; misses do not affect others.\n            [('set', 'a', 1, 2), ('set', 'b', 2, 4),\n             ('advance', 2), ('get', 'a'), ('get', 'b'),\n             ('get', 'missing'), ('advance', 2), ('get', 'b')],\n            # Overwrite while still live.\n            [('set', 'a', 1, 10), ('advance', 2),\n             ('set', 'a', 2, 2), ('advance', 2), ('get', 'a')],\n        ]\n        for operations in sequences:\n            with self.subTest(operations=operations):\n                clock = FakeClock()\n                cache = Cache(clock)\n                model = {}  # key -> (value, write time, TTL)\n                for op in operations:\n                    if op[0] == 'advance':\n                        clock.advance(op[1])\n                    elif op[0] == 'set':\n                        _, key, value, ttl = op\n                        cache.set(key, value, ttl)\n                        model[key] = (value, clock(), ttl)\n                    else:\n                        _, key = op\n                        record = model.get(key)\n                        if record is None:\n                            expected = None\n                        elif clock() - record[1] >= record[2]:\n                            del model[key]\n                            expected = None\n                        else:\n                            expected = record[0]\n                        self.assertEqual(cache.get(key), expected)\n                        self.assertEqual(key in cache.data, key in model)\n\n    def test_invalid_sets(self):\n        cache = Cache(FakeClock())\n        for ttl in (0, -1, float('inf'), float('nan'), True):\n            with self.subTest(ttl=ttl), self.assertRaises(ValueError):\n                cache.set('a', 'value', ttl)\n        with self.assertRaises(ValueError):\n            cache.set('a', None, 1)\n\nif __name__ == '__main__':\n    unittest.main()\n```\n\nThe sequences deliberately use integer times so the boundary checks do not depend on floating-point rounding.",
+          "reply_budget": 834,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Explain what lazy removal means for an expired key that has not been read. Use a short two-key example to distinguish an entry that remains stored but is expired from an observed miss and removal.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Lazy removal means expiry alone does not delete an entry; deletion happens when that key is read.\n\nFor example, set `a` and `b` at t=0 with TTLs of 2 and 5. At t=2, `a` is expired but remains in `cache.data` if it has not been read; `b` is still live. Calling `get('a')` returns `None` and removes `a`. Reading or removing `a` does not affect `b`.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "A colleague proposes resetting the expiry on every successful read to keep frequently used entries alive. Assess that change against the agreed behavior, using a concrete timeline, and explain what the cache should do instead.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Resetting expiry on a successful read would change the cache to a sliding TTL, which conflicts with the agreed fixed expiry.\n\nFor example, set `a` at t=0 with TTL 10. A read at t=6 returns its value. If that read reset expiry, a read at t=11 would still return the value because the new deadline would be t=16. Under the agreed behavior, the deadline stays at t=10: the t=11 read returns `None` and removes the expired entry.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Trace a key set at time 4 with a TTL of 5 seconds, read at time 8, overwritten at time 8 with a TTL of 3 seconds, and read at time 11. Show the value and expiry after each operation and explain the final read.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Let the first value be `old` and the replacement be `new`:\n\n- **t=4, set:** Stores `old` with expiry at t=9.\n- **t=8, read:** Returns `old`; expiry remains t=9.\n- **t=8, overwrite:** Stores `new` with a fresh expiry at t=11.\n- **t=11, read:** Returns `None` and removes the entry. The replacement expires exactly at t=11, so it is no longer live.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Create a fresh two-key trace where one key expires exactly when the other is overwritten. Show the operations, values, expiry times, and stored entries at each step, including reads before and at expiry. Add a practical debugging note distinguishing an observed miss from an expired entry that has not yet been read.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "At each step, the stored entries are shown as `key: value (expiry)`.\n\n| Time | Operation | Result | Stored entries |\n|---|---|---|---|\n| 0 | Set `a = 'red'`, TTL 5 | \u2014 | `a: red (5)` |\n| 0 | Set `b = 'blue'`, TTL 8 | \u2014 | `a: red (5)`, `b: blue (8)` |\n| 4 | Read `a` | `red`; expiry stays 5 | `a: red (5)`, `b: blue (8)` |\n| 5 | Overwrite `b = 'green'`, TTL 3 | \u2014 | `a: red (5)`, `b: green (8)` |\n| 5 | Read `a` | `None`; expired entry removed | `b: green (8)` |\n| 7 | Read `b` | `green`; expiry stays 8 | `b: green (8)` |\n| 8 | Read `b` | `None`; expired entry removed | empty |\n\nAt time 5, before `a` is read, it is expired but still stored. An observed miss from `get('a')` removes it; inspecting storage before that read can therefore reveal an expired entry even though it is no longer live.",
+          "reply_budget": 374,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-038",
+      "source_group": "b50-rle-chunks",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I\u2019m implementing a streaming decoder in Python. Each record is a positive decimal count, a colon, and exactly one ASCII letter; records are separated by semicolons, with no trailing separator. Leading zeros are allowed if the count is positive, and an empty stream decodes to an empty string. Chunks may split anywhere. The decoder must eventually enforce a caller-supplied maximum total decoded length before allocating expanded text, using only the standard library.\n\n```python\nclass Decoder:\n    def __init__(self):\n        self.pending = ''\n        self.output = ''\n\n    def feed(self, chunk):\n        self.pending += chunk\n        parts = self.pending.split(';')\n        for part in parts:\n            if ':' in part:\n                n, letter = part.split(':')\n                self.output += letter * int(n)\n        self.pending = parts[-1]\n        return self.output\n\n    def finish(self):\n        return self.output\n```\n\nFirst, make the grammar and the implications of arbitrary chunk boundaries precise. What must the decoder retain between feeds before it can decide whether a record is valid?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The grammar is `stream := empty | record (';' record)*`, where `record := count ':' letter`, `count` is one or more ASCII digits representing a positive integer, and `letter` is exactly one ASCII letter (`A\u2013Z` or `a\u2013z`). Leading zeros are valid when the value is positive; a trailing semicolon is invalid.\n\nBecause a chunk can end anywhere, retain parsing state across feeds: whether you are reading the count, expecting the letter, or expecting a separator or end of stream; the current count; and, once read, the letter. Also retain the cumulative decoded length and enough state to distinguish an empty stream from a trailing separator. A letter does not complete a validated record until the next character is a semicolon or the stream ends: another character could make the record invalid.\n\nCheck each count against the remaining length allowance before expanding it. Digit-by-digit bounded accumulation can reject an excessive count without constructing an arbitrarily large integer, while still accepting leading zeros. At `finish()`, reject incomplete records, zero counts, and trailing separators. The prototype instead processes incomplete parts, can process the same part again, and never validates the finished stream.",
+          "reply_budget": 332,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Trace the supplied implementation with successive feeds `['1', '2:', 'A;', '2:B']`, followed by `finish()`. Show the pending buffer, returned output, and any exception at each step. Explain what a correct decoder should do with the final record.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Starting with empty `pending` and `output`, the supplied implementation behaves as follows:\n\n| Operation | `pending` afterward | Return value | Exception |\n|---|---|---|---|\n| `feed('1')` | `'1'` | `''` | None |\n| `feed('2:')` | `'12:'` | `''` | None |\n| `feed('A;')` | `''` | `'AAAAAAAAAAAA'` | None |\n| `feed('2:B')` | `'2:B'` | `'AAAAAAAAAAAABB'` | None |\n| `finish()` | `'2:B'` | `'AAAAAAAAAAAABB'` | None |\n\nThe first two chunks form `12:`, which the prototype prematurely processes with an empty letter; multiplying it produces an empty string. It then processes `12:A` when the semicolon arrives. It also expands `2:B` during the final feed but leaves that record in `pending`.\n\nA correct decoder retains `2:B` until `finish()` establishes that the stream ends there, validates the record and the remaining length allowance, and commits its two `B`s exactly once. Its final decoded text is 12 `A`s followed by two `B`s, provided the caller\u2019s limit permits 14 characters.",
+          "reply_budget": 377,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Define the incremental output contract for `feed()` and `finish()`: what does each return, and when is a record committed? Also explain how to enforce the caller-supplied total decoded-length limit before allocating expanded text, including for a count with many digits.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "A useful incremental contract is:\n\n- `feed(chunk)` returns only the newly committed decoded text from that call, possibly `''`. A record is committed when a semicolon confirms its end and the record has passed validation and the length check.\n- `finish()` validates end-of-stream and returns only the final newly committed text, possibly `''`. It commits a complete final record without a semicolon, accepts an entirely empty stream, and rejects incomplete records or a trailing semicolon. The caller concatenates all returned strings to obtain the decoded stream.\n\nTrack the cumulative committed length and the current count while parsing. Accumulate ASCII digits one at a time against the remaining allowance: before `count = count * 10 + digit`, check whether the result would exceed that allowance, for example with `count > (remaining - digit) // 10`. Reject as soon as it would exceed the limit; this avoids constructing a huge integer even for a count with many digits. Leading zeros remain valid, but reject a final count of zero.\n\nCheck the count before creating `letter * count`. Also validate the letter and record terminator before committing. Previously returned text cannot be retracted if a later chunk is invalid, so callers requiring all-or-nothing output must buffer it until `finish()` succeeds.",
+          "reply_budget": 358,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement the decoder as a self-contained Python class using the incremental output and length-limit contract we defined. After malformed input or a limit failure, it must enter an explicit terminal error state. Use only the standard library.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\nclass Decoder:\n    \"\"\"feed() and finish() return only text committed by that call.\"\"\"\n\n    def __init__(self, max_length):\n        if (not isinstance(max_length, int) or isinstance(max_length, bool)\n                or max_length < 0):\n            raise ValueError('max_length must be a nonnegative integer')\n        self.max_length = max_length\n        self.total = 0\n        self.state = 'start'\n        self.count = 0\n        self.letter = None\n\n    def _fail(self, message):\n        self.state = 'error'\n        raise ValueError(message)\n\n    def _check_open(self):\n        if self.state in ('error', 'finished'):\n            raise RuntimeError(f'decoder is {self.state}')\n\n    def _commit(self):\n        # The count was checked against the remaining allowance while parsing.\n        text = self.letter * self.count\n        self.total += self.count\n        self.count = 0\n        self.letter = None\n        return text\n\n    def feed(self, chunk):\n        self._check_open()\n        if not isinstance(chunk, str):\n            self._fail('chunk must be a string')\n        output = []\n        for char in chunk:\n            if self.state in ('start', 'after_separator', 'count'):\n                if '0' <= char <= '9':\n                    digit = ord(char) - ord('0')\n                    remaining = self.max_length - self.total\n                    if self.count > (remaining - digit) // 10:\n                        self._fail('decoded length limit exceeded')\n                    self.count = self.count * 10 + digit\n                    self.state = 'count'\n                elif char == ':' and self.state == 'count':\n                    if self.count == 0:\n                        self._fail('count must be positive')\n                    self.state = 'letter'\n                else:\n                    self._fail('expected a count or colon')\n            elif self.state == 'letter':\n                if not ('A' <= char <= 'Z' or 'a' <= char <= 'z'):\n                    self._fail('expected one ASCII letter')\n                self.letter = char\n                self.state = 'end_record'\n            else:  # end_record\n                if char != ';':\n                    self._fail('expected a separator or end of stream')\n                output.append(self._commit())\n                self.state = 'after_separator'\n        return ''.join(output)\n\n    def finish(self):\n        self._check_open()\n        if self.state == 'start':\n            result = ''\n        elif self.state == 'end_record':\n            result = self._commit()\n        else:\n            self._fail('incomplete record or trailing separator')\n        self.state = 'finished'\n        return result\n```\n\nA malformed chunk or limit failure puts the decoder in `error`; subsequent calls raise `RuntimeError`. If a call fails after committing earlier records within that same call, it raises instead of returning that call's output. Output returned by earlier calls remains valid but cannot be retracted.",
+          "reply_budget": 868,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Explain how the decoder handles representative invalid streams: zero counts, missing letters, adjacent separators, a non-ASCII payload, and a trailing separator. For each, identify when the error is detected and what happens to the decoder afterward.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "For the supplied `Decoder`, assuming a sufficient length limit:\n\n- **Zero count \u2014 `0:A`:** `feed()` raises `ValueError` when it reads `:`, because the accumulated count is zero.\n- **Missing letter \u2014 `2:`:** `feed()` accepts the incomplete record; `finish()` raises `ValueError` because the decoder is still expecting a letter.\n- **Adjacent separators \u2014 `1:A;;`:** The first `;` commits the record internally. The second raises `ValueError` because a count is expected. That failing `feed()` returns no output, even though it committed the first record internally.\n- **Non-ASCII payload \u2014 `1:\u00e9`:** `feed()` raises `ValueError` when it reads `\u00e9`, since the payload must be an ASCII letter.\n- **Trailing separator \u2014 `1:A;`:** `feed()` returns `A` when it reads the separator. `finish()` then raises `ValueError` because another record was expected.\n\nIn every case, the failure puts the decoder in its terminal `error` state; subsequent calls to `feed()` or `finish()` raise `RuntimeError`. Text returned by an earlier successful call cannot be retracted.",
+          "reply_budget": 348,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Write an independent nonstreaming parser for the agreed grammar, then use it to compare the streaming decoder across multiple chunk partitions of valid streams and representative invalid streams. Use only the standard library, and make the comparison account for errors that can arise during either feed or finish.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The reference parses the complete string using the grammar directly; the test tries every partition of each short stream. It compares successful output and treats a `ValueError` from either `feed()` or `finish()` as rejection. Replace `decoder` with the module containing the existing class.\n\n```python\nimport re\nimport unittest\n\nfrom decoder import Decoder\n\n\nRECORD = re.compile(r'([0-9]+):([A-Za-z])', re.ASCII)\n\n\ndef reference_decode(stream, limit):\n    if stream == '':\n        return ''\n    parts = []\n    total = 0\n    for record in stream.split(';'):\n        match = RECORD.fullmatch(record)\n        if match is None:\n            raise ValueError('invalid record')\n        count = int(match.group(1))\n        if count == 0 or count > limit - total:\n            raise ValueError('invalid count or limit exceeded')\n        total += count\n        parts.append((count, match.group(2)))\n    return ''.join(letter * count for count, letter in parts)\n\n\ndef partitions(stream):\n    if not stream:\n        yield []\n        return\n    # Each bit chooses whether to split at a character boundary.\n    for mask in range(1 << (len(stream) - 1)):\n        chunks = []\n        start = 0\n        for i in range(1, len(stream)):\n            if mask & (1 << (i - 1)):\n                chunks.append(stream[start:i])\n                start = i\n        chunks.append(stream[start:])\n        yield chunks\n\n\nclass DecoderComparisonTests(unittest.TestCase):\n    def test_partitions(self):\n        cases = [\n            ('', 0), ('1:A', 1), ('02:a;1:B', 3),\n            ('0:A', 10), ('2:', 10), ('1:A;;1:B', 10),\n            ('1:\u00e9', 10), ('1:A;', 10), ('1:AB', 10),\n            ('3:A', 2), ('1:A;2:B', 2),\n        ]\n        for stream, limit in cases:\n            try:\n                expected = reference_decode(stream, limit)\n                valid = True\n            except ValueError:\n                valid = False\n\n            for chunks in partitions(stream):\n                with self.subTest(stream=stream, limit=limit, chunks=chunks):\n                    decoder = Decoder(limit)\n                    output = []\n                    try:\n                        for chunk in chunks:\n                            output.append(decoder.feed(chunk))\n                        output.append(decoder.finish())\n                    except ValueError:\n                        self.assertFalse(valid)\n                        with self.assertRaises(RuntimeError):\n                            decoder.finish()\n                    else:\n                        self.assertTrue(valid)\n                        self.assertEqual(''.join(output), expected)\n\n\nif __name__ == '__main__':\n    unittest.main()\n```\n\nThe reference uses `int()` and is intended for these small test inputs, not adversarial counts with arbitrarily many digits. Rejected streams can yield partial output before failure, so the test compares full output only for valid streams.",
+          "reply_budget": 859,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-039",
+      "source_group": "b50-token-invariant",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I'm designing a puzzle with two labelled boxes, A and B, and eight indistinguishable tokens. A legal move transfers exactly two tokens from one box to the other, provided the source has at least two; counts must stay nonnegative.\n\nHere's a proposed proof: \u201cEvery distribution of eight tokens is reachable from every other distribution. The total never changes, and each move shifts tokens between the boxes, so repeated moves can put any desired number in A. For example, starting at (8, 0), keep moving two tokens to B until the target is reached.\u201d\n\nExamine the proof and identify the step that is not justified.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The unjustified step is the claim that repeated moves can put any desired number in A. Each move changes A\u2019s count by two, so its parity never changes. Starting from (8, 0), A can only hold 8, 6, 4, 2 or 0 tokens; a distribution such as (7, 1) is unreachable.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Give a concrete counterexample with labelled start and target states, and explain why no sequence of legal moves connects them.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Start: A = 8, B = 0. Target: A = 7, B = 1.\n\nEvery legal move changes A\u2019s count by exactly two, so A\u2019s count remains even throughout any sequence starting from 8. The target requires an odd count, so no sequence of legal moves can reach it.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "State and prove the parity invariant precisely, including how the fixed total relates the parities of the two boxes.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Let a and b be the token counts in boxes A and B. The invariant is that, after every finite sequence of legal moves, a has the same parity as its starting value and b has the same parity as its starting value.\n\nProof: Initially, the claim is true. Each legal move changes one count by +2 and the other by \u22122, so neither parity changes. By induction, the claim holds after any number of moves.\n\nThe fixed total is a + b = 8, which is even. Therefore a and b always have the same parity: both even or both odd. In particular, an even-even starting state cannot reach an odd-odd target, or vice versa.",
+          "reply_budget": 211,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Prove the converse constructively: for any two valid states whose A-counts have the same parity, show how to reach the target. Address which direction to move, why every move is legal, and why the process terminates.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Let the start be (a, 8 \u2212 a) and the target be (t, 8 \u2212 t), with a and t valid counts of the same parity. Then |t \u2212 a| is even.\n\nIf a < t, move two tokens from B to A repeatedly. Before each move, A is at most t \u2212 2, so B contains at least 8 \u2212 (t \u2212 2) \u2265 2 tokens. Each move is legal.\n\nIf a > t, move two tokens from A to B repeatedly. Before each move, A is at least t + 2 \u2265 2, so each move is legal. If a = t, make no moves.\n\nEach move reduces |t \u2212 a| by two, so after exactly |t \u2212 a| / 2 moves A contains t tokens. The total remains eight, so B then contains 8 \u2212 t tokens: the target state.",
+          "reply_budget": 254,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Starting from A = 5, B = 3, show a nontrivial legal move trace to another reachable state. Then list every state reachable from that start and explain how the trace and your proof support the list.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "A legal trace is (A=5, B=3) \u2192 (A=3, B=5) \u2192 (A=1, B=7), moving two tokens from A to B each time.\n\nEvery reachable state is (A=1, B=7), (A=3, B=5), (A=5, B=3), or (A=7, B=1). A must remain odd because each move changes its count by two. Conversely, the constructive proof shows that every valid odd A-count can be reached; the trace illustrates two such moves.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Write a small self-contained enumerator for the original move rule and compare its output with the parity proof. Include starting states from both parity classes and the boundary states.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "This breadth-first enumerator applies the original move rule directly:\n\n```python\nfrom collections import deque\n\n\ndef reachable(start):\n    seen = {start}\n    queue = deque([start])\n    while queue:\n        a, b = queue.popleft()\n        for state in ((a - 2, b + 2), (a + 2, b - 2)):\n            if min(state) >= 0 and state not in seen:\n                seen.add(state)\n                queue.append(state)\n    return sorted(seen)\n\n\nfor start in [(0, 8), (1, 7), (5, 3), (8, 0)]:\n    print(f'{start}: {reachable(start)}')\n```\n\nThe expected output is:\n\n```text\n(0, 8): [(0, 8), (2, 6), (4, 4), (6, 2), (8, 0)]\n(1, 7): [(1, 7), (3, 5), (5, 3), (7, 1)]\n(5, 3): [(1, 7), (3, 5), (5, 3), (7, 1)]\n(8, 0): [(0, 8), (2, 6), (4, 4), (6, 2), (8, 0)]\n```\n\nThe enumerated states match the proof: each start reaches every valid state with the same A-count parity, and none with the opposite parity.",
+          "reply_budget": 421,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Now suppose the rules also permit one single-token transfer. Analyze reachability under two interpretations: the single-token move may be used at most once, or it must be used exactly once. Address boundary states and whether a legal single-token move always exists with eight tokens.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "With **at most one** single-token transfer, every valid state is reachable. Use only two-token moves when the target has the same A-count parity; otherwise, make one legal single-token move and then use two-token moves to reach the target.\n\nWith **exactly one** single-token transfer, a target is reachable if and only if its A-count has the opposite parity from the start. The single-token move flips parity, and all two-token moves preserve it. For any opposite-parity target, make a legal single-token move first, then use the constructive two-token procedure to reach the target.\n\nA legal single-token move always exists: eight tokens cannot leave both boxes empty. At a boundary, move one token from the full box to the empty box. Consequently, a state cannot return to itself if exactly one single-token move is required.",
+          "reply_budget": 253,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Finish with a fresh worked example starting at (A=6, B=2), using targets (A=2, B=6) and (A=3, B=5). For each target, show a valid trace or explain why it is impossible under the original rule, the at-most-once rule, and the exactly-once rule. Connect the results to the invariant and construction established earlier.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Write states as (A, B). A two-token move preserves A\u2019s parity; a single-token move flips it.\n\n**Target (2, 6):**\n- Original rule: (6, 2) \u2192 (4, 4) \u2192 (2, 6), transferring two from A to B each time.\n- At most one single-token move: the same trace works, using none.\n- Exactly one single-token move: impossible. A starts and ends even, but exactly one single-token move would make it odd.\n\n**Target (3, 5):**\n- Original rule: impossible. A starts even and must remain even, while the target is odd.\n- At most one single-token move: (6, 2) \u2192 (5, 3) \u2192 (3, 5), transferring one and then two from A to B.\n- Exactly one single-token move: the same trace works; it uses exactly one single-token move.\n\nEvery transfer in these traces is legal because its source has enough tokens. The results match the earlier construction: two-token moves reach every valid state of the same parity, and one legal single-token move first switches to the other parity class.",
+          "reply_budget": 320,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Generalize the original, at-most-once, and exactly-once reachability rules to any nonnegative total N, paying particular attention to N = 0. Write a runnable finite-state enumerator that tracks whether the single-token move has been used, and use it to check the at-most-once and exactly-once parity characterizations across a meaningful range of small totals. Explain the zero-token exception and reuse the earlier proof ideas without repeating the old traces.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "For a nonnegative total `N`, write the start as `(a, N-a)` and the target as `(t, N-t)`, where `0 \u2264 a, t \u2264 N`.\n\n- **Original rule:** The target is reachable exactly when `a` and `t` have the same parity. Each two-token move preserves parity. Conversely, move two tokens toward the target until A reaches `t`; the source has enough tokens at every step, and the process takes `|t-a| / 2` moves.\n- **At most one single-token move:** Every valid target is reachable, including when `N = 0`. For matching parity, use the original construction. For opposite parity, `N > 0`, so one box is nonempty: make a legal single-token move from it, then use two-token moves to reach the target.\n- **Exactly one single-token move:** If `N > 0`, the target is reachable exactly when `a` and `t` have opposite parity. One single-token move flips parity, while two-token moves preserve it; the construction above proves sufficiency. If `N = 0`, no target is reachable under this requirement: the only state is `(0, 0)`, and there is no token to move.\n\nThe following self-contained Python enumerator tracks both the distribution and whether the single-token move has been used. Its assertions check all starts and targets for totals from 0 through 20, including boundary states:\n\n```python\nfrom collections import deque\n\n\ndef reachable(n, start_a):\n    \"\"\"Return (A count, single move used) states reachable at most once.\"\"\"\n    if n < 0 or not 0 <= start_a <= n:\n        raise ValueError(\"Invalid total or starting count\")\n\n    start = (start_a, False)\n    seen = {start}\n    queue = deque([start])\n\n    while queue:\n        a, used = queue.popleft()\n        b = n - a\n        next_states = []\n\n        if a >= 2:\n            next_states.append((a - 2, used))\n        if b >= 2:\n            next_states.append((a + 2, used))\n        if not used:\n            if a >= 1:\n                next_states.append((a - 1, True))\n            if b >= 1:\n                next_states.append((a + 1, True))\n\n        for state in next_states:\n            if state not in seen:\n                seen.add(state)\n                queue.append(state)\n\n    return seen\n\n\ndef check():\n    for n in range(21):\n        for start_a in range(n + 1):\n            states = reachable(n, start_a)\n            original = {a for a, used in states if not used}\n            at_most_once = {a for a, _ in states}\n            exactly_once = {a for a, used in states if used}\n\n            assert original == {\n                t for t in range(n + 1) if (t - start_a) % 2 == 0\n            }\n            assert at_most_once == set(range(n + 1))\n            assert exactly_once == {\n                t for t in range(n + 1)\n                if n > 0 and (t - start_a) % 2 != 0\n            }\n\n    print(\"All reachability characterizations hold for N = 0..20.\")\n\n\nif __name__ == \"__main__\":\n    check()\n```\n\nThe `used=False` states also enumerate the original rule. For `N = 0`, the search retains `(0, False)` and has no `used=True` state.",
+          "reply_budget": 942,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    }
+  ]
+}

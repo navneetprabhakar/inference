@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-050",
+      "source_group": "dev_music",
+      "family": "natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "A duet has how many performers?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Two.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Name the term for a performance by one person.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Solo.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Which term did I ask about first?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Duet.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-051",
+      "source_group": "dev_code_set",
+      "family": "code_state",
+      "category": "code_state",
+      "turns": [
+        {
+          "user": "What is len({2, 2, 5}) in Python?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "2",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Why not 3?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "A set keeps distinct elements, so the repeated 2 counts once.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Does that answer depend on the set iteration order?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-052",
+      "source_group": "dev_location",
+      "family": "code_state",
+      "category": "code_state",
+      "turns": [
+        {
+          "user": "The drill is under the workbench. Where should I look?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Under the workbench.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "It has been moved to the tool rack. Where is it now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "On the tool rack.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Was its first location the rack?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-053",
+      "source_group": "dev_word_limit",
+      "family": "natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Describe a calm lake in exactly four words.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Still water reflects sky.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Use a different description, still exactly four words.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Still water mirrors clouds.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Repeat only the last word.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "clouds",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-054",
+      "source_group": "dev_unknown_model",
+      "family": "natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Tell me which browser I currently have open.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "I can't determine that from this conversation.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "I am using Firefox. Which browser am I using?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Firefox.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Did you independently inspect my computer?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "No. You told me which browser you are using.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    }
+  ]
+}

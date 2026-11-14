@@ -1,0 +1,46 @@
+{
+  "utc": "2026-11-14T05:57:15.575659+00:00",
+  "local_checks": "pass",
+  "gpu_authorized": false,
+  "gpu_qualified": false,
+  "tests_passed": 150,
+  "actual_training_cli_preflight": {
+    "status": "admitted_inputs_verified_not_GPU_qualified",
+    "packed_rows": 274,
+    "planned_updates": 35,
+    "packing_buffer_size": 1,
+    "stage": "general",
+    "batch_tokens": 32768,
+    "rows_per_update": 8,
+    "lr_batch_scale": 0.25,
+    "assistant_targets": 350692
+  },
+  "freeze": {
+    "status": "verified_not_training_authorization",
+    "files": 31,
+    "release_model_exposures": 0
+  },
+  "http_8765": "off",
+  "new_training": false,
+  "code_sha256": {
+    "cloud_training/nano_sft.py": "4f0a8a9675c70030c3159ed06809cede032f0a084049f674a3e3c52c77981dc1",
+    "cloud_training/nano_quality.py": "cf189ff4b5f3b288351c008886a5ed60e3512d283731f214f9720d861329ea45",
+    "cloud_training/nano_package.py": "1e5bb5c56298db0f808ed941a5537d37d2d743cb4cc115514aa908f34871d4be",
+    "cloud_training/nano_restart_compare.py": "1447ba52eb8859d74d2327cfa141257e779365ce5d83b8cd6b632d8367f26c55",
+    "verify_nano_sft.py": "8dddb184206a8eb73b4e9e727fddf7eccaaa1629c03f072dd32508495c12efd5",
+    "verify_nano_quality.py": "3b8ab3451a917a3aa90a151f95b4636d81a84b3d9ed85046f9682fe7dc1964fa",
+    "verify_nano_package.py": "44dac418592120a90b1d86ed73dbd890165bfede4b9feb4b9a0a788206fb1684",
+    "verify_nano_restart_compare.py": "d4093f8be4a949600a644f45bb864d29448b5c90fe52dd0b2e59e26d46b93fd7",
+    "verify_nano_campaign_watch.py": "cc74624ba65aaaa3940cf2eb569cec830591b1d18878681bd6775d8932320d97"
+  },
+  "remaining_gates": [
+    "Explicit user-approved finite cap",
+    "Bind new STOP/non-auto-delete lease and bootstrap; reject retired DELETE launch path",
+    "CUDA4K memory/runtime/exact fresh-process restart and signal/backup/provider-stop qualification",
+    "Bounded pilot generated behavior, then separately gated release and selected-model local acceptance"
+  ],
+  "caveats": [
+    "CPU and full-size MPS forward checks do not certify CUDA training.",
+    "Budget figures bound attempts, not guaranteed completion or repaired quality."
+  ]
+}

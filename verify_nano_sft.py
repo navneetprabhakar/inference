@@ -162,6 +162,37 @@ class SFTTests(unittest.TestCase):
         state['buffer']=[0,0]
         with self.assertRaises(ValueError):restored.load_state_dict(state)
 
+    def test_cli_defaults_to_order_preserving_buffer_and_rejects_invalid(self):
+        from unittest.mock import patch
+        from cloud_training.nano_sft import main
+        with tempfile.TemporaryDirectory() as t:
+            argv=['nano_sft','--validate-only']
+            for key in ('manifest','base','base-manifest-sha','tokenizer','tokenizer-sha','repo','quality-contract'):
+                argv.extend(['--'+key,str(Path(t)/key)])
+            argv.extend(['--output',str(Path(t)/'output')])
+            with patch('sys.argv',argv),patch('cloud_training.nano_sft.run',return_value=0) as run:
+                self.assertEqual(main(),0);self.assertEqual(run.call_args.args[0].packing_buffer_size,1)
+            for value in ('0','101'):
+                with patch('sys.argv',argv+['--packing-buffer-size',value]),patch('sys.stderr'),patch('cloud_training.nano_sft.run') as run:
+                    with self.assertRaises(SystemExit):main()
+                    run.assert_not_called()
+
+    def test_buffer_one_preserves_shuffled_order_and_restart_identity(self):
+        # Longest-first packing otherwise delays short corrective lessons.
+        data=FakeDataset([2,10,3,9,4]);pack=BestFitConversations(data,capacity=13,buffer_size=1)
+        seen=[]
+        while True:
+            state=pack.state_dict()
+            restored=BestFitConversations(data,capacity=13,buffer_size=1)
+            restored.load_state_dict(state)
+            try:indices=pack.next_indices()
+            except StopIteration:break
+            self.assertEqual(indices,restored.next_indices());seen.extend(indices)
+        self.assertEqual(seen,list(range(len(data))))
+        self.assertEqual(count_packed_rows(data,buffer_size=1),1)
+        with self.assertRaisesRegex(ValueError,'identity'):
+            BestFitConversations(data,capacity=13,buffer_size=100).load_state_dict(state)
+
     def test_padding_and_final_short_update_have_no_targets(self):
         d=FakeDataset([3]);p=BestFitConversations(d,capacity=5)
         batches,count=collect_update(p,microbatch=2,rows_per_update=2)

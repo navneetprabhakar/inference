@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-030",
+      "source_group": "long-packs",
+      "family": "long_context_tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Our fictional neighborhood lending library is preparing welcome packs for 48 households. Each household should receive one reusable envelope containing two loan cards, one large-print borrowing guide, and one contact card. We have 110 loan cards available, and the other materials are sufficient. We want each pack to feel useful to someone visiting the library for the first time, without assuming that every household will use the service in the same way.\n\nImani coordinates the volunteers and will assign the packing and distribution work. Teo checks that each envelope contains the right materials. Ren handles accessibility requests and can help volunteers respond when a household tells us that the standard arrangements are difficult. Sol manages the private household list. Volunteers may use first names privately when needed to carry out their work, but household name lists must not be posted publicly or shared outside the team.\n\nThe borrowing guide should use clear language and large print. When handing over a pack, volunteers should offer a verbal explanation of how borrowing works, while making it easy for someone to decline. We don't want volunteers to assume that a person needs an explanation or to discuss someone's accessibility request in front of others.\n\nWe are considering two approaches. One is a staffed pickup table inside the library. The entrance has step-free access, and a table would let households collect their packs and ask questions in one place. It would also give volunteers a straightforward place to check that each pack is complete. However, step-free access does not mean every household can get to the library or comfortably collect a pack.\n\nThe other approach is hand delivery by volunteers. That could reach households who find pickup difficult and provide a chance to offer an explanation at the door. It would also require more coordination, careful handling of household information, and a way to avoid leaving packs where they might be lost or expose private details. Some households may prefer to collect their own pack rather than receive a visit.\n\nWe haven't chosen an approach yet. Which best fits these constraints, and what practical tradeoffs should inform the decision?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "A staffed pickup table with delivery available by request best fits the constraints. It gives households a choice and keeps routine packing and collection straightforward, while providing another route for people who cannot comfortably collect a pack.\n\n- Prepare 48 envelopes with two loan cards each: 96 cards are needed, leaving 14 spare. Teo can check each pack before distribution; Imani can coordinate shifts and requested deliveries.\n- At pickup or delivery, offer a brief verbal explanation and make declining easy. Refer accessibility requests privately to Ren; step-free access alone does not establish that pickup works for everyone.\n- Have Sol manage the household list and share only the information volunteers need for their assigned work. Do not post names publicly or share the list outside the team.\n- Arrange deliveries with households in advance, including a suitable handover. Do not leave a pack unattended without an agreed safe arrangement that protects privacy.\n\nThe tradeoff is coordination: pickup is simpler, while delivery requires scheduling and careful information handling. Offering both also requires a clear way for households to request delivery or another arrangement without disclosing private needs in public.",
+          "reply_budget": 286,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Before we settle the packing plan, please make exactly one tool call to check the initial loan-card demand: `calculate(op='multiply', a=48, b=2)`. Compare the observed result with our stock.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 48,
+                "b": 2,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "The tool returned 96 loan cards. With 110 in stock, you have enough for all 48 packs, with 14 cards left over.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Let's use the staffed table with delivery available by request. How should households who can't collect arrange delivery, and how can volunteers handle accessibility requests privately without assuming what anyone needs?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Give households a private way to request delivery, such as a phone number or direct message to Sol. Make clear that they can choose delivery without explaining why. Sol can arrange a suitable time and handover with them, then share only the details the assigned volunteer needs. Agree on a safe alternative if nobody is available; don\u2019t leave a pack unattended without an agreed arrangement.\n\nFor accessibility, invite everyone to say privately if a different arrangement would help. Ask what works for them rather than guessing, and involve Ren with the household\u2019s agreement. Share only what volunteers need to carry out the arrangement, and avoid discussing requests at the table or doorstep where others can hear.\n\nAt either handover, a volunteer can say, \u201cWould you like a brief explanation of how borrowing works?\u201d and accept no for an answer.",
+          "reply_budget": 228,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The household count has increased to 54. Please make exactly one further tool call, `calculate(op='multiply', a=54, b=2)`, and compare the observed demand with our stock of 110 loan cards.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 54,
+                "b": 2,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "The tool returned 108 loan cards. With 110 in stock, you have enough for all 54 packs, with 2 cards left over.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "A volunteer suggested posting a checklist with household names beside the pickup table so everyone can see who has collected a pack. How should we handle tracking instead?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Keep the checklist private with Sol or an assigned volunteer, rather than posting household names beside the table. Mark each pack as collected or delivered, and give volunteers access only to the details they need for their work.\n\nFor a public progress display, use an aggregate count with no household names. Handle any identification or accessibility arrangements discreetly, away from other households.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Please turn our decisions into practical instructions for the volunteers, covering packing checks, each person's role, pickup and requested delivery, accessibility, and private tracking.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "**Volunteer instructions: welcome packs**\n\n- **Pack and check:** Prepare 54 reusable envelopes. Put two loan cards, one large-print borrowing guide and one contact card in each. Teo checks every envelope before distribution. The checked demand is 108 loan cards, leaving two of the 110 in stock.\n- **Coordinate:** Imani assigns packing, table and delivery work. Sol manages the private household list and shares only the details volunteers need for their assignments.\n- **Staffed pickup:** Welcome households at the library table and hand over a checked pack. Offer, \u201cWould you like a brief explanation of how borrowing works?\u201d Accept a no without pressure.\n- **Requested delivery:** Give households a private way to contact Sol to request delivery; they do not need to explain why. Agree on a time and handover, and share the necessary details with the assigned volunteer. Do not leave a pack unattended without an agreed safe arrangement that protects privacy.\n- **Accessibility:** Invite everyone to request a different arrangement privately. Ask what would work for them; do not assume what they need. With their agreement, involve Ren, who can help volunteers arrange support. Keep conversations out of earshot of others.\n- **Track privately:** Sol or an assigned volunteer records collection or delivery on a private checklist. Never post household names or share the list outside the team. A public progress display may show an aggregate count.",
+          "reply_budget": 359,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ],
+      "system": "Use authorized calculate or convert tools when the user requests a tool calculation; ground answers in observed results. Explain planning choices naturally."
+    },
+    {
+      "id": "dev-full-031",
+      "source_group": "long-display",
+      "family": "long_context_tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "I'm drafting an illustrated display for a fictional classroom where learners are practicing metric length conversions. I'd like feedback on the clarity, visual explanations, and tone. Here's the draft:\n\n**One length, different names**\n\nHave you ever described the same journey in two ways? Perhaps you said it was a short walk, then counted the steps it took. Measurements can give us different ways to describe a length, too. Let's look closely and ask what stays the same.\n\n**Illustration 1: A ribbon**\n\nImagine a ribbon stretched flat across a table. In one picture, a meter ruler sits beside it. In another, the very same ribbon sits beside centimeter markings. The two labels use different units, so the numbers look different. The ribbon does not have to be cut, stretched, or moved to change its label.\n\nA centimeter is a smaller unit than a meter. It takes more centimeters to describe the same length. You might see a bigger number in centimeters, so perhaps the ribbon is bigger in that picture. Look again: what could you compare in the illustrations to decide?\n\nIf you were explaining the two labels to a friend, what would you point to first? You could trace the ends of the ribbon with your finger, then look at how many spaces on each ruler fit between them. What do you notice about the size of those spaces?\n\n**Illustration 2: A model bridge**\n\nNow picture a small model bridge on a classroom table. One drawing shows its length labeled in centimeters. A second drawing shows the same bridge labeled in millimeters. The bridge is not being rebuilt between pictures. We are choosing a different-sized unit to describe the distance from one end to the other.\n\nThe millimeter markings are closer together than the centimeter markings. That means more of them fit along the same bridge. A larger number in a label does not automatically mean a longer object: first ask which unit the number counts.\n\n**Talk it through**\n\nChoose one illustration and finish this thought: \u201cThe number changed because \u2026\u201d Then try: \u201cThe object's length stayed the same because \u2026\u201d There may be several useful ways to explain your thinking. You can use the pictures, point to the markings, or use your own words.\n\nWhat could make these explanations or illustrations clearer? Please flag anything that might accidentally reinforce a misconception.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "The central idea is clear and the invitation to point, compare and explain gives learners several ways to participate. A few changes would make the illustrations do more of the teaching:\n\n- Show each object at the same scale in both pictures, with its endpoints aligned to the ruler markings. Otherwise, a drawing resized to fit the page could suggest that its length changed.\n- Add concrete labels and unit relationships, such as a 1 m ribbon also labeled 100 cm, and a 10 cm bridge also labeled 100 mm. Show the spaces between markings, not just the marks themselves.\n- Rephrase \u201cperhaps the ribbon is bigger in that picture.\u201d Although the next question challenges it, stating the misconception may reinforce it. Ask instead: \u201cThe centimeter number is larger. Does that mean the ribbon is longer? Compare its endpoints.\u201d\n- Replace \u201cmight see a bigger number\u201d with \u201cthe number is bigger when the same length is measured in a smaller unit.\u201d This makes the relationship more definite.\n- For the bridge, use a ruler detail or magnified inset so millimeter spaces are distinguishable. Label units clearly on both pictures.\n\nThe friendly, exploratory tone works. The journey analogy could be more precise: comparing meters and centimeters along the same route would connect more directly to measuring a single length than contrasting a short walk with a step count.",
+          "reply_budget": 342,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Let\u2019s use a 2.4 m ribbon in the illustration. Please make exactly one tool call, `convert(value=2.4, from='m', to='cm')`, and use the observed result for its centimeter label.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "m",
+                "to": "cm",
+                "value": 2.4
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "The tool returned 240 cm. Label the ribbon **2.4 m = 240 cm**.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Please revise the ribbon section around that label. Make clear why the number changes even though the ribbon stays the same length, and suggest how the illustration can show this.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "**Illustration 1: A ribbon**\n\nThis ribbon is **2.4 m** long. The same length is **240 cm**.\n\nA centimeter is smaller than a meter: 100 centimeters fit in one meter. So it takes more centimeters than meters to measure the ribbon. The number changes because we are counting smaller units; the ribbon itself stays the same length.\n\nLook at the ribbon\u2019s two ends in each picture. What stays in the same place? What changes on the ruler?\n\n*Illustration suggestion:* Show the same ribbon at the same scale in two aligned drawings, with its ends in the same positions. Place a meter ruler beside one and centimeter markings beside the other. Label them **2.4 m** and **240 cm**, and include a close-up showing that 1 meter contains 100 centimeter spaces.",
+          "reply_budget": 242,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "For the second illustration, let's use a model bridge that is 36 cm long. Please make exactly one further tool call, `convert(value=36, from='cm', to='mm')`, and use the observed result for its millimeter label.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "cm",
+                "to": "mm",
+                "value": 36
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "The tool returned 360 mm. Label the bridge **36 cm = 360 mm**.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "One learner says, \u201cI\u2019m worried I\u2019ll get the answer wrong. Does 360 mean the bridge got longer?\u201d How could the display respond gently while explaining the difference between the number and the bridge\u2019s length?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "**Does 360 mean the bridge got longer?**\n\nNo\u2014and it\u2019s a good question! The bridge stays exactly the same length. We can call that length **36 centimeters** or **360 millimeters**.\n\nA millimeter is smaller than a centimeter: 10 millimeters fit in 1 centimeter. So we count more millimeters along the same bridge. The **number** changes because the units are smaller; the bridge\u2019s **length** stays the same.\n\nLook at the ends of the bridge in both pictures. Do they line up in the same places?",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Please bring this together as a final illustrated classroom activity using both the ribbon and bridge. Include visual directions and prompts that help learners explain why the numbers change while the lengths stay the same, with no competition.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "# One length, different names\n\nA length can have different names. Changing the unit changes the number we count, while the object stays the same length.\n\n## Look at the ribbon\n\nThe ribbon is **2.4 m = 240 cm** long. One meter contains 100 centimeters. Because centimeters are smaller, it takes more of them to measure the same ribbon.\n\n*Illustration:* Show the same ribbon twice at the same scale, with both ends aligned. Place meter markings beside one picture and centimeter markings beside the other. Add a close-up showing 100 centimeter spaces in one meter.\n\n**Talk or point:** Where are the ribbon\u2019s ends in each picture? Why is the centimeter number bigger?\n\n## Look at the model bridge\n\nThe bridge is **36 cm = 360 mm** long. One centimeter contains 10 millimeters. The number is bigger because we are counting smaller units, not because the bridge got longer.\n\n*Illustration:* Show the same bridge twice at the same scale, with both ends aligned. Label one picture in centimeters and the other in millimeters. Add a magnified ruler detail showing 10 millimeter spaces in one centimeter.\n\n**Talk or point:** What stays the same in the two pictures? What does the number 360 count?\n\n## Explain your thinking\n\nChoose either picture. You can point, draw, speak or write:\n\n- \u201cThe number changed because \u2026\u201d\n- \u201cThe length stayed the same because \u2026\u201d\n\nTake your time. You can share your thinking in your own way; there is no race.",
+          "reply_budget": 390,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ],
+      "system": "Use authorized calculate or convert tools when the user requests a tool calculation; ground answers in observed results. Explain planning choices naturally."
+    },
+    {
+      "id": "dev-full-032",
+      "source_group": "b50-seed-exhibit",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I\u2019m revising a fictional museum exhibit about a made-up plant called the ribbon cup. Our observation card says:\n\n\u201cOn a dry afternoon, 12 ribbon-cup seeds were released one at a time from the same shelf in a still room. Eight landed within one floor tile of the shelf; four landed farther away. Each seed had a thin wing. In a separate hallway visit, one winged seed moved three tiles when a cart passed.\u201d\n\nThe current label says: \u201cRibbon cups evolved wings so wind always carries every seed far from its parent. The hallway test proves this strategy works in nature.\u201d\n\nPlease sort what we have into direct observations, plausible interpretations, and claims the card cannot establish. Then diagnose the label\u2019s overclaims, keeping the numbers and the limits of the hallway observation clear. Use only this fictional evidence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "- **Direct observations:** In a still room, 12 seeds were released individually from the same shelf. Eight landed within one floor tile; four landed farther away. Each had a thin wing. Separately, one winged seed moved three tiles in a hallway when a cart passed.\n- **Plausible interpretations:** Wings might affect how seeds move, and air disturbed by the cart might have contributed to the hallway seed\u2019s movement. Neither explanation was isolated by a controlled comparison.\n- **Not established:** Why wings evolved, whether wind always carries every seed far, what counts as far from a parent in nature, or how reliably this works outdoors.\n- **Label diagnosis:** The label turns a possible function into a proven evolutionary purpose and uses \u201calways\u201d and \u201cevery\u201d without support. The single hallway observation shows movement under those particular conditions; it does not prove a dispersal strategy works in nature. The still-room results also show variation: eight seeds landed within one tile, while four landed farther away.",
+          "reply_budget": 271,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Could you draft a short exchange between a child and facilitator that distinguishes what they saw the hallway seed do from what might have caused it to move?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Child:** I saw the seed move three tiles when the cart passed.\n\n**Facilitator:** Yes, that\u2019s what we observed. What do you think might have moved it?\n\n**Child:** Maybe the cart stirred the air and pushed it.\n\n**Facilitator:** That\u2019s one possible explanation. We didn\u2019t test what caused the movement, so we can\u2019t be sure.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "We have another observation: in a second still-room release from the same shelf, a wingless model landed farther away than an otherwise similar winged model. What can we infer from that? Design an indoor comparison using our models and fan, including what to vary, hold constant, and record.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "- **Inference:** In this one comparison, the wingless model landed farther than the winged model. That does not establish what caused the difference or show that wings generally reduce travel distance; individual releases can vary.\n- **Indoor comparison:** Release winged and wingless models repeatedly from the same shelf, alternating their order. Compare them with the fan off and with it on at a fixed setting and position. Hold the release point, release method, model size and mass, and room conditions as constant as practical; the wing should be the intended difference between models.\n- **Record:** For each release, note the model, fan condition, landing distance and direction. Compare the distributions across repeated trials, rather than relying on a single landing. The results would describe these models under these indoor conditions, not prove how real seeds disperse outdoors.",
+          "reply_budget": 232,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The dialogue sounds a bit like a quiz. Could you make it more curious and conversational? Also, explain why the indoor comparison cannot establish how the wings evolved.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Child:** The seed went three tiles when the cart came past!\n\n**Facilitator:** It did. I wonder what got it moving.\n\n**Child:** Maybe the cart pushed some air toward it?\n\n**Facilitator:** Maybe. We saw the movement, but we didn't test what caused it. We could try some different conditions and see what happens.\n\nThe indoor comparison can show how these models move under the conditions tested. It cannot establish how wings evolved: it doesn't examine the plant's ancestors, inherited variation, or whether wings affected reproduction across generations.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "A visitor says, \u201cThe cart proves wind carries these seeds in nature.\u201d How might the facilitator respond conversationally using only our evidence? And how could the exhibit include the wingless model\u2019s longer trip without implying wings never affect movement?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Visitor:** \u201cThe cart proves wind carries these seeds in nature.\u201d\n\n**Facilitator:** \u201cWe saw one seed move three tiles when the cart passed. Maybe the cart stirred the air, but we didn\u2019t test what moved the seed, or what happens outdoors.\u201d\n\nFor the model display, you could say: \u201cIn one still-room comparison, the wingless model landed farther away than the winged model. Other releases could turn out differently; this comparison alone doesn\u2019t establish how wings affect movement.\u201d",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Please turn this into a fresh facilitator activity with a setup, conversational prompts, a simple way to record results, and a closing discussion. Use the equipment we have and keep observations distinct from inferences.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Setup:** Place the winged and wingless models at the same shelf, with a clear landing area. Position the fan where it can stay fixed. Release each model several times with the fan off, then with it on at one setting. Alternate which model goes first, and keep the release point and method as consistent as practical.\n\n**During the activity:**\n\n**Facilitator:** \u201cLet\u2019s see where these land. What do you notice?\u201d\n\n**Visitor:** \u201cThat wingless one went farther.\u201d\n\n**Facilitator:** \u201cIt did on that release. I wonder whether we\u2019ll see the same thing again. What might change when we turn the fan on?\u201d\n\n**Record:** For each release, write down the model, whether the fan was on or off, and the landing distance and direction. Add a separate column for ideas about why it moved that way.\n\n**Closing discussion:** Look across the results together. \u201cWhat patterns did we actually see? What might explain them? Did any releases surprise us?\u201d The comparison describes these models indoors; it cannot establish how real seeds move outdoors or how their wings evolved.",
+          "reply_budget": 301,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Could you write a volunteer training roleplay with a facilitator and two visitors? One visitor insists the hallway observation proves wind carries the seeds in nature; the other says the model comparison proves wings never help. Show their objections and the facilitator\u2019s responses in a realistic conversation. Use the observations accurately, don\u2019t invent results, and have them arrive at a question they could actually test with the models and fan.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Facilitator:** Let\u2019s start with the hallway observation. What did we see?\n\n**Visitor 1:** The seed moved three tiles when the cart passed. That proves wind carries these seeds in nature.\n\n**Facilitator:** We did see one seed move three tiles. The cart might have stirred the air, but we didn\u2019t test what caused the movement. And the observation was indoors, so it doesn\u2019t tell us what happens in nature.\n\n**Visitor 1:** But the seed has a wing. Surely the air could catch it?\n\n**Facilitator:** It could be a useful idea to investigate. Having a plausible explanation is different from knowing that\u2019s what happened on that occasion.\n\n**Visitor 2:** The model comparison settles the wing question anyway. The wingless one went farther, so wings never help.\n\n**Facilitator:** In that one still-room comparison, the wingless model did land farther than the otherwise similar winged model. But one release of each doesn\u2019t tell us what would happen across other releases or with moving air.\n\n**Visitor 2:** So how could we check?\n\n**Facilitator:** We could ask: *Under these indoor conditions, how do the landing distances of the winged and wingless models compare with the fan off and with it on?* We can release each model several times in both conditions, keeping the shelf, release method and fan position consistent. We\u2019ll record each distance and look for patterns together.",
+          "reply_budget": 372,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "A volunteer has just told me that every winged-model release was done with the fan on, while every wingless-model release was done with it off. Can you work through what that procedure can and cannot show, then propose the smallest redesign using our models, shelf and fan that lets us separate the effects of the wing and the fan? Keep the earlier controls and recording requirements. Please include an example observation sheet with any sample entries clearly marked as hypothetical. Use the earlier observations as context, but there\u2019s no need to repeat the full activity.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "- **What the procedure shows:** It compares winged models with the fan on against wingless models with the fan off. Any difference in landing distance could be associated with the wing, the fan, their interaction, or variation between releases. Because wing and fan conditions changed together, their effects cannot be separated.\n- **What remains unclear:** This report conflicts with the earlier description of a winged and wingless model compared in a still room. Check which releases the volunteer meant before treating either description as settled. The separate hallway observation remains one seed moving three tiles as a cart passed; its cause was not tested.\n- **Smallest redesign:** Test all four combinations: winged and wingless, each with the fan off and on. Repeat each combination several times and alternate which model goes first. Keep the shelf, release point and method, room conditions, and fan position and setting consistent; make the wing the intended difference between otherwise similar models, including size and mass as closely as practical. Compare winged versus wingless results within each fan condition, and fan-on versus fan-off results for each model. Results apply to these models and indoor conditions.\n\n**Example observation sheet \u2014 all entries below are hypothetical, not reported results**\n\n| Trial | Model | Fan | Distance from shelf | Direction | Possible explanation, not observation |\n|---|---|---|---|---|---|\n| 1 | Winged | Off | 1 tile | Left | Release angle may matter |\n| 2 | Wingless | Off | 2 tiles | Forward | Release angle may matter |\n| 3 | Wingless | On | 3 tiles | Forward | Fan may have influenced movement |\n| 4 | Winged | On | 2 tiles | Right | Fan may have influenced movement |\n\nAdd rows for further releases and compare the spread of distances, not just one pair of landings.",
+          "reply_budget": 445,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The volunteer was describing a separate, later demonstration; the original observations remain unchanged. What should the evidence log retain as distinct entries, and how could we explain to a visitor why this clarification supports neither extreme claim about wings? Please keep this to the log correction and visitor explanation.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "**Evidence log**\n\n- **Original still-room releases:** Twelve winged seeds were released individually from the same shelf. Eight landed within one floor tile; four landed farther away.\n- **Hallway observation:** One winged seed moved three tiles when a cart passed. The cause of its movement was not tested.\n- **Original model comparison:** In a separate still-room release from the same shelf, the wingless model landed farther away than the otherwise similar winged model.\n- **Later demonstration:** Every winged-model release used the fan on; every wingless-model release used it off. Record any observed results separately if available. Because model and fan condition changed together, this procedure cannot separate their effects.\n\n**Visitor explanation**\n\n\u201cThe original still-room comparison did show the wingless model landing farther on that occasion. That one comparison doesn\u2019t establish that wings never help. The hallway seed moved when a cart passed, but we didn\u2019t test what caused it to move, so that doesn\u2019t prove wind carries these seeds in nature. In the later demonstration, the winged and wingless models were tested under different fan conditions, so we can\u2019t tell how much difference came from the wing or the fan.\u201d",
+          "reply_budget": 309,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-033",
+      "source_group": "b50-dependency-plan",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I\u2019m building a Python dependency planner. Task names are strings, and each value is a list of prerequisite names. Here\u2019s my starting point:\n\n```python\ndef plan(tasks, target):\n    seen, result = set(), []\n    def visit(name):\n        if name in seen:\n            return\n        seen.add(name)\n        for dep in tasks.get(name, []):\n            visit(dep)\n        result.append(name)\n    for name in sorted(tasks):\n        visit(name)\n    return result\n```\n\nA plan should contain the target and all its ancestors, with prerequisites before dependents. Whenever multiple tasks are available, choose the lexically smallest. For now, validate every task in the graph: missing references and cycles must raise errors without returning a partial plan.\n\nDiagnose the implementation, then provide a complete runnable replacement. Trace its output on a diamond where `app` depends on `api` and `ui`, and both depend on `core`; explain why the order is deterministic.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The original visits the whole graph instead of selecting the target\u2019s ancestors, ignores missing references, and treats cycles as already visited. DFS order also does not guarantee the lexically smallest task among all currently available tasks.\n\n```python\nimport heapq\n\n\ndef plan(tasks, target):\n    if target not in tasks:\n        raise ValueError(f\"Unknown target: {target}\")\n\n    # Validate the entire graph, including disconnected components.\n    dependents = {name: set() for name in tasks}\n    prerequisites = {}\n    for name, deps in tasks.items():\n        prerequisites[name] = set(deps)\n        for dep in prerequisites[name]:\n            if dep not in tasks:\n                raise ValueError(f\"Unknown prerequisite {dep} for {name}\")\n            dependents[dep].add(name)\n\n    indegree = {name: len(deps) for name, deps in prerequisites.items()}\n    ready = [name for name, degree in indegree.items() if degree == 0]\n    heapq.heapify(ready)\n    visited = 0\n    while ready:\n        name = heapq.heappop(ready)\n        visited += 1\n        for child in dependents[name]:\n            indegree[child] -= 1\n            if indegree[child] == 0:\n                heapq.heappush(ready, child)\n    if visited != len(tasks):\n        raise ValueError(\"Dependency cycle\")\n\n    needed = set()\n    pending = [target]\n    while pending:\n        name = pending.pop()\n        if name not in needed:\n            needed.add(name)\n            pending.extend(prerequisites[name])\n\n    indegree = {name: len(prerequisites[name]) for name in needed}\n    ready = [name for name, degree in indegree.items() if degree == 0]\n    heapq.heapify(ready)\n    result = []\n    while ready:\n        name = heapq.heappop(ready)\n        result.append(name)\n        for child in dependents[name] & needed:\n            indegree[child] -= 1\n            if indegree[child] == 0:\n                heapq.heappush(ready, child)\n    return result\n\n\nif __name__ == \"__main__\":\n    tasks = {\"app\": [\"api\", \"ui\"], \"api\": [\"core\"],\n             \"ui\": [\"core\"], \"core\": []}\n    print(plan(tasks, \"app\"))  # ['core', 'api', 'ui', 'app']\n```\n\n`core` is initially available. After it runs, `api` and `ui` become available; the heap selects `api` first, then `ui`, then `app`. The heap makes each choice lexical regardless of dictionary, dependency-list, or set iteration order.",
+          "reply_budget": 730,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Change the scope: validate and plan only the target and its reachable prerequisites. Show a concrete example with a valid target and a disconnected two-node cycle that the current implementation rejects unnecessarily. Then revise the complete function and include executable tests for the diamond, that disconnected cycle, a reachable cycle, a missing reference, and a repeated prerequisite. Keep lexical selection among all currently available tasks.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The current implementation rejects this graph because it validates the disconnected cycle, even though the plan for `app` is valid:\n\n```python\n{'app': ['core'], 'core': [], 'x': ['y'], 'y': ['x']}\n```\n\nThe revised function examines only the target's prerequisite closure. A heap selects the smallest available task, and sets treat repeated prerequisites as one dependency.\n\n```python\nimport heapq\n\n\ndef plan(tasks, target):\n    if target not in tasks:\n        raise ValueError(f'Unknown target: {target}')\n\n    needed = set()\n    pending = [target]\n    prerequisites = {}\n    while pending:\n        name = pending.pop()\n        if name in needed:\n            continue\n        needed.add(name)\n        deps = set(tasks[name])\n        for dep in deps:\n            if dep not in tasks:\n                raise ValueError(f'Unknown prerequisite {dep} for {name}')\n        prerequisites[name] = deps\n        pending.extend(deps)\n\n    dependents = {name: set() for name in needed}\n    indegree = {name: len(prerequisites[name]) for name in needed}\n    for name, deps in prerequisites.items():\n        for dep in deps:\n            dependents[dep].add(name)\n\n    ready = [name for name in needed if indegree[name] == 0]\n    heapq.heapify(ready)\n    result = []\n    while ready:\n        name = heapq.heappop(ready)\n        result.append(name)\n        for child in dependents[name]:\n            indegree[child] -= 1\n            if indegree[child] == 0:\n                heapq.heappush(ready, child)\n    if len(result) != len(needed):\n        raise ValueError('Dependency cycle')\n    return result\n\n\ndef raises(fn):\n    try:\n        fn()\n    except ValueError:\n        return\n    raise AssertionError('expected ValueError')\n\n\nif __name__ == '__main__':\n    diamond = {'app': ['api', 'ui'], 'api': ['core'],\n               'ui': ['core'], 'core': []}\n    assert plan(diamond, 'app') == ['core', 'api', 'ui', 'app']\n    assert plan({'app': ['core'], 'core': [],\n                 'x': ['y'], 'y': ['x']}, 'app') == ['core', 'app']\n    raises(lambda: plan({'a': ['b'], 'b': ['a']}, 'a'))\n    raises(lambda: plan({'a': ['missing']}, 'a'))\n    assert plan({'a': ['b', 'b'], 'b': []}, 'a') == ['b', 'a']\n```",
+          "reply_budget": 755,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Duplicate prerequisite entries are allowed and should count as one dependency without changing the established ordering. Review whether your function and tests satisfy that rule, and correct them if needed. Then provide a final runnable example combining the original diamond with an unrelated two-node cycle and a repeated prerequisite; explain its exact output.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The function already satisfies the duplicate rule: `set(tasks[name])` collapses repeated prerequisites before computing indegrees. Its existing repeated-prerequisite test checks this, though the combined example below also checks that the diamond\u2019s ordering is unchanged. No function correction is needed.\n\nRun this after the previously supplied `plan` function:\n\n```python\ntasks = {\n    'app': ['api', 'ui', 'api'],  # repeated prerequisite\n    'api': ['core'],\n    'ui': ['core'],\n    'core': [],\n    'x': ['y'],                   # unrelated cycle\n    'y': ['x'],\n}\n\nresult = plan(tasks, 'app')\nprint(result)\nassert result == ['core', 'api', 'ui', 'app']\n```\n\nThe exact output is `['core', 'api', 'ui', 'app']`. Only `app` and its reachable prerequisites are examined, so the `x`\u2013`y` cycle is ignored. After `core`, both `api` and `ui` are available; the heap chooses `api` first. The duplicate `api` entry counts once.",
+          "reply_budget": 334,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Please update the planner to raise a `CycleError` that exposes a closed cycle path when it finds a reachable cycle. Keep target-only validation, lexical ordering, missing dependency errors, and duplicate-edge handling. Provide complete runnable code and focused tests that verify each edge in the reported cycle and confirm disconnected cycles are ignored.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "- `CycleError` is a `ValueError` subclass with a `cycle` attribute containing a closed path: the first and last names are equal, and each successive pair follows a task \u2192 prerequisite edge.\n- Only the target\u2019s prerequisite closure is checked. Duplicate edges count once, and a min-heap picks the lexically smallest currently available task. The cycle search also visits names in lexical order so its reported path is reproducible.\n\n```python\nimport heapq\n\n\nclass CycleError(ValueError):\n    def __init__(self, cycle):\n        self.cycle = list(cycle)\n        super().__init__('Dependency cycle: ' + ' -> '.join(self.cycle))\n\n\ndef plan(tasks, target):\n    if target not in tasks:\n        raise ValueError(f'Unknown target: {target}')\n\n    # Collect and validate only the reachable prerequisite closure.\n    prerequisites = {}\n    pending = [target]\n    while pending:\n        name = pending.pop()\n        if name in prerequisites:\n            continue\n        deps = set(tasks[name])\n        for dep in sorted(deps):\n            if dep not in tasks:\n                raise ValueError(f'Unknown prerequisite {dep} for {name}')\n        prerequisites[name] = deps\n        pending.extend(deps)\n\n    dependents = {name: set() for name in prerequisites}\n    indegree = {name: len(deps) for name, deps in prerequisites.items()}\n    for name, deps in prerequisites.items():\n        for dep in deps:\n            dependents[dep].add(name)\n\n    ready = [name for name, degree in indegree.items() if degree == 0]\n    heapq.heapify(ready)\n    result = []\n    while ready:\n        name = heapq.heappop(ready)\n        result.append(name)\n        for child in dependents[name]:\n            indegree[child] -= 1\n            if indegree[child] == 0:\n                heapq.heappush(ready, child)\n\n    if len(result) == len(prerequisites):\n        return result\n\n    # Iterative DFS finds a back edge and reconstructs a closed cycle.\n    # 0 = unseen, 1 = on the current path, 2 = finished.\n    color = {name: 0 for name in prerequisites}\n    path = []\n    position = {}\n    for root in sorted(prerequisites):\n        if color[root]:\n            continue\n        color[root] = 1\n        position[root] = len(path)\n        path.append(root)\n        stack = [(root, iter(sorted(prerequisites[root])))]\n        while stack:\n            name, edges = stack[-1]\n            dep = next(edges, None)\n            if dep is None:\n                stack.pop()\n                path.pop()\n                del position[name]\n                color[name] = 2\n            elif color[dep] == 1:\n                raise CycleError(path[position[dep]:] + [dep])\n            elif color[dep] == 0:\n                color[dep] = 1\n                position[dep] = len(path)\n                path.append(dep)\n                stack.append((dep, iter(sorted(prerequisites[dep]))))\n\n    raise AssertionError('cycle expected after incomplete topological sort')\n\n\ndef expect_value_error(fn):\n    try:\n        fn()\n    except CycleError:\n        raise AssertionError('expected a non-cycle ValueError')\n    except ValueError:\n        return\n    raise AssertionError('expected ValueError')\n\n\ndef check_cycle(tasks, target):\n    try:\n        plan(tasks, target)\n    except CycleError as exc:\n        cycle = exc.cycle\n        assert len(cycle) >= 2 and cycle[0] == cycle[-1]\n        for task, dependency in zip(cycle, cycle[1:]):\n            assert dependency in tasks[task], (task, dependency)\n        return cycle\n    raise AssertionError('expected CycleError')\n\n\nif __name__ == '__main__':\n    tasks = {\n        'app': ['api', 'ui', 'api'],\n        'api': ['core'],\n        'ui': ['core'],\n        'core': [],\n        'x': ['y'],\n        'y': ['x'],\n    }\n    assert plan(tasks, 'app') == ['core', 'api', 'ui', 'app']\n    assert check_cycle(tasks, 'x') == ['x', 'y', 'x']\n    assert check_cycle({'a': ['a']}, 'a') == ['a', 'a']\n    check_cycle({'app': ['a'], 'a': ['b'], 'b': ['a']}, 'app')\n    expect_value_error(lambda: plan({'app': ['missing']}, 'app'))\n    expect_value_error(lambda: plan({'app': []}, 'missing'))\n\n    # Choose from all currently available tasks, not just DFS siblings.\n    assert plan({'app': ['b', 'z'], 'b': ['a'], 'a': [], 'z': []},\n                'app') == ['a', 'b', 'z', 'app']\n```",
+          "reply_budget": 1342,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-034",
+      "source_group": "b50-transcript-timing",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I need a data-only cue list for a fictional transcript. Times are integer milliseconds and intervals are half-open: overlapping intervals merge into their union, but intervals that only touch remain separate. Labels in a merged group retain their first occurrence order in the input, without duplicates. Zero-length cues are valid standalone intervals and do not overlap other intervals.\n\nThe initially sorted cues are:\n\n```python\ncues = [\n    {'start': 0, 'end': 30000, 'label': 'A'},\n    {'start': 25000, 'end': 50000, 'label': 'B'},\n    {'start': 50000, 'end': 60000, 'label': 'C'},\n]\n\ndef merge(cues):\n    out = []\n    for cue in cues:\n        if out and cue['start'] <= out[-1]['end']:\n            out[-1]['end'] = cue['end']\n            out[-1]['label'] += ',' + cue['label']\n        else:\n            out.append(cue)\n    return out\n```\n\nTrace the intended result and diagnose the helper, including what happens with nested intervals, mutation and invalid ranges.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "The intended result is:\n\n```python\n[\n    {'start': 0, 'end': 50000, 'label': 'A,B'},\n    {'start': 50000, 'end': 60000, 'label': 'C'},\n]\n```\n\nA and B overlap; C only touches their union and stays separate.\n\nThe helper uses `<=`, so it incorrectly merges touching intervals and can merge zero-length cues. It assigns the incoming end directly, so a nested interval can shrink the union; use the maximum end for overlapping nonempty intervals. It appends labels without deduplication or explicitly preserving their original input order. It also appends the original dictionaries to `out` and then changes them, mutating the input. Finally, it does not reject invalid ranges where `start > end`. A corrected implementation must handle zero-length cues separately and validate ranges; if sorting is needed, it must retain original positions to order labels as specified.",
+          "reply_budget": 276,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Show a concrete nested-interval counterexample that exposes the shrinking-union bug, then work through an example with a repeated label to show the intended deduplication and ordering.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "**Nested interval:** Consider `[0, 10) A`, `[2, 5) B`, then `[6, 8) C`. The helper merges B into A but replaces the end `10` with `5`, shrinking the union to `[0, 5)`. It then incorrectly leaves C separate. The intended result is `[0, 10)` with labels `A,B,C`.\n\n**Repeated label:** For `[0, 4) A`, `[2, 6) B`, `[3, 7) A`, and `[5, 8) C`, all four intervals belong to one overlapping group. Their labels appear in input order as `A, B, A, C`; removing the repeated `A` gives the intended result `[0, 8)` with labels `A,B,C`.",
+          "reply_budget": 264,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Write a complete pure-Python merge function for sorted input that follows these rules, including zero-length cues, stable deduplicated labels, validation and input immutability.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef merge(cues):\n    \"\"\"Merge sorted half-open cues without changing the input.\n\n    Labels in each merged group retain their first input occurrence.\n    Zero-length cues remain separate, even inside another interval.\n    \"\"\"\n    finished = []  # (start, original position, result)\n    current = None\n    previous_start = None\n\n    for position, cue in enumerate(cues):\n        start, end, label = cue['start'], cue['end'], cue['label']\n        if not isinstance(start, int) or isinstance(start, bool):\n            raise ValueError('start must be an integer')\n        if not isinstance(end, int) or isinstance(end, bool):\n            raise ValueError('end must be an integer')\n        if not isinstance(label, str):\n            raise ValueError('label must be a string')\n        if start > end:\n            raise ValueError('start must not exceed end')\n        if previous_start is not None and start < previous_start:\n            raise ValueError('cues must be sorted by start')\n        previous_start = start\n\n        if start == end:\n            finished.append((start, position, {\n                'start': start, 'end': end, 'label': label\n            }))\n            continue\n\n        if current is not None and start < current['end']:\n            current['end'] = max(current['end'], end)\n            if label not in current['labels']:\n                current['labels'].append(label)\n        else:\n            if current is not None:\n                finished.append((current['start'], current['position'], {\n                    'start': current['start'], 'end': current['end'],\n                    'label': ','.join(current['labels'])\n                }))\n            current = {\n                'start': start, 'end': end, 'position': position,\n                'labels': [label]\n            }\n\n    if current is not None:\n        finished.append((current['start'], current['position'], {\n            'start': current['start'], 'end': current['end'],\n            'label': ','.join(current['labels'])\n        }))\n\n    finished.sort(key=lambda item: (item[0], item[1]))\n    return [result for _, _, result in finished]\n```\n\nZero-length cues are collected separately, so they cannot interrupt an overlapping group. Results are ordered by start time, with input order breaking ties.",
+          "reply_budget": 678,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Add focused tests for the merge function covering overlaps, touching intervals, nesting, repeated labels, invalid ranges, zero-length cues and input immutability.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "These tests use the existing `merge` function and Python\u2019s standard library:\n\n```python\nimport copy\nimport unittest\n\n\ndef cue(start, end, label):\n    return {'start': start, 'end': end, 'label': label}\n\n\nclass TestMerge(unittest.TestCase):\n    def test_overlap_and_touching(self):\n        cues = [cue(0, 30, 'A'), cue(25, 50, 'B'), cue(50, 60, 'C')]\n        self.assertEqual(merge(cues), [cue(0, 50, 'A,B'), cue(50, 60, 'C')])\n\n    def test_nested_interval_does_not_shrink_union(self):\n        cues = [cue(0, 10, 'A'), cue(2, 5, 'B'), cue(6, 8, 'C')]\n        self.assertEqual(merge(cues), [cue(0, 10, 'A,B,C')])\n\n    def test_repeated_labels_keep_first_occurrence_order(self):\n        cues = [cue(0, 4, 'A'), cue(2, 6, 'B'),\n                cue(3, 7, 'A'), cue(5, 8, 'C')]\n        self.assertEqual(merge(cues), [cue(0, 8, 'A,B,C')])\n\n    def test_invalid_range(self):\n        with self.assertRaises(ValueError):\n            merge([cue(5, 4, 'A')])\n\n    def test_zero_length_inside_union_and_at_same_start(self):\n        cues = [cue(0, 10, 'A'), cue(0, 0, 'Z'),\n                cue(5, 5, 'X'), cue(6, 12, 'B')]\n        self.assertEqual(merge(cues), [cue(0, 12, 'A,B'),\n                                       cue(0, 0, 'Z'), cue(5, 5, 'X')])\n\n    def test_input_is_not_mutated_or_shared(self):\n        cues = [cue(0, 5, 'A'), cue(2, 7, 'B'), cue(8, 9, 'C')]\n        original = copy.deepcopy(cues)\n        result = merge(cues)\n        self.assertEqual(cues, original)\n        result[-1]['end'] = 100\n        self.assertEqual(cues, original)\n\n\nif __name__ == '__main__':\n    unittest.main()\n```\n\nPlace the tests after `merge`, or import `merge` from its module. The zero-length test also checks that a standalone cue does not interrupt a merged group.",
+          "reply_budget": 746,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The input may now be unsorted. Update the merge function to sort by start time, using original position to break ties, while keeping merged labels in their original input order. Include a worked example where chronological label order differs from input order.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef merge(cues):\n    \"\"\"Merge overlapping half-open cues without mutating the input.\"\"\"\n    ordered = []\n    for pos, cue in enumerate(cues):\n        start, end, label = cue['start'], cue['end'], cue['label']\n        if type(start) is not int or type(end) is not int:\n            raise ValueError('times must be integers')\n        if not isinstance(label, str):\n            raise ValueError('label must be a string')\n        if start > end:\n            raise ValueError('start must not exceed end')\n        ordered.append((start, pos, end, label))\n\n    ordered.sort(key=lambda item: (item[0], item[1]))\n    finished = []\n    current = None\n\n    def finish(group):\n        labels = []\n        seen = set()\n        for _, label in sorted(group['labels']):\n            if label not in seen:\n                seen.add(label)\n                labels.append(label)\n        finished.append((group['start'], group['position'], {\n            'start': group['start'], 'end': group['end'],\n            'label': ','.join(labels)\n        }))\n\n    for start, pos, end, label in ordered:\n        if start == end:\n            finished.append((start, pos, {\n                'start': start, 'end': end, 'label': label\n            }))\n        elif current is not None and start < current['end']:\n            current['end'] = max(current['end'], end)\n            current['labels'].append((pos, label))\n        else:\n            if current is not None:\n                finish(current)\n            current = {'start': start, 'end': end, 'position': pos,\n                       'labels': [(pos, label)]}\n\n    if current is not None:\n        finish(current)\n    finished.sort(key=lambda item: (item[0], item[1]))\n    return [result for _, _, result in finished]\n```\n\nFor input `[{'start': 5, 'end': 10, 'label': 'B'}, {'start': 0, 'end': 7, 'label': 'A'}]`, chronological order is A then B, but the merged result is `{'start': 0, 'end': 10, 'label': 'B,A'}` because labels follow original input order. Zero-length cues remain standalone and do not interrupt a merged group.",
+          "reply_budget": 680,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ],
+      "system": "Use authorized calculate or convert tools when the user requests a tool calculation; ground answers in observed results. Explain planning choices naturally."
+    }
+  ]
+}

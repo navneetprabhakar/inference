@@ -1,0 +1,349 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-055",
+      "source_group": "dev_print_sets",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use calculate: 11 packs contain 6 sheets each. Find the total.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 11,
+                "b": 6,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "66 sheets.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Are sheets the same as printed sides?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "No. A sheet can have two sides.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Each sheet is printed on both sides. Calculate the printed side count.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 66,
+                "b": 2,
+                "op": "multiply"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "132 printed sides.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-056",
+      "source_group": "dev_clock_units",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Convert 540 seconds to minutes.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "s",
+                "to": "min",
+                "value": 540
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "9 minutes.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Convert 9 minutes to hours.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "min",
+                "to": "h",
+                "value": 9
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "0.15 hours.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Is that nine hours?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-057",
+      "source_group": "dev_unknown_conversion",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Convert 22 stones into a length.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Please clarify the quantity and units. A mass unit cannot be directly converted to length, and this converter does not support stones.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Use convert for 22 mm in metres.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "mm",
+                "to": "m",
+                "value": 22
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "0.022 m.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Convert 0.022 m to cm.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "m",
+                "to": "cm",
+                "value": 0.022
+              },
+              "name": "convert"
+            }
+          ],
+          "reference_answer": "2.2 cm.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-058",
+      "source_group": "dev_division_failure",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use calculate: 23 divided by zero.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 23,
+                "b": 0,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "The calculator reports division by zero; no numeric result is defined.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Would replacing the result with zero be correct?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Use 4 as the divisor instead.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 23,
+                "b": 4,
+                "op": "divide"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "5.75.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-059",
+      "source_group": "dev_departures",
+      "family": "tool",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use calculate: 38 visitors arrived and 9 left. How many remain?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 38,
+                "b": 9,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "29 visitors.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Then 8 more leave. Calculate the remaining visitors.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [
+            {
+              "arguments": {
+                "a": 29,
+                "b": 8,
+                "op": "subtract"
+              },
+              "name": "calculate"
+            }
+          ],
+          "reference_answer": "21 visitors.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Do we know their names?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    }
+  ]
+}

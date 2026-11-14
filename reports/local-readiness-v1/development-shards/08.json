@@ -1,0 +1,363 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 4096,
+  "source_sha256": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+  "scope": "All61exposed development conversations, not independent release. Existing reviewed references preserved; all generated responses require semantic review.",
+  "sessions": [
+    {
+      "id": "dev-full-040",
+      "source_group": "b50-ticket-selector",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I\u2019m designing a fictional deterministic activity selector for eight booths. Each booth initially needs five printed selector cards, and 19 cards are in stock. For ordered unique labels and nonnegative integer weights, a ticket in `[0, total)` should select the label whose half-open cumulative interval contains it; zero-weight labels should never be selected. This is a demonstration, not a random draw or reward distribution.\n\n```python\ndef select(items, ticket):\n    upper = 0\n    for label, weight in items:\n        upper += weight\n        if ticket <= upper:\n            return label\n    raise ValueError('ticket out of range')\n```\n\nTrace the function for `items = [('empty', 0), ('red', 2), ('blue', 3)]` with tickets 0, 1, 2, 4, and 5. Compare each actual result with the intended result and identify the boundary defects.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "The intended intervals are empty: [0, 0), red: [0, 2), and blue: [2, 5).\n\n| Ticket | Actual | Intended |\n|---|---|---|\n| 0 | empty | red |\n| 1 | red | red |\n| 2 | red | blue |\n| 4 | blue | blue |\n| 5 | blue | out of range |\n\nUsing `<=` includes the upper endpoint, so a boundary ticket goes to the preceding label and a zero-weight first label can be selected. It also accepts `ticket == total`. The function does not reject negative tickets either; they can select the first label. Both negative tickets and tickets at or above the total are outside the specified range.",
+          "reply_budget": 226,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Define the selector\u2019s input-validation contract before implementing it. Cover label uniqueness, weights, total weight and ticket bounds, and explicitly decide whether Python booleans count as integers for weights and tickets.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "A concrete validation contract is:\n\n- `items` is a finite ordered sequence of `(label, weight)` pairs. Labels must be unique under equality; duplicate labels are invalid.\n- Each weight must be a nonnegative Python integer. Reject booleans explicitly, even though `bool` is a subclass of `int`.\n- The sum of weights must be positive, so an empty sequence or all-zero weights is invalid. Individual zero weights are allowed but have empty intervals and cannot be selected.\n- `ticket` must be a Python integer, excluding booleans, and satisfy `0 <= ticket < total_weight`.\n- Reject malformed pairs, duplicates, invalid weights, a nonpositive total, and invalid tickets with `ValueError`.\n\nThe selector then returns the unique label whose half-open cumulative interval contains the ticket.",
+          "reply_budget": 244,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement the selector according to that validation contract, preserving the input. Explain how the interval check handles boundaries and zero-weight labels.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef select(items, ticket):\n    pairs = []\n    labels = []\n    total = 0\n\n    for item in items:\n        try:\n            label, weight = item\n        except (TypeError, ValueError) as exc:\n            raise ValueError(\"each item must be a (label, weight) pair\") from exc\n        if any(label == previous for previous in labels):\n            raise ValueError(\"labels must be unique\")\n        if isinstance(weight, bool) or not isinstance(weight, int) or weight < 0:\n            raise ValueError(\"weights must be nonnegative integers\")\n        labels.append(label)\n        pairs.append((label, weight))\n        total += weight\n\n    if total == 0:\n        raise ValueError(\"total weight must be positive\")\n    if isinstance(ticket, bool) or not isinstance(ticket, int) or not 0 <= ticket < total:\n        raise ValueError(\"ticket out of range or not an integer\")\n\n    upper = 0\n    for label, weight in pairs:\n        upper += weight\n        if ticket < upper:\n            return label\n```\n\nThe strict upper bound assigns a boundary ticket to the next nonempty interval. A zero weight does not increase the upper bound, so its label cannot be selected. Validation completes before selection, and the input is not modified; labels are compared by equality without requiring them to be hashable.",
+          "reply_budget": 395,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Build an independent expanded-list oracle for small weights and use it to compare the selector\u2019s result for every valid ticket across several cases, including zero weights and interval boundaries. Explain the oracle\u2019s practical limitation.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "The expanded list provides an independent mapping from each ticket to a label. With `select` from above in scope:\n\n```python\ndef expanded_oracle(items):\n    return [label for label, weight in items for _ in range(weight)]\n\n\ncases = [\n    [('empty', 0), ('red', 2), ('blue', 3)],\n    [('first', 1), ('gap', 0), ('last', 2)],\n    [('only', 4)],\n    [('zero', 0), ('one', 1), ('end', 0)],\n]\n\nfor items in cases:\n    expanded = expanded_oracle(items)\n    for ticket, expected in enumerate(expanded):\n        assert select(items, ticket) == expected, (items, ticket)\n```\n\nFor example, the first case expands to `['red', 'red', 'blue', 'blue', 'blue']`, so ticket 2 tests the boundary between red and blue. Zero weights add no entries. The oracle uses memory and time proportional to the total weight, so it is practical only for small totals. These cases check valid tickets; validation failures need separate tests.",
+          "reply_budget": 333,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Now exercise the selector\u2019s invalid inputs and ticket boundaries with tests, including duplicate labels, invalid weights and tickets, and zero total weight. Keep the expanded-list oracle limited to small valid cases.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "With the earlier `select` implementation in scope, these tests cover validation and both sides of the ticket boundaries:\n\n```python\ndef rejects(items, ticket):\n    try:\n        select(items, ticket)\n    except ValueError:\n        return\n    raise AssertionError(f'expected ValueError: {items!r}, {ticket!r}')\n\n\nitems = [('empty', 0), ('red', 2), ('blue', 3)]\nassert [select(items, t) for t in range(5)] == [\n    'red', 'red', 'blue', 'blue', 'blue'\n]\nfor ticket in (-1, 5, 6, True, False, 1.0, '1', None):\n    rejects(items, ticket)\n\nfor invalid_items in [\n    [],\n    [('a', 0), ('b', 0)],\n    [('a', 1), ('a', 2)],\n    [(['same'], 1), (['same'], 2)],  # equal unhashable labels\n    [('a', -1)],\n    [('a', True)],\n    [('a', 1.0)],\n    [('a', '1')],\n    [('a',)],\n    [('a', 1, 2)],\n    [None],\n]:\n    rejects(invalid_items, 0)\n\n# Selection must not mutate the supplied list or its pairs.\nfrom copy import deepcopy\noriginal = deepcopy(items)\nselect(items, 2)\nassert items == original\nrejects(items, 5)\nassert items == original\n```\n\nThe existing expanded-list oracle remains useful for small valid cases; these checks exercise rejection separately. I have not executed the tests.",
+          "reply_budget": 490,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Examine what happens if we remove a zero-weight label. Use a worked cumulative-interval table before and after removal to establish whether the other selections or ticket numbers change.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Consider `[('red', 2), ('gap', 0), ('blue', 3)]`:\n\n| Label | Before removal | After removing `gap` |\n|---|---|---|\n| red | `[0, 2)` | `[0, 2)` |\n| gap | `[2, 2)` | removed |\n| blue | `[2, 5)` | `[2, 5)` |\n\nThe zero-weight interval contains no tickets. Removing it leaves every subsequent cumulative boundary unchanged, as well as the total weight of 5. Tickets 0\u20131 still select red and 2\u20134 still select blue; no valid ticket number or other selection changes. This holds for any zero-weight label, provided the remaining labels retain their order.",
+          "reply_budget": 236,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Turn the corrected selector rules into an instructor-facing demonstration. Walk participants through several ticket choices step by step, including interval boundaries and a zero-weight label, and explain what they should observe.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Use `items = [('red', 2), ('gap', 0), ('blue', 3)]`. Ask participants to build the cumulative intervals first:\n\n| Label | Weight | Interval | Tickets |\n|---|---:|---|---|\n| red | 2 | `[0, 2)` | 0, 1 |\n| gap | 0 | `[2, 2)` | none |\n| blue | 3 | `[2, 5)` | 2, 3, 4 |\n\nThe total is 5, so valid tickets are 0 through 4. Walk through these choices:\n\n1. **Ticket 0:** It is at red\u2019s lower boundary and below 2, so it selects red.\n2. **Ticket 1:** It remains below red\u2019s upper boundary, so it selects red.\n3. **Ticket 2:** It is excluded from red because 2 is its upper boundary. The gap contains no tickets, so 2 selects blue at its lower boundary.\n4. **Ticket 4:** It is below blue\u2019s upper boundary of 5, so it selects blue.\n5. **Ticket 5:** It equals the total and must be rejected; \u22121 must also be rejected.\n\nParticipants should observe that intervals include their lower boundary and exclude their upper boundary. A zero-weight label adds no interval width and cannot be selected. This is a deterministic lookup: the same valid ticket and ordered items always yield the same label.",
+          "reply_budget": 391,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ],
+      "system": "Use authorized calculate or convert tools when the user requests a tool calculation; ground answers in observed results. Explain planning choices naturally."
+    },
+    {
+      "id": "dev-full-041",
+      "source_group": "b50-monotone-window",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I need a pure reference model for timestamped observations. Timestamps are nondecreasing integers, and at time `now` the retained interval is `(now - width, now]`.\n\n```python\ndef counts(events, width):\n    active = {}\n    for timestamp, category in events:\n        active[timestamp] = category\n        for old in list(active):\n            if old < timestamp - width:\n                del active[old]\n    result = {}\n    for category in active.values():\n        result[category] = result.get(category, 0) + 1\n    return result\n```\n\nTrace width 5 with events `(10, 'a')`, `(10, 'b')`, and `(15, 'a')`. Explain what should be retained after each event and identify the defects in the current code.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "The intended retained observations are:\n\n- At `(10, 'a')`: `(10, 'a')`.\n- At `(10, 'b')`: both observations at timestamp 10.\n- At `(15, 'a')`: only `(15, 'a')`, because the interval is `(10, 15]`.\n\nThe current code instead overwrites `'a'` with `'b'` at timestamp 10 because timestamps are dictionary keys. At timestamp 15 it retains timestamp 10 because it removes only values strictly less than the lower boundary. It therefore returns `{'b': 1, 'a': 1}` instead of `{'a': 1}`.",
+          "reply_budget": 230,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Let\u2019s define the contract before implementing the reference model. Width must be a nonnegative integer, with width zero retaining no observations, including at the current timestamp. Specify how to handle negative widths, decreasing timestamps, and multiple observations at the same timestamp.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Proposed contract:\n\n- Require a nonnegative integer width; reject negative or non-integer widths explicitly. Width zero retains no observations, even at `now`.\n- Require integer timestamps in nondecreasing order. Reject a timestamp smaller than its predecessor; equal timestamps are valid.\n- Treat every observation as distinct, including multiple observations with the same timestamp and category. Count each retained observation.\n- After each event, retain exactly observations with `now - width < timestamp <= now`. Return category counts after the final event, omitting categories with zero retained observations. An empty input returns `{}`.",
+          "reply_budget": 204,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement the pure event-processing reference model under that contract. Make the clock and empty-sequence behavior explicit, and do not mutate the input.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\nfrom collections import deque\n\n\ndef counts(events, width):\n    if isinstance(width, bool) or not isinstance(width, int) or width < 0:\n        raise ValueError('width must be a nonnegative integer')\n\n    active = deque()\n    result = {}\n    previous = None\n\n    for timestamp, category in events:\n        if isinstance(timestamp, bool) or not isinstance(timestamp, int):\n            raise ValueError('timestamps must be integers')\n        if previous is not None and timestamp < previous:\n            raise ValueError('timestamps must be nondecreasing')\n        previous = now = timestamp\n\n        active.append((timestamp, category))\n        result[category] = result.get(category, 0) + 1\n        while active and active[0][0] <= now - width:\n            _, expired_category = active.popleft()\n            result[expired_category] -= 1\n            if result[expired_category] == 0:\n                del result[expired_category]\n\n    return result\n```\n\nEach event advances the clock to its timestamp; equal timestamps are allowed. An empty sequence has no clock value and returns `{}`. Categories must be hashable, as they are dictionary keys. The input is read without mutation.",
+          "reply_budget": 387,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Build an independent filter-from-history oracle and compare it with the reference model after each event in a substantive sequence with repeated timestamps, multiple categories, and observations exactly on the expiry boundary. State the expected counts independently before showing the comparison.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "For width 5, the expected counts after each event are:\n\n| Event | Expected counts |\n|---|---|\n| `(10, 'a')` | `{'a': 1}` |\n| `(10, 'b')` | `{'a': 1, 'b': 1}` |\n| `(12, 'a')` | `{'a': 2, 'b': 1}` |\n| `(15, 'b')` | `{'a': 1, 'b': 1}` |\n| `(15, 'b')` | `{'a': 1, 'b': 2}` |\n| `(17, 'c')` | `{'b': 2, 'c': 1}` |\n\nAt time 15, both observations at 10 expire at the open lower boundary; at time 17, the observation at 12 expires. Equal timestamps remain distinct.\n\nThe oracle below filters the entire history on each call. Run the comparison with the previously defined `counts` reference model:\n\n```python\ndef history_oracle(events, width):\n    if not events:\n        return {}\n    now = events[-1][0]\n    result = {}\n    for timestamp, category in events:\n        if now - width < timestamp <= now:\n            result[category] = result.get(category, 0) + 1\n    return result\n\n\nevents = [(10, 'a'), (10, 'b'), (12, 'a'),\n          (15, 'b'), (15, 'b'), (17, 'c')]\nexpected = [\n    {'a': 1},\n    {'a': 1, 'b': 1},\n    {'a': 2, 'b': 1},\n    {'a': 1, 'b': 1},\n    {'a': 1, 'b': 2},\n    {'b': 2, 'c': 1},\n]\nassert counts([], 5) == history_oracle([], 5) == {}\nfor i, want in enumerate(expected, 1):\n    history = events[:i]\n    assert history_oracle(history, 5) == want\n    assert counts(history, 5) == want\n    assert history_oracle(history, 0) == counts(history, 0) == {}\n```\n\nThe oracle assumes valid, ordered input; validation of invalid inputs needs separate checks. The comparison has not been executed here.",
+          "reply_budget": 645,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "The model also needs queries that advance the clock without adding an observation. Define how queries expire observations, how to handle a query or event earlier than the current clock, and what happens when a query and subsequent event share the same timestamp.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "A query at time `t` advances the clock to `t`, expires observations with timestamps `<= t - width`, and returns counts for `(t - width, t]` without adding an observation. A query before any event returns `{}` and still establishes the clock.\n\nReject any query or event earlier than the current clock; equal timestamps are allowed. If an event follows a query at the same timestamp, add it as a distinct observation and return counts for the same interval. With width zero, it expires immediately, so the counts remain empty.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Work through this mixed sequence at width 5, giving the counts after each valid operation and the result of the invalid one:\n\n```python\n('event', 10, 'a')\n('event', 10, 'b')\n('query', 15)\n('event', 15, 'a')\n('query', 20)\n('query', 19)\n```\n\nExplain the boundary expiries and why width measures elapsed timestamp units rather than a number of observations.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "| Operation | Result |\n|---|---|\n| Event `(10, 'a')` | `{'a': 1}` |\n| Event `(10, 'b')` | `{'a': 1, 'b': 1}` |\n| Query at `15` | `{}` |\n| Event `(15, 'a')` | `{'a': 1}` |\n| Query at `20` | `{}` |\n| Query at `19` | Error: timestamp precedes the current clock, 20. |\n\nAt time 15, observations at 10 expire because 10 is the excluded lower boundary of `(10, 15]`. Similarly, the observation at 15 expires at time 20. Width is measured in elapsed timestamp units: both observations at time 10 expire together regardless of how many events occurred.",
+          "reply_budget": 265,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Revise the reference model and the independent filter-from-history oracle to handle both events and clock-advancing queries. Preserve the inputs and report invalid operations clearly. Include a complete worked trace for the mixed sequence above, plus a zero-width case and a positive-width case with multiple observations at the same timestamp.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Both functions below return one count mapping per operation. They raise a line-numbered `ValueError` for malformed operations, invalid timestamps, or a backward clock; categories must be hashable. Neither mutates the input.\n\n```python\nfrom collections import deque\n\n\ndef validate_width(width):\n    if isinstance(width, bool) or not isinstance(width, int) or width < 0:\n        raise ValueError('width must be a nonnegative integer')\n\n\ndef read_op(op, number, clock):\n    if not isinstance(op, (tuple, list)) or not op:\n        raise ValueError(f'Operation {number}: invalid operation')\n    kind = op[0]\n    if not ((kind == 'event' and len(op) == 3) or\n            (kind == 'query' and len(op) == 2)):\n        raise ValueError(f'Operation {number}: invalid operation')\n    t = op[1]\n    if isinstance(t, bool) or not isinstance(t, int):\n        raise ValueError(f'Operation {number}: timestamp must be an integer')\n    if clock is not None and t < clock:\n        raise ValueError(f'Operation {number}: timestamp precedes clock')\n    if kind == 'event':\n        try:\n            hash(op[2])\n        except TypeError as exc:\n            raise ValueError(f'Operation {number}: category must be hashable') from exc\n    return kind, t\n\n\ndef model(operations, width):\n    validate_width(width)\n    active, counts, results = deque(), {}, []\n    clock = None\n    for i, op in enumerate(operations, 1):\n        kind, clock = read_op(op, i, clock)\n        if kind == 'event':\n            category = op[2]\n            active.append((clock, category))\n            counts[category] = counts.get(category, 0) + 1\n        while active and active[0][0] <= clock - width:\n            _, category = active.popleft()\n            counts[category] -= 1\n            if counts[category] == 0:\n                del counts[category]\n        results.append(counts.copy())\n    return results\n\n\ndef history_oracle(operations, width):\n    validate_width(width)\n    history, results = [], []\n    clock = None\n    for i, op in enumerate(operations, 1):\n        kind, clock = read_op(op, i, clock)\n        if kind == 'event':\n            history.append((clock, op[2]))\n        counts = {}\n        for t, category in history:\n            if clock - width < t <= clock:\n                counts[category] = counts.get(category, 0) + 1\n        results.append(counts)\n    return results\n```\n\nFor the mixed sequence at width 5, the results are `{'a': 1}`, `{'a': 1, 'b': 1}`, `{}`, `{'a': 1}`, `{}`, then `ValueError` at operation 6: timestamp precedes clock. At 15, both events at 10 expire; at 20, the event at 15 expires. The functions raise on the invalid operation rather than returning partial results.\n\nAt width 0, `[('event', 10, 'a'), ('query', 10)]` produces `[{}, {}]`. At width 5, `[('event', 10, 'a'), ('event', 10, 'a'), ('query', 10)]` produces `[{'a': 1}, {'a': 2}, {'a': 2}]`. These traces are reasoned expectations; the code has not been executed.",
+          "reply_budget": 978,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-042",
+      "source_group": "b50-run-length-offsets",
+      "family": "long_context_natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "I want pure, standard-library Python functions for run-length groups and offsets in a string. Groups represent consecutive equal characters, including spaces; positions count Python Unicode code points, not bytes or grapheme clusters. Here\u2019s my current code:\n\n```python\ndef groups(text):\n    counts = {}\n    for ch in text:\n        counts[ch] = counts.get(ch, 0) + 1\n    return list(counts.items())\n```\n\nUse a concrete string with a space and a nonadjacent repeated character to demonstrate the output this code gives and the groups it should give. Explain what happens to the original order and group boundaries.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "For `text = 'ab a'`, the current function returns `[('a', 2), ('b', 1), (' ', 1)]`. The consecutive groups should be `[('a', 1), ('b', 1), (' ', 1), ('a', 1)]`.\n\nThe dictionary preserves the order in which distinct characters first appeared, but merges all later occurrences of each character. It therefore loses their original positions and the boundaries between separate runs; the counts alone cannot recover the original string or its run offsets.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Define the data contract for encoding and decoding these groups, including empty input and what decoding must reject. Each group should contain a one-code-point string and a strictly positive integer count; booleans are not valid counts. Should decoding accept adjacent groups with the same character?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Define the encoded form as an ordered list of `(character, count)` pairs. `character` must be a Python string of length exactly one, measured in Unicode code points; `count` must be an integer greater than zero, excluding booleans. Encoding `''` produces `[]`, and decoding `[]` produces `''`. Spaces are ordinary characters.\n\nEncoding emits one pair per maximal consecutive run. Decoding validates every pair and raises `ValueError` for malformed pairs, invalid characters, or invalid counts.\n\nI would reject adjacent pairs with the same character during decoding, so each string has one canonical encoding. For example, `[('a', 1), ('a', 2)]` is rejected; its canonical form is `[('a', 3)]`. Accepting and merging adjacent pairs is also workable, but it should be an explicit alternative contract.",
+          "reply_budget": 262,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Decoding needs to accept adjacent groups with the same character: a later split may produce them, and their order must be preserved. Implement pure `encode` and `decode` functions using that contract, including validation and empty input.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef encode(text):\n    if not isinstance(text, str):\n        raise ValueError('text must be a string')\n    result = []\n    for ch in text:\n        if result and result[-1][0] == ch:\n            previous, count = result[-1]\n            result[-1] = (previous, count + 1)\n        else:\n            result.append((ch, 1))\n    return result\n\n\ndef decode(groups):\n    try:\n        iterator = iter(groups)\n    except TypeError as exc:\n        raise ValueError('groups must be iterable') from exc\n\n    parts = []\n    for group in iterator:\n        if not isinstance(group, (tuple, list)) or len(group) != 2:\n            raise ValueError('each group must be a character/count pair')\n        ch, count = group\n        if not isinstance(ch, str) or len(ch) != 1:\n            raise ValueError('character must be one Unicode code point')\n        if isinstance(count, bool) or not isinstance(count, int) or count <= 0:\n            raise ValueError('count must be a positive integer')\n        parts.append(ch * count)\n    return ''.join(parts)\n```\n\n`encode('')` returns `[]`, and `decode([])` returns `''`. Adjacent equal-character groups are accepted in order: `decode([('a', 1), ('a', 2)])` returns `'aaa'`.",
+          "reply_budget": 429,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Give independent reconstruction checks for `encode` and `decode` using explicit expected groups and strings. Cover spaces, nonadjacent repeats, empty input, adjacent equal groups, and invalid counts.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\n# Assumes encode and decode are defined as above.\nexpected_groups = [('a', 1), ('b', 1), (' ', 1), ('a', 1)]\nassert encode('ab a') == expected_groups\nassert decode(expected_groups) == 'ab a'\n\nassert encode('') == []\nassert decode([]) == ''\nassert encode('aa  b') == [('a', 2), (' ', 2), ('b', 1)]\nassert decode([('a', 2), (' ', 2), ('b', 1)]) == 'aa  b'\n\n# Splits need not be canonical; decoding preserves their order.\nassert decode([('a', 1), ('a', 2), (' ', 1), ('b', 1)]) == 'aaa b'\nassert encode('aaa b') == [('a', 3), (' ', 1), ('b', 1)]\n\nfor bad_count in [0, -1, True, False, 1.5, '2']:\n    try:\n        decode([('a', bad_count)])\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(f'accepted count: {bad_count!r}')\n```\n\nThese check explicit outputs in both directions, rather than relying only on a round trip. Adjacent equal groups decode successfully, while encoding combines them into a maximal run.",
+          "reply_budget": 401,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement a separate location function over validated groups. Given a zero-based character offset, return the group index and the offset within that group; reject negative offsets, the end offset, and anything beyond it with `ValueError`. An empty encoding has no valid location. Check it against independently enumerated character positions, including an encoding with adjacent equal groups.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef locate(groups, offset):\n    \"\"\"Return (group index, offset within group) for a character offset.\"\"\"\n    if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:\n        raise ValueError('offset must be a nonnegative integer')\n\n    # Validate all groups, even if the requested position appears early.\n    validated = []\n    try:\n        iterator = iter(groups)\n    except TypeError as exc:\n        raise ValueError('groups must be iterable') from exc\n    for group in iterator:\n        if not isinstance(group, (tuple, list)) or len(group) != 2:\n            raise ValueError('each group must be a character/count pair')\n        ch, count = group\n        if not isinstance(ch, str) or len(ch) != 1:\n            raise ValueError('character must be one Unicode code point')\n        if isinstance(count, bool) or not isinstance(count, int) or count <= 0:\n            raise ValueError('count must be a positive integer')\n        validated.append((ch, count))\n\n    remaining = offset\n    for index, (_, count) in enumerate(validated):\n        if remaining < count:\n            return index, remaining\n        remaining -= count\n    raise ValueError('offset is outside the encoding')\n\n\n# Explicit positions in 'aaa b': adjacent 'a' groups stay distinct.\ngroups = [('a', 1), ('a', 2), (' ', 1), ('b', 1)]\nexpected = [(0, 0), (1, 0), (1, 1), (2, 0), (3, 0)]\nfor offset, location in enumerate(expected):\n    assert locate(groups, offset) == location\n\nfor bad_groups, bad_offset in [\n    (groups, -1), (groups, 5), (groups, 6),\n    ([], 0), (groups, True), (groups, 1.5),\n    ([('a', 1), ('b', 0)], 0),\n]:\n    try:\n        locate(bad_groups, bad_offset)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError((bad_groups, bad_offset))\n```",
+          "reply_budget": 614,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Implement a separate split-at-offset function over validated groups. Accept boundaries from zero through the total length, including both ends and the sole boundary of empty input; reject invalid offsets. Return new left and right group lists, splitting a group when needed without mutating the input. Add an explicit normalization option, defaulting to false, that merges adjacent equal groups within each returned side only when requested. Demonstrate an interior split, an existing group boundary, empty and end cases, and reconstruction of the original text with independently specified expected results.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "```python\ndef split_at_offset(groups, offset, normalize=False):\n    if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:\n        raise ValueError('offset must be a nonnegative integer')\n    if not isinstance(normalize, bool):\n        raise ValueError('normalize must be a boolean')\n    try:\n        iterator = iter(groups)\n    except TypeError as exc:\n        raise ValueError('groups must be iterable') from exc\n\n    validated = []\n    for group in iterator:\n        if not isinstance(group, (tuple, list)) or len(group) != 2:\n            raise ValueError('each group must be a character/count pair')\n        ch, count = group\n        if not isinstance(ch, str) or len(ch) != 1:\n            raise ValueError('character must be one Unicode code point')\n        if isinstance(count, bool) or not isinstance(count, int) or count <= 0:\n            raise ValueError('count must be a positive integer')\n        validated.append((ch, count))\n\n    if offset > sum(count for _, count in validated):\n        raise ValueError('offset is outside the encoding')\n\n    left, right = [], []\n    remaining = offset\n\n    def append(side, ch, count):\n        if count == 0:\n            return\n        if normalize and side and side[-1][0] == ch:\n            side[-1] = (ch, side[-1][1] + count)\n        else:\n            side.append((ch, count))\n\n    for ch, count in validated:\n        taken = min(remaining, count)\n        append(left, ch, taken)\n        append(right, ch, count - taken)\n        remaining -= taken\n    return left, right\n\n\n# Uses decode from the earlier implementation.\ngroups = [('a', 2), ('a', 2), (' ', 1), ('b', 2)]\noriginal = groups.copy()\nassert split_at_offset(groups, 3) == (\n    [('a', 2), ('a', 1)], [('a', 1), (' ', 1), ('b', 2)])\nassert split_at_offset(groups, 2) == (\n    [('a', 2)], [('a', 2), (' ', 1), ('b', 2)])\nassert split_at_offset(groups, 3, normalize=True) == (\n    [('a', 3)], [('a', 1), (' ', 1), ('b', 2)])\nassert split_at_offset([], 0) == ([], [])\nassert split_at_offset(groups, 0) == ([], original)\nassert split_at_offset(groups, 7) == (original, [])\n\nleft, right = split_at_offset(groups, 3)\nassert decode(left) == 'aaa'\nassert decode(right) == 'a bb'\nassert decode(left) + decode(right) == 'aaaa bb'\nassert groups == original\n\nfor bad in (-1, 8, True, 1.5):\n    try:\n        split_at_offset(groups, bad)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(f'accepted offset {bad!r}')\n```",
+          "reply_budget": 885,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-043",
+      "source_group": "dev_invitation",
+      "family": "natural",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Write a brief invitation to a chess evening without inventing a date.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "Join us for a chess evening!",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Add that beginners are welcome.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Join us for a chess evening; beginners are welcome!",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Has a date been specified?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    },
+    {
+      "id": "dev-full-044",
+      "source_group": "dev_fabric",
+      "family": "code_state",
+      "category": "code_state",
+      "turns": [
+        {
+          "user": "The smooth fabric is linen and the rough fabric is wool. Which is rough?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Wool.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Correction: the rough one is jute. Which is rough now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "expected_calls": [],
+          "reference_answer": "Jute.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        },
+        {
+          "user": "Was linen changed?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "expected_calls": [],
+          "reference_answer": "No.",
+          "reply_budget": 192,
+          "rubric": "Review the complete answer against the user request and prior state. Reference wording is illustrative; semantic equivalents allowed. Verify code logic and tool grounding. Contradiction, invented facts, wrong calls, nontermination and blocked followups fail. Do not credit only a correct opening."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+LOCAL READINESS AND PROPOSED GPU CAP — 14 NOVEMBER 2026
+
+Decision: keep every VM OFF. No cap is approved. Local evidence is in this folder;
+read validation.json for final completed checks and remaining GPU-only gates.
+This is qualification/pilot preparation, not a repaired-model or release claim.
+
+LOCAL FINDINGS AND FIXES
+1. Actual frozen data passes full tokenization, mask counts and complete packing.
+   The previous buffer100 longest-first policy starved short corrective examples:
+   first10updates contained only18new code/state targets and86new natural targets.
+   Use --packing-buffer-size1 to preserve seeded shuffled order. The same10update
+   bound now covers276code/state targets,399natural targets and2260newtool targets.
+   It adds padding; quality exposure takes priority over packing efficiency.
+   All6families receive supervision. New short examples still represent only about
+   3% of total target mass; this does not prove they can repair the model.
+2. Buffer size is explicit in checkpoint identity and cursor state. Wrong-buffer
+   restarts fail. Actual data restart checks cover every274train and26dev rows;
+   two declared train epochs preserve350692targets exactly, without truncation.
+   These are350692replay exposures, not unique targets; unique total is175346.
+3. Cloud package omitted context/quality/custody dependencies. Added missing modules
+   and an import-closure guard. Omissions now fail locally before packaging.
+4. Strict fresh-process checkpoint comparator covers model, optimizer, RNG, packing
+   and saved quality guards. Any difference is HOLD. Historical numerical tolerance
+   exceptions are not inherited. Tiny-model comparator tests are not GPU proof.
+5. Old watcher unit test depended on retired20MBcorpus files. Replaced its data with
+   a temporary hash-bound fixture and added a tampering rejection assertion.
+6. Full537M model passed read-only4096token MPS forward on real3941token development
+   content. Source checkpoint unchanged; no optimizer step and no release exposure.
+   This proves local framing/memory feasibility only, not long-context competence.
+7. All3existing local models were fully hash-revalidated. Frozen31-file corpus/test
+   packet remains intact. Release suite has not been run on a model.
+8. Pinned upstream is clean;7CUDA kernel files and2header packages verified; all
+   packaged Python dependency hashes recorded. Linux binaries remain CUDA-unqualified.
+9. Full generated development plan now includes all61sessions/232turns in13shards.
+   21reference answers exceed512tokens; fixed per-turn budgets max1342 preserve
+   adequate reply space and original system instructions.248reference action
+   prefixes fit4K. These are exposed dev data, not independent release tests.
+10. GCP read-only inventory confirms3terminated VMs and available numerical A100/L4
+   quota. Quota does not guarantee capacity. Prior20261029image is deprecated;
+   proposed20261111replacement is READY and not deprecated. Exact torch2.9.1/CUDA12.9
+   verification is mandatory at boot; no silent image/runtime upgrade.
+
+BUDGET PROPOSAL — NO SPEND AUTHORIZATION
+All caps and hour ceilings are cumulative across every lease/retry, not per VM.
+Only release unused reservations after a verified stop and elapsed-cost reconciliation.
+Minimum lower-cost option: $10 on g2-standard-8 /1xL4 24GB, on-demand, us-central1.
+- Up to6billable hours x$0.853624312=$5.12compute;25%margin makes$6.40.
+- Remaining$3.60reserved for disk/network/GCS/closeout uncertainty.
+- L4 4K fit/throughput is unmeasured, and prior L4 capacity requests failed.
+  It requires its own GPU qualification/bootstrap. Not an automatic fallback.
+
+Recommended minimum for the established A100 path: $15 on a2-highgpu-1g /
+1xA10040GB, DWS Flex-start, us-central1.
+- Up to4billable hours x$2=$8compute;25%margin makes$10.
+- Keep$5separate for storage, transfers, recovery and other billing uncertainty.
+- Planning allocation:60min setup/qualification,60min pilot1/checks,75min optional
+  pilot2/checks,45min backup/readback/closeout. Stop sooner whenever work completes
+  or quality fails. No GPU idle waiting for lengthy local semantic review.
+- $5can fund a1hour qualification-only attempt with15min backup reserve; it does
+  not include the two pilots and does not guarantee qualification completes.
+- These are bounded planning caps, not a quote or completion guarantee. Reprice
+  before allocation, including account-specific tax/currency/transfer conditions.
+  If the reserve is inadequate, shorten the lease or return HOLD; never overrun.
+
+Current official sources, checked14November2026:
+https://cloud.google.com/products/dws/pricing
+https://cloud.google.com/products/compute/pricing/accelerator-optimized
+DWS explicitly flags November2026 pricing updates; recheck at allocation.
+On-demand A100 is$3.673385/hour and is NOT an approved automatic fallback.
+
+Existing idle storage is separate ongoing cost: two200GiB pd-balanced disks remain.
+At list$0.10/GiB-month,400GiB is approximately$40/month before taxes, plus GCS.
+This bounded new-run cap does not promise to cover indefinite retained storage.
+Do not delete these disks before required recovery contents are reconciled.
+https://cloud.google.com/products/block-storage
+
+EXACT BOUNDED RECIPE AND ACCEPTANCE
+- Start new SFT from immutable10Bbase; do not layer the fix onto regressed194.
+-4096context/nativeRoPE, microbatch1,32768effective position tokens/update,
+  buffer1,seed103,2declared epochs,LRmultiplier0.125,at most10updates/pilot.
+  Full schedule is35updates; a10update pilot deliberately stops before that.
+- Full development CE, all61sessions and all families, at start/5/10. Preserve
+  guard state and best+last; partial evaluation or regression stop blocks progress.
+- Review all232generated development turns plus18protected turns for both best
+  and last; all13development shards must complete, including long dialogues. No correctness credit for a good prefix
+  followed by contradiction, ungrounded tool text, loops, or blocked follow-ups.
+- At most two pilots. Second requires an evidence-based decision; no automatic
+  LR/epoch/data/budget increase. Two failures force diagnosis and HOLD.
+- CPU tests cannot establish CUDA4K memory, deterministic fresh-process restart,
+  GPU numerical stability or provider shutdown behavior. Those are qualification
+  gates, before substantive pilot training.
+- Qualification: actual uninterrupted2updates vs1+fresh-process restored1update;
+  verified GCS checkpoint readback; exact model/optimizer/RNG/cursor/guard equality.
+  Exercise signal rollback, writer contention, upload failure before COMMITTED,
+  and provider STOP independent of worker/backup health. No approximate pass.
+- New provider STOP deadline and autoDelete=false disk are mandatory. Old DELETE
+  launcher/startup/controller must not be reused for this campaign. Bind newly
+  reviewed launch/bootstrap bytes and current runtime receipts before allocation.
+- Normal shutdown only after writers join and required data/weights pass independent
+  GCS readback. On backup failure, deadline still stops compute and preserves disk.
+- Release189turns stays sealed during pilots. Complete release and matched local
+  MPS acceptance are later gates, not promised within this qualification/pilot cap.
+
+Machine-readable proposal: gpu-proposal.json. authorized_usd is null.
+Actual checks: actual-packet-checks.json, runtime-inputs.json, mps-4k-smoke.json,
+base-preflight.json, preserved-models.json, tests.log, validation.json.
+No model quality improvement is claimed. HTTP remains off.

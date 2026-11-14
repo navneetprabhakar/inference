@@ -207,8 +207,8 @@ class BestFitConversations:
         return ids[:-1],[token if supervised else NATIVE_IGNORE for token,supervised in zip(ids[1:],mask[1:])]
 
 
-def count_packed_rows(dataset):
-    packing=BestFitConversations(dataset)
+def count_packed_rows(dataset,buffer_size=100):
+    packing=BestFitConversations(dataset,buffer_size=buffer_size)
     while True:
         try:packing.next_indices()
         except StopIteration:return packing.rows
@@ -415,11 +415,11 @@ def run(args):
         saved_guards=json.loads((Path(args.resume)/'metadata.json').read_text())['loop']['quality_guards']
         if any(g['stopped'] for g in saved_guards.values()):raise ValueError('Quality-stopped experiment cannot auto-resume; preserve it and define a new bounded experiment')
     train=FiniteEpochDataset(train,args.epochs,seed=args.seed)
-    total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/recipe["rows_per_update"])
+    total_rows=count_packed_rows(train,buffer_size=args.packing_buffer_size);horizon=math.ceil(total_rows/recipe["rows_per_update"])
     if horizon<2:raise ValueError('Finite SFT corpus too small for this schedule; no automatic replay or zero-LR-only run')
     if args.validate_only:
         print(json.dumps({'status':'admitted_inputs_verified_not_GPU_qualified','packed_rows':total_rows,
-                          'planned_updates':horizon,'stage':args.stage,**recipe,'assistant_targets':sum(train.target_counts)},indent=2));return 0
+                          'planned_updates':horizon,'packing_buffer_size':args.packing_buffer_size,'stage':args.stage,**recipe,'assistant_targets':sum(train.target_counts)},indent=2));return 0
     if not torch.__version__.startswith('2.9.') or not torch.cuda.is_available() or not torch.cuda.is_bf16_supported():
         raise ValueError('Pinned torch2.9 CUDA BF16 required')
     import nanochat.flash_attention as attention
@@ -450,13 +450,13 @@ def run(args):
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
-              'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,'epochs':args.epochs,
+              'packing_buffer_size':args.packing_buffer_size,'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,'epochs':args.epochs,
               'numerical_mode':numerical_identity(torch,attention_deterministic=attention_deterministic),'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
     if context_change is not None:identity['context_transition']=context_change
-    packing=BestFitConversations(train);step=0;trained_targets=0;best_dev=None;best_step=None
+    packing=BestFitConversations(train,buffer_size=args.packing_buffer_size);step=0;trained_targets=0;best_dev=None;best_step=None
     guard_states=None
     if args.resume:
         restored=load_bundle(args.resume,model=model,optimizer=optimizer,expected_identity=identity)
@@ -594,11 +594,13 @@ def main():
     p.add_argument('--deterministic-attention',action='store_true')
     p.add_argument('--resume');p.add_argument('--backup-prefix');p.add_argument('--deadline-utc')
     p.add_argument('--kernel-path');p.add_argument('--kernel-sha')
+    p.add_argument('--packing-buffer-size',type=int,default=1,help='Default1 preserves shuffled input order without longest-first starvation; bound into restart identity')
     p.add_argument('--microbatch',type=int,default=4);p.add_argument('--cpu-threads',type=int,default=4)
     p.add_argument('--seed',type=int,default=103);p.add_argument('--max-updates',type=int)
     p.add_argument('--eval-rows',type=int,default=128);p.add_argument('--eval-every-updates',type=int,default=200)
     p.add_argument('--checkpoint-seconds',type=int,default=900);p.add_argument('--checkpoint-reserve-seconds',type=int,default=300)
     a=p.parse_args()
+    if not 1<=a.packing_buffer_size<=100:p.error('Packing buffer must be in1..100')
     if not 1<=a.epochs<=8:p.error('Epochs must be in1..8')
     if not math.isfinite(a.lr_multiplier) or not 0<a.lr_multiplier<=1:p.error('LR multiplier must be finite in (0,1]')
     try: batch_recipe(a.batch_tokens,a.microbatch,a.context_tokens)

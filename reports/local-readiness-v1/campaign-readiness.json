@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "phase": "quality_hold_awaiting_cap_and_GPU_qualification",
+  "failed_pilots": 0,
+  "active_training_vms": 0,
+  "budget": {
+    "authorized_usd": null,
+    "spent_upper_bound_usd": 0,
+    "reserve_usd": 5,
+    "pilot_upper_bound_usd": 10
+  },
+  "checks": {
+    "data_review": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/semantic-review.json",
+      "sha256": "d7edda9fbc96f2d2bd857a1fe76ade0782b8743fa54b0df740bfd0a70dcdb1bf"
+    },
+    "group_split_audit": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/candidate-split-audit.json",
+      "sha256": "7e8f290a3b15cf5743c1199a6dead457d626f10e54eacef4be8782507ab49f0f"
+    },
+    "policy_coverage": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/candidate-4k/admission.json",
+      "sha256": "05871f6861b2401af0dcec01403e2ec8f79c7152765c01ac59d5967e24bdf351"
+    },
+    "source_intent": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/quality-contract.json",
+      "sha256": "794ab4909de297b3138b2bac665064c904b65d622208eb0ed365801ef1292abb"
+    },
+    "token_mask_audit": {
+      "status": "pass",
+      "path": "reports/local-readiness-v1/actual-packet-checks.json",
+      "sha256": "80265f28591172a4d171b180696f83850aa42fb3c9db496823b5904c55f0f86e"
+    },
+    "release_suite_frozen": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/freeze.json",
+      "sha256": "c7c2ef28e83e5b00d112d24438f1b2ddc7dc8c5c2305f18fa4f85684b7fd2851"
+    },
+    "protected_suite_frozen": {
+      "status": "pass",
+      "path": "reports/corrective-corpus-v1/protected-suite.json",
+      "sha256": "d50dfa423f06ed3d401064eeac846b7436bcbce1cead59644ccdae91fadc354c"
+    },
+    "cpu_tests": {
+      "status": "pass",
+      "path": "reports/local-readiness-v1/validation.json",
+      "sha256": "50248251b4c626c4188fc23cf80d6f9fd850598f0e4ef2c20e12610c39e5f878"
+    },
+    "generation_sentinels": {
+      "status": "pass",
+      "path": "reports/local-readiness-v1/development-checks.json",
+      "sha256": "6375455fa858c4a31852188c190d4323c885ea8a3bb0d20e3241e74bf1533dd1"
+    },
+    "local_qualification_plan": {
+      "status": "pass",
+      "path": "reports/local-readiness-v1/gpu-proposal.json",
+      "sha256": "ce35342a211a52b20f0f2a3094b67a7b93dac51271f543942f52e81106f089a8"
+    }
+  },
+  "decision": {
+    "action": "hold_vm_off",
+    "reasons": [
+      "Campaign is on quality hold",
+      "Missing finite numeric budget, pilot bound or backup reserve",
+      "Missing passing evidence: gpu_recovery_qualification",
+      "Missing passing evidence: stop_backup_drill"
+    ],
+    "quality_accepted": false,
+    "automatic_budget_increase_allowed": false,
+    "automatic_data_or_lr_change_allowed": false
+  }
+}

@@ -78,7 +78,7 @@ class WatchTests(unittest.TestCase):
     def test_complete_three_b_chain_serial_commands_and_baseline(self):
         with tempfile.TemporaryDirectory() as t:
             cloud=Cloud();watch=self.watch(t,cloud)
-            watch.recipe=json.loads(Path('runs/ownbase-v2-sft/diagnostic-v3/recipe-candidate.json').read_text())
+            watch.recipe=json.loads(Path('reports/l4-qualification-v1/diagnostic-recovery-recipe-v1.json').read_text())
             status={'status':'awaiting_review','reason':'milestone_quality_review','step':5723,'milestone_tokens':3000000000,'stages':[{'type':'base'}],'review_stages':[]}
             base={'marker':'a'*64};sft={'marker':'f'*64,'status':'complete','step':155,'identity':{'source_manifest_sha256':'d'*64,'parent_bundle_manifest_sha256':'a'*64}}
             quality={'status':'development_checks_complete','diagnostic_base_mode':False,'suite_sha256':watch.recipe['comparison']['quality_suite_sha256'],'repetition_penalty':1.0,'step':155,'runner_sha256':'e'*64,'identity':{'source_manifest_sha256':'d'*64,'batch_tokens':32768,'microbatch':8,'horizon_updates':155},'records':[{'session':'a','turn':0,'assessment':{'automated_pass':False,'manual_review_required':False}}],'automated_total':1,'automated_passed':0}
@@ -149,11 +149,24 @@ class WatchTests(unittest.TestCase):
         with patch.object(cloud,'run',side_effect=[b'{"generation":"1"}',missing,b'{"generation":"2"}',missing,b'{"generation":"3"}',missing,b'{"generation":"4"}']) as run:
             with self.assertRaises(subprocess.CalledProcessError):cloud.snapshot(source)
             self.assertEqual(sum(call.args[0][0]=='cat' for call in run.call_args_list),3)
-    def test_actual_reviewed_recipe_files_no_cloud(self):
-        recipe,msha,files=W.reviewed_inputs('reports/l4-qualification-v1/diagnostic-recovery-recipe-v1.json','runs/ownbase-v2-sft/diagnostic-admitted-v1')
-        self.assertEqual(len(files),4);self.assertEqual(recipe['subset']['planned_updates'],155)
-        command=W.sft_command(self.config,recipe,files,5723,3,'/opt/ownbase-nano/results/base/step','a'*64)
-        self.assertNotIn('--output',command['args']);self.assertNotIn('--deadline-utc',command['args']);self.assertEqual(command['seconds'],900)
-        self.assertEqual(command['args'][command['args'].index('--microbatch')+1],'8')
+    def test_reviewed_recipe_with_self_contained_admission_no_cloud(self):
+        # Retired large corpus files must not be required for a controller unit test.
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);hashes=[]
+            manifest={'training_admitted':True,'tokenizer_sha256':W.TOKENIZER_SHA}
+            for split in ('train','validation'):
+                path=root/(split+'.jsonl');path.write_text(json.dumps({'fixture':split})+'\n')
+                hashes.append(W.sha(path));manifest[split]={'file':path.name,'sha256':hashes[-1]}
+            receipt=root/'admission.json';receipt.write_text(json.dumps({'training_admitted':True,'jsonl_sha256':hashes}))
+            manifest['admission']={'sha256':W.sha(receipt)}
+            (root/'manifest.json').write_text(json.dumps(manifest))
+            recipe,msha,files=W.reviewed_inputs('reports/l4-qualification-v1/diagnostic-recovery-recipe-v1.json',root)
+            self.assertEqual(len(files),4);self.assertEqual(recipe['subset']['planned_updates'],155)
+            command=W.sft_command(self.config,recipe,files,5723,3,'/opt/ownbase-nano/results/base/step','a'*64)
+            self.assertNotIn('--output',command['args']);self.assertNotIn('--deadline-utc',command['args']);self.assertEqual(command['seconds'],900)
+            self.assertEqual(command['args'][command['args'].index('--microbatch')+1],'8')
+            (root/'train.jsonl').write_text('tampered')
+            with self.assertRaisesRegex(ValueError,'Changed diagnostic split'):
+                W.reviewed_inputs('reports/l4-qualification-v1/diagnostic-recovery-recipe-v1.json',root)
 
 if __name__=='__main__':unittest.main()

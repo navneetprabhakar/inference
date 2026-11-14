@@ -1,13 +1,32 @@
 """Offline production bundle builder. Never uploads, reserves money, or starts a VM."""
 from pathlib import Path, PurePosixPath
-import argparse, gzip, hashlib, io, json, subprocess, tarfile
+import argparse, ast, gzip, hashlib, io, json, subprocess, tarfile
 
 REVISION = '92d63d4e8bb4df75c3b71618f31ddde2378b2bcd'
 TOKENIZER_SHA = 'ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5'
 MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano_eval', 'nano_probes',
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
            'campaign_budget', 'runtime', 'nano_campaign', 'nano_sft',
-           'nano_serve', 'nano_chat_format', 'nano_quality')
+           'nano_serve', 'nano_chat_format', 'nano_quality', 'nano_context',
+           'nano_quality_gate', 'nano_corpus_guard', 'nano_restart_compare')
+
+def verify_module_closure(root, modules=MODULES):
+    """Fail locally if a packaged adapter imports an omitted project module."""
+    required=set(modules);missing=set()
+    for module in modules:
+        path=Path(root)/'cloud_training'/(module+'.py')
+        tree=ast.parse(path.read_text(),filename=str(path))
+        for node in ast.walk(tree):
+            names=[]
+            if isinstance(node,ast.ImportFrom) and node.module:
+                if node.module.startswith('cloud_training.'):
+                    names=[node.module.split('.')[1]]
+                elif node.module=='cloud_training':names=[a.name for a in node.names]
+            elif isinstance(node,ast.Import):
+                names=[a.name.split('.')[1] for a in node.names if a.name.startswith('cloud_training.')]
+            missing.update(name for name in names if name not in required)
+    if missing:raise ValueError('Package omits project dependencies: '+', '.join(sorted(missing)))
+    return {'modules':len(required),'missing':[]}
 
 def sha(path):
     with Path(path).open('rb') as f: return hashlib.file_digest(f, 'sha256').hexdigest()
@@ -41,6 +60,7 @@ def extract_verified(archive, destination):
 
 def build(root, target):
     root, target = Path(root), Path(target)
+    verify_module_closure(root)
     repo = root/'runs/nanochat-source'
     if subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip()!=REVISION:
         raise ValueError('Wrong upstream revision')

@@ -52,9 +52,11 @@ def validate_suite(suite, *, release=False):
         if not isinstance(session.get('id'),str) or not session['id'] or not session.get('turns'):raise ValueError('Invalid session')
         if release and not session.get('category'):raise ValueError('Release category required')
         ids.append(session['id'])
+        if session.get('system') is not None and not isinstance(session['system'],str):raise ValueError('Invalid session system message')
         for turn in session['turns']:
             if not isinstance(turn.get('user'),str) or not turn['user'].strip():raise ValueError('Invalid user turn')
             host_policy(turn.get('policy'))
+            if 'reply_budget' in turn and (type(turn['reply_budget']) is not int or not 1<=turn['reply_budget']<=2048):raise ValueError('Invalid per-turn reply budget')
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate session IDs')
 
 
@@ -70,12 +72,17 @@ def run_suite(chat_factory, suite, *, deadline, publish=lambda report:None):
     records=[]
     for session in suite['sessions']:
         chat=chat_factory()
+        default_reply_budget=getattr(chat,'reply_budget',None)
+        if session.get('system') is not None:
+            chat.system=session['system'];chat.reset()
         for index,spec in enumerate(session['turns']):
             if time.monotonic()>=deadline:
                 return {'status':'incomplete_deadline','records':records,'usable_model_claim':False}
+            if 'reply_budget' in spec:chat.reply_budget=spec['reply_budget']
+            elif default_reply_budget is not None:chat.reply_budget=default_reply_budget
             result=chat.turn(spec['user'],policy=spec.get('policy'))
             records.append({'session':session['id'],'turn':index,'user':spec['user'],
-                            'policy':spec.get('policy'),'rubric':spec.get('rubric'),
+                            'policy':spec.get('policy'),'rubric':spec.get('rubric'),'reply_budget':getattr(chat,'reply_budget',None),
                             'result':result,'assessment':assess(result,spec)})
             publish({'status':'running','records':records,'usable_model_claim':False})
             if time.monotonic()>=deadline:

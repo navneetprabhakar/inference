@@ -7,6 +7,27 @@ User priority: deep RCA, enforceable remediation/guardrails, quality above volum
 and hands-off execution. Do useful local work autonomously; never turn a failed
 quality gate into another automatic training extension. Read AGENTS.md.
 
+LOCAL READINESS FOLLOW-UP — CAP NOT APPROVED
+See reports/local-readiness-v1/READINESS_AND_BUDGET.txt and gpu-proposal.json.
+150 tests pass. Fixed short-example starvation with order-preserving buffer1,
+missing package dependencies, and development reply-budget truncation. Full
+61-session/232-turn development suite is prepared in13shards; original system
+instructions preserved;21long reference answers now have sufficient reply space.
+Full537M/4096-token MPS forward smoke passed; this is not conversation acceptance.
+All3local models and frozen release hashes revalidated; release remains unused.
+Original10Bbase restored to runs/local-readiness-v1/base10b and fully SHA-verified.
+Actual training CLI validate-only PASSED:274packed rows over2epochs,35full-schedule
+updates; pilots remain capped at10updates. validation.json records local PASS,
+GPU not authorized/not qualified; campaign-readiness.json correctly remains HOLD.
+Latest readiness delta backup: reports/local-readiness-v1/backup-receipt.json.
+Minimum lower-cost proposal$10L4/6hours; recommended$15A100Flex-start/4hours,
+including$5reserve. Qualification-only$5/1hour. None is approved or guarantees
+completion. Fullrelease/promotion is separate. Existing400GiBdisks cost about
+$40/month at list rates, plus GCS; off does not mean storage is free.
+Do not use old DELETE-on-timeout launchers. New bounded STOP lease and non-auto-
+delete recovery disk required. Newer pinned DLVM image is proposed explicitly
+because old20261029image is deprecated; verify exact runtime at boot.
+
 CORRECTIVE CORPUS / RELEASE — DATA ADMITTED, GPU STILL ON HOLD
 reports/corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt is the current execution report.
 New core100train/18development conversations, fully reviewed; balanced100training
@@ -18,7 +39,8 @@ Release63sessions/189turns includes3structured3K+stress cases. All181new source/
 scenarios reviewed; release has NOT been run on a model. Single-use release custody,
 context preflight and immutable freeze are enforced. Do not regenerate this version.
 Strict current194MPS development baseline:2/54turns,0/18sessions; full raw review saved.
-112tests pass. No retraining or quality promotion. Full data/lineage evidence is
+Corrective-corpus phase passed112tests; current local-readiness suite passes150.
+No retraining or quality promotion. Full data/lineage evidence is
 backed up using reports/corrective-corpus-v1/backup-receipt.json.
 Use candidate-4k/manifest.json and quality-contract.json; the short core alone is
 NOT the training packet. GPU requires finite new budget,4K/restart/fault qualification
@@ -62,7 +84,7 @@ Step50 diagnostic location/verified identity: reports/quality-rca-v1/checkpoint-
 Keep tokenizer, pinned nanochat source and .venv. No HTTP listener on8765.
 
 CLOUD / COST / BACKUP
-All three ownbase VMs TERMINATED; latest verified status quality-rca-v1/cloud-status.json.
+All three ownbase VMs TERMINATED; latest verified status local-readiness-v1/cloud-readonly.json.
 Prior campaign cap$55; conservative compute$34.17 plus$15reserve=$49.17 envelope,
 not an invoice. A new numeric training budget is not assigned. Do not relaunch a
 closed lease or assume permission to spend indefinitely. Persistent disks remain.
@@ -83,8 +105,9 @@ GCS data. Do not rerun archive_payloads.py or retired group restore commands.
 NEXT ACTIONS / STOP CONDITIONS
 1. Read corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt. Preserve the frozen packet;
    no more uncontrolled generation or silent mixing with historical templates.
-2. Prepare finite GPU qualification/pilot budget and stop/backup drill; keep VM off
-   until offline readiness and explicit numeric budget are in place.
+2. Local checks are complete; see local-readiness-v1/validation.json. Await explicit
+   cap approval. Proposed$15A100/$10L4 caps are not authorization. Before allocating,
+   bind a new cumulative budget ledger, STOP lease and non-auto-delete disk/bootstrap.
 3. Qualify4K/restart/fault handling before substantive training. At most two bounded
    10update pilots; compare generated best AND last plus protected regressions.
 4. Freeze candidate selection before the one-shot release. Full release and matched
