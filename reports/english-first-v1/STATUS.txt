@@ -1,0 +1,48 @@
+ENGLISH-FIRST — 14 NOVEMBER 2026
+Scope: English conversation, then maths, then CBSE. User directed cheaper GPU and
+hands-off execution after the changed assessment. Use L4 only, operational10USD
+envelope inside previously discussed15USD ceiling; no automatic upgrade/extension.
+
+Completed locally:
+-24reviewed English fit sessions,72turns,656unique assistant targets. This is a
+ deliberately tiny memorization/learnability control, not a broad English corpus.
+-12new scenario-disjoint development sessions,36turns,556reference targets. Every
+ reference read, real tokenizer/masks/prefixes checked. Same author, not independent
+ release. Existing frozen corrective corpus and release untouched.
+-Current194baseline fully reviewed:0/36strict turns,0/12sessions.16complete answers
+ fail semantics/instructions,7invalid actions,13blocked followups. All counted.
+-Isolated diagnostic contract requires native2K, exact24/12reviewed data, explicit
+ --fit-diagnostic flag and immutable base. Production epoch limit remains8; only
+ this diagnostic allows up to64finite epochs/64updates, LRmultiplier<=.25.
+ Actual64epoch packing has384rows/96full-schedule updates;64update cap stops BEFORE
+ all64epochs.41,984is the full virtual replay target count, NOT unique data or a
+ claim that the capped run consumes all of it. No automatic replay/extension.
+-Development regression guards remain active. Early stop before fit is inconclusive
+ about eventual learnability. Passing tiny fit cannot authorize release; code
+ blocks diagnostic checkpoints at release_decision regardless of other evidence.
+-139CPU tests pass including objective, masks, checkpoint, retention, serving,
+ contract, package and fresh-process actual-loop decisions with mocked compute/I/O.
+ Matching qualification cadence1 fixes the2vs1+1observation mismatch. GPU numerical
+ equivalence and real GCS restore still require execution.
+
+Qualification request:
+Single g2-standard-8/L4 in us-central1, standard price0.853624312USD/hour checked
+against https://cloud.google.com/products/compute/pricing/accelerator-optimized.
+Two-hour absolute expiry, compute envelope2.13406078USDincluding25%margin;3.5USD
+ancillary/recovery reserve. Total reserved envelope5.63406078USD. Cumulative budget
+ledger prevents unreviewed extensions. Provider STOP, no restart-on-failure,
+non-auto-delete disk, private networking and earlier local shutdown are required.
+The absolute expiry includes local staging time, so usable GPU time is shorter.
+The qualification worker cannot start the64-update fit pilot. It runs2versus1+1
+updates with verified GCS restore and exact full-state/quality-loop comparison.
+It independently reads back all committed checkpoint receipts and compact evidence
+before normal shutdown. Backup failure retains disk and still obeys hard expiry.
+Existing retained storage and indefinite future storage are outside this bounded
+new-run envelope; reserve is not a guarantee of the final account invoice.
+
+Current operational state is in launch-response.json (when present), spend-ledger,
+input-backup-receipt and cloud-status. Do not infer a launched VM from a request.
+Next: complete input readback, launch this qualification only, inspect actual GPU
+results, finish signal/upload/provider-stop fault qualification, then admit a
+bounded fit pilot only if every gate passes. Preserve local models and untouched
+release custody. Update user roughly30minutes during the GPU run or on a blocker.

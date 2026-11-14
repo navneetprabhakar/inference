@@ -47,7 +47,9 @@ try:
  assert torch.__version__.startswith('2.9.1') and torch.version.cuda=='12.9'
  assert torch.cuda.device_count()==1 and 'L4' in torch.cuda.get_device_name(0)
  assert torch.cuda.is_bf16_supported()
- result['runtime']={'torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(0)}
+ import nanochat.flash_attention as attention
+ assert not attention.USE_FA3, 'This L4 qualification explicitly requires native SDPA'
+ result['runtime']={'torch':torch.__version__,'cuda':torch.version.cuda,'gpu':torch.cuda.get_device_name(0),'attention':'sdpa'}
  validate_restart_branches(restart_branches())
  download_bundle(config['base_uri'],BASE)
  assert hashlib.sha256((BASE/'manifest.json').read_bytes()).hexdigest()==config['base_manifest_sha256']
@@ -82,11 +84,17 @@ finally:
   for p in OUT.rglob('*'):
    if p.is_file() and p.name!='payload.pt':tar.add(p,arcname='results/'+str(p.relative_to(OUT)))
   tar.add(ROOT/'config.json',arcname='config.json')
+  if (ROOT/'bootstrap.log').exists():tar.add(ROOT/'bootstrap.log',arcname='bootstrap.log')
  try:
   copy(archive,REMOTE+'/evidence.tar.gz',reserve=60)
   readback=ROOT/'evidence-readback.tar.gz';copy(REMOTE+'/evidence.tar.gz',readback,reserve=30)
   assert hashlib.sha256(archive.read_bytes()).digest()==hashlib.sha256(readback.read_bytes()).digest()
   if result['backup_verified']:
+   closeout=ROOT/'closeout.json'
+   closeout.write_text(json.dumps({'evidence_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'all_required_checkpoint_readbacks':True,'evidence_readback':True,'utc':dt.datetime.now(dt.timezone.utc).isoformat()},indent=2)+'\n')
+   copy(closeout,REMOTE+'/closeout.json',reserve=20)
+   closeout_copy=ROOT/'closeout-readback.json';copy(REMOTE+'/closeout.json',closeout_copy,reserve=10)
+   assert closeout.read_bytes()==closeout_copy.read_bytes()
    (ROOT/'normal-stop-ready').write_text('Evidence and required checkpoint readbacks verified\n')
   else:(ROOT/'backup-failure.txt').write_text('Checkpoint verification incomplete; preserve recovery disk')
  except BaseException as e:(ROOT/'backup-failure.txt').write_text(repr(e))

@@ -13,7 +13,7 @@
     "--maintenance-policy=TERMINATE",
     "--no-restart-on-failure",
     "--termination-time=2026-11-14T09:44:50Z",
-    "--metadata=own-deadline-utc=2026-11-14T09:44:50Z,bundle-uri=gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz,bundle-sha256=b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1,packet-uri=gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet.tar.gz,packet-sha256=5ca812f0064f02f6a76a75780cc2a7b141cb88b726031b4ec45b282166a6b999,enable-oslogin=TRUE,block-project-ssh-keys=TRUE",
+    "--metadata=own-deadline-utc=2026-11-14T09:44:50Z,bundle-uri=gs://forge-ownbase-a100-20261110/english-first-v1/runtime/b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1.tar.gz,bundle-sha256=b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1,packet-uri=gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet-reviewed.tar.gz,packet-sha256=db4ef12361ce7941c12cdca50f8d3e02ce105907803998f79e085bd38861295d,enable-oslogin=TRUE,block-project-ssh-keys=TRUE",
     "--instance-termination-action=STOP",
     "--boot-disk-size=100GB",
     "--boot-disk-type=pd-balanced",
@@ -57,12 +57,16 @@
       "sha256": "b8158fc71c72bbcbae20492299fb2206125e370cd8033bbb288bcbde95e9e3a1"
     },
     {
-      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/packet.tar.gz",
-      "uri": "gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet.tar.gz",
-      "sha256": "5ca812f0064f02f6a76a75780cc2a7b141cb88b726031b4ec45b282166a6b999"
+      "path": "/Users/navneetprabhakar/Documents/git/image/inference/runs/english-first-v1/packet-reviewed.tar.gz",
+      "uri": "gs://forge-ownbase-a100-20261110/english-first-v1/forge-english-q-1114-074450/inputs/packet-reviewed.tar.gz",
+      "sha256": "db4ef12361ce7941c12cdca50f8d3e02ce105907803998f79e085bd38861295d"
     }
   ],
   "price_source": "https://cloud.google.com/products/compute/pricing/accelerator-optimized",
   "price_checked_utc": "2026-11-14T07:44:50.021123+00:00",
-  "limits": "No pilot until exact recovery and fault drills pass. No A100 upgrade."
+  "limits": "No pilot until exact recovery and fault drills pass. No A100 upgrade.",
+  "prelaunch_revision": {
+    "previous_request_sha256": "95039d0d97fd947c347377b23758982e1ec70f6ab1aae238ea2d32d3a256f321",
+    "reason": "Include bootstrap log and durable closeout readback; assert native SDPA on L4. No VM provisioned."
+  }
 }
