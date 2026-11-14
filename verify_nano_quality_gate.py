@@ -93,6 +93,14 @@ class GateTests(unittest.TestCase):
             with patch.object(sys,'argv',argv),contextlib.redirect_stdout(io.StringIO()):self.assertEqual(main(),2)
             self.assertFalse(json.loads((root/'blocked.json').read_text())['quality_accepted'])
 
+    def test_new_contract_requires_matching_one_shot_release_claim(self):
+        a=self.fixture();a['contract']['require_one_shot_release']=True
+        self.assertFalse(release_decision(**a)['quality_accepted'])
+        a['raw']['release_claim']={'checkpoint_manifest_sha256':H,'suite_sha256':H,'utc':'2026-11-14'}
+        self.assertTrue(release_decision(**a)['quality_accepted'])
+        a['raw']['release_claim']['suite_sha256']='b'*64
+        self.assertFalse(release_decision(**a)['quality_accepted'])
+
     def test_complete_bound_evidence_passes(self):self.assertTrue(release_decision(**self.fixture())['quality_accepted'])
     def test_forged_aggregate_and_coincidental_answer_fail(self):
         a=self.fixture();a['review']['records'][0]['tool_workflow_pass']=False;a['raw']['automated_passed']=1000

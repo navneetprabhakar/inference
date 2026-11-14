@@ -1,0 +1,1028 @@
+{
+  "schema": 1,
+  "statistics": {
+    "train": {
+      "sessions": 100,
+      "turns": 300,
+      "policy_action_turns": {
+        "enabled_no_call": 100,
+        "disabled_no_call": 100,
+        "enabled_call": 100
+      },
+      "family_sessions": {
+        "natural": 25,
+        "code_state": 25,
+        "tool": 50
+      },
+      "assistant_targets_by_family": {
+        "natural": 748,
+        "code_state": 431,
+        "tool": 3932
+      },
+      "assistant_targets": 5111,
+      "max_framed_tokens": 818,
+      "max_reference_text_tokens": 27,
+      "median_reference_text_tokens": 5
+    },
+    "development": {
+      "sessions": 18,
+      "turns": 54,
+      "policy_action_turns": {
+        "enabled_no_call": 18,
+        "disabled_no_call": 24,
+        "enabled_call": 12
+      },
+      "family_sessions": {
+        "natural": 7,
+        "code_state": 5,
+        "tool": 6
+      },
+      "assistant_targets_by_family": {
+        "natural": 149,
+        "code_state": 72,
+        "tool": 460
+      },
+      "assistant_targets": 681,
+      "max_framed_tokens": 805,
+      "max_reference_text_tokens": 25,
+      "median_reference_text_tokens": 3
+    },
+    "release_reference": {
+      "sessions": 63,
+      "turns": 189,
+      "policy_action_turns": {
+        "enabled_no_call": 87,
+        "disabled_no_call": 60,
+        "enabled_call": 42
+      },
+      "family_sessions": {
+        "natural": 21,
+        "code_state": 21,
+        "tool": 21
+      },
+      "assistant_targets_by_family": {
+        "natural": 538,
+        "code_state": 331,
+        "tool": 1631
+      },
+      "assistant_targets": 2500,
+      "max_framed_tokens": 3858,
+      "max_reference_text_tokens": 21,
+      "median_reference_text_tokens": 4
+    }
+  },
+  "prefix_equality_checks": 697,
+  "tool_checks": 154,
+  "tool_reference_results": [
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a room has 6 rows of 9 seats. How many seats?",
+      "expected": 54,
+      "actual": 54
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Two rows are removed. Use calculate for the remaining 4 rows.",
+      "expected": 36,
+      "actual": 36
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express 2.4 m of ribbon in cm.",
+      "expected": 240,
+      "actual": 240.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Correction: it is 1.8 m. Convert that to cm.",
+      "expected": 180,
+      "actual": 180.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 750 g to kg with the converter.",
+      "expected": 0.75,
+      "actual": 0.75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now convert 1.25 kg to g.",
+      "expected": 1250,
+      "actual": 1250.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "It is 1.5 h. Use convert to get minutes.",
+      "expected": 90,
+      "actual": 90.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert those 90 minutes to seconds.",
+      "expected": 5400,
+      "actual": 5400.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: I had 85 tokens and spent 27. How many remain?",
+      "expected": 58,
+      "actual": 58
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "I receive 12 more. Use calculate on the current balance.",
+      "expected": 70,
+      "actual": 70
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 7 panels need 1.5 m each. What total length is needed?",
+      "expected": 10.5,
+      "actual": 10.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "The price is 8 per metre. Calculate the total for 10.5 m.",
+      "expected": 84,
+      "actual": 84.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 43 people were waiting and 18 entered. How many are still waiting?",
+      "expected": 25,
+      "actual": 25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Five of those waiting leave. Calculate the new queue size.",
+      "expected": 20,
+      "actual": 20
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to divide a 12 m rope equally into 8 pieces. Give the length per piece.",
+      "expected": 1.5,
+      "actual": 1.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert for that piece length in cm.",
+      "expected": 150,
+      "actual": 150.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert for 3500 ml in l.",
+      "expected": 3.5,
+      "actual": 3.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 0.8 l to ml.",
+      "expected": 800,
+      "actual": 800.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: the index changes from 14 to 9. Calculate new minus old.",
+      "expected": -5,
+      "actual": -5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now it changes from 9 to 16. Calculate new minus old.",
+      "expected": 7,
+      "actual": 7
+    },
+    {
+      "kind": "expected_tool_error",
+      "user": "Use calculate to divide 11 by 0.",
+      "error": "division by zero"
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Replace the divisor with 2 and use calculate again.",
+      "expected": 5.5,
+      "actual": 5.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "I meant 4 km to metres. Please use convert.",
+      "expected": 4000,
+      "actual": 4000.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 4000 m to cm.",
+      "expected": 400000,
+      "actual": 400000.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Divide the first number by the second.",
+      "expected": 4,
+      "actual": 4.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now subtract the second from the first.",
+      "expected": 9,
+      "actual": 9
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 8 boxes each contain 14 envelopes. Find the total.",
+      "expected": 112,
+      "actual": 112
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Remove 9 damaged envelopes from that total using calculate.",
+      "expected": 103,
+      "actual": 103
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express 2 days in hours.",
+      "expected": 48,
+      "actual": 48.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now convert half a day to hours.",
+      "expected": 12,
+      "actual": 12.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a rectangle is 5 m by 3 m. What is its area?",
+      "expected": 15,
+      "actual": 15
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A second rectangle is 4 m by 2 m. Calculate its area.",
+      "expected": 8,
+      "actual": 8
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for half of 37.",
+      "expected": 18.5,
+      "actual": 18.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now calculate one quarter of 37.",
+      "expected": 9.25,
+      "actual": 9.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 135 seconds to minutes with convert.",
+      "expected": 2.25,
+      "actual": 2.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert the fractional 0.25 minute to seconds.",
+      "expected": 15,
+      "actual": 15.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a route has segments of 2.5 km and 3.75 km. Add them.",
+      "expected": 6.25,
+      "actual": 6.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert the total to metres.",
+      "expected": 6250,
+      "actual": 6250.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 3 items cost 2.75 each. Find their total price.",
+      "expected": 8.25,
+      "actual": 8.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Add a delivery fee of 1.5 using calculate.",
+      "expected": 9.75,
+      "actual": 9.75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a booklet has 64 pages and I have read 21. How many remain?",
+      "expected": 43,
+      "actual": 43
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "I read 13 more. Calculate the remaining pages.",
+      "expected": 30,
+      "actual": 30
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 45 pages in 3 minutes.",
+      "expected": 15,
+      "actual": 15.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A second run is 56 pages in 4 minutes. Calculate its rate.",
+      "expected": 14,
+      "actual": 14.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 38 mm to cm.",
+      "expected": 3.8,
+      "actual": 3.8
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert the same 38 mm to metres.",
+      "expected": 0.038,
+      "actual": 0.038
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to add -8 and 3.",
+      "expected": -5,
+      "actual": -5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to subtract -4 from -5.",
+      "expected": -1,
+      "actual": -1
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for 13 multiplied by 13.",
+      "expected": 169,
+      "actual": 169
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now use calculate for 13 multiplied by 12.",
+      "expected": 156,
+      "actual": 156
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express 0.125 kg in grams.",
+      "expected": 125,
+      "actual": 125.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 625 g to kilograms.",
+      "expected": 0.625,
+      "actual": 0.625
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: express 25 out of 80 as a fraction in decimal form.",
+      "expected": 0.3125,
+      "actual": 0.3125
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Multiply that decimal by 100 using calculate to get a percentage.",
+      "expected": 31.25,
+      "actual": 31.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: two exercises take 18 and 24 minutes. Add their durations.",
+      "expected": 42,
+      "actual": 42
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Include a 7-minute break using calculate.",
+      "expected": 49,
+      "actual": 49
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 9 cm to mm.",
+      "expected": 90,
+      "actual": 90.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now convert 9 m to cm.",
+      "expected": 900,
+      "actual": 900.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to subtract 47 from 90.",
+      "expected": 43,
+      "actual": 43
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Reverse the subtraction using calculate.",
+      "expected": -43,
+      "actual": -43
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 96 cards are shared equally across 12 sleeves. How many per sleeve?",
+      "expected": 8,
+      "actual": 8.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for 96 cards shared across 16 sleeves instead.",
+      "expected": 6,
+      "actual": 6.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: double a 175 g flour amount.",
+      "expected": 350,
+      "actual": 350
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert the doubled amount to kilograms.",
+      "expected": 0.35,
+      "actual": 0.35
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: start at 0 and add 16.",
+      "expected": 16,
+      "actual": 16
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now multiply the current value by 0 using calculate.",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a jug holds 1.75 l and I pour out 0.5 l. How much remains?",
+      "expected": 1.25,
+      "actual": 1.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert what remains to millilitres.",
+      "expected": 1250,
+      "actual": 1250.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert for 0.75 h in minutes.",
+      "expected": 45,
+      "actual": 45.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 45 minutes back to hours.",
+      "expected": 0.75,
+      "actual": 0.75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to add scores 17 and 23.",
+      "expected": 40,
+      "actual": 40
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Divide their total by 2 using calculate to get the mean.",
+      "expected": 20,
+      "actual": 20.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now I actually want calculate to multiply 4 by 11.",
+      "expected": 44,
+      "actual": 44
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to add 6 to that result.",
+      "expected": 50,
+      "actual": 50
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for 3 divided by 12.",
+      "expected": 0.25,
+      "actual": 0.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now reverse the operands and use calculate.",
+      "expected": 4,
+      "actual": 4.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 0.006 km to metres.",
+      "expected": 6,
+      "actual": 6.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert that result to millimetres.",
+      "expected": 6000,
+      "actual": 6000.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 120 washers minus 35 used.",
+      "expected": 85,
+      "actual": 85
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now use calculate with the corrected initial stock and the same amount used.",
+      "expected": 75,
+      "actual": 75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 5 trips carry 18 crates each. How many crates?",
+      "expected": 90,
+      "actual": 90
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for 7 trips at the same load.",
+      "expected": 126,
+      "actual": 126
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 0.1 minute to seconds.",
+      "expected": 6,
+      "actual": 6.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 6 seconds back to minutes.",
+      "expected": 0.1,
+      "actual": 0.1
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: add 9.5 and -9.5.",
+      "expected": 0,
+      "actual": 0.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now subtract -9.5 from 9.5 using calculate.",
+      "expected": 19,
+      "actual": 19.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "I measured 140 cm. Convert it to metres.",
+      "expected": 1.4,
+      "actual": 1.4000000000000001
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now convert that 1.4 m to millimetres.",
+      "expected": 1400,
+      "actual": 1399.9999999999998
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: from 100 sheets set aside 28. How many remain?",
+      "expected": 72,
+      "actual": 72
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to share the remaining sheets equally among 9 folders.",
+      "expected": 8,
+      "actual": 8.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate for 26 minus 26.",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now divide 26 by 26 using calculate.",
+      "expected": 1,
+      "actual": 1.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 2.25 hours to minutes.",
+      "expected": 135,
+      "actual": 135.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to find how many minutes longer that is than 110 minutes.",
+      "expected": 25,
+      "actual": 25
+    },
+    {
+      "kind": "expected_tool_error",
+      "user": "Use calculate for 0 divided by 0.",
+      "error": "division by zero"
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Keep the numerator at 0 and change the divisor to 5. Use calculate.",
+      "expected": 0,
+      "actual": 0.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: multiply 0.2 by 0.5.",
+      "expected": 0.1,
+      "actual": 0.1
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now multiply 0.2 by 0.05 using calculate.",
+      "expected": 0.01,
+      "actual": 0.010000000000000002
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a walker travels 800 m, then another 450 m. Find total distance travelled.",
+      "expected": 1250,
+      "actual": 1250
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert the total distance to km.",
+      "expected": 1.25,
+      "actual": 1.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 11 packs contain 6 sheets each. Find the total.",
+      "expected": 66,
+      "actual": 66
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Each sheet is printed on both sides. Calculate the printed side count.",
+      "expected": 132,
+      "actual": 132
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 540 seconds to minutes.",
+      "expected": 9,
+      "actual": 9.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 9 minutes to hours.",
+      "expected": 0.15,
+      "actual": 0.15
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert for 22 mm in metres.",
+      "expected": 0.022,
+      "actual": 0.022
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert 0.022 m to cm.",
+      "expected": 2.2,
+      "actual": 2.1999999999999997
+    },
+    {
+      "kind": "expected_tool_error",
+      "user": "Use calculate: 23 divided by zero.",
+      "error": "division by zero"
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use 4 as the divisor instead.",
+      "expected": 5.75,
+      "actual": 5.75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 38 visitors arrived and 9 left. How many remain?",
+      "expected": 29,
+      "actual": 29
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Then 8 more leave. Calculate the remaining visitors.",
+      "expected": 21,
+      "actual": 21
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now actually use calculate for 88 plus 12.",
+      "expected": 100,
+      "actual": 100
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to divide that result by 8.",
+      "expected": 12.5,
+      "actual": 12.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: a craft project needs 9 wooden frames at 16 units each. Find the frame cost.",
+      "expected": 144,
+      "actual": 144
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A discount of 17 units applies to the total. Use calculate for the amount after discount.",
+      "expected": 127,
+      "actual": 127
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A measuring container holds 0.042 l. Use convert to express that in ml.",
+      "expected": 42,
+      "actual": 42.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to combine that 42 ml with another 18 ml.",
+      "expected": 60,
+      "actual": 60
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: split 187 equally into 11 payments.",
+      "expected": 17,
+      "actual": 17.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to find the total of just 8 such payments.",
+      "expected": 136,
+      "actual": 136
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "I meant 6 minutes into seconds. Use the converter.",
+      "expected": 360,
+      "actual": 360.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to remove a 40-second pause from that duration.",
+      "expected": 320,
+      "actual": 320
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: subtract 18.5 from 7.25.",
+      "expected": -11.25,
+      "actual": -11.25
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to multiply that result by -2.",
+      "expected": 22.5,
+      "actual": 22.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A machine makes 72 components in 8 minutes. Use calculate for its average components per minute.",
+      "expected": 9,
+      "actual": 9.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Assuming that rate is constant, use calculate for 13 minutes of output.",
+      "expected": 117,
+      "actual": 117
+    },
+    {
+      "kind": "expected_tool_error",
+      "user": "Use calculate to divide -6 by 0.",
+      "error": "division by zero"
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Change the divisor to -3 and use calculate again.",
+      "expected": 2,
+      "actual": 2.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now use calculate to perform the operation on that label.",
+      "expected": 100,
+      "actual": 100
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Treat the resulting number as centimetres and convert to metres.",
+      "expected": 1,
+      "actual": 1.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 84 responses include 21 incomplete ones. Find the complete-response count.",
+      "expected": 63,
+      "actual": 63
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to divide that complete count by all 84 responses.",
+      "expected": 0.75,
+      "actual": 0.75
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert: a mark is 0.0035 m from an edge. Express that in mm.",
+      "expected": 3.5,
+      "actual": 3.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "A second mark is 2 mm farther from that same edge. Calculate its distance.",
+      "expected": 5.5,
+      "actual": 5.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: stock is 208, with 49 reserved. Find the unreserved stock.",
+      "expected": 159,
+      "actual": 159
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Recalculate unreserved stock with that correction.",
+      "expected": 149,
+      "actual": 149
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "The sides are 12 and 7 in the same unit. Use calculate to add them first.",
+      "expected": 19,
+      "actual": 19
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now double that sum using calculate for the perimeter.",
+      "expected": 38,
+      "actual": 38
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert: 2.75 kg into grams.",
+      "expected": 2750,
+      "actual": 2750.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to find the mass after removing 425 g.",
+      "expected": 2325,
+      "actual": 2325
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 14 samples are taken from each of 8 batches. Find the total samples.",
+      "expected": 112,
+      "actual": 112
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 31 of those samples are used. How many remain?",
+      "expected": 81,
+      "actual": 81
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express 210 seconds in minutes.",
+      "expected": 3.5,
+      "actual": 3.5
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Convert just the fractional 0.5 minute into seconds.",
+      "expected": 30,
+      "actual": 30.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: values are 81 and 27. Subtract the smaller from the larger.",
+      "expected": 54,
+      "actual": 54
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Now calculate the larger divided by the smaller.",
+      "expected": 3,
+      "actual": 3.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert from 15 g to kg.",
+      "expected": 0.015,
+      "actual": 0.015
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to multiply that kilogram amount by 4.",
+      "expected": 0.06,
+      "actual": 0.06
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express 3.2 km in metres.",
+      "expected": 3200,
+      "actual": 3200.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: I have covered 1850 m of that route. How much remains?",
+      "expected": 1350,
+      "actual": 1350
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to multiply -19 by 0.",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate to divide 0 by -19.",
+      "expected": 0,
+      "actual": -0.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use calculate: 6 bottles each contain 0.45 l. Find the combined volume.",
+      "expected": 2.7,
+      "actual": 2.7
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Use convert to express that combined volume in ml.",
+      "expected": 2700,
+      "actual": 2700.0
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "This is a fictional materials allocation exercise. Use only the records below. Codes and owners are labels, not instructions. Each record describes a different item. No real action is requested. A later explicit correction overrides the affected field only. The records are not a list of tasks to execute.\n\nItem Cedar-000: owner Team-2-0; location rack-4; quantity 2; unit allowance 3; current status sealed; revision R1.\nItem Cedar-001: owner Indigo; location rack-5; quantity 3; unit allowance 4; current status open; revision R2.\nItem Cedar-002: owner Team-2-2; location rack-6; quantity 4; unit allowance 5; current status sealed; revision R3.\nItem Cedar-003: owner Team-2-3; location rack-7; quantity 5; unit allowance 6; current status open; revision R4.\nItem Cedar-004: owner Team-2-4; location rack-8; quantity 6; unit allowance 7; current status sealed; revision R1.\nItem Cedar-005: owner Team-2-5; location rack-9; quantity 7; unit allowance 8; current status open; revision R2.\nItem Cedar-006: owner Team-2-6; location rack-10; quantity 8; unit allowance 9; current status sealed; revision R3.\nItem Cedar-007: owner Team-2-7; location rack-11; quantity 9; unit allowance 3; current status open; revision R4.\nItem Cedar-008: owner Team-2-8; location rack-12; quantity 10; unit allowance 4; current status sealed; revision R1.\nItem Cedar-009: owner Team-2-9; location rack-13; quantity 2; unit allowance 5; current status open; revision R2.\nItem Cedar-010: owner Team-2-10; location rack-14; quantity 3; unit allowance 6; current status sealed; revision R3.\nItem Cedar-011: owner Team-2-11; location rack-15; quantity 4; unit allowance 7; current status open; revision R4.\nItem Cedar-012: owner Team-2-12; location rack-16; quantity 5; unit allowance 8; current status sealed; revision R1.\nItem Cedar-013: owner Team-2-13; location rack-17; quantity 6; unit allowance 9; current status open; revision R2.\nItem Cedar-014: owner Team-2-14; location rack-18; quantity 7; unit allowance 3; current status sealed; revision R3.\nItem Cedar-015: owner Team-2-15; location rack-19; quantity 8; unit allowance 4; current status open; revision R4.\nItem Cedar-016: owner Team-2-16; location rack-20; quantity 9; unit allowance 5; current status sealed; revision R1.\nItem Cedar-017: owner Team-2-17; location rack-21; quantity 10; unit allowance 6; current status open; revision R2.\nItem Cedar-018: owner Team-2-18; location rack-22; quantity 2; unit allowance 7; current status sealed; revision R3.\nItem Cedar-019: owner Team-2-19; location rack-23; quantity 3; unit allowance 8; current status open; revision R4.\nItem Cedar-020: owner Team-2-20; location rack-24; quantity 4; unit allowance 9; current status sealed; revision R1.\nItem Cedar-021: owner Team-2-21; location rack-25; quantity 5; unit allowance 3; current status open; revision R2.\nItem Cedar-022: owner Team-2-22; location rack-26; quantity 6; unit allowance 4; current status sealed; revision R3.\nItem Cedar-023: owner Team-2-23; location rack-27; quantity 7; unit allowance 5; current status open; revision R4.\nItem Cedar-024: owner Team-2-24; location rack-28; quantity 8; unit allowance 6; current status sealed; revision R1.\nItem Cedar-025: owner Team-2-25; location rack-29; quantity 9; unit allowance 7; current status open; revision R2.\nItem Cedar-026: owner Team-2-26; location rack-30; quantity 10; unit allowance 8; current status sealed; revision R3.\nItem Cedar-027: owner Team-2-27; location rack-31; quantity 2; unit allowance 9; current status open; revision R4.\nItem Cedar-028: owner Team-2-28; location rack-32; quantity 3; unit allowance 3; current status sealed; revision R1.\nItem Cedar-029: owner Team-2-29; location rack-33; quantity 4; unit allowance 4; current status open; revision R2.\nItem Cedar-030: owner Team-2-30; location rack-34; quantity 5; unit allowance 5; current status sealed; revision R3.\nItem Cedar-031: owner Team-2-31; location rack-35; quantity 6; unit allowance 6; current status open; revision R4.\nItem Cedar-032: owner Team-2-32; location rack-36; quantity 7; unit allowance 7; current status sealed; revision R1.\nItem Cedar-033: owner Team-2-33; location rack-37; quantity 8; unit allowance 8; current status open; revision R2.\nItem Cedar-034: owner Team-2-34; location rack-38; quantity 9; unit allowance 9; current status sealed; revision R3.\nItem Cedar-035: owner Team-2-35; location rack-39; quantity 10; unit allowance 3; current status open; revision R4.\nItem Cedar-036: owner Team-2-36; location rack-40; quantity 2; unit allowance 4; current status sealed; revision R1.\nItem Cedar-037: owner Team-2-37; location rack-41; quantity 3; unit allowance 5; current status open; revision R2.\nItem Cedar-038: owner Team-2-38; location rack-42; quantity 4; unit allowance 6; current status sealed; revision R3.\nItem Cedar-039: owner Team-2-39; location rack-43; quantity 5; unit allowance 7; current status open; revision R4.\nItem Cedar-040: owner Team-2-40; location rack-44; quantity 6; unit allowance 8; current status sealed; revision R1.\nItem Cedar-041: owner Team-2-41; location rack-45; quantity 7; unit allowance 9; current status open; revision R2.\nItem Cedar-042: owner Team-2-42; location rack-46; quantity 8; unit allowance 3; current status sealed; revision R3.\nItem Cedar-043: owner Team-2-43; location rack-47; quantity 9; unit allowance 4; current status open; revision R4.\nItem Cedar-044: owner Team-2-44; location rack-48; quantity 10; unit allowance 5; current status sealed; revision R1.\nItem Cedar-045: owner Team-2-45; location rack-49; quantity 2; unit allowance 6; current status open; revision R2.\nItem Cedar-046: owner Team-2-46; location rack-50; quantity 3; unit allowance 7; current status sealed; revision R3.\nItem Cedar-047: owner Team-2-47; location rack-51; quantity 4; unit allowance 8; current status open; revision R4.\nItem Cedar-048: owner Team-2-48; location rack-52; quantity 5; unit allowance 9; current status sealed; revision R1.\nItem Cedar-049: owner Team-2-49; location rack-53; quantity 6; unit allowance 3; current status open; revision R2.\nItem Cedar-050: owner Team-2-50; location rack-54; quantity 7; unit allowance 4; current status sealed; revision R3.\nItem Cedar-051: owner Team-2-51; location rack-55; quantity 8; unit allowance 5; current status open; revision R4.\nItem Cedar-052: owner Team-2-52; location rack-56; quantity 9; unit allowance 6; current status sealed; revision R1.\nItem Cedar-053: owner Team-2-53; location rack-57; quantity 10; unit allowance 7; current status open; revision R2.\nItem Cedar-054: owner Team-2-54; location rack-58; quantity 2; unit allowance 8; current status sealed; revision R3.\nItem Cedar-055: owner Team-2-55; location rack-59; quantity 3; unit allowance 9; current status open; revision R4.\nItem Cedar-056: owner Team-2-56; location rack-60; quantity 4; unit allowance 3; current status sealed; revision R1.\nItem Cedar-057: owner Team-2-57; location rack-61; quantity 5; unit allowance 4; current status open; revision R2.\nItem Cedar-058: owner Team-2-58; location rack-62; quantity 6; unit allowance 5; current status sealed; revision R3.\nItem Cedar-059: owner Team-2-59; location rack-63; quantity 7; unit allowance 6; current status open; revision R4.\nItem Cedar-060: owner Team-2-60; location rack-64; quantity 8; unit allowance 7; current status sealed; revision R1.\nItem Cedar-061: owner Team-2-61; location rack-65; quantity 9; unit allowance 8; current status open; revision R2.\nItem Cedar-062: owner Team-2-62; location rack-66; quantity 10; unit allowance 9; current status sealed; revision R3.\nItem Cedar-063: owner Team-2-63; location rack-67; quantity 2; unit allowance 3; current status open; revision R4.\nItem Cedar-064: owner Team-2-64; location rack-68; quantity 3; unit allowance 4; current status sealed; revision R1.\nItem Cedar-065: owner Team-2-65; location rack-69; quantity 4; unit allowance 5; current status open; revision R2.\nItem Cedar-066: owner Team-2-66; location rack-70; quantity 5; unit allowance 6; current status sealed; revision R3.\nItem Cedar-067: owner Team-2-67; location rack-71; quantity 6; unit allowance 7; current status open; revision R4.\nItem Cedar-068: owner Team-2-68; location rack-72; quantity 7; unit allowance 8; current status sealed; revision R1.\nItem Cedar-069: owner Team-2-69; location rack-73; quantity 8; unit allowance 9; current status open; revision R2.\nItem Cedar-070: owner Team-2-70; location rack-74; quantity 9; unit allowance 3; current status sealed; revision R3.\nItem Cedar-071: owner Team-2-71; location rack-75; quantity 10; unit allowance 4; current status open; revision R4.\nItem Cedar-072: owner Team-2-72; location rack-76; quantity 2; unit allowance 5; current status sealed; revision R1.\nItem Cedar-073: owner Team-2-73; location rack-77; quantity 3; unit allowance 6; current status open; revision R2.\nItem Cedar-074: owner Team-2-74; location rack-78; quantity 4; unit allowance 7; current status sealed; revision R3.\nItem Cedar-075: owner Team-2-75; location rack-79; quantity 5; unit allowance 8; current status open; revision R4.\nItem Cedar-076: owner Team-2-76; location rack-80; quantity 6; unit allowance 9; current status sealed; revision R1.\nItem Cedar-077: owner Team-2-77; location rack-81; quantity 7; unit allowance 3; current status open; revision R2.\nItem Cedar-078: owner Team-2-78; location rack-82; quantity 8; unit allowance 4; current status sealed; revision R3.\nItem Cedar-079: owner Team-2-79; location rack-83; quantity 9; unit allowance 5; current status open; revision R4.\nItem Cedar-080: owner Team-2-80; location rack-84; quantity 10; unit allowance 6; current status sealed; revision R1.\nItem Cedar-081: owner Team-2-81; location rack-85; quantity 2; unit allowance 7; current status open; revision R2.\nItem Cedar-082: owner Team-2-82; location rack-86; quantity 3; unit allowance 8; current status sealed; revision R3.\nItem Cedar-083: owner Team-2-83; location rack-87; quantity 4; unit allowance 9; current status open; revision R4.\nItem Cedar-084: owner Team-2-84; location rack-88; quantity 5; unit allowance 3; current status sealed; revision R1.\n\nFor this exercise, use the quantity from Cedar-001 and the unit allowance from Cedar-084. Use calculate to multiply them and give the resulting allowance. Do not use either record's other numeric fields.",
+      "expected": 9,
+      "actual": 9
+    },
+    {
+      "kind": "numeric_reference_replay",
+      "user": "Change only the selected quantity to 11. Keep the selected unit allowance from Cedar-084 and use calculate again.",
+      "expected": 33,
+      "actual": 33
+    }
+  ],
+  "split_overlap": {
+    "train/development": {
+      "source_groups_shared": 0,
+      "exact_normalized_user_prompts_shared": 0
+    },
+    "train/release": {
+      "source_groups_shared": 0,
+      "exact_normalized_user_prompts_shared": 0
+    },
+    "development/release": {
+      "source_groups_shared": 0,
+      "exact_normalized_user_prompts_shared": 0
+    }
+  },
+  "near_prompt_flags": [],
+  "independent_python_checks": 17,
+  "explicit_word_count_checks": 6,
+  "source_sha256": {
+    "source_dialogues.py": "47724f63a96f757f945bf939e2d5e4b3bb4b12ca8cb99929ed520f193c7177b6",
+    "source_tools.py": "ab8c05e5fe4777e587c55d85291baffdb09db338cd3530c3a08062dc78307f32",
+    "source_release.py": "fa57b421ac9756911b3c384b13b555ca8e79b07aeb0f7e76eeb307b3cf5db939",
+    "make_long_release.py": "7b57ce4b805775e45e4fb0d8801a93229d898044277ec9b44c471d493cd490fe",
+    "long-release-source.json": "e6bb14b4e0927310dcd48fe588b98b6f125686ae6ebb4148653bb1b827a975a8"
+  },
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "scope_limits": [
+    "Checks do not replace semantic review.",
+    "Distinct source groups do not prove zero semantic similarity or zero overlap with unavailable historical data.",
+    "Release not executed against any model; same author as training, not an independent human evaluation team."
+  ]
+}

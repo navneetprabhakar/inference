@@ -1,7 +1,7 @@
 # Own-model work: quality-first operating rules
 
 Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup.
-The user's current instructions override this file. Current campaign status: QUALITY HOLD.
+The user's current instructions override this file. Current campaign status: GPU QUALITY HOLD; corrective-corpus-v1 data admitted and release frozen.
 
 - Optimize for demonstrated conversation/tool quality, not tokens, epochs, corpus size or job completion.
 - Never label a model accepted from loss, checkpoint age, a few calculator probes or successful job exit.
@@ -17,3 +17,5 @@ The user's current instructions override this file. Current campaign status: QUA
 - Retain future-use data, selected weights, provenance and compact evidence. Delete disposable caches/intermediates; do not blanket-archive obsolete experiments.
 - Update the handoff with current facts, evidence links, limitations and next blockers. Preserve historical facts in Git rather than appending contradictory current-state paragraphs.
 - Batch related changes into few commits/pushes. Run the meaningful objective, masking, restart, serving, quality-gate and retention checks before delivery.
+
+- Corrective-corpus-v1 is immutable. Do not regenerate it in place. Release tests are single-use for a preselected candidate; do not consume them for exploratory baseline/model selection. Current pilot contract caps each run at10updates.

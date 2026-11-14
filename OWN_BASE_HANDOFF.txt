@@ -7,6 +7,23 @@ User priority: deep RCA, enforceable remediation/guardrails, quality above volum
 and hands-off execution. Do useful local work autonomously; never turn a failed
 quality gate into another automatic training extension. Read AGENTS.md.
 
+CORRECTIVE CORPUS / RELEASE — DATA ADMITTED, GPU STILL ON HOLD
+reports/corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt is the current execution report.
+New core100train/18development conversations, fully reviewed; balanced100training
+turns per policy/action mode. Combined4Kcandidate272train/61dev,175,346train targets;
+17,187targets after3072.215inherited dialogues retain SHA-bound historical full review;
+two were freshly reread and repaired for192-token reply headroom.338legacy narrow
+synthetic template rows excluded from both splits; originals remain preserved.
+Release63sessions/189turns includes3structured3K+stress cases. All181new source/test
+scenarios reviewed; release has NOT been run on a model. Single-use release custody,
+context preflight and immutable freeze are enforced. Do not regenerate this version.
+Strict current194MPS development baseline:2/54turns,0/18sessions; full raw review saved.
+112tests pass. No retraining or quality promotion. Full data/lineage evidence is
+backed up using reports/corrective-corpus-v1/backup-receipt.json.
+Use candidate-4k/manifest.json and quality-contract.json; the short core alone is
+NOT the training packet. GPU requires finite new budget,4K/restart/fault qualification
+and bounded pilot review. Max10updates/pilot,2epochs,LRmultiplier0.125,evalinterval10.
+
 COMPLETED TRAINING / HONEST QUALITY
 Own537M (536,871,738 parameters),2048context, random initialization.
 Base:10,000,269,312 tokens. SFT:194updates,8epochs,349unique train sessions,
@@ -31,8 +48,9 @@ persisted stop state, deterministic epoch shuffling, best+last evaluation receip
 complete hash-bound release review and protected checks. Closed allocator scripts
 exit immediately. A new campaign admission decision remains HOLD. CPU validation
 is in reports/quality-rca-v1/validation.json. These changes are NOT GPU-qualified.
-Generated sentinel integration, corrective corpus admission, pristine release suite,
-GPU fault drill and full local release qualification remain required before launch.
+Corrective corpus admission and independent release freeze are now complete.
+GPU fault qualification, bounded generated pilot checks and local4Kqualification
+remain incomplete; corpus readiness alone must not authorize a GPU launch.
 
 LOCAL MODELS — KEEP
 New194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
@@ -52,7 +70,8 @@ GCS root gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
 Useful corpus: data/long-context-corpus-v21/, actual2K SFT and packed base retained.
 Useful weights:10B base, step50, final194 and selected605 backups retained.
 Future-use index: reports/local-gcs-cleanup-20261114/future-use-index.json.
-Latest RCA backup receipt: reports/quality-rca-v1/backup-receipt.json.
+Latest corrective-data backup: reports/corrective-corpus-v1/backup-receipt.json.
+Earlier RCA backup: reports/quality-rca-v1/backup-receipt.json.
 Earlier verified evidence: reports/ownbase-budget50-v1/latest-local-backup.json.
 
 RETENTION ALREADY COMPLETED — DO NOT RESTART OLD ARCHIVE
@@ -62,16 +81,15 @@ last direct-delete pass.248unnecessary archive/superseded corpus GCS objects and
 GCS data. Do not rerun archive_payloads.py or retired group restore commands.
 
 NEXT ACTIONS / STOP CONDITIONS
-1. Use RCA evidence; repair data policy/termination/state coverage with full review,
-   source-group splits and exact tool replay. Audit V21 before any reuse.
-2. Freeze independent release and generated development sentinels; resolve2K/4K
-   source intent. Do not shorten away required late-context supervision.
-3. Verify immutable readiness receipts and prepare bounded pilots/fault drill.
-   Current template and campaign-state deliberately reject launch.
-4. Only then assign a numeric GPU budget. No automatic epoch/LR/budget escalation;
-   at most two failed pilots before hold. Check generated best AND last behavior.
-5. Require release review and full matched local MPS checks before promotion.
-6. Verify backups before normal shutdown; retain durable recovery copies if upload
-   fails. Update every~30minutes while a healthy VM runs; report failures promptly.
+1. Read corrective-corpus-v1/STATUS_AND_NEXT_STEPS.txt. Preserve the frozen packet;
+   no more uncontrolled generation or silent mixing with historical templates.
+2. Prepare finite GPU qualification/pilot budget and stop/backup drill; keep VM off
+   until offline readiness and explicit numeric budget are in place.
+3. Qualify4K/restart/fault handling before substantive training. At most two bounded
+   10update pilots; compare generated best AND last plus protected regressions.
+4. Freeze candidate selection before the one-shot release. Full release and matched
+   MPS checks required before promotion. No threshold/budget/LR/epoch escalation.
+5. Verify required backups before normal shutdown; retain durable recovery copies
+   if upload fails. Healthy VM updates~30minutes; failures reported promptly.
 
 No repaired-model claim. No new GPU training or local HTTP deployment started.

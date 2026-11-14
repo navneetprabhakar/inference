@@ -408,7 +408,7 @@ def run(args):
     contract=json.loads(contract_path.read_text());contract_sha=sha256_file(contract_path)
     admission=json.loads((Path(args.manifest).resolve().parent/manifest['admission']['receipt']).read_text())
     coverage={'train':dataset_coverage(train),'development':dataset_coverage(dev)}
-    errors=contract_errors(contract,manifest=manifest,admission=admission,train=coverage['train'],dev=coverage['development'],epochs=args.epochs,lr_multiplier=args.lr_multiplier,eval_interval=args.eval_every_updates)
+    errors=contract_errors(contract,manifest=manifest,admission=admission,train=coverage['train'],dev=coverage['development'],epochs=args.epochs,lr_multiplier=args.lr_multiplier,eval_interval=args.eval_every_updates,max_updates=args.max_updates)
     atomic_json(out/'quality-preflight.json',{'status':'blocked' if errors else 'diagnostic_ready_not_quality_accepted','contract_sha256':contract_sha,'coverage':coverage,'reasons':errors})
     if errors:raise ValueError('Quality preflight blocked: '+'; '.join(errors))
     if args.resume:

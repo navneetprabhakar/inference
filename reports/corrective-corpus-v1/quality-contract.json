@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "objective": "conversation_and_tools",
+  "dataset_manifest_sha256": "ad31597742cde8eb657ad1a2365efd713bb80eed257c84ea6becef1bba1aa348",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "context_tokens": 4096,
+  "required_parent_manifest_sha256": "d453f03566861975b85d85120b097c8554ba800f2e93d87a0448e4c4149992ba",
+  "release_suite_sha256": "c1a016c46242a91813cf1abbc2e077e3b0eefe0be377c3d47293457e01ab8f07",
+  "protected_suite_sha256": "d50dfa423f06ed3d401064eeac846b7436bcbce1cead59644ccdae91fadc354c",
+  "require_one_shot_release": true,
+  "unresolved_required_data": [],
+  "coverage": {
+    "minimum_training_turns": {
+      "disabled_no_call": 100,
+      "enabled_no_call": 100,
+      "enabled_call": 100
+    },
+    "minimum_unique_assistant_targets": 100000,
+    "minimum_family_sessions": {
+      "natural_dialogue_4k": 100,
+      "long_context_natural": 20,
+      "long_context_tool": 20,
+      "natural": 20,
+      "code_state": 20,
+      "tool": 50
+    }
+  },
+  "recipe_limits": {
+    "max_epochs": 2,
+    "max_lr_multiplier": 0.125,
+    "max_eval_interval": 10,
+    "max_pilot_updates": 10
+  },
+  "regression": {
+    "relative_tolerance": 0.05,
+    "patience": 2
+  },
+  "release": {
+    "minimum_turns_by_category": {
+      "natural": 60,
+      "code_state": 60,
+      "tool": 60
+    },
+    "minimum_category_pass_rate": 0.9,
+    "minimum_complete_session_rate": 0.8
+  },
+  "limits_note": "Keep existing100k-target,100-per-policy-mode,90%-category and80%-session floors. Family taxonomy revised explicitly for source selection: old narrow calculate/convert/correction templates excluded; retained natural/long families plus new natural/state/tool workflows each require development coverage. These counts are engineering floors, not evidence of adequate capability.",
+  "execution_note": "No GPU authorized by this data contract. Separate budget,4K/restart qualification, backup drill and campaign readiness required."
+}

@@ -32,7 +32,7 @@ def dataset_coverage(dataset):
     return {'sessions':len(rows),'assistant_targets':sum(dataset.target_counts),'families':families,'turn_modes':dict(modes)}
 
 
-def contract_errors(contract, *, manifest, admission, train, dev, epochs, lr_multiplier, eval_interval):
+def contract_errors(contract, *, manifest, admission, train, dev, epochs, lr_multiplier, eval_interval, max_updates=None):
     errors=[]
     for key in ('dataset_manifest_sha256','tokenizer_sha256','required_parent_manifest_sha256','release_suite_sha256','protected_suite_sha256'):
         if not isinstance(contract.get(key),str) or not re.fullmatch('[0-9a-f]{64}',contract[key]):errors.append('Missing valid immutable identity: '+key)
@@ -58,6 +58,9 @@ def contract_errors(contract, *, manifest, admission, train, dev, epochs, lr_mul
     for key,actual in [('max_epochs',epochs),('max_lr_multiplier',lr_multiplier),('max_eval_interval',eval_interval)]:
         limit=limits.get(key)
         if not finite(limit) or limit<=0 or actual>limit:errors.append('Recipe exceeds or lacks quality bound: '+key)
+    if 'max_pilot_updates' in limits:
+        ceiling=limits['max_pilot_updates']
+        if type(ceiling)is not int or ceiling<1 or type(max_updates)is not int or not 1<=max_updates<=ceiling:errors.append('Missing or exceeded bounded pilot update limit')
     if contract.get('unresolved_required_data'):errors.append('Required data remains excluded/untrained')
     try:ValidationGuard(contract['regression'])
     except (KeyError,ValueError,TypeError):errors.append('Invalid mandatory regression guard')
@@ -111,6 +114,9 @@ def release_decision(*, raw, raw_sha256, suite, suite_sha256, review, contract, 
     errors=[]
     for value in [raw_sha256,suite_sha256,contract.get('_sha256'),raw.get('checkpoint_manifest_sha256')]:
         if not isinstance(value,str) or not re.fullmatch('[0-9a-f]{64}',value):errors.append('Missing immutable release evidence hash')
+    if contract.get('require_one_shot_release'):
+        claim=raw.get('release_claim',{})
+        if claim.get('checkpoint_manifest_sha256')!=raw.get('checkpoint_manifest_sha256') or claim.get('suite_sha256')!=suite_sha256 or not claim.get('utc'):errors.append('Missing or mismatched one-shot release claim')
     if raw.get('status') not in ('complete_requires_full_review','complete'):errors.append('Raw evaluation did not complete')
     expected=[(s['id'],i) for s in suite.get('sessions',[]) for i,_ in enumerate(s['turns'])]
     if not expected:errors.append('Empty suite')

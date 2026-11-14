@@ -1,0 +1,102 @@
+CORRECTIVE CORPUS —14 NOVEMBER2026
+Decision: offline data admission PASS; GPU execution HOLD. No model has been retrained.
+
+DELIVERED
+- New Codex-authored core:100training conversations/300turns and18development
+  conversations/54turns. Training has100turns in each policy/action mode:
+  tools-disabled/no-call, tools-enabled/no-call, tools-enabled/call.
+- Full source/reference review recorded for all181new scenarios/543turns, including
+  the63release scenarios. No automatic content judge substituted for semantic review.
+- Recovered immutableV21 from GCS and checked its actual files, prefixes, tool
+  results, source groups and historical review/source hashes. Its166enabled/no-call
+  training turns were absent from the actual2K packet used by the previous run.
+- Candidate4K packet:272training and61development conversations,175,346training
+  assistant targets and50,013development targets.52training conversations reach
+  3K;17,187training targets occur after3072tokens,64,988after2048.
+- All original Codex natural/long dialogues retained in their original splits,
+  with two explicitly reviewed prose repairs. Excluded338legacy narrow synthetic
+  calculator/converter/correction rows from BOTH splits; originals remain in GCS.
+-215inherited dialogues have verified historical full-review receipts tied to
+  exact raw source hashes. They are not falsely claimed as all newly reread.
+  Two inherited dialogues were reread completely and repaired; their code, user
+  messages, tool calls and observations remain unchanged.64reference checks pass.
+- Every candidate action prefix reserves192tokens within4096; minimum remaining
+  headroom199tokens. No token slicing, dropped late turns or fake long padding.
+- Short core alone has only5,111targets and77%tool target mass. It is an ingredient,
+  not a standalone admitted SFT replacement. Use candidate-4k/manifest.json.
+
+INDEPENDENT RELEASE CUSTODY
+-63sessions/189turns:20short natural,20short code/state,20short tool workflows,
+  plus ONE structured3K+stress case per category. The three stress cases are not
+  presented as natural long conversations or statistically independent benchmarks.
+- A redundant second variant of each long stress case was rejected before freeze.
+  Long prompts contain relevant scoped records, not repeated explanatory padding.
+- Release source groups, user scenarios and exact prompts are disjoint from the
+  new training/development data and the retained parent. Lexical5word-shingle
+  cross-split maxima:0.0286train/dev,0.05train/release,0.02dev/release.
+- Same Codex author wrote data and tests. Independence means held-out data/custody,
+  not an independent human author, proof of semantic non-overlap, or an external
+  benchmark. Basic mechanisms intentionally overlap. All release references were
+  reviewed without viewing any model response to those release questions.
+- Release has NOT been executed on a model. Freeze hashes bind all sources,
+  references, reviews, selected data, admission and quality contract.
+- Generators refuse to overwrite a frozen packet. Evaluation needs --release,
+  --release-custody and a checkpoint bound to the frozen quality contract. Atomic
+  release-use.json permits only one selected candidate; even an interrupted attempt
+  stays claimed. Tuning/retrying against release outputs requires a new release set.
+- A2K model is rejected for this4K suite before loading or consuming custody. The
+  current model remains available locally, but cannot qualify by skipping long cases.
+
+STRICT CURRENT-MODEL DEVELOPMENT CHECK
+- Existing194checkpoint, MPS, raw greedy,192tokens/action:2/54strict turns,
+  zero of18complete sessions. All54raw/decoded turns and dispatched calls reviewed.
+- Passing turns: recalls the term duet; correctly dispatches88+12 and answers100.
+- Failure examples: adds11+6 instead of multiplying; calculates quoted text despite
+  a copy-only request; emits unknown unit sec; emits an empty answer after a valid
+  division-by-zero error; contradicts supplied facts and loops.
+- Correct opening words do not rescue a contradictory full answer. Blocked
+  follow-ups remain failures. This is an exposed DEVELOPMENT baseline, not release.
+- Baseline's exact original suite is preserved and SHA-verified. Later metadata
+  clarified context/scope; questions, policies and references were unchanged.
+
+CHECKS / GUARDRAILS
+-697new train/serve prefix checks,154new tool/error reference replays, and actual
+  broker parity for all190tool records in the assembled candidate.
+-112CPU tests pass: masking/objective, checkpoint/restart, serving, regression,
+  retention, release evidence, corpus custody, actual broker error shape, split
+  leakage, context mismatch and bounded-pilot enforcement. This is not GPU proof.
+- Existing100k-target,100-per-policy-mode,90%-per-category and80%-complete-session
+  floors remain. Family taxonomy is explicitly revised for the selected mixture:
+  old narrow synthetic families are excluded, replaced by contextual tool workflows;
+  natural/long/state/tool families each have development coverage.
+- Additional mandatory pilot ceiling:10updates; missing/zero/unbounded update limits
+  fail contract preflight. Epoch ceiling2, LR multiplier ceiling0.125 and evaluation
+  interval ceiling10remain. Two failed pilots still require a new diagnosis.
+- Dataset admission does not mean the mixture is proven to improve quality. Short
+  corrective targets remain a small fraction of total loss mass; bounded generated
+  behavior checks must qualify the recipe. Do not assume larger corpus fixes this.
+
+REMAINING READINESS BLOCKERS — VM STAYS OFF
+1. Assign a fresh finite compute budget/reserve/lease only when a concrete bounded
+   qualification run is ready. The closed$55campaign is not an open authorization.
+2. Qualify4K context extension, exact restart, numerical behavior and backup/shutdown
+   fault recovery on a tiny separately bounded qualification lease. CPU tests cannot
+   prove these GPU properties. No substantive training before that qualification.
+3. Use at most two10update pilots, frozen data/recipe, and full development/protected
+   review. Compare best AND last. Stop on any family/aggregate loss regression,
+   generated behavior regression, missing evidence, deadline or budget boundary.
+4. Preselect a candidate before consuming the independent release suite. Require
+   existing acceptance floors and all protected workflows; no threshold weakening.
+5. Repeat complete matched MPS checks on the selected4Kcandidate, verify required
+   GCS backups, then stop compute. Preserve local194/605until a replacement qualifies.
+
+ENTRY POINTS
+candidate-4k/manifest.json and admission.json — exact admitted data and lineage.
+quality-contract.json — immutable data intent, coverage, pilot and release limits.
+freeze.json — immutable custody hashes; do not edit/regenerate in place.
+semantic-review.json — per-scenario new source/reference review.
+candidate-4k/assembly-audit.json — inherited review bindings and every excluded row.
+long-prefix-review.json — two reviewed edits with executable checks.
+baseline194-review.json — strict full local development assessment.
+validation.json, cloud-status.json, backup-receipt.json — execution/backup evidence.
+No model improvement,4Kserving qualification or GPU readiness is claimed.

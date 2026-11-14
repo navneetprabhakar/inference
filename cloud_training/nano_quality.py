@@ -58,6 +58,14 @@ def validate_suite(suite, *, release=False):
     if len(ids)!=len(set(ids)):raise ValueError('Duplicate session IDs')
 
 
+def validate_context_requirement(suite, metadata):
+    required=suite.get('required_context_tokens')
+    if required is None:return
+    if type(required)is not int or required not in (2048,4096):raise ValueError('Invalid suite context requirement')
+    actual=metadata.get('identity',{}).get('config',{}).get('sequence_len')
+    if type(actual)is not int or actual<required:raise ValueError('Checkpoint context does not meet frozen evaluation suite requirement')
+
+
 def run_suite(chat_factory, suite, *, deadline, publish=lambda report:None):
     records=[]
     for session in suite['sessions']:
@@ -121,6 +129,7 @@ def main():
         p.add_argument('--'+key,required=True)
     p.add_argument('--device',default='cuda',choices=['cpu','mps','cuda'])
     p.add_argument('--allow-base',action='store_true')
+    p.add_argument('--release-custody',help='Frozen packet directory; mandatory one-shot custody for release evaluation')
     p.add_argument('--release',action='store_true',help='Frozen release suite; raw output still requires full semantic review and release gate')
     p.add_argument('--repetition-penalty',type=float,default=1.0)
     p.add_argument('--seconds',type=int,default=600)
@@ -136,8 +145,10 @@ def main():
     if actual!=a.checkpoint_manifest_sha256:raise ValueError('Checkpoint manifest differs from requested provenance')
     raw=Path(a.suite).read_bytes();suite=json.loads(raw)
     validate_suite(suite,release=a.release)
+    if a.release and not a.release_custody:p.error('Release evaluation requires --release-custody')
     if a.release and a.allow_base:raise ValueError('Base diagnostics cannot be releases')
     metadata=json.loads((checkpoint/'metadata.json').read_text())
+    validate_context_requirement(suite,metadata)
     if a.allow_base and (metadata['identity'].get('phase')!='base' or metadata['identity'].get('initialization')!='own_random'):
         raise ValueError('Base diagnostic requires own-random base lineage')
     provenance={'checkpoint_manifest_sha256':actual,'suite_sha256':hashlib.sha256(raw).hexdigest(),
@@ -148,11 +159,21 @@ def main():
         'scope':'Raw base diagnostic, not instruction-trained acceptance' if a.allow_base else 'Exposed development assessment, not final acceptance'}
     if not a.worker:
         output=output_guard(checkpoint,a.output);output.parent.mkdir(parents=True,exist_ok=True)
+        if a.release:
+            from cloud_training.nano_corpus_guard import claim_release
+            custody=Path(a.release_custody)
+            contract_sha=hashlib.sha256((custody/'quality-contract.json').read_bytes()).hexdigest()
+            if metadata['identity'].get('quality_contract_sha256')!=contract_sha:raise ValueError('Candidate is not bound to frozen release contract')
+            provenance['release_claim']=claim_release(custody,checkpoint_sha256=actual,suite_sha256=provenance['suite_sha256'],output=output)
         atomic_report(output,dict(provenance,status='loading',records=[]))
         report=supervise([sys.executable,'-m','cloud_training.nano_quality',*sys.argv[1:],'--worker'],output,a.seconds)
         if hashlib.sha256((checkpoint/'manifest.json').read_bytes()).hexdigest()!=actual:
             report.update(status='checkpoint_provenance_changed',usable_model_claim=False);atomic_report(output,report)
         return 0 if report['status'] in ('development_checks_complete','complete_requires_full_review') else 2
+    if a.release:
+        claim=json.loads((Path(a.release_custody)/'release-use.json').read_text())
+        if claim['checkpoint_manifest_sha256']!=actual or claim['suite_sha256']!=provenance['suite_sha256'] or claim['output']!=str(Path(a.output).resolve()):raise ValueError('Release worker does not match custody claim')
+        provenance['release_claim']=claim
     # Separate process owns the model; no optimizer is constructed or saved.
     from cloud_training.nano_serve import BrokerChat,generate_action,load_own_bundle
     model,tok,metadata=load_own_bundle(a.repo,checkpoint,a.tokenizer,
