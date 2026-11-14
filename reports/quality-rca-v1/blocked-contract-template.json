@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "objective": "conversation_and_tools",
+  "status": "BLOCKED_TEMPLATE_NOT_LAUNCH_AUTHORIZATION",
+  "dataset_manifest_sha256": "f22ac188eac1de0aa49a9cd01e61dc67213f8c12b0f10fdb11a36a5312ead8c4",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "context_tokens": 2048,
+  "required_parent_manifest_sha256": "d453f03566861975b85d85120b097c8554ba800f2e93d87a0448e4c4149992ba",
+  "release_suite_sha256": null,
+  "protected_suite_sha256": null,
+  "unresolved_required_data": [
+    "User-requested V21 3K\u20134K examples do not fit the actual 2048-token packet; qualify 4096 context separately and record any staged exclusions."
+  ],
+  "coverage": {
+    "minimum_training_turns": {
+      "disabled_no_call": 100,
+      "enabled_no_call": 100,
+      "enabled_call": 100
+    },
+    "minimum_unique_assistant_targets": 100000,
+    "minimum_family_sessions": {
+      "natural_dialogue_4k": 100,
+      "calculate": 50,
+      "convert": 50,
+      "tool_correction": 50
+    }
+  },
+  "recipe_limits": {
+    "max_epochs": 2,
+    "max_lr_multiplier": 0.125,
+    "max_eval_interval": 10
+  },
+  "regression": {
+    "relative_tolerance": 0.05,
+    "patience": 2
+  },
+  "release": {
+    "minimum_turns_by_category": {
+      "natural": 60,
+      "code_state": 60,
+      "tool": 60
+    },
+    "minimum_category_pass_rate": 0.9,
+    "minimum_complete_session_rate": 0.8
+  },
+  "threshold_note": "Provisional engineering risk limits, not empirically sufficient training sizes or statistical guarantees. Do not lower them to make a failed experiment pass. Final curriculum/family taxonomy and immutable release/protected suite hashes must be frozen before any new pilot."
+}

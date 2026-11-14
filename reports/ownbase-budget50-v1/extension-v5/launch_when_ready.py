@@ -1,4 +1,5 @@
 """After verified10B backup and oldVMstop, transfer the persistent disk to a bounded lease."""
+raise SystemExit('Closed campaign: this allocator is retired. Define a new quality-gated, budget-bound run; do not reuse this lease.')
 import sys,json,time,datetime,hashlib,fcntl,os,subprocess
 from pathlib import Path
 from urllib.parse import quote

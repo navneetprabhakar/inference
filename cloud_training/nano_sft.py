@@ -10,6 +10,7 @@ import fcntl
 import hashlib
 import json
 import math
+import random
 import os
 import re
 from pathlib import Path
@@ -22,6 +23,7 @@ if __package__ in (None,''):
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from cloud_training.nano_benchmark import BATCH, PINNED_REVISION, atomic_json, deterministic_attention
 from cloud_training.nano_chat_format import VERSION, encode_conversation
+from cloud_training.nano_quality_gate import dataset_coverage, contract_errors, ValidationGuard, evaluation_candidates
 from cloud_training.nano_data import sha256_file
 from cloud_training.nano_train import CloudJournal, deadline_timestamp, numerical_identity
 
@@ -132,22 +134,29 @@ class JsonlConversations:
 class FiniteEpochDataset:
     """Explicit finite replay, with epoch count bound into the restart identity.
 
-    Keeps the admitted order each epoch. Development data is never repeated.
+    An explicit seed shuffles each epoch; None preserves historical audit order. Development data is never repeated.
     Virtual indices let the existing exact packing cursor span epoch boundaries.
     """
-    def __init__(self,dataset,epochs):
+    def __init__(self,dataset,epochs,seed=None):
         if type(epochs) is not int or not 1<=epochs<=8 or not len(dataset):
             raise ValueError('Finite epochs must be an integer in1..8 with nonempty data')
         self.dataset=dataset;self.epochs=epochs;self.tokenizer=dataset.tokenizer;self.context=getattr(dataset,"context",SEQUENCE)
-        self.lengths=dataset.lengths*epochs
-        self.target_counts=dataset.target_counts*epochs
-        self.sha=hashlib.sha256(f'{dataset.sha}:finite_epochs:{epochs}'.encode()).hexdigest()
+        self.order=[]
+        if seed is not None and type(seed)is not int:raise ValueError('Integer shuffle seed required')
+        for epoch in range(epochs):
+            order=list(range(len(dataset)))
+            if seed is not None:random.Random(seed+epoch).shuffle(order)
+            self.order.extend(order)
+        self.lengths=[dataset.lengths[i] for i in self.order]
+        self.target_counts=[dataset.target_counts[i] for i in self.order]
+        identity=f'{dataset.sha}:finite_epochs:{epochs}' if seed is None else json.dumps({'dataset':dataset.sha,'epochs':epochs,'seed':seed,'order':self.order},sort_keys=True)
+        self.sha=hashlib.sha256(identity.encode()).hexdigest()
 
     def __len__(self):return len(self.lengths)
 
     def get(self,index):
         if type(index) is not int or not 0<=index<len(self):raise IndexError(index)
-        return self.dataset.get(index%len(self.dataset))
+        return self.dataset.get(self.order[index])
 
 
 class BestFitConversations:
@@ -260,10 +269,28 @@ def evaluate_fixed(model,dataset,*,rows,microbatch,device):
                     losses.append(float(loss));targets+=sum(t!=NATIVE_IGNORE for row in ys for t in row)
         if not targets:raise ValueError('No development assistant targets')
         return {'purpose':'masked_development_loss_not_conversation_acceptance','rows':pack.rows,
-                'assistant_targets':targets,'cross_entropy_nats':math.fsum(losses)/targets,'dataset_sha256':dataset.sha}
+                'assistant_targets':targets,'cross_entropy_nats':math.fsum(losses)/targets,'dataset_sha256':dataset.sha,
+                'complete':pack.consumed==len(dataset)}
     finally:
         for module,mode in modes:module.training=mode
         restore_rng_state(rng)
+
+
+
+def evaluate_families(model,dataset,*,rows,microbatch,device):
+    families={}
+    for i,line in enumerate(dataset.path.read_text().splitlines()):families.setdefault(json.loads(line).get('family','unclassified'),[]).append(i)
+    result={}
+    for family,indices in families.items():
+        class Subset:
+            tokenizer=dataset.tokenizer
+            context=dataset.context
+            lengths=[dataset.lengths[i] for i in indices]
+            sha=hashlib.sha256((dataset.sha+json.dumps(indices)).encode()).hexdigest()
+            def __len__(self):return len(indices)
+            def get(self,index):return dataset.get(indices[index])
+        result[family]=evaluate_fixed(model,Subset(),rows=rows,microbatch=microbatch,device=device)
+    return result
 
 
 def replace_best_pin(journal,new_uri):
@@ -377,7 +404,17 @@ def run(args):
     train=JsonlConversations(manifest['train']['_file'],tok,manifest['train']['sha256'],context=target_context)
     dev=JsonlConversations(manifest['validation']['_file'],tok,manifest['validation']['sha256'],context=target_context)
     if train.fingerprints&dev.fingerprints:raise ValueError('Train/development conversation overlap')
-    if args.epochs>1:train=FiniteEpochDataset(train,args.epochs)
+    contract_path=Path(args.quality_contract)
+    contract=json.loads(contract_path.read_text());contract_sha=sha256_file(contract_path)
+    admission=json.loads((Path(args.manifest).resolve().parent/manifest['admission']['receipt']).read_text())
+    coverage={'train':dataset_coverage(train),'development':dataset_coverage(dev)}
+    errors=contract_errors(contract,manifest=manifest,admission=admission,train=coverage['train'],dev=coverage['development'],epochs=args.epochs,lr_multiplier=args.lr_multiplier,eval_interval=args.eval_every_updates)
+    atomic_json(out/'quality-preflight.json',{'status':'blocked' if errors else 'diagnostic_ready_not_quality_accepted','contract_sha256':contract_sha,'coverage':coverage,'reasons':errors})
+    if errors:raise ValueError('Quality preflight blocked: '+'; '.join(errors))
+    if args.resume:
+        saved_guards=json.loads((Path(args.resume)/'metadata.json').read_text())['loop']['quality_guards']
+        if any(g['stopped'] for g in saved_guards.values()):raise ValueError('Quality-stopped experiment cannot auto-resume; preserve it and define a new bounded experiment')
+    train=FiniteEpochDataset(train,args.epochs,seed=args.seed)
     total_rows=count_packed_rows(train);horizon=math.ceil(total_rows/recipe["rows_per_update"])
     if horizon<2:raise ValueError('Finite SFT corpus too small for this schedule; no automatic replay or zero-LR-only run')
     if args.validate_only:
@@ -408,8 +445,8 @@ def run(args):
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
     reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
-    files=('nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
-    identity={'phase':'sft','stage':args.stage,'parent_bundle_manifest_sha256':args.base_manifest_sha,
+    files=('nano_quality_gate.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
+    identity={'phase':'sft','stage':args.stage,'quality_contract_sha256':contract_sha,'data_order_sha256':train.sha,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
               'source_manifest_sha256':manifest['_sha256'],'horizon_updates':horizon,'packed_rows':total_rows,
@@ -420,10 +457,12 @@ def run(args):
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
     if context_change is not None:identity['context_transition']=context_change
     packing=BestFitConversations(train);step=0;trained_targets=0;best_dev=None;best_step=None
+    guard_states=None
     if args.resume:
         restored=load_bundle(args.resume,model=model,optimizer=optimizer,expected_identity=identity)
         step=restored['metadata']['step'];packing.load_state_dict(restored['data_state']['packing'])
         if restored['data_state']['next_batch']!=step:raise ValueError('SFT next-update mismatch')
+        guard_states=restored['metadata']['loop']['quality_guards']
         trained_targets=restored['metadata']['loop']['trained_targets'];best_dev=restored['metadata']['loop']['best_dev'];best_step=restored['metadata']['loop']['best_step']
     out.mkdir(parents=True,exist_ok=True)
     journal=CloudJournal(out/'retention-journal.json',campaign_prefix=args.backup_prefix,identity=identity,resume_step=step if args.resume else None)
@@ -435,7 +474,21 @@ def run(args):
     for sig in (signal.SIGINT,signal.SIGTERM):signal.signal(sig,handle)
     def stopping():return bool(interrupted) or time.time()>=cutoff
     max_step=min(horizon,step+args.max_updates) if args.max_updates else horizon
-    status={'status':'running','identity':identity,'step':step,'assistant_targets':trained_targets}
+    guard_names=['aggregate',*sorted(coverage['development']['families'])]
+    if guard_states is not None and set(guard_states)!=set(guard_names):raise ValueError('Quality guard resume family mismatch')
+    guards={name:ValidationGuard(contract['regression'],None if guard_states is None else guard_states[name]) for name in guard_names}
+    status={'status':'running','identity':identity,'step':step,'assistant_targets':trained_targets,'train_loss_scope':'last_optimizer_update_only'}
+    def observe_quality(aggregate):
+        families=evaluate_families(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device)
+        status['development_by_family']=families
+        observations={'aggregate':aggregate,**families}
+        if not all(r['complete'] for r in observations.values()):raise ValueError('Partial development evaluation cannot drive quality decisions')
+        # Validate all observations before mutating persisted patience counters.
+        staged={name:ValidationGuard(contract['regression'],g.state) for name,g in guards.items()}
+        stopped=[name for name,r in observations.items() if staged[name].observe(step,r['cross_entropy_nats'])]
+        guards.update(staged)
+        status['quality_guards']={name:dict(g.state) for name,g in guards.items()}
+        return stopped
     last_save=time.monotonic();last_saved=step if args.resume else None
     def checkpoint(reason,pin=False):
         nonlocal last_save,last_saved
@@ -443,7 +496,7 @@ def run(args):
         journal.deadline=time.monotonic()+min(args.checkpoint_reserve_seconds,deadline-time.time())
         path=out/f'step-{step:08d}'
         save_bundle(path,model=model,optimizer=optimizer,metadata={'step':step,'identity':identity,'reason':reason,
-                   'loop':{'trained_targets':trained_targets,'best_dev':best_dev,'best_step':best_step}},
+                   'loop':{'trained_targets':trained_targets,'best_dev':best_dev,'best_step':best_step,'quality_guards':{name:dict(g.state) for name,g in guards.items()}}},
                    data_state={'exact':True,'next_batch':step,'packing':packing.state_dict()})
         journal.set_phase('checkpoint_upload_in_progress',step=step)
         receipt=upload_bundle(path,remote_prefix=args.backup_prefix,timeout=min(args.checkpoint_reserve_seconds,journal.deadline-time.monotonic()))
@@ -464,13 +517,20 @@ def run(args):
         for old in local[:-2]:
             if int(old.name.split('-')[1])!=best_step:
                 validate_bundle(old);shutil.rmtree(old)
+    if stopping() and not args.resume:
+        atomic_json(out/'result.json',dict(status,status='stopped',reason='lease_before_initial_evaluation',quality_accepted=False))
+        return 2
     if not stopping():
         status['development_start']=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device)
         initial_dev=status['development_start']['cross_entropy_nats']
-        if best_dev is None or initial_dev<best_dev:best_dev,best_step=initial_dev,step
+        # Resume loading must not add an unscheduled validation strike or silently change the best pin.
+        if not args.resume:
+            observe_quality(status['development_start'])
+            best_dev,best_step=initial_dev,step
     if not args.resume:checkpoint('initial_warm_started_sft')
     reason='dataset_complete' if max_step==horizon else 'pilot_update_limit'
     while step<max_step:
+        if any(g.state['stopped'] for g in guards.values()):reason='quality_regression_stop';break
         if stopping():reason='lease_or_signal';break
         cursor,rng=packing.state_dict(),capture_rng()
         batches,count=collect_update(packing,args.microbatch,recipe["rows_per_update"])
@@ -490,22 +550,31 @@ def run(args):
         optimizer.step();model.zero_grad(set_to_none=True);torch.cuda.synchronize()
         step+=1;trained_targets+=count
         status.update(step=step,assistant_targets=trained_targets,train_loss=loss,
-                      consumed_conversations=packing.consumed,packed_rows=packing.rows,update_seconds=time.monotonic()-tick)
+                      consumed_conversations=packing.consumed,packed_rows=packing.rows,update_seconds=time.monotonic()-tick,last_update_assistant_targets=count)
         new_best=False
         if (step%args.eval_every_updates==0 or step==max_step) and not stopping():
-            ev=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device)
-            status['development']=ev
-            if best_dev is None or ev['cross_entropy_nats']<best_dev:
-                best_dev,best_step=ev['cross_entropy_nats'],step;new_best=True
+            try:
+                ev=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device)
+                status['development']=ev
+                stopped_families=observe_quality(ev)
+                if stopped_families:status['quality_stop_families']=stopped_families
+                if best_dev is None or ev['cross_entropy_nats']<best_dev:
+                    best_dev,best_step=ev['cross_entropy_nats'],step;new_best=True
+            except (ValueError, RuntimeError, FloatingPointError) as error:
+                status['error']=str(error);reason='quality_evaluation_failure'
+                checkpoint(reason)
+                break
         with (out/'updates.jsonl').open('a') as f:f.write(json.dumps(status,allow_nan=False)+'\n')
         atomic_json(out/'progress.json',status)
-        if new_best or time.monotonic()-last_save>=args.checkpoint_seconds:checkpoint('development_best' if new_best else 'periodic')
+        if new_best or any(g.state['stopped'] for g in guards.values()) or time.monotonic()-last_save>=args.checkpoint_seconds:checkpoint('development_best' if new_best else 'quality_regression_stop' if any(g.state['stopped'] for g in guards.values()) else 'periodic')
+        if any(g.state['stopped'] for g in guards.values()):reason='quality_regression_stop';break
     checkpoint(reason,pin=step==horizon)
-    status.update(status='complete' if step==horizon else 'stopped',reason=reason,
+    status.update(status='complete' if step==horizon and reason=='dataset_complete' else 'stopped',reason=reason,
+                  quality_accepted=False,evaluation_candidates=evaluation_candidates(json.loads(journal.path.read_text()),best_step,step),
                   step=step,assistant_targets=trained_targets,best_development_loss=best_dev,best_development_step=best_step,
                   acceptance='Not evaluated by this worker; use independent actual conversation/tool tests.')
     atomic_json(out/'result.json',status)
-    return 2 if reason=='training_failure' else 0
+    return 2 if reason in ('training_failure','quality_evaluation_failure','quality_regression_stop') else 0
 
 
 def main():
@@ -513,6 +582,7 @@ def main():
     for name in ('manifest','base','base-manifest-sha','tokenizer','tokenizer-sha','repo','output'):
         p.add_argument('--'+name,required=True)
     p.add_argument('--validate-only',action='store_true')
+    p.add_argument('--quality-contract',required=True,help='Hash-bound data intent, coverage, recipe and validation-regression controls')
     p.add_argument('--stage',choices=('general','targeted'),default='general')
     p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
     p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')

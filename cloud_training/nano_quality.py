@@ -41,6 +41,23 @@ def assess(result, spec):
             'manual_review_required':exact is None}
 
 
+def validate_suite(suite, *, release=False):
+    from cloud_training.nano_chat_format import host_policy
+    purpose='heldout_release_never_train' if release else 'development_only_never_train'
+    if suite.get('purpose')!=purpose:raise ValueError('Wrong suite purpose')
+    sessions=suite.get('sessions',[])
+    if not sessions:raise ValueError('Empty evaluation suite')
+    ids=[]
+    for session in sessions:
+        if not isinstance(session.get('id'),str) or not session['id'] or not session.get('turns'):raise ValueError('Invalid session')
+        if release and not session.get('category'):raise ValueError('Release category required')
+        ids.append(session['id'])
+        for turn in session['turns']:
+            if not isinstance(turn.get('user'),str) or not turn['user'].strip():raise ValueError('Invalid user turn')
+            host_policy(turn.get('policy'))
+    if len(ids)!=len(set(ids)):raise ValueError('Duplicate session IDs')
+
+
 def run_suite(chat_factory, suite, *, deadline, publish=lambda report:None):
     records=[]
     for session in suite['sessions']:
@@ -104,6 +121,7 @@ def main():
         p.add_argument('--'+key,required=True)
     p.add_argument('--device',default='cuda',choices=['cpu','mps','cuda'])
     p.add_argument('--allow-base',action='store_true')
+    p.add_argument('--release',action='store_true',help='Frozen release suite; raw output still requires full semantic review and release gate')
     p.add_argument('--repetition-penalty',type=float,default=1.0)
     p.add_argument('--seconds',type=int,default=600)
     p.add_argument('--reply-budget',type=int,default=128)
@@ -117,7 +135,8 @@ def main():
     actual=hashlib.sha256((checkpoint/'manifest.json').read_bytes()).hexdigest()
     if actual!=a.checkpoint_manifest_sha256:raise ValueError('Checkpoint manifest differs from requested provenance')
     raw=Path(a.suite).read_bytes();suite=json.loads(raw)
-    if suite.get('purpose')!='development_only_never_train':raise ValueError('Development-only suite required')
+    validate_suite(suite,release=a.release)
+    if a.release and a.allow_base:raise ValueError('Base diagnostics cannot be releases')
     metadata=json.loads((checkpoint/'metadata.json').read_text())
     if a.allow_base and (metadata['identity'].get('phase')!='base' or metadata['identity'].get('initialization')!='own_random'):
         raise ValueError('Base diagnostic requires own-random base lineage')
@@ -133,7 +152,7 @@ def main():
         report=supervise([sys.executable,'-m','cloud_training.nano_quality',*sys.argv[1:],'--worker'],output,a.seconds)
         if hashlib.sha256((checkpoint/'manifest.json').read_bytes()).hexdigest()!=actual:
             report.update(status='checkpoint_provenance_changed',usable_model_claim=False);atomic_report(output,report)
-        return 0 if report['status']=='development_checks_complete' else 2
+        return 0 if report['status'] in ('development_checks_complete','complete_requires_full_review') else 2
     # Separate process owns the model; no optimizer is constructed or saved.
     from cloud_training.nano_serve import BrokerChat,generate_action,load_own_bundle
     model,tok,metadata=load_own_bundle(a.repo,checkpoint,a.tokenizer,
@@ -147,7 +166,9 @@ def main():
         repetition_penalty=1.0),reply_budget=a.reply_budget,context=model.config.sequence_len)
     publish=lambda report:atomic_report(a.output,{**provenance,**report})
     report=run_suite(factory,suite,deadline=time.monotonic()+a.seconds,publish=publish)
+    if a.release and report['status']=='development_checks_complete':
+        report.update(status='complete_requires_full_review',scope='Frozen release evaluation awaiting full semantic review; no acceptance inferred',limitation='Raw completion is not release acceptance')
     publish(report)
-    return 0 if report['status']=='development_checks_complete' else 2
+    return 0 if report['status'] in ('development_checks_complete','complete_requires_full_review') else 2
 
 if __name__=='__main__':raise SystemExit(main())

@@ -1,4 +1,5 @@
 """One bounded A100 allocation, authorized by user13November; never starts old VM."""
+raise SystemExit('Closed campaign: this allocator is retired. Define a new quality-gated, budget-bound run; do not reuse this lease.')
 import datetime,hashlib,json,os,subprocess,time
 from pathlib import Path
 from gcp_api import request

@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "scope": "Post-comparison diagnostic: increase reply budget to512 on two failed tools-off requests. Does not replace primary192-token scores.",
+  "sessions": [
+    {
+      "id": "notebook-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "My blue notebook belongs to Maya. My green notebook belongs to Dev. Who owns the blue notebook?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": [
+            "Maya"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "science-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Explain in one short sentence why ice melts in a warm room.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": null,
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    }
+  ]
+}

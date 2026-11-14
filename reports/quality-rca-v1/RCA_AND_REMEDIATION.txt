@@ -1,0 +1,269 @@
+OWN MODEL — ROOT CAUSE ANALYSIS AND QUALITY RECOVERY
+14 November 2026. Current evidence, not a claim that the model is repaired.
+
+DECISION
+The 10B base run and SFT execution finished; useful conversation quality did not.
+Keep the VM and HTTP server off. Preserve local194 and605 for explicit testing.
+Do not spend another training budget merely to finish a token/epoch target.
+The failure is a combination of data coverage, optimization, selection and control
+failures. No single fix has yet been shown to recover conversation quality.
+
+1. WHAT ACTUALLY RAN
+- Own random initialization;536,871,738 parameters;2048-token context.
+-10,000,269,312 base tokens; base validation CE2.457102 on1,048,576 targets.
+  This measures next-token prediction, not instruction following or conversation.
+- SFT used349 training sessions and43,183 unique assistant-target tokens, repeated
+  eight times:194 updates,345,464 target exposures. Repetition did not add new
+  examples. Batch8192 position tokens; LR batch scale0.125, extra multiplier1.0.
+-80 Codex natural conversations were actually trained. They contain190 user turns
+  and32,288 supervised targets:74.8% of the unique assistant-target mass.
+  The other269 sessions were105 calculator,112 converter,52 correction sessions.
+- Actual packet derives from corpusV3. The requested newer V4–V21 3K–4K examples
+  were not used in this2K SFT. Canonical V21 has553 sessions and remains in GCS.
+  This was a scoped2K diagnostic, but the run lacked an executable contract
+  preventing that diagnostic from being confused with delivery of the user's
+  broader data objective. A family name containing4k is not context coverage.
+- Full437-session audit:1,046 train/serve prefix checks and403 tool result replays
+  passed; exact train/dev message overlap0. User/tool payload masks and shifted
+  target accounting passed. These checks do not certify semantic correctness,
+  near-duplicate independence, or adequate curriculum coverage.
+
+2. OBSERVED FAILURE, WITH THE RIGHT DENOMINATORS
+Matched CUDA assessment has60 sessions/180 turns, three categories:
+- Before SFT:0/180 strict serving/protocol passes. This is not evidence that base
+  language knowledge is zero; an unaligned base need not follow the chat protocol.
+- After SFT:5/180 strict turns,0/60 complete sessions. Natural0/60, code/state0/60,
+  tool5/60.57 complete frames,45 invalid turns and78 blocked follow-up turns.
+-22 dispatched tool calls; six workflows performed the correct calculation;
+  one omitted requested explanation, leaving five strict passes. A coincidental
+  correct result from the wrong calculation is a failure, not a success.
+- The exposed protected tool set improved0/18 to18/18. That narrow success did
+  not predict broad conversation competence. It was insufficient for acceptance.
+- Historical605 on MPS achieved6/180 and0/60. Neither local model is promoted.
+
+New local controlled diagnostic: BOTH step50 and194 score4/16 strict turns,
+all four calculator turns and zero of12 natural/state turns. Four of12 sessions
+pass, all single-turn calculators. Lower dev loss did not produce a usable assistant.
+Same short requests with tools disabled/enabled,
+plus four explicit calculators, greedy MPS,192 tokens per action. Raw frames and
+all failed/blocked turns are preserved. See paired-review.json for the completed
+checkpoint comparison. This small exposed diagnostic is not a release benchmark.
+At194, tools-off notebook text begins with the correct owner, then invents other
+notebooks and repeats until the budget ends. Literal copying loses a character
+and devolves into a workshop agenda. The science answer drifts into unrelated
+instructions. Tools-on science calls45-50 and returns-5; notebook/literal queries
+invent unavailable tools. Four explicit calculator probes pass with actual calls.
+This establishes that forbidding tools does not fix the conversation failure.
+Natural training answers have median151.5 text tokens;62/190 exceed192tokens.
+All511 assistant-end markers and321 tool-call-end markers are supervised; there
+is no missing-EOS-label finding. Length mismatch is a contributor to investigate,
+not an excuse for drifting on a short ownership or one-sentence question.
+A separate512-token diagnostic repeats two failed tools-off prompts. Both still
+run to the limit, repeating invented ownership or unrelated science instructions.
+This rules out192tokens alone as their cause; primary scores remain unchanged.
+A repetition penalty would change decoding, not establish learned instruction/state
+following. All32 paired turns and both512-token outputs were read in full.
+
+3. CONFIRMED CONTROL FAILURES AND THEIR MECHANISMS
+A. Tool availability was perfectly confounded with calling in the SFT packet.
+   Train:190 tools-disabled/no-call turns;321 tools-enabled/call turns; ZERO
+   tools-enabled/no-call turns. Development similarly has50/82/zero.
+   There is no example teaching 'a tool is available but irrelevant here.'
+   This gives an easy shortcut. Paired inference is consistent with this shortcut;
+   only a controlled training ablation can establish its quantitative causal share.
+   Remediation: train and evaluate both actions under enabled policies; mixed
+   conversations must alternate ordinary answers, justified calls, corrections,
+   grounded follow-ups and abstention. Policy authority stays outside user text.
+
+B. Validation deteriorated while the run kept optimizing.
+   Aggregate dev CE:3.1210 before,2.3124 at50,2.7229 at100,3.4395 at150,
+   3.6175 at194. Final is56.4% worse than best and15.9% worse than start.
+   The old loop recorded the best but did not stop on regression. Eight repeated
+   epochs over this small packet continued after an observed warning at100.
+   A5% tolerance/two-observation patience would stop at150 on the OBSERVED trace.
+   We cannot infer an earlier stop using unmeasured10-step losses.
+   Remediation: persist aggregate AND per-family patience; stop on any regression;
+   reject automatic resumption of a quality-stopped experiment; evaluate more
+   frequently in bounded pilots. A lower LR is a hypothesis, not an established fix.
+
+C. The evaluation controller chose final rather than comparing best and final.
+   ExtensionV5 selected result['last_checkpoint']; step50 was safely preserved but
+   left conversation-untested. Lowest development loss is also not enough to select
+   a serving model: generation must be reviewed for both candidates.
+   Remediation: durable best+last candidate receipts, explicit generated comparison,
+   full per-turn semantic review, no latest-checkpoint promotion.
+
+D. Data intent and context scope were not enforced at the training boundary.
+   Long conversations cannot be made2K-safe by silently chopping late turns or
+   calling their excluded examples 'trained.' The historical no-truncation rule
+   was correct; the missing control was binding required source revision/context
+   coverage and recording unmet intent before allocating more training.
+   Remediation: immutable dataset/parent/tokenizer/context contract. Stage2K core
+   behavior first; separately qualify4K context and late-position target coverage.
+   Stop admission if required source data remains unresolved.
+
+E. Progress controls favored completion milestones over a hard quality gate.
+   Existing reports correctly withheld broad acceptance, broker checks prevented
+   unsupported execution, and backups retained useful artifacts. Those safeguards
+   worked. But weak generated baselines did not prevent another fixed recipe;
+   protected18/18 and job completion were too easy to emphasize over0/60 sessions.
+   Remediation: distinguish training complete, diagnostic complete, quality accepted
+   and locally qualified in machine-readable states. Failure is a normal terminal
+   outcome. No automatic epoch/LR/budget escalation; two failed pilots force hold.
+
+4. CORRECTIONS TO THE PREVIOUS EXPLANATION
+- Near-zero final training loss (0.00008393) describes ONLY the last optimizer
+  update:672 converter target tokens. It is NOT mean full-corpus training loss.
+  It cannot prove that every natural conversation was memorized or fit well.
+-77% tool SESSIONS does NOT mean77% tool LOSS. Natural conversations provided
+  74.8% of supervised targets. Report sessions, turns and target mass separately.
+- 'More data' is not a sufficient remediation. Duplicated templates can amplify
+  shortcuts; long answers can teach verbosity/repetition; narrow exposed tests
+  can improve without generalized behavior. Coverage and independent review matter.
+- No evidence here establishes a tokenizer mismatch, masking offset, broken
+  calculator, or corrupt checkpoint as the main cause. Relevant prefix, mask,
+  objective, replay and artifact checks passed. This narrows the search, not proof
+  that every possible implementation bug has been eliminated.
+- Base knowledge, model capacity, optimizer carryover, LR choice and train/dev
+  semantic overlap remain possible contributors. No completed ablation isolates
+  them. Do not claim537M is inherently incapable, or10B tokens guarantee adequacy.
+
+5. EXECUTABLE CONTROLS ADDED
+cloud_training/nano_quality_gate.py and nano_sft.py:
+- Required --quality-contract before CUDA training; immutable source identities,
+  required corpus parent, all three policy/action modes in train AND development,
+  unique-target/family floors, recipe bounds, unresolved-data rejection.
+- Seeded per-epoch order bound into restart identity removes identical source-order
+  replay. Best-fit packing can still cluster similar lengths/families; inspect
+  packed target mix rather than assuming shuffling guarantees balance. Historical
+  order remains reproducible for audit only.
+- Full development evaluation plus separate family losses; partial evaluation
+  cannot drive quality decisions. Transactional guard updates avoid partial state.
+- Persisted regression patience, same-step idempotence and stopped-run resume ban.
+  Evaluation failures stop, attempt checkpoint backup, and return nonzero.
+- Last-update loss explicitly labeled and target denominator logged.
+- Durable best and last checkpoint identities emitted for generated review.
+  Training completion always sets quality_accepted=false.
+- Release evaluator supports a frozen held-out suite; the gate binds contract,
+  checkpoint, suite, raw outputs and every reviewed turn. Recomputes scores from
+  reviewed records; ignores headline aggregates. Incomplete/blocked turns and
+  incorrect/unreviewed tool workflows fail. Protected exact checks are recomputed
+  from raw events and bound to the same checkpoint. No silent benchmark reuse.
+- New campaign admission requires passing evidence receipts, finite budget+reserve,
+  zero active training VMs, bounded pilots and fewer than two failed pilots.
+  It returns a decision; it does not allocate cloud resources or authenticate
+  reviewer honesty. A future allocator must verify all referenced receipts.
+- Both historical allocator entrypoints now exit immediately: closed campaigns
+  cannot be accidentally relaunched through those commands.
+- Suite policy schema is validated before model loading. This also prevents the
+  diagnostic-authoring mistake recorded in harness-correction.json from being
+  counted as a model failure.
+
+Tests cover objective gradients, shifted masks, exact restart, shuffle identity,
+family evaluation, partial evaluation, persisted regression, missing best/last,
+wrong evidence hashes, forged aggregate passes, wrong workflow with right answer,
+missing/reordered/duplicate review, invalid trusted policy, budget and retry holds.
+See validation.json for executed results. These are CPU checks, not GPU integration
+qualification. New controls still require a tiny GPU stop/resume/backup fault drill
+before any substantive training. No production-ready automation claim is made.
+
+6. QUALITY-FIRST RECOVERY PLAN — HANDS-OFF, WITH EXPLICIT EXITS
+Phase0 (this task): preserve models; audit actual packet/trace; reproduce failure;
+compare best and final locally; implement/test blocking controls; publish evidence.
+Exit: a reproducible diagnosis and quality HOLD, not a repaired-model claim.
+
+Phase1: build the smallest coherent corrective curriculum, then review it fully.
+- Short direct answers and correct assistant termination; copying/literal state;
+  corrections, negation, topic switches, clarifications and multi-turn constraints.
+- Tools-enabled ordinary questions with NO call, alongside justified calculations,
+  exact argument extraction, unit conversions, error recovery and grounded answers.
+- Match each policy setting with both relevant and irrelevant tool situations;
+  include contrasting examples without pairing all enabled policies with calls.
+- Maintain short/medium/long answer distribution; inspect target mass by family,
+  answer length, action mode and context position, not just session counts.
+- Codex-authored examples: retain prompt, raw candidate, edit/rejection rationale,
+  independent replay/checks and full reviewed final version. Do not inflate counts
+  through paraphrase duplication. Existing V21 is available but NOT automatically
+  approved as a fix: its length and policy coverage need a fresh audit.
+- Split by scenario/template/source group BEFORE variants. Prevent paraphrases,
+  same entity scaffolds and translated siblings crossing train/dev/release splits.
+- Reference tools are replayed100%; literal/state targets independently checked;
+  every generated conversation is semantically read. Any unresolved defect blocks
+  admission; never lower review coverage to hit a token quota.
+- Reserve a separate small overfit diagnostic to test whether the implementation
+  can learn and terminate on known examples. Success there never counts as release.
+Exit: reviewed source records, group split receipt, target/mask/policy audits,
+source intent resolved and immutable manifest. Current packet fails these gates.
+
+Phase2: freeze evaluation and launch contract before training.
+- Separate development selection/sentinels from untouched release scenarios.
+  Current180-turn suite is exposed selection evidence, not pristine release data.
+- Include natural/state/code/tool families, tools-enabled abstention, termination,
+  literal changes and multi-turn consistency. Review correct alternative workflows.
+- Proposed initial release floors:>=90% strict turns in EACH category,>=80%
+  complete sessions, zero invalid/blocked turns, zero incorrect dispatched tool
+  workflows, and all protected cases. These are engineering launch requirements,
+  not a universal/statistically proven definition of intelligence.
+- Bind required exact hashes, local/device validation plan, numeric dollar cap,
+  reserve, deadline, retry ceiling, checks and source-code revision.
+- Thresholds and budgets cannot be weakened after seeing results. A suite exposed
+  during selection becomes development-only; preserve its history and replace it.
+Exit: all admission receipts verified. Template currently intentionally BLOCKED.
+
+Phase3: bounded experiments, changing one justified factor at a time.
+- First qualify tiny GPU masking/restart/shutdown/upload with failure injection;
+  verify one writer, deadline reserve, missing-auth and upload-failure behavior.
+- Use fresh experiment IDs and immutable parents. Compare corrected coverage/order
+  with bounded recipe changes; do not silently continue the degraded final194.
+- Freeze at most two pilots; never automatically launch a third after failures.
+  Initial planning bounds<=2epochs, LR multiplier<=0.125, eval interval<=10updates
+  are conservative hypotheses. The previous batch scale and multiplier are distinct.
+- At pilot boundaries, run generated development sentinels and compare BOTH best
+  and last, including short-answer EOS, state corrections and no-call decisions.
+  Reject regressions even if aggregate CE improves. Family-loss stop is additional
+  protection, not a substitute for these generated behavior checks.
+- No rollout to a long run until actual conversations improve and retained skills
+  pass. If neither pilot passes, save evidence and return to diagnosis/data work.
+  Do not spend the remainder just because it is authorized.
+Exit: evidence-supported candidate OR bounded quality hold. No result guaranteed.
+
+Phase4: independent release, local qualification, verified closeout.
+- Freeze the selected candidate before opening release outputs. Review every turn,
+  including blocked follow-ups. Run exact workflows and protected regressions.
+- Compare against retained baseline on matched development suites; do not accept
+  a gain in narrow tools at the cost of natural/state capability.
+- Run full selected-candidate MPS conversation and protected suites locally, same
+  framing and raw decoding, and inspect actual device differences. Four calculator
+  prompts are a smoke test only. Keep old605 and194 until replacement passes.
+- Any failure keeps the candidate experimental. No silent default model swap;
+  user-requested local testing remains possible through explicit checkpoint choice.
+- Before VM shutdown: stop/join training writer; commit checkpoint; independently
+  verify GCS identities/sizes/readback; preserve best/last, manifests, source/code,
+  raw/reviewed evaluations and receipts; record final VM status. Upload failure
+  cannot authorize deletion of the persistent disk or local sole copy. A finite
+  lease still stops compute; durable disk remains until verified backup recovery.
+- Retain only future-use corpus/checkpoints/evidence. Delete regenerable caches
+  and obsolete intermediates; never repeat the blanket historical archive.
+- Healthy VM progress updates approximately every30minutes; immediate report for
+  quality stop, failed backup, budget/deadline risk or required user decision.
+
+7. WHAT IS STILL NOT DONE
+No new training, no repaired model, no accepted release. No independent release
+suite/corrective corpus has yet met the new contract. No new GPU fault drill or
+allocator integration has run. Generated sentinels at pilot boundaries and local
+release qualification remain launch prerequisites, not features claimed to have
+already run. The closed$55 campaign is not permission for unbounded new spending.
+The next campaign remains on hold without asking the user to micromanage routine
+local work. A new numeric budget is required only when a fully prepared GPU pilot
+is ready for that decision.
+
+PRIMARY LOCAL EVIDENCE
+packet-audit.json / audit_packet.py: complete actual packet, masks, prefixes, tools.
+regression-counterfactual.json: verified training trace and observed-stop replay.
+paired-policy-suite.json / step*-paired.json / step*-decoded.json / paired-review.json:
+controlled local inference and full manual assessment, including failed outputs.
+current-packet-preflight.json / blocked-contract-template.json / campaign-state.json:
+actual rejection and explicit unresolved work.
+../ownbase-budget50-v1/final-review/: original full CUDA180-turn review and artifacts.
+../../cloud_training/nano_quality_gate.py, nano_sft.py, nano_quality.py: controls.
+../../verify_nano_quality_gate.py and verify_nano_sft.py: adversarial/regression tests.

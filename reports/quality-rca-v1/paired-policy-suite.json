@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "scope": "16-turn paired-policy diagnostic; exposed probes, not release acceptance. Freeze before loading checkpoints. Greedy MPS, 192 tokens/action.",
+  "sessions": [
+    {
+      "id": "notebook-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "My blue notebook belongs to Maya. My green notebook belongs to Dev. Who owns the blue notebook?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": [
+            "Maya"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        },
+        {
+          "user": "Correction: the blue notebook belongs to Isha. Who owns it now?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": [
+            "Isha"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "literal-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Remember this code exactly: Q7-MANGO-42. What is the code?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": [
+            "Q7-MANGO-42"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        },
+        {
+          "user": "Replace MANGO with LIME. Give only the updated code.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": [
+            "Q7-LIME-42"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "science-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Explain in one short sentence why ice melts in a warm room.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": null,
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "greeting-tools-off",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Hi! Can you help me plan a simple vegetarian lunch?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "exact_answers": null,
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "notebook-tools-on",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "My blue notebook belongs to Maya. My green notebook belongs to Dev. Who owns the blue notebook?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "Maya"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        },
+        {
+          "user": "Correction: the blue notebook belongs to Isha. Who owns it now?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "Isha"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "literal-tools-on",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Remember this code exactly: Q7-MANGO-42. What is the code?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "Q7-MANGO-42"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        },
+        {
+          "user": "Replace MANGO with LIME. Give only the updated code.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "Q7-LIME-42"
+          ],
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "science-tools-on",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Explain in one short sentence why ice melts in a warm room.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": null,
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "greeting-tools-on",
+      "category": "natural",
+      "turns": [
+        {
+          "user": "Hi! Can you help me plan a simple vegetarian lunch?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": null,
+          "expected_calls": [],
+          "rubric": "Answer the actual request accurately, use the latest state, and do not call tools; science must explain heat transfer/melting and lunch must offer a relevant vegetarian option."
+        }
+      ]
+    },
+    {
+      "id": "calculator-0",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use calculate to add 1 to 39. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "40"
+          ],
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "a": 1,
+                "b": 39,
+                "op": "add"
+              }
+            }
+          ],
+          "rubric": "Actual calculator dispatch with requested operands/operation and a grounded correct final answer. Equivalent commutative order allowed; coincidentally matching result from wrong calculation fails."
+        }
+      ]
+    },
+    {
+      "id": "calculator-1",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use the calculator to subtract 19 from 72.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "53"
+          ],
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "a": 72,
+                "b": 19,
+                "op": "subtract"
+              }
+            }
+          ],
+          "rubric": "Actual calculator dispatch with requested operands/operation and a grounded correct final answer. Equivalent commutative order allowed; coincidentally matching result from wrong calculation fails."
+        }
+      ]
+    },
+    {
+      "id": "calculator-2",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Please use calculate: seven multiplied by eight.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "56"
+          ],
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "a": 7,
+                "b": 8,
+                "op": "multiply"
+              }
+            }
+          ],
+          "rubric": "Actual calculator dispatch with requested operands/operation and a grounded correct final answer. Equivalent commutative order allowed; coincidentally matching result from wrong calculation fails."
+        }
+      ]
+    },
+    {
+      "id": "calculator-3",
+      "category": "tool",
+      "turns": [
+        {
+          "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "exact_answers": [
+            "54"
+          ],
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              }
+            }
+          ],
+          "rubric": "Actual calculator dispatch with requested operands/operation and a grounded correct final answer. Equivalent commutative order allowed; coincidentally matching result from wrong calculation fails."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "utc": "2026-11-14T03:12:08.682319+00:00",
+  "purpose": "mechanistic diagnostic, not release acceptance",
+  "all32turns_reviewed": true,
+  "comparison": "Both best-dev50 and final194 fail all natural/state turns and pass four narrow calculator probes; rollback alone does not recover usable conversation.",
+  "runtime": "Both MPS/greedy192tokens per action; serving/tokenizer/model-loading unchanged. Evaluation runner changed only suite preflight/release-mode support between runs; both use development mode.",
+  "limitations": [
+    "Small exposed paired diagnostic, not representative accuracy estimate.",
+    "No4K evaluation; follow-ups blocked after errors remain failures.",
+    "Not an ablation of training data, LR, order, optimizer or base capacity."
+  ],
+  "reviews": [
+    {
+      "checkpoint_manifest_sha256": "ff051a947bfeefc11ca7679aa5e785baaec04d103e466c89d8be3cb87ed490b1",
+      "raw_sha256": "96ce220f0f658acedbf08c833acf582f09abae972abfca8135f5d95625c8060b",
+      "suite_sha256": "0c73833aa5aeea701e96afc5d7d65b1d242751c6c3126379de5b1f3d42b027da",
+      "reviewer": "root Codex agent; all decoded actions and calculator broker traces inspected",
+      "records": [
+        {
+          "session": "notebook-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Starts with correct owner, then contradicts ownership and loops; never terminates within192tokens."
+        },
+        {
+          "session": "notebook-tools-off",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "literal-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Copies the literal initially, then invents Python material and fails to terminate."
+        },
+        {
+          "session": "literal-tools-off",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "science-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Incorrect/conflicting heat explanation and irrelevant experiment; violates one-sentence request and never terminates."
+        },
+        {
+          "session": "greeting-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Initially relevant ingredients devolve into repetitive categories; no completed response."
+        },
+        {
+          "session": "notebook-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Invented malformed conversion-like tool call for an ownership question."
+        },
+        {
+          "session": "notebook-tools-on",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "literal-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Calls42+42 and answers84 instead of copying the code."
+        },
+        {
+          "session": "literal-tools-on",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Malformed nested calculator call instead of applying requested literal correction."
+        },
+        {
+          "session": "science-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Irrelevant15.5-20.5 calculator call and answer-5."
+        },
+        {
+          "session": "greeting-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Introduces salmon into vegetarian advice and fails to terminate."
+        },
+        {
+          "session": "calculator-0",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-1",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-2",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-3",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        }
+      ],
+      "strict_turns": {
+        "passed": 4,
+        "total": 16
+      },
+      "natural_state_turns": {
+        "passed": 0,
+        "total": 12
+      },
+      "calculator_turns": {
+        "passed": 4,
+        "total": 4
+      },
+      "complete_sessions": {
+        "passed": 4,
+        "total": 12
+      },
+      "quality_accepted": false
+    },
+    {
+      "checkpoint_manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54",
+      "raw_sha256": "4a8f89fe27030848b16cac4c80bc9be527e582a82d7cc4a0d170ec0c4b04be9d",
+      "suite_sha256": "0c73833aa5aeea701e96afc5d7d65b1d242751c6c3126379de5b1f3d42b027da",
+      "reviewer": "root Codex agent; all decoded actions and calculator broker traces inspected",
+      "records": [
+        {
+          "session": "notebook-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Correct opening followed by invented people/notebooks, contradictory ownership and repetition; no completed response."
+        },
+        {
+          "session": "notebook-tools-off",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "literal-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Drops Q from literal and drifts into unrelated timed workshop agenda; no completed response."
+        },
+        {
+          "session": "literal-tools-off",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "science-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Some heat-related opening then unrelated/incorrect instructions and scissors; violates one-sentence request and no termination."
+        },
+        {
+          "session": "greeting-tools-off",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Unrequested repetitive timed agenda, dinner topic drift and no completed response."
+        },
+        {
+          "session": "notebook-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Invents unavailable blue notebook tool and web-like converter arguments."
+        },
+        {
+          "session": "notebook-tools-on",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "literal-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Invents unavailable code tool and addition instead of copying requested literal."
+        },
+        {
+          "session": "literal-tools-on",
+          "turn": 1,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Blocked by prior failed turn; retained in denominator."
+        },
+        {
+          "session": "science-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Irrelevant45-50 calculator call and answer-5."
+        },
+        {
+          "session": "greeting-tools-on",
+          "turn": 0,
+          "strict_pass": false,
+          "tool_workflow_pass": null,
+          "reason": "Timed agenda and verbosity do not complete within budget; no completed response."
+        },
+        {
+          "session": "calculator-0",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-1",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-2",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        },
+        {
+          "session": "calculator-3",
+          "turn": 0,
+          "strict_pass": true,
+          "tool_workflow_pass": true,
+          "reason": "Actual dispatched calculate call has correct operation/operands/result and final answer; commutative operand order accepted."
+        }
+      ],
+      "strict_turns": {
+        "passed": 4,
+        "total": 16
+      },
+      "natural_state_turns": {
+        "passed": 0,
+        "total": 12
+      },
+      "calculator_turns": {
+        "passed": 4,
+        "total": 4
+      },
+      "complete_sessions": {
+        "passed": 4,
+        "total": 12
+      },
+      "quality_accepted": false
+    }
+  ]
+}

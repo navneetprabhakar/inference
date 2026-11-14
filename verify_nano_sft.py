@@ -9,7 +9,7 @@ import unittest
 import torch
 import torch.nn.functional as F
 from cloud_training.nano_sft import (BestFitConversations,FiniteEpochDataset,JsonlConversations,backward_weighted,
-    collect_update,count_packed_rows,load_manifest,reset_sft_lrs,sft_schedule,evaluate_fixed,NATIVE_IGNORE,ensure_separate_output,replace_best_pin,batch_recipe,validate_parent_chain,PINNED_REVISION)
+    collect_update,count_packed_rows,load_manifest,reset_sft_lrs,sft_schedule,evaluate_fixed,evaluate_families,NATIVE_IGNORE,ensure_separate_output,replace_best_pin,batch_recipe,validate_parent_chain,PINNED_REVISION)
 from cloud_training.nano_checkpoint import save_bundle,load_bundle
 from cloud_training.nano_benchmark import digest_state
 from cloud_training.nano_chat_format import SPECIALS,VERSION
@@ -42,6 +42,30 @@ class FakeDataset:
 
 class SFTTests(unittest.TestCase):
     def setUp(self):torch.manual_seed(101)
+
+    def test_seeded_order_is_reproducible_unique_per_epoch_and_resume_bound(self):
+        base=FakeDataset([5,7,4,6,3,8]);base.target_counts=[4,6,3,5,2,7]
+        a=FiniteEpochDataset(base,2,seed=42);b=FiniteEpochDataset(base,2,seed=42)
+        self.assertEqual(a.order,b.order);self.assertEqual(a.sha,b.sha)
+        for epoch in range(2):self.assertEqual(sorted(a.order[epoch*6:(epoch+1)*6]),list(range(6)))
+        self.assertNotEqual(a.order[:6],a.order[6:]);self.assertEqual(sum(a.target_counts),54)
+        pack=BestFitConversations(a,capacity=10,buffer_size=2);pack.next_row();state=pack.state_dict()
+        resumed=BestFitConversations(b,capacity=10,buffer_size=2);resumed.load_state_dict(state)
+        self.assertEqual(pack.next_row(),resumed.next_row())
+        changed=BestFitConversations(FiniteEpochDataset(base,2,seed=43),capacity=10,buffer_size=2)
+        with self.assertRaises(ValueError):changed.load_state_dict(state)
+
+    def test_family_eval_and_partial_dev_are_explicit(self):
+        data=FakeDataset([2049,2049,2049]);data.context=2048
+        with tempfile.TemporaryDirectory() as t:
+            data.path=Path(t)/'rows.jsonl'
+            data.path.write_text('\n'.join(json.dumps({'family':f}) for f in ['natural','tool','natural']))
+            result=evaluate_families(TinyLM(),data,rows=10,microbatch=1,device='cpu')
+            self.assertEqual(set(result),{'natural','tool'})
+            self.assertEqual(result['natural']['assistant_targets'],4096)
+            self.assertEqual(result['tool']['assistant_targets'],2048)
+            self.assertTrue(all(v['complete'] for v in result.values()))
+            self.assertFalse(evaluate_fixed(TinyLM(),data,rows=1,microbatch=1,device='cpu')['complete'])
 
     def test_explicit_epochs_preserve_targets_and_stop_without_implicit_wrap(self):
         base=FakeDataset([5,7,4]);base.target_counts=[4,6,3]

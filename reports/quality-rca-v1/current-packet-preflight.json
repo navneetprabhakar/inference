@@ -1,0 +1,71 @@
+{
+  "status": "blocked",
+  "quality_accepted": false,
+  "errors": [
+    "Missing valid immutable identity: release_suite_sha256",
+    "Missing valid immutable identity: protected_suite_sha256",
+    "Required corpus revision is not the admitted parent; resolve data intent explicitly",
+    "Missing training coverage: enabled_no_call",
+    "Missing development coverage: enabled_no_call",
+    "Unique assistant-target floor unmet or invalid",
+    "Family coverage unmet: natural_dialogue_4k",
+    "Recipe exceeds or lacks quality bound: max_epochs",
+    "Recipe exceeds or lacks quality bound: max_lr_multiplier",
+    "Recipe exceeds or lacks quality bound: max_eval_interval",
+    "Required data remains excluded/untrained"
+  ],
+  "coverage": {
+    "train": {
+      "sessions": 349,
+      "assistant_targets": 43183,
+      "families": {
+        "natural_dialogue_4k": {
+          "sessions": 80,
+          "assistant_targets": 32288
+        },
+        "convert": {
+          "sessions": 112,
+          "assistant_targets": 3638
+        },
+        "calculate": {
+          "sessions": 105,
+          "assistant_targets": 3646
+        },
+        "tool_correction": {
+          "sessions": 52,
+          "assistant_targets": 3611
+        }
+      },
+      "turn_modes": {
+        "disabled_no_call": 190,
+        "enabled_call": 321
+      }
+    },
+    "validation": {
+      "sessions": 88,
+      "assistant_targets": 10609,
+      "families": {
+        "natural_dialogue_4k": {
+          "sessions": 19,
+          "assistant_targets": 7833
+        },
+        "calculate": {
+          "sessions": 27,
+          "assistant_targets": 932
+        },
+        "tool_correction": {
+          "sessions": 13,
+          "assistant_targets": 911
+        },
+        "convert": {
+          "sessions": 29,
+          "assistant_targets": 933
+        }
+      },
+      "turn_modes": {
+        "disabled_no_call": 50,
+        "enabled_call": 82
+      }
+    }
+  }
+}

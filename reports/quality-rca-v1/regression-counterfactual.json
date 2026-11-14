@@ -1,0 +1,66 @@
+{
+  "source_sha256": "f12ae0a6de0167a6601fddb3b0a6ff1461c56a1f62cd97e8160bbdce93156646",
+  "policy": {
+    "relative_tolerance": 0.05,
+    "patience": 2
+  },
+  "observations": [
+    {
+      "step": 50,
+      "ce": 2.312421285776877,
+      "last_update_train_loss": 0.7326197270242317,
+      "guard_would_be_stopped": false,
+      "guard_state": {
+        "best_ce": 2.312421285776877,
+        "best_step": 50,
+        "last_step": 50,
+        "last_ce": 2.312421285776877,
+        "strikes": 0,
+        "stopped": false
+      }
+    },
+    {
+      "step": 100,
+      "ce": 2.72294543382528,
+      "last_update_train_loss": 0.2656539465968532,
+      "guard_would_be_stopped": false,
+      "guard_state": {
+        "best_ce": 2.312421285776877,
+        "best_step": 50,
+        "last_step": 100,
+        "last_ce": 2.72294543382528,
+        "strikes": 1,
+        "stopped": false
+      }
+    },
+    {
+      "step": 150,
+      "ce": 3.4394800059587953,
+      "last_update_train_loss": 0.02151102983681321,
+      "guard_would_be_stopped": true,
+      "guard_state": {
+        "best_ce": 2.312421285776877,
+        "best_step": 50,
+        "last_step": 150,
+        "last_ce": 3.4394800059587953,
+        "strikes": 2,
+        "stopped": true
+      }
+    },
+    {
+      "step": 194,
+      "ce": 3.617473217496909,
+      "last_update_train_loss": 8.393133369584878e-05,
+      "guard_would_be_stopped": true,
+      "guard_state": {
+        "best_ce": 2.312421285776877,
+        "best_step": 50,
+        "last_step": 150,
+        "last_ce": 3.4394800059587953,
+        "strikes": 2,
+        "stopped": true
+      }
+    }
+  ],
+  "limitation": "Retrospective replay on aggregate observations only. Would stop at observed step150, preserve step50. No inference about unobserved earlier evals or family losses, or whether step50 is conversationally useful."
+}

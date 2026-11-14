@@ -1,282 +1,77 @@
-FINAL RETENTION NOTE:17redundant evidence snapshots also removed; latest verified snapshot is indexed in reports/ownbase-budget50-v1/latest-local-backup.json. No archive/transfer/training worker remains active. Full closeout metadata is published at gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/closeout-manifest.json after finalGitpush.
+OWN MODEL — AUTHORITATIVE HANDOFF
+Updated14 November2026. This replaces accumulated contradictory live-status notes.
+Earlier handoff history is preserved in Git at4876a1638a86ce622443c8da961286a3c87d67d0.
 
-CURRENT CLOSEOUT — 14 NOVEMBER 2026
-Training and cleanup COMPLETE.10,000,269,312base tokens;194 SFT updates. All VMs and local HTTP OFF. New194 and prior605 weights remain locally validated; ./chat-own-latest.sh --raw runs new model on MPS. Broad CUDA quality5/180 turns,0/60 sessions; narrow protected tools18/18. Local post-cleanup calculator smoke passes; no general-quality promotion.
-User corrected retention: DELETE obsolete experiments/intermediates, do not archive them. Blanket migration stopped; all497 inventoried obsolete payloads are absent (184.23GB logical including earlier offloads). Direct-deletion pass recovered180.70GB (~168.3GiB) free space.248 unnecessary new archive/superseded-corpus GCS objects removed; canonical V21(8files), actual2KSFT(5files), packed base corpus(224payloads), selected checkpoints and compact evidence retained. Both local bundles revalidated after deletion.
-Authority/index: reports/local-gcs-cleanup-20261114/future-use-index.json. Cleanup progress status COMPLETE. Old archive group restore commands are RETIRED; do not restart archive_payloads.py. Full matched new-model MPS180+126 suite deferred at user cleanup priority; four-prompt local smoke and one post-cleanup smoke completed. Strict diagnosis: reports/ownbase-budget50-v1/final-review/why-conversation-fails.txt. SFT dev CE best2.3124 at step50 worsened to3.6175 at194; step50 preserved but conversation-untested.80Codex conversations were trained; newer3K–4KV4–V21were not. No further GPU or school training authorized by this closeout.
-Prior active/download/archive/budget statements below are historical. Current run cap55USD; conservative compute34.17USD plus15reserve, not invoice. Persistent cloud disks remain retained; VM shutdown is not disk deletion.
+CURRENT DECISION: QUALITY HOLD, VM OFF, LOCAL MODELS AVAILABLE
+User priority: deep RCA, enforceable remediation/guardrails, quality above volume
+and hands-off execution. Do useful local work autonomously; never turn a failed
+quality gate into another automatic training extension. Read AGENTS.md.
 
-LATEST — 14 NOV 2026 07:14 IST: New194 SFT bundle fully SHA-verified and running locally on MPS. ./chat-own-latest.sh --raw is ready; previous605 and runtime preserved. Local smoke3/3 explicit calculators, notebook ownership query fails via unavailable tool. No quality promotion. GPU and HTTP remain OFF. Commit f5cb47c pushed. GCS cleanup PID16561 continues; progress/restore receipts under reports/local-gcs-cleanup-20261114. Planned184.23GB logical inactive payloads,97 groups; do NOT claim all offloaded until completion. Unlink only after full archive roundtrip plus GCS MD5/size and restore-manifest readback. Full matched MPS suite deferred at user cleanup priority.
+COMPLETED TRAINING / HONEST QUALITY
+Own537M (536,871,738 parameters),2048context, random initialization.
+Base:10,000,269,312 tokens. SFT:194updates,8epochs,349unique train sessions,
+43,183unique assistant targets /345,464replayed target exposures.
+Actual trained Codex natural conversations:80. V4–V21 3K–4K expansion NOT trained.
+Matched CUDA strict assessment:5/180 turns,0/60 complete sessions after SFT;
+protected exposed tools18/18. Base0/180 protocol passes is not zero language knowledge.
+Dev CE3.1210->best2.3124 at50->final3.6175. Neither194 nor605 is quality accepted.
 
-LOCAL RETENTION / CLEANUP — User explicitly requires local testing. Keep new194 SFT bundle, retained605, tokenizer, nanochat source and .venv. Full MPS comparison deferred; local smoke required. Code/report commit f5cb47c pushed. Inactive untracked corpus and historical payloads migrate through reports/local-gcs-cleanup-20261114/archive_payloads.py; only unlink after archive round-trip SHA and GCS MD5/size verification, with restore manifest in GCS. Do not restart local HTTP or GPU.
+DEEP RCA AND NEW CONTROLS
+reports/quality-rca-v1/RCA_AND_REMEDIATION.txt is the detailed diagnosis and recovery plan.
+packet-audit.json: all437train/dev sessions audited;1,046prefix checks,403tool replays.
+Confirmed coverage gap: ZERO tools-enabled/no-call turns in BOTH train and dev.
+Final low training loss described672converter targets, not mean full-corpus loss.
+Natural conversations contribute74.8% of supervised targets; session ratios mislead.
+Old loop did not stop validation regression; controller evaluated final, not best.
+New local paired-policy diagnostics compare actual earlier/final checkpoints;
+see paired-review.json and raw/decoded outputs. No default-model promotion.
 
-USER CLOSEOUT PRIORITY — 14 NOV 2026: commit/push code, preserve weights and corpus in GCS, clean restorable local artifacts, then explain conversation failure. Full new-candidate MPS assessment deferred by this cleanup priority; download continues. No new training or HTTP server.
+Code now requires a quality contract, per-family/full-dev regression guards,
+persisted stop state, deterministic epoch shuffling, best+last evaluation receipts,
+complete hash-bound release review and protected checks. Closed allocator scripts
+exit immediately. A new campaign admission decision remains HOLD. CPU validation
+is in reports/quality-rca-v1/validation.json. These changes are NOT GPU-qualified.
+Generated sentinel integration, corrective corpus admission, pristine release suite,
+GPU fault drill and full local release qualification remain required before launch.
 
-LATEST VERIFIED STATUS — 14 NOV 2026 06:41 IST
-10B base (10,000,269,312 tokens) and SFT (194 updates, 345,464 assistant-target exposures) COMPLETE. Extension VM confirmed TERMINATED. Final GCS backup receipt: 302 files, base and SFT independent readback verified before shutdown. Current $55 cap; conservative compute $34.17 plus $15 reserve, not invoice. Auth restored. Full CUDA assessment: base0/180 protocol passes; SFT5/180 strict turns,0/60 sessions; protected tool checks0/18 ->18/18. Not a usable general assistant; no promotion. Candidate local download and MPS checks pending. Local HTTP remains OFF. See reports/ownbase-budget50-v1/final-review/summary.json. Older active-training statements below are historical.
+LOCAL MODELS — KEEP
+New194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
+manifest SHA e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
+Run ./chat-own-latest.sh --raw for explicit experimental CLI testing on MPS.
+Previous605: runs/literal-state-repair-v1/results/sft/step-00000605
+manifest SHA05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8
+Step50 diagnostic location/verified identity: reports/quality-rca-v1/checkpoint-status.json.
+Keep tokenizer, pinned nanochat source and .venv. No HTTP listener on8765.
 
-OWN-BASE MODEL — EXECUTION HANDOFF
-As of 13 November 2026. Repository: /Users/navneetprabhakar/Documents/git/image/inference
-Branch: codex/gpt2-from-scratch. Use git log and origin/codex/gpt2-from-scratch for the latest published revision. Current execution evidence is under reports/ownbase-budget50-v1/.
+CLOUD / COST / BACKUP
+All three ownbase VMs TERMINATED; latest verified status quality-rca-v1/cloud-status.json.
+Prior campaign cap$55; conservative compute$34.17 plus$15reserve=$49.17 envelope,
+not an invoice. A new numeric training budget is not assigned. Do not relaunch a
+closed lease or assume permission to spend indefinitely. Persistent disks remain.
+GCS root gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
+Useful corpus: data/long-context-corpus-v21/, actual2K SFT and packed base retained.
+Useful weights:10B base, step50, final194 and selected605 backups retained.
+Future-use index: reports/local-gcs-cleanup-20261114/future-use-index.json.
+Latest RCA backup receipt: reports/quality-rca-v1/backup-receipt.json.
+Earlier verified evidence: reports/ownbase-budget50-v1/latest-local-backup.json.
 
-LATEST CONTROL OVERRIDE — 14NOV2026 01:46IST
-Read reports/ownbase-budget50-v1/extension-v5/README.txt first. Currentcap55USD. Finish10BbaseoncurrentVM, verifiedGCSbackup, then transferpersistentdisktoasequentialtwo-hourA100lease for exact10Bprecheck->CodexSFT->postcheck->verifiedbackup->shutdown. Extensioncapacitynotyetrequested; local launcherPID314armed. OldV4supervisor180852suspended;169758basecloseoutresumed;172461GPUworkerunchanged. AllolderSFTcancellation andsame-lease-only timing statementsbeloware superseded. LocalHTTPstaysOFF. Currentstructuredstate.jsonincludeslatesttelemetry.
+RETENTION ALREADY COMPLETED — DO NOT RESTART OLD ARCHIVE
+497obsolete local payloads absent (~184.23GB logical);~180.70GB free recovered in
+last direct-delete pass.248unnecessary archive/superseded corpus GCS objects and
+17redundant evidence snapshots removed. User specifically wants only future-use
+GCS data. Do not rerun archive_payloads.py or retired group restore commands.
 
-1. EXECUTIVE SUMMARY — CURRENT AT 13 NOVEMBER 2026, 14:12 UTC
+NEXT ACTIONS / STOP CONDITIONS
+1. Use RCA evidence; repair data policy/termination/state coverage with full review,
+   source-group splits and exact tool replay. Audit V21 before any reuse.
+2. Freeze independent release and generated development sentinels; resolve2K/4K
+   source intent. Do not shorten away required late-context supervision.
+3. Verify immutable readiness receipts and prepare bounded pilots/fault drill.
+   Current template and campaign-state deliberately reject launch.
+4. Only then assign a numeric GPU budget. No automatic epoch/LR/budget escalation;
+   at most two failed pilots before hold. Check generated best AND last behavior.
+5. Require release review and full matched local MPS checks before promotion.
+6. Verify backups before normal shutdown; retain durable recovery copies if upload
+   fails. Update every~30minutes while a healthy VM runs; report failures promptly.
 
-- Objective: run a useful conversational/tool model locally, trained from our own randomly initialized 536,871,738-parameter base. No pretrained replacement. The trained context is still 2,048 tokens.
-- User authorized hands-off GPU execution with a fresh $50 incremental GCP cap, VM/GPU selection, roughly 30-minute updates, and GCS backup before shutdown. This supersedes earlier VM-off and same-VM-only restrictions.
-- Active VM: forge-ownbase-budget50-v1, A10040GB/a2-highgpu-1g,FLEX_START,us-central1-b; original retained VM off.7B milestone saved step13352 /7,000,293,376tokens,CE2.607672.8B continuation active; latest13:48UTC observation7,502,036,992tokens andCE2.578081 Base loss is not conversation acceptance.
-- Cost guard: max14GPU hours at conservative2.50USD/hour (35USD) plus15USD ancillaryreserve. Compute estimate12.50USD at13:48UTC; invoice unavailable. ProviderSTOP, guest shutdown, independent watchdog, phase deadlines and backupreserve remain unchanged.
-- Retained local605 baseline runs on MPS and preserves18/18 protected tool checks. Full new assessment is poor:6/180 individual turns and0/60 complete three-turn sessions pass root review. Do not claim general usefulness.
-- Active SFT packet is V2: one8-epoch diagnostic from the eventual new base and one4-epoch low-LR branch from retained605, at most two pilots under the existing deadlines. This replaces the redundant new-base4-epoch arm. All7 retained ancestry payloads are independently SHA-verified on the VM; targeted CPU preflight passes. No SFT has started yet; no automatic promotion.
-- Current immutable long-context corpus is V21: 553 sessions (441 train/112 development), 181,384 training and 52,108 development targets. After 3072: 17,301 train/6,274 development; 52 train/12 development long sessions. 45 new accepted scenarios, 109 fully reviewed versions across 88 initial scenarios. New late targets 12,175 train + 5,622 development. Prior rows/splits byte-preserved; every immutable V4–V21 file independently GCS SHA read back. All new data untrained; full 4K data/hardware gate unmet.
-- Additional matched MPS retention:110/112 historical normalized exact checks,109/112 byte-exact plus expected calls; one normalization pass hides a verbatim casing error. Root reviewed14open outputs:2 acceptable but weak. These are exposed retention cases, not broad quality. Candidates must preserve passing cases; training packet unchanged.
-- Local launcher: ./chat-own.sh --checkpoint runs/literal-state-repair-v1/results/sft/step-00000605. Real MPS smoke returns54 for73-19 through the broker. Default reviewed checkpoint selection is pending training/comparison.
-- Source of truth: reports/ownbase-budget50-v1/ and runs/ownbase-budget50-v1/. DispatcherV2 PID21135, guardPID10852. Cohorts01–22 and selected repairs/extensions fully reviewed; cohort23 generating; probability-reporting and quantifier-certificate extensions queued. V21 adds tombstone reservation workflow and code-point run-group splitting;7776event-set and1348split-boundary checks pass. V20 adds section parser, circular buffer, monotone time window and music worksheet validator. Independent checks:4096parser sequences,23328buffer sequences,11340window sequences,6561music rows; overflow geometry separately checked1296cell pairs but excluded. Latest pushed31e0b6c coversV20 and localHTTP delivery; V21 review evidence queued for next batch. Last training update13:48UTC; next14:18UTC.
-
-LOCAL CHAT PREVIEW — STOPPED at user request. PID69660 terminated and port8765 verified closed; receipt runs/ownbase-budget50-v1/local-chat-server.json. Do not restart automatically. CLI/MPS evaluation remains available. LOCAL_CHAT_API.txt describes the implemented API, not a currently running deployment.
-
-2. NON-NEGOTIABLE OPERATING CONSTRAINTS
-
-- Current run has a $50 incremental cap. The earlier $150 authorization belongs to historical work; do not treat it as current remaining credit or a verified invoice.
-- Historical GPU stop was superseded by the latest explicit50USD execution request. Current allocation:35USD compute envelope (14h at2.50USD/h) plus15USD storage/transfer/uncertainty reserve. Historical150USD figures are not a verified invoice or fresh available credit.
-- Selected new VM:forge-ownbase-budget50-v1, a2-highgpu-1g/A10040GB,FLEX_START,us-central1-b. Old Flex-start scheduling update was rejected, so it stays OFF; fresh VM has provider STOP at14h and persistent boot disk. Never run two GPU instances concurrently.
-- Single weight writer/controller and single locked local generator. Never overwrite historical GCS control commands, weights, admission receipts, or checkpoint identities.
-- Preserve GCS backups and the verified local best checkpoint. Delete local payloads only with independently verified restore evidence, not because a filename looks old.
-- Teacher is Codex CLI gpt-6.1-terra. No automatic paid API fallback or quota reset. Earlier requests for other model versions were superseded by the Terra request.
-- Updates: concise executive bullets, approximately every 30 minutes during sustained execution; interrupt for material blockers/results. Do not create frequent token-consuming status loops. No reporting automation is currently required for a finished batch.
-- Batch related code/data/audit changes into practical commits and pushes. Repository was made public at the user's request; do not commit credentials or weight payloads.
-
-3. TRAINING HISTORY AND WHAT IT ESTABLISHED
-
-A. Own-base training and GPU infrastructure
-Earlier local random-initialization experiments did not deliver useful conversation. The effort moved to CUDA and GCP qualification, then the retained A100-SXM4-40GB run with the 537M architecture. The user allowed scaling up to 1B parameters, but the actual model remains 537M; no parameter expansion occurred merely because more tokens were trained.
-
-Prepared about 10.027B corpus tokens plus separate development data; backed up corpus, tokenizer, source and committed checkpoints to GCS. Qualified restoration and sequential stage execution. A small documented optimizer replay residual means full-trajectory bitwise identity is not claimed.
-
-Base reached 6,000,476,160 tokens on 11 November. At that milestone held-out base cross-entropy was 2.666492, down from 2.695659 at 5.5B and 2.681263 at 5.75B. Historical optimizer throughput was about 103K targets/sec on that A100. These are base-language learning measures, NOT conversation acceptance or current throughput.
-
-B. Why more base training alone was not the immediate fix
-Matched 155-update SFT diagnostics at 3B and 6B both scored 0/6 on the original conversation/tool suite. At 6B, SFT used 2,731,938 assistant targets and development loss improved from 1.967975 to 1.469404, without successful tool use in that suite. The controller failed closed and the VM stopped.
-
-Read-only diagnostics found strong teacher-forced tool framing/token predictions but incorrect freely generated actions, routing and arguments. Increasing reply budget from 128 to 512 did not fix the 0/6 result. No large training/serving attention-kernel mismatch or global label/masking failure was established. Teacher-forced loss was a misleading proxy for actual behavior.
-
-Evidence also found weak tool supervision (~3.77% of diagnostic targets), long generic completions mismatched to short evaluation budgets, limited task diversity and noisy synthetic examples. The course correction therefore emphasized verified curriculum, actual generated sessions, termination, tool retention and context use—not endless optimizer comparisons.
-
-C. Repair experiments, with regressions retained in the record
-- Initial targeted repair: completion improved 8/35 to 31/35, but exact success only 1/35 to 2/35; a former multi-tool success regressed. Not promoted.
-- Broad conversation pilot: 1,000 updates / 18,810,001 assistant targets; development loss improved, but only 1/35 held-out and 0/6 original checks. Not promoted.
-- Instruction repairs v1–v3 improved tool routing, decimal arithmetic and structured state tasks, but gains sometimes displaced earlier conversation abilities.
-- Conversation repair preserved tools and reached 4/6 original checks and both earlier 28/28 suites. Manual planning quality remained poor despite exact scores.
-- Teacher-conversation and constraint-repair branches improved some prose/fact/negation behavior but regressed expanded tool checks to 17/18 or earlier context cases. Not promoted.
-- Literal-state repair, step 605: best retained development candidate. It preserves all 18 tool cases and both earlier 28/28 suites; prior conversation-context 27/28, new literal/state 23/24, general exact 4/4, teacher final facts 7/7. These small exposed/development suites do not establish broad conversation quality. Cancelled-task interpretation, sentence constraints and false physical-action claims still failed in manual inspection.
-- Latest concise-teacher-repair-v3: 194 updates / 120,540 assistant-target exposures across four passes, not unique tokens. Concise contracts improved 9/32 to 28/32 and context to 28/28, but tools regressed to 17/18 and general exact to 2/4. Rejected; step 605 remains preferred.
-
-Important distinction: SFT assistant-target exposures do not advance the base-training token counter. The model did not complete 10B base tokens.
-
-4. CHECKPOINTS, RESTORE AND BUDGET
-
-Best local full bundle:
-  runs/literal-state-repair-v1/results/sft/step-00000605/
-  Files: payload.pt, metadata.json, manifest.json, COMMITTED.
-  payload.pt exists locally: 3,826,061,889 bytes (~3.56 GiB).
-  Payload SHA256: 215e58e18d28cd52a19deb961484b8341440d68efba7284e758c82affbe3990d
-  Manifest SHA256: 05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8
-  This is a training/checkpoint bundle, not an inference-only weight-size or RAM measurement.
-
-Same best in GCS:
-  gs://forge-ownbase-a100-20261110/ownbase-v2/literal-state-repair-v1/checkpoints/checkpoint-cf024e79d2174d578d129daf45764f04
-
-Immutable fallback:
-  gs://forge-ownbase-a100-20261110/ownbase-v2/conversation-repair-v1/checkpoints/checkpoint-73e68fb7922a43c599b22cc4f5f0b2da
-  Manifest SHA256: 911558f640a8fe94a40a0735c5c58c6e34b474ae72ba623d69afbde4623eba28
-
-Full local hashes/COMMITTED and GCS backup were verified on download. This handoff rechecked local payload existence/size, not another full payload hash or live GCS status. Cleanup receipt: reports/local-checkpoint-retention-20261112.json. Superseded payload cleanup reclaimed ~10.69 GiB gross / ~7.13 GiB net after downloading the best bundle; metadata and restore URIs remain.
-
-Budget source: runs/conversation-recovery-150-v1/budget.json.
-- Historical conservative reservation envelope: $136.90, including storage/uncertainty reserve. This is NOT the actual invoice or current spend.
-- Actual billed cost and remaining balance remain unverified. Do not quote $13.10 as today's available money.
-- Old cutoff: 12 November 2026, 21:45:14 UTC, epoch 1794519914. It has EXPIRED.
-- Previous watchdog was retired after confirmed VM stop. Never reuse old deadlines/PIDs or assume an old provider deletion schedule protects a new run.
-- Stopped compute does not eliminate retained disk/GCS charges. Fresh billing reconciliation and new bounded safeguards are prerequisites to any future authorized GPU run.
-
-5. CURRENT CORPUS AND TEACHER/STUDENT WORK
-
-The teacher/student method is supervised learning from generated conversations, not replacing our base with pretrained weights or copying teacher logits. The earlier aspiration was 10,000 accepted dialogues / 2–5M assistant targets; it has NOT been achieved.
-
-Earlier teacher pools must not be bulk-admitted:
-- Large templated production stopped at 2,253 mechanically verified candidates / 617,250 assistant targets. Later screening admitted a subset for historical experiments, but the whole pool was never certified clean; stale facts, narrow values and format defects were found.
-- A later 286-candidate pool contained only 193 unique user sequences. Its count is not an accepted-training count.
-- Natural interactive generation separates a private user brief from an assistant that sees only visible history. This avoids teaching the assistant to rely on hidden scenario facts.
-- CLI review is advisory. It has passed gratitude loops, lost entities and intermediate factual errors; primary-agent full-dialogue review has overridden it repeatedly.
-
-Completed 200-dialogue 4K pilot:
-- All 200 fully reviewed: 186 content passes, 14 rejects.
-- After explicitly trimming closing-only suffixes, 39 single-substantive-answer examples were excluded from context training.
-- Admitted 147 natural dialogues plus 338 exact earlier tool replays.
-- Maximum natural length 2,994 tokens; all five generated 3K+ candidates failed semantic review. Hence 4K framing support did not provide usable 4K coverage.
-- Fixed split drift: two earlier development groups had moved into an untrained intermediate training split. Final admission quarantines them back to development and preserves prior held-out groups.
-- Immutable original final corpus: runs/natural-dialogue-4k-v1/admitted-v2/.
-
-Earlier long-context work (completed 13 November, before this continuation):
-- 16 unique new scenarios; 24 full reviewed versions including separate repairs/extensions. Do not call those 24 unique new conversations.
-- Rejected or repaired timing errors, inconsistent leftovers, repeated quota disputes, confusing pieces with makers, and overstating "not recorded" as "never measured."
-- Seven final dialogues admitted: four training, three development. Ancestor/repaired versions are not duplicated into the corpus.
-- Four selected dialogues reach 3,072–4,096 tokens; three are in training. Maximum is 3,724 tokens.
-- Ten actual local tool calls replayed exactly. Parser examples passed displayed and independent edge checks.
-- Training examples include creative viewpoint/continuity, offline-app help, pottery-label allocation and model-measurement interpretation. Tool arguments must use earlier corrected facts, not just copy arguments supplied in the latest user message.
-- Genuine longer workflow example: a later request for a second spare set retrieves the earlier revised 21-piece count, calls 21 x 3, and preserves privacy rules. Another retrieves 42 cm and the corrected 7.5 cm for a ratio of 5.6, without inferring real-world scale or clearance.
-
-Latest hands-off continuation (13 November):
-- Six unique new scenarios, ten complete dialogue versions fully root-reviewed: nine content passes, one rejected for a false claim that calculator division is unavailable. One additional generation attempt failed on a malformed proposal envelope; it is not a completed/reviewed dialogue.
-- Five final training sessions admitted: event-reducer debugging, LRU-cache debugging, game-kit return workflow, tactile timeline teaching, and document-import evidence interpretation. The short seed-observation conversation is sound but excluded from this long-context supplement. Original/shorter/rejected ancestors are not duplicated.
-- New final lengths: 3,042 / 3,149 / 3,416 / 3,623 / 3,843 tokens. Four meet the strict 3,072-token threshold; do not count the 3,042-token session in that bin.
-- Added 7,716 training assistant targets, including 4,452 after position 2,048 and 1,339 after position 3,072. The revised import workflow has a real calculator call starting at token 3,632, retrieving the earlier total attempts and revised success count without the user restating operands.
-- Ten final tool calls replay exactly. Reducer: nine displayed regression subcases plus 725 independent checks. Cache: five displayed tests plus 4,000 independent state-machine steps against a list-based reference.
-- Explicit schema-constrained proposal repair removes the false tool limitation. All retained intermediate assistant targets were reviewed, not just final answers. Complete raw candidate/review evidence is archived under reports/l4-qualification-v1/long-context-continuation-v2/evidence/ with source hashes.
-
-Historical pre-run combined admitted corpus (current version is in section 1):
-  runs/long-context-corpus-v3/manifest.json
-  Manifest SHA256: ba6f513f6a97780f03e66b3166f897339520479a4975b5b9792e42007f8a560f
-  508 total sessions:158 natural,12 new multi-turn tool workflows,338 older tool replays.
-  Training:407 sessions /115,754 assistant targets.
-  Development:101 sessions /26,688 assistant targets (byte-identical to V2).
-  Training assistant targets after3072:5,126 (previously1,482); development unchanged at652.
-  Eighteen training and one development sessions reach3072 tokens. Maximum is3865.
-  Small pilot only:4K curriculum remains incomplete and entirely untrained.
-
-Validation: exact and 5-gram overlap checks across prior/new sources, source/review hashes, complete root review, actual tool replay, independent executable-code checks, native framing without truncation, packed-target conservation, prior training rows retained byte-for-byte and development file entirely byte-identical. No embedding-based semantic deduplication claim. Distinct unseen evaluation families are reserved in the new plan, but this is NOT a frozen or scored evaluation suite.
-
-V2 was committed/pushed as16baed5. V3 generation, full review, admission and independent verification are complete; all generators finished, no pending reviews. Synthetic evidence is archived under the campaign report with a hash index. GCS backup remains pending authentication; prior backups remain intact. No cloud commands issued. GCP authentication must not block further local work.
-
-6. CONTEXT WINDOW AND TOOL RUNTIME
-
-- Implemented explicit 2K-to-4K SFT transition, framing, packing, checkpoint lineage and serving support. Defaults remain 2K; 8K is rejected by the current implementation.
-- Sixty CPU checks passed at that stage, including a tiny native 4K forward/backward exercise. Full 537M peak memory on a 16 GB system has NOT been measured.
-- Current checkpoint remains 2K-trained. Changing configuration or generating 4K examples is not proof of learned long-context behavior.
-- User's intended order was 10B base target and conversation tuning, then 4K; later requests authorized preparing 4K code/data while the VM stays off. Do not silently treat this as permission to train 4K now. Reconcile actual progress/budget before choosing the next GPU sequence.
-- 8K is a later goal, after 4K memory and quality qualification; it is neither implemented nor trained here.
-- Supported native tools are calculate and convert, via FixtureSession/broker records. Maximum two calls per turn and four per session. No general external-service orchestration is implemented by these datasets.
-- Serving supports repetition penalty, default 1.3 for generated prose; tool JSON and control tokens are exempt. Quality diagnostics use raw 1.0 for comparable measurements. This is a decoding aid, not a cure for learned context failures.
-
-COMPLETED CAMPAIGN V3 — 13 NOVEMBER2026
-- Six cohorts,24 unique scenarios;36 complete reviewed versions including12 followup/repair versions.26 content-pass versions,11 final versions admitted. Do not count repaired ancestors as new unique scenarios or train them alongside descendants.
-- New final lengths3103–3865tokens, all strict3072+. Six natural/code dialogues and five tool workflows;18,963 new assistant targets,10,230 after2048 and3,644 after3072. Ten of11 have at least128 late targets; the telescope dialogue has only31.
-- Seventeen final calls replayed; none starts after3072. New late targets cover corrections, denominators, policy changes, measured/inferred quantities, code operations, CSV error handling and concurrency races. Further late TOOL-CALL supervision is still needed; V2's call at3632 remains the existing example.
-- Code validation includes outline314 independent checks/3 displayed cases; interval merger503/7 plus subtraction1000/3; ledger437/9; lexical paths4146/15; top-k301/7; final CSV202 independent checks/6 displayed tests plus4 boundary checks. Correct short examples were not admitted solely because tests passed.
-- Full review rejected unsupported claims, invented clues, dropped conditions and size/row-number defects. Original CSV4500digit conversion failure repaired via local chunk conversion. A full rewrite overflowed4K and was excluded without truncation; final narrow teacher patches preserve the earlier code and accurately qualify csv.field_size_limit.
-- CLI review is advisory: its quota rejection for the measurement scenario was wrong because all4 calls were exhausted; authoritative policy and full transcript controlled root decision. Correct final answers do not erase incorrect intermediate targets.
-- Original generator retained; sampler revision for cohorts04–06 still often produced short histories. Followups added distinct operations or changed decisions, not repeated summaries or artificial reference padding. Terra capacity pause recovered in the same worker/model; no fallback.
-- Immutable V3 retains all V2 rows in their original splits. Hash-bound source/review lineage, exact/5gram overlap, tool replay and packed-target conservation pass; independent verifier confirms development byte identity and no duplicate final scenario IDs. No embedding semantic-dedup claim.
-- Reports/scripts/evidence: reports/l4-qualification-v1/long-context-campaign-v3/. Runtime completion: runs/long-context-campaign-v3/completion.json. Earlier progress files are historical snapshots; completion.json and corpus-state.json are authoritative now.
-- No generator remains active, no unfinished review. All work local; no VM/cloud/training commands. Full corpus still insufficient for broad4K training claims.
-
-7. HISTORICAL PRE-LAUNCH PLAN — CURRENT EXECUTION DELTAS ABOVE TAKE PRECEDENCE
-
-Detailed proposed plan:OWN_BASE_NEXT_STEPS.txt (13 November2026). Includes local data gates,
-frozen evaluation, budget/restore/launch packet, default10B->2K SFT->4K sequence, an explicit
-diagnostic-first alternative, acceptance and safe shutdown. This was the pre-authorization plan; the current $50 run is now executing.
-Numerical readiness/acceptance thresholds are proposed experimental gates, not achieved results.
-
-LOCAL DATA WORK, CONCURRENT WITH THE BOUNDED GPU RUN
-1. Continue diverse substantive 3K–4K conversation/workflow generation in bounded cohorts. Reuse the successful visible-history method, not old stopped templated jobs. Check the shared generation lock before launching anything.
-2. Increase useful assistant supervision late in the window. Measure targets after 2,048 and 3,072, not merely total document length. More long pasted references, repeated full drafts, boilerplate, gratitude loops, or protocol overhead alone do not fill this gap.
-3. Expand beyond current writing/planning cases: contextual explanation, debugging with executable examples, evolving choices, interrupted tasks, ambiguity, corrections, historical versus current facts, and appropriate tool/no-tool decisions. Keep tasks within actual runtime capabilities.
-4. Fully review complete histories before admission. Reject wrong intermediate targets even if the final answer is correct. Repairs require a new immutable version, provenance and renewed review.
-5. Execute supported tool traces and runnable code where applicable. Deduplicate within/across cohorts; group scenario variants into one split. Preserve all existing development membership. Do not admit original and repaired/extended ancestors together.
-6. Maintain unseen evaluation scenario families before further tuning. Prompt-design qualification sets are development data, not pristine test data.
-7. Build the next immutable corpus version, verify hashes/packing/target counts, update audit and handoff, then commit/push as a batch. Once auth is restored, back up new corpus objects to GCS and verify them; do not start a VM to do this.
-
-HISTORICAL LAUNCH GATES — AUTHORIZATION AND FRESH ALLOCATION NOW COMPLETE
-8. Reconcile actual project spend against the $150 cap; verify best local/GCS checkpoints and data copies. Recreate explicit controller deadline, OS shutdown, independent watchdog and checkpoint reserve. Confirm same VM availability; no new GPU allocation by assumption.
-9. Benchmark full-model 4K memory and throughput before promising 16 GB compatibility. Separate inference peak RAM from optimizer/training memory and checkpoint file size.
-10. Decide whether to finish remaining ~4B base tokens first, following original sequence, or explicitly revise it based on quality and cost evidence. Keep the base and SFT lineages separate. Any later base requires reapplying and reevaluating conversation tuning.
-11. Run a small finite, token-balanced conversation/tool-retention pilot from an explicitly selected immutable parent. Add 4K extension only in the agreed sequence; no unbounded epochs or optimizer/architecture changes without evidence.
-12. Evaluate real generated multi-turn sessions, not teacher-forced loss alone. Retain all 18 protected tool cases; inspect all prior context regressions, tool names/arguments/results, termination, repetition, cancellation and false action claims. Compare identical decode settings and budgets.
-13. Promotion requires better natural conversation without losing tool gains. Prior proposed acceptance target was >=90% complete success on >=40 unseen sessions, >=90% new tool cases, all 18 protected cases retained, and no false completed external actions. These are internal proposed gates, not achieved scores or benchmark certification.
-14. Stop/review if two qualified cycles show no gain. Keep the best checkpoint instead of automatically promoting the newest. Consider 8K only after successful 4K memory/quality evaluation and a separately bounded plan.
-
-Do not declare a usable general model, completed 10B training, 4K-trained weights, or 16 GB fit until directly demonstrated.
-
-8. START-HERE ARTIFACT MAP AND STALE-STATE WARNINGS
-
-Paths below are relative to the repository root shown above.
-- OWN_BASE_HANDOFF.txt: this current operational summary.
-- reports/ownbase-budget50-v1/sft-packet-v2.json: active frozen next-stage script/config hashes; V1 is superseded and never dispatched.
-- runs/long-context-corpus-v21/: current immutable corpus, verified and GCS-backed; separate from frozen 2K training inputs.
-- reports/ownbase-budget50-v1/local-baseline-review.json: full180-turn MPS assessment, not a usability claim.
-- OWN_BASE_NEXT_STEPS.txt: complete proposed next-phase plan, including conditional VM training.
-- TRAINING_AUDIT.txt: append-only history; its original CURRENT STATE header is obsolete. Read newest entries, not that header.
-- reports/l4-qualification-v1/long-context-campaign-v3/corpus-state.json: latest corpus summary and campaign counters.
-- runs/long-context-corpus-v3/{manifest,admission,verification,independent-verification}.json: historical baseline corpus identities and checks. All versions preserved immutable.
-- reports/l4-qualification-v1/long-context-campaign-v3/: current generation/repair/build/verification scripts, supplement, evidence archive, hash index and corpus-state. Use runs/l4-data-prep/.venv/bin/python; top-level .venv lacks rustbpe.
-- reports/l4-qualification-v1/long-context-qualification-v1/: earlier generation/revision/verification/build scripts, all review receipts, committed supplement-train.jsonl and supplement-validation.jsonl. Copied corpus-manifest.json here is an evidence snapshot; use the runs/ manifest for training.
-- runs/long-context-production-final-v1/: final teacher candidates, CLI evidence and full root review; completed, not a running worker.
-- runs/long-context-qualification-v3/: successful qualification candidates; selected examples are development-only.
-- reports/l4-qualification-v1/natural-dialogue-4k-v1/: original 200-dialogue plan, all cohort reviews and prior verification.
-- reports/l4-qualification-v1/conversation-recovery-state.json: historical best/fallback quality results; some phase/next-trial pointers are old.
-- reports/l4-qualification-v1/conversation-recovery-150-v1/plan.txt and runs/conversation-recovery-150-v1/budget.json: historical GPU plan and reservation evidence; deadline expired, NOT a launch instruction.
-- reports/local-checkpoint-retention-20261112.json: verified local best and cleanup/restore evidence.
-- reports/l4-qualification-v1/training-course-correction-20261112.txt: diagnosed SFT/data/generalization problems.
-- reports/l4-qualification-v1/production-state.json: historical 6B milestone evidence. gpu_active=true, $100 budget and production_ready flags are STALE; do not use them as current worker state, budget, or conversational readiness.
-- runs/retained-campaign-watch/: old campaign watcher state/events/BLOCKER files; do not restart its controller based on an old running flag.
-
-Resume principle: follow the newest50USD launch receipt and live provider state. Do not restart old jobs or exceed the new run cap. Preserve immutable lineage and verify GCS backup before normal shutdown; provider cutoff remains the emergency outer boundary.
-
-ACTIVE50USD EXECUTION —13NOVEMBER2026
-- reports/ownbase-budget50-v1/: launch configuration, startup, bounded base controller and independent watchdog. Runtime receipts: runs/ownbase-budget50-v1/.
-- Same537M/2K base resumes at11445 in a separate GCS checkpoint lineage; original6B and tuned605/fallback preserved. Goal10B conditional on learning and time, then reviewed SFT/local delivery.4K remains conditional on data and memory qualification.
-- Provider14h STOP, guest shutdown13h50, base phase11h30, later training12h30, backup deadline13h40, independent local stop watchdog. No old deadlines or commands reused.
-- Fresh GCP auth/billing enabled. Billing export dataset exists but has no tables: no actual invoice claim. API IPv4 workaround is per-process; no global network settings changed.
--50 CPU checks pass after using existing torch environment and pinned upstream import path. Fresh-machine6B restore succeeded; first new updates observed at~104Ktargets/sec and28GB peak allocation. Provider14hSTOP verified. Four immediate capacity requests failed; a single30min queue obtained capacity within~30seconds.
-- Prior VM-off statements in historical sections describe completed local work, not current authorization.
-
-50USD RUN PREPARATION UPDATE — 13NOV2026 09:20UTC
-- Base continuation remains running on the new isolated A100, latest observation6.1027B at~104Ktargets/sec; checkpoint11608 already backed up. Conservative compute accrued~1.22USD at09:17UTC, plus15USD reserved ancillary envelope; not billed cost.
-- Frozen synthetic assessment:reports/ownbase-budget50-v1/assessment.json,60sessions/180turns (20natural,20tools,20code).82raw candidates fully read;22not selected, three explicit selected-spec corrections.47reference toolcalls replayed;84independent code/tool checks; all sessions fit2K with192word placeholder replies (max1596tokens). No4Klate-context or benchmark-independence claim. Every generated answer needs full semantic review; exactcall references do not reject valid equivalent arithmetic workflows automatically.
-- Immutable2K SFT packet uploaded and independent SHA readback verified. Two predefined independent pilots from the eventual selected new base:4epochs97updates172732targetexposures,8epochs194updates345464exposures.349whole already-reviewed2K sessions,43183unique targets/pass; this is diagnostic, not comprehensive generalSFT. CPU-only VM preflight passed both, no concurrentGPU model or weight writer.
-- Bounded dispatcher reports/ownbase-budget50-v1/dispatch_sft.py runs locally, waiting for base_complete; verifies exact new base metadata/journal receipt and sends only the hash-bound prequalified script. Separate current-code tree leaves active base code unchanged. No automatic promotion; verify newSFT GCS payload readback, compare60sessions and18protected turns, preserve605fallback if regression. Final base controller backs up all new VM results before shutdown.
-- Local MPS baseline assessment is running; initial natural responses visibly mishandle facts/constraints. This is the existing605fallback, not new training. Do not present it as a usable general assistant.
-- Separate local corpus-expansion/cohort-01 generates four new visible-history scenarios with delayed useful tool decisions; full root review/admission pending. No new corpus is automatically added to the frozen SFT packet.
-- Runtime sessions and process ownership are under runs/ownbase-budget50-v1; latest-snapshot.json is current live observation. Original retainedVM remains off. All prior VM-off-only and old150USD statements are historical, superseded by user's50USD training authorization.
-
-LOCAL USER ARITHMETIC CHECK — 13 NOV 2026
-- User screenshots show incorrect39+1=73and72-19=18. Original session permissions unknown. Controlled fresh sessions: tools disabled0/3correct; enabled3/3correct with actual calculator calls(54,40,53). Raw/review:local-user-arithmetic-repro.json in runtime and local-user-arithmetic-review.json in reports. This is permission-sensitive diagnostic evidence, not broad quality improvement. UI now explicitly labels per-turn tool permission/execution; reload page, no server restart or model change.
-
-LOCAL PREVIEW STOPPED — 2026-11-13T16:56:15.217258+00:00
-User requested local deployment stop. PID69660 terminated; port8765 verified closed. Do not restart local HTTP preview without new user authorization. GCP training authorization remains active.
-
-FOLLOW-ON SCHOOL CURRICULUM PLAN — 13 NOVEMBER 2026
-User confirmed current plan must finish first and requested detailed maths/science planning through CBSE XII. OWN_SCHOOL_MATH_SCIENCE_PLAN.txt records organic-source eligibility, original Codex/programmatic generation, full verification, curriculum stages,12K pilot, frozen evaluation, conditional training and separate budget authorization. Plan only: no new data ingestion, generation campaign, VM or spending launched.
-
-USER RECONFIRMED TRAINING AND STRICT REVIEW — 2026-11-13T17:07:33.582926+00:00
-Continue approximately30-minute VM updates during execution. Verified queuedV2manifest includes80Codex teacher conversations and269synthetic tool/correction train sessions;349total,43183assistant targets/pass. New3K–4Kcorpus is NOT in this2Kpacket. Actual use must be verified from completed training checkpoint identity and targets before claiming trained. Report full conversation and real tool-call correctness separately. See reports/ownbase-budget50-v1/training-data-use-audit.json. Latest17:06UTC VM8.5223B,CE2.525500,conservativecompute20.76USD+15USDreserve; SFT still pending.
-
-LIVE UPDATE — 13NOV2026 23:31IST /18:01UTC
-ProviderRUNNING; base8,811,708,416tokens step16807,heldoutCE2.510752,~103743tokens/sec. Conservativecompute23.05USD+15USDancillaryreserve=38.05USD envelope,notinvoice. LatestreportedGCScheckpoint16666; uploadreceipt is not independentreadback. SFTnotstarted, dispatcher andbudgetguard alive. LocalHTTPremainsstopped. No newconversation-quality result yet.
-
-9B MILESTONE — 14NOV2026 00:13IST /13NOV18:43UTC
-Confirmed9,000,452,096tokens step17167; heldoutCE2.499508. Result andGCSuploadreceipt reviewed; independentreadback not yet claimed. Nextbase stage17167->19074announced18:40UTC; firstprogressnotyetpublished. Currentcomputeestimate24.80USD+15reserve=39.80USD. ProviderRUNNING,guard/dispatcher alive,SFTpending. Basephaseharddeadline20:18UTC(01:48IST14Nov), worker exits earlier forbackup;10Bnotguaranteed.
-
-BUDGET AMENDMENT — 2026-11-13T18:51:44.872027+00:00
-User authorizes additional5USD; cumulative cap55USD, not a fresh55USD budget. Reserve15USD retained; conservativecompute ceiling40USD/16totalhours. Current14hprovider/guest/watchdog/worker deadlines UNCHANGED. Extra2h is reserved, NOTapplied or launched. GCPtime-limit modification requiresstop. Prepare checkpoint-based continuation only afterGCSverification, cumulativeelapsedcost check, and no concurrentGPU. See reports/ownbase-budget50-v1/budget-amendment-v1.json.
-
-LATEST USER OVERRIDE — 2026-11-13T18:55:54.222972+00:00
-Finish10Bbase, then back up andstop; doNOTexecuteSFT. Dispatcher21135stopped anddisabled-markerchecked. Base-only supervisor169758launched onVM; freezesoldcontroller1791, gracefullycheckpointsoldworker166131, resumesinbase-19074-closeout withtrainendboot48000/checkpointreserve600/backupend49200. Provider50400,guest49800,localwatchdogunchanged. ExtraVMnotlaunched;55USDcap retained. Finalresult muststateactualtokens/goalreached; neverinfer10Bfromtarget. FullresultsinventoryandfinalbundleindependentGCSreadback precedenormalshutdown. ConversationcorpusV21and2Kpacket remainuntrained.
-
-BASE-ONLY TRANSITION VERIFIED — 13NOV18:58:41UTC
-Oldworker166131finished checkpointstep17322; newcontroller validatedbundleandidentity and launched solecontinuation toward19074 inbase-19074-closeout. Train/checkpointhardend22:08UTC(03:38IST), cutoff21:58UTC; backupdeadline22:28UTC(03:58IST); gueststop22:38/provider22:48unchanged. Local evidence3372files independentlyGCSreadbackverified at18:56UTC. Final10Bcompletion andVMshutdown stillpending.
-
-AUTHORITATIVE USER CORRECTION — 2026-11-13T19:22:54.469924+00:00
-SFTmustNOTbecancelled. Exactorder:10B -> matched180turn/18protectedbasechecks -> reviewedCodex2KSFT -> samematchedchecks -> collect/backupeverything -> shutdown. OrderedV4supersedesbase-onlyandundeployedV3. ExistingGPUworker172461continues; oldbase-onlysupervisor169758issuspendedbynewcontroller. V4scriptsindependentlyhashverifiedonVM. No secondretained605arm inthislease:prioritizenew10Bcomparison. Trainingdata/recipe8epochunchanged. Fullsemanticreviewrequired; automatedchecksnotqualityacceptance. Current14hproviderunchanged;sequenceendboot48600,backupdeadline49620,guest49800. Totalcap55USD. Ifanypartincomplete,reportitandpreserveevidence; nofalsecompletedclaim. LocalHTTPstaysOFF.
-
-LIVE UPDATE — 14NOV2026 01:13IST /13NOV19:43UTC
-ProviderRUNNING, base9,304,014,848tokens step17746,heldoutCE2.486919,~103694tokens/sec. LatestreportedGCScheckpoint17671. Conservativecompute27.31USD+15USDreserve=42.31USD envelope;cap55USD. OrderedV4policy10B->precheck->SFT->postcheck remainsactive;noneofthesepost-base stagesstarted. Currentpaceplaces10Bnear03:15–03:30IST; downstreamtimeistightwithinexisting14hlease;donotclaimcompletionbeforeevidence.
-
-LATEST RUNTIME EXTENSION — 2026-11-13T20:15:28.002575+00:00
-GCP400: SetScheduling unsupportedforFlexStart. Userrequestsfinishandallowspotentialbudgetincrease; currentnumericcapremains55USD. ExtensionV5packet6filesGCSindependentreadbackverified. LauncherPID314waitsoldVMTERMINATED+verifiedbasebackup, checks16h cumulativecompute+15reserve<=55, detachesexistingpersistentbootdisk (notdeleted), createsforge-ownbase-extension-v5 sameA100zonewith<=7200sproviderSTOP. NoGPUoverlap. Guest+independentguard alsoenforcelease. OldV4supervisor180852paused; base-onlycloseout169758resumed solelytofinishbase+backupsbeforetransfer; worker172461untouched. ThisisNOTSFTcancellation. Extensionexecutesfull180turn/18protectedprecheck, originalnew-base8epochSFT, matchedpostchecks, finalGCSinventory/readbackandshutdown. Secondary605armdeferred. Tinybaseremainderfallback<=240updatesbeforechecks ifoldcutofffallsjustshort. Capacitynotyetallocated; launcherfailure.jsonmustbemonitored. CurrentVM10B+handoverstillpending. Snapshothelperwilluseactive-vm.jsonandcumulativecostafterallocation.
-
-EXTENSION PRECHECK FIX VERIFIED — explicitown-base diagnosticpermission addedonlytothe pre-SFTcheck; normalpost-SFTloadercontractunchanged. V5sevenpayloadfilesGCSreadbackverified, includingassess_v5.py. ThispreventstheoldSFT-only assessmentloaderfromrejectingthe10Bbasebeforecollectingresponses. Teacher data and trainingrecipe unchanged. Launcher314stillwaiting;no newGPUallocatedyet.
-
-14NOV2026 06:34IST STATUS — 10,000,269,312base tokens completed; independentGCSbasebackupverified21:59:51UTC13Nov,manifest7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53. Extensionallocated22:02:21UTC; independentwatchdogconfirmedTERMINATED22:29:19UTC(03:59IST14Nov). SFT/pre/postreports andfinalextensionbackupreceipt notyetretrieved. GCPuserauthandADCbothrequireinteractive reauthentication; doNOTinferSFTsuccessfromVMstop. Approxconservativecompute34.17USD+15reserve,55cap. Restoregcloudauth thenretrieveGCSsft-status/finalbackup/rawoutputs forfullreview anddownload.
+No repaired-model claim. No new GPU training or local HTTP deployment started.
