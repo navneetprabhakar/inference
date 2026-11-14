@@ -3,6 +3,7 @@
 Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup.
 The user's current instructions override this file. Current campaign status: GPU QUALITY HOLD; corrective-corpus-v1 data admitted and release frozen.
 
+- User priority: English conversation first, then maths, then CBSE through Class12. Defer maths/CBSE corpus expansion until preceding capability gates pass. Tool checks protect regressions but do not substitute for English conversation acceptance.
 - Optimize for demonstrated conversation/tool quality, not tokens, epochs, corpus size or job completion.
 - Never label a model accepted from loss, checkpoint age, a few calculator probes or successful job exit.
 - Use the mandatory nano_sft quality contract. Bind exact dataset parent, tokenizer, context, review/split receipts and required data intent. Missing evidence blocks training.
