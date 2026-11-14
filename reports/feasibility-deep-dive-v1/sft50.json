@@ -1,0 +1,518 @@
+{
+  "utc": "2026-11-14T06:18:31.566177+00:00",
+  "checkpoint": "runs/quality-rca-v1/step-00000050",
+  "manifest_sha256": "ff051a947bfeefc11ca7679aa5e785baaec04d103e466c89d8be3cb87ed490b1",
+  "raw_completions": {
+    "configuration": {
+      "enabled": true,
+      "version": 1,
+      "prompts": [
+        "The rain stopped just before sunrise. When Mira opened the window,",
+        "A library lends books to readers. Readers return the books so that",
+        "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+        "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+      ],
+      "max_new_tokens_per_prompt": 32,
+      "max_total_new_tokens": 128,
+      "decoding": "greedy raw, no repetition penalty",
+      "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion"
+    },
+    "results": [
+      {
+        "prompt": "The rain stopped just before sunrise. When Mira opened the window,",
+        "prompt_ids": [
+          32759,
+          483,
+          3027,
+          8688,
+          760,
+          1003,
+          25144,
+          46,
+          1374,
+          24860,
+          7792,
+          262,
+          4311,
+          44
+        ],
+        "generated_ids": [
+          1025,
+          3766,
+          257,
+          1253,
+          3156,
+          582,
+          2754,
+          331,
+          257,
+          6786,
+          2197,
+          46,
+          583,
+          952,
+          3950,
+          3465,
+          9342,
+          288,
+          257,
+          820,
+          17172,
+          46,
+          24860,
+          4672,
+          12855,
+          262,
+          3156,
+          352,
+          338,
+          17114,
+          1735,
+          44
+        ],
+        "raw_completion": " she saw a large bird perched on a nearby tree. It had bright yellow feathers and a long beak. Mira carefully watched the bird as it flew away,",
+        "seconds": 0.8236118750064634,
+        "complete": true
+      },
+      {
+        "prompt": "A library lends books to readers. Readers return the books so that",
+        "prompt_ids": [
+          32759,
+          65,
+          5715,
+          31895,
+          3725,
+          283,
+          7122,
+          46,
+          4062,
+          378,
+          3307,
+          262,
+          3725,
+          510,
+          334
+        ],
+        "generated_ids": [
+          494,
+          737,
+          363,
+          2067,
+          569,
+          46,
+          30634,
+          339,
+          257,
+          1314,
+          816,
+          737,
+          363,
+          942,
+          3725,
+          44,
+          16405,
+          44,
+          19029,
+          44,
+          288,
+          548,
+          1642,
+          46,
+          874,
+          552,
+          1189,
+          257,
+          1314,
+          283,
+          16937,
+          3725
+        ],
+        "raw_completion": " more people can enjoy them. Libraries are a place where people can find books, magazines, newspapers, and other materials. They also provide a place to borrow books",
+        "seconds": 0.6649951670551673,
+        "complete": true
+      },
+      {
+        "prompt": "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+        "prompt_ids": [
+          32759,
+          483,
+          2860,
+          22251,
+          12685,
+          283,
+          1510,
+          364,
+          46,
+          370,
+          1852,
+          22251,
+          12685,
+          283,
+          2512,
+          13677,
+          46,
+          1510,
+          364,
+          10036,
+          585,
+          975
+        ],
+        "generated_ids": [
+          2860,
+          22251,
+          288,
+          1480,
+          338,
+          287,
+          975,
+          10804,
+          46,
+          2512,
+          13677,
+          10036,
+          585,
+          1009,
+          1852,
+          22251,
+          288,
+          1480,
+          338,
+          287,
+          1009,
+          10804,
+          46,
+          1510,
+          364,
+          288,
+          2512,
+          13677,
+          1072,
+          4027,
+          283,
+          262
+        ],
+        "raw_completion": " blue notebook and put it in his pocket. Leela picked up her green notebook and put it in her pocket. Arun and Leela both went to the",
+        "seconds": 0.6900440420140512,
+        "complete": true
+      },
+      {
+        "prompt": "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was",
+        "prompt_ids": [
+          32759,
+          3505,
+          10292,
+          262,
+          1531,
+          6276,
+          495,
+          287,
+          403,
+          1816,
+          46,
+          2154,
+          11710,
+          338,
+          10141,
+          287,
+          774,
+          4871,
+          105,
+          46,
+          3822,
+          698,
+          2991,
+          3197,
+          495
+        ],
+        "generated_ids": [
+          287,
+          32404,
+          46,
+          370,
+          1531,
+          6276,
+          495,
+          287,
+          403,
+          1816,
+          331,
+          10292,
+          288,
+          774,
+          4871,
+          105,
+          331,
+          11710,
+          46,
+          370,
+          1531,
+          6276,
+          495,
+          287,
+          32404,
+          331,
+          11710,
+          288,
+          403,
+          1816,
+          331,
+          10292
+        ],
+        "raw_completion": " in Mumbai. The parcel was in Pune on Monday and Kochi on Tuesday. The parcel was in Mumbai on Tuesday and Pune on Monday",
+        "seconds": 0.6970930420211516,
+        "complete": true
+      }
+    ],
+    "seconds": 2.875956166011747,
+    "generated_tokens": 128,
+    "complete": true
+  },
+  "contrastive": [
+    {
+      "id": "updated_location",
+      "prompt": "A parcel moved from Jaipur to Surat. Its current location is",
+      "candidates": [
+        {
+          "text": " Surat",
+          "tokens": 2,
+          "sum_nll": 4.58061408996582,
+          "mean_nll": 2.29030704498291
+        },
+        {
+          "text": " Jaipur",
+          "tokens": 3,
+          "sum_nll": 1.9714419841766357,
+          "mean_nll": 0.6571473280588785
+        }
+      ],
+      "correct_preferred_sum": false,
+      "correct_preferred_mean": false
+    },
+    {
+      "id": "updated_owner",
+      "prompt": "Initially Priya owned the mug. She gave it to Kabir. The mug now belongs to",
+      "candidates": [
+        {
+          "text": " Kabir",
+          "tokens": 3,
+          "sum_nll": 2.3895931243896484,
+          "mean_nll": 0.7965310414632162
+        },
+        {
+          "text": " Priya",
+          "tokens": 2,
+          "sum_nll": 2.523452043533325,
+          "mean_nll": 1.2617260217666626
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "colour",
+      "prompt": "The folder is purple, and the chair is brown. The folder is",
+      "candidates": [
+        {
+          "text": " purple",
+          "tokens": 1,
+          "sum_nll": 0.7487623691558838,
+          "mean_nll": 0.7487623691558838
+        },
+        {
+          "text": " brown",
+          "tokens": 1,
+          "sum_nll": 4.766979217529297,
+          "mean_nll": 4.766979217529297
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "age",
+      "prompt": "Ravi is older than Meera. Of these two people, the younger one is",
+      "candidates": [
+        {
+          "text": " Meera",
+          "tokens": 2,
+          "sum_nll": 5.67029333114624,
+          "mean_nll": 2.83514666557312
+        },
+        {
+          "text": " Ravi",
+          "tokens": 2,
+          "sum_nll": 8.50108528137207,
+          "mean_nll": 4.250542640686035
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "water",
+      "prompt": "At standard atmospheric pressure, pure water freezes at",
+      "candidates": [
+        {
+          "text": " 0",
+          "tokens": 2,
+          "sum_nll": 0.12431323528289795,
+          "mean_nll": 0.062156617641448975
+        },
+        {
+          "text": " 100",
+          "tokens": 3,
+          "sum_nll": 10.27135944366455,
+          "mean_nll": 3.423786481221517
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "planet",
+      "prompt": "The planet on which humans live is",
+      "candidates": [
+        {
+          "text": " Earth",
+          "tokens": 1,
+          "sum_nll": 4.547934532165527,
+          "mean_nll": 4.547934532165527
+        },
+        {
+          "text": " Jupiter",
+          "tokens": 1,
+          "sum_nll": 14.012370109558105,
+          "mean_nll": 14.012370109558105
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "biology",
+      "prompt": "Plants use sunlight to make food through",
+      "candidates": [
+        {
+          "text": " photosynthesis",
+          "tokens": 1,
+          "sum_nll": 0.8689669966697693,
+          "mean_nll": 0.8689669966697693
+        },
+        {
+          "text": " digestion",
+          "tokens": 1,
+          "sum_nll": 17.263561248779297,
+          "mean_nll": 17.263561248779297
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "circuit",
+      "prompt": "A simple electric circuit must be closed for current to",
+      "candidates": [
+        {
+          "text": " flow",
+          "tokens": 1,
+          "sum_nll": 0.05266733840107918,
+          "mean_nll": 0.05266733840107918
+        },
+        {
+          "text": " stop",
+          "tokens": 1,
+          "sum_nll": 9.552321434020996,
+          "mean_nll": 9.552321434020996
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "addition",
+      "prompt": "23 + 16 =",
+      "candidates": [
+        {
+          "text": " 39",
+          "tokens": 2,
+          "sum_nll": 5.29694128036499,
+          "mean_nll": 2.648470640182495
+        },
+        {
+          "text": " 37",
+          "tokens": 2,
+          "sum_nll": 3.2488791942596436,
+          "mean_nll": 1.6244395971298218
+        }
+      ],
+      "correct_preferred_sum": false,
+      "correct_preferred_mean": false
+    },
+    {
+      "id": "subtraction",
+      "prompt": "85 - 27 =",
+      "candidates": [
+        {
+          "text": " 58",
+          "tokens": 2,
+          "sum_nll": 6.794473171234131,
+          "mean_nll": 3.3972365856170654
+        },
+        {
+          "text": " 62",
+          "tokens": 2,
+          "sum_nll": 6.277872562408447,
+          "mean_nll": 3.1389362812042236
+        }
+      ],
+      "correct_preferred_sum": false,
+      "correct_preferred_mean": false
+    },
+    {
+      "id": "multiplication",
+      "prompt": "6 * 7 =",
+      "candidates": [
+        {
+          "text": " 42",
+          "tokens": 2,
+          "sum_nll": 5.197652339935303,
+          "mean_nll": 2.5988261699676514
+        },
+        {
+          "text": " 48",
+          "tokens": 2,
+          "sum_nll": 6.576408863067627,
+          "mean_nll": 3.2882044315338135
+        }
+      ],
+      "correct_preferred_sum": true,
+      "correct_preferred_mean": true
+    },
+    {
+      "id": "division",
+      "prompt": "72 / 8 =",
+      "candidates": [
+        {
+          "text": " 9",
+          "tokens": 2,
+          "sum_nll": 4.304184913635254,
+          "mean_nll": 2.152092456817627
+        },
+        {
+          "text": " 6",
+          "tokens": 2,
+          "sum_nll": 3.902151107788086,
+          "mean_nll": 1.951075553894043
+        }
+      ],
+      "correct_preferred_sum": false,
+      "correct_preferred_mean": false
+    }
+  ],
+  "correct_preferred_sum": 8,
+  "correct_preferred_mean": 8,
+  "seconds": 5.71491637500003,
+  "device": "mps",
+  "trained": false,
+  "release_exposure": false
+}

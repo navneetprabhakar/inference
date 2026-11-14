@@ -1,0 +1,205 @@
+OWN MODEL: FEASIBILITY REASSESSMENT — 14 NOVEMBER 2026
+Decision: HOLD. The current recipe is not an evidence-backed route to a dependable
+local conversation/tool assistant, much less CBSE+2 maths/science. A narrower
+from-scratch learning experiment remains plausible, but recovery is unproven.
+This supersedes the recommendation to launch the existing 4K corrective pilots
+once infrastructure qualification passes. It does NOT authorize a replacement
+model, GPU launch, more pretraining, or a larger budget.
+
+1. WHAT WE ACTUALLY HAVE
+537M randomly initialized parameters; 10,000,269,312 base tokens; 2K native context.
+The SFT194 run saw 349 unique sessions and 43,183 unique assistant targets, repeated
+8 times. Only 80 Codex natural conversations were trained. Later 3K–4K expansions
+were not in that run. Repeated targets are not new behavioral diversity.
+Strict CUDA result: 5/180 turns, 0/60 complete sessions. Exposed protected tools:
+18/18. Current new short development suite: 2/54 turns, 0/18 sessions on MPS.
+These are severe task failures, not a nearly finished assistant needing polish.
+Different suites/devices are not directly interchangeable percentages.
+
+Validation CE fell from 3.1210 to 2.3124 at step50, then rose to 3.6175 at194.
+Final-checkpoint selection and lack of enforced behavioral stops allowed a
+regressing run to finish. The last tiny training loss was a converter-only tail,
+not the loss of the complete corpus. Matched step50/194 checks both passed only
+4/16 turns (calculator cases); neither passed the 12 natural/state cases.
+Rollback alone has not demonstrated recovery.
+
+2. NEW LOCAL EXPERIMENT: SEPARATE LANGUAGE FROM CHAT PROTOCOL
+Ran the hash-verified 10B base, SFT50 and SFT194 with the same tokenizer, float32
+MPS runtime and prompts. No training, no network serving, no release exposure.
+Source: probe_foundation.py; outputs: base10b.json, sft50.json, sft194.json.
+Manually reviewed all 12 raw completions and all 36 candidate comparisons.
+
+Twelve contrastive cloze questions, correct answer vs one chosen distractor:
+                          Base10B    SFT50    SFT194
+Correct preferred         9/12       8/12     7/12
+State/relation subset     3/4        3/4      2/4
+Basic science subset      4/4        4/4      4/4
+Arithmetic subset         2/4        1/4      1/4
+Sum and mean token NLL give the same rankings. Candidate lengths differ; both
+are saved. These are investigator-authored exposed diagnostics, NOT generation
+accuracy, a general benchmark, statistical proof of regression or CBSE readiness.
+
+Raw completions establish some language ability, with important limits:
+- Base correctly continues Arun's notebook as blue and parcel location as Kochi,
+  but repeats the parcel sentence and repeats the library explanation.
+- SFT50 produces coherent bird/library prose, but invents Mumbai as the parcel's
+  latest location despite the supplied Kochi update.
+- SFT194 initially says Kochi, then invents Wednesday/Thursday movements; its
+  notebook continuation later describes both notebooks as blue.
+- All three prefer stale Jaipur over current Surat in a separate cloze case.
+- SFT194 additionally prefers the old owner over the recipient of a transferred mug.
+Raw continuation is expected to continue; these fixed 32-token completions cannot
+measure chat stopping. Newly invented story details are not automatically a
+protocol failure. However, contradictory state and weak arithmetic exist outside
+the chat wrapper. Therefore fixing end tokens/formatting alone is insufficient.
+The base is neither proven useless nor proven adequate. A claim that SFT destroyed
+all language knowledge would also be unsupported.
+
+3. CAUSAL FINDINGS: WHAT IS CONFIRMED VS HYPOTHESIS
+Confirmed process/data failures:
+- Sparse behavioral curriculum: 43,183 unique assistant targets is the entire
+  original SFT signal. Policy data had zero tools-enabled/no-call examples.
+- Generalization was not a successful gate before continued training/promotion.
+  Loss/checkpoint completion/protected calculators substituted for broad behavior.
+- Original late-context corpus was not actually consumed; generation != training.
+- Pretraining data provenance/packing checks do not verify factual education.
+  The six-row source spot check even found an incorrect claim about snake smell;
+  this is a warning about source reliability, not an estimate of corpus error rate.
+
+Plausible contributors, not isolated causes:
+- Narrow repeated SFT examples encourage memorized patterns and poor transfer.
+- Inherited base optimizer moments and SFT LR may affect adaptation; no controlled
+  reset-vs-carryover experiment has isolated this.
+- Base training/content may be inadequate for intended reasoning. No broad base
+  capability benchmark establishes its ceiling or necessary additional tokens.
+
+Not established as causes:
+- No confirmed universal tokenizer, target-mask or train/serve-prefix corruption;
+  prior objective/mask/replay checks passed. EOS targets are supervised.
+- A 192-token budget is not the sole issue: sampled 512-token retries still looped.
+- The newly discovered qualification cadence bug affects the proposed restart
+  experiment, not the cause of the already completed SFT194 failure.
+
+4. WHY THE PROPOSED CORRECTION STILL MISSES THE MAIN QUESTION
+The frozen candidate has 272 train sessions, 175,346 unique targets. The new short
+corrective core contributes 5,111 targets (2.915%). Reviewed long data is useful,
+but session balance does not imply loss balance.
+Actual first10-update packing contains 104,361 supervised targets:
+  new short natural 399; new short code/state 276; new short tools 2,260;
+  inherited natural_dialogue_4k 42,948; long_context_natural 32,127;
+  long_context_tool 26,351.
+Thus new short natural+state = 675 targets, 0.647% of pilot target mass; all new
+short lessons = 2.812%. Long examples may also teach these skills: this is not a
+claim that only 0.647% of all useful supervision exists. It demonstrates that the
+new targeted repair signal is heavily diluted under token-normalized loss.
+
+The pilot simultaneously changes data, order, context2K->4K, batch and LR.
+Source formula: fresh LR *0.8*sqrt(batch/524288)*multiplier. Proposed32768/.125
+means .025*fresh LR; prior8192/1 means .1*fresh LR. New initial LR is one-quarter
+of the old initial LR. Parent moments remain. A failure after10updates would not
+identify whether data, dose, optimization, context extension or foundation failed.
+A successful 4K forward pass demonstrates execution, not long-context learning.
+Full development CE also favors long answers; short natural/state targets total
+221/50,013. Report macro family behavioral results separately from aggregate CE.
+
+5. FEASIBILITY OF THE GOAL
+A) Own-from-scratch short dialogue, explicit state updates, narrow safe tools:
+   worth a bounded learning diagnosis; no credible success probability yet.
+B) Dependable open-ended local assistant: not supported by current evidence.
+C) Broad CBSE+2 maths/science from these weights and a $15 repair run: no defensible
+   delivery commitment. Knowledge coverage, mathematical reasoning and instruction
+   following are distinct capabilities; longer conversations do not supply them.
+D) A local system using a pretrained instruct model, retrieval and verified tools:
+   an alternative engineering path if practical utility becomes the main goal;
+   it would NOT count as success training Own from scratch. No replacement made.
+
+External calibration, not an apples-to-apples comparison:
+SmolLM2-360M's official card reports 4T pretraining tokens (~400x our10B), and only
+7.43 GSM8K five-shot for its instruct model. This does not mean Own needs4T or
+should blindly scale tokens; it shows parameter count alone and a token milestone
+cannot justify general-assistant or school-maths claims.
+https://huggingface.co/HuggingFaceTB/SmolLM2-360M
+TinyStories demonstrates coherent small models in a deliberately restricted
+language domain. Narrow scope can be learnable; that does not establish broad
+reasoning or reliable tool use for our model.
+https://arxiv.org/abs/2305.07759
+
+6. REVISED EXPERIMENT ORDER — PROPOSAL, NOT ACTIVATED TRAINING
+First resolve learnability at native2K. Preserve the frozen4K corpus/release;
+create any new diagnostic packet as a separate version with full provenance.
+No hidden lowering of existing release gates and no automatic pilot extensions.
+
+Stage0: experiment integrity and positive controls, locally first.
+- Align all validation observations in uninterrupted/restart qualification and
+  exercise the real training-loop orchestration, not just individual guard tests.
+- Bind STOP lease, cumulative spend, single writer, recovery disk and independently
+  verified GCS restore. Runtime qualification is separate from quality acceptance.
+- Add generation scoring controls (known good/bad frames), check state semantics
+  independent of custom protocol. Optionally compare a pretrained small model
+  using its native template; do not force it through Own's tokenizer/protocol.
+- Lock scenario-group splits before new data, all raw-output scoring rules and
+  family target budgets. Diagnostic cases here are now exposed, never release.
+
+Stage1: tiny fit experiment at native2K, from the preserved base.
+- A proposed 24-session reviewed diagnostic packet: eight short dialogue/stop,
+  eight state correction, eight tool-policy sessions including call/no-call.
+- Verify it can learn its OWN training examples, including complete turns and
+  actual executable calls. Proposed go gate: >=23/24 complete training sessions,
+  all tool-policy prohibitions respected, finite gradients and checkpoint reload.
+- This is an intentionally overfit plumbing/optimization control, NOT acceptance.
+- Predeclare a finite exposure/update cap in a new signed contract before launch;
+  benchmark throughput before pricing it. Do not silently change the current10 cap.
+- If it cannot fit, inspect gradients, masks, per-family loss, stop-token margins,
+  optimizer state and LR. Do not respond by generating thousands more examples.
+
+Stage2: transfer, only if Stage1 passes and budget/authorization remains.
+- Use separate scenario groups, new entities/numbers, varied wording and actual
+  multi-turn state changes. Balance effective target mass at short context.
+- Keep parent/context/batch/order fixed. Compare one optimizer/LR choice at a time
+  within a preregistered comparison; no uncontrolled menu of rescue retries.
+- Proposed DEVELOPMENT go gate (not a replacement release contract): >=90% strict
+  turns and >=80% complete sessions in EACH short natural/state/tool family,
+  no forbidden tool action, no protected regression. Count blocked follow-ups.
+- Passing training but failing transfer means learned examples, not learned skill.
+  If two bounded pilots fail, hold and diagnose; no automatic extension.
+- These thresholds are engineering decisions, not confidence guarantees. Count
+  sessions and uncertainty, and retain raw failures rather than cherry-picked demos.
+
+Stage3: only after short transfer succeeds, add long-context supervision in an
+explicit curriculum; compare matched2K/4K tasks and protect short performance.
+Then full existing61-session development assessment; preselect candidate; consume
+frozen63-session release ONCE; manually review every output; matched localMPS check.
+The release is source-disjoint but Codex-authored like much of training: it is not
+an independent-human benchmark. Add external/human evaluation before broad claims.
+
+Stage4: school subjects require their own scoped curriculum and unseen assessments:
+licensed/permission-compatible authoritative sources; generated examples checked
+against sources and executable maths; split by problem family before variants;
+units, diagrams, derivations and uncertainty scored separately. Retrieval/tool
+success must be labeled system success, not intrinsic model knowledge. Deferred.
+
+7. BUDGET, STOPPING, RESPONSIBILITY
+$15 remains a proposed diagnostic ceiling, NOT the minimum price of recovering
+conversation or finishing the revised stages. No new justified end-to-end budget
+exists before learning/throughput evidence. Do not extrapolate the prior extension
+spend to the cost of all10B tokens. Existing storage still costs money while off.
+The conditional approval did not activate; this further material assessment change
+must be reported before any GPU spend. All3VMs freshly observed TERMINATED.
+Local base/50/194/605 preserved. No serving default changed; HTTP remains off.
+
+Previous planning gave too much weight to test counts, corpus length and completed
+training, and insufficient weight to a discriminating learnability experiment.
+Those controls prevent operational failures; they do not prove we are teaching
+what is missing. The next purchase must buy evidence about learning and transfer,
+not another completed checkpoint. A failed small pilot does not prove impossibility;
+a successful tiny fit does not prove a useful assistant. Report both honestly.
+
+Evidence links (repository-relative):
+reports/quality-rca-v1/RCA_AND_REMEDIATION.txt
+reports/quality-rca-v1/packet-audit.json
+reports/quality-rca-v1/paired-review.json
+reports/corrective-corpus-v1/baseline194-review.json
+reports/local-readiness-v1/actual-packet-checks.json
+reports/readiness-second-review-v1/ASSESSMENT.txt
+reports/l4-qualification-v1/corpus-root-spotcheck.json
+cloud_training/nano_sft.py (reset_sft_lrs and optimizer initialization)
