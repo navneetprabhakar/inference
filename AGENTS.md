@@ -1,7 +1,7 @@
 # Own-model work: quality-first operating rules
 
 Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup.
-The user's current instructions override this file. Current status: PAUSED by user; final A100 run closed; VM/disk retired after verified backups. No GPU starts, allocations, retries, extensions or training without explicit resume. Signal-resume exactness failed; no fit pilot or release acceptance. Evidence: reports/english-a100-v1/. Corrective-corpus-v1 remains immutable.
+The user's current instructions override this file. Current status: LOCAL REMEDIATION requested; cloud PAUSED; final A100 run closed; VM/disk retired after verified backups. No GPU starts, allocations, retries, extensions or training without explicit resume. Signal-resume exactness failed; no fit pilot or release acceptance. Evidence: reports/english-a100-v1/. Corrective-corpus-v1 remains immutable.
 
 - User priority: English conversation first, then maths, then CBSE through Class12. Defer maths/CBSE corpus expansion until preceding capability gates pass. Tool checks protect regressions but do not substitute for English conversation acceptance.
 - Optimize for demonstrated conversation/tool quality, not tokens, epochs, corpus size or job completion.
