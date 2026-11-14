@@ -1,0 +1,639 @@
+{
+  "scope": "All18 postSFT requests, actual calls and returned numbers reviewed; template development regression only. Base0/18 protocol failures.",
+  "records": {
+    "base10b": [
+      {
+        "session": "original-calculate-grounding",
+        "turn": 0,
+        "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "original-convert-grounding",
+        "turn": 0,
+        "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-tool_correction-1",
+        "turn": 0,
+        "user": "Find the difference, first 715, second 1875. Obtain the answer through calculate; output the number alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-tool_correction-1",
+        "turn": 1,
+        "user": "Replace the first input with 1883, retain the other input and operation, and recalculate. Return only the number.",
+        "answer": null,
+        "status": "session_blocked",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-calculate-1",
+        "turn": 0,
+        "user": "Evaluate the multiplication of 596 and 267. Obtain the answer through calculate; output the number alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-calculate-2",
+        "turn": 0,
+        "user": "Case record-594152-9: Find the difference, first 205, second 1838. Obtain the answer through calculate; output the number alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-tool_correction-2",
+        "turn": 0,
+        "user": "Case record-325956-6: Evaluate the multiplication of 1088 and 938. Obtain the answer through calculate; output the number alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-tool_correction-2",
+        "turn": 1,
+        "user": "Replace the first input with 265, retain the other input and operation, and recalculate. Return only the number.",
+        "answer": null,
+        "status": "session_blocked",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-convert-1",
+        "turn": 0,
+        "user": "Case record-739044-12: Express the measurement 1705 kg using g. Use convert and give only the numeric result.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v2-convert-2",
+        "turn": 0,
+        "user": "Express the measurement 1609 km using m. Use convert and give only the numeric result.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-convert-1",
+        "turn": 0,
+        "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-tool_correction-1",
+        "turn": 0,
+        "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-tool_correction-1",
+        "turn": 1,
+        "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+        "answer": null,
+        "status": "session_blocked",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-tool_correction-2",
+        "turn": 0,
+        "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-tool_correction-2",
+        "turn": 1,
+        "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+        "answer": null,
+        "status": "session_blocked",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-calculate-1",
+        "turn": 0,
+        "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-calculate-2",
+        "turn": 0,
+        "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      },
+      {
+        "session": "v3-convert-2",
+        "turn": 0,
+        "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+        "answer": null,
+        "status": "invalid_model_action",
+        "executed_calls": [],
+        "passed": false
+      }
+    ],
+    "new-base-2k-8epochs": [
+      {
+        "session": "original-calculate-grounding",
+        "turn": 0,
+        "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+        "answer": "54",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608507.8390858,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "original-convert-grounding",
+        "turn": 0,
+        "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+        "answer": "3250",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608508.340378,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 3.25
+            },
+            "ok": true,
+            "data": {
+              "result": 3250.0
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-tool_correction-1",
+        "turn": 0,
+        "user": "Find the difference, first 715, second 1875. Obtain the answer through calculate; output the number alone.",
+        "answer": "-1160",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608508.9329855,
+            "name": "calculate",
+            "arguments": {
+              "a": 715,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1160
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-tool_correction-1",
+        "turn": 1,
+        "user": "Replace the first input with 1883, retain the other input and operation, and recalculate. Return only the number.",
+        "answer": "8",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608509.6384134,
+            "name": "calculate",
+            "arguments": {
+              "a": 1883,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 8
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-calculate-1",
+        "turn": 0,
+        "user": "Evaluate the multiplication of 596 and 267. Obtain the answer through calculate; output the number alone.",
+        "answer": "159132",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608510.2075517,
+            "name": "calculate",
+            "arguments": {
+              "a": 596,
+              "b": 267,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 159132
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-calculate-2",
+        "turn": 0,
+        "user": "Case record-594152-9: Find the difference, first 205, second 1838. Obtain the answer through calculate; output the number alone.",
+        "answer": "-1633",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608510.7970622,
+            "name": "calculate",
+            "arguments": {
+              "a": 205,
+              "b": 1838,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1633
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-tool_correction-2",
+        "turn": 0,
+        "user": "Case record-325956-6: Evaluate the multiplication of 1088 and 938. Obtain the answer through calculate; output the number alone.",
+        "answer": "1020544",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608511.3964603,
+            "name": "calculate",
+            "arguments": {
+              "a": 1088,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 1020544
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-tool_correction-2",
+        "turn": 1,
+        "user": "Replace the first input with 265, retain the other input and operation, and recalculate. Return only the number.",
+        "answer": "248570",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608512.0979936,
+            "name": "calculate",
+            "arguments": {
+              "a": 265,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 248570
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-convert-1",
+        "turn": 0,
+        "user": "Case record-739044-12: Express the measurement 1705 kg using g. Use convert and give only the numeric result.",
+        "answer": "1705000",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608512.6259596,
+            "name": "convert",
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 1705
+            },
+            "ok": true,
+            "data": {
+              "result": 1705000.0
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v2-convert-2",
+        "turn": 0,
+        "user": "Express the measurement 1609 km using m. Use convert and give only the numeric result.",
+        "answer": "1609000",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608513.1580012,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 1609
+            },
+            "ok": true,
+            "data": {
+              "result": 1609000.0
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-convert-1",
+        "turn": 0,
+        "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+        "answer": "16998.6",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608513.7173264,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 283.31
+            },
+            "ok": true,
+            "data": {
+              "result": 16998.6
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-tool_correction-1",
+        "turn": 0,
+        "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+        "answer": "2925",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608514.3106754,
+            "name": "calculate",
+            "arguments": {
+              "a": 1133,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2925
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-tool_correction-1",
+        "turn": 1,
+        "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+        "answer": "2228",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608514.9231489,
+            "name": "calculate",
+            "arguments": {
+              "a": 436,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2228
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-tool_correction-2",
+        "turn": 0,
+        "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+        "answer": "646",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608515.5184639,
+            "name": "calculate",
+            "arguments": {
+              "a": 1903,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 646
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-tool_correction-2",
+        "turn": 1,
+        "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+        "answer": "-917",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608516.1780732,
+            "name": "calculate",
+            "arguments": {
+              "a": 340,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -917
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-calculate-1",
+        "turn": 0,
+        "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+        "answer": "4",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608516.7727523,
+            "name": "calculate",
+            "arguments": {
+              "a": 3176,
+              "b": 794,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 4.0
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-calculate-2",
+        "turn": 0,
+        "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+        "answer": "3136",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608517.3085606,
+            "name": "calculate",
+            "arguments": {
+              "a": 1159,
+              "b": 1977,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 3136
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "session": "v3-convert-2",
+        "turn": 0,
+        "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+        "answer": "22468.2",
+        "status": "complete",
+        "executed_calls": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608517.8429992,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 374.47
+            },
+            "ok": true,
+            "data": {
+              "result": 22468.2
+            }
+          }
+        ],
+        "passed": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,2801 @@
+{
+  "checkpoint_manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54",
+  "suite_sha256": "d50dfa423f06ed3d401064eeac846b7436bcbce1cead59644ccdae91fadc354c",
+  "step": 194,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "5fe68ae3cc0013567ac3476b75f8be8283e1d0455bcc7adfb9ab128f4a5b2152",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+    },
+    "attention": "fa3",
+    "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 8192,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "epochs": 8,
+    "eval_every_updates": 50,
+    "eval_rows": 128,
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 194,
+    "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+    "lr_batch_scale": 0.125,
+    "lr_multiplier": 1.0,
+    "microbatch": 4,
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": true,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 776,
+    "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 103,
+    "source_manifest_sha256": "f22ac188eac1de0aa49a9cd01e61dc67213f8c12b0f10fdb11a36a5312ead8c4",
+    "stage": "general",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129"
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "89c9bd4f2ad68d9d53c8e7fb508222e5d05f13dc01e17876d51041563c9fe07b",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 128,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "device": "cuda",
+    "attention": "sdpa",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "original-calculate-grounding",
+      "turn": 0,
+      "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+      "policy": {
+        "permit_calls": true,
+        "allowed_names": [
+          "calculate"
+        ]
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "54",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7480,
+              1191,
+              98,
+              8220,
+              819,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 73,
+                  "b": 19,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":73,\"b\":19,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.8025413110001409
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608507.8390858,
+              "name": "calculate",
+              "arguments": {
+                "a": 73,
+                "b": 19,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 54
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              6722,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "54"
+            },
+            "seconds": 0.03518467600019903
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608507.8390858,
+            "name": "calculate",
+            "arguments": {
+              "a": 73,
+              "b": 19,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 54
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "original-convert-grounding",
+      "turn": 0,
+      "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+      "policy": {
+        "permit_calls": true,
+        "allowed_names": [
+          "convert"
+        ]
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "3250",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              13657,
+              14137,
+              2026,
+              14424,
+              109,
+              14137,
+              13674,
+              8220,
+              51,
+              46,
+              1932,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "km",
+                  "to": "m",
+                  "value": 3.25
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"km\",\"to\":\"m\",\"value\":3.25},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.46119790500006275
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 3.25
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608508.340378,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 3.25
+              },
+              "ok": true,
+              "data": {
+                "result": 3250.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3712,
+              1458,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3250"
+            },
+            "seconds": 0.05112423600007787
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608508.340378,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 3.25
+            },
+            "ok": true,
+            "data": {
+              "result": 3250.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-tool_correction-1",
+      "turn": 0,
+      "user": "Find the difference, first 715, second 1875. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "-1160",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7426,
+              53,
+              1191,
+              98,
+              8220,
+              1344,
+              4092,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 715,
+                  "b": 1875,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":715,\"b\":1875,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5362519079999402
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 715,
+                "b": 1875,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608508.9329855,
+              "name": "calculate",
+              "arguments": {
+                "a": 715,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": -1160
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              45,
+              1495,
+              2249,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "-1160"
+            },
+            "seconds": 0.06862029599983543
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608508.9329855,
+            "name": "calculate",
+            "arguments": {
+              "a": 715,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1160
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-tool_correction-1",
+      "turn": 1,
+      "user": "Replace the first input with 1883, retain the other input and operation, and recalculate. Return only the number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "8",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1344,
+              7820,
+              1191,
+              98,
+              8220,
+              1344,
+              4092,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1883,
+                  "b": 1875,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1883,\"b\":1875,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.6310756029999993
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1883,
+                "b": 1875,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608509.6384134,
+              "name": "calculate",
+              "arguments": {
+                "a": 1883,
+                "b": 1875,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 8
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              56,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "8"
+            },
+            "seconds": 0.039961095000080604
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608508.9329855,
+            "name": "calculate",
+            "arguments": {
+              "a": 715,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1160
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608509.6384134,
+            "name": "calculate",
+            "arguments": {
+              "a": 1883,
+              "b": 1875,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 8
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-calculate-1",
+      "turn": 0,
+      "user": "Evaluate the multiplication of 596 and 267. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "159132",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              7254,
+              54,
+              1191,
+              98,
+              8220,
+              3592,
+              55,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 596,
+                  "b": 267,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":596,\"b\":267,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5230739460000677
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 596,
+                "b": 267,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608510.2075517,
+              "name": "calculate",
+              "arguments": {
+                "a": 596,
+                "b": 267,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 159132
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1296,
+              6556,
+              3712,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "159132"
+            },
+            "seconds": 0.06636049100006858
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608510.2075517,
+            "name": "calculate",
+            "arguments": {
+              "a": 596,
+              "b": 267,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 159132
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-calculate-2",
+      "turn": 0,
+      "user": "Case record-594152-9: Find the difference, first 205, second 1838. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "-1633",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              568,
+              53,
+              1191,
+              98,
+              8220,
+              1344,
+              5314,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 205,
+                  "b": 1838,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":205,\"b\":1838,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5176392270000179
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 205,
+                "b": 1838,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608510.7970622,
+              "name": "calculate",
+              "arguments": {
+                "a": 205,
+                "b": 1838,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": -1633
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              45,
+              1661,
+              4713,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "-1633"
+            },
+            "seconds": 0.06793045600011283
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608510.7970622,
+            "name": "calculate",
+            "arguments": {
+              "a": 205,
+              "b": 1838,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -1633
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-tool_correction-2",
+      "turn": 0,
+      "user": "Case record-325956-6: Evaluate the multiplication of 1088 and 938. Obtain the answer through calculate; output the number alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1020544",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              769,
+              6954,
+              1191,
+              98,
+              8220,
+              7286,
+              56,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1088,
+                  "b": 938,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1088,\"b\":938,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5259137320001628
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1088,
+                "b": 938,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608511.3964603,
+              "name": "calculate",
+              "arguments": {
+                "a": 1088,
+                "b": 938,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 1020544
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              769,
+              568,
+              6722,
+              52,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1020544"
+            },
+            "seconds": 0.08373173599989059
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608511.3964603,
+            "name": "calculate",
+            "arguments": {
+              "a": 1088,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 1020544
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-tool_correction-2",
+      "turn": 1,
+      "user": "Replace the first input with 265, retain the other input and operation, and recalculate. Return only the number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "248570",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              3592,
+              53,
+              1191,
+              98,
+              8220,
+              7286,
+              56,
+              1191,
+              394,
+              14424,
+              23990,
+              514,
+              311,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 265,
+                  "b": 938,
+                  "op": "multiply"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":265,\"b\":938,\"op\":\"multiply\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.6116802419999203
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 265,
+                "b": 938,
+                "op": "multiply"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608512.0979936,
+              "name": "calculate",
+              "arguments": {
+                "a": 265,
+                "b": 938,
+                "op": "multiply"
+              },
+              "ok": true,
+              "data": {
+                "result": 248570
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2254,
+              5545,
+              2819,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "248570"
+            },
+            "seconds": 0.07904944199981401
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608511.3964603,
+            "name": "calculate",
+            "arguments": {
+              "a": 1088,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 1020544
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608512.0979936,
+            "name": "calculate",
+            "arguments": {
+              "a": 265,
+              "b": 938,
+              "op": "multiply"
+            },
+            "ok": true,
+            "data": {
+              "result": 248570
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-convert-1",
+      "turn": 0,
+      "user": "Case record-739044-12: Express the measurement 1705 kg using g. Use convert and give only the numeric result.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1705000",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              10988,
+              14137,
+              2026,
+              14424,
+              103,
+              14137,
+              13674,
+              8220,
+              1802,
+              3898,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "kg",
+                  "to": "g",
+                  "value": 1705
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"kg\",\"to\":\"g\",\"value\":1705},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.44213318299989623
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 1705
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608512.6259596,
+              "name": "convert",
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 1705
+              },
+              "ok": true,
+              "data": {
+                "result": 1705000.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1802,
+              3898,
+              925,
+              48,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1705000"
+            },
+            "seconds": 0.0847073370000544
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608512.6259596,
+            "name": "convert",
+            "arguments": {
+              "from": "kg",
+              "to": "g",
+              "value": 1705
+            },
+            "ok": true,
+            "data": {
+              "result": 1705000.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v2-convert-2",
+      "turn": 0,
+      "user": "Express the measurement 1609 km using m. Use convert and give only the numeric result.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "1609000",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              13657,
+              14137,
+              2026,
+              14424,
+              109,
+              14137,
+              13674,
+              8220,
+              1661,
+              3760,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "km",
+                  "to": "m",
+                  "value": 1609
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"km\",\"to\":\"m\",\"value\":1609},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.44098777399995015
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 1609
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608513.1580012,
+              "name": "convert",
+              "arguments": {
+                "from": "km",
+                "to": "m",
+                "value": 1609
+              },
+              "ok": true,
+              "data": {
+                "result": 1609000.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1661,
+              3760,
+              925,
+              48,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "1609000"
+            },
+            "seconds": 0.08401358900005107
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608513.1580012,
+            "name": "convert",
+            "arguments": {
+              "from": "km",
+              "to": "m",
+              "value": 1609
+            },
+            "ok": true,
+            "data": {
+              "result": 1609000.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-convert-1",
+      "turn": 0,
+      "user": "Obtain 283.31 min expressed in s through convert. Give just the numerical answer.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "16998.6",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              2757,
+              14137,
+              2026,
+              14424,
+              115,
+              14137,
+              13674,
+              8220,
+              3559,
+              51,
+              46,
+              4198,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "min",
+                  "to": "s",
+                  "value": 283.31
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"min\",\"to\":\"s\",\"value\":283.31},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.46899426699997093
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608513.7173264,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 283.31
+              },
+              "ok": true,
+              "data": {
+                "result": 16998.6
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1661,
+              4360,
+              56,
+              46,
+              54,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "16998.6"
+            },
+            "seconds": 0.09967981800014059
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608513.7173264,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 283.31
+            },
+            "ok": true,
+            "data": {
+              "result": 16998.6
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-tool_correction-1",
+      "turn": 0,
+      "user": "Have calculate evaluate the add operation with inputs 1133 and 1792. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "2925",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1495,
+              4713,
+              1191,
+              98,
+              8220,
+              1802,
+              6886,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1133,
+                  "b": 1792,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1133,\"b\":1792,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.48720742299997255
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608514.3106754,
+              "name": "calculate",
+              "arguments": {
+                "a": 1133,
+                "b": 1792,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 2925
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4048,
+              1932,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "2925"
+            },
+            "seconds": 0.050194497999882515
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608514.3106754,
+            "name": "calculate",
+            "arguments": {
+              "a": 1133,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2925
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-tool_correction-1",
+      "turn": 1,
+      "user": "Recalculate after changing the first argument to 436; preserve the rest. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "2228",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              6003,
+              54,
+              1191,
+              98,
+              8220,
+              1802,
+              6886,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 436,
+                  "b": 1792,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":436,\"b\":1792,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.554918472000054
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608514.9231489,
+              "name": "calculate",
+              "arguments": {
+                "a": 436,
+                "b": 1792,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 2228
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2356,
+              3559,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "2228"
+            },
+            "seconds": 0.059363089000044056
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608514.3106754,
+            "name": "calculate",
+            "arguments": {
+              "a": 1133,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2925
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608514.9231489,
+            "name": "calculate",
+            "arguments": {
+              "a": 436,
+              "b": 1792,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 2228
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-tool_correction-2",
+      "turn": 0,
+      "user": "Have calculate evaluate the subtract operation with inputs 1903 and 1257. Return the number without commentary.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "646",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              819,
+              4220,
+              1191,
+              98,
+              8220,
+              1176,
+              7046,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1903,
+                  "b": 1257,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1903,\"b\":1257,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5280830140000035
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608515.5184639,
+              "name": "calculate",
+              "arguments": {
+                "a": 1903,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": 646
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5902,
+              54,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "646"
+            },
+            "seconds": 0.05064561600011075
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608515.5184639,
+            "name": "calculate",
+            "arguments": {
+              "a": 1903,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 646
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-tool_correction-2",
+      "turn": 1,
+      "user": "Recalculate after changing the first argument to 340; preserve the rest. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "-917",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              5253,
+              48,
+              1191,
+              98,
+              8220,
+              1176,
+              7046,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 340,
+                  "b": 1257,
+                  "op": "subtract"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":340,\"b\":1257,\"op\":\"subtract\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.601667826999801
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c2",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              }
+            },
+            "record": {
+              "call_id": "c2",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608516.1780732,
+              "name": "calculate",
+              "arguments": {
+                "a": 340,
+                "b": 1257,
+                "op": "subtract"
+              },
+              "ok": true,
+              "data": {
+                "result": -917
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              45,
+              6556,
+              55,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "-917"
+            },
+            "seconds": 0.07775105400014581
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608515.5184639,
+            "name": "calculate",
+            "arguments": {
+              "a": 1903,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": 646
+            }
+          },
+          {
+            "call_id": "c2",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608516.1780732,
+            "name": "calculate",
+            "arguments": {
+              "a": 340,
+              "b": 1257,
+              "op": "subtract"
+            },
+            "ok": true,
+            "data": {
+              "result": -917
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-calculate-1",
+      "turn": 0,
+      "user": "Have calculate evaluate the divide operation with inputs 3176 and 794. Output only the resulting number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "4",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              4198,
+              7609,
+              1191,
+              98,
+              8220,
+              8217,
+              52,
+              1191,
+              394,
+              14424,
+              16358,
+              445,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 3176,
+                  "b": 794,
+                  "op": "divide"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":3176,\"b\":794,\"op\":\"divide\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.5087412620000578
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608516.7727523,
+              "name": "calculate",
+              "arguments": {
+                "a": 3176,
+                "b": 794,
+                "op": "divide"
+              },
+              "ok": true,
+              "data": {
+                "result": 4.0
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              52,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "4"
+            },
+            "seconds": 0.03449396299993168
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608516.7727523,
+            "name": "calculate",
+            "arguments": {
+              "a": 3176,
+              "b": 794,
+              "op": "divide"
+            },
+            "ok": true,
+            "data": {
+              "result": 4.0
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-calculate-2",
+      "turn": 0,
+      "user": "Have calculate evaluate the add operation with inputs 1159 and 1977. Output only the resulting number.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "3136",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              1495,
+              7254,
+              1191,
+              98,
+              8220,
+              819,
+              7405,
+              1191,
+              394,
+              14424,
+              4670,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              7388,
+              1762,
+              372,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "a": 1159,
+                  "b": 1977,
+                  "op": "add"
+                },
+                "name": "calculate"
+              },
+              "raw": "{\"arguments\":{\"a\":1159,\"b\":1977,\"op\":\"add\"},\"name\":\"calculate\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.4935144000000946
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "calculate",
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608517.3085606,
+              "name": "calculate",
+              "arguments": {
+                "a": 1159,
+                "b": 1977,
+                "op": "add"
+              },
+              "ok": true,
+              "data": {
+                "result": 3136
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4198,
+              4069,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3136"
+            },
+            "seconds": 0.05100429300000542
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608517.3085606,
+            "name": "calculate",
+            "arguments": {
+              "a": 1159,
+              "b": 1977,
+              "op": "add"
+            },
+            "ok": true,
+            "data": {
+              "result": 3136
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    },
+    {
+      "session": "v3-convert-2",
+      "turn": 0,
+      "user": "Obtain 374.47 min expressed in s through convert. Answer with the result alone.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": null,
+      "result": {
+        "status": "complete",
+        "assistant_text": "22468.2",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              6471,
+              14424,
+              2757,
+              14137,
+              2026,
+              14424,
+              115,
+              14137,
+              13674,
+              8220,
+              5348,
+              52,
+              46,
+              6604,
+              125,
+              1191,
+              10005,
+              14424,
+              4779,
+              2263,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "call",
+              "proposal": {
+                "arguments": {
+                  "from": "min",
+                  "to": "s",
+                  "value": 374.47
+                },
+                "name": "convert"
+              },
+              "raw": "{\"arguments\":{\"from\":\"min\",\"to\":\"s\",\"value\":374.47},\"name\":\"convert\"}",
+              "requires_broker_policy_check": true
+            },
+            "seconds": 0.47561044000008224
+          },
+          {
+            "kind": "broker_decision",
+            "decision": {
+              "call_id": "c1",
+              "stage": "adapter",
+              "dispatched": true,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              }
+            },
+            "record": {
+              "call_id": "c1",
+              "source": "offline fixture",
+              "schema_version": 1,
+              "timestamp": 1794608517.8429992,
+              "name": "convert",
+              "arguments": {
+                "from": "min",
+                "to": "s",
+                "value": 374.47
+              },
+              "ok": true,
+              "data": {
+                "result": 22468.2
+              }
+            }
+          },
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              2356,
+              6249,
+              56,
+              46,
+              50,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "22468.2"
+            },
+            "seconds": 0.10021379399995567
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [
+          {
+            "call_id": "c1",
+            "source": "offline fixture",
+            "schema_version": 1,
+            "timestamp": 1794608517.8429992,
+            "name": "convert",
+            "arguments": {
+              "from": "min",
+              "to": "s",
+              "value": 374.47
+            },
+            "ok": true,
+            "data": {
+              "result": 22468.2
+            }
+          }
+        ],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": true,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": true,
+        "manual_review_required": false
+      }
+    }
+  ],
+  "automated_passed": 18,
+  "automated_total": 18,
+  "manual_review_turns": 0,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 29.079090700999814,
+  "hard_process_timeout_seconds": 120
+}

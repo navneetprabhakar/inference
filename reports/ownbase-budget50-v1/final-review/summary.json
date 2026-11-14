@@ -1,0 +1,71 @@
+{
+  "utc": "2026-11-14T01:11:48.805453+00:00",
+  "decision": "Do not promote new SFT as general conversation model. Preserve retained605 fallback; it is also not reliable.",
+  "results": {
+    "base10b": {
+      "turns": 180,
+      "strict_pass": 0,
+      "complete_sessions": 0,
+      "sessions": 60,
+      "status_counts": {
+        "invalid_model_action": 60,
+        "session_blocked": 120
+      },
+      "by_category": {
+        "code_state": {
+          "passed": 0,
+          "total": 60
+        },
+        "natural": {
+          "passed": 0,
+          "total": 60
+        },
+        "tool": {
+          "passed": 0,
+          "total": 60
+        }
+      },
+      "executed_calls": 0,
+      "protected_pass": 0,
+      "protected_total": 18,
+      "source_sha256": "eca171a2e940d366b6f2dba7ba76ff82be7ed55d80a653231d63bdb527301261"
+    },
+    "new-base-2k-8epochs": {
+      "turns": 180,
+      "strict_pass": 5,
+      "complete_sessions": 0,
+      "sessions": 60,
+      "status_counts": {
+        "complete": 57,
+        "invalid_model_action": 45,
+        "session_blocked": 78
+      },
+      "by_category": {
+        "code_state": {
+          "passed": 0,
+          "total": 60
+        },
+        "natural": {
+          "passed": 0,
+          "total": 60
+        },
+        "tool": {
+          "passed": 5,
+          "total": 60
+        }
+      },
+      "executed_calls": 22,
+      "protected_pass": 18,
+      "protected_total": 18,
+      "source_sha256": "eafb478a4f6acf83ddf4b836558dd5b2956ea901675deb7d9aa4bef8c8f74fee"
+    }
+  },
+  "tool_analysis": "22 dispatched calls after SFT; 6 implement requested task correctly, including turn93 whose requested explanation is missing. 16 use wrong operations/operands/units. At least3 also misrender broker numeric results. No full 3-turn session passes. Protected exposed/template checks18/18 do not transfer to natural tool workflows.",
+  "limitations": [
+    "Synthetic development suite, not independent external benchmark.",
+    "CUDA matched pre/post. Local MPS verification pending.",
+    "Base was not instruction-trained; zero protocol passes is not zero language knowledge.",
+    "349 fitting2K training sessions include80Codex conversations and269synthetic tool/correction; 3K\u20134K V4\u2013V21 remain untrained.",
+    "Retained605 prior MPS baseline6/180,0/60,protected18/18; hardware differs from these CUDA results."
+  ]
+}

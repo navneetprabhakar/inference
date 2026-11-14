@@ -1,18 +1,13 @@
 {
-  "utc": "2026-11-13T20:16:29.435569+00:00",
-  "phase": "base_training_extension_v5_armed",
-  "vm": "forge-ownbase-budget50-v1",
+  "utc": "2026-11-14T01:13:45.024180+00:00",
+  "phase": "training_complete_vm_off_local_validation_pending",
+  "vm": "forge-ownbase-extension-v5",
   "zone": "us-central1-b",
-  "provider_status": "RUNNING",
+  "provider_status": "TERMINATED",
   "provider_schedule": {
     "maxRunDuration": {
-      "seconds": "50400",
-      "nanos": 0
+      "seconds": "7200"
     },
-    "onHostMaintenance": "TERMINATE",
-    "automaticRestart": false,
-    "preemptible": false,
-    "provisioningModel": "FLEX_START",
     "instanceTerminationAction": "STOP"
   },
   "new_gpu": "NVIDIA A100-SXM4-40GB",
@@ -23,8 +18,8 @@
   "invoice_verified": false,
   "original_vm": "TERMINATED; untouched",
   "local_baseline": "MPS runtime succeeds; result-recall followup fails, no usability claim",
-  "next": "Finish10B andverifiedbackup; sequentialtwo-hourV5lease onpreserveddisk forprecheck->SFT->postcheck->backup->stop; fullsemanticreview andlocaldelivery follow.",
-  "temporary_firewall": "forge-ownbase-budget50-iap, sourceIAP range only, targetrun-specifictag; delete at closeout",
+  "next": "Complete local checkpoint download and MPS assessment; archive final review and local delivery; no new GPU.",
+  "temporary_firewall": "Removed; deletion operation complete and GET404 verified.",
   "active_sft_packet": "extension-v5/packet.json (frozenV2data/code/recipe)",
   "sft_dispatch_pid": null,
   "local_assessment": {
@@ -50,27 +45,10 @@
     "full4k_ready": false
   },
   "latest_base_observation": {
-    "active_vm": "forge-ownbase-budget50-v1",
-    "prior_compute_hours": 0,
-    "utc": "2026-11-13T20:16:00.537639+00:00",
-    "provider_status": "RUNNING",
-    "machine_type": "a2-highgpu-1g",
-    "provisioning_model": "FLEX_START",
-    "phase": "base_training",
-    "elapsed_hours": 11.462,
-    "conservative_compute_accrual_usd": 28.66,
-    "ancillary_reserved_usd": 15,
-    "total_envelope_to_date_usd": 43.66,
-    "incremental_cap_usd": 55,
-    "invoice_verified": false,
-    "last_heldout_ce": 2.4869187846779823,
-    "telemetry_note": null,
-    "provider_duration_seconds": "50400",
-    "step": 18083,
-    "targets": 9480699904,
-    "train_loss": 2.4700422286987305,
-    "tokens_per_second_last_update": 103560.12788271373,
-    "last_backed_step": 18025
+    "status": "complete",
+    "step": 19074,
+    "targets": 10000269312,
+    "heldout_ce": 2.4571021869778633
   },
   "local_historical_retention": {
     "normalized_exact_passed": 110,
@@ -83,9 +61,21 @@
     "exposed_development_only": true
   },
   "base_7b_review": "base-7b-review.json",
-  "active_corpus_generation": [
-    "cohort-23"
-  ],
-  "extension_launcher_pid": 314,
-  "local_http": "stopped_by_user"
+  "active_corpus_generation": [],
+  "extension_launcher_pid": null,
+  "local_http": "stopped_by_user",
+  "gpu_active": false,
+  "base_tokens": 10000269312,
+  "sft_updates": 194,
+  "sft_assistant_targets": 345464,
+  "cuda_strict_passed_turns": 5,
+  "cuda_total_turns": 180,
+  "cuda_complete_sessions": 0,
+  "protected_tool_passes": 18,
+  "final_gcs_backup_verified": true,
+  "local_http_active": false,
+  "auth_restored": true,
+  "promoted": false,
+  "conservative_compute_usd": 34.17,
+  "conservative_envelope_with_reserve_usd": 49.17
 }

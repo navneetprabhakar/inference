@@ -1,0 +1,61 @@
+10B + SFT assessment — 14 November 2026
+
+Decision: Do not promote the new checkpoint as a general assistant. Keep the existing
+605 fallback for reproducibility; that fallback is also not conversationally reliable.
+
+Executed order: 10,000,269,312 base tokens -> 180-turn +18 protected prechecks ->
+349-session,8-epoch SFT -> matched postchecks -> verified GCS backup -> VM shutdown.
+SFT completed194 updates,345,464 assistant-target exposures,2,792 session exposures.
+The base held-out CE is2.457102 nats (1,048,576 targets); this is language loss,
+not evidence of conversation or tool competence. Final SFT training loss0.0000839
+alongside poor conversational performance is consistent with fitting a narrow packet;
+it is not evidence of generalization.
+
+                         Base10B      PostSFT       Retained605 prior MPS
+Strict passing turns     0/180        5/180         6/180
+Complete conversations   0/60         0/60          0/60
+Protected tool checks    0/18         18/18         18/18
+
+Matched CUDA before/after: identical frozen prompts, raw greedy decoding,2K context,
+192-token reply budget (protected128). Base diagnostic explicitly allowed the base
+checkpoint; it was not instruction-trained. Its0/180 reflects serving/protocol
+failure, not a claim that it learned no language. This synthetic development suite
+is not an independent external benchmark. Retained605 comparison uses different
+hardware; avoid interpreting the one-turn difference as a precise model ranking.
+
+After SFT:57 complete frames,45 invalid actions,78 blocked follow-ups. A blocked
+follow-up is an end-to-end failure caused by the previous turn, not an independent
+failed generation. Natural conversation0/60; code/state0/60; tool workflows5/60.
+Of22 dispatched tool calls,6 used the correct operation/inputs/units. One of those
+returned83 but omitted the explicitly requested explanation, so only5 turns pass.
+A different turn returned the correct number56 by computing64-8 instead of7*8;
+that coincidence fails workflow correctness. At least3 answers also changed actual
+fractional broker results into0. Corrections often overwrite the wrong operand or
+retain stale state. Natural and code answers repeat prompts or invent facts.
+The18 protected template checks all perform the correct calls and report their
+results, including explicit argument corrections. This narrow skill does not
+transfer reliably to natural requests and multi-turn state.
+
+Actual training data:80 reviewed Codex teacher conversations and269 synthetic
+calculate/convert/correction sessions;349 whole fitting2K sessions.43,183 unique
+assistant targets per pass,8 passes. Frozen source manifest:
+f22ac188eac1de0aa49a9cd01e61dc67213f8c12b0f10fdb11a36a5312ead8c4.
+Newer3K–4K corpora V4–V21 were NOT trained. Latest reviewed V21 is preserved;
+cohort23 raw candidates remain unadmitted. No4K model capability claim.
+
+Base manifest:7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53
+SFT manifest:e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
+Backup:gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
+Final backup receipt:302 result files; base and SFT bundles independently read back.
+Six core raw result/assessment objects were downloaded and checked against final
+inventory SHA256. No automatic promotion or HTTP server restart.
+Both run VMs and the original retained VM are TERMINATED. Final run shutdown:
+13Nov22:29:18UTC (14Nov03:59IST), after verified backup22:28:12UTC.
+Conservative compute estimate$34.17 plus$15 ancillary reserve=$49.17 envelope,
+within$55 authorized cap. Actual invoice is not verified; retained storage persists.
+
+Local candidate download and MPS validation remain pending; see handoff for latest.
+Next training should be a separately designed experiment with broader verified
+instruction/state data and frozen generalization gates. Do not spend more GPU
+merely because narrow training loss is low. The school curriculum document is a
+follow-on plan only; no school training was launched.
