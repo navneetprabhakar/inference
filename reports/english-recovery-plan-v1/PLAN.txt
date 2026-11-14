@@ -1,0 +1,330 @@
+OWN ENGLISH RECOVERY PLAN v1
+14 November 2026 — planning only; no training, dataset admission or GPU authorization.
+Scope: improve the existing Own537M lineage. No replacement pretrained model.
+
+1. DECISION AND DEFINITION OF SUCCESS
+First prove short English learnability, then transfer, then local efficiency.
+Do not buy more pretraining or expand3K–4K conversations before those gates pass.
+This plan is an experiment sequence, not a promise that these weights can reach
+broad assistant quality. It can end in a documented HOLD without another expansion.
+
+Target v1: natural, concise English across everyday3–6turn conversations; follow
+scope and corrections, remember explicit facts, summarize supplied text, clarify
+missing information, acknowledge uncertainty, and stop cleanly. Native2048context.
+Simple tools remain regression checks; maths/CBSE, factual breadth, advanced coding,
+voice and4Kcontext are outside this release. Intrinsic model behavior is measured
+separately from broker correctness. No rewriting failed answers in a host rule.
+
+Acceptance proposals, to freeze BEFORE candidate training:
+- English development: >=90% strict turns and >=80% complete sessions IN EACH of
+  six families. Show counts, family macro scores and session-level uncertainty.
+- English sealed release: >=95% strict turns overall, >=85% complete sessions;
+  each family >=90% turns and >=80% sessions. Invalid/incomplete frames <=1%.
+- Zero forbidden executed calls, fabricated claims of tool execution, or critical
+  host-policy violations. Existing protected tool suite18/18 plus fresh tool and
+  no-call release cases; calculators cannot compensate for English failure.
+- All failures, context overflows, timeouts and blocked followups count. Score
+  semantic correctness, relevance, constraints/state, naturalness and completion.
+  A turn passes only if all applicable dimensions pass. Grammar alone is not enough.
+- These are proposed engineering thresholds, not observed scores or statistically
+  established reliability. Do not weaken them after seeing a candidate's results.
+- Local product targets, provisional until baseline: warm p95first-token<=2s at
+  <=512input tokens; median decode>=15tokens/s for128output tokens; peak process
+  memory<=12GiB on this24GiBMac; no sustained swap growth or crash over20sessions.
+  Report cold-load and1536-token-prefill separately. Quality gates take priority;
+  a fast failing model is not efficient. Freeze performance targets after baseline,
+  before optimization, and disclose any change rather than moving the goalposts.
+
+2. CURRENT EVIDENCE AND WHAT IT DOES NOT PROVE
+- Own536,871,738parameters;10,000,269,312base tokens; native2048context.
+- Historical SFT194:349sessions,43,183unique assistant targets,8epochs;80Codex
+  natural dialogues actually trained. Later long expansions were not consumed.
+- Historical devCE best2.3124at50 then3.6175at194; continued training and final
+  selection ignored regression. Step50 rollback has not restored conversation.
+- Current194English development0/36turns. Two-update diagnostic also0/36English
+  and0/18tools, with no actual tool calls. The diagnostic starts from base and
+  sees only882replay targets; it is not a completed corrective SFT experiment.
+- Reviewed tiny fit packet:24sessions/72turns/656unique assistant targets;12dev
+  sessions/36turns. No64-update fit pilot ran. Passing its fit gate would establish
+  memorization/plumbing, not broad English ability.
+- Normal CUDA/GCS2vs1+1restart exact. Signal rollback exact; following resumed
+  update differs in190weight and30optimizer values. This localized divergence
+  is not a demonstrated cause of conversation failure. Upload/provider-stop
+  fault checks remain incomplete. Failure-evidence persistence now fixed locally.
+- Two A100 timing samples: first update67.36s, next0.57s. These are NOT steady-state
+  throughput estimates. Provisioning, compile, validation, serialization and GCS
+  readbacks dominated wall time. Prior compute estimate$3.35 excludes storage/egress.
+Sources: OWN_BASE_HANDOFF.txt; reports/feasibility-deep-dive-v1/ASSESSMENT.txt;
+reports/english-a100-v1/{PAUSE_ASSESSMENT.txt,diagnostic2-*-review.json};
+reports/recovery-fix-v1/REMEDIATION.txt. Preserve their original evidence unchanged.
+
+3. WORK PACKAGE A — LOCAL SCIENTIFIC READINESS (NO VM)
+Deliver before another paid allocation:
+A1. Freeze experiment identity: parent weight manifest AND dataset parent manifest
+    are different concepts; validate both. Pin tokenizer, native2K, runtime/source,
+    optimizer policy, precision/backend, packingbuffer1, seed and reply budgets.
+    Base10B is first fit parent under existing contract.50/194/605remain comparisons,
+    not automatically eligible recovery parents; diagnostic2 is not a new default.
+A2. Execute real-tokenizer examples end to end: user/system/policy prefix equality
+    between train and serve; shifted labels; assistant-only loss; end-token targets;
+    zero prompt/padding loss; tools-enabled/no-call and disabled/no-call; no truncation.
+    Preserve existing passing tests and add only checks covering new behavior.
+A3. Add training-example generation suite for ALL24fit sessions, with fixed reply
+    budgets and actual prior model replies. Teacher-forced loss is secondary.
+    Record end-token probability/rank, per-family CE, repetition, raw frames and
+    complete-session grades. Review full outputs, not only successful samples.
+A4. Trace recovery boundaries: initial weights/moments/RNG/cursor; per-microbatch
+    input hashes and target counts; post-backward gradients; pre/post-optimizer
+    state. Start with affected layer9/13ve_gate and associated Muon group, and
+    retain global hashes to detect drift elsewhere. Fingerprints include dtype,
+    shape and device/layout metadata. Avoid persisting sensitive raw prompts in logs.
+A5. Build CPU fixtures for exact restore, incomplete accumulation, missing receipt,
+    interrupted upload and comparator failure. Persist all receipts before raises.
+    No claim that CPU fixtures qualify CUDA kernels or GCS/provider behavior.
+A6. Predeclare fit/transfer evaluation and decision tree below. Dry-run counts,
+    target mass, full packed schedule and reserve time. A completed worksheet,
+    launch command with hashes, budget and STOP time must exist before approval.
+Exit: hash-bound readiness receipt and runnable instrumentation, no open data/prefix
+errors. Failing or missing evidence blocks cloud training. No new corpus needed yet.
+
+4. WORK PACKAGE B — BOUNDED RUNTIME QUALIFICATION (REQUIRES NEW CAP)
+Keep this a dependency, not an open-ended research project.
+B1. Use one fixed runtime/precision/backend and one writer. Never use old closed
+    launch requests. Fixed absolute providerSTOP; persistent disk autoDelete=false.
+B2. Reproduce fresh0->1vsGCS-restored0->1 with the same observations and boundary
+    traces; normal1->2resume passed but did not cover this failing transition.
+    Distinguish input/gradient divergence from optimizer-only divergence.
+B3. Predeclare only one follow-up intervention justified by the earliest differing
+    boundary: deterministic backend/layout correction if gradients first differ;
+    eager/fixed optimizer control if identical gradients update differently.
+    Do not simultaneously change optimizer, precision, LR and dataset. A backend
+    change is a new runtime identity and must pass normal and interrupted restart.
+B4. Re-run normal2vs1+1, true mid-accumulation SIGTERM rollback/resume, actual GCS
+    upload rejection with recovery, and providerSTOP independently of guest shutdown.
+    Keep the exact-equality gate. A tolerance policy would need a separate explicit
+    decision and behavioral validation; it is not a repair for this failed test.
+B5. Stop after the predeclared attempts or qualification spend slice. No blind zone
+    loop, GPU upgrade or lease extension. No model training if qualification holds.
+Exit: real CUDA/GCS/fault receipts, backup readbacks and observed providerSTOP with
+recovery disk preserved; no training-quality claim. If unmet, local diagnosis/HOLD.
+PyTorch2.9does not guarantee cross-platform bitwise identity; exactness here means
+matched runtime/device branches, not CUDA-vs-MPS. See official source below.
+
+5. WORK PACKAGE C — THE FIRST ACTUAL ENGLISH LEARNING EXPERIMENT
+Run ONLY afterBpasses and approved learning budget remains.
+C1. Use the frozen24/12English diagnostic packet and exact current contract:
+    native2K,8192batch tokens, qualified microbatch, packingbuffer1; LRmultiplier
+    <=.25, at most64updates AND64epochs, eval interval<=5updates. Keep current
+    active family/aggregate regression stop(5% relative tolerance, patience2).
+    The64epoch packing schedule is96updates;64updates ends earlier. Never call
+    replay exposure new data. Contract is diagnostic-only, cannot promote.
+C2. First run preserves the current prescribed base optimizer state for an
+    interpretable baseline. Record exact effective LR per group, update/weight
+    norms, unique targets, exposures and measured cost. Do not silently reset moments.
+C3. Capture generated behavior at initialization,16,32,64updates when reached,
+    plus selected best and last. Exact budgets/cadence go in the preflight receipt.
+    Evaluate all24fit sessions at each selected boundary; exposed development can
+    run separately. Reserve evaluation time; checkpoint limits do not extend lease.
+    No need to keep GPU idle while local full manual review proceeds.
+C4. Fit GO: >=23/24complete training sessions, no invalid/forbidden tool actions,
+    finite gradients/state and verified reload. Keep both no-call policy modes.
+    The isolated packet has NO positive tool lessons; a tool failure here is not
+    evidence that positive tool SFT regressed. It still forbids release promotion.
+C5. If fit fails, classify before action:
+    - High train CE / no movement: check labels, actual consumed rows, gradients,
+      group LRs and update norms; do not generate more dialogues.
+    - Low train CE / bad greedy generation: examine prefix parity, end-token rank,
+      early wrong-token cascades, exposure bias and answer-style mismatch.
+    - Fits examples / fails new wording/state: generalization/data coverage problem.
+    - Dev stop before fit: bounded experiment inconclusive; preserve stop, no retry
+      with guards disabled and no claim that Own is fundamentally incapable.
+C6. A SECOND pilot is conditional and separately preregistered, not automatic.
+    If evidence implicates inherited moments, compare fresh moments with identical
+    parent weights/data/order/LR/dose. Implement and test explicit reset semantics,
+    new identity/contract and restart qualification first. Otherwise change only
+    the diagnosed factor. Aggregate two failed learning pilots => diagnosis/HOLD.
+Exit: an answer to learnability. No release even if tiny fit passes. Production
+candidate must use a production contract, not relabel diagnostic-only weights.
+
+6. WORK PACKAGE D — SHORT ENGLISH CURRICULUM, ONLY AFTER FIT GO
+Create a NEW version; never regenerate corrective-corpus-v1 or english-first-v1.
+Start with at most300reviewed training sessions; ceiling600only if a measured
+missing family needs it. These are workload ceilings, not required volumes.
+Use3–6turn dialogues, mostly20–100token assistant replies, some appropriate one-line
+answers and some150–250token grounded explanations. No forced length or filler.
+Everything, including policy overhead and response reserve, must fit native2K.
+
+Proposed assistant-target distribution across the production curriculum:
+-25% everyday dialogue, natural acknowledgement, preferences and appropriate closing.
+-20% conversational state: entity tracking, ownership vs possession, corrections.
+-15% grounded reading: summarize/extract/answer using supplied English text.
+-15% instruction following: tone, length, list counts, rewrite and scope constraints.
+-10% clarification and uncertainty: missing referents, insufficient evidence.
+- 5% conversation management: topic switch/return and explicit memory limits.
+-10% narrow tool retention: actual calculate/convert trajectories and corrections.
+These sum100%. Report unique tokens AND replay-weighted mass per family. Seeded
+packing must expose every family early; do not let long inherited rows dominate.
+Policy modes are an orthogonal axis: aim45%disabled/no-call,45%enabled/no-call,
+10%enabled/call by session count; report token distribution separately. Freeze
+realized balances before training. No positive calls in the isolated fit packet.
+
+Data origins and use:
+- Human-origin: selectively review English OpenAssistant trees. Keep whole trees
+  in one split; select coherent, high-quality branches; remove duplicates/PII,
+  unsupported claims and low-quality answers. Human origin does not guarantee quality.
+- Human-origin optional: Dolly short grounded QA, rewriting and summarization.
+  Preserve source context and provenance. Its CC-BY-SA license differs from
+  OpenAssistant's Apache2.0; source obligations must be explicitly reviewed before
+  admission/distribution. This plan is not a legal clearance.
+- Codex: generate targeted everyday scenarios, state corrections, clarification,
+  balanced tool/no-call examples, and natural paraphrases. Teacher/model/version,
+  generation prompt hash, seed/scenarioID and reviewer decisions are mandatory.
+- Optional external synthetic: selected smol-smoltalk examples for simple everyday
+  style. This source is synthetic, NOT counted as organic/human coverage. Do not
+  import all rows or assume its success transfers to Own.
+Aim40%human-origin/60%synthetic assistant-target mass among English-only lessons.
+If appropriate human data is unavailable, report the shortfall; do not pad or
+mislabel synthetic data. Revisit the mix before freezing, never silently mid-run.
+
+Full review/admission workflow:
+1. Assign source tree/document/scenario/template GROUP to train/dev/sealed release
+   before producing variants. No sibling paraphrases or entity swaps cross splits.
+2. Generate/curate batches <=25sessions. Correctness, naturalness, state consistency,
+   answer relevance, clean endings and source support must be reviewed on EVERYturn.
+3. Keep explicit world-state ledgers for correction lessons; derive reference
+   assertions from those ledgers. Replay EVERYtool observation through the broker.
+4. Validate schema, tokenizer, masks, context and policy; exact and near-duplicate
+   audit across all splits. Synthetic variants never increase unique scenario count.
+5. Reject unresolved rows. Record fixes/versioning and rerun affected checks.
+6. Freeze hashes and family token/mode coverage. Export an actual packed-update
+   receipt proving which rows/targets appear before the finite update limit.
+Codex generation plus Codex review is not independent human evaluation. A separate
+review pass is useful but must not be advertised as independent authorship.
+
+7. WORK PACKAGE E — TRANSFER PILOT AND CHECKPOINT SELECTION
+Build exposed development:120sessions,20per English family above,4turns each.
+Keep old36turn English suite and18turn tool suite as regressions, not pristine tests.
+Do not open the existing frozen4Krelease for this native2Kexperiment.
+
+Start production SFT from the documented eligible Own parent; base10B is default.
+Do not silently warm-start from diagnostic-only checkpoints. If using50instead,
+predeclare that as a separate parent experiment. Keep tokenizer/2Kformat fixed.
+Proposed first production pilot ceiling:32updates OR2epochs, whichever occurs first;
+new production admission/quality contract required. Existing frozen4K10update cap
+is unchanged and does not apply to this new plan without a new explicit contract.
+Select actual update budget from packed rows, target exposure and measured cost.
+
+Use the successful fit optimization policy with identity-bound changes only.
+Capture at most4development candidate checkpoints, including best and last;
+full family generation review for every candidate considered for selection.
+Choose by strict development behavior, then family floor, then fewer invalid frames;
+loss is diagnostic/tiebreak evidence, never an acceptance substitute. Retain raw
+failures and evaluate complete sessions against actual prior answers.
+
+GO requires the family development thresholds insection1and protected regressions.
+If fit succeeds but transfer fails, inspect scenario diversity and the specific
+failure family; one revised corpus/pilot may be proposed within the two-failure
+stop rule. No indefinite training sweep or automatic epoch/LR increase.
+If still failing after two bounded learning pilots, HOLD. Evaluate foundation
+limitations separately with a broader raw-language/grounding benchmark before
+proposing continued pretraining. No automatic10B/20Btoken target.
+
+8. WORK PACKAGE F — SEALED RELEASE AND LOCAL PERFORMANCE
+Order: first use exposed development for local semantic/performance qualification
+and optimization; then freeze the single final model/runtime identity; only then
+consume sealed release. The local checks below precede sealed scoring.
+After a single candidate is selected, freeze its full identity and decoding settings.
+Prepare a new native2Ksealed English release120sessions/480turns,20sessions per
+family, source/scenario disjoint, never used for selection or debugging. Add20fresh
+policy/tool sessions covering call and both no-call modes. Test budgets fixed ahead.
+The previously frozen63-session4Krelease remains unused for this scoped2Krelease.
+An English-only acceptance is explicitly scope-limited, not full4Kproduct acceptance.
+
+Score every turn; manually review all raw outputs, failures and tool traces. Add
+an independent human review target of at least20complete release sessions sampled
+across families and outcomes; reviewer must not have authored/selected the candidate.
+If unavailable, label evidence automated/Codex-reviewed and keep broad release
+acceptance pending. No fabricated independent-review claim in a hands-off run.
+Release is single-use per preselected candidate. After a failure, retire exposed
+cases from pristine claims; a new candidate needs a genuinely fresh sealed set.
+
+Locally qualify selected weights on MPS with matched prompts, policies, decoding
+and precision recorded. Require same semantic gates; do not require cross-device
+bitwise token identity. Retain raw CUDA/MPS disagreements and classify them.
+Measure30fixed prompts across128/512/1536token input lengths, cold and warm, with
+batch1; report p50/p95first-token, tokens/s,peak memory,output length and failures.
+Then optimize one factor at a time: measured prefill/decoding bottleneck, caching,
+precision/runtime support, then quantization only if actually supported for this
+custom architecture. No assumed GGUF/MLX compatibility or blind conversion.
+Use development for optimization; freeze final runtime/quantization before consuming
+release. If runtime is changed after release, treat it as a new candidate requiring
+fresh qualification/evidence. Do not repeatedly optimize against sealed test scores.
+
+Promote only after model, local semantic and performance gates pass. Preserve old
+model and rollback command. HTTP remains off unless requested. Optional later local
+chat API must expose model identity, raw frames and actual broker calls; no answer
+patching or silent pretrained fallback. A good UI is not evidence of good weights.
+
+9. BUDGET, SCHEDULE AND HANDS-OFF CONTROLS
+No currently active GPU approval is inferred. Old allocations are closed.
+Local packageAand plan preparation cost no new GCPcompute; existing storage bills.
+
+Illustrative NEW diagnostic envelope to price at readiness, NOT a quote or approval:
+$15total: up to$5qualification compute allowance, up to$6tiny-fit compute allowance,
+$4reserve for shutdown/backup/storage/egress/uncertainty. Compute allowances include
+25%rate/runtime margin. Qualification cannot silently spend the learning slice.
+This buys a bounded attempt, not a guarantee of finishing or English recovery.
+Production training/release needs a separate estimate after learnability passes.
+
+Cost worksheet per phase:
+reserved_cost = hourly_rate * (startup + compile + train + eval + checkpoint +
+readback + shutdown hours) *1.25 + measured storage/transfer allowance.
+Use end-to-end timing, not0.57s/update extrapolation. Price-readiness needs multiple
+warm updates at the actual production batch/length mix, plus checkpoint and full
+inference-evaluation timings. Local review can happen with VM off.
+A100observed14Novrate$3.673385/hour is historical pricing evidence, not a new quote.
+Prefer the lowest measured TOTALjob cost among available qualified GPUs; a cheaper
+hourlyL4is not automatically cheaper if unavailable/slow. One predeclared fallback,
+no automatic GPU upgrade. Capacity attempts must not create unused disks or reset
+absolute deadlines. No quota/region changes without evaluating cost/availability.
+
+Every paid run: one writer, immutable inputs, cumulative ledger, finite providerSTOP,
+non-auto-delete recovery disk, local earlier cutoff, clean writer join, independent
+GCS readback before normal stop. On backup failure, finite lease still stops compute
+and disk remains for recovery. Verify no running VM and preserve sole copies.
+GPU update cadence30minutes and immediately on gate failure/budget risk/completion.
+Report currentstage,steps,unique/replaytargets,qualityscores,spent/reserved dollars,
+time remaining,backup state andnext decision. Do not say 'on track' without evidence.
+No updates promised after a paused/completed run unless a new task is active.
+
+Tentative effort bands, not calendar commitments:
+A:1–2focused working days of instrumentation and local checks.
+B/C:one bounded diagnostic campaign; its hard lease may end before success.
+D:2–4focused days for first300sessions plus dev/release preparation and full review;
+   extend calendar time rather than dilute review or exceed corpus ceilings.
+E/F:budget/schedule quoted afterC; evaluation and human review are real dependencies.
+A successful small experiment might support progress within a week of work; there
+is no defensible promise of a usable model by a fixed date from current evidence.
+
+10. DELIVERABLES AND NEXT ACTION ORDER
+Next local deliverables: fit-generation suite; boundary trace implementation;
+readiness receipt; hash-bound experiment card; end-to-end cost/lease worksheet.
+After explicit cap:qualification receipt -> fit result -> GO/HOLD decision.
+After fitGO:new English corpus/version+full reviews -> production contract ->
+bounded transfer result -> selected candidate -> single-use release -> local report.
+Always update handoff with observed facts, limitations, next blocker; batch related
+code/docs/tests/commits. Preserve selected weights, corpus provenance, failures and
+compact evidence in GCS. Delete only verified disposable artifacts. No more tokens,
+rows or completed jobs presented as progress unless behavior improves.
+
+PRIMARY EXTERNAL SOURCES (checked14November2026)
+OpenAssistant human conversation data/card:
+https://huggingface.co/datasets/OpenAssistant/oasst1
+Dolly employee-authored instruction data/card and license metadata:
+https://huggingface.co/datasets/databricks/databricks-dolly-15k
+Smol-smoltalk synthetic dataset/card; selected subset only:
+https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk
+Pinned-version reproducibility guidance (not proof of this incident's cause):
+https://docs.pytorch.org/docs/2.9/notes/randomness.html
+All source revisions/licenses must be pinned again at admission. Dataset reputation
+is not a correctness receipt. No external data has been downloaded/admitted by this plan.
