@@ -1,0 +1,115 @@
+{
+  "_id": "673f1aaaa7dc37c56d62bf13",
+  "id": "HuggingFaceTB/smol-smoltalk",
+  "author": "HuggingFaceTB",
+  "sha": "f73fe857d519ff6ac5af2ea67c4d3834da7b8bcc",
+  "lastModified": "2025-02-06T10:35:19.000Z",
+  "private": false,
+  "gated": false,
+  "disabled": false,
+  "tags": [
+    "language:en",
+    "license:apache-2.0",
+    "size_categories:100K<n<1M",
+    "format:parquet",
+    "modality:text",
+    "library:datasets",
+    "library:dask",
+    "library:mlcroissant",
+    "library:polars",
+    "arxiv:2502.02737",
+    "region:us",
+    "synthetic"
+  ],
+  "description": "\n\t\n\t\t\n\t\n\t\n\t\tSmol-SmalTalk\n\t\n\nThis is a subset of SmolTalk dataset adapted for smol models with less than 1B parameters. We used it to build SmolLM2-360M-Instruct and \nSmolLM2-135M-Instruct. We do SFT on this dataset and then DPO on UltraFeedback.\nCompared to SmolTalk: \n\nThe conversations from Smol-Magpie-Ultra are shorter in this dataset\nWe include less task specific data compared to SmolTalk (e.g no function calling and less rewriting and summarization examples) since these smaller models\u2026 See the full description on the dataset page: https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk.",
+  "downloads": 12486,
+  "likes": 133,
+  "cardData": {
+    "license": "apache-2.0",
+    "language": [
+      "en"
+    ],
+    "tags": [
+      "synthetic"
+    ],
+    "pretty_name": "Smol-SmolTalk",
+    "size_categories": [
+      "100K<n<1M"
+    ],
+    "dataset_info": {
+      "features": [
+        {
+          "name": "messages",
+          "list": [
+            {
+              "name": "content",
+              "dtype": "string"
+            },
+            {
+              "name": "role",
+              "dtype": "string"
+            }
+          ]
+        },
+        {
+          "name": "source",
+          "dtype": "string"
+        }
+      ],
+      "splits": [
+        {
+          "name": "train",
+          "num_bytes": 1811694118.6259818,
+          "num_examples": 460341
+        },
+        {
+          "name": "test",
+          "num_bytes": 95354393.3740182,
+          "num_examples": 24229
+        }
+      ],
+      "download_size": 970652749,
+      "dataset_size": 1907048512
+    },
+    "configs": [
+      {
+        "config_name": "default",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/train-*"
+          },
+          {
+            "split": "test",
+            "path": "data/test-*"
+          }
+        ]
+      }
+    ]
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "data/test-00000-of-00001.parquet"
+    },
+    {
+      "rfilename": "data/train-00000-of-00004.parquet"
+    },
+    {
+      "rfilename": "data/train-00001-of-00004.parquet"
+    },
+    {
+      "rfilename": "data/train-00002-of-00004.parquet"
+    },
+    {
+      "rfilename": "data/train-00003-of-00004.parquet"
+    }
+  ],
+  "createdAt": "2024-11-21T11:34:02.000Z",
+  "usedStorage": 970652749
+}
