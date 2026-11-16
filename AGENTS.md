@@ -1,7 +1,7 @@
 # Own-model work: quality-first operating rules
 
 Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup.
-The user's current instructions override this file. Current status: LOCAL REMEDIATION requested; cloud PAUSED; final A100 run closed; VM/disk retired after verified backups. No GPU starts, allocations, retries, extensions or training without explicit resume. Signal-resume exactness failed; no fit pilot or release acceptance. Evidence: reports/english-a100-v1/. Corrective-corpus-v1 remains immutable.
+The user's current instructions override this file. Current status: LOCAL READINESS checks completed16Nov2026; cloud HOLD until a new explicit cap. See reports/english-local-readiness-v1/READINESS.txt.160local tests pass; base10B and diagnostic2 each0/72fit turns; no accepted model. Fresh GCP inventory blocked by reauthentication; last verified14Nov all retained VMs terminated and finalA100VM/disk retired after backups. New traced runtime is NOT GPU-qualified; signal-resume exactness and upload/provider-stop checks remain unresolved. Corrective-corpus-v1 remains immutable.
 
 - User priority: English conversation first, then maths, then CBSE through Class12. Defer maths/CBSE corpus expansion until preceding capability gates pass. Tool checks protect regressions but do not substitute for English conversation acceptance.
 - Optimize for demonstrated conversation/tool quality, not tokens, epochs, corpus size or job completion.
@@ -29,4 +29,4 @@ The user's current instructions override this file. Current status: LOCAL REMEDI
 - Restart qualification MUST align observation schedules (cadence1 for2vs1+1), preserve exact comparison and prove actual CUDA/GCS recovery. CPU control-flow checks do not establish GPU readiness. Current worker is qualification-only; signal/upload/provider-stop fault checks remain outstanding before a fit pilot.
 - Never use DELETE-on-timeout launchers. Require fixed absolute provider STOP, non-auto-delete recovery disk, verified GCS backups before normal shutdown, and hard stop with disk preservation on backup failure.
 
-- Final run closed on14Nov2026 at09:42:45UTC. Normal CUDA/GCS restart passed; signal rollback was exact but resumed update failed exact comparison. Upload-rejection and independent provider-STOP drills were not reached. Keep project paused, local models available, HTTP off.
+- Final run closed on14Nov2026 at09:42:45UTC. Normal CUDA/GCS restart passed; signal rollback was exact but resumed update failed exact comparison. Upload-rejection and independent provider-STOP drills were not reached. Keep cloud paused, local models available, HTTP off.

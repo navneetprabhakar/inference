@@ -1,0 +1,65 @@
+OWN ENGLISH — LOCAL READINESS RESULTS
+16 November 2026. Own weights only; cloud remains on HOLD.
+
+DECISION
+Local executable checks in recovery-plan Work Package A completed. No prefix,
+masking or frozen-input error found. This is NOT GPU readiness or model acceptance.
+A6 final launch budget/rate/absolute STOP remains deliberately unset pending a new
+approved cap, refreshed authentication and measured qualification timing. The
+experiment card is a prospective template, not an executable approved launch.
+
+EVIDENCE
+- All 41 frozen English/corrective files unchanged. No new data admitted.
+- Real tokenizer/train-serve prefixes, shifted assistant/end labels and both
+  no-call modes checked. All 384 packed rows independently matched; 135,680
+  padding positions correctly masked. 656 unique assistant targets; 64 epochs
+  would require 96 updates/41,984 replay targets. The 64-update bound exposes
+  27,997 targets, not 64 completed epochs. No training performed.
+- Complete exposed training-fit generation: base10B and diagnostic step2 EACH
+  0/72 strict turns, 0/24 sessions; 24 invalid initial frames and 48 blocked
+  followups. Zero executed calls. All 144 turn outcomes reviewed, with raw
+  outputs and failure reasons preserved. These are training-example probes,
+  not independent or heldout release evidence. Both fit_go=false.
+- Conditional gold-history CE: base 5.3563 -> diagnostic 4.9153. End-target CE
+  28.2798 -> 27.4681; non-end CE 2.5301 -> 2.1348. End targets are 72/656
+  positions but account for 61.34% of diagnostic loss. Median end-token rank
+  32,721/32,768; no rank-one endings. This identifies a strong protocol-learning
+  weakness, not a proven sole cause: raw answers also fail semantics. Lower
+  teacher-forced loss did not produce a passing conversation. Two updates do
+  not establish the learnability ceiling of a completed bounded fit experiment.
+- Added identity-bound first-two-update traces: input, gradients, model, optimizer,
+  RNG and packing fingerprints with per-tensor content/layout metadata. CPU
+  tests cover actual training-loop boundaries and interruption. CUDA divergence
+  remains unresolved; synchronous trace overhead must be measured on GPU.
+- Added diagnostic checkpoint pinning at 0/16/32/64 when reached, preserving
+  generated-behavior review snapshots against normal retention pruning.
+- 160 targeted tests passed: objective, masks, restart, serving, quality gates,
+  trace/scoring, checkpoint retention and bounded cloud-control components.
+- Current offline runtime: 148 members hash-verified, 25-module closure pass;
+  archive SHA 02ab26a6a7adf03ffba047834f8f40b2b6242f8ef3939c61b79c9e73eae5625e.
+  Local archive readback is not a GCS or CUDA qualification receipt. New code
+  changes runtime identity; do not resume old GPU runs with this runtime.
+- Full bundles for base10B, diagnostic2 and serving-default194 validated locally.
+  Other retained models preserved; no serving-default change; HTTP8765 off.
+
+BLOCKERS / NEXT STEPS
+1. New explicit finite cap and fresh absolute provider STOP/worker deadline.
+   cost-worksheet.json is illustrative, not a quote or approval. Include compile,
+   tracing, evaluations, milestone transfers/readbacks and shutdown reserve.
+2. GCP authentication refresh. Read-only inventory failed noninteractive
+   reauthentication; fresh VM-off status is NOT verified. Last verified Nov14:
+   three retained VMs TERMINATED; final A100 VM/disk deleted after backups.
+   No VM start, training or GCS mutation attempted in this local task.
+3. Real CUDA signal-resume exactness: trace fresh0->1 vs restored0->1, identify
+   earliest divergence, then qualify normal and interrupted recovery. CPU tests
+   do not fix or explain the historical 190-weight/30-optimizer-value mismatch.
+4. Actual GCS upload-failure/recovery and independent provider-STOP fault drills.
+   No fit pilot until all qualification checks pass within the approved slice.
+5. Only then run the frozen bounded fit experiment, preserve best/last/milestones,
+   assess full conversations, and decide whether unseen English transfer is viable.
+
+Existing GCS backups were not altered or freshly reverified. This new evidence
+and runtime are local only; verified GCS staging is required before future compute.
+No sealed release exposed. No training, answer rewriting or model promotion.
+See readiness-receipt.json, experiment-card.json, fit-comparison.json and
+base10b-review.json / diagnostic2-review.json for hash-bound detailed evidence.

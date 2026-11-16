@@ -1,0 +1,32 @@
+{
+  "status": "planning_only_not_launchable",
+  "approved_cap_usd": null,
+  "provider_stop_utc": null,
+  "new_cloud_spend_this_task": 0,
+  "illustrative_plan_envelope_usd": 15,
+  "illustrative_slices_usd": {
+    "qualification_including_margin": 5,
+    "learning_including_margin": 6,
+    "storage_transfer_shutdown_reserve": 4
+  },
+  "fresh_price_verified": false,
+  "historical_a100_hourly_usd": 3.673385,
+  "historical_price_date": "2026-11-14",
+  "margin_multiplier": 1.25,
+  "formula": "rate * (startup+compile+train+evaluation+trace+checkpoint+GCS_readback+shutdown hours) *1.25 + storage/egress reserve",
+  "historical_update_seconds": [
+    67.362036956,
+    0.571945781
+  ],
+  "gpu_trace_overhead_seconds": null,
+  "production_throughput_seconds": null,
+  "required_new_measurements": [
+    "qualified device/rate",
+    "trace overhead at real shape",
+    "warm update distribution",
+    "milestone+best checkpoint transfers/readbacks",
+    "complete evaluation timing and finite shutdown reserve"
+  ],
+  "prohibited_inference": "Do not project entire run cost from0.57s warm update; do not recycle expired provider deadlines",
+  "evaluation_storage_note": "Pin0/16/32/64 when reached plus best/last; budget all surviving3.83GBtraining bundles and readbacks; no automatic excess storage deletion"
+}

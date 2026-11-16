@@ -1,0 +1,77 @@
+..........................................................................Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/english-first-v1/check_loop.py", line 43, in <module>
+    exec(compile(ast.Module(body=[loop],type_ignores=[]),'actual_nano_sft_loop','exec'),globals())
+  File "actual_nano_sft_loop", line 554, in <module>
+NameError: name 'trace' is not defined. Did you mean: 'train'? Or did you forget to import 'trace'?
+ETraceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/english-first-v1/check_loop.py", line 43, in <module>
+    exec(compile(ast.Module(body=[loop],type_ignores=[]),'actual_nano_sft_loop','exec'),globals())
+  File "actual_nano_sft_loop", line 554, in <module>
+NameError: name 'trace' is not defined. Did you mean: 'train'? Or did you forget to import 'trace'?
+E.Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/english-first-v1/check_loop.py", line 43, in <module>
+    exec(compile(ast.Module(body=[loop],type_ignores=[]),'actual_nano_sft_loop','exec'),globals())
+  File "actual_nano_sft_loop", line 554, in <module>
+NameError: name 'trace' is not defined. Did you mean: 'train'? Or did you forget to import 'trace'?
+E............
+======================================================================
+ERROR: test_fresh_process_split_matches_stop_and_best (verify_nano_qualification_schedule.QualificationTests.test_fresh_process_split_matches_stop_and_best)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 14, in test_fresh_process_split_matches_stop_and_best
+    whole=run(updates=2,losses=losses)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 6, in run
+    return json.loads(subprocess.check_output([sys.executable,'-m','reports.english-first-v1.check_loop',json.dumps(kwargs)],text=True))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python', '-m', 'reports.english-first-v1.check_loop', '{"updates": 2, "losses": [3.0, 3.3, 3.3]}']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_old_schedule_reproduces_mismatch (verify_nano_qualification_schedule.QualificationTests.test_old_schedule_reproduces_mismatch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 20, in test_old_schedule_reproduces_mismatch
+    whole=run(updates=2,losses=[3.,3.3,3.3],cadence=5)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 6, in run
+    return json.loads(subprocess.check_output([sys.executable,'-m','reports.english-first-v1.check_loop',json.dumps(kwargs)],text=True))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python', '-m', 'reports.english-first-v1.check_loop', '{"updates": 2, "losses": [3.0, 3.3, 3.3], "cadence": 5}']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_signal_does_not_insert_unscheduled_observation (verify_nano_qualification_schedule.QualificationTests.test_signal_does_not_insert_unscheduled_observation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 26, in test_signal_does_not_insert_unscheduled_observation
+    first=run(updates=2,losses=losses,cadence=5,signal_at=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/verify_nano_qualification_schedule.py", line 6, in run
+    return json.loads(subprocess.check_output([sys.executable,'-m','reports.english-first-v1.check_loop',json.dumps(kwargs)],text=True))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/.local/share/uv/python/cpython-3.12-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/navneetprabhakar/Documents/git/image/inference/.venv/bin/python', '-m', 'reports.english-first-v1.check_loop', '{"updates": 2, "losses": [3.0, 3.3, 3.3], "cadence": 5, "signal_at": 1}']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 90 tests in 1.244s
+
+FAILED (errors=3)

@@ -1,0 +1,1040 @@
+{
+  "schema": 1,
+  "purpose": "training_fit_exposed_never_release",
+  "required_context_tokens": 2048,
+  "source_sha256": "d64ab6f4c4814f5cd3f476661d1ab31bd0632e00532b5520916acfc062a9bb35",
+  "sessions": [
+    {
+      "id": "apology",
+      "category": "natural",
+      "source_group": "apology",
+      "turns": [
+        {
+          "user": "Write a brief apology for arriving late to a rehearsal. Do not invent an excuse.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Sorry I was late to rehearsal. I know it disrupted the group, and I'll aim to arrive on time next time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Make it one sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sorry I was late to rehearsal; I'll aim to arrive on time next time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Remove the promise about next time.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sorry I was late to rehearsal.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "sign",
+      "category": "natural",
+      "source_group": "sign",
+      "turns": [
+        {
+          "user": "Write a sign asking visitors to close the garden gate. Keep it polite.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Please close the garden gate behind you.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Mention that it keeps the dogs inside.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Please close the garden gate to keep the dogs inside.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Use five words only.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Please keep this gate closed.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "unknown_attachment",
+      "category": "natural",
+      "source_group": "unknown_attachment",
+      "turns": [
+        {
+          "user": "Summarize the document I forgot to attach.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Please attach the document or paste its text so I can summarize it.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Its title is Spring Plans. Can you infer the contents?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The title alone doesn't tell me the contents. Please share the document.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Here is the whole text: We will paint the fence in April. Summarize it in six words.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "We’ll paint the fence in April.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "tone",
+      "category": "natural",
+      "source_group": "tone",
+      "turns": [
+        {
+          "user": "Make this kinder: Your instructions make no sense.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "I'm having trouble following these instructions. Could you clarify them?",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Keep it direct, without a question.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "I'm having trouble following these instructions and need more detail.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Now give only the original sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Your instructions make no sense.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "packing",
+      "category": "natural",
+      "source_group": "packing",
+      "turns": [
+        {
+          "user": "Suggest two things to take on a rainy walk.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "A raincoat and waterproof shoes.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "I already have waterproof shoes. Replace that suggestion.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "A raincoat and a waterproof bag.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Give only the bag suggestion.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "A waterproof bag.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "uncertain_cause",
+      "category": "natural",
+      "source_group": "uncertain_cause",
+      "turns": [
+        {
+          "user": "Rewrite: The printer stopped because the cable broke. The cable is only a suspected cause.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The printer stopped; a damaged cable is a suspected cause, but it has not been confirmed.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Make it shorter.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The printer stopped; a cable fault is suspected but unconfirmed.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Has the cause been confirmed? Answer yes or no.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "clarify_reference",
+      "category": "natural",
+      "source_group": "clarify_reference",
+      "turns": [
+        {
+          "user": "Can you make it shorter?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Please paste the text you want shortened.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "The text is: Our shop will close early this evening for maintenance.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The shop closes early tonight for maintenance.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "What are the closing hours?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The text doesn't give a closing time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "two_options",
+      "category": "natural",
+      "source_group": "two_options",
+      "turns": [
+        {
+          "user": "Suggest two quiet indoor activities for a wet afternoon.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Reading and drawing.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Replace drawing with something that needs no supplies.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Reading and telling stories.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Which activity did you replace?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Drawing.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "plain_language",
+      "category": "natural",
+      "source_group": "plain_language",
+      "turns": [
+        {
+          "user": "Explain what a backup is in one short sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "A backup is an extra copy of data kept so you can recover it if the original is lost.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Use a paper-notebook analogy.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "A backup is like a photocopy of your notebook that you keep in case the notebook is lost.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Does making a backup delete the original?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No; making a backup creates another copy without deleting the original.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "refuse_invention",
+      "category": "natural",
+      "source_group": "refuse_invention",
+      "turns": [
+        {
+          "user": "Write a testimonial from a customer we have never interviewed.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "I can draft a clearly labeled example, but I shouldn't present invented feedback as a real customer's words.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Give a clearly labeled fictional example about a repair shop.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Fictional example: \"The repair was explained clearly, and I knew what to expect.\"",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Is that a real customer quote?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No. It is a fictional example.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "topic_switch",
+      "category": "natural",
+      "source_group": "topic_switch",
+      "turns": [
+        {
+          "user": "Give a short title for a story about a lost kite.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The Missing Kite",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "New topic: what punctuation ends a direct question?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "A question mark.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Return to the story. What title did you suggest?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The Missing Kite",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "concision",
+      "category": "natural",
+      "source_group": "concision",
+      "turns": [
+        {
+          "user": "What does reusable mean? One sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Reusable means something can be used more than once.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Give one example.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "A cloth shopping bag.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Only repeat the adjective I asked about.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Reusable.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "limited_summary",
+      "category": "natural",
+      "source_group": "limited_summary",
+      "turns": [
+        {
+          "user": "Summarize only this note: The gate is open. The lamps are off.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The gate is open and the lamps are off.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Can you tell whether anyone is home?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No. The note doesn't say whether anyone is home.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Quote only the lamp sentence.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The lamps are off.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "list_constraint",
+      "category": "natural",
+      "source_group": "list_constraint",
+      "turns": [
+        {
+          "user": "Name three shapes, separated by commas.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "circle, square, triangle",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Replace the middle shape with rectangle.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "circle, rectangle, triangle",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Now provide only the first and last shapes.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "circle, triangle",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "source_bound",
+      "category": "natural",
+      "source_group": "source_bound",
+      "turns": [
+        {
+          "user": "Based only on this: The bus leaves after breakfast. Does it leave at nine?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The statement doesn't give a clock time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Add this fact: breakfast ends at eight, and the bus leaves at eight fifteen. When does the bus leave?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "At eight fifteen.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Was nine stated or inferred in your first answer?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Neither; I said the time was not given.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "correction_ack",
+      "category": "natural",
+      "source_group": "correction_ack",
+      "turns": [
+        {
+          "user": "I said the parcel was damaged, but I meant delayed. Write a short corrected update.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The parcel is delayed, not damaged.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Remove the comparison to damage.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The parcel is delayed.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Do we know when it will arrive?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No arrival time has been provided.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "question_missing_input",
+      "category": "natural",
+      "source_group": "question_missing_input",
+      "turns": [
+        {
+          "user": "Which of these two designs is clearer?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Please show or describe both designs so I can compare them.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "One sign has small gray letters; the other has large black letters on white. Which is likely easier to read?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "The large black letters on white are likely easier to read because of their size and contrast.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Did you actually see pictures of the signs?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No. I used your descriptions.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "natural_stop",
+      "category": "natural",
+      "source_group": "natural_stop",
+      "turns": [
+        {
+          "user": "Thank me briefly for lending you a book.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Thanks for lending me the book.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Make it warmer but still one sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Thank you for lending me the book; I'm looking forward to reading it.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Use only two words.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Thank you.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "locker_assignment",
+      "category": "code_state",
+      "source_group": "locker_assignment",
+      "turns": [
+        {
+          "user": "The narrow locker is for Uma; the wide locker is for Kiran. Who uses the wide locker?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Kiran.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "They swap lockers. Who uses the narrow locker now?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Kiran.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Which locker did Uma use before the swap?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The narrow locker.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "appointment_state",
+      "category": "code_state",
+      "source_group": "appointment_state",
+      "turns": [
+        {
+          "user": "My pottery class is Friday at four. What day is it?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Friday.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Move it to Sunday; keep the time. State the new schedule.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sunday at four.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Change only the time to six.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sunday at six.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "negation",
+      "category": "code_state",
+      "source_group": "negation",
+      "turns": [
+        {
+          "user": "The paper folder is not for invoices; it is for letters. What goes in it?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Letters.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "The cloth folder is for invoices. Which folder holds invoices?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "The cloth folder.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Do invoices belong in the paper folder?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "No.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "pronoun",
+      "category": "code_state",
+      "source_group": "pronoun",
+      "turns": [
+        {
+          "user": "Tara gave Lata a scarf. Who received it?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Lata.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Lata then lent it to Bina. Who borrowed it?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Bina.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Who originally gave the scarf?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Tara.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "role_change",
+      "category": "code_state",
+      "source_group": "role_change",
+      "turns": [
+        {
+          "user": "Pia is presenting; Yusuf is taking notes. Who is presenting?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Pia.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Yusuf will present instead; Pia will take notes. Who takes notes now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Pia.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Who was originally taking notes?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Yusuf.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    },
+    {
+      "id": "status_sequence",
+      "category": "code_state",
+      "source_group": "status_sequence",
+      "turns": [
+        {
+          "user": "The lamp was off, then switched on. What is its current state?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "On.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "A log entry describes the earlier off state. No new switch happened. What is it now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "On.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Now it is switched off. What is the current state?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Off.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    }
+  ]
+}

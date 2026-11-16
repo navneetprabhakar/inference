@@ -233,19 +233,21 @@ def collect_update(packing, microbatch, rows_per_update=256):
     return batches,count
 
 
-def backward_weighted(model,batches,total_targets,*,device,stop_check=lambda:False):
+def backward_weighted(model,batches,total_targets,*,device,stop_check=lambda:False,observer=None):
     """Global valid-target denominator; works with uneven/zero-target microbatches."""
     import torch
     if total_targets<=0:raise ValueError('Positive supervised target count required')
     actual=sum(t!=NATIVE_IGNORE for _,ys in batches for row in ys for t in row)
     if actual!=total_targets:raise ValueError('Assistant target denominator mismatch')
     summed=0.0
-    for xs,ys in batches:
+    for index,(xs,ys) in enumerate(batches):
         if stop_check():raise InterruptedError('Lease/signal during SFT accumulation')
         x=torch.tensor(xs,dtype=torch.long,device=device);y=torch.tensor(ys,dtype=torch.long,device=device)
+        if observer is not None:observer(index,x,y,'before')
         loss=model(x,y,loss_reduction='sum')
         if not bool(torch.isfinite(loss)):raise FloatingPointError('Nonfinite SFT loss')
         (loss/total_targets).backward();summed+=float(loss.detach())
+        if observer is not None:observer(index,x,y,'after')
     return summed/total_targets
 
 
@@ -378,6 +380,11 @@ def validate_parent_chain(parent, expected_sha, tokenizer_sha, *, stage, ancesto
 
 
 def run(args):
+    trace_updates=getattr(args,'trace_updates',0)
+    if type(trace_updates)is not int or not 0<=trace_updates<=2:raise ValueError('Trace updates must be0..2')
+    fit_eval_steps=set(getattr(args,'fit_eval_steps',[]))
+    if fit_eval_steps and (not getattr(args,'fit_diagnostic',False) or not fit_eval_steps<={0,16,32,64}):
+        raise ValueError('Fit evaluation checkpoints require diagnostic mode and steps0,16,32,64')
     if args.deterministic:
         os.environ["CUBLAS_WORKSPACE_CONFIG"]=":4096:8"
     import torch
@@ -453,7 +460,7 @@ def run(args):
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
     reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
-    files=('nano_quality_gate.py','nano_fit_contract.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py')
+    files=('nano_quality_gate.py','nano_fit_contract.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py','nano_update_trace.py')
     identity={'phase':'sft','diagnostic_only':diagnostic_only,'stage':args.stage,'quality_contract_sha256':contract_sha,'data_order_sha256':train.sha,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
@@ -463,6 +470,8 @@ def run(args):
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
+    identity['update_trace']={'version':1,'absolute_update_limit':trace_updates}
+    identity['fit_eval_steps']=sorted(fit_eval_steps)
     if context_change is not None:identity['context_transition']=context_change
     packing=BestFitConversations(train,buffer_size=args.packing_buffer_size);step=0;trained_targets=0;best_dev=None;best_step=None
     guard_states=None
@@ -473,6 +482,11 @@ def run(args):
         guard_states=restored['metadata']['loop']['quality_guards']
         trained_targets=restored['metadata']['loop']['trained_targets'];best_dev=restored['metadata']['loop']['best_dev'];best_step=restored['metadata']['loop']['best_step']
     out.mkdir(parents=True,exist_ok=True)
+    trace=None
+    if trace_updates:
+        from cloud_training.nano_update_trace import UpdateTrace
+        trace=UpdateTrace(out/'update-trace',limit=trace_updates,identity=identity)
+        trace.state('initial',step,model,optimizer,packing)
     journal=CloudJournal(out/'retention-journal.json',campaign_prefix=args.backup_prefix,identity=identity,resume_step=step if args.resume else None)
     compiled=torch.compile(model,dynamic=False)
     deadline=deadline_timestamp(args.deadline_utc);cutoff=deadline-args.checkpoint_reserve_seconds
@@ -508,7 +522,7 @@ def run(args):
                    data_state={'exact':True,'next_batch':step,'packing':packing.state_dict()})
         journal.set_phase('checkpoint_upload_in_progress',step=step)
         receipt=upload_bundle(path,remote_prefix=args.backup_prefix,timeout=min(args.checkpoint_reserve_seconds,journal.deadline-time.monotonic()))
-        pins=(['final'] if step==horizon else [])+(['best'] if step==best_step else [])
+        pins=(['final'] if step==horizon else [])+(['best'] if step==best_step else [])+(['fit-evaluation'] if step in fit_eval_steps else [])
         record_upload(journal.path,receipt,campaign_prefix=args.backup_prefix,pins=pins)
         journal.set_phase('ready')
         # Publish the new best before unpinning the old best; at most one best is retained.
@@ -523,7 +537,7 @@ def run(args):
         import shutil
         local=sorted(out.glob('step-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
         for old in local[:-2]:
-            if int(old.name.split('-')[1])!=best_step:
+            if int(old.name.split('-')[1])!=best_step and int(old.name.split('-')[1]) not in fit_eval_steps:
                 validate_bundle(old);shutil.rmtree(old)
     if stopping() and not args.resume:
         atomic_json(out/'result.json',dict(status,status='stopped',reason='lease_before_initial_evaluation',quality_accepted=False))
@@ -541,26 +555,31 @@ def run(args):
         if any(g.state['stopped'] for g in guards.values()):reason='quality_regression_stop';break
         if stopping():reason='lease_or_signal';break
         cursor,rng=packing.state_dict(),capture_rng()
+        if trace is not None:trace.state('before_collect',step,model,optimizer,packing)
         batches,count=collect_update(packing,args.microbatch,recipe["rows_per_update"])
         if not batches:reason='dataset_complete';break
         torch.cuda.synchronize();tick=time.monotonic()
         try:
-            loss=backward_weighted(compiled,batches,count,device=next(model.parameters()).device,stop_check=stopping)
+            observer=(lambda i,x,y,phase:trace.microbatch(step,model,i,x,y,phase)) if trace is not None else None
+            loss=backward_weighted(compiled,batches,count,device=next(model.parameters()).device,stop_check=stopping,**({'observer':observer} if observer is not None else {}))
             torch.nn.utils.get_total_norm([p.grad for p in model.parameters() if p.grad is not None],error_if_nonfinite=True)
         except (InterruptedError,FloatingPointError,RuntimeError) as error:
             model.zero_grad(set_to_none=True);packing.load_state_dict(cursor);restore_rng_state(rng)
+            if trace is not None:trace.state('rollback',step,model,optimizer,packing)
             reason='lease_or_signal' if isinstance(error,InterruptedError) else 'training_failure'
             status['error']=str(error);break
         lr,momentum=sft_schedule(cursor["consumed"]/len(train),step)
         for group in optimizer.param_groups:
             group['lr']=group['initial_lr']*lr
             if group['kind']=='muon':group['momentum']=momentum;group['weight_decay']=0.0
+        if trace is not None:trace.state('before_optimizer',step,model,optimizer,packing)
         optimizer.step();model.zero_grad(set_to_none=True);torch.cuda.synchronize()
+        if trace is not None:trace.state('after_optimizer',step,model,optimizer,packing)
         step+=1;trained_targets+=count
         status.update(step=step,assistant_targets=trained_targets,train_loss=loss,
                       consumed_conversations=packing.consumed,packed_rows=packing.rows,update_seconds=time.monotonic()-tick,last_update_assistant_targets=count)
         new_best=False
-        if (step%args.eval_every_updates==0 or step==max_step) and not stopping():
+        if (step%args.eval_every_updates==0 or step==max_step or step in fit_eval_steps) and not stopping():
             try:
                 ev=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device)
                 status['development']=ev
@@ -574,7 +593,7 @@ def run(args):
                 break
         with (out/'updates.jsonl').open('a') as f:f.write(json.dumps(status,allow_nan=False)+'\n')
         atomic_json(out/'progress.json',status)
-        if new_best or any(g.state['stopped'] for g in guards.values()) or time.monotonic()-last_save>=args.checkpoint_seconds:checkpoint('development_best' if new_best else 'quality_regression_stop' if any(g.state['stopped'] for g in guards.values()) else 'periodic')
+        if new_best or step in fit_eval_steps or any(g.state['stopped'] for g in guards.values()) or time.monotonic()-last_save>=args.checkpoint_seconds:checkpoint('development_best' if new_best else 'quality_regression_stop' if any(g.state['stopped'] for g in guards.values()) else 'periodic')
         if any(g.state['stopped'] for g in guards.values()):reason='quality_regression_stop';break
     checkpoint(reason,pin=step==horizon)
     status.update(status='complete' if step==horizon and reason=='dataset_complete' else 'stopped',reason=reason,
@@ -598,6 +617,8 @@ def main():
     p.add_argument('--context-tokens',type=int,choices=SUPPORTED_CONTEXTS,default=SEQUENCE)
     p.add_argument('--allow-context-extension',action='store_true',help='Explicit warm start2Kto4K; never edits the parent checkpoint')
     p.add_argument('--fit-diagnostic',action='store_true',help='Isolated English learnability diagnostic, never a release candidate')
+    p.add_argument('--trace-updates',type=int,default=0,choices=(0,1,2),help='Identity-bound exact boundary evidence for first0..2absolute updates; adds synchronous overhead')
+    p.add_argument('--fit-eval-steps',type=int,nargs='+',default=[],choices=(0,16,32,64),help='Diagnostic-only pinned checkpoints for full fit-generation review; no automatic generation or release')
     p.add_argument('--epochs',type=int,default=1,help='Explicit finite passes over admitted training data;1..8, no implicit replay')
     p.add_argument('--deterministic',action='store_true')
     p.add_argument('--deterministic-attention',action='store_true')
