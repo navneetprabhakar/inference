@@ -1,0 +1,247 @@
+{
+  "source_revision": "179dd21fc55192153d94adb0e0ce8f69e222bf75",
+  "source_receipt": {
+    "key": "oasst",
+    "dataset": "OpenAssistant/oasst2",
+    "revision": "179dd21fc55192153d94adb0e0ce8f69e222bf75",
+    "file": "2023-11-05_oasst2_ready.trees.jsonl.gz",
+    "url": "https://huggingface.co/datasets/OpenAssistant/oasst2/resolve/179dd21fc55192153d94adb0e0ce8f69e222bf75/2023-11-05_oasst2_ready.trees.jsonl.gz",
+    "path": "runs/english-source-shortlist-v1/oasst.gz",
+    "bytes": 54370156,
+    "sha256": "7a886a16ccfc1173c4f00a6897523e3c95b2785a86ee44a18a98f4f2807ee29b"
+  },
+  "selection": "Bounded 16 additional unseen train trees, reviewed nonnegative assistant ranks; 3-6 turns; root writing/name/story/plan keywords plus follow-up correction/recall keywords; longest eligible path first, hash tie-break; 512 reply ceiling; not exhaustive or representative.",
+  "pool_paths": 30,
+  "stats": {
+    "trees": 13854,
+    "non_train_trees_excluded": 692,
+    "previously_exposed_trees_excluded": 171,
+    "context_rejected": 21
+  },
+  "rows": [
+    {
+      "id": "aa4fbd95-bd99-4af9-bb29-63b5aac9e3bc",
+      "source_group": "fc1bef42-b965-4638-b503-4b288e4276cc",
+      "messages": [
+        {
+          "role": "user",
+          "content": "If we assume that Pluto is a planet, how many planets there are in the solar system?"
+        },
+        {
+          "role": "assistant",
+          "content": "If we assume that Pluto is a planet, then together with Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune, it would be the ninth planet."
+        },
+        {
+          "role": "user",
+          "content": "What criteria do scientists use to determine whether an object is classified as a planet or not?"
+        },
+        {
+          "role": "assistant",
+          "content": "Scientists use a set of criteria known as the International Astronomical Union (IAU) definition of a planet to determine whether an object is classified as a planet or not. The criteria include:\n\n    1. The object must be in orbit around the Sun.\n    2. The object must have sufficient mass for its self-gravity to overcome rigid body forces so that it assumes a nearly round shape (this is known as hydrostatic equilibrium).\n    3. The object must have cleared the neighborhood around its orbit of other debris, such as asteroids or comets.\n\nIf an object meets all three of these criteria, it is classified as a planet. If it meets the first two criteria but not the third, it is classified as a dwarf planet, like Pluto.\n\nThe third criterion is often the most controversial, as it requires that a planet must be gravitationally dominant in its orbit, meaning it has cleared out any debris that might compete with it for space in its orbit. This is why Pluto was reclassified as a dwarf planet in 2006, as it orbits in a region of the Solar System with other large objects and has not cleared its orbit of debris.\n\nIt's important to note that this definition is not without controversy and has been debated by scientists and astronomers. However, it remains the official definition used by the IAU for the classification of planets."
+        },
+        {
+          "role": "user",
+          "content": "Who decided Pluto was not a planet and do you think the decision was right?"
+        },
+        {
+          "role": "assistant",
+          "content": "In 2006, the International Astronomical Union (IAU) voted to reclassify Pluto as a dwarf planet, based on the criteria I mentioned earlier. The decision was made during the IAU's General Assembly in Prague, where a resolution was passed defining what constitutes a planet, and Pluto no longer met the third criterion of the definition.\n\nWhether the decision was right or not is a matter of debate and personal opinion. Some scientists and members of the public have argued that Pluto should still be considered a planet, while others support the decision to reclassify it as a dwarf planet.\n\nThe IAU's decision was based on scientific criteria, and the organization is made up of astronomers and scientists from around the world who have expertise in the field. However, the decision has been controversial and some members of the scientific community have disagreed with it. Ultimately, the classification of Pluto as a planet or dwarf planet is a matter of scientific convention and does not change the actual properties and characteristics of the object itself."
+        }
+      ],
+      "path_ids": [
+        "fc1bef42-b965-4638-b503-4b288e4276cc",
+        "daca7f88-b512-4379-9bdc-d5aacb0bd919",
+        "8610965c-b766-4cca-ba54-24e1c7e193e7",
+        "72c13bda-e733-41a8-8021-019ed02870ae",
+        "69593de5-7dfd-46ca-a00b-9a79b83d1583",
+        "aa4fbd95-bd99-4af9-bb29-63b5aac9e3bc"
+      ],
+      "upstream_split": "train",
+      "all_nodes_reviewed_english_nonsynthetic": true,
+      "assistant_rank_policy": "reviewed nonnegative ranks; source rank not acceptance",
+      "selection_hash": "8cbedaddab58b51589bb674acc851ae6d7cd48da0c594ee3231c8b06470b1396",
+      "encoding": [
+        {
+          "tools_enabled": false,
+          "tokens": 848,
+          "targets": 524
+        },
+        {
+          "tools_enabled": true,
+          "tokens": 1124,
+          "targets": 524
+        }
+      ],
+      "review_key": "N0",
+      "training_admitted": false
+    },
+    {
+      "id": "f6fe209e-2781-4f9a-9c0e-061b4837a550",
+      "source_group": "8e856f51-a465-474d-aa25-9d89edbdd974",
+      "messages": [
+        {
+          "role": "user",
+          "content": "I have the functional requirement to build an algorithm that takes any real number and gives back a tuple of the closest number in the Fibonacci sequence and the next one.\n\nPlease write me a couple of unit tests for this requirement using xunit and shouldly."
+        },
+        {
+          "role": "assistant",
+          "content": "Sure, here are a couple of unit tests for the given functional requirement using xUnit and Shouldly in C#:\n\n```c#\nusing System;\nusing Xunit;\nusing Shouldly;\n\npublic class FibonacciTests\n{\n    [Fact]\n    public void TestClosestFibonacciNumbersForNegativeNumber()\n    {\n        // Arrange\n        double number = -10.5;\n\n        // Act\n        (int closest, int next) = Fibonacci.GetClosestFibonacciNumbers(number);\n\n        // Assert\n        closest.ShouldBe(0);\n        next.ShouldBe(1);\n    }\n\n    [Fact]\n    public void TestClosestFibonacciNumbersForLargeNumber()\n    {\n        // Arrange\n        double number = 1000000;\n\n        // Act\n        (int closest, int next) = Fibonacci.GetClosestFibonacciNumbers(number);\n\n        // Assert\n        closest.ShouldBe(832040);\n        next.ShouldBe(1346269);\n    }\n}\n```\n\nIn this example, Fibonacci is the class that implements the algorithm to find the closest Fibonacci numbers.\n\nThe first test case checks whether the algorithm works correctly for negative input values. It expects the closest Fibonacci number to be 0 and the next one to be 1.\n\nThe second test case checks whether the algorithm works correctly for large input values. It expects the closest Fibonacci number to be 832040 and the next one to be 1346269."
+        },
+        {
+          "role": "user",
+          "content": "Write an implementation of `GetClosestFibonacciNumbers` which satisfies the initial description as well as the tests above."
+        },
+        {
+          "role": "assistant",
+          "content": "public static class Fibonacci\n{\n    public static (int closest, int next) GetClosestFibonacciNumbers(double number)\n    {\n        if (number < 0)\n        {\n            return (0, 1);\n        }\n\n        int previous = 0;\n        int current = 1;\n\n        while (true)\n        {\n            int nextFibonacci = previous + current;\n\n            if (nextFibonacci > number)\n            {\n                return (current, nextFibonacci);\n            }\n\n            previous = current;\n            current = nextFibonacci;\n        }\n    }\n}"
+        },
+        {
+          "role": "user",
+          "content": "Thank you, but it is a little unclear to read this way.  Could you please rewrite that with all the code inside the codeblock, and also include a brief explanation?"
+        },
+        {
+          "role": "assistant",
+          "content": "You have logical problems with your code. There is no condition that breaks from the while loop, and provide clearer comments."
+        }
+      ],
+      "path_ids": [
+        "8e856f51-a465-474d-aa25-9d89edbdd974",
+        "08b52c33-1a58-4329-862a-855be4de2c95",
+        "a3ffadfa-b283-417a-9a95-fb770f0ba4b8",
+        "91d08e5e-df82-4643-999e-4cecf95320d6",
+        "8c959fa6-eb8e-449d-b27f-0e1198122ed0",
+        "f6fe209e-2781-4f9a-9c0e-061b4837a550"
+      ],
+      "upstream_split": "train",
+      "all_nodes_reviewed_english_nonsynthetic": true,
+      "assistant_rank_policy": "reviewed nonnegative ranks; source rank not acceptance",
+      "selection_hash": "8de6d6d7b687f8d2ef56d023bd750d69f2312ef4070762002f693b8261c9f686",
+      "encoding": [
+        {
+          "tools_enabled": false,
+          "tokens": 915,
+          "targets": 524
+        },
+        {
+          "tools_enabled": true,
+          "tokens": 1191,
+          "targets": 524
+        }
+      ],
+      "review_key": "N1",
+      "training_admitted": false
+    },
+    {
+      "id": "d2a37c55-c907-4d1d-a2ed-ac39bd55d7b5",
+      "source_group": "a0cace07-92fe-41a0-b1eb-5afff88bac39",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a poem about the battle of the five armies, described in \"The Hobbit\" by J. R. R. Tolkien. It should mainly focus on the heroic deeds of Thorin Oakenshield and his eventual demise."
+        },
+        {
+          "role": "assistant",
+          "content": "In the heart of the Lonely Mountain's keep,\nThe armies gathered, fierce and deep.\nDwarves and Men, Elves in tow,\nTo face their foes, and deal the blow.\n\nAt the fore, Thorin stood tall,\nOakenshield, brave and loyal to all.\nWith sword in hand, he led the charge,\nAgainst the Orcs, he showed no fear or mirage.\n\nWith every swing, his strength did show,\nAs foes fell back, and heroes did grow.\nBut as the battle raged on and on,\nThe tides of fate were soon to dawn.\n\nFor in the fray, Thorin did meet,\nHis nemesis, Azog the Defeat.\nA fierce battle of strength and will,\nAs they fought, the air was still.\n\nThe dwarves fought on, with all their might,\nBut Thorin's fate was sealed that night.\nFor as the dawn did slowly break,\nOakenshield's life did swiftly take.\n\nWith tears in their eyes, they mourned their king,\nAs he lay still, a broken thing.\nBut Thorin died a hero's death,\nHis deeds remembered with every breath.\n\nFor he did fight, with all his might,\nAnd in his death, he won the fight.\nA warrior true, he'll never fade,\nIn tales of old, his name engraved."
+        },
+        {
+          "role": "user",
+          "content": "Write an epic poem about Tolkien."
+        },
+        {
+          "role": "assistant",
+          "content": "The Bard of Middle-earth\n\nIn dreams, when the moon silvered the night sky,\n\nTolkien strayed through valleys of elven lore.\n\nThe Idlewild lay open to his eye,\n\nIts wondrous paths yet unmapped to explore.\n\nFrom these vision quests epics vast he brought,\n\nLyrics and legends in tongues of old.\n\nOf valor in the face of Mordor's rot,\n\nAnd sacrifice more precious far than gold.\n\nHis myth-born mythology its way hath wrought:\n\nIn every eager heart now eager thoughts\n\nOf peace restored at cost of bitterest battles fought.\n\nThrough the words of the Bard of Middle-earth immortals walk among us yet."
+        },
+        {
+          "role": "user",
+          "content": "Awesome, thank you. Is there a deeper meaning of his poem? Could you also rewrite it such that it's a slant rhyme instead?"
+        },
+        {
+          "role": "assistant",
+          "content": "The poem appears to be a tribute to J.R.R. Tolkien and his creation of the world of Middle-earth. It highlights Tolkien's ability to create an entire mythology and inspire the imagination of many people. The poem also emphasizes the themes of sacrifice and valor that are present in Tolkien's works. The use of the phrase \"immortals walk among us yet\" at the end of the poem suggests that the characters and stories created by Tolkien continue to have a significant impact on people today, even after his death.\n\nHere is a possible rewrite of the poem using slant rhyme:\n\nIn dreams, when the moon silvered the night sky,\nTolkien strayed through elven lore to spy.\nThe Idlewild lay open to his eye,\nPaths unmapped, yet waiting to try.\nFrom these quests epics vast he wrought,\nLyrics and legends in tongues of thought.\nOf valor in the face of Mordor's rot,\nAnd sacrifice more precious than aught.\nHis myth-born mythology hath brought,\nIn every heart eager thoughts have caught.\nOf peace restored at battles fought,\nThrough the words of the Bard, immortals sought."
+        }
+      ],
+      "path_ids": [
+        "a0cace07-92fe-41a0-b1eb-5afff88bac39",
+        "0d8a871c-6319-4795-9909-879d9ef0869e",
+        "85f96946-9fb8-4b36-ab0c-b3896c08ec7c",
+        "fc3082da-63e6-4388-827d-d0b7b441b119",
+        "a8e2cd5c-8ada-4514-9056-e97e541a747a",
+        "d2a37c55-c907-4d1d-a2ed-ac39bd55d7b5"
+      ],
+      "upstream_split": "train",
+      "all_nodes_reviewed_english_nonsynthetic": true,
+      "assistant_rank_policy": "reviewed nonnegative ranks; source rank not acceptance",
+      "selection_hash": "9a6af08827061254194bb32c415c784e32dc56ac6ae837beae6334c36f4a6cd1",
+      "encoding": [
+        {
+          "tools_enabled": false,
+          "tokens": 1051,
+          "targets": 685
+        },
+        {
+          "tools_enabled": true,
+          "tokens": 1327,
+          "targets": 685
+        }
+      ],
+      "review_key": "N2",
+      "training_admitted": false
+    },
+    {
+      "id": "2b0b471d-8c7b-4175-9d0c-0c962ca6ad07",
+      "source_group": "89f7d256-bec5-4c4a-acdf-b1f4fe3164ef",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What skills can I teach my children in the future that they don't have today, and what will that mean for them in the future?"
+        },
+        {
+          "role": "assistant",
+          "content": "Can you describe what skills your children currently don't have? How old are they, and what in particular are you concerned about? Unfortunately with the information provided I can only give generic advice.\n\nMany kids today lack financial understanding. It would be a great idea to teach them how to manage money, perhaps by giving them an allowance. It's also good to teach kids to care for themselves by giving them chores such as cooking and clearning, though don't be too harsh: don't give them too much, keep their ages in mind, and I strongly recommend rewarding the kids when they complete what work you give them. Obligatory, you should teach your kids good manners and behavior, safety, and empathy. Perhaps buy them a pet and help them take care of it to teach them responsibility (though make sure you are taking care of the pet as well, and only do this if you are prepared to adopt a living animal).\n\nFor the future, it may also be a good idea to teach your kids computer science, computer programming, and machine learning. At the very least they should have computer literacy."
+        },
+        {
+          "role": "user",
+          "content": "One child is female aged 8. The other is male aged 9.They do not have many skills yet. Should they focus on maths, science, literature or history ? Are there other life skills that might be particularly helpful, but require active guidance on my part ?"
+        },
+        {
+          "role": "assistant",
+          "content": "As a parent, there are several skills you can teach your children that may be particularly helpful in the future, regardless of their gender or age. While academic skills like math, science, literature, and history are important, there are other life skills that can also benefit your children. Here are some suggestions:\n\nDigital literacy: With the increasing reliance on technology in various aspects of life, it's crucial to teach your children digital literacy skills. This includes understanding how to use digital devices, navigating the internet safely, discerning reliable information from fake news, and protecting their online privacy and security.\n\nCritical thinking and problem-solving: These skills are essential for navigating the complexities of the modern world. Encourage your children to think critically and solve problems by engaging them in activities that require them to analyze, evaluate, and come up with creative solutions to real-world problems.\n\nEmotional intelligence: Teaching your children emotional intelligence can help them develop strong interpersonal skills, manage their emotions effectively, and build healthy relationships with others. This includes skills like self-awareness, empathy, communication, and conflict resolution.\n\nAdaptability and resilience: The world is constantly changing, and the ability to adapt to new situations and bounce back from setbacks is invaluable. Encourage your children to embrace change, be flexible, and develop resilience in the face of challenges.\n\nFinancial literacy: Help your children understand the value of money, budgeting, saving, and investing. Teach them about concepts like earning, spending, and managing money wisely, as these skills will serve them well in adulthood.\n\nEnvironmental awareness: With increasing concerns about climate change and environmental sustainability, it's important to educate your children about the environment and their role in protecting it. Teach them about recycling, conservation, and responsible consumption.\n\nCommunication skills: Effective communication is a vital skill in all aspects of life. Encourage your children to develop good verbal, written, and interpersonal communication skills, including active listening, expressing themselves clearly, and understanding different perspectives.\n\nCreativity and innovation: Foster your children's creativity and encourage them to think outside the box. Help them develop their imagination, curiosity, and innovation skills, as these can lead to new opportunities and solutions in the future.\n\nIt's important to remember that each child is unique, and their interests and aptitudes may vary. Encourage them to pursue their passions and interests while also providing guidance and support in developing a well-rounded skill set. By equipping them with a diverse range of skills, you can help your children thrive in the future and become well-prepared for the opportunities and challenges they may face."
+        },
+        {
+          "role": "user",
+          "content": "Woo-hoo... Summarize it please, I'm chatting, not reading a novel. ;)"
+        },
+        {
+          "role": "assistant",
+          "content": "The article suggests that parents can teach their children a range of important life skills beyond academic subjects such as math and science. These skills include digital literacy, critical thinking, emotional intelligence, adaptability, financial literacy, environmental awareness, communication skills, creativity, and innovation. It is essential to remember that each child is unique, and parents should encourage them to pursue their passions and interests while also providing guidance and support to develop a well-rounded skill set to prepare them for the future."
+        }
+      ],
+      "path_ids": [
+        "89f7d256-bec5-4c4a-acdf-b1f4fe3164ef",
+        "a7c8d5be-fa08-45e9-8a82-d11ce07c25cf",
+        "5f3ecf80-9a75-41ee-b630-fd603ea5e593",
+        "ec51d03c-f3e7-4229-82d6-c11cd35a4292",
+        "d58d0faf-cf89-4aa3-a2ad-8137b6b65513",
+        "2b0b471d-8c7b-4175-9d0c-0c962ca6ad07"
+      ],
+      "upstream_split": "train",
+      "all_nodes_reviewed_english_nonsynthetic": true,
+      "assistant_rank_policy": "reviewed nonnegative ranks; source rank not acceptance",
+      "selection_hash": "a2147d441dcbce51310e736e0e6b37a035cec69e0d4cb1426338f059579d9c90",
+      "encoding": [
+        {
+          "tools_enabled": false,
+          "tokens": 1206,
+          "targets": 830
+        },
+        {
+          "tools_enabled": true,
+          "tokens": 1482,
+          "targets": 830
+        }
+      ],
+      "review_key": "N3",
+      "training_admitted": false
+    }
+  ]
+}
