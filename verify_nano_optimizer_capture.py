@@ -90,6 +90,23 @@ class CaptureTests(unittest.TestCase):
    self.assertTrue(all(x['matches_captured_output_exact'] for x in r['calls']))
    with patch.object(optim,'COMPUTE_DTYPE',torch.float64):
     with self.assertRaisesRegex(ValueError,'environment'):cap.replay(path,optim,'eager',Path(d)/'bad')
+ def test_cli_restores_captured_cublas_workspace_across_process(self):
+  with tempfile.TemporaryDirectory() as d:
+   for index,recorded in enumerate((':4096:8',None)):
+    path=Path(d)/('capture-'+str(index));out=Path(d)/('replay-'+str(index))
+    with patch.dict(os.environ,{},clear=False):
+     if recorded is None:os.environ.pop('CUBLAS_WORKSPACE_CONFIG',None)
+     else:os.environ['CUBLAS_WORKSPACE_CONFIG']=recorded
+     self.capture(path)
+    env=dict(os.environ)
+    if recorded is None:env['CUBLAS_WORKSPACE_CONFIG']=':16:8'
+    else:env.pop('CUBLAS_WORKSPACE_CONFIG',None)
+    child=subprocess.run([sys.executable,'-m','cloud_training.nano_optimizer_capture','--capture',str(path),'--repo',str(ROOT/'runs/nanochat-source'),'--mode','eager','--output',str(out)],cwd=ROOT,env=env,capture_output=True,text=True,timeout=60)
+    self.assertEqual(child.returncode,0,child.stderr)
+    result=json.loads((out/'result.json').read_text())
+    self.assertEqual(result['environment']['cublas_workspace'],recorded)
+    self.assertTrue(result['repeatable_exact'])
+    self.assertTrue(all(call['matches_captured_output_exact'] for call in result['calls']))
  def test_actual_sft_loop_captures_only_declared_update(self):
   command=[sys.executable,'-m','reports.english-first-v1.check_loop']
   args={'updates':2,'losses':[3.,2.9,2.8],'capture_step':1}

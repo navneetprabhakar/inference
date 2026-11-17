@@ -4,9 +4,9 @@
 
 Ganesh-base (historically called Own in artifact paths) is an experimental **536,871,738-parameter language model trained from random initialization**, with local inference, supervised conversation training, and a bounded offline tool broker. The current priority is improving **Ganesh-base’s trained weights for English conversation**, followed by maths and then CBSE through Class 12. A pretrained assistant is not substituted for Ganesh-base. The declared model identity is not yet verified as learned in the weights; see [identity status](MODEL_IDENTITY.json).
 
-**Status as of 17 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available. All four old VM records and three disks were deleted after required backups were verified. Cloud training is paused pending a new approved cap; HTTP remains off. Local optimizer-capture checks do not establish CUDA qualification or English improvement.
+**Status as of 18 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available; HTTP is off. The approved $20 L4 attempt passed a scoped exact restart comparison, then stopped at a replay-launcher environment guard. The local fix passes **203 tests**, but full CUDA qualification and the English pilot remain incomplete. Required backups were verified before shutdown; zero VMs/disks remain.
 
-Current local readiness and adverse checks: [bounded pilot readiness](reports/ganesh-controller-v1/READINESS.md). Controller integration and reviewed seed curriculum are prepared; 202 targeted tests pass. Cloud launch remains blocked pending a new cap and live qualification. Reauthentication succeeded; no VM was started.
+Current evidence and remaining gates: [L4 campaign closeout](reports/ganesh-l4-cap20-v1/STATUS.md), [replay RCA](reports/ganesh-l4-cap20-v1/REPLAY_ENV_RCA.md), and [bounded pilot design](reports/ganesh-controller-v1/READINESS.md). No model improvement is claimed from these infrastructure checks.
 
 Current evidence-first reassessment: [Ganesh-base review](reports/ganesh-base-review-v1/REVIEW.md). Model naming does not modify checkpoint payloads or repair conversation behavior.
 

@@ -1,0 +1,142 @@
+{
+  "canIpForward": false,
+  "cpuPlatform": "Intel Cascade Lake",
+  "creationTimestamp": "2026-11-17T10:59:12.667-08:00",
+  "deletionProtection": false,
+  "disks": [
+    {
+      "autoDelete": false,
+      "boot": true,
+      "deviceName": "persistent-disk-0",
+      "diskSizeGb": "200",
+      "guestOsFeatures": [
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        },
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "GVNIC"
+        }
+      ],
+      "index": 0,
+      "interface": "NVME",
+      "kind": "compute#attachedDisk",
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+      ],
+      "mode": "READ_WRITE",
+      "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-west1-a/disks/ganesh-l4-1117-185840",
+      "type": "PERSISTENT"
+    }
+  ],
+  "fingerprint": "_-4MSbdFw_8=",
+  "guestAccelerators": [
+    {
+      "acceleratorCount": 1,
+      "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-west1-a/acceleratorTypes/nvidia-l4"
+    }
+  ],
+  "id": "770191152204815087",
+  "kind": "compute#instance",
+  "labelFingerprint": "42WmSpB8rSM=",
+  "lastStartTimestamp": "2026-11-17T10:59:45.218-08:00",
+  "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-west1-a/machineTypes/g2-standard-8",
+  "metadata": {
+    "fingerprint": "vdUM5lpJOpI=",
+    "items": [
+      {
+        "key": "block-project-ssh-keys",
+        "value": "TRUE"
+      },
+      {
+        "key": "bundle-sha256",
+        "value": "31d393da1a4cf9ffb663368adad7d1a7062b68068ae318bc8eb36d4f86ce354d"
+      },
+      {
+        "key": "bundle-uri",
+        "value": "gs://forge-ownbase-a100-20261110/ganesh-l4-cap20-v1/ganesh-l4-1117-183039/inputs/runtime.tar.gz"
+      },
+      {
+        "key": "enable-oslogin",
+        "value": "TRUE"
+      },
+      {
+        "key": "own-deadline-utc",
+        "value": "2026-11-17T20:58:40Z"
+      },
+      {
+        "key": "packet-sha256",
+        "value": "a55251c73c72c2eee9e8792e6c907b26e8718ab57e3547975a866bc5eeb8dff8"
+      },
+      {
+        "key": "packet-uri",
+        "value": "gs://forge-ownbase-a100-20261110/ganesh-l4-cap20-v1/ganesh-l4-1117-185840/inputs/qualification-packet.tar.gz"
+      },
+      {
+        "key": "startup-script",
+        "value": "#!/bin/bash\nset -euo pipefail\nmkdir -p /opt/english\ncd /opt/english\nexec > >(tee -a /opt/english/bootstrap.log) 2>&1\nexec 9>/opt/english/worker.lock\nflock -n 9 || exit 2\n[ ! -e /opt/english/qualification-started ] || exit 4\nmetadata() { curl --fail --silent --show-error --max-time 10 -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\n# Fixed absolute expiry survives retries/reboots; provider STOP is independent.\nDEADLINE=$(metadata own-deadline-utc)\nMINUTES=$(python3 - \"$DEADLINE\" <<'PY'\nimport datetime,sys,time\nremaining=datetime.datetime.fromisoformat(sys.argv[1].replace('Z','+00:00')).timestamp()-time.time()\nassert remaining>1200\nprint(max(1,int((remaining-60)//60)))\nPY\n)\nshutdown -h \"+$MINUTES\"\n# Copy only private, hash-bound code/config; extraction rejects links/traversal.\ntimeout 600 gcloud storage cp \"$(metadata bundle-uri)\" runtime.tar.gz --quiet\nprintf '%s  runtime.tar.gz\\n' \"$(metadata bundle-sha256)\" | sha256sum -c -\ntimeout 120 gcloud storage cp \"$(metadata packet-uri)\" packet.tar.gz --quiet\nprintf '%s  packet.tar.gz\\n' \"$(metadata packet-sha256)\" | sha256sum -c -\npython3 - <<'PY'\nimport tarfile,pathlib\nfor archive in ('runtime.tar.gz','packet.tar.gz'):\n with tarfile.open(archive) as t:\n  names=set()\n  for m in t.getmembers():\n   p=pathlib.PurePosixPath(m.name)\n   assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name not in names\n   assert not pathlib.Path(m.name).exists()\n   names.add(m.name)\n  t.extractall('.',filter='data')\nfrom cloud_training.nano_package import extract_verified\nextract_verified('runtime.tar.gz','.')\nPY\nfor deb in debs/*.deb; do dpkg-deb -x \"$deb\" /; done\nPYTHON=''\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n if [ -x \"$candidate\" ] && \"$candidate\" -c 'import torch; assert torch.__version__.startswith(\"2.9.1\"); assert torch.version.cuda==\"12.9\"' 2>/dev/null; then PYTHON=\"$candidate\"; break; fi\ndone\n[ -n \"$PYTHON\" ] || exit 3\n\"$PYTHON\" - <<'PY'\nimport zipfile,pathlib\nfor w in pathlib.Path('wheels').glob('*.whl'):zipfile.ZipFile(w).extractall('vendor')\nPY\nexport PYTHONPATH=/opt/english/vendor:/opt/english:/opt/english/nanochat-source\nexport HF_HUB_OFFLINE=1 WANDB_MODE=disabled\n\"$PYTHON\" -u gpu_qualify.py\n# No disk deletion. A failed normal-backup check leaves compute to its hard STOP\n# deadline and retains disk for recovery; do not claim a clean closeout.\nif [ -f /opt/english/normal-stop-ready ] && ! [ -f /opt/english/backup-failure.txt ]; then shutdown -h now; fi\n"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "name": "ganesh-l4-1117-185840",
+  "networkInterfaces": [
+    {
+      "fingerprint": "AF2SCBV_hWU=",
+      "kind": "compute#networkInterface",
+      "name": "nic0",
+      "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+      "networkIP": "10.138.0.6",
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-west1/subnetworks/default"
+    }
+  ],
+  "resourceStatus": {
+    "effectiveInstanceMetadata": {
+      "blockProjectSshKeysMetadataValue": true,
+      "enableOsloginMetadataValue": true,
+      "vmDnsSettingMetadataValue": "ZonalOnly"
+    },
+    "scheduling": {
+      "terminationTimestamp": "2026-11-17T20:58:40Z"
+    }
+  },
+  "satisfiesPzi": true,
+  "scheduling": {
+    "automaticRestart": false,
+    "instanceTerminationAction": "STOP",
+    "onHostMaintenance": "TERMINATE",
+    "preemptible": false,
+    "provisioningModel": "STANDARD",
+    "terminationTime": "2026-11-17T20:58:40Z"
+  },
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-west1-a/instances/ganesh-l4-1117-185840",
+  "serviceAccounts": [
+    {
+      "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_write"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "shieldedInstanceIntegrityPolicy": {
+    "updateAutoLearnPolicy": true
+  },
+  "startRestricted": false,
+  "status": "RUNNING",
+  "tags": {
+    "fingerprint": "42WmSpB8rSM="
+  },
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-west1-a"
+}

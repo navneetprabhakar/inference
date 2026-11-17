@@ -1,0 +1,33 @@
+{
+  "status": "hold_worker_failure",
+  "quality_accepted": false,
+  "pilot_started": false,
+  "backup_verified": true,
+  "runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "gpu": "NVIDIA L4",
+    "attention": "sdpa"
+  },
+  "error": "RuntimeError(\"Command failed with exit1: ['/usr/bin/python3', '-m', 'cloud_training.nano_optimizer_capture', '--capture']\")",
+  "bundle_readbacks": [
+    {
+      "source": "/opt/english/results/split_first/step-00000000",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-l4-cap20-v1/ganesh-l4-1117-185840/salvage/checkpoints/checkpoint-4da8d3285f5d49c6a55f5e3ef0233230",
+      "manifest_sha256": "8da38325e33e1b64116df85cfeb21861e19297349cd102f10e047eccbe24c01e",
+      "readback": true
+    },
+    {
+      "source": "/opt/english/results/split_first/step-00000001",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-l4-cap20-v1/ganesh-l4-1117-185840/salvage/checkpoints/checkpoint-ecf17fab7cac48acbaf257064b708d2c",
+      "manifest_sha256": "610e84b8f0e6e20c239f4726ef1dcbe68d4d6ef3f95ea67c38a26c3903d685a2",
+      "readback": true
+    },
+    {
+      "source": "/opt/english/results/split_resume/step-00000002",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-l4-cap20-v1/ganesh-l4-1117-185840/salvage/checkpoints/checkpoint-5455acbeca9244d09c8a54d675b29053",
+      "manifest_sha256": "383794c6a965aee5491e5a2e9e4579a80675dda46d113dbfdbc65c7b25c3bea4",
+      "readback": true
+    }
+  ]
+}

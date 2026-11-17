@@ -187,6 +187,15 @@ def main():
     sys.path.insert(0,str(Path(args.repo).resolve()))
     meta,before,after=load_capture(args.capture);del before,after
     e=meta['environment']
+    # SFT sets this in its child process. Restore it before any CUDA runtime use;
+    # the replay launcher does not inherit mutations from that completed child.
+    workspace=e['cublas_workspace']
+    if workspace is None:
+        os.environ.pop('CUBLAS_WORKSPACE_CONFIG',None)
+    elif isinstance(workspace,str):
+        os.environ['CUBLAS_WORKSPACE_CONFIG']=workspace
+    else:
+        raise ValueError('Invalid captured CUBLAS workspace setting')
     os.environ['NANOCHAT_DTYPE']=e['compute_dtype'].removeprefix('torch.')
     torch.set_num_threads(e['threads']);torch.set_num_interop_threads(e['interop_threads'])
     torch.set_default_dtype(getattr(torch,e['default_dtype'].removeprefix('torch.')))

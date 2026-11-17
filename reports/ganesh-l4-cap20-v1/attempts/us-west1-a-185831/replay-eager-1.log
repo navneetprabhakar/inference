@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 207, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 205, in main
+    print(json.dumps(replay(args.capture,optim,args.mode,args.output),indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 163, in replay
+    if environment(module)!=meta['environment']: raise ValueError('Replay environment/source mismatch')
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Replay environment/source mismatch
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 114, in apport_excepthook
+    report["ExecutableTimestamp"] = str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/english/-m'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 207, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 205, in main
+    print(json.dumps(replay(args.capture,optim,args.mode,args.output),indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/english/cloud_training/nano_optimizer_capture.py", line 163, in replay
+    if environment(module)!=meta['environment']: raise ValueError('Replay environment/source mismatch')
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Replay environment/source mismatch

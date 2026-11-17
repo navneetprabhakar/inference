@@ -1,18 +1,30 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
-Updated17November2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
+Updated18November2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: LOCAL BOUNDED-PILOT PREPARATION COMPLETE; CLOUD LAUNCH HOLD
-Hands-off execution approved in principle; numerical new cap still unspecified.
-Proposed $20 L4/12-hour envelope ($5 qualification-only); see
-reports/ganesh-controller-v1/BUDGET.md. Keep VMs/HTTP off pending finite cap and
-live qualification. Commit/push of local changes to main authorized. No training,
-cloud writes, weight/default changes or sealed release exposure. Old retry
-requests remain closed; STOPPED_BY_USER preserved. Reauth succeeded; read-only
-inventory at2026-11-17T16:14:37Z showed zero VMs/disks; bucket US-CENTRAL1.
+CURRENT DECISION: L4 QUALIFICATION HOLD; VERIFIED BACKUPS; ZERO VMS/DISKS
+Other-zone search found oneL4 in us-west1-a after six capacity failures. Actual
+2updates vs1+GCSrestore+1 completed; supplemental fullstate comparison EXACT PASS:
+159tensors/1,409,489,630elements, zero mismatches/nonfinite, equal qualityloop.
+Selected actual Muon capture inputs/outputs/context also exactly equal.
+Fresh replay failed environment guard: CLI omitted captured CUBLAS_WORKSPACE_CONFIG.
+Local correction + real subprocess regression passes;203targeted tests pass.
+No English pilot or promotion; signal/upload/providerSTOP/decode gates incomplete.
+See reports/ganesh-l4-cap20-v1/STATUS.md and REPLAY_ENV_RCA.md.
+GCSreadbacks verified for3distinct checkpoints and complete capture/log archive;
+archive downloaded locally, SHA256 and both rawcapture payload sets independently
+verified. Normalshutdown then retired VM/disk/temporaryIAPrule; fresh zeroVMs/disks
+at2026-11-17T19:45:24UTC. Local requested weights unchanged; HTTPoff.
+Estimated VMcompute$0.53665; disk/GCSextra, billingunsettled. $20cumulative ceiling
+unchanged; no active allocation, pending zone check or automaticqualificationretry.
+New locally verified runtime runs/ganesh-l4-cap20-v1/runtime-replay-env-fix.tar.gz
+SHA2569e96cce74e8a23a6519a28909aaed9d0c3c559fe0424243ae9b8b1b636496db3.
+Not GPUqualified/deployed; next execution requires fresh immutable bindings and
+remaining gate evidence. Preserve original GPUruntime for old capture sourceidentity.
 
 CANONICAL CURRENT READINESS
 reports/ganesh-controller-v1/READINESS.md and ADVERSARIAL_REVIEW.md.
-202distinct tests pass; actual unapproved dispatch returns hold_gate. Six-task
+Original controller suite202tests passed; current replay-fix suite203passes.
+The unapproved dispatch test returns hold_gate. Six-task
 controller integrates fit/train/probes/full semantic reviews and curriculum pilot.
 Immutable input/code hashes, durable intent, restart barriers, output checks,
 machine-wide writer lock and bounded child termination are enforced. Provisioning
@@ -30,7 +42,7 @@ v1 rejected before training for identitymass>5%; compact audit retained.
 All41existing frozen hashes unchanged;11new curriculum hashes verified.
 Identity declared, reviewed subset admitted to pilot; NOT trained/weightverified.
 
-RUNTIME / LOCAL READINESS
+ORIGINAL CONTROLLER RUNTIME / PRE-FIX LOCAL READINESS
 runs/ganesh-controller-v1/runtime-qualified-local.tar.gz
 SHA25631d393da1a4cf9ffb663368adad7d1a7062b68068ae318bc8eb36d4f86ce354d
 278322481bytes;155members;30adapter modules, extracted/readback verified.
@@ -40,10 +52,12 @@ Base10B/default194payloads verified; selected local weights retained unchanged.
 Superseded runtime archives removed only after current runtime verified; see cleanup.json.
 
 REMAINING CLOUD / ACCEPTANCE GATES
-New explicit finite cap/reserve, fresh quote/inventory/input GCS readbacks and fixed
+Approved$20cap remains cumulative; a future explicitly requested attempt needs
+fresh quote/inventory/input GCS readbacks and fixed
 absolute providerSTOP required. Actual CUDAshape/throughput, exactrestart, signal
 recovery, GCSrestore, uploadrejection and providerSTOP must pass BEFOREfit.
-Exactrestart mismatch remains unresolved; no no-resume exception approved.
+Historical A100mismatch unresolved; L4normalrestart nowexact under captured
+diagnostic settings, but full qualification incomplete; no no-resume exception.
 Frozenfit24/12sessions unchanged;64epochs AND64updates, batch8192, packing1,
 LRmultiplier.25, seed103. Review all0/16/32/64reached plusbest/last; fitGO>=23/24
 complete sessions and all semantic/action checks. Curriculum follows only fitpass.

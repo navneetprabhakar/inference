@@ -1,0 +1,72 @@
+{
+  "endTime": "2026-11-17T10:56:56.775-08:00",
+  "error": {
+    "errors": [
+      {
+        "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+        "errorDetails": [
+          {
+            "help": {
+              "links": [
+                {
+                  "description": "Troubleshooting documentation",
+                  "url": "https://cloud.google.com/compute/docs/resource-error"
+                }
+              ]
+            }
+          },
+          {
+            "localizedMessage": {
+              "locale": "en-US",
+              "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east1-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+            }
+          },
+          {
+            "errorInfo": {
+              "domain": "compute.googleapis.com",
+              "metadatas": {
+                "attachment": "nvidia-l4:1",
+                "vmType": "g2-standard-8",
+                "zone": "us-east1-c",
+                "zonesAvailable": ""
+              },
+              "reason": "resource_availability"
+            }
+          }
+        ],
+        "message": "The zone 'projects/executespecv1/zones/us-east1-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'."
+      }
+    ]
+  },
+  "httpErrorMessage": "SERVICE UNAVAILABLE",
+  "httpErrorStatusCode": 503,
+  "id": "4376493771237432733",
+  "insertTime": "2026-11-17T10:56:50.080-08:00",
+  "kind": "compute#operation",
+  "name": "operation-1794941809434-6607d74f19e13-8bfb05de-7593b640",
+  "operationType": "insert",
+  "progress": 100,
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-east1-c/operations/operation-1794941809434-6607d74f19e13-8bfb05de-7593b640",
+  "startTime": "2026-11-17T10:56:50.112-08:00",
+  "status": "DONE",
+  "targetId": "7452274286042095006",
+  "targetLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-east1-c/instances/ganesh-l4-1117-185612",
+  "user": "admin@executespec.ai",
+  "warnings": [
+    {
+      "code": "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+      "data": [
+        {
+          "key": "disk_size_gb",
+          "value": "200"
+        },
+        {
+          "key": "image_size_gb",
+          "value": "100"
+        }
+      ],
+      "message": "Disk size: '200 GB' is larger than image size: '100 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details."
+    }
+  ],
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-east1-c"
+}

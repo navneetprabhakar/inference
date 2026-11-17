@@ -1,0 +1,31 @@
+[
+  {
+    "allowed": [
+      {
+        "IPProtocol": "tcp",
+        "ports": [
+          "22"
+        ]
+      }
+    ],
+    "creationTimestamp": "2026-11-17T11:01:36.687-08:00",
+    "description": "Temporary IAP-only SSH for approved Ganesh L4 qualification",
+    "direction": "INGRESS",
+    "disabled": false,
+    "id": "5288847234108037759",
+    "kind": "compute#firewall",
+    "logConfig": {
+      "enable": false
+    },
+    "name": "ganesh-cap20-iap-ssh",
+    "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+    "priority": 1000,
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/firewalls/ganesh-cap20-iap-ssh",
+    "sourceRanges": [
+      "35.235.240.0/20"
+    ],
+    "targetTags": [
+      "ganesh-cap20-qualification"
+    ]
+  }
+]
