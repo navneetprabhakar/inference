@@ -18,7 +18,8 @@ def train_argv(request,task,root):
           '--manifest',str(safe(root,data['manifest'])),'--quality-contract',str(safe(root,data['contract'])),
           '--output',str(out),'--epochs','3' if pilot else '64','--max-updates','64','--context-tokens','2048',
           '--batch-tokens','8192','--microbatch','1','--packing-buffer-size','1','--lr-multiplier','.25',
-          '--eval-every-updates','1' if pilot else '5','--eval-rows','128','--seed','103','--deterministic']
+          '--eval-every-updates','1' if pilot else '5','--eval-rows','128','--seed','103','--deterministic',
+          '--muon-kernel-mode',common.get('muon_kernel_mode','compiled')]
     if not pilot:args+=['--fit-diagnostic','--fit-eval-steps','0','16','32','64']
     return args
 

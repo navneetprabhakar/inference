@@ -78,6 +78,18 @@ def reset_sft_lrs(optimizer, fresh_lrs, batch_scale=1.0, multiplier=1.0):
         if group.get('kind')=='muon':group['weight_decay']=0.0
 
 
+def configure_muon_kernel(module, mode):
+    """Select the pinned implementation; never silently fall back across modes."""
+    if mode not in ('compiled','eager'):
+        raise ValueError('Unknown Muon kernel mode')
+    original=module.muon_step_fused
+    eager=getattr(original,'_torchdynamo_orig_callable',None)
+    if not callable(eager) or getattr(original,'__wrapped__',None) is not eager:
+        raise ValueError('Expected the pinned compiled Muon entry point')
+    if mode=='eager':module.muon_step_fused=eager
+    return mode
+
+
 def load_manifest(path, tokenizer_sha, context=SEQUENCE):
     path=Path(path).resolve();m=json.loads(path.read_text())
     if m.get('schema')!=1 or m.get('training_admitted') is not True or m.get('format_version')!=VERSION:
@@ -464,6 +476,8 @@ def run(args):
     if attention_deterministic: deterministic_attention(attention)
     from nanochat.gpt import GPT,GPTConfig
     from nanochat.common import COMPUTE_DTYPE
+    import nanochat.optim as optimizer_module
+    muon_kernel_mode=configure_muon_kernel(optimizer_module,getattr(args,'muon_kernel_mode','compiled'))
     if COMPUTE_DTYPE!=torch.bfloat16:raise ValueError('BF16 activations required')
     torch.set_num_threads(args.cpu_threads)
     config=GPTConfig(**target_config)
@@ -482,6 +496,7 @@ def run(args):
               'packing_buffer_size':args.packing_buffer_size,'batch_tokens':args.batch_tokens,'lr_batch_scale':recipe['lr_batch_scale'],'lr_multiplier':args.lr_multiplier,'epochs':args.epochs,
               'numerical_mode':numerical_identity(torch,attention_deterministic=attention_deterministic),'microbatch':args.microbatch,'seed':args.seed,'torch':torch.__version__,
               'attention':'fa3' if attention.USE_FA3 else 'sdpa','kernel_sha256':args.kernel_sha,
+              'muon_kernel_mode':muon_kernel_mode,
               'eval_rows':args.eval_rows,'eval_every_updates':args.eval_every_updates,
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
     identity['update_trace']={'version':1,'absolute_update_limit':trace_updates}
@@ -639,6 +654,7 @@ def main():
     p.add_argument('--ancestor',action='append',default=[],help='Each immutable ancestor bundle required for targeted SFT lineage')
     p.add_argument('--batch-tokens',type=int,default=BATCH,help='Effective position tokens/update;32768 recommended initial targeted experiment')
     p.add_argument('--lr-multiplier',type=float,default=1.0,help='Explicit reduced SFT learning rate, recorded in checkpoint identity; (0,1]')
+    p.add_argument('--muon-kernel-mode',choices=('compiled','eager'),default='compiled',help='Identity-bound optimizer execution mode; requires qualification before use')
     p.add_argument('--context-tokens',type=int,choices=SUPPORTED_CONTEXTS,default=SEQUENCE)
     p.add_argument('--allow-context-extension',action='store_true',help='Explicit warm start2Kto4K; never edits the parent checkpoint')
     p.add_argument('--fit-diagnostic',action='store_true',help='Isolated English learnability diagnostic, never a release candidate')

@@ -15,6 +15,28 @@ from cloud_training.nano_benchmark import digest_state
 from cloud_training.nano_chat_format import SPECIALS,VERSION
 
 
+class MuonKernelMode(unittest.TestCase):
+    def module(self):
+        from types import SimpleNamespace
+        def eager(value):return value+1
+        def compiled(value):return eager(value)
+        compiled.__wrapped__=eager;compiled._torchdynamo_orig_callable=eager
+        return SimpleNamespace(muon_step_fused=compiled),compiled,eager
+    def test_explicit_eager_preserves_underlying_implementation(self):
+        from cloud_training.nano_sft import configure_muon_kernel
+        m,c,e=self.module()
+        self.assertEqual(configure_muon_kernel(m,'eager'),'eager')
+        self.assertIs(m.muon_step_fused,e)
+        self.assertEqual(m.muon_step_fused(4),c(4))
+        with self.assertRaises(ValueError):configure_muon_kernel(m,'compiled')
+    def test_compiled_default_and_unknown_mode(self):
+        from cloud_training.nano_sft import configure_muon_kernel
+        m,c,e=self.module();self.assertEqual(configure_muon_kernel(m,'compiled'),'compiled')
+        self.assertIs(m.muon_step_fused,c)
+        with self.assertRaises(ValueError):configure_muon_kernel(m,'auto')
+        self.assertIs(m.muon_step_fused,c)
+
+
 class TinyLM(torch.nn.Module):
     def __init__(self):
         super().__init__();self.embedding=torch.nn.Embedding(8,4,dtype=torch.float64)

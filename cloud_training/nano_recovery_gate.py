@@ -42,7 +42,8 @@ def inspect(root, request, stage, *, now=None):
     need(request.get('schema') == 1, 'Unsupported request schema')
     need(request.get('scope') == 'ganesh_english_recovery', 'Wrong campaign scope')
     need(request.get('path') in ('exact_resume', 'no_resume_diagnostic'), 'Unknown qualification path')
-    need(request.get('machine') == 'g2-standard-8', 'Only the specified L4 machine is allowed')
+    need(request.get('machine') in ('g2-standard-8', 'a2-highgpu-1g'),
+         'Only a single L4 or A100 40GB machine is supported; approval must bind the exact choice')
     need(type(request.get('resource_count')) is int and request['resource_count'] == 1, 'Exactly one campaign VM required')
     need(request.get('provider_action') == 'STOP' and request.get('disk_auto_delete') is False,
          'STOP and non-auto-delete recovery disk required')
@@ -131,6 +132,18 @@ def inspect(root, request, stage, *, now=None):
             except (KeyError,ValueError,TypeError,OSError):errors.append('Complete rate-derived price quote required')
     if stage in ('fit', 'curriculum', 'release'):
         required = QUALIFICATION
+        # Keeping an allocated GPU until work finishes avoids losing scarce
+        # capacity. Only explicit user authority permits observing STOP at
+        # closeout; its fixed configuration is still required before training.
+        if request.get('provider_stop_validation') == 'closeout':
+            need(auth.get('retain_vm_until_work_complete') is True,
+                 'Deferring the STOP drill requires explicit retain-VM authority')
+            if stage != 'release':
+                required = tuple('provider_stop_configured' if n == 'provider_stop' else n
+                                 for n in required)
+        else:
+            need(request.get('provider_stop_validation') in (None, 'before_fit'),
+                 'Unknown provider STOP validation order')
         if request.get('path') == 'no_resume_diagnostic':
             required = tuple(n for n in QUALIFICATION if n not in ('exact_restart', 'signal_recovery'))
         for name in required:

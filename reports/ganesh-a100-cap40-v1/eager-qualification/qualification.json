@@ -1,0 +1,178 @@
+{
+  "status": "hold_worker_failure",
+  "quality_accepted": false,
+  "pilot_started": false,
+  "backup_verified": true,
+  "runtime": {
+    "torch": "2.9.1+cu129",
+    "cuda": "12.9",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "attention": "sdpa",
+    "muon_kernel_mode": "eager"
+  },
+  "replay": {
+    "eager": {
+      "fresh_process_equal": true,
+      "first": {
+        "calls": [
+          {
+            "iteration": 0,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "first_call"
+          },
+          {
+            "iteration": 1,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "warm_repeat"
+          },
+          {
+            "iteration": 2,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "warm_repeat"
+          }
+        ],
+        "capture_manifest_sha256": "0d06d40739da0850ada19153cec791dad7fc6e9497b8cdfa6a2ce13a42bd6963",
+        "environment": {
+          "bf16_reduced_precision": true,
+          "capability": [
+            8,
+            0
+          ],
+          "compute_dtype": "torch.bfloat16",
+          "cublas_workspace": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "cudnn_tf32": true,
+          "default_dtype": "torch.float32",
+          "deterministic": true,
+          "deterministic_warn_only": false,
+          "fp16_reduced_precision": true,
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "harness_sha256": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+          "interop_threads": 6,
+          "matmul_precision": "highest",
+          "matmul_tf32": false,
+          "source_sha256": "7c9b714c6f76e3a9d50fc530044b2767d0cd89391237e609548f1cd730afed8f",
+          "threads": 4,
+          "torch": "2.9.1+cu129"
+        },
+        "mode": "eager",
+        "repeatable_exact": true,
+        "scope": "Kernel replay only. Cross-mode differences do not by themselves prove a restart defect."
+      },
+      "second": {
+        "calls": [
+          {
+            "iteration": 0,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "first_call"
+          },
+          {
+            "iteration": 1,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "warm_repeat"
+          },
+          {
+            "iteration": 2,
+            "matches_captured_output_exact": true,
+            "matches_first_replay_exact": true,
+            "phase": "warm_repeat"
+          }
+        ],
+        "capture_manifest_sha256": "0d06d40739da0850ada19153cec791dad7fc6e9497b8cdfa6a2ce13a42bd6963",
+        "environment": {
+          "bf16_reduced_precision": true,
+          "capability": [
+            8,
+            0
+          ],
+          "compute_dtype": "torch.bfloat16",
+          "cublas_workspace": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "cudnn_tf32": true,
+          "default_dtype": "torch.float32",
+          "deterministic": true,
+          "deterministic_warn_only": false,
+          "fp16_reduced_precision": true,
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "harness_sha256": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+          "interop_threads": 6,
+          "matmul_precision": "highest",
+          "matmul_tf32": false,
+          "source_sha256": "7c9b714c6f76e3a9d50fc530044b2767d0cd89391237e609548f1cd730afed8f",
+          "threads": 4,
+          "torch": "2.9.1+cu129"
+        },
+        "mode": "eager",
+        "repeatable_exact": true,
+        "scope": "Kernel replay only. Cross-mode differences do not by themselves prove a restart defect."
+      }
+    }
+  },
+  "comparison": {
+    "status": "pass",
+    "step": 2,
+    "full_state": {
+      "bitwise_equal": true,
+      "tensor_count": 159,
+      "tensor_mismatch_count": 0,
+      "tensor_elements": 1409489630,
+      "numeric_mismatch_elements": 0,
+      "max_abs_difference": 0.0,
+      "max_symmetric_relative_difference": 0.0,
+      "nonfinite_elements": 0,
+      "metadata_mismatch_count": 0,
+      "metadata_mismatches": [],
+      "top_tensor_mismatches": [],
+      "groups": {
+        "model": {
+          "tensor_mismatches": 0,
+          "numeric_mismatch_elements": 0
+        },
+        "optimizer": {
+          "tensor_mismatches": 0,
+          "numeric_mismatch_elements": 0
+        },
+        "gradients": {
+          "tensor_mismatches": 0,
+          "numeric_mismatch_elements": 0
+        }
+      },
+      "relative_definition": "abs(a-b)/max(abs(a),abs(b),1e-12); no acceptance threshold applied"
+    },
+    "quality_loop_equal": true,
+    "manifest_files_verified": true,
+    "quality_accepted": false,
+    "limitation": "Caller must prove branches were separately executed and one restored from GCS; equal files alone do not establish a restart experiment."
+  },
+  "fresh_process_gcs_restore": true,
+  "error": "RuntimeError(\"Command failed with exit2: ['/usr/bin/python3', '-m', 'cloud_training.nano_sft', '--repo']\")",
+  "bundle_readbacks": [
+    {
+      "source": "/opt/english-eager/results/signal/interrupted-live",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-a100-cap40-v1/ganesh-a100-1117-203113/eager-r2/salvage/checkpoints/checkpoint-6050a291f4174f99b99781ee4d19fd73",
+      "manifest_sha256": "f33d80b43f4c32cb61eea53934304ad4e63c1bfe43c6faaeddc97c50d8c295ad",
+      "readback": true
+    },
+    {
+      "source": "/opt/english-eager/results/split_first/step-00000001",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-a100-cap40-v1/ganesh-a100-1117-203113/eager-r2/salvage/checkpoints/checkpoint-2b72e54eff3443e1a70ff00dd3f1eb72",
+      "manifest_sha256": "fbd28e8ab9672e841664fdd05d44ed515092401e0dccd9e984fd11c86fb1518f",
+      "readback": true
+    },
+    {
+      "source": "/opt/english-eager/results/split_resume/step-00000002",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-a100-cap40-v1/ganesh-a100-1117-203113/eager-r2/salvage/checkpoints/checkpoint-ca1dd339d0f84bde9c150c436291cad5",
+      "manifest_sha256": "ff9a1b190a216577fce1397191845699858dbb2f76aac6c863b5a839112ebf76",
+      "readback": true
+    }
+  ]
+}

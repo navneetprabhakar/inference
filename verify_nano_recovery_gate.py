@@ -52,6 +52,13 @@ class RecoveryGate(unittest.TestCase):
     def test_old_approval_cannot_bind_new_spec(self):
         self.r['reserve_usd']=5
         self.assertIn('Approval does not bind this specification', self.result()['blockers'])
+    def test_a100_requires_new_exact_approval_and_receipts(self):
+        self.r['machine']='a2-highgpu-1g'
+        self.assertFalse(self.result()['allowed'])
+        self.bind()
+        self.assertTrue(self.result()['allowed'],self.result())
+        del self.r['evidence']['exact_restart']
+        self.assertFalse(self.result('fit')['allowed'])
     def test_missing_receipt(self):
         del self.r['evidence']['input_backups']
         self.assertFalse(self.result()['allowed'])
@@ -97,6 +104,22 @@ class RecoveryGate(unittest.TestCase):
         p=self.root/'exact_restart.json';v=json.loads(p.read_text());v['status']='fail';p.write_text(json.dumps(v))
         self.r['evidence']['exact_restart']['sha256']=digest(p)
         self.assertFalse(self.result('fit')['allowed'])
+    def test_closeout_stop_needs_authority_and_configured_proof(self):
+        self.r['provider_stop_validation']='closeout';self.bind()
+        self.assertFalse(self.result('fit')['allowed'])
+        self.r['authorization']['retain_vm_until_work_complete']=True
+        self.assertFalse(self.result('fit')['allowed'])
+        p=self.root/'provider_stop_configured.json'
+        p.write_text(json.dumps({'status':'pass','check':'provider_stop_configured',
+            'spec_sha256':self.r['authorization']['spec_sha256']}))
+        self.r['evidence']['provider_stop_configured']={'path':p.name,'sha256':digest(p)}
+        del self.r['evidence']['provider_stop']
+        self.assertTrue(self.result('fit')['allowed'],self.result('fit'))
+        self.assertTrue(self.result('curriculum')['allowed'],self.result('curriculum'))
+        self.assertFalse(self.result('release')['allowed'])
+    def test_unknown_stop_order_blocks_training(self):
+        self.r['provider_stop_validation']='skip';self.bind()
+        self.assertFalse(self.result('fit')['allowed'])
     def test_fault_checks_cannot_be_omitted(self):
         for name in ('provider_stop','gcs_restore','upload_rejection'):
             old=self.r['evidence'].pop(name)
@@ -128,7 +151,7 @@ class RecoveryGate(unittest.TestCase):
         self.assertFalse(self.result('release')['allowed'])
     def test_unsafe_resource_policy(self):
         for key,value in [('provider_action','DELETE'),('disk_auto_delete',True),('automatic_restart',True),
-                          ('automatic_retry',True),('machine','a2-highgpu-1g'),('resource_count',2)]:
+                          ('automatic_retry',True),('machine','a2-ultragpu-1g'),('resource_count',2)]:
             original=copy.deepcopy(self.r);self.r[key]=value;self.bind()
             self.assertFalse(self.result()['allowed']);self.r=original;self.bind()
 

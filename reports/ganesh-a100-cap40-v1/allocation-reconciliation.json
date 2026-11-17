@@ -1,0 +1,42 @@
+{
+  "instances": [],
+  "disks": [],
+  "error": {
+    "errors": [
+      {
+        "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+        "errorDetails": [
+          {
+            "help": {
+              "links": [
+                {
+                  "description": "Troubleshooting documentation",
+                  "url": "https://cloud.google.com/compute/docs/resource-error"
+                }
+              ]
+            }
+          },
+          {
+            "localizedMessage": {
+              "locale": "en-US",
+              "message": "A a2-highgpu-1g VM instance with 1 nvidia-tesla-a100 accelerator(s) is currently unavailable in the us-central1-a zone, because of gpu_availability root cause(s). Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+            }
+          },
+          {
+            "errorInfo": {
+              "domain": "compute.googleapis.com",
+              "metadatas": {
+                "attachment": "nvidia-tesla-a100:1",
+                "vmType": "a2-highgpu-1g",
+                "zone": "us-central1-a",
+                "zonesAvailable": ""
+              },
+              "reason": "gpu_availability"
+            }
+          }
+        ],
+        "message": "The zone 'projects/executespecv1/zones/us-central1-a' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'."
+      }
+    ]
+  }
+}

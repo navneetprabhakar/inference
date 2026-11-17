@@ -23,6 +23,13 @@ class TaskWiring(unittest.TestCase):
     with self.assertRaises(BlockingIOError):
      with gpu_writer_lock(p):pass
    with gpu_writer_lock(p):pass
+ def test_explicit_muon_mode_reaches_both_training_tasks(self):
+  r=json.loads(Path('reports/ganesh-controller-v1/request-template.json').read_text())
+  r['training_inputs']['muon_kernel_mode']='eager'
+  for task in r['tasks']:
+   if task.get('operation') in ('train_fit','train_curriculum'):
+    argv=train_argv(r,task,Path.cwd())
+    self.assertEqual(argv[argv.index('--muon-kernel-mode')+1],'eager')
  def test_real_frozen_budget_sum(self):
   fit=json.loads(Path('reports/english-local-readiness-v1/fit-suite.json').read_text())
   dev=json.loads(Path('reports/english-first-v1/development-suite.json').read_text())
