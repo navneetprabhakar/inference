@@ -1,0 +1,307 @@
+{
+  "reviewer": "Codex evidence-first author review; not independent blind review",
+  "all30outputs_reviewed": true,
+  "all_long_context_and_release_claims_excluded": true,
+  "records": [
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "greeting",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "f65fe229c9d3e3a1705f215eef12a80620adc4700919fde55ac66442f743ebbb",
+      "frame_kind": "invalid",
+      "manual_assessment": "Unrelated expository/instructional continuation, not a relevant greeting; no complete native frame within64tokens.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "simple_instruction",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "117684eabc7dec2deddbd9f8c8b35f2845a543d10c1df19156535d77817cec45",
+      "frame_kind": "invalid",
+      "manual_assessment": "Does not deliver the requested single short thank-you for moving help; repetition, invented narrative or unrelated additional advice. SFT50ends validly but fails semantics/constraints.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "identity",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "209fb5eea98d729e2b4e84996289c0bb736e1683c4828381ef3c0603814040eb",
+      "frame_kind": "invalid",
+      "manual_assessment": "Requested canonical name/creator absent. Invented or incoherent identity; new user-supplied facts have not been trained. No identity success claimed.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "recall_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "d363c0798b64715ffe97ee1e0427831056e52263880b76c80ac57c729e4811cf",
+      "frame_kind": "invalid",
+      "manual_assessment": "Access word appears, demonstrating some extraction from supplied history. Extra text violates just-word instruction; SFT50also invites changing the word. Only production-framed SFT50/194terminate validly. This is not an autonomous successful conversation.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "correction_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "e3f267d3b656f26c0c17e4b71f9077ba9c1b693376d0bc87a84591f0e1d10157",
+      "frame_kind": "invalid",
+      "manual_assessment": "Answers stale Tuesday despite supplied Friday correction. SFT50/194terminate validly, isolating a semantic state-update failure from parser failure.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-fresh.json",
+      "candidate": "base10b",
+      "case": "plain_completion_control",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "1c06e2dbbc75e3dd8ffede9080a4308666596f02065d6681bba6437a5a5a5e64",
+      "frame_kind": "not_scored_plain_control",
+      "manual_assessment": "Immediate color red is correct, followed by repetition; narrow completion ability only.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "greeting",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "52e507d1db85afc60ac897536f8798f8d48dada87325c5ba413248f58121c24e",
+      "frame_kind": "invalid",
+      "manual_assessment": "Unrelated expository/instructional continuation, not a relevant greeting; no complete native frame within64tokens.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "simple_instruction",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "5ce89978c46f67ac2fac18229c27a142b8425f5ccc28579c39ddb89fdde9dafd",
+      "frame_kind": "invalid",
+      "manual_assessment": "Does not deliver the requested single short thank-you for moving help; repetition, invented narrative or unrelated additional advice. SFT50ends validly but fails semantics/constraints.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "identity",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "21ce85b17011b95a8af16e0071f834303b5794945b15f07bc48714953188a801",
+      "frame_kind": "invalid",
+      "manual_assessment": "Requested canonical name/creator absent. Invented or incoherent identity; new user-supplied facts have not been trained. No identity success claimed.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "recall_gold_history",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "e7f3119fdfdf3bbd65faad9f40f5865d05ace7f65cf7d0956dcd4bbae238fa00",
+      "frame_kind": "invalid",
+      "manual_assessment": "Access word appears, demonstrating some extraction from supplied history. Extra text violates just-word instruction; SFT50also invites changing the word. Only production-framed SFT50/194terminate validly. This is not an autonomous successful conversation.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "correction_gold_history",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "90ff898e03aede8652062873f86daedd34eb0ddd517a9a51d1686c05311c0090",
+      "frame_kind": "invalid",
+      "manual_assessment": "Friday is retrieved after correction, but answer violates just-day instruction; base fails native termination.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/base10b-minimal-frame.json",
+      "candidate": "base10b",
+      "case": "plain_completion_control",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "1c06e2dbbc75e3dd8ffede9080a4308666596f02065d6681bba6437a5a5a5e64",
+      "frame_kind": "not_scored_plain_control",
+      "manual_assessment": "Immediate color red is correct, followed by repetition; narrow completion ability only.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "greeting",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "fb7b304e7af45e0b43596c792129e5ba1c7df1dbc15f4bcb8466a4b95d71d25e",
+      "frame_kind": "invalid",
+      "manual_assessment": "Unrelated expository/instructional continuation, not a relevant greeting; no complete native frame within64tokens.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "simple_instruction",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "bf41485a44827d1d98c65e0023d9dc622c3720fbd26cd5875a9b7bc22ca1b6e3",
+      "frame_kind": "invalid",
+      "manual_assessment": "Does not deliver the requested single short thank-you for moving help; repetition, invented narrative or unrelated additional advice. SFT50ends validly but fails semantics/constraints.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "identity",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "e029a98f6a0597acaf31c560501c3bd41caeee9efe177b62c9008ef70dd7bae1",
+      "frame_kind": "invalid",
+      "manual_assessment": "Requested canonical name/creator absent. Invented or incoherent identity; new user-supplied facts have not been trained. No identity success claimed.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "recall_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "5dbe809b3899ce2487c4ddddd6196490d2d767c2ba3978fb61e9b829e6d7424c",
+      "frame_kind": "text",
+      "manual_assessment": "Access word appears, demonstrating some extraction from supplied history. Extra text violates just-word instruction; SFT50also invites changing the word. Only production-framed SFT50/194terminate validly. This is not an autonomous successful conversation.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "correction_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "82b96eb03085898dd0403d272ad0e6144e70d3472e1e98484f90a2a28897a746",
+      "frame_kind": "text",
+      "manual_assessment": "Answers stale Tuesday despite supplied Friday correction. SFT50/194terminate validly, isolating a semantic state-update failure from parser failure.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-fresh.json",
+      "candidate": "sft194",
+      "case": "plain_completion_control",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "a284233b020774dca6380daac3633f7dc380afba4a0901bd919f830719ac6270",
+      "frame_kind": "not_scored_plain_control",
+      "manual_assessment": "Continuation drifts from the explicit red-cup fact; no general-quality inference from one control.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "greeting",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "f45c03ee87ab67aaee7803f7723c0511e0a209364c3beb65d8045f7dea3768ee",
+      "frame_kind": "invalid",
+      "manual_assessment": "Unrelated expository/instructional continuation, not a relevant greeting; no complete native frame within64tokens.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "simple_instruction",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "532719a38eabf8f0bc196495e3615db0a1f7e842354e4848c74ac583a8602c1b",
+      "frame_kind": "invalid",
+      "manual_assessment": "Does not deliver the requested single short thank-you for moving help; repetition, invented narrative or unrelated additional advice. SFT50ends validly but fails semantics/constraints.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "identity",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "8e62eddacb7e12cea0cbf5bcc81b1d60e040d081a3d93025fb408700de96b346",
+      "frame_kind": "invalid",
+      "manual_assessment": "Requested canonical name/creator absent. Invented or incoherent identity; new user-supplied facts have not been trained. No identity success claimed.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "recall_gold_history",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "1e2a58199b8949e74e3c41932133f16107926c79be2a9a84f6715d0f90207479",
+      "frame_kind": "invalid",
+      "manual_assessment": "Access word appears, demonstrating some extraction from supplied history. Extra text violates just-word instruction; SFT50also invites changing the word. Only production-framed SFT50/194terminate validly. This is not an autonomous successful conversation.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "correction_gold_history",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "7734bf6bdcf076fe5e2cec85ac6a64a8fb36cedc53c8f066306cea13530bd78f",
+      "frame_kind": "text",
+      "manual_assessment": "Friday is retrieved after correction, but answer violates just-day instruction; base fails native termination.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft194-minimal-frame.json",
+      "candidate": "sft194",
+      "case": "plain_completion_control",
+      "minimal_policy_ablation": true,
+      "raw_sha256": "a284233b020774dca6380daac3633f7dc380afba4a0901bd919f830719ac6270",
+      "frame_kind": "not_scored_plain_control",
+      "manual_assessment": "Continuation drifts from the explicit red-cup fact; no general-quality inference from one control.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "greeting",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "c717f1dd3a2c8737371bf237fe5c4bad54da2b6c16a3d69c332eb853da6b04b4",
+      "frame_kind": "invalid",
+      "manual_assessment": "Unrelated expository/instructional continuation, not a relevant greeting; no complete native frame within64tokens.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "simple_instruction",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "1a2c2cc5b3f61d7e2e620e3f533cae54afa14bd21be6eaab50de2deae06f1695",
+      "frame_kind": "text",
+      "manual_assessment": "Does not deliver the requested single short thank-you for moving help; repetition, invented narrative or unrelated additional advice. SFT50ends validly but fails semantics/constraints.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "identity",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "335aee21818a4b7b55f8097eef3b5eecc387b6fd14f0d8ad19c1d57e7b3ca5f2",
+      "frame_kind": "invalid",
+      "manual_assessment": "Requested canonical name/creator absent. Invented or incoherent identity; new user-supplied facts have not been trained. No identity success claimed.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "recall_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "30ed09f55721b518c0d24899065a686a07dcf583760bb80aa16ca14a1a0fd4ff",
+      "frame_kind": "text",
+      "manual_assessment": "Access word appears, demonstrating some extraction from supplied history. Extra text violates just-word instruction; SFT50also invites changing the word. Only production-framed SFT50/194terminate validly. This is not an autonomous successful conversation.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "correction_gold_history",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "82b96eb03085898dd0403d272ad0e6144e70d3472e1e98484f90a2a28897a746",
+      "frame_kind": "text",
+      "manual_assessment": "Answers stale Tuesday despite supplied Friday correction. SFT50/194terminate validly, isolating a semantic state-update failure from parser failure.",
+      "independent_release": false
+    },
+    {
+      "source": "reports/ganesh-base-review-v1/sft50-fresh.json",
+      "candidate": "sft50",
+      "case": "plain_completion_control",
+      "minimal_policy_ablation": false,
+      "raw_sha256": "42c2edf9034205d69c14d213435508dc2a4ac7aca7348e6cc17b4959640e46e1",
+      "frame_kind": "not_scored_plain_control",
+      "manual_assessment": "Continuation drifts from the explicit red-cup fact; no general-quality inference from one control.",
+      "independent_release": false
+    }
+  ]
+}

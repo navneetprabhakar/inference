@@ -1,184 +1,117 @@
-OWN MODEL — AUTHORITATIVE HANDOFF
-Updated 16 November 2026. Current facts supersede historical plans in Git.
+GANESH-BASE — AUTHORITATIVE HANDOFF
+Updated17November2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT: NEW $15 APPROVAL — CAPACITY HOLD, NO GPU WORKER RAN
-16Nov latest user permits L4 or A100 under new total$15incremental cap; supersedes
-old L4-only/no-cap instructions. Prior review/handoff pushed to main50defa5.
-Plan/results: reports/english-cap15-v2/PLAN.md and RESULTS.md. $5qualification,
-$6conditional fit,$4storage/transfer/backup reserve. Qualification first; no release.
-56targeted tests and fresh checks pass:148runtime members,3local model bundles,
-41frozen inputs,5worker argv branches. Runtime/packet GCS readbacks hash-verified.
-One60minute A100 attempt reserved$4.59173125with25%margin. us-central1-f failed
-capacity; provider suggested us-central1-a. Separate same-price fallback reviewed
-and attempted under original deadline; it also failed capacity. Both operations
-DONE with errors, neither created VM/disk. Async acceptance was not launch success.
-Final fresh inventory:3retained VMs TERMINATED;0new VM/disk; no worker/training.
-Observed new GPU compute$0; active compute reservation$0. GCS staging/readback/
-storage costs not yet invoice-reconciled; retain$4reserve, do not claim zero spend.
-Approval remains recorded; no automatic retry pending. Future request requires
-fresh capacity/cost/lease review and cumulative reconciliation within remainingcap,
-not reusing closed requests. No extra budget approval requested at this point.
-CUDA signal-resume exactness, upload-failure recovery and independent providerSTOP
-remain unqualified. New traced worker is locally checked only; cannot launch fit.
-All inputs/evidence preserved; see input-backup-receipt and final-backup-receipt.
-No new model/checkpoint existed to back up or shut down. Existing local Own models
-preserved; HTTPoff/default unchanged; no sealed release exposure or data admission.
-Further source review: reports/oasst-memory-remaining-v1/RESULTS.md.8new TRAIN
-conversations/24responses,0retained;48prefix checks pass. Prior4two-turn candidates/
-595targets unchanged, unadmitted. Delayed memory/sustained correction gap persists.
-Historical receipts remain immutable; current status supersedes old cap/auth notes.
+CURRENT DECISION: LOCAL BOUNDED-PILOT PREPARATION COMPLETE; CLOUD LAUNCH HOLD
+Hands-off execution approved in principle; numerical new cap still unspecified.
+Proposed $20 L4/12-hour envelope ($5 qualification-only); see
+reports/ganesh-controller-v1/BUDGET.md. Keep VMs/HTTP off pending finite cap and
+live qualification. Commit/push of local changes to main authorized. No training,
+cloud writes, weight/default changes or sealed release exposure. Old retry
+requests remain closed; STOPPED_BY_USER preserved. Reauth succeeded; read-only
+inventory at2026-11-17T16:14:37Z showed zero VMs/disks; bucket US-CENTRAL1.
 
-LOCAL READINESS RESULTS / GPU BLOCKERS
-Results: reports/english-local-readiness-v1/READINESS.txt and readiness-receipt.json.
-160 targeted tests pass; all41 frozen input files unchanged. Real tokenizer,
-prefix/labels/end targets and full384-row padding checks pass. Current offline
-runtime148members read back/hash-verified; base10B/diagnostic2/default194 intact.
-Full exposed training-fit review: base10B and diagnostic2 EACH0/72turns,
-0/24sessions (24invalid initial frames,48blocked followups), zero executed calls.
-End targets are11%of positions but61%of diagnostic teacher-forced loss; median
-end-token rank32,721/32,768. Lower CE has not produced conversation improvement.
-This is conditional evidence, not a sole-cause diagnosis or learnability ceiling.
-Recovery boundary instrumentation and0/16/32/64diagnostic checkpoint retention
-implemented/CPU-tested; CUDA mismatch still unresolved. New runtime unqualified.
-No training, new data admission, release exposure, VM start or GCS mutation.
-HTTP8765off; defaults unchanged. Evidence/runtime currently local only.
-Read-only GCP inventory failed reauthentication on16Nov: fresh VM-off verification
-unavailable. The following VM/backup facts were last verified14Nov, not today.
-Next blockers: new finite cap, refreshed GCP auth/inventory, concrete fresh lease
-and rate/timing, exact CUDA signal-resume plus upload/provider-STOP qualification.
-A6 final launch budget/deadline remains pending; experiment card is not approval.
+CANONICAL CURRENT READINESS
+reports/ganesh-controller-v1/READINESS.md and ADVERSARIAL_REVIEW.md.
+202distinct tests pass; actual unapproved dispatch returns hold_gate. Six-task
+controller integrates fit/train/probes/full semantic reviews and curriculum pilot.
+Immutable input/code hashes, durable intent, restart barriers, output checks,
+machine-wide writer lock and bounded child termination are enforced. Provisioning
+and live qualification remain separate supervised steps. Same-agent review is not
+independent acceptance. Local evidence does not establish CUDA/GCS/providerSTOP.
 
-PREVIOUS CAMPAIGN — CLOSED14NOV2026
-Final A100 VM forge-english-a100-1114-084208, us-central1-f, TERMINATED
-at09:42:45UTC14Nov2026, then VM and redundant disk deleted after verified backups.
-Three prior VMs remain TERMINATED. No active writer, retry or fit pilot.
-English conversation remains first; maths/CBSE deferred. No accepted model.
-Final compute estimate $3.349724 across A100 allocations (not invoice verified;
-storage/network additional, $3.50 reserve). All compute reservations released.
-Operational cap remained $10, within prior $15 ceiling. See spend-ledger.json.
+REVIEWED SEED CURRICULUM
+reports/ganesh-english-curriculum-v2/:31train sessions/91turns/1052unique target
+positions;16dev/47turns/496reference targets. Full138turn review;6tool replays.
+Both no-call modes and positive calls. Identity45targets/4.28%;3train/2dev examples.
+Codex synthetic only; no new organic admission. Exposed development, overlapping
+abstract structures, short context<=638tokens: NOT pristine release or broad English.
+Seven actual updates in3epochs,25packed rows,3156replay targets; ceiling64updates.
+v1 rejected before training for identitymass>5%; compact audit retained.
+All41existing frozen hashes unchanged;11new curriculum hashes verified.
+Identity declared, reviewed subset admitted to pilot; NOT trained/weightverified.
 
-Normal CUDA/GCS restart PASS: uninterrupted2updates vs1+fresh restore+1,
-all159tensors/1,409,489,630elements bitwise equal and quality loop equal.
-Real mid-accumulation SIGTERM: live rollback payload byte-identical to initial
-state. Subsequent resumed update FAILED exact comparison: HOLD. Training loss
-before update matched, but development CE after update differed. Kernel-level
-cause is not established. Offline comparison:4/159tensors differ (190model
-weight values,30optimizer values); metadata/RNG/data state equal. Localized
-numerical divergence does not explain gross conversation failure. Upload-rejection and independent providerSTOP drills
-were not reached. No64-update English fit pilot or release test ran.
-Required checkpoint and evidence readbacks verified before normal shutdown.
-Normal shutdown is NOT proof of independent provider-stop fault qualification.
-See repair/backup-reconciliation.json and faults/worker-backup-check.json.
+RUNTIME / LOCAL READINESS
+runs/ganesh-controller-v1/runtime-qualified-local.tar.gz
+SHA25631d393da1a4cf9ffb663368adad7d1a7062b68068ae318bc8eb36d4f86ce354d
+278322481bytes;155members;30adapter modules, extracted/readback verified.
+Data packet47509bytes SHA2563c19f919e81406fe8f1d68254afec0b66c7dde5db15f55ecdacdee5b7f6bf794.
+No sealed release included. Both integrated validate-only preflights pass.
+Base10B/default194payloads verified; selected local weights retained unchanged.
+Superseded runtime archives removed only after current runtime verified; see cleanup.json.
 
-Two launcher defects fixed with regression tests: missing /checkpoints suffix;
-stale local retention journal used for backup verification. Reconciled against
-current authoritative GCS journals; all4 required restart bundles read back.
-144component tests passed. Neither CPU tests nor normal restart grant readiness.
+REMAINING CLOUD / ACCEPTANCE GATES
+New explicit finite cap/reserve, fresh quote/inventory/input GCS readbacks and fixed
+absolute providerSTOP required. Actual CUDAshape/throughput, exactrestart, signal
+recovery, GCSrestore, uploadrejection and providerSTOP must pass BEFOREfit.
+Exactrestart mismatch remains unresolved; no no-resume exception approved.
+Frozenfit24/12sessions unchanged;64epochs AND64updates, batch8192, packing1,
+LRmultiplier.25, seed103. Review all0/16/32/64reached plusbest/last; fitGO>=23/24
+complete sessions and all semantic/action checks. Curriculum follows only fitpass.
+Total maximum318528generated tokens including frozen192token dev budget and
+baseline/best/last protectedchecks. Uncached decode cost is not measured on L4.
+No guaranteed cap/time estimate from warm update speed. No automatic escalation.
+Two failedpilots -> HOLD. Pilot cannot authorize release; independent release and
+localMPSqualification required for promotion. Full semantic reviews may finish
+locally after computeSTOP. Verify backups before normalshutdown; finiteleaseSTOP
+still applies on backupfailure with recoverydisk preserved.
 
-Full local MPS review of preselected diagnostic step2: English0/36turns,
-0/12sessions (12invalid frames,24blocked followups); protected tools0/18turns,
-0/14sessions (14invalid frames,4blocked), zero actual executed calls.
-All raw frames and blocked denominators retained. Exposed development only;
-not independent release evidence. Existing194baseline also0/36English turns.
-This2-update base-derived checkpoint consumed882replay assistant targets from
-656unique targets. It is an infrastructure diagnostic, not a completed SFT;
-its failures do not establish that a completed fit pilot cannot learn.
-Default unchanged. Local models and explicit diagnostic CLI remain available;
-HTTP8765off. No sealed release consumed; corrective corpus remains frozen.
-Evidence: reports/english-a100-v1/; final rationale in PAUSE_ASSESSMENT.txt.
+RCA AND CURRENT MODEL QUALITY
+reports/ganesh-base-review-v1/REVIEW.md; raw probes, data-audit and manualreview.
+Completed SFT349sessions/43183assistant targets;80natural sessions supply32288
+(74.77%)targets.190disabled-no-call,321enabled-call, ZEROenabled-no-call turns.
+Natural replies median152.5tokens;121/190exceed128. Curriculum/style mismatch real;
+not proof of sole cause.30exploratory raw outputs include repeated controls and
+framing ablations, not30independent benchmark questions. SFT194partially recalls
+supplied-history facts but often fails correction; removing policy improved one
+paired case, not general English. Best-lossSFT50also fails basic instructions.
+No model has passed conversation acceptance. Nativecontext2048, not4K.
 
-CURRENT ENGLISH DIAGNOSTIC — reports/english-first-v1/
--24reviewed fit sessions/72turns/656unique assistant targets, derived from the
- reviewed corrective core.12new everyday development sessions/36turns/556reference
- targets. Full manual source/reference review plus real tokenizer/mask/prefix checks.
--Current194MPS baseline:0/36strict turns,0/12complete passing sessions.16finished
- answers fail semantics/instructions;7invalid actions;13blocked followups count
- as failures. Full raw/decoded/per-turn review retained. No quality improvement.
--The tiny fit set tests training-example learnability, NOT broad conversation.
- New dev includes broader everyday dialogue than fit training: failure there is
- not isolated proof of deficient foundation capacity. Same author, no independent
- reviewer claim. Development is never training or pristine release data.
--Isolated english_fit_diagnostic contract requires native2K, exact reviewed24/12
- data, immutable base and explicit --fit-diagnostic. Both no-call policy modes
- covered; positive tool workflows remain separate regression tests.
--Only this diagnostic permits64finite epochs/64updates,LRmultiplier<=.25. Production
- default8epochs and old corrective4K10-update bounds remain unchanged. Actual
-64epoch packet=384rows/96full-schedule updates,41,984replay targets. The64update
- cap stops BEFORE completing64epochs; these are not new/unique targets.
--Development regression guards remain active. Early stop before fit is inconclusive
- about maximum learnability; never automatically extend. Fit go target23/24complete
- training sessions, then unseen transfer. Diagnostic checkpoints are explicitly
- blocked from release regardless of other evidence. No serving default change.
--Real CLI validate-only passes.140related CPU tests passed; expanded4lease tests
- subsequently passed. These are component/control-flow checks, not GPU acceptance.
- Qualification cadence1 aligns2vs1+1observations. Fresh-process tests execute the
- actual SFT while-body with mocked compute/I/O; normal CUDA/GCS proof now passes; fault qualification remains incomplete.
+OPTIMIZER DIAGNOSIS
+reports/english-reassessment-v1/trace-analysis.json and PLAN.md.
+First12boundaries of firstupdate match; resumedsecond update first differs AFTER
+optimizer.step despite matching recorded pre-step inputs/gradients/state.16projection
+weights/1secondmoment differ, maxabs4.3847e-6; devCEdifference~.00431%; zero guard
+strikes. Not causal proof of broad conversation failure or checkpoint corruption.
+reports/optimizer-capture-v1/READINESS.md: actual Muon group capture/replay local
+harness;2GiBcapture cap, one group at update0or1, explicit diagnostic/trace flags.
+CPUcapture/replay controls pass, eager/compiled differ repeatably; not failingGPU
+inputs or CUDAreadiness. Actual production-shape capture remains outstanding.
 
-HISTORICAL L4 CAPACITY ATTEMPTS / CLOSED BUDGET
-Single g2-standard-8/L4 qualification request; fixed absolute STOP, non-auto-delete
- disk, private networking, earlier worker cutoff, GCS input/readback and closeout.
-11supported zones across us-central1/us-east1/us-east4/us-west1 failed with confirmed
-ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS. An additional us-central1-f request was
-rejected because that machine type is unsupported; per-zone API preflight now
-prevents recurrence. Oregon a/b briefly showed STAGING, then failed; no worker ran.
-All operations reconciled; no new VM or disk remains;3existing VMs TERMINATED.
-Live Billing Catalog validates same-or-lower regional rate than reserved0.853624312
-USD/hour. Two-hour compute reservation2.13406078USDwas released after reconciliation.
-Estimated compute spend0; not an invoice claim. Existing storage/GCS still bills.
-No automatic retries remain. Old request deadline09:44:50UTC14Nov must NOT be reused.
-See live-status.json, spend-ledger.json, operation receipts and cloud-closeout.json.
+LOCAL WEIGHTS — PRESERVE
+base10B: runs/local-readiness-v1/base10b
+  manifest7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53
+SFT50: runs/quality-rca-v1/step-00000050
+  manifestff051a947bfeefc11ca7679aa5e785baaec04d103e466c89d8be3cb87ed490b1
+Default experimentalSFT194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
+  manifeste99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
+Also retained: literal-state-repair-v1 step605; english-a100-v1 diagnosticstep2,
+reference-step1 and signal-resumed-step1. No serving default changed.
+Tokenizer: runs/ownbase-v2-data/tokenizer
+  SHAad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5
+Pinned upstream: runs/nanochat-source revision92d63d4e8bb4df75c3b71618f31ddde2378b2bcd.
 
-BACKUPS / LOCAL PRESERVATION
-Qualification runtime and reviewed packet independently downloaded/hash-verified
-from GCS. New A100 diagnostic checkpoints exist; none are accepted models.
-Historical pre-A100 compact evidence receipt:
-reports/english-first-v1/backup-receipt.json (created during this closeout).
-Prior current models, tokenizer, pinned nanochat source and .venv remain local:
--Base10B: runs/local-readiness-v1/base10b
- SHA7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53
--Step50: runs/quality-rca-v1/step-00000050
- SHA ff051a947bfeefc11ca7679aa5e785baaec04d103e466c89d8be3cb87ed490b1
--SFT194: runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs
- SHA e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54
--SFT605: runs/literal-state-repair-v1/results/sft/step-00000605
- SHA05ab60c277c0bcfb4288215b8909aa693a451ab1e059fa5aacd7946f2a1854a8
-Use ./chat-own-latest.sh --raw for explicit experimental194MPS CLI. HTTP8765 stays off.
-GCS future-use index: reports/local-gcs-cleanup-20261114/future-use-index.json.
-Prior base/corpus/model backups: gs://forge-ownbase-a100-20261110/ownbase-v2/budget50-v1/
-Do not rerun archive_payloads.py or retired restore/allocator scripts.497obsolete
-local payloads and248unneeded GCS objects were already removed. Keep future-use
-corpus, selected weights and compact evidence; do not duplicate obsolete archives.
+CLOUD RETENTION AUTHORITY / PRIOR CLEANUP
+reports/gcp-cleanup-20261117/REPORT.md and own-plan.json are retention authority.
+All4VMrecords/3disks(500GiB) deleted after required backups verified. Own obsolete
+85objects/258.042GiB removed;11selected/reference/mismatch bundles plus corpus and
+compact evidence retained (~62.797GiB). Historical legacy Ganesh buckets deleted;
+not the Own-lineage checkpoints now named Ganesh-base. Laxmi exactduplicates removed
+with restore maps; unique/opaque archives retained.5supersededsecretversions
+removed,14latest retained. Own blanket30day deletion lifecycle removed.
+Cleanup receipts retain hashes/readbacks; do not delete unverified solecopies.
+Account historical costs/inventory: reports/gcp-cost-audit-v1/REPORT.md (precleanup).
+LatestA100run stopped16Nov18:38:53UTC, computeestimate$2.2077plus unreconciled other
+charges. Retainedstorage continues billing; no fresh settlement/costquote claimed.
 
-WHY THE RECIPE CHANGED
-Read reports/feasibility-deep-dive-v1/ASSESSMENT.txt and
-reports/quality-rca-v1/RCA_AND_REMEDIATION.txt.
-Own537M:10,000,269,312base tokens, native2048context. Actual SFT194 had349unique
-sessions/43,183assistant targets,8epochs;80Codex natural dialogues trained.
-V4–V21long expansions were NOT trained. Old data had zero enabled-tools/no-call
-coverage. DevCE3.1210->best2.3124at50->3.6175at194. Old run did not stop regression.
-Strict CUDA5/180turns,0/60sessions despite protected tools18/18. Matched50/194checks
-both4/16, calculator-only. Rollback has not established conversation recovery.
-Raw base/50/194cloze diagnostics9/8/7of12correct preferences show some knowledge but
-unreliable state/arithmetic; NOT generation accuracy or proof of broad regression.
-Old4Kpilot gave675/104361targets to NEW short natural/state repairs and changed too
-many variables together. That pilot recommendation is withdrawn. Establish short
-learning/transfer first; no broad assistant or CBSE success/budget promise.
+FROZEN / SOURCE REVIEW RULES
+corrective-corpus-v1 immutable; existing4Kpilot<=10updates; release single-use.
+Existing4Kcandidate full development61sessions/232turns; no partial-shard pass.
+New English diagnostic does not authorize4Krelease or production data admission.
+OASST reviews retained only4two-turn candidates/595targets, unadmitted; recent
+correction/delayed-memory sweeps yielded no acceptable additions. Source counts
+are not trained targets or quality gains. See reports/oasst-*/RESULTS.md.
+Englishfirst, then maths, then CBSE. No release exposure for exploratory selection.
 
-FROZEN CORRECTIVE CORPUS — PRESERVE, NOT CURRENT DIAGNOSTIC RECIPE
-reports/corrective-corpus-v1 remains immutable:31freeze-bound files, release unused.
-Combined candidate272train/61dev,175,346unique train targets;17,187after3072.
-215inherited dialogues retain hash-bound historical review;338narrow legacy rows
-excluded. Source/reference review completed; not a model-quality acceptance.
-Release63sessions/189turns is source-disjoint but Codex-authored; do not claim an
-independent human benchmark. No exploratory model selection on this release.
-Existing4Kcontract/gates remain intact for that candidate. Do not mix it silently
-into the English tiny-fit control or weaken its thresholds for promotion.
-
-NEXT ACTIONS / HARD STOPS
-Cloud paused; local remediation allowed. No autonomous cloud starts, retries, training, dataset expansion
-or promotion. Preserve local models, future-use corpus, mismatch states and
-hash-bound evidence in GCS. See reports/english-a100-v1/backup-receipt.json.
-Only after explicit user resume: diagnose resumed-update divergence with gradient
-and optimizer-boundary fingerprints; finish signal/upload/provider fault gates;
-then bounded English learnability and unseen transfer. No maths/CBSE before
-English acceptance. No release exposure for exploratory model selection.
+NEXT
+Keep compute off pending new cap. See current readiness for ordered approval-time
+checks and live qualification. No current model passes conversation acceptance.

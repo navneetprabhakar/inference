@@ -117,11 +117,22 @@ def supervise(argv,output,seconds):
     with Path(str(output)+'.log').open('x') as log:
         process=subprocess.Popen(argv,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
         timed_out=False
-        try:code=process.wait(timeout=seconds)
-        except subprocess.TimeoutExpired:
-            timed_out=True
-            os.killpg(process.pid,signal.SIGKILL)
-            code=process.wait()
+        previous={}
+        def terminate_child(sig,frame):
+            if process.poll() is None:
+                os.killpg(process.pid,signal.SIGKILL)
+                process.wait()
+            raise SystemExit(128+sig)
+        try:
+            for sig in (signal.SIGTERM,signal.SIGINT):
+                previous[sig]=signal.signal(sig,terminate_child)
+            try:code=process.wait(timeout=seconds)
+            except subprocess.TimeoutExpired:
+                timed_out=True
+                os.killpg(process.pid,signal.SIGKILL)
+                code=process.wait()
+        finally:
+            for sig,handler in previous.items():signal.signal(sig,handler)
     report=json.loads(Path(output).read_text())
     if timed_out or code!=0:
         report.update(status='incomplete_timeout' if timed_out else 'incomplete_worker_error',usable_model_claim=False)

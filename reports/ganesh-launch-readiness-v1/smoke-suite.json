@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "purpose": "training_fit_exposed_never_release",
+  "required_context_tokens": 2048,
+  "source_sha256": "d64ab6f4c4814f5cd3f476661d1ab31bd0632e00532b5520916acfc062a9bb35",
+  "sessions": [
+    {
+      "id": "apology",
+      "category": "natural",
+      "source_group": "apology",
+      "turns": [
+        {
+          "user": "Write a brief apology for arriving late to a rehearsal. Do not invent an excuse.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reference_answer": "Sorry I was late to rehearsal. I know it disrupted the group, and I'll aim to arrive on time next time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Make it one sentence.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sorry I was late to rehearsal; I'll aim to arrive on time next time.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        },
+        {
+          "user": "Remove the promise about next time.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reference_answer": "Sorry I was late to rehearsal.",
+          "expected_calls": [],
+          "reply_budget": 128,
+          "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory."
+        }
+      ]
+    }
+  ],
+  "smoke_only": true
+}

@@ -8,7 +8,7 @@ MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
            'campaign_budget', 'runtime', 'nano_campaign', 'nano_sft',
            'nano_serve', 'nano_chat_format', 'nano_quality', 'nano_context',
-           'nano_quality_gate', 'nano_fit_contract', 'nano_qualification_schedule', 'nano_corpus_guard', 'nano_restart_compare', 'nano_update_trace', 'nano_fit_readiness')
+           'nano_quality_gate', 'nano_fit_contract', 'nano_qualification_schedule', 'nano_corpus_guard', 'nano_restart_compare', 'nano_update_trace', 'nano_fit_readiness', 'nano_optimizer_capture', 'nano_fit_probe', 'nano_recovery_gate', 'nano_recovery_controller', 'nano_recovery_tasks')
 
 def verify_module_closure(root, modules=MODULES):
     """Fail locally if a packaged adapter imports an omitted project module."""
@@ -76,6 +76,7 @@ def build(root, target):
             if p.is_file() and '__pycache__' not in p.parts: files[name+'/'+p.relative_to(folder).as_posix()] = p
     for name in MODULES: files['cloud_training/'+name+'.py'] = root/'cloud_training'/ (name+'.py')
     files['tools/__init__.py']=root/'tools/__init__.py'
+    files['ganesh_recovery_task.py']=root/'ganesh_recovery_task.py'
     files['cloud_training/evaluation/conversation-tools-dev.json']=root/'cloud_training/evaluation/conversation-tools-dev.json'
     files['cloud_training/nano_server.sh'] = root/'cloud_training/nano_server.sh'
     for name in ('kernel-lock.json','python-headers-lock.json'): files[name] = root/'reports/l4-qualification-v1'/name

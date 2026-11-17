@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "objective": "conversation_and_tools",
+  "diagnostic_only": true,
+  "pilot_only": true,
+  "dataset_manifest_sha256": "d5df681224fc462d9c94d8392f4b2c08880ef60a871eacfab2ba2ddd1df1dd15",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "context_tokens": 2048,
+  "required_parent_manifest_sha256": "102b7d077cb6c57929ef3797c6165531cca1d5d59e2dee5db0729b43d483be32",
+  "release_suite_sha256": "ba78aa47747df7be9ddae28dbca0426f3d843d8b8c3e08f10b33dba74359f8d7",
+  "protected_suite_sha256": "0cb4109ff2a6800b3f828c70f3880c89a160e73798777c05bad94e05dc7a20cc",
+  "development_suite_sha256": "40e5942a4cb56e26a90caad6ddbe3375d9d68ab679b5305466c08aeafa60abca",
+  "review_sha256": "b34cf452c2267e601d6159c189765c4a2b163e7384eccad5d6069a5237a0325c",
+  "coverage": {
+    "minimum_training_turns": {
+      "disabled_no_call": 10,
+      "enabled_no_call": 10,
+      "enabled_call": 4
+    },
+    "minimum_unique_assistant_targets": 1072,
+    "minimum_family_sessions": {
+      "ordinary": 1,
+      "instructions": 1,
+      "correction": 1,
+      "memory": 1,
+      "model_identity": 1,
+      "tools": 1
+    }
+  },
+  "recipe_limits": {
+    "max_epochs": 3,
+    "max_lr_multiplier": 0.25,
+    "max_eval_interval": 1,
+    "max_pilot_updates": 64
+  },
+  "regression": {
+    "relative_tolerance": 0.05,
+    "patience": 2
+  },
+  "unresolved_required_data": [],
+  "release": {
+    "eligible": false
+  },
+  "notes": [
+    "Pilot intentionally cannot authorize release. Existing frozen fit must pass before this separate curriculum is trained.",
+    "No claim of broad English coverage; optimize for measured learning, not row count."
+  ]
+}

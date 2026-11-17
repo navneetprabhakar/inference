@@ -1,0 +1,153 @@
+{
+  "checkpoint_manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54",
+  "suite_sha256": "54abeedad3a35f6d6ad099865c26722aa8cd00fd24171c09ac29cb8ecb7edbdd",
+  "runner_sha256": "2dfb9f00e9718864e465478799117384f4b39b23d78afc4a8f725e3bfd22866f",
+  "scope": "exposed_fit",
+  "release_eligible": false,
+  "decoding": "greedy; repetition penalty1",
+  "reply_budget": 128,
+  "device": "mps",
+  "status": "fit_checks_complete_requires_review",
+  "records": [
+    {
+      "session": "apology",
+      "turn": 0,
+      "user": "Write a brief apology for arriving late to a rehearsal. Do not invent an excuse.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory.",
+      "reply_budget": 128,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Expecting value: line 1 column 19 (char 18)",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              32764,
+              25311,
+              17428,
+              4990,
+              8220,
+              25311,
+              97,
+              8220,
+              98,
+              1191,
+              98,
+              8220,
+              394,
+              1191,
+              394,
+              14424,
+              11988,
+              116,
+              803,
+              34,
+              125,
+              1191,
+              10005,
+              14424,
+              574,
+              921,
+              34,
+              125,
+              32765
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Expecting value: line 1 column 19 (char 18)"
+            },
+            "seconds": 1.9035431249649264
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      },
+      "decoded_actions": [
+        "<|python_start|>{\"arguments\":{\"a\":b,\"b\":op,\"op\":\"subtract\"},\"name\":\"apology\"}<|python_end|>"
+      ]
+    },
+    {
+      "session": "apology",
+      "turn": 1,
+      "user": "Make it one sentence.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory.",
+      "reply_budget": 128,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      },
+      "decoded_actions": []
+    },
+    {
+      "session": "apology",
+      "turn": 2,
+      "user": "Remove the promise about next time.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Semantic equivalents allowed. Relevant natural English, exact current facts and requested constraints, clean end; no tools. Judge followups against actual earlier model replies. Reference wording is not mandatory.",
+      "reply_budget": 128,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      },
+      "decoded_actions": []
+    }
+  ],
+  "automated_passed": 0,
+  "automated_total": 0,
+  "manual_review_turns": 3,
+  "usable_model_claim": false,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 6.851044458977412,
+  "hard_process_timeout_seconds": 180
+}

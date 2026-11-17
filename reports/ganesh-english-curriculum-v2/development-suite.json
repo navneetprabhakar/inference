@@ -1,0 +1,726 @@
+{
+  "schema": 1,
+  "purpose": "development_only_never_train",
+  "required_context_tokens": 2048,
+  "sessions": [
+    {
+      "id": "english_v1_small_success",
+      "source_group": "small_success",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "I finally organised a drawer I kept putting off.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "That sounds satisfying. Was it easier to find things afterwards?",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Modest caption and deletion, distinct situation from training. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Yes. Help me write a modest caption about it.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "One drawer sorted, and a little less clutter.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Modest caption and deletion, distinct situation from training. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Remove the reference to clutter.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "One drawer sorted.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Modest caption and deletion, distinct situation from training. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_missing_photo",
+      "source_group": "missing_photo",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "Is the frame in my photograph crooked?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "I do not have the photograph here. Please share it or describe what you are seeing.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "No false visual access; conditional spatial inference is supported. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "The left corner is lower than the right.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "From your description, the frame is tilted rather than level.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "No false visual access; conditional spatial inference is supported. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Can you say which way it slopes without claiming you saw it?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Based on your description, it slopes downward to the left.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "No false visual access; conditional spatial inference is supported. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_gentle_disagreement",
+      "source_group": "gentle_disagreement",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "My friend prefers the first title, but I prefer the second. How can I say that kindly?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "I can see why you like the first title. I am leaning towards the second one.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Tone change without unsupported argument or claim. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Remove the opening acknowledgement.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "I am leaning towards the second title.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Tone change without unsupported argument or claim. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Make it a little less certain.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "I think I might prefer the second title.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Tone change without unsupported argument or claim. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_weather_wording",
+      "source_group": "weather_wording",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "Make \"The weather was characterised by a lack of wind\" easier to read.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "There was no wind.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Two-word count and punctuation explicitly checked. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Use exactly two words.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "No wind",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Two-word count and punctuation explicitly checked. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Add a full stop without adding words.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No wind.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Two-word count and punctuation explicitly checked. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_poster_emphasis",
+      "source_group": "poster_emphasis",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "Write a short poster line about a fictional evening of stories. Do not give a location.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Join us for an evening of stories.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Ordered edits preserved; no invented location. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Start with Discover.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Discover an evening of stories.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Ordered edits preserved; no invented location. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Replace stories with poetry.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Discover an evening of poetry.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Ordered edits preserved; no invented location. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_spare_key",
+      "source_group": "spare_key",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "The spare key is in the blue tin.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "The spare key is in the blue tin.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Location changes without treating old container as still valid. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "I moved it to the desk drawer. The tin is empty now.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The spare key is now in the desk drawer, and the blue tin is empty.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Location changes without treating old container as still valid. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Suggest a label for the empty tin.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Empty",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Location changes without treating old container as still valid. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Where should I look for the key?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "In the desk drawer.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Location changes without treating old container as still valid. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_stage_part",
+      "source_group": "stage_part",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "In our play, Mira is the narrator and Ishan is the traveller.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Mira is the narrator, and Ishan is the traveller.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Both roles updated; no confusion from dialogue order. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Ishan will narrate instead. Mira will play the traveller.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Ishan is now the narrator, and Mira is the traveller.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Both roles updated; no confusion from dialogue order. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Suggest a neutral heading for the cast list.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Cast",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Both roles updated; no confusion from dialogue order. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Who plays the traveller now?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Mira.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Both roles updated; no confusion from dialogue order. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_printing_finish",
+      "source_group": "printing_finish",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "My order notes say matte paper and a red cover.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Your notes specify matte paper and a red cover.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Changed and unchanged attributes separated; no fake external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Change only the cover colour to cream.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The notes now specify matte paper and a cream cover.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Changed and unchanged attributes separated; no fake external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Please do not claim that an order was actually submitted.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "I have only updated the description in this conversation; I have not submitted an order.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Changed and unchanged attributes separated; no fake external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "What paper finish is still in the notes?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Matte.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Changed and unchanged attributes separated; no fake external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_train_window",
+      "source_group": "train_window",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "For the scene I am writing, the passenger is sitting by the window with a yellow scarf.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The passenger sits by the window and wears a yellow scarf.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Retrieves original colour after title changes; creative title remains hypothetical. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Suggest a title for this scene.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Between Stations",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Retrieves original colour after title changes; creative title remains hypothetical. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Can you make the title three words?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Somewhere Between Stations",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Retrieves original colour after title changes; creative title remains hypothetical. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "What colour is the scarf in my scene?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Yellow.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Retrieves original colour after title changes; creative title remains hypothetical. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_folder_contents",
+      "source_group": "folder_contents",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "The amber folder holds recipes. The grey folder holds receipts.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Recipes are in the amber folder; receipts are in the grey folder.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Similar words recipes/receipts deliberately distinguished. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Suggest a heading for my organisation notes.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Folder Guide",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Similar words recipes/receipts deliberately distinguished. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Turn the heading into a question about finding things.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Where Does Everything Go?",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Similar words recipes/receipts deliberately distinguished. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Which folder contains receipts?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The grey folder.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Similar words recipes/receipts deliberately distinguished. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_visitor_limit",
+      "source_group": "visitor_limit",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "For this imaginary gathering, invitations are for adults only.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "The invitations are for adults only.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Uses stated scenario rule without giving broad social judgement. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Write a welcoming opening line for the invitation.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "We would love you to join us for a relaxed gathering.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Uses stated scenario rule without giving broad social judgement. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Shorten that opening.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "We would love you to join us.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Uses stated scenario rule without giving broad social judgement. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Would a children’s craft table fit the invitation restriction I gave?",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "No. You specified an adults-only gathering.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Uses stated scenario rule without giving broad social judgement. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_speaker_details",
+      "source_group": "speaker_details",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "In this fictional announcement, Noor presents the photographs and Vik reads the poems.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Noor presents the photographs, and Vik reads the poems.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Delayed actor-role retrieval after editing distractors. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Give the event a simple name.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Pictures and Poems",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Delayed actor-role retrieval after editing distractors. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Make the name lowercase.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "pictures and poems",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Delayed actor-role retrieval after editing distractors. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        },
+        {
+          "user": "Who reads the poems?",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "Vik.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Delayed actor-role retrieval after editing distractors. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "identity_about_page",
+      "source_group": "about_page",
+      "category": "model_identity",
+      "turns": [
+        {
+          "user": "Write a one-sentence description of yourself for an about page.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "I am Ganesh-base, a language model created by Navneet Prabhakar.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Exact model/creator facts supplied by user; no identity-bearing system prompt, no claim of a performed external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "identity_creator_full",
+      "source_group": "creator_full",
+      "category": "model_identity",
+      "turns": [
+        {
+          "user": "Give your creator’s first and last name, without shortening either.",
+          "policy": {
+            "permit_calls": false,
+            "allowed_names": []
+          },
+          "reference_answer": "Navneet Prabhakar.",
+          "expected_calls": [],
+          "reply_budget": 192,
+          "rubric": "Exact model/creator facts supplied by user; no identity-bearing system prompt, no claim of a performed external action. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_jar_total",
+      "source_group": "jar_total",
+      "category": "tools",
+      "turns": [
+        {
+          "user": "Please calculate the sum of 34 and 28.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "62.",
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "add",
+                "a": 34,
+                "b": 28
+              }
+            }
+          ],
+          "reply_budget": 192,
+          "rubric": "Read prompt operands/order against actual calculator proposal; final numeric answer matches replayed result. Minimal regression lesson, not English-quality evidence. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    },
+    {
+      "id": "english_v1_seat_difference",
+      "source_group": "seat_difference",
+      "category": "tools",
+      "turns": [
+        {
+          "user": "Please calculate 91 minus 23.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ]
+          },
+          "reference_answer": "68.",
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 91,
+                "b": 23
+              }
+            }
+          ],
+          "reply_budget": 192,
+          "rubric": "Read prompt operands/order against actual calculator proposal; final numeric answer matches replayed result. Minimal regression lesson, not English-quality evidence. Judge meaning using actual prior model history; no invented facts/actions; clean termination."
+        }
+      ]
+    }
+  ]
+}

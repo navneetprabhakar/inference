@@ -1,0 +1,1228 @@
+{
+  "archive_sha256": "19adaa1e986d7ae0f038a3a2fbc59badf3027c02da61cb2b1e78316998ef0e33",
+  "fresh_first_update": [
+    {
+      "event": "initial",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "before_collect",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "before_optimizer",
+      "step": 0,
+      "differences": {}
+    },
+    {
+      "event": "after_optimizer",
+      "step": 0,
+      "differences": {}
+    }
+  ],
+  "resumed_second_update": [
+    {
+      "event": "before_collect",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_before",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "microbatch_after",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "before_optimizer",
+      "step": 1,
+      "differences": {}
+    },
+    {
+      "event": "after_optimizer",
+      "step": 1,
+      "differences": {
+        "model": {
+          "content_equal": false,
+          "tensor_differences": [
+            "state.transformer.h.4.mlp.c_proj.weight",
+            "state.transformer.h.5.mlp.c_proj.weight",
+            "state.transformer.h.12.mlp.c_proj.weight",
+            "state.transformer.h.6.mlp.c_proj.weight",
+            "state.transformer.h.0.mlp.c_proj.weight",
+            "state.transformer.h.11.mlp.c_proj.weight",
+            "state.transformer.h.14.mlp.c_proj.weight",
+            "state.transformer.h.10.mlp.c_proj.weight",
+            "state.transformer.h.9.mlp.c_proj.weight",
+            "state.transformer.h.1.mlp.c_proj.weight",
+            "state.transformer.h.8.mlp.c_proj.weight",
+            "state.transformer.h.7.mlp.c_proj.weight",
+            "state.transformer.h.2.mlp.c_proj.weight",
+            "state.transformer.h.15.mlp.c_proj.weight",
+            "state.transformer.h.3.mlp.c_proj.weight",
+            "state.transformer.h.13.mlp.c_proj.weight"
+          ]
+        },
+        "optimizer": {
+          "content_equal": false,
+          "tensor_differences": [
+            "state.state.87.second_momentum_buffer"
+          ]
+        }
+      }
+    }
+  ],
+  "results": {
+    "uninterrupted": {
+      "status": "stopped",
+      "step": 2,
+      "assistant_targets": 882,
+      "train_loss_scope": "last_optimizer_update_only",
+      "development_start": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.368929965890569,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "development_by_family": {
+        "preferences": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 126,
+          "cross_entropy_nats": 4.253256177145337,
+          "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+          "complete": true
+        },
+        "social_response": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 127,
+          "cross_entropy_nats": 3.439048947311762,
+          "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+          "complete": true
+        },
+        "grounding": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 86,
+          "cross_entropy_nats": 4.090867863144985,
+          "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+          "complete": true
+        },
+        "state": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 57,
+          "cross_entropy_nats": 4.5619057103207235,
+          "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+          "complete": true
+        },
+        "clarification": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 97,
+          "cross_entropy_nats": 4.283782644370167,
+          "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+          "complete": true
+        },
+        "conversation_memory": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 63,
+          "cross_entropy_nats": 5.445165240575397,
+          "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+          "complete": true
+        }
+      },
+      "quality_guards": {
+        "aggregate": {
+          "best_ce": 4.202723798134344,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 4.202723798134344,
+          "strikes": 0,
+          "stopped": false
+        },
+        "clarification": {
+          "best_ce": 4.283782644370167,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 4.283782644370167,
+          "strikes": 0,
+          "stopped": false
+        },
+        "conversation_memory": {
+          "best_ce": 5.445165240575397,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 5.445165240575397,
+          "strikes": 0,
+          "stopped": false
+        },
+        "grounding": {
+          "best_ce": 4.090867863144985,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 4.090867863144985,
+          "strikes": 0,
+          "stopped": false
+        },
+        "preferences": {
+          "best_ce": 4.253256177145337,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 4.253256177145337,
+          "strikes": 0,
+          "stopped": false
+        },
+        "social_response": {
+          "best_ce": 3.439048947311762,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 3.439048947311762,
+          "strikes": 0,
+          "stopped": false
+        },
+        "state": {
+          "best_ce": 4.5619057103207235,
+          "best_step": 2,
+          "last_step": 2,
+          "last_ce": 4.5619057103207235,
+          "strikes": 0,
+          "stopped": false
+        }
+      },
+      "retention": {
+        "status": "dry_run",
+        "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints",
+        "kept": [
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-5670ac088b644b948398151a82ceed73",
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-4e602d0c6b5446e5b514ed07c52b4d76",
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-ce115e8534534edfb1196c3a381a04ae"
+        ],
+        "candidates": [],
+        "deleted": [],
+        "protected_latest_count": 2,
+        "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+      },
+      "train_loss": 5.079271806989397,
+      "consumed_conversations": 32,
+      "packed_rows": 8,
+      "update_seconds": 46.98353001099997,
+      "last_update_assistant_targets": 420,
+      "development": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.202723798134344,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "reason": "pilot_update_limit",
+      "quality_accepted": false,
+      "evaluation_candidates": [
+        {
+          "step": 2,
+          "roles": [
+            "best_development",
+            "last"
+          ],
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-ce115e8534534edfb1196c3a381a04ae",
+          "manifest_sha256": "9cc640a9449d64ff0aa390d4f066b136bedd21c8b1f574a1a49c3939ca7e8652",
+          "requires_generation_review": true
+        }
+      ],
+      "best_development_loss": 4.202723798134344,
+      "best_development_step": 2,
+      "acceptance": "Not evaluated by this worker; use independent actual conversation/tool tests."
+    },
+    "split_first": {
+      "status": "stopped",
+      "step": 1,
+      "assistant_targets": 462,
+      "train_loss_scope": "last_optimizer_update_only",
+      "development_start": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.368929965890569,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "development_by_family": {
+        "preferences": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 126,
+          "cross_entropy_nats": 4.305560399615575,
+          "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+          "complete": true
+        },
+        "social_response": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 127,
+          "cross_entropy_nats": 3.5091480645607778,
+          "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+          "complete": true
+        },
+        "grounding": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 86,
+          "cross_entropy_nats": 4.192653922147529,
+          "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+          "complete": true
+        },
+        "state": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 57,
+          "cross_entropy_nats": 4.699064555921052,
+          "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+          "complete": true
+        },
+        "clarification": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 97,
+          "cross_entropy_nats": 4.358299648638853,
+          "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+          "complete": true
+        },
+        "conversation_memory": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 63,
+          "cross_entropy_nats": 5.538555811321925,
+          "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+          "complete": true
+        }
+      },
+      "quality_guards": {
+        "aggregate": {
+          "best_ce": 4.282220030860078,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 4.282220030860078,
+          "strikes": 0,
+          "stopped": false
+        },
+        "clarification": {
+          "best_ce": 4.358299648638853,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 4.358299648638853,
+          "strikes": 0,
+          "stopped": false
+        },
+        "conversation_memory": {
+          "best_ce": 5.538555811321925,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 5.538555811321925,
+          "strikes": 0,
+          "stopped": false
+        },
+        "grounding": {
+          "best_ce": 4.192653922147529,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 4.192653922147529,
+          "strikes": 0,
+          "stopped": false
+        },
+        "preferences": {
+          "best_ce": 4.305560399615575,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 4.305560399615575,
+          "strikes": 0,
+          "stopped": false
+        },
+        "social_response": {
+          "best_ce": 3.5091480645607778,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 3.5091480645607778,
+          "strikes": 0,
+          "stopped": false
+        },
+        "state": {
+          "best_ce": 4.699064555921052,
+          "best_step": 1,
+          "last_step": 1,
+          "last_ce": 4.699064555921052,
+          "strikes": 0,
+          "stopped": false
+        }
+      },
+      "retention": {
+        "status": "dry_run",
+        "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints",
+        "kept": [
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-5512f3f95704482bb7b27f09a50c8704",
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-96f1ab62b330402dbc66530b9491a6c5"
+        ],
+        "candidates": [],
+        "deleted": [],
+        "protected_latest_count": 2,
+        "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+      },
+      "train_loss": 5.019661048790077,
+      "consumed_conversations": 16,
+      "packed_rows": 4,
+      "update_seconds": 55.228592967000054,
+      "last_update_assistant_targets": 462,
+      "development": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.282220030860078,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "reason": "pilot_update_limit",
+      "quality_accepted": false,
+      "evaluation_candidates": [
+        {
+          "step": 1,
+          "roles": [
+            "best_development",
+            "last"
+          ],
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-96f1ab62b330402dbc66530b9491a6c5",
+          "manifest_sha256": "273997965d2f64877ff1cdd4da41a29a7126be96e4c7098d90dcefc823d0891a",
+          "requires_generation_review": true
+        }
+      ],
+      "best_development_loss": 4.282220030860078,
+      "best_development_step": 1,
+      "acceptance": "Not evaluated by this worker; use independent actual conversation/tool tests."
+    },
+    "split_resume": {
+      "status": "stopped",
+      "step": 2,
+      "assistant_targets": 882,
+      "train_loss_scope": "last_optimizer_update_only",
+      "development_start": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.282220030860078,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "train_loss": 5.079271806989397,
+      "consumed_conversations": 32,
+      "packed_rows": 8,
+      "update_seconds": 53.324728392,
+      "last_update_assistant_targets": 420,
+      "development": {
+        "purpose": "masked_development_loss_not_conversation_acceptance",
+        "rows": 4,
+        "assistant_targets": 556,
+        "cross_entropy_nats": 4.202542805843216,
+        "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+        "complete": true
+      },
+      "development_by_family": {
+        "preferences": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 126,
+          "cross_entropy_nats": 4.256804935515873,
+          "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+          "complete": true
+        },
+        "social_response": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 127,
+          "cross_entropy_nats": 3.4366935669906495,
+          "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+          "complete": true
+        },
+        "grounding": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 86,
+          "cross_entropy_nats": 4.090662401775981,
+          "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+          "complete": true
+        },
+        "state": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 57,
+          "cross_entropy_nats": 4.561573764734101,
+          "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+          "complete": true
+        },
+        "clarification": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 97,
+          "cross_entropy_nats": 4.279343123288498,
+          "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+          "complete": true
+        },
+        "conversation_memory": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 1,
+          "assistant_targets": 63,
+          "cross_entropy_nats": 5.444426037016369,
+          "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+          "complete": true
+        }
+      },
+      "quality_guards": {
+        "aggregate": {
+          "best_ce": 4.202542805843216,
+          "best_step": 2,
+          "last_ce": 4.202542805843216,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "clarification": {
+          "best_ce": 4.279343123288498,
+          "best_step": 2,
+          "last_ce": 4.279343123288498,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "conversation_memory": {
+          "best_ce": 5.444426037016369,
+          "best_step": 2,
+          "last_ce": 5.444426037016369,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "grounding": {
+          "best_ce": 4.090662401775981,
+          "best_step": 2,
+          "last_ce": 4.090662401775981,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "preferences": {
+          "best_ce": 4.256804935515873,
+          "best_step": 2,
+          "last_ce": 4.256804935515873,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "social_response": {
+          "best_ce": 3.4366935669906495,
+          "best_step": 2,
+          "last_ce": 3.4366935669906495,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        },
+        "state": {
+          "best_ce": 4.561573764734101,
+          "best_step": 2,
+          "last_ce": 4.561573764734101,
+          "last_step": 2,
+          "stopped": false,
+          "strikes": 0
+        }
+      },
+      "retention": {
+        "status": "dry_run",
+        "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints",
+        "kept": [
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-5512f3f95704482bb7b27f09a50c8704",
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-96f1ab62b330402dbc66530b9491a6c5",
+          "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-ab133faa76234c0b9b22d1c650128840"
+        ],
+        "candidates": [],
+        "deleted": [],
+        "protected_latest_count": 2,
+        "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+      },
+      "reason": "pilot_update_limit",
+      "quality_accepted": false,
+      "evaluation_candidates": [
+        {
+          "step": 2,
+          "roles": [
+            "best_development",
+            "last"
+          ],
+          "remote_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-ab133faa76234c0b9b22d1c650128840",
+          "manifest_sha256": "349acdd009787e16785df9ce0468166c2f68fd520b70797c709275aa19af0bd5",
+          "requires_generation_review": true
+        }
+      ],
+      "best_development_loss": 4.202542805843216,
+      "best_development_step": 2,
+      "acceptance": "Not evaluated by this worker; use independent actual conversation/tool tests."
+    }
+  },
+  "updates": {
+    "uninterrupted": [
+      {
+        "status": "running",
+        "step": 1,
+        "assistant_targets": 462,
+        "train_loss_scope": "last_optimizer_update_only",
+        "development_start": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.368929965890569,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        },
+        "development_by_family": {
+          "preferences": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 126,
+            "cross_entropy_nats": 4.305560399615575,
+            "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+            "complete": true
+          },
+          "social_response": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 127,
+            "cross_entropy_nats": 3.5091480645607778,
+            "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+            "complete": true
+          },
+          "grounding": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 86,
+            "cross_entropy_nats": 4.192653922147529,
+            "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+            "complete": true
+          },
+          "state": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 57,
+            "cross_entropy_nats": 4.699064555921052,
+            "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+            "complete": true
+          },
+          "clarification": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 97,
+            "cross_entropy_nats": 4.358299648638853,
+            "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+            "complete": true
+          },
+          "conversation_memory": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 63,
+            "cross_entropy_nats": 5.538555811321925,
+            "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+            "complete": true
+          }
+        },
+        "quality_guards": {
+          "aggregate": {
+            "best_ce": 4.282220030860078,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.282220030860078,
+            "strikes": 0,
+            "stopped": false
+          },
+          "clarification": {
+            "best_ce": 4.358299648638853,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.358299648638853,
+            "strikes": 0,
+            "stopped": false
+          },
+          "conversation_memory": {
+            "best_ce": 5.538555811321925,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 5.538555811321925,
+            "strikes": 0,
+            "stopped": false
+          },
+          "grounding": {
+            "best_ce": 4.192653922147529,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.192653922147529,
+            "strikes": 0,
+            "stopped": false
+          },
+          "preferences": {
+            "best_ce": 4.305560399615575,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.305560399615575,
+            "strikes": 0,
+            "stopped": false
+          },
+          "social_response": {
+            "best_ce": 3.5091480645607778,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 3.5091480645607778,
+            "strikes": 0,
+            "stopped": false
+          },
+          "state": {
+            "best_ce": 4.699064555921052,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.699064555921052,
+            "strikes": 0,
+            "stopped": false
+          }
+        },
+        "retention": {
+          "status": "dry_run",
+          "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints",
+          "kept": [
+            "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-5670ac088b644b948398151a82ceed73"
+          ],
+          "candidates": [],
+          "deleted": [],
+          "protected_latest_count": 1,
+          "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+        },
+        "train_loss": 5.019661048790077,
+        "consumed_conversations": 16,
+        "packed_rows": 4,
+        "update_seconds": 112.81160324599995,
+        "last_update_assistant_targets": 462,
+        "development": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.282220030860078,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        }
+      },
+      {
+        "status": "running",
+        "step": 2,
+        "assistant_targets": 882,
+        "train_loss_scope": "last_optimizer_update_only",
+        "development_start": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.368929965890569,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        },
+        "development_by_family": {
+          "preferences": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 126,
+            "cross_entropy_nats": 4.253256177145337,
+            "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+            "complete": true
+          },
+          "social_response": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 127,
+            "cross_entropy_nats": 3.439048947311762,
+            "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+            "complete": true
+          },
+          "grounding": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 86,
+            "cross_entropy_nats": 4.090867863144985,
+            "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+            "complete": true
+          },
+          "state": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 57,
+            "cross_entropy_nats": 4.5619057103207235,
+            "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+            "complete": true
+          },
+          "clarification": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 97,
+            "cross_entropy_nats": 4.283782644370167,
+            "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+            "complete": true
+          },
+          "conversation_memory": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 63,
+            "cross_entropy_nats": 5.445165240575397,
+            "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+            "complete": true
+          }
+        },
+        "quality_guards": {
+          "aggregate": {
+            "best_ce": 4.202723798134344,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 4.202723798134344,
+            "strikes": 0,
+            "stopped": false
+          },
+          "clarification": {
+            "best_ce": 4.283782644370167,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 4.283782644370167,
+            "strikes": 0,
+            "stopped": false
+          },
+          "conversation_memory": {
+            "best_ce": 5.445165240575397,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 5.445165240575397,
+            "strikes": 0,
+            "stopped": false
+          },
+          "grounding": {
+            "best_ce": 4.090867863144985,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 4.090867863144985,
+            "strikes": 0,
+            "stopped": false
+          },
+          "preferences": {
+            "best_ce": 4.253256177145337,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 4.253256177145337,
+            "strikes": 0,
+            "stopped": false
+          },
+          "social_response": {
+            "best_ce": 3.439048947311762,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 3.439048947311762,
+            "strikes": 0,
+            "stopped": false
+          },
+          "state": {
+            "best_ce": 4.5619057103207235,
+            "best_step": 2,
+            "last_step": 2,
+            "last_ce": 4.5619057103207235,
+            "strikes": 0,
+            "stopped": false
+          }
+        },
+        "retention": {
+          "status": "dry_run",
+          "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints",
+          "kept": [
+            "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-5670ac088b644b948398151a82ceed73",
+            "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/uninterrupted/checkpoints/checkpoint-4e602d0c6b5446e5b514ed07c52b4d76"
+          ],
+          "candidates": [],
+          "deleted": [],
+          "protected_latest_count": 2,
+          "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+        },
+        "train_loss": 5.079271806989397,
+        "consumed_conversations": 32,
+        "packed_rows": 8,
+        "update_seconds": 46.98353001099997,
+        "last_update_assistant_targets": 420,
+        "development": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.202723798134344,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        }
+      }
+    ],
+    "split_first": [
+      {
+        "status": "running",
+        "step": 1,
+        "assistant_targets": 462,
+        "train_loss_scope": "last_optimizer_update_only",
+        "development_start": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.368929965890569,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        },
+        "development_by_family": {
+          "preferences": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 126,
+            "cross_entropy_nats": 4.305560399615575,
+            "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+            "complete": true
+          },
+          "social_response": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 127,
+            "cross_entropy_nats": 3.5091480645607778,
+            "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+            "complete": true
+          },
+          "grounding": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 86,
+            "cross_entropy_nats": 4.192653922147529,
+            "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+            "complete": true
+          },
+          "state": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 57,
+            "cross_entropy_nats": 4.699064555921052,
+            "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+            "complete": true
+          },
+          "clarification": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 97,
+            "cross_entropy_nats": 4.358299648638853,
+            "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+            "complete": true
+          },
+          "conversation_memory": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 63,
+            "cross_entropy_nats": 5.538555811321925,
+            "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+            "complete": true
+          }
+        },
+        "quality_guards": {
+          "aggregate": {
+            "best_ce": 4.282220030860078,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.282220030860078,
+            "strikes": 0,
+            "stopped": false
+          },
+          "clarification": {
+            "best_ce": 4.358299648638853,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.358299648638853,
+            "strikes": 0,
+            "stopped": false
+          },
+          "conversation_memory": {
+            "best_ce": 5.538555811321925,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 5.538555811321925,
+            "strikes": 0,
+            "stopped": false
+          },
+          "grounding": {
+            "best_ce": 4.192653922147529,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.192653922147529,
+            "strikes": 0,
+            "stopped": false
+          },
+          "preferences": {
+            "best_ce": 4.305560399615575,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.305560399615575,
+            "strikes": 0,
+            "stopped": false
+          },
+          "social_response": {
+            "best_ce": 3.5091480645607778,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 3.5091480645607778,
+            "strikes": 0,
+            "stopped": false
+          },
+          "state": {
+            "best_ce": 4.699064555921052,
+            "best_step": 1,
+            "last_step": 1,
+            "last_ce": 4.699064555921052,
+            "strikes": 0,
+            "stopped": false
+          }
+        },
+        "retention": {
+          "status": "dry_run",
+          "campaign_prefix": "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints",
+          "kept": [
+            "gs://forge-ownbase-a100-20261110/english-cap15-retries-v1/forge-english-retry-1116-180221/split/checkpoints/checkpoint-5512f3f95704482bb7b27f09a50c8704"
+          ],
+          "candidates": [],
+          "deleted": [],
+          "protected_latest_count": 1,
+          "limitations": "Pins are caller-supplied. Validates commitment/manifests/object sizes; not a fresh-VM restore. Soft-delete/version retention may delay storage savings."
+        },
+        "train_loss": 5.019661048790077,
+        "consumed_conversations": 16,
+        "packed_rows": 4,
+        "update_seconds": 55.228592967000054,
+        "last_update_assistant_targets": 462,
+        "development": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.282220030860078,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        }
+      }
+    ],
+    "split_resume": [
+      {
+        "status": "running",
+        "step": 2,
+        "assistant_targets": 882,
+        "train_loss_scope": "last_optimizer_update_only",
+        "development_start": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.282220030860078,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        },
+        "train_loss": 5.079271806989397,
+        "consumed_conversations": 32,
+        "packed_rows": 8,
+        "update_seconds": 53.324728392,
+        "last_update_assistant_targets": 420,
+        "development": {
+          "purpose": "masked_development_loss_not_conversation_acceptance",
+          "rows": 4,
+          "assistant_targets": 556,
+          "cross_entropy_nats": 4.202542805843216,
+          "dataset_sha256": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd",
+          "complete": true
+        },
+        "development_by_family": {
+          "preferences": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 126,
+            "cross_entropy_nats": 4.256804935515873,
+            "dataset_sha256": "d09098b607183d04201cb9aadc0b39edc8f5de8a0ce3893c24a9fd1b014ed326",
+            "complete": true
+          },
+          "social_response": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 127,
+            "cross_entropy_nats": 3.4366935669906495,
+            "dataset_sha256": "00d4a8aabaf06c2c75f520a301421b144b3ca04f305fadfc608adbe040657992",
+            "complete": true
+          },
+          "grounding": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 86,
+            "cross_entropy_nats": 4.090662401775981,
+            "dataset_sha256": "fb030187e4ea5846ee89ccdcd34f3de7d2e10e3cd1ba9a0ddc3241ff7b278305",
+            "complete": true
+          },
+          "state": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 57,
+            "cross_entropy_nats": 4.561573764734101,
+            "dataset_sha256": "73a3cb4174a55cf673fd9679136159bc563fee20e6bfd5036e9bf73ff162fa84",
+            "complete": true
+          },
+          "clarification": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 97,
+            "cross_entropy_nats": 4.279343123288498,
+            "dataset_sha256": "c4e70a695233f76e8407f316b1b9d7bab06150431b66e74ed3a7eaad04f53a8f",
+            "complete": true
+          },
+          "conversation_memory": {
+            "purpose": "masked_development_loss_not_conversation_acceptance",
+            "rows": 1,
+            "assistant_targets": 63,
+            "cross_entropy_nats": 5.444426037016369,
+            "dataset_sha256": "29fe01a5b99aa9a19264592e26eb47dc2bff208a2102ae1f7a0533bd58725edd",
+            "complete": true
+          }
+        },
+        "quality_guards": {
+          "aggregate": {
+            "best_ce": 4.202542805843216,
+            "best_step": 2,
+            "last_ce": 4.202542805843216,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "clarification": {
+            "best_ce": 4.279343123288498,
+            "best_step": 2,
+            "last_ce": 4.279343123288498,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "conversation_memory": {
+            "best_ce": 5.444426037016369,
+            "best_step": 2,
+            "last_ce": 5.444426037016369,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "grounding": {
+            "best_ce": 4.090662401775981,
+            "best_step": 2,
+            "last_ce": 4.090662401775981,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "preferences": {
+            "best_ce": 4.256804935515873,
+            "best_step": 2,
+            "last_ce": 4.256804935515873,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "social_response": {
+            "best_ce": 3.4366935669906495,
+            "best_step": 2,
+            "last_ce": 3.4366935669906495,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          },
+          "state": {
+            "best_ce": 4.561573764734101,
+            "best_step": 2,
+            "last_ce": 4.561573764734101,
+            "last_step": 2,
+            "stopped": false,
+            "strikes": 0
+          }
+        }
+      }
+    ]
+  }
+}

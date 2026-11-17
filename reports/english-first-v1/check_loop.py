@@ -28,6 +28,19 @@ class Model:
 model=Model();optimizer=NS(param_groups=[],step=lambda:None)
 trace_events=[]
 trace=NS(state=lambda event,step,*args:trace_events.append([event,step]),microbatch=lambda *args:None) if a.get('trace') else None
+optimizer_capture=None
+capture_steps=[];identity={}
+if a.get('capture_step') is not None:
+ from contextlib import contextmanager
+ import cloud_training.nano_optimizer_capture as capture_module
+ @contextmanager
+ def fake_capture(*unused,**kw):
+  capture_steps.append(kw['step']);yield
+ capture_module.capture_step=fake_capture
+ sys.modules['nanochat']=NS(optim=NS())
+ model.named_parameters=lambda:iter([])
+ optimizer_capture={'absolute_step':a['capture_step'],'parameter':'test','max_bytes':100}
+
 fit_eval_steps=set(a.get('fit_eval_steps',[]))
 torch=NS(cuda=NS(synchronize=lambda:None),nn=NS(utils=NS(get_total_norm=lambda *args,**kwargs:None)))
 dev=None
@@ -45,4 +58,4 @@ loop=next(n for n in run.body if isinstance(n,ast.While))
 with tempfile.TemporaryDirectory() as directory:
  out=Path(directory)
  exec(compile(ast.Module(body=[loop],type_ignores=[]),'actual_nano_sft_loop','exec'),globals())
-print(json.dumps({'step':step,'guard':guard.state,'best_dev':best_dev,'best_step':best_step,'observed':observed,'reason':reason,'trace_events':trace_events,'checkpoint_steps':checkpoint_steps}))
+print(json.dumps({'step':step,'guard':guard.state,'best_dev':best_dev,'best_step':best_step,'observed':observed,'reason':reason,'trace_events':trace_events,'checkpoint_steps':checkpoint_steps,'capture_steps':capture_steps}))

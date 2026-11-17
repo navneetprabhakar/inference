@@ -6,6 +6,7 @@ claim conversation quality from language loss. Use a separately reserved lease.
 """
 from __future__ import annotations
 import argparse
+from contextlib import contextmanager, nullcontext
 import fcntl
 import hashlib
 import json
@@ -26,6 +27,17 @@ from cloud_training.nano_chat_format import VERSION, encode_conversation
 from cloud_training.nano_quality_gate import dataset_coverage, contract_errors, ValidationGuard, evaluation_candidates
 from cloud_training.nano_data import sha256_file
 from cloud_training.nano_train import CloudJournal, deadline_timestamp, numerical_identity
+
+@contextmanager
+def gpu_writer_lock(path='/tmp/ganesh-gpu-writer.lock'):
+    """Machine-wide advisory lock for every SFT writer, across output directories."""
+    fd=os.open(path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
+    try:
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        yield
+    finally:
+        os.close(fd)
+
 
 NATIVE_IGNORE = -1  # Pinned nanochat GPT.forward, distinct from export labels -100.
 from cloud_training.nano_context import DEFAULT_CONTEXT, SUPPORTED_CONTEXTS, transition_config, validate_context_edge
@@ -380,6 +392,8 @@ def validate_parent_chain(parent, expected_sha, tokenizer_sha, *, stage, ancesto
 
 
 def run(args):
+    from cloud_training.nano_optimizer_capture import config as capture_config
+    optimizer_capture=capture_config(args)
     trace_updates=getattr(args,'trace_updates',0)
     if type(trace_updates)is not int or not 0<=trace_updates<=2:raise ValueError('Trace updates must be0..2')
     fit_eval_steps=set(getattr(args,'fit_eval_steps',[]))
@@ -460,7 +474,7 @@ def run(args):
     load_bundle(base,model=model,optimizer=optimizer,expected_identity=base_meta['identity'])
     reset_sft_lrs(optimizer,fresh_lrs,recipe["lr_batch_scale"],args.lr_multiplier)
     torch.manual_seed(args.seed);torch.cuda.manual_seed_all(args.seed)
-    files=('nano_quality_gate.py','nano_fit_contract.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py','nano_update_trace.py')
+    files=('nano_quality_gate.py','nano_fit_contract.py','nano_context.py','nano_sft.py','nano_chat_format.py','nano_checkpoint.py','nano_train.py','nano_retention.py','l4_recovery_check.py','nano_update_trace.py','nano_optimizer_capture.py')
     identity={'phase':'sft','diagnostic_only':diagnostic_only,'stage':args.stage,'quality_contract_sha256':contract_sha,'data_order_sha256':train.sha,'parent_bundle_manifest_sha256':args.base_manifest_sha,
               'parent_identity':base_meta['identity'],'revision':PINNED_REVISION,'config':vars(config),'tokenizer_sha256':args.tokenizer_sha,
               'format_version':VERSION,'base_bundle_manifest_sha256':root_sha,'base_identity':root_meta['identity'],
@@ -472,6 +486,7 @@ def run(args):
               'adapter_hashes':{f:sha256_file(Path(__file__).parent/f) for f in files}}
     identity['update_trace']={'version':1,'absolute_update_limit':trace_updates}
     identity['fit_eval_steps']=sorted(fit_eval_steps)
+    if optimizer_capture is not None:identity['optimizer_capture']=optimizer_capture
     if context_change is not None:identity['context_transition']=context_change
     packing=BestFitConversations(train,buffer_size=args.packing_buffer_size);step=0;trained_targets=0;best_dev=None;best_step=None
     guard_states=None
@@ -481,6 +496,8 @@ def run(args):
         if restored['data_state']['next_batch']!=step:raise ValueError('SFT next-update mismatch')
         guard_states=restored['metadata']['loop']['quality_guards']
         trained_targets=restored['metadata']['loop']['trained_targets'];best_dev=restored['metadata']['loop']['best_dev'];best_step=restored['metadata']['loop']['best_step']
+    if optimizer_capture is not None and step>optimizer_capture['absolute_step']:
+        raise ValueError('Resume has already passed requested optimizer capture')
     out.mkdir(parents=True,exist_ok=True)
     trace=None
     if trace_updates:
@@ -573,7 +590,15 @@ def run(args):
             group['lr']=group['initial_lr']*lr
             if group['kind']=='muon':group['momentum']=momentum;group['weight_decay']=0.0
         if trace is not None:trace.state('before_optimizer',step,model,optimizer,packing)
-        optimizer.step();model.zero_grad(set_to_none=True);torch.cuda.synchronize()
+        if optimizer_capture is not None and step==optimizer_capture['absolute_step']:
+            from cloud_training.nano_optimizer_capture import capture_step
+            from nanochat import optim as optimizer_module
+            with capture_step(optimizer_module,optimizer,model.named_parameters(),out/'optimizer-capture'/f'step-{step:08d}',
+                              step=step,parameter=optimizer_capture['parameter'],identity=identity,max_bytes=optimizer_capture['max_bytes']):
+                optimizer.step()
+        else:
+            optimizer.step()
+        model.zero_grad(set_to_none=True);torch.cuda.synchronize()
         if trace is not None:trace.state('after_optimizer',step,model,optimizer,packing)
         step+=1;trained_targets+=count
         status.update(step=step,assistant_targets=trained_targets,train_loss=loss,
@@ -618,6 +643,8 @@ def main():
     p.add_argument('--allow-context-extension',action='store_true',help='Explicit warm start2Kto4K; never edits the parent checkpoint')
     p.add_argument('--fit-diagnostic',action='store_true',help='Isolated English learnability diagnostic, never a release candidate')
     p.add_argument('--trace-updates',type=int,default=0,choices=(0,1,2),help='Identity-bound exact boundary evidence for first0..2absolute updates; adds synchronous overhead')
+    p.add_argument('--capture-muon-step',type=int,choices=(0,1),default=None,help='Opt-in actual fused Muon inputs/outputs for one absolute update; isolated diagnostic only, up to2GiB')
+    p.add_argument('--capture-muon-param',default='transformer.h.0.mlp.c_proj.weight',help='Named parameter selecting the one Muon group to capture')
     p.add_argument('--fit-eval-steps',type=int,nargs='+',default=[],choices=(0,16,32,64),help='Diagnostic-only pinned checkpoints for full fit-generation review; no automatic generation or release')
     p.add_argument('--epochs',type=int,default=1,help='Explicit finite passes over admitted training data;1..8, no implicit replay')
     p.add_argument('--deterministic',action='store_true')
@@ -650,7 +677,8 @@ def main():
     out.mkdir(parents=True,exist_ok=True)
     with (out/'.writer.lock').open('a+b') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-        return run(a)
+        with (nullcontext() if a.validate_only else gpu_writer_lock()):
+            return run(a)
 
 
 if __name__=='__main__':raise SystemExit(main())

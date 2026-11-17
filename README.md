@@ -1,8 +1,14 @@
-# Own: from-scratch English conversation model
+# Ganesh-base: from-scratch English conversation model
 
-Own is an experimental **536,871,738-parameter language model trained from random initialization**, with local inference, supervised conversation training, and a bounded offline tool broker. The current priority is improving **Own's own weights for English conversation**, followed by maths and then CBSE through Class 12. A pretrained assistant is not substituted for Own.
+**Creator: Navneet Prabhakar.**
 
-**Status as of 14 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights are available, but English conversation remains unreliable. Cloud training is paused; the final A100 instance and its disk were removed after verified backups. The three previously retained VMs were last verified stopped. No automatic retry or new GPU allocation is pending. The HTTP preview remains off.
+Ganesh-base (historically called Own in artifact paths) is an experimental **536,871,738-parameter language model trained from random initialization**, with local inference, supervised conversation training, and a bounded offline tool broker. The current priority is improving **Ganesh-base’s trained weights for English conversation**, followed by maths and then CBSE through Class 12. A pretrained assistant is not substituted for Ganesh-base. The declared model identity is not yet verified as learned in the weights; see [identity status](MODEL_IDENTITY.json).
+
+**Status as of 17 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available. All four old VM records and three disks were deleted after required backups were verified. Cloud training is paused pending a new approved cap; HTTP remains off. Local optimizer-capture checks do not establish CUDA qualification or English improvement.
+
+Current local readiness and adverse checks: [bounded pilot readiness](reports/ganesh-controller-v1/READINESS.md). Controller integration and reviewed seed curriculum are prepared; 202 targeted tests pass. Cloud launch remains blocked pending a new cap and live qualification. Reauthentication succeeded; no VM was started.
+
+Current evidence-first reassessment: [Ganesh-base review](reports/ganesh-base-review-v1/REVIEW.md). Model naming does not modify checkpoint payloads or repair conversation behavior.
 
 The repository contains current code alongside historical experiments. A successful test, completed training job, low loss, or working calculator is **not** a model-quality acceptance.
 
@@ -29,7 +35,7 @@ The repository contains current code alongside historical experiments. A success
 |---|---|
 | [OWN_BASE_HANDOFF.txt](OWN_BASE_HANDOFF.txt) | Authoritative current facts, checkpoint identities, limitations, and blockers |
 | [AGENTS.md](AGENTS.md) | Quality-first operating rules for repository work |
-| [English recovery plan](reports/english-recovery-plan-v1/PLAN.txt) | Detailed proposed learnability, transfer, data, release, performance, and budget gates |
+| [Current pilot readiness](reports/ganesh-controller-v1/READINESS.md) | Current phase gates, measured workload bounds, local checks and unresolved launch blockers |
 | [OWN_BASE_NEXT_STEPS.txt](OWN_BASE_NEXT_STEPS.txt) | Current execution restrictions and next local deliverables |
 | [Final GPU assessment](reports/english-a100-v1/PAUSE_ASSESSMENT.txt) | What the last campaign established and why it stopped |
 | [Feasibility assessment](reports/feasibility-deep-dive-v1/ASSESSMENT.txt) | Model limitations, training-recipe issues, and unresolved hypotheses |
@@ -39,7 +45,7 @@ Read the handoff before training, admitting data, selecting a model, or cleaning
 
 ## Model and runtime
 
-| Property | Current Own lineage |
+| Property | Current Ganesh-base lineage |
 |---|---|
 | Initialization | Random initialization; no imported pretrained language-model weights |
 | Parameters | 536,871,738 |
