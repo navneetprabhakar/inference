@@ -1,0 +1,1528 @@
+{
+  "status": "required_backups_verified",
+  "pilot_started": false,
+  "writers_joined": true,
+  "checkpoints": [
+    {
+      "branch": "continuous",
+      "step": 0,
+      "manifest_sha256": "79c6592156e1231120a2c6455d88f3e68995efa81e911a09dce9df4b9e4901cc",
+      "receipt": {
+        "bytes_one_way": 3826079822,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+            "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+            "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+            "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+            "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+            "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+          },
+          "attention": "sdpa",
+          "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 8192,
+          "block_arm": "broad",
+          "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "controlled_pilot_only": true,
+          "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+          "diagnostic_only": false,
+          "epochs": 1,
+          "eval_every_updates": 1,
+          "eval_rows": 128,
+          "fit_eval_steps": [],
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 40,
+          "kernel_sha256": null,
+          "lr_batch_scale": 0.125,
+          "lr_multiplier": 0.25,
+          "microbatch": 1,
+          "muon_kernel_mode": "eager",
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": false,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 160,
+          "packing_buffer_size": 1,
+          "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+              "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+              "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+              "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+              "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+            },
+            "attention": "sdpa",
+            "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 8192,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+            "diagnostic_only": true,
+            "epochs": 64,
+            "eval_every_updates": 5,
+            "eval_rows": 128,
+            "fit_eval_steps": [
+              0,
+              16,
+              32,
+              64
+            ],
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 96,
+            "kernel_sha256": null,
+            "lr_batch_scale": 0.125,
+            "lr_multiplier": 0.25,
+            "microbatch": 1,
+            "muon_kernel_mode": "eager",
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": false,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 384,
+            "packing_buffer_size": 1,
+            "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+            "stage": "general",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129",
+            "update_trace": {
+              "absolute_update_limit": 0,
+              "version": 1
+            }
+          },
+          "phase": "sft",
+          "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129",
+          "update_trace": {
+            "absolute_update_limit": 0,
+            "version": 1
+          },
+          "validation_metric": "content_cross_entropy_nats"
+        },
+        "independent_sha256_readback": true,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 17568,
+              "sha256": "e7717e2885d37fe757b172a3e732c761be345beef5711327acf14e1883ca4668"
+            },
+            "payload.pt": {
+              "bytes": 3826061825,
+              "sha256": "e2b44a8d157c2d863d2169b21697fd8193b4e3e333e84a3c9a03587dbf55f610"
+            }
+          },
+          "step": 0,
+          "version": 1
+        },
+        "note": "Upload receipt only; fresh-machine restore and next update not tested.",
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/continuous/checkpoints/checkpoint-d50ba39c1a0f488799553b1dbe0bb65c",
+        "seconds": 39.493299402999924,
+        "status": "gcs_bundle_integrity_passed",
+        "step": 0,
+        "transfer_integrity": "gcloud storage cp built-in checksum validation"
+      },
+      "recovery_roundtrip_seconds": 19.586617364999938
+    },
+    {
+      "branch": "continuous",
+      "step": 2,
+      "manifest_sha256": "1ae48e83842f56ff6a55983f6c8ecb52b5554ea03ff150a0d00c2c79ef2d69e3",
+      "receipt": {
+        "bytes_one_way": 3826079813,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+            "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+            "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+            "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+            "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+            "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+          },
+          "attention": "sdpa",
+          "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 8192,
+          "block_arm": "broad",
+          "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "controlled_pilot_only": true,
+          "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+          "diagnostic_only": false,
+          "epochs": 1,
+          "eval_every_updates": 1,
+          "eval_rows": 128,
+          "fit_eval_steps": [],
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 40,
+          "kernel_sha256": null,
+          "lr_batch_scale": 0.125,
+          "lr_multiplier": 0.25,
+          "microbatch": 1,
+          "muon_kernel_mode": "eager",
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": false,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 160,
+          "packing_buffer_size": 1,
+          "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+              "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+              "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+              "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+              "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+            },
+            "attention": "sdpa",
+            "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 8192,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+            "diagnostic_only": true,
+            "epochs": 64,
+            "eval_every_updates": 5,
+            "eval_rows": 128,
+            "fit_eval_steps": [
+              0,
+              16,
+              32,
+              64
+            ],
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 96,
+            "kernel_sha256": null,
+            "lr_batch_scale": 0.125,
+            "lr_multiplier": 0.25,
+            "microbatch": 1,
+            "muon_kernel_mode": "eager",
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": false,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 384,
+            "packing_buffer_size": 1,
+            "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+            "stage": "general",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129",
+            "update_trace": {
+              "absolute_update_limit": 0,
+              "version": 1
+            }
+          },
+          "phase": "sft",
+          "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129",
+          "update_trace": {
+            "absolute_update_limit": 0,
+            "version": 1
+          },
+          "validation_metric": "content_cross_entropy_nats"
+        },
+        "independent_sha256_readback": true,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 17559,
+              "sha256": "cfe87956e0793c55ce75760d5618759e2b46c0d4e75a41fa0ed531d037f910bd"
+            },
+            "payload.pt": {
+              "bytes": 3826061825,
+              "sha256": "853b0e3dff054011c1b3f7efc179424337983b9abde54ddc057c41a74c329d69"
+            }
+          },
+          "step": 2,
+          "version": 1
+        },
+        "note": "Upload receipt only; fresh-machine restore and next update not tested.",
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/continuous/checkpoints/checkpoint-bcf4dfa3ee644eeb9e99af42245697af",
+        "seconds": 40.261177323000084,
+        "status": "gcs_bundle_integrity_passed",
+        "step": 2,
+        "transfer_integrity": "gcloud storage cp built-in checksum validation"
+      },
+      "recovery_roundtrip_seconds": 18.89047209299997
+    },
+    {
+      "branch": "split_first",
+      "step": 0,
+      "manifest_sha256": "79c6592156e1231120a2c6455d88f3e68995efa81e911a09dce9df4b9e4901cc",
+      "receipt": {
+        "bytes_one_way": 3826079822,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+            "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+            "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+            "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+            "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+            "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+          },
+          "attention": "sdpa",
+          "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 8192,
+          "block_arm": "broad",
+          "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "controlled_pilot_only": true,
+          "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+          "diagnostic_only": false,
+          "epochs": 1,
+          "eval_every_updates": 1,
+          "eval_rows": 128,
+          "fit_eval_steps": [],
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 40,
+          "kernel_sha256": null,
+          "lr_batch_scale": 0.125,
+          "lr_multiplier": 0.25,
+          "microbatch": 1,
+          "muon_kernel_mode": "eager",
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": false,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 160,
+          "packing_buffer_size": 1,
+          "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+              "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+              "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+              "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+              "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+            },
+            "attention": "sdpa",
+            "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 8192,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+            "diagnostic_only": true,
+            "epochs": 64,
+            "eval_every_updates": 5,
+            "eval_rows": 128,
+            "fit_eval_steps": [
+              0,
+              16,
+              32,
+              64
+            ],
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 96,
+            "kernel_sha256": null,
+            "lr_batch_scale": 0.125,
+            "lr_multiplier": 0.25,
+            "microbatch": 1,
+            "muon_kernel_mode": "eager",
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": false,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 384,
+            "packing_buffer_size": 1,
+            "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+            "stage": "general",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129",
+            "update_trace": {
+              "absolute_update_limit": 0,
+              "version": 1
+            }
+          },
+          "phase": "sft",
+          "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129",
+          "update_trace": {
+            "absolute_update_limit": 0,
+            "version": 1
+          },
+          "validation_metric": "content_cross_entropy_nats"
+        },
+        "independent_sha256_readback": true,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 17568,
+              "sha256": "e7717e2885d37fe757b172a3e732c761be345beef5711327acf14e1883ca4668"
+            },
+            "payload.pt": {
+              "bytes": 3826061825,
+              "sha256": "e2b44a8d157c2d863d2169b21697fd8193b4e3e333e84a3c9a03587dbf55f610"
+            }
+          },
+          "step": 0,
+          "version": 1
+        },
+        "note": "Upload receipt only; fresh-machine restore and next update not tested.",
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/split/checkpoints/checkpoint-b3d11bda1bcd4edf951485629b6bdac7",
+        "seconds": 38.23460766900007,
+        "status": "gcs_bundle_integrity_passed",
+        "step": 0,
+        "transfer_integrity": "gcloud storage cp built-in checksum validation"
+      },
+      "recovery_roundtrip_seconds": 18.694309087999954
+    },
+    {
+      "branch": "split_first",
+      "step": 1,
+      "manifest_sha256": "818bc87221e45f3cde13ad1ff74f21f695061200f6515b888ac7579c5a4b62db",
+      "receipt": {
+        "status": "gcs_bundle_integrity_passed",
+        "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/recovery/split_first/checkpoints/checkpoint-62a5f2fa4fe04c67ba8b6ffefe665947",
+        "seconds": 68.42314548100012,
+        "bytes_one_way": 3826079815,
+        "identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+            "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+            "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+            "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+            "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+            "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+          },
+          "attention": "sdpa",
+          "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 8192,
+          "block_arm": "broad",
+          "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "controlled_pilot_only": true,
+          "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+          "diagnostic_only": false,
+          "epochs": 1,
+          "eval_every_updates": 1,
+          "eval_rows": 128,
+          "fit_eval_steps": [],
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 40,
+          "kernel_sha256": null,
+          "lr_batch_scale": 0.125,
+          "lr_multiplier": 0.25,
+          "microbatch": 1,
+          "muon_kernel_mode": "eager",
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": false,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 160,
+          "packing_buffer_size": 1,
+          "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+              "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+              "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+              "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+              "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+            },
+            "attention": "sdpa",
+            "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "base_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "batch_tokens": 8192,
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+            "diagnostic_only": true,
+            "epochs": 64,
+            "eval_every_updates": 5,
+            "eval_rows": 128,
+            "fit_eval_steps": [
+              0,
+              16,
+              32,
+              64
+            ],
+            "format_version": "forge-nanochat-v1",
+            "horizon_updates": 96,
+            "kernel_sha256": null,
+            "lr_batch_scale": 0.125,
+            "lr_multiplier": 0.25,
+            "microbatch": 1,
+            "muon_kernel_mode": "eager",
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": false,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "packed_rows": 384,
+            "packing_buffer_size": 1,
+            "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+            "parent_identity": {
+              "adapter_hashes": {
+                "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+                "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+                "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+                "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+                "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+                "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+                "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+                "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+              },
+              "attention": "fa3",
+              "batch_tokens": 524288,
+              "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+              "config": {
+                "n_embd": 1024,
+                "n_head": 8,
+                "n_kv_head": 8,
+                "n_layer": 16,
+                "sequence_len": 2048,
+                "vocab_size": 32768,
+                "window_pattern": "SSSL"
+              },
+              "eval_every_tokens": 250000000,
+              "eval_tokens_per_shard": 1048576,
+              "horizon_updates": 19074,
+              "initialization": "own_random",
+              "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+              "microbatch": 16,
+              "numerical_mode": {
+                "cublas_workspace_config": ":4096:8",
+                "cuda": "12.9",
+                "cudnn_allow_tf32": true,
+                "cudnn_benchmark": false,
+                "cudnn_deterministic": true,
+                "deterministic_algorithms": true,
+                "deterministic_attention": true,
+                "float32_matmul_precision": "highest",
+                "gpu": "NVIDIA A100-SXM4-40GB",
+                "sm": [
+                  8,
+                  0
+                ]
+              },
+              "phase": "base",
+              "probes": {
+                "decoding": "greedy raw, no repetition penalty",
+                "enabled": true,
+                "max_new_tokens_per_prompt": 32,
+                "max_total_new_tokens": 128,
+                "prompts": [
+                  "The rain stopped just before sunrise. When Mira opened the window,",
+                  "A library lends books to readers. Readers return the books so that",
+                  "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                  "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+                ],
+                "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+                "version": 1
+              },
+              "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+              "seed": 103,
+              "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+              "torch": "2.9.1+cu129"
+            },
+            "phase": "sft",
+            "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+            "stage": "general",
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129",
+            "update_trace": {
+              "absolute_update_limit": 0,
+              "version": 1
+            }
+          },
+          "phase": "sft",
+          "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+          "stage": "targeted",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129",
+          "update_trace": {
+            "absolute_update_limit": 0,
+            "version": 1
+          },
+          "validation_metric": "content_cross_entropy_nats"
+        },
+        "step": 1,
+        "manifest": {
+          "files": {
+            "metadata.json": {
+              "bytes": 17561,
+              "sha256": "ded0884d91ee6e003a45a71d7bfa3d1f455778861319d5a7e3e10b9e4d3388ad"
+            },
+            "payload.pt": {
+              "bytes": 3826061825,
+              "sha256": "b999c743e79660c879e38147369c755d5a53959e3fdfecf7b2142f1905b2eda9"
+            }
+          },
+          "step": 1,
+          "version": 1
+        },
+        "publication_order": [
+          "payload.pt",
+          "metadata.json",
+          "manifest.json",
+          "COMMITTED"
+        ],
+        "transfer_integrity": "gcloud storage cp built-in checksum validation",
+        "independent_sha256_readback": true,
+        "note": "Fresh directory download verified; caller must restore and compare next update. Not a fresh-VM restart test.",
+        "download_directory": "/opt/ganesh-conversation/recovery-readback-split_first-1"
+      },
+      "recovery_roundtrip_seconds": 79.2042097360004
+    }
+  ],
+  "provider_stop_utc": "2026-11-18T08:23:38Z",
+  "evidence": {
+    "uri": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/recovery/recovery-evidence.tar.gz",
+    "sha256": "8bb1f8597a3921a875568e0b457e1c29dc19083e93ae050fd214f4be3dda831e",
+    "readback_verified": true
+  },
+  "local_parent_preserved": true,
+  "quality_accepted": false
+}

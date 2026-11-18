@@ -1,0 +1,9 @@
+"""Audit retained provenance without restoring bulk text or opening sealed evaluation."""
+import hashlib,json
+from pathlib import Path
+R=Path('reports/ganesh-english-sourcing-v1')
+p=Path('runs/ownbase-v2-data/corpus/full-10b-report.json');x=json.loads(p.read_text())
+sources=json.loads(Path('runs/ownbase-v2-data/sources.json').read_text())
+entries=x['train'];source=sum(r['packing']['source_tokens'] for r in entries);crop=sum(r['packing']['cropped_tokens'] for r in entries)
+audit={'status':'metadata_audit_complete_document_overlap_blocked','old_base_source':sources['dataset'],'revision':sources['revision'],'declared_upstream_license':sources['upstream_license'],'prepared_train_shards':len(entries),'prepared_train_targets':sum(r['targets'] for r in entries),'prepared_documents_kept':sum(r['documents']['kept'] for r in entries),'pre_crop_source_tokens':source,'cropped_tokens':crop,'cropped_fraction':crop/source,'actual_base_training_targets':10000269312,'prepared_is_not_consumed_stream':True,'report_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'old_normalization':x['method'],'new_fineweb_overlap':'UNKNOWN until normalized document hashes/near-duplicate indexes are compared; different dataset names do not prove new content','old_dedup_index_compressed_bytes':18987528142,'old_dedup_index_uncompressed_bytes':31116214272,'restore_policy':'Do not restore19GB archive locally under bounded sourcing workspace; use existing GCS backup after auth and separately plan disk-bounded index processing. No compute allocation authorized.','limitations':['No fresh readback of archived dedup index in this review','No claim complete per-document copyright clearance','Cropped positions are preparation statistics, not proof of a model failure cause','No new foundation tranche admitted']}
+(R/'foundation-audit.json').write_text(json.dumps(audit,indent=2)+'\n');print(json.dumps(audit,indent=2))

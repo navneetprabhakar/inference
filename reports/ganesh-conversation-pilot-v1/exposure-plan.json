@@ -1,0 +1,1156 @@
+{
+  "schema": 1,
+  "status": "offline_plan_only_runner_integration_required",
+  "parent_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+  "seed": 103,
+  "cycles": 4,
+  "updates_per_arm": 40,
+  "targets_per_arm": 9144,
+  "epoch_equivalent_broad": 4,
+  "family_target_matching": "exact each update; full conversations and EOS, no target truncation or padding losses",
+  "selection": "Train-only token/length matching; no model outputs or development scores used. Narrow3or4of8 scenarios per family; shared tool/identity rows retained.",
+  "blocks": [
+    {
+      "update": 1,
+      "cycle": 0,
+      "family": "model_identity",
+      "assistant_targets_each_arm": 68,
+      "broad": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ],
+      "control": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ]
+    },
+    {
+      "update": 2,
+      "cycle": 0,
+      "family": "entity",
+      "assistant_targets_each_arm": 202,
+      "broad": [
+        "convpilot_included_excluded",
+        "convpilot_sender_receiver",
+        "convpilot_different_containers",
+        "convpilot_borrowed_camera",
+        "convpilot_two_tasks",
+        "convpilot_three_person_exchange",
+        "convpilot_desk_positions",
+        "convpilot_two_messages"
+      ],
+      "control": [
+        "convpilot_desk_positions",
+        "convpilot_desk_positions",
+        "convpilot_borrowed_camera",
+        "convpilot_borrowed_camera",
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange",
+        "convpilot_desk_positions",
+        "convpilot_three_person_exchange"
+      ]
+    },
+    {
+      "update": 3,
+      "cycle": 0,
+      "family": "tools",
+      "assistant_targets_each_arm": 129,
+      "broad": [
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_product",
+        "convpilot_t_share"
+      ],
+      "control": [
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_product",
+        "convpilot_t_share"
+      ]
+    },
+    {
+      "update": 4,
+      "cycle": 0,
+      "family": "rewrite",
+      "assistant_targets_each_arm": 259,
+      "broad": [
+        "convpilot_summary_facts",
+        "convpilot_apology_text",
+        "convpilot_preserve_negative",
+        "convpilot_short_notice",
+        "convpilot_polite_request",
+        "convpilot_maintain_uncertainty",
+        "convpilot_invitation_tone",
+        "convpilot_condense_without_invention"
+      ],
+      "control": [
+        "convpilot_summary_facts",
+        "convpilot_summary_facts",
+        "convpilot_summary_facts",
+        "convpilot_polite_request",
+        "convpilot_polite_request",
+        "convpilot_condense_without_invention",
+        "convpilot_invitation_tone",
+        "convpilot_condense_without_invention"
+      ]
+    },
+    {
+      "update": 5,
+      "cycle": 0,
+      "family": "clarification",
+      "assistant_targets_each_arm": 359,
+      "broad": [
+        "convpilot_reminder_detail",
+        "convpilot_editing_missing",
+        "convpilot_ambiguous_pronoun",
+        "convpilot_message_recipient",
+        "convpilot_choice_scope",
+        "convpilot_busy_day",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note"
+      ],
+      "control": [
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_message_recipient",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note"
+      ]
+    },
+    {
+      "update": 6,
+      "cycle": 0,
+      "family": "memory",
+      "assistant_targets_each_arm": 209,
+      "broad": [
+        "convpilot_preferred_contact",
+        "convpilot_picnic_item",
+        "convpilot_spare_key",
+        "convpilot_seat_preference",
+        "convpilot_plant_name",
+        "convpilot_two_preferences",
+        "convpilot_corrected_then_distracted",
+        "convpilot_distractor_correction"
+      ],
+      "control": [
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_seat_preference",
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction",
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction"
+      ]
+    },
+    {
+      "update": 7,
+      "cycle": 0,
+      "family": "instructions",
+      "assistant_targets_each_arm": 128,
+      "broad": [
+        "convpilot_position",
+        "convpilot_punctuation",
+        "convpilot_list_format",
+        "convpilot_single_word",
+        "convpilot_word_order",
+        "convpilot_bounded_suggestions",
+        "convpilot_length_constraint",
+        "convpilot_precise_edit"
+      ],
+      "control": [
+        "convpilot_punctuation",
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions",
+        "convpilot_punctuation",
+        "convpilot_bounded_suggestions"
+      ]
+    },
+    {
+      "update": 8,
+      "cycle": 0,
+      "family": "correction",
+      "assistant_targets_each_arm": 213,
+      "broad": [
+        "convpilot_container_move",
+        "convpilot_contact_spelling",
+        "convpilot_meeting_room",
+        "convpilot_pickup_hour",
+        "convpilot_shirt_colour",
+        "convpilot_changing_constraints",
+        "convpilot_cancelled_plan",
+        "convpilot_partial_correction"
+      ],
+      "control": [
+        "convpilot_contact_spelling",
+        "convpilot_shirt_colour",
+        "convpilot_pickup_hour",
+        "convpilot_pickup_hour",
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints",
+        "convpilot_contact_spelling",
+        "convpilot_changing_constraints"
+      ]
+    },
+    {
+      "update": 9,
+      "cycle": 0,
+      "family": "grounding",
+      "assistant_targets_each_arm": 333,
+      "broad": [
+        "convpilot_arrival_unknown",
+        "convpilot_empty_label",
+        "convpilot_weather_evidence",
+        "convpilot_ticket_price",
+        "convpilot_book_author",
+        "convpilot_partial_story",
+        "convpilot_no_action_claim",
+        "convpilot_reported_vs_verified"
+      ],
+      "control": [
+        "convpilot_arrival_unknown",
+        "convpilot_empty_label",
+        "convpilot_empty_label",
+        "convpilot_weather_evidence",
+        "convpilot_empty_label",
+        "convpilot_reported_vs_verified",
+        "convpilot_arrival_unknown",
+        "convpilot_reported_vs_verified"
+      ]
+    },
+    {
+      "update": 10,
+      "cycle": 0,
+      "family": "ordinary",
+      "assistant_targets_each_arm": 386,
+      "broad": [
+        "convpilot_thanks_help",
+        "convpilot_quiet_company",
+        "convpilot_missed_friend",
+        "convpilot_weekend_rest",
+        "convpilot_small_success",
+        "convpilot_uneasy_new_group",
+        "convpilot_hobby_start",
+        "convpilot_unfinished_project"
+      ],
+      "control": [
+        "convpilot_quiet_company",
+        "convpilot_quiet_company",
+        "convpilot_weekend_rest",
+        "convpilot_weekend_rest",
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group",
+        "convpilot_quiet_company",
+        "convpilot_uneasy_new_group"
+      ]
+    },
+    {
+      "update": 11,
+      "cycle": 1,
+      "family": "model_identity",
+      "assistant_targets_each_arm": 68,
+      "broad": [
+        "convpilot_identity_context",
+        "convpilot_name_creator"
+      ],
+      "control": [
+        "convpilot_identity_context",
+        "convpilot_name_creator"
+      ]
+    },
+    {
+      "update": 12,
+      "cycle": 1,
+      "family": "memory",
+      "assistant_targets_each_arm": 209,
+      "broad": [
+        "convpilot_spare_key",
+        "convpilot_distractor_correction",
+        "convpilot_preferred_contact",
+        "convpilot_picnic_item",
+        "convpilot_corrected_then_distracted",
+        "convpilot_plant_name",
+        "convpilot_two_preferences",
+        "convpilot_seat_preference"
+      ],
+      "control": [
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction",
+        "convpilot_seat_preference"
+      ]
+    },
+    {
+      "update": 13,
+      "cycle": 1,
+      "family": "instructions",
+      "assistant_targets_each_arm": 128,
+      "broad": [
+        "convpilot_list_format",
+        "convpilot_precise_edit",
+        "convpilot_position",
+        "convpilot_punctuation",
+        "convpilot_length_constraint",
+        "convpilot_word_order",
+        "convpilot_bounded_suggestions",
+        "convpilot_single_word"
+      ],
+      "control": [
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions",
+        "convpilot_punctuation",
+        "convpilot_single_word",
+        "convpilot_punctuation",
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions",
+        "convpilot_single_word"
+      ]
+    },
+    {
+      "update": 14,
+      "cycle": 1,
+      "family": "correction",
+      "assistant_targets_each_arm": 213,
+      "broad": [
+        "convpilot_meeting_room",
+        "convpilot_partial_correction",
+        "convpilot_container_move",
+        "convpilot_contact_spelling",
+        "convpilot_cancelled_plan",
+        "convpilot_shirt_colour",
+        "convpilot_changing_constraints",
+        "convpilot_pickup_hour"
+      ],
+      "control": [
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints",
+        "convpilot_contact_spelling",
+        "convpilot_shirt_colour",
+        "convpilot_contact_spelling",
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints",
+        "convpilot_pickup_hour"
+      ]
+    },
+    {
+      "update": 15,
+      "cycle": 1,
+      "family": "tools",
+      "assistant_targets_each_arm": 129,
+      "broad": [
+        "convpilot_t_difference",
+        "convpilot_t_product",
+        "convpilot_t_share",
+        "convpilot_t_sum"
+      ],
+      "control": [
+        "convpilot_t_difference",
+        "convpilot_t_product",
+        "convpilot_t_share",
+        "convpilot_t_sum"
+      ]
+    },
+    {
+      "update": 16,
+      "cycle": 1,
+      "family": "entity",
+      "assistant_targets_each_arm": 202,
+      "broad": [
+        "convpilot_different_containers",
+        "convpilot_two_messages",
+        "convpilot_included_excluded",
+        "convpilot_sender_receiver",
+        "convpilot_desk_positions",
+        "convpilot_two_tasks",
+        "convpilot_three_person_exchange",
+        "convpilot_borrowed_camera"
+      ],
+      "control": [
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange",
+        "convpilot_desk_positions",
+        "convpilot_desk_positions",
+        "convpilot_desk_positions",
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange",
+        "convpilot_borrowed_camera"
+      ]
+    },
+    {
+      "update": 17,
+      "cycle": 1,
+      "family": "ordinary",
+      "assistant_targets_each_arm": 386,
+      "broad": [
+        "convpilot_missed_friend",
+        "convpilot_unfinished_project",
+        "convpilot_thanks_help",
+        "convpilot_quiet_company",
+        "convpilot_hobby_start",
+        "convpilot_small_success",
+        "convpilot_uneasy_new_group",
+        "convpilot_weekend_rest"
+      ],
+      "control": [
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group",
+        "convpilot_quiet_company",
+        "convpilot_quiet_company",
+        "convpilot_quiet_company",
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group",
+        "convpilot_weekend_rest"
+      ]
+    },
+    {
+      "update": 18,
+      "cycle": 1,
+      "family": "rewrite",
+      "assistant_targets_each_arm": 259,
+      "broad": [
+        "convpilot_preserve_negative",
+        "convpilot_condense_without_invention",
+        "convpilot_summary_facts",
+        "convpilot_apology_text",
+        "convpilot_invitation_tone",
+        "convpilot_polite_request",
+        "convpilot_maintain_uncertainty",
+        "convpilot_short_notice"
+      ],
+      "control": [
+        "convpilot_summary_facts",
+        "convpilot_condense_without_invention",
+        "convpilot_summary_facts",
+        "convpilot_summary_facts",
+        "convpilot_invitation_tone",
+        "convpilot_polite_request",
+        "convpilot_condense_without_invention",
+        "convpilot_polite_request"
+      ]
+    },
+    {
+      "update": 19,
+      "cycle": 1,
+      "family": "grounding",
+      "assistant_targets_each_arm": 333,
+      "broad": [
+        "convpilot_weather_evidence",
+        "convpilot_reported_vs_verified",
+        "convpilot_arrival_unknown",
+        "convpilot_empty_label",
+        "convpilot_no_action_claim",
+        "convpilot_book_author",
+        "convpilot_partial_story",
+        "convpilot_ticket_price"
+      ],
+      "control": [
+        "convpilot_empty_label",
+        "convpilot_reported_vs_verified",
+        "convpilot_arrival_unknown",
+        "convpilot_empty_label",
+        "convpilot_arrival_unknown",
+        "convpilot_empty_label",
+        "convpilot_reported_vs_verified",
+        "convpilot_weather_evidence"
+      ]
+    },
+    {
+      "update": 20,
+      "cycle": 1,
+      "family": "clarification",
+      "assistant_targets_each_arm": 359,
+      "broad": [
+        "convpilot_ambiguous_pronoun",
+        "convpilot_tone_for_note",
+        "convpilot_reminder_detail",
+        "convpilot_editing_missing",
+        "convpilot_unclear_location",
+        "convpilot_choice_scope",
+        "convpilot_busy_day",
+        "convpilot_message_recipient"
+      ],
+      "control": [
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note",
+        "convpilot_message_recipient"
+      ]
+    },
+    {
+      "update": 21,
+      "cycle": 2,
+      "family": "grounding",
+      "assistant_targets_each_arm": 333,
+      "broad": [
+        "convpilot_partial_story",
+        "convpilot_book_author",
+        "convpilot_empty_label",
+        "convpilot_weather_evidence",
+        "convpilot_reported_vs_verified",
+        "convpilot_ticket_price",
+        "convpilot_arrival_unknown",
+        "convpilot_no_action_claim"
+      ],
+      "control": [
+        "convpilot_reported_vs_verified",
+        "convpilot_empty_label",
+        "convpilot_empty_label",
+        "convpilot_empty_label",
+        "convpilot_reported_vs_verified",
+        "convpilot_weather_evidence",
+        "convpilot_arrival_unknown",
+        "convpilot_arrival_unknown"
+      ]
+    },
+    {
+      "update": 22,
+      "cycle": 2,
+      "family": "model_identity",
+      "assistant_targets_each_arm": 68,
+      "broad": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ],
+      "control": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ]
+    },
+    {
+      "update": 23,
+      "cycle": 2,
+      "family": "ordinary",
+      "assistant_targets_each_arm": 386,
+      "broad": [
+        "convpilot_uneasy_new_group",
+        "convpilot_small_success",
+        "convpilot_quiet_company",
+        "convpilot_missed_friend",
+        "convpilot_unfinished_project",
+        "convpilot_weekend_rest",
+        "convpilot_thanks_help",
+        "convpilot_hobby_start"
+      ],
+      "control": [
+        "convpilot_uneasy_new_group",
+        "convpilot_weekend_rest",
+        "convpilot_quiet_company",
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group",
+        "convpilot_weekend_rest",
+        "convpilot_quiet_company",
+        "convpilot_quiet_company"
+      ]
+    },
+    {
+      "update": 24,
+      "cycle": 2,
+      "family": "rewrite",
+      "assistant_targets_each_arm": 259,
+      "broad": [
+        "convpilot_maintain_uncertainty",
+        "convpilot_polite_request",
+        "convpilot_apology_text",
+        "convpilot_preserve_negative",
+        "convpilot_condense_without_invention",
+        "convpilot_short_notice",
+        "convpilot_summary_facts",
+        "convpilot_invitation_tone"
+      ],
+      "control": [
+        "convpilot_condense_without_invention",
+        "convpilot_polite_request",
+        "convpilot_summary_facts",
+        "convpilot_summary_facts",
+        "convpilot_condense_without_invention",
+        "convpilot_polite_request",
+        "convpilot_summary_facts",
+        "convpilot_invitation_tone"
+      ]
+    },
+    {
+      "update": 25,
+      "cycle": 2,
+      "family": "instructions",
+      "assistant_targets_each_arm": 128,
+      "broad": [
+        "convpilot_bounded_suggestions",
+        "convpilot_word_order",
+        "convpilot_punctuation",
+        "convpilot_list_format",
+        "convpilot_precise_edit",
+        "convpilot_single_word",
+        "convpilot_position",
+        "convpilot_length_constraint"
+      ],
+      "control": [
+        "convpilot_bounded_suggestions",
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions",
+        "convpilot_single_word",
+        "convpilot_punctuation",
+        "convpilot_punctuation"
+      ]
+    },
+    {
+      "update": 26,
+      "cycle": 2,
+      "family": "entity",
+      "assistant_targets_each_arm": 202,
+      "broad": [
+        "convpilot_three_person_exchange",
+        "convpilot_two_tasks",
+        "convpilot_sender_receiver",
+        "convpilot_different_containers",
+        "convpilot_two_messages",
+        "convpilot_borrowed_camera",
+        "convpilot_included_excluded",
+        "convpilot_desk_positions"
+      ],
+      "control": [
+        "convpilot_three_person_exchange",
+        "convpilot_borrowed_camera",
+        "convpilot_desk_positions",
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange",
+        "convpilot_borrowed_camera",
+        "convpilot_desk_positions",
+        "convpilot_desk_positions"
+      ]
+    },
+    {
+      "update": 27,
+      "cycle": 2,
+      "family": "clarification",
+      "assistant_targets_each_arm": 359,
+      "broad": [
+        "convpilot_busy_day",
+        "convpilot_choice_scope",
+        "convpilot_editing_missing",
+        "convpilot_ambiguous_pronoun",
+        "convpilot_tone_for_note",
+        "convpilot_message_recipient",
+        "convpilot_reminder_detail",
+        "convpilot_unclear_location"
+      ],
+      "control": [
+        "convpilot_tone_for_note",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note",
+        "convpilot_message_recipient",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location"
+      ]
+    },
+    {
+      "update": 28,
+      "cycle": 2,
+      "family": "correction",
+      "assistant_targets_each_arm": 213,
+      "broad": [
+        "convpilot_changing_constraints",
+        "convpilot_shirt_colour",
+        "convpilot_contact_spelling",
+        "convpilot_meeting_room",
+        "convpilot_partial_correction",
+        "convpilot_pickup_hour",
+        "convpilot_container_move",
+        "convpilot_cancelled_plan"
+      ],
+      "control": [
+        "convpilot_changing_constraints",
+        "convpilot_pickup_hour",
+        "convpilot_shirt_colour",
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints",
+        "convpilot_pickup_hour",
+        "convpilot_contact_spelling",
+        "convpilot_contact_spelling"
+      ]
+    },
+    {
+      "update": 29,
+      "cycle": 2,
+      "family": "memory",
+      "assistant_targets_each_arm": 209,
+      "broad": [
+        "convpilot_two_preferences",
+        "convpilot_plant_name",
+        "convpilot_picnic_item",
+        "convpilot_spare_key",
+        "convpilot_distractor_correction",
+        "convpilot_seat_preference",
+        "convpilot_preferred_contact",
+        "convpilot_corrected_then_distracted"
+      ],
+      "control": [
+        "convpilot_distractor_correction",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction",
+        "convpilot_seat_preference",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item"
+      ]
+    },
+    {
+      "update": 30,
+      "cycle": 2,
+      "family": "tools",
+      "assistant_targets_each_arm": 129,
+      "broad": [
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_share",
+        "convpilot_t_product"
+      ],
+      "control": [
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_share",
+        "convpilot_t_product"
+      ]
+    },
+    {
+      "update": 31,
+      "cycle": 3,
+      "family": "instructions",
+      "assistant_targets_each_arm": 128,
+      "broad": [
+        "convpilot_list_format",
+        "convpilot_word_order",
+        "convpilot_bounded_suggestions",
+        "convpilot_punctuation",
+        "convpilot_length_constraint",
+        "convpilot_position",
+        "convpilot_single_word",
+        "convpilot_precise_edit"
+      ],
+      "control": [
+        "convpilot_single_word",
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions",
+        "convpilot_single_word",
+        "convpilot_punctuation",
+        "convpilot_punctuation",
+        "convpilot_single_word",
+        "convpilot_bounded_suggestions"
+      ]
+    },
+    {
+      "update": 32,
+      "cycle": 3,
+      "family": "memory",
+      "assistant_targets_each_arm": 209,
+      "broad": [
+        "convpilot_spare_key",
+        "convpilot_plant_name",
+        "convpilot_two_preferences",
+        "convpilot_picnic_item",
+        "convpilot_corrected_then_distracted",
+        "convpilot_preferred_contact",
+        "convpilot_seat_preference",
+        "convpilot_distractor_correction"
+      ],
+      "control": [
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_distractor_correction",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_picnic_item",
+        "convpilot_seat_preference",
+        "convpilot_distractor_correction"
+      ]
+    },
+    {
+      "update": 33,
+      "cycle": 3,
+      "family": "grounding",
+      "assistant_targets_each_arm": 333,
+      "broad": [
+        "convpilot_weather_evidence",
+        "convpilot_book_author",
+        "convpilot_partial_story",
+        "convpilot_empty_label",
+        "convpilot_no_action_claim",
+        "convpilot_arrival_unknown",
+        "convpilot_ticket_price",
+        "convpilot_reported_vs_verified"
+      ],
+      "control": [
+        "convpilot_empty_label",
+        "convpilot_empty_label",
+        "convpilot_reported_vs_verified",
+        "convpilot_empty_label",
+        "convpilot_arrival_unknown",
+        "convpilot_arrival_unknown",
+        "convpilot_weather_evidence",
+        "convpilot_reported_vs_verified"
+      ]
+    },
+    {
+      "update": 34,
+      "cycle": 3,
+      "family": "correction",
+      "assistant_targets_each_arm": 213,
+      "broad": [
+        "convpilot_meeting_room",
+        "convpilot_shirt_colour",
+        "convpilot_changing_constraints",
+        "convpilot_contact_spelling",
+        "convpilot_cancelled_plan",
+        "convpilot_container_move",
+        "convpilot_pickup_hour",
+        "convpilot_partial_correction"
+      ],
+      "control": [
+        "convpilot_pickup_hour",
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints",
+        "convpilot_shirt_colour",
+        "convpilot_contact_spelling",
+        "convpilot_contact_spelling",
+        "convpilot_pickup_hour",
+        "convpilot_changing_constraints"
+      ]
+    },
+    {
+      "update": 35,
+      "cycle": 3,
+      "family": "model_identity",
+      "assistant_targets_each_arm": 68,
+      "broad": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ],
+      "control": [
+        "convpilot_name_creator",
+        "convpilot_identity_context"
+      ]
+    },
+    {
+      "update": 36,
+      "cycle": 3,
+      "family": "entity",
+      "assistant_targets_each_arm": 202,
+      "broad": [
+        "convpilot_different_containers",
+        "convpilot_two_tasks",
+        "convpilot_three_person_exchange",
+        "convpilot_sender_receiver",
+        "convpilot_desk_positions",
+        "convpilot_included_excluded",
+        "convpilot_borrowed_camera",
+        "convpilot_two_messages"
+      ],
+      "control": [
+        "convpilot_borrowed_camera",
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange",
+        "convpilot_desk_positions",
+        "convpilot_desk_positions",
+        "convpilot_desk_positions",
+        "convpilot_borrowed_camera",
+        "convpilot_three_person_exchange"
+      ]
+    },
+    {
+      "update": 37,
+      "cycle": 3,
+      "family": "rewrite",
+      "assistant_targets_each_arm": 259,
+      "broad": [
+        "convpilot_preserve_negative",
+        "convpilot_polite_request",
+        "convpilot_maintain_uncertainty",
+        "convpilot_apology_text",
+        "convpilot_invitation_tone",
+        "convpilot_summary_facts",
+        "convpilot_short_notice",
+        "convpilot_condense_without_invention"
+      ],
+      "control": [
+        "convpilot_summary_facts",
+        "convpilot_polite_request",
+        "convpilot_condense_without_invention",
+        "convpilot_summary_facts",
+        "convpilot_invitation_tone",
+        "convpilot_summary_facts",
+        "convpilot_polite_request",
+        "convpilot_condense_without_invention"
+      ]
+    },
+    {
+      "update": 38,
+      "cycle": 3,
+      "family": "tools",
+      "assistant_targets_each_arm": 129,
+      "broad": [
+        "convpilot_t_product",
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_share"
+      ],
+      "control": [
+        "convpilot_t_product",
+        "convpilot_t_difference",
+        "convpilot_t_sum",
+        "convpilot_t_share"
+      ]
+    },
+    {
+      "update": 39,
+      "cycle": 3,
+      "family": "clarification",
+      "assistant_targets_each_arm": 359,
+      "broad": [
+        "convpilot_ambiguous_pronoun",
+        "convpilot_choice_scope",
+        "convpilot_busy_day",
+        "convpilot_editing_missing",
+        "convpilot_unclear_location",
+        "convpilot_reminder_detail",
+        "convpilot_message_recipient",
+        "convpilot_tone_for_note"
+      ],
+      "control": [
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_tone_for_note",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_unclear_location",
+        "convpilot_message_recipient",
+        "convpilot_tone_for_note"
+      ]
+    },
+    {
+      "update": 40,
+      "cycle": 3,
+      "family": "ordinary",
+      "assistant_targets_each_arm": 386,
+      "broad": [
+        "convpilot_missed_friend",
+        "convpilot_small_success",
+        "convpilot_uneasy_new_group",
+        "convpilot_quiet_company",
+        "convpilot_hobby_start",
+        "convpilot_thanks_help",
+        "convpilot_weekend_rest",
+        "convpilot_unfinished_project"
+      ],
+      "control": [
+        "convpilot_weekend_rest",
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group",
+        "convpilot_quiet_company",
+        "convpilot_quiet_company",
+        "convpilot_quiet_company",
+        "convpilot_weekend_rest",
+        "convpilot_uneasy_new_group"
+      ]
+    }
+  ],
+  "residuals": [
+    {
+      "family": "clarification",
+      "broad_unique": 8,
+      "control_unique": 3,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4166,
+      "control_positions": 3985,
+      "targets_each": 359,
+      "control_repeats": {
+        "convpilot_message_recipient": 1,
+        "convpilot_unclear_location": 5,
+        "convpilot_tone_for_note": 2
+      }
+    },
+    {
+      "family": "correction",
+      "broad_unique": 8,
+      "control_unique": 4,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 3981,
+      "control_positions": 3993,
+      "targets_each": 213,
+      "control_repeats": {
+        "convpilot_pickup_hour": 3,
+        "convpilot_shirt_colour": 1,
+        "convpilot_contact_spelling": 2,
+        "convpilot_changing_constraints": 2
+      }
+    },
+    {
+      "family": "entity",
+      "broad_unique": 8,
+      "control_unique": 3,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4042,
+      "control_positions": 4056,
+      "targets_each": 202,
+      "control_repeats": {
+        "convpilot_borrowed_camera": 3,
+        "convpilot_desk_positions": 3,
+        "convpilot_three_person_exchange": 2
+      }
+    },
+    {
+      "family": "grounding",
+      "broad_unique": 8,
+      "control_unique": 4,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4159,
+      "control_positions": 4158,
+      "targets_each": 333,
+      "control_repeats": {
+        "convpilot_weather_evidence": 1,
+        "convpilot_empty_label": 3,
+        "convpilot_arrival_unknown": 2,
+        "convpilot_reported_vs_verified": 2
+      }
+    },
+    {
+      "family": "instructions",
+      "broad_unique": 8,
+      "control_unique": 3,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 3961,
+      "control_positions": 4046,
+      "targets_each": 128,
+      "control_repeats": {
+        "convpilot_single_word": 4,
+        "convpilot_punctuation": 2,
+        "convpilot_bounded_suggestions": 2
+      }
+    },
+    {
+      "family": "memory",
+      "broad_unique": 8,
+      "control_unique": 3,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4003,
+      "control_positions": 3792,
+      "targets_each": 209,
+      "control_repeats": {
+        "convpilot_seat_preference": 1,
+        "convpilot_picnic_item": 5,
+        "convpilot_distractor_correction": 2
+      }
+    },
+    {
+      "family": "model_identity",
+      "broad_unique": 2,
+      "control_unique": 2,
+      "broad_exposures": 2,
+      "control_exposures": 2,
+      "broad_turns": 6,
+      "control_turns": 6,
+      "broad_positions": 919,
+      "control_positions": 919,
+      "targets_each": 68,
+      "control_repeats": {
+        "convpilot_name_creator": 1,
+        "convpilot_identity_context": 1
+      }
+    },
+    {
+      "family": "ordinary",
+      "broad_unique": 8,
+      "control_unique": 3,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4180,
+      "control_positions": 4171,
+      "targets_each": 386,
+      "control_repeats": {
+        "convpilot_weekend_rest": 3,
+        "convpilot_quiet_company": 3,
+        "convpilot_uneasy_new_group": 2
+      }
+    },
+    {
+      "family": "rewrite",
+      "broad_unique": 8,
+      "control_unique": 4,
+      "broad_exposures": 8,
+      "control_exposures": 8,
+      "broad_turns": 26,
+      "control_turns": 26,
+      "broad_positions": 4079,
+      "control_positions": 4072,
+      "targets_each": 259,
+      "control_repeats": {
+        "convpilot_polite_request": 2,
+        "convpilot_summary_facts": 3,
+        "convpilot_invitation_tone": 1,
+        "convpilot_condense_without_invention": 2
+      }
+    },
+    {
+      "family": "tools",
+      "broad_unique": 4,
+      "control_unique": 4,
+      "broad_exposures": 4,
+      "control_exposures": 4,
+      "broad_turns": 4,
+      "control_turns": 4,
+      "broad_positions": 1244,
+      "control_positions": 1244,
+      "targets_each": 129,
+      "control_repeats": {
+        "convpilot_t_sum": 1,
+        "convpilot_t_difference": 1,
+        "convpilot_t_product": 1,
+        "convpilot_t_share": 1
+      }
+    }
+  ],
+  "unsupported_by_existing_nano_sft": [
+    "Explicit replay index blocks",
+    "One optimizer update per prescribed block with variable microbatch count",
+    "Learning-rate and momentum clock shared by block index rather than consumed-conversation fraction",
+    "Resume identity binding block plan, block cursor and persistent guards",
+    "Per-block target-equality checks before optimizer step"
+  ]
+}

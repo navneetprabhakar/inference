@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 import re
 import subprocess
@@ -26,33 +27,32 @@ def _remote_prefix(remote_prefix):
     return remote_prefix.rstrip('/') + '/checkpoint-' + uuid.uuid4().hex
 
 
-def _copy(src, dst, deadline):
+def _budget(timeout):
+    if type(timeout) not in (int, float) or not math.isfinite(timeout) or not 0 < timeout <= 1800:
+        raise ValueError('Transfer timeout must be finite, positive and <=1800 seconds')
+    start = time.monotonic()
+    return start, start + timeout
+
+
+def _remaining(deadline):
     remaining = deadline - time.monotonic()
     if remaining <= 0:
         raise TimeoutError('GCS checkpoint transfer deadline expired')
-    # gcloud storage cp validates transfer checksums by default. Do not disable
-    # this check. Independent SHA256 readback is performed by roundtrip_bundle.
+    return remaining
+
+
+def _copy(src, dst, deadline):
+    # Keep checksum validation enabled. All validation, upload and readback work
+    # shares the caller's one deadline; no fresh allowance after local hashing.
     command = ['gcloud', 'storage', 'cp', str(src), str(dst), '--quiet']
-    subprocess.run(command, check=True, timeout=remaining, capture_output=True, text=True)
+    subprocess.run(command, check=True, timeout=_remaining(deadline), capture_output=True, text=True)
 
 
-def upload_bundle(source, *, remote_prefix, timeout=600):
-    """Checksummed GCS upload; does not download or claim fresh-machine recovery.
-
-    The returned local SHA manifest plus successful gcloud checksum validation
-    establish the upload receipt. Use roundtrip_bundle for independent SHA readback.
-    Caller handles retention and billing; every invocation creates a new prefix.
-    """
-    source = Path(source).resolve()
-    original = validate_bundle(source)
-    if not 0 < timeout <= 1800:
-        raise ValueError('Upload timeout must be positive and <=1800 seconds')
-    remote = _remote_prefix(remote_prefix)
-    start = time.monotonic()
-    deadline = start + timeout
+def _publish(source, original, remote, start, deadline):
     for name in COMPONENTS:  # COMMITTED must remain last.
         _copy(source / name, remote + '/' + name, deadline)
     metadata = json.loads((source / 'metadata.json').read_text())
+    _remaining(deadline)
     return {'status': 'gcs_bundle_uploaded', 'remote_prefix': remote,
             'seconds': time.monotonic() - start,
             'bytes_one_way': sum((source / name).stat().st_size for name in COMPONENTS),
@@ -63,21 +63,32 @@ def upload_bundle(source, *, remote_prefix, timeout=600):
             'note': 'Upload receipt only; fresh-machine restore and next update not tested.'}
 
 
+def upload_bundle(source, *, remote_prefix, timeout=600):
+    """Checksummed upload within one deadline including local validation.
+
+    Local validation cannot be preempted here; if it exhausts the allowance, no
+    upload begins. This receipt never claims independent SHA readback or restart.
+    """
+    start, deadline = _budget(timeout)
+    remote = _remote_prefix(remote_prefix)
+    source = Path(source).resolve()
+    original = validate_bundle(source)
+    _remaining(deadline)
+    return _publish(source, original, remote, start, deadline)
+
+
 def roundtrip_bundle(source, *, remote_prefix, destination, timeout=600):
+    """One shared deadline covers validation, upload and independent readback."""
+    start, deadline = _budget(timeout)
+    remote = _remote_prefix(remote_prefix)
     source = Path(source).resolve()
     destination = Path(destination).resolve()
-    original = validate_bundle(source)
-    if not 0 < timeout <= 1800:
-        raise ValueError('Roundtrip timeout must be positive and <=1800 seconds')
     if destination.exists():
         raise FileExistsError(destination)
-    # Validate path before creating destination or starting uploads.
-    _remote_prefix(remote_prefix)
+    original = validate_bundle(source)
+    _remaining(deadline)
     destination.mkdir(parents=True)
-    start = time.monotonic()
-    deadline = start + timeout
-    receipt = upload_bundle(source, remote_prefix=remote_prefix, timeout=timeout)
-    remote = receipt['remote_prefix']
+    receipt = _publish(source, original, remote, start, deadline)
     for name in COMPONENTS:
         _copy(remote + '/' + name, destination / name, deadline)
     downloaded = validate_bundle(destination)
@@ -87,6 +98,7 @@ def roundtrip_bundle(source, *, remote_prefix, destination, timeout=600):
     downloaded_meta = json.loads((destination / 'metadata.json').read_text())
     if downloaded_meta != original_meta:
         raise ValueError('Downloaded checkpoint metadata differs')
+    _remaining(deadline)
     return {**receipt, 'status': 'gcs_bundle_integrity_passed',
             'download_directory': str(destination), 'seconds': time.monotonic() - start,
             'independent_sha256_readback': True,

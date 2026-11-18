@@ -1,0 +1,16 @@
+{
+  "utc": "2026-11-18T05:45:47.211191+00:00",
+  "purpose": "backup_only_no_training",
+  "provider_stop_utc": "2026-11-18T08:23:38Z",
+  "argv": [
+    "gcloud",
+    "compute",
+    "ssh",
+    "ganesh-conv-1118-050838",
+    "--project=executespecv1",
+    "--zone=us-central1-f",
+    "--tunnel-through-iap",
+    "--quiet",
+    "--command=sudo bash -c 'set -euo pipefail\ncd /opt/ganesh-conversation\ntest ! -f recovery-backups.json\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n if [ -x \"$candidate\" ] && \"$candidate\" -c '\"'\"'import torch; assert torch.__version__.startswith(\"2.9.1\")'\"'\"' 2>/dev/null; then\n  systemd-run --unit=ganesh-conversation-recovery-backup --property=WorkingDirectory=/opt/ganesh-conversation --property=RuntimeMaxSec=3000 --setenv=PYTHONPATH=/opt/ganesh-conversation/vendor:/opt/ganesh-conversation:/opt/ganesh-conversation/nanochat-source --setenv=HF_HUB_OFFLINE=1 --setenv=WANDB_MODE=disabled \"$candidate\" -u /opt/ganesh-conversation/reports/ganesh-conversation-execution-v1/recover_and_backup_on_vm.py\n  exit 0\n fi\ndone\nexit 3\n'"
+  ]
+}

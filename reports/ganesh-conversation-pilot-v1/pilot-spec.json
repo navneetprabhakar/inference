@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "kind": "proposed_experiment_not_executable_training_contract",
+  "launch_ready": false,
+  "training_authorized": false,
+  "budget_approved": false,
+  "release_eligible": false,
+  "parent_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+  "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+  "context": 2048,
+  "arms": {
+    "broad": "train.jsonl",
+    "control": "control.jsonl"
+  },
+  "arm_input_sha256": {
+    "broad": "d989328554c64057784436da173eab97e735503dc942c06787310886ee96908b",
+    "control": "7642853d6db52c7283271a063ae1079b8f58512c52856645c8d4c6a3f099ee4a"
+  },
+  "development_suite_sha256": "380e30f833959f8e51aef61c1eea5a466854447049b40fa3578404e1937e72d5",
+  "review_sha256": "f5ca59636a0f6ee5d831cbaa16bf4b8e9d3efb0d21a707ac5c258069fa16a7a7",
+  "source_manifest_sha256": "4c3b71f9a6b73243da359e3bbbe0dfe1542f381633c8b72b4f756aaaf516edce",
+  "exposure_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+  "baseline_raw_sha256": "c99431daf83415e3bff15e5bad1630b3b7a530d6fa5b65b2f68346a232b08b87",
+  "baseline_review_sha256": "d13e7d2062bae89492410355990799c13c92cef56f28d0b601c5195eb7eddca9",
+  "recipe": {
+    "updates_per_arm": 40,
+    "assistant_targets_per_arm": 9144,
+    "position_slots_per_update": 8192,
+    "microbatch": 1,
+    "packing_buffer": 1,
+    "lr_multiplier": 0.25,
+    "optimizer_initialization": "identical inherited Fit30 states in separate arms",
+    "muon": "eager",
+    "seed": 103,
+    "max_broad_row_exposures": 4,
+    "max_control_row_exposures": 20,
+    "resume_old_stopped_experiment": false
+  },
+  "proposed_primary_gate": {
+    "matching_update": 40,
+    "matching_targets": 9144,
+    "treatment_complete_english_session_gain_over_baseline_min": 4,
+    "treatment_complete_english_session_gain_over_control_min": 3,
+    "families_improved_min": 3,
+    "requires_correction_or_memory_gain": true,
+    "max_lost_correct_turns_per_family_vs_baseline": 1,
+    "content_regression_relative_tolerance": 0.05,
+    "content_regression_patience": 2,
+    "two_failed_arms": "hold",
+    "release_authorized_by_pilot": false
+  },
+  "baseline": {
+    "reviewed_records": 109,
+    "english_turns_passed": 20,
+    "english_turns": 104,
+    "english_sessions_passed": 2,
+    "english_sessions": 32,
+    "all_sessions_passed": 2,
+    "all_sessions": 35,
+    "blocked_turns": 26,
+    "native_complete_turns": 69,
+    "identity_turns_passed": 0,
+    "tool_turns_passed": 0,
+    "sensitivity": "Rejecting directive recall row59 reduces English complete sessions2to1; no broader readiness conclusion changes."
+  },
+  "requested_future_cap_usd": 25,
+  "required_before_allocation": [
+    "Exact block runner integration and executable mandatory quality contract",
+    "Persistent separate content/end loss guards and block-cursor optimizer restart/rollback tests",
+    "Controller finite-budget/lease/backup failure dry run and fresh regional quotes/inventory/readbacks",
+    "Explicit new user cap approval"
+  ],
+  "required_after_allocation_before_learning": [
+    "Changed-path CUDA restart/signal and upload failure qualification",
+    "Measured stage forecast fits fixed deadline and backup reserve"
+  ],
+  "required_before_any_release": [
+    "Observed provider scheduled STOP",
+    "Independent protected release review",
+    "Selected model local MPS acceptance"
+  ]
+}

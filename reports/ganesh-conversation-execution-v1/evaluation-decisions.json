@@ -1,0 +1,19 @@
+{
+  "recorded_before_new_GPU_generation": true,
+  "release_eligible": false,
+  "fixed_frozen_MPS_baseline_complete_english_sessions": 2,
+  "required_same_device_parent_baseline": true,
+  "baseline_comparison_rule": "Report fixed MPS baseline and new CUDA parent separately. A learning GO must improve at least4complete English sessions over BOTH, preserving the frozen primary threshold and preventing device differences from being credited to training.",
+  "primary_matching_update": 40,
+  "primary_matching_targets": 9144,
+  "treatment_control_min_complete_session_gain": 3,
+  "minimum_families_improved": 3,
+  "requires_correction_or_memory_gain": true,
+  "maximum_lost_turns_per_family": 1,
+  "stopped_arm_rule": "Any arm failing to reach40 means incomplete primary matched-exposure comparison; never substitute its best checkpoint for the missing endpoint.",
+  "borderline_rule": "Apply the frozen MPS baseline's directive-recall judgment consistently to every candidate; report stricter sensitivity separately. Boundary disagreement means HOLD.",
+  "snapshots": "At most7unique selected snapshots: shared parent plus midpoint20,best-content-CE,last per arm; deduplicate identical initial weights.",
+  "raw_integrity": "All117turns per snapshot including invalid/blocked follow-ups; no answer replacement or reference teacher forcing; actual broker results; full per-turn review.",
+  "protected_defaults": "96tokens/action as frozen cost plan; original prompts/policies/system messages/turn order unchanged.",
+  "user_visible_model_default_changed": false
+}

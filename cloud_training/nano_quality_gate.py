@@ -34,9 +34,12 @@ def dataset_coverage(dataset):
 
 def contract_errors(contract, *, manifest, admission, train, dev, epochs, lr_multiplier, eval_interval, max_updates=None):
     errors=[]
-    for key in ('dataset_manifest_sha256','tokenizer_sha256','required_parent_manifest_sha256','release_suite_sha256','protected_suite_sha256'):
+    pilot=contract.get('objective')=='controlled_conversation_pilot'
+    keys=('dataset_manifest_sha256','tokenizer_sha256','required_parent_manifest_sha256','protected_suite_sha256')+(() if pilot else ('release_suite_sha256',))
+    if pilot and contract.get('release_eligible') is not False:errors.append('Controlled pilot cannot authorize release')
+    for key in keys:
         if not isinstance(contract.get(key),str) or not re.fullmatch('[0-9a-f]{64}',contract[key]):errors.append('Missing valid immutable identity: '+key)
-    if contract.get('schema')!=1 or contract.get('objective')!='conversation_and_tools':return ['Missing supported quality contract']
+    if contract.get('schema')!=1 or contract.get('objective') not in ('conversation_and_tools','controlled_conversation_pilot'):return ['Missing supported quality contract']
     for key,actual in [('dataset_manifest_sha256',manifest['_sha256']),('tokenizer_sha256',manifest['tokenizer_sha256']),('context_tokens',manifest['context_tokens'])]:
         if contract.get(key)!=actual:errors.append('Contract/input mismatch: '+key)
     if contract.get('required_parent_manifest_sha256')!=admission.get('parent_manifest_sha256'):
@@ -112,7 +115,7 @@ def evaluation_candidates(journal,best_step,last_step):
 def release_decision(*, raw, raw_sha256, suite, suite_sha256, review, contract, checkpoint_identity, protected=None, protected_suite=None, protected_suite_sha256=None):
     """Derive scores from complete hash-bound per-turn review; aggregate claims ignored."""
     errors=[]
-    if contract.get('diagnostic_only') or checkpoint_identity.get('diagnostic_only'):
+    if contract.get('diagnostic_only') or checkpoint_identity.get('diagnostic_only') or contract.get('objective')=='controlled_conversation_pilot' or checkpoint_identity.get('controlled_pilot_only'):
         return {'status':'blocked','reasons':['Diagnostic fit checkpoints cannot authorize release'],'quality_accepted':False}
     for value in [raw_sha256,suite_sha256,contract.get('_sha256'),raw.get('checkpoint_manifest_sha256')]:
         if not isinstance(value,str) or not re.fullmatch('[0-9a-f]{64}',value):errors.append('Missing immutable release evidence hash')

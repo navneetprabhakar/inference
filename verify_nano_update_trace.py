@@ -18,7 +18,7 @@ class TraceTests(unittest.TestCase):
    path.unlink()
    with self.assertRaisesRegex(ValueError,'Incomplete'):compare_traces(a.path,b.path)
  def test_actual_sft_loop_emits_optimizer_boundaries(self):
-  out=subprocess.check_output([sys.executable,'-m','reports.english-first-v1.check_loop',json.dumps({'updates':1,'losses':[3.,2.9],'trace':True})],text=True)
+  out=subprocess.check_output([sys.executable,'-m','nano_loop_harness',json.dumps({'updates':1,'losses':[3.,2.9],'trace':True})],text=True)
   self.assertEqual(json.loads(out)['trace_events'],[['before_collect',0],['before_optimizer',0],['after_optimizer',0]])
  def test_content_and_layout_are_separate_and_values_not_emitted(self):
   x=torch.arange(12,dtype=torch.float32).reshape(3,4);y=x.t().contiguous().t()

@@ -108,7 +108,7 @@ class CaptureTests(unittest.TestCase):
     self.assertTrue(result['repeatable_exact'])
     self.assertTrue(all(call['matches_captured_output_exact'] for call in result['calls']))
  def test_actual_sft_loop_captures_only_declared_update(self):
-  command=[sys.executable,'-m','reports.english-first-v1.check_loop']
+  command=[sys.executable,'-m','nano_loop_harness']
   args={'updates':2,'losses':[3.,2.9,2.8],'capture_step':1}
   result=json.loads(subprocess.check_output(command+[json.dumps(args)],text=True))
   self.assertEqual(result['capture_steps'],[1]);self.assertEqual(result['step'],2)

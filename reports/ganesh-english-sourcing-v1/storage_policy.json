@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "gcs_prefix": "gs://forge-ownbase-a100-20261110/ganesh-english-sourcing-v1",
+  "status": "local_storage_active_gcs_migration_paused",
+  "source_cache_limit_bytes": 1073741824,
+  "new_review_workspace_limit_bytes": 268435456,
+  "minimum_free_disk_bytes": 21474836480,
+  "max_single_source_download_bytes": 268435456,
+  "new_source_downloads_while_auth_pending": true,
+  "local_retention": [
+    "existing model weights/runtime",
+    "immutable frozen data",
+    "scripts",
+    "source/review manifests",
+    "compact audit receipts"
+  ],
+  "post_auth": "Authentication alone does not trigger migration. Keep data locally until user requests migration again; verified readback required before any later eviction.",
+  "vm_start_authorized": false,
+  "training_admitted": false,
+  "maths_expansion": "deferred until English gate",
+  "migration_authorized": false,
+  "local_eviction_authorized": false
+}

@@ -1,0 +1,581 @@
+{
+  "passed": true,
+  "scope": "Pure schedule packing/masking/cursor simulation and checkpoint ancestry integrity, NOT optimizer or CUDA restart",
+  "updates_per_arm": 40,
+  "targets_per_arm": 9144,
+  "positions_per_update": 8192,
+  "padding": "All additional row labels are -1; no supervised padding or truncated assistant ends. Required future runner must skip or safely handle all-ignore microbatches using global target denominator.",
+  "tests": [
+    "full plan packing",
+    "exact targets each update",
+    "continuous versus1+restore+39 row equality",
+    "wrong arm/hash/cursor rejected",
+    "own Fit30 to random-base ancestry verified"
+  ],
+  "records": {
+    "broad": [
+      {
+        "update": 1,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 2,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "4a97e175aa6d135bfe014d91677d8f9d2e34253896bdf172ade74f07efab45e5"
+      },
+      {
+        "update": 3,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "5db4d5207097b75f68c65f82817a9e66b7384053259153a75493be979e310f61"
+      },
+      {
+        "update": 4,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "dcad975fbc56d56cb9ac6593f1522baa9d0b78cef5c08f734107a06485bd59dd"
+      },
+      {
+        "update": 5,
+        "actual_targets": 359,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "4ab47c155cde9e38c3a3a2be8a3bc075402907bd0ece85a11cf31cc8788eab47"
+      },
+      {
+        "update": 6,
+        "actual_targets": 209,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f47f07e8240011d021b5c26c0ff4beeeaa7b39d33f7bf56ee7843180831ef3a7"
+      },
+      {
+        "update": 7,
+        "actual_targets": 128,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b84ed4718d6130f68ca417878189a57de6cf92ce499197ac249c57c5751d557c"
+      },
+      {
+        "update": 8,
+        "actual_targets": 213,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "2d70db94019a518da3d71d741b6decee1fb7b2fcf1531c6c7ef84ebf134fab25"
+      },
+      {
+        "update": 9,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "410751065ca496d9ad04ba1f89e8c88e910bdff2b9f414496352f1fe126f0f4f"
+      },
+      {
+        "update": 10,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "41de33d7c8d0661fa48b7f9259a715c9f568ee03d555c2ff9c806abd177078d3"
+      },
+      {
+        "update": 11,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f5dc397c3edaa4409208768dd8760037595f3dd8c7284a3e4df4531b581b37d5"
+      },
+      {
+        "update": 12,
+        "actual_targets": 209,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "8a135c69debf41855768cae9f8463628064369e98e9b43961ca0feb0aaee8fbc"
+      },
+      {
+        "update": 13,
+        "actual_targets": 128,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "ab663da51532708bb7d70b175ddeb131bd0daaf3b6145b1e82fa84a0db9a2d24"
+      },
+      {
+        "update": 14,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "554b7a01860fa6444a91454430bc0cc3de7be11c5631e1a1d824c160742edde0"
+      },
+      {
+        "update": 15,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b5a116bad7fd1c558bf60dc647ce3b0bceaa6beb28c95b1da1f24377657a3223"
+      },
+      {
+        "update": 16,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "63148275461cd37e9d02ff9a0d6bbb4389ee6634770106f5f5cb8394b5851a4c"
+      },
+      {
+        "update": 17,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "58d361e581537b7f77ecab2a6fbb040be01c8db5841f9813f52793ed958da3f4"
+      },
+      {
+        "update": 18,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "323411f4d6b2910ddbdf603741f23fc68052960af02f5561b75ee52d4d0083af"
+      },
+      {
+        "update": 19,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "76fd4b118ce7df9980b13ecddaea380f5025187c39b9d454ca2c0708dfc3f909"
+      },
+      {
+        "update": 20,
+        "actual_targets": 359,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "c744704e2e8570d9146652a23e1aa682ee10a6799cbae45488a3c92569164e0b"
+      },
+      {
+        "update": 21,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a154808f26bf3e30fbef7f485bc1eba41ab3237fc3ab0b821a2c2f4cbd48fc5d"
+      },
+      {
+        "update": 22,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 23,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "140de3b7ff93a91e47463fcf20d823f25b3c4f9a3fd03bfe53e1380cbe521e46"
+      },
+      {
+        "update": 24,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "74081f9db2e7ee29705560334e7d863d79248f91dffdf99c5a2b72368c6bc294"
+      },
+      {
+        "update": 25,
+        "actual_targets": 128,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "8335ba088b795b09de9ff5b85f31a968859004b841dd8de7512fdd28d3b7648e"
+      },
+      {
+        "update": 26,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "211c4898d448c08699f80d5aef08c6301977baa566e3fbac752088f4e4030bfc"
+      },
+      {
+        "update": 27,
+        "actual_targets": 359,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "aeff8fdc1117d6c7c9ca76d99f745b9e7229c943bbb36db6c61d4a752c3dfd10"
+      },
+      {
+        "update": 28,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "d7dddb3fb42187767b30e26ad8a6432f778d8c13a90bfa7592d178a06041cdca"
+      },
+      {
+        "update": 29,
+        "actual_targets": 209,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "08bebb919774b4a2a9f141782b9fbda3ffa6febf2fc650713241599d59fc01fa"
+      },
+      {
+        "update": 30,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a3e325f3876bc978fa7b145a7a1036c95c3b4f7775bfad59026fd82699b47e4c"
+      },
+      {
+        "update": 31,
+        "actual_targets": 128,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "0df4793ce4b4656c1e8c56f9c42fe5f582de5617503fbb8ae2c3967a1988a5c2"
+      },
+      {
+        "update": 32,
+        "actual_targets": 209,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "2836bdf00173ed9caf2906bf28900a60ebd742a7f1d026c272b2199cac7e965a"
+      },
+      {
+        "update": 33,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "3e4982c61463b4c521d5a1838a66bce8b487c6ddb26fcfe0418876fb9b1f8ce7"
+      },
+      {
+        "update": 34,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b1fef6f84d8d2ee57f813b0fa5ece76af2a927415261d7e9fc649b864612ec43"
+      },
+      {
+        "update": 35,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 36,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "d8f020680775a09e551e0f42d7c4ff55a596ebc920b0316c920339a91b2d793e"
+      },
+      {
+        "update": 37,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "9d26ba3e8ebbae60365864682c2ec2c4dbda0a3e5e44e0f3f86dd2f854c20399"
+      },
+      {
+        "update": 38,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "ba687ce409a3eb577ceffe37b2bd09ffa491526379f879b30f2b5886d022452f"
+      },
+      {
+        "update": 39,
+        "actual_targets": 359,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "d50336f69c002ac03c0b96a8f1960bb9935bad80a2d0e127d40a6703b079744e"
+      },
+      {
+        "update": 40,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a838caf8db96a2c0128b57c0bb9ddf9624bc7641e72388c1c6abd129e5325143"
+      }
+    ],
+    "control": [
+      {
+        "update": 1,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 2,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "7f2155f634658dc4094b616952ca4d622d8a493b09fa35c607311b70898da196"
+      },
+      {
+        "update": 3,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "5db4d5207097b75f68c65f82817a9e66b7384053259153a75493be979e310f61"
+      },
+      {
+        "update": 4,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "4c8d4b654c28c4676942b913cf208061b726240e786bae7918b0289b54ab3319"
+      },
+      {
+        "update": 5,
+        "actual_targets": 359,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a35704ae0276214bbf89eb0654dfed1088060fb35fea16a9a60d98d1c871d857"
+      },
+      {
+        "update": 6,
+        "actual_targets": 209,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "c217cc8a2484bb8b281a487780dc00b30f96d8c12e0c42ea9065e93abdfd8e66"
+      },
+      {
+        "update": 7,
+        "actual_targets": 128,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "77533c6314f59e9dadeb756809d3c39b6c53807ccf89af7848f8f469b28543de"
+      },
+      {
+        "update": 8,
+        "actual_targets": 213,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "c3a7b6fcf5ec32cfb1c91f7a7cf8a3b252eb0b0a342d5f7190d737a18aed6787"
+      },
+      {
+        "update": 9,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "33dda480220a5f7cb8dd5c280dd2ded0619ff0d9e4d2c78d5277ae51772e6a35"
+      },
+      {
+        "update": 10,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "9a969e808238c39704a2fc88ca535789df39e70c6ebcbe24529be680c734181d"
+      },
+      {
+        "update": 11,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f5dc397c3edaa4409208768dd8760037595f3dd8c7284a3e4df4531b581b37d5"
+      },
+      {
+        "update": 12,
+        "actual_targets": 209,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f818eda91dc816832dbf21eecb127e3333d18eef3dec0340d47d70c0666043c3"
+      },
+      {
+        "update": 13,
+        "actual_targets": 128,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "ddb9fc8bf09cf0e64b4554d59a3dec98f359d836223b972f7f262581e98943b4"
+      },
+      {
+        "update": 14,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "7471f7dcad2ad2e529b96d276039e6a4e45f5a38e87313cd80cfba69f7fb0c7d"
+      },
+      {
+        "update": 15,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b5a116bad7fd1c558bf60dc647ce3b0bceaa6beb28c95b1da1f24377657a3223"
+      },
+      {
+        "update": 16,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "773107376de5e0a45ad83f1800f10a58695d7aea154ee7c7dc6358b04028d58e"
+      },
+      {
+        "update": 17,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f8822dac2f4a5ad1afbb29cb7778773b2330c6a86d417fc51aced4d2517a662e"
+      },
+      {
+        "update": 18,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "847ccdb4a70f2926e614b0c865a5a6bce38e248950ac03aec05ee51d773778e6"
+      },
+      {
+        "update": 19,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "ecb00e7007cf22d5bbaf1f56bc593af9fcb09293a495a1946876ab9f9550b740"
+      },
+      {
+        "update": 20,
+        "actual_targets": 359,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "bc21d8b4852d7349b76639d11a9cedd1ef45de390155bbbef417de08f2e8e0ac"
+      },
+      {
+        "update": 21,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "c907acbfeb1204522d4c5c5c85b6d53a30a8226341244c5027de83b9edc26cc9"
+      },
+      {
+        "update": 22,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 23,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "15a57c728305cad71a5a76fc1de3c6aa0e62e6fbf8f0093da6e4513e5cef2780"
+      },
+      {
+        "update": 24,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "2ae71545320d16eeb7881181c846209e99cf15ad97a63e48feee730338c441ae"
+      },
+      {
+        "update": 25,
+        "actual_targets": 128,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "70049e5a841ec55f17e79a930f67452ea12aba43fd619edeab2c361556abbffc"
+      },
+      {
+        "update": 26,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "18d9db6d4df546faaa08ded0afa54839ba5ff4b082c1ff12e3562416abe49ec2"
+      },
+      {
+        "update": 27,
+        "actual_targets": 359,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "1764472789decad6e925f47aee0e2a0e778185ba2b3a4370b2922723eb967678"
+      },
+      {
+        "update": 28,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "47e56ee1588fe10efe13a355f935f91abee3df7480fe6b23dd78cf496ee661f9"
+      },
+      {
+        "update": 29,
+        "actual_targets": 209,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "04803262e9e632291e983b1a7369e760490f6a99d88eb3766f662d05afd945b2"
+      },
+      {
+        "update": 30,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a3e325f3876bc978fa7b145a7a1036c95c3b4f7775bfad59026fd82699b47e4c"
+      },
+      {
+        "update": 31,
+        "actual_targets": 128,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "7e88281d7eaa6346fd226f833b87c9616f91c83e4620f23e41a924b2b74180ff"
+      },
+      {
+        "update": 32,
+        "actual_targets": 209,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "74a259bdc977bf1f4207f294177c824864f0f6d8e919ff9bf25d54d281df0255"
+      },
+      {
+        "update": 33,
+        "actual_targets": 333,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b10504b196059c2e42c2ed24cf1fe65f30ca15bb410ceae0959e6990aca75d3f"
+      },
+      {
+        "update": 34,
+        "actual_targets": 213,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "1d7e0d71bf0de75eafb14f0d623360e5313e23de6d67ab9fa061decc47c02af7"
+      },
+      {
+        "update": 35,
+        "actual_targets": 68,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "98c2ff96ce377109b629def0921107f597a760e5b13afbe283236bb9ea63e2d6"
+      },
+      {
+        "update": 36,
+        "actual_targets": 202,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "a7442b7d7dec34f2b7011ea85611d4d997c4c4ca9aa7a1f48a946fe5c6a05f86"
+      },
+      {
+        "update": 37,
+        "actual_targets": 259,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "f67b28819081e19a41af27dc2c7082142d3843aba31e03764917f3fe2d794d6a"
+      },
+      {
+        "update": 38,
+        "actual_targets": 129,
+        "active_rows": 1,
+        "total_rows": 4,
+        "tensor_lists_sha256": "ba687ce409a3eb577ceffe37b2bd09ffa491526379f879b30f2b5886d022452f"
+      },
+      {
+        "update": 39,
+        "actual_targets": 359,
+        "active_rows": 2,
+        "total_rows": 4,
+        "tensor_lists_sha256": "b9c0676cb49662b668459f019fd3522ad8b733c9b429f221c127c7f1826889b4"
+      },
+      {
+        "update": 40,
+        "actual_targets": 386,
+        "active_rows": 3,
+        "total_rows": 4,
+        "tensor_lists_sha256": "65040874fc45d270692b48ba4da6c4b8a9ca57763afe33a3e79a4f277fc7c9a8"
+      }
+    ]
+  }
+}

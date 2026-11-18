@@ -3,7 +3,7 @@ import json,subprocess,sys,unittest
 from cloud_training.nano_qualification_schedule import restart_branches,validate_restart_branches
 
 def run(**kwargs):
-    return json.loads(subprocess.check_output([sys.executable,'-m','reports.english-first-v1.check_loop',json.dumps(kwargs)],text=True))
+    return json.loads(subprocess.check_output([sys.executable,'-m','nano_loop_harness',json.dumps(kwargs)],text=True))
 
 class QualificationTests(unittest.TestCase):
     def test_rejects_old_observation_schedule(self):

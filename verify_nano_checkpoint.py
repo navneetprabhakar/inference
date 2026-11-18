@@ -223,6 +223,36 @@ class CheckpointTests(unittest.TestCase):
                                  destination=self.path.parent / 'partial-download')
         self.assertFalse(any(command[4].endswith('/COMMITTED') for command in calls))
 
+    def test_validation_time_consumes_upload_deadline_before_any_cloud_write(self):
+        from cloud_training.l4_recovery_check import upload_bundle
+        self.save();clock=[0.0]
+        def slow_validation(path):
+            value=validate_bundle(path);clock[0]+=6;return value
+        with patch('cloud_training.l4_recovery_check.time.monotonic',side_effect=lambda:clock[0]), patch('cloud_training.l4_recovery_check.validate_bundle',side_effect=slow_validation), patch('cloud_training.l4_recovery_check.subprocess.run') as copy:
+            with self.assertRaises(TimeoutError):upload_bundle(self.path,remote_prefix='gs://test-bucket/project/run',timeout=5)
+            copy.assert_not_called()
+
+    def test_roundtrip_never_resets_deadline_after_validation_or_upload(self):
+        from cloud_training.l4_recovery_check import roundtrip_bundle
+        self.save();clock=[0.0];store={};allowances=[]
+        def validation(path):
+            value=validate_bundle(path);clock[0]+=2;return value
+        def copy(command,**kwargs):
+            allowances.append(kwargs['timeout']);src,dst=command[3:5]
+            if dst.startswith('gs://'):store[dst]=Path(src).read_bytes()
+            else:Path(dst).write_bytes(store[src])
+            clock[0]+=.25
+        with patch('cloud_training.l4_recovery_check.time.monotonic',side_effect=lambda:clock[0]),patch('cloud_training.l4_recovery_check.validate_bundle',side_effect=validation),patch('cloud_training.l4_recovery_check.subprocess.run',side_effect=copy):
+            with self.assertRaises(TimeoutError):roundtrip_bundle(self.path,remote_prefix='gs://test-bucket/project/run',destination=self.path.parent/'late-readback',timeout=5)
+        self.assertEqual(allowances,[3,2.75,2.5,2.25,2,1.75,1.5,1.25])
+
+    def test_invalid_timeout_rejected_before_expensive_validation(self):
+        from cloud_training.l4_recovery_check import upload_bundle
+        for timeout in (True,0,-1,float('nan'),float('inf'),1801,None):
+            with self.subTest(timeout=timeout),patch('cloud_training.l4_recovery_check.validate_bundle') as check:
+                with self.assertRaises(ValueError):upload_bundle(self.path,remote_prefix='gs://test-bucket/project/run',timeout=timeout)
+                check.assert_not_called()
+
     def test_symlink_refused(self):
         self.save()
         src = self.path / 'metadata.json'

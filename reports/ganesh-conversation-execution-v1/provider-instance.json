@@ -1,0 +1,152 @@
+{
+  "canIpForward": false,
+  "cpuPlatform": "Unknown CPU Platform",
+  "creationTimestamp": "2026-11-17T21:08:47.908-08:00",
+  "deletionProtection": false,
+  "disks": [
+    {
+      "autoDelete": false,
+      "boot": true,
+      "deviceName": "persistent-disk-0",
+      "diskSizeGb": "200",
+      "guestOsFeatures": [
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        },
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "GVNIC"
+        }
+      ],
+      "index": 0,
+      "interface": "SCSI",
+      "kind": "compute#attachedDisk",
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-dlvm",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gvnic",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-py310",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-gpu-pytorch-2-9",
+        "https://www.googleapis.com/compute/v1/projects/click-to-deploy-images/global/licenses/c2d-dl-platform-ubuntu-2404"
+      ],
+      "mode": "READ_WRITE",
+      "source": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-c/disks/ganesh-conv-1118-050838",
+      "type": "PERSISTENT"
+    }
+  ],
+  "fingerprint": "bFrq8M6cskk=",
+  "guestAccelerators": [
+    {
+      "acceleratorCount": 1,
+      "acceleratorType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-c/acceleratorTypes/nvidia-tesla-a100"
+    }
+  ],
+  "id": "7884885193349172272",
+  "kind": "compute#instance",
+  "labelFingerprint": "42WmSpB8rSM=",
+  "machineType": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-c/machineTypes/a2-highgpu-1g",
+  "metadata": {
+    "fingerprint": "59CM8miblhg=",
+    "items": [
+      {
+        "key": "block-project-ssh-keys",
+        "value": "TRUE"
+      },
+      {
+        "key": "bundle-sha256",
+        "value": "02a93d181d535d9f32ccd4353199f493401bb91563ec87a1b676d73452b99ec0"
+      },
+      {
+        "key": "bundle-uri",
+        "value": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/inputs/02a93d181d535d9f32ccd4353199f493401bb91563ec87a1b676d73452b99ec0-runtime.tar.gz"
+      },
+      {
+        "key": "config-sha256",
+        "value": "2446325ee5882536bd3e09e16f66dc19fed256c227a63e1e869123e847fd36bf"
+      },
+      {
+        "key": "config-uri",
+        "value": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/inputs/config.json"
+      },
+      {
+        "key": "enable-oslogin",
+        "value": "TRUE"
+      },
+      {
+        "key": "own-deadline-utc",
+        "value": "2026-11-18T08:23:38Z"
+      },
+      {
+        "key": "packet-sha256",
+        "value": "326e4f15635fcb2320f6675de25d8cac17372cd776756ec046e0afe328c4bb94"
+      },
+      {
+        "key": "packet-uri",
+        "value": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/inputs/326e4f15635fcb2320f6675de25d8cac17372cd776756ec046e0afe328c4bb94-packet-complete.tar.gz"
+      },
+      {
+        "key": "startup-script",
+        "value": "#!/bin/bash\nset -euo pipefail\nmkdir -p /opt/ganesh-conversation\ncd /opt/ganesh-conversation\nexec > >(tee -a bootstrap.log) 2>&1\nexec 9>bootstrap.lock\nflock -n 9 || exit 2\nmetadata() { curl --fail --silent --show-error --max-time 10 -H 'Metadata-Flavor: Google' \"http://metadata.google.internal/computeMetadata/v1/instance/attributes/$1\"; }\n# The provider STOP is primary. Independent guest fallback is at STOP+60 seconds.\nDEADLINE=$(metadata own-deadline-utc)\nFALLBACK=$(python3 - \"$DEADLINE\" <<'PY'\nimport datetime,sys,time\nstop=datetime.datetime.fromisoformat(sys.argv[1].replace('Z','+00:00'))\nassert stop.timestamp()-time.time()>1800\nprint((stop+datetime.timedelta(seconds=60)).strftime('%Y-%m-%d %H:%M:%S UTC'))\nPY\n)\nsystemd-run --unit=ganesh-budget-stop --on-calendar=\"$FALLBACK\" /sbin/shutdown -h now\n[ ! -e bootstrap-started ] || exit 0\ntouch bootstrap-started\ntimeout 600 gcloud storage cp \"$(metadata bundle-uri)\" runtime.tar.gz --quiet\nprintf '%s  runtime.tar.gz\\n' \"$(metadata bundle-sha256)\" | sha256sum -c -\ntimeout 120 gcloud storage cp \"$(metadata packet-uri)\" packet.tar.gz --quiet\nprintf '%s  packet.tar.gz\\n' \"$(metadata packet-sha256)\" | sha256sum -c -\ntimeout 120 gcloud storage cp \"$(metadata config-uri)\" config.json --quiet\nprintf '%s  config.json\\n' \"$(metadata config-sha256)\" | sha256sum -c -\npython3 - <<'PY'\nimport pathlib,tarfile\nfor archive in ('runtime.tar.gz','packet.tar.gz'):\n with tarfile.open(archive) as t:\n  seen=set()\n  for m in t.getmembers():\n   p=pathlib.PurePosixPath(m.name)\n   assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name not in seen\n   assert not pathlib.Path(m.name).exists()\n   seen.add(m.name)\n  t.extractall('.',filter='data')\nfrom cloud_training.nano_package import extract_verified\nextract_verified('runtime.tar.gz','.')\nPY\nfor deb in debs/*.deb; do dpkg-deb -x \"$deb\" /; done\nPYTHON=''\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n if [ -x \"$candidate\" ] && \"$candidate\" -c 'import torch; assert torch.__version__.startswith(\"2.9.1\"); assert torch.version.cuda==\"12.9\"' 2>/dev/null; then PYTHON=\"$candidate\"; break; fi\ndone\n[ -n \"$PYTHON\" ] || exit 3\n\"$PYTHON\" - <<'PY'\nimport zipfile,pathlib\nfor w in pathlib.Path('wheels').glob('*.whl'):zipfile.ZipFile(w).extractall('vendor')\nPY\nexport PYTHONPATH=/opt/ganesh-conversation/vendor:/opt/ganesh-conversation:/opt/ganesh-conversation/nanochat-source\nexport HF_HUB_OFFLINE=1 WANDB_MODE=disabled\n\"$PYTHON\" - <<'PY'\nimport json,subprocess\nfrom pathlib import Path\nfrom cloud_training.nano_checkpoint import validate_bundle\nfrom cloud_training.nano_data import sha256_file\ncfg=json.loads(Path('config.json').read_text())\nfor name in ('parent','ancestor'):\n d=Path(name);d.mkdir()\n for file in ('payload.pt','metadata.json','manifest.json','COMMITTED'):\n  subprocess.run(['gcloud','storage','cp',cfg[name+'_uri']+'/'+file,str(d/file),'--quiet'],check=True,timeout=600)\n validate_bundle(d)\n assert sha256_file(d/'manifest.json')==cfg[name+'_manifest_sha256']\nPY\n\"$PYTHON\" -u reports/ganesh-conversation-execution-v1/gpu_qualify.py\n# No automatic learning dispatch. The bounded controller requires actual receipts.\n"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "name": "ganesh-conv-1118-050838",
+  "networkInterfaces": [
+    {
+      "fingerprint": "PFFV_uV9YLk=",
+      "kind": "compute#networkInterface",
+      "name": "nic0",
+      "network": "https://www.googleapis.com/compute/v1/projects/executespecv1/global/networks/default",
+      "networkIP": "10.128.15.199",
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "https://www.googleapis.com/compute/v1/projects/executespecv1/regions/us-central1/subnetworks/default"
+    }
+  ],
+  "resourceStatus": {
+    "effectiveInstanceMetadata": {
+      "blockProjectSshKeysMetadataValue": true,
+      "enableOsloginMetadataValue": true,
+      "vmDnsSettingMetadataValue": "ZonalOnly"
+    },
+    "scheduling": {
+      "terminationTimestamp": "2026-11-18T08:23:38Z"
+    }
+  },
+  "satisfiesPzi": true,
+  "scheduling": {
+    "automaticRestart": false,
+    "instanceTerminationAction": "STOP",
+    "onHostMaintenance": "TERMINATE",
+    "preemptible": false,
+    "provisioningModel": "STANDARD",
+    "terminationTime": "2026-11-18T08:23:38Z"
+  },
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-c/instances/ganesh-conv-1118-050838",
+  "serviceAccounts": [
+    {
+      "email": "forge-ownbase-bench@executespecv1.iam.gserviceaccount.com",
+      "scopes": [
+        "https://www.googleapis.com/auth/devstorage.read_write"
+      ]
+    }
+  ],
+  "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
+    "enableSecureBoot": false,
+    "enableVtpm": true
+  },
+  "shieldedInstanceIntegrityPolicy": {
+    "updateAutoLearnPolicy": true
+  },
+  "startRestricted": false,
+  "status": "STAGING",
+  "tags": {
+    "fingerprint": "-Vlxe8hepEw=",
+    "items": [
+      "ganesh-a100-cap40-iap"
+    ]
+  },
+  "zone": "https://www.googleapis.com/compute/v1/projects/executespecv1/zones/us-central1-c"
+}

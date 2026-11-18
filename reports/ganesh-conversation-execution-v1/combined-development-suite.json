@@ -1,0 +1,1747 @@
+{
+  "purpose": "development_only_never_train",
+  "schema": 1,
+  "required_context_tokens": 2048,
+  "sessions": [
+    {
+      "id": "convpilot_dev_finished_puzzle",
+      "source_group": "dev_finished_puzzle",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "The puzzle I was working on is finally complete.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Finishing it must feel satisfying.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I want to leave it out for a while.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "You can enjoy seeing the finished puzzle before putting it away.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "No advice now, just a brief response.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Enjoy it.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_waiting",
+      "source_group": "dev_waiting",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "I am bored while waiting for a friend.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Would you like a small distraction while you wait?",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Ask me an easy question about my day.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "What was the most pleasant part of your day so far?",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Having breakfast outside.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "That sounds like a pleasant start to the day.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_reassurance",
+      "source_group": "dev_reassurance",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "I tried a new recipe and it did not turn out as I hoped.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "That is frustrating after putting in the effort.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I do not want troubleshooting.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Understood. We do not need to troubleshoot it.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Thanks for listening.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "You are welcome.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_ambiguous_comparison",
+      "source_group": "dev_ambiguous_comparison",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Is this better than the other one?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Which two things are you comparing, and what would make one better for you?",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Two reading lamps. Only one has an adjustable arm, and I need to direct the light.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The lamp with the adjustable arm sounds better suited to that need.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which feature mattered?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The adjustable arm, because you want to direct the light.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_missing_sentence",
+      "source_group": "dev_missing_sentence",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Please fix the grammar.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Please send the sentence you want corrected.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "She carry the boxes.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "She carries the boxes.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Make it past tense.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "She carried the boxes.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_unclear_they",
+      "source_group": "dev_unclear_they",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Nina met the twins when they returned. Who returned?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "In that sentence, \"they\" most naturally refers to the twins.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Change it so Nina is the one who returned.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "When Nina returned, she met the twins.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Who returned in the revised sentence?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Nina.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_brackets",
+      "source_group": "dev_brackets",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "Output only the word done inside square brackets.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "[done]",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Use round brackets instead.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "(done)",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Remove the brackets and capitalise the first letter.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Done",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_separator",
+      "source_group": "dev_separator",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "Write ant and bee separated by a slash. No other text.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "ant/bee",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Replace the slash with a hyphen.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "ant-bee",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Now give only the word after the hyphen.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "bee",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_select_phrase",
+      "source_group": "dev_select_phrase",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "Reply with the last word of \"a gentle breeze\" and nothing else.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "breeze",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Give the first word of that original phrase.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "a",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Give the middle word only.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "gentle",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_birthplace",
+      "source_group": "dev_birthplace",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "All I know about Rehan is that he repairs clocks. Where was he born?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "His birthplace cannot be determined from that information.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "He says he was born in Patna.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "His stated birthplace is Patna.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Do we know where he lives now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. His current home has not been specified.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_shop_hours",
+      "source_group": "dev_shop_hours",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "A sign says the shop is open on holidays. What time does it close?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The sign does not give a closing time.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Another sign says it closes at six in the evening.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The stated closing time is six in the evening.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Does that tell us when it opens?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. The opening time is still unspecified.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_missing_size",
+      "source_group": "dev_missing_size",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "A listing calls a table wooden but gives no measurements. Will it fit through my doorway?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "We need the table dimensions and doorway measurements to determine that.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Can you confidently say yes without those measurements?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. There is not enough information to say that confidently.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Give me a short request to send the seller.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Could you please provide the table dimensions?",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_team_roles",
+      "source_group": "dev_team_roles",
+      "category": "entity",
+      "turns": [
+        {
+          "user": "At rehearsal, Pablo handles lighting and Mira handles costumes. Who handles costumes?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Mira handles costumes.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Who handles lighting?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Pablo.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Does Pablo handle costumes according to that description?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. Mira handles costumes.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_map_symbols",
+      "source_group": "dev_map_symbols",
+      "category": "entity",
+      "turns": [
+        {
+          "user": "On this map, a star marks the station and a circle marks the clinic. What does the circle mark?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The clinic.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which symbol marks the station?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "A star.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Does the star mark the clinic?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. It marks the station.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_absent_item",
+      "source_group": "dev_absent_item",
+      "category": "entity",
+      "turns": [
+        {
+          "user": "The drawer has scissors and tape, but no glue. Is there glue in the drawer?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No, there is no glue in the drawer.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Name the two items that are there.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Scissors and tape.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which adhesive item is present?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Tape.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_return_day",
+      "source_group": "dev_return_day",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "I will return the board game on Thursday.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "You will return it on Thursday.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "That no longer works; make it Friday.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The return day is now Friday.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which day is the return planned for now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Friday.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_active_contact",
+      "source_group": "dev_active_contact",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "The caretaker to contact is Ravi.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Ravi is the caretaker to contact.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Ravi is away. Contact Lila instead.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Lila is now the contact.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Whom should I contact under the revised plan?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Lila.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_storage_change",
+      "source_group": "dev_storage_change",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "The torch is in the cabinet.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The torch is in the cabinet.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I have taken it out and put it in the basket.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The torch is now in the basket.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Where can I find the torch now?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "In the basket.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_favourite_sound",
+      "source_group": "dev_favourite_sound",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "My favourite sound is waves on the shore.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Your favourite sound is waves on the shore.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "My desk faces a wall, and there is a clock above it.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Your desk faces a wall with a clock above it.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "What sound did I say I like most?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Waves on the shore.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_carried_item",
+      "source_group": "dev_carried_item",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "For the visit, I am bringing a sketchbook.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "You are bringing a sketchbook.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "The building has a side entrance.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The building has a side entrance.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "What did I say I would bring?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "A sketchbook.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_revised_route",
+      "source_group": "dev_revised_route",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "We plan to take the tunnel.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "You plan to take the tunnel.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Use the bridge instead. The weather forecast is clear.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "You will use the bridge instead, and the forecast is clear.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which route did we settle on?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The bridge.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_remove_filler",
+      "source_group": "dev_remove_filler",
+      "category": "rewrite",
+      "turns": [
+        {
+          "user": "Remove unnecessary words: At this point in time, the lift is not working.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The lift is not working.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Add a polite request to use the stairs.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The lift is not working. Please use the stairs.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Keep only the request.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Please use the stairs.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_preserve_order",
+      "source_group": "dev_preserve_order",
+      "category": "rewrite",
+      "turns": [
+        {
+          "user": "Say this more simply: Prior to leaving, ensure that the window is shut.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Close the window before leaving.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Change it to happen after leaving, keeping the other action.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Close the window after leaving.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "In the revised sentence, which happens first?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Leaving happens first.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_condense_update",
+      "source_group": "dev_condense_update",
+      "category": "rewrite",
+      "turns": [
+        {
+          "user": "Make this shorter without losing facts: The bus was late, and as a result we arrived after the start.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The late bus made us miss the start.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Do not imply that we missed the whole event.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The bus was late, so we arrived after the event began.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "What caused the late arrival?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The bus was late.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_low_pressure",
+      "source_group": "dev_low_pressure",
+      "category": "ordinary",
+      "turns": [
+        {
+          "user": "I planted some seeds and keep checking whether they have grown.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Waiting for something you planted can make you eager to see progress.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I just wanted to share that, not get instructions.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Thanks for sharing it with me.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "What was I checking?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Whether the seeds had grown.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Respond in one short sentence now.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "I hope you enjoy watching them grow.",
+          "expected_calls": [],
+          "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_priority_change",
+      "source_group": "dev_priority_change",
+      "category": "clarification",
+      "turns": [
+        {
+          "user": "Can you make it lighter?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Do you mean lighter in weight, colour, or tone?",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I mean the tone of a message. Here it is: Your delay has caused considerable inconvenience.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The delay has made things difficult.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Ask for an update without sounding angry.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Could you please let me know when to expect an update?",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Was I asking about the weight of an object?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. You were asking about the tone of a message.",
+          "expected_calls": [],
+          "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_excluded_topic",
+      "source_group": "dev_excluded_topic",
+      "category": "instructions",
+      "turns": [
+        {
+          "user": "The reference is ZX-41. Return only the two letters before the hyphen.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "ZX",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Now give only the two digits after the hyphen.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "41",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Restore the full reference, keeping its original case and punctuation.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "ZX-41",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Give the full reference in lowercase. Nothing else.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "zx-41",
+          "expected_calls": [],
+          "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_rumour",
+      "source_group": "dev_rumour",
+      "category": "grounding",
+      "turns": [
+        {
+          "user": "Two notes disagree: one says the package is heavy and the other says it is light. Neither is marked newer. Which should I trust?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Those notes alone do not establish which description is correct.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "The sender confirms the heavy label was an error.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Then the heavy label should not be relied on.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Does that confirmation alone give the exact weight?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. It gives no exact weight.",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Write a short request for the missing measurement.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Could you please provide the package weight?",
+          "expected_calls": [],
+          "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_object_transfer",
+      "source_group": "dev_object_transfer",
+      "category": "entity",
+      "turns": [
+        {
+          "user": "Nikhil gave a notebook to Eva. Eva gave a pen, but not the notebook, to Karim. Who has the notebook?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Eva has the notebook.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Who received the pen?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Karim.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Did Eva give Karim both objects?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. She gave Karim only the pen.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Name the person still holding the notebook.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Eva.",
+          "expected_calls": [],
+          "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_keep_other_field",
+      "source_group": "dev_keep_other_field",
+      "category": "correction",
+      "turns": [
+        {
+          "user": "My chosen fabric is cotton.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Your chosen fabric is cotton.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "I considered switching to linen, but decided not to change the order.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Your order remains cotton.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which fabric is currently selected?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Cotton.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Did merely considering linen change my selection?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "No. You decided not to change it.",
+          "expected_calls": [],
+          "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_unrelated_move",
+      "source_group": "dev_unrelated_move",
+      "category": "memory",
+      "turns": [
+        {
+          "user": "The first word I want you to keep track of is marble.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "The first word is marble.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "The next word is feather. These are a sequence, not replacements.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "The sequence is marble, then feather.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Which word did I mention first?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Marble.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "And which came second?",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Feather.",
+          "expected_calls": [],
+          "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_preserve_possibility",
+      "source_group": "dev_preserve_possibility",
+      "category": "rewrite",
+      "turns": [
+        {
+          "user": "Turn this into reported speech: Lena said, \"I am ready.\"",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Lena said that she was ready.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Who was ready?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Lena.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Rewrite the reported sentence using \"she\" instead of the name.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "She said that she was ready.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Return to Lena's original first-person words, without quotation marks.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "I am ready.",
+          "expected_calls": [],
+          "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_dev_identity",
+      "source_group": "dev_identity",
+      "category": "model_identity",
+      "turns": [
+        {
+          "user": "What is this model called?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Ganesh-base.",
+          "expected_calls": [],
+          "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Name the creator of this model.",
+          "policy": {
+            "allowed_names": [],
+            "permit_calls": false
+          },
+          "reply_budget": 96,
+          "reference_answer": "Navneet Prabhakar.",
+          "expected_calls": [],
+          "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        },
+        {
+          "user": "Is Ganesh-base your creator or your name?",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "Ganesh-base is my name.",
+          "expected_calls": [],
+          "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_d_sum",
+      "source_group": "d_sum",
+      "category": "tools",
+      "turns": [
+        {
+          "user": "Use the conversion tool to express 3 m in cm.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "300.",
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "m",
+                "to": "cm",
+                "value": 3
+              },
+              "name": "convert"
+            }
+          ],
+          "rubric": "Prompt/arguments/order and final answer checked against actual offline broker replay; call/end structure retained. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "convpilot_d_difference",
+      "source_group": "d_difference",
+      "category": "tools",
+      "turns": [
+        {
+          "user": "Use the conversion tool to express 2 kg in g.",
+          "policy": {
+            "allowed_names": [
+              "calculate",
+              "convert"
+            ],
+            "permit_calls": true
+          },
+          "reply_budget": 96,
+          "reference_answer": "2000.",
+          "expected_calls": [
+            {
+              "arguments": {
+                "from": "kg",
+                "to": "g",
+                "value": 2
+              },
+              "name": "convert"
+            }
+          ],
+          "rubric": "Prompt/arguments/order and final answer checked against actual offline broker replay; call/end structure retained. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail."
+        }
+      ]
+    },
+    {
+      "id": "context-correction",
+      "turns": [
+        {
+          "user": "My parcel is in Nashik. Reply only: noted",
+          "exact_answers": [
+            "noted"
+          ],
+          "reply_budget": 96
+        },
+        {
+          "user": "Correction: the parcel is now in Mysuru. Reply only: updated",
+          "exact_answers": [
+            "updated"
+          ],
+          "reply_budget": 96
+        },
+        {
+          "user": "Where is my parcel now? Reply with only the city name.",
+          "exact_answers": [
+            "Mysuru"
+          ],
+          "reply_budget": 96
+        }
+      ]
+    },
+    {
+      "id": "calculate-grounding",
+      "turns": [
+        {
+          "user": "Use calculate to subtract 19 from 73. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "calculate"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "calculate",
+              "arguments": {
+                "op": "subtract",
+                "a": 73,
+                "b": 19
+              }
+            }
+          ],
+          "exact_answers": [
+            "54"
+          ],
+          "reply_budget": 96
+        }
+      ]
+    },
+    {
+      "id": "convert-grounding",
+      "turns": [
+        {
+          "user": "Use convert to convert 3.25 km to m. Reply with only the numeric result.",
+          "policy": {
+            "permit_calls": true,
+            "allowed_names": [
+              "convert"
+            ]
+          },
+          "expected_calls": [
+            {
+              "name": "convert",
+              "arguments": {
+                "value": 3.25,
+                "from": "km",
+                "to": "m"
+              }
+            }
+          ],
+          "exact_answers": [
+            "3250",
+            "3250.0"
+          ],
+          "reply_budget": 96
+        }
+      ]
+    },
+    {
+      "id": "no-call",
+      "turns": [
+        {
+          "user": "Do not use tools. Reply only: ready",
+          "exact_answers": [
+            "ready"
+          ],
+          "reply_budget": 96
+        }
+      ]
+    },
+    {
+      "id": "conversation-review",
+      "turns": [
+        {
+          "user": "I have twenty minutes to tidy my desk and prepare for a meeting. Suggest a short practical plan.",
+          "rubric": "Relevant feasible plan within20minutes; coherent, no repetition or invented actions.",
+          "reply_budget": 96
+        },
+        {
+          "user": "The meeting was cancelled. Change your plan so I can focus on tidying.",
+          "rubric": "Uses the prior context, respects cancellation, revises plan coherently; no claimed tool action.",
+          "reply_budget": 96
+        }
+      ]
+    }
+  ]
+}

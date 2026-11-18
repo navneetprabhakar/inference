@@ -1,0 +1,6297 @@
+{
+  "checkpoint_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+  "suite_sha256": "380e30f833959f8e51aef61c1eea5a466854447049b40fa3578404e1937e72d5",
+  "step": 30,
+  "identity": {
+    "adapter_hashes": {
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+      "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+      "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+      "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+      "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+    },
+    "attention": "sdpa",
+    "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "batch_tokens": 8192,
+    "config": {
+      "n_embd": 1024,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_layer": 16,
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "window_pattern": "SSSL"
+    },
+    "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+    "diagnostic_only": true,
+    "epochs": 64,
+    "eval_every_updates": 5,
+    "eval_rows": 128,
+    "fit_eval_steps": [
+      0,
+      16,
+      32,
+      64
+    ],
+    "format_version": "forge-nanochat-v1",
+    "horizon_updates": 96,
+    "kernel_sha256": null,
+    "lr_batch_scale": 0.125,
+    "lr_multiplier": 0.25,
+    "microbatch": 1,
+    "muon_kernel_mode": "eager",
+    "numerical_mode": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.9",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "deterministic_attention": false,
+      "float32_matmul_precision": "highest",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ]
+    },
+    "packed_rows": 384,
+    "packing_buffer_size": 1,
+    "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "phase": "sft",
+    "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "seed": 103,
+    "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+    "stage": "general",
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "torch": "2.9.1+cu129",
+    "update_trace": {
+      "absolute_update_limit": 0,
+      "version": 1
+    }
+  },
+  "repetition_penalty": 1.0,
+  "runner_sha256": "8b3cf89a1deefdd69673441216b50897082a18ff82332487359e9c7e32e3de0f",
+  "decoding": {
+    "temperature": 0,
+    "reply_budget_per_action": 96,
+    "max_actions_per_turn": 3
+  },
+  "diagnostic_base_mode": false,
+  "usable_model_claim": false,
+  "scope": "Exposed development assessment, not final acceptance",
+  "evaluation_runtime": {
+    "torch": "2.14.1",
+    "cuda": null,
+    "device": "mps",
+    "attention": "sdpa",
+    "gpu": null
+  },
+  "status": "development_checks_complete",
+  "records": [
+    {
+      "session": "convpilot_dev_finished_puzzle",
+      "turn": 0,
+      "user": "The puzzle I was working on is finally complete.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for cooperating.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              24335,
+              651,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for cooperating."
+            },
+            "seconds": 0.40842549997614697
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_finished_puzzle",
+      "turn": 1,
+      "user": "I want to leave it out for a while.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for cooperating.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              24335,
+              651,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for cooperating."
+            },
+            "seconds": 0.48917299997992814
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_finished_puzzle",
+      "turn": 2,
+      "user": "No advice now, just a brief response.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for cooperating.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              24335,
+              651,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for cooperating."
+            },
+            "seconds": 0.8211795410024934
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_waiting",
+      "turn": 0,
+      "user": "I am bored while waiting for a friend.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "I'm bored.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              73,
+              1657,
+              13075,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "I'm bored."
+            },
+            "seconds": 0.20577870798297226
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_waiting",
+      "turn": 1,
+      "user": "Ask me an easy question about my day.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ask me an easy question about my day.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              16909,
+              522,
+              346,
+              1793,
+              2112,
+              575,
+              778,
+              1132,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ask me an easy question about my day."
+            },
+            "seconds": 0.821495332987979
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_waiting",
+      "turn": 2,
+      "user": "Having breakfast outside.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Having breakfast outside.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              11644,
+              8574,
+              2505,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Having breakfast outside."
+            },
+            "seconds": 0.6169194590183906
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_reassurance",
+      "turn": 0,
+      "user": "I tried a new recipe and it did not turn out as I hoped.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "I tried a new recipe and it did not turn out as I hoped.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              73,
+              5033,
+              257,
+              725,
+              5518,
+              288,
+              338,
+              1225,
+              433,
+              1789,
+              539,
+              352,
+              333,
+              20271,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "I tried a new recipe and it did not turn out as I hoped."
+            },
+            "seconds": 1.115561417012941
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_reassurance",
+      "turn": 1,
+      "user": "I do not want troubleshooting.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              84,
+              29334,
+              306,
+              433,
+              287,
+              262,
+              9463,
+              286,
+              30666,
+              1144,
+              46,
+              6098,
+              3101,
+              257,
+              10327,
+              2473,
+              324,
+              6303,
+              354,
+              14080,
+              360,
+              8389,
+              2799,
+              443,
+              4411,
+              5715,
+              286,
+              4870,
+              4782,
+              7422,
+              575,
+              16710,
+              46,
+              319,
+              29334,
+              306,
+              257,
+              1513,
+              15307,
+              593,
+              491,
+              548,
+              2500,
+              419,
+              746,
+              21540,
+              46,
+              6235,
+              494,
+              575,
+              16710,
+              1490,
+              354,
+              483,
+              1438,
+              32,
+              769,
+              5341,
+              11013,
+              16710,
+              352,
+              257,
+              1513,
+              15307,
+              593,
+              491,
+              548,
+              2500,
+              419,
+              746,
+              21540,
+              46,
+              319,
+              29334,
+              306,
+              433,
+              287,
+              262,
+              9463,
+              286,
+              30666,
+              1144,
+              46,
+              6098,
+              3101,
+              257,
+              10327,
+              2473,
+              324,
+              6303,
+              354,
+              483,
+              1438,
+              32,
+              769,
+              5341
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 9.758066459035035
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_reassurance",
+      "turn": 2,
+      "user": "Thanks for listening.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_ambiguous_comparison",
+      "turn": 0,
+      "user": "Is this better than the other one?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              370,
+              5715,
+              10677,
+              553,
+              746,
+              5353,
+              347,
+              657,
+              2202,
+              2681,
+              354,
+              14080,
+              585,
+              283,
+              2081,
+              443,
+              4456,
+              360,
+              14080,
+              585,
+              283,
+              2081,
+              443,
+              4456,
+              360,
+              8389,
+              1915,
+              387,
+              4845,
+              283,
+              5443,
+              387,
+              16809,
+              354,
+              13110,
+              9062,
+              31976,
+              462,
+              9177,
+              430,
+              19463,
+              481,
+              311,
+              360,
+              1635,
+              1405,
+              3466,
+              443,
+              4456,
+              283,
+              313,
+              324,
+              2968,
+              46,
+              6098,
+              1915,
+              915,
+              287,
+              257,
+              1274,
+              1773,
+              354,
+              10897,
+              313,
+              324,
+              21454,
+              272,
+              2008,
+              23007,
+              44,
+              633,
+              495,
+              257,
+              1545,
+              347,
+              443,
+              6325,
+              46,
+              6098,
+              1408,
+              1305,
+              2466,
+              354,
+              23007,
+              333,
+              6529,
+              553,
+              315,
+              494,
+              638,
+              46,
+              6098,
+              1915,
+              915
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 4.663228499994148
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_ambiguous_comparison",
+      "turn": 1,
+      "user": "Two reading lamps. Only one has an adjustable arm, and I need to direct the light.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_ambiguous_comparison",
+      "turn": 2,
+      "user": "Which feature mattered?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_sentence",
+      "turn": 0,
+      "user": "Please fix the grammar.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for pointing that out.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              12824,
+              334,
+              539,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for pointing that out."
+            },
+            "seconds": 0.39748616598080844
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_sentence",
+      "turn": 1,
+      "user": "She carry the boxes.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No. The boxes are checked.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              370,
+              7143,
+              339,
+              8452,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No. The boxes are checked."
+            },
+            "seconds": 0.7181510839727707
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_sentence",
+      "turn": 2,
+      "user": "Make it past tense.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Past tense including third-person singular simple present continuous.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              29428,
+              24569,
+              1256,
+              3672,
+              15812,
+              18360,
+              1874,
+              1590,
+              6286,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Past tense including third-person singular simple present continuous."
+            },
+            "seconds": 1.4852038750541396
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unclear_they",
+      "turn": 0,
+      "user": "Nina met the twins when they returned. Who returned?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The twins met when they returned.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              17946,
+              1125,
+              593,
+              472,
+              8886,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The twins met when they returned."
+            },
+            "seconds": 0.28210591699462384
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unclear_they",
+      "turn": 1,
+      "user": "Change it so Nina is the one who returned.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Change it so Nina is the one who returned.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              20572,
+              338,
+              510,
+              489,
+              2103,
+              306,
+              262,
+              557,
+              718,
+              8886,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Change it so Nina is the one who returned."
+            },
+            "seconds": 0.9891821669880301
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unclear_they",
+      "turn": 2,
+      "user": "Who returned in the revised sentence?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The twins returned in the revised sentence.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              17946,
+              8886,
+              287,
+              262,
+              19818,
+              9009,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The twins returned in the revised sentence."
+            },
+            "seconds": 1.0839637499884702
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_brackets",
+      "turn": 0,
+      "user": "Output only the word done inside square brackets.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              3309,
+              1239,
+              306,
+              15933,
+              287,
+              4543,
+              21533,
+              46,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 7.150593750004191
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_brackets",
+      "turn": 1,
+      "user": "Use round brackets instead.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_brackets",
+      "turn": 2,
+      "user": "Remove the brackets and capitalise the first letter.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_separator",
+      "turn": 0,
+      "user": "Write ant and bee separated by a slash. No other text.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please type ant or bee separated by a slash.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1275,
+              1488,
+              351,
+              6136,
+              8638,
+              430,
+              257,
+              1304,
+              1204,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please type ant or bee separated by a slash."
+            },
+            "seconds": 0.4278619169490412
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_separator",
+      "turn": 1,
+      "user": "Replace the slash with a hyphen.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please type slash with hyphen.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1275,
+              1304,
+              1204,
+              347,
+              4089,
+              789,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please type slash with hyphen."
+            },
+            "seconds": 0.7265647500171326
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_separator",
+      "turn": 2,
+      "user": "Now give only the word after the hyphen.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please type after the hyphen.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1275,
+              966,
+              262,
+              4089,
+              789,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please type after the hyphen."
+            },
+            "seconds": 0.9285511669586413
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_select_phrase",
+      "turn": 0,
+      "user": "Reply with the last word of \"a gentle breeze\" and nothing else.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for giving this a try.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              3713,
+              443,
+              257,
+              1408,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for giving this a try."
+            },
+            "seconds": 0.4954788750037551
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_select_phrase",
+      "turn": 1,
+      "user": "Give the first word of that original phrase.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for giving this a try.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              3713,
+              443,
+              257,
+              1408,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for giving this a try."
+            },
+            "seconds": 0.7134904579725116
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_select_phrase",
+      "turn": 2,
+      "user": "Give the middle word only.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for giving this a try.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              3713,
+              443,
+              257,
+              1408,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for giving this a try."
+            },
+            "seconds": 1.2086227079853415
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_birthplace",
+      "turn": 0,
+      "user": "All I know about Rehan is that he repairs clocks. Where was he born?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "He was born in London, England.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3297,
+              495,
+              5039,
+              287,
+              6573,
+              44,
+              6232,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "He was born in London, England."
+            },
+            "seconds": 0.3353288750513457
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_birthplace",
+      "turn": 1,
+      "user": "He says he was born in Patna.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "He was born in Patna, India.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3297,
+              495,
+              5039,
+              287,
+              5279,
+              4375,
+              44,
+              3952,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "He was born in Patna, India."
+            },
+            "seconds": 0.8130795410252176
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_birthplace",
+      "turn": 2,
+      "user": "Do we know where he lives now?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "He lives in Patna, India.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3297,
+              2912,
+              287,
+              5279,
+              4375,
+              44,
+              3952,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "He lives in Patna, India."
+            },
+            "seconds": 1.030104167002719
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_shop_hours",
+      "turn": 0,
+      "user": "A sign says the shop is open on holidays. What time does it close?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              4451,
+              23716,
+              415,
+              32,
+              52,
+              58,
+              925,
+              8077,
+              331,
+              13819,
+              46,
+              6098,
+              1915,
+              262,
+              619,
+              443,
+              3288,
+              2104,
+              46,
+              846,
+              338,
+              1846,
+              553,
+              44,
+              4557,
+              1490,
+              283,
+              18425,
+              262,
+              3288,
+              288,
+              1408,
+              1305,
+              46,
+              9361,
+              324,
+              23014,
+              389,
+              46,
+              5955,
+              257,
+              4730,
+              1132,
+              354,
+              533,
+              575,
+              13819,
+              415,
+              262,
+              4451,
+              1071,
+              1089,
+              619,
+              793,
+              262,
+              4451,
+              2045,
+              331,
+              13819,
+              63,
+              538,
+              58,
+              370,
+              4451,
+              23716,
+              415,
+              32,
+              52,
+              58,
+              925,
+              8077,
+              331,
+              13819,
+              354,
+              20867,
+              575,
+              13819,
+              415,
+              262,
+              4451,
+              1071,
+              483,
+              2004,
+              1239,
+              7003,
+              257,
+              4451,
+              334,
+              23716,
+              415,
+              32,
+              52,
+              58,
+              925,
+              8077
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 6.823701834015083
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_shop_hours",
+      "turn": 1,
+      "user": "Another sign says it closes at six in the evening.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_shop_hours",
+      "turn": 2,
+      "user": "Does that tell us when it opens?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_size",
+      "turn": 0,
+      "user": "A listing calls a table wooden but gives no measurements. Will it fit through my doorway?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              1280,
+              1846,
+              553,
+              2346,
+              752,
+              262,
+              3985,
+              2325,
+              864,
+              338,
+              1846,
+              553,
+              419,
+              6279,
+              46,
+              6098,
+              1915,
+              262,
+              7608,
+              351,
+              1408,
+              1454,
+              3102,
+              354,
+              15746,
+              269,
+              5428,
+              306,
+              257,
+              6394,
+              2671,
+              324,
+              776,
+              4155,
+              44,
+              506,
+              338,
+              363,
+              315,
+              4860,
+              283,
+              1866,
+              262,
+              7608,
+              7274,
+              46,
+              6555,
+              269,
+              5428,
+              306,
+              2310,
+              1084,
+              420,
+              3609,
+              2074,
+              44,
+              537,
+              1504,
+              338,
+              535,
+              780,
+              4253,
+              2224,
+              351,
+              9502,
+              334,
+              363,
+              315,
+              5059,
+              46,
+              1363,
+              44,
+              633,
+              339,
+              595,
+              1897,
+              283,
+              1866,
+              262,
+              7608,
+              286,
+              8326,
+              5428,
+              44,
+              719,
+              352,
+              844,
+              257,
+              6410,
+              1866,
+              351,
+              257,
+              19017,
+              46,
+              846,
+              313
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 4.579309457971249
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_size",
+      "turn": 1,
+      "user": "Can you confidently say yes without those measurements?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_missing_size",
+      "turn": 2,
+      "user": "Give me a short request to send the seller.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_team_roles",
+      "turn": 0,
+      "user": "At rehearsal, Pablo handles lighting and Mira handles costumes. Who handles costumes?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Pablo.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              80,
+              376,
+              7013,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Pablo."
+            },
+            "seconds": 0.30265241698361933
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_team_roles",
+      "turn": 1,
+      "user": "Who handles lighting?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Pablo.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              80,
+              376,
+              7013,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Pablo."
+            },
+            "seconds": 0.46194016601657495
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_team_roles",
+      "turn": 2,
+      "user": "Does Pablo handle costumes according to that description?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No. Pablo does not handle costumes according to that description.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              403,
+              376,
+              7013,
+              793,
+              433,
+              3775,
+              25289,
+              1958,
+              283,
+              334,
+              6537,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No. Pablo does not handle costumes according to that description."
+            },
+            "seconds": 2.181804416992236
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_map_symbols",
+      "turn": 0,
+      "user": "On this map, a star marks the station and a circle marks the clinic. What does the circle mark?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "A star marks the station and a circle marks the clinic.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              65,
+              3914,
+              7758,
+              262,
+              5422,
+              288,
+              257,
+              7069,
+              7758,
+              262,
+              12399,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "A star marks the station and a circle marks the clinic."
+            },
+            "seconds": 0.4898482909775339
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_map_symbols",
+      "turn": 1,
+      "user": "Which symbol marks the station?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "A star marks the station and a circle marks the clinic.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              65,
+              3914,
+              7758,
+              262,
+              5422,
+              288,
+              257,
+              7069,
+              7758,
+              262,
+              12399,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "A star marks the station and a circle marks the clinic."
+            },
+            "seconds": 1.1398243749863468
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_map_symbols",
+      "turn": 2,
+      "user": "Does the star mark the clinic?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No. The star does not mark the clinic.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              370,
+              3914,
+              793,
+              433,
+              1423,
+              262,
+              12399,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No. The star does not mark the clinic."
+            },
+            "seconds": 1.3648947500041686
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_absent_item",
+      "turn": 0,
+      "user": "The drawer has scissors and tape, but no glue. Is there glue in the drawer?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No glue is present in the drawer.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              8491,
+              306,
+              1590,
+              287,
+              262,
+              22305,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No glue is present in the drawer."
+            },
+            "seconds": 0.5888042079750448
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_absent_item",
+      "turn": 1,
+      "user": "Name the two items that are there.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The drawer has scissors and tape, but no glue.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              22305,
+              535,
+              15576,
+              288,
+              6410,
+              44,
+              506,
+              780,
+              8491,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The drawer has scissors and tape, but no glue."
+            },
+            "seconds": 1.0846359999850392
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_absent_item",
+      "turn": 2,
+      "user": "Which adhesive item is present?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The drawer has scissors and tape, but no glue.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              22305,
+              535,
+              15576,
+              288,
+              6410,
+              44,
+              506,
+              780,
+              8491,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The drawer has scissors and tape, but no glue."
+            },
+            "seconds": 1.784130375017412
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_return_day",
+      "turn": 0,
+      "user": "I will return the board game on Thursday.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for your visit! Please return the board game on Thursday.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              387,
+              3101,
+              33,
+              6098,
+              3307,
+              262,
+              3433,
+              2115,
+              331,
+              11791,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for your visit! Please return the board game on Thursday."
+            },
+            "seconds": 0.5190764170256443
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_return_day",
+      "turn": 1,
+      "user": "That no longer works; make it Friday.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for your visit! Please make it Friday.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              387,
+              3101,
+              33,
+              6098,
+              713,
+              338,
+              9572,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for your visit! Please make it Friday."
+            },
+            "seconds": 0.924864707980305
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_return_day",
+      "turn": 2,
+      "user": "Which day is the return planned for now?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thanks for your visit! Please make it Thursday.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9361,
+              324,
+              387,
+              3101,
+              33,
+              6098,
+              713,
+              338,
+              11791,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thanks for your visit! Please make it Thursday."
+            },
+            "seconds": 1.3718021659879014
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_active_contact",
+      "turn": 0,
+      "user": "The caretaker to contact is Ravi.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please go to Ravi's office and tell him you need assistance.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              660,
+              283,
+              29604,
+              105,
+              386,
+              4641,
+              288,
+              2169,
+              1961,
+              313,
+              606,
+              6303,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please go to Ravi's office and tell him you need assistance."
+            },
+            "seconds": 0.9855202919570729
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_active_contact",
+      "turn": 1,
+      "user": "Ravi is away. Contact Lila instead.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please go to Lila's office and tell him you need assistance.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              660,
+              283,
+              490,
+              10277,
+              386,
+              4641,
+              288,
+              2169,
+              1961,
+              313,
+              606,
+              6303,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please go to Lila's office and tell him you need assistance."
+            },
+            "seconds": 1.2732992499950342
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_active_contact",
+      "turn": 2,
+      "user": "Whom should I contact under the revised plan?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Ravi.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              82,
+              554,
+              105,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Ravi."
+            },
+            "seconds": 0.7261046670028009
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_storage_change",
+      "turn": 0,
+      "user": "The torch is in the cabinet.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The torch is in the cabinet.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              24687,
+              306,
+              287,
+              262,
+              15330,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The torch is in the cabinet."
+            },
+            "seconds": 0.28128533402923495
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_storage_change",
+      "turn": 1,
+      "user": "I have taken it out and put it in the basket.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "I have taken it out and put it in the basket.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              73,
+              419,
+              2739,
+              338,
+              539,
+              288,
+              1480,
+              338,
+              287,
+              262,
+              8726,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "I have taken it out and put it in the basket."
+            },
+            "seconds": 1.1765527079696767
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_storage_change",
+      "turn": 2,
+      "user": "Where can I find the torch now?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The torch is in the cabinet.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              24687,
+              306,
+              287,
+              262,
+              15330,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The torch is in the cabinet."
+            },
+            "seconds": 1.0020533750066534
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_favourite_sound",
+      "turn": 0,
+      "user": "My favourite sound is waves on the shore.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Waves on the shore are a loud noise.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              87,
+              1542,
+              331,
+              262,
+              9096,
+              339,
+              257,
+              7613,
+              3842,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Waves on the shore are a loud noise."
+            },
+            "seconds": 0.661974958027713
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_favourite_sound",
+      "turn": 1,
+      "user": "My desk faces a wall, and there is a clock above it.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "A clock faces a wall.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              65,
+              6773,
+              8174,
+              257,
+              2429,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "A clock faces a wall."
+            },
+            "seconds": 0.5757459999877028
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_favourite_sound",
+      "turn": 2,
+      "user": "What sound did I say I like most?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Waves on the shore are a loud noise.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              87,
+              1542,
+              331,
+              262,
+              9096,
+              339,
+              257,
+              7613,
+              3842,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Waves on the shore are a loud noise."
+            },
+            "seconds": 1.5856303329928778
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_carried_item",
+      "turn": 0,
+      "user": "For the visit, I am bringing a sketchbook.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please bring a sketchbook.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              2395,
+              257,
+              12495,
+              3733,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please bring a sketchbook."
+            },
+            "seconds": 0.29728741699364036
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_carried_item",
+      "turn": 1,
+      "user": "The building has a side entrance.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "The building has a side entrance.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              2240,
+              535,
+              257,
+              1665,
+              13206,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "The building has a side entrance."
+            },
+            "seconds": 0.7552419169805944
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_carried_item",
+      "turn": 2,
+      "user": "What did I say I would bring?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please bring a sketchbook.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              2395,
+              257,
+              12495,
+              3733,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please bring a sketchbook."
+            },
+            "seconds": 0.8849408329697326
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_revised_route",
+      "turn": 0,
+      "user": "We plan to take the tunnel.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1915,
+              387,
+              8018,
+              351,
+              3875,
+              601,
+              2155,
+              46,
+              1011,
+              1186,
+              283,
+              967,
+              262,
+              13755,
+              46,
+              13,
+              8,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 6.729647959000431
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_revised_route",
+      "turn": 1,
+      "user": "Use the bridge instead. The weather forecast is clear.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_revised_route",
+      "turn": 2,
+      "user": "Which route did we settle on?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_remove_filler",
+      "turn": 0,
+      "user": "Remove unnecessary words: At this point in time, the lift is not working.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Sorry, I couldn't find any errors in your message.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              23007,
+              44,
+              333,
+              6529,
+              553,
+              942,
+              641,
+              7645,
+              287,
+              387,
+              4957,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Sorry, I couldn't find any errors in your message."
+            },
+            "seconds": 0.478141792002134
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_remove_filler",
+      "turn": 1,
+      "user": "Add a polite request to use the stairs.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Sorry, I couldn't find any errors in your message.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              23007,
+              44,
+              333,
+              6529,
+              553,
+              942,
+              641,
+              7645,
+              287,
+              387,
+              4957,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Sorry, I couldn't find any errors in your message."
+            },
+            "seconds": 1.1135275830165483
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_remove_filler",
+      "turn": 2,
+      "user": "Keep only the request.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Sorry, I couldn't find any errors in your message.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              23007,
+              44,
+              333,
+              6529,
+              553,
+              942,
+              641,
+              7645,
+              287,
+              387,
+              4957,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Sorry, I couldn't find any errors in your message."
+            },
+            "seconds": 1.6123646670021117
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_order",
+      "turn": 0,
+      "user": "Say this more simply: Prior to leaving, ensure that the window is shut.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please shut the window before leaving.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              5187,
+              262,
+              4311,
+              1003,
+              5007,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please shut the window before leaving."
+            },
+            "seconds": 0.5939001250080764
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_order",
+      "turn": 1,
+      "user": "Change it to happen after leaving, keeping the other action.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please change it to happen after leaving, keeping the other action.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1259,
+              338,
+              283,
+              2223,
+              966,
+              5007,
+              44,
+              3671,
+              262,
+              548,
+              2872,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please change it to happen after leaving, keeping the other action."
+            },
+            "seconds": 1.2571430410025641
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_order",
+      "turn": 2,
+      "user": "In the revised sentence, which happens first?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              848,
+              262,
+              19818,
+              9009,
+              44,
+              537,
+              3142,
+              815,
+              63,
+              8,
+              795,
+              34,
+              795,
+              34,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 16.595555124979
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_condense_update",
+      "turn": 0,
+      "user": "Make this shorter without losing facts: The bus was late, and as a result we arrived after the start.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              5152,
+              306,
+              546,
+              23897,
+              784,
+              288,
+              1846,
+              553,
+              4830,
+              262,
+              2523,
+              415,
+              1005,
+              46,
+              24344,
+              306,
+              443,
+              2297,
+              7378,
+              262,
+              1746,
+              286,
+              262,
+              1105,
+              3713,
+              262,
+              4173,
+              1160,
+              46,
+              1237,
+              10544,
+              415,
+              257,
+              2296,
+              2440,
+              44,
+              1446,
+              1072,
+              262,
+              1394,
+              3575,
+              288,
+              262,
+              943,
+              286,
+              491,
+              1449,
+              5476,
+              354,
+              14080,
+              360,
+              8389,
+              945,
+              443,
+              283,
+              2973,
+              443,
+              352,
+              257,
+              1915,
+              452,
+              307,
+              9361,
+              46,
+              32759,
+              483,
+              32,
+              568,
+              568,
+              45,
+              568,
+              2174,
+              1320,
+              700,
+              306,
+              20164,
+              288,
+              396,
+              339,
+              7333,
+              283,
+              886,
+              262,
+              1219,
+              288,
+              4157,
+              415,
+              262,
+              1320,
+              1737,
+              1707,
+              283,
+              1273,
+              257,
+              1894
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 4.777555708016735
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_condense_update",
+      "turn": 1,
+      "user": "Do not imply that we missed the whole event.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_condense_update",
+      "turn": 2,
+      "user": "What caused the late arrival?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_low_pressure",
+      "turn": 0,
+      "user": "I planted some seeds and keep checking whether they have grown.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "They have grown.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              3434,
+              419,
+              4496,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "They have grown."
+            },
+            "seconds": 0.3014612079714425
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_low_pressure",
+      "turn": 1,
+      "user": "I just wanted to share that, not get instructions.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "I just wanted to share that, not get instructions.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              73,
+              760,
+              4341,
+              283,
+              2750,
+              334,
+              44,
+              433,
+              662,
+              4152,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "I just wanted to share that, not get instructions."
+            },
+            "seconds": 1.0066918749944307
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_low_pressure",
+      "turn": 2,
+      "user": "What was I checking?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "I was checking whether the seeds had grown.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              73,
+              495,
+              7919,
+              2143,
+              262,
+              3073,
+              952,
+              4496,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "I was checking whether the seeds had grown."
+            },
+            "seconds": 1.4606652919901535
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_low_pressure",
+      "turn": 3,
+      "user": "Respond in one short sentence now.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Respond to the expressed feeling/request without inventing personal details or giving unwanted advice; later constraints are followed. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Thank you.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              10897,
+              313,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Thank you."
+            },
+            "seconds": 0.7676334999850951
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_priority_change",
+      "turn": 0,
+      "user": "Can you make it lighter?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Please send me the relevant text.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              5074,
+              522,
+              262,
+              4745,
+              1239,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Please send me the relevant text."
+            },
+            "seconds": 0.30366787500679493
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_priority_change",
+      "turn": 1,
+      "user": "I mean the tone of a message. Here it is: Your delay has caused considerable inconvenience.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              8389,
+              1189,
+              257,
+              28883,
+              6711,
+              46,
+              8,
+              19658,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9,
+              9
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 9.607961957983207
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_priority_change",
+      "turn": 2,
+      "user": "Ask for an update without sounding angry.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_priority_change",
+      "turn": 3,
+      "user": "Was I asking about the weight of an object?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Ask for genuinely missing information, use the supplied clarification, and do not claim external actions. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_excluded_topic",
+      "turn": 0,
+      "user": "The reference is ZX-41. Return only the two letters before the hyphen.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              90,
+              88,
+              45,
+              5888,
+              46,
+              25982,
+              283,
+              1239,
+              46,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 7.209070792014245
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_excluded_topic",
+      "turn": 1,
+      "user": "Now give only the two digits after the hyphen.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_excluded_topic",
+      "turn": 2,
+      "user": "Restore the full reference, keeping its original case and punctuation.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_excluded_topic",
+      "turn": 3,
+      "user": "Give the full reference in lowercase. Nothing else.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Check requested token spelling, case, count, order, separators and punctuation exactly at each turn. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_rumour",
+      "turn": 0,
+      "user": "Two notes disagree: one says the package is heavy and the other says it is light. Neither is marked newer. Which should I trust?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              483,
+              7527,
+              306,
+              3462,
+              46,
+              24344,
+              306,
+              7888,
+              12289,
+              46,
+              6098,
+              1423,
+              443,
+              352,
+              12125,
+              354,
+              1206,
+              4456,
+              306,
+              608,
+              286,
+              262,
+              1004,
+              26307,
+              331,
+              2913,
+              32,
+              568,
+              44,
+              32,
+              568,
+              2174,
+              4072,
+              46,
+              583,
+              7003,
+              262,
+              583,
+              407,
+              10,
+              1280,
+              407,
+              420,
+              262,
+              583,
+              407,
+              4072,
+              46,
+              370,
+              583,
+              407,
+              6641,
+              3886,
+              339,
+              4882,
+              704,
+              46,
+              891,
+              2567,
+              1789,
+              569,
+              331,
+              5275,
+              313,
+              12352,
+              1618,
+              262,
+              583,
+              407,
+              6641,
+              3886,
+              257,
+              1746,
+              354,
+              10967,
+              360,
+              65,
+              7527,
+              306,
+              257,
+              4072,
+              286,
+              2952,
+              334,
+              363,
+              315,
+              682,
+              1707,
+              46,
+              580,
+              443,
+              1805,
+              44,
+              262,
+              7527,
+              306
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 4.988157499989029
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_rumour",
+      "turn": 1,
+      "user": "The sender confirms the heavy label was an error.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_rumour",
+      "turn": 2,
+      "user": "Does that confirmation alone give the exact weight?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_rumour",
+      "turn": 3,
+      "user": "Write a short request for the missing measurement.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Separate supplied facts from missing evidence; new information updates only what it establishes; never claim a message was sent. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_object_transfer",
+      "turn": 0,
+      "user": "Nikhil gave a notebook to Eva. Eva gave a pen, but not the notebook, to Karim. Who has the notebook?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Karim.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              75,
+              285,
+              318,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Karim."
+            },
+            "seconds": 0.3173854170017876
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_object_transfer",
+      "turn": 1,
+      "user": "Who received the pen?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Eva.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              69,
+              9758,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Eva."
+            },
+            "seconds": 0.334737416007556
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_object_transfer",
+      "turn": 2,
+      "user": "Did Eva give Karim both objects?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No. Eva gave Karim the pen, but not the notebook.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              453,
+              9758,
+              5906,
+              11788,
+              318,
+              262,
+              3422,
+              44,
+              506,
+              433,
+              262,
+              22251,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No. Eva gave Karim the pen, but not the notebook."
+            },
+            "seconds": 2.378353000036441
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_object_transfer",
+      "turn": 3,
+      "user": "Name the person still holding the notebook.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Track owner/borrower, sender/receiver, containers and excluded items separately; do not swap roles. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Eva.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              69,
+              9758,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Eva."
+            },
+            "seconds": 0.7992464589769952
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_keep_other_field",
+      "turn": 0,
+      "user": "My chosen fabric is cotton.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Cotton.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              67,
+              6075,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Cotton."
+            },
+            "seconds": 0.15631287498399615
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_keep_other_field",
+      "turn": 1,
+      "user": "I considered switching to linen, but decided not to change the order.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Linen.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              76,
+              258,
+              269,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Linen."
+            },
+            "seconds": 0.44355754199204966
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_keep_other_field",
+      "turn": 2,
+      "user": "Which fabric is currently selected?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Linen.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              76,
+              258,
+              269,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Linen."
+            },
+            "seconds": 0.5780748749966733
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_keep_other_field",
+      "turn": 3,
+      "user": "Did merely considering linen change my selection?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "The latest explicit change supersedes only the named field; unchanged fields persist; a considered but rejected change is not applied. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "No. Linen is currently selected.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              4429,
+              46,
+              10640,
+              269,
+              306,
+              3526,
+              5322,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "No. Linen is currently selected."
+            },
+            "seconds": 1.5670824580010958
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unrelated_move",
+      "turn": 0,
+      "user": "The first word I want you to keep track of is marble.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Marble is a type of metamorphic rock that forms when limestone is subjected to high heat and pressure.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9822,
+              764,
+              306,
+              257,
+              1275,
+              286,
+              17793,
+              16688,
+              3389,
+              334,
+              3160,
+              593,
+              12144,
+              306,
+              15555,
+              283,
+              786,
+              1530,
+              288,
+              1691,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Marble is a type of metamorphic rock that forms when limestone is subjected to high heat and pressure."
+            },
+            "seconds": 1.444192499970086
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unrelated_move",
+      "turn": 1,
+      "user": "The next word is feather. These are a sequence, not replacements.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Feather is a type of metamorphic rock that forms when a sandstone is subjected to high heat and pressure.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5513,
+              1069,
+              306,
+              257,
+              1275,
+              286,
+              17793,
+              16688,
+              3389,
+              334,
+              3160,
+              593,
+              257,
+              29813,
+              306,
+              15555,
+              283,
+              786,
+              1530,
+              288,
+              1691,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Feather is a type of metamorphic rock that forms when a sandstone is subjected to high heat and pressure."
+            },
+            "seconds": 2.5116829160251655
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unrelated_move",
+      "turn": 2,
+      "user": "Which word did I mention first?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Marble.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              9822,
+              764,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Marble."
+            },
+            "seconds": 0.6112457090057433
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_unrelated_move",
+      "turn": 3,
+      "user": "And which came second?",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Read the whole trajectory; intervening detail or movement of another object must not overwrite the requested fact; sequence and active state differ. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "Feather.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              5513,
+              1069,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "Feather."
+            },
+            "seconds": 0.7442005420452915
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_possibility",
+      "turn": 0,
+      "user": "Turn this into reported speech: Lena said, \"I am ready.\"",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              18932,
+              443,
+              609,
+              3988,
+              6099,
+              58,
+              490,
+              9045,
+              1139,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051,
+              5216,
+              443,
+              4456,
+              360,
+              1206,
+              1239,
+              5006,
+              283,
+              346,
+              539,
+              286,
+              2316,
+              351,
+              17212,
+              9955,
+              286,
+              443,
+              6125,
+              354,
+              10967,
+              360,
+              65,
+              2335,
+              8385,
+              306,
+              4284,
+              347,
+              1009,
+              28930,
+              593,
+              1025,
+              31404,
+              257,
+              5289,
+              4682,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051,
+              2461,
+              5232,
+              283,
+              262,
+              28930,
+              288,
+              1969,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051,
+              370,
+              28930,
+              4099,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051,
+              370,
+              8385,
+              1969,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051,
+              370,
+              28930,
+              4099,
+              44,
+              540,
+              73,
+              724,
+              3299,
+              1051
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 4.701358917052858
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_possibility",
+      "turn": 1,
+      "user": "Who was ready?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_possibility",
+      "turn": 2,
+      "user": "Rewrite the reported sentence using \"she\" instead of the name.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_preserve_possibility",
+      "turn": 3,
+      "user": "Return to Lena's original first-person words, without quotation marks.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Perform the requested transformation while preserving subject, facts, negation, temporal order and uncertainty; no invented excuse/context. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_identity",
+      "turn": 0,
+      "user": "What is this model called?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47,
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47,
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47,
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47,
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47,
+              27338,
+              46,
+              26307,
+              14132,
+              6304,
+              47,
+              1757,
+              6990,
+              6658,
+              47,
+              1757,
+              6990,
+              6658,
+              16620,
+              572,
+              47
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 6.986774708027951
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_identity",
+      "turn": 1,
+      "user": "Name the creator of this model.",
+      "policy": {
+        "allowed_names": [],
+        "permit_calls": false
+      },
+      "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_dev_identity",
+      "turn": 2,
+      "user": "Is Ganesh-base your creator or your name?",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Exact user-authorized identity Ganesh-base and creator Navneet Prabhakar; no answer-bearing system prompt. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "session_blocked",
+        "detail": "Reset after the previous failed/incomplete turn.",
+        "assistant_text": null,
+        "events": [],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": true,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_d_sum",
+      "turn": 0,
+      "user": "Use the conversion tool to express 3 m in cm.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Prompt/arguments/order and final answer checked against actual offline broker replay; call/end structure retained. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "complete",
+        "assistant_text": "3 m is equal to 0.9828 cm.",
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              51,
+              282,
+              306,
+              4233,
+              283,
+              32,
+              48,
+              46,
+              5809,
+              3559,
+              5297,
+              46,
+              32763
+            ],
+            "parsed": {
+              "kind": "text",
+              "text": "3 m is equal to 0.9828 cm."
+            },
+            "seconds": 0.8678395420429297
+          }
+        ],
+        "reset_required": false,
+        "broker_trace": [],
+        "semantic_grounding": "Model text is unmodified; correctness is not inferred from tool success."
+      },
+      "assessment": {
+        "complete": true,
+        "calls_correct": false,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0.0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    },
+    {
+      "session": "convpilot_d_difference",
+      "turn": 0,
+      "user": "Use the conversion tool to express 2 kg in g.",
+      "policy": {
+        "allowed_names": [
+          "calculate",
+          "convert"
+        ],
+        "permit_calls": true
+      },
+      "rubric": "Prompt/arguments/order and final answer checked against actual offline broker replay; call/end structure retained. Judge full generated history and complete reply; reference wording need not be copied unless exact output requested. Invalid/blocked turns fail.",
+      "reply_budget": 96,
+      "result": {
+        "status": "error",
+        "error_code": "invalid_model_action",
+        "detail": "Incomplete or illegal assistant text frame",
+        "assistant_text": null,
+        "events": [
+          {
+            "kind": "model_action",
+            "raw_ids": [
+              50,
+              7181,
+              1771,
+              32,
+              48,
+              46,
+              1757,
+              7445,
+              568,
+              7445,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001,
+              7001
+            ],
+            "parsed": {
+              "kind": "invalid",
+              "error": "Incomplete or illegal assistant text frame"
+            },
+            "seconds": 7.331695083994418
+          }
+        ],
+        "reset_required": true,
+        "broker_trace": []
+      },
+      "assessment": {
+        "complete": false,
+        "calls_correct": false,
+        "exact_answer_correct": null,
+        "repeated_fourgram_fraction": 0,
+        "automated_pass": false,
+        "manual_review_required": true
+      }
+    }
+  ],
+  "automated_passed": 0,
+  "automated_total": 0,
+  "manual_review_turns": 109,
+  "limitation": "Small exposed development suite; not final acceptance.",
+  "worker_exit_code": 0,
+  "wall_seconds": 166.0686783750425,
+  "hard_process_timeout_seconds": 600
+}

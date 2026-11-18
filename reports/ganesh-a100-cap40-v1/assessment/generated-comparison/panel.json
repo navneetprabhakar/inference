@@ -1,0 +1,731 @@
+{
+  "scope": "exposed local diagnostic; never training or release; hand-authored by assessment author; no independent authorship claim",
+  "reply_budget": 64,
+  "temperature": 0,
+  "repetition_penalty": 1,
+  "plain_framing": "BOS + identical user prompt + newline Answer:",
+  "chat_framing": "canonical native, no extra system, tools disabled",
+  "review": "All 96 prompt/expected pairs reviewed for consistency before inference. Unknown variants must acknowledge missing evidence, not guess. Meaning rubrics require semantic review. Distractor recall in this panel is supplied context, not a generated multi-turn rollout.",
+  "pairs": [
+    {
+      "id": "entity-luggage",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "Leela checked a striped suitcase. Harish checked a silver suitcase. Who checked the silver suitcase?",
+          "expected": "Harish"
+        },
+        {
+          "prompt": "Harish checked a striped suitcase. Leela checked a silver suitcase. Who checked the silver suitcase?",
+          "expected": "Leela"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "entity-jobs",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "At the cafe, Tomas bakes bread while Elena serves drinks. Who bakes bread?",
+          "expected": "Tomas"
+        },
+        {
+          "prompt": "At the cafe, Elena bakes bread while Tomas serves drinks. Who bakes bread?",
+          "expected": "Elena"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "entity-keys",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "One key opens the shed and the other opens the attic. The brass key is for the shed; the black key is for the attic. Which key opens the attic?",
+          "expected": "black"
+        },
+        {
+          "prompt": "One key opens the shed and the other opens the attic. The black key is for the shed; the brass key is for the attic. Which key opens the attic?",
+          "expected": "brass"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "entity-pets",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "Rohan feeds the rabbit. Zoya feeds the turtle. Whose task is feeding the rabbit?",
+          "expected": "Rohan"
+        },
+        {
+          "prompt": "Zoya feeds the rabbit. Rohan feeds the turtle. Whose task is feeding the rabbit?",
+          "expected": "Zoya"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "entity-seats",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "Dina sits beside the window. Omar sits beside the aisle. Who has the window seat?",
+          "expected": "Dina"
+        },
+        {
+          "prompt": "Omar sits beside the window. Dina sits beside the aisle. Who has the window seat?",
+          "expected": "Omar"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "entity-gifts",
+      "family": "entity",
+      "variants": [
+        {
+          "prompt": "The puzzle is a gift from Ishan, and the kite is a gift from Sara. Who gave the kite?",
+          "expected": "Sara"
+        },
+        {
+          "prompt": "The puzzle is a gift from Sara, and the kite is a gift from Ishan. Who gave the kite?",
+          "expected": "Ishan"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-drink",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "I said I wanted coffee. That was a mistake: I want tea instead. What drink should you record?",
+          "expected": "tea"
+        },
+        {
+          "prompt": "I said I wanted tea. That was a mistake: I want coffee instead. What drink should you record?",
+          "expected": "coffee"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-size",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "My order originally said medium. Please correct it to large. What is my corrected size?",
+          "expected": "large"
+        },
+        {
+          "prompt": "My order originally said large. Please correct it to medium. What is my corrected size?",
+          "expected": "medium"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-destination",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "The delivery address used to say Indore. I have updated it to Bhopal. Which city should receive the parcel?",
+          "expected": "Bhopal"
+        },
+        {
+          "prompt": "The delivery address used to say Bhopal. I have updated it to Indore. Which city should receive the parcel?",
+          "expected": "Indore"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-name",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "The label says Kunal, but the recipient is actually Dev. Give the corrected recipient name.",
+          "expected": "Dev"
+        },
+        {
+          "prompt": "The label says Dev, but the recipient is actually Kunal. Give the corrected recipient name.",
+          "expected": "Kunal"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-day",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "Please replace Saturday with Tuesday in my booking. Which day is the booking now for?",
+          "expected": "Tuesday"
+        },
+        {
+          "prompt": "Please replace Tuesday with Saturday in my booking. Which day is the booking now for?",
+          "expected": "Saturday"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "correction-quantity",
+      "family": "correction",
+      "variants": [
+        {
+          "prompt": "I first requested two chairs. Change that request to five chairs. How many chairs do I want now?",
+          "expected": "five"
+        },
+        {
+          "prompt": "I first requested five chairs. Change that request to two chairs. How many chairs do I want now?",
+          "expected": "two"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-door",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "The door was locked. A guard unlocked it. Nobody touched it after that. Is it locked or unlocked now?",
+          "expected": "unlocked"
+        },
+        {
+          "prompt": "The door was unlocked. A guard locked it. Nobody touched it after that. Is it locked or unlocked now?",
+          "expected": "locked"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-wallet",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "Nora took her wallet out of her coat and put it in her backpack. Where is the wallet now?",
+          "expected": "backpack"
+        },
+        {
+          "prompt": "Nora took her wallet out of her backpack and put it in her coat. Where is the wallet now?",
+          "expected": "coat"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-lamp",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "The lamp was on before lunch. At lunch, Ravi switched it off. What is its state after lunch?",
+          "expected": "off"
+        },
+        {
+          "prompt": "The lamp was off before lunch. At lunch, Ravi switched it on. What is its state after lunch?",
+          "expected": "on"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-queue",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "A train stopped at Cedar, then at Willow. What was the most recent stop?",
+          "expected": "Willow"
+        },
+        {
+          "prompt": "A train stopped at Willow, then at Cedar. What was the most recent stop?",
+          "expected": "Cedar"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-loan",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "Farah owned a bicycle and then gave it permanently to Ben. Who owns it now?",
+          "expected": "Ben"
+        },
+        {
+          "prompt": "Ben owned a bicycle and then gave it permanently to Farah. Who owns it now?",
+          "expected": "Farah"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "temporal-status",
+      "family": "temporal",
+      "variants": [
+        {
+          "prompt": "The shop was open this morning. The owner closed it at noon and has not reopened it. Is it open or closed now?",
+          "expected": "closed"
+        },
+        {
+          "prompt": "The shop was closed this morning. The owner opened it at noon and has not closed it again. Is it open or closed now?",
+          "expected": "open"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-box",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "The red box contains buttons, not coins. What is inside the red box?",
+          "expected": "buttons"
+        },
+        {
+          "prompt": "The red box contains coins, not buttons. What is inside the red box?",
+          "expected": "coins"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-transport",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "Neha did not take the bus; she took the tram. How did she travel?",
+          "expected": "tram"
+        },
+        {
+          "prompt": "Neha did not take the tram; she took the bus. How did she travel?",
+          "expected": "bus"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-material",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "This cup is made of steel rather than glass. What material is the cup made of?",
+          "expected": "steel"
+        },
+        {
+          "prompt": "This cup is made of glass rather than steel. What material is the cup made of?",
+          "expected": "glass"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-route",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "Only the west entrance is open. The east entrance is closed. Which entrance can visitors use?",
+          "expected": "west"
+        },
+        {
+          "prompt": "Only the east entrance is open. The west entrance is closed. Which entrance can visitors use?",
+          "expected": "east"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-speaker",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "Milan wrote the message. Ritu did not write it. Who wrote the message?",
+          "expected": "Milan"
+        },
+        {
+          "prompt": "Ritu wrote the message. Milan did not write it. Who wrote the message?",
+          "expected": "Ritu"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "negation-food",
+      "family": "negation",
+      "variants": [
+        {
+          "prompt": "The lunch contains peas but no beans. Name the vegetable that is included.",
+          "expected": "peas"
+        },
+        {
+          "prompt": "The lunch contains beans but no peas. Name the vegetable that is included.",
+          "expected": "beans"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "constraints-case",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Reply with exactly the lowercase word ready and nothing else.",
+          "expected": "ready"
+        },
+        {
+          "prompt": "Reply with exactly the uppercase word READY and nothing else.",
+          "expected": "READY"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "constraints-order",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Write exactly these two words in this order, separated by one space: peach plum.",
+          "expected": "peach plum"
+        },
+        {
+          "prompt": "Write exactly these two words in this order, separated by one space: plum peach.",
+          "expected": "plum peach"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "constraints-select",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Of these words, repeat only the animal: spoon, fox, cloud.",
+          "expected": "fox"
+        },
+        {
+          "prompt": "Of these words, repeat only the animal: spoon, owl, cloud.",
+          "expected": "owl"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "constraints-punctuation",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Reply with exactly yes followed by one exclamation mark.",
+          "expected": "yes!"
+        },
+        {
+          "prompt": "Reply with exactly no followed by one question mark.",
+          "expected": "no?"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "constraints-omit",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Write only the second word from this list: oak, pine, birch.",
+          "expected": "pine"
+        },
+        {
+          "prompt": "Write only the first word from this list: oak, pine, birch.",
+          "expected": "oak"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "constraints-count",
+      "family": "constraints",
+      "variants": [
+        {
+          "prompt": "Give the word hello exactly once, with no other text.",
+          "expected": "hello"
+        },
+        {
+          "prompt": "Give the word hello exactly twice, separated by one space, with no other text.",
+          "expected": "hello hello"
+        }
+      ],
+      "rubric": "exact"
+    },
+    {
+      "id": "uncertainty-age",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "We know that Priya likes chess, but nothing about her age. Based only on this information, how old is she?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "We know that Priya likes chess and is nine years old. Based only on this information, how old is she?",
+          "expected": "nine"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "uncertainty-colour",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "A courier delivered a bicycle. Its colour was not mentioned. What colour is the bicycle?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "A courier delivered a yellow bicycle. What colour is the bicycle?",
+          "expected": "yellow"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "uncertainty-time",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "The note says the concert is tonight. It gives no start time. At what exact time does the concert start?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "The note says the concert is tonight at seven. At what time does the concert start?",
+          "expected": "seven"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "uncertainty-number",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "A basket holds apples, but nobody counted them. Based only on that statement, how many apples are there?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "A basket holds four apples. Based only on that statement, how many apples are there?",
+          "expected": "four"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "uncertainty-location",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "Amina misplaced her scarf and does not know where it is. Based only on that information, where is it?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "Amina placed her scarf on the sofa and it has not moved. Where is it?",
+          "expected": "sofa"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "uncertainty-owner",
+      "family": "uncertainty",
+      "variants": [
+        {
+          "prompt": "Someone left an umbrella by the door. No name or owner was given. Who owns it?",
+          "expected": "unknown"
+        },
+        {
+          "prompt": "Vikram left his umbrella by the door. Who owns it?",
+          "expected": "Vikram"
+        }
+      ],
+      "rubric": "known_unknown"
+    },
+    {
+      "id": "paraphrase-wet",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Explain this in a short, simpler sentence without changing its meaning: The pavement is wet because rain fell.",
+          "expected": "rain caused wet pavement"
+        },
+        {
+          "prompt": "Explain this in a short, simpler sentence without changing its meaning: Rain did not fall, so the pavement stayed dry.",
+          "expected": "no rain and dry pavement"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "paraphrase-permission",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Say this more simply, preserving the rule: Visitors may enter only after showing a ticket.",
+          "expected": "ticket required to enter"
+        },
+        {
+          "prompt": "Say this more simply, preserving the rule: Visitors may enter without showing a ticket.",
+          "expected": "ticket not required to enter"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "paraphrase-preference",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Rewrite naturally without changing who prefers what: Lata would rather walk than take a taxi.",
+          "expected": "Lata prefers walking over taxi"
+        },
+        {
+          "prompt": "Rewrite naturally without changing who prefers what: Lata would rather take a taxi than walk.",
+          "expected": "Lata prefers taxi over walking"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "paraphrase-before",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Put this in simple words: Wash your hands before preparing the meal.",
+          "expected": "wash hands before making food"
+        },
+        {
+          "prompt": "Put this in simple words: Wash your hands after preparing the meal.",
+          "expected": "wash hands after making food"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "paraphrase-apology",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Write a short apology for arriving late. Do not claim that you arrived on time.",
+          "expected": "apology for own lateness"
+        },
+        {
+          "prompt": "Write a short thank-you for someone arriving on time. Do not say that they were late.",
+          "expected": "thanks for other persons punctuality"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "paraphrase-request",
+      "family": "paraphrase",
+      "variants": [
+        {
+          "prompt": "Turn this into a polite request while keeping the object: Open the curtain.",
+          "expected": "polite request open curtain"
+        },
+        {
+          "prompt": "Turn this into a polite request while keeping the object: Close the curtain.",
+          "expected": "polite request close curtain"
+        }
+      ],
+      "rubric": "meaning"
+    },
+    {
+      "id": "delayed-snack",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "For the outing I chose grapes. We also discussed umbrellas, ticket prices, and the weather. The snack choice has not changed. What snack did I choose?",
+          "expected": "grapes"
+        },
+        {
+          "prompt": "For the outing I chose crackers. We also discussed umbrellas, ticket prices, and the weather. The snack choice has not changed. What snack did I choose?",
+          "expected": "crackers"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "delayed-colour",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "My preferred folder colour is orange. Later we discussed printing and paper sizes. None of that changed my preference. What folder colour do I prefer?",
+          "expected": "orange"
+        },
+        {
+          "prompt": "My preferred folder colour is violet. Later we discussed printing and paper sizes. None of that changed my preference. What folder colour do I prefer?",
+          "expected": "violet"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "delayed-contact",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "Call Mehul if the delivery is late. The package is light, the road is busy, and the forecast is cloudy. Who should be called if delivery is late?",
+          "expected": "Mehul"
+        },
+        {
+          "prompt": "Call Nisha if the delivery is late. The package is light, the road is busy, and the forecast is cloudy. Who should be called if delivery is late?",
+          "expected": "Nisha"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "delayed-room",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "We reserved the studio for rehearsal. There is a kitchen next door and a garden outside. We have not changed our reservation. Where is the rehearsal?",
+          "expected": "studio"
+        },
+        {
+          "prompt": "We reserved the library for rehearsal. There is a kitchen next door and a garden outside. We have not changed our reservation. Where is the rehearsal?",
+          "expected": "library"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "delayed-schedule",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "The walk is on Wednesday. Our later discussion covered shoes, water bottles and sunscreen. The day stayed the same. Which day is the walk?",
+          "expected": "Wednesday"
+        },
+        {
+          "prompt": "The walk is on Friday. Our later discussion covered shoes, water bottles and sunscreen. The day stayed the same. Which day is the walk?",
+          "expected": "Friday"
+        }
+      ],
+      "rubric": "fact"
+    },
+    {
+      "id": "delayed-updated",
+      "family": "delayed",
+      "variants": [
+        {
+          "prompt": "I initially picked the lake, then changed the outing to the museum. After that we discussed snacks and the bus. Where is the outing now planned?",
+          "expected": "museum"
+        },
+        {
+          "prompt": "I initially picked the museum, then changed the outing to the lake. After that we discussed snacks and the bus. Where is the outing now planned?",
+          "expected": "lake"
+        }
+      ],
+      "rubric": "fact"
+    }
+  ]
+}

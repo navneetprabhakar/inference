@@ -1,0 +1,60 @@
+{
+  "scope": "Exposed development only; not independent release",
+  "combined_sha256": "9c45d619e0a94a3a02f1394f6f29fa195ee6e7595a930d7f865bb397f8279e9e",
+  "sources": {
+    "development": {
+      "original_suite_sha256": "380e30f833959f8e51aef61c1eea5a466854447049b40fa3578404e1937e72d5",
+      "sessions": [
+        "convpilot_dev_finished_puzzle",
+        "convpilot_dev_waiting",
+        "convpilot_dev_reassurance",
+        "convpilot_dev_ambiguous_comparison",
+        "convpilot_dev_missing_sentence",
+        "convpilot_dev_unclear_they",
+        "convpilot_dev_brackets",
+        "convpilot_dev_separator",
+        "convpilot_dev_select_phrase",
+        "convpilot_dev_birthplace",
+        "convpilot_dev_shop_hours",
+        "convpilot_dev_missing_size",
+        "convpilot_dev_team_roles",
+        "convpilot_dev_map_symbols",
+        "convpilot_dev_absent_item",
+        "convpilot_dev_return_day",
+        "convpilot_dev_active_contact",
+        "convpilot_dev_storage_change",
+        "convpilot_dev_favourite_sound",
+        "convpilot_dev_carried_item",
+        "convpilot_dev_revised_route",
+        "convpilot_dev_remove_filler",
+        "convpilot_dev_preserve_order",
+        "convpilot_dev_condense_update",
+        "convpilot_dev_low_pressure",
+        "convpilot_dev_priority_change",
+        "convpilot_dev_excluded_topic",
+        "convpilot_dev_rumour",
+        "convpilot_dev_object_transfer",
+        "convpilot_dev_keep_other_field",
+        "convpilot_dev_unrelated_move",
+        "convpilot_dev_preserve_possibility",
+        "convpilot_dev_identity",
+        "convpilot_d_sum",
+        "convpilot_d_difference"
+      ]
+    },
+    "protected": {
+      "original_suite_sha256": "0cb4109ff2a6800b3f828c70f3880c89a160e73798777c05bad94e05dc7a20cc",
+      "sessions": [
+        "context-correction",
+        "calculate-grounding",
+        "convert-grounding",
+        "no-call",
+        "conversation-review"
+      ]
+    }
+  },
+  "reply_budget": 96,
+  "per_snapshot_timeout_seconds": 900,
+  "runner": "cloud_training.nano_fit_probe",
+  "reason": "Existing bounded fit probe supports full session evaluation beyond nano_quality CLI600second limit. Combined suite uses one model load; questions/policies/system prompts/turn order unchanged. Only omitted protected default budgets are made explicit96 as predeclared in cost plan."
+}

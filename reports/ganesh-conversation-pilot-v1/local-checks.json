@@ -1,0 +1,897 @@
+{
+  "passed": true,
+  "scope": "corpus semantics receipt, exact input/label masks and prefixes in prepare, split/exposure/identity structure and offline broker replay; NOT GPU/runner qualification",
+  "coverage": {
+    "train": {
+      "sessions": 70,
+      "assistant_targets": 2286,
+      "families": {
+        "ordinary": {
+          "sessions": 8,
+          "assistant_targets": 386
+        },
+        "clarification": {
+          "sessions": 8,
+          "assistant_targets": 359
+        },
+        "instructions": {
+          "sessions": 8,
+          "assistant_targets": 128
+        },
+        "grounding": {
+          "sessions": 8,
+          "assistant_targets": 333
+        },
+        "entity": {
+          "sessions": 8,
+          "assistant_targets": 202
+        },
+        "correction": {
+          "sessions": 8,
+          "assistant_targets": 213
+        },
+        "memory": {
+          "sessions": 8,
+          "assistant_targets": 209
+        },
+        "rewrite": {
+          "sessions": 8,
+          "assistant_targets": 259
+        },
+        "model_identity": {
+          "sessions": 2,
+          "assistant_targets": 68
+        },
+        "tools": {
+          "sessions": 4,
+          "assistant_targets": 129
+        }
+      },
+      "turn_modes": {
+        "enabled_no_call": 107,
+        "disabled_no_call": 107,
+        "enabled_call": 4
+      }
+    },
+    "control": {
+      "sessions": 33,
+      "assistant_targets": 1128,
+      "families": {
+        "ordinary": {
+          "sessions": 3,
+          "assistant_targets": 156
+        },
+        "clarification": {
+          "sessions": 3,
+          "assistant_targets": 151
+        },
+        "instructions": {
+          "sessions": 3,
+          "assistant_targets": 55
+        },
+        "grounding": {
+          "sessions": 4,
+          "assistant_targets": 167
+        },
+        "entity": {
+          "sessions": 3,
+          "assistant_targets": 80
+        },
+        "correction": {
+          "sessions": 4,
+          "assistant_targets": 104
+        },
+        "memory": {
+          "sessions": 3,
+          "assistant_targets": 83
+        },
+        "rewrite": {
+          "sessions": 4,
+          "assistant_targets": 135
+        },
+        "model_identity": {
+          "sessions": 2,
+          "assistant_targets": 68
+        },
+        "tools": {
+          "sessions": 4,
+          "assistant_targets": 129
+        }
+      },
+      "turn_modes": {
+        "enabled_no_call": 47,
+        "disabled_no_call": 48,
+        "enabled_call": 4
+      }
+    },
+    "development": {
+      "sessions": 35,
+      "assistant_targets": 916,
+      "families": {
+        "ordinary": {
+          "sessions": 4,
+          "assistant_targets": 128
+        },
+        "clarification": {
+          "sessions": 4,
+          "assistant_targets": 142
+        },
+        "instructions": {
+          "sessions": 4,
+          "assistant_targets": 45
+        },
+        "grounding": {
+          "sessions": 4,
+          "assistant_targets": 141
+        },
+        "entity": {
+          "sessions": 4,
+          "assistant_targets": 82
+        },
+        "correction": {
+          "sessions": 4,
+          "assistant_targets": 91
+        },
+        "memory": {
+          "sessions": 4,
+          "assistant_targets": 100
+        },
+        "rewrite": {
+          "sessions": 4,
+          "assistant_targets": 101
+        },
+        "model_identity": {
+          "sessions": 1,
+          "assistant_targets": 26
+        },
+        "tools": {
+          "sessions": 2,
+          "assistant_targets": 60
+        }
+      },
+      "turn_modes": {
+        "enabled_no_call": 54,
+        "disabled_no_call": 53,
+        "enabled_call": 2
+      }
+    }
+  },
+  "frozen_files_verified": {
+    "reports/corrective-corpus-v1/candidate-4k/manifest.json": "ad31597742cde8eb657ad1a2365efd713bb80eed257c84ea6becef1bba1aa348",
+    "reports/corrective-corpus-v1/candidate-4k/train.jsonl": "2c5360ffff88facc4e74e4707ead06b365d8a125a377069ad9af6fe6d1b634c8",
+    "reports/corrective-corpus-v1/candidate-4k/validation.jsonl": "551cd8768130a3b898a3fb8ceecf04018ed4a61dabd60d1959c6edfa999a1602",
+    "reports/corrective-corpus-v1/quality-contract.json": "794ab4909de297b3138b2bac665064c904b65d622208eb0ed365801ef1292abb",
+    "reports/corrective-corpus-v1/train.jsonl": "50adad94af36039c1f9872f00e3c1c202a1b68157b381b18facd2072986c48ee",
+    "reports/corrective-corpus-v1/validation.jsonl": "2ed6bbd0771baf6d8e9590aaf5ffe010353a50d899e3f56c9401dcd748d32eaf",
+    "reports/english-first-v1/fit-train.jsonl": "d64ab6f4c4814f5cd3f476661d1ab31bd0632e00532b5520916acfc062a9bb35",
+    "reports/english-first-v1/development-reference.jsonl": "ca60dc0b0db45975b5f7954fe4b45ca7d5bb16412eada4cd149a93ff5fa120fd"
+  },
+  "tool_calls_replayed": 6,
+  "full_review_sessions": 105,
+  "full_review_user_turns": 327,
+  "schedule_checks": [
+    {
+      "update": 1,
+      "family": "model_identity",
+      "arms": {
+        "broad": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        },
+        "control": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        }
+      }
+    },
+    {
+      "update": 2,
+      "family": "entity",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4042
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4056
+        }
+      }
+    },
+    {
+      "update": 3,
+      "family": "tools",
+      "arms": {
+        "broad": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        },
+        "control": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        }
+      }
+    },
+    {
+      "update": 4,
+      "family": "rewrite",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4079
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4072
+        }
+      }
+    },
+    {
+      "update": 5,
+      "family": "clarification",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 4166
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 3985
+        }
+      }
+    },
+    {
+      "update": 6,
+      "family": "memory",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 4003
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 3792
+        }
+      }
+    },
+    {
+      "update": 7,
+      "family": "instructions",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 3961
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 4046
+        }
+      }
+    },
+    {
+      "update": 8,
+      "family": "correction",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3981
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3993
+        }
+      }
+    },
+    {
+      "update": 9,
+      "family": "grounding",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4159
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4158
+        }
+      }
+    },
+    {
+      "update": 10,
+      "family": "ordinary",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4180
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4171
+        }
+      }
+    },
+    {
+      "update": 11,
+      "family": "model_identity",
+      "arms": {
+        "broad": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        },
+        "control": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        }
+      }
+    },
+    {
+      "update": 12,
+      "family": "memory",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 4003
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 3792
+        }
+      }
+    },
+    {
+      "update": 13,
+      "family": "instructions",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 3961
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 4046
+        }
+      }
+    },
+    {
+      "update": 14,
+      "family": "correction",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3981
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3993
+        }
+      }
+    },
+    {
+      "update": 15,
+      "family": "tools",
+      "arms": {
+        "broad": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        },
+        "control": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        }
+      }
+    },
+    {
+      "update": 16,
+      "family": "entity",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4042
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4056
+        }
+      }
+    },
+    {
+      "update": 17,
+      "family": "ordinary",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4180
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4171
+        }
+      }
+    },
+    {
+      "update": 18,
+      "family": "rewrite",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4079
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4072
+        }
+      }
+    },
+    {
+      "update": 19,
+      "family": "grounding",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4159
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4158
+        }
+      }
+    },
+    {
+      "update": 20,
+      "family": "clarification",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 4166
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 3985
+        }
+      }
+    },
+    {
+      "update": 21,
+      "family": "grounding",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4159
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4158
+        }
+      }
+    },
+    {
+      "update": 22,
+      "family": "model_identity",
+      "arms": {
+        "broad": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        },
+        "control": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        }
+      }
+    },
+    {
+      "update": 23,
+      "family": "ordinary",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4180
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4171
+        }
+      }
+    },
+    {
+      "update": 24,
+      "family": "rewrite",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4079
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4072
+        }
+      }
+    },
+    {
+      "update": 25,
+      "family": "instructions",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 3961
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 4046
+        }
+      }
+    },
+    {
+      "update": 26,
+      "family": "entity",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4042
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4056
+        }
+      }
+    },
+    {
+      "update": 27,
+      "family": "clarification",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 4166
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 3985
+        }
+      }
+    },
+    {
+      "update": 28,
+      "family": "correction",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3981
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3993
+        }
+      }
+    },
+    {
+      "update": 29,
+      "family": "memory",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 4003
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 3792
+        }
+      }
+    },
+    {
+      "update": 30,
+      "family": "tools",
+      "arms": {
+        "broad": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        },
+        "control": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        }
+      }
+    },
+    {
+      "update": 31,
+      "family": "instructions",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 3961
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 128,
+          "position_tokens": 4046
+        }
+      }
+    },
+    {
+      "update": 32,
+      "family": "memory",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 4003
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 209,
+          "position_tokens": 3792
+        }
+      }
+    },
+    {
+      "update": 33,
+      "family": "grounding",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4159
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 333,
+          "position_tokens": 4158
+        }
+      }
+    },
+    {
+      "update": 34,
+      "family": "correction",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3981
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 213,
+          "position_tokens": 3993
+        }
+      }
+    },
+    {
+      "update": 35,
+      "family": "model_identity",
+      "arms": {
+        "broad": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        },
+        "control": {
+          "conversations": 2,
+          "turns": 6,
+          "assistant_targets": 68,
+          "position_tokens": 919
+        }
+      }
+    },
+    {
+      "update": 36,
+      "family": "entity",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4042
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 202,
+          "position_tokens": 4056
+        }
+      }
+    },
+    {
+      "update": 37,
+      "family": "rewrite",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4079
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 259,
+          "position_tokens": 4072
+        }
+      }
+    },
+    {
+      "update": 38,
+      "family": "tools",
+      "arms": {
+        "broad": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        },
+        "control": {
+          "conversations": 4,
+          "turns": 4,
+          "assistant_targets": 129,
+          "position_tokens": 1244
+        }
+      }
+    },
+    {
+      "update": 39,
+      "family": "clarification",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 4166
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 359,
+          "position_tokens": 3985
+        }
+      }
+    },
+    {
+      "update": 40,
+      "family": "ordinary",
+      "arms": {
+        "broad": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4180
+        },
+        "control": {
+          "conversations": 8,
+          "turns": 26,
+          "assistant_targets": 386,
+          "position_tokens": 4171
+        }
+      }
+    }
+  ],
+  "sealed_release_read": false,
+  "training_authorized": false,
+  "runner_ready": false
+}

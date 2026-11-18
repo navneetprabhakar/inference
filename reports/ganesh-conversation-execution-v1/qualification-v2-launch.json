@@ -1,0 +1,18 @@
+{
+  "utc": "2026-11-18T05:25:21.808309+00:00",
+  "provider_stop_utc": "2026-11-18T08:23:38Z",
+  "runtime_sha256": "f8fbe3e743c697bf3f4c4c9f17ac0b6ee7f872465997f7ff47516faf40d86734",
+  "purpose": "qualification_only",
+  "pilot_started": false,
+  "argv": [
+    "gcloud",
+    "compute",
+    "ssh",
+    "ganesh-conv-1118-050838",
+    "--project=executespecv1",
+    "--zone=us-central1-f",
+    "--tunnel-through-iap",
+    "--quiet",
+    "--command=sudo bash -c 'set -euo pipefail\ncd /opt/ganesh-conversation\ntest -f config-v2.json\ntest ! -e qualification-v2-started\ntest ! -d qualification-v2\nfor candidate in /opt/conda/bin/python /opt/pytorch/bin/python /opt/venv/bin/python /usr/bin/python3 /usr/local/bin/python3; do\n if [ -x \"$candidate\" ] && \"$candidate\" -c '\"'\"'import torch; assert torch.__version__.startswith(\"2.9.1\"); assert torch.version.cuda==\"12.9\"'\"'\"' 2>/dev/null; then\n  systemd-run --unit=ganesh-conversation-qual-v2 --property=WorkingDirectory=/opt/ganesh-conversation --property=RuntimeMaxSec=960 --setenv=PYTHONPATH=/opt/ganesh-conversation/vendor:/opt/ganesh-conversation:/opt/ganesh-conversation/nanochat-source --setenv=HF_HUB_OFFLINE=1 --setenv=WANDB_MODE=disabled \"$candidate\" -u /opt/ganesh-conversation/reports/ganesh-conversation-execution-v1/gpu_qualify.py\n  exit 0\n fi\ndone\nexit 3\n'"
+  ]
+}

@@ -206,7 +206,7 @@ history. Report end-to-end and isolated diagnostic measures separately.
    boilerplate prevalence, policy-prefix influence, and generalization under changed
    names/order/phrasing. More training cannot be assumed to fix all of these.
 
-### Recommended sequence
+### Initial proposed sequence — revised by the second review below
 
 **1. Define the first product milestone and prepare evidence locally.** Basic
 screen-free English chat, clarification, instruction following and3–6turn stateful
@@ -315,3 +315,142 @@ unjustified: https://arxiv.org/abs/2502.02737 .
 and a versioned experiment contract. Do not launch a VM or resume step30. The next
 paid work should answer whether transferable English improves under controlled SFT,
 not merely whether more examples can be memorized.
+
+
+## Second adverse review — 18 November 2026
+
+**Decision: revise the experiment priority; no new training is ready for dispatch.**
+This review adds read-only local checkpoint analysis and 72 counterfactual scoring
+records. No optimizer step, weight edit, data admission, serving-default change or
+cloud operation occurred. These are same-author exposed diagnostics, not independent
+release tests. Scripts, inputs and raw results are in `assessment/deep-review/`.
+
+### What changed after testing the recommendations
+
+1. **Fresh optimizer state is no longer the recommended first experiment.** The
+   assistant-end output-head second moment at base10B is 2.6882e-25, versus
+   4.03747e-7 at fit20 and 3.23771e-4 at fit30. Its inherited contribution after
+   decay is negligible relative to the observed SFT state. The first moment also
+   grows from effectively zero. This weakens the specific stale-end-token-moments
+   explanation; it does not rule out effects of shared/trunk state or Adam step
+   counters. Suppressed ending weights and inherited optimizer moments are different
+   mechanisms. Resetting moments remains a possible controlled ablation, not a fix
+   supported by these measurements. Never reset state during an exact resume.
+
+2. **Weak state tracking appears outside chat framing as well.** Six simple pairs
+   reverse ownership, meeting day, borrower/owner, negation, switch state and item
+   location. A pair passes only when both reversed contexts rank the correct answer
+   above the alternative. Results below show passing pairs out of six; each cell
+   reports mean-token / joint-log-probability scoring.
+
+   | Own checkpoint | Plain continuation | Canonical chat |
+   |---|---:|---:|
+   | base10B | 2/6 / 2/6 | 1/6 / 1/6 |
+   | fit30 | 2/6 / 2/6 | 1/6 / 2/6 |
+   | SFT194 | 2/6 / 2/6 | 1/6 / 1/6 |
+
+   Static answer preferences often survive fact reversal. This is evidence against
+   assuming chat controls alone explain the failure. However, six hand-authored
+   pairs, answer-length/tokenization sensitivity and supplied candidate answers
+   cannot establish a general capability ceiling. This is likelihood ranking, not
+   generated conversation. There is no defensible winning parent from this panel.
+
+3. **More EOS pressure is not justified.** Endings already contribute about 60% of
+   initial packed fit loss. Development content CE worsened from 2.6394 to 3.9399
+   while endings improved. Preserve the regression stop; measure premature ending
+   as well as missing ending. Head reinitialization, softcap removal and loss
+   reweighting are untested hypotheses, not authorized remedies.
+
+4. **The corpus-count and percentage recommendations were under-specified.**
+   300–500 conversations is a planning batch, not a demonstrated sufficient dose.
+   The prepared 31-session curriculum has only 1,052 supervised target positions;
+   it is a seed, not a credible broad-English remedy. Likewise the earlier 70%/50%
+   pilot and 90%/80% release suggestions are unvalidated planning thresholds, not
+   launch gates. Illustratively, 48/60 passing sessions gives a Wilson 95% interval
+   of roughly 68.2%–88.2%, even assuming independent sessions. Correlated scenarios
+   make that assumption optimistic. This is a hypothetical calculation, not our
+   model's result. No existing acceptance contract has been changed.
+
+### Revised next steps and decision checks
+
+1. **Finish a balanced local foundation comparison before choosing a parent.**
+   Expand ownership, negation, correction and delayed recall across independently
+   written scenarios, answer positions, entities and distractors. Pair reversals
+   within a split; keep related variants out of other splits. Compare base10B,
+   fit30 and SFT194 with the same prompts. Include bounded free generation and
+   generated multi-turn histories alongside reference-prefix diagnostics. Report
+   semantic correctness, valid endings, premature endings and complete sessions
+   separately. Examine disagreements between scoring methods rather than selecting
+   the favorable score. These prompts remain exposed development material.
+
+2. **Audit the foundation's actual inputs and build coverage, not repetitions.**
+   Reconcile source composition, filtering, duplication and unique exposure in the
+   10,000,269,312 processed pretraining positions; that count does not prove ten
+   billion unique useful English tokens. Record unavailable evidence explicitly.
+   Review natural English and grounded conversational examples for grammar,
+   instruction following, clarification, reference resolution and state changes.
+   Require source lineage, full turn review, state oracles and scenario-level
+   separation. Use reviewed Smol-SmolTalk/OASST for appropriate natural phrasing and
+   labelled Codex material for missing controlled skills. Count unique targets and
+   per-family target mass. Preserve the frozen fit and protected release material.
+
+3. **Choose the learning objective from the failure pattern.** If broad plain
+   comprehension is adequate but generated chat is weak, prioritize a broader SFT
+   curriculum from the best measured Own parent. If plain comprehension remains
+   weak across balanced probes and natural continuations, compare a bounded clean
+   English adaptation hypothesis before committing to more SFT repetition. Neither
+   route is authorized automatically, and there is no evidence for a required
+   number of additional billions of tokens. Optimize one defensible hypothesis at
+   a time; do not spend another campaign mainly qualifying the same GPU/runtime.
+
+4. **Freeze a new experiment only after the evidence supports it.** Bind parent,
+   tokenizer, corpus/review receipts, objective, optimizer initialization policy,
+   target exposures, checkpoint schedule and budget. Define prospective improvement
+   and regression rules with per-family/session denominators and uncertainty.
+   Separate learnability, generalization and release decisions. Existing failed
+   controller state remains failed; two failed pilots force diagnosis/hold. Check
+   changed training paths specifically and reuse applicable exact-runtime evidence.
+   One writer, finite provider STOP, backup verification and local MPS acceptance
+   remain mandatory. Scheduled-provider STOP observation remains unresolved.
+
+### Research cross-check and limits
+
+[LIMA](https://arxiv.org/abs/2305.11206) used 1,000 curated examples on a pretrained
+65B LLaMA. Its result does not establish that a few hundred examples can supply
+missing foundational skills in this 537M model. [TinyStories](https://arxiv.org/abs/2305.07759)
+shows that very small models can learn coherent stories from simplified synthetic
+language. That supports investigating focused language data, but story coherence
+is not evidence of reliable multi-turn assistant behavior. Neither paper establishes
+Ganesh-base's minimum data, compute budget or a guaranteed recovery recipe.
+
+### Reproducibility and remaining limits
+
+`audit_optimizer.py` checks bundle integrity and reads saved optimizer tensors;
+`optimizer-state.json` records measurements. `probe_counterfactuals.py` loads the
+retained local Own checkpoints and writes exact inputs, manifest hashes, scores and
+summaries. `recommendation-sanity.json` contains the illustrative uncertainty and
+moment-decay calculations. No release set was consumed. These diagnostics do not
+replace a wider natural-language generation assessment, a pretraining-input audit,
+independent grading or actual learning curves on the proposed broader curriculum.
+The new evidence narrows hypotheses; it does not claim conversation has improved.
+
+
+## Executed generated comparison — 18 November 2026
+
+The next local comparison is now complete:576 single-turn outputs and216 rollout
+records, fully reviewed, with input/manifest/parser integrity verified. See
+[the generated-comparison report](assessment/generated-comparison/RESULT.md) and
+[summary](assessment/generated-comparison/summary.json).
+
+Native clean short answers: base10B0/96, fit30 27/96, SFT1940/96. All three score
+0/12 complete clean native three-turn sessions. Fit30 has better short-answer
+framing and semantics, but a fully valid Sunday-to-Monday correction exchange still
+ends with Sunday. Neither stopping alone nor the older SFT solves conversation.
+
+The next hypothesis is broader reviewed contextual-conversation SFT, provisionally
+starting from fit30 and comparing against an exposure-matched narrow replay control.
+This is not a launch-ready recipe or parent promotion: short-answer gains do not
+establish conversational superiority, and no new corpus/contract/cap is approved.
+Keep existing failed guards/frozen data, retained weights, serving default and VM
+state unchanged. The report records exact scores, limitations, stop conditions and
+remaining readiness work; it supersedes the earlier pending local-comparison step.

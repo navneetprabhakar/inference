@@ -1,0 +1,85 @@
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+05:38:37
+in__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 738, in main
+    return run(a)
+           ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 673, in run
+    checkpoint(reason,pin=step==horizon)
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 591, in checkpoint
+    receipt=upload_bundle(path,remote_prefix=args.backup_prefix,timeout=min(args.checkpoint_reserve_seconds,journal.deadline-time.monotonic()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/l4_recovery_check.py", line 54, in upload_bundle
+    _copy(source / name, remote + '/' + name, deadline)
+  File "/opt/ganesh-conversation/cloud_training/l4_recovery_check.py", line 36, in _copy
+    subprocess.run(command, check=True, timeout=remaining, capture_output=True, text=True)
+  File "/usr/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/usr/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['gcloud', 'storage', 'cp', '/opt/ganesh-conversation/qualification-v2/split_first/step-00000001/payload.pt', 'gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/split/checkpoints/checkpoint-57a6423768c8406e85d82932fe7cf301/payload.pt', '--quiet']' timed out after 72.00579121800001 seconds
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 228, in partial_apport_excepthook
+    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 114, in apport_excepthook
+    report["ExecutableTimestamp"] = str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ganesh-conversation/-m'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 741, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 738, in main
+    return run(a)
+           ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 673, in run
+    checkpoint(reason,pin=step==horizon)
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 591, in checkpoint
+    receipt=upload_bundle(path,remote_prefix=args.backup_prefix,timeout=min(args.checkpoint_reserve_seconds,journal.deadline-time.monotonic()))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/l4_recovery_check.py", line 54, in upload_bundle
+    _copy(source / name, remote + '/' + name, deadline)
+  File "/opt/ganesh-conversation/cloud_training/l4_recovery_check.py", line 36, in _copy
+    subprocess.run(command, check=True, timeout=remaining, capture_output=True, text=True)
+  File "/usr/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/usr/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['gcloud', 'storage', 'cp', '/opt/ganesh-conversation/qualification-v2/split_first/step-00000001/payload.pt', 'gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/split/checkpoints/checkpoint-57a6423768c8406e85d82932fe7cf301/payload.pt', '--quiet']' timed out after 72.00579121800001 seconds
+Scaling the LR for the AdamW parameters ∝1/√(1024/768) = 0.866025
+
+[('split_first/progress.json', 1, 'running'), ('continuous/progress.json', 2, 'running')]
+
+{
+  "status": "hold",
+  "check": "cuda_changed_path",
+  "runtime_sha256": "f8fbe3e743c697bf3f4c4c9f17ac0b6ee7f872465997f7ff47516faf40d86734",
+  "instance": "ganesh-conv-1118-050838",
+  "pilot_started": false,
+  "error": "RuntimeError('split_first failed 1')",
+  "seconds": 705.9347095489502
+}
+

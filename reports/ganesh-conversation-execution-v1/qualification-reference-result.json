@@ -1,0 +1,982 @@
+{
+  "status": "stopped",
+  "identity": {
+    "phase": "sft",
+    "diagnostic_only": false,
+    "stage": "targeted",
+    "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+    "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+    "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+    "parent_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+        "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+        "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+        "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+        "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+      },
+      "attention": "sdpa",
+      "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+      "base_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "batch_tokens": 8192,
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+      "diagnostic_only": true,
+      "epochs": 64,
+      "eval_every_updates": 5,
+      "eval_rows": 128,
+      "fit_eval_steps": [
+        0,
+        16,
+        32,
+        64
+      ],
+      "format_version": "forge-nanochat-v1",
+      "horizon_updates": 96,
+      "kernel_sha256": null,
+      "lr_batch_scale": 0.125,
+      "lr_multiplier": 0.25,
+      "microbatch": 1,
+      "muon_kernel_mode": "eager",
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": false,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "packed_rows": 384,
+      "packing_buffer_size": 1,
+      "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+      "parent_identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+          "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+          "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+        },
+        "attention": "fa3",
+        "batch_tokens": 524288,
+        "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "eval_every_tokens": 250000000,
+        "eval_tokens_per_shard": 1048576,
+        "horizon_updates": 19074,
+        "initialization": "own_random",
+        "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+        "microbatch": 16,
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": true,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "phase": "base",
+        "probes": {
+          "decoding": "greedy raw, no repetition penalty",
+          "enabled": true,
+          "max_new_tokens_per_prompt": 32,
+          "max_total_new_tokens": 128,
+          "prompts": [
+            "The rain stopped just before sunrise. When Mira opened the window,",
+            "A library lends books to readers. Readers return the books so that",
+            "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+            "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+          ],
+          "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+          "version": 1
+        },
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129"
+      },
+      "phase": "sft",
+      "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+      "stage": "general",
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129",
+      "update_trace": {
+        "absolute_update_limit": 0,
+        "version": 1
+      }
+    },
+    "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "config": {
+      "sequence_len": 2048,
+      "vocab_size": 32768,
+      "n_layer": 16,
+      "n_head": 8,
+      "n_kv_head": 8,
+      "n_embd": 1024,
+      "window_pattern": "SSSL"
+    },
+    "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+    "format_version": "forge-nanochat-v1",
+    "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+    "base_identity": {
+      "adapter_hashes": {
+        "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+        "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+        "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+        "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+        "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+        "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+        "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+        "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+      },
+      "attention": "fa3",
+      "batch_tokens": 524288,
+      "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+      "config": {
+        "n_embd": 1024,
+        "n_head": 8,
+        "n_kv_head": 8,
+        "n_layer": 16,
+        "sequence_len": 2048,
+        "vocab_size": 32768,
+        "window_pattern": "SSSL"
+      },
+      "eval_every_tokens": 250000000,
+      "eval_tokens_per_shard": 1048576,
+      "horizon_updates": 19074,
+      "initialization": "own_random",
+      "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+      "microbatch": 16,
+      "numerical_mode": {
+        "cublas_workspace_config": ":4096:8",
+        "cuda": "12.9",
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "deterministic_attention": true,
+        "float32_matmul_precision": "highest",
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "sm": [
+          8,
+          0
+        ]
+      },
+      "phase": "base",
+      "probes": {
+        "decoding": "greedy raw, no repetition penalty",
+        "enabled": true,
+        "max_new_tokens_per_prompt": 32,
+        "max_total_new_tokens": 128,
+        "prompts": [
+          "The rain stopped just before sunrise. When Mira opened the window,",
+          "A library lends books to readers. Readers return the books so that",
+          "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+          "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+        ],
+        "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+        "version": 1
+      },
+      "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+      "seed": 103,
+      "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+      "torch": "2.9.1+cu129"
+    },
+    "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+    "horizon_updates": 40,
+    "packed_rows": 160,
+    "packing_buffer_size": 1,
+    "batch_tokens": 8192,
+    "lr_batch_scale": 0.125,
+    "lr_multiplier": 0.25,
+    "epochs": 1,
+    "numerical_mode": {
+      "cuda": "12.9",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "sm": [
+        8,
+        0
+      ],
+      "deterministic_algorithms": true,
+      "deterministic_attention": false,
+      "float32_matmul_precision": "highest",
+      "cublas_workspace_config": ":4096:8",
+      "cudnn_deterministic": true,
+      "cudnn_benchmark": false,
+      "cudnn_allow_tf32": true
+    },
+    "microbatch": 1,
+    "seed": 103,
+    "torch": "2.9.1+cu129",
+    "attention": "sdpa",
+    "kernel_sha256": null,
+    "muon_kernel_mode": "eager",
+    "eval_rows": 128,
+    "eval_every_updates": 1,
+    "adapter_hashes": {
+      "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+      "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+      "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+      "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+      "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+      "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+      "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+      "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+      "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+      "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+      "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d",
+      "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff"
+    },
+    "controlled_pilot_only": true,
+    "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+    "block_arm": "broad",
+    "validation_metric": "content_cross_entropy_nats",
+    "update_trace": {
+      "version": 1,
+      "absolute_update_limit": 0
+    },
+    "fit_eval_steps": []
+  },
+  "step": 2,
+  "assistant_targets": 270,
+  "train_loss_scope": "last_optimizer_update_only",
+  "development_start": {
+    "purpose": "masked_development_loss_not_conversation_acceptance",
+    "rows": 9,
+    "assistant_targets": 916,
+    "cross_entropy_nats": 4.300017877437142,
+    "dataset_sha256": "16d5deb588864d6690dda0ba1e166284f865f8c8c0efa87df3e6d81cb01411ea",
+    "complete": true,
+    "content_targets": 807,
+    "end_targets": 109,
+    "content_cross_entropy_nats": 4.0578214132505135,
+    "end_cross_entropy_nats": 6.093159981823843
+  },
+  "development_by_family": {
+    "ordinary": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 2,
+      "assistant_targets": 128,
+      "cross_entropy_nats": 5.297206282615662,
+      "dataset_sha256": "cc8a3cb643943b98bc812f790906f1df56fef83c5238591393180427b391be09",
+      "complete": true,
+      "content_targets": 115,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 5.392317995817765,
+      "end_cross_entropy_nats": 4.4558407710148735
+    },
+    "clarification": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 142,
+      "cross_entropy_nats": 5.010162783340669,
+      "dataset_sha256": "a1e9899f4dfdafae071e6d139bcc9b42b943818163ff170cdbabcb913be3faea",
+      "complete": true,
+      "content_targets": 129,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 5.206847198249758,
+      "end_cross_entropy_nats": 3.058447030874399
+    },
+    "instructions": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 45,
+      "cross_entropy_nats": 9.238310411241319,
+      "dataset_sha256": "5be51c7d8f4bf2166b5d3433d87af8e5fd027a5e40be3641c5bdf0ceee3fe2e9",
+      "complete": true,
+      "content_targets": 32,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 6.672217845916748,
+      "end_cross_entropy_nats": 15.554844782902645
+    },
+    "grounding": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 141,
+      "cross_entropy_nats": 4.606312853224734,
+      "dataset_sha256": "c06977f21d97e8495f9dedf38fbc3a4350c0ffe34c90976af909feaf788ee954",
+      "complete": true,
+      "content_targets": 128,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 4.675656318664551,
+      "end_cross_entropy_nats": 3.9235470111553488
+    },
+    "entity": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 2,
+      "assistant_targets": 82,
+      "cross_entropy_nats": 1.802133048452982,
+      "dataset_sha256": "3021d2cb4f567bc0ab1de97e90de27b070003314450e4d87295ceda451eed093",
+      "complete": true,
+      "content_targets": 69,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 1.7166397537010303,
+      "end_cross_entropy_nats": 2.255904271052434
+    },
+    "correction": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 91,
+      "cross_entropy_nats": 3.068842290521978,
+      "dataset_sha256": "f514b71107513432238ccc6a29751fc33be26af0ec1ec75ea3c8cfd73867d49a",
+      "complete": true,
+      "content_targets": 78,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 3.2619218092698317,
+      "end_cross_entropy_nats": 1.9103653247539814
+    },
+    "memory": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 100,
+      "cross_entropy_nats": 1.9542779541015625,
+      "dataset_sha256": "524ae128c60e2eb0af243b67599c5090bb6fcc7e62f01e197c47fcb0bb48ea8d",
+      "complete": true,
+      "content_targets": 87,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 1.9166307120487607,
+      "end_cross_entropy_nats": 2.2062247349665713
+    },
+    "rewrite": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 101,
+      "cross_entropy_nats": 2.1366883834989943,
+      "dataset_sha256": "8fd55ece6ae5bae398fabcd97101c1de32b8fc6edfb28a9b46f1de600b62bf75",
+      "complete": true,
+      "content_targets": 88,
+      "end_targets": 13,
+      "content_cross_entropy_nats": 2.162446975708008,
+      "end_cross_entropy_nats": 1.9623213547926683
+    },
+    "model_identity": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 26,
+      "cross_entropy_nats": 4.4806641798753,
+      "dataset_sha256": "b1f3d900cbb1436f05fabf0ec3feb8048122826de5b0e3df0a6ec691372ba662",
+      "complete": true,
+      "content_targets": 23,
+      "end_targets": 3,
+      "content_cross_entropy_nats": 4.415707132090693,
+      "end_cross_entropy_nats": 4.9786685307820635
+    },
+    "tools": {
+      "purpose": "masked_development_loss_not_conversation_acceptance",
+      "rows": 1,
+      "assistant_targets": 60,
+      "cross_entropy_nats": 4.5060373942057295,
+      "dataset_sha256": "990e8487b14375c0b4a633865dfe6bd136a98505a4ab1c1165457ae1b3728b16",
+      "complete": true,
+      "content_targets": 58,
+      "end_targets": 2,
+      "content_cross_entropy_nats": 3.7425452922952585,
+      "end_cross_entropy_nats": 26.647306442260742
+    }
+  },
+  "quality_guards": {
+    "aggregate": {
+      "best_ce": 3.942964537288472,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 3.942964537288472,
+      "strikes": 0,
+      "stopped": false
+    },
+    "clarification": {
+      "best_ce": 5.200924422389777,
+      "best_step": 0,
+      "last_step": 2,
+      "last_ce": 5.206847198249758,
+      "strikes": 0,
+      "stopped": false
+    },
+    "correction": {
+      "best_ce": 3.2619218092698317,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 3.2619218092698317,
+      "strikes": 0,
+      "stopped": false
+    },
+    "entity": {
+      "best_ce": 1.7166397537010303,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 1.7166397537010303,
+      "strikes": 0,
+      "stopped": false
+    },
+    "grounding": {
+      "best_ce": 4.675656318664551,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 4.675656318664551,
+      "strikes": 0,
+      "stopped": false
+    },
+    "instructions": {
+      "best_ce": 6.672217845916748,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 6.672217845916748,
+      "strikes": 0,
+      "stopped": false
+    },
+    "memory": {
+      "best_ce": 1.9166307120487607,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 1.9166307120487607,
+      "strikes": 0,
+      "stopped": false
+    },
+    "model_identity": {
+      "best_ce": 4.415707132090693,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 4.415707132090693,
+      "strikes": 0,
+      "stopped": false
+    },
+    "ordinary": {
+      "best_ce": 5.392317995817765,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 5.392317995817765,
+      "strikes": 0,
+      "stopped": false
+    },
+    "rewrite": {
+      "best_ce": 2.162446975708008,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 2.162446975708008,
+      "strikes": 0,
+      "stopped": false
+    },
+    "tools": {
+      "best_ce": 3.7425452922952585,
+      "best_step": 2,
+      "last_step": 2,
+      "last_ce": 3.7425452922952585,
+      "strikes": 0,
+      "stopped": false
+    }
+  },
+  "last_checkpoint": {
+    "step": 2,
+    "path": "/opt/ganesh-conversation/qualification-v2/continuous/step-00000002",
+    "upload": {
+      "status": "gcs_bundle_uploaded",
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/continuous/checkpoints/checkpoint-bcf4dfa3ee644eeb9e99af42245697af",
+      "seconds": 40.261177323000084,
+      "bytes_one_way": 3826079813,
+      "identity": {
+        "adapter_hashes": {
+          "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+          "nano_block_replay.py": "76e06d896f7db223cc5b05dddd5dc1d60a6069363d37e52b78d7de0054c9eabe",
+          "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+          "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+          "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+          "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+          "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+          "nano_quality_gate.py": "814262a41784c4e1cb0e5006aec63c91e91de4a0cd4b1bbb245dafa6e9b39a44",
+          "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+          "nano_sft.py": "b36968acc206009ca0a224ec92ee73ac73bec4157ae0f74de401c2eac7e4d671",
+          "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+          "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+        },
+        "attention": "sdpa",
+        "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+        "base_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+            "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+            "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+          },
+          "attention": "fa3",
+          "batch_tokens": 524288,
+          "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "eval_every_tokens": 250000000,
+          "eval_tokens_per_shard": 1048576,
+          "horizon_updates": 19074,
+          "initialization": "own_random",
+          "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+          "microbatch": 16,
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": true,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "phase": "base",
+          "probes": {
+            "decoding": "greedy raw, no repetition penalty",
+            "enabled": true,
+            "max_new_tokens_per_prompt": 32,
+            "max_total_new_tokens": 128,
+            "prompts": [
+              "The rain stopped just before sunrise. When Mira opened the window,",
+              "A library lends books to readers. Readers return the books so that",
+              "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+              "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+            ],
+            "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+            "version": 1
+          },
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129"
+        },
+        "batch_tokens": 8192,
+        "block_arm": "broad",
+        "block_plan_sha256": "82a15f380ae90f3fd4f24904ef88886674dc6218f6345e3603223e3b17a07f5c",
+        "config": {
+          "n_embd": 1024,
+          "n_head": 8,
+          "n_kv_head": 8,
+          "n_layer": 16,
+          "sequence_len": 2048,
+          "vocab_size": 32768,
+          "window_pattern": "SSSL"
+        },
+        "controlled_pilot_only": true,
+        "data_order_sha256": "7a4df562dd77a8ec9dd9e0cccdd526d93914cba972f29ca3c3089528d9f881b8",
+        "diagnostic_only": false,
+        "epochs": 1,
+        "eval_every_updates": 1,
+        "eval_rows": 128,
+        "fit_eval_steps": [],
+        "format_version": "forge-nanochat-v1",
+        "horizon_updates": 40,
+        "kernel_sha256": null,
+        "lr_batch_scale": 0.125,
+        "lr_multiplier": 0.25,
+        "microbatch": 1,
+        "muon_kernel_mode": "eager",
+        "numerical_mode": {
+          "cublas_workspace_config": ":4096:8",
+          "cuda": "12.9",
+          "cudnn_allow_tf32": true,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "deterministic_algorithms": true,
+          "deterministic_attention": false,
+          "float32_matmul_precision": "highest",
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "sm": [
+            8,
+            0
+          ]
+        },
+        "packed_rows": 160,
+        "packing_buffer_size": 1,
+        "parent_bundle_manifest_sha256": "70075d157bb3a1bfa96866b3a5737d41037f416ce54b961b2ed0d5f16aa13145",
+        "parent_identity": {
+          "adapter_hashes": {
+            "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+            "nano_chat_format.py": "14ff190b2b4da22ffa84c960a9dbd2610d9af5ca12eb6ec170b60bc4f8276945",
+            "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+            "nano_context.py": "ed97c3f5b9a52b19cd4bb62a5fed3464a5ca34ef4e041ead5e6705734f4b7175",
+            "nano_fit_contract.py": "a829e8ed62a11478e4b6de50bceccbbdffa34d2bdd46c3cd731e832e6b6b74f7",
+            "nano_optimizer_capture.py": "639594e78d28049a9d74ba5aaf2f4be440e19cc3729b708fac9f7353473148ff",
+            "nano_quality_gate.py": "e5e24d41abd66e558bee4530fb9eb073fa3f033de93c6303ed386f5b7055b083",
+            "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+            "nano_sft.py": "c98395e382b24bad1e43c074bbe2a59b3300b13b96a06cf058cb71174be94b46",
+            "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a",
+            "nano_update_trace.py": "6f1b08e589ec3acdfef61e4743d070d8ee24c9299d8da982360be79b6a65569d"
+          },
+          "attention": "sdpa",
+          "base_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "base_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "batch_tokens": 8192,
+          "config": {
+            "n_embd": 1024,
+            "n_head": 8,
+            "n_kv_head": 8,
+            "n_layer": 16,
+            "sequence_len": 2048,
+            "vocab_size": 32768,
+            "window_pattern": "SSSL"
+          },
+          "data_order_sha256": "d61fd53ec9643bc4c148b5f5ce7b936679fcbc9ec475ba4f2dc4e44f8fc02960",
+          "diagnostic_only": true,
+          "epochs": 64,
+          "eval_every_updates": 5,
+          "eval_rows": 128,
+          "fit_eval_steps": [
+            0,
+            16,
+            32,
+            64
+          ],
+          "format_version": "forge-nanochat-v1",
+          "horizon_updates": 96,
+          "kernel_sha256": null,
+          "lr_batch_scale": 0.125,
+          "lr_multiplier": 0.25,
+          "microbatch": 1,
+          "muon_kernel_mode": "eager",
+          "numerical_mode": {
+            "cublas_workspace_config": ":4096:8",
+            "cuda": "12.9",
+            "cudnn_allow_tf32": true,
+            "cudnn_benchmark": false,
+            "cudnn_deterministic": true,
+            "deterministic_algorithms": true,
+            "deterministic_attention": false,
+            "float32_matmul_precision": "highest",
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "sm": [
+              8,
+              0
+            ]
+          },
+          "packed_rows": 384,
+          "packing_buffer_size": 1,
+          "parent_bundle_manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+          "parent_identity": {
+            "adapter_hashes": {
+              "l4_recovery_check.py": "2b5f9ba400f0c406ab9e0431c4ad1357b23ebe84ca932ddffaeaf9e82455f75f",
+              "nano_benchmark.py": "68a21758de408ba8743a9d4dac30f4277d8624df2758578cb92a579228ed4c1b",
+              "nano_checkpoint.py": "6c8998a2a5407fa2ccced2784881f7f6644c556fdbf9229db384d28d91943e1b",
+              "nano_data.py": "c68802eefc2f732c90486bfb305b537dd7fef142eaecc987e12805d9f4e5a899",
+              "nano_eval.py": "ca8183ea2b36ec159a0283965075fcdbe39f33ea6c89d89e3305ccf49e978f9a",
+              "nano_probes.py": "a05ac0b81b5f44160c0adc73ee3e89c7d9dd38f3a989c6d9ff905c8299c218fc",
+              "nano_retention.py": "63e4acf354baf7686faf39a68042cd7594de0e841d07c0b4957fbfd384ea7a64",
+              "nano_train.py": "3987d54f591dcb4de4b4a909ef8c6f05e4c1fa6bde2cbdc77b27e2f3eca0c07a"
+            },
+            "attention": "fa3",
+            "batch_tokens": 524288,
+            "campaign_sha256": "56339d59cd7a7fc68c874925cc427b6a661bba1fbbc5816f84cf0107d34d8151",
+            "config": {
+              "n_embd": 1024,
+              "n_head": 8,
+              "n_kv_head": 8,
+              "n_layer": 16,
+              "sequence_len": 2048,
+              "vocab_size": 32768,
+              "window_pattern": "SSSL"
+            },
+            "eval_every_tokens": 250000000,
+            "eval_tokens_per_shard": 1048576,
+            "horizon_updates": 19074,
+            "initialization": "own_random",
+            "kernel_sha256": "85b2e0c2ef47d48eb6a2131ddf6d9066c4dc44f87a231114cc4222b3a2575953",
+            "microbatch": 16,
+            "numerical_mode": {
+              "cublas_workspace_config": ":4096:8",
+              "cuda": "12.9",
+              "cudnn_allow_tf32": true,
+              "cudnn_benchmark": false,
+              "cudnn_deterministic": true,
+              "deterministic_algorithms": true,
+              "deterministic_attention": true,
+              "float32_matmul_precision": "highest",
+              "gpu": "NVIDIA A100-SXM4-40GB",
+              "sm": [
+                8,
+                0
+              ]
+            },
+            "phase": "base",
+            "probes": {
+              "decoding": "greedy raw, no repetition penalty",
+              "enabled": true,
+              "max_new_tokens_per_prompt": 32,
+              "max_total_new_tokens": 128,
+              "prompts": [
+                "The rain stopped just before sunrise. When Mira opened the window,",
+                "A library lends books to readers. Readers return the books so that",
+                "The blue notebook belongs to Arun. The green notebook belongs to Leela. Arun picked up his",
+                "On Monday the parcel was in Pune. On Tuesday it arrived in Kochi. Its most recent location was"
+              ],
+              "purpose": "qualitative base diagnostics only; not chat/tool acceptance or optimization criterion",
+              "version": 1
+            },
+            "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+            "seed": 103,
+            "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+            "torch": "2.9.1+cu129"
+          },
+          "phase": "sft",
+          "quality_contract_sha256": "5236649c2b2ce0f10e28cd65c976d5410493aed8fb4d26e6c0e644e5c7a01dbb",
+          "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+          "seed": 103,
+          "source_manifest_sha256": "8a124bdece1ed9b19b6aeb09f5258d9b18422145cf1c1c18b50c4df45c78f5d3",
+          "stage": "general",
+          "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+          "torch": "2.9.1+cu129",
+          "update_trace": {
+            "absolute_update_limit": 0,
+            "version": 1
+          }
+        },
+        "phase": "sft",
+        "quality_contract_sha256": "dc14d306f2455798134153a46d876c105c699f5e8411c2e20ef92c5a9a997b0d",
+        "revision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+        "seed": 103,
+        "source_manifest_sha256": "1e305beb04d7636f8791d272f57af421ec5b6f25e13134717760a56e84245ebe",
+        "stage": "targeted",
+        "tokenizer_sha256": "ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5",
+        "torch": "2.9.1+cu129",
+        "update_trace": {
+          "absolute_update_limit": 0,
+          "version": 1
+        },
+        "validation_metric": "content_cross_entropy_nats"
+      },
+      "step": 2,
+      "manifest": {
+        "files": {
+          "metadata.json": {
+            "bytes": 17559,
+            "sha256": "cfe87956e0793c55ce75760d5618759e2b46c0d4e75a41fa0ed531d037f910bd"
+          },
+          "payload.pt": {
+            "bytes": 3826061825,
+            "sha256": "853b0e3dff054011c1b3f7efc179424337983b9abde54ddc057c41a74c329d69"
+          }
+        },
+        "step": 2,
+        "version": 1
+      },
+      "publication_order": [
+        "payload.pt",
+        "metadata.json",
+        "manifest.json",
+        "COMMITTED"
+      ],
+      "transfer_integrity": "gcloud storage cp built-in checksum validation",
+      "independent_sha256_readback": false,
+      "note": "Upload receipt only; fresh-machine restore and next update not tested."
+    }
+  },
+  "train_loss": 2.2152599674640316,
+  "consumed_conversations": 10,
+  "packed_rows": 8,
+  "update_seconds": 0.5886894520000396,
+  "last_update_assistant_targets": 202,
+  "development": {
+    "purpose": "masked_development_loss_not_conversation_acceptance",
+    "rows": 9,
+    "assistant_targets": 916,
+    "cross_entropy_nats": 4.053626531076223,
+    "dataset_sha256": "16d5deb588864d6690dda0ba1e166284f865f8c8c0efa87df3e6d81cb01411ea",
+    "complete": true,
+    "content_targets": 807,
+    "end_targets": 109,
+    "content_cross_entropy_nats": 3.942964537288472,
+    "end_cross_entropy_nats": 4.87293094670007
+  },
+  "reason": "pilot_update_limit",
+  "quality_accepted": false,
+  "evaluation_candidates": [
+    {
+      "step": 2,
+      "roles": [
+        "best_development",
+        "last"
+      ],
+      "remote_prefix": "gs://forge-ownbase-a100-20261110/ganesh-conversation-execution-v1/ganesh-conv-1118-050838/qualification-v2/continuous/checkpoints/checkpoint-bcf4dfa3ee644eeb9e99af42245697af",
+      "manifest_sha256": "1ae48e83842f56ff6a55983f6c8ecb52b5554ea03ff150a0d00c2c79ef2d69e3",
+      "requires_generation_review": true
+    }
+  ],
+  "best_development_loss": 3.942964537288472,
+  "best_development_step": 2,
+  "acceptance": "Not evaluated by this worker; use independent actual conversation/tool tests."
+}

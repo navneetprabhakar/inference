@@ -1,0 +1,41 @@
+WARNING: 
+
+To increase the performance of the tunnel, consider installing NumPy. For instructions,
+please see https://cloud.google.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth
+
+[]
+{
+  "status": "hold",
+  "check": "cuda_changed_path",
+  "runtime_sha256": "02a93d181d535d9f32ccd4353199f493401bb91563ec87a1b676d73452b99ec0",
+  "instance": "ganesh-conv-1118-050838",
+  "pilot_started": false,
+  "error": "RuntimeError('continuous failed 1')",
+  "seconds": 97.29631447792053
+}
+
+str(int(os.stat(binary).st_mtime))
+                                            ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/ganesh-conversation/-m'
+
+Original exception was:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 737, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 734, in main
+    return run(a)
+           ^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_sft.py", line 555, in run
+    journal=CloudJournal(out/'retention-journal.json',campaign_prefix=args.backup_prefix,identity=identity,resume_step=step if args.resume else None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_train.py", line 193, in __init__
+    self.prefix = _prefix(campaign_prefix)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ganesh-conversation/cloud_training/nano_retention.py", line 27, in _prefix
+    raise ValueError('Explicit campaign prefix ending /checkpoints required')
+ValueError: Explicit campaign prefix ending /checkpoints required
+Scaling the LR for the AdamW parameters ∝1/√(1024/768) = 0.866025
+
