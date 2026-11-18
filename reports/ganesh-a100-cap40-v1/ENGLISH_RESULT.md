@@ -151,3 +151,167 @@ inventory shows0VMs/0disks. Required backups were verified before shutdown/delet
 Estimated cumulative compute/disk including priorL4is$10.61, excluding unsettled
 storage/network; conservative margin plus reserves is$20.59under the$40cap.
 Scheduled-provider STOP remains unproven; normal stop is not relabeled as that test.
+
+## Thorough next-step reassessment — 18 November 2026
+
+Assessment only: no new training, VM, dataset admission or changed gate authorized.
+This refines the earlier termination-first recommendation. Improving termination
+alone is insufficient and additional EOS pressure is not automatically desirable.
+
+### A material correction to the interpretation
+
+Reweighting the saved isolated teacher-forced diagnostics by actual content-token
+count gives the following development results; all three use the same520content
+and36end-token reference positions:
+
+| Checkpoint | Unseen content CE | Unseen end-token CE |
+|---|---:|---:|
+| Base0 | 2.789902 | 28.829655 |
+| Best-loss20 | 2.639400 | 11.580472 |
+| Last30 | 3.939904 | 5.788230 |
+
+Content CE worsened about49% from20to30 while end-token CE improved. This is real
+reference-content deterioration, not just an unfortunate checkpoint-selection rule.
+The guard was useful. Last30is a better free-running generator than20because it can
+finish some answers, but a worse predictor of unseen reference content. Both facts
+can hold. We should retain the stop and improve the objective/data/selection design.
+Source-bound calculation: assessment/content-end-reassessment.json.
+
+The existing fit confirms substantial memorization and partial chat-protocol learning.
+It does not establish broad English improvement. The12development sessions are
+small, repeatedly inspected, and not pristine release data. Blocked follow-ups count
+as failures, but do not independently measure what the model would do given a valid
+history. Report end-to-end and isolated diagnostic measures separately.
+
+### Evidence-ranked explanations
+
+1. **Established:** the exposed fit is tiny:24sessions/72assistant messages and656
+   supervised token positions. The next prepared curriculum is also a seed pilot:
+   31sessions/95assistant messages, including only6sessions each for ordinary
+   conversation, instructions, corrections and memory. Neither warrants a broad
+   English recovery forecast.
+2. **Established:** answer termination is severely suppressed initially. However,
+   endings already account for roughly60%of initial packed fit loss. Blindly
+   increasing their weight can further distort content learning or cause empty
+   answers. Suppressed logits and attenuated gradients are measured; causal repair
+   by a particular warmup/reinitialization has NOT been demonstrated.
+3. **Established:** optimization changes weights and can memorize short sequences.
+   The exact eager restart fix does not supply missing conversational competence.
+4. **Confirmed implementation, untested hypothesis:** SFT loads the base optimizer
+   state and retains moments while changing learning rates. That is not inherently
+   a bug, but it is not equivalent to a fresh task-specific SFT optimizer. Separate
+   new-task warm-start policy from exact restart of an existing SFT run. A fresh
+   optimizer arm must retain the identical own model weights, tokenizer and data.
+5. **Unresolved:** base-language/compositional ability, pretraining source quality,
+   boilerplate prevalence, policy-prefix influence, and generalization under changed
+   names/order/phrasing. More training cannot be assumed to fix all of these.
+
+### Recommended sequence
+
+**1. Define the first product milestone and prepare evidence locally.** Basic
+screen-free English chat, clarification, instruction following and3–6turn stateful
+conversation inside native2Kcontext. No broad factual expertise,4Kclaim, maths or
+CBSE milestone yet. Keep Ganesh-base/Navneet Prabhakar identity in a small reviewed
+training share, then test it without giving the answer in the system prompt.
+
+Build a compact source-disjoint development panel spanning everyday replies,
+clarification, rewriting, grounding, preference retention, state corrections,
+ownership/negation and clean closings. Compare Own base10B, last30and retained SFT194
+on the same panel; use chat output plus plain-prefix/teacher-forced diagnostics.
+Do not assume the latest checkpoint is the strongest parent. Do not use another
+pretrained model as the serving solution. Diagnostic prompts become exposed;
+create and protect a separate release panel.
+
+**2. Replace the seed curriculum with a real, reviewed pilot curriculum.** A practical
+initial design range is300–500distinct conversations, usually2–6turns; this is a
+planning range, not a proven sufficiency threshold or a quota that overrides quality.
+Cover different intents, answer lengths and conversational wording. For corrections,
+use explicit state oracles, counterfactual swaps and late recalls; split whole
+scenario/template/source groups before variants. Hold out some entity/order/wording
+combinations. Avoid multiplying one template to satisfy the count.
+
+Use reviewed Smol-SmolTalk training rows for natural phrasing, selected OASST training
+paths where complete provenance and every turn pass review, and labelled Codex
+examples for controlled correction/memory gaps. Smol-SmolTalk is synthetic, not an
+organic human corpus. Existing source review found only a small shortlist; its
+acceptance rate is not a population estimate and it does not justify bulk admission.
+Source IDs, revisions, licensing, split ownership, near-duplicate checks and raw
+versus edited lineage remain required. Codex-generated answers require semantic
+review and state-oracle checks; syntax validation alone is insufficient.
+
+Preserve required tool/no-call modes in a production-intent contract, with positive
+tool material small and replay-verified. Tools are regression protection, not the
+English milestone. Report family assistant-target mass, not just session percentages.
+
+**3. Test one controlled optimization difference on that broader curriculum.** After
+new local readiness and explicit new experiment approval, propose at most two bounded
+arms from the same selected Own parent: current inherited optimizer moments versus
+fresh optimizer moments. Everything else stays fixed: data/order, LR schedule,
+objective, tokenizer, context, update and replay limits. Predeclare budget allocation
+and exact limits after tokenizing/counting the reviewed corpus; no invented runtime
+estimate from the24second tiny-fit measurement. Both arms start from identical
+weights. This evaluates an optimization hypothesis while performing actual English
+training. It does not assume optimizer reset will win.
+
+This proposal requires a new versioned controller contract. The current frozen-fit
+failure remains a failure. Do not silently waive its>=23/24gate or let the old
+controller dispatch curriculum. In the proposed contract, learnability diagnostics,
+generalization-pilot admission and release acceptance have distinct roles. If the
+new design is not approved, training remains blocked.
+
+Keep content/end losses separate; measure valid ending, premature/empty ending,
+actual semantic correctness and complete-session success at fixed checkpoints.
+Record matched baseline, best and last on real generated histories. Preserve all
+blocked turns in the end-to-end denominator. Evaluate diverse reference prefixes
+as diagnostics only, never substitutes for generated conversation success.
+
+**4. Predeclare decisions and stop conditions.** Proposed pilot progress threshold:
+at least70%valid completed turns and50%fully correct conversations on a new grouped
+60session development panel, with improvement spread across families and no material
+content-loss regression. These are engineering milestones, not statistical proof or
+release criteria; thresholds need prospective review before any learning run.
+Retain hard numerical, integrity, budget and writer stops. Define content-regression
+threshold/patience prospectively from the fixed baseline and measurement stability;
+do not select it to accommodate this run's failure. Two failed pilots force HOLD.
+
+For a first narrowly scoped release, propose a separately authored, protected set
+with>=90%correct turns,>=80%complete conversations and>=80%turn correctness in each
+critical family, plus identity/grounding and tool regression checks. A60session
+release panel is still small: report denominators and uncertainty and do not claim
+broad benchmark competence. Independent grading remains outstanding; a second pass
+by the same author is not independent review. Local MPS must pass the selected
+candidate's checks before default promotion.
+
+If both arms improve endings but not unseen content, stop optimizer tinkering and
+assess foundation/data coverage. If plain-language comprehension is weak even without
+chat controls, a bounded clean-English continued-pretraining experiment may be needed
+before further SFT. That is a different budget and objective, not an automatic next
+stage. If language works but conversation fails, focus on SFT diversity/state tracking.
+If revised data improves held-out learning curves, scale distinct reviewed scenarios
+before scaling repetition. No claim that several hundred examples guarantee success.
+
+**5. Reduce operational overhead without weakening data protection.** Reuse exact
+runtime-bound optimizer/recovery evidence when applicable; test changed objective
+and optimizer-initialization paths specifically. Use one VM/one writer, measured
+stage timers and a fixed provider deadline set before launch. GCP does not permit
+changing terminationTime on the running VM in this campaign; do not depend on that
+for extensions or a last-minute scheduled-stop drill. Keep the unresolved scheduled
+STOP evidence explicit. Checkpoint at planned durable boundaries and failures, avoid
+unnecessary repeated multi-GB copies, and verify required backups before shutdown.
+The GPU should spend its useful allocation on learning and behavior assessment.
+
+### External context, not a sufficiency claim
+
+The official Smol-SmolTalk card describes460,341training rows, shorter conversations,
+less specialist material and no advanced maths for sub-1B models. This supports the
+curriculum direction, not copying all rows or claiming Ganesh needs that exact count:
+https://huggingface.co/datasets/HuggingFaceTB/smol-smoltalk/blob/main/README.md
+The SmolLM2 paper's1.7B result used roughly11trillion pretraining tokens. That is not a
+minimum requirement for basic conversation, but it makes direct expectations of
+commercial small-model quality from Own's10Btokens and a few dozen SFT conversations
+unjustified: https://arxiv.org/abs/2502.02737 .
+
+**Decision:** proceed with local foundation assessment, a broader reviewed curriculum
+and a versioned experiment contract. Do not launch a VM or resume step30. The next
+paid work should answer whether transferable English improves under controlled SFT,
+not merely whether more examples can be memorized.
