@@ -1,0 +1,87 @@
+{
+  "type": "object",
+  "properties": {
+    "reviews": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "group": {
+                "type": "string",
+                "enum": [
+                  "a_189"
+                ]
+              },
+              "content_sha256": {
+                "type": "string",
+                "enum": [
+                  "0090271cb57f094250aeda09cf34392452b10155299f46d0716b96474aa55ef7"
+                ]
+              },
+              "decision": {
+                "type": "string",
+                "enum": [
+                  "accept",
+                  "revise",
+                  "reject"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "turn_reviews": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "turn": {
+                      "type": "integer"
+                    },
+                    "decision": {
+                      "type": "string",
+                      "enum": [
+                        "pass",
+                        "fail"
+                      ]
+                    },
+                    "rationale": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "turn",
+                    "decision",
+                    "rationale"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "memory_annotation_valid": {
+                "type": "boolean"
+              },
+              "distinct_scenario": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "group",
+              "content_sha256",
+              "decision",
+              "reason",
+              "turn_reviews",
+              "memory_annotation_valid",
+              "distinct_scenario"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "reviews"
+  ],
+  "additionalProperties": false
+}

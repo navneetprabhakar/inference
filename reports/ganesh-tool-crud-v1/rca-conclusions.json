@@ -1,0 +1,39 @@
+{
+  "status": "bounded_rca_complete_full_suite_still_stopped",
+  "extended_reply_budget": 512,
+  "extended_generated_tokens": 512,
+  "extended_status": "invalid_model_action",
+  "first128_identical": true,
+  "known_controls": [
+    {
+      "id": "known_calculate",
+      "transport_status": "complete",
+      "answer": "The calculate function adds a uniform quantity over a specified interval.",
+      "calls": 0,
+      "semantic_pass": false,
+      "reason": "Ignored requested calculation/tool; irrelevant definition instead of25."
+    },
+    {
+      "id": "known_convert",
+      "transport_status": "complete",
+      "answer": "Please note that convert doesn't take a value in metres.",
+      "calls": 0,
+      "semantic_pass": false,
+      "reason": "No tool call; falsely rejects supported metre conversion instead of200cm."
+    },
+    {
+      "id": "plain_hello",
+      "transport_status": "complete",
+      "answer": "Thanks for asking. Please forgive me if I'm not very clear.\r",
+      "calls": 0,
+      "semantic_pass": false,
+      "reason": "No greeting; two sentences despite one-sentence request."
+    }
+  ],
+  "context_change_applied": false,
+  "reason": "No input overflow;512-output continuation remains malformed. Checkpoint2048 total;4K input+4K output requires at least8192 total, not qualified.",
+  "checkpoint_sft_sessions": 24,
+  "checkpoint_sft_tool_calls": 0,
+  "training": false,
+  "all_probe_processes_joined": true
+}

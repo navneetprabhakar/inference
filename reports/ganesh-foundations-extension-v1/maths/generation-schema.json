@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "properties": {
+    "conversations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "type": "string",
+            "enum": [
+              "ordinary",
+              "language_explanation",
+              "grounding",
+              "planning",
+              "clarification",
+              "correction",
+              "memory"
+            ]
+          },
+          "group": {
+            "type": "string"
+          },
+          "turns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string"
+                },
+                "assistant": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "user",
+                "assistant"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "author_review_notes": {
+            "type": "string"
+          },
+          "recall_probe": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "support_turn": {
+                    "type": "integer"
+                  },
+                  "probe_turn": {
+                    "type": "integer"
+                  },
+                  "focus": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "support_turn",
+                  "probe_turn",
+                  "focus"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "family",
+          "group",
+          "turns",
+          "author_review_notes",
+          "recall_probe"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "conversations"
+  ],
+  "additionalProperties": false
+}

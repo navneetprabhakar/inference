@@ -1,0 +1,103 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_180",
+      "turns": [
+        {
+          "user": "I keep losing a particular page in my paper notebook.",
+          "assistant": "You could mark the page with a removable tab so it's easier to find."
+        },
+        {
+          "user": "The pages have no numbers.",
+          "assistant": "A removable tab still works without numbers. You could label it with a short description of the page."
+        },
+        {
+          "user": "I need to find several topics, not just one.",
+          "assistant": "You could use a separate labeled tab for each topic."
+        },
+        {
+          "user": "I don't want tabs sticking out.",
+          "assistant": "You could try removable markers placed just inside the page edges, so they don't protrude."
+        },
+        {
+          "user": "How would I know which note is which without opening every page?",
+          "assistant": "Different colors might help: you could use a color key inside the cover and look for the matching marker when you fan the pages."
+        },
+        {
+          "user": "I only have one color.",
+          "assistant": "You could place the markers at different heights along the page edges, with each height representing a topic. A removable key inside the cover could show which height belongs to each topic."
+        },
+        {
+          "user": "What if the markers are hard to tell apart?",
+          "assistant": "You could space the heights farther apart and make the key match their positions. Fanning the pages may make the markers easier to spot."
+        },
+        {
+          "user": "Summarize the approach.",
+          "assistant": "Place removable, single-color markers just inside the page edges at distinct heights. Use a removable key inside the cover to match each height to a topic, then fan the pages to find its marker."
+        }
+      ],
+      "author_review_notes": "The proposed position key uses removable markers without protruding tabs or page numbers.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "a_180",
+        "content_sha256": "9f50ecbb5b46aa6e754b66cfc13225e5877c54517588f7f22ba983a817765a46",
+        "decision": "revise",
+        "reason": "The eight-turn scenario is distinct, but the indexing method never establishes how markers placed inside closed pages can be identified reliably by height. Repair the later replies with a practical way to locate topics without protruding tabs or opening every page, while retaining the one-color constraint.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "A removable tab is a tentative, useful way to find one page."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "The suggestion correctly explains that a labeled tab does not require page numbers."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Separate labeled tabs address the change from one page to several topics."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Markers inside the edges respond to the restriction against protruding tabs."
+          },
+          {
+            "turn": 5,
+            "decision": "fail",
+            "rationale": "Fanning may expose markers, but the reply does not explain how their colors can be identified without checking pages; the practical visibility of markers inside the edges is uncertain."
+          },
+          {
+            "turn": 6,
+            "decision": "fail",
+            "rationale": "Different heights alone do not establish that the single-color markers will be visible or distinguishable when the notebook is closed or fanned."
+          },
+          {
+            "turn": 7,
+            "decision": "fail",
+            "rationale": "Wider spacing may help only if the markers are visible; the reply does not resolve the user's stated difficulty telling them apart."
+          },
+          {
+            "turn": 8,
+            "decision": "fail",
+            "rationale": "The summary repeats the unresolved assumption that fanning will reveal a distinguishable marker at the mapped height."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_180",
+      "family": "correction",
+      "scenario": "Troubleshoot difficulty finding a particular page in a paper notebook; user clarifies the pages have no numbers.",
+      "mechanism": "Avoid page-number instructions and suggest a reversible indexing method.",
+      "turns": 8
+    }
+  }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_251",
+      "turns": [
+        {
+          "user": "Help me end a fictional scene with uncertainty. A character stands at a gate.",
+          "assistant": "“At the gate, she paused. Whether she would go on or turn back was impossible to tell.”"
+        },
+        {
+          "user": "Actually, she definitely walks away. Only her reason should be uncertain.",
+          "assistant": "“She walked away from the gate. Perhaps she was relieved; perhaps she had simply changed her mind.”"
+        },
+        {
+          "user": "Could it sound quieter?",
+          "assistant": "“She walked away from the gate. No one knew quite why.”"
+        },
+        {
+          "user": "Make it warmer without changing what happens.",
+          "assistant": "“She walked away from the gate, her reason a quiet mystery.”"
+        },
+        {
+          "user": "Shorter, please.",
+          "assistant": "“She walked away, her reason a mystery.”"
+        },
+        {
+          "user": "Does that leave her action uncertain?",
+          "assistant": "No. She definitely walks away; the reason remains unknown to the reader."
+        }
+      ],
+      "author_review_notes": "The departure stays definite through the tone and length edits; her reason remains uncertain without asserting that she knows it.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "a_251",
+        "content_sha256": "367b9ca4654dd9aee2b8f2747ef028312e0976dbd85f97fd670d05d20ce273c8",
+        "decision": "revise",
+        "reason": "Turn 4 does not meaningfully make the scene warmer. Revise it to add warmth while preserving the definite departure and uncertainty about her reason.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Creates an uncertain ending around the character's next action."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Correctly makes the departure definite while offering possible reasons without asserting one."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Makes the wording quieter and preserves a definite departure and an uncertain reason."
+          },
+          {
+            "turn": 4,
+            "decision": "fail",
+            "rationale": "Calling the reason a quiet mystery changes the phrasing but does not clearly add the requested warmth."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Shortens the preceding sentence while retaining the definite action and unknown reason."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Correctly distinguishes the definite action from the uncertain reason."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_251",
+      "family": "correction",
+      "scenario": "Co-write a fictional ending: user initially wants uncertainty, then clarifies that the character definitely walks away while only their reason should remain uncertain.",
+      "mechanism": "Separate ambiguity of observed action from ambiguity of motive, preserve action certainty through a later tone edit and shorter ending.",
+      "turns": 6
+    }
+  }
+]

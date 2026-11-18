@@ -1,0 +1,77 @@
+[
+  {
+    "conversation": {
+      "family": "ordinary",
+      "group": "r_listening_for_bass",
+      "turns": [
+        {
+          "user": "I've started noticing bass lines in songs. I want to listen more attentively, not learn an instrument.",
+          "assistant": "You could listen to a familiar song once for the whole arrangement, then again while following the lowest line you can hear."
+        },
+        {
+          "user": "What should I listen for in that line?",
+          "assistant": "Notice where it repeats, pauses, or changes alongside the other sounds. You don't need to name the notes."
+        },
+        {
+          "user": "I keep losing track of it.",
+          "assistant": "That can happen when several sounds overlap. Try following it for just a short section, then replay that section."
+        },
+        {
+          "user": "Does repetition mean it's always doing the same thing?",
+          "assistant": "Not necessarily. A phrase can repeat with a small change in timing, length, or its final notes."
+        },
+        {
+          "user": "What could I try next?",
+          "assistant": "Pick a short passage and listen for one repeated phrase and any variation."
+        }
+      ],
+      "author_review_notes": "The final suggestion follows the immediate discussion without a memory probe.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "r_listening_for_bass",
+        "content_sha256": "e6f612f54a6cc07c0c82ca0ed46524345b4025824aa6d4bd6a7d76836868c537",
+        "decision": "revise",
+        "reason": "The replies are sound, but the planned mechanism requires a later recall of the listening-only goal, which is absent. Add a natural recall after at least two complete intervening exchanges and annotate its latest support turn; alternatively, revise the plan if recall was not intended.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Suggests focused listening without steering the user toward learning an instrument."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Names practical features to notice without requiring music terminology."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Offers a manageable way to deal with losing the line among overlapping sounds."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Correctly explains that repeated phrases can contain small variations."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Gives a concrete next exercise, though it does not fulfill the planned recall."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "r_listening_for_bass",
+      "family": "ordinary",
+      "premise": "The user has started noticing bass lines in songs and wants to listen more attentively.",
+      "mechanism": "Suggest a listening approach, discuss repetition, then recall that the user wants to listen rather than learn an instrument.",
+      "diversity_key": "music_listening_attention_goal",
+      "turns": 5
+    }
+  }
+]

@@ -1,0 +1,491 @@
+{
+  "status": "complete_reviewed_candidate_staging_not_training_admission",
+  "requested_worker_target": 240,
+  "final_candidates": 239,
+  "parent_authorized_quality_stop_before_worker_quota": true,
+  "planned_scenarios": 255,
+  "excluded_groups": [
+    "a_023",
+    "a_028",
+    "a_034",
+    "a_042",
+    "a_061",
+    "a_093",
+    "a_104",
+    "a_114",
+    "a_156",
+    "a_180",
+    "a_205",
+    "a_221",
+    "a_230",
+    "a_233",
+    "a_251",
+    "a_255"
+  ],
+  "assistant_turns": 1424,
+  "unique_normalized_assistant_texts": 1421,
+  "family_counts": {
+    "correction": 195,
+    "memory": 44
+  },
+  "target_positions_single_policy": 29246,
+  "generation": {
+    "interface": "codex exec",
+    "requested_model": "gpt-6.1-terra",
+    "cli_version": "codex-cli 0.167.1",
+    "backend_routing_independently_verified": false,
+    "completed_cli_calls_including_planning_reviews_repairs": 96,
+    "configured_max_concurrent_cli": 2,
+    "max_generation_versions_per_scenario": 3,
+    "raw_text_preserved": true,
+    "tool_events": 0
+  },
+  "artifacts": {
+    "accepted": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/accepted.jsonl",
+      "sha256": "57bf61de1f3829617438a50dc8c0f49523270b317612c31147715b5e9b6e74a9"
+    },
+    "full_content_review": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/final-content-review-e50edbd7a805333c.json",
+      "sha256": "e50edbd7a805333c7ccb2fb5eeff2f1196a1d274a03c976459a7680d8dfcb9d7"
+    },
+    "validation": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/audit.json",
+      "sha256": "c15f6181ce8d17ef7f521bdfae1183e0d9375c0d3ae7aff41073331d9e202004"
+    },
+    "peer_support": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-c/a-support/manual-review-final.json",
+      "sha256": "9b87abeff7f53376216cde9949711677d450c5bd926b6de8834b7932f9925967"
+    },
+    "generation_revision_history": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/generation-revision-history-cd16eadcfbdaf406.json",
+      "sha256": "cd16eadcfbdaf4068b468fe7c65b4b9d3785bd959b0908c64fc6dccdf6489cca"
+    },
+    "memory_evidence": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/final-memory-evidence-859b494955551afa.json",
+      "sha256": "859b494955551afa55df0015d09e52d5c6ac190bc3a9c6ef13c87b7ace7102df"
+    },
+    "metadata_gate": {
+      "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-a/metadata-gate-receipt.json",
+      "sha256": "d10775f104096b782ab476d81356697bb94d56df303c431b08062a910987a288"
+    }
+  },
+  "checks": {
+    "native2048_both_policies_exact_prefix_and256reserve": "pass",
+    "max_context": 1751,
+    "max_prompt": 1724,
+    "max_reply_targets": 68,
+    "full_manual_content_inspection": "every delivered assistant target; exact content hashes",
+    "cold_review_binding": "pass per assistant turn and exact input digest",
+    "lexical_internal_5gram_threshold_035": 0,
+    "lexical_prior_candidates_threshold_035": 0,
+    "prior_candidate_count": 310,
+    "prior_candidate_file_sha256": "db6d8417041e5c2585751ee4c3f5a1b7603ca2718922943eac7d4e73bee1ead8",
+    "all_writers_joined": true,
+    "explicit_revision_counts": "all rows present, maximum 2",
+    "memory_probe_credit_count": 44,
+    "memory_integrity": "all239 passed selected_memory_integrity.verify_memory; false credit always null"
+  },
+  "protected": {
+    "gcp_operations": 0,
+    "vm_start": false,
+    "http_start": false,
+    "frozen_data_mutated": false,
+    "weights_mutated": false,
+    "shared_corpus_mutated": false,
+    "commits": 0
+  },
+  "limitations": [
+    "Candidates only; no training admission or model-quality claim.",
+    "Same requested model generated and cold-reviewed in separate CLI sessions; not independent release validation.",
+    "Earlier cold reviews included plans; every delivered target additionally received message-only manual inspection.",
+    "No 3K\u20134K claim: native2048 packet with reserved256 reply budget.",
+    "Lexical and plan screens are not exhaustive semantic decontamination; root owns global grouping/admission."
+  ],
+  "cli_event_receipts": [
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-replacement-fix-1-review.events.jsonl",
+      "sha256": "c4064bedea50fd45cdd27f5664da921644bb7afa50dcc37a6df1927b20a2fbbb"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-g0.events.jsonl",
+      "sha256": "0ceeae183728b7d27abc4bded9718250fd306196070f67b5bc8be361cccc03a8"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-r0.events.jsonl",
+      "sha256": "c48a0d3c9979011beeb3b5e7272c7631ff5bcdfdd5986436d2dbb630c2e43837"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-r0.events.jsonl",
+      "sha256": "437929c9b5fa114292a2b0ec675447d3ad1e8a1676a32457fd748b7ed2761e48"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-r2.events.jsonl",
+      "sha256": "44f21ba87f0e79b0d6f8778b52e725dfcefb2e74db0d976be9f8972917f46def"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-g0.events.jsonl",
+      "sha256": "91e00189486d65bfac4bf1494bdfc11e1300c6b3c6cbb3fc40a88dcd262a3367"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-g2.events.jsonl",
+      "sha256": "83653211298c5931ed8dc4d2d86b2deb2a9cf44cd47d78d298c117d6a023afe7"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-r0.events.jsonl",
+      "sha256": "b57be4b98906c53de3e51732cf657aaf05180f5eefbdfaea0337890915b7635f"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-g0.events.jsonl",
+      "sha256": "157168732b4a865f6998e5412f032900427bb56c4ff40cecdc905bb297e69184"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-replacement-fix-2-review.events.jsonl",
+      "sha256": "4311e473a52e3ea843236052a10bd47986fa6c7e37953657de306350abee4f24"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-r1-binding-retry-a_037.events.jsonl",
+      "sha256": "b26f94dd5b6b2c7389c348ac167bb01c187705fd8fc22fdc30fdf11a90be47b3"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-r1.events.jsonl",
+      "sha256": "6ab49099d71ccc76b55489e71d14816f2e3e07fa64df71fa10e0bc760aed6571"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-r1-binding-retry-a_229.events.jsonl",
+      "sha256": "465d2e2e07d53962502b6b35f95021a3aa427d6c5d4a0dca246b5d9655b38013"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-g2.events.jsonl",
+      "sha256": "744615d9846d393ddb5246ba66b8ce690535309f3f17fa2958dbfca0629925ff"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-r1.events.jsonl",
+      "sha256": "2ff2c57c926e3992938dc400b668bfdc9252054bf4326a7ffcf2974ad67b06c3"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-replacement-fix-2-generation.events.jsonl",
+      "sha256": "a8a58203312583f60c52f80fe9216669182d80c43530af63cf6a3c78658eca92"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-g1.events.jsonl",
+      "sha256": "6fc46abb80261cb29ac18a1fd31d94426ba6d2476629c5b1cd8325fed5838545"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-r2.events.jsonl",
+      "sha256": "1f5731729e3e45e62d88a1327f9fa29c944d0a63af3cddd0d3a0eb6dbe5ed932"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-g1.events.jsonl",
+      "sha256": "831963db73711d3679d33bed2e0f7e350c596143fded8ab74cdc3cfac5571be4"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-r1.events.jsonl",
+      "sha256": "34f47e499fb8f43bfa09985ebfc60b77d2085deddb9221b5a3a643d5b83d392c"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-g1.events.jsonl",
+      "sha256": "8bc22715304b491a4a682ffc18205b15d6657a6d0378608a2444f4890f4e44e6"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-r2.events.jsonl",
+      "sha256": "334e545259e2c4654ae063db6faad10f544b3d99cbbae963598ab3cab8e4fd37"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-r0.events.jsonl",
+      "sha256": "3598df02bd34c085b574f994fbfb44ef743c52798c715ea77804bb715ce885c8"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-r1.events.jsonl",
+      "sha256": "a38084f817ab5f16a7357a67a5f497220c0be035e572010e5f58a5b5708ff0ab"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-r1.events.jsonl",
+      "sha256": "952892aa17f7bad570ccae7f66e5f9f67cacbda3d5d576c2c4d81298be9fe8da"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-g1.events.jsonl",
+      "sha256": "1d68a16f9ec04d8a2a416bc5a78a99fa183851e4ad520fa0ca5183cd2e316e98"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-g2.events.jsonl",
+      "sha256": "a69376236be8830f82521109ff834c6bc81e965063a0327db66ef2702b69e232"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-g1.events.jsonl",
+      "sha256": "a9e18fcaaa8736ae7b4dfb0e234b85439987a7e2eef62db4d433b4f61db46c95"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-r0-binding-retry-a_113.events.jsonl",
+      "sha256": "f304057b6997a70e0a6f9013084c207ba56d7f28b0b4bf97a10f2175c54bc006"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-r1.events.jsonl",
+      "sha256": "d89405f1ba6723713450daf22ccbf5ef42a7872a92e72b275ceca501ce6550f8"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-r2.events.jsonl",
+      "sha256": "fc69086918ace1978835dd630de4afdb362b82225f9458e941a208cb96f9a168"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-r0-binding-retry-a_149.events.jsonl",
+      "sha256": "0d72a7d101d832ddf265d1f30751a28ea14d3a2f8edca1de0c5460d6c25bca9f"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-g2.events.jsonl",
+      "sha256": "b3d223fb0098d56789e8d78914ce6acb6bce645308ecfffd3c95b70bff9626cf"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-replacement-fix-1-generation.events.jsonl",
+      "sha256": "4a27ee1ba89a55150dbd37b8b49dd20ca7ac84d69d52172a1e26ddcf8133f99b"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-g1.events.jsonl",
+      "sha256": "28d5e70bf4e774e07cb44243206c1b3897d6bf67e590adb0e7fd1a7b0ec98ec2"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-g0.events.jsonl",
+      "sha256": "77ea4cdcf15f4c48bae44fa68c918edb19314365415a510f72c29b35b0c2c20a"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-g0.events.jsonl",
+      "sha256": "5383477ce821c792c98507db60ba407e437f565ce6e436c08ffd89203136d228"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-r0.events.jsonl",
+      "sha256": "9ebd52da10ef4af99efb86a58cfbb567de97412c8c046d6e12ef60fe092c29e1"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-r2.events.jsonl",
+      "sha256": "928faa029860e7b80d0eb671a76e47712b5f8e3a3a5a29f403515555a8fcc168"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-r0.events.jsonl",
+      "sha256": "771772461d4e2a02a4fd8ece879c5c674f1bdc7a87e7c2d28d0216c8b6de51fa"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-r1.events.jsonl",
+      "sha256": "b7f864a81ccec797d5dba6765efcb94302c4bd6c90d08c4203e4a90569d8d65f"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-g2.events.jsonl",
+      "sha256": "5c281b952852acf0e00015dfb1e6c6e68b277636fb8fe4571c226792adfcfdf3"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-g1.events.jsonl",
+      "sha256": "e767acbfe8e9aea224ca923c3fbe69602a2344ea7129e14c5ecc533c9af442ce"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-g0.events.jsonl",
+      "sha256": "9615f78418db5bb5d0f1de5780e018fd0f3d53fa17dba5de6dbdd219f3c5ba43"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-r0.events.jsonl",
+      "sha256": "19993137c0ec83f027685c2d9ed8f06c1249eefe2ded19e4f3c72e32607fe894"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-g0.events.jsonl",
+      "sha256": "232e7847260a9bbc207ac90c0a3b61083fc6bc7d6964350242ffbf4ca3d6ad27"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-r1-binding-retry-a_087.events.jsonl",
+      "sha256": "d70a4b2f0de608180061f402d97f7aada03929eb851c687693426b1b44d8d4d0"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-g1.events.jsonl",
+      "sha256": "eb199e0c52b3446ae4a67b18deabbbeef67c0948de291a92f856ea8b9d35778e"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-r2.events.jsonl",
+      "sha256": "4c721bc7d587c883e6a948e4732011831f9b48ec4639418c34330efefef075d5"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-g2.events.jsonl",
+      "sha256": "a250b538dfa8276d4064f1b000905e6e2909f0a2fb61228f32643088583d1cdf"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-r2.events.jsonl",
+      "sha256": "5893331ca6fd2456a6c223ae0623e9f221a2d79c05991263a6ed46c1eb008625"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-r1.events.jsonl",
+      "sha256": "da73bc11161bcea0efc3acefa61075e46922c2451de91ec57f8857fae36710c7"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-r0.events.jsonl",
+      "sha256": "f7c64b14342c4fe7f08698d6f8b617eab891fde15f9be769deef94a0ed8b0207"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b10-g2.events.jsonl",
+      "sha256": "27a3f0448e433eeeb0ef854eb7ee181af07a6c5269ef52117b48eaa3b581c01a"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-g0.events.jsonl",
+      "sha256": "dda1285eb7f011a6174285223042427bee2d20ac97229fb12afe06418c69e970"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-g1.events.jsonl",
+      "sha256": "a694b8de026c7f48dac4b9b04fa569af479594af8a783bd51156e1435e9aba70"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-r1.events.jsonl",
+      "sha256": "2795b72a3d04c48915dd7a18ec5323452bf498ce4b776f0d633befee1c234d03"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b09-g2.events.jsonl",
+      "sha256": "2e63b4d378e8e91cd934172ced9b3f41718ce53a6d3542b6210251076a454665"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b06-r2.events.jsonl",
+      "sha256": "9f2998bd9e390ce98bc592585482df7078962b7e2beaa3616614aa5ec71b7933"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-r2.events.jsonl",
+      "sha256": "3772f5327db90814884022b78bf17a09aa91fbaa31d1dc3413c326caa08d2f6a"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-r1.events.jsonl",
+      "sha256": "22352f9971084641531f5cfc887c3b980156371b08115964336cd67828677e4c"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-c-fix-1-generation.events.jsonl",
+      "sha256": "7a47e5079d8a6eba35e64f6fba74b144e195f8316296e183107dd6c95f1e137c"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-r0.events.jsonl",
+      "sha256": "2ae20f752d185022dd165f7be7bcf9c349fffb1dcb9c38f8724620132acf8a36"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-g0.events.jsonl",
+      "sha256": "3895e34aaffec441ce2bf1986cf3882cddb22bd0bc95950b66a138d5a3cf1690"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-fix-1-review.events.jsonl",
+      "sha256": "94a3187f78dd9957962e4a5e80212f1ac9d9026660a3ac12a36ade69e99a2379"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-r0.events.jsonl",
+      "sha256": "3203b0d2a7be8cd168a0bcb8abcfec46ab776d0750d2a1df475c17e18fe665c0"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-fix-2-review.events.jsonl",
+      "sha256": "61ea674c0e09f8188bf8d3044fbb9afcf284c4c9e0c4d891e129200cc8fbfd5c"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b01-g2.events.jsonl",
+      "sha256": "6118b381579608e636c22a995163563ecf9e943bc0d076e115828cb6b292c507"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-fix-2-generation.events.jsonl",
+      "sha256": "7a095c24c7e04107b89463323ccf9d4e6969731ef585baf62cec5a80ef85c2a1"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b12-g0.events.jsonl",
+      "sha256": "b1aee4a3ce4d8db0cac89106843f352e557cd420fd9b8c1641fa8c914d04ae80"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b03-g1.events.jsonl",
+      "sha256": "f4d89e471c3ab1ea98a7e24eab4840345be915aecf490437840f1174109b0126"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-r1.events.jsonl",
+      "sha256": "e5926d30433dbd4d69e3d063a255c8bd7529283a8f8f64f45dfd7d1debe6e7ca"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b13-r0.events.jsonl",
+      "sha256": "256114e6fdd4a8fec5d8371cb2b0d7dbe5b7782239eae226b1c9bb00bfdae1e9"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-r1-binding-retry-a_032.events.jsonl",
+      "sha256": "a6e1d829edb9ce3d4e18384aa913e760d1e0f9695713b51d9fe1ac438bc7fd0e"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-fix-1-generation.events.jsonl",
+      "sha256": "7dd6eb2dc56c9c293346f59f2102611a4ba7536917a26b4b862e6d16ff2cd4b3"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-g0.events.jsonl",
+      "sha256": "fb89409dff941fb9a7ffe796e06b0a9fdcf3102ef0a57d69bf3a6c1e5512e497"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-r0.events.jsonl",
+      "sha256": "919634d1f2aebb743c5d86e0a5a057c42834ba2a210d1d69faa30ddc6cbd0ee4"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/manual-c-fix-1-review.events.jsonl",
+      "sha256": "b08f31a1434e2968f630ddda47b31239e2441b3ece73ba312ebd5f338aea8d0d"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b13-g0.events.jsonl",
+      "sha256": "e56fd7fbf2550806b0ef8bccb262f02980c0ed7d71d09e390da0de505afab442"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-g1.events.jsonl",
+      "sha256": "89b498fe5f4ab05a004e196e2712a84d2ae8cfc609bf57b39fd1a6bba696ac1b"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b04-r0-binding-retry-a_070.events.jsonl",
+      "sha256": "fedd73d5390cd03b34b2cca6129427edd109db8425f9a35db5ae8e4729074c65"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/planning.events.jsonl",
+      "sha256": "9fd6bfe8b19298cbb86736d52abf8d36f70678d70efd12b78e2fabdfbc0995c4"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-r2.events.jsonl",
+      "sha256": "0074cf17e7608407904bfdc9ab06af1faabb6122358cc8e46c59d22ad80b3dcc"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-g2.events.jsonl",
+      "sha256": "20e5f0be07727527158c5deeda5cfbdba79296f976e714f345a6b659389df1cd"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-g1.events.jsonl",
+      "sha256": "300afe41094992e264fc5cd1bf12dd4fb355d39a4183ad92dd1978401d23c61b"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b14-g0.events.jsonl",
+      "sha256": "2be78516559cc9d57c6813ea9b250eaf05ff1e4deb19eeb2d9a2e63dd06daa30"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b13-r1.events.jsonl",
+      "sha256": "c66ced88580282475a1364c5e062b77b0462783d8ca91e7f1d6bc0157f91b889"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-r0.events.jsonl",
+      "sha256": "045fe4d4e64fe7575a5d185aa580d97aa2688dd1ffae8c9b480f36cf5c918e3d"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-r2.events.jsonl",
+      "sha256": "08d40cbf3ea039196cadd09203f7111a94bd3c55bab53977df9dfcac5c001e0c"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b02-g0.events.jsonl",
+      "sha256": "90ee4166a1561b27dde3e911f9674c353b7dbeb9972a1b5f61ece40477565848"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b13-g1.events.jsonl",
+      "sha256": "84bf561721d9bcefa7f57b0fdc0ab02a1b9fe6025f6f5cdc7b4c8633df74ac66"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b11-g2.events.jsonl",
+      "sha256": "4019fe99c3d8e73f00b97f2b8a0ea357eb9b6ce41c38ade9389b8957e183c74d"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b08-g2.events.jsonl",
+      "sha256": "54019712f0521997a1f23072cc0dc55d670af4eb453659e753fb51a6c4876927"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b07-r2.events.jsonl",
+      "sha256": "277688a756ab2f911b442970a1d5e733e9c1f6d9ae25659de29fef0e39bfcbb1"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b14-r0.events.jsonl",
+      "sha256": "45b0dd3b6dd506ff740260f259f5e39f355a8964064746db399e36c3ef829e55"
+    },
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-a/b05-r1.events.jsonl",
+      "sha256": "3b0562a91713806c5a603da9ccc6fe69c70b63194c8192fbc240c319dbf43c09"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "properties": {
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "enum": [
+              "a_229"
+            ]
+          },
+          "content_sha256": {
+            "type": "string",
+            "enum": [
+              "364b9f62eb5567151dcdf5b13ac4f6557c28bceae289e162f4f81a737f58f0c7"
+            ]
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "revise",
+              "reject"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "turn_reviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "turn": {
+                  "type": "integer"
+                },
+                "decision": {
+                  "type": "string",
+                  "enum": [
+                    "pass",
+                    "fail"
+                  ]
+                },
+                "rationale": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "turn",
+                "decision",
+                "rationale"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "memory_annotation_valid": {
+            "type": "boolean"
+          },
+          "distinct_scenario": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "group",
+          "content_sha256",
+          "decision",
+          "reason",
+          "turn_reviews",
+          "memory_annotation_valid",
+          "distinct_scenario"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "reviews"
+  ],
+  "additionalProperties": false
+}

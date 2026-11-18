@@ -1,7 +1,9 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
 Updated18November2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: QUALIFICATION HOLD; VM/DISK RETIRED; NO ENGLISH PILOT
+CURRENT DECISION: PAUSED FOR USER REASSESSMENT; VM/DISK RETIRED; NO PILOT
+Next plan:reports/ganesh-next-training-plan-v3/PLAN.md supersedes earlier sequencing.
+User requested stop for tonight after commit/push; no automatic work pending.
 Goal: usable English conversation from Own weights, then maths/CBSE. No accepted
 model. The new approved $25 A100 attempt failed infrastructure qualification twice;
 no further retry or training is pending. Closeout evidence is authoritative in
@@ -11,25 +13,74 @@ Project inventory:0VMs/0disks. Compute/disk estimate$2.80; GCS/network and final
 invoice excluded. Cap was not exhausted. See cloud-closeout.json.
 Prior $40 campaign is closed separately. Do not reuse either launch request.
 
+CURRENT LOCAL TOOL DIAGNOSTIC — STOPPED; BOUNDED RCA COMPLETE
+User-stopped full suite remains37of48scenarios; all37 invalid/128tokens, zero native
+call starts. Authorized RCA added one same-prompt512-output probe and3native controls.
+512probe repeats identical first128tokens and remains invalid. Production calculate/
+convert controls terminate at13tokens but make no calls and answer incorrectly;
+greeting control also fails instruction. Exact Fit30 SFT dataset24sessions has zero
+tool-call/observation messages. Missing tool supervision and schema transfer are
+confirmed gaps; no evidence token-budget extension fixes them. Inputs242–249tokens
+fit native2048.4Kinput+4Koutput needs>=8192total; current8K is unqualified. No context
+change applied. See reports/ganesh-tool-crud-v1/RCA.md and rca-conclusions.json.
+Ten mocks/harness preserved;7scripted tests passed. No automatic full-suite resume.
+Next:versioned registry/structured-result training contract, reviewed executable
+lessons, tiny bounded tool fit before larger mixed pilot. No new GPU cap approved.
+No training, cloud/VM/HTTP start, database or weight/frozen-data changes; probesjoined.
+
+CURRENT REVIEWED EXTENSION — BASIC MATHS / DECISIONS / ORCHESTRATION
+User explicitly authorized basic maths authoring alongside English. Separate packet
+complete:67selected of72planned conversations/335assistant turns/11,720targets.
+Maths24/120turns;decisions24/120;orchestration19/95;5orchestration rejects retained
+as evidence, not counted. Full cold CLI per-turn, worker and root-agent reading;
+exact Codex CLI gpt-6.1-terra,up to6jobs,alljoined. No human-review claim.
+190exact maths calculations plus supplemental schedule/retry arithmetic replayed.
+Adverse verification findings fixed;8new mutation tests+29selection tests pass;
+frozen packet validator passes. Both native2K no-call modes/maxprompt1436+256reserve
+pass; no positive-tool,3K/4K or additional memory-qualification claim.
+Packet:runs/ganesh-foundations-extension-v1/reviewed-v1.jsonl
+SHA256:5fb9ef033f3eb8644d9a9a40b3ede612eb201c3cfe108bd7ed60d388cceee1df
+Report:reports/ganesh-foundations-extension-v1/RESULT.md and verification.json.
+Across separate packets:1,093candidate conversations/6,259turns. Existing1,026English
+packet remains byte-identical. Extension candidate-only; English remains primary.
+Curriculum grouping/balancing, admission and positive-tool coverage still outstanding.
+No training, VM/HTTP start, cloud operations or weight/frozen-data changes.
+
 CURRENT LOCAL SOURCING — LOCAL DISK ACTIVE; GCS MIGRATION PAUSED
 Latest user instruction is to use local disk for now. This supersedes the earlier
 post-auth migration/eviction request. Keep payloads local; auth alone triggers nothing.
 No new GPU cap, VM start, training, GCS upload or deletion in this sourcing task.
 reports/ganesh-english-sourcing-v1/STATUS.md and progress.json are current evidence.
-Existing115,086-row Smol shard verified;420candidate trajectories selected.60full
-source conversations/180assistant replies reviewed;10shortlisted.24original Codex
-trajectories/78replies authored and second-pass reviewed, not independent review.
-Combined34candidates/108turns/3727target positions; max context972. Both no-call
-policies serialize and match serving prefixes. No positive tool lessons in batch.
-1000-session target NOT complete; candidates NOT admitted. Editing45.6%of target
-mass; correction+memory8.0%. Expand breadth, do not inflate by replay. Limited
-lexical comparison against172exposed historical rows found no exact/fivegram>=.35
-matches; not full semantic decontamination. Frozen packet validator passes unchanged.
+LOCAL REVIEW MILESTONE COMPLETE:1,026selected conversations/5,924assistant turns/
+118,422supervised target positions;5,912distinct normalized assistant texts.
+Canonical packet:runs/ganesh-english-sourcing-v1/scale-1000/reviewed-1000-v1.jsonl
+SHA256:4c19b20fc0de517b5846c203c2d73864923e377085927267283acd52c06c0a8a
+See scale-1000/RESULT.md,selection-manifest.json,verification.json and supervision-analysis.json.
+306of310legacy candidates retained after fresh full-turn review;4defects excluded.
+720new conversations fully reviewed.815total CLI Terra,202earlier parent-authored,
+9public-source Smol synthetic; allsynthetic, provenance preserved. All new generation
+and revisions used exact Codex CLI gpt-6.1-terra; up to8parallel jobs; alljoined.
+CLI evidence binds requested model, not independently observed backend routing.
+401evidence-bound memory probes,2–6intervening exchanges. Content-only gaps33–195
+native tokens,median88; no3K/4K or demonstrated model-memory claim. Correction/memory
+70.9%target mass;14.4%replies start "you could": balance and style remain limitations.
+Adverse review repaired gates for mandatory cumulative revision histories, exact
+review inputs and explicit memory evidence.105targeted integrity/core tests pass;
+frozen validator passes327reference turns/109baseline reviews. Both native2K no-call
+modes pass every turn,maxprompt1765+256reserve=2021; maximum actual reply171targets.
+Final all-pairs lexical audit and172exposed comparators:0exact/0near at0.35. This is
+not exhaustive semantic/pretraining decontamination. Sealed release untouched.
+Legacy310payload byte-identical; selectedFit30 and servingSFT194 fully hashed and
+retained locally. Frozen data unchanged; no model evaluated, trained or accepted.
+Not training-admitted: source/scenario/template grouping, balanced curriculum/dev,
+quality-contract binding, production positive-tool coverage and protected release
+remain separate gates. Fresh GPU readiness and finite cap required before launch.
+Local disk remains authoritative; VM/HTTP off; no GCP operation in this task.
 Foundation metadata audit confirms ClimbMix as actual base source, not FineWeb.
 10.027Btargets prepared vs10.000Bconsumed;16.35%of pre-crop source tokens cropped.
 No causal conclusion from cropping. FineWeb overlap with prior stream UNKNOWN;
 19GBcompressed/31GBraw dedup index not restored locally. No new foundation admission.
-Five source revisions/cards pinned; maths catalogued only, training still deferred.
+Five source revisions/cards pinned; separate basic maths candidate extension reviewed; training still deferred.
 GCSdestination gs://forge-ownbase-a100-20261110/ganesh-english-sourcing-v1.
 Scoped migration prepared for~285MBpayloads plus compact evidence; five local
 corruption/mutation/eviction/dry-run tests pass; current local policy now also blocks
@@ -40,7 +91,8 @@ Commit preparation:538nano tests +5migration-policy tests pass; helper renamed
 nano_loop_harness.py for clean test discovery. Frozen staged hashes preserved.
 
 CURRENT RESEARCHED RECOMMENDATION — 18 NOV SECOND ADVERSE PASS
-reports/ganesh-action-plan-v2/PLAN.md is the current actionable recommendation.
+reports/ganesh-action-plan-v2/PLAN.md retains earlier research and controller details.
+Current sequencing is superseded by ganesh-next-training-plan-v3/PLAN.md.
 Distinguish infrastructure qualification, learning evidence and product acceptance.
 Preserve the frozen70-session comparison as a diagnostic; it is not a full English
 curriculum. Run it once after repairing actual launcher/controller timing, then

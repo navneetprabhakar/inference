@@ -1,0 +1,84 @@
+[
+  {
+    "conversation": {
+      "family": "planning",
+      "group": "orch_003",
+      "turns": [
+        {
+          "user": "We have 18 tasks for tomorrow's launch. Seven are finished, and those are the only tasks already assigned. How many are left to assign?",
+          "assistant": "There are 11 tasks left to assign."
+        },
+        {
+          "user": "Three of those depend on a vendor response that may not arrive today. How many can we assign now?",
+          "assistant": "You can assign the other 8 now, assuming they have no other blockers. Keep the 3 vendor-dependent tasks pending until you have the response."
+        },
+        {
+          "user": "Two people have equal capacity for those 8. What's a sensible starting split?",
+          "assistant": "Start with 4 tasks each, provided the tasks are roughly comparable in effort. Adjust if their complexity differs."
+        },
+        {
+          "user": "One task is a better fit for the second person. Move it in the proposed split.",
+          "assistant": "The proposed split becomes 3 tasks for the first person and 5 for the second."
+        },
+        {
+          "user": "Do we need a calculator or a scheduling tool to work that out?",
+          "assistant": "No. The arithmetic is straightforward, and the proposed allocation can be stated directly. A scheduling tool might help track the work later, but it isn't needed for this calculation."
+        },
+        {
+          "user": "The vendor hasn't responded by our assignment cutoff. Should we allocate the remaining three as ready work?",
+          "assistant": "Keep them marked as blocked rather than ready. You can identify potential owners, but wait for the vendor response and confirm any other dependencies before treating the tasks as ready."
+        }
+      ],
+      "author_review_notes": "The opening establishes that all unfinished tasks are unassigned. The allocation remains a proposal, and vendor-dependent work stays blocked at the cutoff.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "orch_003",
+        "content_sha256": "8356b8ea466a6e3f1498168f490c7b124b7675f9b34dab9a56dc14388c1e1eb9",
+        "decision": "revise",
+        "reason": "Turn 2 treats a vendor dependency as a reason tasks cannot be assigned. The dialogue establishes that the tasks depend on a response, not that ownership must wait. Revise turn 2 to distinguish assigning an owner from marking the tasks ready, and retain that distinction in later turns.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Correctly subtracts the seven assigned tasks from 18."
+          },
+          {
+            "turn": 2,
+            "decision": "fail",
+            "rationale": "Says to keep three tasks pending assignment until the vendor responds, although a dependency on a response does not establish that they cannot be assigned. Clarify whether assignment requires readiness, or state that all 11 can potentially be assigned while three remain blocked."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "A four-and-four starting split is sensible for eight tasks, with an appropriate effort caveat."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Correctly updates the proposed split to three and five without claiming to execute it."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Correctly explains that neither a calculator nor a scheduling tool is needed for the calculation."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Keeps the vendor-dependent tasks blocked while distinguishing potential ownership from readiness."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "orch_003",
+      "family": "planning",
+      "turns": 6,
+      "scenario": "simple mental calculation needs no tool"
+    }
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "goal": 1000,
+  "current_candidates": 310,
+  "minimum_new_before_existing_review_rejections": 690,
+  "generator_model": "gpt-6.1-terra",
+  "interface": "codex exec",
+  "max_parallel_cli_jobs": 8,
+  "revision_limit_per_scenario": 2,
+  "acceptance": [
+    "scenario plan before generation",
+    "exact raw provenance",
+    "fresh CLI review without generator notes",
+    "all assistant turns explicitly reviewed",
+    "no unresolved semantic or instruction errors",
+    "native2048 both no-call policies with256reply reserve",
+    "actual assistant replies<=256targets",
+    "no duplicate or cosmetic variant counting",
+    "no training admission or release claim"
+  ],
+  "scope": "English conversations, emphasis corrections/delayed memory with substantive dialogue; no maths expansion, positive tool lessons or cloud work",
+  "protected": "frozen data, all weights, VM/HTTP off; no GCP operations",
+  "staging_only": true,
+  "producer_allocations": {
+    "worker-a": 240,
+    "worker-b": 240,
+    "root": 210
+  },
+  "existing_review": "worker-c reviews all310, flags removals or repairs; root produces replacements as necessary",
+  "state": "running",
+  "status": "complete_local_candidate_review",
+  "training_admitted": false,
+  "selected_payload_sha256": "4c19b20fc0de517b5846c203c2d73864923e377085927267283acd52c06c0a8a"
+}

@@ -1,0 +1,107 @@
+{
+  "group": "c_replace_015",
+  "family": "grounding",
+  "messages": [
+    {
+      "role": "user",
+      "content": "A fictional card says: “All the small envelopes contain invitations. Some invitations are printed on cream paper.” Must a small envelope contain a cream invitation?"
+    },
+    {
+      "role": "assistant",
+      "content": "No. The cream invitations could be elsewhere; the card doesn't say where they are."
+    },
+    {
+      "role": "user",
+      "content": "What does it establish about each small envelope?"
+    },
+    {
+      "role": "assistant",
+      "content": "Each small envelope contains invitations. It doesn't specify their paper colour."
+    },
+    {
+      "role": "user",
+      "content": "So could all the invitations in small envelopes be white?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, provided the cream invitations are elsewhere."
+    },
+    {
+      "role": "user",
+      "content": "Could one of the small envelopes have a cream invitation instead?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes. That's possible, but the card doesn't require it."
+    },
+    {
+      "role": "user",
+      "content": "I'm writing a summary: “Small envelopes contain cream invitations.” Is that too strong?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes. It presents an overlap as a fact when the card only allows it as a possibility."
+    },
+    {
+      "role": "user",
+      "content": "What if I write “Small envelopes contain invitations, some of which are cream”?"
+    },
+    {
+      "role": "assistant",
+      "content": "That still suggests some invitations in the small envelopes are cream. The card doesn't establish that."
+    },
+    {
+      "role": "user",
+      "content": "Can you help me keep the two facts separate?"
+    },
+    {
+      "role": "assistant",
+      "content": "You could write: “All small envelopes contain invitations. Some invitations are on cream paper.”"
+    },
+    {
+      "role": "user",
+      "content": "Add a short note explaining why I shouldn't combine them."
+    },
+    {
+      "role": "assistant",
+      "content": "“All small envelopes contain invitations. Some invitations are on cream paper.”\n\nThe card doesn't say whether any cream invitations are in the small envelopes."
+    }
+  ],
+  "recall_probe": null,
+  "generation": {
+    "interface": "codex exec",
+    "requested_model": "gpt-6.1-terra",
+    "cli_version": "codex-cli 0.167.1",
+    "raw_artifact": "runs/ganesh-english-sourcing-v1/scale-1000/worker-c/replacements/c015-text-g2.raw.json",
+    "raw_sha256": "d1f2c2cdd17b140e9843b9634b06af63dc71914c28097831cdee3ee35cd973d8"
+  },
+  "review_receipts": [
+    {
+      "path": "runs/ganesh-english-sourcing-v1/scale-1000/worker-c/replacements/c015-text-r2.raw.json",
+      "sha256": "30553e7b4ecc35a68ea44be08981c771a80b15122c1326cf1628d12f946a1188"
+    }
+  ],
+  "plan_receipt": {
+    "path": "reports/ganesh-english-sourcing-v1/scale-1000/worker-c/replacements/b02.plan.json",
+    "sha256": "1dff4154b28038ca775758252dd615eea5fd18ab233507d4f06829382fc94501"
+  },
+  "content_sha256": "5438db20c5c92e8057885489ffc45b9224963e1f8995df9b7b09821e2607821e",
+  "training_admitted": false,
+  "independent_release_review": false,
+  "encoding": [
+    {
+      "tools_enabled": false,
+      "tokens": 1012,
+      "assistant_targets": 162
+    },
+    {
+      "tools_enabled": true,
+      "tokens": 1748,
+      "assistant_targets": 162
+    }
+  ],
+  "max_generation_prompt": 1712,
+  "max_reply_targets": 36,
+  "reply_budget": 256,
+  "manual_revision": "second and final allowed repair; messages-only coldpass"
+}

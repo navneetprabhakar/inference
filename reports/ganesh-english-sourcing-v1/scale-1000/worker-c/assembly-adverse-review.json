@@ -1,0 +1,77 @@
+{
+  "mode": "read-only review; root owns fixes",
+  "findings": [
+    {
+      "id": "M1",
+      "priority": "P1",
+      "file": "verify_selection.py",
+      "lines": [
+        34,
+        47
+      ],
+      "issue": "Recall annotation not bound to exact raw generation or explicit corrected-annotation receipt; nonmemory cold-review N/A flags can authorize fabricated memory credit.",
+      "reproduction": "In-memory c_replace_001 raw recall_probe=null changed to support1/probe4/focus invented user preference; memory_probe_credit=true. verify_new and verify_full_content both returned4. No source artifact changed.",
+      "remediation": "Require exact selected annotation binding and semantic-valid evidence; verify credit derives from that evidence and recheck focus, bounds and >=2gap. Explicitly refuse promotion of null original probe without separate reviewed annotation receipt."
+    },
+    {
+      "id": "L1",
+      "priority": "P1",
+      "file": "verify_selection.py",
+      "lines": [
+        123,
+        127
+      ],
+      "issue": "Standalone verification reads mutable worker-c/selection-receipt.json rather than row-pinned fresh_selection_receipt and does not validate memory_review_receipt/credit.",
+      "remediation": "Load row pinned receipt by path+SHA and match selected entry plus annotation object; reject mutated credit/fields and missing evidence."
+    },
+    {
+      "id": "R1",
+      "priority": "P2",
+      "file": "verify_selection.py",
+      "lines": [
+        40,
+        43
+      ],
+      "issue": "List-form review_receipts check hash and turn indices but not pass decision, rationale or assistant turn count.",
+      "remediation": "Require exact pass decision/count/rationale; failed/exclude list entry must not be silently accepted alongside dict pass."
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "file": "verify_selection.py",
+      "lines": [
+        37,
+        58
+      ],
+      "issue": "Cold review JSON is hash-checked but CLI events/request/freshness/model/tool policy and messages-only review are not enforced.",
+      "remediation": "Verify review call event/request sidecars and output equivalence as for generation; require at least one qualifying fresh messages-only cold review for final content."
+    },
+    {
+      "id": "B1",
+      "priority": "P2",
+      "file": "verify_selection.py",
+      "lines": [
+        76
+      ],
+      "issue": "Revision cap enforced only if optional total_generation_revisions is present; omission bypasses it.",
+      "remediation": "Require explicit count with generation-history chain or pinned supplemental ledger, reject unknown count or >2."
+    },
+    {
+      "id": "P1",
+      "priority": "P1",
+      "file": "verify_selection.py",
+      "lines": [
+        125,
+        127
+      ],
+      "issue": "Legacy selected rows bind messages but not source/provenance/generation metadata to immutable baseline; old parent-authored row can be relabelled exact CLI model and analyze_selection will count that label.",
+      "remediation": "Compare immutable baseline provenance keys for legacy records; allow only enumerated new selection/annotation fields."
+    }
+  ],
+  "not_findings": [
+    "Native tokenizer checks include both policies, actual reply targets, prefix identity and reserved context.",
+    "Overlap tool accurately limits claims to lexical screen and uses only exposed comparators.",
+    "Assembly enforces immutable versioned output bytes and production/training/model-quality flags remain false."
+  ],
+  "remaining": "Parent fixes and regression rejection checks; report does not claim these issues remain after later edits."
+}

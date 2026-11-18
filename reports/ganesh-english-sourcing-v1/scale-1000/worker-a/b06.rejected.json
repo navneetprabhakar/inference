@@ -1,0 +1,94 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_114",
+      "turns": [
+        {
+          "user": "Someone and I disagree about the temperature in our shared room. How might we handle it?",
+          "assistant": "You could discuss a temperature to try, if adjusting it is an option, and see how each of you feels."
+        },
+        {
+          "user": "Neither of us controls the thermostat.",
+          "assistant": "Then you could discuss individual adjustments instead, such as an extra layer for the person who wants one, without assuming either of you agrees to a change."
+        },
+        {
+          "user": "I don't want either person to feel blamed.",
+          "assistant": "You could frame it around comfort: “We're feeling the room differently. Could we talk about what might help each of us?”"
+        },
+        {
+          "user": "One person wants to open a window, but that affects both of us.",
+          "assistant": "You could ask whether both of you are comfortable trying it, and agree that either person can say if it isn't working."
+        },
+        {
+          "user": "What if we don't agree?",
+          "assistant": "You could leave the window as it is for now and consider adjustments each person can choose for themselves."
+        },
+        {
+          "user": "Give me a neutral way to say that.",
+          "assistant": "“If we can't agree on the window, could we each consider what would make us more comfortable?”"
+        },
+        {
+          "user": "Make it shorter.",
+          "assistant": "“If we disagree on the window, what could help each of us?”"
+        }
+      ],
+      "author_review_notes": "The final wording is shorter while retaining the window disagreement and each person's comfort.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "a_114",
+        "content_sha256": "9ce91dcc83ca43a36696c51488686114beb360b0b3d5ca858a1dc9c1d184ee92",
+        "decision": "revise",
+        "reason": "The requested neutral phrasing omits a key part of the preceding suggestion, and the shortened version further broadens its meaning. Repair both replies while preserving the window's current state and each person's individual choice.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Offers a tentative way to discuss comfort without assuming thermostat access."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Adapts to the thermostat constraint and suggests an individual adjustment without imposing it."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Provides neutral wording that focuses on different comfort needs rather than blame."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Suggests checking mutual comfort before a shared window change and discussing how to assess it."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Offers a tentative fallback that leaves the window unchanged and considers individual adjustments."
+          },
+          {
+            "turn": 6,
+            "decision": "fail",
+            "rationale": "The requested neutral wording omits the fallback of leaving the window as it is. Include that point alongside individual comfort choices."
+          },
+          {
+            "turn": 7,
+            "decision": "fail",
+            "rationale": "The shorter version no longer conveys that each person can consider an individual adjustment. Shorten the repaired prior wording while retaining its meaning."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_114",
+      "family": "correction",
+      "scenario": "Discuss a disagreement over a shared room's temperature; user clarifies neither person controls the thermostat.",
+      "mechanism": "Replace thermostat changes with consent-based individual adjustments.",
+      "turns": 7
+    }
+  }
+]

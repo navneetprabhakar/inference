@@ -1,0 +1,89 @@
+[
+  {
+    "conversation": {
+      "family": "memory",
+      "group": "a_093",
+      "turns": [
+        {
+          "user": "In my fantasy library, books cannot leave the building.",
+          "assistant": "That rule could make the library a place where readers linger and stories unfold inside."
+        },
+        {
+          "user": "What is the librarian like?",
+          "assistant": "Perhaps she's patient with readers but firm about the library's rules."
+        },
+        {
+          "user": "Describe the shelves.",
+          "assistant": "Tall wooden shelves curve around the reading room, with narrow ladders between them."
+        },
+        {
+          "user": "What light fills the room?",
+          "assistant": "Warm lamplight pools on the tables while the upper shelves remain dim."
+        },
+        {
+          "user": "Suggest a plot for this setting.",
+          "assistant": "A reader finds a hidden message in a book. Because the book cannot leave the building, they must return to the library to decipher it, perhaps with the librarian's help."
+        },
+        {
+          "user": "What could the message point toward?",
+          "assistant": "Perhaps a particular shelf conceals a second message, leading them deeper into the building."
+        }
+      ],
+      "author_review_notes": "Turn 1 is the latest support; turns 2–4 intervene before the plot, which explicitly depends on the restriction.",
+      "recall_probe": {
+        "support_turn": 1,
+        "probe_turn": 5,
+        "focus": "Books cannot leave the library building."
+      }
+    },
+    "defects": [
+      {
+        "group": "a_093",
+        "content_sha256": "6d0f9f7a6f5e3bd3ffb947cc4d75c82bc0e7b00a7f4e2fb1b1db7439d920a97c",
+        "decision": "revise",
+        "reason": "The plot assumes the reader must return to decipher the message, although the reader could decipher it during the current visit. Revise the plot to make a return an optional story choice or establish a reason for leaving first.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Builds on the library rule as a tentative setting idea."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Offers a tentative librarian characterization consistent with the rule."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Describes shelves appropriate to the imagined library."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Adds a concise description of the room's lighting."
+          },
+          {
+            "turn": 5,
+            "decision": "fail",
+            "rationale": "The book's inability to leave does not establish that the reader must return; they could decipher the message during the current visit. Make the return optional or provide a reason for it."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Offers a tentative continuation of the hidden-message plot."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_093",
+      "family": "memory",
+      "scenario": "Imagine a library in a fantasy story where books cannot leave the building; discuss the librarian and shelves before proposing a plot.",
+      "mechanism": "Keep the plot within the lending rule after two exchanges.",
+      "turns": 6
+    }
+  }
+]

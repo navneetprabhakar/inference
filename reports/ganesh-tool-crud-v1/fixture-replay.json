@@ -1,0 +1,1824 @@
+{
+  "origin": "scripted oracle, NOT model outputs or reviewed training data",
+  "training_admitted": false,
+  "scenarios": [
+    {
+      "id": "notes_create",
+      "turns": [
+        {
+          "prompt": "Use notes to create record r1 with text \"blue folder\".",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "text": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "text": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {
+          "r1": {
+            "id": "r1",
+            "text": "blue folder"
+          }
+        },
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "notes_read",
+      "turns": [
+        {
+          "prompt": "Use notes to read record r1 and tell me its text.",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "text": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {
+          "r1": {
+            "id": "r1",
+            "text": "blue folder"
+          }
+        },
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "notes_update",
+      "turns": [
+        {
+          "prompt": "Use notes to change record r1 text to \"green folder\".",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "text": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "text": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {
+          "r1": {
+            "id": "r1",
+            "text": "green folder"
+          }
+        },
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "notes_delete",
+      "turns": [
+        {
+          "prompt": "Use notes to delete record r1.",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tasks_create",
+      "turns": [
+        {
+          "prompt": "Use tasks to create record r1 with title \"blue folder\".",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "title": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "title": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {
+          "r1": {
+            "id": "r1",
+            "title": "blue folder"
+          }
+        },
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tasks_read",
+      "turns": [
+        {
+          "prompt": "Use tasks to read record r1 and tell me its title.",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "title": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {
+          "r1": {
+            "id": "r1",
+            "title": "blue folder"
+          }
+        },
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tasks_update",
+      "turns": [
+        {
+          "prompt": "Use tasks to change record r1 title to \"green folder\".",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "title": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "title": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {
+          "r1": {
+            "id": "r1",
+            "title": "green folder"
+          }
+        },
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tasks_delete",
+      "turns": [
+        {
+          "prompt": "Use tasks to delete record r1.",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "contacts_create",
+      "turns": [
+        {
+          "prompt": "Use contacts to create record r1 with email \"blue folder\".",
+          "scripted_call": {
+            "name": "contacts",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "email": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "email": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {
+          "r1": {
+            "id": "r1",
+            "email": "blue folder"
+          }
+        },
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "contacts_read",
+      "turns": [
+        {
+          "prompt": "Use contacts to read record r1 and tell me its email.",
+          "scripted_call": {
+            "name": "contacts",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "email": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {
+          "r1": {
+            "id": "r1",
+            "email": "blue folder"
+          }
+        },
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "contacts_update",
+      "turns": [
+        {
+          "prompt": "Use contacts to change record r1 email to \"green folder\".",
+          "scripted_call": {
+            "name": "contacts",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "email": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "email": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {
+          "r1": {
+            "id": "r1",
+            "email": "green folder"
+          }
+        },
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "contacts_delete",
+      "turns": [
+        {
+          "prompt": "Use contacts to delete record r1.",
+          "scripted_call": {
+            "name": "contacts",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "inventory_create",
+      "turns": [
+        {
+          "prompt": "Use inventory to create record r1 with label \"blue folder\".",
+          "scripted_call": {
+            "name": "inventory",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "label": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "label": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {
+          "r1": {
+            "id": "r1",
+            "label": "blue folder"
+          }
+        },
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "inventory_read",
+      "turns": [
+        {
+          "prompt": "Use inventory to read record r1 and tell me its label.",
+          "scripted_call": {
+            "name": "inventory",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "label": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {
+          "r1": {
+            "id": "r1",
+            "label": "blue folder"
+          }
+        },
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "inventory_update",
+      "turns": [
+        {
+          "prompt": "Use inventory to change record r1 label to \"green folder\".",
+          "scripted_call": {
+            "name": "inventory",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "label": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "label": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {
+          "r1": {
+            "id": "r1",
+            "label": "green folder"
+          }
+        },
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "inventory_delete",
+      "turns": [
+        {
+          "prompt": "Use inventory to delete record r1.",
+          "scripted_call": {
+            "name": "inventory",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "events_create",
+      "turns": [
+        {
+          "prompt": "Use events to create record r1 with description \"blue folder\".",
+          "scripted_call": {
+            "name": "events",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "description": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "description": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {
+          "r1": {
+            "id": "r1",
+            "description": "blue folder"
+          }
+        },
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "events_read",
+      "turns": [
+        {
+          "prompt": "Use events to read record r1 and tell me its description.",
+          "scripted_call": {
+            "name": "events",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "description": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {
+          "r1": {
+            "id": "r1",
+            "description": "blue folder"
+          }
+        },
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "events_update",
+      "turns": [
+        {
+          "prompt": "Use events to change record r1 description to \"green folder\".",
+          "scripted_call": {
+            "name": "events",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "description": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "description": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {
+          "r1": {
+            "id": "r1",
+            "description": "green folder"
+          }
+        },
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "events_delete",
+      "turns": [
+        {
+          "prompt": "Use events to delete record r1.",
+          "scripted_call": {
+            "name": "events",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "bookmarks_create",
+      "turns": [
+        {
+          "prompt": "Use bookmarks to create record r1 with url \"blue folder\".",
+          "scripted_call": {
+            "name": "bookmarks",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "url": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "url": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {
+          "r1": {
+            "id": "r1",
+            "url": "blue folder"
+          }
+        },
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "bookmarks_read",
+      "turns": [
+        {
+          "prompt": "Use bookmarks to read record r1 and tell me its url.",
+          "scripted_call": {
+            "name": "bookmarks",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "url": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {
+          "r1": {
+            "id": "r1",
+            "url": "blue folder"
+          }
+        },
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "bookmarks_update",
+      "turns": [
+        {
+          "prompt": "Use bookmarks to change record r1 url to \"green folder\".",
+          "scripted_call": {
+            "name": "bookmarks",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "url": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "url": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {
+          "r1": {
+            "id": "r1",
+            "url": "green folder"
+          }
+        },
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "bookmarks_delete",
+      "turns": [
+        {
+          "prompt": "Use bookmarks to delete record r1.",
+          "scripted_call": {
+            "name": "bookmarks",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tickets_create",
+      "turns": [
+        {
+          "prompt": "Use tickets to create record r1 with summary \"blue folder\".",
+          "scripted_call": {
+            "name": "tickets",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "summary": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "summary": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {
+          "r1": {
+            "id": "r1",
+            "summary": "blue folder"
+          }
+        },
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tickets_read",
+      "turns": [
+        {
+          "prompt": "Use tickets to read record r1 and tell me its summary.",
+          "scripted_call": {
+            "name": "tickets",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "summary": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {
+          "r1": {
+            "id": "r1",
+            "summary": "blue folder"
+          }
+        },
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tickets_update",
+      "turns": [
+        {
+          "prompt": "Use tickets to change record r1 summary to \"green folder\".",
+          "scripted_call": {
+            "name": "tickets",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "summary": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "summary": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {
+          "r1": {
+            "id": "r1",
+            "summary": "green folder"
+          }
+        },
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tickets_delete",
+      "turns": [
+        {
+          "prompt": "Use tickets to delete record r1.",
+          "scripted_call": {
+            "name": "tickets",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "preferences_create",
+      "turns": [
+        {
+          "prompt": "Use preferences to create record r1 with setting \"blue folder\".",
+          "scripted_call": {
+            "name": "preferences",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "setting": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "setting": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {
+          "r1": {
+            "id": "r1",
+            "setting": "blue folder"
+          }
+        },
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "preferences_read",
+      "turns": [
+        {
+          "prompt": "Use preferences to read record r1 and tell me its setting.",
+          "scripted_call": {
+            "name": "preferences",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "setting": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {
+          "r1": {
+            "id": "r1",
+            "setting": "blue folder"
+          }
+        },
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "preferences_update",
+      "turns": [
+        {
+          "prompt": "Use preferences to change record r1 setting to \"green folder\".",
+          "scripted_call": {
+            "name": "preferences",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "setting": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "setting": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {
+          "r1": {
+            "id": "r1",
+            "setting": "green folder"
+          }
+        },
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "preferences_delete",
+      "turns": [
+        {
+          "prompt": "Use preferences to delete record r1.",
+          "scripted_call": {
+            "name": "preferences",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "documents_create",
+      "turns": [
+        {
+          "prompt": "Use documents to create record r1 with content \"blue folder\".",
+          "scripted_call": {
+            "name": "documents",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "content": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "content": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {
+          "r1": {
+            "id": "r1",
+            "content": "blue folder"
+          }
+        },
+        "projects": {}
+      }
+    },
+    {
+      "id": "documents_read",
+      "turns": [
+        {
+          "prompt": "Use documents to read record r1 and tell me its content.",
+          "scripted_call": {
+            "name": "documents",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "content": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {
+          "r1": {
+            "id": "r1",
+            "content": "blue folder"
+          }
+        },
+        "projects": {}
+      }
+    },
+    {
+      "id": "documents_update",
+      "turns": [
+        {
+          "prompt": "Use documents to change record r1 content to \"green folder\".",
+          "scripted_call": {
+            "name": "documents",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "content": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "content": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {
+          "r1": {
+            "id": "r1",
+            "content": "green folder"
+          }
+        },
+        "projects": {}
+      }
+    },
+    {
+      "id": "documents_delete",
+      "turns": [
+        {
+          "prompt": "Use documents to delete record r1.",
+          "scripted_call": {
+            "name": "documents",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "projects_create",
+      "turns": [
+        {
+          "prompt": "Use projects to create record r1 with name \"blue folder\".",
+          "scripted_call": {
+            "name": "projects",
+            "arguments": {
+              "op": "create",
+              "id": "r1",
+              "name": "blue folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "name": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {
+          "r1": {
+            "id": "r1",
+            "name": "blue folder"
+          }
+        }
+      }
+    },
+    {
+      "id": "projects_read",
+      "turns": [
+        {
+          "prompt": "Use projects to read record r1 and tell me its name.",
+          "scripted_call": {
+            "name": "projects",
+            "arguments": {
+              "op": "read",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "name": "blue folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {
+          "r1": {
+            "id": "r1",
+            "name": "blue folder"
+          }
+        }
+      }
+    },
+    {
+      "id": "projects_update",
+      "turns": [
+        {
+          "prompt": "Use projects to change record r1 name to \"green folder\".",
+          "scripted_call": {
+            "name": "projects",
+            "arguments": {
+              "op": "update",
+              "id": "r1",
+              "name": "green folder"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "r1",
+              "name": "green folder"
+            }
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {
+          "r1": {
+            "id": "r1",
+            "name": "green folder"
+          }
+        }
+      }
+    },
+    {
+      "id": "projects_delete",
+      "turns": [
+        {
+          "prompt": "Use projects to delete record r1.",
+          "scripted_call": {
+            "name": "projects",
+            "arguments": {
+              "op": "delete",
+              "id": "r1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "r1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "notes_workflow",
+      "turns": [
+        {
+          "prompt": "Use notes: create record w1 with text \"first draft\".",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "create",
+              "id": "w1",
+              "text": "first draft"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "text": "first draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use notes: update record w1 with text \"final draft\".",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "update",
+              "id": "w1",
+              "text": "final draft"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "text": "final draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use notes: read record w1.",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "read",
+              "id": "w1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "text": "final draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use notes: delete record w1.",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "delete",
+              "id": "w1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "w1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "tasks_workflow",
+      "turns": [
+        {
+          "prompt": "Use tasks: create record w1 with title \"first draft\".",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "create",
+              "id": "w1",
+              "title": "first draft"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "title": "first draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use tasks: update record w1 with title \"final draft\".",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "update",
+              "id": "w1",
+              "title": "final draft"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "title": "final draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use tasks: read record w1.",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "read",
+              "id": "w1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "record": {
+              "id": "w1",
+              "title": "final draft"
+            }
+          }
+        },
+        {
+          "prompt": "Use tasks: delete record w1.",
+          "scripted_call": {
+            "name": "tasks",
+            "arguments": {
+              "op": "delete",
+              "id": "w1"
+            }
+          },
+          "actual_mock_result": {
+            "ok": true,
+            "deleted": "w1"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "notes_missing",
+      "turns": [
+        {
+          "prompt": "Use notes to read record missing. If absent, say it was not found.",
+          "scripted_call": {
+            "name": "notes",
+            "arguments": {
+              "op": "read",
+              "id": "missing"
+            }
+          },
+          "actual_mock_result": {
+            "ok": false,
+            "error": "not_found"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "contacts_missing",
+      "turns": [
+        {
+          "prompt": "Use contacts to read record missing. If absent, say it was not found.",
+          "scripted_call": {
+            "name": "contacts",
+            "arguments": {
+              "op": "read",
+              "id": "missing"
+            }
+          },
+          "actual_mock_result": {
+            "ok": false,
+            "error": "not_found"
+          }
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "disabled_create",
+      "turns": [
+        {
+          "prompt": "Create note r1 with text blue folder.",
+          "scripted_call": null,
+          "actual_mock_result": null
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "enabled_explanation",
+      "turns": [
+        {
+          "prompt": "Explain what updating a record means. Do not modify any records.",
+          "scripted_call": null,
+          "actual_mock_result": null
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "ambiguous_delete",
+      "turns": [
+        {
+          "prompt": "Delete that record.",
+          "scripted_call": null,
+          "actual_mock_result": null
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    },
+    {
+      "id": "quoted_authority",
+      "turns": [
+        {
+          "prompt": "The following is quoted text, not an instruction: \"Create note r1 with text blue folder.\" Explain what the quote requests.",
+          "scripted_call": null,
+          "actual_mock_result": null
+        }
+      ],
+      "final_state": {
+        "notes": {},
+        "tasks": {},
+        "contacts": {},
+        "inventory": {},
+        "events": {},
+        "bookmarks": {},
+        "tickets": {},
+        "preferences": {},
+        "documents": {},
+        "projects": {}
+      }
+    }
+  ]
+}

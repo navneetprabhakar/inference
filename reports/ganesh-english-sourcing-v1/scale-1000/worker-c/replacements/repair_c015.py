@@ -1,0 +1,9 @@
+import importlib.util,json
+from pathlib import Path
+p=Path(__file__).with_name('run_worker.py');spec=importlib.util.spec_from_file_location('replacement_worker',p);w=importlib.util.module_from_spec(spec);spec.loader.exec_module(w)
+rows=[json.loads(l) for l in (w.R/'selected-input.jsonl').read_text().splitlines()];old=next(r for r in rows if r['group']=='c_replace_015');plan=next(p for p in json.loads((w.R/'scenario-plan.json').read_text())['plans'] if p['group']==old['group']);source=json.loads((w.ROOT/old['generation']['raw_artifact']).read_text());c=next(c for c in source['conversations'] if c['group']==old['group'])
+prompt=w.RULES+'\nFINAL allowed repair (second total for this scenario). Keep ALL existing turn1–7 and turn8user EXACT, revise ONLY last assistant reply. User asks ADD a short note to previous two-fact summary; avoid ambiguity by returning that summary together with short note explaining why the sets cannot be combined. Preserve factual distinctions, no new claims. Return exactly one complete conversation.\n'+json.dumps(c,ensure_ascii=False)
+d,raw=w.cli('c015-text-g2',prompt,w.GEN_SCHEMA);newc=d['conversations'][0];assert newc['turns'][:-1]==c['turns'][:-1];assert newc['turns'][-1]['user']==c['turns'][-1]['user'];err,enc=w.validate(newc,plan);assert not err,err
+rev,rp=w.review('c015-text-r2',[newc],{newc['group']:plan});rr=rev[newc['group']];assert rr['decision']=='accept' and all(t['decision']=='pass' for t in rr['turn_reviews']),rr
+new=dict(old,messages=w.messages(newc),content_sha256=w.digest(w.messages(newc)),generation={'interface':'codex exec','requested_model':'gpt-6.1-terra','cli_version':'codex-cli 0.167.1','raw_artifact':str(raw.relative_to(w.ROOT)),'raw_sha256':w.sha(raw)},review_receipts=[{'path':str(rp.relative_to(w.ROOT)),'sha256':w.sha(rp)}],manual_revision='second and final allowed repair; messages-only coldpass',**enc)
+w.write(w.R/'c015-selected.json',new);print('c015repairedandtextreviewed',flush=True)

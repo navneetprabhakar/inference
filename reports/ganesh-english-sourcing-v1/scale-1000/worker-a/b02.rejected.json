@@ -1,0 +1,176 @@
+[
+  {
+    "conversation": {
+      "family": "memory",
+      "group": "a_023",
+      "turns": [
+        {
+          "user": "Help me prepare a short spoken introduction. No jokes, please.",
+          "assistant": "What is the introduction for?"
+        },
+        {
+          "user": "It's for a neighborhood book club.",
+          "assistant": "You could welcome everyone and briefly explain what the club does."
+        },
+        {
+          "user": "The audience is a mix of new and returning members.",
+          "assistant": "A welcome that names both groups could make the opening feel inclusive."
+        },
+        {
+          "user": "It should take about 20 seconds.",
+          "assistant": "There's room for a welcome, one sentence about the club and a transition into the meeting."
+        },
+        {
+          "user": "We discuss one book each month.",
+          "assistant": "You could say, “Each month, we gather to discuss one book.” It's direct and easy to say aloud."
+        },
+        {
+          "user": "Write it now, and suggest an opening line that might get a laugh.",
+          "assistant": "You asked for no jokes earlier. Would you like a lighthearted opening that might get a laugh, or should I keep the introduction entirely straight?"
+        }
+      ],
+      "author_review_notes": "The final request creates tension with the earlier no-jokes constraint, so the assistant asks how to reconcile them.",
+      "recall_probe": {
+        "support_turn": 1,
+        "probe_turn": 6,
+        "focus": "No jokes in the spoken introduction."
+      }
+    },
+    "defects": [
+      {
+        "group": "a_023",
+        "content_sha256": "ceeb0f0c194abc3ca77f3e8d5270a2b7510e4649cbe0972bba950188a631fc69",
+        "decision": "revise",
+        "reason": "The final reply treats the user's updated request as a conflict requiring confirmation and omits the requested introduction. Revise it to write the introduction and suggest a potentially funny opening, while retaining the stated audience, monthly format, and approximate length.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Asking what the introduction is for is a useful initial clarification."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "The proposed structure fits a book club introduction."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Welcoming both new and returning members addresses the audience."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "The suggested structure is plausible for a 20-second opening."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "The proposed sentence accurately reflects the monthly discussion."
+          },
+          {
+            "turn": 6,
+            "decision": "fail",
+            "rationale": "The user now explicitly requests a laugh, updating the earlier no-jokes preference. The reply asks for confirmation instead of providing the introduction and opening line."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_023",
+      "family": "memory",
+      "scenario": "Prepare a short spoken introduction with no jokes; discuss audience and duration before requesting the introduction.",
+      "mechanism": "Remember humor exclusion after two intervening exchanges.",
+      "turns": 6
+    }
+  },
+  {
+    "conversation": {
+      "family": "memory",
+      "group": "a_028",
+      "turns": [
+        {
+          "user": "I want to make a bookmark using only paper.",
+          "assistant": "A folded paper bookmark could work. What shape would you like?"
+        },
+        {
+          "user": "A corner shape that fits over a page.",
+          "assistant": "A folded triangle pocket could slip over the corner of a page."
+        },
+        {
+          "user": "I'd like a simple striped pattern.",
+          "assistant": "You could use paper that already has stripes, with the patterned side facing outward."
+        },
+        {
+          "user": "Should the stripes run across or diagonally?",
+          "assistant": "Across may look orderly; diagonal stripes could give it a livelier look. Either can work."
+        },
+        {
+          "user": "I'll choose diagonal.",
+          "assistant": "You could try folding a small piece with the stripes oriented diagonally, then check the visible triangle before making the bookmark."
+        },
+        {
+          "user": "Now give me assembly steps, including how to fasten the pocket.",
+          "assistant": "Use the folds as the fastener, keeping it paper-only: fold a square diagonally into a triangle. Fold each side corner up to the top, then unfold. Fold the front layer of the top corner down to the bottom edge. Fold the side corners up again and tuck them into that pocket."
+        }
+      ],
+      "author_review_notes": "The fastening request makes the paper-only constraint consequential; a test fold lets the user check the visible stripe direction.",
+      "recall_probe": {
+        "support_turn": 1,
+        "probe_turn": 6,
+        "focus": "Use only paper for the bookmark."
+      }
+    },
+    "defects": [
+      {
+        "group": "a_028",
+        "content_sha256": "0ef8cacb3a7f4b76097830bcc3a163ab3e665dfe6a85254b573d0e56a062c4fc",
+        "decision": "revise",
+        "reason": "The memory annotation points to an outdated support turn. Change support_turn from 1 to 3, where the assistant most recently echoes the paper constraint; turns 4 and 5 then intervene before the probe.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "A folded bookmark respects the paper-only constraint and invites a shape preference."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "A folded triangle pocket fits the requested page corner."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Already-striped paper is compatible with the paper-only constraint."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "The comparison offers tentative aesthetic differences without asserting a required choice."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Checking the visible folded triangle is relevant to the selected stripe orientation."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "The folding and tucking steps fasten a corner pocket using paper alone."
+          }
+        ],
+        "memory_annotation_valid": false,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_028",
+      "family": "memory",
+      "scenario": "Plan a homemade bookmark using only paper; discuss shape and pattern before asking for assembly steps.",
+      "mechanism": "Recall material restriction after two complete exchanges.",
+      "turns": 6
+    }
+  }
+]

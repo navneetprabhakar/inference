@@ -1,0 +1,76 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_042",
+      "turns": [
+        {
+          "user": "What's the difference between peek and glance?",
+          "assistant": "A peek is a quick look, often at something partly hidden or something you may not be meant to see. A glance is simply a brief look."
+        },
+        {
+          "user": "Can you use a surprise as the setting, without spoiling it?",
+          "assistant": "“She peeked through the partly open door but saw only a corner of the room.” “He glanced at the closed gift, then looked away.” Neither reveals the surprise."
+        },
+        {
+          "user": "Actually, keep the surprise covered in both examples.",
+          "assistant": "“She peeked at the covered surprise.” “He glanced at the covered surprise.” The first suggests curiosity; the second simply describes a brief look."
+        },
+        {
+          "user": "Can a peek be accidental?",
+          "assistant": "Yes, though “peek” often suggests an intentional look. “Glance” is usually more natural for a brief accidental look."
+        },
+        {
+          "user": "Make the glance example even shorter.",
+          "assistant": "“He glanced at the covered surprise.”"
+        }
+      ],
+      "author_review_notes": "The user changes the example constraint, and the final example retains the covered surprise.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "a_042",
+        "content_sha256": "e883172385b4a25d0567f3ea88e0c6b0fd83caa75a7069a985556953e9d765a5",
+        "decision": "revise",
+        "reason": "The final reply repeats the earlier glance example rather than shortening it. Replace it with a genuinely shorter example that retains the covered-surprise setting. All other turns pass; the five-turn scenario is distinct and the null memory annotation is valid.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Accurately distinguishes a peek from a glance without treating the associations of peek as absolute."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Provides natural examples in a surprise setting without revealing what the surprise is."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Revises both examples so the surprise remains covered and preserves the distinction between the words."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Allows an accidental peek while explaining that peek more often suggests intention and glance may sound more natural."
+          },
+          {
+            "turn": 5,
+            "decision": "fail",
+            "rationale": "Repeats the turn 3 glance example verbatim, so it does not satisfy the request to make it even shorter. Shorten the sentence while preserving the covered-surprise setting."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_042",
+      "family": "correction",
+      "scenario": "Learn the distinction between 'peek' and 'glance'; user wants examples about observing a surprise without spoiling it.",
+      "mechanism": "Adapt examples while maintaining the difference in usage.",
+      "turns": 5
+    }
+  }
+]

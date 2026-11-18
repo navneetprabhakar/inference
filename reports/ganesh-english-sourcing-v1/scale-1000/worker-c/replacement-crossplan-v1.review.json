@@ -1,0 +1,88 @@
+{
+  "clusters": [
+    {
+      "groups": ["b_r001", "b_124", "b_158", "b_231"],
+      "classification": "shared_template_distinct_content",
+      "reason": "Each retains a supplied cause of an everyday event across two detours. b_r001 later retells the dessert mix-up; b_124, b_158 and b_231 explicitly ask for the earlier cause. The events differ, but generation could produce a recurring cause–detour–recall pattern.",
+      "recommended_split_group": "Group for split review if the generated dialogue uses the same cause–detour–recall wording."
+    },
+    {
+      "groups": ["b_r010", "b_207"],
+      "classification": "shared_template_distinct_content",
+      "reason": "Both concern an item or message reaching the wrong person and require preserving recipient details across detours. b_r010 specifies a sender and intended sibling recipient; b_207 concerns a parcel with a correct address and unfamiliar name.",
+      "recommended_split_group": "Review together for repeated misdelivery and recipient-recall scaffolding."
+    },
+    {
+      "groups": ["a_247", "a_052", "a_107", "a_142"],
+      "classification": "shared_template_distinct_content",
+      "reason": "Each corrects the intended sense of a polysemous word or phrase using context. The actual senses and examples differ: a_247 moves from air to writing, while a_052, a_107 and a_142 use different lexical contrasts.",
+      "recommended_split_group": "Group for template review if dialogues share the same correction and example sequence."
+    },
+    {
+      "groups": ["a_251", "r_ground_character_motive"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both separate an observed departure from uncertain motive. a_251 revises a fictional ending so departure is definite; r_ground_character_motive interprets an already supplied passage and resists certainty about motives.",
+      "recommended_split_group": "Compare generated endings and passage wording before deciding whether to co-split."
+    },
+    {
+      "groups": ["a_253", "weather_quote_two_sources"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both retain attribution across two conflicting sources and a correction. a_253 corrects which unverified rehearsal account was later; weather_quote_two_sources corrects a forecast quotation and its modality.",
+      "recommended_split_group": "Review for reused two-source dialogue scaffolding; keep chronology and quote-correction distinctions."
+    },
+    {
+      "groups": ["c_replace_001", "cafe_notice_limit", "museum_notice_exceptions"],
+      "classification": "shared_template_distinct_content",
+      "reason": "Each grounds an answer in a short notice with service-specific scope. c_replace_001 adds a weekday exception and alternative return location; cafe_notice_limit uses separate food and drink cutoffs, and museum_notice_exceptions uses separate museum and garden schedules.",
+      "recommended_split_group": "Check notice wording and question sequences for common template ancestry."
+    },
+    {
+      "groups": ["c_replace_007", "weather_plan_conditional", "picnic_weather_message"],
+      "classification": "shared_template_distinct_content",
+      "reason": "Each applies a conditional rule without treating its trigger as established. c_replace_007 concerns permission to sit during a private rehearsal; the selected originals concern weather-dependent event decisions.",
+      "recommended_split_group": "Review condition-versus-current-state prompts for shared question templates."
+    },
+    {
+      "groups": ["c_replace_013", "visitor_shoes_house_rule"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both require preserving permission without turning it into an obligation. c_replace_013 also contrasts an instruction about a separate tray with cup placement; visitor_shoes_house_rule concerns an optional guest practice.",
+      "recommended_split_group": "Compare generated permission-versus-requirement probes for repeated phrasing."
+    },
+    {
+      "groups": ["c_replace_040", "speech_length_not_speed"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both correct the dimension meant by a length-related complaint. c_replace_040 distinguishes shorter sentences from a shorter passage when comparing descriptions; speech_length_not_speed distinguishes written length from delivery speed while editing a speech.",
+      "recommended_split_group": "Review for common comparison-unit correction wording."
+    },
+    {
+      "groups": ["c_replace_043", "r_ground_review_balanced"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both test whether a paraphrase overstates supplied evaluative evidence. c_replace_043 contrasts approval of one cover with no evaluation of another; r_ground_review_balanced summarizes both praise and criticism of a performance.",
+      "recommended_split_group": "Review paraphrase-check wording; the underlying evidence structures differ."
+    },
+    {
+      "groups": ["c_replace_025", "c_replace_044", "r_because_so_relationship"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "These explain how a connector relates clauses, but target different relations: overlap in c_replace_025, consequence versus sequence in c_replace_044, and cause versus result direction in r_because_so_relationship.",
+      "recommended_split_group": "Check for shared explanatory scaffolding, not semantic duplication."
+    },
+    {
+      "groups": ["a_246", "garden_wildlife_no_claim"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Both avoid asserting an unknown cause. a_246 explicitly switches between an absurd fictional theory and a tentative practical possibility; garden_wildlife_no_claim preserves uncertainty about what made a garden hole.",
+      "recommended_split_group": "Review only if generated cause-speculation exchanges converge."
+    },
+    {
+      "groups": ["c_replace_031", "a_040"],
+      "classification": "same_domain_distinct_mechanism",
+      "reason": "Historical overlap only: c_replace_031 is excluded. Both discuss enjoying an object despite limited practical or display appeal, but c_replace_031 concerns an expired calendar illustration without a stated decision, while a_040 concerns a valued gift the user dislikes displaying.",
+      "recommended_split_group": "No selected-set duplicate; retain as a historical comparison."
+    }
+  ],
+  "coverage_note": "Triaged the supplied new plans against the supplied original inventory and one another, emphasizing actionable overlaps. No pair met the stated cosmetic-duplicate threshold on the supplied plan details. Worker A and B replacements are prospective; worker C selection flags are final. Excluded records are identified where cited and are not counted as selected-set duplicates.",
+  "limitations": [
+    "Plans are summaries rather than complete dialogues; shared-template hints require comparison of generated wording and turn sequences.",
+    "The inventory is a supplied reference set, so this audit cannot establish semantic independence from unsupplied plans or dialogues.",
+    "Absence from the clusters means no material overlap was identified from the supplied descriptions; it is not proof of independence."
+  ]
+}

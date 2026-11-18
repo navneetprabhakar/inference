@@ -1,0 +1,154 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_221",
+      "turns": [
+        {
+          "user": "I have a mixed box with ribbons and paper clips. What could I label it?",
+          "assistant": "“Ribbons and paper clips” is clear, though it may be narrow if the box holds other things."
+        },
+        {
+          "user": "It also has gift tags. I want something more descriptive than “miscellaneous.”",
+          "assistant": "How about “Ribbons, paper clips, and gift tags”? It names the items you’ve mentioned."
+        },
+        {
+          "user": "The clips aren't for gifts, though.",
+          "assistant": "The label lists the clips separately, so it doesn’t suggest they’re for gifts."
+        },
+        {
+          "user": "Can you make it shorter?",
+          "assistant": "“Ribbons, clips & gift tags” keeps all three items."
+        }
+      ],
+      "author_review_notes": "The label uses only the named contents; the final version is shorter and retains all three items.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "a_221",
+        "content_sha256": "e23c1b74553c6f915a775b09eb5c8aeafbd198da3efd8079cf6afaf55c2413c4",
+        "decision": "revise",
+        "reason": "Turn 3 dismisses the user's concern with an overly certain claim about how the label will be read. Acknowledge the ambiguity and tentatively offer a label that separates the clips from gift-related items.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Offers a clear label and appropriately qualifies its scope."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Includes all three stated items and responds to the request for a descriptive label."
+          },
+          {
+            "turn": 3,
+            "decision": "fail",
+            "rationale": "The claim that the wording does not suggest the clips are for gifts is too categorical; the grouping could imply that association. Offer a clearer separation."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Shortens the label while retaining all three item categories."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_221",
+      "family": "correction",
+      "scenario": "Choose an organizing label for a mixed box; user prefers a descriptive label over 'miscellaneous'.",
+      "mechanism": "Use only supplied contents and avoid claiming an exhaustive inventory.",
+      "turns": 4
+    }
+  },
+  {
+    "conversation": {
+      "family": "memory",
+      "group": "a_233",
+      "turns": [
+        {
+          "user": "Plan a fictional craft fair. A woven basket on the display is only a sample.",
+          "assistant": "The basket can show visitors the maker’s work while remaining a display sample."
+        },
+        {
+          "user": "The maker is an older weaver named Ivo.",
+          "assistant": "Ivo could stand beside the display and talk about how the baskets are woven."
+        },
+        {
+          "user": "The sample is blue with a narrow white rim.",
+          "assistant": "That contrast could make it easy to notice on the table."
+        },
+        {
+          "user": "Put the stall near a window.",
+          "assistant": "Light from the window could brighten the stall."
+        },
+        {
+          "user": "A visitor asks about other colors.",
+          "assistant": "Ivo could describe other colors and explain which, if any, are available."
+        },
+        {
+          "user": "Describe the visitor's choices without inventing stock.",
+          "assistant": "The visitor can look at the blue basket with its narrow white rim and ask Ivo about other colors. The basket is a display sample; whether any baskets are available to buy remains unspecified."
+        }
+      ],
+      "author_review_notes": "Turn 1 is the latest support for the basket’s sample-only status; four complete exchanges intervene before the probe.",
+      "recall_probe": {
+        "support_turn": 1,
+        "probe_turn": 6,
+        "focus": "The displayed basket is only a sample."
+      }
+    },
+    "defects": [
+      {
+        "group": "a_233",
+        "content_sha256": "3972bf3bf0e2d3e50de7e17c32abd46f2bc1b1583877017b9b6b829f22ae4a19",
+        "decision": "revise",
+        "reason": "The recall annotation cites turn 1, but the assistant echoes the sample status in turn 1; that is still the latest supporting exchange, so the annotation is valid. Turn 2 should avoid assuming that Ivo can discuss how baskets are woven; frame that as an optional stall activity without asserting his knowledge.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Uses the stated sample status in a plausible fictional display suggestion."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Tentatively suggests an activity consistent with Ivo being a weaver."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Offers a tentative visual effect without asserting it as fact."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Responds to the requested location with a tentative observation."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Suggests discussing colors while explicitly leaving availability uncertain."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Uses the stated basket details and sample status, and keeps purchase availability unspecified."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_233",
+      "family": "memory",
+      "scenario": "Plan a fictional craft fair where a display item is only a sample; discuss its maker and appearance before describing visitor choices.",
+      "mechanism": "Avoid offering the sample for sale after two exchanges.",
+      "turns": 6
+    }
+  }
+]

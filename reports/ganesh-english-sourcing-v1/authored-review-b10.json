@@ -1,0 +1,443 @@
+[
+  {
+    "group": "correction_scope_suffix",
+    "messages_sha256": "93c834f5380e36bf4c3fc714372e73effc9a8d31520519d452c3baa8b75420e1",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Patil to Patel surname correction does not alter Alina or unrelated Arun. Message scopes edit precisely.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "No. Patel is your surname correction. Arun’s name stays as it was."
+      }
+    ]
+  },
+  {
+    "group": "retry_without_new_fact",
+    "messages_sha256": "e7f466e9233ae236a4e2983f9abbec22f334ee9d762ed50d32acd5a7e262005d",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Repeated demand does not produce invented day. Explicit new Wednesday message supplies missing information and permits answer.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "The second message supplied the missing day. Repeating the question alone did not add that information."
+      }
+    ]
+  },
+  {
+    "group": "polite_not_tentative",
+    "messages_sha256": "6e330010b5e3a20dcbc2c7ffa65f780c7d8dec7838c9d134db3a896ffbf19827",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Please/thanks preserve firm Friday deadline; whenever-you-can rejected as semantic weakening. Final sentence keeps time and request.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Please return the borrowed chairs by Friday, thank you."
+      }
+    ]
+  },
+  {
+    "group": "uncertain_owner_revealed",
+    "messages_sha256": "391a2868cdbfee3b385c3f82aa1621e2cf46378b9dd1da7d0dacb8e990507b3e",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Noor guess queried, denied, then manager identification supplied. Unknown interval not filled with speculation; final note omits superseded guess.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "No. The later identification supersedes that guess."
+      }
+    ]
+  },
+  {
+    "group": "report_firsthand_revision",
+    "messages_sha256": "32db80953a07ffb2d397dbd2f706456de20a88647e06fe8e8761557718a7cbd5",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Seeing fallen fence after storm distinguished from witnessing fall. No causal certainty inferred from timing; note honest about observation limits.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "I noticed the fence was down after the storm. I did not see it fall, so I do not know exactly what happened."
+      }
+    ]
+  },
+  {
+    "group": "interrupted_plan_resume",
+    "messages_sha256": "ba7ab35f3a218b6e687251fe189c887058ec0d392ffd13232d03729b804d06fb",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Activities reversed after separate phone wording detour. Swap scope applies to film/reading rather than unrelated call request.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Film first, reading afterwards."
+      }
+    ]
+  },
+  {
+    "group": "sibling_perspective_switch",
+    "messages_sha256": "cf4e95d04a950284f764b58860bc46badd9cd4004b2e9d59c0ee2447fd12ebdf",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "My/your suitcase referent follows sender role; sister remains owner. Sunday applies to both messages without ownership flip.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Your message: “I will collect your suitcase on Sunday.”\nHer reply: “That works for me. You can collect my suitcase on Sunday.”"
+      }
+    ]
+  },
+  {
+    "group": "permission_limited_channel",
+    "messages_sha256": "5ad51376aa41c29ee0ece5ffa12a7b9ccaf0c1641abdbf2c1c4cecec38520a77",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Email added to print permission, social exclusion stays. Does not infer blanket online permission.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "You added the email newsletter; the printed booklet was already allowed."
+      }
+    ]
+  },
+  {
+    "group": "audio_story_spoiler",
+    "messages_sha256": "96418f0b631b603a39b22136ca665d4a596d678ccb2de7c073674d2fc318581f",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "River and music feedback wording excludes narrator identity. Asks for unclear segment without assuming cause; spoiler question rejected. Constraint persistence with explicit reveal in probe, not unprompted recall.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "Only the first episode."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "No. That question would reveal the identity you asked to keep out of the message.",
+      "probe_focus": "do not reveal missing-brother identity",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "quiet_cafe_preference",
+    "messages_sha256": "8d51c53431f6bdb4e4f629bad15ebd025d32e64fcbcb65e7a8250105f278acb3",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Quiet beats fashionable live-band setting; notebook task does not create connectivity requirement. Added practical seating question prevents immediate Wi-Fi answer echo.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "No. You said you do not need Wi-Fi."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 3,
+      "probe_turn": 6,
+      "intervening_complete_turns": 2,
+      "expected_assistant_exact": "No. You said you do not need Wi-Fi.",
+      "probe_focus": "Wi-Fi not required",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "translation_names_fixed",
+    "messages_sha256": "1fffb2e29118ae962ac3373c24dc0f8b08da0f82d9536acfa3a1293746173f50",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "Names preserved through simplification, postpone not permanent cancellation, Omar remains unavailable. Name persistence is reinforced throughout; do not treat as difficult uncued recall.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "Omar."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "It might make the names more familiar to some readers, but it would break your instruction to keep Aditi and Omar unchanged.",
+      "probe_focus": "keep Aditi and Omar unchanged",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "garden_seed_swap_pending",
+    "messages_sha256": "d478cf1e11385a5b5d5bddc1b8a9854c411be79651a3848e446c95d339128413",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "Proposed swap never treated as complete. Priya lacks marigolds; no receipt invented. Basil envelope retained across interest message, decline and receipt clarification.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "Basil seeds."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 2,
+      "probe_turn": 7,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "Basil seeds.",
+      "probe_focus": "basil in user envelope",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "short_story_unreliable_narrator",
+    "messages_sha256": "6b7ba675f7d08f98dfec98bb3aff73334c6c1a029b4de8a83bb66ee305d1077c",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "Narrator assumption separated from author reality. Authorised plant clue does not identify resident; late underlying-plan answer grounded in initial fact, not narrator belief.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "No. The resident has not been named."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "Someone still lives in the house.",
+      "probe_focus": "someone still lives there",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "shared_oven_schedule",
+    "messages_sha256": "f369a5537c1b760c9ec8af2cbc5c9b84ff3544958e4fad0ef8aabc97fa29f9e0",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "Separate slots maintained, tray preparation avoids overlap. Counter request remains unanswered; oven booking does not allocate counter. Later extension conflicts with slot rule.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "Eli."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 2,
+      "probe_turn": 5,
+      "intervening_complete_turns": 2,
+      "expected_assistant_exact": "No. You agreed not to overlap oven use, so leaving your food in during Eli’s slot would conflict with that.",
+      "probe_focus": "nonoverlapping oven slots",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "workshop_observer_role",
+    "messages_sha256": "68c5af36a9a50e8d5d3fcf4a74d2a8999f90cb1b9d8e9cd520a91c9fef67f7f0",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 7,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "rationale": "Observer role not promoted by note-taking/seating permission. Practical place requires separate enquiry; original wheel exclusion persists.",
+    "checks": [
+      {
+        "turn": 7,
+        "expected_assistant_exact": "You may take notes, and observers should sit in the back row."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "No. It addresses notes and seating, not changing your observer place into a practical place.",
+      "probe_focus": "observer has not booked wheel use",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  },
+  {
+    "group": "family_recipe_credit",
+    "messages_sha256": "5740c737c8ef08ff7963036d180b20a3c2f6e73e05cd5404a59d8ba016d37871",
+    "decision": "shortlist",
+    "reviewer": "Codex author second semantic pass",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Recipe origin grandfather, teacher aunt, small seasoning change user. Serving-message detour deliberately omits credits; late teaching-role recall returns aunt.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Your aunt."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Your aunt.",
+      "probe_focus": "aunt taught recipe",
+      "annotation_scope": "Author-assessed supporting exchange for named focus only; other cues and repeated constraints can lower difficulty. Not model evaluation."
+    }
+  }
+]

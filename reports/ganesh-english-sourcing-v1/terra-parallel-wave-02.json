@@ -1,0 +1,45 @@
+{
+  "status": "completed_reviewed_candidates_only",
+  "model": "gpt-6.1-terra",
+  "interface": "codex exec",
+  "concurrency": 4,
+  "batches": [
+    "b17",
+    "b18",
+    "b19",
+    "b20"
+  ],
+  "planned_conversations": 48,
+  "sandbox": "read-only",
+  "corpus_writers": 1,
+  "training_admitted": false,
+  "gcp_vm_operations": false,
+  "prompt_sha256": {
+    "b17": "517a085a1ea1942879ba6454d24416bd2e2c2426b6395b43e9044469f42f5ce8",
+    "b18": "24ced14048a0288ec2c647731c548c9c993590920adc5cfeb69de2d7116f06a1",
+    "b19": "cf247e3820b495b32c7d9aafd192f9fca327ae4a3da5d47bd041bfe64ea02776",
+    "b20": "a2c9a63d36d1f04616064a38673f71202a674751d253b116250314af48cbfdf0"
+  },
+  "revision_batches": [
+    "b17",
+    "b18",
+    "b19",
+    "b20"
+  ],
+  "review_feedback": {
+    "b17": "Parent review: (1) camera_bag_owner turn2 adds 'camera' to spare batteries without specifying their type. Preserve the generic supplied label. (2) temporary_sign_not_permanent turn4 introduces a marked desk despite an unclear referent. Ask for the landmark or use an explicit placeholder immediately; do not assert an unprovided desk and repair it later. (3) painting_subject_not_artist initial neutral label can be mistaken for an actual title; use explicit Subject/Artist labels from the first catalog label, keep unknown title unknown. Other scenarios retain meaning. Review all content after these edits; update self-review/probes. Maintain >=3turn counts and no count>6.",
+    "b19": "Blocking review findings: (1) You produced7 five-turn conversations, exceeding max6 per length. Add a substantive task to one existing five-turn scenario, not a cosmetic variant/new scenario. (2) museum_label_material_unknown turn3 claims investigation underway when user merely asks whether it could be mentioned. Respond conditionally/ask confirmation or retain unknown; do not make an unsupported assertion then rely on next-turn correction. (3) short_story_last_paragraph_only turn5 asks for two sentences even shorter, but your answer has the same length. Actually shorten while retaining two full sentences, meaning, restrained style and original first paragraph in final full passage. Check word counts explicitly in self-review. Map orientation must keep conventional-map assumptions clear where needed. Return all12 corrected scenarios.",
+    "b20": "Parent review: (1) borrowed_keys_two_locations first user does not establish Mira owns/lent the keys, but assistant says your keys/thanks for lending. Either make the user explicitly supply that fact from turn1, or keep ALL assistant notes neutral on ownership/lender. Every assistant target must be grounded at its point. (2) story_pet_not_narrator turn5 introduces an unspecified gender and later fixes it. Keep the neighbour gender-neutral from the first target; replace the later edit request with another meaningful task if needed. Do not teach unsupported assistant assertions as setup. (3) train_platform_time_distinction final compact reminder should retain the stated ten-minute bag-check duration while keeping its start time unknown. All other supplied constraints preserved; re-review and update notes/probes. Return all12 scenarios with length diversity intact."
+  },
+  "candidate_conversations_added": 48,
+  "assistant_turns_reviewed": 249,
+  "workers_running": 0,
+  "raw_text_changed_by_parent": false,
+  "raw_initial_batches_revised_before_inclusion": 4,
+  "selected_raw_sha256": {
+    "b17": "5ebf2e2c51fb537af0d6fab90083dab0630f87ff00af693ffc18accb688cbe4b",
+    "b18": "93776c63ac98fbea067c521540e07d0fe8983ea67fd7aa94e01a0e15b9c9930b",
+    "b19": "7f69f089f35faf350bec32fa10de2a6446d0f2f27265700044140b294b34ca62",
+    "b20": "a1ab0e046cdc6ef7c40b5a645097fbe892c5c9697010def73b23214aee5d9299"
+  }
+}

@@ -6,7 +6,7 @@ Ganesh-base (historically called Own in artifact paths) is an experimental **536
 
 **Status as of 18 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available; HTTP is off. The latest $25 A100 attempt stopped on qualification infrastructure failures before either controlled English pilot arm ran. Required backups were verified before the dedicated VM and disk were retired. No GPU restart is pending.
 
-Current work: reviewed English corpus sourcing and local execution repairs. The new shortlist contains **34 candidate conversations**, not an admitted or complete 1,000-conversation curriculum. **Use local disk for now; GCS migration and local eviction are paused.** See the [action plan](reports/ganesh-action-plan-v2/PLAN.md), [qualification failure report](reports/ganesh-conversation-execution-v1/RESULT.md), [sourcing status](reports/ganesh-english-sourcing-v1/STATUS.md), and [authoritative handoff](OWN_BASE_HANDOFF.txt).
+Current work is **paused for reassessment**. Reviewed candidates total **1,093 conversations** (1,026 English plus67 maths/decision/orchestration); none are admitted to a new run. The stopped mocked-tool diagnostic and bounded RCA found call-selection/instruction failures, not an input-context limit. See the [next training plan](reports/ganesh-next-training-plan-v3/PLAN.md), [tool RCA](reports/ganesh-tool-crud-v1/RCA.md), [sourcing status](reports/ganesh-english-sourcing-v1/STATUS.md), and [authoritative handoff](OWN_BASE_HANDOFF.txt). Local disk remains in use; VM/HTTP off; no automatic work pending.
 
 Current evidence-first reassessment: [Ganesh-base review](reports/ganesh-base-review-v1/REVIEW.md). Model naming does not modify checkpoint payloads or repair conversation behavior.
 
@@ -306,7 +306,7 @@ See [the preserved comparison](reports/english-a100-v1/faults/local-signal-resum
 
 ## English recovery plan
 
-The [detailed plan](reports/english-recovery-plan-v1/PLAN.txt) keeps the existing Own lineage and separates learning, generalization, and runtime efficiency:
+The [current plan](reports/ganesh-next-training-plan-v3/PLAN.md) supersedes the sequence below. The historical [detailed plan](reports/english-recovery-plan-v1/PLAN.txt) keeps the existing Own lineage and separates learning, generalization, and runtime efficiency:
 
 1. **Local readiness:** complete fit-generation scoring, train/serve parity checks, recovery boundary traces, and a hash-bound experiment/cost card.
 2. **Bounded qualification:** resolve the failing recovery transition and complete real fault checks within a newly approved finite cap.
@@ -315,7 +315,7 @@ The [detailed plan](reports/english-recovery-plan-v1/PLAN.txt) keeps the existin
 5. **Candidate selection:** use complete generated conversations and family-level scores, not loss or checkpoint age.
 6. **Local efficiency and release:** optimize using exposed development data, freeze the final model/runtime, then consume a disjoint sealed release once and qualify local MPS behavior.
 
-Proposed quality/performance thresholds and the illustrative $15 diagnostic envelope in that document are **planning proposals, not current results or spending authorization**. Two failed bounded learning pilots force diagnosis rather than automatic budget, epoch, or corpus expansion. Maths and CBSE remain deferred.
+Proposed quality/performance thresholds and the illustrative $15 diagnostic envelope in that document are **planning proposals, not current results or spending authorization**. Two failed bounded learning pilots force diagnosis rather than automatic budget, epoch, or corpus expansion. Basic maths candidate authoring is now reviewed separately; CBSE expansion remains deferred.
 
 ## Tests and evaluation
 

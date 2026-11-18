@@ -1,0 +1,197 @@
+[
+  {
+    "conversation": {
+      "family": "clarification",
+      "group": "r_clarify_comparison_standard",
+      "turns": [
+        {
+          "user": "I want my fictional character to sound more confident.",
+          "assistant": "For example, “Maybe we could leave” could become “Let's leave now.” Should the character stay polite, or sound more forceful?"
+        },
+        {
+          "user": "Polite, but definite.",
+          "assistant": "A clear request without excessive hedging may work. Share the line you'd like revised."
+        },
+        {
+          "user": "“I'm sorry, but maybe you could give me the map?”",
+          "assistant": "“Please give me the map.”"
+        },
+        {
+          "user": "Can she give a reason too?",
+          "assistant": "“Please give me the map. I need to check the route.”"
+        },
+        {
+          "user": "Make it warmer.",
+          "assistant": "“Could you please give me the map? I need to check the route.”"
+        },
+        {
+          "user": "Keep the warmth but make it more definite.",
+          "assistant": "“Please give me the map. I'd like to check the route.”"
+        },
+        {
+          "user": "Shorter, please.",
+          "assistant": "“Please give me the map to check the route.”"
+        }
+      ],
+      "author_review_notes": "Clarifies the desired tone and makes the final request shorter while retaining its reason.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "r_clarify_comparison_standard",
+        "content_sha256": "c0711a4012112bca0e96693180c3eeb0e62efd8759227a8c0bc961c699a62c48",
+        "decision": "revise",
+        "reason": "Turn 6 weakens the stated reason while changing the requested tone. Keep the reason as a need while making the request more definite and warm; adjust the final shortening accordingly.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "The example illustrates confidence and asks a relevant question about politeness."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "The reply reflects the polite, definite goal and requests the actual line."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "The revision removes hedging while retaining politeness."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "The fictional character gives a plausible reason for requesting the map."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "The question form adds warmth and retains the stated reason."
+          },
+          {
+            "turn": 6,
+            "decision": "fail",
+            "rationale": "Changing “I need” to “I'd like” weakens the reason, although the user only requested a more definite tone. Preserve the need."
+          },
+          {
+            "turn": 7,
+            "decision": "pass",
+            "rationale": "The sentence is shorter and preserves the immediately preceding version's request and reason."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "r_clarify_comparison_standard",
+      "family": "clarification",
+      "premise": "The user wants a fictional character to sound 'more confident' but does not say whether the character should remain polite.",
+      "mechanism": "Show a small example and ask about the desired balance, then revise the user's supplied dialogue.",
+      "diversity_key": "voice_revision_competing_tone_goals",
+      "turns": 7
+    }
+  },
+  {
+    "conversation": {
+      "family": "clarification",
+      "group": "r_clarify_pronoun_in_scene",
+      "turns": [
+        {
+          "user": "In my scene: “Mira met the dancers at the gate. They carried a lantern.” Is that clear?",
+          "assistant": "“They” could mean Mira, if that's Mira's pronoun, or the dancers. Which do you intend?"
+        },
+        {
+          "user": "The dancers carried it.",
+          "assistant": "You could write: “Mira met the dancers at the gate. The dancers carried a lantern.”"
+        },
+        {
+          "user": "That repeats dancers.",
+          "assistant": "“Mira met the dancers, who carried a lantern, at the gate.”"
+        },
+        {
+          "user": "Can you make it less compressed?",
+          "assistant": "“Mira met the dancers at the gate. Among them, the dancers carried a lantern.” Or, more naturally: “The dancers carried a lantern as Mira met them at the gate.”"
+        },
+        {
+          "user": "I want the lantern mentioned first.",
+          "assistant": "“Carrying a lantern, the dancers met Mira at the gate.”"
+        },
+        {
+          "user": "Does that change who met whom?",
+          "assistant": "It describes the same meeting, but makes the dancers the subject. To mention the lantern first: “The lantern was carried by the dancers Mira met at the gate.”"
+        },
+        {
+          "user": "I like that last one. Make it shorter.",
+          "assistant": "“The lantern belonged to the dancers Mira met at the gate.” This is shorter, but “belonged to” implies ownership. To preserve carrying: “The dancers' lantern came with them when Mira met them at the gate.”"
+        },
+        {
+          "user": "Could I use “they” there?",
+          "assistant": "You could, but “they” might be ambiguous if Mira uses that pronoun. Naming the dancers keeps the carriers clear."
+        }
+      ],
+      "author_review_notes": "Clarifies the intended referent and discusses how sentence order changes emphasis.",
+      "recall_probe": null
+    },
+    "defects": [
+      {
+        "group": "r_clarify_pronoun_in_scene",
+        "content_sha256": "1351c156f4d401b9d67df3119edee18da2a5aff677b994ffd000270f8bf04f40",
+        "decision": "revise",
+        "reason": "Repair the awkward first option in turn 4 and replace turn 7 with a shorter sentence that preserves carrying without inventing ownership. Keep the lantern-first constraint if feasible.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "The reply identifies both possible referents without assuming Mira's pronouns."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Repeating the noun makes the intended carriers explicit."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "The relative clause avoids repetition while preserving who carried the lantern."
+          },
+          {
+            "turn": 4,
+            "decision": "fail",
+            "rationale": "“Among them, the dancers carried a lantern” is awkward and fails to resolve the repetition. Give only a natural, less compressed alternative."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "The sentence mentions the lantern before the dancers and preserves their carrying it."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "The reply explains the change in grammatical subject and offers a lantern-first version retaining Mira as the person who met the dancers."
+          },
+          {
+            "turn": 7,
+            "decision": "fail",
+            "rationale": "The first proposal introduces ownership, and the second implies ownership and accompaniment rather than explicitly preserving carrying. Provide a genuinely shorter carrying version."
+          },
+          {
+            "turn": 8,
+            "decision": "pass",
+            "rationale": "The reply correctly notes that the pronoun can be ambiguous if Mira uses it, without assuming her pronouns."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "r_clarify_pronoun_in_scene",
+      "family": "clarification",
+      "premise": "The user supplies a short fictional scene where 'they' could refer to either a person or a group.",
+      "mechanism": "Explain both possible readings and ask which is intended before suggesting a clearer sentence.",
+      "diversity_key": "pronoun_reference_person_group",
+      "turns": 8
+    }
+  }
+]

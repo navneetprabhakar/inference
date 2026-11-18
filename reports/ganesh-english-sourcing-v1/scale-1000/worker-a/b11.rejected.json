@@ -1,0 +1,107 @@
+[
+  {
+    "conversation": {
+      "family": "correction",
+      "group": "a_205",
+      "turns": [
+        {
+          "user": "My scene cards are Arrival, Search, Storm, Discovery, Farewell.",
+          "assistant": "That's the current order: Arrival → Search → Storm → Discovery → Farewell."
+        },
+        {
+          "user": "Move Farewell immediately after Arrival. Keep the others in their existing relative order.",
+          "assistant": "Arrival → Farewell → Search → Storm → Discovery."
+        },
+        {
+          "user": "What changed?",
+          "assistant": "Only Farewell moved; the other cards remain in the same relative order."
+        },
+        {
+          "user": "Does Discovery still come after Storm?",
+          "assistant": "Yes, Discovery still follows Storm."
+        },
+        {
+          "user": "I might make Farewell a flash-forward. Would that fit?",
+          "assistant": "It could: the early Farewell might raise a question that later scenes gradually answer."
+        },
+        {
+          "user": "I don't want it to reveal the ending.",
+          "assistant": "You could keep the reason for the farewell unclear and focus on a small detail instead."
+        },
+        {
+          "user": "Give me one possible detail.",
+          "assistant": "A character leaves a folded paper bird on the doorstep."
+        },
+        {
+          "user": "Help me introduce that detail as I lay out the cards.",
+          "assistant": "You could place the paper bird detail in Farewell, just after Arrival, and let Search, Storm and Discovery unfold without immediately explaining it."
+        }
+      ],
+      "author_review_notes": "The single move preserves the other cards' relative order; the final suggestion uses the revised sequence.",
+      "recall_probe": {
+        "support_turn": 2,
+        "probe_turn": 8,
+        "focus": "Farewell follows Arrival in the revised scene order."
+      }
+    },
+    "defects": [
+      {
+        "group": "a_205",
+        "content_sha256": "d4a2fd39b5563a9daada3e0fc408f569f97153f71ae711823930d2f26e3957bc",
+        "decision": "revise",
+        "reason": "The card move and creative collaboration are sound, but the recall annotation cites an outdated support turn. Change support_turn from 2 to 3: turn 3 echoes that only Farewell moved, supporting its revised position. Two complete exchanges then intervene before the probe at turn 8.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Accurately restates the supplied card order."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Moves Farewell immediately after Arrival and preserves the other cards’ relative order."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Correctly explains the single move without claiming the other cards retained their absolute positions."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Correctly confirms that Discovery follows Storm."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Offers a tentative narrative reason the flash-forward could fit."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Suggests a way to preserve uncertainty about the ending."
+          },
+          {
+            "turn": 7,
+            "decision": "pass",
+            "rationale": "Provides one concrete fictional detail without asserting it is established story content."
+          },
+          {
+            "turn": 8,
+            "decision": "pass",
+            "rationale": "Places the proposed detail in the revised order and preserves the request not to reveal the ending immediately."
+          }
+        ],
+        "memory_annotation_valid": false,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "a_205",
+      "family": "correction",
+      "scenario": "Arrange a set of fictional scene cards; user moves the final scene earlier but wants the others in their existing relative order.",
+      "mechanism": "Apply a single move without reshuffling unrelated scenes.",
+      "turns": 8
+    }
+  }
+]

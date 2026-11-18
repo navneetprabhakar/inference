@@ -1,0 +1,336 @@
+[
+  {
+    "group": "map_left_from_viewpoint",
+    "messages_sha256": "70b097550ae0808690bb9738c27db424a1f32f753cfaab29fa66437c7bc49c93",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Person-facing-north left is west; conventional rotated-map assumption explicit. Final sketch positions consistent within that stated convention, not a mirrored map.",
+    "generator_self_review_notes": "The correction changes the reference frame to a person facing north. Their left is west; with a conventional map rotated so north is down, west is page-right and south is up. The final labels retain that assumption. Remaining weakness: a mirrored map would need different placements.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Pond: right of the bench. Gate: above the bench."
+      }
+    ]
+  },
+  {
+    "group": "host_arrival_before_guests",
+    "messages_sha256": "1ae45d0f2fc2e2c13289acc81a3e9feab1cac472bd87077f9018c35698654ff0",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Host6:30 replaces7:30, guests7 unchanged; optional glasses task keeps sequence. Final requested omission of window end does not invent travel time.",
+    "generator_self_review_notes": "The host's arrival changes from 7:30 to 6:30; guests remain at 7:00. Setting out glasses is optional and follows arrival. I removed the window's end time in the final sequence. Remaining weakness: the final version no longer states the task's ten-minute duration, as requested.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "6:30 — Host arrives; optionally set out glasses.\n7:00 — Guests arrive."
+      }
+    ]
+  },
+  {
+    "group": "museum_label_material_unknown",
+    "messages_sha256": "e8c23aa67d3fca4653ae62c2b114c3a0e9bd8494b1cd49e57b0015070d9350c8",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Revision makes investigation conditional until user confirms none. Blue rim retained, material unknown; no ongoing-research claim.",
+    "generator_self_review_notes": "The material changes from an inventory assertion to unknown; the blue rim remains confirmed. I changed the investigation wording to a conditional suggestion, then retained only the known facts after the user clarified. Remaining weakness: the visitor label is intentionally terse.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Small bowl with a blue rim. Material unknown."
+      }
+    ]
+  },
+  {
+    "group": "photographer_credit_abbreviation",
+    "messages_sha256": "35719ae99acecc8af68ee503155cebfde04a8353f8b60d583fbfc3614e207120",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "M.Sen supersedes full-name credit and temporary placeholder excluded from final output.",
+    "generator_self_review_notes": "The professional credit is corrected to M. Sen and stays beneath the image. The layout placeholder is excluded from the final line. No title or image detail is invented. Remaining weakness: the placeholder is functional rather than descriptive.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Photo: M. Sen"
+      }
+    ]
+  },
+  {
+    "group": "invitation_named_party_only",
+    "messages_sha256": "4d14447b792f7b8d2e30dfe65a6670601866b6fc0d7acf3b70cb72059633b4f4",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Invite narrows to Dev only, no family availability inferred; warm wording maintains scope.",
+    "generator_self_review_notes": "The invitation changes from Dev and his family to Dev alone. The final version asks for a response without claiming availability or inviting anyone else. Remaining weakness: the picnic has no time or location because none was supplied.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Hi Dev, I'd love for you to join me for a picnic on Sunday. When you have a chance, please let me know if you can come."
+      }
+    ]
+  },
+  {
+    "group": "short_story_last_paragraph_only",
+    "messages_sha256": "c719b5de82ab46bda469354357e4f83afe8f926505e4791d7054ed283b2c98d0",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Original first paragraph exact; last-only revision preserved. Final shorter two sentences have9 whitespace-delimited words versus10 before shortening; no cause for empty street invented.",
+    "generator_self_review_notes": "The scope changes to the original last paragraph only; the first paragraph is preserved exactly in the final passage. The replacement shrinks from 10 words to 9 while keeping two full sentences and the empty street. Remaining weakness: the shorter ending is the original wording, which meets the constraint but adds no new vividness.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "Rain tapped the roof. Anya waited by the door.\n\nAt dawn, she opened it. The street was empty."
+      }
+    ]
+  },
+  {
+    "group": "music_playlist_no_repeat",
+    "messages_sha256": "5673224f19018bffb4c3d2cc69c81c17faa39bc5b3177bab383b7d55246249ad",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Per-artist uniqueness applied to two Asha entries after unrelated opening/title tasks; no arbitrary song preference invented.",
+    "generator_self_review_notes": "The one-appearance-per-artist rule is last supported in turn 1. The opening and title tasks intervene before the probe. The response identifies the duplicate without inventing tracks. Remaining weakness: it does not choose which Asha track to remove because no preferences were supplied.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Remove or replace one of the two Asha tracks so each artist appears only once."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 4,
+      "intervening_complete_turns": 2,
+      "expected_assistant_exact": "Remove or replace one of the two Asha tracks so each artist appears only once.",
+      "probe_focus": "Each artist may appear only once",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "repair_note_keep_original_part",
+    "messages_sha256": "d91ba412925717e19d1218cbba9c7b1e6e0f414a28a177e1b4010a03c3f20f5b",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Retain-original conditional survives fault/subject/prior-contact tasks; no performed repair or unconditional replacement claim.",
+    "generator_self_review_notes": "The original switch must be kept if replaced, last stated in turn 1. Three distinct tasks intervene. The combined note retains that condition, the reported fault and the request for prior contact. Remaining weakness: the fault's exact symptoms are unspecified.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Hello, the lamp's switch feels loose, and the problem occurs when the cord moves. Please contact me before carrying out any work. If the switch needs replacing, please keep the original for me."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Hello, the lamp's switch feels loose, and the problem occurs when the cord moves. Please contact me before carrying out any work. If the switch needs replacing, please keep the original for me.",
+      "probe_focus": "Keep the original switch if it is replaced",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "family_reunion_photo_limit",
+    "messages_sha256": "0251eaea31448be79ae351d72211210a26b3906157a9a2d0608699e113e938ef",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Maximum3 not exact3; at least2of5 set aside. Additional heading task retains meaningful gap; no publication claimed.",
+    "generator_self_review_notes": "The at-most-three limit is last supported in turn 1, and the page is still being planned. I added a childhood-games heading task to vary conversation length. Four tasks intervene; setting aside at least two of five meets the limit. Remaining weakness: no particular photos are selected.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "Set aside at least two; that leaves no more than three on the page."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "Set aside at least two; that leaves no more than three on the page.",
+      "probe_focus": "At most three photos on the reunion page",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "book_circle_shared_copy",
+    "messages_sha256": "5b435288cb0d86c723dfd1c5806c4e253c6c0978da651a191b8d6caad4542016",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Only copy must remain at centre; discussion detours do not create borrowing permission or extra copy.",
+    "generator_self_review_notes": "The shared copy must remain at the center, last supported in turn 1. Discussion, facilitation and welcome tasks intervene. The answer respects the restriction without inventing another copy. Remaining weakness: access hours are unspecified.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "The shared copy needs to stay at the community center, so they can't take it home for the weekend. They can read it there."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "The shared copy needs to stay at the community center, so they can't take it home for the weekend. They can read it there.",
+      "probe_focus": "The shared copy stays at the community center",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "walking_trip_rest_request",
+    "messages_sha256": "dbd8e4237b42f32cfd03b91f2d757ee22f051861dfa85752dfe43f47b542a0f0",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Seated halfway rest retained despite loop description; no fabricated bench location or break duration.",
+    "generator_self_review_notes": "The rest must be seated and halfway through, last supported in turn 1. Water, rain and endpoint tasks intervene; the loop does not change the request. Remaining weakness: the answer cannot name a suitable seat or duration from the available information.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Include a seated rest halfway through the loop."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Include a seated rest halfway through the loop.",
+      "probe_focus": "A seated rest halfway through the walk",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "pottery_piece_not_for_sale",
+    "messages_sha256": "5128bca0c9a42c198143f32415b020d023ebc311f1b6be9b490172070f55ae2a",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Green keepsake remains not for sale across display tasks; visitor reply kind without accepting sale.",
+    "generator_self_review_notes": "The green bowl is a family keepsake and not for sale, last supported in turn 1. The title, process sign and grouping discussion intervene before the purchase request. Remaining weakness: the reply offers no alternative piece because none was identified.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Thank you for asking. The green bowl is a family keepsake, so it isn't for sale."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Thank you for asking. The green bowl is a family keepsake, so it isn't for sale.",
+      "probe_focus": "The green bowl is a family keepsake and not for sale",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  }
+]

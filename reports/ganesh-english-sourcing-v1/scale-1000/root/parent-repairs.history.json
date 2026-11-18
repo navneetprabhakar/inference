@@ -1,0 +1,199 @@
+[
+  {
+    "group": "r_because_so_relationship",
+    "total_generation_revisions": 2,
+    "errors": [
+      {
+        "group": "r_because_so_relationship",
+        "content_sha256": "e1f97dc5eb8cff08fd729061de3a87fa7818f491dfcaa583bfe4ea37f8b7f25f",
+        "decision": "revise",
+        "reason": "Turn 7 miscounts the words. Correct the comparison: the because-first version has eight words; the other two have seven.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Accurately distinguishes reason from result with matching examples."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Correctly shows both positions for the because clause."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Identifies tiredness as the reason and leaving early as the result."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Rewrites the sentence with so while preserving the relationship."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Correctly preserves the cause."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Moves the because clause to the front without changing the meaning."
+          },
+          {
+            "turn": 7,
+            "decision": "fail",
+            "rationale": "“Because I felt tired, I left early” has eight words, not seven; each other version has seven."
+          }
+        ],
+        "memory_annotation_valid": true,
+        "distinct_scenario": true
+      }
+    ],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_casual_walk_conversation",
+    "total_generation_revisions": 1,
+    "errors": [],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_ground_incomplete_scene",
+    "total_generation_revisions": 1,
+    "errors": [],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_ground_task_responsibility",
+    "total_generation_revisions": 1,
+    "errors": [],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_clarify_which_paragraph",
+    "total_generation_revisions": 1,
+    "errors": [],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_memory_user_metaphor_rule",
+    "total_generation_revisions": 1,
+    "errors": [
+      {
+        "group": "r_memory_user_metaphor_rule",
+        "content_sha256": "0141dc16a5cf82fd974dcd20c07413ebf5ada86b9a4957729fe9054eef486e15",
+        "decision": "revise",
+        "reason": "The recall annotation cites an outdated support turn. Change support_turn to 2: the assistant's turn 2 echoes the garden comparison, and five complete exchanges intervene before turn 8. The no-flowers constraint was last supported at turn 1.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Proposes a garden comparison without depicting people as flowers."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Offers imagery suited to the requested lively tone."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Tentatively connects movement between tables to the garden imagery."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Incorporates music without claiming an unstated detail."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Suggests narrow paths to convey the requested cramped feeling."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Offers a simple-language approach without changing the scene."
+          },
+          {
+            "turn": 7,
+            "decision": "pass",
+            "rationale": "Gives a useful two-sentence structure for the requested description."
+          },
+          {
+            "turn": 8,
+            "decision": "pass",
+            "rationale": "Uses simple language, a lively garden comparison, narrow paths, tables and music without describing people as flowers."
+          }
+        ],
+        "memory_annotation_valid": false,
+        "distinct_scenario": true
+      }
+    ],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave1-cold.raw.json"
+  },
+  {
+    "group": "r_memory_user_metaphor_rule",
+    "total_generation_revisions": 2,
+    "errors": [
+      {
+        "group": "r_memory_user_metaphor_rule",
+        "content_sha256": "0141dc16a5cf82fd974dcd20c07413ebf5ada86b9a4957729fe9054eef486e15",
+        "decision": "revise",
+        "reason": "The opening reply does not fulfill the request to describe the room, and the memory annotation points to an outdated support turn. Have the first reply offer a brief garden-based description without comparing people to flowers. Redesign the later exchanges so at least two complete exchanges intervene after the latest garden reference before the final recall, then annotate that latest support turn.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "fail",
+            "rationale": "The user asks for a description, but the reply only proposes an approach without providing one."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Rustling and shifting paths tentatively suggest liveliness without describing people as flowers."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "The proposed winding paths connect the garden image to movement between tables."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "The reply incorporates the newly supplied music without inventing its character."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Narrow paths convey the requested cramped feeling."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "The suggestion addresses simple language and echoes the garden imagery."
+          },
+          {
+            "turn": 7,
+            "decision": "pass",
+            "rationale": "The reply answers the question and suggests a workable division between two sentences."
+          },
+          {
+            "turn": 8,
+            "decision": "pass",
+            "rationale": "The two short sentences preserve the lively, cramped garden comparison, tables and music without portraying people as flowers."
+          }
+        ],
+        "memory_annotation_valid": false,
+        "distinct_scenario": true
+      }
+    ],
+    "raw": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave2.raw.json",
+    "review": "runs/ganesh-english-sourcing-v1/scale-1000/root/parent-repair-wave2-cold.raw.json"
+  }
+]

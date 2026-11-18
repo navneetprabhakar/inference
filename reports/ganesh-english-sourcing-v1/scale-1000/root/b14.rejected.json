@@ -1,0 +1,99 @@
+[
+  {
+    "conversation": {
+      "family": "memory",
+      "group": "r_memory_friend_views_distinct",
+      "turns": [
+        {
+          "user": "One friend likes my story's pacing; another thinks it's rushed. I'm undecided.",
+          "assistant": "You could ask each friend which moments shaped their reaction before deciding whether to revise."
+        },
+        {
+          "user": "The rushed comment was about the ending.",
+          "assistant": "You might ask which part of the ending needed more room."
+        },
+        {
+          "user": "The ending has a reunion followed by a quick goodbye.",
+          "assistant": "An extra beat between those events might be worth considering."
+        },
+        {
+          "user": "I don't want to add a lot of pages.",
+          "assistant": "You could test a sentence or two that lets the reunion register before the goodbye."
+        },
+        {
+          "user": "Could that make it drag?",
+          "assistant": "It could, depending on the sentences and the effect you want. Comparing both versions may help."
+        },
+        {
+          "user": "I might ask both friends to read the two versions.",
+          "assistant": "You could give them the versions without saying which one you changed, then ask how each ending feels."
+        },
+        {
+          "user": "What should I ask them, given where we each stand?",
+          "assistant": "Since their pacing views differ and you're undecided, you could ask each privately: “How does each ending feel around the reunion and goodbye? Does either feel rushed or too slow?”"
+        }
+      ],
+      "author_review_notes": "The final question accounts for both views and the user's uncertainty without attributing either view to a friend.",
+      "recall_probe": {
+        "support_turn": 1,
+        "probe_turn": 7,
+        "focus": "Recall each friend's pacing view and the user's undecided position."
+      }
+    },
+    "defects": [
+      {
+        "group": "r_memory_friend_views_distinct",
+        "content_sha256": "c180ca7ed5ffa48f8349ddf5b8901018b9ba42a56c3282cc7a3e8279c6c2fcc5",
+        "decision": "revise",
+        "reason": "The dialogue is useful and distinct, but the recall annotation overlooks the later support for the rushed view. Change support_turn from 1 to 2; turns 3–6 then provide enough intervening exchanges.",
+        "turn_reviews": [
+          {
+            "turn": 1,
+            "decision": "pass",
+            "rationale": "Suggests a useful way to understand the conflicting feedback without choosing a side."
+          },
+          {
+            "turn": 2,
+            "decision": "pass",
+            "rationale": "Responds to the clarification that the rushed comment concerned the ending."
+          },
+          {
+            "turn": 3,
+            "decision": "pass",
+            "rationale": "Offers a tentative revision suited to the reunion and goodbye."
+          },
+          {
+            "turn": 4,
+            "decision": "pass",
+            "rationale": "Respects the constraint against adding many pages."
+          },
+          {
+            "turn": 5,
+            "decision": "pass",
+            "rationale": "Acknowledges that the proposed addition could slow the ending and suggests a comparison."
+          },
+          {
+            "turn": 6,
+            "decision": "pass",
+            "rationale": "Offers a practical way to gather reactions to both versions."
+          },
+          {
+            "turn": 7,
+            "decision": "pass",
+            "rationale": "Accurately reflects the differing views and the user's uncertainty while proposing a focused question."
+          }
+        ],
+        "memory_annotation_valid": false,
+        "distinct_scenario": true
+      }
+    ],
+    "plan": {
+      "group": "r_memory_friend_views_distinct",
+      "family": "memory",
+      "premise": "The user reports that one friend likes a story's pacing while another finds it rushed, and the user is undecided.",
+      "mechanism": "Discuss possible revisions, then accurately represent the three distinct positions when choosing what to ask next.",
+      "diversity_key": "feedback_multiple_views_user_undecided",
+      "turns": 7
+    }
+  }
+]

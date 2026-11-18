@@ -1,0 +1,54 @@
+notes_create ['invalid_model_action']
+notes_read ['invalid_model_action']
+notes_update ['invalid_model_action']
+notes_delete ['invalid_model_action']
+tasks_create ['invalid_model_action']
+tasks_read ['invalid_model_action']
+tasks_update ['invalid_model_action']
+tasks_delete ['invalid_model_action']
+contacts_create ['invalid_model_action']
+contacts_read ['invalid_model_action']
+contacts_update ['invalid_model_action']
+contacts_delete ['invalid_model_action']
+inventory_create ['invalid_model_action']
+inventory_read ['invalid_model_action']
+inventory_update ['invalid_model_action']
+inventory_delete ['invalid_model_action']
+events_create ['invalid_model_action']
+events_read ['invalid_model_action']
+events_update ['invalid_model_action']
+events_delete ['invalid_model_action']
+bookmarks_create ['invalid_model_action']
+bookmarks_read ['invalid_model_action']
+bookmarks_update ['invalid_model_action']
+bookmarks_delete ['invalid_model_action']
+tickets_create ['invalid_model_action']
+tickets_read ['invalid_model_action']
+tickets_update ['invalid_model_action']
+tickets_delete ['invalid_model_action']
+preferences_create ['invalid_model_action']
+preferences_read ['invalid_model_action']
+preferences_update ['invalid_model_action']
+preferences_delete ['invalid_model_action']
+documents_create ['invalid_model_action']
+documents_read ['invalid_model_action']
+documents_update ['invalid_model_action']
+documents_delete ['invalid_model_action']
+projects_create ['invalid_model_action']
+Traceback (most recent call last):
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/ganesh-tool-crud-v1/harness.py", line 126, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/ganesh-tool-crud-v1/harness.py", line 123, in main
+    result=run_case(case,tok,lambda ids,n:generate_action(model,tok,ids,n),model.config.sequence_len,a.reply_budget)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/ganesh-tool-crud-v1/harness.py", line 91, in run_case
+    start=time.monotonic();raw=list(generate(ids,budget));action=parse(tok,raw,c)
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/reports/ganesh-tool-crud-v1/harness.py", line 123, in <lambda>
+    result=run_case(case,tok,lambda ids,n:generate_action(model,tok,ids,n),model.config.sequence_len,a.reply_budget)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/navneetprabhakar/Documents/git/image/inference/cloud_training/nano_serve.py", line 164, in generate_action
+    if not bool(torch.isfinite(logits).all()): raise ValueError('Nonfinite generation logits')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

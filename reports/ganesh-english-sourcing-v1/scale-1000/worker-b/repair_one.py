@@ -1,0 +1,5 @@
+import importlib.util,json,pathlib
+p=pathlib.Path(__file__).with_name('pipeline.py');s=importlib.util.spec_from_file_location('bpipe',p);b=importlib.util.module_from_spec(s);s.loader.exec_module(b)
+g='b_101';original=next(c for c in json.loads((b.O/'batch-08-g1.raw.json').read_text())['conversations'] if c['group']==g)
+plan={'group':g,'scenario':'FINAL REPAIR OF EXISTING SCENARIO, same group. User must explicitly establish cake or food BEFORE assistant suggests serving it. Original dialogue never identifies object, leaking hidden baking plan. Fix this grounding error. Preserve centre/plain plus decoration only edge intent,4pairs,2interveningpairs before recall. Earlier draft: '+json.dumps(original,ensure_ascii=False),'memory_focus':'Decoration only around cake edge, centre plain','detours':'Actual user-established serving context and plate choice; no decoration placement rehearsal.','turns':4,'revision_accounting':'Originalg0 andg1 exist; this is second/final revision. No additional revision allowed.'}
+b.run_batch(30,[plan],max_revisions=0)

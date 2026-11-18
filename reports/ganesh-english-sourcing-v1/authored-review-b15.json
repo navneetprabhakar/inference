@@ -1,0 +1,340 @@
+[
+  {
+    "group": "exhibition_date_two_events",
+    "messages_sha256": "49c77a42cfb5242295ff9aec74e29ff382faaffd8d017e712e0edcd5d8f7ecd0",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Opening changes14June only; talk remains19June. Warmth and compression add no location/time facts.",
+    "generator_self_review_notes": "The correction changes only the exhibition opening; the talk remains on 19 June. The final notice preserves both events. I kept the invitation free of invented venue or time details. Weakness: the final task is a straightforward compression.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Print exhibition: opens 14 June. Artist talk: 19 June."
+      }
+    ]
+  },
+  {
+    "group": "garden_member_title",
+    "messages_sha256": "8fd3dcffedf488faa7c51d39c0b75b8957983d5abefbb2f5cd79a6c8294acc0f",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Member correction removes secretary title while retaining speaking duty; later welcome and oral version do not reinstate title.",
+    "generator_self_review_notes": "Priya is a member, not the secretary; the correction does not change her speaking role. I removed the incorrect title from every subsequent version and added no new title. Weakness: the role distinction is explicit in the correction.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Welcome, especially if you're new to the club. Priya is one of our members, and she'll tell us about the seed exchange."
+      }
+    ]
+  },
+  {
+    "group": "reply_from_wrong_sender",
+    "messages_sha256": "382b2a40f9e0408ad7f6c94c09ffe627a53ee166997cadacc525bfbb526e5645",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Arun correct recipient; prepare-versus-send distinction overrides earlier sending commitment. Unknown send time and promised later update retained.",
+    "generator_self_review_notes": "Arun sent the original request; the user is the person replying. The later correction separates preparing the agenda from sending it. I removed the earlier sending commitment and retained the user's intended update. Weakness: no uncertainty remains about the sender after correction.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "Hi Arun, I can prepare the agenda this morning, but I don't yet know when I can send it. I'll update you when I know."
+      }
+    ]
+  },
+  {
+    "group": "timetable_optional_stop",
+    "messages_sha256": "5cee16df13d3335f5fc30bbc12a453f836c3d3fed4abd2c33c09b13ec7815e02",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 4,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rationale": "Optional cafe moves before museum; skipping it does not cancel museum participation. Regrouping logistics remain unspecified, not fabricated.",
+    "generator_self_review_notes": "The café moved before the museum and remains optional; the museum and return are part of the itinerary for everyone. I made the final wording explicit about the museum. Weakness: the itinerary does not specify how the group reunites, which the user did not supply.",
+    "checks": [
+      {
+        "turn": 4,
+        "expected_assistant_exact": "Meet at the station at 9; those who wish can stop at the café before everyone visits the museum and returns to the station."
+      }
+    ]
+  },
+  {
+    "group": "quotation_remove_inference",
+    "messages_sha256": "6718dedb6337eaabd03af11de06d0dbd6b3050caaa3914caac8a26cc93519b9d",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Reported scope narrowed to some examples, original quote remains verbatim and clarification separate. Does not infer rejection from criticism.",
+    "generator_self_review_notes": "The original quotation is preserved verbatim, while the user's clarification narrows its intended scope. Rejection is an unsupported inference and is excluded. The neutral rewrite retains the criticism. Weakness: the clarification is reported from the user rather than directly from the commenter.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Original comment: “The draft is shorter, but the examples still feel repetitive.”\nScope clarification: The commenter meant some examples."
+      }
+    ]
+  },
+  {
+    "group": "ticket_transfer_not_cancel",
+    "messages_sha256": "250b1539cd1a0710b7c7a8090927937062eaef298198d4972765def3b3b4dae5",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Conditional transfer replaces cancellation, Leela recipient retained, no performed-transfer claim. Subject/form variants preserve uncertain permission.",
+    "generator_self_review_notes": "The user corrected cancellation to a conditional transfer request. Leela is the sister and intended recipient. The final versions omit a reason and do not claim a transfer has happened. Weakness: the draft does not ask about a deadline, since none was supplied.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "I'd like to transfer my ticket to my sister, Leela, if transfers are allowed."
+      }
+    ]
+  },
+  {
+    "group": "artist_statement_no_sales",
+    "messages_sha256": "6fddd0eb552dfd46f25ed79b2f999de0c89f81f6db59978d927ec271d9d9c6c8",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Chosen second title preserved despite requested alternative; medium/light theme grounded; no prices or sales in final label.",
+    "generator_self_review_notes": "The user chose “At the Edge of Light”; the label draws on the stated medium and theme and does not mention sales or prices. Turns 2–4 intervene between the boundary and the label request. I avoided claiming details about the artwork beyond those supplied. Weakness: the probe signals that an earlier boundary exists, though it does not supply it.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "At the Edge of Light is a small paper landscape inspired by walks near my home. It reflects my interest in the ordinary changes in light that shape a familiar place."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "At the Edge of Light is a small paper landscape inspired by walks near my home. It reflects my interest in the ordinary changes in light that shape a familiar place.",
+      "probe_focus": "Do not mention selling or prices.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "library_donation_loan",
+    "messages_sha256": "b972a483f76ba7914a40191da57fd4f937776cd7c72a02d5f9a2504a13ed69ef",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Atlas loan and travel-book donation distinct across heading/welcome tasks; five-word description uses conventional hyphenated word counting. No invented return date.",
+    "generator_self_review_notes": "The three travel books are donated permanently; only the illustrated atlas is loaned. Turns 2–5 contain separate display tasks before the return request. I did not invent a return date. Weakness: the user does not specify a preferred return method.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "Hello, the illustrated atlas is on loan for the display, so please return it to me afterward. The three travel books are a permanent donation."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "Hello, the illustrated atlas is on loan for the display, so please return it to me afterward. The three travel books are a permanent donation.",
+      "probe_focus": "The atlas is loaned; the three travel books are permanently donated.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "walk_start_end_distinct",
+    "messages_sha256": "5f1c2250f9868bc7abcf084feb58722f2e683d9258bc638ab9efd738943c5801",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "North gate start/riverside kiosk finish retained through title/water/footwear; no invented loop or time.",
+    "generator_self_review_notes": "The walk starts at the north gate and ends at the riverside kiosk, with no return to the gate. Turns 2–4 develop other parts of the group message. The final answer distinguishes the two locations without inventing times. Weakness: the requested location lines are concise rather than a full route.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Start: North gate\nFinish: Riverside kiosk"
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Start: North gate\nFinish: Riverside kiosk",
+      "probe_focus": "Distinct start and finish, with no return to the start.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "cooking_club_no_equipment",
+    "messages_sha256": "f23b32b764893106ffe87df75fcffcdf9b8f23773226179cc3a3576181953b57",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 6,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "rationale": "Discussion-only constraint and optional personal disclosure preserved through three-part plan; no live preparation added.",
+    "generator_self_review_notes": "The room has no cooking equipment and the user ruled out live preparation. The intervening turns develop an inclusive discussion, and the plan uses those choices without cooking. Weakness: it does not assign timings because none were requested.",
+    "checks": [
+      {
+        "turn": 6,
+        "expected_assistant_exact": "1. Invite quiet reflection on a memorable food; sharing is optional.\n2. Let participants contribute aloud or in a written note.\n3. Close by inviting an idea or question to take away, with the option to pass."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 6,
+      "intervening_complete_turns": 4,
+      "expected_assistant_exact": "1. Invite quiet reflection on a memorable food; sharing is optional.\n2. Let participants contribute aloud or in a written note.\n3. Close by inviting an idea or question to take away, with the option to pass.",
+      "probe_focus": "No cooking equipment or live preparation.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "family_photo_people_roles",
+    "messages_sha256": "5b9b63023fab4a4ede9a1b65e016ff49a3972722e37ee61c9c0aa4cca5ded935",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Visible aunt and cousin distinguished from invisible photographer; caption retains supplied relation and umbrella holder after title editing.",
+    "generator_self_review_notes": "Meera is the user's aunt and holds the umbrella; Dev is the user's cousin beside her. The user is the photographer and is not visible. Three album-title tasks intervene. I avoided including the photographer as a visible person. Weakness: the supplied positions are limited to their relation to each other.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "Aunt Meera holds the umbrella, with cousin Dev beside her."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "Aunt Meera holds the umbrella, with cousin Dev beside her.",
+      "probe_focus": "Visible people, their roles, and the photographer's absence from the image.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  },
+  {
+    "group": "paper_map_route_choice",
+    "messages_sha256": "a6215bd2b7555e320ed8127c993570c6d4963a8c54479291275f31ab52839612",
+    "decision": "shortlist",
+    "reviewer": "Codex parent session full semantic review of CLI output; exact reviewer backend variant not verified",
+    "independent_review": false,
+    "training_admitted": false,
+    "assistant_turns_reviewed": 5,
+    "reviewed_turn_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rationale": "Garden route choice and longer/gentler tradeoff retained; ridge not substituted because shorter. Title provides partial cue, so delay is not isolated benchmark evidence.",
+    "generator_self_review_notes": "The garden route is the user's choice; it is longer and gentle, while the ridge route is shorter and steep. Turns 2–4 cover the note and invitation before the route synthesis. I framed suitability as a possibility. Weakness: the description relies entirely on the user's map information.",
+    "checks": [
+      {
+        "turn": 5,
+        "expected_assistant_exact": "I'm taking the garden route: it's longer than the ridge route, but its gentler gradient may suit someone who prefers a less steep walk."
+      }
+    ],
+    "recall_probe": {
+      "last_supporting_turn": 1,
+      "probe_turn": 5,
+      "intervening_complete_turns": 3,
+      "expected_assistant_exact": "I'm taking the garden route: it's longer than the ridge route, but its gentler gradient may suit someone who prefers a less steep walk.",
+      "probe_focus": "Chosen garden route and its tradeoff against the ridge route.",
+      "annotation_scope": "Parent-reviewed constraint/fact focus; contextual cues may reduce difficulty, not measured model performance."
+    }
+  }
+]
