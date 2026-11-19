@@ -1,13 +1,20 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
 Updated 19 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: LOCAL TIMING REPLAY COMPLETE; KEEP VM OFF
-Both frozen 40-update arms together model at 19.2–47.4 minutes of training.
-Proposed deadline 47 min/arm, 319 min end-to-end plus 1 fallback minute.
-Proposed incremental cap $33 ($32.67 including reserves). No current launch approval.
-See reports/ganesh-english-a100-30/TIMING_REPLAY.md. Before launch, version and
-test the controller/launcher/early monitor, bind approval and requalify live.
-Fresh decode is critical: historical forecast 89.4 min against a 90 min limit.
+CURRENT DECISION: PATCHED MAIN CLEANED LOCALLY; HOLD TRAINING FOR REASSESSMENT
+Baseline main ebff543. Removed 131 Git-backed historical report files from 14
+retired experiment groups and project bytecode caches. The original reports
+remain available at ebff543. Three closed qualification archive copies were
+evicted from runs/ after comparing local SHA-256 with prior readback receipts
+and current GCS object sizes and MD5 checksums. Local paths, object generations
+and hashes are in runs/local-cleanup-ebff543/archive-evictions.jsonl.
+Preserved local models, datasets, tokenizer, runtime archives and raw chat evidence.
+Post-cleanup plan validate/check, evaluation readiness and all 58 tests passed.
+The real tokenizer rejected 72 training and 6 validation rows at 2K, and the
+patched trainer CLI imports a missing loader. No repaired SFT learning result.
+Fit30 conversation smoke evidence: runs/patched-main-ebff543/conversations.jsonl.
+The $33 estimate covers the separately versioned frozen comparison only.
+No new training approval. See reports/ganesh-english-a100-30/TIMING_REPLAY.md.
 
 PREVIOUS CAMPAIGN: $30 A100 QUALIFICATION CLOSED AT TIMING GATE; NO PILOT
 See reports/ganesh-english-a100-30/RESULT.md and closeout.json. Readiness pushed as 1fdb78f.
