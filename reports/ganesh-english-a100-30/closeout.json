@@ -1,0 +1,88 @@
+{
+  "instance": "ganesh-eng-1119-081421",
+  "zone": "us-central1-f",
+  "pilot_started": false,
+  "qualification_updates": 2,
+  "hold": {
+    "status": "hold",
+    "reason": "Projected arm 5654s exceeds 1350s allocation",
+    "timings": {
+      "startup": 78.899322961,
+      "evaluation": 2.7249683500000117,
+      "checkpoint": 117.26140227599998,
+      "update": 55.15207169399997
+    },
+    "arm_limit": 1350,
+    "scope": "continuous branch only; additional samples cannot reduce these maxima",
+    "pilot_started": false
+  },
+  "timings": [
+    {
+      "stage": "startup",
+      "seconds": 78.899322961,
+      "step": 0
+    },
+    {
+      "stage": "evaluation",
+      "seconds": 2.7249683500000117,
+      "step": 0
+    },
+    {
+      "stage": "checkpoint",
+      "seconds": 117.26140227599998,
+      "step": 0
+    },
+    {
+      "stage": "update",
+      "seconds": 55.15207169399997,
+      "step": 1
+    },
+    {
+      "stage": "evaluation",
+      "seconds": 2.0366283139999837,
+      "step": 1
+    },
+    {
+      "stage": "update",
+      "seconds": 0.5890456519999816,
+      "step": 2
+    },
+    {
+      "stage": "evaluation",
+      "seconds": 2.036704199999974,
+      "step": 2
+    },
+    {
+      "stage": "checkpoint",
+      "seconds": 141.17349524900004,
+      "step": 2
+    }
+  ],
+  "independent_backup_readbacks": {
+    "instance": "ganesh-eng-1119-081421",
+    "writers_joined": true,
+    "bundles": [
+      {
+        "path": "qualification-v3/continuous/step-00000000",
+        "uri": "gs://forge-ownbase-a100-20261110/ganesh-english-controlled-v2/ganesh-eng-1119-081421/qualification-v3/continuous/checkpoints/checkpoint-1b13f91b875447c2adbe17de0cbac6a5",
+        "manifest_sha256": "ae2f143b25d88b28cbf53f65b5a275543bef3bc4a664357ff130b9ff02097340"
+      },
+      {
+        "path": "qualification-v3/continuous/step-00000002",
+        "uri": "gs://forge-ownbase-a100-20261110/ganesh-english-controlled-v2/ganesh-eng-1119-081421/qualification-v3/continuous/checkpoints/checkpoint-f50ec93489414f81a6b9f456026e5e42",
+        "manifest_sha256": "dc1855e1f399497ba570ec2b6e02ccb6e537c481945b1f8abf0666ded031eacc"
+      }
+    ],
+    "evidence": {
+      "uri": "gs://forge-ownbase-a100-20261110/ganesh-english-controlled-v2/ganesh-eng-1119-081421/closeout/closeout-evidence.tar.gz",
+      "sha256": "1831bd178bb1f62169fb48c424828e1acf64c05b0e9243d7692975e869b3396e"
+    }
+  },
+  "compute_disk_estimate_usd": 0.7321987302749444,
+  "elapsed_seconds": 712.259,
+  "inventory": {
+    "instances": [],
+    "disks": []
+  },
+  "final_invoice": false
+}
