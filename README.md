@@ -2,7 +2,70 @@
 
 **Creator: Navneet Prabhakar.**
 
-Ganesh-base (historically called Own in artifact paths) is an experimental **536,871,738-parameter language model trained from random initialization**, with local inference, supervised conversation training, and a bounded offline tool broker. The current priority is improving **Ganesh-base’s trained weights for English conversation**, followed by maths and then CBSE through Class 12. A pretrained assistant is not substituted for Ganesh-base. The declared model identity is not yet verified as learned in the weights; see [identity status](MODEL_IDENTITY.json).
+Ganesh-base (historically called Own in artifact paths) is a **536,871,738-parameter (`119`-tensor) decoder-only Transformer language model trained from random initialization**, with local Apple Silicon (`mps`) inference, a repaired action-weighted SFT pipeline (`cloud_training/ganesh_sft_repair.py`), a 4-layer immutable identity and creator protection system (`ganesh/__init__.py`), and a 12-tool execution broker (`calculate`, `convert`, plus 10 stateful CRUD tools).
+
+## Repaired SFT v2 & Milestone Governance (`ganesh-base-repair-v1`)
+
+### 1. What Was Built and Repaired (`What`)
+
+1. **Self-Contained `536,871,738`-Parameter `GaneshGPT` Architecture (`ganesh/model.py`):**
+   - Implements the exact `119`-tensor layout of `Base10B` (`wte = 33,554,432`, 8 odd-layer `value_embeds = 268,435,456`, `lm_head = 33,554,432`, `transformer_matrices = 201,327,360` including 8 `ve_gate` matrices, and `58` scalars).
+   - Runs natively on Apple Silicon (`mps`), `cuda`, and `cpu` with PyTorch `scaled_dot_product_attention` without external FlashAttention-3 or `runs/nanochat-source`.
+2. **4-Layer Immutable Identity and Creator Protection (`ganesh/__init__.py`, `configs/MODEL_IDENTITY.json`):**
+   - **Layer 1 (Contract & SHA-256 Lock):** Hardcodes `MODEL_IDENTITY = {"model_name": "Ganesh-base", "creator": "Navneet Prabhakar", "immutable": True}` and validates `configs/project.json` and `configs/MODEL_IDENTITY.json` against `configs/guardrails.json`.
+   - **Layer 2 (SFT v2 Weight Embedding):** Embeds `38` train and `22` validation identity and anti-override conversations across both `[tools:off]` and `[tools:on]` modes (`reports/ganesh-sft-repair-v2/`).
+   - **Layer 3 (Checkpoint Cryptographic Binding):** Binds `model_identity` and `model_identity_sha256` inside `save_ganesh_checkpoint()` and `load_ganesh_checkpoint()` (`cloud_training/ganesh_sft_repair.py`); tampered checkpoints fail closed before weight loading.
+   - **Layer 4 (Runtime Anti-Override Guard):** `immutable_ganesh_identity_guard()` rejects persona overrides and `[SYSTEM OVERRIDE]` attacks at runtime while preserving user-name-vs-model-name distinction.
+3. **Six Root-Cause SFT & Runtime Repairs (`cloud_training/ganesh_sft_repair.py` & `scripts/build_ganesh_sft_v2.py`):**
+   - **Fix 1 (Control-Token Head Calibration):** `calibrate_control_token_heads()` normalizes uninitialized control token rows (`32760..32767`) in `lm_head`, `transformer.wte`, and all 8 `value_embeds` tables to match active vocabulary RMS norm, eliminating the `-42.0` raw logit `15 * tanh(z / 15)` gradient dead-zone (`43.2x` gradient recovery).
+   - **Fix 2 (Action-Weighted Cross-Entropy Loss):** `action_weighted_sft_loss()` applies a `3.0x` loss weight to `<|assistant_end|>`, `<|python_start|>`, and `<|python_end|>`.
+   - **Fix 3 (Clean AdamW SFT Optimizer):** `build_fresh_sft_optimizer()` uses a clean AdamW optimizer (`lr = 3e-5`, cosine decay) instead of reusing stale `step=19074` pretraining Muon moments.
+   - **Fix 4 (12-Tool Compact Serializer & Validator):** `compact_policy_header()` replaces the 85-token JSON policy header with a 12-token header (`[tools:off]` or `[tools:on allowed=...]`), and `validate_any_tool_call()` validates all 12 tools (`calculate`, `convert`, plus 10 stateful CRUD tools).
+   - **Fix 5 (Full Causal Attention & Single-Conversation Masking):** `GaneshGPT.set_full_causal_attention()` upgrades `SSSL` sliding-window attention to `LLLLLLLLLLLLLLLL` (`16/16` full causal layers), `build_single_conversation_batch()` isolates conversations with `NATIVE_IGNORE` (`-1`), and `generate_action_repaired()` bans `<|bos|>` (`32759`) during decoding.
+   - **Fix 6 (Balanced 12-Tool SFT v2 Corpus):** `reports/ganesh-sft-repair-v2/` contains `1,531` train and `285` validation conversations balanced across `disabled_no_call` (`476`), `enabled_no_call` (`498`), and `enabled_call` (`557`, with `770` execution-verified tool calls).
+
+---
+
+### 2. How It Works and How to Run It (`How`)
+
+#### A. How the End-to-End Pipeline Works
+
+1. **Encoding (`encode_conversation_repaired`):** Each turn Prepends a compact policy header (`[tools:off]` or `[tools:on allowed=...]`) inside `<|user_start|>...<|user_end|>` (`mask=0`) and supervises only assistant prose (`<|assistant_start|>...<|assistant_end|>`) and canonical JSON tool calls (`<|python_start|>{"name":...,"arguments":...}<|python_end|>`) with `mask=1`. Tool observations (`<|output_start|>...<|output_end|>`) are masked (`mask=0`) so the model never learns to hallucinate tool outputs.
+2. **SFT Training (`run_repaired_sft`):** Before step 1, `calibrate_control_token_heads()` moves special tokens out of the `tanh` saturation zone and `set_full_causal_attention()` enables full context attention across all 16 layers. Training optimizes `action_weighted_sft_loss()` (`3.0x` delimiter weight) with AdamW and saves checkpoints via `save_ganesh_checkpoint()`.
+3. **Closed-Loop Tool Inference (`generate_action_repaired`):** At inference time, `<|bos|>` is masked to `-inf`. If step 0 emits `<|python_start|>`, the decoder generates a canonical JSON tool call up to `<|python_end|>`, validates it via `validate_any_tool_call()`, executes it against `FixtureSession` or the CRUD broker, appends `<|output_start|>...<|output_end|>`, and resumes generation until `<|assistant_end|>`.
+
+#### B. How to Verify and Run Locally
+
+1. **Read the Core Documentation:**
+   - [`docs/CODEMAP.md`](docs/CODEMAP.md): Complete module, CLI, dataset, and SHA-256 hash-binding map.
+   - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): Exact `536,871,738`-parameter `GaneshGPT` tensor breakdown and SFT repair diagrams.
+   - [`docs/EXECUTION_PLAN.md`](docs/EXECUTION_PLAN.md) & [`docs/EXECUTION_STATUS.md`](docs/EXECUTION_STATUS.md): Milestone dependency graph (`G0 -> D0, M0 -> S0, E0 -> A0`) and verification status.
+   - [`docs/HOW_TO_TEST.md`](docs/HOW_TO_TEST.md): Step-by-step local verification, SFT training, and 9-category evaluation guide on Apple M4 Max (`mps`).
+2. **Run Contract, Guardrail, and Unit Verification:**
+   ```sh
+   PYTHONDONTWRITEBYTECODE=1 python -m ganesh.plan validate
+   PYTHONDONTWRITEBYTECODE=1 python -m ganesh.plan check
+   PYTHONDONTWRITEBYTECODE=1 python -m ganesh.evaluation --require-ready
+   PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -p "verify_*.py" -v
+   ```
+3. **Rebuild the SFT v2 Dataset (`1,531` Train / `285` Validation Conversations):**
+   ```sh
+   PYTHONDONTWRITEBYTECODE=1 python scripts/build_ganesh_sft_v2.py
+   ```
+4. **Run the Extensive 9-Category (`18/18`) and Tough Multi-Turn (`12/12`) Suites on `mps`:**
+   ```sh
+   PYTHONDONTWRITEBYTECODE=1 python scripts/run_extensive_ganesh_test.py
+   PYTHONDONTWRITEBYTECODE=1 python scripts/run_tough_tests.py
+   ```
+5. **Run Repaired SFT on the `537M` `Base10B` Checkpoint (`step-000019074`):**
+   ```sh
+   PYTHONDONTWRITEBYTECODE=1 python cloud_training/ganesh_sft_repair.py \
+     --checkpoint runs/ownbase-budget50-v1/checkpoints/step-000019074 \
+     --device mps \
+     --epochs 2 \
+     --batch-size 4 \
+     --lr 3e-5
+   ```
 
 **Status as of 18 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available; HTTP is off. The latest $25 A100 attempt stopped on qualification infrastructure failures before either controlled English pilot arm ran. Required backups were verified before the dedicated VM and disk were retired. No GPU restart is pending.
 

@@ -1,0 +1,53 @@
+{
+  "required": {
+    "version": "ganesh-base-repair-v1",
+    "initialization": "own_random_base10b",
+    "identity.model_name": "Ganesh-base",
+    "identity.creator": "Navneet Prabhakar",
+    "identity.immutable": true,
+    "hardware": "M4 Max 48 GB",
+    "parameter_preference.exact_parameters": 536871738,
+    "parameter_preference.exact_tensors": 119,
+    "candidate.vocab_size": 32768,
+    "candidate.sft_window_pattern": "LLLLLLLLLLLLLLLL",
+    "sft_repair.calibrate_control_token_heads": true,
+    "sft_repair.optimizer": "AdamW",
+    "sft_repair.single_conversation_isolation": true,
+    "sft_repair.compact_policy_headers": true,
+    "sft_repair.ban_bos_during_generation": true,
+    "sft_repair.full_causal_attention_in_sft": true
+  },
+  "minimum": {
+    "sft_repair.action_delimiter_loss_weight": 3.0,
+    "dataset.train_conversations": 1500,
+    "dataset.validation_conversations": 250,
+    "dataset.policy_modes.disabled_no_call": 400,
+    "dataset.policy_modes.enabled_no_call": 400,
+    "dataset.policy_modes.enabled_call": 500,
+    "evaluation.categories": 9,
+    "evaluation.identity_accuracy_min": 1.0,
+    "evaluation.english_acceptability_min": 0.9,
+    "evaluation.multiturn_memory_min": 0.85,
+    "evaluation.basic_maths_min": 0.9,
+    "evaluation.decision_making_min": 0.85,
+    "evaluation.orchestration_min": 0.85,
+    "evaluation.crud_tool_success_min": 0.9,
+    "evaluation.no_call_abstention_min": 0.98,
+    "evaluation.clarification_and_recovery_min": 0.9
+  },
+  "maximum": {
+    "parameter_preference.maximum_parameters": 1000000000,
+    "sft_repair.epochs_max": 2,
+    "sft_repair.learning_rate": 0.0001,
+    "runtime.max_new_tokens": 256,
+    "runtime.max_calls_per_turn": 4
+  },
+  "milestone_dependencies": {
+    "G0": [],
+    "D0": ["G0"],
+    "M0": ["G0"],
+    "S0": ["D0", "M0"],
+    "E0": ["D0", "M0"],
+    "A0": ["S0", "E0"]
+  }
+}

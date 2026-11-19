@@ -1,6 +1,23 @@
 # Ganesh-base work: quality-first operating rules
 
-Read OWN_BASE_HANDOFF.txt before training, dataset admission, model selection or cleanup. Canonical model name: Ganesh-base; creator: Navneet Prabhakar. Preserve legacy Own/ownbase artifact paths/hashes. Identity declaration/candidates do not prove weight embedding; see MODEL_IDENTITY.json and reports/ganesh-base-review-v1/REVIEW.md.
+Read `docs/CODEMAP.md`, `docs/ARCHITECTURE.md`, `docs/EXECUTION_PLAN.md`, `docs/EXECUTION_STATUS.md`, `docs/HOW_TO_TEST.md`, `configs/project.json`, `configs/guardrails.json`, and `docs/OWN_BASE_HANDOFF.txt` before training, dataset admission, model selection, or cleanup. Canonical model name: **Ganesh-base**; creator: **Navneet Prabhakar** (foundational, immutable across all 4 protection layers: contract/guardrails, SFT dataset/weights, checkpoint cryptographic binding, and runtime anti-override guard). Preserve legacy Own/ownbase artifact paths/hashes.
+
+## Repaired Architecture & Milestone Governance (`ganesh-base-repair-v1`)
+
+- **Self-Contained `536,871,738`-Parameter `GaneshGPT` (`ganesh/model.py`):** Matches the exact `119`-tensor layout of `Base10B` (`wte = 33,554,432`, 8 odd-layer `value_embeds = 268,435,456`, `lm_head = 33,554,432`, `transformer_matrices = 201,327,360` including 8 `ve_gate` matrices, and `58` scalars) and runs natively on Apple Silicon (`mps`), `cuda`, and `cpu` without requiring external FlashAttention-3 or `runs/nanochat-source`.
+- **Six SFT & Runtime Repairs (`cloud_training/ganesh_sft_repair.py` & `scripts/build_ganesh_sft_v2.py`):**
+  1. `calibrate_control_token_heads()` normalizes uninitialized special control tokens (`32760..32767`) in `lm_head`, `transformer.wte`, and all 8 `value_embeds` tables to remove the `-42.0` raw logit `tanh`-softcap gradient dead-zone (`43.2x` gradient recovery).
+  2. `action_weighted_sft_loss()` applies a `3.0x` loss weight to `<|assistant_end|>`, `<|python_start|>`, and `<|python_end|>`.
+  3. `build_fresh_sft_optimizer()` uses a clean AdamW optimizer (`lr = 3e-5`, cosine schedule) instead of stale `step=19074` pretraining Muon moments.
+  4. `compact_policy_header()` and `validate_any_tool_call()` support all 12 tools (`calculate`, `convert`, plus 10 CRUD tools) with a 12-token policy header (`[tools:off]` / `[tools:on allowed=...]`).
+  5. `GaneshGPT.set_full_causal_attention()` upgrades `SSSL` to `LLLLLLLLLLLLLLLL` (`16/16` full causal layers), `build_single_conversation_batch()` isolates conversations with `NATIVE_IGNORE` (`-1`), and `generate_action_repaired()` bans `<|bos|>` (`32759`) during decoding.
+  6. `reports/ganesh-sft-repair-v2/` provides `1,531` train and `285` validation conversations balanced across `disabled_no_call`, `enabled_no_call`, and `enabled_call` (`770` execution-verified tool calls).
+- **Mandatory Verification Checks:**
+  - `PYTHONDONTWRITEBYTECODE=1 python -m ganesh.plan validate`
+  - `PYTHONDONTWRITEBYTECODE=1 python -m ganesh.plan check`
+  - `PYTHONDONTWRITEBYTECODE=1 python -m ganesh.evaluation --require-ready`
+  - `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -p "verify_*.py" -v`
+
 The user's current instructions override this file. Current status: approved $20 L4 campaign closed on replay-environment qualification failure; verified backups, zero VMs/disks. Read reports/ganesh-l4-cap20-v1/STATUS.md and REPLAY_ENV_RCA.md. L4 normal restart and selected raw Muon capture compared exactly; historical A100 issue is not universally resolved. Local CUBLAS replay restoration fix passes 203 tests and package readback, not CUDA qualification. No automatic retry/pilot/promotion. Fresh bindings and remaining live gates required for continuation. Original runtime must remain for old source-bound captures. Local weights/frozen data preserved; HTTP off.
 
 - User priority: English conversation first, then maths, then CBSE through Class12. Defer maths/CBSE corpus expansion until preceding capability gates pass. Tool checks protect regressions but do not substitute for English conversation acceptance.

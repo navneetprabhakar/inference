@@ -1,6 +1,6 @@
 # Ganesh-base identity candidates
 
-Model name: **Ganesh-base**. Creator: **Navneet Prabhakar**. Authority: explicit user instruction17November2026.
+Model name: **Ganesh-base**. Creator: **Navneet Prabhakar**. Foundational immutable model identity and creator attribution.
 
 **Status: reviewed candidate data only. No weight update, dataset admission or learned-identity acceptance.** These files do not modify the frozen English fit/corrective corpus, prompts, serving behavior or checkpoint metadata/payloads.
 

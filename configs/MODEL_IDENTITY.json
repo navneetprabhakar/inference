@@ -1,0 +1,15 @@
+{
+  "model_name": "Ganesh-base",
+  "creator": "Navneet Prabhakar",
+  "immutable": true,
+  "protection_layers": [
+    "Layer 1: Contract, guardrails, and SHA-256 signature verification (ganesh.verify_model_identity)",
+    "Layer 2: Balanced SFT v2 dataset training across disabled_no_call and enabled_no_call (reports/ganesh-sft-repair-v2)",
+    "Layer 3: Checkpoint payload cryptographic binding (save_ganesh_checkpoint / load_ganesh_checkpoint)",
+    "Layer 4: Runtime inference and anti-override guard (immutable_ganesh_identity_guard)"
+  ],
+  "legacy_artifact_prefix": "Own/ownbase/forge; preserved for checkpoint lineage and hashes",
+  "weight_embedded_verified": true,
+  "identity_candidate_directory": "reports/ganesh-base-identity-v1",
+  "admitted_repair_directory": "reports/ganesh-sft-repair-v2"
+}

@@ -1,0 +1,90 @@
+{
+  "version": "ganesh-base-repair-v1",
+  "initialization": "own_random_base10b",
+  "identity": {
+    "model_name": "Ganesh-base",
+    "creator": "Navneet Prabhakar",
+    "immutable": true
+  },
+  "hardware": "M4 Max 48 GB",
+  "parameter_preference": {
+    "maximum_parameters": 1000000000,
+    "exact_parameters": 536871738,
+    "exact_tensors": 119,
+    "strength": "hard_cap"
+  },
+  "candidate": {
+    "n_layer": 16,
+    "n_embd": 1024,
+    "n_head": 8,
+    "n_kv_head": 8,
+    "vocab_size": 32768,
+    "sequence_len": 2048,
+    "extended_sequence_len": 4096,
+    "pretrain_window_pattern": "SSSL",
+    "sft_window_pattern": "LLLLLLLLLLLLLLLL",
+    "logit_softcap": 15.0,
+    "value_embeds_layers": [1, 3, 5, 7, 9, 11, 13, 15],
+    "ve_gate_channels": 12,
+    "smear_gate_dim": 24,
+    "position_encoding": "RoPE",
+    "normalization": "RMSNorm",
+    "activation": "ReLU2"
+  },
+  "sft_repair": {
+    "calibrate_control_token_heads": true,
+    "control_tokens_range": [32760, 32767],
+    "action_delimiter_loss_weight": 3.0,
+    "optimizer": "AdamW",
+    "learning_rate": 3e-05,
+    "weight_decay": 0.01,
+    "epochs_max": 2,
+    "single_conversation_isolation": true,
+    "compact_policy_headers": true,
+    "ban_bos_during_generation": true,
+    "full_causal_attention_in_sft": true
+  },
+  "dataset": {
+    "release_dir": "reports/ganesh-sft-repair-v2",
+    "train_conversations": 1523,
+    "validation_conversations": 283,
+    "assistant_text_turns": 5860,
+    "tool_calls_verified": 770,
+    "policy_modes": {
+      "disabled_no_call": 472,
+      "enabled_no_call": 494,
+      "enabled_call": 557
+    }
+  },
+  "runtime": {
+    "context_tokens": 2048,
+    "max_new_tokens": 256,
+    "max_calls_per_turn": 4,
+    "repetition_penalty": 1.05,
+    "broker_tools": ["calculate", "convert"],
+    "crud_tools": [
+      "bookmarks",
+      "contacts",
+      "documents",
+      "events",
+      "inventory",
+      "notes",
+      "preferences",
+      "projects",
+      "tasks",
+      "tickets"
+    ]
+  },
+  "evaluation": {
+    "categories": 9,
+    "identity_accuracy_min": 1.0,
+    "english_acceptability_min": 0.9,
+    "multiturn_memory_min": 0.85,
+    "basic_maths_min": 0.9,
+    "decision_making_min": 0.85,
+    "orchestration_min": 0.85,
+    "crud_tool_success_min": 0.9,
+    "no_call_abstention_min": 0.98,
+    "clarification_and_recovery_min": 0.9
+  }
+}
