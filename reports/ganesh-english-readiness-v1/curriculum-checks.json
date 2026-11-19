@@ -1,0 +1,66 @@
+{
+  "train": {
+    "native": {
+      "assistant_targets": 38692,
+      "sessions": 305,
+      "assistant_turns": 1799,
+      "family_target_mass": {
+        "memory": 8990,
+        "correction": 8974,
+        "planning": 2883,
+        "clarification": 909,
+        "grounding": 3638,
+        "ordinary": 9091,
+        "language_explanation": 4207
+      },
+      "max_prompt": 1750,
+      "max_prompt_with_reserve": 2006,
+      "max_reply_targets": 85,
+      "max_complete_context": 1766
+    },
+    "unique_normalized_assistant_texts": 1799,
+    "family_target_mass": {
+      "memory": 8990,
+      "correction": 8974,
+      "planning": 2883,
+      "clarification": 909,
+      "grounding": 3638,
+      "ordinary": 9091,
+      "language_explanation": 4207
+    }
+  },
+  "development": {
+    "native": {
+      "assistant_targets": 9747,
+      "sessions": 80,
+      "assistant_turns": 465,
+      "family_target_mass": {
+        "memory": 2063,
+        "correction": 1894,
+        "clarification": 1353,
+        "ordinary": 2073,
+        "grounding": 880,
+        "rewrite": 63,
+        "language_explanation": 723,
+        "planning": 698
+      },
+      "max_prompt": 1744,
+      "max_prompt_with_reserve": 2000,
+      "max_reply_targets": 48,
+      "max_complete_context": 1776
+    },
+    "unique_normalized_assistant_texts": 465,
+    "family_target_mass": {
+      "memory": 2063,
+      "correction": 1894,
+      "clarification": 1353,
+      "ordinary": 2073,
+      "grounding": 880,
+      "rewrite": 63,
+      "language_explanation": 723,
+      "planning": 698
+    }
+  },
+  "training_admitted": false,
+  "scoring": "Use generated conversation histories. Score every planned assistant turn for correctness, grounded facts, latest constraints, requested form and permitted action. Record reasons and first failure. Blocked turns count as failures. Complete session requires all turns to pass. References are assessor-only. This exposed split changes both source and topic; results do not isolate either effect."
+}

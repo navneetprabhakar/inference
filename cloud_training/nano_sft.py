@@ -567,6 +567,12 @@ def run(args):
     status={'status':'running','identity':identity,'step':step,'assistant_targets':trained_targets,'train_loss_scope':'last_optimizer_update_only'}
     component_options={'separate_end':True} if block_mode else {}
     metric='content_cross_entropy_nats' if block_mode else 'cross_entropy_nats'
+    # Qualification records observed wall time without changing the training schedule.
+    def timing(stage, seconds):
+        if os.environ.get('GANESH_MEASURE_PILOT') == '1':
+            with (out/'stage-timings.jsonl').open('a') as stream:
+                stream.write(json.dumps({'stage':stage,'seconds':seconds,'step':step})+'\n')
+
     def observe_quality(aggregate):
         families=evaluate_families(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device,**component_options)
         status['development_by_family']=families
@@ -582,7 +588,8 @@ def run(args):
     def checkpoint(reason,pin=False):
         nonlocal last_save,last_saved
         if last_saved==step:return
-        journal.deadline=time.monotonic()+min(args.checkpoint_reserve_seconds,deadline-time.time())
+        checkpoint_start=time.monotonic()
+        journal.deadline=checkpoint_start+min(args.checkpoint_reserve_seconds,deadline-time.time())
         path=out/f'step-{step:08d}'
         save_bundle(path,model=model,optimizer=optimizer,metadata={'step':step,'identity':identity,'reason':reason,
                    'loop':{'trained_targets':trained_targets,'best_dev':best_dev,'best_step':best_step,'quality_guards':{name:dict(g.state) for name,g in guards.items()}}},
@@ -606,16 +613,22 @@ def run(args):
         for old in local[:-2]:
             if int(old.name.split('-')[1])!=best_step and int(old.name.split('-')[1]) not in pinned_steps:
                 validate_bundle(old);shutil.rmtree(old)
+        timing('checkpoint',time.monotonic()-checkpoint_start)
+    if os.environ.get('GANESH_MEASURE_PILOT') == '1':
+        timing('startup',time.monotonic()-float(os.environ['GANESH_PROCESS_START']))
     if stopping() and not args.resume:
         atomic_json(out/'result.json',dict(status,status='stopped',reason='lease_before_initial_evaluation',quality_accepted=False))
         return 2
     if not stopping():
+        evaluation_start=time.monotonic()
         status['development_start']=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device,**component_options)
         initial_dev=status['development_start'][metric]
         # Resume loading must not add an unscheduled validation strike or silently change the best pin.
         if not args.resume:
             observe_quality(status['development_start'])
             best_dev,best_step=initial_dev,step
+    if not stopping() and 'development_start' in status:
+        timing('evaluation',time.monotonic()-evaluation_start)
     if not args.resume:checkpoint('initial_warm_started_sft')
     reason='dataset_complete' if max_step==horizon else 'pilot_update_limit'
     while step<max_step:
@@ -653,12 +666,15 @@ def run(args):
         step+=1;trained_targets+=count
         status.update(step=step,assistant_targets=trained_targets,train_loss=loss,
                       consumed_conversations=packing.consumed,packed_rows=packing.rows,update_seconds=time.monotonic()-tick,last_update_assistant_targets=count)
+        timing('update',status['update_seconds'])
         new_best=False
         if (step%args.eval_every_updates==0 or step==max_step or step in pinned_steps) and not stopping():
             try:
+                evaluation_start=time.monotonic()
                 ev=evaluate_fixed(model,dev,rows=args.eval_rows,microbatch=args.microbatch,device=next(model.parameters()).device,**component_options)
                 status['development']=ev
                 stopped_families=observe_quality(ev)
+                timing('evaluation',time.monotonic()-evaluation_start)
                 if stopped_families:status['quality_stop_families']=stopped_families
                 if best_dev is None or ev[metric]<best_dev:
                     best_dev,best_step=ev[metric],step;new_best=True

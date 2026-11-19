@@ -6,7 +6,7 @@ REVISION = '92d63d4e8bb4df75c3b71618f31ddde2378b2bcd'
 TOKENIZER_SHA = 'ad777bb448ea8fcf115835548596f9303f3ee5e85a014b0bb315567091080cc5'
 MODULES = ('nano_train', 'nano_benchmark', 'nano_checkpoint', 'nano_data', 'nano_eval', 'nano_probes',
            'nano_retention', 'l4_recovery_check', 'nano_launch', 'nano_package',
-           'campaign_budget', 'runtime', 'nano_campaign', 'nano_block_replay', 'nano_conversation_controller', 'nano_sft',
+           'campaign_budget', 'runtime', 'nano_campaign', 'nano_block_replay', 'nano_conversation_controller', 'nano_conversation_controller_v2', 'nano_pilot_window', 'nano_sft',
            'nano_serve', 'nano_chat_format', 'nano_quality', 'nano_context',
            'nano_quality_gate', 'nano_fit_contract', 'nano_qualification_schedule', 'nano_corpus_guard', 'nano_restart_compare', 'nano_update_trace', 'nano_fit_readiness', 'nano_optimizer_capture', 'nano_fit_probe', 'nano_recovery_gate', 'nano_recovery_controller', 'nano_recovery_tasks')
 
