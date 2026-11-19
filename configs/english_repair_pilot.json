@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "parent_manifest": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53",
+  "train_sha256": "739cc4a34bb1bb5e73f616ec5e4eed68222cf4c3d957b9236b049a448beaa246",
+  "validation_sha256": "1ae1428980efaf9f13a88b12bfd9ae2b1c3d900c4846189415a423d2cb331727",
+  "train_indices": [65, 46, 69, 51, 66, 58, 90, 64],
+  "validation_indices": [30, 21, 40, 43, 35, 39, 90, 54],
+  "epochs": 2,
+  "batch_size": 4,
+  "max_updates": 4,
+  "learning_rate": 0.00003,
+  "reply_budget": 48,
+  "sessions": [
+    {"family":"correction","tools":false,"turns":[
+      ["My pickup is at Elm Pier. Reply with just the pickup location.","Elm Pier"],
+      ["Correction: use Violet Wharf instead. Reply with the updated location only.","Violet Wharf"],
+      ["Which place should I walk to? Just the name.","Violet Wharf"]]},
+    {"family":"delayed memory","tools":true,"turns":[
+      ["My reading group's nickname is Copper Kites. What is our nickname? Name only.","Copper Kites"],
+      ["Spell the word desk backwards. Just the result.","ksed"],
+      ["What was our reading group's nickname? Reply with just the name.","Copper Kites"]]},
+    {"family":"contextual revision","tools":false,"turns":[
+      ["Write this notice in lowercase: QUIET UNTIL NOON. Just the notice.","quiet until noon"],
+      ["Change noon to dusk and repeat the notice.","quiet until dusk"],
+      ["Now drop the first word. Give the remaining words only.","until dusk"]]}
+  ]
+}

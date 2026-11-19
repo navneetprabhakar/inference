@@ -590,6 +590,7 @@ def run_repaired_sft(
     context: int = 2048,
     compact_policy: bool = True,
     device: str | torch.device = "cpu",
+    observe=None,
 ) -> dict:
     """Execute the repaired SFT loop on `mps`, `cuda`, or `cpu` with head calibration and regression tracking."""
     controls = token_contract(tokenizer)
@@ -619,6 +620,8 @@ def run_repaired_sft(
         for r in val_rows
     ]
 
+    if observe is not None and observe(0, model):
+        return {"updates": 0}
     optimizer = build_fresh_sft_optimizer(model, lr=lr)
     steps_per_epoch = max(1, math.ceil(len(encoded_train) / batch_size))
     total_steps = max(1, epochs * steps_per_epoch)
@@ -660,9 +663,13 @@ def run_repaired_sft(
                 controls,
                 action_weight=action_weight,
             )
+            if not torch.isfinite(loss):
+                raise ValueError("Nonfinite training loss")
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
             optimizer.step()
+            if observe is not None and observe(step, model):
+                return {"updates": step}
 
         val_metrics = evaluate_sft_split(
             model,
@@ -748,7 +755,14 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--lr", type=float, default=3e-5)
     parser.add_argument("--validate-only", action="store_true", help="Encode both splits and optionally run a base forward pass without optimization.")
+    parser.add_argument("--english-pilot-output", type=Path, help="Run the bound English pilot into a fresh local directory.")
     args = parser.parse_args()
+    if args.english_pilot_output and (not args.checkpoint or args.validate_only):
+        parser.error("Pilot requires the base checkpoint and training mode")
+    if args.checkpoint and not args.validate_only and not args.english_pilot_output:
+        parser.error("Training requires --english-pilot-output with a fresh directory")
+    if args.english_pilot_output and (args.epochs, args.batch_size, args.lr) != (2, 4, 3e-5):
+        parser.error("Pilot settings are frozen")
 
     train_path = args.dataset_dir / "train.jsonl"
     val_path = args.dataset_dir / "validation.jsonl"
@@ -791,17 +805,8 @@ def main() -> None:
                     raise ValueError("Nonfinite output from restored base")
             print(json.dumps({"checkpoint_verified": True, "device": device, "optimizer_updates": 0}))
             return
-        train_rows, val_rows = splits["train"], splits["validation"]
-        result = run_repaired_sft(
-            model,
-            tokenizer,
-            train_rows,
-            val_rows,
-            epochs=args.epochs,
-            batch_size=args.batch_size,
-            lr=args.lr,
-            device=device,
-        )
+        from ganesh.english_pilot import run
+        result = run(model, tokenizer, splits, args.english_pilot_output, args.dataset_dir)
         print(json.dumps(result, indent=2))
 
 

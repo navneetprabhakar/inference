@@ -34,7 +34,11 @@
       "name": "Repaired Action-Weighted SFT Trainer & <\\|bos\\|>-Masked Inference Runtime",
       "status": "completed",
       "evidence_sha256": {
-        "cloud_training/ganesh_sft_repair.py": "b824e0a1b8ac0e24f89accc91fb262026f0746c9ebf3682c993a962acb5a6b7d"
+        "cloud_training/ganesh_sft_repair.py": "ed879bb13ca918521ae346b6ce8a3173f406dfa11ea27549e9fc07ad83bf964c",
+        "ganesh/english_pilot.py": "d0b756702b045a75cc4c1f8c6c3da0a5a2aae0b297c656ab83bf9a95269f77d3",
+        "configs/english_repair_pilot.json": "18a27cbbfe549992541e59b280b391b951027b50da4a56b913bfd67789ab9f90",
+        "reports/ganesh-sft-repair-v2/english-baseline.json": "6d6528f522dfe58198de50f25a7a444904813a73753c0d1194685bd0147d0b70",
+        "reports/ganesh-sft-repair-v2/english-roundtrip.json": "be22d4ef1fbbb8d88182a8c78963ed5115a2a66dc0be3d220e7b238791a36b67"
       }
     },
     "E0": {
@@ -49,9 +53,9 @@
       "name": "Live 537M Base10B Checkpoint SFT Execution & 9-Category Release Audit on MPS",
       "status": "pending",
       "blockers": [
-        "No live repaired SFT selected. Persist and verify the selected output weights before any training run."
+        "No live repaired pilot has run. Human review of best and last English transcripts and independent gates remain outstanding."
       ],
-      "next_action": "Wire selected checkpoint persistence and verify a reload, then bind a bounded pilot and behavioral regression checks before training."
+      "next_action": "On separate training approval, run the bound MPS diagnostic in a new output directory. Hold on regression or no gain."
     }
   }
 }

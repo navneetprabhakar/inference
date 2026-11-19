@@ -9,4 +9,4 @@
 | **`M0` (Self-Contained `537M` `GaneshGPT`)** | `completed` | `GaneshGPT` matches all `119` tensors and `536,871,738` parameters of `Base10B` without requiring `runs/nanochat-source` or CUDA FlashAttention-3. |
 | **`S0` (Repaired SFT Trainer & Decoder)** | `completed` | `8/8` unit and convergence tests in `tests/verify_ganesh_sft_repair.py` passed on `mps`. |
 | **`E0` (9-Category Evaluation Gate)** | `completed` | `python -m ganesh.evaluation --require-ready` verified all 9 capability categories and replayed all reference tool calls. |
-| **`A0` (Live `Base10B` MPS SFT Run)** | `pending` | Local parent and real-tokenizer preflight passed. The training CLI discards selected weights at exit. See the current handoff before training. |
+| **`A0` (Live `Base10B` MPS SFT Run)** | `pending` | Local parent and real-tokenizer preflight passed. Local save/reload parity passed. The four-update English pilot is bound to the raw baseline. No live training result. |

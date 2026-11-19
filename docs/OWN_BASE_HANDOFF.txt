@@ -1,7 +1,35 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
 Updated 19 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: LOCAL INPUT AND PARENT CHECKS PASS; HOLD REPAIRED SFT
+CURRENT DECISION: LOCAL CHECKPOINT READBACK VERIFIED; ENGLISH PILOT BOUND AND UNRUN
+Repairs pushed to main at 964f61b before this work. No Base10B optimizer update.
+Verified the 537M checkpoint after head calibration and switching all 16 layers
+to full causal attention. Restored config and weights into a fresh MPS model.
+All vocabulary logits at all positions matched bit-for-bit on 13- and 641-token
+inputs; the reloaded model also reproduced every raw development frame.
+Transient 2 GB copy removed after verification. Receipts under
+reports/ganesh-sft-repair-v2/english-{baseline,roundtrip}.json.
+
+Base10B raw baseline: 0/9 exact replies, 3 first replies exhausted their
+48-token budgets, 6 dependent turns blocked. No independent estimate of memory
+accuracy is possible from these blocked follow-ups. No serving guard or tool
+broker participated. These exposed probes assess short constrained answers;
+fluency and broad conversational competence still require separate evaluation.
+
+configs/english_repair_pilot.json binds 8 reviewed training and 8 validation
+rows from the repaired splits. At most four updates; batch four, two epochs,
+3e-5 AdamW. Same three 3-turn behavioral probes before calibration, after setup,
+and after every update. Stop immediately on loss of a previously correct or
+properly completed reply, or after two updates without behavior gain. Ties
+favor earlier weights. Best and last must replay all raw frames after reload.
+No automatic retry, release, serving change or cloud launch. The next decision
+is whether to run the local diagnostic. docs/HOW_TO_TEST.md records invocation.
+Local verification: 62 tests passed, including a tiny model run with a scripted
+gain then regression exercising the training stop and both checkpoint reloads.
+The full real-tokenizer preflight and the plan/evaluation harness passed.
+Project executespecv1 inventory was empty.
+
+PREVIOUS INPUT AND PARENT CHECKS
 Cleanup pushed to main at eeb619a. Prior cleanup inventory and receipts are in
 that revision. Local Base10B remains at runs/local-readiness-v1/base10b.
 The repaired loader verifies the committed bundle, exact parent and tokenizer.
@@ -23,13 +51,6 @@ validated 13 reference prompts and replayed four expected calls. These are
 preflight results. No new model was trained or scored. No accepted chat model.
 GCP inventory for executespecv1 returned zero instances. Local MPS validation
 performed zero Base10B optimizer updates. See docs/HOW_TO_TEST.md to reproduce.
-
-Before training: wire selected-checkpoint persistence into the repaired CLI
-(currently exits after printing metrics), prove reload reproduces logits with
-the trained attention configuration, and bind a bounded pilot with a raw,
-multi-turn English baseline, behavior-based regression stops and best/last
-comparison. Current best selection uses validation loss alone. Keep protected
-release data unused. The previous $33 estimate applied to a different pilot.
 
 PREVIOUS CAMPAIGN: $30 A100 QUALIFICATION CLOSED AT TIMING GATE; NO PILOT
 See reports/ganesh-english-a100-30/RESULT.md and closeout.json. Readiness pushed as 1fdb78f.
