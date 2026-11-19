@@ -1,7 +1,15 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
 Updated 19 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: $30 A100 QUALIFICATION CLOSED AT TIMING GATE; NO PILOT
+CURRENT DECISION: LOCAL TIMING REPLAY COMPLETE; KEEP VM OFF
+Both frozen 40-update arms together model at 19.2–47.4 minutes of training.
+Proposed deadline 47 min/arm, 319 min end-to-end plus 1 fallback minute.
+Proposed incremental cap $33 ($32.67 including reserves). No current launch approval.
+See reports/ganesh-english-a100-30/TIMING_REPLAY.md. Before launch, version and
+test the controller/launcher/early monitor, bind approval and requalify live.
+Fresh decode is critical: historical forecast 89.4 min against a 90 min limit.
+
+PREVIOUS CAMPAIGN: $30 A100 QUALIFICATION CLOSED AT TIMING GATE; NO PILOT
 See reports/ganesh-english-a100-30/RESULT.md and closeout.json. Readiness pushed as 1fdb78f.
 One A100 ran two qualification updates. Projected 5,654 seconds per arm exceeded
 the frozen 1,350-second limit. No learning arms, restart qualification or quality
@@ -9,8 +17,7 @@ comparison completed. No automatic retry. Required checkpoints and evidence were
 independently read back from GCS before shutdown. Final inventory zero VMs/disks.
 Compute/disk estimate $0.73; final invoice and storage/network costs excluded.
 Local weights and frozen data preserved. 305 English training candidates and 80
-exposed development sessions remain separate from the frozen pilot. Replay the
-cold/warm update and checkpoint measurements locally before sizing another run.
+exposed development sessions remain separate from the frozen pilot.
 Previous campaign closeout follows; historical caps are closed.
 Goal: usable English conversation from Own weights, then maths/CBSE. No accepted
 model. The new approved $25 A100 attempt failed infrastructure qualification twice;
