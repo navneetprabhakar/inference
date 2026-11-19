@@ -28,15 +28,12 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/build_ganesh_sft_v2.py
 
 ---
 
-## 4. Run Repaired SFT on the `537M` `Base10B` Checkpoint (`mps`)
+## 4. Verify the local Base10B parent and both splits on MPS
 
-After you copy or symlink `runs/` (`runs/ownbase-budget50-v1/checkpoints/step-000019074` and `runs/ownbase-v2-data/tokenizer/tokenizer.pkl`) into `runs/`, run:
+With the pinned nanochat checkout and tokenizer under `runs/`, run the following from the repository root.
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python cloud_training/ganesh_sft_repair.py \
-  --checkpoint runs/ownbase-budget50-v1/checkpoints/step-000019074 \
-  --device mps \
-  --epochs 2 \
-  --batch-size 4 \
-  --lr 3e-5
+.venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/local-readiness-v1/base10b --device mps --validate-only
 ```
+
+This checks hashes, encodes both splits with the project tokenizer, reserves 256 tokens at each assistant action, and runs a finite forward pass. Training is on hold pending selected-checkpoint persistence, reload verification, and behavioral regression gates.

@@ -1,20 +1,35 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
 Updated 19 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: PATCHED MAIN CLEANED LOCALLY; HOLD TRAINING FOR REASSESSMENT
-Baseline main ebff543. Removed 131 Git-backed historical report files from 14
-retired experiment groups and project bytecode caches. The original reports
-remain available at ebff543. Three closed qualification archive copies were
-evicted from runs/ after comparing local SHA-256 with prior readback receipts
-and current GCS object sizes and MD5 checksums. Local paths, object generations
-and hashes are in runs/local-cleanup-ebff543/archive-evictions.jsonl.
-Preserved local models, datasets, tokenizer, runtime archives and raw chat evidence.
-Post-cleanup plan validate/check, evaluation readiness and all 58 tests passed.
-The real tokenizer rejected 72 training and 6 validation rows at 2K, and the
-patched trainer CLI imports a missing loader. No repaired SFT learning result.
-Fit30 conversation smoke evidence: runs/patched-main-ebff543/conversations.jsonl.
-The $33 estimate covers the separately versioned frozen comparison only.
-No new training approval. See reports/ganesh-english-a100-30/TIMING_REPLAY.md.
+CURRENT DECISION: LOCAL INPUT AND PARENT CHECKS PASS; HOLD REPAIRED SFT
+Cleanup pushed to main at eeb619a. Prior cleanup inventory and receipts are in
+that revision. Local Base10B remains at runs/local-readiness-v1/base10b.
+The repaired loader verifies the committed bundle, exact parent and tokenizer.
+Corrected reference-forward differences in GaneshGPT. On MPS, all logits matched
+the pinned reference exactly at 13 and 641 tokens (across the short window).
+Regression test: tests/verify_ganesh_parent_parity.py.
+
+The real tokenizer accepted 1,531 train and 285 validation rows at native 2K.
+All 72+6 prior overflows and one additional train row requiring a 256-token
+generation reserve were shortened at complete reply boundaries. Compared every
+row against eeb619a: retained messages and policies are exact source prefixes.
+Rebuilding reproduced the split and summary hashes. Maximum shifted inputs:
+2,046 train, 1,947 validation. Only derived rows changed; full source histories
+remain available. Counts and hashes: reports/ganesh-sft-repair-v2/summary.json.
+Shortened rows teach fewer late turns; this does not qualify 4K recall.
+
+Plan validate/check passed, 59 tests passed, and the nine-category harness
+validated 13 reference prompts and replayed four expected calls. These are
+preflight results. No new model was trained or scored. No accepted chat model.
+GCP inventory for executespecv1 returned zero instances. Local MPS validation
+performed zero Base10B optimizer updates. See docs/HOW_TO_TEST.md to reproduce.
+
+Before training: wire selected-checkpoint persistence into the repaired CLI
+(currently exits after printing metrics), prove reload reproduces logits with
+the trained attention configuration, and bind a bounded pilot with a raw,
+multi-turn English baseline, behavior-based regression stops and best/last
+comparison. Current best selection uses validation loss alone. Keep protected
+release data unused. The previous $33 estimate applied to a different pilot.
 
 PREVIOUS CAMPAIGN: $30 A100 QUALIFICATION CLOSED AT TIMING GATE; NO PILOT
 See reports/ganesh-english-a100-30/RESULT.md and closeout.json. Readiness pushed as 1fdb78f.

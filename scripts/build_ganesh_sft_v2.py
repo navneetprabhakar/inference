@@ -207,6 +207,39 @@ def load_reviewed_english_and_foundations() -> tuple[list[dict], list[dict]]:
     return english_rows, foundation_rows
 
 
+def fit_reviewed_prefix(row, tokenizer, context=2048):
+    """Keep the longest intact prefix ending in a completed assistant reply."""
+    from cloud_training.ganesh_sft_repair import encode_ready_conversation
+    messages, policies = row["messages"], row["policies"]
+    if sum(m["role"] == "user" for m in messages) != len(policies):
+        raise ValueError("Source turn/policy mismatch")
+    if not messages or messages[-1]["role"] != "assistant" or "content" not in messages[-1]:
+        raise ValueError("Incomplete source conversation")
+    for end in range(len(messages), 0, -1):
+        if end < len(messages) and messages[end]["role"] != "user":
+            continue
+        if messages[end-1]["role"] != "assistant" or "content" not in messages[end-1]:
+            continue
+        prefix = messages[:end]
+        count = sum(m["role"] == "user" for m in prefix)
+        try:
+            encode_ready_conversation(tokenizer, prefix, policies[:count], context=context)
+        except ValueError as exc:
+            if str(exc) not in ("Conversation exceeds context capacity", "Context overflow for generation"):
+                raise
+            continue
+        if end == len(messages):
+            return row
+        result = dict(row, messages=prefix, policies=policies[:count])
+        result["source_messages_sha256"] = hashlib.sha256(canonical(messages).encode()).hexdigest()
+        result["source_turns"] = len(policies)
+        result["policy_mode"] = ("enabled_call" if any("tool_call" in m for m in prefix)
+                                 else "enabled_no_call" if any(p["permit_calls"] for p in policies[:count])
+                                 else "disabled_no_call")
+        return result
+    raise ValueError(f"No complete turn fits in {context} tokens: {row['provenance']}")
+
+
 def build_dataset() -> dict:
     out_dir = ROOT / "reports/ganesh-sft-repair-v2"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -314,6 +347,14 @@ def build_dataset() -> dict:
         if fp not in seen_fp:
             seen_fp.add(fp)
             clean_val.append(row)
+
+    from cloud_training.ganesh_sft_repair import load_project_tokenizer
+    tokenizer = load_project_tokenizer()
+    clean_train = [fit_reviewed_prefix(row, tokenizer) for row in clean_train]
+    clean_val = [fit_reviewed_prefix(row, tokenizer) for row in clean_val]
+    fingerprints = [canonical([r["messages"], r["policies"]]) for r in clean_train + clean_val]
+    if len(fingerprints) != len(set(fingerprints)):
+        raise ValueError("Duplicate conversation after 2K prefix selection")
 
     train_path = out_dir / "train.jsonl"
     val_path = out_dir / "validation.jsonl"

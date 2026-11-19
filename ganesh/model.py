@@ -21,7 +21,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-def rms_norm(x: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
+def rms_norm(x: torch.Tensor, eps: float | None = None) -> torch.Tensor:
     return F.rms_norm(x, (x.size(-1),), eps=eps)
 
 
@@ -80,18 +80,18 @@ class GaneshCausalSelfAttention(nn.Module):
 
         if ve is not None and self.ve_gate is not None:
             ve = ve.view(bsz, seq_len, self.n_kv_head, self.head_dim)
-            gate = 2.0 * torch.sigmoid(self.ve_gate(x[..., : self.ve_gate.in_features]))
+            gate = 3.0 * torch.sigmoid(self.ve_gate(x[..., : self.ve_gate.in_features]))
             v = v + gate.unsqueeze(-1) * ve
 
-        q = rms_norm(apply_rotary_emb(q, cos, sin)).transpose(1, 2)
-        k = rms_norm(apply_rotary_emb(k, cos, sin)).transpose(1, 2)
+        q = (1.2 * rms_norm(apply_rotary_emb(q, cos, sin))).transpose(1, 2)
+        k = (1.2 * rms_norm(apply_rotary_emb(k, cos, sin))).transpose(1, 2)
         v = v.transpose(1, 2)
 
         enable_gqa = self.n_head != self.n_kv_head
         if window_size is not None and 0 < window_size < seq_len:
             idx = torch.arange(seq_len, device=x.device)
             diff = idx.unsqueeze(1) - idx.unsqueeze(0)
-            attn_mask = (diff >= 0) & (diff < window_size)
+            attn_mask = (diff >= 0) & (diff <= window_size)
             y = F.scaled_dot_product_attention(q, k, v, attn_mask=attn_mask, enable_gqa=enable_gqa)
         else:
             y = F.scaled_dot_product_attention(q, k, v, is_causal=True, enable_gqa=enable_gqa)
@@ -207,7 +207,7 @@ class GaneshGPT(nn.Module):
         key = (seq_len, device)
         if key not in self._rotary_cache:
             head_dim = self.config.n_embd // self.config.n_head
-            inv_freq = 1.0 / (10000.0 ** (torch.arange(0, head_dim, 2, dtype=torch.float32, device=device) / head_dim))
+            inv_freq = 1.0 / (100000.0 ** (torch.arange(0, head_dim, 2, dtype=torch.float32, device=device) / head_dim))
             t = torch.arange(seq_len, dtype=torch.float32, device=device)
             freqs = torch.outer(t, inv_freq)
             cos = freqs.cos()[None, :, None, :]
@@ -221,7 +221,7 @@ class GaneshGPT(nn.Module):
             return None
         ch = pattern[layer_idx % len(pattern)]
         if ch == "S":
-            return self.config.sequence_len // 2
+            return -(-self.config.sequence_len // 4 // 128) * 128
         return None
 
     def forward(
@@ -233,13 +233,12 @@ class GaneshGPT(nn.Module):
         bsz, seq_len = idx.size()
         cos, sin = self._get_rotary(seq_len, idx.device)
 
-        x = self.transformer["wte"](idx)
+        x = rms_norm(self.transformer["wte"](idx))
         if seq_len > 1:
             gate = self.smear_lambda.to(x.dtype) * torch.sigmoid(
                 self.smear_gate(x[:, 1:, : self.config.smear_gate_dim])
             )
             x = torch.cat([x[:, :1], x[:, 1:] + gate * x[:, :-1]], dim=1)
-        x = rms_norm(x)
         x0 = x
 
         half_layer = self.config.n_layer // 2
@@ -248,7 +247,7 @@ class GaneshGPT(nn.Module):
             x = self.resid_lambdas[i] * x + self.x0_lambdas[i] * x0
             ve = self.value_embeds[str(i)](idx) if str(i) in self.value_embeds else None
             x = block(x, ve, cos, sin, window_size=self._layer_window(i))
-            if i == half_layer - 1:
+            if i == half_layer:
                 x_backout = x
 
         if x_backout is not None:

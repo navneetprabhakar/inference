@@ -6,20 +6,20 @@
       "name": "Contract, Guardrails & Root-Cause Audit Lock",
       "status": "completed",
       "evidence_sha256": {
-        "configs/project.json": "22be14d532d8afb74368746a119921feb592a95593cb151e6e351a2bd3e21884",
+        "configs/project.json": "45be3fa724d3511a3bf8a5fdc2a936f844d09e5f75781d36c81e69cb98991baf",
         "configs/guardrails.json": "2e00ea3761ad90c750b44d9d9524eb3a9a6a4cd6ca645b4fc19712da4d828bfe",
         "ganesh/plan.py": "43baf3fd49815d2926a96f2a39e8ebe3b99de539dfeee85a031c28086e887f5c"
       }
     },
     "D0": {
-      "name": "Balanced SFT v2 Dataset (1,523 Train / 283 Val) & 12-Tool Registry",
+      "name": "Balanced 2K SFT v2 dataset and 12-tool registry",
       "status": "completed",
       "evidence_sha256": {
         "reports/ganesh_tool_crud_helper.py": "02d79cd2a1397dd72e1e4cf5d8590c65fb36679d874589a64452f07ce1c629bb",
-        "reports/ganesh-sft-repair-v2/train.jsonl": "1ae9bd272c5b224386309fab00b086317f31bfd9f991d2b8aa2f61dd654fba7a",
-        "reports/ganesh-sft-repair-v2/validation.jsonl": "4ad9f703dd2a8477960127c20924d4d7aed042b6a2314d9653f92cf1afeb2990",
-        "reports/ganesh-sft-repair-v2/summary.json": "ac02030123e3d7db7a0131d5980f64abda175f9eaded71cd7db2af03184a1a38",
-        "scripts/build_ganesh_sft_v2.py": "daa771260621b9516d6946a4118ef10c22907795df94785227fedfbeca38c0d2"
+        "reports/ganesh-sft-repair-v2/train.jsonl": "739cc4a34bb1bb5e73f616ec5e4eed68222cf4c3d957b9236b049a448beaa246",
+        "reports/ganesh-sft-repair-v2/validation.jsonl": "1ae1428980efaf9f13a88b12bfd9ae2b1c3d900c4846189415a423d2cb331727",
+        "reports/ganesh-sft-repair-v2/summary.json": "65579bfb54ec80bc6a991e443a03ccf31cbc4a904efbc440934edc6fa647db24",
+        "scripts/build_ganesh_sft_v2.py": "fe3b1e2ca2f73402bed1bf685c2e27f2b1c0caaa7abea1b68f52a0cf57022d7c"
       }
     },
     "M0": {
@@ -27,14 +27,14 @@
       "status": "completed",
       "evidence_sha256": {
         "ganesh/__init__.py": "b9683ef711f5a68a6ead8b7d1e4ad39a668d1f6991beb45d7b832949c322f0f9",
-        "ganesh/model.py": "00ae5ef7c9da340af0adeadf5adcf55ac3f032ff1720c25f1f55dacd32d834f7"
+        "ganesh/model.py": "7e8934ee7eacc6f42e6081cf71379a4485fd9416a7bfb349eb0e6acf36cbe335"
       }
     },
     "S0": {
       "name": "Repaired Action-Weighted SFT Trainer & <\\|bos\\|>-Masked Inference Runtime",
       "status": "completed",
       "evidence_sha256": {
-        "cloud_training/ganesh_sft_repair.py": "5193d4cc85d30a6017d9ca3a687bfadb97527b6f7709a4fb504f740a38ab4f5d"
+        "cloud_training/ganesh_sft_repair.py": "b824e0a1b8ac0e24f89accc91fb262026f0746c9ebf3682c993a962acb5a6b7d"
       }
     },
     "E0": {
@@ -47,11 +47,11 @@
     },
     "A0": {
       "name": "Live 537M Base10B Checkpoint SFT Execution & 9-Category Release Audit on MPS",
-      "status": "in_progress",
+      "status": "pending",
       "blockers": [
-        "Link or copy git-ignored Base10B checkpoint (`runs/ownbase-budget50-v1/checkpoints/step-000019074/payload.pt`) and `runs/ownbase-v2-data/tokenizer/tokenizer.pkl` into `runs/`."
+        "No live repaired SFT selected. Persist and verify the selected output weights before any training run."
       ],
-      "next_action": "Run `python cloud_training/ganesh_sft_repair.py --checkpoint runs/ownbase-budget50-v1/checkpoints/step-000019074 --device mps --epochs 2 --batch-size 4 --lr 3e-5`."
+      "next_action": "Wire selected checkpoint persistence and verify a reload, then bind a bounded pilot and behavioral regression checks before training."
     }
   }
 }

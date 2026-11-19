@@ -198,6 +198,20 @@ def encode_conversation_repaired(
     }
 
 
+def encode_ready_conversation(tokenizer, messages, policies, *, context=2048, reply_budget=256):
+    """Check the training sequence and the generation prefix for every assistant action."""
+    encoded = encode_conversation_repaired(tokenizer, messages, policies=policies, context=context)
+    if len(encoded["ids"]) + reply_budget > context:
+        users = 0
+        for index, msg in enumerate(messages):
+            if msg["role"] == "user":
+                users += 1
+            elif msg["role"] == "assistant":
+                encode_conversation_repaired(tokenizer, messages[:index], policies=policies[:users],
+                                             for_generation=True, context=context, reply_budget=reply_budget)
+    return encoded
+
+
 def calibrate_control_token_heads(model: nn.Module, controls: dict[str, int]) -> dict[str, float]:
     """Repair uninitialized special control tokens (IDs 32760..32767) in lm_head, wte, and value_embeds.
 
@@ -681,6 +695,40 @@ def run_repaired_sft(
     }
 
 
+BASE10B_MANIFEST_SHA = "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53"
+
+
+def load_project_tokenizer():
+    from cloud_training.nano_eval import verify_upstream
+    from cloud_training.nano_package import TOKENIZER_SHA, sha
+
+    repo = ROOT / "runs/nanochat-source"
+    directory = ROOT / "runs/ownbase-v2-data/tokenizer"
+    verify_upstream(repo)
+    if sha(directory / "tokenizer.pkl") != TOKENIZER_SHA:
+        raise ValueError("Unexpected own tokenizer")
+    sys.path.insert(0, str(repo))
+    from nanochat.tokenizer import RustBPETokenizer
+    tokenizer = RustBPETokenizer.from_directory(str(directory))
+    token_contract(tokenizer)
+    return tokenizer
+
+
+def load_base10b(checkpoint: Path, device: str):
+    from cloud_training.nano_package import TOKENIZER_SHA
+    from cloud_training.nano_sft import validate_base_metadata
+    from ganesh.model import GaneshConfig, GaneshGPT
+
+    meta = validate_base_metadata(checkpoint, BASE10B_MANIFEST_SHA, TOKENIZER_SHA)
+    with torch.device("meta"):
+        model = GaneshGPT(GaneshConfig(**meta["identity"]["config"]))
+    # Copy into FP32 parameters: the serialized parent can contain mixed dtypes.
+    model.to_empty(device=device)
+    state = torch.load(checkpoint / "payload.pt", map_location="cpu", weights_only=True, mmap=True)
+    model.load_state_dict(state["model"], strict=True)
+    return model
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Repaired SFT trainer and dataset verifier for 537M Ganesh-base.")
     parser.add_argument(
@@ -699,6 +747,7 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=2)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--lr", type=float, default=3e-5)
+    parser.add_argument("--validate-only", action="store_true", help="Encode both splits and optionally run a base forward pass without optimization.")
     args = parser.parse_args()
 
     train_path = args.dataset_dir / "train.jsonl"
@@ -707,25 +756,42 @@ def main() -> None:
     if not train_path.is_file() or not val_path.is_file():
         raise SystemExit(f"Dataset files missing in {args.dataset_dir}. Run build_ganesh_sft_v2.py first.")
 
-    summary = json.loads(summary_path.read_text()) if summary_path.is_file() else {}
-    print(json.dumps({
-        "status": "dataset_verified",
-        "dataset_dir": str(args.dataset_dir),
-        "train_conversations": summary.get("train", {}).get("conversations"),
-        "val_conversations": summary.get("validation", {}).get("conversations"),
-        "by_policy_mode": summary.get("train", {}).get("by_policy_mode"),
-    }, indent=2))
-
+    from cloud_training.nano_package import sha
+    summary = json.loads(summary_path.read_text())
+    tokenizer = load_project_tokenizer()
+    splits = {}
+    stats = {}
+    for split, path in (("train", train_path), ("validation", val_path)):
+        if sha(path) != summary[split]["sha256"]:
+            raise ValueError(f"Dataset hash mismatch for {split}")
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        if not rows or len(rows) != summary[split]["conversations"]:
+            raise ValueError(f"Dataset count mismatch for {split}")
+        lengths = []
+        for index, row in enumerate(rows, 1):
+            try:
+                encoded = encode_ready_conversation(tokenizer, row["messages"], row["policies"])
+                if not any(encoded["mask"]):
+                    raise ValueError("No assistant targets")
+                lengths.append(len(encoded["ids"]) - 1)
+            except ValueError as error:
+                raise ValueError(f"{split} row {index}: {error}") from error
+        splits[split] = rows
+        stats[split] = {"rows": len(rows), "max_input_tokens": max(lengths)}
+    print(json.dumps({"status": "dataset_verified", "splits": stats}, indent=2))
     if args.checkpoint is not None:
-        from cloud_training.nano_eval import load_bundle_model, load_tokenizer
-        device = (
-            "mps" if args.device == "auto" and torch.backends.mps.is_available()
-            else ("cuda" if args.device == "auto" and torch.cuda.is_available() else (args.device if args.device != "auto" else "cpu"))
-        )
-        tokenizer, _ = load_tokenizer()
-        model, _, _ = load_bundle_model(args.checkpoint, device=device)
-        train_rows = [json.loads(line) for line in train_path.read_text().splitlines() if line.strip()]
-        val_rows = [json.loads(line) for line in val_path.read_text().splitlines() if line.strip()]
+        device = args.device
+        if device == "auto":
+            device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+        model = load_base10b(args.checkpoint, device)
+        if args.validate_only:
+            with torch.inference_mode():
+                logits = model(torch.tensor([tokenizer.encode("The book is blue.")], device=device))
+                if not torch.isfinite(logits).all():
+                    raise ValueError("Nonfinite output from restored base")
+            print(json.dumps({"checkpoint_verified": True, "device": device, "optimizer_updates": 0}))
+            return
+        train_rows, val_rows = splits["train"], splits["validation"]
         result = run_repaired_sft(
             model,
             tokenizer,

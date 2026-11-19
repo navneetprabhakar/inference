@@ -22,7 +22,7 @@ Ganesh-base (historically called Own in artifact paths) is a **536,871,738-param
    - **Fix 3 (Clean AdamW SFT Optimizer):** `build_fresh_sft_optimizer()` uses a clean AdamW optimizer (`lr = 3e-5`, cosine decay) instead of reusing stale `step=19074` pretraining Muon moments.
    - **Fix 4 (12-Tool Compact Serializer & Validator):** `compact_policy_header()` replaces the 85-token JSON policy header with a 12-token header (`[tools:off]` or `[tools:on allowed=...]`), and `validate_any_tool_call()` validates all 12 tools (`calculate`, `convert`, plus 10 stateful CRUD tools).
    - **Fix 5 (Full Causal Attention & Single-Conversation Masking):** `GaneshGPT.set_full_causal_attention()` upgrades `SSSL` sliding-window attention to `LLLLLLLLLLLLLLLL` (`16/16` full causal layers), `build_single_conversation_batch()` isolates conversations with `NATIVE_IGNORE` (`-1`), and `generate_action_repaired()` bans `<|bos|>` (`32759`) during decoding.
-   - **Fix 6 (Balanced 12-Tool SFT v2 Corpus):** `reports/ganesh-sft-repair-v2/` contains `1,531` train and `285` validation conversations balanced across `disabled_no_call` (`476`), `enabled_no_call` (`498`), and `enabled_call` (`557`, with `770` execution-verified tool calls).
+   - **Fix 6 (Balanced 12-Tool SFT v2 Corpus):** `reports/ganesh-sft-repair-v2/` contains `1,531` train and `285` validation conversations balanced across `disabled_no_call` (`480`), `enabled_no_call` (`510`), and `enabled_call` (`541`, with `732` execution-verified tool calls).
 
 ---
 
@@ -57,19 +57,15 @@ Ganesh-base (historically called Own in artifact paths) is a **536,871,738-param
    PYTHONDONTWRITEBYTECODE=1 python scripts/run_extensive_ganesh_test.py
    PYTHONDONTWRITEBYTECODE=1 python scripts/run_tough_tests.py
    ```
-5. **Run Repaired SFT on the `537M` `Base10B` Checkpoint (`step-000019074`):**
+5. **Verify the local Base10B checkpoint and 2K curriculum on MPS**
    ```sh
-   PYTHONDONTWRITEBYTECODE=1 python cloud_training/ganesh_sft_repair.py \
-     --checkpoint runs/ownbase-budget50-v1/checkpoints/step-000019074 \
-     --device mps \
-     --epochs 2 \
-     --batch-size 4 \
-     --lr 3e-5
+   .venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/local-readiness-v1/base10b --device mps --validate-only
    ```
+   Training is on hold. See the [current handoff](docs/OWN_BASE_HANDOFF.txt) for the remaining gates.
 
 **Status as of 18 November 2026: no model has passed conversation acceptance.** Base training reached **10,000,269,312 tokens**. Local weights remain available; HTTP is off. The latest $25 A100 attempt stopped on qualification infrastructure failures before either controlled English pilot arm ran. Required backups were verified before the dedicated VM and disk were retired. No GPU restart is pending.
 
-Current work is **paused for reassessment**. Reviewed candidates total **1,093 conversations** (1,026 English plus67 maths/decision/orchestration); none are admitted to a new run. The stopped mocked-tool diagnostic and bounded RCA found call-selection/instruction failures, not an input-context limit. See the [next training plan](reports/ganesh-next-training-plan-v3/PLAN.md), [tool RCA](reports/ganesh-tool-crud-v1/RCA.md), [sourcing status](reports/ganesh-english-sourcing-v1/STATUS.md), and [authoritative handoff](OWN_BASE_HANDOFF.txt). Local disk remains in use; VM/HTTP off; no automatic work pending.
+Current work is **paused for reassessment**. Reviewed candidates total **1,093 conversations** (1,026 English plus67 maths/decision/orchestration); none are admitted to a new run. The stopped mocked-tool diagnostic and bounded RCA found call-selection/instruction failures, not an input-context limit. See the [next training plan](reports/ganesh-next-training-plan-v3/PLAN.md), [tool RCA](reports/ganesh-tool-crud-v1/RCA.md), [sourcing status](reports/ganesh-english-sourcing-v1/STATUS.md), and [authoritative handoff](docs/OWN_BASE_HANDOFF.txt). Local disk remains in use; VM/HTTP off; no automatic work pending.
 
 Current evidence-first reassessment: [Ganesh-base review](reports/ganesh-base-review-v1/REVIEW.md). Model naming does not modify checkpoint payloads or repair conversation behavior.
 
@@ -96,7 +92,7 @@ The repository contains current code alongside historical experiments. A success
 
 | Document | Purpose |
 |---|---|
-| [OWN_BASE_HANDOFF.txt](OWN_BASE_HANDOFF.txt) | Authoritative current facts, checkpoint identities, limitations, and blockers |
+| [OWN_BASE_HANDOFF.txt](docs/OWN_BASE_HANDOFF.txt) | Authoritative current facts, checkpoint identities, limitations, and blockers |
 | [AGENTS.md](AGENTS.md) | Quality-first operating rules for repository work |
 | [Current pilot readiness](reports/ganesh-controller-v1/READINESS.md) | Current phase gates, measured workload bounds, local checks and unresolved launch blockers |
 | [OWN_BASE_NEXT_STEPS.txt](OWN_BASE_NEXT_STEPS.txt) | Current execution restrictions and next local deliverables |
