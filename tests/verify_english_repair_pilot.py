@@ -57,6 +57,7 @@ class PilotChecks(unittest.TestCase):
             tokens = torch.arange(12, device="mps")[None, :]
             stack.enter_context(patch.object(pilot, "probe", lambda m: [m(tokens)]))
             result = pilot.run(model, MockNanochatTokenizer(), splits, Path(tmp) / "fixture", dataset)
+        self.assertEqual(model.config.window_pattern, "SSSL")
         self.assertEqual(result["updates"], 2)
         self.assertEqual(result["stop"], "behavior_regression")
         self.assertEqual(result["comparison"]["best"]["step"], 1)

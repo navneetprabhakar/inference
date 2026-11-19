@@ -1,5 +1,26 @@
 {
   "version": "ganesh-base-repair-v1",
+  "model_lineage": {
+    "improvement_parent": "v0.1",
+    "versions": {
+      "v0": {
+        "checkpoint": "Base10B",
+        "recovery_receipt": "docs/ganesh-v0-recovery.json",
+        "manifest_sha256": "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53"
+      },
+      "v0.1": {
+        "checkpoint": "SFT194",
+        "parent": "v0",
+        "directory": "runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs",
+        "manifest_sha256": "e99af4fad61379dfe460cc646bd5ceed920e44ff93456a3e5a331b27930edb54"
+      },
+      "v0.2": {
+        "checkpoint": "Fit30",
+        "parent": "v0",
+        "status": "retired"
+      }
+    }
+  },
   "initialization": "own_random_base10b",
   "identity": {
     "model_name": "Ganesh-base",

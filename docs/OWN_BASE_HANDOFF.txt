@@ -1,7 +1,33 @@
 GANESH-BASE — AUTHORITATIVE HANDOFF
-Updated 19 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
+Updated 20 November 2026. Model: Ganesh-base. Creator: Navneet Prabhakar.
 
-CURRENT DECISION: LOCAL CHECKPOINT READBACK VERIFIED; ENGLISH PILOT BOUND AND UNRUN
+Ganesh-base v0 is Base10B, the foundation. Ganesh-base v0.1 is SFT194, the active chat checkpoint and parent for improvements. Ganesh-base v0.2 was Fit30, a retired fine-tune of v0. Preserve legacy checkpoint paths and hashes. Use v0.1 as the sole English baseline and improvement parent.
+
+CURRENT STATE: v0.1 is the sole local English baseline and improvement parent.
+The pilot uses the v0.1 native chat format, original SSSL attention and original
+control weights. MPS reload reproduced exact logits at lengths 13 and 641 and
+all raw probe replies. Strict baseline 0/9: one completed wrong reply, three
+budget exhaustions, five blocked follow-ups. The 8 train and 8 validation rows
+fit native 2K. No live training. v0.1 reference parity, readiness and 62 tests
+passed. All four v0 archive objects were downloaded by generation and matched
+against the local SHA-256 before the local foundation checkpoint was removed.
+Recovery receipt: docs/ganesh-v0-recovery.json. Historical code commit:
+f89b16c3b6769a09e477ee3fcade7847074a3bdc. Keep v0.1 locally for rollback.
+
+LOCAL ENGLISH WINDOW DIAGNOSTIC: exposed probes, no training or deployment
+SFT194 completed four live name/bag turns identically at 2K/4K/8K. It
+invented biographical details, echoed the green correction, then recalled Mira
+but omitted green on the final joint query. The open-ended picnic dialogue
+exhausted even 256 reply tokens on its first turn at every window. Base10B
+failed to finish either opening at all three sizes. Supplied-history name swaps
+isolated recall: SFT194 recovered 2/2 names around 1,925 input tokens (extra
+words), 0/2 at 4,064–4,065 and 0/2 at 8,131–8,132. These are two names in one
+synthetic scenario. Context extension used native RoPE and recomputed attention
+windows in memory. Serving defaults and checkpoint metadata remain at native
+settings. Evidence: reports/ganesh-context-window-check/{basic-dialogue,
+live-256,results}.jsonl; harness: scripts/check_english_context_windows.py.
+
+HISTORICAL v0 PILOT: LOCAL CHECKPOINT READBACK VERIFIED; NEVER RUN
 Repairs pushed to main at 964f61b before this work. No Base10B optimizer update.
 Verified the 537M checkpoint after head calibration and switching all 16 layers
 to full causal attention. Restored config and weights into a fresh MPS model.
@@ -22,8 +48,7 @@ rows from the repaired splits. At most four updates; batch four, two epochs,
 and after every update. Stop immediately on loss of a previously correct or
 properly completed reply, or after two updates without behavior gain. Ties
 favor earlier weights. Best and last must replay all raw frames after reload.
-No automatic retry, release, serving change or cloud launch. The next decision
-is whether to run the local diagnostic. docs/HOW_TO_TEST.md records invocation.
+No automatic retry, release, serving change or cloud launch. Future improvements start from v0.1.
 Local verification: 62 tests passed, including a tiny model run with a scripted
 gain then regression exercising the training stop and both checkpoint reloads.
 The full real-tokenizer preflight and the plan/evaluation harness passed.

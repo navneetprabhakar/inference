@@ -1,5 +1,7 @@
 # Ganesh-base: from-scratch English conversation model
 
+Ganesh-base v0 is Base10B, the foundation. Ganesh-base v0.1 is SFT194, the active chat checkpoint and parent for improvements. Ganesh-base v0.2 was Fit30, a retired fine-tune of v0. Preserve legacy checkpoint paths and hashes. Use v0.1 as the sole English baseline and improvement parent.
+
 **Creator: Navneet Prabhakar.**
 
 Ganesh-base (historically called Own in artifact paths) is a **536,871,738-parameter (`119`-tensor) decoder-only Transformer language model trained from random initialization**, with local Apple Silicon (`mps`) inference, a repaired action-weighted SFT pipeline (`cloud_training/ganesh_sft_repair.py`), a 4-layer immutable identity and creator protection system (`ganesh/__init__.py`), and a 12-tool execution broker (`calculate`, `convert`, plus 10 stateful CRUD tools).
@@ -57,9 +59,9 @@ Ganesh-base (historically called Own in artifact paths) is a **536,871,738-param
    PYTHONDONTWRITEBYTECODE=1 python scripts/run_extensive_ganesh_test.py
    PYTHONDONTWRITEBYTECODE=1 python scripts/run_tough_tests.py
    ```
-5. **Verify the local Base10B checkpoint and 2K curriculum on MPS**
+5. **Verify the local v0.1 checkpoint and 2K curriculum on MPS**
    ```sh
-   .venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/local-readiness-v1/base10b --device mps --validate-only
+   .venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs --device mps --validate-only
    ```
    Training is on hold. See the [current handoff](docs/OWN_BASE_HANDOFF.txt) for the remaining gates.
 
@@ -228,7 +230,7 @@ The following six bundles were independently validated locally on 14 November 20
 
 | Bundle | Local directory | Role |
 |---|---|---|
-| Base10B | `runs/local-readiness-v1/base10b` | Preserved base weights; not a chat checkpoint |
+| v0 (Base10B) | [GCS recovery receipt](docs/ganesh-v0-recovery.json) | Archived foundation |
 | SFT50 | `runs/quality-rca-v1/step-00000050` | Earlier best-development checkpoint for comparison |
 | SFT194 | `runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs` | Current explicit terminal-chat wrapper target |
 | SFT605 | `runs/literal-state-repair-v1/results/sft/step-00000605` | Older retained comparison checkpoint |

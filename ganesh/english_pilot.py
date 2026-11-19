@@ -37,7 +37,7 @@ def evaluate(model, tokenizer, spec):
                 if blocked:
                     continue
                 policy = dict(permit_calls=session["tools"], allowed_names=["calculate"] if session["tools"] else [])
-                frame = sft.encode_conversation_repaired(tokenizer, [dict(role="user", content=prompt)],
+                frame = sft.encode_conversation(tokenizer, [dict(role="user", content=prompt)],
                     policies=[policy], for_generation=True, reply_budget=spec["reply_budget"])["ids"]
                 prefix = history_ids + frame[1:] if history_ids else frame
                 if len(prefix) + spec["reply_budget"] > model.config.sequence_len:
@@ -107,7 +107,7 @@ def score(rows):
 
 
 def bind(model, tokenizer, spec):
-    if spec["parent_manifest"] != sft.BASE10B_MANIFEST_SHA:
+    if spec["parent_manifest"] != sft.active_parent()["manifest_sha256"]:
         raise ValueError("Unexpected pilot parent")
     rows = evaluate(model, tokenizer, spec)
     return dict(contract_sha256=sha(CONTRACT), parent=spec["parent_manifest"], tokenizer=TOKENIZER_SHA,
@@ -165,12 +165,12 @@ def run(model, tokenizer, splits, directory, dataset_dir):
 
     sft.run_repaired_sft(model, tokenizer, rows["train"], rows["validation"],
         epochs=spec["epochs"], batch_size=spec["batch_size"], lr=spec["learning_rate"],
-        device="mps", observe=observe)
+        device="mps", observe=observe, native_continuation=True)
     # A setup regression can leave the untouched, already bound parent as best.
     comparison = {}
     for label, item in (("best", best), ("last", last)):
         if item is None:
-            reference = sft.load_base10b(ROOT / "runs/local-readiness-v1/base10b", "mps")
+            reference = sft.load_active_parent(ROOT / sft.active_parent()["directory"], "mps")
             if evaluate(reference, tokenizer, spec) != baseline["rows"]:
                 raise ValueError("Best parent behavior differs on reload")
             del reference

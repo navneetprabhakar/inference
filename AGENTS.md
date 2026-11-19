@@ -1,5 +1,7 @@
 # Ganesh-base work: quality-first operating rules
 
+Ganesh-base v0 is Base10B, the foundation. Ganesh-base v0.1 is SFT194, the active chat checkpoint and parent for improvements. Ganesh-base v0.2 was Fit30, a retired fine-tune of v0. Preserve legacy checkpoint paths and hashes. Use v0.1 as the sole English baseline and improvement parent.
+
 Read `docs/CODEMAP.md`, `docs/ARCHITECTURE.md`, `docs/EXECUTION_PLAN.md`, `docs/EXECUTION_STATUS.md`, `docs/HOW_TO_TEST.md`, `configs/project.json`, `configs/guardrails.json`, and `docs/OWN_BASE_HANDOFF.txt` before training, dataset admission, model selection, or cleanup. Canonical model name: **Ganesh-base**; creator: **Navneet Prabhakar** (foundational, immutable across all 4 protection layers: contract/guardrails, SFT dataset/weights, checkpoint cryptographic binding, and runtime anti-override guard). Preserve legacy Own/ownbase artifact paths/hashes.
 
 ## Repaired Architecture & Milestone Governance (`ganesh-base-repair-v1`)

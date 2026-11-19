@@ -28,22 +28,16 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/build_ganesh_sft_v2.py
 
 ---
 
-## 4. Verify the local Base10B parent and both splits on MPS
+## 4. Verify the local v0.1 parent and both splits on MPS
 
 With the pinned nanochat checkout and tokenizer under `runs/`, run the following from the repository root.
 
 ```bash
-.venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/local-readiness-v1/base10b --device mps --validate-only
+.venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/ownbase-budget50-v1/local-candidates/new-base-2k-8epochs --device mps --validate-only
 ```
 
 This checks hashes, encodes both splits with the project tokenizer, reserves 256 tokens at each assistant action, and runs a finite forward pass.
 
-## 5. Bounded English pilot (requires a separate training decision)
+## 5. Ganesh-base v0.1 improvement pilot
 
-The verified parent baseline, pilot contract and exact curriculum hashes are bound by `configs/execution.json`. After approval, choose a fresh local output directory.
-
-```bash
-.venv/bin/python -m cloud_training.ganesh_sft_repair --checkpoint runs/local-readiness-v1/base10b --device mps --english-pilot-output runs/english-repair-pilot-01
-```
-
-The runner compares live raw baseline token IDs to the recorded receipt before training. It checks behavior after setup and every update, saves each observed state, and compares finite logits after reload. A regression or two consecutive updates without a gain stops the run. Four updates is the absolute cap. An existing output directory blocks reuse. Inspect `result.json` and both raw transcripts before any further decision. An interrupted run can contain partial evidence without a final result.
+The bounded pilot uses the v0.1 weights and native chat serializer for the selected English rows and raw behavior checks. Preserve the original v0.1 weights for rollback. After a training decision, use the same checkpoint path and replace `--validate-only` with `--english-pilot-output runs/v01-english-pilot-01`. Use a fresh output directory.

@@ -42,7 +42,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from cloud_training.nano_chat_format import SPECIALS, canonical, token_contract
+from cloud_training.nano_chat_format import encode_conversation, SPECIALS, canonical, token_contract
 from ganesh import MODEL_IDENTITY, MODEL_IDENTITY_SHA256, verify_model_identity
 from reports.ganesh_tool_crud_helper import TOOLS as CRUD_TOOLS
 from tools import FIELDS as BROKER_FIELDS, OPERATIONS, UNITS, bounded_number
@@ -591,34 +591,24 @@ def run_repaired_sft(
     compact_policy: bool = True,
     device: str | torch.device = "cpu",
     observe=None,
+    native_continuation=False,
 ) -> dict:
     """Execute the repaired SFT loop on `mps`, `cuda`, or `cpu` with head calibration and regression tracking."""
     controls = token_contract(tokenizer)
-    if hasattr(model, "set_full_causal_attention"):
-        model.set_full_causal_attention()
-    calibration_report = calibrate_control_token_heads(model, controls)
+    calibration_report = {}
+    if not native_continuation:
+        if hasattr(model, "set_full_causal_attention"):
+            model.set_full_causal_attention()
+        calibration_report = calibrate_control_token_heads(model, controls)
     model.to(device)
+    encoder = encode_conversation if native_continuation else encode_conversation_repaired
+    options = {} if native_continuation else {"compact_policy": compact_policy}
+    def encode_rows(rows):
+        return [encoder(tokenizer, row["messages"], policies=row.get("policies"),
+                        context=context, **options) for row in rows]
 
-    encoded_train = [
-        encode_conversation_repaired(
-            tokenizer,
-            r["messages"],
-            policies=r.get("policies"),
-            context=context,
-            compact_policy=compact_policy,
-        )
-        for r in train_rows
-    ]
-    encoded_val = [
-        encode_conversation_repaired(
-            tokenizer,
-            r["messages"],
-            policies=r.get("policies"),
-            context=context,
-            compact_policy=compact_policy,
-        )
-        for r in val_rows
-    ]
+    encoded_train = encode_rows(train_rows)
+    encoded_val = encode_rows(val_rows)
 
     if observe is not None and observe(0, model):
         return {"updates": 0}
@@ -702,9 +692,6 @@ def run_repaired_sft(
     }
 
 
-BASE10B_MANIFEST_SHA = "7d803e32928ca9ecc1fe38bf7d47c54bca80c0996d6bb006b718cfd851975e53"
-
-
 def load_project_tokenizer():
     from cloud_training.nano_eval import verify_upstream
     from cloud_training.nano_package import TOKENIZER_SHA, sha
@@ -721,12 +708,22 @@ def load_project_tokenizer():
     return tokenizer
 
 
-def load_base10b(checkpoint: Path, device: str):
-    from cloud_training.nano_package import TOKENIZER_SHA
-    from cloud_training.nano_sft import validate_base_metadata
+def active_parent():
+    lineage = json.loads((ROOT / "configs/project.json").read_text())["model_lineage"]
+    return lineage["versions"][lineage["improvement_parent"]]
+
+
+def load_active_parent(checkpoint: Path, device: str):
+    from cloud_training.nano_package import TOKENIZER_SHA, sha
+    from cloud_training.nano_checkpoint import validate_bundle
     from ganesh.model import GaneshConfig, GaneshGPT
 
-    meta = validate_base_metadata(checkpoint, BASE10B_MANIFEST_SHA, TOKENIZER_SHA)
+    if sha(checkpoint / "manifest.json") != active_parent()["manifest_sha256"]:
+        raise ValueError("Unexpected improvement parent")
+    validate_bundle(checkpoint)
+    meta = json.loads((checkpoint / "metadata.json").read_text())
+    if meta["identity"]["phase"] != "sft" or meta["identity"]["tokenizer_sha256"] != TOKENIZER_SHA:
+        raise ValueError("Unexpected SFT identity or tokenizer")
     with torch.device("meta"):
         model = GaneshGPT(GaneshConfig(**meta["identity"]["config"]))
     # Copy into FP32 parameters: the serialized parent can contain mixed dtypes.
@@ -748,7 +745,7 @@ def main() -> None:
         "--checkpoint",
         type=Path,
         default=None,
-        help="Optional path to Base10B checkpoint directory (requires runs/nanochat-source and tokenizer.pkl).",
+        help="Optional path to active Ganesh-base v0.1 checkpoint directory (requires runs/nanochat-source and tokenizer.pkl).",
     )
     parser.add_argument("--device", choices=["auto", "mps", "cuda", "cpu"], default="auto")
     parser.add_argument("--epochs", type=int, default=2)
@@ -757,6 +754,12 @@ def main() -> None:
     parser.add_argument("--validate-only", action="store_true", help="Encode both splits and optionally run a base forward pass without optimization.")
     parser.add_argument("--english-pilot-output", type=Path, help="Run the bound English pilot into a fresh local directory.")
     args = parser.parse_args()
+    pilot = json.loads((ROOT / "configs/english_repair_pilot.json").read_text())
+    if args.english_pilot_output:
+        lineage = json.loads((ROOT / "configs/project.json").read_text())["model_lineage"]
+        selected = lineage["versions"][lineage["improvement_parent"]]
+        if pilot["parent_manifest"] != selected["manifest_sha256"]:
+            parser.error("Pilot parent differs from active Ganesh-base improvement parent; rebind before training")
     if args.english_pilot_output and (not args.checkpoint or args.validate_only):
         parser.error("Pilot requires the base checkpoint and training mode")
     if args.checkpoint and not args.validate_only and not args.english_pilot_output:
@@ -790,6 +793,11 @@ def main() -> None:
                 lengths.append(len(encoded["ids"]) - 1)
             except ValueError as error:
                 raise ValueError(f"{split} row {index}: {error}") from error
+        if sha(path) != pilot[f"{split}_sha256"]:
+            raise ValueError(f"Unbound curriculum for {split}")
+        for index in pilot[f"{split}_indices"]:
+            row = rows[index]
+            encode_conversation(tokenizer, row["messages"], policies=row["policies"], context=2048)
         splits[split] = rows
         stats[split] = {"rows": len(rows), "max_input_tokens": max(lengths)}
     print(json.dumps({"status": "dataset_verified", "splits": stats}, indent=2))
@@ -797,7 +805,7 @@ def main() -> None:
         device = args.device
         if device == "auto":
             device = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
-        model = load_base10b(args.checkpoint, device)
+        model = load_active_parent(args.checkpoint, device)
         if args.validate_only:
             with torch.inference_mode():
                 logits = model(torch.tensor([tokenizer.encode("The book is blue.")], device=device))
